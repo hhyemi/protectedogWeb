@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MessageMapper">
+ 	
+ 	
+	<resultMap id="messageSelectMap" type="message">
+		<result property="messageNo"	column="message_no"		jdbcType="NUMERIC"/>
+		<result property="messageTitle"	column="message_title"		jdbcType="VARCHAR"/>
+		<result property="messageContent"	column="messasge_content"	jdbcType="VARCHAR"/>
+		<result property="sender.id"			column="send_id"		jdbcType="VARCHAR"/>
+		<result property="receiver1.id"		column="receive_id1"	jdbcType="VARCHAR"/>
+		<result property="receiver2.id"		column="receive_id2"	jdbcType="VARCHAR"/>
+		<result property="receiver3.id"		column="receive_id3"	jdbcType="VARCHAR"/>
+		<result property="receiver4.id"		column="receive_id4"	jdbcType="VARCHAR"/>
+		<result property="receiver5.id"		column="receive_id5"	jdbcType="VARCHAR"/>
+		<result property="receiver6.id"		column="receive_id6"	jdbcType="VARCHAR"/>
+		<result property="receiver7.id"		column="receive_id7"	jdbcType="VARCHAR"/>
+		<result property="receiver8.id"		column="receive_id8"	jdbcType="VARCHAR"/>
+		<result property="receiver9.id"		column="receive_id9"	jdbcType="VARCHAR"/>
+		<result property="receiver10.id"		column="receive_id10"	jdbcType="VARCHAR"/>
+		<result property="sendDate"			column="send_date"	jdbcType="DATE"/>
+		<result property="receiveDate"		column="receive_date"	jdbcType="DATE"/>
+		<result property="messageStatus"		column="message_status"	jdbcType="CHAR"/>
+		<result property="delCode"			column="del_code"	jdbcType="CHAR"/>
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert id="addMessage"	parameterType="message">
+		INSERT INTO message(message_no, message_title, message_content, send_id,
+		receive_id1, receive_id2, receive_id3, receive_id4, receive_id5, 
+		receive_id6, receive_id7, receive_id8, receive_id9, receive_id10,
+		send_date, message_status, del_code)
+		VALUES(seq_message_message_no.NEXTVAL, #{messageTitle}, #{messageContent}, #{sender.id}, 
+		#{receiver1.id},#{receiver2.id:VARCHAR},#{receiver3.id:VARCHAR},#{receiver4.id:VARCHAR},#{receiver5.id:VARCHAR},
+		#{receiver6.id:VARCHAR},#{receiver7.id:VARCHAR},#{receiver8.id:VARCHAR},#{receiver9.id:VARCHAR},#{receiver10.id:VARCHAR}, 
+		SYSDATE, #{messageStatus}, #{delCode})
+	</insert>
+
+	 
+	 <!-- SQL : SELECT ONE -->
+
+	<select id="getMessage"	parameterType="string"	resultMap="messageSelectMap">
+		SELECT
+		message_no, message_title, message_content, send_id, send_date
+		FROM message
+		WHERE message_no=#{messageNo}
+	</select>
+	
+	
+	<!-- SQL : Update -->
+	
+	<update id="updateMessage" 	parameterType="message">
+		UPDATE message
+		<set>
+			message_status	= #{messageStatus},
+			receive_date	= SYSDATE
+		</set>
+		WHERE message_no=#{messageNo}
+	</update>
+		 
+	<!-- SQL : SELECT LIST -->
+	 	
+	<select id="getMessageList"		parameterType="search"	resultMap="messageSelectMap">
+		SELECT send_id, receive_id1, message_title, send_date, receive_date
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT send_id, receive_id1, message_title, send_date, receive_date
+				FROM message
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							send_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							receive_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							message_title=#{searchKeyword}
+						</if>
+					</where>
+				</if>
+				ORDER BY send_id ) inner_table
+			WHERE ROWNUM &lt;=#{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SQL : SELECT ROW Count -->	 
+
+	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT send_id, receive_id1, message_title, send_date, receive_date
+			FROM message
+			<if test="searchCondition != null">
+				<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							send_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							receive_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							message_title=#{searchKeyword}
+						</if>
+					</where>
+			</if> ) countTable						
+	</select>
+	 
+</mapper>

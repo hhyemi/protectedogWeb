@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//SQL(Script)/protectedog.sql=EUC-KR
+encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=UTF-8
 encoding/<project>=UTF-8

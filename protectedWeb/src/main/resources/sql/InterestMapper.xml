@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="InterestMapper">
+ 	
+ 	
+	<resultMap id="interestSelectMap" type="interest">
+		<result property="interestNo"			column="interest_no"		jdbcType="NUMERIC"/>
+		<result property="boardCode"			column="board_code"		jdbcType="CHAR"/>
+		<result property="interestComment.commentNo"	column="comment_no"		jdbcType="NUMERIC"/>
+		<result property="interestPost.postNo"		column="post_no"			jdbcType="NUMERIC"/>
+		<result property="interestId.id"			column="id"			jdbcType="VARCHAR"/>
+		<result property="regDate"				column="reg_date"			jdbcType="DATE"/>
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert id="addInterest"	parameterType="interest">
+		INSERT INTO interest(interest_no, board_code, comment_no, post_no, id, reg_date)
+		VALUES(seq_interest_interest_no.NEXTVAL, #{boardCode}, #{interestComment.commentNo}, 
+			#{interestPost.postNo}, #{interestId.id}, SYSDATE)
+	</insert>
+
+	 
+	 <!-- SQL : SELECT ONE -->
+
+	<select id="getInterest"	parameterType="string"	resultMap="interestSelectMap">
+		SELECT
+		interest_no, board_code, comment_no, post_no, id
+		FROM interest
+		WHERE id=#{interestId.id}
+	 </select>
+
+
+	<!-- SQL : SELECT LIST -->
+	 	
+	<select id="getInterestList"	parameterType="search"	resultMap="interestSelectMap">
+		SELECT interest_no, board_code, comment_no, post_no, id
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT interest_no, board_code, comment_no, post_no, id
+				FROM users
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							board_code=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							comment_no=#{searchKeyword}
+						</if>
+					</where>
+				</if>
+				ORDER BY id ) inner_table
+			WHERE ROWNUM &lt;=#{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SQL : SELECT ROW Count -->	 
+
+	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT interest_no, board_code, comment_no, post_no, id
+			FROM users
+			<if test="searchCondition != null">
+				<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							board_code=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							comment_no=#{searchKeyword}
+						</if>
+					</where>
+			</if> ) countTable						
+	</select>
+
+	
+	<!-- SQL : DELETE -->
+
+	<delete id="deleteInterest"	parameterType="interest">
+		DELETE interest WHERE interest_no=#{interestNo}
+	</delete>
+	 
+</mapper>

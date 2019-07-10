@@ -9,8 +9,6 @@ public class Message {
 	private int messageNo;
 	private String messageTitle;
 	private String messageContent;
-	//MessageHistory DB
-	private int HistoryNo;
 	private Date sendDate;
 	private Date receiveDate;
 	private String messageStatus;
@@ -26,6 +24,7 @@ public class Message {
 	private User receiver9;
 	private User receiver10;
 	private String delCode;
+
 	
 	///Constructor
 	
@@ -48,6 +47,7 @@ public class Message {
 	public void setMessageContent(String messageContent) {
 		this.messageContent = messageContent;
 	}
+
 	public Date getSendDate() {
 		return sendDate;
 	}
@@ -72,10 +72,10 @@ public class Message {
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
-	public User getReceiver() {
+	public User getReceiver1() {
 		return receiver1;
 	}
-	public void setReceiver(User receiver1) {
+	public void setReceiver1(User receiver1) {
 		this.receiver1 = receiver1;
 	}
 	public User getReceiver2() {
@@ -138,30 +138,10 @@ public class Message {
 	public void setDelCode(String delCode) {
 		this.delCode = delCode;
 	}
-	public int getHistoryNo() {
-		return HistoryNo;
-	}
-	public void setHistoryNo(int historyNo) {
-		HistoryNo = historyNo;
-	}
 	@Override
 	public String toString() {
 		return "Message [messageNo=" + messageNo + ", messageTitle=" + messageTitle + ", messageContent="
-				+ messageContent + ", HistoryNo=" + HistoryNo + ", sendDate=" + sendDate + ", receiveDate="
-				+ receiveDate + ", messageStatus=" + messageStatus + ", sender=" + sender + ", receiver1=" + receiver1
-				+ ", receiver2=" + receiver2 + ", receiver3=" + receiver3 + ", receiver4=" + receiver4 + ", receiver5="
-				+ receiver5 + ", receiver6=" + receiver6 + ", receiver7=" + receiver7 + ", receiver8=" + receiver8
-				+ ", receiver9=" + receiver9 + ", receiver10=" + receiver10 + ", delCode=" + delCode
-				+ ", getMessageNo()=" + getMessageNo() + ", getMessageTitle()=" + getMessageTitle()
-				+ ", getMessageContent()=" + getMessageContent() + ", getSendDate()=" + getSendDate()
-				+ ", getReceiveDate()=" + getReceiveDate() + ", getMessageStatus()=" + getMessageStatus()
-				+ ", getSender()=" + getSender() + ", getReceiver()=" + getReceiver() + ", getReceiver2()="
-				+ getReceiver2() + ", getReceiver3()=" + getReceiver3() + ", getReceiver4()=" + getReceiver4()
-				+ ", getReceiver5()=" + getReceiver5() + ", getReceiver6()=" + getReceiver6() + ", getReceiver7()="
-				+ getReceiver7() + ", getReceiver8()=" + getReceiver8() + ", getReceiver9()=" + getReceiver9()
-				+ ", getReceiver10()=" + getReceiver10() + ", getDelCode()=" + getDelCode() + ", getHistoryNo()="
-				+ getHistoryNo() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ messageContent + ", toString()="+ super.toString() + "]";
 	}
 	
 	
