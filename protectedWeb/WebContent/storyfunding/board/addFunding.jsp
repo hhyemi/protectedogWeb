@@ -24,7 +24,7 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	
-       #start { border:3px solid #0066cc; }
+       #start { border:3px solid #5271c7; }
 	   #startNo { border:3px solid #ffffff}
 
     </style>
@@ -91,15 +91,16 @@
 
             <!-- 첨부 버튼 -->
             <div id="attach">
-                <label class="col-sm-offset-3 waves-effect waves-teal btn-flat" for="uploadInputBox">사진첨부(대표이미지는 파란테두리)</label>
+                <span class="col-sm-offset-3 label label-primary" ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;대표이미지는 파란테두리입니다.
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata" multiple />
             </div>
             
             <br/><br/>
             
             <!-- 미리보기 영역 -->
-            <div id="preview" class="content" style='display:inline; min-width:1200px;'></div> 
-            
+            <div class="form-group">
+            <div id="preview" class="content col-sm-offset-3 col-sm-5" style='display:inline; min-width:1200px;'></div> 
+            </div>
 		  <div class="form-group">
 		   <h4 class="col-sm-offset-3 col-sm-12">연락처</h4>
 		     <h5 class="col-sm-offset-3 col-sm-12">
@@ -145,32 +146,38 @@
 
 		var fundTargetPay = $('input[name="fundTargetPay"]').val();
 		var postTitle = $('input[name="postTitle"]').val();
-	//	var postContent = $('input[name="postContent"]').val();
+		//var postContent = $('input[name="postContent"]').val();
 		var phone2 = $('input[name="phone2"]').val();
 		var phone3 = $('input[name="phone3"]').val();	
 
 		if(fundTargetPay == null || fundTargetPay.length<1){
 			alert("후원목표금액은 반드시 입력하여야 합니다.");
+			$('input[name="fundTargetPay"]').focus();
 			return;
 		}
 		if(fundTargetPay < 100000 || fundTargetPay > 3000000){
 			alert("후원목표금액은 10만원이상 300만원이하로 입력하여야 합니다.")
+			$('input[name="fundTargetPay"]').focus();
 			return;
 		}
 		if(postTitle == null || postTitle.length<1){
 			alert("글제목은 반드시 입력하여야 합니다.");
+			$('input[name="postTitle"]').focus();
 			return;
 		}
-/*		if(postContent == null || postContent.length<1){
+	/*	if(postContent == null || postContent.length<1){
 			alert("글내용은 반드시 입력하셔야 합니다.");
+			$('input[name="postContent"]').focus();
 			return;
 		}*/
 		if(phone2 == null || phone2.length<1){
 			alert("휴대폰번호는 반드시 입력하셔야 합니다.");
+			$('input[name="phone2"]').focus();
 			return;
 		}
 		if(phone3 == null || phone3.length<1){
 			alert("휴대폰번호는 반드시 입력하셔야 합니다.");
+			$('input[name="phone3"]').focus();
 			return;
 		}
 		
@@ -186,7 +193,7 @@
    			var form = $('#uploadForm')[0];
             var formData = new FormData(form);
 
-            for (var index = 0; index < Object.keys(files).length; index++) {
+            for (var index = 0; index < 100; index++) {
                 //formData 공간에 files라는 이름으로 파일을 추가한다.
                 //동일명으로 계속 추가할 수 있다.
                 formData.append('files',files[index]);
@@ -281,12 +288,12 @@
                      }
                  
                      $("#preview").append(
-                                     "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:208px' >"
-                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"200px;\" height=\"200px;\"/>"
+                                     "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:130px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
                                              + "<a href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "삭제" + "</a>" + "</div>");
+                                             + "   삭제" + "</a>" + "</div>");
                      files[imgNum] = file;
 
                  };
@@ -300,6 +307,7 @@
      //preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
      function deletePreview(obj) {
          var imgNum = obj.attributes['value'].value;
+         alert(imgNum);
          delete files[imgNum];
          $("#preview .preview-box[value=" + imgNum + "]").remove();
          resizeHeight();
