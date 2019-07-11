@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding/<project>=euc_kr
+=======
+encoding/<project>=EUC-KR
+>>>>>>> refs/remotes/origin/master
