@@ -25,6 +25,23 @@
     <!-- Responsive CSS -->
     <link href="../resources/css/responsive/responsive.css" rel="stylesheet">
 
+<style type="text/css">
+
+#pattern-switcher {
+	width : 60px;
+	top : 92%;
+	height : 50px;
+	
+	margin-right : 10px;
+	
+	font-weight: bold;
+}
+
+#patter-close > i{
+	top:91.5%;
+	left :93.5%;
+}
+</style>
 </head>
 
 <body>
@@ -108,34 +125,46 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">adopt</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">adopt</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="index.html">분양</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">missing</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="index.html">실종</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">storyfunding</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="index.html">스토리펀딩</a>
+                                    </div>
+                                </li>
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">hospital</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="index.html">병원</a>
+                                    </div>
+                                </li>
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">pedia</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="index.html">견종백과</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">community</a>
+                                    <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">1</a>
                                     </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">missing</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">2</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">market</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="index.html">1</a>
                                     </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">storyfunding</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">3</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">HOSPITAL</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">PEDIA</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">Community</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Market</a>
                                 </li>
 <!--                                 <li class="nav-item"> -->
 <!--                                     <a class="nav-link" href="contact.html">MANAGER</a> -->

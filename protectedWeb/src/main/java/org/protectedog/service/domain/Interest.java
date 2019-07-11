@@ -1,15 +1,15 @@
 package org.protectedog.service.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Interest {
 	
 	/// Field
 	private int interestNo;
-	private int commentNo;
-	private int postNo;
-	private String id;
-	private char boardCode;
+	private Comment interestComment;
+	private Board interestPost;
+	private User interestId;
+	private String boardCode;
 	private Date regDate;
 	
 	/// Constructor
@@ -21,28 +21,28 @@ public class Interest {
 	public void setInterestNo(int interestNo) {
 		this.interestNo = interestNo;
 	}
-	public int getCommentNo() {
-		return commentNo;
+	public Comment getInterestComment() {
+		return interestComment;
 	}
-	public void setCommentNo(int commentNo) {
-		this.commentNo = commentNo;
+	public void setInterestComment(Comment interestComment) {
+		this.interestComment = interestComment;
 	}
-	public int getPostNo() {
-		return postNo;
+	public Board getInterestPost() {
+		return interestPost;
 	}
-	public void setPostNo(int postNo) {
-		this.postNo = postNo;
+	public void setInterestPost(Board interestPost) {
+		this.interestPost = interestPost;
 	}
-	public String getId() {
-		return id;
+	public User getinterestId() {
+		return interestId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setinterestId(User interestId) {
+		this.interestId = interestId;
 	}
-	public char getBoardCode() {
+	public String getBoardCode() {
 		return boardCode;
 	}
-	public void setBoardCode(char boardCode) {
+	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
 	}
 	public Date getRegDate() {
@@ -51,10 +51,11 @@ public class Interest {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
 	@Override
 	public String toString() {
-		return "Interest [interestNo=" + interestNo + ", commentNo=" + commentNo + ", postNo=" + postNo + ", id=" + id
-				+ ", boardCode=" + boardCode + ", regDate=" + regDate + "]";
-	}	
+		return "Interest [interestNo=" + interestNo + ", interestComment=" + interestComment + ", interestPost="
+				+ interestPost + ", interestId=" + interestId + ", boardCode=" + boardCode + ", regDate=" + regDate + "]";
+	}
+	
+	
 }

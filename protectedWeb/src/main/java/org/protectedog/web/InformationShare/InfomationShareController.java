@@ -35,11 +35,13 @@ public class InfomationShareController {
 	int pageSize;
 
 	@RequestMapping(value = "addInformation", method = RequestMethod.POST)
-	public String addInfo(@ModelAttribute("info") Board board, HttpSession session) throws Exception {
+	public String addInfo(@ModelAttribute("board") Board board, HttpSession session) throws Exception {
 		
 		System.out.println(" ============================== addInfo ==================================");
 		
 		board.setBoardCode("IS");
+		board.setId("user02");
+		board.setId("»£∑©¿Ã");
 		//board.set
 		System.out.println(" info Board : " + board);
 		
