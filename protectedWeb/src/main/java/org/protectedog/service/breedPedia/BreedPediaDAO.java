@@ -7,7 +7,7 @@ import org.protectedog.service.domain.Breed;
 
 public interface BreedPediaDAO {
 	
-public void addInfo(Breed breed) throws Exception;
+	public void addInfo(Breed breed) throws Exception;
 	
 	public Breed getInfo(int breedNo) throws Exception;
 	
