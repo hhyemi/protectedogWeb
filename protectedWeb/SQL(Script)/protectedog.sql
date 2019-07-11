@@ -174,9 +174,9 @@ CREATE TABLE ADOPT(
 	LOCATION 		VARCHAR2(50) 	NOT NULL ENABLE, 
 	REG_DATE 		DATE 		NOT NULL ENABLE, 
 	DOG_BREED 		VARCHAR2(20), 
-	DOG_WEIGHT 		VARCHAR2(10) 	NOT NULL ENABLE, 
-	DOG_SIZE 		VARCHAR2(10) 	NOT NULL ENABLE, 
-	DOG_GENDER 		VARCHAR2(10) 	NOT NULL ENABLE, 
+	DOG_WEIGHT 		NUMBER(4,2) 	NOT NULL ENABLE, 
+	DOG_SIZE 		VARCHAR2(6) 	NOT NULL ENABLE, 
+	DOG_GENDER 		VARCHAR2(4) 	NOT NULL ENABLE, 
 	DOG_PAY 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	DOG_STATUS 		VARCHAR2(40) 	NOT NULL ENABLE, 
 	DOG_CHAR 		VARCHAR2(40) 	NOT NULL ENABLE, 
@@ -254,13 +254,8 @@ CREATE TABLE ORDERS (
 CREATE TABLE APPLY (
    	APPLY_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ADOPT_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
-<<<<<<< HEAD
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
-=======
-	ID 				VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	PHONE 			VARCHAR2(11) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
->>>>>>> refs/remotes/origin/master
 	JOB 			NUMBER(1,0) 	NOT NULL ENABLE, 
 	ADDR 			NUMBER(1,0) 	NOT NULL ENABLE, 
 	MATE 			NUMBER(1,0) 	NOT NULL ENABLE, 
@@ -271,22 +266,23 @@ CREATE TABLE APPLY (
 	PAY 			VARCHAR2(200) 	NOT NULL ENABLE, 
 	REASON 			VARCHAR2(400) 	NOT NULL ENABLE, 
 	SITUATION 		VARCHAR2(400) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 			NOT NULL ENABLE, 
-	STATUS_CODE 	CHAR(1) 		DEFAULT '1' NOT NULL ENABLE,
+	TIME 			VARCHAR2(200 ) 	NOT NULL ENABLE, 
+	REG_DATE 		DATE 		NOT NULL ENABLE, 
+	STATUS_CODE 		CHAR(1) 		DEFAULT '1' NOT NULL ENABLE,
 	PRIMARY KEY (APPLY_NO));
 	 
 
 CREATE TABLE BOARD (
    	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
-	ID 				VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
+	ID 			VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
 	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE  REFERENCES USERS(NICKNAME), 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
-	POST_CONTENT 	VARCHAR2(600) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 			NOT NULL ENABLE, 
+	POST_CONTENT 		VARCHAR2(600) 	NOT NULL ENABLE, 
+	REG_DATE 		DATE 		NOT NULL ENABLE, 
 	VIEW_COUNT 		NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
-	RECOMMEND_COUNT NUMBER(5,0), 
-	MARKET_CODE 	NUMBER(2,0), 
+	RECOMMEND_COUNT 	NUMBER(5,0), 
+	MARKET_CODE 		NUMBER(2,0), 
 	PRICE 			NUMBER(10,0), 
 	CITY 			VARCHAR2(20), 
 	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE), 
@@ -296,7 +292,6 @@ CREATE TABLE BOARD (
 	DEL_CODE		CHAR(1),
 	PRIMARY KEY (POST_NO));
 
-	
 CREATE TABLE PARTICIPATE (
 	PARTICIPATE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
@@ -465,25 +460,15 @@ INSERT INTO apply
 (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
 currently, plan, pay, reason, situation, time, reg_date)  
 VALUES 
-<<<<<<< HEAD
 (11112, 10000, 'user03', '011-2123-4567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
 '예상비용', '그냥', '상황에 따른 양육 여부', '반려동물한테 쓸 수 있는 시간', SYSDATE );
-=======
-(11112, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
-'예상비용', '그냥', '상황에 따른 양육 여부', SYSDATE );
->>>>>>> refs/remotes/origin/master
 					
 INSERT INTO apply 
 (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
 currently, plan, pay, reason, situation, time, reg_date)  
 VALUES 
-<<<<<<< HEAD
 (11113, 10000, 'user03', '011-2123-4567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
 '예상비용', '그냥', '상황에 따른 양육 여부', '반려동물한테 쓸 수 있는 시간', SYSDATE );
-=======
-(11113, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
-'예상비용', '그냥', '상황에 따른 양육 여부', SYSDATE );
->>>>>>> refs/remotes/origin/master
 				
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
@@ -541,3 +526,20 @@ VALUES (10001, seq_RECOMMENT_RECOMMENT_NO, 'user02', '2번 대댓글선수 잘 달리나요
 
 INSERT INTO recomment( comment_no, recomment_no, id, recomment_content, reg_date, nickName) 
 VALUES (10002, seq_RECOMMENT_RECOMMENT_NO, 'user03', '3번 대댓글선수 잘 달리나요?!', sysdate, '안녕');
+
+
+
+INSERT INTO coupon
+(coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
+VALUES
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user01', 5000, '0', '2019/07/11', '2019/09/11', null);
+
+INSERT INTO coupon
+(coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
+VALUES
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user02', 5000, '1', '2019/07/11', '2019/09/11', '2019/07/11');
+
+INSERT INTO coupon
+(coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
+VALUES
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user03', 5000, '0', '2019/07/11', '2019/09/11', null);
