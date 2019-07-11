@@ -20,7 +20,7 @@
     		ㅇ @Controller annotation 선언된 Bean 만 Wiring
 		   ㅇ @Service / @Repository  annotation 선언된 Bean 은 Scan 제외 -->
 	<context:component-scan base-package="org.protectedog.web">
-		<context:include-filter 	type="annotation"		expression="org.springframework.stereotype.Controller" />
+		<context:include-filter 	type="annotation"	expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Service"/>
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan> 

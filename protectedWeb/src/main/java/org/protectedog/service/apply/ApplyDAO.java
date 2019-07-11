@@ -2,6 +2,7 @@ package org.protectedog.service.apply;
 
 import java.util.Map;
 
+import org.protectedog.common.Search;
 import org.protectedog.service.domain.Apply;
 
 
@@ -16,7 +17,7 @@ public interface ApplyDAO {
 	public Apply getApply(int applyNo) throws Exception ;
 
 	// SELECT LIST
-//	public Map<String , Object> listApply(Search search, int adoptNo) throws Exception ;
+	public Map<String , Object> listApply(Search search, int adoptNo) throws Exception ;
 	
 	// DELETE
 	public void delApply(Apply apply) throws Exception ;

@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
-encoding/<project>=UTF-8
+encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR
+encoding//src/main/java/org/protectedog/common/web/LogonCheckInterceptor.java=EUC-KR

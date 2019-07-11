@@ -17,7 +17,7 @@ public class LogAspectJ {
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 			
 		System.out.println("");
-		System.out.println("[Around before] Å¸¦°´Ã¼.¸Þ¼­µå :"+
+		System.out.println("[Around before] Å¸°Ù °´Ã¼ ¸Þ¼­µå :"+
 													joinPoint.getTarget().getClass().getName() +"."+
 													joinPoint.getSignature().getName());
 		if(joinPoint.getArgs().length !=0){
@@ -26,7 +26,7 @@ public class LogAspectJ {
 		//==> Å¸°Ù °´Ã¼ÀÇ Method ¸¦ È£Ãâ ÇÏ´Â ºÎºÐ 
 		Object obj = joinPoint.proceed();
 
-		System.out.println("[Around after] Å¸°Ù °´Ã¼return value  : "+obj);
+		System.out.println("[Around after] Å¸°Ù °´Ã¼ return value  : "+obj);
 		System.out.println("");
 		
 		return obj;

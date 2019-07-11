@@ -7,8 +7,8 @@ import java.sql.Date;
 public class Apply {
 	
 	///Field
-	private int adoptNo;
 	private int applyNo;
+	private int adoptNo;
 	private String id;
 	private String phone;
 	private int job;
@@ -21,9 +21,8 @@ public class Apply {
 	private String pay;
 	private String reason;
 	private String situation;
-	private String time;
 	private Date regDate;
-	private String statusCode;
+	private char statusCode;
 	
 	
 	public int getAdoptNo() {
@@ -110,12 +109,6 @@ public class Apply {
 	public void setSituation(String situation) {
 		this.situation = situation;
 	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -123,21 +116,25 @@ public class Apply {
 		this.regDate = regDate;
 	}
 	
-	public String getStatusCode() {
+	public char getStatusCode() {
 		return statusCode;
 	}
 	
-	public void setStatusCode(String statusCode) {
+	public void setStatusCode(char statusCode) {
 		this.statusCode = statusCode;
 	}
 	
 	
+	
+	@Override
 	public String toString() {
-		return "[ adoptNo : "+adoptNo+" ] [ applyNo : "+applyNo+" ] [ id : "+id+" ] [ phone : "+phone
-				+" ] [ job : "+job+" ] [ addr : "+addr+" ] [ mate : "+mate+" ] [ mateAgree : "+mateAgree
-				+" ] [ raise : "+raise+" ] [ currently : "+currently+" ] [ plan : "+plan+" ] [ pay : "+pay
-				+" ] [ reason : "+reason+" ] [ situation : "+situation+" ] [ time : "+time+" ] [regDate : "+regDate+" ]";
+		return "\n\n¡á¡á¡á Apply ¡á¡á¡á \n[adoptNo=" + adoptNo + ", applyNo=" + applyNo + ", id=" + id + ", phone=" + phone + ", job=" + job
+				+ ", \naddr=" + addr + ", mate=" + mate + ", mateAgree=" + mateAgree + ", raise=" + raise + ", currently="
+				+ currently + ", \nplan=" + plan + ", pay=" + pay + ", reason=" + reason + ", situation=" + situation
+				+ ", \nregDate=" + regDate + ", statusCode=" + statusCode + "]";
 	}
-
+	
+	
+	
 
 }
