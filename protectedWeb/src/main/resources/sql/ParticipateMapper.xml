@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ParticipateMapper">
+
+	<resultMap id="participateSelectMap" type="participate">
+		<result property="participateNo" column="PARTICIPATE_NO" jdbcType="NUMERIC" />
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="nickName" column="NICKNAME" jdbcType="VARCHAR" />
+		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
+		<result property="regDate" column="REG_DATE" jdbcType="DATE" />
+		<result property="fundPay" column="FUND_PAY " jdbcType="NUMERIC" />
+	</resultMap>
+
+	<!-- SQL : INSERT -->
+	<insert id="addParticipate" parameterType="participate">
+		INSERT
+		INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY )
+		VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL , #{id:VARCHAR} , #{nickName:VARCHAR} , #{postNo:NUMERIC} , SYSDATE ,#{fundPay:NUMERIC} )
+	</insert>
+
+	<!-- SQL : SELECT ONE -->
+	<select id="getParticipate" parameterType="string" resultMap="participateSelectMap">
+		SELECT
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		FROM PARTICIPATE
+		WHERE PARTICIPATE_NO = #{value}
+	</select>
+
+	<!-- SQL : SELECT LIST -->
+	<select id="listParticipate" parameterType="search" resultMap="participateSelectMap">
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+		FROM (	SELECT
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		FROM PARTICIPATE
+		<where>
+			<if test="postNo != null ">
+			AND POST_NO = #{postNo}
+			</if>
+		</where>
+		 ORDER BY REG_DATE DESC	
+		) inner_table
+		WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN
+		#{startRowNum} AND
+		#{endRowNum}
+	</select>
+
+	<!-- SQL : USER에서 쓰는 SELECT LIST -->
+	<select id="listParticipateUser" parameterType="string" resultMap="participateSelectMap">
+		SELECT
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		FROM PARTICIPATE
+		<where>
+			<if test="postNo != null ">
+			AND ID = #{value}
+			</if>
+		</where>
+	</select>
+	
+	<!-- SQL : SELECT ROW Count -->
+	<select id="getParticipateTotalCount" parameterType="participate" resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		FROM PARTICIPATE
+		<where>
+			<if test="postNo != null ">
+			AND POST_NO = #{postNo}
+			</if>
+		</where>
+		) countTable
+	</select>
+
+</mapper>

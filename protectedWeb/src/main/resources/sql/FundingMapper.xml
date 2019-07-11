@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FundingMapper">
+
+	<resultMap id="fundingSelectMap" type="funding">
+
+		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="nickName" column="NICKNAME" jdbcType="VARCHAR" />
+		<result property="statusCode" column="STATUS_CODE" jdbcType="CHAR" />
+		<result property="phone" column="PHONE" jdbcType="VARCHAR" />
+		<result property="postTitle" column="POST_TITLE" jdbcType="VARCHAR" />		
+		<result property="postContent" column="POST_CONTENT" jdbcType="VARCHAR" />
+		<!-- default 0 -->
+		<result property="viewCount" column="VIEW_COUNT" jdbcType="NUMERIC" />
+		<!-- default 0 -->
+		<result property="voterCount" column="VOTER_COUNT" jdbcType="NUMERIC" />		
+		<result property="voteStartDate" column="VOTE_START_DATE" jdbcType="DATE" />
+		<result property="voteEndDate" column="VOTE_END_DATE" jdbcType="DATE" />
+		<result property="fundTargetPay" column="FUND_TARGET_PAY" jdbcType="NUMERIC" />
+		<result property="voteTargetCount" column="VOTE_TARGET_COUNT" jdbcType="NUMERIC" />
+		<result property="fundTargetDay" column="FUND_TARGET_DAY" jdbcType="NUMERIC" />
+		<!-- default 0 -->
+		<result property="sponsorCount" column="SPONSOR_COUNT" jdbcType="NUMERIC" />
+		<!-- default 0 -->		
+		<result property="fundPay" column="FUND_PAY" jdbcType="NUMERIC" />
+		<result property="fundStartDate" column="FUND_START_DATE" jdbcType="DATE" />
+		<result property="fundEndDate" column="FUND_END_DATE" jdbcType="DATE" />
+		<result property="reviewTitle" column="REVIEW_TITLE" jdbcType="VARCHAR" />
+		<result property="reviewContent" column="REVIEW_CONTENT" jdbcType="VARCHAR" />
+		<result property="reviewRegDate" column="REVIEW_REG_DATE" jdbcType="DATE" />
+		</resultMap>
+
+	<!-- SQL : INSERT -->
+	<insert 	id="addFunding"		parameterType="funding" >
+		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+		SELECT SEQ_STORYFUNDING_POST_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	 	INSERT
+		INTO STORYFUNDING( POST_NO , ID , NICKNAME , STATUS_CODE , PHONE , POST_TITLE , POST_CONTENT , 
+		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_START_DATE , FUND_END_DATE ) 
+		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickName:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
+		SYSDATE , SYSDATE+30 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} , SYSDATE+31 , SYSDATE+31+#{fundTargetDay} )
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getFunding"	parameterType="string"	resultMap="fundingSelectMap">
+		SELECT
+		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 		
+		FROM STORYFUNDING 
+		WHERE POST_NO IN #{value}
+	 </select>
+<!-- 		 
+	 SQL : SELECT LIST
+	<select  id="listFunding"  parameterType="search"	resultMap="fundingSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT
+													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 				
+											FROM STORYFUNDING 
+											<if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+											 			POST_TITLE = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+											 			NICKNAME = #{searchKeyword}
+													</if>
+												</where>
+											</if>
+											ORDER BY POST_NO ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	 위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		
+-->		 
+	<!-- SQL : UPDATE -->	 
+	 <update	id="updateFunding"	parameterType="funding" >
+	   	UPDATE STORYFUNDING
+	   	<set>
+	   		PHONE       	   = #{phone:VARCHAR} ,
+			POST_TITLE	       = #{postTitle:VARCHAR},
+			POST_CONTENT 	   = #{postContent:VARCHAR} ,
+			FUND_TARGET_PAY	   = #{fundTargetPay:NUMERIC},
+			FUND_TARGET_DAY    = #{fundTargetDay:NUMERIC},
+			VOTE_TARGET_COUNT  = #{voteTargetCount:NUMERIC},
+			FUND_END_DATE      = SYSDATE+31+#{fundTargetDay}
+	   	</set>
+	   	WHERE POST_NO IN #{postNo} 
+	 </update>
+<!--
+	SQL : UPDATE StatusCode
+	<update id="updateStatusCode" parameterType="funding">
+		UPDATE STORYFUNDING
+		<set>
+			STATUS_CODE = #{statusCode:CHAR},
+		</set>
+		WHERE POST_NO IN #{postNo:VARCHAR}
+
+	</update>
+ 
+	SQL : DELETE		 
+	<delete id="delFunding" parameterType="string">
+		DELETE
+		FROM STORYFUNDING
+		WHERE POST_NO IN #{value}
+	</delete>
+	
+	SQL : SELECT ROW Count	 
+	 <select  id="getTotalCount"  parameterType="search" resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT
+						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 		
+						FROM STORYFUNDING 
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			POST_TITLE = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 			NICKNAME = #{searchKeyword}
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+-->
+</mapper> 

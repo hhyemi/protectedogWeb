@@ -17,7 +17,7 @@ public class LogAspectJ {
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 			
 		System.out.println("");
-		System.out.println("[Around before] ≈∏Å¶∞¥√º.∏ﬁº≠µÂ :"+
+		System.out.println("[Around before] ≈∏∞Ÿ∞¥√º ∏ﬁº≠µÂ :"+
 													joinPoint.getTarget().getClass().getName() +"."+
 													joinPoint.getSignature().getName());
 		if(joinPoint.getArgs().length !=0){
