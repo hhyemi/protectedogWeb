@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CouponMapper">
+ 	
+ 	
+	<resultMap id="couponSelectMap" type="coupon">
+		<result property="couponNo"	column="coupon_no"	jdbcType="NUMERIC"/>
+		<result property="couponCode"	column="coupon_code"	jdbcType="VARCHAR"/>
+		<result property="receiveUser.id"	column="receiver_id"	jdbcType="VARCHAR"/>
+		<result property="couponName"	column="coupon_name"	jdbcType="VARCHAR"/>
+		<result property="discount"		column="discount"	jdbcType="NUMERIC"/>
+		<result property="couponStatus"	column="coupon_status"	jdbcType="CHAR"/>
+		<result property="makeDate"	column="make_date"	jdbcType="DATE"/>
+		<result property="limitDate"		column="limit_date"	jdbcType="DATE"/>
+		<result property="useDate"		column="use_date"	jdbcType="DATE"/>
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert id="addCoupon"	parameterType="coupon">
+		INSERT INTO coupon
+			(coupon_no, coupon_code, receiver_id, coupon_name, discount, coupon_status,
+			make_date, limit_date, use_date)
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiveUser.id}, #{couponName}, #{discount}, 
+			#{couponStatus:VARCHAR}, SYSDATE, #{limitDate:DATE}, #{useDate:DATE})
+	</insert>
+
+	 
+	 <!-- SQL : SELECT ONE -->
+
+	<select id="getCoupon"	parameterType="string"	resultMap="couponSelectMap">
+		SELECT
+		coupon_no, coupon_name, discount, coupon_status, make_date, use_date, limit_date 
+		FROM coupon
+		WHERE coupon_no=#{couponNo}
+	</select>
+	 
+
+	 <!-- SQL : UPDATE -->
+
+	<update id="updateCoupon"	parameterType="coupon">
+		UPDATE coupon
+		<set>
+			coupon_status=#{couponStatus:VARCHAR},
+			use_date=#{useDate:VARCHAR}
+		</set>
+		WHERE coupon_no=#{couponNo}
+	</update>
+			
+		 
+	<!-- SQL : SELECT LIST -->
+	 	
+	<select id="getCouponList"		parameterType="search"	resultMap="couponSelectMap">
+		SELECT coupon_no, coupon_name, coupon_status, make_date, use_date, limit_date
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT coupon_no, coupon_name, coupon_status, make_date, use_date, limit_date
+				FROM coupon
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							make_date=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							limit_date=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							coupon_name=#{searchKeyword}
+						</if>
+						<if test="searchCondition==3 and searchkeyword !='' ">
+							coupon_status=#{searchKeyword}
+						</if>
+					</where>
+				</if>
+				ORDER BY coupon_no ) inner_table
+			WHERE ROWNUM &lt;=#{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SQL : SELECT ROW Count -->	 
+
+	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT coupon_no, coupon_name, coupon_status, make_date, use_date, limit_date
+			FROM coupon
+			<if test="searchCondition != null">
+				<where>
+					<if test="searchCondition==0 and searchKeyword !='' ">
+						make_date=#{searchKeyword}
+					</if>
+					<if test="searchCondition==1 and searchkeyword !='' ">
+						limit_date=#{searchKeyword}
+					</if>
+					<if test="searchCondition==2 and searchkeyword !='' ">
+						coupon_name=#{searchKeyword}
+					</if>
+					<if test="searchCondition==3 and searchkeyword !='' ">
+						coupon_status=#{searchKeyword}
+					</if>
+				</where>
+			</if> ) countTable						
+	</select>
+	 
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReportMapper">
+ 	
+ 	
+	<resultMap id="reportSelectMap" type="report">
+		<result property="reportNo"		column="report_no"	jdbcType="NUMERIC"/>
+		<result property="reporter.id"	column="reporter_id"	jdbcType="VARCHAR"/>
+		<result property="reported.id"	column="reported_id"	jdbcType="VARCHAR"/>
+		<result property="reportCategory"	column="report_category"	jdbcType="VARCHAR"/>
+		<result property="reportContent"	column="report_content"	jdbcType="VARCHAR"/>
+		<result property="reportStatus"	column="report_status"	jdbcType="NUMERIC"/>
+		<result property="reportDate"	column="report_date"	jdbcType="DATE"/>
+		<result property="delCode"		column="del_code"	jdbcType="CHAR"/>
+		<result property="file1"		column="file1"		jdbcType="VARCHAR"/>
+		<result property="file2"		column="file2"		jdbcType="VARCHAR"/>
+		<result property="file3"		column="file3"		jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert id="addReport"	parameterType="report">
+		INSERT INTO report
+		(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date,
+		file1, file2, file3, del_code)
+		VALUES
+		(seq_report_report_no.NEXTVAL, #{reporter.id}, #{reported.id}, #{reportCategory}, 
+		#{reportContent}, #{reportStatus}, SYSDATE, #{file1}, #{file2:VARCHAR}, #{file3:VARCHAR}, 
+		#{delCode:CHAR})
+	</insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+
+	<select id="getReport"	parameterType="string"	resultMap="reportSelectMap">
+		SELECT
+		report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code, 
+		file1, file2, file3
+		FROM report
+		WHERE report_no=#{reportNo}
+	</select>
+	
+
+	<!-- SQL : UPDATE -->
+
+	<update id="updateReport"		parameterType="report">
+		UPDATE report
+		<set>
+			report_status=#{reportStatus},
+			del_code=#{delCode:CHAR}
+		</set>
+		WHERE report_no=#{reportNo}
+	</update>
+
+	<!-- SQL : SELECT LIST -->
+	 	
+	<select id="getReportList" 	parameterType="search" 	resultMap="reportSelectMap">
+		SELECT report_no, reporter_id, reported_id, report_category, report_date
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT report_no, reporter_id, reported_id, report_category, report_date
+				FROM report
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							reporter_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							reported_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							report_category=#{searchKeyword}
+						</if>
+						<if test="searchCondition==3 and searchkeyword !='' ">
+							report_date=#{searchKeyword}
+						</if>
+					</where>
+				</if>
+				ORDER BY report_no ) inner_table
+			WHERE ROWNUM &lt;=#{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SQL : SELECT ROW Count -->	 
+
+	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT report_no, reporter_id, reported_id, report_category, report_date
+			FROM report
+			<if test="searchCondition != null">
+				<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							reporter_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							reported_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							report_category=#{searchKeyword}
+						</if>
+						<if test="searchCondition==3 and searchkeyword !='' ">
+							report_date=#{searchKeyword}
+						</if>
+					</where>
+			</if> ) countTable						
+	</select>
+	 
+</mapper>

@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
 <<<<<<< HEAD
+encoding//SQL(Script)/protectedog.sql=EUC-KR
+encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=UTF-8
+encoding/<project>=EUC-KR
+=======
+<<<<<<< HEAD
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR
 encoding//src/main/java/org/protectedog/common/web/LogonCheckInterceptor.java=EUC-KR
 =======
@@ -18,4 +23,5 @@ encoding//src/main/java/org/protectedog/web/storyfunding/FundingController.java=
 encoding//src/main/java/org/protectedog/web/storyfunding/FundingRestController.java=EUC-KR
 encoding/<project>=EUC-KR
 >>>>>>> refs/heads/hyemi
+>>>>>>> refs/remotes/origin/master
 >>>>>>> refs/remotes/origin/master

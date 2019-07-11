@@ -43,13 +43,14 @@ public class BoardServiceImpl implements BoardService{
 
 	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception {
 		Map<String, Object> map= boardDAO.listBoard(search, boardCode);
-		int totalCount = boardDAO.getTotalCount(boardCode);
-		
-		map.put("map", map );
-		map.put("totalCount", new Integer(totalCount));
-		
+//		int totalCount = boardDAO.getTotalCount(boardCode);
+//		
+//		map.put("map", map );
+//		map.put("totalCount", new Integer(totalCount));
+//		
 		return map;
 	}
+
 
 	public void updateBoard(Board board) throws Exception {
 		boardDAO.updateBoard(board);

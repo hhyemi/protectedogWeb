@@ -19,7 +19,8 @@
 <link href="/css/animate.min.css" rel="stylesheet">
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/decoupled-document/ckeditor.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/12.2.0/decoupled-document/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
@@ -33,12 +34,10 @@ body {
 	font-family: '나눔고딕', 'NanumGothic', ng
 }
 
-
 #editor {
 	min-height: 600px;
 	max-height: 960px;
-	max-width : 1130px;
-	
+	max-width: 1130px;
 	margin-left: 15px;
 	text-align: left;
 }
@@ -48,20 +47,20 @@ body {
 }
 
 #preview img {
-    width: 100px;
-    height: 100px;
+	width: 100px;
+	height: 100px;
 }
 
 #preview p {
-    text-overflow: ellipsis;
-    overflow: hidden;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .preview-box {
-    border: 1px solid;
-    padding: 5px;
-    border-radius: 2px;
-    margin-bottom: 10px;
+	border: 1px solid;
+	padding: 5px;
+	border-radius: 2px;
+	margin-bottom: 10px;
 }
 </style>
 
@@ -70,36 +69,7 @@ body {
 <script type="text/javascript">
 function fncAddProduct(){
 	
-	var name = $("input[name='prodName']").val();
-	var detail = $("input[name='prodDetail']").val();
-	var manuDate = $("input[name='manuDate']").val();
-	var price = $("input[name='price']").val();
-	var amount = $("input[name='amount']").val();
-	
-	if(name == null || name.length<1){
-		alert("상품명은 반드시 입력하여야 합니다.");
-		return;
-	}
-	if(detail == null || detail.length<1){
-		alert("상품상세정보는 반드시 입력하여야 합니다.");
-		return;
-	}
-	if(manuDate == null || manuDate.length<1){
-		alert("제조일자는 반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(price == null || price.length<1){
-		alert("가격은 반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(amount == null || amount.length<1){
-		alert("개수는 반드시 입력하셔야 합니다.");
-	} else if ( amount > 999 ) {
-		alert("개수는 최대 999개까지만 등록가능합니다.");
-	} 
-		
-	
-	$("form").attr("method","POST").attr("action","/product/addProduct").submit();
+	$("form").attr("method","POST").attr("action","/info/addInformation").submit();
 	
 }
 
@@ -122,76 +92,76 @@ $(function () {
 <body>
 
 	<div class="container">
-			<h3 class=" text-info">새 글 쓰기</h3>
-		
+		<h3 class=" text-info">새 글 쓰기</h3>
+
 		<hr>
-		
+
 		<div style="border: 1px solid black; padding: 5px;">
-		
-		<form class="form-horizontal" name="detailForm"
-			enctype="multipart/form-data">
 
-			<div class="row">
-				<div class="col-xs-12 col-md-12">
-					<input type="text" class="form-control" name="postTitle"
-						id="postTitle" placeholder="제목을 입력해 주세요." />
+			<form class="form-horizontal" name="detailForm"
+				enctype="multipart/form-data">
+
+				<div class="row">
+					<div class="col-xs-12 col-md-12">
+						<input type="text" class="form-control" name="postTitle"
+							id="postTitle" placeholder="제목을 입력해 주세요." />
+					</div>
 				</div>
-			</div>
 
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-xs-4 col-md-2"> -->
-<!-- 					<strong>이미지</strong> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			
-			<br/>
-			
-			<div class="row">
-				<div class="col-xs-12 col-md-12">
-					<div class="body">
-            <!-- 첨부 버튼 -->
-            <div id="attach">
-                <label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진첨부</label>
-                <input id="uploadInputBox" style="display: none" type="file" name="filedata" multiple />
-            </div>
-            
-            <!-- 미리보기 영역 -->
-            <div id="preview" class="content"></div>
-            
-            <!-- multipart 업로드시 영역 -->
-            		<form id="uploadForm" style="display: none;">
-            		</form>
-        			</div>
+				<!-- 			<div class="row"> -->
+				<!-- 				<div class="col-xs-4 col-md-2"> -->
+				<!-- 					<strong>이미지</strong> -->
+				<!-- 				</div> -->
+				<!-- 			</div> -->
+
+				<br />
+
+				<div class="row">
+					<div class="col-xs-12 col-md-12">
+						<div class="body">
+							<!-- 첨부 버튼 -->
+							<div id="attach">
+								<label class="waves-effect waves-teal btn-flat"
+									for="uploadInputBox">사진첨부</label> <input id="uploadInputBox"
+									style="display: none" type="file" name="filedata" multiple />
+							</div>
+
+							<!-- 미리보기 영역 -->
+							<div id="preview" class="content"></div>
+
+							<!-- multipart 업로드시 영역 -->
+							<form id="uploadForm" style="display: none;"></form>
+						</div>
+					</div>
 				</div>
-			</div>
-		
-			<hr />
-			
-			<div class="postForm row" align="center">
 
-<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
-	
-<div id="editor" class="col-xs-12 col-md-12">
-	<p>This is the initial editor content.</p>
-</div>
+				<hr />
 
-</div>
+				<div class="postForm row" align="center">
 
+					<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
+
+					<div id="editor" class="col-xs-12 col-md-12">
+						<p>This is the initial editor content.</p>
+					</div>
+
+				</div>
+			</form>
 		</div>
 
-<hr />
-			<div class="row">
-				<div class="col-md-12 text-center ">
-					<button type="button" class="btn btn-primary">등록</button>
-					<a id="reset" class="btn btn-primary btn" role="button">취소</a>
-				</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-12 text-center ">
+				<button type="button" class="btn btn-primary">등록</button>
+				<a id="reset" class="btn btn-primary btn" role="button">취소</a>
 			</div>
+		</div>
 
-		</form>
-		
+
+
 	</div>
-	
-<script>
+
+	<script>
     DecoupledEditor
         .create( document.querySelector( '#editor' ) )
         .then( editor => {
@@ -337,7 +307,7 @@ $(function () {
     }); 
 
 </script>
-	
+
 
 </body>
 </html>

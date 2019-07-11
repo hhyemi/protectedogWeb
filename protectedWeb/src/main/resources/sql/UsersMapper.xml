@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UsersMapper">
+ 	
+ 	
+	<resultMap id="usersSelectMap" type="users">
+		<result property="userNo"		column="user_no"		jdbcType="NUMERIC"/>
+		<result property="id"		column="id"		jdbcType="VARCHAR"/>
+		<result property="kakao"		column="kakao"		jdbcType="VARCHAR"/>
+		<result property="naver"		column="id"		jdbcType="VARCHAR"/>
+		<result property="google"		column="id"		jdbcType="VARCHAR"/>
+		<result property="facebook"		column="id"		jdbcType="VARCHAR"/>
+		<result property="pw"		column="pw"		jdbcType="VARCHAR"/>
+		<result property="userName"	column="user_name"	jdbcType="VARCHAR"/>
+		<result property="nickname"	column="nickname"	jdbcType="VARCHAR"/>
+		<result property="email"		column="email"		jdbcType="VARCHAR"/>
+		<result property="phone"		column="phone"		jdbcType="NUMERIC"/>
+		<result property="userAddr"		column="user_addr"	jdbcType="VARCHAR"/>
+		<result property="account"		column="account"		jdbcType="VARCHAR"/>
+		<result property="birthDate"	column="birth_date"	jdbcType="NUMERIC"/>
+		<result property="gender"		column="gender"		jdbcType="CHAR"/>
+		<result property="levelPoint"	column="level_point"	jdbcType="NUMERIC"/>
+		<result property="levels"		column="levels"		jdbcType="VARCHAR"/>
+		<result property="accessDate"	column="access_date"	jdbcType="DATE"/>
+		<result property="role"		column="role"		jdbcType="VARCHAR"/>
+		<result property="purpose1"	column="purpose1"	jdbcType="VARCHAR"/>
+		<result property="purpose2"	column="purpose2"	jdbcType="VARCHAR"/>
+		<result property="purpose3"	column="purpose3"	jdbcType="VARCHAR"/>
+		<result property="profile"		column="profile"		jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert id="addUsersBase"	parameterType="users">
+		INSERT INTO users(user_no, id, kakao, naver, google, facebook, pw, user_name, nickname, 
+				level_point, levels, role, purpose1, purpose2, purpose3)
+		VALUES(seq_users_user_no.NEXTVAL, #{id}, #{kakao:VARCHAR}, #{naver:VARCHAR}, #{google:VARCHAR},
+			#{facebook:VARCHAR}, #{pw}, #{userName}, #{nickname}, 0, '미인증회원', 'user', #{purpose1:VARCHAR}, 
+			#{purpose2:VARCHAR}, #{purpose3:VARCHAR})
+	</insert>
+	<insert id="addUsersAdditional"	parameterType="users">
+		INSERT INTO users(email, phone, user_addr, account, birth_date, gender)
+		VALUES(#{email:VARCHAR}, #{phone:VARCHAR}, #{userAddr:VARCHAR}, 
+			#{account:VARCHAR}, #{birthDate:VARCHAR}, #{gender:VARCHAR})
+		WHERE id=#{userId}
+	</insert>
+
+	 
+	 <!-- SQL : SELECT ONE -->
+
+	<select id="getUsers"	parameterType="string"	resultMap="usersSelectMap">
+		SELECT
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, access_date, profile
+		FROM users
+		WHERE id=#{value}
+	</select>
+	 
+
+	 <!-- SQL : UPDATE -->
+
+	<update id="updateUsers"	parameterType="users">
+		UPDATE users
+		<set>
+			pw=#{pw},
+			user_name=#{userName},
+			nickname=#{nickname},
+			email=#{email:VARCHAR},
+			phone=#{phone:NUMERIC},
+			user_addr=#{userAddr:VARCHAR},
+			account=#{account:NUMERIC},
+			profile=#{profile}
+		</set>
+		WHERE id=#{id}
+	</update>
+			
+		 
+	<!-- SQL : SELECT LIST -->
+	 	
+	<select id="getUsersList"	parameterType="search"	resultMap="usersSelectMap">
+		SELECT id, user_name, nickname, levels
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT id, user_name, nickname, levels
+				FROM users
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							user_name=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							nickname=#{searchKeyword}
+						</if>
+						<if test="searchCondition==3 and searchkeyword !='' ">
+							level=#{searchKeyword}
+						</if>
+					</where>
+				</if>
+				ORDER BY id ) inner_table
+			WHERE ROWNUM &lt;=#{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SQL : SELECT ROW Count -->	 
+
+	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT id, user_name, nickname, levels
+			FROM users
+			<if test="searchCondition != null">
+				<where>
+					<if test="searchCondition==0 and searchKeyword !='' ">
+						id=#{searchKeyword}
+					</if>
+					<if test="searchCondition==1 and searchkeyword !='' ">
+						user_name=#{searchKeyword}
+					</if>
+					<if test="searchCondition==2 and searchkeyword !='' ">
+						nickname=#{searchKeyword}
+					</if>
+					<if test="searchCondition==3 and searchkeyword !='' ">
+						level=#{searchKeyword}
+					</if>
+				</where>
+			</if> ) countTable						
+	</select>
+	 
+</mapper>

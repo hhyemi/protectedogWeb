@@ -10,9 +10,10 @@ public class Coupon {
 	private String couponCode;
 	private int discount;
 	private int couponNo;
-	private String couponStatus;
+	private char couponStatus;
 	private Date makeDate;
 	private Date limitDate;
+	private Date UseDate;
 	
 	///Constructor
 	
@@ -47,10 +48,10 @@ public class Coupon {
 	public void setCouponNo(int couponNo) {
 		this.couponNo = couponNo;
 	}
-	public String getCouponStatus() {
+	public char getCouponStatus() {
 		return couponStatus;
 	}
-	public void setCouponStatus(String couponStatus) {
+	public void setCouponStatus(char couponStatus) {
 		this.couponStatus = couponStatus;
 	}
 	public Date getMakeDate() {
@@ -66,14 +67,17 @@ public class Coupon {
 		this.limitDate = limitDate;
 	}
 	
+	public Date getUseDate() {
+		return UseDate;
+	}
+	public void setUseDate(Date useDate) {
+		UseDate = useDate;
+	}
 	@Override
 	public String toString() {
 		return "Coupon [receiveUser=" + receiveUser + ", couponName=" + couponName + ", couponCode=" + couponCode
 				+ ", discount=" + discount + ", couponNo=" + couponNo + ", couponStatus=" + couponStatus + ", makeDate="
-				+ makeDate + ", limitDate=" + limitDate + ", getReceiveUser()=" + getReceiveUser()
-				+ ", getCouponName()=" + getCouponName() + ", getCouponCode()=" + getCouponCode() + ", getDiscount()="
-				+ getDiscount() + ", getCouponNo()=" + getCouponNo() + ", getCouponStatus()=" + getCouponStatus()
-				+ ", getMakeDate()=" + getMakeDate() + ", getLimitDate()=" + getLimitDate() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}	
+				+ makeDate + ", limitDate=" + limitDate + ", UseDate=" + UseDate + "]";
+	}
+
 }

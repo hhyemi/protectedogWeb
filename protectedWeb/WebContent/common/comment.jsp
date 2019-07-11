@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -27,6 +28,10 @@
 <style>
 body {
 	padding-top: 50px;
+}
+
+.temp {
+	height : 300px;
 }
 </style>
 
@@ -58,10 +63,10 @@ body {
 
 <body>
 
-
 	
-
 	<form class="container">
+		
+		<jsp:include page="../index.jsp"></jsp:include>
 		<!-- 		<div class="row"> -->
 		<!-- 			<div class="col-xs-4 col-md-12" align="left"> -->
 		<!-- 				<b><h3>한줄평</h3></b> -->
@@ -102,10 +107,10 @@ body {
 				<h4>
 					<b>z1존은우</b>&nbsp; <small>2019-07-10 10:23:27</small>&nbsp;
 				</h4>
-				<h5>보신탕 냠냠 개곡이가 최고야 ! <br> 보신탕 냠냠 개곡이가 최고야 ! </h5>
+				<h5>찾아라 비밀의 열쇠</h5>
 				<span class="glyphicon glyphicon-refresh"></span> &nbsp; <span
 					class="glyphicon glyphicon-remove"></span> &nbsp; <span
-					class="glyphicon glyphicon-alert"></span>
+					class="glyphicon glyphicon-alert"></span> &nbsp;
 					<span class="glyphicon glyphicon-plus"></span>
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
@@ -131,7 +136,8 @@ body {
 				<h5>바르고 고운말을 사용합시다</h5>
 				<span class="glyphicon glyphicon-refresh"></span> &nbsp; <span
 					class="glyphicon glyphicon-remove"></span> &nbsp; <span
-					class="glyphicon glyphicon-alert"></span>
+					class="glyphicon glyphicon-alert"></span>  &nbsp;
+					<span class="glyphicon glyphicon-plus"></span>
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
 				<span class="glyphicon glyphicon-chevron-up"></span> <br>

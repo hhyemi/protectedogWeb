@@ -24,9 +24,23 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	
-       #start { border:3px solid #0066cc; }
+       #start { border:3px solid #5271c7; }
 	   #startNo { border:3px solid #ffffff}
-	   
+	   #btn-add{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:150px;
+		}
+		#btn-cancel{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:150px;
+		}		
+
     </style>
 
 	</head>
@@ -39,7 +53,7 @@
 		<h1 class="bg-primary text-center">후원 신청 등 록</h1>
 	    </div>		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form id ="uploadForm" class="form-horizontal">
 	
 		<div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">후원목표금액</h4>
@@ -53,11 +67,14 @@
 		  
 		  <div class="form-group" id="voteNum">
 		    <h4 class="col-sm-offset-3 col-sm-12">투표수 <strong class="text-danger">0</strong>표</h4>
+		  </div>
+
+		  <div class="form-group" >
 		    <h5 class="col-sm-offset-3 col-sm-12" >
 			후원게시글로 이동하려면 받아야 할 투표 수입니다.
 			</h5>
 		  </div>
-		  
+		  		  
 		  <div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">후원목표기간</h4>
 			<h5 class="col-sm-offset-3 col-sm-12">
@@ -75,7 +92,7 @@
 		  <div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">글제목</h4>
 		    <div class="col-sm-offset-3 col-sm-5"">
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요.">
+		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." maxlength="10" >
 		    </div>
 		  </div>
 		  
@@ -88,13 +105,16 @@
 
             <!-- 첨부 버튼 -->
             <div id="attach">
-                <label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진첨부(대표이미지는 파란테두리)</label>
-                <input id="uploadInputBox" style="display: none" type="file" name="filedata" multiple />
+                <span class="col-sm-offset-3 label label-primary" ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;대표이미지는 파란테두리입니다.
+                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata" multiple />
             </div>
             
+            <br/><br/>
+            
             <!-- 미리보기 영역 -->
-            <div id="preview" class="content" style='display:inline;min-width:1200px;'></div>
-		  
+            <div class="form-group">
+            <div id="preview" class="content col-sm-offset-3 col-sm-5" style='display:inline; min-width:1200px;'></div> 
+            </div>
 		  <div class="form-group">
 		   <h4 class="col-sm-offset-3 col-sm-12">연락처</h4>
 		     <h5 class="col-sm-offset-3 col-sm-12">
@@ -117,13 +137,12 @@
 		    <input type="hidden" name="phone"  />
 		  </div>
 		  
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-	  			<button type="button" class="btn btn-primary">등록</button>
-	  			<button type="button" class="btn btn-warning">취소</button>
-		    </div>
+		  <br/><br/>
+		  <div class="form-group text-center">
+	  			<button type="button" id="btn-add">등록</button>
+	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
+		  <br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		
@@ -146,26 +165,33 @@
 
 		if(fundTargetPay == null || fundTargetPay.length<1){
 			alert("후원목표금액은 반드시 입력하여야 합니다.");
+			$('input[name="fundTargetPay"]').focus();
 			return;
 		}
 		if(fundTargetPay < 100000 || fundTargetPay > 3000000){
 			alert("후원목표금액은 10만원이상 300만원이하로 입력하여야 합니다.")
+			$('input[name="fundTargetPay"]').focus();
 			return;
 		}
 		if(postTitle == null || postTitle.length<1){
 			alert("글제목은 반드시 입력하여야 합니다.");
+			$('input[name="postTitle"]').focus();
 			return;
 		}
-		if(postContent == null || postContent.length<1){
+		alert(postContent)
+/* 		if(postContent == null || postContent.length<1){
 			alert("글내용은 반드시 입력하셔야 합니다.");
+			$('input[name="postContent"]').focus();
 			return;
-		}
+		} */
 		if(phone2 == null || phone2.length<1){
 			alert("휴대폰번호는 반드시 입력하셔야 합니다.");
+			$('input[name="phone2"]').focus();
 			return;
 		}
 		if(phone3 == null || phone3.length<1){
 			alert("휴대폰번호는 반드시 입력하셔야 합니다.");
+			$('input[name="phone3"]').focus();
 			return;
 		}
 		
@@ -177,63 +203,48 @@
 		}
 		$("input:hidden[name='phone']").val( value );
 		
-		
-		
-		 var form = $('#uploadForm')[0];
-         var formeData = new FormData(form);
+		//============= 다중파일업로드 AJAX =============
+   		 $(function() {     
+   			var form = $('#uploadForm')[0];
+            var formData = new FormData(form);
 
-         for (var index = 0; index < Object.keys(files).length; index++) {
-             //formData 공간에 files라는 이름으로 파일을 추가한다.
-             //동일명으로 계속 추가할 수 있다.
-             formData.append('files',files[index]);
-         }
-
-         //ajax 통신으로 multipart form을 전송한다.
-         $.ajax({
-             type : 'POST',
-             enctype : 'multipart/form-data',
-             processData : false,
-             contentType : false,
-             cache : false,
-             timeout : 600000,
-             url : '/funding/json/imageupload',
-             dataType : 'JSON',
-             data : formData,
-             success : function(result) {
-                 //이 부분을 수정해서 다양한 행동을 할 수 있으며,
-                 //여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
-                 //-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
-                 if (result === -1) {
-                     alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-                     // 이후 동작 ...
-                 } else if (result === -2) {
-                     alert('파일이 10MB를 초과하였습니다.');
-                     // 이후 동작 ...
-                 } else {
-                     alert('이미지 업로드 성공');
-                     // 이후 동작 ...
-                 }
-             }
-             //전송실패에대한 핸들링은 고려하지 않음
-         });
+            for (var index = 0; index < 100; index++) {
+                //formData 공간에 files라는 이름으로 파일을 추가한다.
+                //동일명으로 계속 추가할 수 있다.
+                formData.append('files',files[index]);
+            }
+            $.ajax({
+                type : 'POST',
+                enctype : 'multipart/form-data',
+                processData : false,
+                contentType : false,
+                cache : false,
+                timeout : 600000,
+                url : '/funding/json/imageupload/',
+                dataType : 'JSON',
+                data : formData,
+                success : function(result) {
+                    //이 부분을 수정해서 다양한 행동을 할 수 있으며,
+                    //여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
+                    //-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
+                    if (result === -1) {
+                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+                        // 이후 동작 ...
+                    } else if (result === -2) {
+                        alert('파일이 10MB를 초과하였습니다.');
+                        // 이후 동작 ...
+                    } else {
+                        alert('이미지 업로드 성공');
+                        // 이후 동작 ...
+                    }
+                }
+                //전송실패에대한 핸들링은 고려하지 않음
+            });
+        });
 
 
 		$('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
-
 	}
-	
-	//============= 후원목표금액에 따른 표개수 =============
-	 $(function() {
-		 
-		$("input[name='fundTargetPay']").on('input' , function() {
-			
-			 var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);			
-			//alert("입력  : "+inputed);
-			 $("#voteNum").children("h4").remove();
-			 $("#voteNum").append("<h4 class=\"col-sm-offset-3 col-sm-12\">투표수 <strong class=\"text-danger\">"+inputed+"</strong>표</h4>");
-		});
-		
-	});
 	
 	//============= "다중파일업로드"  Event 처리 및  연결 =============		
 
@@ -247,8 +258,9 @@
          if (input[0].files) {
              //파일 선택이 여러개였을 시의 대응
              for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-                 var file = input[0].files[fileIndex];
 
+                 var file = input[0].files[fileIndex];
+            	 
                  if (validation(file.name))
                      continue;
 
@@ -277,12 +289,12 @@
                      }
                  
                      $("#preview").append(
-                                     "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:208px' >"
-                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"200px;\" height=\"200px;\"/>"
+                                     "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:130px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
                                              + "<a href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "삭제" + "</a>" + "</div>");
+                                             + "   삭제" + "</a>" + "</div>");
                      files[imgNum] = file;
 
                  };
@@ -293,15 +305,16 @@
              alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
      }
 
-     //preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
+     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
      function deletePreview(obj) {
          var imgNum = obj.attributes['value'].value;
+         alert(imgNum);
          delete files[imgNum];
          $("#preview .preview-box[value=" + imgNum + "]").remove();
          resizeHeight();
      }
 
-     //확장자 validation 체크
+     //============= 파일 확장자 validation 체크 =============
      function validation(fileName) {
          fileName = fileName + "";
          var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
@@ -314,67 +327,63 @@
              return false;
          }
      }
+     
 
-	 		$(document).ready(function() {
-         //submit 등록. 실제로 submit type은 아니다.
-	/* 
-         $('.submit a').on('click',function() {                        
-             var form = $('#uploadForm')[0];
-             var formeData = new FormData(form);
- 
-             for (var index = 0; index < Object.keys(files).length; index++) {
-                 //formData 공간에 files라는 이름으로 파일을 추가한다.
-                 //동일명으로 계속 추가할 수 있다.
-                 formData.append('files',files[index]);
-             }
+	 	$(document).ready(function() {
 
-             //ajax 통신으로 multipart form을 전송한다.
-             $.ajax({
-                 type : 'POST',
-                 enctype : 'multipart/form-data',
-                 processData : false,
-                 contentType : false,
-                 cache : false,
-                 timeout : 600000,
-                 url : '/product/json/imageupload',
-                 dataType : 'JSON',
-                 data : formData,
-                 success : function(result) {
-                     //이 부분을 수정해서 다양한 행동을 할 수 있으며,
-                     //여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
-                     //-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
-                     if (result === -1) {
-                         alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-                         // 이후 동작 ...
-                     } else if (result === -2) {
-                         alert('파일이 10MB를 초과하였습니다.');
-                         // 이후 동작 ...
-                     } else {
-                         alert('이미지 업로드 성공');
-                         // 이후 동작 ...
-                     }
-                 }
-                 //전송실패에대한 핸들링은 고려하지 않음
-             });
-         });*/
-         
-         // <input type=file> 태그 기능 구현
-         $('#attach input[type=file]').change(function() {
+		 	//============= 사진미리보기 =============
+	 		$('#attach input[type=file]').change(function() {
              addPreview($(this)); //preview form 추가하기
          });
+
+	 		//============= 후원목표금액 =============
+             $('#fundTargetPay').keyup(function(){
+            	 
+                 //후원목표금액 길이초과
+                 if ($(this).val().length > $(this).attr('maxlength')-1) {
+                     alert('제한길이 초과');
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                 }
+                 //후원목표금액 문자 입력 검증     
+            	 var exp = /^[0-9]+$/;
+            	 if($(this).val().match(exp)){
+            		//금액에 따른 표개수
+      				if($(this).val().match(exp)){
+    					 var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);			
+    					 $("#voteNum").children("h4").remove();
+    					 $("#voteNum").append("<h4 class=\"col-sm-offset-3 col-sm-12\">투표수 <strong class=\"text-danger\">"+inputed+"</strong>표</h4>");
+    					}
+            		 return true;
+            	 }else{
+            		alert("숫자만 입력하세요.")
+            		var val = $(this).val(); 
+            		var len = val.length; 
+            		$(this).val(val.substring(0,len-1));  		
+            	 }
+            	
+             });
+	 		
+     		//============= 글제목 길이 체크 =============
+             $('#postTitle').keyup(function(){
+                 if ($(this).val().length > $(this).attr('maxlength')-1) {
+                     alert('제한길이 초과');
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                 }
+             });
+
      }); 
 	
 	$(function() {
 		
-		//============= 등록 Event  처리 =============	
-		$( "button.btn.btn-primary" ).on("click" , function() {
-			fncAddFunding();
-		});
-		
-		//============= 취소 Event  처리 =============
-		 $( "button.btn.btn-warning" ).on("click" , function() {
-			 fncUpdateProduct();
-			});
+			//============= 등록 Event  처리 =============	
+			$( "#btn-add" ).on("click" , function() {
+				fncAddFunding();
+				});
+			
+			//============= 취소 Event  처리 =============
+			 $( "#btn-cancel" ).on("click" , function() {
+					history.go(-1);
+				});
 				
 	});	
 	  	 		

@@ -1,5 +1,9 @@
 package org.protectedog.web.storyfunding;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.service.domain.Funding;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/funding/*")
@@ -33,11 +38,15 @@ public class FundingController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
+	@Value("#{commonProperties['fileSF']}")
+	// @Value("#{commonProperties['pageSize'] ?: 2}")
+	String fileroot;
+	
 	@RequestMapping(value = "addFunding", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
 		System.out.println("/funding/addfunding : POST");
-
+		
 		// 나중에 세션으로 변경//
 		String id = "user01";
 		String nickName = "스캇";
