@@ -543,3 +543,18 @@ INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
 VALUES
 (seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user03', 5000, '0', '2019/07/11', '2019/09/11', null);
+
+INSERT INTO interest
+(interest_no, board_code, comment_no, post_no, id, reg_date)
+VALUES
+(SEQ_INTEREST_INTEREST_NO.nextval, 'IS', 10001, 15556, 'user01', '2019-07-11');
+
+INSERT INTO interest
+(interest_no, board_code, comment_no, post_no, id, reg_date)
+VALUES
+(SEQ_INTEREST_INTEREST_NO.nextval, 'IS', null, 15557, 'user02', '2019-07-11');
+
+INSERT INTO interest
+(interest_no, board_code, comment_no, post_no, id, reg_date)
+VALUES
+(SEQ_INTEREST_INTEREST_NO.nextval, 'IS', 10002, 15555, 'user03', '2019-07-11');
