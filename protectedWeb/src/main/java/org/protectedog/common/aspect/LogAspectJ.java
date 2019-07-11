@@ -3,6 +3,10 @@ package org.protectedog.common.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 
+/*
+ * FileName : PojoAspectJ.java
+ * :: XML¿¡ ¼±¾ğÀûÀ¸·Î aspect ÀÇ Àû¿ë
+ */
 public class LogAspectJ {
 
 	///Constructor
@@ -11,19 +15,25 @@ public class LogAspectJ {
 	}
 	
 	//Around  Advice
+
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 			
 		System.out.println("");
-		System.out.println("[Around before] íƒ€ï¿½â”›ëŠ˜ï¿½.ë©”ì„œë“œ :"+
+
+		System.out.println("[Around before] Å¸°Ù °´Ã¼ ¸Ş¼­µå :"+
 													joinPoint.getTarget().getClass().getName() +"."+
 													joinPoint.getSignature().getName());
 		if(joinPoint.getArgs().length !=0){
-			System.out.println("[Around before]methodì— ì „ë‹¬ë˜ëŠ” ì¸ì : "+ joinPoint.getArgs()[0]);
+
+			System.out.println("[Around before]method¿¡ Àü´ŞµÇ´Â ÀÎÀÚ: "+ joinPoint.getArgs()[0]);
 		}
-		//==> íƒ€ê²Ÿ ê°ì²´ì˜ Method ë¥¼ í˜¸ì¶œ í•˜ëŠ” ë¶€ë¶„ 
+
+		//==>Å¸°Ù °´Ã¼ÀÇ Method¸¦ È£ÃâÇÏ´Â ºÎºĞ
 		Object obj = joinPoint.proceed();
 
-		System.out.println("[Around after] íƒ€ê²Ÿ ê°ì²´return value  : "+obj);
+
+
+		System.out.println("[Around after] Å¸°Ù °´Ã¼ return value  : "+obj);
 		System.out.println("");
 		
 		return obj;
