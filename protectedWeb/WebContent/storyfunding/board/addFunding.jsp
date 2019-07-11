@@ -26,6 +26,20 @@
 	
        #start { border:3px solid #5271c7; }
 	   #startNo { border:3px solid #ffffff}
+	   #btn-add{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:150px;
+		}
+		#btn-cancel{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:150px;
+		}		
 
     </style>
 
@@ -78,7 +92,7 @@
 		  <div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">글제목</h4>
 		    <div class="col-sm-offset-3 col-sm-5"">
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요.">
+		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." maxlength="10" >
 		    </div>
 		  </div>
 		  
@@ -123,13 +137,12 @@
 		    <input type="hidden" name="phone"  />
 		  </div>
 		  
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-	  			<button type="button" class="btn btn-primary">등록</button>
-	  			<button type="button" class="btn btn-warning">취소</button>
-		    </div>
+		  <br/><br/>
+		  <div class="form-group text-center">
+	  			<button type="button" id="btn-add">등록</button>
+	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
+		  <br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		
@@ -146,7 +159,7 @@
 
 		var fundTargetPay = $('input[name="fundTargetPay"]').val();
 		var postTitle = $('input[name="postTitle"]').val();
-		//var postContent = $('input[name="postContent"]').val();
+		var postContent = $('input[name="postContent"]').val();
 		var phone2 = $('input[name="phone2"]').val();
 		var phone3 = $('input[name="phone3"]').val();	
 
@@ -165,11 +178,12 @@
 			$('input[name="postTitle"]').focus();
 			return;
 		}
-	/*	if(postContent == null || postContent.length<1){
+		alert(postContent)
+/* 		if(postContent == null || postContent.length<1){
 			alert("글내용은 반드시 입력하셔야 합니다.");
 			$('input[name="postContent"]').focus();
 			return;
-		}*/
+		} */
 		if(phone2 == null || phone2.length<1){
 			alert("휴대폰번호는 반드시 입력하셔야 합니다.");
 			$('input[name="phone2"]').focus();
@@ -189,6 +203,7 @@
 		}
 		$("input:hidden[name='phone']").val( value );
 		
+		//============= 다중파일업로드 AJAX =============
    		 $(function() {     
    			var form = $('#uploadForm')[0];
             var formData = new FormData(form);
@@ -230,20 +245,6 @@
 
 		$('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
 	}
-	
-	
-	//============= 후원목표금액에 따른 표개수 =============
-	 $(function() {
-		 
-		$("input[name='fundTargetPay']").on('input' , function() {
-			
-			 var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);			
-			//alert("입력  : "+inputed);
-			 $("#voteNum").children("h4").remove();
-			 $("#voteNum").append("<h4 class=\"col-sm-offset-3 col-sm-12\">투표수 <strong class=\"text-danger\">"+inputed+"</strong>표</h4>");
-		});
-		
-	});
 	
 	//============= "다중파일업로드"  Event 처리 및  연결 =============		
 
@@ -304,7 +305,7 @@
              alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
      }
 
-     //preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
+     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
      function deletePreview(obj) {
          var imgNum = obj.attributes['value'].value;
          alert(imgNum);
@@ -313,7 +314,7 @@
          resizeHeight();
      }
 
-     //확장자 validation 체크
+     //============= 파일 확장자 validation 체크 =============
      function validation(fileName) {
          fileName = fileName + "";
          var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
@@ -326,24 +327,63 @@
              return false;
          }
      }
+     
 
-	 		$(document).ready(function() {
-         $('#attach input[type=file]').change(function() {
+	 	$(document).ready(function() {
+
+		 	//============= 사진미리보기 =============
+	 		$('#attach input[type=file]').change(function() {
              addPreview($(this)); //preview form 추가하기
          });
+
+	 		//============= 후원목표금액 =============
+             $('#fundTargetPay').keyup(function(){
+            	 
+                 //후원목표금액 길이초과
+                 if ($(this).val().length > $(this).attr('maxlength')-1) {
+                     alert('제한길이 초과');
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                 }
+                 //후원목표금액 문자 입력 검증     
+            	 var exp = /^[0-9]+$/;
+            	 if($(this).val().match(exp)){
+            		//금액에 따른 표개수
+      				if($(this).val().match(exp)){
+    					 var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);			
+    					 $("#voteNum").children("h4").remove();
+    					 $("#voteNum").append("<h4 class=\"col-sm-offset-3 col-sm-12\">투표수 <strong class=\"text-danger\">"+inputed+"</strong>표</h4>");
+    					}
+            		 return true;
+            	 }else{
+            		alert("숫자만 입력하세요.")
+            		var val = $(this).val(); 
+            		var len = val.length; 
+            		$(this).val(val.substring(0,len-1));  		
+            	 }
+            	
+             });
+	 		
+     		//============= 글제목 길이 체크 =============
+             $('#postTitle').keyup(function(){
+                 if ($(this).val().length > $(this).attr('maxlength')-1) {
+                     alert('제한길이 초과');
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                 }
+             });
+
      }); 
 	
 	$(function() {
 		
-		//============= 등록 Event  처리 =============	
-		$( "button.btn.btn-primary" ).on("click" , function() {
-			fncAddFunding();
-		});
-		
-		//============= 취소 Event  처리 =============
-		 $( "button.btn.btn-warning" ).on("click" , function() {
-			 fncUpdateProduct();
-			});
+			//============= 등록 Event  처리 =============	
+			$( "#btn-add" ).on("click" , function() {
+				fncAddFunding();
+				});
+			
+			//============= 취소 Event  처리 =============
+			 $( "#btn-cancel" ).on("click" , function() {
+					history.go(-1);
+				});
 				
 	});	
 	  	 		
