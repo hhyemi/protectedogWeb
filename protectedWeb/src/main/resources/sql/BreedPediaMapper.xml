@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BreedPediaMapper">
+ 	
+	<resultMap id="BreedPediaSelectMap" type="breed">
+		<result property="breedNo" 		column="breed_no" 			jdbcType="NUMERIC"/>
+		<result property="weight"		column="weight" 			jdbcType="NUMERIC" />
+		<result property="height" 		column="height"				jdbcType="NUMERIC" />
+		<result property="avgLife"	 	column="avg_life"			jdbcType="NUMERIC" />
+		<result property="addInfo" 		column="add_Info" 			jdbcType="VARCHAR" />
+		<result property="types" 		column="types" 				jdbcType="VARCHAR" />
+		<result property="characters"   column="characters"			jdbcType="VARCHAR" />
+		<result property="Image" 		column="files" 				jdbcType="VARCHAR" />
+		<result property="name" 		column="name" 				jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addBreedPedia"	parameterType="breed" >
+	 	INSERT
+		INTO BREED_PEDIA( breed_no, weight, height, avg_life, add_Info, types, characters, files, name) 
+		VALUES	 ( seq_BREED_PEDIA_BREED_NO.NEXTVAL, #{weight} , #{height} , #{avgLife} , #{addInfo}, #{types}, 
+							#{characters}, #{Image}, #{name});
+	 </insert>
+	
+	<select id="getBreedPedia" parameterType="int" resultMap="BreedPediaSelectMap">
+		SELECT breed_no, weight, height, avg_life, addInfo, types, characters, files, name
+		FROM breed_pedia
+		AND breed_no = #{value}
+	</select>
+	
+	<update id="updateBreedPedia" parameterType="breed">
+		UPDATE breed_pedia
+		SET weight = #{weight}, 
+			height = #{height}, 
+			avg_life = #{avgLife}, 
+			add_info = #{addInfo}, 
+			types = #{types},
+			characters = #{characters},
+			files = #{Image},
+			name = #{name}
+		WHERE breed_no=#{breedNo}
+	</update>
+	
+	<delete id="delBreedPedia" parameterType="int">
+		DELETE 
+		FROM breed_pedia
+		WHERE breed_no = #{breedNo} 
+	</delete>
+	
+	<select id="listBreedPedia" parameterType="map" resultMap="BreedPediaSelectMap">
+		SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT breed_no, weight, height, avg_life, add_info, types, characters, files, name
+                						FROM breed_pedia       
+<!--                 						<if test="searchCondition != null"> -->
+<!-- 											<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 										 		AND p.prod_no like '%'||#{searchKeyword}||'%' -->
+<!-- 											</if> -->
+<!-- 											<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 								 				AND p.prod_name like '%'||#{searchKeyword}||'%' -->
+<!-- 											</if> -->
+<!-- 											<if test="searchCondition == 2 and searchKeyword !='' "> -->
+<!-- 												AND p.price like #{searchKeyword} -->
+<!-- 											</if> -->
+<!-- 										</if>   -->
+										ORDER BY name ASC ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+<!-- 	<select id="getProductSearchList" parameterType="map" resultType="string"> -->
+	
+<!-- 	SELECT ${field} -->
+<!--     FROM product -->
+<!-- 	WHERE ${field} like '%'||#{searchKeyword}||'%' -->
+	
+<!-- 	</select> -->
+	
+<!-- 	<select  id="getBreedPedia"  parameterType="search"	 resultType="int"> -->
+<!-- 	  	SELECT count(*) -->
+<!-- 		FROM ( SELECT p.prod_no, p.PROD_NAME, p.PROD_DETAIL, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, t.TRAN_STATUS_CODE -->
+<!--                FROM product p, transaction t    -->
+<!--                WHERE p.prod_no = t.prod_no(+) -->
+<!-- 				<if test="searchCondition != null"> -->
+<!-- 					<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 						AND p.prod_no like '%'||#{searchKeyword}||'%' -->
+<!-- 					</if> -->
+<!-- 					<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 						AND p.prod_name like '%'||#{searchKeyword}||'%' -->
+<!-- 					</if> -->
+<!-- 					<if test="searchCondition == 2 and searchKeyword !='' "> -->
+<!-- 						AND p.price like #{searchKeyword} -->
+<!-- 					</if> -->
+<!-- 				</if>  -->
+<!-- 		ORDER BY p.prod_no) countTable											 -->
+<!-- 	 </select> -->
+</mapper>
