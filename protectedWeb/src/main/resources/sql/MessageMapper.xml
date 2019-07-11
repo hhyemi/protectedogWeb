@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MessageMapper">
+ 	
+ 	
+	<resultMap id="messageSelectMap" type="message">
+		<result property="messageNo"	column="message_no"		jdbcType="NUMERIC"/>
+		<result property="messageTitle"	column="message_title"		jdbcType="VARCHAR"/>
+		<result property="messageContent"	column="messasge_content"	jdbcType="VARCHAR"/>
+		<result property="sender.id"			column="send_id"		jdbcType="VARCHAR"/>
+		<result property="receiver.id"		column="receive_id"	jdbcType="VARCHAR"/>
+		<result property="sendDate"			column="send_date"	jdbcType="DATE"/>
+		<result property="receiveDate"		column="receive_date"	jdbcType="DATE"/>
+		<result property="messageStatus"		column="message_status"	jdbcType="CHAR"/>
+		<result property="delCode"			column="del_code"	jdbcType="CHAR"/>
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	
+	<insert id="addMessage"	parameterType="message">
+		INSERT INTO message(message_no, message_title, message_content, send_id,
+		receive_id1, send_date, message_status, del_code)
+		VALUES(seq_message_message_no.NEXTVAL, #{messageTitle}, #{messageContent}, #{sender.id}, 
+		#{receiver.id}, SYSDATE, #{messageStatus}, #{delCode})
+	</insert>
+
+	 
+	 <!-- SQL : SELECT ONE -->
+
+	<select id="getMessage"	parameterType="string"	resultMap="messageSelectMap">
+		SELECT
+		message_no, message_title, message_content, send_id, send_date
+		FROM message
+		WHERE message_no=#{messageNo}
+	</select>
+	
+	
+	<!-- SQL : Update -->
+	
+	<update id="updateMessage" 	parameterType="message">
+		UPDATE message
+		<set>
+			message_status	= #{messageStatus},
+			receive_date	= SYSDATE
+		</set>
+		WHERE message_no=#{messageNo}
+	</update>
+		 
+	<!-- SQL : SELECT LIST -->
+	 	
+	<select id="getMessageList"		parameterType="search"	resultMap="messageSelectMap">
+		SELECT send_id, receive_id, message_title, send_date, receive_date
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT send_id, receive_id, message_title, send_date, receive_date
+				FROM message
+				<if test="searchCondition != null">
+					<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							send_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							receive_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							message_title=#{searchKeyword}
+						</if>
+					</where>
+				</if>
+				ORDER BY send_id ) inner_table
+			WHERE ROWNUM &lt;=#{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+
+	<!-- SQL : SELECT ROW Count -->	 
+
+	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT send_id, receive_id, message_title, send_date, receive_date
+			FROM message
+			<if test="searchCondition != null">
+				<where>
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							send_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							receive_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==2 and searchkeyword !='' ">
+							message_title=#{searchKeyword}
+						</if>
+					</where>
+			</if> ) countTable						
+	</select>
+	 
+</mapper>

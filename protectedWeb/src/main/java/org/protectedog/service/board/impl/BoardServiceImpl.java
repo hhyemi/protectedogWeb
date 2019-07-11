@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardDAO;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.domain.Board;
@@ -40,15 +41,16 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.getBoard(postNo);
 	}
 
-//	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception {
-//		Map<String, Object> map= boardDAO.listBoard(search, boardCode);
+	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception {
+		Map<String, Object> map= boardDAO.listBoard(search, boardCode);
 //		int totalCount = boardDAO.getTotalCount(boardCode);
 //		
 //		map.put("map", map );
 //		map.put("totalCount", new Integer(totalCount));
 //		
-//		return map;
-//	}
+		return map;
+	}
+
 
 	public void updateBoard(Board board) throws Exception {
 		boardDAO.updateBoard(board);

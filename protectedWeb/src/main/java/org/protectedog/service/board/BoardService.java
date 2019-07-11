@@ -2,6 +2,7 @@ package org.protectedog.service.board;
 
 import java.util.Map;
 
+import org.protectedog.common.Search;
 import org.protectedog.service.domain.Board;
 
 
@@ -16,7 +17,7 @@ public interface BoardService {
 	public Board getBoard(int postNo) throws Exception;
 	
 	// 글 리스트 조회
-//	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception;
+	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception;
 	
 	// 글 수정
 	public void updateBoard(Board board) throws Exception;

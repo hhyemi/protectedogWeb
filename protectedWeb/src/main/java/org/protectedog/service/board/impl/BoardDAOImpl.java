@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardDAO;
 import org.protectedog.service.domain.Board;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("BoardMapper.getBoard", postNo);
 	}
 	
-//	public Map<String, Object> listBoard(Search search, String boardCode) throws Exception {
-//		Map<String , Object>  map = new HashMap<String, Object>();
+	public Map<String, Object> listBoard(Search search, String boardCode) throws Exception {
+		Map<String , Object>  map = new HashMap<String, Object>();
 //		map.put("boardCode",  boardCode );
 //		map.put("endRowNum",  search.getEndRowNum()+"" );
 //		map.put("startRowNum",  search.getStartRowNum()+"" );
@@ -51,8 +52,8 @@ public class BoardDAOImpl implements BoardDAO{
 //		map.put("totalCount", sqlSession.selectOne("BoardMapper.getTotalCount", map));
 //		map.put("list", list);
 //
-//		return map;
-//	}
+		return map;
+	}
 	
 	public void updateBoard(Board board) throws Exception {
 		sqlSession.update("BoardMapper.updateBoard", board);

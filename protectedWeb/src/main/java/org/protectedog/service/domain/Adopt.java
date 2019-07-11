@@ -9,10 +9,10 @@ public class Adopt {
 	///Field
 	private String boardCode;
 	private int postNo;
-	private String id;
+	private String id;			// user
 	private String postTitle;
 	private String postContent;
-	private String phone;
+	private String phone;		// user
 	private String adoptArea;
 	private String location;
 	private Date regDate;
@@ -28,11 +28,12 @@ public class Adopt {
 	private Date dogDate;
 	
 	private String statusCode;
-
+	
+	
 	
 	
 	public String getBoardCode() {
-		return boardCode;
+		return boardCode.trim();
 	}
 
 	public void setBoardCode(String boardCode) {
@@ -183,13 +184,20 @@ public class Adopt {
 		this.statusCode = statusCode;
 	}
 
+	
+	
+	@Override
 	public String toString() {
-		return "[ boardCode : "+boardCode+" ] [ postNo : "+postNo+" ] [ id : "+id+" ] [ postTitle : "+postTitle
-				+" ] [ postContent : "+postContent+" ] [ phone : "+phone+" ] [ adoptArea : "+adoptArea
-				+" ] [ location : "+location+" ] [ regDate : "+regDate+" ] [ dogBreed : "+dogBreed
-				+" ] [ dogWeight : "+dogWeight+" ] [ dogSize : "+dogSize+" ] [ dogGender : "+dogGender
-				+" ] [ dogPay : "+dogPay+" ] [ dogStatus : "+dogStatus+" ] [dogChar : "+dogChar
-				+" ] [ dogPersonality : "+dogPersonality+" ] [ dogDate : "+dogDate+" ] [ statusCode : "+statusCode+" ]";
+		return "\n\n¡á¡á¡á Adopt ¡á¡á¡á \n[boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
+				+ ", \npostContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", location="
+				+ location + ", \nregDate=" + regDate + ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight
+				+ ", \ndogSize=" + dogSize + ", dogGender=" + dogGender + ", dogPay=" + dogPay + ", dogStatus="
+				+ dogStatus + ", \ndogChar=" + dogChar + ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate
+				+ ", statusCode=" + statusCode + "]";
 	}
+	
+	
+
+	
 
 }

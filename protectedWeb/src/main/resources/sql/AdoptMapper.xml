@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdoptMapper">
+
+	<resultMap id="adoptSelectMap" type="adopt">
+ 	 
+		<result property="boardCode" 		column="board_code" 	 	jdbcType="CHAR"/>
+		<result property="postNo" 			column="post_no" 			jdbcType="NUMERIC"/>
+		<result property="id" 				column="id" 				jdbcType="VARCHAR"/>
+		<result property="postTitle" 		column="post_title" 		jdbcType="VARCHAR"/>
+		<result property="postContent" 		column="post_content" 		jdbcType="VARCHAR"/>
+		<result property="phone" 			column="phone" 				jdbcType="VARCHAR"/>
+		<result property="adoptArea" 		column="adopt_area" 		jdbcType="VARCHAR"/>
+		<result property="location" 		column="location" 			jdbcType="VARCHAR"/>
+		<result property="regDate" 			column="reg_date" 			jdbcType="DATE"/>
+		<result property="dogBreed" 		column="dog_breed" 			jdbcType="VARCHAR"/>
+		<result property="dogWeight"		column="dog_weight" 		jdbcType="NUMERIC"/>
+		<result property="dogSize" 			column="dog_size" 			jdbcType="VARCHAR"/>
+		<result property="dogGender" 		column="dog_gender" 		jdbcType="VARCHAR"/>
+		<result property="dogPay" 			column="dog_pay" 			jdbcType="NUMERIC"/>
+		<result property="dogStatus" 		column="dog_status" 		jdbcType="VARCHAR"/>
+		<result property="dogChar" 			column="dog_char" 			jdbcType="VARCHAR"/>
+		<result property="dogPersonality" 	column="dog_personality" 	jdbcType="VARCHAR"/>
+		<result property="dogDate" 			column="dog_date" 			jdbcType="DATE"/>
+		<result property="statusCode" 		column="status_code" 		jdbcType="CHAR"/>
+		
+	 </resultMap>
+	
+
+	
+	 <!-- SQL : INSERT -->
+	 <insert 	id="addAdopt"		parameterType="adopt" >
+	 	INSERT
+		INTO adopt (board_code, post_no, id, post_title, post_content, phone, 
+					adopt_area, location, reg_date, 
+					dog_breed, dog_weight, dog_size, dog_gender, dog_pay, 
+					dog_status, dog_char, dog_personality, dog_date) 
+		VALUES	   (#{boardCode}, seq_adopt_post_no.nextval, #{id}, #{postTitle}, #{postContent}, #{phone}, 
+					#{adoptArea:VARCHAR}, #{location}, SYSDATE, 
+					#{dogBreed:VARCHAR}, #{dogWeight}, #{dogSize}, #{dogGender}, #{dogPay},
+					#{dogStatus}, #{dogChar}, #{dogPersonality}, #{dogDate} )
+	 </insert>
+	 
+	 
+	 
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getAdopt"	parameterType="int"		resultMap="adoptSelectMap">
+		SELECT
+		board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, 
+		dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
+		FROM adopt 
+		WHERE post_no = #{value}
+	 </select>
+	 
+	 
+	 
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateAdopt"	parameterType="adopt" >
+	   	UPDATE adopt
+	   	<set>
+			post_title		= #{postTitle},
+			post_content	= #{postContent},
+			adopt_area		= #{adoptArea:VARCHAR},
+			location		= #{location},
+			dog_breed		= #{dogBreed:VARCHAR},
+			dog_weight		= #{dogWeight},
+			dog_size		= #{dogSize},
+			dog_gender		= #{dogGender},
+			dog_pay 		= #{dogPay},
+			dog_status	 	= #{dogStatus} ,
+			dog_char 		= #{dogChar},
+			dog_personality	= #{dogPersonality},
+			dog_date		= #{dogDate}
+	   	</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+
+	 <update	id="updateStatusCode"	parameterType="adopt" >
+	   	UPDATE adopt
+	   	<set>
+			status_code	= #{statusCode}
+	   	</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+	 
+		 
+		 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="listAdopt"  parameterType="map"	resultMap="adoptSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM ( SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
+	  							dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
+						FROM adopt
+						<where>
+								board_code = #{boardCode} AND status_code != '0' 
+								<if test="searchCondition != null">
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND nickname  LIKE '%'||#{searchKeyword}||'%'
+									</if> 
+								</if>
+						</where>
+						ORDER BY post_no DESC ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+
+
+
+	
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
+	  					dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
+				FROM adopt
+				<where>
+						board_code = #{boardCode} AND status_code != '0' 
+						<if test="searchCondition != null">
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+					 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+							</if>
+							<if test="searchCondition == 1 and searchKeyword !='' ">
+					 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+							</if>
+							<if test="searchCondition == 2 ">
+<!-- 							크기순 정렬  -->
+								AND dog_size = #{dogSize} 
+							</if>
+						</if>
+						
+						
+				</where> ) countTable						
+	 </select>
+	 
+	 
+	 
+	 
+</mapper>

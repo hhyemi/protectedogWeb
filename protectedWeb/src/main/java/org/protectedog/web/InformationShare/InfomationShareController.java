@@ -39,7 +39,7 @@ public class InfomationShareController {
 		
 		System.out.println(" ============================== addInfo ==================================");
 		
-		board.setBoardCode('I');
+		board.setBoardCode("IS");
 		//board.set
 		System.out.println(" info Board : " + board);
 		

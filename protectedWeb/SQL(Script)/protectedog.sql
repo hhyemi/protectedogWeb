@@ -9,7 +9,6 @@ DROP TABLE adopt;
 DROP TABLE cart;
 DROP TABLE storyfunding;
 DROP TABLE message;
-DROP TABLE message_history;
 DROP TABLE orders;
 DROP TABLE apply;
 DROP TABLE board;
@@ -32,7 +31,6 @@ DROP SEQUENCE seq_CART_CART_NO;
 DROP SEQUENCE seq_STORYFUNDING_POST_NO;
 DROP SEQUENCE seq_MESSAGE_MESSAGE_NO;
 
-DROP SEQUENCE seq_MESSAGE_HISTORY_HISTORY_NO;
 DROP SEQUENCE seq_ORDERS_ORDER_NO;
 DROP SEQUENCE seq_APPLY_APPLY_NO;
 DROP SEQUENCE seq_BOARD_POST_NO;
@@ -59,7 +57,6 @@ CREATE SEQUENCE seq_CART_CART_NO	 		INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_STORYFUNDING_POST_NO 		INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_MESSAGE_MESSAGE_NO 		INCREMENT BY 1 START WITH 10000;
 
-CREATE SEQUENCE seq_MESSAGE_HISTORY_HISTORY_NO	 	INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_ORDERS_ORDER_NO 			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_APPLY_APPLY_NO 			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_BOARD_POST_NO 			INCREMENT BY 1 START WITH 10000;
@@ -83,7 +80,7 @@ CREATE TABLE USERS (
 	USER_NAME 		VARCHAR2(10) 	NOT NULL,
 	NICKNAME 		VARCHAR2(14)	NOT NULL UNIQUE,
 	EMAIL 			VARCHAR2(100),
-	PHONE 			VARCHAR2(11) 	UNIQUE,
+	PHONE 			VARCHAR2(13) 	UNIQUE,
 	USER_ADDR 		VARCHAR2(1000),
 	ACCOUNT 		VARCHAR2(30),
 	BIRTH_DATE 		NUMBER(6,0), 
@@ -133,7 +130,7 @@ CREATE TABLE FILES (
 
 CREATE TABLE COUPON (
 	COUPON_NO 		NUMBER(6,0) 	NOT NULL,
-	COUPON_CODE 		NUMBER(10,0) 	NOT NULL UNIQUE,
+	COUPON_CODE 		VARCHAR2(10,0) 	NOT NULL,
 	RECEIVER_ID 		VARCHAR2(12) 	NOT NULL REFERENCES USERS(ID),
 	COUPON_NAME 		VARCHAR2(50)  	NOT NULL,
 	DISCOUNT 		NUMBER(5,0)  	NOT NULL,
@@ -172,14 +169,14 @@ CREATE TABLE ADOPT(
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
 	POST_CONTENT 		VARCHAR2(600) 	NOT NULL ENABLE, 
-	PHONE 			VARCHAR2(11) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
+	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
 	ADOPT_AREA 		VARCHAR2(150) , 
 	LOCATION 		VARCHAR2(50) 	NOT NULL ENABLE, 
 	REG_DATE 		DATE 		NOT NULL ENABLE, 
 	DOG_BREED 		VARCHAR2(20), 
-	DOG_WEIGHT 		NUMBER(4,2) 	NOT NULL ENABLE, 
-	DOG_SIZE 		VARCHAR2(6) 	NOT NULL ENABLE, 
-	DOG_GENDER 		VARCHAR2(4) 	NOT NULL ENABLE, 
+	DOG_WEIGHT 		VARCHAR2(10) 	NOT NULL ENABLE, 
+	DOG_SIZE 		VARCHAR2(10) 	NOT NULL ENABLE, 
+	DOG_GENDER 		VARCHAR2(10) 	NOT NULL ENABLE, 
 	DOG_PAY 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	DOG_STATUS 		VARCHAR2(40) 	NOT NULL ENABLE, 
 	DOG_CHAR 		VARCHAR2(40) 	NOT NULL ENABLE, 
@@ -201,7 +198,7 @@ CREATE TABLE STORYFUNDING(
 	ID                VARCHAR2(12)    NOT NULL ENABLE REFERENCES USERS(ID), 
 	NICKNAME          VARCHAR2(14)    NOT NULL ENABLE REFERENCES USERS(NICKNAME),
 	STATUS_CODE       CHAR(1)       NOT NULL ENABLE, 
-	PHONE             VARCHAR2(11)    NOT NULL ENABLE, 
+	PHONE             VARCHAR2(13)    NOT NULL ENABLE, 
 	POST_TITLE          VARCHAR2(30)    NOT NULL ENABLE, 
 	POST_CONTENT       VARCHAR2(600)    NOT NULL ENABLE, 
 	VIEW_COUNT          NUMBER(5,0)    DEFAULT 0 NOT NULL ENABLE, 
@@ -221,30 +218,17 @@ CREATE TABLE STORYFUNDING(
 	PRIMARY KEY (POST_NO));
 
 CREATE TABLE MESSAGE (
-   	MESSAGE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
+   	MESSAGE_NO 			NUMBER(6,0) 	NOT NULL ENABLE, 
 	MESSAGE_TITLE 		VARCHAR2(200) 	NOT NULL ENABLE, 
 	MESSAGE_CONTENT 	VARCHAR2(2000) 	NOT NULL ENABLE, 
-	PRIMARY KEY (MESSAGE_NO));
-
-CREATE TABLE MESSAGE_HISTORY (
-   	MESSAGE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	SEND_ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID1 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID2 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID3 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID4 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID5 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID6 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID7 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID8 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID9 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID10 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	SEND_DATE 		DATE, 
+	RECEIVE_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
+	SEND_DATE 			DATE, 
 	RECEIVE_DATE 		DATE, 
 	MESSAGE_STATUS 		CHAR(1) 		NOT NULL ENABLE, 
-	HISTORY_NO 		NUMBER(6,0) 	NOT NULL,
-	DEL_CODE 		CHAR(1) 		NOT NULL,
-	PRIMARY KEY (HISTORY_NO));
+	DEL_CODE 			CHAR(1) 		NOT NULL,
+	PRIMARY KEY (MESSAGE_NO));
+
 	 
 CREATE TABLE ORDERS (
    	ORDER_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
@@ -254,7 +238,7 @@ CREATE TABLE ORDERS (
 	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE) NOT NULL,
 	RECEIVER_ADDR 		VARCHAR2(100) 	NOT NULL, 
 	RECEIVER_NAME 		VARCHAR2(50) 	NOT NULL, 
-	RECEIVER_PHONE 		VARCHAR2(11) 	NOT NULL, 
+	RECEIVER_PHONE 		VARCHAR2(13) 	NOT NULL, 
 	ORDER_REQUEST 		VARCHAR2(40), 
 	PAYMENT_CODE 		NUMBER(2,0) 	NOT NULL, 
 	ORDER_DATE 		DATE, 
@@ -270,8 +254,13 @@ CREATE TABLE ORDERS (
 CREATE TABLE APPLY (
    	APPLY_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ADOPT_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
+<<<<<<< HEAD
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
+	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
+=======
+	ID 				VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	PHONE 			VARCHAR2(11) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
+>>>>>>> refs/remotes/origin/master
 	JOB 			NUMBER(1,0) 	NOT NULL ENABLE, 
 	ADDR 			NUMBER(1,0) 	NOT NULL ENABLE, 
 	MATE 			NUMBER(1,0) 	NOT NULL ENABLE, 
@@ -282,32 +271,32 @@ CREATE TABLE APPLY (
 	PAY 			VARCHAR2(200) 	NOT NULL ENABLE, 
 	REASON 			VARCHAR2(400) 	NOT NULL ENABLE, 
 	SITUATION 		VARCHAR2(400) 	NOT NULL ENABLE, 
-	TIME 			VARCHAR2(200 ) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 		NOT NULL ENABLE, 
-	STATUS_CODE 		CHAR(1) 		DEFAULT '1' NOT NULL ENABLE,
+	REG_DATE 		DATE 			NOT NULL ENABLE, 
+	STATUS_CODE 	CHAR(1) 		DEFAULT '1' NOT NULL ENABLE,
 	PRIMARY KEY (APPLY_NO));
 	 
 
 CREATE TABLE BOARD (
    	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
-	ID 			VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
+	ID 				VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
 	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE  REFERENCES USERS(NICKNAME), 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
-	POST_CONTENT 		VARCHAR2(600) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 		NOT NULL ENABLE, 
+	POST_CONTENT 	VARCHAR2(600) 	NOT NULL ENABLE, 
+	REG_DATE 		DATE 			NOT NULL ENABLE, 
 	VIEW_COUNT 		NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
-	RECOMMEND_COUNT 	NUMBER(5,0), 
-	MARKET_CODE 		NUMBER(2,0), 
+	RECOMMEND_COUNT NUMBER(5,0), 
+	MARKET_CODE 	NUMBER(2,0), 
 	PRICE 			NUMBER(10,0), 
 	CITY 			VARCHAR2(20), 
-	PHONE 			VARCHAR2(11) 	REFERENCES USERS(PHONE), 
+	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE), 
 	QNA_CODE 		CHAR(2), 
 	ROUTE 			VARCHAR2(250), 
 	PROD_NAME 		VARCHAR2(200), 
 	DEL_CODE		CHAR(1),
 	PRIMARY KEY (POST_NO));
 
+	
 CREATE TABLE PARTICIPATE (
 	PARTICIPATE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
@@ -372,7 +361,7 @@ VALUES
 INSERT INTO users
 (id, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, user_no, gender, role, levels, purpose1, purpose2)
 VALUES
-('user01', '87654321', scott, '스캇', 'scott@tiger.com', '01111234567', '서울시 성북구', '110-234-567890', '900314', '5600', '10001', 'm', 'user', '골드', '정보공유', '입양');
+('user01', '87654321', 'scott', '스캇', 'scott@tiger.com', '011-1123-4567', '서울시 성북구', '110-234-567890', '900314', '5600', '10001', 'm', 'user', '골드', '정보공유', '입양');
 
 INSERT INTO users
 (id, kakao, pw, user_name, nickname, level_point, user_no, role, levels)
@@ -382,17 +371,32 @@ VALUES
 INSERT INTO users
 (id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, user_no, gender, role, levels, purpose1)
 VALUES 
-('user03', '123124124', 'ytrewq21', 'hello', '안녕', 'hello@tiger.com', '01121234567', '서울시 성북구', '110-432-098765', 900314, 0, 10003, 'm', 'user', '브론즈', '입양');	 
+('user03', '123124124', 'ytrewq21', 'hello', '안녕', 'hello@tiger.com', '011-2123-4567', '서울시 성북구', '110-432-098765', 900314, 0, 10003, 'm', 'user', '브론즈', '입양');	 
 
+INSERT INTO message
+(message_no, message_title, message_content, send_id, receive_id, send_date, 
+receive_date, message_status, del_code)
+VALUES
+(seq_message_message_no.NEXTVAL, '테스트1', '이거슨 테스트인 거시여1', 'user01', 'user02', SYSDATE, null, '0', '0');
+
+INSERT INTO message
+(message_no, message_title, message_content, send_id, receive_id, send_date, receive_date, essage_status, del_code)
+VALUES
+(seq_message_message_no.NEXTVAL, '테스트2', '이거슨 테스트인 거시여2', 'user02', 'user01', SYSDATE, SYSDATE, '1', '0');
+
+INSERT INTO message
+(message_no, message_title, message_content, send_id, receive_id, send_date, receive_date, essage_status, del_code)
+VALUES
+(seq_message_message_no.NEXTVAL, '테스트3', '이거슨 테스트인 거시여3', 'user03', 'user01', SYSDATE, SYSDATE, '1', '1');
 
 
 INSERT 
 INTO STORYFUNDING(POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE)
-VALUES ( SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user01' ,'스캇' ,0 ,'01012345678' ,'강아지를도와주세요' ,'내용내용 도와주세용' ,0 ,0 , SYSDATE ,SYSDATE+30 ,100000,200,20 ,0, 10000,SYSDATE+31 , SYSDATE+61 );
+VALUES ( SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user01' ,'스캇' ,0 ,'010-1234-5678' ,'강아지를도와주세요' ,'내용내용 도와주세용' ,0 ,0 , SYSDATE ,SYSDATE+30 ,100000,200,20 ,0, 10000,SYSDATE+31 , SYSDATE+61 );
     
 INSERT 
 INTO STORYFUNDING(POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE)
-VALUES ( SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user02' ,'호랭이' ,0 ,'01012345678' ,'멍뭉헬프' ,'내용내용 2222도와주세용' ,0 ,0 ,SYSDATE ,SYSDATE+30 ,100000,200,20 ,0, 10000,SYSDATE+31 , SYSDATE+61 );
+VALUES ( SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user02' ,'호랭이' ,0 ,'010-1234-5678' ,'멍뭉헬프' ,'내용내용 2222도와주세용' ,0 ,0 ,SYSDATE ,SYSDATE+30 ,100000,200,20 ,0, 10000,SYSDATE+31 , SYSDATE+61 );
     
 INSERT INTO PARTICIPATE 
 VALUES (seq_PARTICIPATE_PARTICIPATE_NO.nextval, 'user01', '스캇', 10002, '20190712',50000);
@@ -406,7 +410,7 @@ INSERT INTO adopt
 (board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
 dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date ) 
 VALUES 
-('AD', 10000, 'user03', '분양테스트1', '테스트중 테스트중', '01121234567', 
+('AD', 10000, 'user03', '분양테스트1', '테스트중 테스트중', '011-2123-4567', 
 '분양가능지역, 테스트' , '분양가능위치, 테스트' , SYSDATE , '차우차우', 7.1, '1', '1', 
 100000, '건강', '차우차우특징', '차우차우성격', '20190701' );
 	 
@@ -414,7 +418,7 @@ INSERT INTO adopt
 (board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
 dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date ) 
 VALUES 
-('AD', 10001, 'user03', '분양테스트2', '테스트중 테스트중', '01121234567', '분양가능지역, 테스트' , 
+('AD', 10001, 'user03', '분양테스트2', '테스트중 테스트중', '011-2123-4567', '분양가능지역, 테스트' , 
 '분양가능위치, 테스트' , SYSDATE , '차우차우', 7.2, '2', '2', 200000, '건강하지않음', '차우차우특징', '차우차우성격', 
 '20190702' );
 	 
@@ -422,7 +426,7 @@ INSERT INTO adopt
 (board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
 dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date ) 
 VALUES 
-('AD', 10002, 'user03', '분양테스트3', '테스트중 테스트중', '01121234567', '분양가능지역, 테스트' , 
+('AD', 10002, 'user03', '분양테스트3', '테스트중 테스트중', '011-2123-4567', '분양가능지역, 테스트' , 
 '분양가능위치, 테스트' , SYSDATE , '차우차우', 7.3, '3', '1', 300000, '건강', '차우차우특징', '차우차우성격', 
 '20190703' );
 				
@@ -430,7 +434,7 @@ INSERT INTO adopt
 (board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
 dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date ) 
 VALUES 
-('MS', 10003, 'user03', '실종테스트1', '테스트중 테스트중', '01121234567', NULL, 
+('MS', 10003, 'user03', '실종테스트1', '테스트중 테스트중', '011-2123-4567', NULL, 
 '실종위치, 테스트' , SYSDATE , '차우차우', 7.1, '1', '2', 100000, '건강', '차우차우특징', '차우차우성격', 
 '20190701' );
 
@@ -438,7 +442,7 @@ INSERT INTO adopt
 (board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
 dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date ) 
 VALUES 
-('MS', 10004, 'user03', '실종테스트2', '테스트중 테스트중', '01121234567', NULL, 
+('MS', 10004, 'user03', '실종테스트2', '테스트중 테스트중', '011-2123-4567', NULL, 
 '실종위치, 테스트' , SYSDATE , '차우차우', 7.2, '2', '1', 100000, '건강', '차우차우특징', '차우차우성격', 
 '20190702' );
 
@@ -446,7 +450,7 @@ INSERT INTO adopt
 (board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
 dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date ) 
 VALUES 
-('MS', 10005, 'user03', '실종테스트3', '테스트중 테스트중', '01121234567', NULL, 
+('MS', 10005, 'user03', '실종테스트3', '테스트중 테스트중', '011-2123-4567', NULL, 
 '실종위치, 테스트' , SYSDATE , '차우차우', 7.7, '3', '2', 100000, '건강', '차우차우특징', '차우차우성격', 
 '20190703' );
 				
@@ -454,22 +458,32 @@ INSERT INTO apply
 (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
 currently, plan, pay, reason, situation, time, reg_date) 
 VALUES 
-(11111, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
+(11111, 10000, 'user03', '011-2123-4567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
 '예상비용', '그냥', '상황에 따른 양육 여부', '반려동물한테 쓸 수 있는 시간', SYSDATE );
 					
 INSERT INTO apply  
 (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
 currently, plan, pay, reason, situation, time, reg_date)  
 VALUES 
-(11112, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
+<<<<<<< HEAD
+(11112, 10000, 'user03', '011-2123-4567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
 '예상비용', '그냥', '상황에 따른 양육 여부', '반려동물한테 쓸 수 있는 시간', SYSDATE );
+=======
+(11112, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
+'예상비용', '그냥', '상황에 따른 양육 여부', SYSDATE );
+>>>>>>> refs/remotes/origin/master
 					
 INSERT INTO apply 
 (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
 currently, plan, pay, reason, situation, time, reg_date)  
 VALUES 
-(11113, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
+<<<<<<< HEAD
+(11113, 10000, 'user03', '011-2123-4567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
 '예상비용', '그냥', '상황에 따른 양육 여부', '반려동물한테 쓸 수 있는 시간', SYSDATE );
+=======
+(11113, 10000, 'user03', '01121234567', 1, 1, 2, NULL, 1, 2, '계획 없음', 
+'예상비용', '그냥', '상황에 따른 양육 여부', SYSDATE );
+>>>>>>> refs/remotes/origin/master
 				
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)

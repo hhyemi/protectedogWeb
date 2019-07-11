@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+ 	
+ 	
+ 	 <resultMap id="boardSelectMap" type="board">
+ 	 
+		<result property="postNo" 			column="post_no" 			jdbcType="NUMERIC"/>
+		<result property="boardCode" 		column="board_code" 	 	jdbcType="CHAR"/>
+		<result property="id" 				column="id" 				jdbcType="VARCHAR"/>
+		<result property="nickName" 		column="nickname" 			jdbcType="VARCHAR"/>
+		<result property="postTitle" 		column="post_title" 		jdbcType="VARCHAR"/>
+		<result property="postContent" 		column="post_content" 		jdbcType="VARCHAR"/>
+		<result property="regDate" 			column="reg_date" 			jdbcType="DATE"/>
+		<result property="viewCount" 		column="view_count" 		jdbcType="NUMERIC"/>
+		<result property="recommendCount" 	column="recommend_count"	jdbcType="NUMERIC"/>
+		<result property="marketCode" 		column="market_code"		jdbcType="NUMERIC"/>
+		<result property="price" 			column="price"				jdbcType="NUMERIC"/>
+		<result property="city" 			column="city"				jdbcType="VARCHAR"/>
+		<result property="phone" 			column="phone"				jdbcType="VARCHAR"/>
+		<result property="qnaCode" 			column="qna_code"			jdbcType="CHAR"/>
+		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
+		<result property="prodName" 		column="prod_name"			jdbcType="VARCHAR"/>
+		<result property="statusCode" 		column="status_code" 		jdbcType="CHAR"/>
+		
+	 </resultMap>
+	
+
+	
+	 <!-- SQL : INSERT -->
+	 <insert 	id="addBoard"		parameterType="board" >
+	 	INSERT
+		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
+						market_code, price, city , phone, qna_code, route, prod_name)  
+		VALUES	 (	seq_adopt_post_no.nextval, 
+					#{boardCode},
+					#{id} , 
+					#{nickName} , 
+					#{postTitle} , 
+					#{postContent} , 
+					SYSDATE , 
+					#{viewCount} , 
+					#{recommendCount:NUMERIC},
+					#{marketCode:NUMERIC},
+					#{price:NUMERIC},
+					#{city:VARCHAR},
+					#{phone:VARCHAR},
+					#{qnaCode:CHAR},
+					#{route:VARCHAR},
+					#{prodName:VARCHAR}  )
+	 </insert>
+	 
+	 
+	 
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getBoard"	parameterType="int"		resultMap="boardSelectMap">
+		SELECT
+		post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
+		market_code, price, city , phone, qna_code, route, prod_name, status_code
+		FROM board 
+		WHERE post_no = #{value} 
+	 </select>
+	 
+	 
+	 
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateBoard"	parameterType="board" >
+	   	UPDATE board 
+	   	<set>
+			#{postTitle} , 
+			#{postContent} , 
+			#{marketCode:NUMERIC},
+			#{price:NUMERIC},
+			#{city:VARCHAR},
+			#{phone:VARCHAR},
+			#{qnaCode},
+			#{route:VARCHAR},
+			#{prodName:VARCHAR} 
+	   	</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+	 
+	 <update	id="updateViewCount"	parameterType="board" >
+	   	UPDATE board 
+	   	<set>
+			view_count	= #{viewCount}
+	   	</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+	 
+	 <update	id="updateRecommendCount"	parameterType="board" >
+	   	UPDATE board
+	   	<set>
+			recommend_count	= #{recommendCount}
+	   	</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+	 
+		 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="listBoard"  parameterType="map"	resultMap="boardSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM ( SELECT post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
+	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_name, status_code  
+						FROM board
+						<where>
+								board_code = #{boardCode} AND status_code != '0'
+								<if test="searchCondition != null">
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND nickname  LIKE '%'||#{searchKeyword}||'%'
+									</if> 
+								</if>
+						</where>
+						ORDER BY post_no DESC ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+ 
+ 
+	
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
+	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_name, status_code  
+				FROM board
+				<where>
+						board_code = #{boardCode} AND status_code != '0'
+						<if test="searchCondition != null">
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+					 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+							</if>
+							<if test="searchCondition == 1 and searchKeyword !='' ">
+					 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+							</if>
+							<if test="searchCondition == 2 and searchKeyword !='' ">
+					 			AND nickname  LIKE '%'||#{searchKeyword}||'%'
+							</if> 
+						</if>
+				</where> ) countTable						
+	 </select>
+	 
+	 
+	 
+	 
+</mapper>

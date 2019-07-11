@@ -3,6 +3,7 @@ package org.protectedog.service.adopt;
 
 import java.util.Map;
 
+import org.protectedog.common.Search;
 import org.protectedog.service.domain.Adopt;
 
 
@@ -16,7 +17,7 @@ public interface AdoptDAO {
 	public Adopt getAdopt(int postNo) throws Exception ;
 
 	// SELECT LIST
-//	public Map<String, Object> listAdopt(Search search, String boardCode) throws Exception ;
+	public Map<String, Object> listAdopt(Search search, String boardCode) throws Exception ;
 
 	// UPDATE
 	public void updateAdopt(Adopt adopt) throws Exception ;
