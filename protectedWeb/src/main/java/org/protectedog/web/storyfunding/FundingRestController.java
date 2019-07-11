@@ -32,11 +32,28 @@ public class FundingRestController {
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
+
 	@Value("#{commonProperties['fileSF']}")
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	String fileroot;
 
+	@RequestMapping(value = "json/imageupload", method = RequestMethod.POST)
+	public void imageupload(@RequestParam("files") List<MultipartFile> images) throws Exception {
 
+		System.out.println("/product/json/imageupload : POST");
+
+		for (MultipartFile image : images) {
+
+			String fileName = image.getOriginalFilename();
+
+			File f = new File(fileroot, fileName);
+			
+			try {
+				image.transferTo(f);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

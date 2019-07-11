@@ -39,7 +39,7 @@
 		<h1 class="bg-primary text-center">후원 신청 등 록</h1>
 	    </div>		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form id ="uploadForm" class="form-horizontal">
 	
 		<div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">후원목표금액</h4>
@@ -183,16 +183,47 @@
 		$("input:hidden[name='phone']").val( value );
 		
    		 $(function() {     
-         for (var index = 0; index < Object.keys(files).length; index++) {
-        	 alert(files[index].toString)
-         }
-        	 //$("#files").val(files[index]);
+   			var form = $('#uploadForm')[0];
+            var formData = new FormData(form);
 
-		});
+            for (var index = 0; index < Object.keys(files).length; index++) {
+                //formData 공간에 files라는 이름으로 파일을 추가한다.
+                //동일명으로 계속 추가할 수 있다.
+                formData.append('files',files[index]);
+            }
+            $.ajax({
+                type : 'POST',
+                enctype : 'multipart/form-data',
+                processData : false,
+                contentType : false,
+                cache : false,
+                timeout : 600000,
+                url : '/funding/json/imageupload/',
+                dataType : 'JSON',
+                data : formData,
+                success : function(result) {
+                    //이 부분을 수정해서 다양한 행동을 할 수 있으며,
+                    //여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
+                    //-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
+                    if (result === -1) {
+                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+                        // 이후 동작 ...
+                    } else if (result === -2) {
+                        alert('파일이 10MB를 초과하였습니다.');
+                        // 이후 동작 ...
+                    } else {
+                        alert('이미지 업로드 성공');
+                        // 이후 동작 ...
+                    }
+                }
+                //전송실패에대한 핸들링은 고려하지 않음
+            });
+        });
+
 
 		$('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
-
 	}
+	
 	
 	//============= 후원목표금액에 따른 표개수 =============
 	 $(function() {
