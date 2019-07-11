@@ -17,13 +17,18 @@
 		<typeAlias alias="breed" type="org.protectedog.service.domain.Breed" />
 		<typeAlias alias="comment" type="org.protectedog.service.domain.Comment" />
 		<typeAlias alias="reComment" type="org.protectedog.service.domain.ReComment" />
+		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />
+
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
+
 		<mapper resource="sql/BreedPediaMapper.xml"/>
 		<mapper resource="sql/CommentMapper.xml"/>
 		<mapper resource="sql/ReCommentMapper.xml"/>
+		<mapper resource="sql/FundingMapper.xml"/>
+
 	</mappers>
 
 </configuration>
