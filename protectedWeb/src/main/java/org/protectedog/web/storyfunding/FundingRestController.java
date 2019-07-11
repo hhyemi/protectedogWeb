@@ -33,35 +33,10 @@ public class FundingRestController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@Value("#{commonProperties['fileroot']}")
+	@Value("#{commonProperties['fileSF']}")
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	String fileroot;
 
-	@RequestMapping(value="json//imageupload",method=RequestMethod.POST)
-	public int multiImageUpload(@RequestParam("files")List<MultipartFile> images) {
-		
-		System.out.println("/product/json/imageupload : POST");
-		
-		
-		 for(MultipartFile image : images) {
-			 
-			 String fileName = image.getOriginalFilename();
 
-				File f = new File(fileroot, fileName);
-				// 한번에 한해서 동일한 파일이 존재하면 이름에 (1) ,
-				// (나중에)2번째에도 검사해서 이름을 편해보고, 확장자 앞에 다른 이름을 추가하도록 해보자
-				if (f.exists()) {
-					f = new File(fileroot, fileName + "(1)");
-				}
-
-				try {
-					image.transferTo(f);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	        }
-		
-		return 1;
-	}
 
 }
