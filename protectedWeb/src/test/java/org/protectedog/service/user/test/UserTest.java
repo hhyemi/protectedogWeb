@@ -79,7 +79,7 @@ public class UserTest {
 
 	}
 	
-//	@Test
+	//@Test
 	 public void testUpdateUser() throws Exception{
 		 
 		User user = userService.getUsers("testUserId");
