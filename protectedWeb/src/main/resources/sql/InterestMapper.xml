@@ -20,8 +20,8 @@
 	
 	<insert id="addInterest"	parameterType="interest">
 		INSERT INTO interest(interest_no, board_code, comment_no, post_no, id, reg_date)
-		VALUES(seq_interest_interest_no.NEXTVAL, #{boardCode}, #{interestComment.commentNo}, 
-			#{interestPost.postNo}, #{interestId.id}, SYSDATE)
+		VALUES(seq_interest_interest_no.NEXTVAL, #{boardCode}, #{interestComment.commentNo:NUMERIC}, 
+			#{interestPost.postNo:NUMERIC}, #{interestId.id}, SYSDATE)
 	</insert>
 
 	 
