@@ -2,7 +2,7 @@ package org.protectedog.service.domain;
 
 import java.sql.Date;
 
-public class Recomment {
+public class ReComment {
 	
 	/// Field
 	private int recommentNo;

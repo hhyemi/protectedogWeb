@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommentMapper">
+ 	
+ 	
+	<resultMap id="commentSelectMap" type="comment">
+		<result property="commentNo" 			column="comment_no" 		jdbcType="NUMERIC" />
+		<result property="postNo"				column="post_no" 			jdbcType="NUMERIC" />
+		<result property="boardCode" 			column="board_code"			jdbcType="VARCHAR" />
+		<result property="id" 					column="id"					jdbcType="VARCHAR" />
+		<result property="commentContent" 		column="comment_content"	jdbcType="VARCHAR" />
+		<result property="regDate" 				column="reg_date"			jdbcType="DATE"    />
+		<result property="likeCount" 			column="like_count"			jdbcType="NUMERIC" />
+		<result property="nickName" 			column="nickname"			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addComment"	parameterType="comment" >
+	INSERT INTO comments( comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName) 
+	VALUES (seq_COMMENTS_COMMENT_NO.nextval, #{postNo}, #{boardCode}, #{id}, #{commentContent}, #{regDate}, #{likeCount}, #{nickName})
+	<!-- to_date(sysdate, 'yyyy/mm/dd hh:mi:ss') -->
+	 </insert>
+	 
+	<select id="getComment" parameterType="int">
+		SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName 
+		FROM comments 
+		WHERE comment_no = #{value}
+	</select>
+	
+	<update id="updateComment" parameterType="comment" >
+		UPDATE comments
+		SET comment_content = #{commentContent}
+		WHERE comment_no = #{commentNo}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		DELETE 
+		FROM comments
+		WHERE comment_no = #{value}
+	</delete>
+		
+	<select  id="listComment"  parameterType="map"	resultMap="commentSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM (  SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName
+						FROM   comments
+						WHERE  post_no = #{postNo} AND status_code != '0'
+						ORDER BY reg_date DESC ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	 <select  id="getTotalCount"  parameterType="map"	resultMap="commentSelectMap">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName
+				FROM   comments
+				WHERE  post_no = #{postNo} AND status_code != '0' ) countTable
+	 </select>
+</mapper>
