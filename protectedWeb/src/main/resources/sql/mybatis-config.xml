@@ -13,17 +13,27 @@
 	</settings>	
 	
 	<!-- FQCN(Full Qualified Class Name) Alias(별칭관리) -->
+
 	<typeAliases>
 		<typeAlias alias="adopt" type="org.protectedog.service.domain.Adopt" />
 		<typeAlias alias="apply" type="org.protectedog.service.domain.Apply" />
 		<typeAlias alias="board" type="org.protectedog.service.domain.Board" />
+		<typeAlias alias="breed" type="org.protectedog.service.domain.Breed" />
+		<typeAlias alias="comment" type="org.protectedog.service.domain.Comment" />
+		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />
+
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
+
 		<mapper resource="sql/AdoptMapper.xml"/>
 		<mapper resource="sql/ApplyMapper.xml"/>
 		<mapper resource="sql/BoardMapper.xml"/>
+		<mapper resource="sql/BreedPediaMapper.xml"/>
+		<mapper resource="sql/CommentMapper.xml"/>
+		<mapper resource="sql/FundingMapper.xml"/>
+
 	</mappers>
 
 </configuration>

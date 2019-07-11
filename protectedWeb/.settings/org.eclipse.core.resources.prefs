@@ -1,3 +1,21 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR
 encoding//src/main/java/org/protectedog/common/web/LogonCheckInterceptor.java=EUC-KR
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+encoding/<project>=euc_kr
+=======
+<<<<<<< HEAD
+encoding/<project>=euc_kr
+=======
+encoding/<project>=EUC-KR
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/heads/eunwoo
+=======
+encoding//src/main/java/org/protectedog/web/storyfunding/FundingController.java=EUC-KR
+encoding//src/main/java/org/protectedog/web/storyfunding/FundingRestController.java=EUC-KR
+encoding/<project>=EUC-KR
+>>>>>>> refs/heads/hyemi
+>>>>>>> refs/remotes/origin/master

@@ -2,17 +2,16 @@ package org.protectedog.service.domain;
 
 import java.sql.Date;
 
-public class StoryFundingReview {
-		
+public class FundingReview {
+
 	private String postNo;
 	private String id;
-	private String nickName;		
+	private String nickName;
 	private String reviewTitle;
 	private String reviewContent;
 	private Date reviewRegDate;
-	private String reviewDelCode;
-	
-	public StoryFundingReview() {
+
+	public FundingReview() {
 	}
 
 	public String getPostNo() {
@@ -63,14 +62,12 @@ public class StoryFundingReview {
 		this.reviewRegDate = reviewRegDate;
 	}
 
-	public String getReviewDelCode() {
-		return reviewDelCode;
+	@Override
+	public String toString() {
+		return "StoryFundingReview [postNo=" + postNo + ", id=" + id + ", nickName=" + nickName + ", reviewTitle="
+				+ reviewTitle + ", reviewContent=" + reviewContent + ", reviewRegDate=" + reviewRegDate + "]";
 	}
 
-	public void setReviewDelCode(String reviewDelCode) {
-		this.reviewDelCode = reviewDelCode;
-	}
 	
-	
-	
+
 }
