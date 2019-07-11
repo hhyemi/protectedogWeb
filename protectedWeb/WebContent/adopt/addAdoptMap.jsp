@@ -54,7 +54,7 @@
 			$("form").attr("method" , "POST").attr("action" , "/adopt/addAdopt").submit();
 		}
 		
-
+		
 	</script>		
 
 </head>

@@ -32,14 +32,17 @@
 	
 
 	
-	 <!-- SQL : INSERT -->
-	 <insert 	id="addAdopt"		parameterType="adopt" >
+	 <!-- SQL : INSERT postNo 리턴 설정 -->
+	 <insert 	id="addAdopt"		parameterType="adopt" >	  
+	  <selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+	    select seq_adopt_post_no.nextval FROM DUAL
+	  </selectKey>
 	 	INSERT
 		INTO adopt (board_code, post_no, id, post_title, post_content, phone, 
 					adopt_area, location, reg_date, 
 					dog_breed, dog_weight, dog_size, dog_gender, dog_pay, 
 					dog_status, dog_char, dog_personality, dog_date) 
-		VALUES	   (#{boardCode}, seq_adopt_post_no.nextval, #{id}, #{postTitle}, #{postContent}, #{phone}, 
+		VALUES	   (#{boardCode}, #{postNo}, #{id}, #{postTitle}, #{postContent}, #{phone}, 
 					#{adoptArea:VARCHAR}, #{location}, SYSDATE, 
 					#{dogBreed:VARCHAR}, #{dogWeight}, #{dogSize}, #{dogGender}, #{dogPay},
 					#{dogStatus}, #{dogChar}, #{dogPersonality}, #{dogDate} )
@@ -103,17 +106,17 @@
 						FROM adopt
 						<where>
 								board_code = #{boardCode} AND status_code != '0' 
-								<if test="searchCondition != null">
-									<if test="searchCondition == 0 and searchKeyword !='' ">
-							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
-									</if>
-									<if test="searchCondition == 1 and searchKeyword !='' ">
-							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
-									</if>
-									<if test="searchCondition == 2 and searchKeyword !='' ">
-							 			AND nickname  LIKE '%'||#{searchKeyword}||'%'
-									</if> 
-								</if>
+<!-- 								<if test="searchCondition != null"> -->
+<!-- 									<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 							 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 									</if> -->
+<!-- 									<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 							 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 									</if> -->
+<!-- 									<if test="searchCondition == 2 and searchKeyword !='' "> -->
+<!-- 							 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
+<!-- 									</if>  -->
+<!-- 								</if> -->
 						</where>
 						ORDER BY post_no DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
@@ -132,18 +135,18 @@
 				FROM adopt
 				<where>
 						board_code = #{boardCode} AND status_code != '0' 
-						<if test="searchCondition != null">
-							<if test="searchCondition == 0 and searchKeyword !='' ">
-					 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
-							</if>
-							<if test="searchCondition == 1 and searchKeyword !='' ">
-					 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
-							</if>
-							<if test="searchCondition == 2 ">
+<!-- 						<if test="searchCondition != null"> -->
+<!-- 							<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 					 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 							</if> -->
+<!-- 							<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 					 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 							</if> -->
+<!-- 							<if test="searchCondition == 2 "> -->
 <!-- 							크기순 정렬  -->
-								AND dog_size = #{dogSize} 
-							</if>
-						</if>
+<!-- 								AND dog_size = #{dogSize}  -->
+<!-- 							</if> -->
+<!-- 						</if> -->
 						
 						
 				</where> ) countTable						

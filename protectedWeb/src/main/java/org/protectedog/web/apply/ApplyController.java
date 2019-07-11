@@ -91,9 +91,9 @@ public class ApplyController {
 		adopt.setStatusCode("2");
 		adoptService.updateStatusCode(adopt);    //신청서 등록했으니 분양글 상태코드 2로 변경
 		
-		model.addAttribute("apply", apply);
+		model.addAttribute("adopt", adopt);
 		
-		return "forward:/adopt/getAdopt.jsp";
+		return "forward:/adopt/getAdopt.jsp?postNo="+apply.getAdoptNo();
 	}
 	
 	

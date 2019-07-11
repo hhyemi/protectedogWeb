@@ -51,10 +51,10 @@
 	
 		
 		function fncAddUser() {
-			$("form").attr("method" , "POST").attr("action" , "/adopt/addAdopt").submit();
+			$("form").attr("method" , "POST").attr("action" , "/adopt/updateAdopt").submit();
 		}
 		
-
+		
 	</script>		
 
 </head>
@@ -68,48 +68,49 @@
 	<div class="container">
 	<button type="button" class="btn btn-primary">보호할개</button>
 	
+	
 		<h1 class="bg-primary text-center">
-			<c:if test="${param.boardCode eq 'AD' }">
-	  			분양글 등록
+			<c:if test="${adopt.boardCode eq 'AD' }">
+	  			분양글 수정
 	  		</c:if>
-		    <c:if test="${param.boardCode eq 'MS' }">
-	  			실종글 등록
+		    <c:if test="${adopt.boardCode eq 'MS' }">
+	  			실종글 수정
 	  		</c:if>
 		
 		</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
-		<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
-		<input type="hidden" name="id" value="user03" >
+		<input type="hidden" name="boardCode" value=" ${ adopt.boardCode.trim() }" >
+		<input type="hidden" name="postNo" value=" ${ adopt.postNo }" >
 		
 		  <div class="form-group">
 		    <label for="postTitle" class="col-sm-offset-1 col-sm-3 control-label">글제목</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="글제목"  >
+		      <input type="text" class="form-control" id="postTitle" name="postTitle" value="${ adopt.postTitle }" placeholder="글제목"  >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="postContent" class="col-sm-offset-1 col-sm-3 control-label">글내용</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="postContent" name="postContent" placeholder="글내용">
+		      <input type="text" class="form-control" id="postContent" name="postContent" value="${ adopt.postContent }" placeholder="글내용">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">연락처</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="phone" name="phone" value="01121234567" placeholder="연락처">
+		      <input type="text" class="form-control" id="phone" name="phone"  value="${ adopt.phone }" placeholder="연락처">
 		     <span id="pwdTest" > </span>
 		    </div>
 		  </div>
 		  
-		  <c:if test="${param.boardCode eq 'AD' }">
+		  <c:if test="${adopt.boardCode eq 'AD' }">
 			  <div class="form-group">
 			    <label for="adoptArea" class="col-sm-offset-1 col-sm-3 control-label">분양가능지역</label>
 			    <div class="col-sm-4">
-			      <input type="text" class="form-control" id="adoptArea" name="adoptArea" placeholder="분양가능지역">
+			      <input type="text" class="form-control" id="adoptArea" name="adoptArea" value="${ adopt.adoptArea }" placeholder="분양가능지역">
 			    </div>
 			  </div>
 		  </c:if>
@@ -117,29 +118,29 @@
 		  
 		   <div class="form-group">
 		    <label for="location" class="col-sm-offset-1 col-sm-3 control-label">
-				<c:if test="${param.boardCode eq 'AD' }">
+				<c:if test="${adopt.boardCode eq 'AD' }">
 		  			발견위치
 		  		</c:if>
-			    <c:if test="${param.boardCode eq 'MS' }">
+			    <c:if test="${adopt.boardCode eq 'MS' }">
 		  			실종위치
 		  		</c:if>
 			</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="location" name="location" placeholder="위치">
+		      <input type="text" class="form-control" id="location" name="location" value="${ adopt.location }" placeholder="위치">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogBreed" class="col-sm-offset-1 col-sm-3 control-label">견종</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="견종">
+		      <input type="text" class="form-control" id="dogBreed" name="dogBreed" value="${ adopt.dogBreed }" placeholder="견종">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogWeight" class="col-sm-offset-1 col-sm-3 control-label">무게</label>
 		    <div class="col-sm-4">
-		      <input type="number" class="form-control" id="dogWeight" name="dogWeight" step="any"  >
+		      <input type="number" class="form-control" id="dogWeight" name="dogWeight" value="${ adopt.dogWeight }" step="any"  >
 		    </div>
 		  </div>
 	  
@@ -165,39 +166,46 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="dogPay" class="col-sm-offset-1 col-sm-3 control-label">비용</label>
+		    <label for="dogPay" class="col-sm-offset-1 col-sm-3 control-label">
+				<c:if test="${adopt.boardCode eq 'AD' }">
+		  			책임비
+		  		</c:if>
+			    <c:if test="${adopt.boardCode eq 'MS' }">
+		  			사례비
+		  		</c:if>
+			</label>
 		    <div class="col-sm-4">
-		      <input type="number" class="form-control" id="dogPay" name="dogPay" >
+		      <input type="number" class="form-control" id="dogPay" name="dogPay"  value="${ adopt.dogPay }" >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogStatus" class="col-sm-offset-1 col-sm-3 control-label">개상태</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="dogStatus" name="dogStatus" placeholder="개상태">
+		      <input type="text" class="form-control" id="dogStatus" name="dogStatus" value="${ adopt.dogStatus }" placeholder="개상태">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogChar" class="col-sm-offset-1 col-sm-3 control-label">외모특징</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="dogChar" name="dogChar" placeholder="외모특징">
+		      <input type="text" class="form-control" id="dogChar" name="dogChar" value="${ adopt.dogChar }" placeholder="외모특징">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogPersonality" class="col-sm-offset-1 col-sm-3 control-label">성격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="dogPersonality" name="dogPersonality" placeholder="성격">
+		      <input type="text" class="form-control" id="dogPersonality" name="dogPersonality" value="${ adopt.dogPersonality }" placeholder="성격">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogDate" class="col-sm-offset-1 col-sm-3 control-label">
-			    <c:if test="${param.boardCode eq 'AD' }">
+			    <c:if test="${adopt.boardCode eq 'AD' }">
 		  			발견일자
 		  		</c:if>
-			    <c:if test="${param.boardCode eq 'MS' }">
+			    <c:if test="${adopt.boardCode eq 'MS' }">
 		  			실종일자
 		  		</c:if>
 		    </label>

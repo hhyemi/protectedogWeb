@@ -36,10 +36,58 @@
 					self.location = "/adopt/updateAdopt?postNo=${adopt.postNo}"
 			});
 			
-			 $( "button:contains('목록')" ).on("click" , function() {
-					self.location = "/adopt/listAdopt"
+			 $( "button:contains('삭제')" ).on("click" , function() {
+				 	alert("삭제하시겠습니까 dialog 추가");
+					self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}"
 			});
+			
+			 $( "button:contains('신청')" ).on("click" , function() {
+					self.location = "../apply/getTerms.jsp?postNo=${adopt.postNo}"
+			});
+			
+			 $( "button:contains('목록')" ).on("click" , function() {
+					self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
+			});
+			
+			 $( "button:contains('신청글보기')" ).on("click" , function() {
+					self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
+			});
+			
+			 $( "button:contains('보호할개')" ).on("click" , function() {
+					self.location = "../index.jsp"
+			});
+		 
 		});
+		
+		
+		 $(function() {			
+				$( "button:contains('분양완료')" ).on("click" , function() {
+					var postNo = ${adopt.postNo};
+					alert(typeof postNo);
+
+					$.ajax( 
+						 		{
+									url : "/adopt/json/updateStatusCode/"+postNo ,
+									method : "GET" ,
+									dataType : "json" ,
+									headers : {
+												"Accept" : "application/json",
+												"Content-Type" : "application/json"
+											  },
+									success : function(status) {
+										$( '#complete' ).text('<b>완료됨</b>');
+									},
+									error: function(request, status, error){ 
+										alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+							        }
+						});
+				});	
+			
+		 });
+		
+// 		function fncAddUser() {
+// 			self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
+// 		}
 		
 	</script>
 	
@@ -50,9 +98,17 @@
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
+	<button type="button" class="btn btn-primary">보호할개</button>
 	
 		<div class="page-header">
-	       <h3 class=" text-info">ADOPT 글 상세조회</h3>
+	       <h3 class=" text-info">
+		        <c:if test="${adopt.boardCode eq 'AD' }">
+		  			분양글 상세조회
+		  		</c:if>
+			    <c:if test="${adopt.boardCode eq 'MS' }">
+		  			실종글 상세조회
+		  		</c:if>
+	       </h3>
 	    </div>
 	    <input type="hidden" name="postNo" value=" ${ adopt.postNo }" >
 	
@@ -98,15 +154,24 @@
 		
 		<hr/>
 		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>분양가능지역</strong></div>
-			<div class="col-xs-8 col-md-4">${adopt.adoptArea}</div>
-		</div>
+		<c:if test="${adopt.boardCode eq 'AD' }">
+			<div class="row">
+		  		<div class="col-xs-4 col-md-2 "><strong>분양가능지역</strong></div>
+				<div class="col-xs-8 col-md-4">${adopt.adoptArea}</div>
+			</div>
+			
+			<hr/>
+		</c:if>
 		
-		<hr/>
-		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>위치</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>
+	  			<c:if test="${adopt.boardCode eq 'AD' }">
+		  			발견위치
+		  		</c:if>
+			    <c:if test="${adopt.boardCode eq 'MS' }">
+		  			실종위치
+		  		</c:if>
+	  		</strong></div>
 			<div class="col-xs-8 col-md-4">${adopt.location}</div>
 		</div>
 		
@@ -134,7 +199,21 @@
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>비용</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>성별</strong></div>
+			<div class="col-xs-8 col-md-4">${adopt.dogGender}</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>
+				<c:if test="${adopt.boardCode eq 'AD' }">
+		  			책임비
+		  		</c:if>
+			    <c:if test="${adopt.boardCode eq 'MS' }">
+		  			사례비
+		  		</c:if>
+			</strong></div>
 			<div class="col-xs-8 col-md-4">${adopt.dogPay}</div>
 		</div>
 		
@@ -162,7 +241,14 @@
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>발견실종일자</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>
+	  			<c:if test="${adopt.boardCode eq 'AD' }">
+		  			발견일자
+		  		</c:if>
+			    <c:if test="${adopt.boardCode eq 'MS' }">
+		  			실종일자
+		  		</c:if>
+	  		</strong></div>
 			<div class="col-xs-8 col-md-4">${adopt.dogDate}</div>
 		</div>
 		
@@ -175,10 +261,28 @@
 		
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary">회원정보수정</button>
-	  			<c:if test="${user.role eq 'admin' }">
-	  				<button type="button" class="btn btn-default">목록</button>
+	  		
+	  			<c:if test="${adopt.statusCode eq '1' }">
+		  			<button type="button" class="btn btn-primary">수정</button>
+		  			<button type="button" class="btn btn-primary">삭제</button>
+		  			<c:if test="${adopt.boardCode eq 'MS' }">
+				  		<button type="button" class="btn btn-primary">찾기완료</button>
+				  	</c:if>
 	  			</c:if>
+	  			<c:if test="${adopt.statusCode eq '2' }">
+	  				<button type="button" class="btn btn-primary">분양완료</button>
+	  				<button type="button" class="btn btn-primary">신청글보기</button>
+	  			</c:if>
+	  			<br/><br/>
+	  			<button type="button" class="btn btn-primary">목록</button>
+<%-- 	  			<c:if test="${user.role eq 'admin' }"> --%>
+<!-- 	  				<button type="button" class="btn btn-default">목록</button> -->
+<%-- 	  			</c:if> --%>
+				<c:if test="${adopt.boardCode eq 'AD' }">
+		  			<button type="button" class="btn btn-primary">입양신청</button>
+		  		</c:if>
+		  		<br/><br/>
+		  		<span id="complete">${adopt.statusCode }</span>
 	  		</div>
 		</div>
 		

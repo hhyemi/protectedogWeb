@@ -146,7 +146,7 @@ public class AdoptServiceTest {
 	 }
 	
 
-	 @Test	//==>확인
+	 //@Test	//확인
 	 public void testGetPurchaseListById() throws Exception{
 		 
 	 	Search search = new Search();
@@ -154,25 +154,25 @@ public class AdoptServiceTest {
 	 	search.setPageSize(1);	 	
 	 	Map<String,Object> map = adoptService.listAdopt(search, "AD");
 	 	
-//	 	List<Object> list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(2, list.size());
-//	 	
-//	 	System.out.println("\n :: console 확인 :: "+list);
-//	 	
-//	 	Integer totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(2);
-//	 	map = adoptService.listAdopt(search, "AD");
-//	 	
-//	 	list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(2, list.size());
-//	 	
-//	 	System.out.println("\n :: console 확인 :: "+list);
-//	 	
-//	 	totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
+	 	List<Object> list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(1, list.size());
+	 	
+	 	System.out.println("\n :: console 확인 :: "+list);
+	 	
+	 	Integer totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(2);
+	 	map = adoptService.listAdopt(search, "AD");
+	 	
+	 	list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(2, list.size());
+	 	
+	 	System.out.println("\n :: console 확인 :: "+list);
+	 	
+	 	totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
 	 }
 	
 }

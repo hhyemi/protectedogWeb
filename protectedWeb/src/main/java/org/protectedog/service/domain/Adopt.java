@@ -188,11 +188,11 @@ public class Adopt {
 	
 	@Override
 	public String toString() {
-		return "\n\n¡á¡á¡á Adopt ¡á¡á¡á \n[boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
-				+ ", \npostContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", location="
-				+ location + ", \nregDate=" + regDate + ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight
-				+ ", \ndogSize=" + dogSize + ", dogGender=" + dogGender + ", dogPay=" + dogPay + ", dogStatus="
-				+ dogStatus + ", \ndogChar=" + dogChar + ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate
+		return "Adopt [boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", location="
+				+ location + ", regDate=" + regDate + ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight
+				+ ", dogSize=" + dogSize + ", dogGender=" + dogGender + ", dogPay=" + dogPay + ", dogStatus="
+				+ dogStatus + ", dogChar=" + dogChar + ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate
 				+ ", statusCode=" + statusCode + "]";
 	}
 	

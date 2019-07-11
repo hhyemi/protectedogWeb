@@ -69,7 +69,7 @@ public class ApplyServiceTest {
 	
 	
 	//@Test	//확인
-	public void testGetAdopt() throws Exception {
+	public void testGetApply() throws Exception {
 		
 		Apply apply = new Apply();
 		apply = applyService.getApply(10000);
@@ -84,53 +84,51 @@ public class ApplyServiceTest {
 	
 
 	 
-	 @Test	//확인
+	 //@Test	//확인
 	 public void testDelApply() throws Exception{
 		 
-//		Apply apply = applyService.getApply(10000);
-//		Assert.assertNotNull(apply);
-//		
-//		Assert.assertEquals("1", adopt.getStatusCode());
-//		adopt.setPostNo(10000);
-//		adopt.setStatusCode("2");
-//		adoptService.updateStatusCode(adopt);
-//		
-//		adopt = adoptService.getAdopt(10000);
-//		Assert.assertNotNull(adopt);
-//
-//		System.out.println("\n :: console 확인 :: "+adopt);
-//
-//		Assert.assertEquals("2", adopt.getStatusCode());
+		Apply apply = applyService.getApply(10023);
+		Assert.assertNotNull(apply);
+		Assert.assertEquals("1", apply.getStatusCode());
+		
+		applyService.delApply(apply);
+
+		apply = applyService.getApply(10023);
+		Assert.assertNotNull(apply);
+
+		System.out.println("\n :: console 확인 :: "+apply);
+
+		Assert.assertEquals("0", apply.getStatusCode());
 	 }
 	
 
-	 //@Test	//==>확인
+	// @Test	//확인
 	 public void testListApply() throws Exception{
 		 
-//	 	Search search = new Search();
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(1);	 	
-//	 	Map<String,Object> map = adoptService.listAdopt(search, "AD");
+	 	Search search = new Search();
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(1);	 	
+	 	Map<String,Object> map = applyService.listApply(search, 10026);
 	 	
-//	 	List<Object> list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(2, list.size());
-//	 	
-//	 	System.out.println("\n :: console 확인 :: "+list);
-//	 	
-//	 	Integer totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(2);
-//	 	map = adoptService.listAdopt(search, "AD");
-//	 	
-//	 	list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(2, list.size());
-//	 	
-//	 	System.out.println("\n :: console 확인 :: "+list);
-//	 	
-//	 	totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
+	 	List<Object> list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(1, list.size());
+	 	
+	 	System.out.println("\n :: console 확인 :: "+list);
+	 	
+	 	Integer totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(2);
+	 	map = applyService.listApply(search, 10026);
+	 	
+	 	list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(2, list.size());
+	 	
+	 	System.out.println("\n :: console 확인 :: "+list);
+	 	
+	 	totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
 	 }
 	
 }

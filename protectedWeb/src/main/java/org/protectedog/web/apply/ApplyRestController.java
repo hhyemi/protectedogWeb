@@ -63,7 +63,7 @@ public class ApplyRestController {
 		
 		Apply apply = applyService.getApply(applyNo);
 	
-		apply.setStatusCode('0');	// 신청서 삭제
+		apply.setStatusCode("0");	// 신청서 삭제
 		
 		//Business Logic
 		applyService.delApply(apply);

@@ -73,12 +73,12 @@
 		
 		<property name="exceptionMappings">
 			<props>
-				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop>
-				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop>
+<!-- 				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop> -->
+<!-- 				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop> -->
 			</props>
 		</property>
 		
-		<property name="defaultErrorView"	value="/common/error.jsp" />
+<!-- 		<property name="defaultErrorView"	value="/common/error.jsp" /> -->
 		
 	</bean>
     <!-- 브라우저가 multipart/form-data 데이터로 보내는

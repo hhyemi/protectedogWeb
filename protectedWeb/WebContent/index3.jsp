@@ -13,6 +13,8 @@
 
 		<li><a href="#">분양</a></li>
 		<li><a href="#">실종</a></li>
+		<li><a href="#">분양목록</a></li>
+		<li><a href="#">실종목록</a></li>
 		
 		
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -20,12 +22,20 @@
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		 	$("a:contains('분양')").on("click" , function() {
-				$(self.location).attr("href","/adopt/addAdopt?boardCode=AD");
+				$(self.location).attr("href","../adopt/getTerms.jsp");
 				//self.location = "/user/logout"
 			}); 
 			
 		 	$("a:contains('실종')").on("click" , function() {
 				$(self.location).attr("href","/adopt/addAdopt?boardCode=MS");
+			}); 
+			
+		 	$("a:contains('분양목록')").on("click" , function() {
+				$(self.location).attr("href","/adopt/listAdopt?boardCode=AD");
+			}); 
+		 	
+		 	$("a:contains('실종목록')").on("click" , function() {
+				$(self.location).attr("href","/adopt/listAdopt?boardCode=MS");
 			}); 
 		
 		 });
