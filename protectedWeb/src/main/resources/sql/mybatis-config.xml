@@ -17,12 +17,16 @@
 		<typeAlias alias="search" type="org.protectedog.common.Search"/>
 		<typeAlias alias="users" type="org.protectedog.service.domain.User"/>
 		<typeAlias alias="message" type="org.protectedog.service.domain.Message"/>
+		<typeAlias alias="report" type="org.protectedog.service.domain.Report"/>
+		<typeAlias alias="coupon" type="org.protectedog.service.domain.Coupon"/>
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
 		<mapper resource="sql/UsersMapper.xml"/>
 		<mapper resource="sql/MessageMapper.xml"/>
+		<mapper resource="sql/ReportMapper.xml"/>
+		<mapper resource="sql/CouponMapper.xml"/>
 	</mappers>
 
 </configuration>

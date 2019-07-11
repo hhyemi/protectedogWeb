@@ -41,7 +41,7 @@ public class UserTest {
 		user.setPw("testPass");
 		user.setNickname("testNickname");
 		user.setLevelPoint(0);
-		user.setLevels("ë¯¸ì¸ì¦íšŒì›");
+		user.setLevels("¹ÌÀÎÁõÈ¸¿ø");
 		user.setRole("user");
 		user.setPurpose1(null);
 		user.setPurpose2(null);
@@ -67,7 +67,7 @@ public class UserTest {
 		user.setPw("testPass");
 		user.setNickname("testNick2");
 		user.setLevelPoint(0);
-		user.setLevels("ë¯¸ì¸ì¦íšŒì›");
+		user.setLevels("¹ÌÀÎÁõÈ¸¿ø");
 		user.setRole("user");
 		user.setPurpose1(null);
 		user.setPurpose2(null);
@@ -90,7 +90,7 @@ public class UserTest {
 		user.setNickname("testNick");
 		user.setEmail("abc@naver.com");
 		user.setPhone("111-2222-3333");
-		user.setUserAddr("ì„¬ì§„ê°• í™”ê°œì¥í„°");
+		user.setUserAddr("¼­¿ï½Ã");
 		user.setAccount("110-000-111111");
 		user.setProfile("gdgd.jpg");
 		
@@ -113,7 +113,7 @@ public class UserTest {
 //			user.setPassword("testPasswd");
 //			user.setSsn("1111112222222");
 //			user.setPhone("111-2222-3333");
-//			user.setAddr("ï¿½ï¿½âµµ");
+//			user.setAddr("¼­¿ï½Ã");
 //			user.setEmail("test@test.com");
 //			
 //			userService.addUser(user);

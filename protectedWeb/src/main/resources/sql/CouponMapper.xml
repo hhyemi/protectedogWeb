@@ -10,9 +10,9 @@
 	<resultMap id="couponSelectMap" type="coupon">
 		<result property="couponNo"	column="coupon_no"	jdbcType="NUMERIC"/>
 		<result property="couponCode"	column="coupon_code"	jdbcType="VARCHAR"/>
-		<result property="receiverUser.id"	column="receiver_id"	jdbcType="VARCHAR"/>
+		<result property="receiveUser.id"	column="receiver_id"	jdbcType="VARCHAR"/>
 		<result property="couponName"	column="coupon_name"	jdbcType="VARCHAR"/>
-		<result property="discount"		column="discount"	jdbcType="VARCHAR"/>
+		<result property="discount"		column="discount"	jdbcType="NUMERIC"/>
 		<result property="couponStatus"	column="coupon_status"	jdbcType="CHAR"/>
 		<result property="makeDate"	column="make_date"	jdbcType="DATE"/>
 		<result property="limitDate"		column="limit_date"	jdbcType="DATE"/>
@@ -25,8 +25,8 @@
 		INSERT INTO coupon
 			(coupon_no, coupon_code, receiver_id, coupon_name, discount, coupon_status,
 			make_date, limit_date, use_date)
-		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiverId}, #{couponName}, #{discount}, 
-			#{couponStatus:VARCHAR}, SYSDATE, #{limitDate:VARCHAR}, #{useDate:VARCHAR})
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiveUser.id}, #{couponName}, #{discount}, 
+			#{couponStatus:VARCHAR}, SYSDATE, #{limitDate:DATE}, #{useDate:DATE})
 	</insert>
 
 	 
@@ -75,7 +75,7 @@
 						</if>
 					</where>
 				</if>
-				ORDER BY id ) inner_table
+				ORDER BY coupon_no ) inner_table
 			WHERE ROWNUM &lt;=#{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

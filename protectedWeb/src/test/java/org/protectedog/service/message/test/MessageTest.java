@@ -37,7 +37,7 @@ public class MessageTest {
 		Message message=new Message();
 		message.setMessageNo(10000);
 		message.setMessageTitle("hihi");
-		message.setMessageContent("이거슨 테스트인 거시여");
+		message.setMessageContent("�̰Ž� �׽�Ʈ�� �Žÿ�1");
 		
 		User sender=new User();
 		sender.setId("user01");
@@ -45,16 +45,7 @@ public class MessageTest {
 		
 		User receiver=new User();
 		receiver.setId("user02");
-		message.setReceiver1(receiver);
-		message.setReceiver2(null);
-		message.setReceiver3(null);
-		message.setReceiver4(null);
-		message.setReceiver5(null);
-		message.setReceiver6(null);
-		message.setReceiver7(null);
-		message.setReceiver8(null);
-		message.setReceiver9(null);
-		message.setReceiver10(null);
+		message.setReceiver(receiver);
 		
 		Date date=new Date();
 		date.setYear(2019);
@@ -81,7 +72,7 @@ public class MessageTest {
 		Message message=new Message();
 		message.setMessageNo(10001);
 		message.setMessageTitle("hihihi");
-		message.setMessageContent("이거슨 테스트인 거시여2");
+		message.setMessageContent("�̰Ž� �׽�Ʈ�� �Žÿ�2");
 		
 		User sender=new User();
 		sender.setId("user02");
@@ -89,16 +80,7 @@ public class MessageTest {
 		
 		User receiver=new User();
 		receiver.setId("user03");
-		message.setReceiver1(receiver);
-		message.setReceiver2(null);
-		message.setReceiver3(null);
-		message.setReceiver4(null);
-		message.setReceiver5(null);
-		message.setReceiver6(null);
-		message.setReceiver7(null);
-		message.setReceiver8(null);
-		message.setReceiver9(null);
-		message.setReceiver10(null);
+		message.setReceiver(receiver);
 		
 		Date date=new Date();
 		date.setYear(2019);

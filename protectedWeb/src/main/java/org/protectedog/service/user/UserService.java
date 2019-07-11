@@ -7,22 +7,22 @@ import org.protectedog.service.domain.User;
 
 public interface UserService {
 
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½Ô·ï¿½
+	//È¸¿ø°¡ÀÔ(±âº»Á¤º¸)
 	public void addUsersBase(User user) throws Exception;
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ô·ï¿½
+	//È¸¿ø°¡ÀÔ(Ãß°¡Á¤º¸)
 	public void addUsersAdditional(User user) throws Exception;
 	
-	//ï¿½Î±ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½
+	//·Î±×ÀÎ, ³»Á¤º¸º¸±â
 	public User getUsers(String id) throws Exception;
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+	//ÀüÃ¼È¸¿øº¸±â
 	public Map<String, Object> getUsersList(Search search) throws Exception;
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¸¿øÁ¤º¸¼öÁ¤
 	public void updateUsers(User user) throws Exception;
 	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½Ã¼Å©
+	//¾ÆÀÌµð Áßº¹Ã¼Å©
 	public int checkDuplication(String id) throws Exception;
 	
 }

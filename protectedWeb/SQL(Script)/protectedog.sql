@@ -130,7 +130,7 @@ CREATE TABLE FILES (
 
 CREATE TABLE COUPON (
 	COUPON_NO 		NUMBER(6,0) 	NOT NULL,
-	COUPON_CODE 		NUMBER(10,0) 	NOT NULL UNIQUE,
+	COUPON_CODE 		VARCHAR2(10,0) 	NOT NULL,
 	RECEIVER_ID 		VARCHAR2(12) 	NOT NULL REFERENCES USERS(ID),
 	COUPON_NAME 		VARCHAR2(50)  	NOT NULL,
 	DISCOUNT 		NUMBER(5,0)  	NOT NULL,
@@ -222,16 +222,7 @@ CREATE TABLE MESSAGE (
 	MESSAGE_TITLE 		VARCHAR2(200) 	NOT NULL ENABLE, 
 	MESSAGE_CONTENT 	VARCHAR2(2000) 	NOT NULL ENABLE, 
 	SEND_ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID1 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVE_ID2 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID3 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID4 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID5 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID6 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID7 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID8 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID9 		VARCHAR2(12) 	REFERENCES USERS(ID), 
-	RECEIVE_ID10 		VARCHAR2(12) 	REFERENCES USERS(ID), 
+	RECEIVE_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	SEND_DATE 			DATE, 
 	RECEIVE_DATE 		DATE, 
 	MESSAGE_STATUS 		CHAR(1) 		NOT NULL ENABLE, 
@@ -378,28 +369,20 @@ VALUES
 ('user03', '123124124', 'ytrewq21', 'hello', '안녕', 'hello@tiger.com', '011-2123-4567', '서울시 성북구', '110-432-098765', 900314, 0, 10003, 'm', 'user', '브론즈', '입양');	 
 
 INSERT INTO message
-(message_no, message_title, message_content, send_id, receive_id1, receive_id2, receive_id3, receive_id4, 
-receive_id5, receive_id6, receive_id7, receive_id8, receive_id9, receive_id10, send_date, 
+(message_no, message_title, message_content, send_id, receive_id, send_date, 
 receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, '테스트1', '이거슨 테스트인 거시여1', 'user01', 'user02', null, null, null, null, null, null, null, null, null, 
-SYSDATE, null, '0', '0');
+(seq_message_message_no.NEXTVAL, '테스트1', '이거슨 테스트인 거시여1', 'user01', 'user02', SYSDATE, null, '0', '0');
 
 INSERT INTO message
-(message_no, message_title, message_content, send_id, receive_id1, receive_id2, receive_id3, receive_id4, 
-receive_id5, receive_id6, receive_id7, receive_id8, receive_id9, receive_id10, send_date, 
-receive_date, message_status, del_code)
+(message_no, message_title, message_content, send_id, receive_id, send_date, receive_date, essage_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, '테스트2', '이거슨 테스트인 거시여2', 'user02', 'user01', 'user03', null, null, null, null, null, null, null, null, 
-SYSDATE, SYSDATE, '1', '0');
+(seq_message_message_no.NEXTVAL, '테스트2', '이거슨 테스트인 거시여2', 'user02', 'user01', SYSDATE, SYSDATE, '1', '0');
 
 INSERT INTO message
-(message_no, message_title, message_content, send_id, receive_id1, receive_id2, receive_id3, receive_id4, 
-receive_id5, receive_id6, receive_id7, receive_id8, receive_id9, receive_id10, send_date, 
-receive_date, message_status, del_code)
+(message_no, message_title, message_content, send_id, receive_id, send_date, receive_date, essage_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, '테스트3', '이거슨 테스트인 거시여3', 'user03', 'user01', 'user02', 'admin', null, null, null, null, null, null, null, 
-SYSDATE, SYSDATE, '1', '1');
+(seq_message_message_no.NEXTVAL, '테스트3', '이거슨 테스트인 거시여3', 'user03', 'user01', SYSDATE, SYSDATE, '1', '1');
 
 
 INSERT 

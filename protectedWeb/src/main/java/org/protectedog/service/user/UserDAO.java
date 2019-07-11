@@ -7,10 +7,10 @@ import org.protectedog.service.domain.User;
 
 public interface UserDAO {
 	
-	// Insert(ï¿½âº»ï¿½ï¿½ï¿½ï¿½)
+	// Insert(±âº»Á¤º¸)
 	public void addUsersBase(User user) throws Exception;
 	
-	// Insert(ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½)
+	// Insert(Ãß°¡Á¤º¸)
 	public void addUsersAdditional(User user) throws Exception;
 	
 	// Select One
@@ -22,7 +22,7 @@ public interface UserDAO {
 	// Update
 	public void updateUsers(User user) throws Exception;
 	
-	// List pageÃ³ï¿½ï¿½
+	// List paging
 	public int getTotalCount(Search search) throws Exception;
 	
 }

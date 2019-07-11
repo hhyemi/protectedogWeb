@@ -41,7 +41,7 @@
 		SELECT interest_no, board_code, comment_no, post_no, id
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
 			FROM( SELECT interest_no, board_code, comment_no, post_no, id
-				FROM users
+				FROM interest
 				<if test="searchCondition != null">
 					<where>
 						<if test="searchCondition==0 and searchKeyword !='' ">
@@ -52,7 +52,7 @@
 						</if>
 					</where>
 				</if>
-				ORDER BY id ) inner_table
+				ORDER BY interest_no ) inner_table
 			WHERE ROWNUM &lt;=#{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
@@ -63,7 +63,7 @@
 	<select  id="getTotalCount"		parameterType="search"	resultType="int">
 		SELECT COUNT(*)
 		FROM(	SELECT interest_no, board_code, comment_no, post_no, id
-			FROM users
+			FROM interest
 			<if test="searchCondition != null">
 				<where>
 						<if test="searchCondition==0 and searchKeyword !='' ">

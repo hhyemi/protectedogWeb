@@ -1,5 +1,7 @@
 package org.protectedog.service.domain;
 
+import java.util.Date;
+
 public class Report {
 
 	///Field
@@ -9,7 +11,11 @@ public class Report {
 	private String reportCategory;
 	private String reportContent;
 	private int reportStatus;
-	private String delCode;
+	private Date reportDate;
+	private char delCode;
+	private String file1;
+	private String file2;
+	private String file3;
 	
 	///Constructor
 	
@@ -50,19 +56,45 @@ public class Report {
 	public void setReportStatus(int reportStatus) {
 		this.reportStatus = reportStatus;
 	}
-	public String getDelCode() {
+	public Date getReportDate() {
+		return reportDate;
+	}
+	public void setReportDate(Date reportDate) {
+		this.reportDate = reportDate;
+	}
+	public char getDelCode() {
 		return delCode;
 	}
-	public void setDelCode(String delCode) {
+	public void setDelCode(char delCode) {
 		this.delCode = delCode;
 	}
-	
+	public String getFile1() {
+		return file1;
+	}
+	public void setFile1(String file1) {
+		this.file1 = file1;
+	}
+	public String getFile2() {
+		return file2;
+	}
+	public void setFile2(String file2) {
+		this.file2 = file2;
+	}
+	public String getFile3() {
+		return file3;
+	}
+	public void setFile3(String file3) {
+		this.file3 = file3;
+	}
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reporter=" + reporter + ", reported=" + reported
 				+ ", reportCategory=" + reportCategory + ", reportContent=" + reportContent + ", reportStatus="
-				+ reportStatus + ", delCode=" + delCode + "]";
+				+ reportStatus + ", reportDate=" + reportDate + ", delCode=" + delCode + ", file1=" + file1 + ", file2="
+				+ file2 + ", file3=" + file3 + "]";
 	}
+
+
 	
 	
 }
