@@ -211,13 +211,13 @@ ol {
     font-size: 14px;
     right: 50%;
     width: 30px;
-    background-color: #fc6c3f;
+    background-color: #3a76d6;
     color: #fff;
     text-align: center;
     height: 30px;
     line-height: 30px;
     border-radius: 50%;
-    margin-right: -15px;
+	margin-right: -15px;
 }
 
 a,
@@ -1446,10 +1446,10 @@ li {
 }
 
 #pattern-switcher {
-	width: 120px;
-	background-color: #fc6c3f;
+	width: 80px;
+	background-color: #3a76d6;
 	position: fixed;
-	top: 15%;
+	top: 98%;
 	z-index: 9999;
 	cursor: pointer;
 	height: 50px;
@@ -1469,7 +1469,7 @@ li {
 }
 
 #pattern-switcher:hover {
-	background-color: #e3410e;
+	background-color: #1062e6;
 }
 
 #patter-close > i {
