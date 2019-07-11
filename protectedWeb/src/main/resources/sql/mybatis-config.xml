@@ -26,7 +26,7 @@
 		<typeAlias alias="breed" type="org.protectedog.service.domain.Breed" />
 		<typeAlias alias="comment" type="org.protectedog.service.domain.Comment" />
 		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />
-
+		<typeAlias alias="interest" type="org.protectedog.service.domain.Interest"/>
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -41,7 +41,7 @@
 		<mapper resource="sql/BreedPediaMapper.xml"/>
 		<mapper resource="sql/CommentMapper.xml"/>
 		<mapper resource="sql/FundingMapper.xml"/>
-
+		<mapper resource="sql/InterestMapper.xml"/>
 	</mappers>
 
 </configuration>
