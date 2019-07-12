@@ -8,6 +8,7 @@
 <html lang="ko">
 	
 <head>
+	<title>Update Adopt</title>
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -32,7 +33,7 @@
 	<script type="text/javascript">
 	
 		 $(function() {
-			$( "button.btn.btn-primary" ).on("click" , function() {
+			$( "button:contains('수정')" ).on("click" , function() {
 				fncAddUser();
 			});
 			
@@ -45,7 +46,8 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
 // 				$("form")[0].reset();
-				alert("글 등록 취소 -> 목록으로")
+				alert("글 등록 취소 -> getAdopt")
+				$("form").attr("method" , "POST").attr("action" , "/adopt/getAdopt?postNo=${adopt.postNo}").submit();
 			});
 		});	
 	
@@ -126,7 +128,9 @@
 		  		</c:if>
 			</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="location" name="location" value="${ adopt.location }" placeholder="위치">
+		      <div id="map" style="width: 600px; height: 300px;"  align="center"></div>
+			  <p>마우스로 위치를 지정하세요. 우클릭시 마커가 사라집니다.</p>
+		      <input type="hidden" class="form-control" id="location" name="location" value="${ adopt.location }" placeholder="위치">
 		    </div>
 		  </div>
 		  
@@ -216,7 +220,7 @@
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >등 &nbsp;록</button>
+		      <button type="button" class="btn btn-primary"  >수정</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 			</div>
 		  </div>
@@ -225,6 +229,83 @@
 		
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
+	 
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+
+//       var mapArea;
+//       var markersArea = [];
+
+      var map;
+      var markers = [];
+      var loca = "${adopt.location}";
+      var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
+      var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
+      console.log(  localat  );
+      console.log(   localng   );
+
+      function initMap() {
+    	  var centerLoca = {lat: localat, lng: localng};
+
+//         mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+//           zoom: 13,
+//           center: haightAshbury
+//         });
+
+//         mapArea.addListener('click', function(event) {
+//         	addMarker(event.latLng);
+//         });
+        
+        ///////////////////////////////////////////////////////////////////////////
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: centerLoca
+        });
+
+        map.addListener('click', function(event) {
+        	addMarker(event.latLng);
+        });
+        
+        addMarker(centerLoca);
+      }
+      
+      var markerArea;
+      var marker;
+    
+      function addMarker(location) {
+    	if (marker != undefined){
+    		deleteMarkers();
+    	}
+    	
+        marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        
+        markers.push(marker);
+        $( '#location' ).val(location);
+        
+        if (marker != undefined){
+            marker.addListener('rightclick', function() {
+            	deleteMarkers();
+           });
+        }
+      }
+
+      function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+
+      function deleteMarkers() {
+    	setMapOnAll(null);
+        markers = [];
+      }
+      
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap"
+    async defer></script>
 	
 </body>
 

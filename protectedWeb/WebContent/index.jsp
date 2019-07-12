@@ -130,13 +130,15 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">adopt</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/adopt/addAdopt?boardCode=AD">분양</a>
+                                        <a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양글리스트</a>
+                                        <a class="dropdown-item" href="/adopt/listAdoptReview?boardCode=AD">입양후기</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">missing</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/adopt/addAdopt?boardCode=MS">실종</a>
+                                        <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종글리스트</a>
+                                        <a class="dropdown-item" href="/adopt/listAdoptReview?boardCode=MS">찾은 후기</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -181,7 +183,7 @@
     </header>
     <!-- ****** Header Area End ****** -->
 	
-	<div class="temp" style="width: 100%; height: 3000px;">
+<!-- 	<div class="temp" style="width: 100%; height: 3000px;"> -->
 	
 	
 	
