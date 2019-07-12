@@ -16,11 +16,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--  bootstrap Dropdown CSS & JS  -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+<link href="../resources/css/others/animate.css" rel="stylesheet">
 <script
-	src="https://cdn.ckeditor.com/ckeditor5/12.2.0/decoupled-document/ckeditor.js"></script>
+	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
@@ -57,19 +55,22 @@ body {
 }
 
 .preview-box {
-	border: 1px solid;
 	padding: 5px;
 	border-radius: 2px;
 	margin-bottom: 10px;
 }
+
+.ck-editor__editable{
+	text-align: left;
+}
 </style>
 
 <!--  JavaScript  -->
-<script type="text/javascript" src="../javascript/calendar.js"></script>
 <script type="text/javascript">
 function fncAddProduct(){
 	
-	$("form").attr("method","POST").attr("action","/info/addInformation").submit();
+	var postContent = $("#editor").text();
+	$("form[name=detailForm]").attr("method","POST").attr("action","/info/addInformation").attr("enctype","multipart/form-data").submit();
 	
 }
 
@@ -83,6 +84,8 @@ $(function () {
 		fncAddProduct();
 	});
 	
+	
+	
 });
 
 	</script>
@@ -91,20 +94,20 @@ $(function () {
 
 <body>
 
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<div class="container">
 		<h3 class=" text-info">새 글 쓰기</h3>
 
 		<hr>
 
-		<div style="border: 1px solid black; padding: 5px;">
+		<div style="border: 1px solid #d7dade; padding: 3px;">
 
-			<form class="form-horizontal" name="detailForm"
-				enctype="multipart/form-data">
+			<form class="form-horizontal" name="detailForm">
 
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
-							id="postTitle" placeholder="제목을 입력해 주세요." />
+							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." />
 					</div>
 				</div>
 
@@ -130,7 +133,7 @@ $(function () {
 							<div id="preview" class="content"></div>
 
 							<!-- multipart 업로드시 영역 -->
-							<form id="uploadForm" style="display: none;"></form>
+ 							<div id="uploadForm" style="display: none;"></div>
 						</div>
 					</div>
 				</div>
@@ -140,10 +143,10 @@ $(function () {
 				<div class="postForm row" align="center">
 
 					<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
-
-					<div id="editor" class="col-xs-12 col-md-12">
-						<p>This is the initial editor content.</p>
-					</div>
+					<textarea id="editor" name="postContent" style="text-align: left;">
+					
+					</textarea>
+				
 
 				</div>
 			</form>
@@ -162,12 +165,23 @@ $(function () {
 	</div>
 
 	<script>
-    DecoupledEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-            const toolbarContainer = document.querySelector( '#toolbar-container' );
-            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+	ClassicEditor
+        .create( document.querySelector( '#editor' ),{
+        	
+        	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        	heading: {
+                options: [
+                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                ]
+            }
+        	
         } )
+//         .then( editor => {
+//             const toolbarContainer = document.querySelector( '#toolbar-container' );
+//             toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+//         } )
         .catch( error => {
             console.error( error );
         } );

@@ -151,13 +151,14 @@
                                  <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">pedia</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="index.html">견종백과</a>
+                                        <a class="dropdown-item" href="/community/getBreedPedia.jsp">견종백과</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">community</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="index.html">1</a>
+                                        <a class="dropdown-item" href="/community/listInfo.jsp">정보공유</a>
+                                        <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -177,12 +178,6 @@
         </div>
     </header>
     <!-- ****** Header Area End ****** -->
-	
-	<div style="width: 100%; height: 3000px;">
-	
-	
-	
-	</div>
 
     <!-- Jquery-2.2.4 js -->
     <script src="../resources/js/jquery/jquery-2.2.4.min.js"></script>

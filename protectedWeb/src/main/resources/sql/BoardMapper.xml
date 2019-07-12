@@ -36,7 +36,7 @@
 	 	INSERT
 		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
 						market_code, price, city , phone, qna_code, route, prod_name)  
-		VALUES	 (	seq_adopt_post_no.nextval, 
+		VALUES	 (	seq_board_post_no.nextval, 
 					#{boardCode},
 					#{id} , 
 					#{nickName} , 
