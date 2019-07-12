@@ -57,20 +57,18 @@ public class AdoptController {
 	
 	
 	@RequestMapping( value="addAdopt", method=RequestMethod.GET )
-	public String addAdopt(  @RequestParam("boardCode") String boardCode, HttpSession session  ) throws Exception {
+	public String addAdopt(  @RequestParam("boardCode") String boardCode, HttpSession session 
+//								, Model model
+																		) throws Exception {
 
 		System.out.println("/adopt/addAdopt : GET : "+boardCode);
 		
 //		adopt.setId(((User)session.getAttribute("user")).getId());
 //		adopt.setPhone(((User)session.getAttribute("user")).getPhone());
+//		model.addAttribute("adopt", adopt);
 		
-		// 분양이면 약관동의, 실종이면 글쓰기로
-		if(boardCode.equals("AD")) {
-			return "forward:/adopt/getTerms.jsp";
-		}else {
-//			return "forward:/adopt/test.jsp";
-			return "forward:/adopt/addAdopt.jsp?=MS";
-		}
+
+		return "forward:/adopt/addAdopt.jsp?boardCode="+boardCode;
 	}
 	
 
@@ -81,13 +79,15 @@ public class AdoptController {
 //											,MultipartHttpServletRequest mtfRequest
 											) throws Exception {
 
-		System.out.println("/adopt/addAdopt : POST 컨트롤러들어옴");
+		System.out.println("/adopt/addAdopt : POST");
 		System.out.println(adopt);
 
 		// 파일
 //		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		System.out.println("파일확인 : "+product.getFileName());
 		adoptService.addAdopt(adopt);
+		adopt = adoptService.getAdopt(adopt.getPostNo());
+		System.out.println("=========================="+adopt);
 		model.addAttribute("adopt", adopt);
 		
 		return "forward:/adopt/getAdopt.jsp";
@@ -96,7 +96,7 @@ public class AdoptController {
 	
 	
 	// 글 상세조회
-	@RequestMapping( value="getAdopt", method=RequestMethod.GET)
+	@RequestMapping( value="getAdopt")
 	public String getAdopt( @RequestParam("postNo") int postNo , Model model) throws Exception {
 		
 		System.out.println("/adopt/getAdopt : GET");
@@ -140,27 +140,31 @@ public class AdoptController {
 //		if ( fileName ) {
 //			adopt.setFileName((adoptService.getAdopt(adopt.getPostNo())).getFileName());
 //		}
-		
+
+		System.out.println(adopt);
+		System.out.println(adopt.getPostNo());
 		adoptService.updateAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		model.addAttribute("adopt", adopt);		
 
-		return "forward:/adopt/getAdopt.jsp?postNo="+adopt.getPostNo();
+		return "forward:/adopt/getAdopt?postNo="+adopt.getPostNo();
 	}
 	
 	
 	
 	// 글 삭제
-	@RequestMapping( value="updateStatusCode" , method=RequestMethod.POST)
-	public String updateStatusCode( @ModelAttribute("adopt") Adopt adopt ) throws Exception{
+	@RequestMapping( value="updateStatusCode" , method=RequestMethod.GET)
+	public String updateStatusCode( @RequestParam("postNo") int postNo ,
+									@ModelAttribute("adopt") Adopt adopt ) throws Exception{
 		
-		System.out.println("/adopt/updateStatusCode : POST");
+		System.out.println("/adopt/updateStatusCode : POST  "+adopt);
 
+		adopt = adoptService.getAdopt(postNo);
 		adopt.setStatusCode("0");
 		adoptService.updateStatusCode(adopt);
 		
 		// 파라미터값으로 보드코드? 
-		return "forward:/adopt/listAdopt";
+		return "forward:/adopt/listAdopt?boardCode="+adopt.getBoardCode();
 	}
 	
 	
@@ -171,7 +175,9 @@ public class AdoptController {
 	public String listAdopt( @ModelAttribute("search") Search search,
 							 @RequestParam("boardCode") String boardCode, Model model ) throws Exception{
 		
-		System.out.println("/adopt/listAdopt : GET / POST");
+		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
+		
+		search.setSearchCondition("");
 		
 		if (search.getCurrentPage() ==0 ) {
 			search.setCurrentPage(1);
@@ -179,21 +185,21 @@ public class AdoptController {
 		
 		search.setPageSize(pageSize);
 		System.out.println("■■■■ 검색어 확인 : "+search.getSearchKeyword()
-						+"  ■■■■ search 확인 : "+search);
+						+"\n■■■■ search 확인 : "+search);
 		
 		Map<String , Object> map=adoptService.listAdopt(search, boardCode);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			
 		System.out.println("■■■■ map 확인 : "+map
-						+"  ■■■■ map.get(\"list\") 확인  : "+map.get("list"));
+						+"\n■■■■ map.get(\"list\") 확인  : "+map.get("list"));
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
 		// 파라미터값으로 보드코드? 
-		return "forward:/adopt/listAdopt.jsp";
+		return "forward:/adopt/listAdopt.jsp?boardCode="+boardCode;
 	}
 	
 	

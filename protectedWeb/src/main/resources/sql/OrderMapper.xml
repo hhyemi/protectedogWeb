@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderMapper">
+	<resultMap type="order" id="orderSelectMap">
+		<result property="orderNo" column="order_no" jdbcType="NUMERIC"/>
+		<result property="prodNo" column="prod_no" jdbcType="NUMERIC" />
+		<result property="id" column="id" jdbcType="VARCHAR"/>
+		<result property="phone" column="phone" jdbcType="VARCHAR" />
+		<result property="couponNo" column="payment_option" jdbcType="CHAR" />
+		<result property="receiverAdder" column="receiver_addr" jdbcType="VARCHAR" />
+		<result property="receiverName" column="receiver_name" jdbcType="VARCHAR" />
+		<result property="receiverPhone" column="receiver_phone" jdbcType="VARCHAR" />
+		<result property="orderRequest" column="order_request" jdbcType="VARCHAR" />
+		<result property="paymentCode" column="payment_code" jdbcType="NUMERIC" />
+		<result property="orderDate" column="order_date" jdbcType="DATE"/>
+		<result property="orderQuantity" column="order_quantity" jdbcType="NUMERIC"/>
+		<result property="totalPrice" column="total_price" jdbcType="NUMERIC" />
+		<result property="orderCode" column ="order_code" jdbcType="NUMERIC"/>
+		<result property="deliveryCode" column="delivery_code" jdbcType="NUMERIC"/>
+	</resultMap>
+
+	<sql id="select-Order">
+		SELECT 
+		order_no, id, phone, receiver_addr, receiver_name, receiver_phone, order_request, payment_code, 
+		order_date, order_quantity, total_price, order_code, delivery_code
+		FROM orders;
+	</sql>
+
+
+<insert id="addOrder" parameterType="order">
+		INSERT 
+		INTO orders(order_no, prod_no, id, phone, receiver_name, receiver_phone, receiver_addr, order_request, paymentCode, order_date, order_quantity, total_price, order_code, delivery_code)
+		VALUES (
+		seq_Order_order_no.NEXTVAL,
+		#{prodNo},
+		#{id},
+		#{phone},
+		#{receiverName},
+		#{receiverPhone},
+		#{receiverAddr},
+		#{orderRequest},
+		#{paymentCode},
+		SYSDATE,
+		#{orderQantity},
+		#{totalPrice},
+		#{orderCode},
+		#{deliveryCode})
+	</insert>
+
+<select id="getOrder" parameterType="string" resultMap="orderSelectMap">
+		SELECT o.order_no, o.prod_no, p.prod_name, o.id, o.receiver_name, o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, o.order_date, o.order_code, order_quantity, o.total_price	
+		FROM orders o, product p
+		WHERE o.order_no = #{orderNo}
+		AND o.prod_no = p.prod_no;
+	</select>
+
+
+	 <update id="updateOrderCode" parameterType="order" >
+	UPDATE orders 
+	SET
+	order_code = #{orderCode}
+	WHERE order_no = #{orderNo}
+	</update>
+	
+	<update id="updateOrder" parameterType="order">
+	UPDATE orders
+	SET
+	receiver_name = #{receiverName}, receiver_phone = #{receiverPhone}, receiver_addr = #{receiverAddr},
+	order_request = #{orderRequest}
+	WHERE order_no = #{orderNo}
+	</update>
+	
+	<delete id="delOrder" parameterType="order">
+	DELETE FROM orders
+	WHERE tran_no = #{tranNo}
+	</delete>
+
+	 <select  id="listOrder"  parameterType="search"	resultMap="orderSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  		FROM (	SELECT order_no , prod_no , prod_name, total_price, order_code
+					FROM orders
+					WHERE id =#{id}					
+					ORDER BY order_no) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
+	 
+	 <select  id="listAdminOrder"  parameterType="search"	resultMap="orderSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  		FROM (	SELECT order_no, reg_date, id, order_quantity, payment_code, total_price, order_code, delivery_code
+					FROM orders
+					WHERE id =#{id}					
+					ORDER BY order_no) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
+	 
+	 <select  id="listSwapOrder"  parameterType="search"	resultMap="orderSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  		FROM (	SELECT order_no , prod_no , prod_name, total_price, order_code
+					FROM orders
+					WHERE id =#{id}					
+					ORDER BY order_no) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
+	 
+
+
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM(SELECT * FROM orders) countTable
+		</select>
+		
+		</mapper>

@@ -173,10 +173,9 @@ public class Board {
 	
 	@Override
 	public String toString() {
-		return "\n\n¡á¡á¡á Board ¡á¡á¡á \n[postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
-				+ ", \npostTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
-				+ viewCount + ", \nrecommendCount=" + recommendCount + ", marketCode=" + marketCode + ", price=" + price
-				+ ", \ncity=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodName="
+		return "Board [postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
+				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
+				+ ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodName="
 				+ prodName + ", statusCode=" + statusCode + "]";
 	}
 	
