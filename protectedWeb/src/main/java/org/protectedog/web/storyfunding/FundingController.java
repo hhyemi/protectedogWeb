@@ -1,5 +1,7 @@
 package org.protectedog.web.storyfunding;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +95,10 @@ public class FundingController {
 		System.out.println("/funding/getFunding ");
 
 		Funding funding = fundingService.getFunding(postNo);
+		FileDog file = fileService.getFile(postNo);
 
+
+		model.addAttribute("file",file);
 		model.addAttribute("funding", funding);
 
 		return "forward:/funding/getFunding.jsp";

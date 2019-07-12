@@ -41,6 +41,14 @@
 	top:91.5%;
 	left :93.5%;
 }
+
+		@font-face { font-family: 'NanumGothic';
+		src: url('/fonts/NanumGothic.eot');
+		src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
+		url('/fonts/NanumGothic.woff') format('woff');}
+		
+		
+		body {font-family: 'NanumGothic', 'serif';}
 </style>
 </head>
 
@@ -112,7 +120,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">#protectedog</a>
+                        <a href="index.html" class="yummy-logo">보호할개</a>
                     </div>
                 </div>
             </div>
@@ -125,44 +133,44 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">adopt</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">분양</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">분양</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">missing</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">실종</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">실종</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">storyfunding</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">스토리펀딩</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/storyfunding/addFunding.jsp">후원신청</a>
                                         <a class="dropdown-item" href="index.html">후원게시</a>
                                     </div>
                                 </li>
                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">hospital</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">동물병원</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">병원</a>
                                     </div>
                                 </li>
                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">pedia</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">견종백과</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">견종백과</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">community</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">커뮤니티</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">1</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">market</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">스토어</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="index.html">1</a>
                                     </div>

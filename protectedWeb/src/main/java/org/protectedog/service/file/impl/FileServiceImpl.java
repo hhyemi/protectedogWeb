@@ -30,9 +30,8 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public FileDog getFile(int fileNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public FileDog getFile(int postNo) throws Exception {
+		return fileDAO.getFile(postNo);
 	}
 
 	@Override

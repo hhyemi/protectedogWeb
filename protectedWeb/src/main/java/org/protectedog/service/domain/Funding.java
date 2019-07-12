@@ -29,7 +29,7 @@ public class Funding {
 	private String phone2;
 	private String phone3;
 	// 투표 남은 날짜
-	private Date voteRemainDate;
+	private int voteRemainDate;
 	// 후원 남은 날짜
 	private Date fundRemainDate;
 
@@ -210,11 +210,11 @@ public class Funding {
 		this.phone3 = phone3;
 	}
 
-	public Date getVoteRemainDate() {
+	public int getVoteRemainDate() {
 		return voteRemainDate;
 	}
 
-	public void setVoteRemainDate(Date voteRemainDate) {
+	public void setVoteRemainDate(int voteRemainDate) {
 		this.voteRemainDate = voteRemainDate;
 	}
 

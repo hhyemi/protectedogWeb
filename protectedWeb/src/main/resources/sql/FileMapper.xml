@@ -26,15 +26,14 @@
 		select * from DUAL
 	 </insert>
 	 
-	<!--   SQL : SELECT ONE 
+	<!--   SQL : SELECT ONE -->
 	 <select 	id="getFile"	parameterType="string"	resultMap="fileSelectMap">
 		SELECT
-		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 		
-		FROM STORYFUNDING 
+		FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE
+		FROM FILES 
 		WHERE POST_NO IN #{value}
 	 </select>
-	 
+<!-- 	 
 	 SQL : SELECT LIST
 	<select  id="listFunding"  parameterType="search"	resultMap="fundingSelectMap">
 	  	SELECT *

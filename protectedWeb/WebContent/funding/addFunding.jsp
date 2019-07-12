@@ -18,8 +18,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<!-- ////////////////////달력 /////////////////////////////-->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<!-- Bootstrap Dropdown Hover CSS -->
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
@@ -54,14 +53,6 @@
 		width: 1000px;
 		}		
 
-		@font-face { font-family: 'NanumGothic';
-		src: url('/fonts/NanumGothic.eot');
-		src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
-		url('/fonts/NanumGothic.woff') format('woff');}
-		
-		
-		body {font-family: 'NanumGothic', 'serif';}
-
     </style>
 
 	</head>
@@ -73,7 +64,7 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
 		<div class="page-header col-sm-offset-3">	
-		<h3>후원 신청 등 록</h3> 후원신청은 투표 <strong class="text-danger">1개</strong>이상 받을 시 <strong class="text-danger">수정이 불가</strong>합니다.
+		<font size=6>후원 신청 등록</font> 후원신청은 투표 <strong class="text-danger">1개</strong>이상 받을 시 <strong class="text-danger">수정이 불가</strong>합니다.
 	    </div>		
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
@@ -187,7 +178,8 @@
 		var postContent = $('input[name="postContent"]').val();
 		var phone2 = $('input[name="phone2"]').val();
 		var phone3 = $('input[name="phone3"]').val();	
-
+		var file = $("#multiFile").val();	 
+		
 		if(fundTargetPay == null || fundTargetPay.length<1){
 			alert("후원목표금액은 반드시 입력하여야 합니다.");
 			$('input[name="fundTargetPay"]').focus();
@@ -208,6 +200,10 @@
 			$('input[name="postContent"]').focus();
 			return;
 		} */
+		if(file == null || file.length<1){
+			alert("파일은 반드시 입력하셔야 합니다.");
+			return;
+		}
 		if(phone2 == null || phone2.length<1){
 			alert("휴대폰번호는 반드시 입력하셔야 합니다.");
 			$('input[name="phone2"]').focus();
