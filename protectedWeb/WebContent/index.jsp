@@ -80,10 +80,10 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="register.html">Sign in</a>
+                                <a href="/users/loginView.jsp">Sign in</a>
                             </div>
                             <div class="register">
-                                <a href="register.html">Sign up</a>
+                                <a href="/users/addUsersBaseView.jsp">Sign up</a>
                             </div>
 <!--                             <div class="myPage"> -->
 <!--                             	<a href="#">마이페이지</a> -->
@@ -94,13 +94,13 @@
 <!--                             <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a> -->
 <!--                         </div> -->
                         <!-- Search Form -->
-                        <div class="search-hidden-form">
-                            <form action="#" method="get">
-                                <input type="search" name="search" id="search-anything" placeholder="Search Anything...">
-                                <input type="submit" value="" class="d-none">
-                                <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            </form>
-                        </div>
+<!--                         <div class="search-hidden-form"> -->
+<!--                             <form action="#" method="get"> -->
+<!--                                 <input type="search" name="search" id="search-anything" placeholder="Search Anything..."> -->
+<!--                                 <input type="submit" value="" class="d-none"> -->
+<!--                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span> -->
+<!--                             </form> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </div>

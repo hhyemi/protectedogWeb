@@ -42,12 +42,18 @@
 			#{facebook:VARCHAR}, #{pw}, #{userName}, #{nickname}, 0, '미인증회원', 'user', #{purpose1:VARCHAR}, 
 			#{purpose2:VARCHAR}, #{purpose3:VARCHAR})
 	</insert>
-	<insert id="addUsersAdditional"	parameterType="users">
-		INSERT INTO users(email, phone, user_addr, account, birth_date, gender)
-		VALUES(#{email:VARCHAR}, #{phone:VARCHAR}, #{userAddr:VARCHAR}, 
-			#{account:VARCHAR}, #{birthDate:VARCHAR}, #{gender:VARCHAR})
-		WHERE id=#{userId}
-	</insert>
+	<update id="addUsersAdditional"	parameterType="users">
+		UPDATE users
+		<set>
+			email=#{email},
+			phone=#{phone},
+			user_addr=#{userAddr},
+			account=#{account},
+			birth_date=#{birthDate},
+			gender=#{gender}
+		</set>
+		WHERE id=#{id}
+	</update>
 
 	 
 	 <!-- SQL : SELECT ONE -->
