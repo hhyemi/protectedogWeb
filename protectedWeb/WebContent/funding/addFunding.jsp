@@ -20,7 +20,17 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<!-- ////////////////////달력 /////////////////////////////-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		
+	<!-- Bootstrap Dropdown Hover CSS -->
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <!-- Bootstrap Dropdown Hover JS -->
+    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   
+   
+    <!-- jQuery UI toolTip 사용 CSS-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jQuery UI toolTip 사용 JS-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	
@@ -39,27 +49,40 @@
 		color:#29304d;
 		height:40px;
 		width:150px;
+		}
+		.container{
+		width: 1000px;
 		}		
+
+		@font-face { font-family: 'NanumGothic';
+		src: url('/fonts/NanumGothic.eot');
+		src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
+		url('/fonts/NanumGothic.woff') format('woff');}
+		
+		
+		body {font-family: 'NanumGothic', 'serif';}
 
     </style>
 
 	</head>
 	<body>
-
+	<!-- ToolBar Start /////////////////////////////////////-->
+	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+   	<!-- ToolBar End /////////////////////////////////////-->
+   	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<div class="page-header">	
-		<h1 class="bg-primary text-center">후원 신청 등 록</h1>
+	<div class="container ">
+		<div class="page-header col-sm-offset-3">	
+		<h3>후원 신청 등 록</h3> 후원신청은 투표 <strong class="text-danger">1개</strong>이상 받을 시 <strong class="text-danger">수정이 불가</strong>합니다.
 	    </div>		
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 	
 		<div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">후원목표금액</h4>
-			<h5 class="col-sm-offset-3 col-sm-12">
-			투표개수는 (<strong class="text-danger">목표금액 X 0.001</strong>)표로 적용됩니다. (10만원 ~ 300만원까지 입력가능합니다.)</h5>
-		    <div class="col-sm-offset-3 col-sm-5">
+			<label class="col-sm-offset-3 col-sm-12">
+			투표개수는 ( <strong class="text-danger">목표금액 X 0.001</strong> )표로 적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )</label>
+		    <div class="col-sm-offset-3 col-sm-7">
 		      <input type="text" class="form-control" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7" >
 		    </div>
 		    <strong>원</strong>
@@ -70,17 +93,17 @@
 		  </div>
 
 		  <div class="form-group" >
-		    <h5 class="col-sm-offset-3 col-sm-12" >
+		    <label class="col-sm-offset-3 col-sm-12" >
 			후원게시글로 이동하려면 받아야 할 투표 수입니다.
-			</h5>
+			</label>
 		  </div>
 		  		  
 		  <div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">후원목표기간</h4>
-			<h5 class="col-sm-offset-3 col-sm-12">
-			후원 받을기간을 입력하세요. (7일 ~ 30일까지 선택가능합니다.)<br/>
-			투표가 마감되었을 때 시작 날부터의 기간입니다. 투표 기간은 <strong class="text-danger">30</strong>일로 고정됩니다.</h5>
-		    <div class="col-sm-offset-3 col-sm-5"">
+			<label class="col-sm-offset-3 col-sm-12">
+			후원 받을기간을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br/>
+			투표가 마감되었을 때 시작 날부터의 기간입니다. 투표 기간은 <strong class="text-danger">30</strong>일로 고정됩니다.</label>
+		    <div class="col-sm-offset-3 col-sm-7">
 		      <select class="form-control" name="fundTargetDay" id="fundTargetDay">
 		      <c:forEach var ="i" begin="7" end ="30" step="1">
 				  	<option value="${i}" >${i}</option>
@@ -91,34 +114,34 @@
 		  
 		  <div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">글제목</h4>
-		    <div class="col-sm-offset-3 col-sm-5"">
+		    <div class="col-sm-offset-3 col-sm-7">
 		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." maxlength="10" >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 			<h4 class="col-sm-offset-3 col-sm-12">글내용</h4>
-			    <div class="col-sm-offset-3 col-sm-5"">
+			    <div class="col-sm-offset-3 col-sm-7">
 			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."></textarea>
 			    </div>
 			  </div>
 
             <!-- 첨부 버튼 -->
             <div id="attach">
-                <span class="col-sm-offset-3 label label-primary" ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;대표이미지는 파란테두리입니다.
-                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata" multiple />
+                <span class="col-sm-offset-3 label label-primary" ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;대표이미지는 파란테두리입니다. (최대 8장까지 업로드 가능합니다.)
+                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
             
             <br/><br/>
             
             <!-- 미리보기 영역 -->
             <div class="form-group">
-            <div id="preview" class="content col-sm-offset-3 col-sm-5" style='display:inline; min-width:1200px;'></div> 
+            <div id="preview" class="col-sm-offset-3 col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
             </div>
 		  <div class="form-group">
 		   <h4 class="col-sm-offset-3 col-sm-12">연락처</h4>
-		     <h5 class="col-sm-offset-3 col-sm-12">
-			문의받을 연락처를 입력해주세요.</h5>			
+		     <label class="col-sm-offset-3 col-sm-12">
+			문의받을 연락처를 입력해주세요.</label>			
 			 <div class="col-sm-offset-3 col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" >010</option>
@@ -135,6 +158,7 @@
 		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호" maxlength="4">
 		    </div>
 		    <input type="hidden" name="phone"  />
+		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 		  </div>
 		  
 		  <br/><br/>
@@ -142,7 +166,7 @@
 	  			<button type="button" id="btn-add">등록</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
-		  <br/><br/><br/><br/>
+		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		
@@ -152,7 +176,8 @@
 
     <!--  ///////////////////////// JavaScript ////////////////////////// --> 	
 	<script type="text/javascript" >
-	
+
+	//============= 등록버튼 눌렀을때 함수 =============		
 	function fncAddFunding(){
 		
 		//Form 유효성 검증
@@ -178,7 +203,6 @@
 			$('input[name="postTitle"]').focus();
 			return;
 		}
-		alert(postContent)
 /* 		if(postContent == null || postContent.length<1){
 			alert("글내용은 반드시 입력하셔야 합니다.");
 			$('input[name="postContent"]').focus();
@@ -209,11 +233,10 @@
             var formData = new FormData(form);
 
             for (var index = 0; index < 100; index++) {
-                //formData 공간에 files라는 이름으로 파일을 추가한다.
-                //동일명으로 계속 추가할 수 있다.
                 formData.append('files',files[index]);
             }
-            $.ajax({
+             	
+             	$.ajax({
                 type : 'POST',
                 enctype : 'multipart/form-data',
                 processData : false,
@@ -224,9 +247,6 @@
                 dataType : 'JSON',
                 data : formData,
                 success : function(result) {
-                    //이 부분을 수정해서 다양한 행동을 할 수 있으며,
-                    //여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
-                    //-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
                     if (result === -1) {
                         alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
                         // 이후 동작 ...
@@ -235,10 +255,8 @@
                         // 이후 동작 ...
                     } else {
                         alert('이미지 업로드 성공');
-                        // 이후 동작 ...
                     }
                 }
-                //전송실패에대한 핸들링은 고려하지 않음
             });
         });
 
@@ -246,12 +264,17 @@
 		$('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
 	}
 	
+	//============= "다중파일업로드 파일명만 저장해서 value" =============	
+	function fnAddFile(fileNameArray) {
+	   	$("#multiFile").val(fileNameArray)	 
+	}	
+	
 	//============= "다중파일업로드"  Event 처리 및  연결 =============		
 
 	    //임의의 file object영역
      var files = {};
      var previewIndex = 0;
-
+     var fileNameArray = new Array();
      // image preview 기능 구현
      // input = file object[]
      function addPreview(input) {
@@ -287,15 +310,24 @@
                      }else{
                      	previewId = "startNo";	
                      }
-                 
+                 	//8장 이상 업로드시
+                     if(Object.keys(files).length>=8){
+                    	 alert("사진은 8장까지만 업로드 가능합니다.");
+                    	 delete files[imgNum];
+                     }else{
+					// 8장 이하 
                      $("#preview").append(
-                                     "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:130px' >"
+                                     "<div class=\"preview-box\"  id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
                                              + "<a href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
                                              + "   삭제" + "</a>" + "</div>");
+
                      files[imgNum] = file;
+                     fileNameArray[imgNum]=file.name;
+                     fnAddFile(fileNameArray);
+                     }
 
                  };
 
@@ -308,8 +340,9 @@
      //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
      function deletePreview(obj) {
          var imgNum = obj.attributes['value'].value;
-         alert(imgNum);
          delete files[imgNum];
+         fileNameArray.splice(imgNum,1);
+         fnAddFile(fileNameArray);
          $("#preview .preview-box[value=" + imgNum + "]").remove();
          resizeHeight();
      }
@@ -344,7 +377,7 @@
                      alert('제한길이 초과');
                      $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                  }
-                 //후원목표금액 문자 입력 검증     
+                 //후원목표금액 문자 입력 검증 (정규식사용)    
             	 var exp = /^[0-9]+$/;
             	 if($(this).val().match(exp)){
             		//금액에 따른 표개수
@@ -363,14 +396,32 @@
             	
              });
 	 		
-     		//============= 글제목 길이 체크 =============
+     		//============= 글제목 길이 입력 검증 =============
              $('#postTitle').keyup(function(){
                  if ($(this).val().length > $(this).attr('maxlength')-1) {
                      alert('제한길이 초과');
                      $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                  }
              });
-
+           //============= 연락처 문자 입력 검증 (JavaScript 함수사용)=============
+             $('#phone2').keyup(function(){
+                var val = $(this).val(); 
+				if(isNaN(val)){
+            		alert("숫자만 입력하세요.")
+            		var len = val.length; 
+            		$(this).val(val.substring(0,len-1));  		
+            	 }         	
+             });
+           
+             $('#phone3').keyup(function(){
+                var val = $(this).val(); 
+				if(isNaN(val)){
+            		alert("숫자만 입력하세요.")
+            		var len = val.length; 
+            		$(this).val(val.substring(0,len-1));  		
+            	 }         	
+             });
+             
      }); 
 	
 	$(function() {
