@@ -33,8 +33,9 @@
 	
 	 <!-- SQL : INSERT -->
 	 <insert 	id="addBoard"		parameterType="board" >
+	 
 	 	INSERT
-		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
+		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, recommend_count,
 						market_code, price, city , phone, qna_code, route, prod_name)  
 		VALUES	 (	seq_board_post_no.nextval, 
 					#{boardCode},
@@ -43,7 +44,6 @@
 					#{postTitle} , 
 					#{postContent} , 
 					SYSDATE , 
-					#{viewCount} , 
 					#{recommendCount:NUMERIC},
 					#{marketCode:NUMERIC},
 					#{price:NUMERIC},
@@ -73,15 +73,15 @@
 	 <update	id="updateBoard"	parameterType="board" >
 	   	UPDATE board 
 	   	<set>
-			#{postTitle} , 
-			#{postContent} , 
-			#{marketCode:NUMERIC},
-			#{price:NUMERIC},
-			#{city:VARCHAR},
-			#{phone:VARCHAR},
-			#{qnaCode},
-			#{route:VARCHAR},
-			#{prodName:VARCHAR} 
+			post_title		= #{postTitle} , 
+			post_content	= #{postContent} , 
+			market_code		= #{marketCode:NUMERIC},
+			price			= #{price:NUMERIC},
+			city			= #{city:VARCHAR},
+			phone			= #{phone:VARCHAR},
+			qna_code		= #{qnaCode:CHAR},
+			route			= #{route:VARCHAR},
+			prod_name		= #{prodName:VARCHAR} 
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -105,6 +105,15 @@
 	 </update>
 	 
 	 
+	 <update	id="delBoard"	parameterType="board" >
+	   	UPDATE board
+	   	<set>
+			status_code	= #{statusCode}
+	   	</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+	 
 		 
 		 
 	<!-- SQL : SELECT LIST -->
@@ -116,17 +125,17 @@
 						FROM board
 						<where>
 								board_code = #{boardCode} AND status_code != '0'
-								<if test="searchCondition != null">
-									<if test="searchCondition == 0 and searchKeyword !='' ">
-							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
-									</if>
-									<if test="searchCondition == 1 and searchKeyword !='' ">
-							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
-									</if>
-									<if test="searchCondition == 2 and searchKeyword !='' ">
-							 			AND nickname  LIKE '%'||#{searchKeyword}||'%'
-									</if> 
-								</if>
+<!-- 								<if test="searchCondition != null"> -->
+<!-- 									<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 							 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 									</if> -->
+<!-- 									<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 							 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 									</if> -->
+<!-- 									<if test="searchCondition == 2 and searchKeyword !='' "> -->
+<!-- 							 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
+<!-- 									</if>  -->
+<!-- 								</if> -->
 						</where>
 						ORDER BY post_no DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
@@ -144,17 +153,17 @@
 				FROM board
 				<where>
 						board_code = #{boardCode} AND status_code != '0'
-						<if test="searchCondition != null">
-							<if test="searchCondition == 0 and searchKeyword !='' ">
-					 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
-							</if>
-							<if test="searchCondition == 1 and searchKeyword !='' ">
-					 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
-							</if>
-							<if test="searchCondition == 2 and searchKeyword !='' ">
-					 			AND nickname  LIKE '%'||#{searchKeyword}||'%'
-							</if> 
-						</if>
+<!-- 						<if test="searchCondition != null"> -->
+<!-- 							<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 					 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 							</if> -->
+<!-- 							<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 					 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 							</if> -->
+<!-- 							<if test="searchCondition == 2 and searchKeyword !='' "> -->
+<!-- 					 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
+<!-- 							</if>  -->
+<!-- 						</if> -->
 				</where> ) countTable						
 	 </select>
 	 

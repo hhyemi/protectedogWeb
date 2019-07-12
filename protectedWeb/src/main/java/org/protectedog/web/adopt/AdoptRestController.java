@@ -5,6 +5,7 @@ import org.protectedog.service.domain.Adopt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ public class AdoptRestController {
 
 	// 글상태 완료로 변경
 	@RequestMapping( value="json/updateStatusCode/{postNo}", method=RequestMethod.GET)
-	public Adopt updateStatusCode( @RequestParam("postNo") int postNo ) throws Exception{
+	public Adopt updateStatusCode( @PathVariable("postNo") int postNo ) throws Exception{
 
 		System.out.println("/adopt/json/updateStatusCode : GET");
 		

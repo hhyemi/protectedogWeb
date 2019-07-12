@@ -78,10 +78,10 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="register.html">Sign in</a>
+                                <a href="/users/loginView.jsp">Sign in</a>
                             </div>
                             <div class="register">
-                                <a href="register.html">Sign up</a>
+                                <a href="/users/addUsersBaseView.jsp">Sign up</a>
                             </div>
 <!--                             <div class="myPage"> -->
 <!--                             	<a href="#">마이페이지</a> -->
@@ -92,13 +92,13 @@
 <!--                             <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a> -->
 <!--                         </div> -->
                         <!-- Search Form -->
-                        <div class="search-hidden-form">
-                            <form action="#" method="get">
-                                <input type="search" name="search" id="search-anything" placeholder="Search Anything...">
-                                <input type="submit" value="" class="d-none">
-                                <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            </form>
-                        </div>
+<!--                         <div class="search-hidden-form"> -->
+<!--                             <form action="#" method="get"> -->
+<!--                                 <input type="search" name="search" id="search-anything" placeholder="Search Anything..."> -->
+<!--                                 <input type="submit" value="" class="d-none"> -->
+<!--                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span> -->
+<!--                             </form> -->
+<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -128,19 +128,22 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">adopt</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/adopt/addAdopt?boardCode=AD">분양</a>
+                                        <a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양글리스트</a>
+                                        <a class="dropdown-item" href="/adopt/listAdoptReview?boardCode=AD">입양후기</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">missing</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/adopt/addAdopt?boardCode=MS">실종</a>
+                                        <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종글리스트</a>
+                                        <a class="dropdown-item" href="/adopt/listAdoptReview?boardCode=MS">찾은 후기</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">storyfunding</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="index.html">스토리펀딩</a>
+                                        <a class="dropdown-item" href="/funding/addFunding.jsp">후원신청</a>
+                                        <a class="dropdown-item" href="index.html">후원게시</a>
                                     </div>
                                 </li>
                                  <li class="nav-item dropdown">
@@ -179,7 +182,7 @@
     </header>
     <!-- ****** Header Area End ****** -->
 	
-	<div class="temp" style="width: 100%; height: 3000px;">
+<!-- 	<div class="temp" style="width: 100%; height: 3000px;"> -->
 	
 	
 	

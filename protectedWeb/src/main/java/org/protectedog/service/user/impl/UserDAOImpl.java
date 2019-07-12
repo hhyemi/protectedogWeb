@@ -37,7 +37,7 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public void addUsersAdditional(User user) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert("UsersMapper.addUsersAdditional", user);
+		sqlSession.update("UsersMapper.addUsersAdditional", user);
 	}
 
 	@Override

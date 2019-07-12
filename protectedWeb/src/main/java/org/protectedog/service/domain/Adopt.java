@@ -30,6 +30,10 @@ public class Adopt {
 	private String statusCode;
 	
 	
+	private String adoptArea1;
+	private String adoptArea2;
+	private String adoptArea3;
+	
 	
 	
 	public String getBoardCode() {
@@ -86,6 +90,12 @@ public class Adopt {
 
 	public void setAdoptArea(String adoptArea) {
 		this.adoptArea = adoptArea;
+		if(adoptArea != null && adoptArea.length() !=0 ){
+			adoptArea1 = adoptArea.split("#")[0];
+			adoptArea2 = adoptArea.split("#")[1];
+			adoptArea3 = adoptArea.split("#")[2];
+		}
+		
 	}
 
 	public String getLocation() {
@@ -186,13 +196,37 @@ public class Adopt {
 
 	
 	
+	public String getAdoptArea1() {
+		return adoptArea1;
+	}
+
+	public void setAdoptArea1(String adoptArea1) {
+		this.adoptArea1 = adoptArea1;
+	}
+
+	public String getAdoptArea2() {
+		return adoptArea2;
+	}
+
+	public void setAdoptArea2(String adoptArea2) {
+		this.adoptArea2 = adoptArea2;
+	}
+
+	public String getAdoptArea3() {
+		return adoptArea3;
+	}
+
+	public void setAdoptArea3(String adoptArea3) {
+		this.adoptArea3 = adoptArea3;
+	}
+
 	@Override
 	public String toString() {
-		return "\n\n¡á¡á¡á Adopt ¡á¡á¡á \n[boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
-				+ ", \npostContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", location="
-				+ location + ", \nregDate=" + regDate + ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight
-				+ ", \ndogSize=" + dogSize + ", dogGender=" + dogGender + ", dogPay=" + dogPay + ", dogStatus="
-				+ dogStatus + ", \ndogChar=" + dogChar + ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate
+		return "Adopt [boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", location="
+				+ location + ", regDate=" + regDate + ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight
+				+ ", dogSize=" + dogSize + ", dogGender=" + dogGender + ", dogPay=" + dogPay + ", dogStatus="
+				+ dogStatus + ", dogChar=" + dogChar + ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate
 				+ ", statusCode=" + statusCode + "]";
 	}
 	

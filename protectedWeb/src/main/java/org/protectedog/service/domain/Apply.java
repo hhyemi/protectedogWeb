@@ -22,7 +22,7 @@ public class Apply {
 	private String reason;
 	private String situation;
 	private Date regDate;
-	private char statusCode;
+	private String statusCode;
 	
 	
 	public int getAdoptNo() {
@@ -116,11 +116,11 @@ public class Apply {
 		this.regDate = regDate;
 	}
 	
-	public char getStatusCode() {
+	public String getStatusCode() {
 		return statusCode;
 	}
 	
-	public void setStatusCode(char statusCode) {
+	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
 	}
 	
@@ -128,10 +128,10 @@ public class Apply {
 	
 	@Override
 	public String toString() {
-		return "\n\n¡á¡á¡á Apply ¡á¡á¡á \n[adoptNo=" + adoptNo + ", applyNo=" + applyNo + ", id=" + id + ", phone=" + phone + ", job=" + job
-				+ ", \naddr=" + addr + ", mate=" + mate + ", mateAgree=" + mateAgree + ", raise=" + raise + ", currently="
-				+ currently + ", \nplan=" + plan + ", pay=" + pay + ", reason=" + reason + ", situation=" + situation
-				+ ", \nregDate=" + regDate + ", statusCode=" + statusCode + "]";
+		return "Apply [adoptNo=" + adoptNo + ", applyNo=" + applyNo + ", id=" + id + ", phone=" + phone + ", job=" + job
+				+ ", addr=" + addr + ", mate=" + mate + ", mateAgree=" + mateAgree + ", raise=" + raise + ", currently="
+				+ currently + ", plan=" + plan + ", pay=" + pay + ", reason=" + reason + ", situation=" + situation
+				+ ", regDate=" + regDate + ", statusCode=" + statusCode + "]";
 	}
 	
 	

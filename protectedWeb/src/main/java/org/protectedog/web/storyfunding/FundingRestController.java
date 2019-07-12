@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.protectedog.service.file.FileService;
 import org.protectedog.service.storyfunding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,6 +24,7 @@ public class FundingRestController {
 	@Qualifier("fundingServiceImpl")
 	private FundingService fundingService;
 
+
 	public FundingRestController() {
 		System.out.println(this.getClass());
 	}
@@ -32,36 +34,27 @@ public class FundingRestController {
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
-	@Value("#{commonProperties['fileroot']}")
-	// @Value("#{commonProperties['pageSize'] ?: 2}")
+
+	@Value("#{commonProperties['fileSF']}")
 	String fileroot;
 
-	@RequestMapping(value="json//imageupload",method=RequestMethod.POST)
-	public int multiImageUpload(@RequestParam("files")List<MultipartFile> images) {
-		
+	@RequestMapping(value = "json/imageupload", method = RequestMethod.POST)
+	public void imageupload(@RequestParam("files") List<MultipartFile> images) throws Exception {
+
 		System.out.println("/product/json/imageupload : POST");
-		
-		
-		 for(MultipartFile image : images) {
-			 
-			 String fileName = image.getOriginalFilename();
 
-				File f = new File(fileroot, fileName);
-				// 한번에 한해서 동일한 파일이 존재하면 이름에 (1) ,
-				// (나중에)2번째에도 검사해서 이름을 편해보고, 확장자 앞에 다른 이름을 추가하도록 해보자
-				if (f.exists()) {
-					f = new File(fileroot, fileName + "(1)");
-				}
+		for (MultipartFile image : images) {
+			String fileName = image.getOriginalFilename();
 
-				try {
-					image.transferTo(f);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	        }
-		
-		return 1;
+			// 이클립스에 저장
+			File f = new File(fileroot, fileName);
+
+			try {
+				image.transferTo(f);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

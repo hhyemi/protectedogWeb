@@ -1,14 +1,15 @@
 package org.protectedog.service.domain;
 
-public class File {
-	
+public class FileDog {
+
 	private int fileNo;
 	private String boardCode;
-	private String postNo;
-	private int fileName;
+	private int postNo;
+	private String fileName;
 	private int fileCode;
+
 	
-	public File() {
+	public FileDog() {
 	}
 
 	public int getFileNo() {
@@ -27,19 +28,19 @@ public class File {
 		this.boardCode = boardCode;
 	}
 
-	public String getPostNo() {
+	public int getPostNo() {
 		return postNo;
 	}
 
-	public void setPostNo(String postNo) {
+	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
 
-	public int getFileName() {
+	public String getFileName() {
 		return fileName;
 	}
 
-	public void setFileName(int fileName) {
+	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
@@ -50,9 +51,11 @@ public class File {
 	public void setFileCode(int fileCode) {
 		this.fileCode = fileCode;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "FileUpload [fileNo=" + fileNo + ", boardCode=" + boardCode + ", postNo=" + postNo + ", fileName="
+				+ fileName + ", fileCode=" + fileCode + "]";
+	}
 
 }
