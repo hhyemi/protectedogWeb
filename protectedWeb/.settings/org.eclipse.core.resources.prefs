@@ -1,27 +1,12 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-<<<<<<< HEAD
 encoding//SQL(Script)/protectedog.sql=EUC-KR
-encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=UTF-8
-encoding/<project>=EUC-KR
-=======
-<<<<<<< HEAD
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR
+encoding//src/main/java/org/protectedog/common/openAPI/NewsAPI.java=UTF-8
 encoding//src/main/java/org/protectedog/common/web/LogonCheckInterceptor.java=EUC-KR
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-encoding/<project>=euc_kr
-=======
-<<<<<<< HEAD
-encoding/<project>=euc_kr
-=======
-encoding/<project>=EUC-KR
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/heads/eunwoo
-=======
+encoding//src/main/java/org/protectedog/web/InformationShare/InfomationShareController.java=UTF-8
 encoding//src/main/java/org/protectedog/web/storyfunding/FundingController.java=EUC-KR
 encoding//src/main/java/org/protectedog/web/storyfunding/FundingRestController.java=EUC-KR
 encoding/<project>=EUC-KR
->>>>>>> refs/heads/hyemi
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/master

@@ -62,11 +62,12 @@ body {
 </head>
 
 <body>
-
 	
 	<form class="container">
-		
 		<jsp:include page="../index.jsp"></jsp:include>
+	</form>
+				
+	<form class="container">
 		<!-- 		<div class="row"> -->
 		<!-- 			<div class="col-xs-4 col-md-12" align="left"> -->
 		<!-- 				<b><h3>วัมูฦ๒</h3></b> -->
