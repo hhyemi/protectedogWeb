@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MileageMapper">
+	<resultMap type="mileage" id="mileageSelectMap">
+		<result property="mileageNo" column="mileage_no" jdbcType="NUMERIC"/>
+		<result property="mileageCode" column="mileage_code" jdbcType="NUMERIC" />
+		<result property="id" column="id" jdbcType="VARCHAR" />
+		<result property="mileageReason" column="mileage_reason" jdbcType="VARCHAR" />
+		<result property="regDate" column="regDate" jdbcType="DATE" />
+		</resultMap>
+
+		
+	<update id="updateMileage" parameterType="mileage">
+	UPDATE mileage
+	set mileage= mileage + #{mileage}
+	WHERE id=#{id}
+	</update>
+	
+	
+
+	<select  id="listMileage"  parameterType="map"	resultMap="mileageSelectMap">
+		SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  		FROM (	SELECT mileage_no, id, mileage, country, prod_detail, company,
+	  		discount_price
+	  						 FROM product 	  					 
+									<if test="searchCondition != null">										
+											<if test="searchCondition == 0 and searchKeyword !='' ">
+								 				AND p.prod_no like '%' || #{searchKeyword} ||'%'							 				
+											</if>
+											
+											<if test="searchCondition == 1 and searchKeyword !='' ">
+								 				AND p.prod_name like '%' || #{searchKeyword} ||'%'	
+											</if>
+											
+											<if test="searchCondition == 2 and searchKeyword !='' ">
+								 				AND p.price like '%' || #{searchKeyword} ||'%'	
+											</if>
+										</if>) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select> 
+
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM(SELECT * FROM transaction) countTable
+	</select>
+	
+</mapper>
