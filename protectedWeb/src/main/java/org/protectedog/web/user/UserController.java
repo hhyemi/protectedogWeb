@@ -79,12 +79,12 @@ public class UserController {
 		
 		System.out.println("/users/addUsersAdditional");
 		
-		userService.addUsersAdditional(user);
-		
 		String sessionId=((User)session.getAttribute("user")).getId();
 		if(sessionId.equals(user.getId())) {
 			session.setAttribute("user", user);
 		}
+		
+		userService.addUsersAdditional(user);
 		
 		return "redirect:/users/loginView.jsp";
 		
