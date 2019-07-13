@@ -147,7 +147,8 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">스토리펀딩</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/storyfunding/addFunding.jsp">후원신청</a>
+                                        <a class="dropdown-item" href="/funding/addFunding.jsp">후원신청</a>
+                                        <a class="dropdown-item" href="/funding/getTerms">약관</a>
                                         <a class="dropdown-item" href="index.html">후원게시</a>
                                     </div>
                                 </li>

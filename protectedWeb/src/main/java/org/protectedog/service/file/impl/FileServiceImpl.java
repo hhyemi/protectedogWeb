@@ -30,7 +30,7 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public FileDog getFile(int postNo) throws Exception {
+	public List<FileDog> getFile(int postNo) throws Exception {
 		return fileDAO.getFile(postNo);
 	}
 

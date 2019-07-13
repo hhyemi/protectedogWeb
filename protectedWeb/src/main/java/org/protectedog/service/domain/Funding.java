@@ -32,7 +32,9 @@ public class Funding {
 	private int voteRemainDate;
 	// 후원 남은 날짜
 	private Date fundRemainDate;
-
+	//투표율
+	private int VoteRate;
+	
 	public Funding() {
 	}
 
@@ -225,6 +227,14 @@ public class Funding {
 	public void setFundRemainDate(Date fundRemainDate) {
 		this.fundRemainDate = fundRemainDate;
 	}
+	
+	public int getVoteRate() {
+		return VoteRate;
+	}
+
+	public void setVoteRate(int voteRate) {
+		VoteRate = voteRate;
+	}	
 
 	@Override
 	public String toString() {
@@ -237,6 +247,7 @@ public class Funding {
 				+ ", phone2=" + phone2 + ", phone3=" + phone3 + ", voteRemainDate=" + voteRemainDate
 				+ ", fundRemainDate=" + fundRemainDate + "]";
 	}
+
 
 	
 }

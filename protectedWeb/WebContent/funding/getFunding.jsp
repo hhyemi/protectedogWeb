@@ -22,18 +22,45 @@
    
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
+	<!-- KAKAO -->
+   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
 		.container{
 		width: 500px;
-		}	
-		
+		font-size :15px;
+		}			
 		#voteDate{
-		width:320px;
+		width:255px;
 		float:left;
 		}
+		.form-group{
+		padding-left:100px;
+		padding-right:80px;
+		}
+	   #btn-vote{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:100px;
+		}
+		#btn-interest{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:100px;
+		}		
+		#btn-question{
+		background: #fff;
+        border:2px solid #29304d;
+		color:#29304d;
+		height:40px;
+		width:150px;
+		}
+		
      </style>
    
 
@@ -45,32 +72,49 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-	
-		<div class=" col-md-offset-3 ">
-			<font size=5>${funding.postTitle}</font> &emsp;${funding.id} 
-				<div  align="right"  ><b>${funding.voteStartDate }</b></div>
+	<div class="form-group">
+
+		<div >
+			<font size=5><b>${funding.postTitle}</b></font> &emsp;${funding.id} 
+				<!-- <div  align="right"  ><b>작성일 : ${funding.voteStartDate }</b></div>  -->
 	    </div>
 	    
 	    <div class="media">  
-		<div class="media-left media-middle col-md-offset-3 ">
-		      <img class="media-object" src="/resources/file/fileSF/${file.fileName }" width="450px;" height="280px;" >
+		<div class="media-left media-middle ">
+		      <img class="media-object" src="/resources/file/fileSF/${file.fileName }" width="570px;" height="370px;" >
 		</div>
 		<div class="media-body">
-		
-			<h3 class="media-heading">${funding.fundPay }원</h3>
-			    
+			<p/>
+			<h2 class="media-heading">${funding.fundPay }표</h2>
+			<p/>
 			<h4 class="media-heading">남은기간 ${funding.voteRemainDate }일</h4>
-			    
+			<p/>	 			    
 			 <div class="progress">
-			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: 20%;"></div>
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${30-funding.voteRemainDate}%;"></div>
 			 </div>
-			   <div  id="voteDate" >${funding.voteStartDate}</div>  <div >${funding.voteEndDate}</div>
-	
-			    
-			    
-		</div>
-		</div>
+		      <div  id="voteDate" >${funding.voteStartDate}</div>  <div >${funding.voteEndDate}</div>
+			<p/>	 
+			 <div><h2>투표율&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h2></div>
+			<p/>	 
+			 <div><h2>현재투표인원&ensp;${funding.voterCount}명</h2></div>		
+			 <p/>	 
+			  <div>
+	  			<button type="button" id="btn-vote">투표하기</button>
+	  			<button type="button" id="btn-interest">관심등록</button>
+		 	 </div>		 
+		 	 <p/>
+			  <div>
+	  			<button type="button" id="btn-question">문의하기</button>
+		 	 </div>		
+		 	 <p/><p/><p/><p/><p/><p/> 
+		 	 	 
+			<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
+			<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
+			<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
+			<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
 
+		</div>
+		</div>
 
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>후원번호</strong></div>
@@ -115,32 +159,78 @@
  		<hr/>
  			
 		<div class="row">	
-	  		<div class="col-md-10 text-center">
+	  		<div >
 	  			<button type="button" class="btn btn-primary">수정</button>
-	  			<button type="button" class="btn btn-warning">이전</button>
+	  			<button type="button" class="btn btn-warning">취소</button>
 	  		</div> 		
 	 	</div>
 	 	
 	 	<br/><br/>			
 		<br/>
-		
+	</div>	
  	</div>
  	
  	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
+		//=============  카카오톡 공유하기=============	
+
+		 
 	 $(function() {
 		 
-		 $( "button.btn.btn-primary" ).on("click" , function() {
-			 self.location = "/funding/updateFunding?postNo=${funding.postNo}"
-			});
-			 
-			 $( "button.btn.btn-warning" ).on("click" , function() {
-					history.go(-1);
+			//=============  수정 Event  처리 =============	
+			 $( "button.btn.btn-primary" ).on("click" , function() {
+				 self.location = "/funding/updateFunding?postNo=${funding.postNo}"
 				});
-
-		});
-	
+			
+			//=============  취소 Event  처리 =============				 
+			 $( "button.btn.btn-warning" ).on("click" , function() {
+				 self.location = "/index.jsp"
+				});
+			
+			//============= SNS공유 Event  처리 =============	
+			$( "#twitter" ).on("click" , function() {
+		 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+				});		
+			
+			$( "#naver" ).on("click" , function() {
+		 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+				});		
+			
+			$( "#facebook" ).on("click" , function() {
+		 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+				});			
+			
+			$( "#kakao" ).on("click" , function() {
+				sendLinkKakao()
+				});	
+			 
+	 });
+		
+	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+	 function sendLinkKakao(){
+	     Kakao.Link.sendDefault({
+	       objectType: 'feed',
+	       content: {
+	         title: '유기견보호',
+	         description: '멍멍',
+	         imageUrl:document.location.href,
+	         link: {
+	           mobileWebUrl: document.location.href,
+	           webUrl:document.location.href
+	         }
+	       },
+	       buttons: [       
+	         {
+	           title: '링크 열기',
+	           link: {
+	             mobileWebUrl: document.location.href,
+	             webUrl: document.location.href
+	           }
+	         }
+	       ]
+	     }); 
+	 }
 	
 	</script>
  	

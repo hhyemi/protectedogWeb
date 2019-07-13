@@ -1,7 +1,5 @@
 package org.protectedog.web.storyfunding;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +43,25 @@ public class FundingController {
 	int pageSize;
 
 	@Value("#{commonProperties['fileSF']}")
-	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	String fileroot;
 	
 	@Value("#{commonProperties['funding']}")
 	String boardCode;
+
+	@Value("#{termsProperties['SFTermsOne']}")
+	String SFTermsOne;
+	
+	@Value("#{termsProperties['SFTermsTwo']}")
+	String SFTermsTwo;
+
+	@Value("#{termsProperties['SFTermsThree']}")
+	String SFTermsThree;
+	
+	@Value("#{termsProperties['SFTermsFour']}")
+	String SFTermsFour;
+
+	@Value("#{termsProperties['SFTermsFive']}")
+	String SFTermsFive;	
 	
 	@RequestMapping(value = "addFunding", method = RequestMethod.POST)
 	public String addUser(@RequestParam("multiFile") ArrayList<String> multiFile,
@@ -95,15 +107,31 @@ public class FundingController {
 		System.out.println("/funding/getFunding ");
 
 		Funding funding = fundingService.getFunding(postNo);
-		FileDog file = fileService.getFile(postNo);
+		List<FileDog> file = fileService.getFile(postNo);
 
 
-		model.addAttribute("file",file);
+		model.addAttribute("file",file.get(0));
 		model.addAttribute("funding", funding);
 
 		return "forward:/funding/getFunding.jsp";
 	}
+	
+	@RequestMapping(value = "getTerms", method = RequestMethod.GET)
+	public String getTerms(Model model) throws Exception {
 
+		System.out.println("/funding/getTerms");
+		
+		List<String> termsList = new ArrayList<String>();
+		termsList.add(SFTermsOne);
+		termsList.add(SFTermsTwo);
+		termsList.add(SFTermsThree);
+		termsList.add(SFTermsFour);
+		model.addAttribute("termsList",termsList);
+
+		return "forward:/funding/getTerms.jsp";
+	}
+
+	
 	@RequestMapping(value = "updateFunding", method = RequestMethod.GET)
 	public String updateFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
