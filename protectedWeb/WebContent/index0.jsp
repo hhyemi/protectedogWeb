@@ -1,6 +1,8 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +30,15 @@
     <link rel="stylesheet" href="resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="resources/prodmenu/css/style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		$("span:contains('Sign in')").on("click", function(){
+    			$(self.location).attr("href","/users/login");
+    		});
+    	});
+    </script>
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -44,7 +55,12 @@
 						    <span class="text">youremail@email.com</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+					    	<c:if test="${sessionScope.user.role eq null}">
+						    <span class="text">Sign in</span><span class="text">sign up</span>
+						    </c:if>
+						    <c:if test="${sessionScope.user.role != null}">
+						    <span class="text">${sessionScope.user.nickName} 님 환영합니다.</span>
+						    </c:if>
 					    </div>
 				    </div>
 			    </div>
@@ -81,7 +97,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">병원</a>
+              	<a class="dropdown-item" href="/community/getHospital.jsp">병원</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
@@ -90,7 +106,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">PEDIA</a>
+              	 <a class="dropdown-item" href="/community/getBreedPedia.jsp">PEDIA</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
@@ -99,8 +115,8 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">COMMUNITY</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">COMMUNITY</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
+              	<a class="dropdown-item" href="/info/listInfo">정보공유</a>
+                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>

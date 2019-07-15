@@ -32,12 +32,14 @@ body {
 	font-family: '³ª´®°íµñ', 'NanumGothic', ng
 }
 
+#toolbar-container{
+}
 #editor {
 	min-height: 600px;
 	max-height: 960px;
+	min-width: 960px;
 	max-width: 1130px;
 	margin-left: 15px;
-	text-align: left;
 }
 
 body {
@@ -140,10 +142,10 @@ $(function () {
 
 				<hr />
 
-				<div class="postForm row" align="center">
+				<div class="row" id="ckEditor" align="center">
 
 					<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
-					<textarea id="editor" name="postContent" style="text-align: left;">
+					<textarea class="col-xs-12 col-md-12" id="editor" name="postContent" style="text-align: left;">
 					
 					</textarea>
 				

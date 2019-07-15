@@ -78,10 +78,10 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="/users/loginView.jsp">Sign in</a>
+                                <a href="/users/login">Sign in</a>
                             </div>
                             <div class="register">
-                                <a href="/users/addUsersBaseView.jsp">Sign up</a>
+                                <a href="/users/addUsersBase">Sign up</a>
                             </div>
 <!--                             <div class="myPage"> -->
 <!--                             	<a href="#">마이페이지</a> -->

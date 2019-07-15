@@ -39,14 +39,16 @@ public class InfomationShareController {
 	public InfomationShareController() {
 		System.out.println(this.getClass());
 	}
-
+	
+	@Value("#{commonProperties['info']}")
+	String boardCode;
+	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
-	String boardCode = "IS";
 
 	@RequestMapping(value = "addInformation")
 	public String addInfo(@ModelAttribute("board") Board board, HttpSession session, HttpServletRequest request)
@@ -54,7 +56,7 @@ public class InfomationShareController {
 
 		System.out.println(" ============================== addInfo ==================================");
 
-		board.setBoardCode("IS");
+		board.setBoardCode(boardCode);
 		board.setId("user02");
 		board.setNickName("호랭이");
 
@@ -119,11 +121,10 @@ public class InfomationShareController {
 		
 		// Search 디버깅
 		System.out.println(" listInfo search : " + search);
-		
-		
+				
 		// 게시글 불러오기
 		Board board = boardService.getBoard(postNo);
-		
+
 		// 댓글 불러오기
 		Map<String, Object> map = commentService.listComment(postNo, search);
 		
@@ -146,20 +147,39 @@ public class InfomationShareController {
 		
 		return "forward:/community/getInfo.jsp";
 	}
-
-	@RequestMapping(value = "updateFunding", method = RequestMethod.POST)
-	public String updateFunding(@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
-
-		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
+	
+	@RequestMapping(value = "updateView")
+	public String updateView() throws Exception {		
+		return "redirect:/community/updateInfo.jsp";
+	}
+	
+	@RequestMapping(value = "updateInfo")
+	public String updateInfo(@ModelAttribute("board") Board board, HttpServletRequest request) throws Exception {
+		
+		if(request.getMethod().equals("GET")){
+			return "redirect:/common/error.jsp";
+		}
+		
+		board.setBoardCode(boardCode);
+		board.setId("user02");
+		board.setNickName("호랭이");
+		
+		boardService.updateBoard(board);
+		
+		
+		return "redirect:/community/updateInfo.jsp";
 	}
 	
 	@RequestMapping(value = "delInfo")
 	public String delInfo(@ModelAttribute("board") Board board, HttpSession session) throws Exception {
 		
 		System.out.println(" ============================== delInfo ==================================");
-		
+	
 		System.out.println(" delInfo : " + board );
-		return "redirect:/info/listInfo?";
+		
+		boardService.delBoard(board);
+		
+		return "redirect:/info/listInfo";
 	}
 	
 

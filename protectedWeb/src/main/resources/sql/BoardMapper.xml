@@ -108,9 +108,9 @@
 	 
 	 <update	id="delBoard"	parameterType="board" >
 	   	UPDATE board
-	   	<set>
-			del_code = '0'
-	   	</set>
+		<set>
+		del_code = '0'
+		</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
 	 
@@ -139,7 +139,7 @@
 									</if> 
 								</if>
 						</where>
-						ORDER BY post_no DESC ) inner_table
+						ORDER BY reg_date DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
