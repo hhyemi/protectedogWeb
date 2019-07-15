@@ -8,33 +8,33 @@
 
 	<resultMap id="fileSelectMap" type="file">
 
-		<result property="fileNo" column="POST_NO" jdbcType="NUMERIC" />
-		<result property="boardCode" column="ID" jdbcType="VARCHAR" />
-		<result property="postNo" column="NICKNAME" jdbcType="VARCHAR" />
-		<result property="fileName" column="STATUS_CODE" jdbcType="CHAR" />
-		<result property="fileCode" column="PHONE" jdbcType="VARCHAR" />	
+		<result property="fileNo" column="FILE_NO" jdbcType="NUMERIC" />
+		<result property="boardCode" column="BOARD_CODE" jdbcType="CHAR" />
+		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
+		<result property="fileName" column="FILE_NAME" jdbcType="VARCHAR" />
+		<result property="fileCode" column="FILE_CODE" jdbcType="CHAR" />	
 
 		</resultMap>
 
 	<!-- SQL : INSERT -->
-	<insert 	id="addFile"		parameterType="file" >
-	 	INSERT
-		INTO STORYFUNDING( POST_NO , ID , NICKNAME , STATUS_CODE , PHONE , POST_TITLE , POST_CONTENT , 
-		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_START_DATE , FUND_END_DATE ) 
-		VALUES	 ( SEQ_STORYFUNDING_POST_NO.NEXTVAL , #{id:VARCHAR} , #{nickName:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
-		SYSDATE , SYSDATE+30 , #{fundTargetPay:NUMERIC} , #{fundTargetPay:NUMERIC}*0.001 , #{fundTargetDay} , SYSDATE+31 , SYSDATE+31+#{fundTargetDay} )
+	<insert 	id="addFile"		parameterType="java.util.List">
+	 	INSERT ALL
+		<foreach collection="list" item="item" >	 	
+		INTO FILES( FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE ) 
+		VALUES	 ( GET_FILE_NO() , #{item.boardCode:VARCHAR} , #{item.postNo:VARCHAR} ,  #{item.fileName:VARCHAR} , #{item.fileCode:CHAR} )
+		</foreach>
+		select * from DUAL
 	 </insert>
 	 
-	 <!-- SQL : SELECT ONE -->
+	<!--   SQL : SELECT ONE -->
 	 <select 	id="getFile"	parameterType="string"	resultMap="fileSelectMap">
 		SELECT
-		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 		
-		FROM STORYFUNDING 
+		FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE
+		FROM FILES 
 		WHERE POST_NO IN #{value}
 	 </select>
-	 
-	 <!-- SQL : SELECT LIST -->
+<!-- 	 
+	 SQL : SELECT LIST
 	<select  id="listFunding"  parameterType="search"	resultMap="fundingSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
@@ -56,7 +56,7 @@
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
-	 	<!--  위 두번째 subQuery 의  
+	 	 위 두번째 subQuery 의  
 	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
 	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
 	 			< 는 keyword 로 &lt; 를	사용.
@@ -65,9 +65,9 @@
 	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
 
 				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-		-->
+		
 	 
-	 <!-- SQL : UPDATE -->
+	 SQL : UPDATE
 	 <update	id="updateFunding"	parameterType="funding" >
 	   	UPDATE STORYFUNDING
 	   	<set>
@@ -82,7 +82,7 @@
 	   	WHERE POST_NO IN #{postNo} 
 	 </update>
 	 
-	<!-- SQL : UPDATE StatusCode -->
+	SQL : UPDATE StatusCode
 	<update id="updateStatusCode" parameterType="funding">
 		UPDATE STORYFUNDING
 		<set>
@@ -92,12 +92,12 @@
 
 	</update>
 
-	<!-- SQL : DELETE -->		 
+	SQL : DELETE		 
 	<delete id="delFunding" parameterType="string">
 		DELETE
 		FROM STORYFUNDING
 		WHERE POST_NO IN #{value}
-	</delete>
+	</delete> -->
 	
 	 
 </mapper>

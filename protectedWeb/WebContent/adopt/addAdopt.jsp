@@ -8,6 +8,7 @@
 <html lang="ko">
 	
 <head>
+<title>Add Adopt</title>
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -22,10 +23,25 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-       body > div.container{
+      body > div.container{
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
+        
+	/*   ↓↓↓ 지도관련   ↓↓↓   */
+      #map {
+        height: 100%;
+      }
+      #mapArea {
+        height: 100%;
+      }
+      
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -38,6 +54,10 @@
 			
 			$( "button:contains('보호할개')" ).on("click" , function() {
 				self.location = "../index.jsp"
+			});
+			
+			$( "button:contains('dd')" ).on("click" , function() {
+				alert($('#pop').text());
 			});
 		});	
 		
@@ -82,8 +102,9 @@
 		<form class="form-horizontal">
 		<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
 		<input type="hidden" name="id" value="user03" >
+		<input type="hidden" name="statusCode" value="1" >
 		
-		  <div class="form-group">
+		  <div class="form-group" >
 		    <label for="postTitle" class="col-sm-offset-1 col-sm-3 control-label">글제목</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="글제목"  >
@@ -109,13 +130,17 @@
 			  <div class="form-group">
 			    <label for="adoptArea" class="col-sm-offset-1 col-sm-3 control-label">분양가능지역</label>
 			    <div class="col-sm-4">
-			      <input type="text" class="form-control" id="adoptArea" name="adoptArea" placeholder="분양가능지역">
+			    <div id="mapArea" style="width: 600px; height: 300px;"  align="center"></div>
+			    <span id="pop"></span>
+			      <input type="textbox" style=" width: 600px;" class="form-control" id="adoptArea" name="adoptArea" placeholder="3개까지 선택가능합니다.">
+			      <button >dd</button>
 			    </div>
 			  </div>
 		  </c:if>
+		
+<!-- 		  <br/><br/><br/><br/><br/> -->
 		  
-		  
-		   <div class="form-group">
+		  <div class="form-group">
 		    <label for="location" class="col-sm-offset-1 col-sm-3 control-label">
 				<c:if test="${param.boardCode eq 'AD' }">
 		  			발견위치
@@ -124,8 +149,12 @@
 		  			실종위치
 		  		</c:if>
 			</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="location" name="location" placeholder="위치">
+		    <div class="col-sm-6">
+		    
+		<!-- 	■■■■■  위치 마커 찍기   ■■■■■	  -->
+		      <div id="map" style="width: 600px; height: 300px;"  align="center"></div>
+			  <p>마우스로 위치를 지정하세요. 우클릭시 마커가 사라집니다.</p>
+		      <input type="hidden" class="form-control" id="location" name="location" placeholder="위치">
 		    </div>
 		  </div>
 		  
@@ -217,6 +246,171 @@
 		
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
+	
+	 
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+
+      var map;
+      var mapArea;
+      var markers = [];
+      var markersArea = [];
+      
+      function initMap() {
+	        mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+		    	zoom: 13,
+		    	center: {lat: 37.564, lng: 127.0017}
+	        });
+	
+	        mapArea.addListener('click', function(event) {
+	        	addMarker(event.latLng, "aaa");
+	        });
+	  ///////////////////////////////////////////////////////////////////////////
+	        map = new google.maps.Map(document.getElementById('map'), {
+	        	zoom: 13,
+	        	center: {lat: 37.564, lng: 127.0017}
+	        });
+	
+	        map.addListener('click', function(event) {
+	        	addMarker(event.latLng, "a");
+	        });
+      }
+      
+      
+      var markerArea;
+      var marker;
+      var loca;
+      var str = "";
+      var mmm = "";
+/////////////////////////////////////////////////////////////////////////////////////////////
+      function addMarker(location, str) {
+    	  
+    	  if ( str == "aaa"){
+	    		 if (markersArea.length <3){
+	  		        var markerArea = new google.maps.Marker({
+	  			        position: location,
+	  			        map: mapArea
+	  		        });
+	  		        
+	  		     	markersArea.push(markerArea);
+	  		   		 
+	  		   		if(markersArea.length >0){
+	  			   		 var markTest="";
+	  			   		 mmm="";
+	  			   		 for (var i = 0; i < markersArea.length; i++) {
+	  			   			mmm += markersArea[i].position+"#" ;
+	  			   		$("#adoptArea").val(mmm);
+	  			   			
+	  			   			
+	  			   	// 역지오코딩 //
+	  		    	        var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1 ,markersArea[i].position.toString().indexOf(",") )  );
+	  				 	    var localng = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf(",")+1, markersArea[i].position.toString().indexOf(")") )  );
+	  		    	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+	  		    	            success: function(data){
+	  		//    	                 alert(JSON.stringify(data));
+	  		//    	                 alert(data.results[0].formatted_address);
+	  		//    	                 $('p').text(JSON.stringify(data));
+	  		
+	  		    	               markTest+= data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length)+"#";
+// 	  		    	             alert(markTest);
+	  		    	             $("#pop").text(markTest);
+	  		    	            }
+	  		    	 		});
+	  				 	 }
+	  		   		}
+	
+	  	        }else{
+	  	        	alert("3개까지 지정 가능함");
+	  	        }
+	    		 ////////////////////////////////////////////////
+	  	        if (markerArea != undefined){
+	  	        	markerArea.addListener('rightclick', function() {
+	  	        		mmm="";
+						var markTest="";
+	  					for (var i = 0; i < markersArea.length; i++) {
+	  						markTest="";
+	  						$("#pop").val(markTest);
+	  				       if (markersArea[i] === markerArea) {
+			  				   markersArea[i].setMap(null);
+			  				   markersArea.splice(i, 1 );
+	  				       }else{
+	  				       
+	  				    	   
+	  				    	   
+	  				    	   
+	  				 		 // 역지오코딩 //
+	  		    	        var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1 ,markersArea[i].position.toString().indexOf(",") )  );
+	  				 	    var localng = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf(",")+1, markersArea[i].position.toString().indexOf(")") )  );
+	  		    	        mmm += markersArea[i].position+"#";
+	  		    	      $("#adoptArea").val(mmm);
+	  				 		 $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+	  		    	            success: function(data){
+	  		//    	                 alert(JSON.stringify(data));
+	  		//    	                 alert(data.results[0].formatted_address);
+	  		    	              	markTest += data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length)+"#";
+	  		    	       			$("#pop").text(markTest);
+	  		    	            }
+	  		    	 		});
+	  	    	        
+// 	  		    	      markTest += markersArea[i].position;
+	  			 	  	} //$("#pop").text(markTest);
+	  					}$("#pop").text(markTest);
+	  					$("#adoptArea").val(mmm);
+	  	            });
+	  	        }
+	    	        
+		  	      	
+	    	        
+    	  }else if( str == "a"){
+		    	if (marker != undefined){
+		    		deleteMarkers();
+		    	}
+		    	
+		        marker = new google.maps.Marker({
+			        position: location,
+			        map: map
+		        });
+		        
+		        markers.push(marker);
+		        $( '#location' ).val(location);
+		        loca =  $( '#location' ).val().toString();
+		
+		 	    var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
+		 	    var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
+		        
+		        if (marker != undefined){
+		           marker.addListener('rightclick', function() {
+		            	deleteMarkers();
+		           });
+		        }
+		        
+		        // 역지오코딩 //
+		        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+		            success: function(data){
+		//                 alert(JSON.stringify(data));
+		//                 alert(data.results[0].formatted_address);
+		//                 $('p').text(JSON.stringify(data));
+		                $('p').text(data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length));
+		            }
+		 		});
+    	  }
+      }
+
+      function setMapOnAll(map) {
+	        for (var i = 0; i < markers.length; i++) {
+	          	markers[i].setMap(map);
+	        }
+      }
+
+      function deleteMarkers() {
+	    	setMapOnAll(null);
+	        markers = [];
+      }
+      
+      
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap"
+    async defer></script>
 	
 </body>
 

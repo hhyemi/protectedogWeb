@@ -51,6 +51,7 @@
 	
 		
 		function fncAddApply() {
+			alert("신청완료 dialog")
 			$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
 		}
 		
@@ -144,21 +145,21 @@
 		  <div class="form-group">
 		    <label for="dogStatus" class="col-sm-offset-1 col-sm-3 control-label">반려견을 입양하게 될 경우, <br/>1년간의 예상 비용 써주세요.</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="pay" name="pay" placeholder="개상태">
+		      <input type="text" class="form-control" id="pay" name="pay" >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogChar" class="col-sm-offset-1 col-sm-3 control-label">반려견을 입양하고 싶은 이유를 서술해주세요.</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="reason" name="reason" placeholder="외모특징">
+		      <input type="text" class="form-control" id="reason" name="reason">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="dogPersonality" class="col-sm-offset-1 col-sm-3 control-label">반려견을 입양하고 상황이 바뀔 경우, <br/>대처방법을 서술해주세요.</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="situation" name="situation" placeholder="성격">
+		      <input type="text" class="form-control" id="situation" name="situation">
 		    </div>
 		  </div>
 		  

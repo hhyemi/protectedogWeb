@@ -79,14 +79,15 @@ public class AdoptController {
 //											,MultipartHttpServletRequest mtfRequest
 											) throws Exception {
 
-		System.out.println("/adopt/addAdopt : POST 컨트롤러들어옴");
+		System.out.println("/adopt/addAdopt : POST");
 		System.out.println(adopt);
 
 		// 파일
 //		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		System.out.println("파일확인 : "+product.getFileName());
 		adoptService.addAdopt(adopt);
-//		adopt = adoptService.getAdopt(adopt.getPostNo());
+		adopt = adoptService.getAdopt(adopt.getPostNo());
+		System.out.println("=========================="+adopt);
 		model.addAttribute("adopt", adopt);
 		
 		return "forward:/adopt/getAdopt.jsp";
@@ -174,7 +175,7 @@ public class AdoptController {
 	public String listAdopt( @ModelAttribute("search") Search search,
 							 @RequestParam("boardCode") String boardCode, Model model ) throws Exception{
 		
-		System.out.println("/adopt/listAdopt : GET / POST");
+		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
 		
 		search.setSearchCondition("");
 		
@@ -198,7 +199,7 @@ public class AdoptController {
 		model.addAttribute("search", search);
 		
 		// 파라미터값으로 보드코드? 
-		return "forward:/adopt/listAdopt.jsp";
+		return "forward:/adopt/listAdopt.jsp?boardCode="+boardCode;
 	}
 	
 	

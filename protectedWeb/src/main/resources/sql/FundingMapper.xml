@@ -32,7 +32,10 @@
 		<result property="fundEndDate" column="FUND_END_DATE" jdbcType="DATE" />
 		<result property="reviewTitle" column="REVIEW_TITLE" jdbcType="VARCHAR" />
 		<result property="reviewContent" column="REVIEW_CONTENT" jdbcType="VARCHAR" />
-		<result property="reviewRegDate" column="REVIEW_REG_DATE" jdbcType="DATE" />
+		<result property="reviewRegDate" column="REVIEW_REG_DATE" jdbcType="DATE" />	
+		<!-- DOMAIN에만 존재 -->
+		<result property="voteRemainDate" column="VOTE_REMAIN_DATE" jdbcType="NUMERIC" />
+		<result property="voteRate" column="VOTE_RATE" jdbcType="NUMERIC" />		
 		</resultMap>
 
 	<!-- SQL : INSERT -->
@@ -51,7 +54,8 @@
 	 <select 	id="getFunding"	parameterType="string"	resultMap="fundingSelectMap">
 		SELECT
 		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 		
+		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , 		
+		TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
 		FROM STORYFUNDING 
 		WHERE POST_NO IN #{value}
 	 </select>

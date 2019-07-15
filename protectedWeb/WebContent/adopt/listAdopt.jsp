@@ -18,6 +18,7 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
@@ -35,15 +36,16 @@
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
+			var ccc = $( '#boardCode' ).val();
 			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/adopt/listAdopt?boardCode=${adopt.boardCode}").submit();
+			$("form").attr("method" , "POST").attr("action" , "/adopt/listAdopt?boardCode="+ccc).submit();
 		}
 		
 		
 		//============= "검색"  Event  처리 =============	
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $( "button.btn.btn-default" ).on("click" , function() {
+			 $( "button:contains('검색')" ).on("click" , function() {
 				fncGetList(1);
 			});
 		 });
@@ -61,6 +63,16 @@
 			$( "button:contains('보호할개')" ).on("click" , function() {
 				self.location = "../index.jsp"
 			});
+			
+			if( $( '#boardCode' ).val()=="AD"){
+				$( "button:contains('글쓰기')" ).on("click" , function() {
+					self.location = "../adopt/getTerms.jsp"
+				});
+			} else {
+				$( "button:contains('글쓰기')" ).on("click" , function() {
+					self.location = "/adopt/addAdopt?boardCode=MS"
+				});
+			}
 			//==> userId LINK Event End User 에게 보일수 있도록 
 			$( "td:nth-child(2)" ).css("color" , "red");
 			
@@ -81,10 +93,10 @@
 </head>
 
 <body>
-	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container ">
 	<button type="button" class="btn btn-primary">보호할개</button>
+	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	
 		<div class="page-header text-info">
 	       <h3>
@@ -140,9 +152,15 @@
 			  <td align="center">${ i }</td>
 			  <td align="left">${adopt.postTitle}
 			  	<input type="hidden" id="postNo" value="${adopt.postNo}">
+			  	<c:if test="${adopt.statusCode eq '3' }">
+				  	<span class="label label-default">
+					  	<c:if test="${adopt.boardCode eq 'AD' }">분양완료</c:if>
+					  	<c:if test="${adopt.boardCode eq 'MS' }">찾기완료</c:if>
+				  	</span>
+			  	</c:if>
 			  </td>
 			  <td align="left">${adopt.dogBreed}</td>
-			  <td align="left">${adopt.dogPay}</td>
+			  <td align="left">${adopt.dogPay}원</td>
 			</tr>
           </c:forEach>
         
@@ -168,8 +186,8 @@
 				  </div>
 				  
 				  <button type="button" class="btn btn-default">검색</button>
+				  <button type="button" class="btn btn-primary">글쓰기</button>
 				  
-				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
 				</form>
