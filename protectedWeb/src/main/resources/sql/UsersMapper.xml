@@ -45,22 +45,31 @@
 	<update id="addUsersAdditional"	parameterType="users">
 		UPDATE users
 		<set>
-			email=#{email},
-			phone=#{phone},
-			user_addr=#{userAddr},
-			account=#{account},
-			birth_date=#{birthDate},
-			gender=#{gender}
+			email=#{email:VARCHAR},
+			phone=#{phone:NUMERIC},
+			user_addr=#{userAddr:VARCHAR},
+			account=#{account:VARCHAR},
+			birth_date=#{birthDate:NUMERIC},
+			gender=#{gender:CHAR}
 		</set>
 		WHERE id=#{id}
 	</update>
+	
+	<!-- SQL : SELECT SOCIAL -->
 
+	<select id="getSocial" 	parameterType="map" resultMap="usersSelectMap">
+		SELECT
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
+		access_date, profile, kakao
+		FROM users
+		WHERE kakao=#{kakao}
+	</select>
 	 
 	 <!-- SQL : SELECT ONE -->
 
 	<select id="getUsers"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, access_date, profile
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
 		FROM users
 		WHERE id=#{value}
 	</select>

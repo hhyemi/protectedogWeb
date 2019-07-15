@@ -25,4 +25,9 @@ public interface UserService {
 	//아이디 중복체크
 	public int checkDuplication(String id) throws Exception;
 	
+	//SNS 연동
+	public User getSocial(Map<String, Object> map) throws Exception;
+	
+
+	
 }
