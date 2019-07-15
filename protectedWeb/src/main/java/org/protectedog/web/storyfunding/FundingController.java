@@ -48,23 +48,40 @@ public class FundingController {
 	@Value("#{commonProperties['funding']}")
 	String boardCode;
 
-	@Value("#{termsProperties['SFTermsOne']}")
+	@Value("#{commonProperties['SFTermsOne']}")
 	String SFTermsOne;
 	
-	@Value("#{termsProperties['SFTermsTwo']}")
+	@Value("#{commonProperties['SFTermsTwo']}")
 	String SFTermsTwo;
 
-	@Value("#{termsProperties['SFTermsThree']}")
+	@Value("#{commonProperties['SFTermsThree']}")
 	String SFTermsThree;
 	
-	@Value("#{termsProperties['SFTermsFour']}")
+	@Value("#{commonProperties['SFTermsFour']}")
 	String SFTermsFour;
 
-	@Value("#{termsProperties['SFTermsFive']}")
+	@Value("#{commonProperties['SFTermsFive']}")
 	String SFTermsFive;	
+
+	@RequestMapping(value = "addFunding", method = RequestMethod.GET)
+	public String addFunding(HttpSession session) throws Exception {
+
+		System.out.println("/funding/addfunding : GET");
+		// 나중에 세션으로 변경//
+		Funding funding = new Funding();
+		String id = "user01";
+		String nickName = "스캇";
+		funding.setId(id);
+		funding.setNickName(nickName);
+		// 변경여기까지//
+
+
+		return "redirect:/funding/addFunding.jsp";
+	}
+	
 	
 	@RequestMapping(value = "addFunding", method = RequestMethod.POST)
-	public String addUser(@RequestParam("multiFile") ArrayList<String> multiFile,
+	public String addFunding(@RequestParam("multiFile") ArrayList<String> multiFile,
 			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
 		System.out.println("/funding/addfunding : POST");
@@ -126,6 +143,7 @@ public class FundingController {
 		termsList.add(SFTermsTwo);
 		termsList.add(SFTermsThree);
 		termsList.add(SFTermsFour);
+		termsList.add(SFTermsFive);
 		model.addAttribute("termsList",termsList);
 
 		return "forward:/funding/getTerms.jsp";

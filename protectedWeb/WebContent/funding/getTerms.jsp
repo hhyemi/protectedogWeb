@@ -85,7 +85,65 @@
 			${termsList.get(0) }
 		  </div>
 		  <br/>		
-
+		  <div align="right" style="padding-right:1000px;">
+		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		</div>	
+		 <br/>			
+			
+		  <div class="form-group" id="voteNum">
+		    <font ><b>제2조 (정의)</b></font>
+		  </div>
+		  <div class="form-group" >
+			${termsList.get(1) }
+		  </div>
+		  <br/>		
+		  <div align="right" style="padding-right:1000px;">
+		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		</div>	
+		 <br/>			
+					  
+		  <div class="form-group" id="voteNum">
+		    <font ><b>제3조 (서비스의 제공)</b></font>
+		  </div>
+		  <div class="form-group" >
+			${termsList.get(2) }
+		  </div>
+		  <br/>		
+		  <div align="right" style="padding-right:1000px;">
+		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		</div>	
+		 <br/>			
+			
+		  <div class="form-group" id="voteNum">
+		    <font ><b>제4조 (서비스의 신청)</b></font>
+		  </div>
+		  <div class="form-group" >
+			${termsList.get(3) }
+		  </div>
+		  <br/>			  
+		  <div align="right" style="padding-right:1000px;">
+		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		</div>	
+		 <br/>			
+			
+		  <div class="form-group" id="voteNum">
+		    <font ><b>제5조 (서비스의 이용료 등)</b></font>
+		  </div>
+		  <div class="form-group" >
+			${termsList.get(4) }
+		  </div>
+		  <br/>
+		  <div align="right" style="padding-right:1000px;">
+		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		</div>	
+		 <br/><br/>		
+		<input type="checkbox" id="allCheck" ><label>모두동의</label>
+		<br/><br/><br/><br/>
+		  <div class="form-group text-center">
+	  			<button type="button" id="btn-add">작성하기</button>
+	  			<button type="button" id="btn-cancel">취소</button>
+		  </div>
+		<br/><br/><br/><br/>	  		  
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 
@@ -96,104 +154,17 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
 
-   //============= 등록버튼 눌렀을때 함수 =============      
-   function fncAddFunding(){
-      
-      //Form 유효성 검증
-
-      var fundTargetPay = $('input[name="fundTargetPay"]').val();
-      var postTitle = $('input[name="postTitle"]').val();
-      var postContent = $('input[name="postContent"]').val();
-      var phone2 = $('input[name="phone2"]').val();
-      var phone3 = $('input[name="phone3"]').val();   
-      var file = $("#multiFile").val();    
-      
-      if(fundTargetPay == null || fundTargetPay.length<1){
-         alert("후원목표금액은 반드시 입력하여야 합니다.");
-         $('input[name="fundTargetPay"]').focus();
-         return;
-      }
-      if(fundTargetPay < 100000 || fundTargetPay > 3000000){
-         alert("후원목표금액은 10만원이상 300만원이하로 입력하여야 합니다.")
-         $('input[name="fundTargetPay"]').focus();
-         return;
-      }
-      if(postTitle == null || postTitle.length<1){
-         alert("글제목은 반드시 입력하여야 합니다.");
-         $('input[name="postTitle"]').focus();
-         return;
-      }
-/*       if(postContent == null || postContent.length<1){
-         alert("글내용은 반드시 입력하셔야 합니다.");
-         $('input[name="postContent"]').focus();
-         return;
-      } */
-      if(file == null || file.length<1){
-         alert("파일은 반드시 입력하셔야 합니다.");
-         return;
-      }
-      if(phone2 == null || phone2.length<1){
-         alert("휴대폰번호는 반드시 입력하셔야 합니다.");
-         $('input[name="phone2"]').focus();
-         return;
-      }
-      if(phone3 == null || phone3.length<1){
-         alert("휴대폰번호는 반드시 입력하셔야 합니다.");
-         $('input[name="phone3"]').focus();
-         return;
-      }
-      
-      var value = "";   
-      if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
-         var value = $("#phone1 option:selected").val() + "-" 
-                        + $("input[name='phone2']").val() + "-" 
-                        + $("input[name='phone3']").val();
-      }
-      $("input:hidden[name='phone']").val( value );
-      
-      //============= 다중파일업로드 AJAX =============
-          $(function() {     
-            var form = $('#uploadForm')[0];
-            var formData = new FormData(form);
-
-            for (var index = 0; index < 100; index++) {
-                formData.append('files',files[index]);
-            }
-                
-                $.ajax({
-                type : 'POST',
-                enctype : 'multipart/form-data',
-                processData : false,
-                contentType : false,
-                cache : false,
-                timeout : 600000,
-                url : '/funding/json/imageupload/',
-                dataType : 'JSON',
-                data : formData,
-                success : function(result) {
-                    if (result === -1) {
-                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-                        // 이후 동작 ...
-                    } else if (result === -2) {
-                        alert('파일이 10MB를 초과하였습니다.');
-                        // 이후 동작 ...
-                    } else {
-                        alert('이미지 업로드 성공');
-                    }
-                }
-            });
-        });
-
-
-      $('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
-   }
-
-   
    $(function() {
       
          //============= 등록 Event  처리 =============   
          $( "#btn-add" ).on("click" , function() {
-            fncAddFunding();
+        	if( !$("input[name=termsCheck]").prop("checked")){
+        		alert("모두 동의해주세요.")
+        	}else{
+        		self.location="/funding/addFunding"
+        	}
+        	
+ 
             });
          
          //============= 취소 Event  처리 =============
@@ -201,6 +172,18 @@
                history.go(-1);
             });
             
+	  		//============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 		
+		    $("#allCheck").click(function(){
+		        //클릭되었으면
+		        if($("#allCheck").not(":disabled").prop("checked")){
+		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 true로 정의
+		            $("input[name=termsCheck]").not(":disabled").prop("checked",true);
+		            //클릭이 안되있으면
+		        }else{
+		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 false로 정의
+		            $("input[name=termsCheck]").not(":disabled").prop("checked",false);
+		        }
+		    });
    });   
                
    
