@@ -41,14 +41,6 @@
 	top:91.5%;
 	left :93.5%;
 }
-
-		@font-face { font-family: 'NanumGothic';
-		src: url('/fonts/NanumGothic.eot');
-		src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
-		url('/fonts/NanumGothic.woff') format('woff');}
-		
-		
-		body {font-family: 'NanumGothic', 'serif';}
 </style>
 </head>
 
