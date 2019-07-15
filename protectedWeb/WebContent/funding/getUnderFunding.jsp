@@ -38,15 +38,11 @@
 	<link rel="stylesheet" href="/resources/under/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="/resources/under/css/owl.theme.default.min.css">
 
-	<!-- Theme style  -->
+	<!-- Theme style -->
 	<link rel="stylesheet" href="/resources/under/css/style.css">
 
 	<!-- Modernizr JS -->
 	<script src="/resources/under/js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -74,6 +70,8 @@
 								<div class="col-md-10 col-md-offset-1">
 									<span class="price">글 내용</span>
 									<h2>${funding.postContent }</h2>
+									<a class="main_btn" href="#">수정하기</a> 
+									<a class="main_btn" href="#">삭제하기</a> 
 								</div>
 							</div>
 						</div>
@@ -81,9 +79,9 @@
 				</div>
 			</div>
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
+			<div class="gototop js-top">
+				<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+			</div>
 	
 	<!-- jQuery -->
 	<script src="/resources/under/js/jquery.min.js"></script>
