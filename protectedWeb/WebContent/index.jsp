@@ -166,7 +166,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">market</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="index.html">1</a>
+                                        <a class="dropdown-item" href="shop/product/listProduct.jsp">상품등록</a>
                                     </div>
                                 </li>
 <!--                                 <li class="nav-item"> -->
