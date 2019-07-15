@@ -161,7 +161,8 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">community</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="index.html">1</a>
+                                        <a class="dropdown-item" href="/info/listInfo">정보공유</a>
+                                        <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">

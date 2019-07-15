@@ -20,7 +20,7 @@
     <link rel="icon" href="../resources/img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link href="../resources/css/style.css" rel="stylesheet">
+    <link href="../resources/css/style.css">
 
     <!-- Responsive CSS -->
     <link href="../resources/css/responsive/responsive.css" rel="stylesheet">
@@ -112,7 +112,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">보호할개</a>
+                        <a href="/index.jsp" class="yummy-logo">보호할개</a>
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">커뮤니티</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/community/listInfo.jsp">정보공유</a>
+                                        <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                                         <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
                                     </div>
                                 </li>
@@ -181,14 +181,14 @@
     <!-- ****** Header Area End ****** -->
 
     <!-- Jquery-2.2.4 js -->
-    <script src="../resources/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/resources/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="../resources/js/bootstrap/popper.min.js"></script>
+    <script src="/resources/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap-4 js -->
-    <script src="../resources/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/resources/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins JS -->
-    <script src="../resources/js/others/plugins.js"></script>
+    <script src="/resources/js/others/plugins.js"></script>
     <!-- Active JS -->
-    <script src="../resources/js/active.js"></script>
+    <script src="/resources/js/active.js"></script>
 </body>
 </html>

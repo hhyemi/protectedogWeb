@@ -25,7 +25,7 @@
 		<result property="qnaCode" 			column="qna_code"			jdbcType="CHAR"/>
 		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
 		<result property="prodName" 		column="prod_name"			jdbcType="VARCHAR"/>
-		<result property="statusCode" 		column="status_code" 		jdbcType="CHAR"/>
+		<result property="statusCode" 		column="del_code" 		jdbcType="CHAR"/>
 		
 	 </resultMap>
 	
@@ -36,7 +36,7 @@
 	 
 	 	INSERT
 		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, recommend_count,
-						market_code, price, city , phone, qna_code, route, prod_name)  
+						market_code, price, city , phone, qna_code, route, prod_name, del_code)  
 		VALUES	 (	seq_board_post_no.nextval, 
 					#{boardCode},
 					#{id} , 
@@ -51,7 +51,8 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodName:VARCHAR}  )
+					#{prodName:VARCHAR},
+					1  )
 	 </insert>
 	 
 	 
@@ -61,7 +62,7 @@
 	 <select 	id="getBoard"	parameterType="int"		resultMap="boardSelectMap">
 		SELECT
 		post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
-		market_code, price, city , phone, qna_code, route, prod_name, status_code
+		market_code, price, city , phone, qna_code, route, prod_name, del_code
 		FROM board 
 		WHERE post_no = #{value} 
 	 </select>
@@ -108,7 +109,7 @@
 	 <update	id="delBoard"	parameterType="board" >
 	   	UPDATE board
 	   	<set>
-			status_code	= #{statusCode}
+			del_code = '0'
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -121,21 +122,22 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
   				FROM ( SELECT post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_name, status_code  
+	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
 						FROM board
 						<where>
-								board_code = #{boardCode} AND status_code != '0'
-<!-- 								<if test="searchCondition != null"> -->
-<!-- 									<if test="searchCondition == 0 and searchKeyword !='' "> -->
-<!-- 							 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 									</if> -->
-<!-- 									<if test="searchCondition == 1 and searchKeyword !='' "> -->
-<!-- 							 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 									</if> -->
-<!-- 									<if test="searchCondition == 2 and searchKeyword !='' "> -->
-<!-- 							 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
-<!-- 									</if>  -->
-<!-- 								</if> -->
+								board_code = #{boardCode} AND del_code != '0'
+								<if test="searchCondition != null">
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+										AND nickname  LIKE '%'||#{searchKeyword}||'%'
+							 			OR id        LIKE '%'||#{searchKeyword}||'%'
+									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+									</if> 
+								</if>
 						</where>
 						ORDER BY post_no DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
@@ -149,10 +151,10 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_name, status_code  
+	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
 				FROM board
 				<where>
-						board_code = #{boardCode} AND status_code != '0'
+						board_code = #{boardCode} AND del_code != '0'
 <!-- 						<if test="searchCondition != null"> -->
 <!-- 							<if test="searchCondition == 0 and searchKeyword !='' "> -->
 <!-- 					 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->

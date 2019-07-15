@@ -6,11 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpRequest;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
+import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
+import org.protectedog.service.domain.Comment;
 import org.protectedog.service.domain.Funding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +31,10 @@ public class InfomationShareController {
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
+	
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
 
 	public InfomationShareController() {
 		System.out.println(this.getClass());
@@ -41,76 +46,121 @@ public class InfomationShareController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
+	String boardCode = "IS";
+
 	@RequestMapping(value = "addInformation")
-	public String addInfo(@ModelAttribute("board") Board board, HttpSession session, HttpServletRequest request) throws Exception {
-		
+	public String addInfo(@ModelAttribute("board") Board board, HttpSession session, HttpServletRequest request)
+			throws Exception {
+
 		System.out.println(" ============================== addInfo ==================================");
-		
+
 		board.setBoardCode("IS");
 		board.setId("user02");
 		board.setNickName("호랭이");
-		
-		//request.setCharacterEncoding("euc_kr");
-		
-		//System.out.println(" info Content : " + content);
-		//board.set
+
+		// request.setCharacterEncoding("euc_kr");
+
+		// System.out.println(" info Content : " + content);
+		// board.set
 		System.out.println(" info Board : " + board);
-		
+
 		boardService.addBoard(board);
-		
-		return "redirect:/community/addInfo.jsp";
+
+		return "redirect:/info/listInfo";
 	}
-	
+
 	@RequestMapping(value = "listInfo")
-	public String listInfo( @ModelAttribute("search") Search search, Model model , HttpServletRequest request) throws Exception{
-		
-		System.out.println("/listProduct");
-		
-		if(search.getCurrentPage() == 0 ){
+	public String listInfo(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
+
+		System.out.println(" ============================== listInfo ==================================");
+
+		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
 		
+		// 페이지 사이즈
 		if(request.getParameter("pageSize") == null) {
 			search.setPageSize(pageSize);
 		} else {
-			String repageSize = (String)request.getParameter("pageSize");
-			search.setPageSize(Integer.parseInt(repageSize));
+			System.out.println("listInfo pageSize : " + request.getParameter("pageSize") );
+			search.setPageSize(Integer.parseInt(request.getParameter("pageSize")));
+		}
+
+		System.out.println(" listInfo searchKeyword " + search.getSearchKeyword());
+		System.out.println(" listInfo search : " + search);
+
+		// Business logic 수행
+		Map<String, Object> map = boardService.listBoard(search, boardCode);
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, search.getPageSize());
+		System.out.println(resultPage);
+
+		System.out.println(" listInfo map.get('list') :: "  + map.get("list"));
+
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+
+		return "forward:/community/listInfo.jsp";
+	}
+
+	@RequestMapping(value = "getInfo", method = RequestMethod.GET)
+	public String getInfo(@RequestParam("postNo") int postNo, @ModelAttribute("search") Search search, Model model) throws Exception {
+		
+		System.out.println(" ============================== getInfo ==================================");
+		
+		// 첫 페이지 1로 고정
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
 		}
 		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("search",search);
+		// 댓글 페이지 사이즈 5로 고정
+		search.setPageSize(5);
 		
-		if(request.getParameter("order") == null) {
-			searchMap.put("order", "p.prod_no");
-		} else if(request.getParameter("order").equals("1")) {
-			searchMap.remove("order");
-			searchMap.put("order", "p.PRICE DESC");
-		} else if(request.getParameter("order").equals("2")){
-			searchMap.remove("order");
-			searchMap.put("order", "p.PRICE ASC");
-		}	
-			
-		System.out.println(" getParameter : " + request.getParameter("menu"));
+		// Search 디버깅
+		System.out.println(" listInfo search : " + search);
 		
-		System.out.println(search + " :: ");
-		System.out.println(search.getStartRowNum()+" "+search.getEndRowNum());
 		
-		model.addAttribute("search", search);
+		// 게시글 불러오기
+		Board board = boardService.getBoard(postNo);
 		
-		return "forward:/product/listProduct.jsp";
-	}
-	
-	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
-	public String getFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
-
-		return null;
+		// 댓글 불러오기
+		Map<String, Object> map = commentService.listComment(postNo, search);
+		
+		// 페이징 
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
+		
+		// 페이지 디버깅
+		System.out.println(resultPage);
+		
+		// 게시글 디버깅
+		System.out.println(" getInfo board : " + board);
+		
+		// 댓글 디버깅
+		System.out.println(" getInfo listComment : " +map.get("list"));
+		System.out.println(" getInfo totalCount : " +map.get("totalCount"));
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("totalCount", map.get("totalCount"));
+		model.addAttribute("board", board);
+		
+		return "forward:/community/getInfo.jsp";
 	}
 
 	@RequestMapping(value = "updateFunding", method = RequestMethod.POST)
-	public String updateFunding(@ModelAttribute("funding") Funding funding,HttpSession session)
-			throws Exception {
+	public String updateFunding(@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
 	}
+	
+	@RequestMapping(value = "delInfo")
+	public String delInfo(@ModelAttribute("board") Board board, HttpSession session) throws Exception {
+		
+		System.out.println(" ============================== delInfo ==================================");
+		
+		System.out.println(" delInfo : " + board );
+		return "redirect:/info/listInfo?";
+	}
+	
 
 }
