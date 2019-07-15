@@ -30,8 +30,8 @@ public class FileDAOImpl implements FileDAO {
 	}
 
 	@Override
-	public FileDog getFile(int postNo) throws Exception {
-		return sqlSession.selectOne("FileMapper.getFile",postNo);
+	public List<FileDog> getFile(int postNo) throws Exception {
+		return sqlSession.selectList("FileMapper.getFile",postNo);
 	}
 
 	@Override
