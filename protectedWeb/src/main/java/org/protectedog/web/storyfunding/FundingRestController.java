@@ -38,6 +38,8 @@ public class FundingRestController {
 	@Value("#{commonProperties['fileSF']}")
 	String fileroot;
 
+	
+	
 	@RequestMapping(value = "json/imageupload", method = RequestMethod.POST)
 	public void imageupload(@RequestParam("files") List<MultipartFile> images) throws Exception {
 

@@ -49,7 +49,7 @@ h7 {
 <!-- JavaScript -->
 <script type="text/javascript">
 
-	function fncGetUserList(currentPage) {
+	function fncGetList(currentPage) {
 
 		$("#currentPage").val(currentPage)
 
