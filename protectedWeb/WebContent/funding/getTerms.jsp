@@ -59,6 +59,13 @@
 		.form-form{
 	    padding-left:15px;	
 		}
+		input[type="checkbox"]:focus {
+			
+			outline-color : #ff0022;
+			outline-style: solid;
+			outline-width : 1px;
+			
+		}	
     </style>
 
 	</head>
@@ -71,7 +78,7 @@
 	<div class="container ">
 		<div class="form-group">
 		<div class="page-header text-center">	
-		<font size=6>후원 신청글 약관동의</font> 후원신청정책을<strong style="color:#225cba"> 꼼꼼히 </strong> 확인해주세요.
+		<font size=6>${termsTitle}  </font>정책을<strong style="color:#225cba"> 꼼꼼히 </strong> 확인해주세요.
 	    </div>		
 		</div>	
 		
@@ -85,8 +92,8 @@
 			${termsList.get(0) }
 		  </div>
 		  <br/>		
-		  <div align="right" style="padding-right:1000px;">
-		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		  <div align="right" style="padding-right:100px;">
+		<input type="checkbox" class="termsCheck" name="termsCheck1" >동의 합니다.
 		</div>	
 		 <br/>			
 			
@@ -97,8 +104,8 @@
 			${termsList.get(1) }
 		  </div>
 		  <br/>		
-		  <div align="right" style="padding-right:1000px;">
-		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		  <div align="right" style="padding-right:100px;">
+		<input type="checkbox" class="termsCheck"  name="termsCheck2" >동의 합니다.
 		</div>	
 		 <br/>			
 					  
@@ -109,8 +116,8 @@
 			${termsList.get(2) }
 		  </div>
 		  <br/>		
-		  <div align="right" style="padding-right:1000px;">
-		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		  <div align="right" style="padding-right:100px;">
+		<input type="checkbox" class="termsCheck"  name="termsCheck3" >동의 합니다.
 		</div>	
 		 <br/>			
 			
@@ -121,8 +128,8 @@
 			${termsList.get(3) }
 		  </div>
 		  <br/>			  
-		  <div align="right" style="padding-right:1000px;">
-		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		  <div align="right" style="padding-right:100px;">
+		<input type="checkbox" class="termsCheck"  name="termsCheck4" >동의 합니다.
 		</div>	
 		 <br/>			
 			
@@ -133,14 +140,25 @@
 			${termsList.get(4) }
 		  </div>
 		  <br/>
-		  <div align="right" style="padding-right:1000px;">
-		<input type="checkbox" name="termsCheck" > <label>동의 합니다.</label>
+		  <div align="right" style="padding-right:100px;">
+		<input type="checkbox" class="termsCheck"  name="termsCheck5" >동의 합니다.
 		</div>	
 		 <br/><br/>		
-		<input type="checkbox" id="allCheck" ><label>모두동의</label>
+		 <hr/>
+		  <div align="right" style="padding-right:100px;">
+		<input type="checkbox" id="allCheck" >모두 동의합니다.
+		</div>	
 		<br/><br/><br/><br/>
+	
 		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">작성하기</button>
+	  			<button type="button" id="btn-add">
+	  			<c:if test="${termsTitle eq '후원신청글'}">
+	  			작성하기
+	  			</c:if>
+	  			<c:if test="${termsTitle eq '투표하기'}">
+	  			투표하기
+	  			</c:if>
+	  			</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
 		<br/><br/><br/><br/>	  		  
@@ -149,7 +167,11 @@
 
     </div>
    <!--  화면구성 div end /////////////////////////////////////-->
-
+    <!--================ start footer Area  =================-->
+    <!-- footer Start /////////////////////////////////////-->
+	 <jsp:include page="/layout/footer.jsp"></jsp:include>
+   	<!-- footer End /////////////////////////////////////-->  
+    <!--================ End footer Area  =================-->
 
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
@@ -158,10 +180,23 @@
       
          //============= 등록 Event  처리 =============   
          $( "#btn-add" ).on("click" , function() {
-        	if( !$("input[name=termsCheck]").prop("checked")){
-        		alert("모두 동의해주세요.")
+
+        	if( !$("input[name=termsCheck1]").prop("checked")){
+        		$("input[name=termsCheck1]").focus();
+        	}else if(!$("input[name=termsCheck2]").prop("checked")){
+        		$("input[name=termsCheck2]").focus();
+          	}else if(!$("input[name=termsCheck3]").prop("checked")){
+        		$("input[name=termsCheck3]").focus();
+          	}else if(!$("input[name=termsCheck4]").prop("checked")){
+        		$("input[name=termsCheck4]").focus();
+          	}else if(!$("input[name=termsCheck5]").prop("checked")){
+        		$("input[name=termsCheck5]").focus();        	       	       	       	
         	}else{
-        		self.location="/funding/addFunding"
+        		if(	${termsTitle eq "후원신청글"}){
+        			self.location="/funding/addFunding"
+        		}else if(${termsTitle eq "투표하기"}){
+        			self.location="/funding/addFund"
+        		}
         	}
         	
  
@@ -177,11 +212,11 @@
 		        //클릭되었으면
 		        if($("#allCheck").not(":disabled").prop("checked")){
 		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 true로 정의
-		            $("input[name=termsCheck]").not(":disabled").prop("checked",true);
+		            $(".termsCheck").not(":disabled").prop("checked",true);
 		            //클릭이 안되있으면
 		        }else{
 		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 false로 정의
-		            $("input[name=termsCheck]").not(":disabled").prop("checked",false);
+		            $(".termsCheck").not(":disabled").prop("checked",false);
 		        }
 		    });
    });   

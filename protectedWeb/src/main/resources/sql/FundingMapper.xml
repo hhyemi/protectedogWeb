@@ -33,6 +33,8 @@
 		<result property="reviewTitle" column="REVIEW_TITLE" jdbcType="VARCHAR" />
 		<result property="reviewContent" column="REVIEW_CONTENT" jdbcType="VARCHAR" />
 		<result property="reviewRegDate" column="REVIEW_REG_DATE" jdbcType="DATE" />	
+		<result property="mainFile" column="MAIN_FILE" jdbcType="DATE" />	
+				
 		<!-- DOMAIN에만 존재 -->
 		<result property="voteRemainDate" column="VOTE_REMAIN_DATE" jdbcType="NUMERIC" />
 		<result property="voteRate" column="VOTE_RATE" jdbcType="NUMERIC" />		
@@ -45,28 +47,29 @@
 		</selectKey>
 	 	INSERT
 		INTO STORYFUNDING( POST_NO , ID , NICKNAME , STATUS_CODE , PHONE , POST_TITLE , POST_CONTENT , 
-		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_START_DATE , FUND_END_DATE ) 
+		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ) 
 		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickName:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
-		SYSDATE , SYSDATE+30 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} , SYSDATE+31 , SYSDATE+31+#{fundTargetDay} )
+		SYSDATE , SYSDATE+30 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} , SYSDATE+31 , SYSDATE+31+#{fundTargetDay} , #{mainFile} )
 	 </insert>
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getFunding"	parameterType="string"	resultMap="fundingSelectMap">
 		SELECT
 		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , 		
+		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , 		
 		TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
 		FROM STORYFUNDING 
 		WHERE POST_NO IN #{value}
 	 </select>
-<!-- 		 
-	 SQL : SELECT LIST
+	 
+	<!-- 	 SQL : SELECT LIST-->
 	<select  id="listFunding"  parameterType="search"	resultMap="fundingSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT
 													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 				
+													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
+											        TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE 
 											FROM STORYFUNDING 
 											<if test="searchCondition != null">
 												<where>
@@ -82,18 +85,10 @@
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
-	 	 위 두번째 subQuery 의  
-	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
-	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-	 			< 는 keyword 로 &lt; 를	사용.
-	 			
-	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
 
-				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
 		
--->		 
-	<!-- SQL : UPDATE -->	 
+<!-- 
+	 SQL : UPDATE 
 	 <update	id="updateFunding"	parameterType="funding" >
 	   	UPDATE STORYFUNDING
 	   	<set>
@@ -106,7 +101,7 @@
 			FUND_END_DATE      = SYSDATE+31+#{fundTargetDay}
 	   	</set>
 	   	WHERE POST_NO IN #{postNo} 
-	 </update>
+	 </update> -->
 <!--
 	SQL : UPDATE StatusCode
 	<update id="updateStatusCode" parameterType="funding">
@@ -124,13 +119,14 @@
 		FROM STORYFUNDING
 		WHERE POST_NO IN #{value}
 	</delete>
-	
-	SQL : SELECT ROW Count	 
+-->	
+ <!-- SQL : SELECT ROW Count	--> 
 	 <select  id="getTotalCount"  parameterType="search" resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT
 						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE 		
+						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
+						TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE  		
 						FROM STORYFUNDING 
 						<if test="searchCondition != null">
 							<where>
@@ -143,5 +139,5 @@
 							</where>
 						</if> ) countTable						
 	 </select>
--->
+
 </mapper> 

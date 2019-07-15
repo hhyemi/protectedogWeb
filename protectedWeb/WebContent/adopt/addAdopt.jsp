@@ -48,7 +48,7 @@
 	<script type="text/javascript">
 	
 		 $(function() {
-			$( "button.btn.btn-primary" ).on("click" , function() {
+			$( "button:contains('등록')" ).on("click" , function() {
 				fncAddUser();
 			});
 			
@@ -131,9 +131,9 @@
 			    <label for="adoptArea" class="col-sm-offset-1 col-sm-3 control-label">분양가능지역</label>
 			    <div class="col-sm-4">
 			    <div id="mapArea" style="width: 600px; height: 300px;"  align="center"></div>
+			    <span>3개까지 선택가능합니다.</span><br/>
 			    <span id="pop"></span>
-			      <input type="textbox" style=" width: 600px;" class="form-control" id="adoptArea" name="adoptArea" placeholder="3개까지 선택가능합니다.">
-			      <button >dd</button>
+			    <input type="textbox" style=" width: 600px;" class="form-control" id="adoptArea" name="adoptArea" placeholder="3개까지 선택가능합니다.">
 			    </div>
 			  </div>
 		  </c:if>
@@ -237,7 +237,7 @@
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >등 &nbsp;록</button>
+		      <button type="button" class="btn btn-primary"  >등록</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 			</div>
 		  </div>
@@ -251,29 +251,35 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script>
 
+ 	  var mapArea;
       var map;
-      var mapArea;
-      var markers = [];
+      
       var markersArea = [];
+      var markers = [];
+      
       
       function initMap() {
-	        mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-		    	zoom: 13,
-		    	center: {lat: 37.564, lng: 127.0017}
-	        });
-	
-	        mapArea.addListener('click', function(event) {
-	        	addMarker(event.latLng, "aaa");
-	        });
-	  ///////////////////////////////////////////////////////////////////////////
-	        map = new google.maps.Map(document.getElementById('map'), {
+    	  
+    	  if( $('input[name=boardCode]').val().trim() =='AD'){
+		        mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+			    	zoom: 13,
+			    	center: {lat: 37.564, lng: 127.0017}
+		        });
+		
+		        mapArea.addListener('click', function(event) {
+		        	addMarker(event.latLng, "area");
+		        });
+    	  }
+	  ////////////////////        위: 분양가능지역               //      아래: 분양|실종위치          ////////////////////////////////////////
+	  
+	      map = new google.maps.Map(document.getElementById('map'), {
 	        	zoom: 13,
 	        	center: {lat: 37.564, lng: 127.0017}
-	        });
+	      });
 	
-	        map.addListener('click', function(event) {
-	        	addMarker(event.latLng, "a");
-	        });
+	      map.addListener('click', function(event) {
+	        	addMarker(event.latLng, "loca");
+	      });
       }
       
       
@@ -281,11 +287,14 @@
       var marker;
       var loca;
       var str = "";
+      var markTest="";
       var mmm = "";
+      
 /////////////////////////////////////////////////////////////////////////////////////////////
       function addMarker(location, str) {
     	  
-    	  if ( str == "aaa"){
+    	  if ( str == "area"){
+    		  
 	    		 if (markersArea.length <3){
 	  		        var markerArea = new google.maps.Marker({
 	  			        position: location,
@@ -294,74 +303,58 @@
 	  		        
 	  		     	markersArea.push(markerArea);
 	  		   		 
-	  		   		if(markersArea.length >0){
-	  			   		 var markTest="";
-	  			   		 mmm="";
-	  			   		 for (var i = 0; i < markersArea.length; i++) {
-	  			   			mmm += markersArea[i].position+"#" ;
-	  			   		$("#adoptArea").val(mmm);
-	  			   			
-	  			   			
-	  			   	// 역지오코딩 //
-	  		    	        var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1 ,markersArea[i].position.toString().indexOf(",") )  );
+			   		$("#adoptArea").val( $("#adoptArea").val()+location+"#");
+			   			
+		    	    var localat = parseFloat(  location.toString().substring( location.toString().indexOf("(")+1 ,location.toString().indexOf(",") )  );
+				 	var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
+		    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+		    	         success: function(data){
+		    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
+		    	          			$("#pop").append(markTest);
+		    	         }
+		    	 	});
+
+	  	        }else{
+	  	        	alert("3개까지 지정 가능함 dialog 추가");
+	  	        }
+	    		 
+
+	  	        if (markerArea != undefined){
+	  	        	
+	  	        	markerArea.addListener('rightclick', function() {
+	  	        		
+	  					for (var i = 0; i < markersArea.length; i++) {
+	  				      	if (markersArea[i] === markerArea) {
+			  				   markersArea[i].setMap(null);
+			  				   markersArea.splice(i, 1);
+	  				       	}
+	  					}
+	  					
+	  					markTest="";
+	  					mmm="";
+	  					for (var i = 0; i < markersArea.length; i++) {
+	  						
+	  						mmm += markersArea[i].position+"#";
+	  						var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1, markersArea[i].position.toString().indexOf(",") )  );
 	  				 	    var localng = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf(",")+1, markersArea[i].position.toString().indexOf(")") )  );
+	  				 		
 	  		    	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	  		    	            success: function(data){
-	  		//    	                 alert(JSON.stringify(data));
-	  		//    	                 alert(data.results[0].formatted_address);
-	  		//    	                 $('p').text(JSON.stringify(data));
-	  		
-	  		    	               markTest+= data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length)+"#";
-// 	  		    	             alert(markTest);
-	  		    	             $("#pop").text(markTest);
-	  		    	            }
-	  		    	 		});
-	  				 	 }
-	  		   		}
-	
-	  	        }else{
-	  	        	alert("3개까지 지정 가능함");
-	  	        }
-	    		 ////////////////////////////////////////////////
-	  	        if (markerArea != undefined){
-	  	        	markerArea.addListener('rightclick', function() {
-	  	        		mmm="";
-						var markTest="";
-	  					for (var i = 0; i < markersArea.length; i++) {
-	  						markTest="";
-	  						$("#pop").val(markTest);
-	  				       if (markersArea[i] === markerArea) {
-			  				   markersArea[i].setMap(null);
-			  				   markersArea.splice(i, 1 );
-	  				       }else{
-	  				       
-	  				    	   
-	  				    	   
-	  				    	   
-	  				 		 // 역지오코딩 //
-	  		    	        var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1 ,markersArea[i].position.toString().indexOf(",") )  );
-	  				 	    var localng = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf(",")+1, markersArea[i].position.toString().indexOf(")") )  );
-	  		    	        mmm += markersArea[i].position+"#";
-	  		    	      $("#adoptArea").val(mmm);
-	  				 		 $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
-	  		    	            success: function(data){
-	  		//    	                 alert(JSON.stringify(data));
-	  		//    	                 alert(data.results[0].formatted_address);
-	  		    	              	markTest += data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length)+"#";
+// 	  		   	               		alert(JSON.stringify(data));
+	  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
 	  		    	       			$("#pop").text(markTest);
 	  		    	            }
 	  		    	 		});
-	  	    	        
-// 	  		    	      markTest += markersArea[i].position;
-	  			 	  	} //$("#pop").text(markTest);
-	  					}$("#pop").text(markTest);
+	  					}
+	  					$("#pop").text(markTest);
 	  					$("#adoptArea").val(mmm);
 	  	            });
 	  	        }
-	    	        
+	  	        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////    	        
 		  	      	
-	    	        
-    	  }else if( str == "a"){
+    	  }else if( str == "loca"){
+    		  
 		    	if (marker != undefined){
 		    		deleteMarkers();
 		    	}
@@ -372,10 +365,11 @@
 		        });
 		        
 		        markers.push(marker);
+	    		  
 		        $( '#location' ).val(location);
 		        loca =  $( '#location' ).val().toString();
 		
-		 	    var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
+		 	    var localat = parseFloat(  loca.substring( loca.indexOf("(")+1, loca.indexOf(",") )  );
 		 	    var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
 		        
 		        if (marker != undefined){
@@ -387,14 +381,13 @@
 		        // 역지오코딩 //
 		        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 		            success: function(data){
-		//                 alert(JSON.stringify(data));
-		//                 alert(data.results[0].formatted_address);
-		//                 $('p').text(JSON.stringify(data));
-		                $('p').text(data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length));
+// 		                $('p').text(JSON.stringify(data));
+		                $('p').text(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
 		            }
 		 		});
     	  }
       }
+      
 
       function setMapOnAll(map) {
 	        for (var i = 0; i < markers.length; i++) {

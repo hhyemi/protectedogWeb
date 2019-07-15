@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -32,9 +33,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	
-       #start { border:3px solid #5271c7; }
-	   #startNo { border:3px solid #ffffff}
 	   #btn-add{
 		background: #fff;
         border:2px solid #29304d;
@@ -111,7 +109,7 @@
 		  <div class="form-group">
 			<h4 class=>글제목</h4><p/>		
 		    <div class=>
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." maxlength="10" style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
@@ -124,7 +122,7 @@
 			<br/>
             <!-- 첨부 버튼 -->
             <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;대표이미지는 파란테두리입니다. (최대 8장까지 업로드 가능합니다.)
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
            <br/>
@@ -167,7 +165,11 @@
 
     </div>
    <!--  화면구성 div end /////////////////////////////////////-->
-
+    <!--================ start footer Area  =================-->
+    <!-- footer Start /////////////////////////////////////-->
+	 <jsp:include page="/layout/footer.jsp"></jsp:include>
+   	<!-- footer End /////////////////////////////////////-->  
+    <!--================ End footer Area  =================-->
 
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
@@ -304,12 +306,6 @@
                      
                      var imgNum = previewIndex++;
                      
-                     var previewId = "";             
-                     if(imgNum==0){
-                        previewId = "start";
-                     }else{
-                        previewId = "startNo";   
-                     }
                     //8장 이상 업로드시
                      if(Object.keys(files).length>=8){
                         alert("사진은 8장까지만 업로드 가능합니다.");
@@ -317,7 +313,7 @@
                      }else{
                // 8장 이하 
                      $("#preview").append(
-                                     "<div class=\"preview-box\"  id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
                                              + "<a href=\"#\" value=\""
                                              + imgNum
@@ -384,7 +380,7 @@
                   if($(this).val().match(exp)){
                     var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);         
                     $("#voteNum").children().remove();
-                    $("#voteNum").append("<font><b>투표수 <strong class=\"text-danger\">"+inputed+"</strong>표</b></font>");
+                    $("#voteNum").append("<font><b>투표수 <strong  style=\"color:#225cba\">"+inputed+"</strong>표</b></font>");
                    }
                    return true;
                 }else{
@@ -404,7 +400,7 @@
                   for(var i = 0; i < byteText.length ; i++) {
                      byteNum += ( byteText.charCodeAt(i) > 127 ) ? 2 : 1;
                   }
-                  if(byteNum > 12) {              	 
+                  if(byteNum > 30) {              	 
                       alert('제한길이 초과');
                       $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                   }

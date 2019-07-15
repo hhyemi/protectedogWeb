@@ -1,5 +1,6 @@
 package org.protectedog.service.storyfunding.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,14 @@ public class FundingServiceImpl implements FundingService {
 
 	@Override
 	public Map<String, Object> listFunding(Search search) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Funding> list= fundingDAO.listFunding(search);
+		int totalCount = fundingDAO.getTotalCount(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list );
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
 	}
 
 

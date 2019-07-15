@@ -25,7 +25,8 @@
     <!-- main css -->
     <link rel="stylesheet" href="/resources/get/css/style.css" />
     <link rel="stylesheet" href="/resources/get/css/responsive.css" />
-
+	<!-- KAKAO -->
+   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
 		#voteDate{
 		width:340px;
@@ -108,16 +109,17 @@
 			 <div><h3>현재투표인원&ensp;${funding.voterCount}명</h3></div>		 	 
                <br/>  
               <div class="card_area">
-                <a class="main_btn" href="#">투표하기</a> 
+                <a class="main_btn" href="#">투표하기</a><a class="main_btn" href="#">문의하기</a>  
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
               </div>
               <br/>
-			  <div class="card_area">
-	  			<a class="main_btn" href="#">문의하기</a> 
-	  			<br/>
-		 	 </div>	
+		    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
+			<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
+			<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
+			<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
+		 	  
             </div>
           </div></div>
         </div>
@@ -157,17 +159,71 @@
 	<script type="text/javascript">
     $(function(){
     
-	//============= 투표하기 Event  처리 =============	
- 	$( "a:contains('투표하기')" ).on("click" , function() {
- 		alert("투표")
-		//$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
-	});   
-    
-	//============= 문의하기 Event  처리 =============	
- 	$( "a:contains('문의하기')" ).on("click" , function() {
-		$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
-	});   
+		//============= 투표하기 Event  처리 =============	
+	 	$( "a:contains('투표하기')" ).on("click" , function() {
+			$(self.location).attr("href","/funding/getTerms?termsTitle=SFVote");
+		});   
+	    
+		//============= 문의하기 Event  처리 =============	
+	 	$( "a:contains('문의하기')" ).on("click" , function() {
+			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+		});   
+	
+		//============= SNS공유 Event  처리 =============	
+		$( "#twitter" ).on("click" , function() {
+	 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+			});		
+		
+		$( "#naver" ).on("click" , function() {
+	 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+			});		
+		
+		$( "#facebook" ).on("click" , function() {
+	 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+			});			
+		
+		$( "#kakao" ).on("click" , function() {
+			sendLinkKakao()
+		});	
+	    
+		//============= 수정하기 Event  처리 =============	
+	 	$( "a:contains('수정하기')" ).on("click" , function() {
+	 		 self.location = "/funding/updateFunding?postNo=${funding.postNo}"
+		});   
+		
+		//============= 삭제하기 Event  처리 =============	
+	 	$( "a:contains('삭제하기')" ).on("click" , function() {
+	 		alert("삭제하기")
+			//$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+		});   	
+		
     });
+    
+	
+	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+	 function sendLinkKakao(){
+	     Kakao.Link.sendDefault({
+	       objectType: 'feed',
+	       content: {
+	         title: '유기견보호',
+	         description: '멍멍',
+	         imageUrl:document.location.href,
+	         link: {
+	           mobileWebUrl: document.location.href,
+	           webUrl:document.location.href
+	         }
+	       },
+	       buttons: [       
+	         {
+	           title: '링크 열기',
+	           link: {
+	             mobileWebUrl: document.location.href,
+	             webUrl: document.location.href
+	           }
+	         }
+	       ]
+	     }); 
+	 }    
     </script>
     
   </body>

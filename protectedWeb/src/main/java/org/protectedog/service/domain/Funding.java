@@ -32,9 +32,11 @@ public class Funding {
 	private int voteRemainDate;
 	// 후원 남은 날짜
 	private Date fundRemainDate;
-	//투표율
+	// 투표율
 	private int VoteRate;
-	
+	// 대표이미지
+	private String mainFile;
+
 	public Funding() {
 	}
 
@@ -227,27 +229,33 @@ public class Funding {
 	public void setFundRemainDate(Date fundRemainDate) {
 		this.fundRemainDate = fundRemainDate;
 	}
-	
+
 	public int getVoteRate() {
 		return VoteRate;
 	}
 
 	public void setVoteRate(int voteRate) {
 		VoteRate = voteRate;
-	}	
+	}
+
+	public String getMainFile() {
+		return mainFile;
+	}
+
+	public void setMainFile(String mainFile) {
+		this.mainFile = mainFile;
+	}
 
 	@Override
 	public String toString() {
-		return "StoryFunding [postNo=" + postNo + ", id=" + id + ", nickName=" + nickName + ", statusCode=" + statusCode
+		return "Funding [postNo=" + postNo + ", id=" + id + ", nickName=" + nickName + ", statusCode=" + statusCode
 				+ ", phone=" + phone + ", postTitle=" + postTitle + ", postContent=" + postContent + ", viewCount="
-				+ viewCount + ", voteTargetCount=" + voteTargetCount + ", voterCount=" + voterCount + ", voteStartDate="
-				+ voteStartDate + ", voteEndDate=" + voteEndDate + ", fundTargetPay=" + fundTargetPay
+				+ viewCount + ", voterCount=" + voterCount + ", voteStartDate=" + voteStartDate + ", voteEndDate="
+				+ voteEndDate + ", fundTargetPay=" + fundTargetPay + ", voteTargetCount=" + voteTargetCount
 				+ ", fundTargetDay=" + fundTargetDay + ", sponsorCount=" + sponsorCount + ", fundPay=" + fundPay
 				+ ", fundStartDate=" + fundStartDate + ", fundEndDate=" + fundEndDate + ", phone1=" + phone1
 				+ ", phone2=" + phone2 + ", phone3=" + phone3 + ", voteRemainDate=" + voteRemainDate
-				+ ", fundRemainDate=" + fundRemainDate + "]";
+				+ ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate + ", mainFile=" + mainFile + "]";
 	}
 
-
-	
 }
