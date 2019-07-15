@@ -32,7 +32,7 @@
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" name="formal">
-		
+		<input type="hidden" id="kakao" name="kakao" value="${ kakao }">
 		  <div class="form-group">
 		    <label for="id" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
@@ -125,6 +125,34 @@
 			});
 		});	
 		
+		$(function(){
+			
+			$("#id").keyup(function(){
+				var id=$("#id").val();
+				var checkId=JSON.stringify({id:id});
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/users/json/checkDuplication",
+					data : checkId,
+					datatype : "json" ,
+					success : function(response){
+						if($.trim(response.result)==0){
+							$('#helpBlock').html("사용가능");
+							$('#submit').attr('disabled', false);
+						}else{
+							$('#helpBlock').html("사용불가");
+							$('#submit').attr('disabled', true);
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+			});
+		});
+	
+		
 		$(function() {
 			
 			$( "#addition" ).on("click" , function() {
@@ -169,40 +197,7 @@
 			});
 		});	
 	
-		
-// 		function fncAddUsers() {
-			
-// 			var id=$("input[name='id']").val();
-// 			var pw=$("input[name='pw']").val();
-// 			var pw_confirm=$("input[name='pw2']").val();
-// 			var name=$("input[name='userName']").val();
-			
-			
-// 			if(id == null || id.length <1){
-// 				alert("아이디는 반드시 입력하셔야 합니다.");
-// 				return;
-// 			}
-// 			if(pw == null || pw.length <1){
-// 				alert("패스워드는  반드시 입력하셔야 합니다.");
-// 				return;
-// 			}
-// 			if(pw_confirm == null || pw_confirm.length <1){
-// 				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-// 				return;
-// 			}
-// 			if(name == null || name.length <1){
-// 				alert("이름은  반드시 입력하셔야 합니다.");
-// 				return;
-// 			}
-			
-// 			if( pw != pw_confirm ) {				
-// 				alert("비밀번호 확인이 일치하지 않습니다.");
-// 				$("input:text[name='password2']").focus();
-// 				return;
-// 			}
-				
-// 			$("form[name=formal]").attr("method" , "POST").attr("action" , "/user/addUsersBase");
-// 		}
+
 		
 
 
