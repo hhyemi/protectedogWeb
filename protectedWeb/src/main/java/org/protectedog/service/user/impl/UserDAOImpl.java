@@ -1,6 +1,7 @@
 package org.protectedog.service.user.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.common.Search;
@@ -63,5 +64,13 @@ public class UserDAOImpl implements UserDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("UsersMapper.getTotalCount", search);
 	}
+
+	@Override
+	public User getSocial(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UsersMapper.getSocial", map);
+	}
+
+
 
 }

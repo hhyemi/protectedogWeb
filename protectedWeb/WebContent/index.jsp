@@ -1,5 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,7 @@
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../resources/css/others/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- Favicon -->
     <link rel="icon" href="../resources/img/core-img/favicon.ico">
 
@@ -70,35 +72,45 @@
                     <div class="top_social_bar">
                         <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                         <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                        <a id="custom-login-btn" href="javascript:loginWithKakao()">
+                        	<img src="../resources/img/kakao/kakaolink_btn_small.png" width="15"/>
+                        </a>
+                        <a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a>
+                        <c:if test="${ sessionScope.user.role != null }">
+                        	<div class="logout">
+                                <a href="/users/logout">logout</a>
+                            </div>
+                        </c:if>
                         <a href="#"><i class="fa fa-naver" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <!--  Login Register Area -->
+                
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
+                        <c:if test="${ sessionScope.user.role eq null }">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="/users/loginView.jsp">Sign in</a>
+                                <a href="/users/login">Sign in</a>
                             </div>
                             <div class="register">
-                                <a href="/users/addUsersBaseView.jsp">Sign up</a>
+                                <a href="/users/addUsersBase">Sign up</a>
                             </div>
-<!--                             <div class="myPage"> -->
-<!--                             	<a href="#">마이페이지</a> -->
-<!--                             </div> -->
-                        </div>
-                        <!-- Search Button Area -->
-<!--                         <div class="search_button"> -->
-<!--                             <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a> -->
-<!--                         </div> -->
-                        <!-- Search Form -->
-<!--                         <div class="search-hidden-form"> -->
-<!--                             <form action="#" method="get"> -->
-<!--                                 <input type="search" name="search" id="search-anything" placeholder="Search Anything..."> -->
-<!--                                 <input type="submit" value="" class="d-none"> -->
-<!--                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span> -->
-<!--                             </form> -->
-<!--                         </div> -->
+                         </div>
+                         </c:if>
+                         <c:if test="${ sessionScope.user.role != null }">
+                         <div class="login_area d-flex">
+                            <div class="login">
+                                <a href="#">${ sessionScope.user.nickname }</a>
+                            </div>
+                            <div class="mypage">
+                                <a href="#">Mypage</a>
+                            </div>
+                         </div>
+                         </c:if>
                     </div>
                 </div>
             </div>
@@ -167,7 +179,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">market</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="index.html">1</a>
+                                        <a class="dropdown-item" href="shop/product/listProduct.jsp">상품등록</a>
                                     </div>
                                 </li>
 <!--                                 <li class="nav-item"> -->
@@ -198,5 +210,41 @@
     <script src="../resources/js/others/plugins.js"></script>
     <!-- Active JS -->
     <script src="../resources/js/active.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    
+    <script type="text/javascript">
+    	Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+    	function loginWithKakao(){
+    		Kakao.Auth.login({
+    			success:function(authObj){
+    				Kakao.API.request({
+    					url:"/v2/user/me",
+    					success:function(result){
+    						var info=JSON.stringify(result);
+		                    $(location).attr('href', '/users/kakao?kakao='+result.id);
+    					}
+    				});
+    				Kakao.Auth.getAccessToken();
+    				alert(Kakao.Auth.getAccessToken());
+    			},
+    				fail:function(err){
+    				alert(JSON.stringify(err));
+    				alert("로그인 실패")
+    			}
+    		})
+    	}
+    	
+    	function logoutWithKakao(){
+    		Kakao.Auth.logout();
+    		alert("카카오 로그아웃");
+    		location.href='https://accounts.kakao.com/logout?continue=https://pf.kakao.com/logged_out';
+    		//goMain();
+    	}
+    	
+//     	function goMain(){
+//     		location.href="/index.jsp";
+//     	}
+    </script>
+
 </body>
 </html>

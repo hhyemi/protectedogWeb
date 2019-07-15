@@ -1,29 +1,34 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
-
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+<html>
 
-<html lang="ko">
-	
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- ¬¸¡∂ : http://getbootstrap.com/css/   ¬¸¡∂ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<!-- ////////////////////¥ﬁ∑¬ /////////////////////////////-->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		
-	<!--  ///////////////////////// CSS ////////////////////////// -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
+    
+    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
+
+    <link rel="stylesheet" href="../../resources/prodmenu/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="../../resources/prodmenu/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
+    <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
         	border: 3px solid #D6CDB7;
@@ -34,74 +39,32 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-	//============= "µÓ∑œ"  Event ø¨∞· =============
+	//============= "Îì±Î°ù"  Event Ïó∞Í≤∞ =============
 	$(function() {
-		 $( "#addbutton" ).on("click" , function() {
+		//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 Í≥º 3 Î∞©Î≤ï Ï°∞Ìï© : $("tagName.className:filterÌï®Ïàò") ÏÇ¨Ïö©Ìï®.	
+		 $( "#addproduct" ).on("click" , function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('µÓ∑œ')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('Îì±Î°ù')" ).html() );
 			fncAddProduct();
 		});
 	});	
 
-	//============= "√Îº“"  Event √≥∏Æ π◊  ø¨∞· =============
+	//============= "Ï∑®ÏÜå"  Event Ï≤òÎ¶¨ Î∞è  Ïó∞Í≤∞ =============
 	$(function() {
-		 $( "#canclebutton" ).on("click" , function() {
+		//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 Í≥º 3 Î∞©Î≤ï Ï°∞Ìï© : $("tagName.className:filterÌï®Ïàò") ÏÇ¨Ïö©Ìï®.	
+		 $( "a[href='#' ]" ).on("click" , function() {
 				//Debug..
-				//alert(  $( "td.ct_btn01:contains('√Îº“')" ).html() );
+				//alert(  $( "td.ct_btn01:contains('Ï∑®ÏÜå')" ).html() );
 				$("form")[0].reset();
 		});
 	});	
 
 	function fncAddProduct(){
-		//Form ¿Ø»øº∫ ∞À¡ı
 		
-		var prodName=$("input[name='prodName']").val();
-	 	//var name = document.detailForm.prodName.value;
-	 	var price=$("input[name='price']").val();
-		//var detail = document.detailForm.prodDetail.value;
-		var manuDate=$("input[name='manuDate']").val();
-		//var manuDate = document.detailForm.manuDate.value;
-		var company=$("input[name='company']").val();
-		//var price = document.detailForm.price.value;
-		var country=$("input[name='country']").val();
-		//var price = document.detailForm.price.value;
-		var discountPrice=$("input[name='discountPrice']").val();
-		//var price = document.detailForm.price.value;
-		var quantity=$("input[name='quantity']").val();
-		//var price = document.detailForm.price.value;
-		var prodDatail=$("input[name='prodDetail']").val();
-		//var price = document.detailForm.price.value;
-	
-		if(name == null || prodName.length<1){
-			alert("ªÛ«∞∏Ì¿∫ π›µÂΩ√ ¿‘∑¬«œø©æﬂ «’¥œ¥Ÿ.");
-			return;
-		}
-		if(prcie == null || price.length<1){
-			alert("ªÛ«∞∞°∞›¿ª ¿‘∑¬«ÿ¡÷ººø‰");
-			return;
-		}
-		if(company == null || company.length<1){
-			alert("ªÛ«∞ ¡¶¡∂ªÁ∏¶ ¿‘∑¬«ÿ¡÷ººø‰");
-			return;
-		}
-		if(country == null || country.length<1){
-			alert("ø¯ªÍ¡ˆ∏¶ ¿‘∑¬«ÿ¡÷ººø‰.");
-			return;
-		}
-		if(discountPrice == null || discountPrice.length<1){
-			alert("ªÛ«∞ «“¿Œ∞°∏¶ ¿‘∑¬«ÿ¡÷ººø‰");
-			return;
-		}
-		if(price == null || quantity.length<1){
-			alert("ªÛ«∞ºˆ∑Æ¿ª ¿‘∑¬«ÿ¡÷ººø‰");
-			return;
-		}
-		if(price == null || prodDetail.length<1){
-			alert("ªÛ«∞ ªÛºº¡§∫∏∏¶ ¿‘∑¬«ÿ¡÷ººø‰");
-			return;
-		}
 		
-		$("form").attr("method", "POST").attr("action" , "/shop/Product/addProduct").submit();
+		$("form").attr("method", "POST").attr("action" , "/shop/product/addProduct").submit();
 	}
 	
 	$(function() {
@@ -116,98 +79,211 @@
 </script>
 </head>
 
-<body>
-
-	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
-	<div class="container">
-
-		<h2>DOG SHOP | <small>ªÛ«∞µÓ∑œ</small></h2>
-		
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-		
-		  <div class="form-group">
-		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label" >ªÛ«∞∏Ì</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="ªÛ«∞∏Ì¿ª π›µÂΩ√ ¿‘∑¬«ÿ¡÷ººø‰">
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger"></strong>
-		      </span>
-		    </div>
-		   </div>
-	
-		     <!--  <div class="form-group">
-		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">ªÛ«∞¿ÃπÃ¡ˆ</label>
-		    <div class="col-sm-4">
-		     <input type="file" class="form-control" id="fileName" name="fileName" placeholder="¿ÃπÃ¡ˆ∏¶ µÓ∑œ«ÿ¡÷ººø‰">
-		    </div>
-		    </div>-->
-		  
-		    
-		    <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">∞° 	∞›</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="price" name="price" placeholder="ªÛ«∞∞°∞›¿ª ¿‘∑¬«ÿ¡÷ººø‰">
-		    </div>
-		    </div>
-		    
-		    <div class="form-group">
-		    <label for="discountPrice" class="col-sm-offset-1 col-sm-3 control-label">«“¿Œ∞°</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="discountPrice" name="discoutPrice" placeholder="«“¿Œæ◊¿ª ¿‘∑¬«ÿ¡÷ººø‰">
-		    </div>
-		    </div>
-		    
-		    
-		    <div class="form-group">
-		    <label for="country" class="col-sm-offset-1 col-sm-3 control-label">¿Á∞Ìºˆ∑Æ</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="quantity" name="quantity" placeholder="¿Á∞Ìºˆ∑Æ¿ª ¿‘∑¬«ÿ¡÷ººø‰">
-		    </div>
-		    </div>
-		    
-		     <div class="form-group">
-		    <label for="country" class="col-sm-offset-1 col-sm-3 control-label">ø¯ªÍ¡ˆ</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="country" name="country" placeholder="ø¯ªÍ¡ˆ∏¶ ¿‘∑¬«ÿ¡÷ººø‰">
-		    </div>
-		    </div>
-		    
-		     <div class="form-group">
-		    <label for="company" class="col-sm-offset-1 col-sm-3 control-label">¡¶¡∂ªÁ</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="company" name="company" placeholder="¡¶¡∂ªÁ∏¶ ¿‘∑¬«ÿ¡÷ººø‰">
-		    </div>
-		    </div>
-		    
-		    <div class="form-group">
-			<label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">¡¶¡∂¿œ¿⁄</label>
-		    <div class="col-sm-4">
-		     		<input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="ªÛ«∞¡¶¡∂¿œ¿⁄∏¶ ¿‘∑¬«ÿ¡÷ººø‰" readonly>
-			</div>
-			</div>
-<br>
-		    
-		    <div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">ªÛ«∞ªÛºº¡§∫∏</label>
-		    <div class="col-sm-4">
-		      <textarea class="form-control" rows="3" placeholder="ªÛ«∞ªÛºº≥ªø™¿ª ±‚¿‘«ÿ¡÷ººø‰" id="prodDetail" name="prodDetail"></textarea>
-		    </div>
-		    </div>
-		    
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-default btn-lg" id="addbutton">µÓ &nbsp;∑œ</button>
-			  <a class="btn btn-default btn-lg" href="#" role="button" id="canclebutton">√Î&nbsp;º“</a>
+  <body class="goto-here">
+		<div class="py-1 bg-black">
+    	<div class="container">
+    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+	    		<div class="col-lg-12 d-block">
+		    		<div class="row d-flex">
+		    			<div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+						    <span class="text">+ 1235 2355 98</span>
+					    </div>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						    <span class="text">youremail@email.com</span>
+					    </div>
+					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+					    </div>
+				    </div>
+			    </div>
 		    </div>
 		  </div>
-		</form>
-		<!-- form Start /////////////////////////////////////-->
-		
- 	</div>
-	<!--  »≠∏È±∏º∫ div end /////////////////////////////////////-->
-	
-</body>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">#PROTECTEDDOG</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
 
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Î∂ÑÏñë</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">Î∂ÑÏñë</a>
+                <a class="dropdown-item" href="product-single.html">Ïã§Ï¢Ö</a>
+
+              </div>
+            </li>
+	          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ïä§ÌÜ†Î¶¨ÌéÄÎî©</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">Ïä§ÌÜ†Î¶¨ÌéÄÎî©</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Î≥ëÏõê</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">Î≥ëÏõê</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">PEDIA</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">COMMUNITY</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">COMMUNITY</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="shop.html">MARKET</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+
+    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">admin</a></span> <span>page</span></p>
+            <h1 class="mb-0 bread">DOG|SHOP ÏÉÅÌíàÎì±Î°ù</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 ftco-animate">
+						<form action="#" class="billing-form">
+							<h3 class="mb-4 billing-heading">ÏÉÅÌíàÏ†ïÎ≥¥Î•º Îì±Î°ùÌï¥Ï£ºÏÑ∏Ïöî</h3>
+	          	<div class="row align-items-end">
+	          		<div class="col-md-6">
+	                <div class="form-group">
+	                	<label for="firstname">ÏÉÅÌíàÎ™Ö</label>
+	                  <input type="text" class="form-control" name="prodName" id="prodName" placeholder="ÏÉÅÌíàÎ™ÖÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+	              </div>
+	              <div class="w-100"></div>
+	              <div class="col-md-6">
+	                <div class="form-group">
+	                	<label for="lastname">Í∞Ä Í≤©</label>
+	                  <input type="text" class="form-control" name="price" id="price" placeholder="Í∞ÄÍ≤©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+                </div>
+                <div class="col-md-6">
+	                <div class="form-group">
+	                	<label for="firstname">ÏõêÏÇ∞ÏßÄ</label>
+	                  <input type="text" class="form-control" name="country" id="country" placeholder="ÏõêÏÇ∞ÏßÄÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+	              </div>
+		            
+		            <div class="col-md-6">
+		            	<div class="form-group">
+	                	<label for="streetaddress">Ï†úÏ°∞ÏÇ¨</label>
+	                  <input type="text" class="form-control" name="company" id="company" placeholder="Ï†úÏ°∞ÏÇ¨Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+		            </div>
+		           <div class="col-md-6">
+		            	<div class="form-group">
+	                	<label for="streetaddress">Ï†úÏ°∞Ïùº</label>
+	                  <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="Ï†úÏ°∞ÏùºÏûêÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+		            </div>
+		            <div class="w-100"></div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
+	                	<label for="towncity">Ìï†Ïù∏Ïï°</label>
+	                  <input type="text" class="form-control" id="discoutPridce" name="discountPridce" placeholder="ÏÉÅÌíàÏùò Ìï†Ïù∏Í∞ÄÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+		            </div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
+		            		<label for="postcodezip">Ïû¨Í≥†ÏàòÎüâ</label>
+	                  <input type="text" class="form-control" id="quantity" name="quantity" placeholder="ÏÉÅÌíàÏùò ÏûÖÍ≥†ÏàòÎüâÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî">
+	                </div>
+		            </div>
+		            <div class="w-100"></div>
+		            <div class="col-md-12">
+	                <div class="form-group">
+	                	<label for="phone">ÏÉÅÏÑ∏Ï†ïÎ≥¥</label>
+	                  <textarea class="form-control" id="prodDetail" name="prodDetail" rows="6" placeholder="ÏÉÅÌíàÏùò ÏÉÅÏÑ∏Ï†ïÎ≥¥Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî"></textarea>
+	                </div>
+	              <div class="col-md-6">
+		            	<div class="form-group">
+		            		<label for="postcodezip">ÏÉÅÌíàÏù¥ÎØ∏ÏßÄ</label>
+	                  <input type="file" class="form-control" placeholder="">
+	                </div>
+	                
+	                <p class="align-items-center"><a class="btn btn-primary py-3 px-4" id="addproduct" name="addproduct">Îì±Î°ùÌïòÍ∏∞</a> &nbsp;<a href="#"class="btn btn-primary py-3 px-4">Ï∑®ÏÜåÌïòÍ∏∞</a></p>
+	                </div>
+
+	              
+               
+
+
+
+
+   
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+  </svg></div>
+  </div></div></form></div></div></div></section>
+
+
+  <script src="../../resources/prodmenu/js/jquery.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../../resources/prodmenu/js/popper.min.js"></script>
+  <script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+  <script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+  <script src="../../resources/prodmenu/js/aos.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+  <script src="../../resources/prodmenu/js/bootstrap-datepicker.js"></script>
+  <script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../../resources/prodmenu/js/google-map.js"></script>
+  <script src="../../resources/prodmenu/js/main.js"></script>
+   <!-- ////////////////////Îã¨Î†• /////////////////////////////-->
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  </body>
 </html>

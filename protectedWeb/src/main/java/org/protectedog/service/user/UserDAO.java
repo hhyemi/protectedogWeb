@@ -1,6 +1,7 @@
 package org.protectedog.service.user;
 
 import java.util.List;
+import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.User;
@@ -24,5 +25,10 @@ public interface UserDAO {
 	
 	// List paging
 	public int getTotalCount(Search search) throws Exception;
+	
+	// SNS Insert, Select
+	public User getSocial(Map<String, Object> map) throws Exception;
+	
+
 	
 }
