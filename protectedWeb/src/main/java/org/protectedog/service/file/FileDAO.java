@@ -9,7 +9,7 @@ public interface FileDAO {
 	
 	public void addFile(List<FileDog> file) throws Exception;
 
-	public FileDog getFile(int postNo) throws Exception; 
+	public List<FileDog> getFile(int postNo) throws Exception; 
 	
 	public void updateFile(FileDog file) throws Exception;
 	

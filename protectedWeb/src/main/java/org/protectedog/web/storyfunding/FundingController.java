@@ -1,7 +1,5 @@
 package org.protectedog.web.storyfunding;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,14 +43,45 @@ public class FundingController {
 	int pageSize;
 
 	@Value("#{commonProperties['fileSF']}")
-	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	String fileroot;
 	
 	@Value("#{commonProperties['funding']}")
 	String boardCode;
+
+	@Value("#{commonProperties['SFTermsOne']}")
+	String SFTermsOne;
+	
+	@Value("#{commonProperties['SFTermsTwo']}")
+	String SFTermsTwo;
+
+	@Value("#{commonProperties['SFTermsThree']}")
+	String SFTermsThree;
+	
+	@Value("#{commonProperties['SFTermsFour']}")
+	String SFTermsFour;
+
+	@Value("#{commonProperties['SFTermsFive']}")
+	String SFTermsFive;	
+
+	@RequestMapping(value = "addFunding", method = RequestMethod.GET)
+	public String addFunding(HttpSession session) throws Exception {
+
+		System.out.println("/funding/addfunding : GET");
+		// 나중에 세션으로 변경//
+		Funding funding = new Funding();
+		String id = "user01";
+		String nickName = "스캇";
+		funding.setId(id);
+		funding.setNickName(nickName);
+		// 변경여기까지//
+
+
+		return "redirect:/funding/addFunding.jsp";
+	}
+	
 	
 	@RequestMapping(value = "addFunding", method = RequestMethod.POST)
-	public String addUser(@RequestParam("multiFile") ArrayList<String> multiFile,
+	public String addFunding(@RequestParam("multiFile") ArrayList<String> multiFile,
 			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
 		System.out.println("/funding/addfunding : POST");
@@ -95,7 +124,7 @@ public class FundingController {
 		System.out.println("/funding/getFunding ");
 
 		Funding funding = fundingService.getFunding(postNo);
-		FileDog file = fileService.getFile(postNo);
+		List<FileDog> file = fileService.getFile(postNo);
 
 
 		model.addAttribute("file",file);
@@ -103,7 +132,24 @@ public class FundingController {
 
 		return "forward:/funding/getFunding.jsp";
 	}
+	
+	@RequestMapping(value = "getTerms", method = RequestMethod.GET)
+	public String getTerms(Model model) throws Exception {
 
+		System.out.println("/funding/getTerms");
+		
+		List<String> termsList = new ArrayList<String>();
+		termsList.add(SFTermsOne);
+		termsList.add(SFTermsTwo);
+		termsList.add(SFTermsThree);
+		termsList.add(SFTermsFour);
+		termsList.add(SFTermsFive);
+		model.addAttribute("termsList",termsList);
+
+		return "forward:/funding/getTerms.jsp";
+	}
+
+	
 	@RequestMapping(value = "updateFunding", method = RequestMethod.GET)
 	public String updateFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
