@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -63,6 +64,28 @@
 					  
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
+					        <a id="kakao-login-btn"></a>
+						    <a href="http://developers.kakao.com/logout"></a>
+						    <script type='text/javascript'>
+						    Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+
+					        Kakao.Auth.createLoginButton({
+					          container: '#kakao-login-btn',
+					          success: function(authObj) {
+					        	  Kakao.API.request({
+					                  url : "/v2/user/me",
+					                  success : function(result){
+					                     var info=JSON.stringify(result);
+					                     $(location).attr('href', '/users/kakao?kakao='+result.id);
+					                  }
+					               })
+					          },
+					          fail: function(err) {
+					             alert(JSON.stringify(err));
+					          }
+					        });
+
+						    </script>
 					      <button type="button" class="btn btn-primary"  >로 &nbsp;그 &nbsp;인</button>
 					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
 					    </div>

@@ -73,10 +73,24 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		int result=0;
 		User user=userDAO.getUsers(id);
+		System.out.println("chkDup :"+id);
+		System.out.println("chkDup : "+user);
 		if(user!=null) {
 			result=1;
 		}
 		return result;
 	}
+
+	@Override
+	public User getSocial(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userDAO.getSocial(map);
+	}
+
+
+
+
+	
+	
 
 }

@@ -1,5 +1,9 @@
 package org.protectedog.web.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.service.domain.User;
@@ -35,6 +39,23 @@ public class UserController {
 	int pageSize;
 	
 	///Method
+	@RequestMapping(value="kakao", method=RequestMethod.GET)
+	public String kakao(@RequestParam("kakao") String kakao, HttpServletRequest request, HttpSession session) throws Exception{
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("kakao", kakao);
+		
+		User user=userService.getSocial(map);
+		if(user==null) {
+			request.setAttribute("kakao", kakao);
+			return "forward:/users/addUsersBaseView.jsp";
+		}else {
+			session.setAttribute("user", user);
+			return "redirect:/";
+		}
+		
+	}
+	
 	@RequestMapping(value="addUsersBase", method=RequestMethod.GET)
 	public String addUsersBase() throws Exception{
 		
@@ -63,7 +84,6 @@ public class UserController {
 		Session.setAttribute("user", user);
 		
 		return "redirect:/users/addUsersAdditionalView.jsp";
-		
 	}
 	
 	@RequestMapping(value="addUsersAdditional", method=RequestMethod.GET)
@@ -87,7 +107,6 @@ public class UserController {
 		userService.addUsersAdditional(user);
 		
 		return "redirect:/users/loginView.jsp";
-		
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
@@ -96,7 +115,6 @@ public class UserController {
 		System.out.println("/users/login : GET");
 		
 		return "redirect:/users/loginView.jsp";
-		
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
@@ -106,13 +124,36 @@ public class UserController {
 		
 		User dbUser=userService.getUsers(user.getId());
 		
+		System.out.println("aaa : "+user.getPw());
+		System.out.println("bbb : "+dbUser.getPw());
+		
 		if(user.getPw().equals(dbUser.getPw())) {
+			System.out.println("hi");
 			session.setAttribute("user", dbUser);
+
 			System.out.println("session : "+dbUser);
+
+			System.out.println(session.getAttribute("user"));
+		}else {
+			System.out.println("ERROR");
+
 		}
 		
-		return "redirect:/index.jsp";
+		System.out.println("ANG : "+session.getAttribute("user"));
 		
+		return "redirect:/index.jsp";
+	}
+	
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception{
+		
+		System.out.println("/users/logout : GET");
+		
+		System.out.println("logout session : ");
+		
+		session.invalidate();
+		
+		return "redirect:/index.jsp";
 	}
 	
 }
