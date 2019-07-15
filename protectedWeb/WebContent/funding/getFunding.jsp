@@ -1,240 +1,174 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
+<html>
 
-<html lang="ko">
-	
 <head>
-	<meta charset="EUC-KR">
+    <meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	<!-- KAKAO -->
-   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
+    <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
+    <link rel="stylesheet" href="/resources/get/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/resources/get/css/themify-icons.css" />
+    <link rel="stylesheet" href="/resources/get/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/resources/get/css/simpleLightbox.css" />
+    <link rel="stylesheet" href="/resources/get/css/nice-select.css" />
+    <link rel="stylesheet" href="/resources/get/css/animate.css" />
+    <link rel="stylesheet" href="/resources/get/css/jquery-ui.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="/resources/get/css/style.css" />
+    <link rel="stylesheet" href="/resources/get/css/responsive.css" />
 
-		.container{
-		width: 500px;
-		font-size :15px;
-		}			
+	<style>
 		#voteDate{
-		width:255px;
+		width:340px;
 		float:left;
 		}
-		.form-group{
-		padding-left:100px;
-		padding-right:80px;
-		}
-	   #btn-vote{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:100px;
-		}
-		#btn-interest{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:100px;
-		}		
-		#btn-question{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
-		
-     </style>
-   
-
-</head>
-
-<body>
-	<!-- ToolBar Start /////////////////////////////////////-->
+	</style> 
+ 
+ 
+  </head>
+  <body>
+ 	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-   	<!-- ToolBar End /////////////////////////////////////-->
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-	<div class="container">
-	<div class="form-group">
+   	<!-- ToolBar End /////////////////////////////////////-->   
+    <!--================Header Menu Area =================--> 
 
-		<div >
-			<font size=5><b>${funding.postTitle}</b></font> &emsp;${funding.id} 
-				<!-- <div  align="right"  ><b>ÀÛ¼ºÀÏ : ${funding.voteStartDate }</b></div>  -->
-	    </div>
-	    
-	    <div class="media">  
-		<div class="media-left media-middle ">
-		      <img class="media-object" src="/resources/file/fileSF/${file.fileName }" width="570px;" height="370px;" >
-		</div>
-		<div class="media-body">
-			<p/>
-			<h2 class="media-heading">${funding.fundPay }Ç¥</h2>
-			<p/>
-			<h4 class="media-heading">³²Àº±â°£ ${funding.voteRemainDate }ÀÏ</h4>
-			<p/>	 			    
+    <!--================Single Product Area =================-->
+    <div class="product_image_area">
+      <div class="container">
+        <div class="row s_product_inner">
+          <div class="col-lg-6">
+            <div class="s_product_img">
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
+              >
+                <ol class="carousel-indicators">
+                       
+ 				<c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
+					<c:if test="${i eq 0}">	
+	                  <li
+	                    data-target="#carouselExampleIndicators"
+	                    data-slide-to="${i}"
+	                    class="active"
+	                  >
+	                </c:if>
+					<c:if test="${!(i eq 0)}">	
+	                  <li
+	                    data-target="#carouselExampleIndicators"
+	                    data-slide-to="${i}"
+	                  >
+	                </c:if>	                
+                  </c:forEach>               
+                     
+                </ol>
+                <div class="carousel-inner">
+
+                  
+				<c:forEach var="name" items="${file}" varStatus="status">
+					<c:if test="${status.first}">	
+					<c:set var ="className" value="carousel-item active"/>
+	                </c:if>
+					<c:if test="${!(status.first)}">	
+					<c:set var ="className" value="carousel-item"/>
+	                </c:if>	                
+                    <div class="${className}">	                
+                    <img
+                      class="d-block w-100"
+                      src="/resources/file/fileSF/${name.fileName}" height="450px;" 
+                    />
+                  </div>			
+                  </c:forEach>
+          
+                </div>
+              </div>
+            </div>
+          </div>
+ 			 <div class="col-lg-5 offset-lg-1">
+             <div class="s_product_text">			 
+            <div>
+             <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.id}</b> 
+			<h3>${funding.fundPay }í‘œ</h3>
+			<h4 class="media-heading">ë‚¨ì€ê¸°ê°„ ${funding.voteRemainDate }ì¼</h4> 			    
 			 <div class="progress">
 			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${30-funding.voteRemainDate}%;"></div>
 			 </div>
-		      <div  id="voteDate" >${funding.voteStartDate}</div>  <div >${funding.voteEndDate}</div>
-			<p/>	 
-			 <div><h2>ÅõÇ¥À²&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h2></div>
-			<p/>	 
-			 <div><h2>ÇöÀçÅõÇ¥ÀÎ¿ø&ensp;${funding.voterCount}¸í</h2></div>		
-			 <p/>	 
-			  <div>
-	  			<button type="button" id="btn-vote">ÅõÇ¥ÇÏ±â</button>
-	  			<button type="button" id="btn-interest">°ü½Éµî·Ï</button>
-		 	 </div>		 
-		 	 <p/>
-			  <div>
-	  			<button type="button" id="btn-question">¹®ÀÇÇÏ±â</button>
-		 	 </div>		
-		 	 <p/><p/><p/><p/><p/><p/> 
-		 	 	 
-			<a href="#"  id="twitter"  title="Æ®À§ÅÍ·Î °øÀ¯"><img src="/resources/file/others/twitter.png"></a>
-			<a href="#" id="facebook" title="ÆäÀÌ½ººÏÀ¸·Î °øÀ¯"><img src="/resources/file/others/facebook.png"></a>
-			<a href="#"  id="naver" title="³×ÀÌ¹ö·Î °øÀ¯"><img src="/resources/file/others/naver.png"></a>
-			<a href="#"  id="kakao" title="Ä«Ä«¿ÀÅåÀ¸·Î °øÀ¯"> <img src="/resources/file/others/kakao.png" ></a>
+		      <div  id="voteDate" >${funding.voteStartDate}</div>  <div >${funding.voteEndDate}</div> 
+		     <br/>
+			 <div><h3>íˆ¬í‘œìœ¨&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h3></div>
+			 <div><h3>í˜„ì¬íˆ¬í‘œì¸ì›&ensp;${funding.voterCount}ëª…</h3></div>		 	 
+               <br/>  
+              <div class="card_area">
+                <a class="main_btn" href="#">íˆ¬í‘œí•˜ê¸°</a> 
+                <a class="icon_btn" href="#">
+                  <i class="lnr lnr lnr-heart"></i>
+                </a>
+              </div>
+              <br/>
+			  <div class="card_area">
+	  			<a class="main_btn" href="#">ë¬¸ì˜í•˜ê¸°</a> 
+	  			<br/>
+		 	 </div>	
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+   <br><br><br/>
+    <!--================End Single Product Area =================-->
 
-		</div>
-		</div>
+   <jsp:include page="getUnderFunding.jsp" />
+    <!--================End Product Description Area =================-->
 
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>ÈÄ¿ø¹øÈ£</strong></div>
-			<div class="col-xs-8 col-md-4">${funding.postNo}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>ÈÄ¿ø¸ñÇ¥±İ¾×</strong></div>
-			<div class="col-xs-8 col-md-4">${funding.fundTargetPay }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>ÈÄ¿ø¸ñÇ¥±â°£</strong></div>
-			<div class="col-xs-8 col-md-4">${funding.fundTargetDay}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>±ÛÁ¦¸ñ</strong></div>
-			<div class="col-xs-8 col-md-4">${funding.postTitle}</div>
-		</div>		
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>±Û³»¿ë</strong></div>
-			<div class="col-xs-8 col-md-4">${funding.postContent}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>ÈŞ´ëÀüÈ­¹øÈ£</strong></div>
-			<div class="col-xs-8 col-md-4">${funding.phone}</div>
-		</div>
+    <!--================ start footer Area  =================-->
+    <!-- footer Start /////////////////////////////////////-->
+	 <jsp:include page="/layout/footer.jsp"></jsp:include>
+   	<!-- footer End /////////////////////////////////////-->  
+    <!--================ End footer Area  =================-->
 
- 		<hr/>
- 			
-		<div class="row">	
-	  		<div >
-	  			<button type="button" class="btn btn-primary">¼öÁ¤</button>
-	  			<button type="button" class="btn btn-warning">Ãë¼Ò</button>
-	  		</div> 		
-	 	</div>
-	 	
-	 	<br/><br/>			
-		<br/>
-	</div>	
- 	</div>
- 	
- 	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/resources/get/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/get/js/popper.js"></script>
+    <script src="/resources/get/js/bootstrap.min.js"></script>
+    <script src="/resources/get/js/stellar.js"></script>
+    <script src="/resources/get/js/simpleLightbox.min.js"></script>
+    <script src="/resources/get/js/jquery.nice-select.min.js"></script>
+    <script src="/resources/get/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/resources/get/js/isotope-min.js"></script>
+    <script src="/resources/get/js/owl.carousel.min.js"></script>
+    <script src="/resources/get/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/resources/get/js/mail-script.js"></script>
+    <script src="/resources/get/js/jquery-ui.js"></script>
+    <script src="/resources/get/js/jquery.waypoints.min.js"></script>
+    <script src="/resources/get/js/jquery.counterup.js"></script>
+    <script src="/resources/get/js/theme.js"></script>
+    
+ 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	
-		//=============  Ä«Ä«¿ÀÅå °øÀ¯ÇÏ±â=============	
-
-		 
-	 $(function() {
-		 
-			//=============  ¼öÁ¤ Event  Ã³¸® =============	
-			 $( "button.btn.btn-primary" ).on("click" , function() {
-				 self.location = "/funding/updateFunding?postNo=${funding.postNo}"
-				});
-			
-			//=============  Ãë¼Ò Event  Ã³¸® =============				 
-			 $( "button.btn.btn-warning" ).on("click" , function() {
-				 self.location = "/index.jsp"
-				});
-			
-			//============= SNS°øÀ¯ Event  Ã³¸® =============	
-			$( "#twitter" ).on("click" , function() {
-		 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-				});		
-			
-			$( "#naver" ).on("click" , function() {
-		 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-				});		
-			
-			$( "#facebook" ).on("click" , function() {
-		 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-				});			
-			
-			$( "#kakao" ).on("click" , function() {
-				sendLinkKakao()
-				});	
-			 
-	 });
-		
-	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
-	 function sendLinkKakao(){
-	     Kakao.Link.sendDefault({
-	       objectType: 'feed',
-	       content: {
-	         title: 'À¯±â°ßº¸È£',
-	         description: '¸Û¸Û',
-	         imageUrl:document.location.href,
-	         link: {
-	           mobileWebUrl: document.location.href,
-	           webUrl:document.location.href
-	         }
-	       },
-	       buttons: [       
-	         {
-	           title: '¸µÅ© ¿­±â',
-	           link: {
-	             mobileWebUrl: document.location.href,
-	             webUrl: document.location.href
-	           }
-	         }
-	       ]
-	     }); 
-	 }
-	
-	</script>
- 	
-</body>
-
+    $(function(){
+    
+	//============= íˆ¬í‘œí•˜ê¸° Event  ì²˜ë¦¬ =============	
+ 	$( "a:contains('íˆ¬í‘œí•˜ê¸°')" ).on("click" , function() {
+ 		alert("íˆ¬í‘œ")
+		//$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+	});   
+    
+	//============= ë¬¸ì˜í•˜ê¸° Event  ì²˜ë¦¬ =============	
+ 	$( "a:contains('ë¬¸ì˜í•˜ê¸°')" ).on("click" , function() {
+		$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+	});   
+    });
+    </script>
+    
+  </body>
 </html>
-

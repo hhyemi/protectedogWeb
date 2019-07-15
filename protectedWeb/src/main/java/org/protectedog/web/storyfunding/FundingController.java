@@ -127,7 +127,7 @@ public class FundingController {
 		List<FileDog> file = fileService.getFile(postNo);
 
 
-		model.addAttribute("file",file.get(0));
+		model.addAttribute("file",file);
 		model.addAttribute("funding", funding);
 
 		return "forward:/funding/getFunding.jsp";
