@@ -43,8 +43,7 @@ body {
 		$("#commentGo").on(
 				"click",
 				function() {
-					$("form").attr("action", "/comment/addComment?postNo=")
-							.attr("method", "POST").submit();
+					$("form").attr("action", "/comment/addComment?postNo="+${board.postNo}).attr("method", "POST").submit();
 				});
 
 		//	Äü¸Þ´º¹Ù
@@ -77,7 +76,7 @@ body {
 		<br>
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
-				<input type="text" name="reply" class="form-control"
+				<input type="text" name="commentContent" class="form-control"
 					style="width: 100%; height: 40px" placeholder="´ñ±ÛÀÔ·Â" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
