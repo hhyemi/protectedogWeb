@@ -59,7 +59,7 @@
 						    <span class="text">Sign in</span><span class="text">sign up</span>
 						    </c:if>
 						    <c:if test="${sessionScope.user.role != null}">
-						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
+						    <span class="text">${sessionScope.user.nickName} 님 환영합니다.</span>
 						    </c:if>
 					    </div>
 				    </div>
@@ -80,18 +80,17 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">분양</a>
-                <a class="dropdown-item" href="product-single.html">실종</a>
+              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
+                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
+                <a class="dropdown-item" href="/adoptreview/addAdoptReview">경로테스트</a>
 
               </div>
             </li>
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토리펀딩</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">스토리펀딩</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              	<a class="dropdown-item" href="/funding/listFunding">후원신청</a>
+                <a class="dropdown-item" href="product-single.html">후원게시</a>
               </div>
             </li>
             <li class="nav-item dropdown">

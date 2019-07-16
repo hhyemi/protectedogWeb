@@ -63,7 +63,7 @@ public class AdoptReviewController {
 	@RequestMapping( value="addAdoptReview", method=RequestMethod.GET )
 	public String addAdoptReview( ) throws Exception {
 
-		System.out.println("/adoptreview/addBoard : GET");
+		System.out.println("/adoptreview/addAdoptReview : GET");
 
 		return "forward:/adoptreview/addAdoptReview.jsp";
 	}
@@ -81,6 +81,7 @@ public class AdoptReviewController {
 		//Business Logic
 //		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		System.out.println("파일확인 : "+product.getFileName());
+		System.out.println("======================"+board);
 		boardService.addBoard(board);
 		
 		return "forward:/adoptreview/getAdoptReview.jsp";
@@ -96,7 +97,7 @@ public class AdoptReviewController {
 		
 		//Business Logic
 		Board board = boardService.getBoard(postNo);
-		board.setRecommendCount(board.getRecommendCount()+1);
+//		board.setViewCount(board.getViewCount()+1);
 		boardService.updateViewCount(board);
 		// Model 과 View 연결
 		model.addAttribute("board", board);	
@@ -126,8 +127,8 @@ public class AdoptReviewController {
 	
 	
 	
-	@RequestMapping( value="updateBoard" , method=RequestMethod.POST)
-	public String updateBoard( @ModelAttribute("board") Board board, Model model
+	@RequestMapping( value="updateAdoptReview" , method=RequestMethod.POST)
+	public String updateAdoptReview( @ModelAttribute("board") Board board, Model model
 //								,MultipartHttpServletRequest mtfRequest
 												) throws Exception{
 

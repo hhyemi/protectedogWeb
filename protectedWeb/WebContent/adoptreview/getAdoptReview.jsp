@@ -43,17 +43,15 @@
 	
 		$(function() {
 			$( "button:contains('수정')" ).on("click" , function() {
-				alert("신청완료 dialog")
 				self.location = "/adoptreview/updateAdoptReview?postNo=${board.postNo}"
 			});
 			
 			$( "button:contains('삭제')" ).on("click" , function() {
-				alert("신청완료 dialog")
+				alert("삭제완료 dialog")
 				self.location = "/adoptreview/delAdoptReview?postNo=${board.postNo}"
 			});
 			
 			$( "button:contains('목록')" ).on("click" , function() {
-				alert("신청완료 dialog")
 				$("form").attr("method" , "POST").attr("action" , "/adoptreivew/listAdoptReview").submit();
 			});
 			
@@ -141,6 +139,8 @@
      var route = "${board.route}";
      var routeTest = [];
      var routeMark = [];
+     var infowindowF;
+     var infowindowL;
      
      
      if (route.indexOf("#") != -1){
@@ -168,6 +168,9 @@
 	        map: map
         });
 	    
+	    infowindowF = new google.maps.InfoWindow();
+        infowindowL = new google.maps.InfoWindow();
+	    
 	    var aaa = "";
 	    
 	    for ( i=0; i<routeTest.length; i++){
@@ -186,7 +189,15 @@
     			map: map
 		    });
 		    
+		    markers.push(marker);
 	    }
+	    
+		// pop up
+	    infowindowF.setContent("출발");
+        infowindowF.open(map, markers[0]);
+        
+        infowindowL.setContent("도착");
+        infowindowL.open(map, markers[markers.length-1]);
      }
 	      
  	 </script>

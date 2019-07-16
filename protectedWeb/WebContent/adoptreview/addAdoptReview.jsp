@@ -48,13 +48,9 @@
   	
 	
 		 $(function() {
-			$( "button:contains('신청')" ).on("click" , function() {
+			$( "button:contains('등록')" ).on("click" , function() {
 				fncAddApply();
 			});
-			
-// 			$( "button:contains('확인')" ).on("click" , function() {
-// 				alert(  $('#inputTest').val()  );
-// 			});
 			
 			$( "button:contains('보호할개')" ).on("click" , function() {
 				self.location = "../index.jsp"
@@ -71,7 +67,7 @@
 	
 		
 		function fncAddApply() {
-			alert("신청완료 dialog")
+// 			alert("등록완료 dialog")
 			$("form").attr("method" , "POST").attr("action" , "/adoptreview/addAdoptReview").submit();
 		}
 		
@@ -130,7 +126,7 @@
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >신청</button>
+		      <button type="button" class="btn btn-primary"  >등록</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취소</a>
 			</div>
 		  </div>
@@ -146,48 +142,65 @@
 	  	  var poly;
 	      var map;
 	      var markers = [];
+          var infowindowF;
+          var infowindowL;
 
 	      function initMap() {
-	        map = new google.maps.Map(document.getElementById('map'), {
-		        zoom: 13,
-		        center: {lat: 37.564, lng:  127.0017} 
-	        });
-
-	        poly = new google.maps.Polyline({
-		        strokeColor: '#000000',
-		        strokeOpacity: 0.5,
-		        strokeWeight: 5,
-		        map: map
-	        });
-
-	        map.addListener('click', addLatLng);
+	    	  
+		        map = new google.maps.Map(document.getElementById('map'), {
+			        zoom: 15,
+			        center: {lat: 37.564, lng:  127.0017} 
+		        });
+	
+		        poly = new google.maps.Polyline({
+			        strokeColor: '#000000',
+			        strokeOpacity: 0.5,
+			        strokeWeight: 5,
+			        map: map
+		        });
+		        
+		        infowindowF = new google.maps.InfoWindow();
+		        infowindowL = new google.maps.InfoWindow();
+		        
+		        map.addListener('click', addLatLng);
 	      }
 
-	     
+	      
 	      function addLatLng(event) {
 	    	  
 		        if (markers.length <5){
 		        	 
 		        	var path = poly.getPath();
-// 		        	var infowindow = new google.maps.InfoWindow();
 		 	        path.push(event.latLng);
-// 		 	        alert(event.latLng);
 		 	        
 		       		var marker = new google.maps.Marker({
 				        position: event.latLng,
 				        title: '#' + path.getLength(),
 				        map: map
 		       		});
+		       		markers.push(marker);
 		       		
 		        	$( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
+		        	
+		        	// pop up
+		        	infowindowF.setContent("출발");
+		 	        infowindowF.open(map, markers[0]);
+		 	        
+		 	        if(markers.length > 1){
+			        	infowindowL.setContent("도착");
+			 	        infowindowL.open(map, marker);
+			 	        
+// 			 	        if(infowindowL.getPosition() != undefined){
+// 				        	infowindowL.setContent("도착");
+// 				 	        infowindowL.open(map, marker);
+// 			 	        }
+		 	        }
 		        	
 		        }else{
 			        alert("5개까지 지정 가능함 dialog 추가");
 			    }
-// 		        infowindow.setContent("<input type=\"text\" id=\"inputTest\" value=\"\"><button>확인<\/button>");
-// 	 	        infowindow.open(map, marker);
-		        markers.push(marker);
-
+		        
+		       
 		        if (marker != undefined){
 		        	
 		            marker.addListener('rightclick', function() {
@@ -205,6 +218,13 @@
 						
 				    	for (var i = 0; i < markers.length; i++) {
 				    		test += markers[i].position+"#";
+				    		
+				    		//pop up
+				        	infowindowF.setContent("출발");
+				 	        infowindowF.open(map, markers[0]);
+				 	        
+				 	        infowindowL.setContent("도착");
+				 	        infowindowL.open(map, markers[markers.length-1]);
 					 	}
 				    	
 				    	$( "#route ").val(  test  );

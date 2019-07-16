@@ -144,26 +144,24 @@ public class BoardServiceTest {
 		Assert.assertEquals(1, board.getRecommendCount());
 	 }
 	 
-	 
-	 
-//	 //@Test	//확인
-//	 public void testDelBoard() throws Exception{
-//		 
-//		Board board = boardService.getBoard(10041);
-//		Assert.assertNotNull(board);
-//		
-////		Assert.assertEquals("", board.getStatusCode());
-//		board.setStatusCode('0');;
-//		boardService.delBoard(board);
-//		
-//		board = boardService.getBoard(10041);
-//		Assert.assertNotNull(board);
-//
-//		System.out.println("\n :: console 확인 :: "+board);
-//
-//		Assert.assertEquals('0', board.getStatusCode());
-//	 }
-	
+	 //@Test	//확인
+	 public void testDelBoard() throws Exception{
+		 
+		Board board = boardService.getBoard(10041);
+		Assert.assertNotNull(board);
+		
+//		Assert.assertEquals("", board.getStatusCode());
+		board.setDelCode('0');;
+		boardService.delBoard(board);
+		
+		board = boardService.getBoard(10041);
+		Assert.assertNotNull(board);
+
+		System.out.println("\n :: console 확인 :: "+board);
+
+		Assert.assertEquals('0', board.getDelCode());
+	 }
+
 
 	 //@Test	//==>확인
 	 public void testListBoard() throws Exception{
