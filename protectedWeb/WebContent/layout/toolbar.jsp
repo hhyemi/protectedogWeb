@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +30,16 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		$("span:contains('Sign in')").on("click", function(){
+    			$(self.location).attr("href","/users/login");
+    		});
+    	});
+    </script>
+    
     <style type="text/css">
     	.py-1 bg-black{
     		min-height: 27px;
@@ -48,9 +60,22 @@
 <!--                       <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
 <!--                       <span class="text">youremail@email.com</span> -->
                    </div>
-                   <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                      <span class="text">Sign in | Sign up</span>
+                   <c:if test="${sessionScope.user.role eq null}">
+                   <div class="col-md-2 pr-4 d-flex topper align-items-center text-lg-right" style="margin : 0px; padding: 0px;">
+
+						    <span class="text">Sign in</span>
                    </div>
+                   <div class="col-md-2 pr-4 d-flex topper align-items-center text-lg-right" style="margin : 0px; padding: 0px;">
+						    <span class="text">Sign up</span>
+						   
+                   </div>
+                    </c:if>
+                    
+                    <c:if test="${sessionScope.user.role != null}">
+                    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right" style="margin : 0px; padding: 0px;">
+						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>	
+					</div>
+					</c:if>
                 </div>
              </div>
           </div>
@@ -58,7 +83,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
        <div class="container">
-         <a class="navbar-brand" href="/index0.jsp">#PROTECTEDOG</a>
+         <a class="navbar-brand" href="/index.jsp">#PROTECTEDOG</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
            <span class="oi oi-menu"></span> Menu
          </button>

@@ -40,11 +40,12 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("BoardMapper.getBoard", postNo);
 	}
 	
-	public Map<String, Object> listBoard(Search search, String boardCode) throws Exception {
+	public Map<String, Object> listBoard(Search search, String boardCode, int order) throws Exception {
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
 		map.put("endRowNum",  search.getEndRowNum()+"" );
 		map.put("startRowNum",  search.getStartRowNum()+"" );
+		map.put("order", order);
 		
 		List<Board> list = sqlSession.selectList("BoardMapper.listBoard", map); 
 
@@ -75,6 +76,12 @@ public class BoardDAOImpl implements BoardDAO{
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
 	public int getTotalCount(String boardCode) throws Exception {
 		return sqlSession.selectOne("BoardMapper.getTotalCount", boardCode);
+	}
+	
+	// 게시판 상위 5개의 게시글을 조회수 내림차순으로 출력하는 메소드
+	public List<Board> listBoardRankingSearch(String boardCode) throws Exception {
+		
+		return sqlSession.selectList("BoardMapper.listBoardRankingSearch", boardCode);
 	}
 
 

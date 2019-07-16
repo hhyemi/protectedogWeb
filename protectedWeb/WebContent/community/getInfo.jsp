@@ -22,9 +22,9 @@
 	$(function() {
 
 		$("button:contains('수정')").on("click", function() {
-			alert("수정");
+			//alert($("input[type='hidden']").val());
 			// 			$(self.location).attr("href","/community/updateInfo.jsp");
-			self.location = "/info/updateView";
+			self.location = "/info/updateView?postNo="+$("input[type='hidden']").val();
 		});
 
 		$("button:contains('삭제')").on(
@@ -43,6 +43,10 @@
 	});
 </script>
 <style type="text/css">
+
+body {
+	position: relative;
+}
 .container {
 	font-size: 14px;
 }
@@ -66,9 +70,9 @@
 <body>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-
+		
 	<div class="container">
-
+		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
 
@@ -99,5 +103,7 @@
 	</div>
 
 		<jsp:include page="/common/comment.jsp"></jsp:include>
+		
+		<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

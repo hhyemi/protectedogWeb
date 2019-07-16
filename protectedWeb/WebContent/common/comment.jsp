@@ -66,7 +66,8 @@ body {
 		<!-- 		</div> -->
 
 		<hr />
-
+	
+		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row">
 			<div class="col-sm-12 col-md-12" align="center">
 				비회원은 댓글을 달 수 없습니다 <a href="#" style="color: #0b43b3;">로그인</a> 후 이용해
@@ -74,6 +75,9 @@ body {
 			</div>
 		</div>
 		<br>
+		</c:if>
+		
+		<c:if test="${sessionScope.user.role != null}">
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
 				<input type="text" name="commentContent" class="form-control"
@@ -88,8 +92,8 @@ body {
 				</button>
 			</div>
 		</div>
-
 		<br>
+		</c:if>
 
 		<c:forEach var="comment" items="${list}">
 			<div class="row">

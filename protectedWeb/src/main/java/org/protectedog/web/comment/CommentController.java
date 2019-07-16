@@ -1,5 +1,8 @@
 package org.protectedog.web.comment;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import org.protectedog.common.Search;
 import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Comment;
+import org.protectedog.service.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,8 +52,11 @@ public class CommentController {
 
 		System.out.println(" ============================== addComment ==================================");
 
+		User user = (User) session.getAttribute("user");
+		comment.setId(user.getId());
+		comment.setNickName(user.getNickname());
 		comment.setBoardCode(boardCode);
-		
+	
 		int postNo = Integer.parseInt( request.getParameter("postNo") ) ; 
 		comment.setPostNo( postNo );
 		
@@ -57,14 +64,14 @@ public class CommentController {
 
 		commentService.addComment(comment);
 
-		return "redirect:/info/getInfo?prodNo="+postNo ;
+		return "redirect:/info/getInfo?postNo="+postNo ;
 	}
-}
+
 
 //	@RequestMapping(value = "listComment")
 //	public String listComment(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
 //
-//		System.out.println(" ============================== listInfo ==================================");
+//		System.out.println(" ============================== listComment ==================================");
 //
 //		if (search.getCurrentPage() == 0) {
 //			search.setCurrentPage(1);
@@ -79,7 +86,7 @@ public class CommentController {
 //		System.out.println(" listInfo search : " + search);
 //
 //		// Business logic ผ๖วเ
-//		Map<String, Object> map = commentService.listComment(postNo, search);
+//		Map<String, Object> map = commentService.list
 //		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, search.getPageSize());
 //		System.out.println(resultPage);
 //
@@ -92,6 +99,8 @@ public class CommentController {
 //
 //		return "forward:/community/listInfo.jsp";
 //	}
+	
+}
 //
 //	@RequestMapping(value = "getInfo", method = RequestMethod.GET)
 //	public String getInfo(@RequestParam("postNo") int postNo, @ModelAttribute("search") Search search, Model model) throws Exception {
