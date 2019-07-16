@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Participate {
 
-	private String participateNo;
+	private int participateNo;
 	private String id;
 	private String nickName;
 	private int postNo;
@@ -14,11 +14,11 @@ public class Participate {
 	public Participate() {
 	}
 
-	public String getParticipateNo() {
+	public int getParticipateNo() {
 		return participateNo;
 	}
 
-	public void setParticipateNo(String participateNo) {
+	public void setParticipateNo(int participateNo) {
 		this.participateNo = participateNo;
 	}
 
