@@ -96,6 +96,7 @@
 		<input type="hidden" name="id" value="user03" >
 		<input type="hidden" name="nickName" value="안녕" >
 		<input type="hidden" name="boardCode" value="AR" >
+		<input type="hidden" name="postNo" value="${ board.postNo }" >
 		
 		  
 
@@ -122,6 +123,7 @@
 		    <div id="map" style="width: 600px; height: 400px;">${board.route }</div>
 		      <input type="hidden" class="form-control" id="route" name="route" value="${board.route }">
 		      <span id="pop"></span>
+		      <p>지도를 우클릭하고 다시 경로를 설정하세요.</p>
 		    </div>
 		    <p></p>
 		  </div>
@@ -151,18 +153,13 @@
 	      var routeTest = [];
 	      var routeMark = [];
 	      
-	      
+	      //마커가 하나라도 있을때
 	      if (route.indexOf("#") != -1){
 	       	  var routeArray = route.split("#");
-	       	console.log(route);
-       		console.log(routeArray);
+	       	  
 	       	  for ( i=0; i<routeArray.length-1; i++){
 	       		routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
 	       		routeMark[i] = "marker"+i.toString();
-	       		
-	       		console.log(route);
-	       		console.log(routeTest);
-	       		console.log(routeMark);
 	       	  }   	  
 	      }
 	      
@@ -181,7 +178,9 @@
 		        strokeWeight: 5,
 		        map: map
 	        });
+	        
 	        var aaa = "";
+	        
 	        for ( i=0; i<routeTest.length; i++){
 		    	
 		 	    var path = poly.getPath();
@@ -198,9 +197,19 @@
 	    			map: map
 			    });
 			    
+			    markers.push(marker);
+			    
 		    }
 
 	        map.addListener('click', addLatLng);
+	        map.addListener('rightclick', function() {
+	        	for (var i = markers.length-1; i >=0; i--) {
+	        		markers[i].setMap(null);
+	        		markers.splice(i, 1 );
+	        		poly.getPath().removeAt(i);
+	        		$( "#route ").val( '' );
+	            }
+       	    });
 	      }
 
 	     

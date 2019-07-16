@@ -64,15 +64,10 @@
 				self.location = "../index.jsp"
 			});
 			
-			if( $( '#boardCode' ).val()=="AD"){
-				$( "button:contains('글쓰기')" ).on("click" , function() {
-					self.location = "../adopt/getTerms.jsp"
-				});
-			} else {
-				$( "button:contains('글쓰기')" ).on("click" , function() {
-					self.location = "/adopt/addAdopt?boardCode=MS"
-				});
-			}
+			$( "button:contains('글쓰기')" ).on("click" , function() {
+				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
+			});
+
 			//==> userId LINK Event End User 에게 보일수 있도록 
 			$( "td:nth-child(2)" ).css("color" , "red");
 			
@@ -93,6 +88,8 @@
 </head>
 
 <body>
+
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
 	<button type="button" class="btn btn-primary">보호할개</button>

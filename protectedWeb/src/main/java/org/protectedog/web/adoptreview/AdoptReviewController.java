@@ -126,8 +126,8 @@ public class AdoptReviewController {
 	
 	
 	
-	@RequestMapping( value="updateBoard" , method=RequestMethod.POST)
-	public String updateBoard( @ModelAttribute("board") Board board, Model model
+	@RequestMapping( value="updateAdoptReview" , method=RequestMethod.POST)
+	public String updateAdoptReview( @ModelAttribute("board") Board board, Model model
 //								,MultipartHttpServletRequest mtfRequest
 												) throws Exception{
 

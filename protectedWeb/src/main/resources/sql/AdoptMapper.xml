@@ -15,7 +15,9 @@
 		<result property="postContent" 		column="post_content" 		jdbcType="VARCHAR"/>
 		<result property="phone" 			column="phone" 				jdbcType="VARCHAR"/>
 		<result property="adoptArea" 		column="adopt_area" 		jdbcType="VARCHAR"/>
+		<result property="areaKr" 			column="area_kr" 			jdbcType="VARCHAR"/>
 		<result property="location" 		column="location" 			jdbcType="VARCHAR"/>
+		<result property="locationKr" 		column="location_kr"	 	jdbcType="VARCHAR"/>
 		<result property="regDate" 			column="reg_date" 			jdbcType="DATE"/>
 		<result property="dogBreed" 		column="dog_breed" 			jdbcType="VARCHAR"/>
 		<result property="dogWeight"		column="dog_weight" 		jdbcType="NUMERIC"/>
@@ -39,11 +41,11 @@
 	  </selectKey>
 	 	INSERT
 		INTO adopt (board_code, post_no, id, post_title, post_content, phone, 
-					adopt_area, location, reg_date, 
+					adopt_area, area_kr, location, location_kr, reg_date, 
 					dog_breed, dog_weight, dog_size, dog_gender, dog_pay, 
 					dog_status, dog_char, dog_personality, dog_date, status_code) 
 		VALUES	   (#{boardCode}, #{postNo}, #{id}, #{postTitle}, #{postContent}, #{phone}, 
-					#{adoptArea:VARCHAR}, #{location}, SYSDATE, 
+					#{adoptArea:VARCHAR}, #{areaKr:VARCHAR}, #{location}, #{locationKr}, SYSDATE, 
 					#{dogBreed:VARCHAR}, #{dogWeight}, #{dogSize}, #{dogGender}, #{dogPay},
 					#{dogStatus}, #{dogChar}, #{dogPersonality}, #{dogDate} , #{statusCode})
 	 </insert>
@@ -54,7 +56,7 @@
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getAdopt"	parameterType="int"		resultMap="adoptSelectMap">
 		SELECT
-		board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, 
+		board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, 
 		dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
 		FROM adopt 
 		WHERE post_no = #{value}
@@ -70,7 +72,9 @@
 			post_title		= #{postTitle},
 			post_content	= #{postContent},
 			adopt_area		= #{adoptArea:VARCHAR},
+			area_kr			= #{areaKr:VARCHAR},
 			location		= #{location},
+			location_kr		= #{locationKr},
 			dog_breed		= #{dogBreed:VARCHAR},
 			dog_weight		= #{dogWeight},
 			dog_size		= #{dogSize},
@@ -101,7 +105,7 @@
 	<select  id="listAdopt"  parameterType="map"	resultMap="adoptSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-  				FROM ( SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
+  				FROM ( SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
 	  							dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
 						FROM adopt
 						<where>
@@ -130,7 +134,7 @@
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, location, reg_date, dog_breed, 
+	  	FROM(	SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
 	  					dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
 				FROM adopt
 				<where>

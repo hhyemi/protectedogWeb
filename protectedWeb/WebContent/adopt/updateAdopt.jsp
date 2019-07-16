@@ -268,32 +268,36 @@
       
       
       function initMap() {
-    	  if( $('input[name=boardCode]').val().trim() =='AD'){
-    		  mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+    	
+    	if( $('input[name=boardCode]').val().trim() =='AD'){
+    		mapArea = new google.maps.Map(document.getElementById('mapArea'), {
   			    zoom: 11,
   			    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
   			    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
-  		});
+  			});
   	    
-  	    var aaa = "";
-  	    for ( i=0; i<arrayTest.length; i++){
+  	   		var aaa = "";
+  	    
+  	   		for ( i=0; i<arrayTest.length; i++){
   	    	
-  		    markerArea= arrayMark[i];
-  		
-  		    markerArea = new google.maps.Marker({
-  		        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
-  		    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
-  		        map: mapArea
-  		    });
-  		 	markersArea.push(markerArea);
-    		$.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+arrayTest[i]+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
-  	            success: function(data){
-  	            	aaa += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
-  	                $('#pop').text(aaa);
-  	            }
-  	 		});
+	  		    markerArea= arrayMark[i];
+	  		
+	  		    markerArea = new google.maps.Marker({
+	  		        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
+	  		    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
+	  		        map: mapArea
+	  		    });
+	  		    
+	  		 	markersArea.push(markerArea);
+	  		 	
+	    		$.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+arrayTest[i]+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+	  	            success: function(data){
+	  	            	aaa += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
+	  	                $('#pop').text(aaa);
+	  	            }
+	  	 		});
     		 	
-  	    }//$('#pop').text(aaa);
+  	  		}//$('#pop').text(aaa);
 	
 	        mapArea.addListener('click', function(event) {
 	            	addMarker(event.latLng, "aaa");
@@ -307,7 +311,7 @@
 	            }
 	        	$('#pop').text('');
            });
-    	  }
+    	}
 	///////////////////////////////////////////////////////////////////////////
 	
 	    	var centerLoca = {lat: localat, lng: localng};

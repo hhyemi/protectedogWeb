@@ -5,7 +5,7 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -64,8 +64,9 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">분양</a>
-                <a class="dropdown-item" href="product-single.html">실종</a>
+              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양글리스트</a>
+              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종글리스트</a>
+              	<a class="dropdown-item" href="/adoptreview/addAdoptReview">후기</a>
 
               </div>
             </li>
