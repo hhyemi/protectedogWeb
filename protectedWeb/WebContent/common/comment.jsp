@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html lang="ko">
 <head>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--  bootstrap CDN  -->
+<!-- <meta charset="EUC-KR"> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+<!--  bootstrap CDN -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -18,11 +18,6 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--  bootstrap DropDown CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!--  bootstrap DropDown JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 <!--  CSS -->
 <style>
@@ -31,7 +26,7 @@ body {
 }
 
 .temp {
-	height : 300px;
+	height: 300px;
 }
 </style>
 
@@ -42,13 +37,14 @@ body {
 				function() {
 					$(self.location).attr(
 							"href",
-							"/purchase/addPurchaseView?prod_no="+ $("#prodNo").text().trim());
+							"/purchase/addPurchaseView?prod_no="
+									+ $("#prodNo").text().trim());
 				});
 		$("#commentGo").on(
 				"click",
 				function() {
-					$("form").attr("action",
-							"/comment/addComment?postNo=").attr("method", "POST").submit();
+					$("form").attr("action", "/comment/addComment?postNo=")
+							.attr("method", "POST").submit();
 				});
 
 		//	퀵메뉴바
@@ -62,11 +58,7 @@ body {
 </head>
 
 <body>
-	
-	<form class="container">
-		<jsp:include page="../index.jsp"></jsp:include>
-	</form>
-				
+
 	<form class="container">
 		<!-- 		<div class="row"> -->
 		<!-- 			<div class="col-xs-4 col-md-12" align="left"> -->
@@ -100,54 +92,32 @@ body {
 
 		<br>
 
-		<div class="row">
-			<div class="col-sm-1 col-md-1" align="center">
-				<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;"/>
+		<c:forEach var="comment" items="${list}">
+			<div class="row">
+				<div class="col-sm-1 col-md-1" align="center">
+					<img src="https://via.placeholder.com/80"
+						style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
+				</div>
+				<div class="col-sm-9 col-md-9" align="left">
+					<h4>
+						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp;
+					</h4>
+					<h5>${comment.commentContent}</h5>
+					<span class="glyphicon glyphicon-refresh"></span> &nbsp; <span
+						class="glyphicon glyphicon-remove"></span> &nbsp; <span
+						class="glyphicon glyphicon-alert"></span> &nbsp; <span
+						class="glyphicon glyphicon-plus"></span>
+				</div>
+				<div class="col-sm-2 col-md-2" align="center">
+					<span class="glyphicon glyphicon-chevron-up"></span> <br>
+					<h4>
+						<b>${comment.likeCount}</b>
+					</h4>
+					<span class="glyphicon glyphicon-chevron-down"></span>
+				</div>
 			</div>
-			<div class="col-sm-9 col-md-9" align="left">
-				<h4>
-					<b>z1존은우</b>&nbsp; <small>2019-07-10 10:23:27</small>&nbsp;
-				</h4>
-				<h5>찾아라 비밀의 열쇠</h5>
-				<span class="glyphicon glyphicon-refresh"></span> &nbsp; <span
-					class="glyphicon glyphicon-remove"></span> &nbsp; <span
-					class="glyphicon glyphicon-alert"></span> &nbsp;
-					<span class="glyphicon glyphicon-plus"></span>
-			</div>
-			<div class="col-sm-2 col-md-2" align="center">
-				<span class="glyphicon glyphicon-chevron-up"></span> <br>
-				<h4>
-					<b>0</b>
-				</h4>
-				<span class="glyphicon glyphicon-chevron-down"></span>
-			</div>
-		</div>
-
-		<br>
-
-		<div class="row">
-			<div class="col-sm-1 col-md-1" align="center">
-				<img src="https://via.placeholder.com/80"
-					style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
-			</div>
-			<div class="col-sm-9 col-md-9" align="left">
-				<h4>
-					<b>작은타우렌</b>&nbsp; <small>2019-07-10 10:23:27 수정됨</small>&nbsp;
-				</h4>
-				<h5>바르고 고운말을 사용합시다</h5>
-				<span class="glyphicon glyphicon-refresh"></span> &nbsp; <span
-					class="glyphicon glyphicon-remove"></span> &nbsp; <span
-					class="glyphicon glyphicon-alert"></span>  &nbsp;
-					<span class="glyphicon glyphicon-plus"></span>
-			</div>
-			<div class="col-sm-2 col-md-2" align="center">
-				<span class="glyphicon glyphicon-chevron-up"></span> <br>
-				<h4>
-					<b>0</b>
-				</h4>
-				<span class="glyphicon glyphicon-chevron-down"></span>
-			</div>
-		</div>
+			<br/>
+		</c:forEach>
 
 		<div class="row">
 			&nbsp;
@@ -155,7 +125,7 @@ body {
 			<p>
 		</div>
 
-		
+
 		<br>
 
 	</form>

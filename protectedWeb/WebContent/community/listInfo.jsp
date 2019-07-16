@@ -44,28 +44,41 @@ h7 {
 /* 	} */
 </style>
 
-<title>상품 목록조회</title>
+<title>정보공유</title>
 
 <!-- JavaScript -->
 <script type="text/javascript">
-	function fncGetUserList(currentPage) {
+
+	function fncGetList(currentPage) {
 
 		$("#currentPage").val(currentPage)
 
 		$("form").attr("method", "POST").attr(
 				"action",
-				"/product/listProduct?&menu=" + $("#menu").val() + "&pageSize="
-						+ $("#selectPageSize").val()).submit();
+				"/info/listInfo").submit();
 
 	}
 
 	function getPageSize() {
-		$(self.location).attr(
-				"href",
-				"/product/listProduct?menu=" + $("#menu").val() + "&pageSize="
-						+ $("#selectPageSize").val());
+		$(self.location).attr("href","/info/listInfo?&pageSize="+ $("#selectPageSize").val());
 	}
-
+	
+	
+	$(function(){
+		
+		$("button:contains('전체보기')").on("click", function(){
+			$(self.location).attr("href","/info/listinfo?order=1&pageSize=${search.pageSize}");
+		});
+		
+		$("button:contains('관심등록')").on("click", function(){
+			$(self.location).attr("href","/info/listinfo?order=2&pageSize=${search.pageSize}");
+		});
+		
+		$("button:contains('추천수순')").on("click", function(){
+			$(self.location).attr("href","/info/listinfo?order=3&pageSize=${search.pageSize}");
+		});
+		
+	});
 	$(function() {
 
 		var pageSize = $("#selectPageSize").val();
@@ -102,43 +115,16 @@ h7 {
 									});
 						});
 
-		$("#tranState").on(
-				"click",
-				function() {
+		$("td:nth-child(2)").on("click",function() {
 
-					alert($(this).children("input").val()+" "+$("#menu").val())
-					$(self.location).attr(
-							"href",
-							"/purchase/updateTranCode?prodNo="
-									+ $(this).children("input").val()
-									+ "&menu=" + $("#menu").val());
-					alert('배송이 완료되었습니다.');
+					alert($(this).children("input").val())
+					$(self.location).attr("href","/info/getInfo?postNo="+ $(this).children("input").val());
 				});
-
-		$(".thumbnail").on(
-				"click",
-				function() {
-
-					self.location = "/product/getProduct?prodNo="
-							+ $(this).children("input").val() + "&menu="
-							+ $("#menu").val();
-				});
-
-		//		배송하기 (구현예정) 
 
 		// 		페이지 처리를 위한 스크립트
 		$("button.btn.btn-default").on("click", function() {
 			fncGetUserList(1);
 		});
-
-		$(".table-hover th td:nth-child(1)").css("color", "red").css(
-				"font-weight", "bolder");
-		$("h7").css("color", "red").css("font-weight", "bolder");
-		//$(".table-hover.table-striped:nth-child(2n+1)" ).css("background-color" , "whitesmoke");
-
-		//  		$("#thumnail").on("mouseover", function(){
-		//  			$(this).css("background-color","red");
-		//  		});
 		
 		$("button:contains('글 쓰기')").on("click", function(){
 			self.location = "/community/addInfo.jsp"
@@ -171,26 +157,21 @@ h7 {
 
 		<div class="row">
 			<div class="col-md-6 col-sm-5 col-xm-12">
-
-				<table>
-					<tr>
-						<td><span>표시개수</span></td>
-						<td><span> <select name="pageSize" id="selectPageSize"
+						<span>표시개수</span>
+						<span> <select name="pageSize" id="selectPageSize"
 								onchange="javascript:getPageSize()">
-									<%-- 									<option value="6" ${ search.pageSize == 6 ? "selected" : "" }>6</option> --%>
-									<%-- 									<option value="9" ${ search.pageSize == 9 ? "selected" : "" }>9</option> --%>
-									<%-- 									<option value="12" ${ search.pageSize == 12 ? "selected" : "" } >12</option> --%>
-									<%-- 									<option value="15" ${ search.pageSize == 15 ? "selected" : "" } >15</option> --%>
+								<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8</option>
+								<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15</option>
+								<option value="30" ${ search.pageSize == 30 ? "selected" : "" } >30</option>
+								<option value="50" ${ search.pageSize == 50 ? "selected" : "" } >50</option>
 							</select>
-						</span></td>
+						</span>
 						<!-- 						<td> -->
 						<%-- 	    					<span><a href="/product/listProduct?menu=${param.menu}&order=1&pageSize=${search.pageSize}">▲ 높은가격순</a></span> --%>
 						<!-- 	    				</td> -->
 						<!-- 	    				<td> -->
 						<%-- 							<span><a href="/product/listProduct?menu=${param.menu}&order=2&pageSize=${search.pageSize}">▼ 낮은가격순</a></span> --%>
 						<!-- 						</td>						 -->
-					</tr>
-				</table>
 
 			</div>
 			<div class="col-md-6 col-md-6 col-sm-7 col-xm-12 text-right">
@@ -198,9 +179,9 @@ h7 {
 					<div class="form-group">
 						<select class="form-control" id="searchCondition"
 							name="searchCondition">
-											    		<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
-														<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
-														<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
+											    		<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+														<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+														<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
 						</select>
 					</div>
 
@@ -224,12 +205,12 @@ h7 {
 
 		<p>
 		<table class="table table-hover table-striped">
-
+		
 			<thead>
 				<tr align="center">
 					<th width="10%">번호</th>
 					<th width="30%">제목</th>
-					<th width="10%">글쓴이</th>
+					<th width="10%">작성자</th>
 					<th width="10%">작성일</th>
 					<th width="5%">조회수</th>
 					<th width="5%">추천수</th>					
@@ -237,18 +218,22 @@ h7 {
 			</thead>
 
 			<tbody>
-<%-- 				<c:set var="i" value="0" /> --%>
-<%-- 				<c:forEach var="user" items="${list}"> --%>
-<%-- 					<c:set var="i" value="${ i+1 }" /> --%>
+				<c:forEach var="board" items="${list}">
+					<c:if test="${board.viewCount + board.recommendCount >= '1000'}">
 					<tr>
 						<td align="center">1</td>
-						<td align="center">★ 보신탕좀 먹어보자[0]</td>
-						<td align="center">스캇 V (User01)</td>
-						<td align="center">2019년07월12일</td>
-						<td align="center">1</td>
-						<td align="center">0</td>
+						<td align="center">
+							<input type="hidden" name="postNo" value="${board.postNo}">
+							${board.postTitle}
+						</td>
+						<td align="center">${board.nickName}</td>
+						<td align="center">${board.regDate}</td>
+						<td align="center">${board.viewCount}</td>
+						<td align="center">${board.recommendCount}</td>
 					</tr>
-<%-- 				</c:forEach> --%>
+					</c:if>
+				</c:forEach>
+				
 
 			</tbody>
 		</table>
@@ -276,27 +261,22 @@ h7 {
 
 			<tbody>
 
-<%-- 				<c:set var="i" value="0" /> --%>
-<%-- 				<c:forEach var="user" items="${list}"> --%>
-<%-- 					<c:set var="i" value="${ i+1 }" /> --%>
+				<c:set var="i" value="0" />
+				<c:forEach var="board" items="${list}">
+					<c:set var="i" value="${ i+1 }" />
 					<tr>
-						<td align="center">2</td>
-						<td align="center">프로텍티도그조 화이팅하자 아자아자 작은타우렌 만세만세 만만세[9]</td>
-						<td align="center">작은타우렌 S (User02)</td>
-						<td align="center">2019년07월12일</td>
-						<td align="center">100</td>
-						<td align="center">999</td>
+						<td align="center">${i}</td>
+						<td align="center">
+							<input type="hidden" name="postNo" value="${board.postNo}">
+							${board.postTitle}
+						</td>
+						<td align="center">${board.nickName}</td>
+						<td align="center">${board.regDate}</td>
+						<td align="center">${board.viewCount}</td>
+						<td align="center">${board.recommendCount}</td>
 					</tr>
-					
-					<tr>
-						<td align="center">1</td>
-						<td align="center">★ 보신탕좀 먹어보자[0]</td>
-						<td align="center">스캇 V (User01)</td>
-						<td align="center">2019년07월12일</td>
-						<td align="center">1</td>
-						<td align="center">0</td>
-					</tr>
-<%-- 				</c:forEach> --%>
+				</c:forEach>
+
 
 			</tbody>
 		</table>

@@ -130,9 +130,13 @@ public class UserController {
 		if(user.getPw().equals(dbUser.getPw())) {
 			System.out.println("hi");
 			session.setAttribute("user", dbUser);
+
+			System.out.println("session : "+dbUser);
+
 			System.out.println(session.getAttribute("user"));
 		}else {
 			System.out.println("ERROR");
+
 		}
 		
 		System.out.println("ANG : "+session.getAttribute("user"));

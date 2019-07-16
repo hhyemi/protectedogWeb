@@ -26,6 +26,7 @@
 		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
 		<result property="prodName" 		column="prod_name"			jdbcType="VARCHAR"/>
 		<result property="delCode" 			column="del_code" 			jdbcType="CHAR"/>
+
 		
 	 </resultMap>
 	
@@ -53,7 +54,8 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodName:VARCHAR}  )
+					#{prodName:VARCHAR},
+					1  )
 	 </insert>
 	 
 	 
@@ -109,9 +111,9 @@
 	 
 	 <update	id="delBoard"	parameterType="board" >
 	   	UPDATE board
-	   	<set>
-			del_code	= '0'
-	   	</set>
+		<set>
+		del_code = '0'
+		</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
 	 
@@ -127,19 +129,20 @@
 						FROM board
 						<where>
 								board_code = #{boardCode} AND del_code != '0'
-<!-- 								<if test="searchCondition != null"> -->
-<!-- 									<if test="searchCondition == 0 and searchKeyword !='' "> -->
-<!-- 							 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 									</if> -->
-<!-- 									<if test="searchCondition == 1 and searchKeyword !='' "> -->
-<!-- 							 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 									</if> -->
-<!-- 									<if test="searchCondition == 2 and searchKeyword !='' "> -->
-<!-- 							 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
-<!-- 									</if>  -->
-<!-- 								</if> -->
+								<if test="searchCondition != null">
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+										AND nickname  LIKE '%'||#{searchKeyword}||'%'
+							 			OR id        LIKE '%'||#{searchKeyword}||'%'
+									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+									</if> 
+								</if>
 						</where>
-						ORDER BY post_no DESC ) inner_table
+						ORDER BY reg_date DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>

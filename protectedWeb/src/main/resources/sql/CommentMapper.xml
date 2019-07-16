@@ -54,10 +54,10 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	 
-	 <select  id="getTotalCount"  parameterType="map"	resultMap="commentSelectMap">
+	 <select  id="getTotalCount"  parameterType="int"	resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName
 				FROM   comments
-				WHERE  post_no = #{postNo} AND status_code != '0' ) countTable
+				WHERE  post_no = #{value} AND status_code != '0' ) countTable
 	 </select>
 </mapper>

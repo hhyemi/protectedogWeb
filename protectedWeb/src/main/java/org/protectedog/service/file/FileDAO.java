@@ -11,9 +11,6 @@ public interface FileDAO {
 
 	public List<FileDog> getFile(int postNo) throws Exception; 
 	
-	public void updateFile(FileDog file) throws Exception;
-	
-	public void delFunding(int fileNo) throws Exception;
-	
+	public void delFile(FileDog file) throws Exception;
 
 }

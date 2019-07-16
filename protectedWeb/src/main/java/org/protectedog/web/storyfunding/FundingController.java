@@ -146,7 +146,7 @@ public class FundingController {
 		termsList.add(SFTermsFive);
 		if (termsTitle.equals("SFPost")) {
 			termsTitle = "후원신청글";
-		}else if(termsTitle.equals("SFVote")){
+		} else if (termsTitle.equals("SFVote")) {
 			termsTitle = "투표하기";
 		}
 
@@ -168,16 +168,57 @@ public class FundingController {
 
 		model.addAttribute("funding", funding);
 		model.addAttribute("file", file);
-		
+
 		return "forward:/funding/updateFunding.jsp";
 	}
 
 	@RequestMapping(value = "updateFunding", method = RequestMethod.POST)
-	public String updateFunding(@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
+	public String updateFunding(@ModelAttribute("funding") Funding funding,
+			@RequestParam("multiFile") ArrayList<String> multiFile,
+			@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
 
 		System.out.println("/funding/updateFunding : POST"); // Business Logic
 
-		System.out.println("뭔데시발" + funding);
+		System.out.println("multiFile:::" + multiFile);
+		System.out.println("deleteFile:::" + deleteFile);
+
+		if (deleteFile != null) {
+
+			for (String fileName : deleteFile) {
+				FileDog files = new FileDog();
+				files.setFileName(fileName);
+				files.setPostNo(funding.getPostNo());
+
+				fileService.delFile(files);
+			}
+		}
+		if (multiFile.size() != 0) {
+			List<FileDog> listFile = new ArrayList<FileDog>();
+			// 파일디비에넣기
+			for (String fileName : multiFile) {
+				FileDog files = new FileDog();
+				files.setBoardCode(boardCode);
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(funding.getPostNo());
+				listFile.add(files);
+			}
+			fileService.addFile(listFile);
+		}
+
+		// 나중에 세션으로 변경//
+		String id = "user01";
+		String nickName = "스캇";
+		funding.setId(id);
+		funding.setNickName(nickName);
+
+		List<FileDog> file =fileService.getFile(funding.getPostNo());
+		funding.setMainFile(file.get(0).getFileName());
+		// 변경여기까지//
+
+		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
+		funding.setVoteTargetCount(voteTargetCount);
+
 		fundingService.updateFunding(funding);
 
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
