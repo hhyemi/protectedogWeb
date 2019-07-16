@@ -34,16 +34,10 @@ public class FileServiceImpl implements FileService{
 		return fileDAO.getFile(postNo);
 	}
 
-	@Override
-	public void updateFile(FileDog file) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void delFunding(int fileNo) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void delFile(FileDog file) throws Exception {
+		fileDAO.delFile(file);
 	}
 
 

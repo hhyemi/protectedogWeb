@@ -34,7 +34,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	   #btn-add{
+	   #btn-update{
 		background: #fff;
         border:2px solid #29304d;
 		color:#29304d;
@@ -140,9 +140,9 @@
             <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
 
 				<c:forEach var="name" items="${file}" varStatus="status">            
-				<div class="preview-box" value="${status.index}"  style='display:inline;float:left;width:140px' >
+				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
                      <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
-                            <a href="#" value="${status.index}"  onclick="deletePreview2(this)">삭제</a></div>     
+                            <a href="#" value="${name.fileName}"  onclick="deletePreview2(this)">삭제</a></div>     
                 </c:forEach>           
             
 
@@ -169,13 +169,14 @@
 		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty funding.phone3 ? funding.phone3 : ''}"   placeholder="변경번호">
 		    </div>
 		    <input type="hidden" name="phone"  />
-		    <input type="hidden" id="multiFile" name="multiFile" >
-		    <input type="hidden" id="deleteFile" name="deleteFile" >		    
+		    <input type="hidden" name="postNo" value="${funding.postNo }" />		    	
+		    <input type="hidden" id="multiFile" name="multiFile" />
+		    <input type="hidden" id="deleteFile" name="deleteFile" />		    
 		  </div>
         
 		  <br/><br/>
 		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">등록</button>
+	  			<button type="button" id="btn-update">수정</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -193,8 +194,8 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
 
-   //============= 등록버튼 눌렀을때 함수 =============      
-   function fncAddFunding(){
+   //============= 수정버튼 눌렀을때 함수 =============      
+   function fncUpdateFunding(){
       
       //Form 유효성 검증
 
@@ -202,8 +203,7 @@
       var postTitle = $('input[name="postTitle"]').val();
       var postContent = $('input[name="postContent"]').val();
       var phone2 = $('input[name="phone2"]').val();
-      var phone3 = $('input[name="phone3"]').val();   
-      var file = $("#multiFile").val();    
+      var phone3 = $('input[name="phone3"]').val();     
       
       if(fundTargetPay == null || fundTargetPay.length<1){
          alert("후원목표금액은 반드시 입력하여야 합니다.");
@@ -225,10 +225,6 @@
          $('input[name="postContent"]').focus();
          return;
       } */
-      if(file == null || file.length<1){
-         alert("파일은 반드시 입력하셔야 합니다.");
-         return;
-      }
       if(phone2 == null || phone2.length<1){
          alert("휴대폰번호는 반드시 입력하셔야 합니다.");
          $('input[name="phone2"]').focus();
@@ -282,13 +278,19 @@
         });
 
 
-      $('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
+      $('form').attr("method","POST").attr("action","/funding/updateFunding").attr("enctype","multipart/form-data").submit();
    }
    
-   //============= "다중파일업로드 파일명만 저장해서 value" =============   
+   //============= "다중파일업로드 파일명만 저장해서 insert할 value" =============   
    function fnAddFile(fileNameArray) {
          $("#multiFile").val(fileNameArray)    
    }   
+
+   //============= "다중파일업로드 파일명만 저장해서 delete할 value" =============   
+   function fnDeleteFile(deletefileNameArray) {
+         $("#deleteFile").val(deletefileNameArray)    
+   }   
+   
    
    //============= "다중파일업로드"  Event 처리 및  연결 =============      
 
@@ -366,9 +368,10 @@
      }
      //=============원래있던사진들 삭제버튼누를때 =============
      function deletePreview2(obj) {
-         var imgNum = obj.attributes['value'].value;
-         //fnAddFile(fileNameArray);
-         $("#preview .preview-box[value=" + imgNum + "]").remove();
+         var imgName = obj.attributes['value'].value;
+         deletefileNameArray.push(imgName);
+         fnDeleteFile(deletefileNameArray);
+         $("#preview .preview-box2[value=\"" + imgName + "\"]").remove();
          resizeHeight();
      }
 
@@ -457,9 +460,9 @@
    
    $(function() {
       
-         //============= 등록 Event  처리 =============   
-         $( "#btn-add" ).on("click" , function() {
-            fncAddFunding();
+         //============= 수정 Event  처리 =============   
+         $( "#btn-update" ).on("click" , function() {
+        	 fncUpdateFunding();
             });
          
          //============= 취소 Event  처리 =============
