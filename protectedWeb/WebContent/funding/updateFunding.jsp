@@ -260,7 +260,7 @@
                 contentType : false,
                 cache : false,
                 timeout : 600000,
-                url : '/funding/json/imageupload/',
+                url : '/Images/json/imageupload/SF',
                 dataType : 'JSON',
                 data : formData,
                 success : function(result) {
