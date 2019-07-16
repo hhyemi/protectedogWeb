@@ -57,7 +57,10 @@
 		}
 		
 		
-	</script>		
+	</script>	
+	
+	
+		
 
 </head>
 
@@ -112,7 +115,10 @@
 			  <div class="form-group">
 			    <label for="adoptArea" class="col-sm-offset-1 col-sm-3 control-label">분양가능지역</label>
 			    <div class="col-sm-4">
-			      <input type="text" class="form-control" id="adoptArea" name="adoptArea" value="${ adopt.adoptArea }" placeholder="분양가능지역">
+			    <div id="mapArea" style="width: 600px; height: 300px;"  align="center"></div>
+			    <span id="pop"></span>
+			      <input type="textbox" style=" width: 600px;" class="form-control" id="adoptArea" name="adoptArea" placeholder="3개까지 선택가능합니다.">
+			      <button >dd</button>
 			    </div>
 			  </div>
 		  </c:if>
@@ -237,59 +243,200 @@
 //       var markersArea = [];
 
       var map;
+      var marker;
       var markers = [];
       var loca = "${adopt.location}";
       var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
       var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
-      console.log(  localat  );
-      console.log(   localng   );
-
-      function initMap() {
-    	  var centerLoca = {lat: localat, lng: localng};
-
-//         mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-//           zoom: 13,
-//           center: haightAshbury
-//         });
-
-//         mapArea.addListener('click', function(event) {
-//         	addMarker(event.latLng);
-//         });
-        
-        ///////////////////////////////////////////////////////////////////////////
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: centerLoca
-        });
-
-        map.addListener('click', function(event) {
-        	addMarker(event.latLng);
-        });
-        
-        addMarker(centerLoca);
+      
+      var mapArea;
+      var markerArea;
+      var markersArea = [];
+      var adArea = "${adopt.adoptArea}";
+      var arrayTest = [];
+      var arrayMark = [];
+      
+      
+      if (adArea.indexOf("#") != -1){
+    	  var areaArray = adArea.split("#");
+    	  
+    	  for ( i=0; i<areaArray.length-1; i++){
+    		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
+    		  arrayMark[i] = "markerArea"+i.toString();
+    	  }   	  
       }
       
-      var markerArea;
-      var marker;
-    
-      function addMarker(location) {
-    	if (marker != undefined){
-    		deleteMarkers();
-    	}
-    	
-        marker = new google.maps.Marker({
-          position: location,
-          map: map
-        });
-        
-        markers.push(marker);
-        $( '#location' ).val(location);
-        
-        if (marker != undefined){
-            marker.addListener('rightclick', function() {
-            	deleteMarkers();
+      
+      function initMap() {
+    	  if( $('input[name=boardCode]').val().trim() =='AD'){
+    		  mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+  			    zoom: 11,
+  			    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
+  			    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
+  		});
+  	    
+  	    var aaa = "";
+  	    for ( i=0; i<arrayTest.length; i++){
+  	    	
+  		    markerArea= arrayMark[i];
+  		
+  		    markerArea = new google.maps.Marker({
+  		        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
+  		    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
+  		        map: mapArea
+  		    });
+  		 	markersArea.push(markerArea);
+    		$.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+arrayTest[i]+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+  	            success: function(data){
+  	            	aaa += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
+  	                $('#pop').text(aaa);
+  	            }
+  	 		});
+    		 	
+  	    }//$('#pop').text(aaa);
+	
+	        mapArea.addListener('click', function(event) {
+	            	addMarker(event.latLng, "aaa");
+	        });
+	        
+	        mapArea.addListener('rightclick', function() {
+// 	        	alert(markersArea);
+	        	for (var i = markersArea.length-1; i >=0; i--) {
+	        		markersArea[i].setMap(null);
+	        		markersArea.splice(i, 1 );
+	            }
+	        	$('#pop').text('');
            });
-        }
+    	  }
+	///////////////////////////////////////////////////////////////////////////
+	
+	    	var centerLoca = {lat: localat, lng: localng};
+	
+	        map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 13,
+	          center: centerLoca
+	        });
+	        
+	        marker = new google.maps.Marker({
+	            position: centerLoca,
+	            map: map
+	        });
+	        markers.push(marker);
+	
+	        map.addListener('click', function(event) {
+	        	addMarker(event.latLng, "a");
+	        });
+        
+      }
+      
+      var str = "";
+      var mmm = "";
+    
+      function addMarker(location, str) {
+
+    	  if ( str == "aaa"){
+    		  if (markersArea.length <3){
+	  		        var markerArea = new google.maps.Marker({
+	  			        position: location,
+	  			        map: mapArea
+	  		        });
+	  		        
+	  		     	markersArea.push(markerArea);
+	  		   		 
+	  		   		if(markersArea.length >0){
+	  			   		 var markTest="";
+	  			   		 mmm="";
+	  			   		 
+	  			   		 for (var i = 0; i < markersArea.length; i++) {
+	  			   			mmm += markersArea[i].position+"#" ;
+	  			   			$("#adoptArea").val(mmm);
+	  			   			
+	  			  		 	// 역지오코딩 //
+	  		    	        var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1 ,markersArea[i].position.toString().indexOf(",") )  );
+	  				 	    var localng = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf(",")+1, markersArea[i].position.toString().indexOf(")") )  );
+	  		    	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+	  		    	            success: function(data){
+//	  		   	              			 	  $('p').text(JSON.stringify(data));
+	  		    	           				  markTest+= data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
+	  		    	          				  $("#pop").text(markTest);
+	  		    	            }
+	  		    	 		});
+	  				 	 }
+	  		   		}
+	
+	  	        }else{
+	  	        	alert("3개까지 지정 가능함");
+	  	        }
+	    		 ////////////////////////////////////////////////
+	  	        if (markerArea != undefined){
+	  	        	
+	  	        	markerArea.addListener('rightclick', function() {
+	  	        		mmm="";
+						var markTest="";
+	  					for (var i = 0; i < markersArea.length; i++) {
+	  						markTest="";
+	  						$("#pop").val(markTest);
+	  				       if (markersArea[i].position === markerArea.position) {
+			  				   markersArea[i].setMap(null);
+			  				   markersArea.splice(i, 1 );
+	  				       }else{
+	  				       
+	  				 		 // 역지오코딩 //
+	  		    	        var localat = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf("(")+1 ,markersArea[i].position.toString().indexOf(",") )  );
+	  				 	    var localng = parseFloat(  markersArea[i].position.toString().substring( markersArea[i].position.toString().indexOf(",")+1, markersArea[i].position.toString().indexOf(")") )  );
+	  		    	        mmm += markersArea[i].position+"#";
+	  		    	      $("#adoptArea").val(mmm);
+	  				 		 $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+	  		    	            success: function(data){
+	  		//    	                 alert(JSON.stringify(data));
+	  		//    	                 alert(data.results[0].formatted_address);
+	  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"#";
+	  		    	       			$("#pop").text(markTest);
+	  		    	            }
+	  		    	 		});  // markTest += markersArea[i].position;
+	  			 	  	} //$("#pop").text(markTest);
+	  					}$("#pop").text(markTest);
+	  					$("#adoptArea").val(mmm);
+	  	            });
+	  	        	
+}
+
+  
+		  	      	
+	    	        
+    	  }else if( str == "a"){
+// 		    	if (marker != undefined){
+		    		deleteMarkers();
+// 		    	}
+		    	
+		        marker = new google.maps.Marker({
+			        position: location,
+			        map: map
+		        });
+		        
+		        markers.push(marker);
+		        $( '#location' ).val(location);
+		        loca =  $( '#location' ).val().toString();
+		
+		 	    var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
+		 	    var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
+		        
+		        if (marker != undefined){
+		           marker.addListener('rightclick', function() {
+		            	deleteMarkers();
+		           });
+		        }
+		        
+		        // 역지오코딩 //
+		        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+		            success: function(data){
+		//                 alert(JSON.stringify(data));
+		//                 alert(data.results[0].formatted_address);
+		//                 $('p').text(JSON.stringify(data));
+		                $('p').text(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
+		            }
+		 		});
+    	  }
       }
 
       function setMapOnAll(map) {

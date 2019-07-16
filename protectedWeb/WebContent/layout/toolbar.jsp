@@ -28,48 +28,53 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    <style type="text/css">
+    	.py-1 bg-black{
+    		min-height: 27px;
+    	}
+    </style>
   </head>
   <body class="goto-here">
-		<div class="py-1 bg-black">
-    	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-	    		<div class="col-lg-12 d-block">
-		    		<div class="row d-flex">
-		    			<div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
-					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
-					    </div>
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-					    </div>
-				    </div>
-			    </div>
-		    </div>
-		  </div>
+      <div class="py-1 bg-black">
+       <div class="container">
+          <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+             <div class="col-lg-12 d-block">
+                <div class="row d-flex">
+                   <div class="col-md pr-4 d-flex topper align-items-center">
+<!--                       <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div> -->
+<!--                       <span class="text">+ 1235 2355 98</span> -->
+                   </div>
+                   <div class="col-md pr-4 d-flex topper align-items-center">
+<!--                       <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
+<!--                       <span class="text">youremail@email.com</span> -->
+                   </div>
+                   <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+                      <span class="text">Sign in | Sign up</span>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">#PROTECTEDDOG</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+       <div class="container">
+         <a class="navbar-brand" href="/index0.jsp">#PROTECTEDOG</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="oi oi-menu"></span> Menu
+         </button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item dropdown">
+         <div class="collapse navbar-collapse" id="ftco-nav">
+           <ul class="navbar-nav ml-auto">
+             <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">분양</a>
+                 <a class="dropdown-item" href="shop.html">분양</a>
                 <a class="dropdown-item" href="product-single.html">실종</a>
 
               </div>
             </li>
-	          <li class="nav-item dropdown">
+             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토리펀딩</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/funding/listFunding">후원신청</a>
@@ -79,7 +84,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">병원</a>
+                 <a class="dropdown-item" href="/community/getHospital.jsp">병원</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
@@ -88,7 +93,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">PEDIA</a>
+                 <a class="dropdown-item" href="/community/getBreedPedia.jsp">PEDIA</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
@@ -97,8 +102,8 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">COMMUNITY</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">COMMUNITY</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
+                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
@@ -106,18 +111,18 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">MARKET</a>
+                 <a class="dropdown-item" href="shop.html">MARKET</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
             </li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+             <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
+           </ul>
+         </div>
+       </div>
+     </nav>
     <!-- END nav -->
 
 

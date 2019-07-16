@@ -29,10 +29,7 @@ public class Adopt {
 	
 	private String statusCode;
 	
-	
-	private String adoptArea1;
-	private String adoptArea2;
-	private String adoptArea3;
+
 	
 	
 	
@@ -90,12 +87,6 @@ public class Adopt {
 
 	public void setAdoptArea(String adoptArea) {
 		this.adoptArea = adoptArea;
-		if(adoptArea != null && adoptArea.length() !=0 ){
-			adoptArea1 = adoptArea.split("#")[0];
-			adoptArea2 = adoptArea.split("#")[1];
-			adoptArea3 = adoptArea.split("#")[2];
-		}
-		
 	}
 
 	public String getLocation() {
@@ -196,29 +187,6 @@ public class Adopt {
 
 	
 	
-	public String getAdoptArea1() {
-		return adoptArea1;
-	}
-
-	public void setAdoptArea1(String adoptArea1) {
-		this.adoptArea1 = adoptArea1;
-	}
-
-	public String getAdoptArea2() {
-		return adoptArea2;
-	}
-
-	public void setAdoptArea2(String adoptArea2) {
-		this.adoptArea2 = adoptArea2;
-	}
-
-	public String getAdoptArea3() {
-		return adoptArea3;
-	}
-
-	public void setAdoptArea3(String adoptArea3) {
-		this.adoptArea3 = adoptArea3;
-	}
 
 	@Override
 	public String toString() {

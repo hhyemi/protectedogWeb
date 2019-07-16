@@ -42,16 +42,17 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	public Map<String, Object> listBoard(Search search, String boardCode) throws Exception {
 		Map<String , Object>  map = new HashMap<String, Object>();
-//		map.put("boardCode",  boardCode );
-//		map.put("endRowNum",  search.getEndRowNum()+"" );
-//		map.put("startRowNum",  search.getStartRowNum()+"" );
-//		
-//		List<Board> list = sqlSession.selectList("BoardMapper.listBoard", map); 
-//
-//		//selectOne: 쿼리 결과가 없으면 return null 
-//		map.put("totalCount", sqlSession.selectOne("BoardMapper.getTotalCount", map));
-//		map.put("list", list);
-//
+		map.put("boardCode",  boardCode );
+		map.put("endRowNum",  search.getEndRowNum()+"" );
+		map.put("startRowNum",  search.getStartRowNum()+"" );
+		
+		List<Board> list = sqlSession.selectList("BoardMapper.listBoard", map); 
+
+		//selectOne: 쿼리 결과가 없으면 return null 
+		map.put("totalCount", sqlSession.selectOne("BoardMapper.getTotalCount", map))
+		;
+		map.put("list", list);
+
 		return map;
 	}
 	

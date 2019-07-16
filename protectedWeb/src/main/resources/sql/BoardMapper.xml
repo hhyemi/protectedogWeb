@@ -25,7 +25,8 @@
 		<result property="qnaCode" 			column="qna_code"			jdbcType="CHAR"/>
 		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
 		<result property="prodName" 		column="prod_name"			jdbcType="VARCHAR"/>
-		<result property="statusCode" 		column="status_code" 		jdbcType="CHAR"/>
+		<result property="delCode" 			column="del_code" 			jdbcType="CHAR"/>
+
 		
 	 </resultMap>
 	
@@ -33,11 +34,13 @@
 	
 	 <!-- SQL : INSERT -->
 	 <insert 	id="addBoard"		parameterType="board" >
-	 
+	 	<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+	    SELECT seq_board_post_no.nextval FROM DUAL
+	 	</selectKey>
 	 	INSERT
 		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, recommend_count,
 						market_code, price, city , phone, qna_code, route, prod_name)  
-		VALUES	 (	seq_board_post_no.nextval, 
+		VALUES	 (	#{postNo}, 
 					#{boardCode},
 					#{id} , 
 					#{nickName} , 
@@ -51,7 +54,8 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodName:VARCHAR}  )
+					#{prodName:VARCHAR},
+					1  )
 	 </insert>
 	 
 	 
@@ -107,9 +111,9 @@
 	 
 	 <update	id="delBoard"	parameterType="board" >
 	   	UPDATE board
-	   	<set>
-			del_code	= '0'
-	   	</set>
+		<set>
+		del_code = '0'
+		</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
 	 
@@ -125,19 +129,20 @@
 						FROM board
 						<where>
 								board_code = #{boardCode} AND del_code != '0'
-<!-- 								<if test="searchCondition != null"> -->
-<!-- 									<if test="searchCondition == 0 and searchKeyword !='' "> -->
-<!-- 							 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 									</if> -->
-<!-- 									<if test="searchCondition == 1 and searchKeyword !='' "> -->
-<!-- 							 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 									</if> -->
-<!-- 									<if test="searchCondition == 2 and searchKeyword !='' "> -->
-<!-- 							 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
-<!-- 									</if>  -->
-<!-- 								</if> -->
+								<if test="searchCondition != null">
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+										AND nickname  LIKE '%'||#{searchKeyword}||'%'
+							 			OR id        LIKE '%'||#{searchKeyword}||'%'
+									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+									</if> 
+								</if>
 						</where>
-						ORDER BY post_no DESC ) inner_table
+						ORDER BY reg_date DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -152,7 +157,7 @@
 	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
 				FROM board
 				<where>
-						board_code = #{boardCode} AND status_code != '0'
+						board_code = #{boardCode} AND del_code != '0'
 <!-- 						<if test="searchCondition != null"> -->
 <!-- 							<if test="searchCondition == 0 and searchKeyword !='' "> -->
 <!-- 					 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->

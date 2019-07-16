@@ -170,12 +170,9 @@
 			<div class="row">
 		  		<div class="col-xs-4 col-md-2 "><strong>분양가능지역</strong></div>
 		  		<div id="mapArea" style="width: 600px; height: 300px;"  align="center"></div>
-			    <span id="pop"></span>
 				<div class="col-xs-8 col-md-4">
-				${adopt.adoptArea1} <br/>
-				${adopt.adoptArea2}<br/>
-				${adopt.adoptArea3}<br/>
-				</div>
+			 	   <p id="pop"></p>
+			    </div>
 			</div>
 			
 			<hr/>
@@ -277,8 +274,6 @@
 		<hr/>
 		
 		
-	
-		
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
 	  		
@@ -295,9 +290,6 @@
 	  			</c:if>
 	  			<br/><br/>
 	  			<button type="button" class="btn btn-primary">목록</button>
-<%-- 	  			<c:if test="${user.role eq 'admin' }"> --%>
-<!-- 	  				<button type="button" class="btn btn-default">목록</button> -->
-<%-- 	  			</c:if> --%>
 
 				<c:if test="${adopt.boardCode eq 'AD' && adopt.statusCode ne '3'}">
 		  			<button type="button" class="btn btn-primary">입양신청</button>
@@ -320,94 +312,74 @@
       var loca = "${adopt.location}";
       var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
       var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
-//       console.log(  localat  );
-//       console.log(   localng   );
       var marker;
+      
+      var mapArea;
+      var markerArea;
+      var adArea = "${adopt.adoptArea}";
+      var arrayTest = [];
+      var arrayMark = [];
+      
+      
+      if (adArea.indexOf("#") != -1){
+    	  var areaArray = adArea.split("#");
+    	  
+    	  for ( i=0; i<areaArray.length-1; i++){
+    		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
+    		  arrayMark[i] = "markerArea"+i.toString();
+    	  }   	  
+      }
+      
+      
       
       function initMap() {
         var centerLoca = {lat: localat, lng: localng};
 
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: centerLoca
+        	zoom: 15,
+        	center: centerLoca
         });
         
         marker = new google.maps.Marker({
             position: centerLoca,
             map: map
         });
-        
-        
-       
+               
         $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
             success: function(data){
-//                 alert(JSON.stringify(data));
-//                 alert(data.results[0].formatted_address);
-//                 $('p').text(JSON.stringify(data));
-                $('p').text(data.results[0].formatted_address.substring(5, data.results[0].formatted_address.length));
+                $('p').text(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
             }
  		});
 
-//         addMarker(centerLoca);
-
-
  ////////////////////////////////////////////
  
- 	  var adArea1 = "${adopt.adoptArea1}";
- 	  var adArea2 = "${adopt.adoptArea2}";
- 	  var adArea3 = "${adopt.adoptArea3}";
-      var adArea1lat = parseFloat(  adArea1.substring( adArea1.indexOf("(")+1 ,adArea1.indexOf(",") )  );
-      var adArea1lng = parseFloat(  adArea1.substring( adArea1.indexOf(",")+1, adArea1.indexOf(")") )  );
-      var adArea2lat = parseFloat(  adArea2.substring( adArea2.indexOf("(")+1 ,adArea2.indexOf(",") )  );
-      var adArea2lng = parseFloat(  adArea2.substring( adArea2.indexOf(",")+1, adArea2.indexOf(")") )  );
-      var adArea3lat = parseFloat(  adArea3.substring( adArea1.indexOf("(")+1 ,adArea3.indexOf(",") )  );
-      var adArea3lng = parseFloat(  adArea3.substring( adArea1.indexOf(",")+1, adArea3.indexOf(")") )  );
-        mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-	    	zoom: 13,
-	    	center: {lat: 37.564, lng: 127.0017}
-        });
-
-        mapArea.addListener('click', function(event) {
-        	addMarker(event.latLng, "aaa");
-        });
-        //////////////////////////////////////////////
+	    mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+			    zoom: 11,
+			    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
+			    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
+		});
+	    
+	    var aaa = "";
+	    for ( i=0; i<arrayTest.length; i++){
+	    	
+		    markerArea= arrayMark[i];
+		
+		    markerArea = new google.maps.Marker({
+		        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
+		    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
+		        map: mapArea
+		    });
+		    
+  		 	$.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+arrayTest[i]+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+	            success: function(data){
+	            	aaa += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+", ";
+	                $('#pop').text(aaa);
+	            }
+	 		});
+  		 	
+	    }//$('#pop').text(aaa);
+	    
       }
-      
-//       var marker;
-    
-//       function addMarker(location) {
-//     	if (marker != undefined){
-//     		deleteMarkers();
-//     	}
-    	
-//         marker = new google.maps.Marker({
-//           position: location,
-//           map: map
-//         });
-        
-//         markers.push(marker);
-//         $( '#location' ).val(location);
-        
-//         if (marker != undefined){
-//             marker.addListener('rightclick', function() {
-//             	deleteMarkers();
-//            });
-//         }
-//       }
-
-//       function setMapOnAll(map) {
-//         for (var i = 0; i < markers.length; i++) {
-//           markers[i].setMap(map);
-//         }
-//       }
-
-//       function deleteMarkers() {
-//     	setMapOnAll(null);
-//         markers = [];
-//       }
-      
-      
-      ////////////////////////////////////////////////
       
       
     </script>

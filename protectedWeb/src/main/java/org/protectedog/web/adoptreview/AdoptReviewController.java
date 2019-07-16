@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 //==> 판매관리 Controller
 @Controller
-@RequestMapping("/adoptReivew/*")
+@RequestMapping("/adoptreview/*")
 public class AdoptReviewController {
 	
 	///Field
@@ -50,13 +50,11 @@ public class AdoptReviewController {
 	
 	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
 	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
-//	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
-//	int pageUnit;
+	@Value("#{commonProperties['pageUnit']}")
+	int pageUnit;
 	
-//	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
-//	int pageSize;
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
 	
 
 	
@@ -119,6 +117,7 @@ public class AdoptReviewController {
 		Board board = boardService.getBoard(postNo);
 		// Model 과 View 연결
 		model.addAttribute("board", board);
+		System.out.println("============================================\n"+board);
 		
 
 		return "forward:/adoptreview/updateAdoptReview.jsp";

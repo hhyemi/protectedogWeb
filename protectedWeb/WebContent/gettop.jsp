@@ -24,6 +24,21 @@
     <!-- main css -->
     <link rel="stylesheet" href="resources/get/css/style.css" />
     <link rel="stylesheet" href="resources/get/css/responsive.css" />
+    
+ 	<style type="text/css">
+ 		#under{
+ 			color : black;
+ 		}
+ 		.price{
+ 			color : black;
+ 		}
+ 		p{
+ 			color : black;
+ 		}
+ 		li{
+ 			color : black;
+ 		}
+ 	</style>
   </head>
 
   <body>
@@ -163,8 +178,10 @@
     </div>
    <br><br><br/>
     <!--================End Single Product Area =================-->
-
+	
+	<div id="under">
    <jsp:include page="getunder.jsp" />
+   </div>
     <!--================End Product Description Area =================-->
 
     <!--================ start footer Area  =================-->
