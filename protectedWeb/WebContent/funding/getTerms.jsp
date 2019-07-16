@@ -192,10 +192,11 @@
           	}else if(!$("input[name=termsCheck5]").prop("checked")){
         		$("input[name=termsCheck5]").focus();        	       	       	       	
         	}else{
-        		if(	${termsTitle eq "후원신청글"}){
-        			self.location="/funding/addFunding"
-        		}else if(${termsTitle eq "투표하기"}){
-        			self.location="/funding/addFund"
+        		if(	${termsTitle == "후원신청글"}){
+        			self.location="/funding/addFunding";
+        		}else if(${termsTitle == "투표하기"}){
+        			alert("투표하였습니다.")
+        			self.location="/funding/addFund?postNo=${postNo}";
         		}
         	}
         	

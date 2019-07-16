@@ -39,7 +39,10 @@
 		<result property="voteRemainDate" column="VOTE_REMAIN_DATE" jdbcType="NUMERIC" />
 		<result property="voteRate" column="VOTE_RATE" jdbcType="NUMERIC" />		
 		</resultMap>
-
+		
+		
+  <!--/////////////// FUNDING 게시판 ////////////////////// -->
+  
 	<!-- SQL : INSERT -->
 	<insert 	id="addFunding"		parameterType="funding" >
 		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
@@ -61,30 +64,6 @@
 		FROM STORYFUNDING 
 		WHERE POST_NO IN #{value}
 	 </select>
-	 
-	<!-- 	 SQL : SELECT LIST-->
-	<select  id="listFunding"  parameterType="search"	resultMap="fundingSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT
-													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
-											        TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE 
-											FROM STORYFUNDING 
-											<if test="searchCondition != null">
-												<where>
-													<if test="searchCondition == 0 and searchKeyword !='' ">
-											 			POST_TITLE = #{searchKeyword}
-													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-											 			NICKNAME = #{searchKeyword}
-													</if>
-												</where>
-											</if>
-											ORDER BY POST_NO ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-	 </select>
 
 	<!--  SQL : UPDATE--> 
 	 <update	id="updateFunding"	parameterType="funding" >
@@ -97,29 +76,87 @@
 			FUND_TARGET_DAY    = #{fundTargetDay:NUMERIC},
 			VOTE_TARGET_COUNT  = #{voteTargetCount:NUMERIC},
 			FUND_END_DATE      = SYSDATE+31+#{fundTargetDay},
-			MAIN_FILE          = #{mainFile:VARCHAR}
+			MAIN_FILE          = #{mainFile:VARCHAR},
+			VOTER_COUNT        = VOTER_COUNT + #{voterCount:NUMERIC}
 	   	</set>
 	   	WHERE POST_NO IN #{postNo} 
 	 </update>
+	 
+	 <!-- SQL : DELETE -->
+	<delete id="delFunding" parameterType="string">
+		DELETE
+		FROM STORYFUNDING
+		WHERE POST_NO = #{value}
+	</delete>	
+		 	 
+	<!-- 	 SQL : SELECT LIST-->
+	<select  id="listFunding"  parameterType="search"	resultMap="fundingSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT
+													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
+											        TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
+											FROM STORYFUNDING 
+									     <where>
+									           <if test="searchCondition != null">
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+														POST_TITLE LIKE #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+												    	NICKNAME LIKE #{searchKeyword}
+												    </if>
+										        </if> 		    
+												<if test="voteCondition != null">
+													 <if test="voteCondition == 2 and voteCondition !='' ">
+													    AND STATUS_CODE = 1
+											         </if>
+												     <if test="voteCondition == 3 and voteCondition !='' ">
+													    AND STATUS_CODE != 1
+													 </if>
+												 </if>											
+										    </where>
+											ORDER BY POST_NO ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
 
- <!-- SQL : SELECT ROW Count	--> 
+	  <!-- SQL : AUTOCOMPLETE -->
+	 <select 	id="getAutoFunding"	parameterType="map"	resultType="string">
+		SELECT
+		${field}
+		FROM STORYFUNDING 
+		WHERE ${field} LIKE '%'||#{searchKeyword}||'%'
+	 </select>	 
+	  
+     <!-- SQL : SELECT ROW Count	--> 
 	 <select  id="getTotalCount"  parameterType="search" resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT
 						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
-						TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE  		
+						TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
 						FROM STORYFUNDING 
-						<if test="searchCondition != null">
-							<where>
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			POST_TITLE = #{searchKeyword}
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 			NICKNAME = #{searchKeyword}
-								</if>
-							</where>
-						</if> ) countTable						
+									     <where>
+									           <if test="searchCondition != null">
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+														POST_TITLE LIKE #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+												    	NICKNAME LIKE #{searchKeyword}
+												    </if>
+										        </if> 		    
+												<if test="voteCondition != null">
+													 <if test="voteCondition == 2 and voteCondition !='' ">
+													    AND STATUS_CODE = 1
+											         </if>
+												     <if test="voteCondition == 3 and voteCondition !='' ">
+													    AND STATUS_CODE != 1
+													 </if>
+												 </if>											
+										    </where>
+							) countTable						
 	 </select>
+	 
 
 </mapper> 
