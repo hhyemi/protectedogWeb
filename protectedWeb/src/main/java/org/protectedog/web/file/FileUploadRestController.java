@@ -51,7 +51,7 @@ public class FileUploadRestController {
 	public void imageupload(@RequestParam("files") List<MultipartFile> images, @PathVariable String boardCode)
 			throws Exception {
 
-		System.out.println("/product/json/imageupload : POST");
+		System.out.println("/Images/json/imageupload : POST");
 
 		for (MultipartFile image : images) {
 			String fileName = image.getOriginalFilename();

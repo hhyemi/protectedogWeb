@@ -86,9 +86,7 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 
-		
-<!-- 
-	 SQL : UPDATE 
+	<!--  SQL : UPDATE--> 
 	 <update	id="updateFunding"	parameterType="funding" >
 	   	UPDATE STORYFUNDING
 	   	<set>
@@ -98,28 +96,12 @@
 			FUND_TARGET_PAY	   = #{fundTargetPay:NUMERIC},
 			FUND_TARGET_DAY    = #{fundTargetDay:NUMERIC},
 			VOTE_TARGET_COUNT  = #{voteTargetCount:NUMERIC},
-			FUND_END_DATE      = SYSDATE+31+#{fundTargetDay}
+			FUND_END_DATE      = SYSDATE+31+#{fundTargetDay},
+			MAIN_FILE          = #{mainFile:VARCHAR}
 	   	</set>
 	   	WHERE POST_NO IN #{postNo} 
-	 </update> -->
-<!--
-	SQL : UPDATE StatusCode
-	<update id="updateStatusCode" parameterType="funding">
-		UPDATE STORYFUNDING
-		<set>
-			STATUS_CODE = #{statusCode:CHAR},
-		</set>
-		WHERE POST_NO IN #{postNo:VARCHAR}
+	 </update>
 
-	</update>
- 
-	SQL : DELETE		 
-	<delete id="delFunding" parameterType="string">
-		DELETE
-		FROM STORYFUNDING
-		WHERE POST_NO IN #{value}
-	</delete>
--->	
  <!-- SQL : SELECT ROW Count	--> 
 	 <select  id="getTotalCount"  parameterType="search" resultType="int">
 	  	SELECT COUNT(*)

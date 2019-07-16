@@ -27,7 +27,7 @@
 		<typeAlias alias="comment" type="org.protectedog.service.domain.Comment" />
 		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />
 		<typeAlias alias="interest" type="org.protectedog.service.domain.Interest"/>
-<!-- 		<typeAlias alias="file" type="org.protectedog.service.domain.FileDog"/> -->
+		<typeAlias alias="file" type="org.protectedog.service.domain.FileDog"/>
 		<typeAlias alias="product" type="org.protectedog.service.domain.Product"/>
 		<typeAlias alias="order" type="org.protectedog.service.domain.Order"/>
 		<typeAlias alias="cart" type="org.protectedog.service.domain.Cart"/>
@@ -47,7 +47,7 @@
 		<mapper resource="sql/CommentMapper.xml"/>
 		<mapper resource="sql/FundingMapper.xml"/>
 		<mapper resource="sql/InterestMapper.xml"/>
-<!-- 		<mapper resource="sql/FileMapper.xml"/> -->
+		<mapper resource="sql/FileMapper.xml"/>
 		<mapper resource="sql/ProductMapper.xml"/>
 		<mapper resource="sql/OrderMapper.xml"/>
 		<mapper resource="sql/CartMapper.xml"/>
