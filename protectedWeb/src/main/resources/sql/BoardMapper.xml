@@ -54,8 +54,7 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodName:VARCHAR},
-					1  )
+					#{prodName:VARCHAR})
 	 </insert>
 	 
 	 
@@ -94,7 +93,7 @@
 	 <update	id="updateViewCount"	parameterType="board" >
 	   	UPDATE board 
 	   	<set>
-			view_count	= #{viewCount}
+			view_count	= view_count+1
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -103,7 +102,7 @@
 	 <update	id="updateRecommendCount"	parameterType="board" >
 	   	UPDATE board
 	   	<set>
-			recommend_count	= #{recommendCount}
+			recommend_count	= recommend_count+1
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>

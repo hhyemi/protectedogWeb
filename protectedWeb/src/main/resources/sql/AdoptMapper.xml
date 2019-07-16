@@ -28,6 +28,7 @@
 		<result property="dogChar" 			column="dog_char" 			jdbcType="VARCHAR"/>
 		<result property="dogPersonality" 	column="dog_personality" 	jdbcType="VARCHAR"/>
 		<result property="dogDate" 			column="dog_date" 			jdbcType="DATE"/>
+		<result property="mainFile" 		column="main_file" 			jdbcType="VARCHAR"/>
 		<result property="statusCode" 		column="status_code" 		jdbcType="CHAR"/>
 		
 	 </resultMap>
@@ -43,11 +44,11 @@
 		INTO adopt (board_code, post_no, id, post_title, post_content, phone, 
 					adopt_area, area_kr, location, location_kr, reg_date, 
 					dog_breed, dog_weight, dog_size, dog_gender, dog_pay, 
-					dog_status, dog_char, dog_personality, dog_date, status_code) 
+					dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
 		VALUES	   (#{boardCode}, #{postNo}, #{id}, #{postTitle}, #{postContent}, #{phone}, 
 					#{adoptArea:VARCHAR}, #{areaKr:VARCHAR}, #{location}, #{locationKr}, SYSDATE, 
 					#{dogBreed:VARCHAR}, #{dogWeight}, #{dogSize}, #{dogGender}, #{dogPay},
-					#{dogStatus}, #{dogChar}, #{dogPersonality}, #{dogDate} , #{statusCode})
+					#{dogStatus}, #{dogChar}, #{dogPersonality}, #{dogDate}, #{mainFile}, #{statusCode})
 	 </insert>
 	 
 	 
@@ -55,9 +56,10 @@
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getAdopt"	parameterType="int"		resultMap="adoptSelectMap">
-		SELECT
-		board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, 
-		dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
+		SELECT 	board_code, post_no, id, post_title, post_content, phone, 
+				adopt_area, area_kr, location, location_kr, reg_date, 
+				dog_breed, dog_weight, dog_size, dog_gender, dog_pay, 
+				dog_status, dog_char, dog_personality, dog_date, main_file, status_code
 		FROM adopt 
 		WHERE post_no = #{value}
 	 </select>
@@ -106,7 +108,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
   				FROM ( SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
-	  							dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
+	  							dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code
 						FROM adopt
 						<where>
 								board_code = #{boardCode} AND status_code != '0' 
@@ -135,7 +137,7 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
-	  					dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, status_code
+	  					dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code
 				FROM adopt
 				<where>
 						board_code = #{boardCode} AND status_code != '0' 

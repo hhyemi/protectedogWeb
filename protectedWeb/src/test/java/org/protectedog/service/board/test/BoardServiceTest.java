@@ -153,7 +153,7 @@ public class BoardServiceTest {
 		Assert.assertNotNull(board);
 		
 //		Assert.assertEquals("", board.getStatusCode());
-		board.setStatusCode('0');;
+		board.setDelCode('0');;
 		boardService.delBoard(board);
 		
 		board = boardService.getBoard(10041);
@@ -161,7 +161,7 @@ public class BoardServiceTest {
 
 		System.out.println("\n :: console »Æ¿Œ :: "+board);
 
-		Assert.assertEquals('0', board.getStatusCode());
+		Assert.assertEquals('0', board.getDelCode());
 	 }
 	
 

@@ -123,7 +123,7 @@
 		    <div id="map" style="width: 600px; height: 400px;">${board.route }</div>
 		      <input type="hidden" class="form-control" id="route" name="route" value="${board.route }">
 		      <span id="pop"></span>
-		      <p>지도를 우클릭하고 다시 경로를 설정하세요.</p>
+		      <p>경로를 변경할 경우, 지도를 우클릭하고 다시 설정하세요.</p>
 		    </div>
 		    <p></p>
 		  </div>
@@ -152,6 +152,8 @@
 	      var route = $('#route').val();
 	      var routeTest = [];
 	      var routeMark = [];
+          var infowindowF;
+          var infowindowL;
 	      
 	      //마커가 하나라도 있을때
 	      if (route.indexOf("#") != -1){
@@ -163,53 +165,58 @@
 	       	  }   	  
 	      }
 	      
-	      
-	      
 	      function initMap() {
-	        map = new google.maps.Map(document.getElementById('map'), {
-		        zoom: 13,
-		        center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
-		    			lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
-			});
+		        map = new google.maps.Map(document.getElementById('map'), {
+			        zoom: 13,
+			        center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
+			    			lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
+				});
+	
+		        poly = new google.maps.Polyline({
+			        strokeColor: '#000000',
+			        strokeOpacity: 0.5,
+			        strokeWeight: 5,
+			        map: map
+		        });
+		        
+		        var aaa = "";
+		        
+		        for ( i=0; i<routeTest.length; i++){
+			    	
+			 	    var path = poly.getPath();
+	
+		 	        path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
+		 	        								parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
 
-	        poly = new google.maps.Polyline({
-		        strokeColor: '#000000',
-		        strokeOpacity: 0.5,
-		        strokeWeight: 5,
-		        map: map
-	        });
-	        
-	        var aaa = "";
-	        
-	        for ( i=0; i<routeTest.length; i++){
-		    	
-		 	    var path = poly.getPath();
-
-	 	        path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
-	 	        								parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
-//	  	        console.log("확인 : "+centerLocaArea);
-			    marker= routeMark[i];
-			
-			    marker = new google.maps.Marker({
-			        position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
-						lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
-	    			title: '#' + path.getLength(),
-	    			map: map
-			    });
-			    
-			    markers.push(marker);
-			    
-		    }
-
-	        map.addListener('click', addLatLng);
-	        map.addListener('rightclick', function() {
-	        	for (var i = markers.length-1; i >=0; i--) {
-	        		markers[i].setMap(null);
-	        		markers.splice(i, 1 );
-	        		poly.getPath().removeAt(i);
-	        		$( "#route ").val( '' );
-	            }
-       	    });
+				    marker= routeMark[i];
+				
+				    marker = new google.maps.Marker({
+				        position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
+							lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
+		    			title: '#' + path.getLength(),
+		    			map: map
+				    });
+				    
+				    markers.push(marker);
+				    
+			    }
+	
+		        infowindowF = new google.maps.InfoWindow();
+		        infowindowL = new google.maps.InfoWindow();
+		        infowindowF.setContent("출발");
+	 	        infowindowF.open(map, markers[0]);
+	 	        infowindowL.setContent("도착");
+	 	        infowindowL.open(map, markers[markers.length-1]);
+	
+		        map.addListener('click', addLatLng);
+		        map.addListener('rightclick', function() {
+		        	for (var i = markers.length-1; i >=0; i--) {
+		        		markers[i].setMap(null);
+		        		markers.splice(i, 1 );
+		        		poly.getPath().removeAt(i);
+		        		$( "#route ").val( '' );
+		            }
+	       	    });
 	      }
 
 	     
@@ -218,9 +225,7 @@
 		        if (markers.length <5){
 		        	 
 		        	var path = poly.getPath();
-// 		        	var infowindow = new google.maps.InfoWindow();
 		 	        path.push(event.latLng);
-// 		 	        alert(event.latLng);
 		 	        
 		       		var marker = new google.maps.Marker({
 				        position: event.latLng,
@@ -228,15 +233,24 @@
 				        map: map
 		       		});
 		       		
+		       		markers.push(marker);
+		        	
 		        	$( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
 		        	
+		        	// pop up
+		        	infowindowF.setContent("출발");
+		 	        infowindowF.open(map, markers[0]);
+		 	        
+		 	        if(markers.length > 1){
+			        	infowindowL.setContent("도착");
+			 	        infowindowL.open(map, marker);
+		 	        }
+		 	        
 		        }else{
 			        alert("5개까지 지정 가능함 dialog 추가");
 			    }
-// 		        infowindow.setContent("<input type=\"text\" id=\"inputTest\" value=\"\"><button>확인<\/button>");
-// 	 	        infowindow.open(map, marker);
-		        markers.push(marker);
-
+		        
+		        
 		        if (marker != undefined){
 		        	
 		            marker.addListener('rightclick', function() {
@@ -254,12 +268,20 @@
 						
 				    	for (var i = 0; i < markers.length; i++) {
 				    		test += markers[i].position+"#";
+				    		
+				    		//pop up
+				        	infowindowF.setContent("출발");
+				 	        infowindowF.open(map, markers[0]);
+				 	        
+				 	        infowindowL.setContent("도착");
+				 	        infowindowL.open(map, markers[markers.length-1]);
 					 	}
 				    	
 				    	$( "#route ").val(  test  );
 					 	
 		            });
 		        }
+		        
 	      }
 	      
  	 </script>

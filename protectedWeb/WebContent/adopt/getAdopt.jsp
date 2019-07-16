@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 
 <!DOCTYPE html>
@@ -66,58 +67,45 @@
                 data-ride="carousel"
               >
                 <ol class="carousel-indicators" >
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="0"
-                    class="active"
-                  >
-                    <img
-                      src="images/get/img/product/single-product/s-product-s-2.jpg"
-                      alt=""
-                    />
-                  </li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="1"
-                  >
-                    <img
-                      src="images/get/img/product/single-product/s-product-s-3.jpg"
-                      alt=""
-                    />
-                  </li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="2"
-                  >
-                    <img
-                      src="images/get/img/product/single-product/s-product-s-4.jpg"
-                      alt=""
-                    />
-                  </li>
+                
+                
+                  <c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
+					<c:if test="${i eq 0}">	
+	                  <li
+	                    data-target="#carouselExampleIndicators"
+	                    data-slide-to="${i}"
+	                    class="active"
+	                  >
+	                </c:if>
+					<c:if test="${!(i eq 0)}">	
+	                  <li
+	                    data-target="#carouselExampleIndicators"
+	                    data-slide-to="${i}"
+	                  >
+	                </c:if>	                
+                  </c:forEach>               
+                     
                 </ol>
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+
+                  
+				<c:forEach var="name" items="${file}" varStatus="status">
+					<c:if test="${status.first}">	
+					<c:set var ="className" value="carousel-item active"/>
+	                </c:if>
+					<c:if test="${!(status.first)}">	
+					<c:set var ="className" value="carousel-item"/>
+	                </c:if>	                
+                    <div class="${className}">	                
                     <img
                       class="d-block w-100"
-                      src="http://placehold.it/400x400"
-                      alt="First slide"
+                      src="/resources/file/fileAdopt/${name.fileName}" height="450px;" 
                     />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="http://placehold.it/400x400"
-                      alt="Second slide"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="http://placehold.it/400x400"
-                      alt="Third slide"
-                    />
-                  </div>
+                  </div>			
+                  </c:forEach>
+          
                 </div>
+                
               </div>
             </div>
           </div>
@@ -353,6 +341,30 @@
 	    }//$('#pop').text(aaa);
 	    
       }
+      
+      $(function() {			
+			$( "button:contains('분양완료'), button:contains('찾기완료')" ).on("click" , function() {
+				var postNo = ${adopt.postNo};
+				alert(typeof postNo);
+				$.ajax( 
+					 		{
+								url : "/adopt/json/updateStatusCode/"+postNo ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+											"Accept" : "application/json",
+											"Content-Type" : "application/json"
+										  },
+								success : function(status) {
+									$( '#complete' ).text('완료됨');
+								},
+								error: function(request, status, error){ 
+									alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+						        }
+					});
+			});	
+		
+	 });
       
       $(function() {
     	    $( "a:contains('수정')" ).on("click" , function() {

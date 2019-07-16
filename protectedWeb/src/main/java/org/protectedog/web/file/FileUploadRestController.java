@@ -64,6 +64,15 @@ public class FileUploadRestController {
 				} else if (boardCode.equals("AD")) {
 					File f = new File(fileADRoot, fileName);
 					image.transferTo(f);
+				} else if (boardCode.equals("MS")) {
+					File f = new File(fileADRoot, fileName);
+					image.transferTo(f);
+				} else if (boardCode.equals("AR")) {
+					File f = new File(fileADRoot, fileName);
+					image.transferTo(f);
+				} else if (boardCode.equals("MR")) {
+					File f = new File(fileADRoot, fileName);
+					image.transferTo(f);
 				} else if (boardCode.equals("IS")) {
 					File f = new File(fileISRoot, fileName);
 					image.transferTo(f);

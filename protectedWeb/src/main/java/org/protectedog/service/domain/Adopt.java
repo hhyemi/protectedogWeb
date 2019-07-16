@@ -29,6 +29,8 @@ public class Adopt {
 	private String dogPersonality;
 	private Date dogDate;
 	
+	private String mainFile;
+
 	private String statusCode;
 	
 
@@ -195,6 +197,14 @@ public class Adopt {
 		this.dogDate = dogDate;
 	}
 
+	public String getMainFile() {
+		return mainFile;
+	}
+
+	public void setMainFile(String mainFile) {
+		this.mainFile = mainFile;
+	}
+
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -205,7 +215,6 @@ public class Adopt {
 
 	
 	
-	
 	@Override
 	public String toString() {
 		return "Adopt [boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
@@ -213,7 +222,8 @@ public class Adopt {
 				+ areaKr + ", location=" + location + ", locationKr=" + locationKr + ", regDate=" + regDate
 				+ ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight + ", dogSize=" + dogSize + ", dogGender="
 				+ dogGender + ", dogPay=" + dogPay + ", dogStatus=" + dogStatus + ", dogChar=" + dogChar
-				+ ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate + ", statusCode=" + statusCode + "]";
+				+ ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate + ", mainFile=" + mainFile
+				+ ", statusCode=" + statusCode + "]";
 	}
 	
 
