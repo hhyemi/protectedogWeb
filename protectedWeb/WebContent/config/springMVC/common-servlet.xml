@@ -73,8 +73,8 @@
 		
 		<property name="exceptionMappings">
 			<props>
-<!-- 				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop> -->
-<!-- 				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop> -->
+				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop>
+				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop>
 			</props>
 		</property>
 		

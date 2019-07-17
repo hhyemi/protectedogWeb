@@ -24,8 +24,8 @@ public class Search {
 	public int getPageSize() {
 		return pageSize;
 	}
-	public void setPageSize(int paseSize) {
-		this.pageSize = paseSize;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 	public int getCurrentPage() {

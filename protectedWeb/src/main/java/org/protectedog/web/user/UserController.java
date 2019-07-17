@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -154,6 +155,50 @@ public class UserController {
 		session.invalidate();
 		
 		return "redirect:/index.jsp";
+	}
+	
+	@RequestMapping(value="getUsers", method=RequestMethod.GET)
+	public String getUsers(@RequestParam("id") String id, Model model) throws Exception{
+		
+		System.out.println("/users/getUsers");
+		
+		User user=userService.getUsers(id);
+		
+		model.addAttribute("user", user);
+		
+		return "forward:/users/getUsersView.jsp";
+		
+	}
+	
+	@RequestMapping(value="updateUsers", method=RequestMethod.GET)
+	public String updateUsers(@RequestParam("id") String id, Model model) throws Exception{
+		
+		System.out.println("/users/updateUsers : GET");
+		
+		User user=userService.getUsers(id);
+		
+		model.addAttribute(user);
+		
+		return "forward:/users/updateUsersView.jsp";
+		
+	}
+	
+	@RequestMapping(value="updateUsers", method=RequestMethod.POST)
+	public String updateUsers(@ModelAttribute("user") User user, Model model, HttpSession session) throws Exception{
+		
+		System.out.println("/users/updateUsers : POST");
+		
+		userService.updateUsers(user);
+		
+		String sessionId=((User)session.getAttribute("user")).getId();
+		System.out.println("update : "+sessionId);
+		
+		if(sessionId.equals(user.getId())) {
+			session.setAttribute("user", user);
+		}
+		
+		return "redirect:/users/getUsers?id="+user.getId();
+		
 	}
 	
 }

@@ -80,14 +80,14 @@
 	<update id="updateUsers"	parameterType="users">
 		UPDATE users
 		<set>
+			id=#{id},
 			pw=#{pw},
-			user_name=#{userName},
 			nickname=#{nickname},
 			email=#{email:VARCHAR},
 			phone=#{phone:NUMERIC},
 			user_addr=#{userAddr:VARCHAR},
 			account=#{account:NUMERIC},
-			profile=#{profile}
+			profile=#{profile:VARCHAR}
 		</set>
 		WHERE id=#{id}
 	</update>
