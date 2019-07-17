@@ -26,9 +26,29 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
+	  	body {
             padding-top : 50px;
         }
+        img { 
+     		max-height: 250px; 
+     		min-height: 250px; 
+     		width: 100%; 
+     		vertical-align: middle;
+       }
+        
+        figure.snip1384 {
+			font-family: 'Raleway', Arial, sans-serif;
+			position: relative;
+			overflow: hidden;
+			margin: 10px;
+			min-width: 230px;
+			max-width: 315px;
+			width: 100%;
+			color: #ffffff;
+			text-align: left;
+			font-size: 16px;
+			background-color: #000000;
+		}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -48,6 +68,9 @@
 			 $( "button:contains('검색')" ).on("click" , function() {
 				fncGetList(1);
 			});
+			 $( "figure" ).on("click" , function() {
+				 self.location ="/adopt/getAdopt?postNo="+$(this).children( $('input')).val().trim();
+			});
 		 });
 		
 		
@@ -55,7 +78,7 @@
 		 $(function() {
 		
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(2)" ).on("click" , function() {
+			$( "td:nth-child(3)" ).on("click" , function() {
 				alert("글번호 : "+$(this).children().val().trim());
 				 self.location ="/adopt/getAdopt?postNo="+$(this).children().val().trim();
 			});
@@ -64,15 +87,10 @@
 				self.location = "../index.jsp"
 			});
 			
-			if( $( '#boardCode' ).val()=="AD"){
-				$( "button:contains('글쓰기')" ).on("click" , function() {
-					self.location = "../adopt/getTerms.jsp"
-				});
-			} else {
-				$( "button:contains('글쓰기')" ).on("click" , function() {
-					self.location = "/adopt/addAdopt?boardCode=MS"
-				});
-			}
+			$( "button:contains('글쓰기')" ).on("click" , function() {
+				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
+			});
+
 			//==> userId LINK Event End User 에게 보일수 있도록 
 			$( "td:nth-child(2)" ).css("color" , "red");
 			
@@ -93,6 +111,8 @@
 </head>
 
 <body>
+
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
 	<button type="button" class="btn btn-primary">보호할개</button>
@@ -125,51 +145,72 @@
 		
 		
       <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
+<!--       <table class="table table-hover table-striped" > -->
       
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left" >글제목</th>
-            <th align="left">견종</th>
-            <th align="left">
-	            <c:if test="${param.boardCode eq 'AD' }">
-		  			책임비
-		  		</c:if>
-			    <c:if test="${param.boardCode eq 'MS' }">
-		  			사례비
-		  		</c:if>
-            </th>
-          </tr>
-        </thead>
+<!--         <thead> -->
+<!--           <tr> -->
+<!--             <th align="center">No</th> -->
+<!--             <th align="left" >글제목</th> -->
+<!--             <th align="left">견종</th> -->
+<!--             <th align="left"> -->
+<%-- 	            <c:if test="${param.boardCode eq 'AD' }"> --%>
+<!-- 		  			책임비 -->
+<%-- 		  		</c:if> --%>
+<%-- 			    <c:if test="${param.boardCode eq 'MS' }"> --%>
+<!-- 		  			사례비 -->
+<%-- 		  		</c:if> --%>
+<!--             </th> -->
+<!--           </tr> -->
+<!--         </thead> -->
        
-		<tbody>
+<!-- 		<tbody> -->
 		
-		  <c:set var="i" value="0" />
+		  
+        
+<!--         </tbody> -->
+      
+<!--       </table> -->
+      <div class="row">
+      <div class="col-md-12"></div>
+      <div class="col-md-12">
+      <c:set var="i" value="0" />
 		  <c:forEach var="adopt" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left">${adopt.postTitle}
-			  	<input type="hidden" id="postNo" value="${adopt.postNo}">
-			  	<c:if test="${adopt.statusCode eq '3' }">
-				  	<span class="label label-default">
-					  	<c:if test="${adopt.boardCode eq 'AD' }">분양완료</c:if>
-					  	<c:if test="${adopt.boardCode eq 'MS' }">찾기완료</c:if>
-				  	</span>
-			  	</c:if>
-			  </td>
-			  <td align="left">${adopt.dogBreed}</td>
-			  <td align="left">${adopt.dogPay}원</td>
-			</tr>
-          </c:forEach>
-        
-        </tbody>
-      
-      </table>
+			
+<!-- 			<tr> -->
+<%-- 			  <td align="center">${ i }</td> --%>
+<%-- 			  <td align="center"><img src="../resources/file/fileAdopt/${adopt.mainFile}" onerror="this.src='http://placehold.it/400x400'"></td> --%>
+<%-- 			  <td align="left">${adopt.postTitle} --%>
+<%-- 			  	<input type="hidden" id="postNo" value="${adopt.postNo}"> --%>
+<%-- 			  	<c:if test="${adopt.statusCode eq '3' }"> --%>
+<!-- 				  	<span class="label label-default"> -->
+<%-- 					  	<c:if test="${adopt.boardCode eq 'AD' }">분양완료</c:if> --%>
+<%-- 					  	<c:if test="${adopt.boardCode eq 'MS' }">찾기완료</c:if> --%>
+<!-- 				  	</span> -->
+<%-- 			  	</c:if> --%>
+<!-- 			  </td> -->
+<%-- 			  <td align="left">${adopt.dogBreed}</td> --%>
+<%-- 			  <td align="left">${adopt.dogPay}원</td> --%>
+<!-- 			</tr> -->
+			
+			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: ">
+			<figure>
+			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
+				  <img src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/>
+				  <figcaption>
+					    <h3>${adopt.postTitle}</h3>
+				  </figcaption>
+			</figure>
+			</div>	
+			
+          </c:forEach></div>
+          </div>
+          <div class="col-md-12">
+		 <br/>  	<br/>
+		    </div>
 	  <!--  table End /////////////////////////////////////-->
 	  
-	  <div class="col-md-6 text-right">
+	  <div class="col-md-12 text-right">
 			    <form class="form-inline" name="detailForm">
 			    
 				  <div class="form-group">

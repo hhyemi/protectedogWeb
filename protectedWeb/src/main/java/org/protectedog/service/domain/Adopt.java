@@ -14,7 +14,9 @@ public class Adopt {
 	private String postContent;
 	private String phone;		// user
 	private String adoptArea;
+	private String areaKr;
 	private String location;
+	private String locationKr;
 	private Date regDate;
 	
 	private String dogBreed;
@@ -27,6 +29,8 @@ public class Adopt {
 	private String dogPersonality;
 	private Date dogDate;
 	
+	private String mainFile;
+
 	private String statusCode;
 	
 
@@ -89,12 +93,28 @@ public class Adopt {
 		this.adoptArea = adoptArea;
 	}
 
+	public String getAreaKr() {
+		return areaKr;
+	}
+
+	public void setAreaKr(String areaKr) {
+		this.areaKr = areaKr;
+	}
+
 	public String getLocation() {
 		return location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public String getLocationKr() {
+		return locationKr;
+	}
+
+	public void setLocationKr(String locationKr) {
+		this.locationKr = locationKr;
 	}
 
 	public Date getRegDate() {
@@ -177,6 +197,14 @@ public class Adopt {
 		this.dogDate = dogDate;
 	}
 
+	public String getMainFile() {
+		return mainFile;
+	}
+
+	public void setMainFile(String mainFile) {
+		this.mainFile = mainFile;
+	}
+
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -187,19 +215,16 @@ public class Adopt {
 
 	
 	
-
 	@Override
 	public String toString() {
 		return "Adopt [boardCode=" + boardCode + ", postNo=" + postNo + ", id=" + id + ", postTitle=" + postTitle
-				+ ", postContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", location="
-				+ location + ", regDate=" + regDate + ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight
-				+ ", dogSize=" + dogSize + ", dogGender=" + dogGender + ", dogPay=" + dogPay + ", dogStatus="
-				+ dogStatus + ", dogChar=" + dogChar + ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate
+				+ ", postContent=" + postContent + ", phone=" + phone + ", adoptArea=" + adoptArea + ", areaKr="
+				+ areaKr + ", location=" + location + ", locationKr=" + locationKr + ", regDate=" + regDate
+				+ ", dogBreed=" + dogBreed + ", dogWeight=" + dogWeight + ", dogSize=" + dogSize + ", dogGender="
+				+ dogGender + ", dogPay=" + dogPay + ", dogStatus=" + dogStatus + ", dogChar=" + dogChar
+				+ ", dogPersonality=" + dogPersonality + ", dogDate=" + dogDate + ", mainFile=" + mainFile
 				+ ", statusCode=" + statusCode + "]";
 	}
-	
-	
-
 	
 
 }

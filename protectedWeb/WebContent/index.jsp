@@ -80,8 +80,9 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">분양</a>
-                <a class="dropdown-item" href="product-single.html">실종</a>
+              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
+                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
+                <a class="dropdown-item" href="/adoptreview/addAdoptReview">경로테스트</a>
 
               </div>
             </li>

@@ -1,5 +1,6 @@
 package org.protectedog.service.board;
 
+import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
@@ -16,7 +17,7 @@ public interface BoardDAO {
 	public Board getBoard(int postNo) throws Exception ;
 
 	// SELECT LIST
-	public Map<String, Object> listBoard(Search search, String boardCode) throws Exception ;
+	public Map<String, Object> listBoard(Search search, String boardCode, int order) throws Exception ;
 
 	// UPDATE
 	public void updateBoard(Board board) throws Exception ;
@@ -31,6 +32,10 @@ public interface BoardDAO {
 	public void delBoard(Board board) throws Exception ;
 	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
+	
 	public int getTotalCount(String boardCode) throws Exception ;
+	
+	// SELECT LIST RANKING TOP 5
+	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
 	
 }
