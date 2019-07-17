@@ -195,7 +195,7 @@
    <script type="text/javascript" >
 
    //============= 수정버튼 눌렀을때 함수 =============      
-   function fncUpdateFunding(){
+   function fncUpdateVoting(){
       
       //Form 유효성 검증
 
@@ -278,7 +278,7 @@
         });
 
 
-      $('form').attr("method","POST").attr("action","/funding/updateFunding").attr("enctype","multipart/form-data").submit();
+      $('form').attr("method","POST").attr("action","/funding/updateVoting").attr("enctype","multipart/form-data").submit();
    }
    
    //============= "다중파일업로드 파일명만 저장해서 insert할 value" =============   
@@ -462,7 +462,7 @@
       
          //============= 수정 Event  처리 =============   
          $( "#btn-update" ).on("click" , function() {
-        	 fncUpdateFunding();
+        	 fncUpdateVoting();
             });
          
          //============= 취소 Event  처리 =============

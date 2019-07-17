@@ -175,7 +175,7 @@
    <script type="text/javascript" >
 
    //============= 등록버튼 눌렀을때 함수 =============      
-   function fncAddFunding(){
+   function fncAddVoting(){
       
       //Form 유효성 검증
 
@@ -263,7 +263,7 @@
         });
 
 
-      $('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
+      $('form').attr("method","POST").attr("action","/funding/addVoting").attr("enctype","multipart/form-data").submit();
    }
    
    //============= "다중파일업로드 파일명만 저장해서 value" =============   
@@ -430,7 +430,7 @@
       
          //============= 등록 Event  처리 =============   
          $( "#btn-add" ).on("click" , function() {
-            fncAddFunding();
+            fncAddVoting();
             });
          
          //============= 취소 Event  처리 =============

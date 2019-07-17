@@ -37,8 +37,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
-            <h1 class="mb-0 bread">후원신청</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">support</a></span> <span>post</span></p>
+            <h1 class="mb-0 bread">후원게시</h1>
           </div>
         </div>
       </div>
@@ -54,9 +54,9 @@
 				    	<div class="right-box">
 
 						    <select class="form-control" id="voteCondition" name="voteCondition" >
-								<option value="1" ${ ! empty search.voteCondition && search.voteCondition==1 ? "selected" : "" }>전체보기</option>
-								<option value="2" ${ ! empty search.voteCondition && search.voteCondition==2 ? "selected" : "" } >투표중</option>
-								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >투표완료</option>
+								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option>
+								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >후원중</option>
+								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >후원완료</option>
 							</select>   
 						    &emsp;
 						    <select class="form-control" name="searchCondition" id="searchCondition" >
@@ -84,10 +84,22 @@
 				    					</a>
 				    					<div class="text py-3 px-3">
 				    						<h2><a href="#">${funding.postTitle}</a></h2>
-				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
-										 <div class="progress">
-										  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
-										 </div>	
+				    						
+										 <!-- 후원종료 -->
+										 <c:if test ="${!(funding.statusCode eq 3) }">
+				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
+										    <div class="progress">		 
+										    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>										 
+										    </div>
+										 </c:if>
+										 <!-- 후원중 -->
+										 <c:if test ="${funding.statusCode eq 3 }">										 
+				    					   <h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
+										   <div class="progress">												 
+										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
+										   </div>					
+										</c:if>
+										
 										 <div align="right">	    						
 										<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
 										</div>
@@ -101,6 +113,7 @@
 		    	</div>
 		    <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->		    	
 		    <input type="hidden" id="currentPage" name="currentPage" value=""/>	  
+		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
   		  <div class="form-group text-center">
 	  			<button type="button" id="btn-add">작성하기</button>
@@ -128,14 +141,14 @@
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/funding/listFunding").submit();
+	   	$("form").attr("method" , "POST").attr("action" , "/funding/listVoting").submit();
 	 
 	}
     $(function(){
     	
 		//============= "검색"  Event  처리 =============	
 		 $( "button.btn.btn-default" ).on("click" , function() {
-			fncGetList(1);
+			    fncGetList(1);
 		});
 		//============= "투표중/투표완료"  Event   처리 =============
 		$( "#voteCondition" ).change(function(){
@@ -143,7 +156,7 @@
 		});    
 		//============= 썸네일 사진 클릭 Event  처리 =============	
 	 	$( ".img-prod" ).on("click" , function() {
-			$(self.location).attr("href","/funding/getFunding?postNo="+$(this).children("input").val());
+			$(self.location).attr("href","/funding/getVoting?postNo="+$(this).children("input").val());
 		});   
 	
         //============= 작성 Event  처리 =============   
@@ -159,7 +172,7 @@
 	          var convertSearch = JSON.stringify(search);
 	          
 	          $.ajax({
-	             url : "/funding/json/listFunding/",
+	             url : "/funding/json/listVoting/",
 	             method : "POST",
 	             dataType : "json",
 	             data :  convertSearch ,
@@ -169,7 +182,7 @@
 	                "Content-Type" : "application/json;charset=euc_kr"
 	             },
 	             success : function(JSONData, status){
-	            	 alert(JSONData)
+	            	 //alert(JSONData)
 	                $("#searchKeyword").autocomplete({
 	                   source : JSONData
 	                });
