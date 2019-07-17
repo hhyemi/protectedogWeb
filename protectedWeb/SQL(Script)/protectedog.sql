@@ -97,7 +97,7 @@ CREATE TABLE USERS (
 
 CREATE TABLE PRODUCT (
 	PROD_NO 		NUMBER(6,0) 	NOT NULL,
-	PROD_NAME 		VARCHAR2(50) 	UNIQUE NOT NULL, 
+	PROD_NAME 		VARCHAR2(50) 	NOT NULL, 
 	PRICE 			NUMBER(10,0) 	NOT NULL, 
 	MANU_DATE 		DATE 		NOT NULL, 
 	REG_DATE 		DATE 		NOT NULL, 
@@ -106,6 +106,7 @@ CREATE TABLE PRODUCT (
 	PROD_DETAIL 		VARCHAR2(4000) 	NOT NULL, 
 	COMPANY 		VARCHAR2(15) 	NOT NULL, 
 	DISCOUNT_PRICE 		NUMBER(10,0) 	NOT NULL, 
+	PROD_CODE      		NUMBER(2,0)
 	PRIMARY KEY(PROD_NO));
 
 CREATE TABLE BREED_PEDIA (
@@ -171,7 +172,9 @@ CREATE TABLE ADOPT(
 	POST_CONTENT 	VARCHAR2(600) 	NOT NULL ENABLE, 
 	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
 	ADOPT_AREA 		VARCHAR2(200) , 
+	AREA_KR 		VARCHAR2(200) , 
 	LOCATION 		VARCHAR2(100) 	NOT NULL ENABLE, 
+	LOCATION_KR 	VARCHAR2(100) 	NOT NULL ENABLE, 
 	REG_DATE 		DATE 			NOT NULL ENABLE, 
 	DOG_BREED 		VARCHAR2(20), 
 	DOG_WEIGHT 		VARCHAR2(6) 	NOT NULL ENABLE, 
@@ -182,6 +185,7 @@ CREATE TABLE ADOPT(
 	DOG_CHAR 		VARCHAR2(40) 	NOT NULL ENABLE, 
 	DOG_PERSONALITY VARCHAR2(40) 	NOT NULL ENABLE, 
 	DOG_DATE 		DATE 			NOT NULL ENABLE, 
+	MAIN_FILE     		VARCHAR2(100)    NOT NULL,
 	STATUS_CODE 	CHAR(1) 		NOT NULL ENABLE, 
 	PRIMARY KEY (POST_NO));
 	
@@ -233,7 +237,6 @@ CREATE TABLE MESSAGE (
 	 
 CREATE TABLE ORDERS (
    	ORDER_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	PROD_NAME 		VARCHAR2(50) 	REFERENCES PRODUCT(PROD_NAME) NOT NULL, 
 	PROD_NO 		NUMBER(6,0) 	REFERENCES PRODUCT(PROD_NO) NOT NULL, 
 	ID 			VARCHAR2(12) 	REFERENCES USERS(ID) NOT NULL, 
 	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE) NOT NULL,
@@ -287,9 +290,9 @@ CREATE TABLE BOARD (
 	CITY 			VARCHAR2(20), 
 	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE), 
 	QNA_CODE 		CHAR(2), 
-	ROUTE 			VARCHAR2(400), 
-	PROD_NAME 		VARCHAR2(200), 
-	DEL_CODE		CHAR(1)			DEFAULT '1',
+	ROUTE 			VARCHAR2(250), 
+	PROD_NO		NUMBER(6,0)	REFERENCES PRODUCT(PROD_NO),
+	DEL_CODE		CHAR(1)		DEFAULT '1',
 	PRIMARY KEY (POST_NO));
 
 CREATE TABLE PARTICIPATE (
@@ -299,6 +302,7 @@ CREATE TABLE PARTICIPATE (
 	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES STORYFUNDING(POST_NO), 
 	REG_DATE 		DATE 		NOT NULL ENABLE, 
 	FUND_PAY 		NUMBER(7,0), 
+	STATUS_CODE 		CHAR(1) 		NOT NULL ENABLE,
 	PRIMARY KEY (PARTICIPATE_NO));
 	 
 CREATE TABLE COMMENTS (
@@ -540,19 +544,19 @@ VALUES (10002, seq_RECOMMENT_RECOMMENT_NO, 'user03', '3번 대댓글선수 잘 달리나요
 
 
 INSERT INTO coupon
-(coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
+(coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user01', 5000, '0', '2019/07/11', '2019/09/11', null);
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원권', 5000, '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO coupon
-(coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
+(coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user02', 5000, '1', '2019/07/11', '2019/09/11', '2019/07/11');
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파1만원권', 10000, '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO coupon
-(coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, limit_date, use_date)
+(coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원할인권', 'user03', 5000, '0', '2019/07/11', '2019/09/11', null);
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파2만원권', 20000, '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO interest
 (interest_no, board_code, comment_no, post_no, id, reg_date)

@@ -2,6 +2,7 @@
 <%@ page pageEncoding="EUC-KR"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 
@@ -45,17 +46,40 @@
         }
     </style>
  <script type="text/javascript">
+ <script type="text/javascript">
+	//============= "등록"  Event 연결 =============
+	
+	$( "#addproduct").on("click", function(){
+		 self.location = "/product/addProduct.jsp"
 
 	
+});
+
+	//============= "취소"  Event 처리 및  연결 =============
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+		$("a[href='#' ]").on("click", function() {
+			//Debug..
+			//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
+			$("form")[0].reset();
+		});
+	});
+
 </script> 
 </head>
 
 <body>
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+<%-- 	<jsp:include page="/layout/toolbar.jsp" /> --%>
    	<!-- ToolBar End /////////////////////////////////////-->
 	
-	       <h1 align="center">관리자 <small>구매목록 조회</small></h1><br/>
+	       <h1 align="center">관리자 <small>상품 등록내역 조회<button class="mdl-button mdl-js-button mdl-button--primary" id="addProduct">
+  상품등록
+</button></small></h1><br/>
+	       
+	       <!-- Primary-colored flat button -->
+
 	
 		<!--  table Start /////////////////////////////////////-->
       <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" align="center">
@@ -63,37 +87,39 @@
       <thead>
     <tr>
       <th class ="mdl-data-table__cell--non-numeric" align="center" >No</th>
-            <th align="left">회원ID</th>
-            <th align="left">회원명 </th>
-            <th align="left">전화번호</th>
-            <th align="left">배송현황</th>
-             <th align="left">정보수정</th>
+            <th align="left">상품번호</th>
+            <th align="left">상품명 </th>
+            <th align="left">상품가격</th>
+            <th align="left">제조사</th>
+            <th align="left">원산지</th>
+             <th align="left">상품제조일자</th>
+             <th align="left">상품등록일</th>
+             <th align="left">재고수량</th>
+             <th align="left">상품코드</th>
+             <th align="left">할인액</th>
     </tr>
         </thead>
-			
-	<!-- 	<c:set var="i" value="0"/>
-		<c:forEach var = "purchase" items="${list}">
-		<c:set var="i" value="${i+1}" />-->
-	
-	<tbody>
+        
+			<tbody>
+	<c:set var="i" value="0"/>
+		<c:forEach var = "product" items="${list}">
+		<c:set var="i" value="${i+1}" />
     <tr>
-      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-      <td>25</td>
-      <td>$2.90</td>
+      <td class="mdl-data-table__cell--non-numeric" align="center">${product.prodNo}</td>
+      <td align="center">${product.prodName}</td>
+      <td align="center">${product.price}</td>
+      <td align="center">${product.company}</td>
+       <td align="center">${product.country}</td>
+        <td align="center">${product.manuDate}</td>
+         <td align="center">${product.regDate}</td>
+          <td align="center">${product.quantity }</td>
+          <td align="center">${product.prodCode }</td>
+          <td align="center">${product.discountPrice }</td>
+           
+        
     </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-      <td>50</td>
-      <td>$1.25</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-      <td>10</td>
-      <td>$2.35</td>
-    </tr>
+    	</c:forEach>
   </tbody>
-
-	<!--</c:forEach>-->
 	</table>
 	
 </body>

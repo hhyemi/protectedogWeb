@@ -43,14 +43,17 @@ public class CouponServiceImpl implements CouponService{
 	}
 
 	@Override
-	public Map<String, Object> getCouponList(Search search) throws Exception {
+	public Map<String, Object> getCouponList(Map<String, Object> sMap) throws Exception {
 		// TODO Auto-generated method stub
+		List<Coupon> sList=couponDAO.getMyCouponList(sMap);
+		Search search =(Search)sMap.get("search");
 		List<Coupon> list=couponDAO.getCouponList(search);
 		int totalCount=couponDAO.getTotalCount(search);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("totalCount", totalCount);
+		map.put("sList", sList);
 		return map;
 	}
 
@@ -58,6 +61,12 @@ public class CouponServiceImpl implements CouponService{
 	public void updateCouponStatus(Coupon coupon) throws Exception {
 		// TODO Auto-generated method stub
 		couponDAO.updateCouponStatus(coupon);
+	}
+
+	@Override
+	public void addCouponManage(Coupon coupon) throws Exception {
+		// TODO Auto-generated method stub
+		couponDAO.addCouponManage(coupon);
 	}
 
 

@@ -48,18 +48,39 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
-					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
-					    </div>
+						   	 	<c:if test="${ sessionScope.user == null }">
+						   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
+                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" width="15"/>
+                        		</a>
+                        		</c:if>
+                        		<c:if test="${ sessionScope.user.kakao != null }">
+                        		<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a>
+                        		</c:if>
+					    	</div>
+					   		<div class="col-md pr-4 d-flex topper align-items-center">
+					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						   		<span class="text">youremail@email.com</span>
+					   		</div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 					    	<c:if test="${sessionScope.user.role eq null}">
 						    <span class="text">Sign in</span><span class="text">sign up</span>
 						    </c:if>
 						    <c:if test="${sessionScope.user.role != null}">
-						    <span class="text">${sessionScope.user.nickName} 님 환영합니다.</span>
+						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
+						    <input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
+						    <c:if test="${sessionScope.user.role eq 'user' }">
+						    <div class="myInfo">
+						    	<input type="button" id="myInfo" value="마이페이지">
+						    </div>
+						    </c:if>
+						    <c:if test="${sessionScope.user.role eq 'admin' }">
+						    <div class="myInfo">
+						    	<input type="button" id="manageMenu" value="관리자메뉴">
+						    </div>
+						    </c:if>
+						    <div class="logout">
+                                <a href="/users/logout">logout</a>
+                            </div>
 						    </c:if>
 					    </div>
 				    </div>
@@ -128,6 +149,7 @@
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
+                <a class="dropdown-item" href="/coupon/listCoupon">오늘의 쿠폰</a>
               </div>
             </li>
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
@@ -776,6 +798,47 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="resources/prodmenu/js/google-map.js"></script>
   <script src="resources/prodmenu/js/main.js"></script>
-    
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  
+      <script type="text/javascript">
+    	Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+    	function loginWithKakao(){
+    		Kakao.Auth.login({
+    			success:function(authObj){
+    				Kakao.API.request({
+    					url:"/v2/user/me",
+    					success:function(result){
+    						var info=JSON.stringify(result);
+		                    $(location).attr('href', '/users/kakao?kakao='+result.id);
+    					}
+    				});
+    				Kakao.Auth.getAccessToken();
+    			},
+    				fail:function(err){
+    				alert(JSON.stringify(err));
+    				alert("로그인 실패")
+    			}
+    		})
+    	}
+    	
+    	function logoutWithKakao(){
+    		Kakao.Auth.logout();
+    		location.href='https://accounts.kakao.com/logout?continue=https://pf.kakao.com/logged_out';
+    	}
+    	
+    	$(function(){
+    		$("#myInfo").on("click", function(){
+    			$(self.location).attr('href', "/users/getUsers?id=${sessionScope.user.id}");
+    		})
+    	});
+    	
+    	</script>
+  
+  
   </body>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> refs/remotes/origin/master
 </html>

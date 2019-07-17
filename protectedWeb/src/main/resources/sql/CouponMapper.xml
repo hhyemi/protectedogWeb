@@ -10,7 +10,7 @@
 	<resultMap id="couponSelectMap" type="coupon">
 		<result property="couponNo"	column="coupon_no"	jdbcType="NUMERIC"/>
 		<result property="couponCode"	column="coupon_code"	jdbcType="VARCHAR"/>
-		<result property="receiveUser.id"	column="receiver_id"	jdbcType="VARCHAR"/>
+		<result property="receiverId"	column="receiver_id"	jdbcType="VARCHAR"/>
 		<result property="couponName"	column="coupon_name"	jdbcType="VARCHAR"/>
 		<result property="discount"		column="discount"	jdbcType="NUMERIC"/>
 		<result property="couponStatus"	column="coupon_status"	jdbcType="CHAR"/>
@@ -21,12 +21,20 @@
 	
 	<!-- SQL : INSERT -->
 	
+	<insert id="addCouponManage" parameterType="coupon">
+		INSERT INTO coupon
+			(coupon_no, coupon_code, coupon_name, discount, coupon_status,
+			make_date, limit_date)
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{couponName}, #{discount}, 
+			#{couponStatus}, SYSDATE, #{limitDate})
+	</insert>
+	
 	<insert id="addCoupon"	parameterType="coupon">
 		INSERT INTO coupon
 			(coupon_no, coupon_code, receiver_id, coupon_name, discount, coupon_status,
 			make_date, limit_date, use_date)
-		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiveUser.id}, #{couponName}, #{discount}, 
-			#{couponStatus:VARCHAR}, SYSDATE, #{limitDate:DATE}, #{useDate:DATE})
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiveId}, #{couponName}, #{discount}, 
+			'1', SYSDATE, #{limitDate:DATE}, #{useDate:DATE})
 	</insert>
 
 	 
@@ -34,7 +42,7 @@
 
 	<select id="getCoupon"	parameterType="string"	resultMap="couponSelectMap">
 		SELECT
-		coupon_no, coupon_name, discount, coupon_status, make_date, use_date, limit_date 
+		coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, use_date, limit_date 
 		FROM coupon
 		WHERE coupon_no=#{couponNo}
 	</select>
@@ -46,7 +54,7 @@
 		UPDATE coupon
 		<set>
 			coupon_status=#{couponStatus:VARCHAR},
-			use_date=#{useDate:VARCHAR}
+			use_date=SYSDATE
 		</set>
 		WHERE coupon_no=#{couponNo}
 	</update>
@@ -54,30 +62,28 @@
 		 
 	<!-- SQL : SELECT LIST -->
 	 	
-	<select id="getCouponList"		parameterType="search"	resultMap="couponSelectMap">
-		SELECT coupon_no, coupon_name, coupon_status, make_date, use_date, limit_date
+	<select id="getCouponList"	parameterType="search"	resultMap="couponSelectMap">
+		SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT coupon_no, coupon_name, coupon_status, make_date, use_date, limit_date
+			FROM( SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
 				FROM coupon
-				<if test="searchCondition != null">
-					<where>
-						<if test="searchCondition==0 and searchKeyword !='' ">
-							make_date=#{searchKeyword}
-						</if>
-						<if test="searchCondition==1 and searchkeyword !='' ">
-							limit_date=#{searchKeyword}
-						</if>
-						<if test="searchCondition==2 and searchkeyword !='' ">
-							coupon_name=#{searchKeyword}
-						</if>
-						<if test="searchCondition==3 and searchkeyword !='' ">
-							coupon_status=#{searchKeyword}
-						</if>
-					</where>
-				</if>
+				WHERE coupon_status='0'
+				AND receiver_id IS NULL
 				ORDER BY coupon_no ) inner_table
 			WHERE ROWNUM &lt;=#{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getMyCouponList"	parameterType="map"	resultMap="couponSelectMap">
+		SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
+				FROM coupon
+				WHERE coupon_status='1'
+				AND receiver_id = #{receiverId}
+				ORDER BY coupon_no ) inner_table
+			WHERE ROWNUM &lt;=#{endNum} )
+		WHERE row_seq BETWEEN #{startNum} AND #{endNum}
 	</select>
 
 
@@ -85,7 +91,7 @@
 
 	<select  id="getTotalCount"		parameterType="search"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT coupon_no, coupon_name, coupon_status, make_date, use_date, limit_date
+		FROM(	SELECT coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, use_date, limit_date
 			FROM coupon
 			<if test="searchCondition != null">
 				<where>

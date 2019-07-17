@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -53,29 +55,42 @@
              <div class="col-lg-12 d-block">
                 <div class="row d-flex">
                    <div class="col-md pr-4 d-flex topper align-items-center">
-<!--                       <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div> -->
-<!--                       <span class="text">+ 1235 2355 98</span> -->
-                   </div>
-                   <div class="col-md pr-4 d-flex topper align-items-center">
-<!--                       <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
-<!--                       <span class="text">youremail@email.com</span> -->
-                   </div>
-                   <c:if test="${sessionScope.user.role eq null}">
-                   <div class="col-md-2 pr-4 d-flex topper align-items-center text-lg-right" style="margin : 0px; padding: 0px;">
-
-						    <span class="text">Sign in</span>
-                   </div>
-                   <div class="col-md-2 pr-4 d-flex topper align-items-center text-lg-right" style="margin : 0px; padding: 0px;">
-						    <span class="text">Sign up</span>
-						   
-                   </div>
-                    </c:if>
-                    
-                    <c:if test="${sessionScope.user.role != null}">
-                    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right" style="margin : 0px; padding: 0px;">
-						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>	
-					</div>
-					</c:if>
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+						   	 	<c:if test="${ sessionScope.user == null }">
+						   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
+                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" width="15"/>
+                        		</a>
+                        		</c:if>
+                        		<c:if test="${ sessionScope.user.kakao != null }">
+                        		<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a>
+                        		</c:if>
+					    	</div>
+					   		<div class="col-md pr-4 d-flex topper align-items-center">
+					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						   		<span class="text">youremail@email.com</span>
+					   		</div>
+					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+					    	<c:if test="${sessionScope.user.role eq null}">
+						    <span class="text">Sign in</span><span class="text">sign up</span>
+						    </c:if>
+						    <c:if test="${sessionScope.user.role != null}">
+						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
+						    <input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
+						    <c:if test="${sessionScope.user.role eq 'user' }">
+						    <div class="myInfo">
+						    	<input type="button" id="myInfo" value="마이페이지">
+						    </div>
+						    </c:if>
+						    <c:if test="${sessionScope.user.role eq 'admin' }">
+						    <div class="myInfo">
+						    	<input type="button" id="manageMenu" value="관리자메뉴">
+						    </div>
+						    </c:if>
+						    <div class="logout">
+                                <a href="/users/logout">logout</a>
+                            </div>
+						    </c:if>
+					    </div>
                 </div>
              </div>
           </div>
@@ -138,10 +153,11 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="shop.html">MARKET</a>
+                <a class="dropdown-item" href="shop.html">MARKET</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
+                <a class="dropdown-item" href="/coupon/listCoupon">오늘의 쿠폰</a>
               </div>
             </li>
              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
