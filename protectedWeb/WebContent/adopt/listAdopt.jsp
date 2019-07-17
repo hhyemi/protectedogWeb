@@ -3,6 +3,7 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -129,7 +130,7 @@
 	       </h3>
 	    </div>
 	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
 	    <div class="row">
 	    
 		    <div class="col-md-6 text-left">
@@ -138,67 +139,46 @@
 		    	</p>
 		    </div>
 		    
-		    
-	    	
+		    <div class="col-md-5 text-right" style="padding-right: 0px;">
+		    		<span>
+			    		<c:if test="${param.boardCode eq 'AD' }">책임비 낮은순</c:if>
+					    <c:if test="${param.boardCode eq 'MS' }">사례비 높은순</c:if>
+		    		</span>
+		    </div>
+		    <div class="col-md-1 text-right">
+		    		<select>
+					  	<option value="전체" >전체</option>
+					  	<option value="강원도" >강원도</option>
+						<option value="경기도" >경기도</option>
+						<option value="경상도" >경상도</option>
+						<option value="광주시" >광주시</option>
+						<option value="대전시" >대전시</option>
+						<option value="부산시" >부산시</option>
+						<option value="서울시" >서울시</option>
+						<option value="울산시" >울산시</option>
+						<option value="인천시" >인천시</option>
+						<option value="전라도" >전라도</option>
+						<option value="충청도" >충청도</option>
+					</select>
+		    </div>
 		</div>
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		
-		
-      <!--  table Start /////////////////////////////////////-->
-<!--       <table class="table table-hover table-striped" > -->
-      
-<!--         <thead> -->
-<!--           <tr> -->
-<!--             <th align="center">No</th> -->
-<!--             <th align="left" >글제목</th> -->
-<!--             <th align="left">견종</th> -->
-<!--             <th align="left"> -->
-<%-- 	            <c:if test="${param.boardCode eq 'AD' }"> --%>
-<!-- 		  			책임비 -->
-<%-- 		  		</c:if> --%>
-<%-- 			    <c:if test="${param.boardCode eq 'MS' }"> --%>
-<!-- 		  			사례비 -->
-<%-- 		  		</c:if> --%>
-<!--             </th> -->
-<!--           </tr> -->
-<!--         </thead> -->
-       
-<!-- 		<tbody> -->
-		
-		  
-        
-<!--         </tbody> -->
-      
-<!--       </table> -->
+
+
+
       <div class="row">
       <div class="col-md-12"></div>
       <div class="col-md-12">
       <c:set var="i" value="0" />
 		  <c:forEach var="adopt" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			
-<!-- 			<tr> -->
-<%-- 			  <td align="center">${ i }</td> --%>
-<%-- 			  <td align="center"><img src="../resources/file/fileAdopt/${adopt.mainFile}" onerror="this.src='http://placehold.it/400x400'"></td> --%>
-<%-- 			  <td align="left">${adopt.postTitle} --%>
-<%-- 			  	<input type="hidden" id="postNo" value="${adopt.postNo}"> --%>
-<%-- 			  	<c:if test="${adopt.statusCode eq '3' }"> --%>
-<!-- 				  	<span class="label label-default"> -->
-<%-- 					  	<c:if test="${adopt.boardCode eq 'AD' }">분양완료</c:if> --%>
-<%-- 					  	<c:if test="${adopt.boardCode eq 'MS' }">찾기완료</c:if> --%>
-<!-- 				  	</span> -->
-<%-- 			  	</c:if> --%>
-<!-- 			  </td> -->
-<%-- 			  <td align="left">${adopt.dogBreed}</td> --%>
-<%-- 			  <td align="left">${adopt.dogPay}원</td> --%>
-<!-- 			</tr> -->
-			
+
 			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: ">
 			<figure>
 			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
 				  <img src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/>
 				  <figcaption>
 					    <h3>${adopt.postTitle}</h3>
+					    <fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원
 				  </figcaption>
 			</figure>
 			</div>	
@@ -214,7 +194,7 @@
 			    <form class="form-inline" name="detailForm">
 			    
 				  <div class="form-group">
-				    <select class="form-control" name="searchCondition" >
+				    <select name="searchCondition" >
 						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
 						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>내용</option>
 					</select>
@@ -222,8 +202,8 @@
 				  
 				  <div class="form-group">
 				    <label class="sr-only" for="searchKeyword">검색어</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
-				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				    <input type="text" id="searchKeyword" name="searchKeyword"  placeholder="검색어를 입력하세요."
+				    		value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 				  </div>
 				  
 				  <button type="button" class="btn btn-default">검색</button>
