@@ -5,7 +5,7 @@ import java.util.Date;
 public class Coupon {
 
 	///Field
-	private User receiveUser;
+	private String receiverId;
 	private String couponName;
 	private String couponCode;
 	private int discount;
@@ -18,11 +18,11 @@ public class Coupon {
 	///Constructor
 	
 	///Method
-	public User getReceiveUser() {
-		return receiveUser;
+	public String getReceiverId() {
+		return receiverId;
 	}
-	public void setReceiveUser(User receiveUser) {
-		this.receiveUser = receiveUser;
+	public void setReceiveId(String receiverId) {
+		this.receiverId = receiverId;
 	}
 	public String getCouponName() {
 		return couponName;
@@ -75,7 +75,7 @@ public class Coupon {
 	}
 	@Override
 	public String toString() {
-		return "Coupon [receiveUser=" + receiveUser + ", couponName=" + couponName + ", couponCode=" + couponCode
+		return "Coupon [receiveId=" + receiverId + ", couponName=" + couponName + ", couponCode=" + couponCode
 				+ ", discount=" + discount + ", couponNo=" + couponNo + ", couponStatus=" + couponStatus + ", makeDate="
 				+ makeDate + ", limitDate=" + limitDate + ", UseDate=" + UseDate + "]";
 	}
