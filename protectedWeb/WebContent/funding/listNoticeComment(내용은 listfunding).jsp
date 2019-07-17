@@ -11,6 +11,19 @@
     <meta charset="EUC-KR">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">    
+    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/jquery.timepicker.css">  
+    <link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
+    <link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
 
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -84,9 +97,9 @@
 				    					</a>
 				    					<div class="text py-3 px-3">
 				    						<h2><a href="#">${funding.postTitle}</a></h2>
-				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
+				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${30-funding.voteRemainDate}%</strong></b></a></h3>
 										 <div class="progress">
-										  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
+										  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${30-funding.voteRemainDate}%;"></div>
 										 </div>	
 										 <div align="right">	    						
 										<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
@@ -119,6 +132,21 @@
 
   <!-- loader -->
 
+  <script src="../../resources/prodmenu/js/jquery.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../../resources/prodmenu/js/popper.min.js"></script>
+  <script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+  <script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+  <script src="../../resources/prodmenu/js/aos.js"></script>
+  <script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+  <script src="../../resources/prodmenu/js/bootstrap-datepicker.js"></script>
+  <script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../../resources/prodmenu/js/google-map.js"></script>
   <script src="../../resources/prodmenu/js/main.js"></script>
  
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -148,7 +176,7 @@
 	
         //============= 작성 Event  처리 =============   
         $( "#btn-add" ).on("click" , function() {
-        	$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
+        	$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost");
 
            });
         

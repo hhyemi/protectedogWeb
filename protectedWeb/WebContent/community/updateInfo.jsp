@@ -71,10 +71,10 @@ label {
 
 <!--  JavaScript  -->
 <script type="text/javascript">
-function fncAddProduct(){
+function fncUpdateBoard(){
 	
 	var postContent = $("#editor").text();
-	$("form[name=detailForm]").attr("method","POST").attr("action","/info/addInformation").attr("enctype","multipart/form-data").submit();
+	$("form[name=detailForm]").attr("method","POST").attr("action","/info/updateInfo").attr("enctype","multipart/form-data").submit();
 	
 }
 
@@ -85,7 +85,7 @@ $(function () {
 	});
 	
 	$("button.btn.btn-primary").on("click", function(){
-		fncAddProduct();
+		fncUpdateBoard();
 	});
 	
 	
@@ -106,13 +106,14 @@ $(function () {
 
 		<div style="border: 1px solid #d7dade; padding: 3px;">
 
-			<form class="form-horizontal" name="uploadForm">
-
+			<form class="form-horizontal" name="detailForm">
+					
+				<input type="hidden" name="postNo" value="${board.postNo}">
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
 							id="postTitle" style="height: 50px; font-size: 20px"
-							placeholder="제목을 입력해 주세요." />
+							placeholder="${board.postTitle}" />
 					</div>
 				</div>
 
@@ -151,7 +152,7 @@ $(function () {
 						class="col-xs-12 col-md-12"></div>
 					<textarea class="col-xs-12 col-md-12" id="editor"
 						name="postContent" style="text-align: left;">
-					
+						${board.postContent}
 					</textarea>
 				</div>
 			</form>
@@ -160,7 +161,7 @@ $(function () {
 		<hr />
 		<div class="row">
 			<div class="col-md-12 text-center ">
-				<button type="button" class="btn btn-primary">등록</button>
+				<button type="button" class="btn btn-primary">수정</button>
 				<a id="reset" class="btn btn-primary btn" role="button">취소</a>
 			</div>
 		</div>

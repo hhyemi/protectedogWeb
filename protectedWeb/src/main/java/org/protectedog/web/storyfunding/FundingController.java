@@ -10,6 +10,7 @@ import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Funding;
+import org.protectedog.service.domain.Participate;
 import org.protectedog.service.file.FileService;
 import org.protectedog.service.storyfunding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,36 @@ public class FundingController {
 	@Value("#{commonProperties['SFTermsFive']}")
 	String SFTermsFive;
 
+	/////////////// 약관보기 /////////////////////
+
+	// 약관보기
+	@RequestMapping(value = "getTerms", method = RequestMethod.GET)
+	public String getTerms(@RequestParam("termsTitle") String termsTitle, @RequestParam("postNo") String postNo,
+			Model model) throws Exception {
+
+		System.out.println("/funding/getTerms");
+
+		List<String> termsList = new ArrayList<String>();
+		termsList.add(SFTermsOne);
+		termsList.add(SFTermsTwo);
+		termsList.add(SFTermsThree);
+		termsList.add(SFTermsFour);
+		termsList.add(SFTermsFive);
+		if (termsTitle.equals("SFPost")) {
+			termsTitle = "후원신청글";
+		} else if (termsTitle.equals("SFVote")) {
+			termsTitle = "투표하기";
+		}
+
+		model.addAttribute("termsList", termsList);
+		model.addAttribute("termsTitle", termsTitle);
+		model.addAttribute("postNo", postNo);
+		return "forward:/funding/getTerms.jsp";
+	}
+
+	/////////////// FUNDING 게시판 /////////////////////
+
+	// 펀딩 글 작성
 	@RequestMapping(value = "addFunding", method = RequestMethod.GET)
 	public String addFunding(HttpSession session) throws Exception {
 
@@ -81,6 +112,7 @@ public class FundingController {
 		return "redirect:/funding/addFunding.jsp";
 	}
 
+	// 펀딩 글 등록
 	@RequestMapping(value = "addFunding", method = RequestMethod.POST)
 	public String addFunding(@RequestParam("multiFile") ArrayList<String> multiFile,
 			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
@@ -119,6 +151,7 @@ public class FundingController {
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
 	}
 
+	// 펀딩 글 확인
 	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
 	public String getFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
@@ -133,29 +166,7 @@ public class FundingController {
 		return "forward:/funding/getFunding.jsp";
 	}
 
-	@RequestMapping(value = "getTerms", method = RequestMethod.GET)
-	public String getTerms(@RequestParam("termsTitle") String termsTitle, Model model) throws Exception {
-
-		System.out.println("/funding/getTerms");
-
-		List<String> termsList = new ArrayList<String>();
-		termsList.add(SFTermsOne);
-		termsList.add(SFTermsTwo);
-		termsList.add(SFTermsThree);
-		termsList.add(SFTermsFour);
-		termsList.add(SFTermsFive);
-		if (termsTitle.equals("SFPost")) {
-			termsTitle = "후원신청글";
-		}else if(termsTitle.equals("SFVote")){
-			termsTitle = "투표하기";
-		}
-
-		model.addAttribute("termsList", termsList);
-		model.addAttribute("termsTitle", termsTitle);
-
-		return "forward:/funding/getTerms.jsp";
-	}
-
+	// 펀딩 글 수정작성
 	@RequestMapping(value = "updateFunding", method = RequestMethod.GET)
 	public String updateFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
@@ -168,41 +179,111 @@ public class FundingController {
 
 		model.addAttribute("funding", funding);
 		model.addAttribute("file", file);
-		
+
 		return "forward:/funding/updateFunding.jsp";
 	}
 
+	// 펀딩 글 수정등록
 	@RequestMapping(value = "updateFunding", method = RequestMethod.POST)
-	public String updateFunding(@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
+	public String updateFunding(@ModelAttribute("funding") Funding funding,
+			@RequestParam("multiFile") ArrayList<String> multiFile,
+			@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
 
 		System.out.println("/funding/updateFunding : POST"); // Business Logic
 
-		System.out.println("뭔데시발" + funding);
+		System.out.println("multiFile:::" + multiFile);
+		System.out.println("deleteFile:::" + deleteFile);
+
+		if (deleteFile != null) {
+
+			for (String fileName : deleteFile) {
+				FileDog files = new FileDog();
+				files.setFileName(fileName);
+				files.setPostNo(funding.getPostNo());
+
+				fileService.delFile(files);
+			}
+		}
+		if (multiFile.size() != 0) {
+			List<FileDog> listFile = new ArrayList<FileDog>();
+			// 파일디비에넣기
+			for (String fileName : multiFile) {
+				FileDog files = new FileDog();
+				files.setBoardCode(boardCode);
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(funding.getPostNo());
+				listFile.add(files);
+			}
+			fileService.addFile(listFile);
+		}
+
+		// 나중에 세션으로 변경//
+		String id = "user01";
+		String nickName = "스캇";
+		funding.setId(id);
+		funding.setNickName(nickName);
+
+		List<FileDog> file = fileService.getFile(funding.getPostNo());
+		funding.setMainFile(file.get(0).getFileName());
+		// 변경여기까지//
+
+		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
+		funding.setVoteTargetCount(voteTargetCount);
+
 		fundingService.updateFunding(funding);
 
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
 	}
 
+	// 펀딩 글 삭제
+	@RequestMapping(value = "delFunding")
+	public String delFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
+
+		System.out.println("/funding/delFunding");
+
+		fundingService.delFunding(postNo);
+
+		return "forward:/funding/listFunding";
+	}
+
+	// 펀딩 글 리스트
 	@RequestMapping(value = "listFunding")
 	public String listFunding(@ModelAttribute("search") Search search, Model model, HttpSession session)
 			throws Exception {
 
 		System.out.println("/funding/listFunding : GET / POST");
 
+		String originSearch = null;
+
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
 
-		// User user = (User) session.getAttribute("user");
+		if (search.getSearchKeyword() == null) {
+			search.setSearchKeyword("");
+		} else {
+			if (!search.getSearchKeyword().equals("")) {
+				originSearch = search.getSearchKeyword();
+				String likeSearch = "%" + search.getSearchKeyword() + "%";
+				search.setSearchKeyword(likeSearch);
+			}
+		}
 
-		// 변경여기까지//
+		if (search.getSearchCondition() == null) {
+			search.setSearchCondition("");
+		}
+
+		// User user = (User) session.getAttribute("user");
 
 		Map<String, Object> map = fundingService.listFunding(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
+
+		search.setSearchKeyword(originSearch);
 
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
@@ -211,5 +292,26 @@ public class FundingController {
 
 		return "forward:/funding/listFunding.jsp";
 	}
+	/////////////// FUNDING 참여/////////////////////
 
+	// 투표와 후원참여
+	@RequestMapping(value = "addFund", method = RequestMethod.GET)
+	public String addFund(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
+
+		System.out.println("/funding/addfunding : GET");
+
+		Participate participate = new Participate();
+		participate.setPostNo(postNo);
+		participate.setId("user01");
+		participate.setNickName("스캇");
+
+		fundingService.addParticipate(participate);
+		
+		Funding funding = new Funding();
+		funding.setVoterCount(1);
+		
+		fundingService.updateFunding(funding);
+
+		return "redirect:/funding/getFunding?postNo=" + postNo;
+	}
 }

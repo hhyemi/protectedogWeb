@@ -29,7 +29,7 @@
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
 		#voteDate{
-		width:340px;
+		width:375px;
 		float:left;
 		}
 	</style> 
@@ -98,7 +98,7 @@
              <div class="s_product_text">			 
             <div>
              <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.id}</b> 
-			<h3>${funding.fundPay }표</h3>
+			<h3>${funding.voterCount}표</h3>
 			<h4 class="media-heading">남은기간 ${funding.voteRemainDate }일</h4> 			    
 			 <div class="progress">
 			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${30-funding.voteRemainDate}%;"></div>
@@ -126,10 +126,61 @@
       </div>
     </div>
    <br><br><br/>
-    <!--================End Single Product Area =================-->
-
-   <jsp:include page="getUnderFunding.jsp" />
+<!--================Product Description Area =================-->
+	 <section class="product_description_area">
+	      <div class="container">
+	        <ul class="nav nav-tabs" id="myTab" role="tablist">
+		          <li class="nav-item">
+		            <a
+		              class="nav-link"
+		              id="home-tab"
+		              data-toggle="tab"
+		              href="#home"
+		              role="tab"
+		              aria-controls="home"
+		              aria-selected="true"
+		              >스토리</a
+		            >
+		          </li>
+		          <li class="nav-item">
+		            <a
+		              class="nav-link"
+		              id="profile-tab"
+		              data-toggle="tab"
+		              href="#profile"
+		              role="tab"
+		              aria-controls="profile"
+		              aria-selected="false"
+		              >후기</a
+		            >
+		          </li>
+	
+		        </ul>
+		        <div class="tab-content" id="myTabContent">
+		          <div
+		            class="tab-pane fade"
+		            id="home"
+		            role="tabpanel"
+		            aria-labelledby="home-tab">
+		            	<div class="col-md-10 col-md-offset-1">
+							<span class="price">글 내용</span>
+								<h2>${funding.postContent }</h2>
+							<a class="main_btn" href="#">수정하기</a> 
+							<a class="main_btn" href="#">삭제하기</a> 
+						</div>
+		          </div>
+		          <div
+		            class="tab-pane fade"
+		            id="profile"
+		            role="tabpanel"
+		            aria-labelledby="profile-tab">
+					ㅋㅋㅋㅋ
+		          </div>
+		       </div>
+	      </div>
+	    </section>
     <!--================End Product Description Area =================-->
+
 
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
@@ -161,12 +212,12 @@
     
 		//============= 투표하기 Event  처리 =============	
 	 	$( "a:contains('투표하기')" ).on("click" , function() {
-			$(self.location).attr("href","/funding/getTerms?termsTitle=SFVote");
+	 		self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
 		});   
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+	 		self.location = "/user/getUser?userId=${sessionScope.user.userId}";
 		});   
 	
 		//============= SNS공유 Event  처리 =============	
@@ -193,37 +244,45 @@
 		
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "a:contains('삭제하기')" ).on("click" , function() {
-	 		alert("삭제하기")
-			//$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+	 		func_confirm()
 		});   	
-		
     });
     
-	
-	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
-	 function sendLinkKakao(){
-	     Kakao.Link.sendDefault({
-	       objectType: 'feed',
-	       content: {
-	         title: '유기견보호',
-	         description: '멍멍',
-	         imageUrl:document.location.href,
-	         link: {
-	           mobileWebUrl: document.location.href,
-	           webUrl:document.location.href
-	         }
-	       },
-	       buttons: [       
-	         {
-	           title: '링크 열기',
-	           link: {
-	             mobileWebUrl: document.location.href,
-	             webUrl: document.location.href
-	           }
-	         }
-	       ]
-	     }); 
-	 }    
+	  //=============삭제 알림창 Event  처리 =============    	
+            function func_confirm () {
+                if(confirm('정말 삭제하시겠습니까?')){
+                	self.location = "/funding/delFunding?postNo=${funding.postNo}"
+                	alert("삭제가 완료되었습니다.")
+                } else {
+                }
+            }
+
+    
+		//============= 카카오 공유하기Event  처리 =============		
+		 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+		 function sendLinkKakao(){
+		     Kakao.Link.sendDefault({
+		       objectType: 'feed',
+		       content: {
+		         title: '유기견보호',
+		         description: '멍멍',
+		         imageUrl:document.location.href,
+		         link: {
+		           mobileWebUrl: document.location.href,
+		           webUrl:document.location.href
+		         }
+		       },
+		       buttons: [       
+		         {
+		           title: '링크 열기',
+		           link: {
+		             mobileWebUrl: document.location.href,
+		             webUrl: document.location.href
+		           }
+		         }
+		       ]
+		     }); 
+		 }    
     </script>
     
   </body>

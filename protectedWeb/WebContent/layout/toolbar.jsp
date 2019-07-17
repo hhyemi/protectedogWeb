@@ -3,6 +3,8 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -30,6 +32,16 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		$("span:contains('Sign in')").on("click", function(){
+    			$(self.location).attr("href","/users/login");
+    		});
+    	});
+    </script>
+    
     <style type="text/css">
     	.py-1 bg-black{
     		min-height: 27px;
@@ -97,8 +109,9 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="shop.html">분양</a>
-                <a class="dropdown-item" href="product-single.html">실종</a>
+              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
+                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
+                <a class="dropdown-item" href="/adoptreview/addAdoptReview">경로테스트</a>
 
               </div>
             </li>

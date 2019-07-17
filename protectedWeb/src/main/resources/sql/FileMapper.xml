@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileMapper">
+
+	<resultMap id="fileSelectMap" type="file">
+
+		<result property="fileNo" column="FILE_NO" jdbcType="NUMERIC" />
+		<result property="boardCode" column="BOARD_CODE" jdbcType="CHAR" />
+		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
+		<result property="fileName" column="FILE_NAME" jdbcType="VARCHAR" />
+		<result property="fileCode" column="FILE_CODE" jdbcType="CHAR" />	
+
+		</resultMap>
+
+	<!-- SQL : INSERT -->
+	<insert 	id="addFile"	parameterType="java.util.List">
+	 	INSERT ALL
+		<foreach collection="list" item="item" >	 	
+		INTO FILES( FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE ) 
+		VALUES	 ( GET_FILE_NO() , #{item.boardCode:VARCHAR} , #{item.postNo:VARCHAR} ,  #{item.fileName:VARCHAR} , #{item.fileCode:CHAR} )
+		</foreach>
+		select * from DUAL
+	 </insert>
+	 
+	<!--   SQL : SELECT ONE -->
+	 <select 	id="getFile"	parameterType="string"	resultMap="fileSelectMap">
+		SELECT
+		FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE
+		FROM FILES 
+		WHERE POST_NO IN #{value}
+		ORDER BY FILE_NO
+	 </select>
+
+	<!-- SQL : DELETE  -->		 
+	<delete id="delFile" parameterType="file">
+ 
+		DELETE 
+		FROM FILES WHERE
+		POST_NO IN #{postNo} AND FILE_NAME IN #{fileName}
+
+	</delete> 
+	
+	 
+</mapper>

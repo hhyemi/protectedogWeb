@@ -1,6 +1,7 @@
 package org.protectedog.web.adopt;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,8 @@ import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.domain.Adopt;
+import org.protectedog.service.domain.FileDog;
+import org.protectedog.service.file.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -33,6 +35,10 @@ public class AdoptController {
 	@Qualifier("adoptServiceImpl")
 	private AdoptService adoptService;
 	
+	@Autowired
+	@Qualifier("fileServiceImpl")
+	private FileService fileService;
+	
 	//setter Method 구현 않음
 	
 //	@Resource(name = "uploadPath")
@@ -45,6 +51,10 @@ public class AdoptController {
 	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+
+	@Value("#{commonProperties['fileAdopt']}")
+	String fileroot;
+	
 	
 
 	
@@ -61,7 +71,7 @@ public class AdoptController {
 //								, Model model
 																		) throws Exception {
 
-		System.out.println("/adopt/addAdopt : GET : "+boardCode);
+		System.out.println("/adopt/addAdopt : GET \n"+boardCode);
 		
 //		adopt.setId(((User)session.getAttribute("user")).getId());
 //		adopt.setPhone(((User)session.getAttribute("user")).getPhone());
@@ -75,19 +85,33 @@ public class AdoptController {
 	
 	// 글 등록하고 상세조회 화면으로 
 	@RequestMapping( value="addAdopt", method=RequestMethod.POST )
-	public String addAdopt( @ModelAttribute("adopt") Adopt adopt, Model model
-//											,MultipartHttpServletRequest mtfRequest
-											) throws Exception {
+	public String addAdopt( @ModelAttribute("adopt") Adopt adopt, Model model,
+							@RequestParam("multiFile") ArrayList<String> multiFile 
+							) throws Exception {
 
-		System.out.println("/adopt/addAdopt : POST");
-		System.out.println(adopt);
+		System.out.println("/adopt/addAdopt : POST \n"+adopt);
+	
 
 		// 파일
-//		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
-//		System.out.println("파일확인 : "+product.getFileName());
+		adopt.setMainFile(multiFile.get(0));
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		System.out.println("=========================="+adopt);
+		
+		List<FileDog> listFile = new ArrayList<FileDog>();
+		
+		// 파일디비에넣기
+		for (String fileName : multiFile) {
+
+			FileDog files = new FileDog();
+			files.setBoardCode(adopt.getBoardCode());
+			files.setFileName(fileName);
+			files.setFileCode(0);
+			files.setPostNo(adopt.getPostNo());
+			listFile.add(files);
+		}
+		fileService.addFile(listFile);
+		
 		model.addAttribute("adopt", adopt);
 		
 		return "forward:/adopt/getAdopt.jsp";
@@ -102,8 +126,10 @@ public class AdoptController {
 		System.out.println("/adopt/getAdopt : GET");
 		
 		Adopt adopt = adoptService.getAdopt(postNo);
+		List<FileDog> file = fileService.getFile(postNo);
+		
 		model.addAttribute("adopt", adopt);	
-//		System.out.println("파일이름 확인 : "+product.getFileName());
+		model.addAttribute("file", file);	
 	
 		return "forward:/adopt/getAdopt.jsp";
 	}
@@ -117,7 +143,10 @@ public class AdoptController {
 		System.out.println("/adopt/updateAdopt : GET");
 		
 		Adopt adopt = adoptService.getAdopt(postNo);
+		List<FileDog> file = fileService.getFile(postNo);
+		
 		model.addAttribute("adopt", adopt);
+		model.addAttribute("file", file);	
 		
 		return "forward:/adopt/updateAdopt.jsp";
 	}
@@ -127,19 +156,40 @@ public class AdoptController {
 	// 글 수정하고 조회
 	// 글상태확인은 jsp에서
 	@RequestMapping( value="updateAdopt" , method=RequestMethod.POST)
-	public String updateAdopt( @ModelAttribute("adopt") Adopt adopt, Model model
-//								, MultipartHttpServletRequest mtfRequest
-																		) throws Exception{
+	public String updateAdopt( @ModelAttribute("adopt") Adopt adopt, Model model,
+								@RequestParam("multiFile") ArrayList<String> multiFile,
+								@RequestParam("deleteFile") ArrayList<String> deleteFile  ) throws Exception{
 
-		System.out.println("/adopt/updateAdopt : POST");
+		System.out.println("/adopt/updateAdopt : POST\n"+adopt);
+		System.out.println("multiFile :::" + multiFile);
+		System.out.println("deleteFile:::" + deleteFile);
 		
-		// 파일
-//		adopt.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
-//		boolean fileName = adopt.getFileName().endsWith("_");
+		if (deleteFile != null) {
 
-//		if ( fileName ) {
-//			adopt.setFileName((adoptService.getAdopt(adopt.getPostNo())).getFileName());
-//		}
+			for (String fileName : deleteFile) {
+				FileDog files = new FileDog();
+				files.setFileName(fileName);
+				files.setPostNo(adopt.getPostNo());
+
+				fileService.delFile(files);
+			}
+		}
+		if (multiFile.size() != 0) {
+			List<FileDog> listFile = new ArrayList<FileDog>();
+			// 파일디비에넣기
+			for (String fileName : multiFile) {
+				FileDog files = new FileDog();
+				files.setBoardCode(adopt.getBoardCode());
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(adopt.getPostNo());
+				listFile.add(files);
+			}
+			fileService.addFile(listFile);
+		}
+		
+		List<FileDog> file =fileService.getFile(adopt.getPostNo());
+		adopt.setMainFile(file.get(0).getFileName());
 
 		System.out.println(adopt);
 		System.out.println(adopt.getPostNo());

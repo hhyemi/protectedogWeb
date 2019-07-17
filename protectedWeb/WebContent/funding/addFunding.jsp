@@ -245,7 +245,7 @@
                 contentType : false,
                 cache : false,
                 timeout : 600000,
-                url : '/funding/json/imageupload/',
+                url : '/Images/json/imageupload/SF',
                 dataType : 'JSON',
                 data : formData,
                 success : function(result) {
@@ -371,7 +371,7 @@
                  //후원목표금액 길이초과
                  if ($(this).val().length > $(this).attr('maxlength')-1) {
                      alert('제한길이 초과');
-                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')-1));
                  }
                  //후원목표금액 문자 입력 검증 (정규식사용)    
                 var exp = /^[0-9]+$/;

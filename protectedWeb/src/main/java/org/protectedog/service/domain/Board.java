@@ -27,7 +27,7 @@ public class Board {
 	private String qnaCode;
 	private String route;
 	private String prodName;
-	private char statusCode;
+	private char delCode;
 	
 
 
@@ -103,15 +103,14 @@ public class Board {
 	public void setRecommendCount(int recommendCount) {
 		this.recommendCount = recommendCount;
 	}
-
-	public char getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(char statusCode) {
-		this.statusCode = statusCode;
-	}
 	
+	public char getDelCode() {
+		return delCode;
+	}
+
+	public void setDelCode(char delCode) {
+		this.delCode = delCode;
+	}
 	
 	public int getMarketCode() {
 		return marketCode;
@@ -176,8 +175,10 @@ public class Board {
 		return "Board [postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
 				+ ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodName="
-				+ prodName + ", statusCode=" + statusCode + "]";
+				+ prodName + ", delCode=" + delCode + "]";
 	}
+
+
 	
 	
 	

@@ -144,8 +144,6 @@ public class BoardServiceTest {
 		Assert.assertEquals(1, board.getRecommendCount());
 	 }
 	 
-	 
-	 
 	 //@Test	//확인
 	 public void testDelBoard() throws Exception{
 		 
@@ -153,7 +151,7 @@ public class BoardServiceTest {
 		Assert.assertNotNull(board);
 		
 //		Assert.assertEquals("", board.getStatusCode());
-		board.setStatusCode('0');;
+		board.setDelCode('0');;
 		boardService.delBoard(board);
 		
 		board = boardService.getBoard(10041);
@@ -161,37 +159,37 @@ public class BoardServiceTest {
 
 		System.out.println("\n :: console 확인 :: "+board);
 
-		Assert.assertEquals('0', board.getStatusCode());
+		Assert.assertEquals('0', board.getDelCode());
 	 }
-	
+
 
 	 //@Test	//==>확인
 	 public void testListBoard() throws Exception{
 		 
-	 	Search search = new Search();
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(1);	 	
-	 	Map<String,Object> map = boardService.listBoard(search, "AR");
-	 	
-	 	List<Object> list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(0, list.size());
-	 	
-	 	System.out.println("\n :: console 확인 :: "+list);
-	 	
-	 	Integer totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 	
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(2);
-	 	map = boardService.listBoard(search, "AR");
-	 	
-	 	list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(0, list.size());
-	 	
-	 	System.out.println("\n :: console 확인 :: "+list);
-	 	
-	 	totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
+//	 	Search search = new Search();
+//	 	search.setCurrentPage(1);
+//	 	search.setPageSize(1);	 	
+//	 	Map<String,Object> map = boardService.listBoard(search, "AR");
+//	 	
+//	 	List<Object> list = (List<Object>)map.get("list");
+//	 	Assert.assertEquals(0, list.size());
+//	 	
+//	 	System.out.println("\n :: console 확인 :: "+list);
+//	 	
+//	 	Integer totalCount = (Integer)map.get("totalCount");
+//	 	System.out.println(totalCount);
+//	 	
+//	 	search.setCurrentPage(1);
+//	 	search.setPageSize(2);
+//	 	map = boardService.listBoard(search, "AR");
+//	 	
+//	 	list = (List<Object>)map.get("list");
+//	 	Assert.assertEquals(0, list.size());
+//	 	
+//	 	System.out.println("\n :: console 확인 :: "+list);
+//	 	
+//	 	totalCount = (Integer)map.get("totalCount");
+//	 	System.out.println(totalCount);
 	 }
 	
 }

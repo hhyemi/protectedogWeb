@@ -1,5 +1,6 @@
 package org.protectedog.service.board;
 
+import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
@@ -17,7 +18,7 @@ public interface BoardService {
 	public Board getBoard(int postNo) throws Exception;
 	
 	// 글 리스트 조회
-	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception;
+	public Map<String , Object> listBoard(Search search, String boardCode, int order) throws Exception;
 	
 	// 글 수정
 	public void updateBoard(Board board) throws Exception;
@@ -30,6 +31,9 @@ public interface BoardService {
 	
 	// 글 삭제
 	public void delBoard(Board board) throws Exception;
+	
+	// SELECT LIST RANKING TOP 5
+	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
 	
 
 }

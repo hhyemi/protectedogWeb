@@ -51,7 +51,7 @@ public class FileUploadRestController {
 	public void imageupload(@RequestParam("files") List<MultipartFile> images, @PathVariable String boardCode)
 			throws Exception {
 
-		System.out.println("/product/json/imageupload : POST");
+		System.out.println("/Images/json/imageupload : POST");
 
 		for (MultipartFile image : images) {
 			String fileName = image.getOriginalFilename();
@@ -62,6 +62,15 @@ public class FileUploadRestController {
 					File f = new File(fileSFRoot, fileName);
 					image.transferTo(f);
 				} else if (boardCode.equals("AD")) {
+					File f = new File(fileADRoot, fileName);
+					image.transferTo(f);
+				} else if (boardCode.equals("MS")) {
+					File f = new File(fileADRoot, fileName);
+					image.transferTo(f);
+				} else if (boardCode.equals("AR")) {
+					File f = new File(fileADRoot, fileName);
+					image.transferTo(f);
+				} else if (boardCode.equals("MR")) {
 					File f = new File(fileADRoot, fileName);
 					image.transferTo(f);
 				} else if (boardCode.equals("IS")) {

@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.getBoard(postNo);
 	}
 
-	public Map<String , Object> listBoard(Search search, String boardCode) throws Exception {
-		Map<String, Object> map= boardDAO.listBoard(search, boardCode);
+	public Map<String , Object> listBoard(Search search, String boardCode, int order) throws Exception {
+		Map<String, Object> map= boardDAO.listBoard(search, boardCode, order);
 		int totalCount = boardDAO.getTotalCount(boardCode);
 		
 		map.put("map", map );
@@ -66,6 +66,10 @@ public class BoardServiceImpl implements BoardService{
 
 	public void delBoard(Board board) throws Exception {
 		boardDAO.delBoard(board);
+	}
+	
+	public List<Board> listBoardRankingSearch(String boardCode) throws Exception {
+		return boardDAO.listBoardRankingSearch(boardCode);
 	}
 
 

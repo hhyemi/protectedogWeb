@@ -60,8 +60,20 @@ body {
 	margin-bottom: 10px;
 }
 
-.ck-editor__editable{
+.ck.ck-editor {
+	min-width: 95%;
+}
+
+.ck-editor__editable {
 	text-align: left;
+	min-height: 300px;
+	min-width: 95%;
+}
+
+label {
+	background-color: #3e6dad;
+	color: white;
+	border-radius: 10px;
 }
 </style>
 
@@ -140,7 +152,7 @@ $(function () {
 
 				<hr />
 
-				<div class="postForm row" align="center">
+				<div class="postForm" align="center">
 
 					<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
 					<textarea id="editor" name="postContent" style="text-align: left;">

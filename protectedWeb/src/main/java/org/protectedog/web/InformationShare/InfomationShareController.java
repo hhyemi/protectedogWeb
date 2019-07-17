@@ -1,6 +1,7 @@
 package org.protectedog.web.InformationShare;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,22 +61,20 @@ public class InfomationShareController {
 		board.setId("user02");
 		board.setNickName("호랭이");
 
-		// request.setCharacterEncoding("euc_kr");
-
-		// System.out.println(" info Content : " + content);
-		// board.set
 		System.out.println(" info Board : " + board);
 
 		boardService.addBoard(board);
 
-		return "redirect:/info/listInfo";
+		return "redirect:/info/getInfo?postNo="+board.getPostNo();
 	}
 
 	@RequestMapping(value = "listInfo")
 	public String listInfo(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println(" ============================== listInfo ==================================");
-
+		
+		int order;
+		
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
@@ -87,12 +86,23 @@ public class InfomationShareController {
 			System.out.println("listInfo pageSize : " + request.getParameter("pageSize") );
 			search.setPageSize(Integer.parseInt(request.getParameter("pageSize")));
 		}
+		
+		if(request.getParameter("order") == null) {
+			order = 0 ;
+		} else {
+			order = Integer.parseInt(request.getParameter("order"));
+			System.out.println(" listInfo order : " + order);
+		}
+		
 
 		System.out.println(" listInfo searchKeyword " + search.getSearchKeyword());
 		System.out.println(" listInfo search : " + search);
 
-		// Business logic 수행
-		Map<String, Object> map = boardService.listBoard(search, boardCode);
+		// 게시글 목록 조회
+		Map<String, Object> map = boardService.listBoard(search, boardCode, order);
+		
+		List<Board> list = boardService.listBoardRankingSearch(boardCode);
+		
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, search.getPageSize());
 		System.out.println(resultPage);
 
@@ -100,6 +110,7 @@ public class InfomationShareController {
 
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
+		model.addAttribute("listRanking", list);
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 
@@ -124,7 +135,10 @@ public class InfomationShareController {
 				
 		// 게시글 불러오기
 		Board board = boardService.getBoard(postNo);
-
+		
+		// 조회수 증가
+		boardService.updateViewCount(board);
+		
 		// 댓글 불러오기
 		Map<String, Object> map = commentService.listComment(postNo, search);
 		
@@ -149,16 +163,21 @@ public class InfomationShareController {
 	}
 	
 	@RequestMapping(value = "updateView")
-	public String updateView() throws Exception {		
-		return "redirect:/community/updateInfo.jsp";
+	public String updateView(@RequestParam("postNo") int postNo, Model model) throws Exception {		
+		
+		System.out.println(" ============================== updateView ==================================");
+		
+		Board board = boardService.getBoard(postNo);
+		
+		model.addAttribute("board", board);
+		
+		return "forward:/community/updateInfo.jsp";
 	}
 	
 	@RequestMapping(value = "updateInfo")
-	public String updateInfo(@ModelAttribute("board") Board board, HttpServletRequest request) throws Exception {
+	public String updateInfo(@ModelAttribute("board") Board board, HttpServletRequest request, Model model) throws Exception {
 		
-		if(request.getMethod().equals("GET")){
-			return "redirect:/common/error.jsp";
-		}
+		System.out.println(" ============================== updateInfo ==================================");
 		
 		board.setBoardCode(boardCode);
 		board.setId("user02");
@@ -166,8 +185,8 @@ public class InfomationShareController {
 		
 		boardService.updateBoard(board);
 		
-		
-		return "redirect:/community/updateInfo.jsp";
+		model.addAttribute("board", board);
+		return "redirect:/info/getInfo?postNo="+board.getPostNo();
 	}
 	
 	@RequestMapping(value = "delInfo")
