@@ -1,195 +1,158 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page pageEncoding="EUC-KR"%>
+
 
 <!DOCTYPE html>
-<html>
+
+<html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-	
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../resources/get/css/bootstrap.css" />
-    <link rel="stylesheet" href="../../resources/get/css/icon/style.css" />
-    <link rel="stylesheet" href="../../resources/get/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../../resources/get/css/themify-icons.css" />
-    <link rel="stylesheet" href="../../resources/get/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="../../resources/get/css/simpleLightbox.css" />
-    <link rel="stylesheet" href="../../resources/get/css/nice-select.css" />
-    <link rel="stylesheet" href="../../resources/get/css/animate.css" />
-    <link rel="stylesheet" href="../../resources/get/css/jquery-ui.css" />
-    <!-- main css -->
-    <link rel="stylesheet" href="../../resources/get/css/style.css" />
-    <link rel="stylesheet" href="../../resources/get/css/responsive.css" />
-  </head>
+<meta charset="EUC-KR">
 
-  <body>
-    
-    <!--================Header Menu Area =================-->
+<!-- ¬¸¡∂ : http://getbootstrap.com/css/   ¬¸¡∂ -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!--================Single Product Area =================-->
-    <div class="product_image_area">
-      <div class="container">
-        <div class="row s_product_inner">
-          <div class="col-lg-6">
-            <div class="s_product_img">
-              <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-ride="carousel"
-              >
-                <ol class="carousel-indicators">
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="0"
-                    class="active"
-                  >
-                    <img
-                      src="images/get/img/product/single-product/s-product-s-2.jpg"
-                      alt=""
-                    />
-                  </li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="1"
-                  >
-                    <img
-                      src="images/get/img/product/single-product/s-product-s-3.jpg"
-                      alt=""
-                    />
-                  </li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="2"
-                  >
-                    <img
-                      src="images/get/img/product/single-product/s-product-s-4.jpg"
-                      alt=""
-                    />
-                  </li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img
-                      class="d-block w-100"
-                      src="resources/get/img/10000.jpg"
-                      alt="First slide"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="resources/get/img/10000.jpg"
-                      alt="Second slide"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="resources/get/img/10000.jpg"
-                      alt="Third slide"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5 offset-lg-1">
-            <div class="s_product_text">
-              <h3>${product.prodName}</h3>
-              <h2>ÌåêÎß§Í∞Ä : ${product.price}</h2>
-              <ul class="list">
-                <li>
-                  <a class="active" href="#">
-                    <span>Category</span> : Adult</a
-                  >
-                </li>
-                <li>
-                   <a href="#"> <span>ÏõêÏÇ∞ÏßÄ</span> : ${product.country} &nbsp;&nbsp;${product.discountPrice}</a>
-                </li>
-                <li>
-                   <a href="#"> <span>Ï†úÏ°∞ÏÇ¨</span> : ${product.company}</a>
-                </li>
-                <li>
-                   <a href="#"> <span>Í∏∞Î≥∏Ï†ÅÎ¶ΩÍ∏à</span> :</a>
-                </li>
-              </ul>
-              <p>
-              </p>
-              <div class="product_count" id>
-                <label for="qty">ÏàòÎüâ : </label>
-                <input
-                  type="text"
-                  name="qty"
-                  id="sst"
-                  maxlength="20"
-                  value="1"
-                  title="Quantity:"
-                  class="input-text qty"
-                />
-                <button
-                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                  class="increase items-count"
-                  type="button"
-                >
-                  <i class="lnr lnr-chevron-up"></i>
-                </button>
-                <button
-                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                  class="reduced items-count"
-                  type="button"
-                >
-                  <i class="lnr lnr-chevron-down"></i>
-                </button>
-              </div>
-              <div class="card_area">
-                <a class="main_btn" href="#">Ïû•Î∞îÍµ¨Îãà Îã¥Í∏∞</a>
-                <a class="icon_btn" href="#">
-                  <i class="lnr lnr lnr-diamond"></i>
-                </a>
-                <a class="icon_btn" href="#">
-                  <i class="lnr lnr lnr-heart"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-   <br><br><br/>
-    <!--================End Single Product Area =================-->
+<!-- Bootstrap Dropdown Hover CSS -->
+<link href="/css/animate.min.css" rel="stylesheet">
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<link href="/css/styles.css">
 
-   <jsp:include page="./getunder.jsp" />
-    <!--================End Product Description Area =================-->
+<!-- Bootstrap Dropdown Hover JS -->
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
-    <!--================ start footer Area  =================-->
-    
-    <!--================ End footer Area  =================-->
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+body {
+	padding-top: 50px;
+}
+</style>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../../resources/get/js/jquery-3.2.1.min.js"></script>
-    <script src="../../resources/get/js/popper.js"></script>
-    <script src="../../resources/get/js/bootstrap.min.js"></script>
-    <script src="../../resources/get/js/stellar.js"></script>
-    <script src="../../resources/get/js/simpleLightbox.min.js"></script>
-    <script src="../../resources/get/js/jquery.nice-select.min.js"></script>
-    <script src="../../resources/get/js/imagesloaded.pkgd.min.js"></script>
-    <script src="../../resources/get/js/isotope-min.js"></script>
-    <script src="../../resources/get/js/owl.carousel.min.js"></script>
-    <script src="../../resources/get/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../../resources/get/js/mail-script.js"></script>
-    <script src="../../resources/get/js/jquery-ui.js"></script>
-    <script src="../../resources/get/js/jquery.waypoints.min.js"></script>
-    <script src="../../resources/get/js/jquery.counterup.js"></script>
-    <script src="../../resources/get/js/theme.js"></script>
-  </body>
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+	//============= »∏ø¯¡§∫∏ºˆ¡§ Event  √≥∏Æ =============	
+
+	$(function() {
+		$("#buy").bind("click", function() {
+			alert("±∏∏≈¡§∫∏∏¶ ¿‘∑¬«ÿ¡÷ººø‰.")
+			self.location = "/order/addOrder?prodNo=${product.prodNo }";
+
+		});
+
+		$("#re").bind("click", function() {
+			self.location = "/product/updateProduct?prodNo=${product.prodNo}"
+		});
+
+		$("#yes").on("click", function() {
+			self.location = "/product/listProduct.jsp";
+		});
+	});
+</script>
+
+</head>
+
+<body>
+
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
+
+	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
+	<div class="container">
+
+		<div class="page-header">
+			<h3 class=" text-info">ªÛ«∞ªÛºº¡∂»∏</h3>
+
+			<h5 class="text-muted">
+				≥ª ¡§∫∏∏¶ <strong class="text-danger">√÷Ω≈¡§∫∏∑Œ ∞¸∏Æ</strong>«ÿ ¡÷ººø‰.
+			</h5>
+		</div>
+
+		<hr />
+		<div class="row">
+			<div class="col-xs-4 col-md-2">
+				<strong>ªÛ«∞π¯»£</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.prodNo }</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2 ">
+				<strong>ªÛ«∞∏Ì</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.prodName }</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2 ">
+				<strong>ªÛ«∞ªÛºº¡§∫∏</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${ product.prodDetail}</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2 ">
+				<strong>¡¶¡∂¿œ¿⁄</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.manuDate }</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2 ">
+				<strong>∞°∞›</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${ product.price}</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-xs-4 col-md-2 ">
+				<strong>¿Á∞Ìºˆ∑Æ</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${ product.quantity}</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-xs-4 col-md-2 ">
+				<strong>µÓ∑œ¿œ¿⁄</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${ product.regDate}</div>
+		</div>
+
+
+
+		<hr />
+
+		<div class="row">
+			<div class="col-md-12 text-center ">
+
+				<button type="button" class="btn btn-primary" id="buy">±∏∏≈</button>
+
+				<button type="button" class="btn btn-primary" id="yes">¿Ã¿¸</button>
+			</div>
+		</div>
+
+		<br />
+
+	</div>
+	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
+
+
+</body>
+
 </html>
