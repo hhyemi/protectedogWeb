@@ -229,6 +229,7 @@ h7 {
 			<tbody>
 				<c:set var="i" value="0" />
 				<c:forEach var="best" items="${listRanking}">
+					<c:if test="${best.viewCount != 0 }">
 					<c:set var="i" value="${ i+1 }" />
 					<tr>
 						<td align="center">${i}</td>
@@ -241,6 +242,7 @@ h7 {
 						<td align="center">${best.viewCount}</td>
 						<td align="center">${best.recommendCount}</td>
 					</tr>
+					</c:if>
 				</c:forEach>
 				
 

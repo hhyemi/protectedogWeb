@@ -59,7 +59,7 @@
 						    <span class="text">Sign in</span><span class="text">sign up</span>
 						    </c:if>
 						    <c:if test="${sessionScope.user.role != null}">
-						    <span class="text">${sessionScope.user.nickName} 님 환영합니다.</span>
+						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
 						    </c:if>
 					    </div>
 				    </div>

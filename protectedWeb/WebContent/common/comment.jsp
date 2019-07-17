@@ -8,8 +8,8 @@
 <head>
 
 <!--  meta  -->
-<!-- <meta charset="EUC-KR"> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+<meta charset="EUC-KR">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -32,27 +32,142 @@ body {
 
 <script type="text/javascript">
 	$(function() {
-		$("#purchase").on(
-				"click",
-				function() {
-					$(self.location).attr(
-							"href",
-							"/purchase/addPurchaseView?prod_no="
-									+ $("#prodNo").text().trim());
+		
+		// 댓글 등록 
+		$("#commentGo").on("click",function() {
+			$("form").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
+		});
+		
+		// 댓글 수정
+		$(".glyphicon-refresh").on("click", function() {
+			
+			var commentNo = $(this).parent().parent().children("input").val() ;
+			
+			$.ajax(
+					{
+						url : "/comment/json/getComment/"+commentNo,
+						method : "POST",
+						dataType : "Json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						
+						success : function(JSONData, status){
+							
+							$("#"+commentNo+""+".cmCont").remove();
+							$("#"+commentNo+""+".area").hide();
+							
+ 							var modifyScreen = 
+ 								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' "
+ 								+ "style='width: 100%; height: 40px' placeholder='"+JSONData.commentContent+"'></div>";
+							
+ 							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
+ 								+ "<a href='#' onclick='update(); return false;'> "
+ 								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
+ 								+ "수정" 								
+ 								+ "</span></div>"
+ 							
+							$("#"+commentNo+"").append(modifyScreen);
+ 							$("#"+commentNo+"").append(button);
+						},
+										
+						error : function(request, status, error){							
+							alert("Error");							
+						}
+				
+					}
+			);
+		});
+		
+		$(".glyphicon-remove").on("click", function() {
+			
+			//alert();
+			var commentNo = $(this).parent().parent().children("input").val();
+			var result = confirm("정말 삭제 하시겠습니까?");
+			
+			if (result) {
+				$.ajax({
+							url : "/comment/json/delComment/"+commentNo,
+							method : "POST",
+							dataType : "Json",
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							success : function(JSONData, status){
+								
+								$("#"+commentNo+""+".row").remove();
+								
+							},
+											
+							error : function(request, status, error){							
+								alert("Error");														
+							}
 				});
-		$("#commentGo").on(
-				"click",
-				function() {
-					$("form").attr("action", "/comment/addComment?postNo="+${board.postNo}).attr("method", "POST").submit();
-				});
-
-		//	퀵메뉴바
-		// 	var currentPosition = parseInt($(".quick").css("top")); 
-		//     $(window).scroll(function() { 
-		//             var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다. 
-		//             $(".quick").stop().animate({"top":position+currentPosition+"px"},500); 
-		//     });
+			}
+		});
+		
+		$(".glyphicon-alert").on("click", function() {
+			console.log("신고");
+			// $("form").attr("action","/comment/updateComment?commentNo=")
+		});
+		
+		$(".glyphicon-plus").on("click", function() {
+			console.log("답글")
+		});
+		
+		$(".glyphicon-chevron-up").on("click", function(){
+			console.log("업");
+			var commentNo = $(this).parent().children("input").val();
+			alert(commentNo);
+		});
+		
+		$(".glyphicon-chevron-down").on("click", function(){
+			console.log("다운")
+			alert($(this).parent().parent().children().children("input").val());
+		});
+			
 	});
+
+	function update(){
+		
+		var search 	= {commentNo : $("#commentNo").val(), commentContent : $("#commentContent").val()};
+		var convertSearch = JSON.stringify(search);
+		
+ 		$.ajax(
+ 				{
+ 					url : "/comment/json/updateComment/",
+ 					method : "POST",
+ 					dataType : "json",
+ 					data : convertSearch,
+ 					headers : {
+ 						"Accept" : "application/json",
+ 						"Content-Type" : "application/json"
+ 					},
+					
+ 					success : function(JSONData, status){						
+						
+ 						$("#"+JSONData.commentNo+""+".cmCont").remove();
+ 						$(".ajax").remove();
+ 						$("#"+JSONData.commentNo+""+".area").show();
+ 						
+ 							var modifyScreen = 	
+ 								  "<div id="+JSONData.commentNo+"class='area'>"
+ 								+ "<h5 id="+JSONData.commentNo+"class='cmCont'>"+JSONData.commentContent+"</h5>";
+						
+ 						$("#"+JSONData.commentNo+"").append(modifyScreen);
+ 	
+					},
+					
+					
+ 					error : function(request, status, error){
+						
+ 						alert("error");
+						
+ 					}
+ 				});
+	}
 </script>
 </head>
 
@@ -96,27 +211,36 @@ body {
 		</c:if>
 
 		<c:forEach var="comment" items="${list}">
-			<div class="row">
+			<div class="row" id="${comment.commentNo}">
 				<div class="col-sm-1 col-md-1" align="center">
 					<img src="https://via.placeholder.com/80"
 						style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
 				</div>
 				<div class="col-sm-9 col-md-9" align="left">
-					<h4>
+					
+					<h4 id="${comment.commentNo}">
 						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp;
 					</h4>
-					<h5>${comment.commentContent}</h5>
-					<span class="glyphicon glyphicon-refresh"></span> &nbsp; <span
-						class="glyphicon glyphicon-remove"></span> &nbsp; <span
-						class="glyphicon glyphicon-alert"></span> &nbsp; <span
-						class="glyphicon glyphicon-plus"></span>
+					<input type="hidden" name="commentNo" value="${comment.commentNo}">
+					
+					<div id="${comment.commentNo}" class="area">
+					<h5  id="${comment.commentNo}" class="cmCont">${comment.commentContent}</h5>
+					<span class="glyphicon glyphicon-refresh"></span> &nbsp; 
+					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
+					<span class="glyphicon glyphicon-alert"></span> &nbsp; 
+					<span class="glyphicon glyphicon-plus"></span>
+					</div>
 				</div>
-				<div class="col-sm-2 col-md-2" align="center">
-					<span class="glyphicon glyphicon-chevron-up"></span> <br>
-					<h4>
+				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-right: 0 px;">
+					<font size="8px">
 						<b>${comment.likeCount}</b>
-					</h4>
-					<span class="glyphicon glyphicon-chevron-down"></span>
+					</font>
+				</div>
+				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-left : 0 px;">
+					<span class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span>
+					<p/>
+					<p/>
+					<span class="glyphicon glyphicon-chevron-down" style="font-size: 20px"></span>
 				</div>
 			</div>
 			<br/>

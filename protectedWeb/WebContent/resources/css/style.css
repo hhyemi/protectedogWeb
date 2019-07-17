@@ -221,7 +221,7 @@ ol {
 }
 
 a,
-a:hover,
+a:click,
 a:focus,
 a:active {
     text-decoration: none;

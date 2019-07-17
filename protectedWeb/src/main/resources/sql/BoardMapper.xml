@@ -15,6 +15,7 @@
 		<result property="nickName" 		column="nickname" 			jdbcType="VARCHAR"/>
 		<result property="postTitle" 		column="post_title" 		jdbcType="VARCHAR"/>
 		<result property="postContent" 		column="post_content" 		jdbcType="VARCHAR"/>
+		<result property="postContent" 		column="post_content2" 		jdbcType="CLOB" javaType="string"/>
 		<result property="regDate" 			column="reg_date" 			jdbcType="DATE"/>
 		<result property="viewCount" 		column="view_count" 		jdbcType="NUMERIC"/>
 		<result property="recommendCount" 	column="recommend_count"	jdbcType="NUMERIC"/>
@@ -30,21 +31,20 @@
 		
 	 </resultMap>
 	
-
-	
 	 <!-- SQL : INSERT -->
 	 <insert 	id="addBoard"		parameterType="board" >
 	 	<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
 	    SELECT seq_board_post_no.nextval FROM DUAL
 	 	</selectKey>
 	 	INSERT
-		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, recommend_count,
+		INTO board (  post_no, board_code, id, nickname, post_title, post_content, post_content2, reg_date, recommend_count,
 						market_code, price, city , phone, qna_code, route, prod_name)  
 		VALUES	 (	#{postNo}, 
 					#{boardCode},
 					#{id} , 
 					#{nickName} , 
-					#{postTitle} , 
+					#{postTitle} ,
+					'testing', 
 					#{postContent} , 
 					SYSDATE , 
 					#{recommendCount:NUMERIC},
@@ -63,7 +63,7 @@
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getBoard"	parameterType="int"		resultMap="boardSelectMap">
 		SELECT
-		post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
+		post_no, board_code, id, nickname, post_title, post_content, post_content2, reg_date, view_count, recommend_count,
 		market_code, price, city , phone, qna_code, route, prod_name, del_code
 		FROM board 
 		WHERE post_no = #{value} 
@@ -93,7 +93,7 @@
 	 <update	id="updateViewCount"	parameterType="board" >
 	   	UPDATE board 
 	   	<set>
-			view_count	= view_count + 1 ;
+			view_count	= view_count + 1
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -102,7 +102,7 @@
 	 <update	id="updateRecommendCount"	parameterType="board" >
 	   	UPDATE board
 	   	<set>
-			recommend_count	= recommend_count + 1 ;
+			recommend_count	= recommend_count + 1
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>

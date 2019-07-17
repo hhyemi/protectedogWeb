@@ -20,12 +20,15 @@
 	
 	<!-- SQL : INSERT -->
 	<insert id="addComment"	parameterType="comment" >
+		<selectKey keyProperty="commentNo" resultType="int" order="BEFORE">
+	    	SELECT seq_COMMENTS_COMMENT_NO.nextval FROM DUAL
+	 	</selectKey>
 	INSERT INTO comments( comment_no, post_no, board_code, id, COMMENT_CONTENT, reg_date, like_count, nickName) 
 	VALUES (seq_COMMENTS_COMMENT_NO.nextval, #{postNo}, #{boardCode}, #{id}, #{commentContent}, SYSDATE, #{likeCount}, #{nickName})
 	<!-- to_date(sysdate, 'yyyy/mm/dd hh:mi:ss') -->
 	 </insert>
 	 
-	<select id="getComment" parameterType="int">
+	<select id="getComment" parameterType="int" resultMap="commentSelectMap">
 		SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName 
 		FROM comments 
 		WHERE comment_no = #{value}
@@ -37,7 +40,7 @@
 		WHERE comment_no = #{commentNo}
 	</update>
 	
-	<delete id="deleteComment" parameterType="int">
+	<delete id="delComment" parameterType="int">
 		DELETE 
 		FROM comments
 		WHERE comment_no = #{value}

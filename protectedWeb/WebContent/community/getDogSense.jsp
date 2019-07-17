@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -27,26 +30,30 @@
 
 <script type="text/javascript">
 	
-	var cnt = 2;	
+	var cnt = 3;	
 	var searchKeyword = '애견상식';
-	$(function () {
-		$("button").on("click",function(){
-			searchKeyword = $(this).text();
-			fnGetList();
-		});
-	});
+	
+// 	$(function () {
+// 		$("button").on("click",function(){
+// 			searchKeyword = $(this).text();
+// 			alert(searchKeyword)
+// 			fnGetList();
+// 		});
+// 	});
+	
 	
 	function fnGetList(sGetToken){
 		
-//		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+sGetToken);
-// 		var $getval = $("#search_box").val();
+		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+sGetToken);
 		
-// 		if($getval == ""){
-// 			alert("검색어 입력 !");
-// 			$("#search_box").focus();
-// 			return;
-// 		}
-				
+// 			var $getval = $("#search_box").val();
+		
+// 			if($getval == ""){
+// 			//alert("검색어 입력 !");
+// 				$("#search_box").focus();
+// 				return;
+// 			}
+		
 		$("#get_view").empty();
 		$("#nav_view").empty();
 		
@@ -57,7 +64,7 @@
 		
 		if(sGetToken){
 // 			sTargetUrl += "&pageToken=" + sGetToken;
-			cnt += 5 ;
+			cnt += 3 ;
 			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
 			sTargetUrl += "&maxResults="+cnt;
 		}
@@ -69,7 +76,7 @@
 			dataType : "jsonp",
 			success : function(jdata) {
 				
-				console.log(jdata);
+				//console.log(jdata);
 				
 				$(jdata.items).each(function(i){
 					
@@ -78,36 +85,14 @@
 					console.log(" sinppet.title : " + this.snippet.title) ; 
 					console.log(" sinppet.description : " + this.snippet.description) ; 
 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
-					
-					$("#get_view").append("<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>");
-// 					var test = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id="+this.id.videoId+"&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w";
-// 					console.log(test);
-// 					$.ajax({
-						
-// 						type : "POST",
-// 						url : test,
-// 						dataType : "jsonp",
-// 						success : function(jdata) {
-							
-// 							console.log(jdata);
-							
-// 							$(jdata.items).each(function(i){
-// 								if(videoId == this.id){
-// 									$(".title").append(this.statistics.viewCount+"<br>");
-// 									$(".title").append(this.statistics.likeCount+"<br>");
-// 									$(".title").append(this.statistics.dislikeCount+"<br>");
-// 									$(".title").append(this.statistics.favoriteCount+"<br>");
-// 									$(".title").append(this.statistics.commentCount+"<br>");
-// 								}
-// 							});						
-// 						}					
-// 					});
-					$("#get_view").append("<span class='box'>"); //<img src='"+this.snippet.thumbnails.default.url+"'>
-					$("#get_view").append("<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title'>"+this.snippet.title+"</span></a><br>");					
-					
-					
-					$("#get_view").append(this.snippet.publishedAt+"<br>");
-					$("#get_view").append("<span class='description'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>");
+					$("#get_view").append(
+							  "<div class='col-md-4 style='border : 1px solid black;''>"
+							+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
+							+ "<span class='box'>"
+							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title'>"+this.snippet.title+"</span></a><br>"										
+							+ this.snippet.publishedAt+"<br>"
+							+ "<span class='description'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
+							+ "</div>");
 									
 				}).promise().done(function(){
 					
@@ -135,10 +120,6 @@ span {
 	max-width: 900px;
 	/* 	background-color: green; */
 	display: inline-block;
-}
-
-body {
-	padding-top: 100px;
 }
 
 .box {
@@ -189,22 +170,24 @@ body {
 </head>
 <body onload="fnGetList();">
 
-	<!-- 	<form name="form1" method="post" onsubmit="return false;"> -->
-	<!-- 		<input type="text" id="search_box" /> -->
-	<!-- 		<button onClick="fnGetList();">가져오기</button> -->
-	<!-- 	</form> -->
-	<div class="container">
-	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+
+	<div class="container">
+
 	<button class="btn btn-default">#애견상식</button>
 	<button class="btn btn-default">#애견훈련</button>
 	<button class="btn btn-default">#애견분양</button>
 	<button class="btn btn-default">#애견음악</button>
 	<button class="btn btn-default">#애견카페</button>
-
+	
+<!-- 	<form name="form1" method="post" onsubmit="return false;"> -->
+<!-- 		<input type="text" id="search_box" /> -->
+<!-- 		<button onClick="fnGetList();">가져오기</button> -->
+<!-- 	</form> -->
+	
 	<hr>
-	<div id="get_view" class="col-md-6 col-sm-6 col-lg-6"></div>
-	<div id="nav_view" class="col-md-6 col-sm-6 col-lg-6"></div>
+	<div id="get_view" class="row"></div>
+	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div>
 	</div>
 
 </body>
