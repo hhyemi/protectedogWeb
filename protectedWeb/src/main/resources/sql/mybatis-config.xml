@@ -25,7 +25,7 @@
 		<typeAlias alias="board" type="org.protectedog.service.domain.Board" />
 		<typeAlias alias="breed" type="org.protectedog.service.domain.Breed" />
 		<typeAlias alias="comment" type="org.protectedog.service.domain.Comment" />
-		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />
+		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />	
 		<typeAlias alias="interest" type="org.protectedog.service.domain.Interest"/>
 		<typeAlias alias="file" type="org.protectedog.service.domain.FileDog"/>
 		<typeAlias alias="product" type="org.protectedog.service.domain.Product"/>

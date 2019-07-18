@@ -1,6 +1,7 @@
 package org.protectedog.service.file.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.file.FileDAO;
@@ -30,14 +31,20 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public List<FileDog> getFile(int postNo) throws Exception {
-		return fileDAO.getFile(postNo);
+	public List<FileDog> getFile(Map<String,Object> filePost) throws Exception {
+		return fileDAO.getFile(filePost);
 	}
 
 
 	@Override
 	public void delFile(FileDog file) throws Exception {
 		fileDAO.delFile(file);
+	}
+
+	@Override
+	public void delAllFile(Map<String, Object> filePost) throws Exception {
+		fileDAO.delAllFile(filePost);
+		
 	}
 
 

@@ -163,8 +163,7 @@
 		              role="tab"
 		              aria-controls="review"
 		              aria-selected="false"
-		              >후기</a
-		            >
+		              >후기 </a>
 		          </li>
 		          <li class="nav-item">
 		            <a
@@ -196,10 +195,21 @@
 		            id="review"
 		            role="tabpanel"
 		            aria-labelledby="review-tab">
-					후기후기
-					<a class="main_btn" href="#">후기작성하기</a> 
-					<a class="main_btn" href="#">후기수정하기</a> 			
-					<a class="main_btn" href="#">후기삭제하기</a> 									
+		            <span class="price">후기 제목</span>
+					<h2>${funding.reviewTitle }</h2>
+		            <span class="price">후기 이미지</span>
+		            <p/>
+					<c:forEach var="name" items="${fileReview}" varStatus="status">      
+	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
+	                  </c:forEach>	
+	                <p/>  
+		            <span class="price">후기 내용</span>
+					<h2>${funding.reviewContent }</h2>				
+		            <span class="price">작성 일자</span>
+					<h2>${funding.reviewRegDate }</h2>
+					<a class="main_btn" href="#">후기작성</a> 
+					<a class="main_btn" href="#">후기수정</a> 			
+					<a class="main_btn" href="#">후기삭제</a> 									
 		          </div>
 		          <div
 		            class="tab-pane fade"
@@ -273,27 +283,26 @@
 			sendLinkKakao()
 		});	
 	    
-		//============= 수정하기 Event  처리 =============	
-	 	$( "a:contains('수정하기')" ).on("click" , function() {
-	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
+		//============= 후기작성 Event  처리 =============	
+	 	$( "a:contains('후기작성')" ).on("click" , function() {
+	 		self.location = "/funding/addReview?postNo=${funding.postNo}";
 		});   
 		
-		//============= 삭제하기 Event  처리 =============	
-	 	$( "a:contains('삭제하기')" ).on("click" , function() {
-	 		func_confirm()
-		});   	
-    });
-    
-	  //=============삭제 알림창 Event  처리 =============    	
-            function func_confirm () {
-                if(confirm('정말 삭제하시겠습니까?')){
-                	self.location = "/funding/delVoting?postNo=${funding.postNo}"
-                	alert("삭제가 완료되었습니다.")
-                } else {
-                }
+		//============= 후기수정 Event  처리 =============	
+	 	$( "a:contains('후기수정')" ).on("click" , function() {
+	 		self.location = "/funding/updateReview?postNo=${funding.postNo}";
+		});   
+		
+		//============= 후기삭제 Event  처리 =============	
+	 	$( "a:contains('후기삭제')" ).on("click" , function() {
+            if(confirm('정말 삭제하시겠습니까?')){
+            	self.location = "/funding/delReview?postNo=${funding.postNo}"
+            	alert("삭제가 완료되었습니다.")
+            } else {
             }
-
-    
+		});   
+		
+    });
 		//============= 카카오 공유하기Event  처리 =============		
 		 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 		 function sendLinkKakao(){
