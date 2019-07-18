@@ -34,34 +34,6 @@
             padding-top : 50px;
         }
      </style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-		
-		//============= 회원정보수정 Event  처리 =============	
-		$(function(){
-			$("#moreView").on("click", function(){
-				var reportNo=$(this).parent().children().children("#reportNo").val();
-				alert(reportNo);
-				self.location="/report/getReport?reportNo="+reportNo;
-			})
-		});
-		
-		$(function(){
-			$("#couponManage").on("click", function(){
-				self.location="/coupon/addCouponManage"
-			})
-		});
-		
-		$(function(){
-			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				alert(couponNo);
-				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
-			})
-		})
-		
-	</script>
 	
 </head>
 
@@ -89,6 +61,7 @@
 					<th align="left">제목</th>
 					<th align="left">보낸일시</th>
 					<th align="left">받은일시</th>
+					<th align="left">더보기</th>
 				</tr>
 			</thead>
 		
@@ -113,6 +86,7 @@
 								<fmt:formatDate value="${ message.receiveDate }" pattern="yyyy년 MM월 dd일"/>
 							</c:if>
 						</td>
+						<td id="moreView" align="left">더보기</td>
 
 					</tr>
 				</c:forEach>
@@ -131,6 +105,23 @@
 		<jsp:include page="../common/pageNavigator_new.jsp"/>
 		<jsp:include page="../layout/footer.jsp"></jsp:include>
 
+
+
+
+	<script type="text/javascript">
+		
+		//============= 회원정보수정 Event  처리 =============	
+		$(function(){
+			$("td:nth-child(6)").on("click", function(){
+				var messageNo=$(this).parent().children().children("#messageNo").val();
+				self.location="/message/getMessage?messageNo="+messageNo;
+			})
+		});
+		
+		
+	</script>
+	
+	
 </body>
 
 </html>
