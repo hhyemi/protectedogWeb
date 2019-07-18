@@ -69,27 +69,31 @@
 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
 						   		<span class="text">youremail@email.com</span>
 					   		</div>
+					   		
+					   		
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-					    	<c:if test="${sessionScope.user.role eq null}">
-						    <span class="text">Sign in</span><span class="text">sign up</span>
+					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
+						    <c:if test="${ sessionScope.user eq null }">
+						    	<span class="text">Sign in</span><span class="text">Sign Up</span>
 						    </c:if>
-						    <c:if test="${sessionScope.user.role != null}">
-						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
-						    <input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
+						    <c:if test="${ sessionScope.user != null }">
+						    	<span class="text">${ sessionScope.user.nickname } 님 환영합니다</span>
+						    </c:if>
 						    <c:if test="${sessionScope.user.role eq 'user' }">
 						    <div class="myInfo">
 						    	<input type="button" id="myInfo" value="마이페이지">
 						    </div>
 						    </c:if>
 						    <c:if test="${sessionScope.user.role eq 'admin' }">
-						    <div class="myInfo">
+						    <div class="manageMenu">
 						    	<input type="button" id="manageMenu" value="관리자메뉴">
 						    </div>
 						    </c:if>
+						    <c:if test="${ sessionScope.user != null }">
 						    <div class="logout">
                                 <a href="/users/logout">logout</a>
                             </div>
-						    </c:if>
+                            </c:if>
 					    </div>
                 </div>
              </div>
