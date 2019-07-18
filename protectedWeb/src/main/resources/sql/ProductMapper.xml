@@ -27,7 +27,8 @@
 	<!-- 상품등록  : product add -->
 	<insert id="addProduct" parameterType="product">
 		INSERT 
-		INTO product (prod_no, prod_name, price, manu_date, reg_date, country, quantity, prod_detail, company, 
+		INTO product (prod_no, prod_name, price, manu_date, reg_date, countr
+		y, quantity, prod_detail, company, 
 		discount_price, prod_code) 
 		VALUES (SEQ_PRODUCT_PROD_NO.NEXTVAL, #{prodName}, #{price}, #{manuDate}, SYSDATE, #{country}, 
 		#{quantity}, #{prodDetail}, #{company}, #{discountPrice}, #{prodCode})
