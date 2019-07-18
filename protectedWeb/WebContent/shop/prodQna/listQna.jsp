@@ -96,7 +96,7 @@ body {
 		<thead>
 			<tr>
 				<th class="mdl-data-table__cell--non-numeric" align="center" id="no">글번호</th>
-				<th align="left">{</th>
+				<th align="left">질문형태</th>
 				<th align="left" id="postTitle">글제목</th>
 				<th align="left" id="id">문의자</th>
 				<th align="left">등록일</th>

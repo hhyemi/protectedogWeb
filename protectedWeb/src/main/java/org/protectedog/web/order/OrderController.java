@@ -58,7 +58,7 @@ public class OrderController {
 	public String addPurchaseView(@ModelAttribute("product") Product product, Model model) throws Exception{
 		System.out.println("/addPurchaseView");
 		
-		product = productService.getProduct(product.getProdNo());
+		product = productService.getProduct(product.getProdNO());
 		System.out.println(product);
 		model.addAttribute("product", product);
 		
