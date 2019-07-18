@@ -29,19 +29,14 @@
 }
 
 body {
-	font-family: '나눔고딕', 'NanumGothic', ng
+	font-family: '나눔고딕', 'NanumGothic', ng;
 }
 
 #editor {
 	min-height: 600px;
-	max-height: 960px;
 	max-width: 1130px;
 	margin-left: 15px;
 	text-align: left;
-}
-
-body {
-	padding-top: 50px;
 }
 
 #preview img {
@@ -107,6 +102,7 @@ $(function () {
 <body>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 	<div class="container">
 		<h3 class=" text-info">새 글 쓰기</h3>
 
@@ -170,16 +166,21 @@ $(function () {
 				<button type="button" class="btn btn-primary">등록</button>
 				<a id="reset" class="btn btn-primary btn" role="button">취소</a>
 			</div>
+		</div>	
+		
+		<div class="row" style="height: 100px">
+		
 		</div>
-
-
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 
 	</div>
 
 	<script>
+	let editor;
+
 	ClassicEditor
-        .create( document.querySelector( '#editor' ),{
-        	
+	    .create( document.querySelector( '#editor' ),{
+	    
         	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
         	heading: {
                 options: [
@@ -188,15 +189,14 @@ $(function () {
                     { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
                 ]
             }
-        	
-        } )
-//         .then( editor => {
-//             const toolbarContainer = document.querySelector( '#toolbar-container' );
-//             toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-//         } )
-        .catch( error => {
-            console.error( error );
-        } );
+	    	
+	    })
+	    .then( newEditor => {
+	        editor = newEditor;
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
     
   //============= "다중파일업로드"  Event 처리 및  연결 =============		
 
@@ -240,7 +240,15 @@ $(function () {
                     }else{
                     	previewId = "startNo";	
                     }
+                	
+                	document.querySelector( '#editor' ).addEventListener( 'click', () => {
+                	    const editorData = editor.getData();     	           
+                	} );
+                	
+                	alert(img.target.result);
+                    editor.setData(editor.getData()+"<p><"+imgSelectName+" src='" + img.target.result + "' style='min-width:100%'/></p><p/>");		
                 
+                    
                     $("#preview").append(
                                     "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:208px' >"
                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"200px;\" height=\"200px;\"/>"

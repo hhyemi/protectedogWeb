@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.protectedog.service.domain.Cart;
 
-public interface CartServcie {
+public interface CartService {
 
 	public void Cart(Cart cart)throws Exception;
 	

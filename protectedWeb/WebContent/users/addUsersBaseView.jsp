@@ -67,7 +67,6 @@
 		    <label for="nickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임">
-
 		    </div>
 		  </div>
 		  

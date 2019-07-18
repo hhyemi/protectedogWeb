@@ -86,7 +86,10 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
 <!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
-            <h1 class="mb-0 bread">분양글 등록</h1>
+            <h1 class="mb-0 bread" id="h1">
+           		<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
+			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if>
+            </h1>
           </div>
         </div>
       </div>
@@ -114,19 +117,19 @@
 	          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
 	          			
 						<div class="form-group">
-							<div class="col-md-12"><strong>1. </strong>addAdopt 등록 약관 추가 예정</div>
+							<div class="col-md-12"><strong>1. </strong>약관 추가</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="check" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
 								</div>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<div class="col-md-12"><strong>2. </strong>addAdopt 등록 약관 추가 예정</div>
+							<div class="col-md-12"><strong>2. </strong>약관 추가</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="check" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
 								</div>
 							</div>
 						</div>
@@ -134,20 +137,23 @@
 						<div class="form-group">
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="checkAll" class="mr-2"><strong>모두 동의</strong></label>
+								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 동의</strong></label>
 								</div>
 							</div>
 						</div>
 						
 					</div>
 				</div>
+				
+				
+	   
 	          	
 	          	
 	          	<div class="col-md-12"><br/><hr/><br/></div>
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>글제목</strong></label>
+		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
 		                	<input type="text" class="form-control" name="postTitle" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
@@ -162,7 +168,7 @@
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
-			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>사진등록</strong>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)</label></span>
+			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>사진등록</strong>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)</label></span>
 			                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 			            </div>
 		            </div>
@@ -200,7 +206,7 @@
 	                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-		                	<label for="dogBreed"><strong>견종</strong></label>
+		                	<label for="dogBreed"><strong>견종</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="견종을 입력하세요.">
 		                </div>
 	                </div>
@@ -218,7 +224,7 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogWeight"><strong>체중</strong></label>
+	                		<label for="dogWeight"><strong>체중</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
 	                  		<input type="number" class="form-control" name="dogWeight"  value="5.5" placeholder="강아지 체중을 입력하세요.">
 	               		</div>
                		</div>
@@ -236,13 +242,9 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogPay"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">
-						  			책임비
-						  		</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">
-						  			사례비
-						  		</c:if>
-	                		</strong></label>
+		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
+							    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if>
+	                		</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
 	                  		<input type="number" class="form-control" name="dogPay" value="100" placeholder="비용을 입력하세요.">
 	               		</div>
                		</div>
@@ -250,12 +252,8 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogDate"><strong>
-	                			<c:if test="${param.boardCode eq 'AD' }">
-						  			발견일자
-						  		</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">
-						  			실종일자
-						  		</c:if>
+	                			<c:if test="${param.boardCode eq 'AD' }">발견일자</c:if>
+							    <c:if test="${param.boardCode eq 'MS' }">실종일자</c:if>
 	                		</strong></label>
 	                  		<input type="date" class="form-control" name="dogDate" value="2019-07-07" >
 	               		</div>
@@ -263,32 +261,48 @@
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogStatus"><strong>상태</strong></label>
+	                		<label for="dogStatus"><strong>상태</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
 	                  		<input type="text" class="form-control" name="dogStatus" value="dd" placeholder="강아지 상태를 설명해주세요.">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogPersonality"><strong>성격</strong></label>
+	                		<label for="dogPersonality"><strong>성격</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
 	                  		<input type="text" class="form-control" name="dogPersonality" value="dd" placeholder="강아지 성격을 설명해주세요.">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogChar"><strong>특징</strong></label>
+	                		<label for="dogChar"><strong>특징</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
 	                  		<input type="text" class="form-control" name="dogChar" value="dd" placeholder="강아지 특징을  설명해주세요.">
 	               		</div>
                		</div>
                		
+               		
+               		
+	            	<div class="col-md-12">
+	            	<br/>
+                		<label><strong>
+                		<c:if test="${param.boardCode eq 'AD' }">
+                			지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.
+                		</c:if>
+                		<c:if test="${param.boardCode eq 'MS' }">
+                			지도를 클릭하면 마커가 생성되며, 지도를 우클릭하거나 마커를 우클릭한 경우 마커가 삭제됩니다. 
+                		</c:if>
+                		</strong></label>
+               		</div>
+               		
+               		
+               		
                		<c:if test="${param.boardCode eq 'AD' }">
 		            	<div class="col-md-12">
 		              		<div class="form-group">
-		                		<label for="adoptArea"><strong>분양가능지역</strong> &nbsp;(3곳까지 선택가능합니다. 우클릭으로 마커를 해제해주세요.)</label>
+		                		<label for="adoptArea"><strong>분양가능지역</strong> &nbsp;(3곳까지 선택가능합니다.)</label>
 		                		<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
-		                  		<input type="text" class="form-control" id="adoptArea" name="adoptArea" placeholder="" readonly="readonly">
-		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" placeholder="" readonly="readonly">
+		                  		<input type="hidden" class="form-control" id="adoptArea" name="adoptArea" >
+		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" placeholder="마커 위치가 입력됩니다." readonly="readonly">
 		               		</div>
 	               		</div>
                		</c:if>
@@ -302,17 +316,17 @@
 							    <c:if test="${param.boardCode eq 'MS' }">
 						  			실종위치
 						  		</c:if>
-	                		</strong> (우클릭으로 마커를 해제해주세요.)</label>
+	                		</strong></label>
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
-	                  		<input type="text" class="form-control" id="location" name="location" placeholder="" >
-	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" placeholder="">
+	                  		<input type="hidden" class="form-control" id="location" name="location">
+	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" placeholder="마커 위치가 입력됩니다." readonly>
 	               		</div>
                		</div>
                		
                		
                		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>글내용</strong></label>
+		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요.">
 		                </div>
 	                </div>
@@ -331,7 +345,8 @@
 
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
-					<p><a href="#"class="btn btn-primary py-3 px-4 col-md-12">등록</a></p>
+					<p><button class="btn btn-primary py-3 px-4 col-md-12">등록</button></p>
+<!-- 					<p><a href="#"class="btn btn-primary py-3 px-4 col-md-12">등록</a></p> -->
 					
 					<div class="form-group">
 						<div class="col-md-12">
@@ -343,6 +358,83 @@
 	          	</div>
 	          </div>
 	          
+	          
+ <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
+
+			<div id="dialog-terms" title="확인">
+			  <p align="center"><br/>약관동의를 모두 클릭해주세요.</p>
+			</div>       
+			<div id="dialog-postTitle" title="확인">
+			  <p align="center"><br/>제목을 입력해주세요.</p>
+			</div>       
+			<div id="dialog-postTitleLength" title="확인">
+			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p>
+			</div>       
+			<div id="dialog-dogBreedLength" title="확인">
+			  <p align="center"><br/>견종은 10자까지 입력할 수 있습니다.</p>
+			</div>       
+			<div id="dialog-img" title="확인">
+			  <p align="center"><br/>이미지를 등록해주세요.</p>
+			</div>        
+			<div id="dialog-dogWeight" title="확인">
+			  <p align="center"><br/>체중을 입력해주세요.</p>
+			</div>       
+			<div id="dialog-dogWeightLength" title="확인">
+			  <p align="center"><br/>체중은 6자까지 입력할 수 있습니다.</p>
+			</div>       
+			<div id="dialog-dogPay" title="확인">
+			  <p align="center"><br/>
+			  		<c:if test="${param.boardCode eq 'AD' }">책임비를 입력해주세요.</c:if>
+			  		<c:if test="${param.boardCode eq 'MS' }">사례비를 입력해주세요.</c:if>
+			  </p>
+			</div>       
+			<div id="dialog-dogPayLength" title="확인">
+			  <p align="center"><br/>
+			  		<c:if test="${param.boardCode eq 'AD' }">책임비는 백만원 이상은 입력하실 수 없습니다.</c:if>
+			  		<c:if test="${param.boardCode eq 'MS' }">사례비는 백만원 이상은 입력하실 수 없습니다.</c:if>
+			  </p>
+			</div>       
+			<div id="dialog-dogDate" title="확인">
+			  <p align="center"><br/>
+			  		<c:if test="${param.boardCode eq 'AD' }">발견일자를 입력해주세요.</c:if>
+			  		<c:if test="${param.boardCode eq 'MS' }">실종일자를 입력해주세요.</c:if>
+			  </p>
+			</div>       
+			<div id="dialog-dogStatus" title="확인">
+			  <p align="center"><br/>강아지 상태를 설명해주세요.</p>
+			</div>       
+			<div id="dialog-dogStatusLength" title="확인">
+			  <p align="center"><br/>강아지 상태는 20자까지 입력할 수 있습니다.</p>
+			</div>       
+			<div id="dialog-dogPersonality" title="확인">
+			  <p align="center"><br/>강아지 성격을 설명해주세요.</p>
+			</div>       
+			<div id="dialog-dogPersonalityLength" title="확인">
+			  <p align="center"><br/>강아지 성격은 20자까지 입력할 수 있습니다.</p>
+			</div>       
+			<div id="dialog-dogChar" title="확인">
+			  <p align="center"><br/>강아지 특징을 설명해주세요.</p>
+			</div>       
+			<div id="dialog-dogCharLength" title="확인">
+			  <p align="center"><br/>강아지 특징은 20자까지 입력할 수 있습니다.</p>
+			</div>       
+			<div id="dialog-area" title="확인">
+			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
+			</div>       
+			<div id="dialog-location" title="확인">
+			  <p align="center"><br/>
+			  		<c:if test="${param.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if>
+			  		<c:if test="${param.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if>
+			  </p>
+			</div>   
+			<div id="dialog-postContent" title="확인">
+			  <p align="center"><br/>내용을 입력해주세요.</p>
+			</div>      
+			<div id="dialog-postContentLength" title="확인">
+			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p>
+			</div>      
+       
+<!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
 	          
 	          
           </div> <!-- .col-md-8 -->
@@ -430,6 +522,9 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
   <script src="/resources/prodmenu/js/jquery.min.js"></script>
   <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="/resources/prodmenu/js/popper.min.js"></script>
@@ -447,6 +542,8 @@
   <script src="/resources/prodmenu/js/main.js"></script>
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/resources/events.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
   <script>
 
@@ -468,6 +565,19 @@
 		        mapArea.addListener('click', function(event) {
 		        	addMarker(event.latLng, "area");
 		        });
+		        
+		        mapArea.addListener('rightclick', function() {
+			    	if( markersArea.length > 0 ){
+	   		        	
+			    		for (var i = markersArea.length-1; i >=0; i--) {
+	   		        		markersArea[i].setMap(null);
+	   		        		markersArea.splice(i, 1 );
+	   		            }
+	   		        	
+	   		        	$('#adoptArea').val('');
+	   		        	$('#areaKr').val('');
+			    	}
+			    });
     	  }
 	  ////////////////////        위: 분양가능지역               //      아래: 분양|실종위치          ////////////////////////////////////////
 	  
@@ -479,6 +589,12 @@
 	      map.addListener('click', function(event) {
 	        	addMarker(event.latLng, "loca");
 	      });
+	      
+	      map.addListener('rightclick', function() {
+	        	deleteMarkers();
+	        	$('#location').val('');
+	        	$('#locationKr').val('');
+		  });
       }
       
       
@@ -514,7 +630,7 @@
 		    	 	});
 
 	  	        }else{
-	  	        	alert("3개까지 지정 가능함 dialog 추가");
+// 	  	        	alert("3개까지 지정 가능함 dialog 추가");
 	  	        }
 	    		 
 
@@ -574,6 +690,7 @@
 		        if (marker != undefined){
 		           marker.addListener('rightclick', function() {
 		            	deleteMarkers();
+		            	$('#locationKr').val('');
 		           });
 		        }
 		        
@@ -601,35 +718,7 @@
       
       //////////////////////        ↑ map         /////////////////////////////////////////////////////////////////////////////////////////////////////////
        
-      $( 'input[name=checkAll]').on('click', function(){
-    	  $( 'input[name=check]').prop("checked");
-    	  
-    	  
-// 			var price = $( '#tranPrice').val();
-// 			var mileage =  $( "#mileage" ).val() ;
-// 			var quantity = $( '#tranQuantity').val(  );
-// 			var usermileage = ${purchase.buyer.mileage };
-			
-//  			if (    $( 'input[type=checkbox]').prop("checked")   ){
-// 					console.log ("체크 확인" );
-// 					console.log (  $( 'input[type=checkbox]').val()  );
-// // 					$( '#tranPrice').val(  parseInt(price)- parseInt(mileage)  );
-// 			}else{
-// // 				$( '#tranPrice').val( ${purchase.purchaseProd.price } *  parseInt(quantity)  );
-// 			}
-	  });
-      
-      if ( $( 'input[name=check]').prop("checked")){
-    	  $( 'input[name=checkAll]').prop("checked");
-      }
-      
-      
-	//////////////////////          ↑ check box         /////////////////////////////////////////////////////////////////////////////////////////////////////////
-      
 
-    
- 
-	
 	  //============= "다중파일업로드 파일명만 저장해서 value" =============   
 	  function fnAddFile(fileNameArray) {
 	  	   $("#multiFile").val(fileNameArray)    
@@ -641,6 +730,7 @@
 	 var files = {};
 	 var previewIndex = 0;
 	 var fileNameArray = new Array();
+	 
 	 // image preview 기능 구현
 	 // input = file object[]
 	 function addPreview(input) {
@@ -671,8 +761,8 @@
 	                 var imgNum = previewIndex++;
 	                 
 	                //8장 이상 업로드시
-	                 if(Object.keys(files).length>=8){
-	            		alert("사진은 8장까지만 업로드 가능합니다.");
+	                 if(Object.keys(files).length>=5){
+	            		alert("사진은 5장까지만 업로드 가능합니다.");
 	                    delete files[imgNum];
 	                 }else{
 	          		 // 8장 이하 
@@ -716,11 +806,10 @@
                           processData: false,
                           success: function(data){
 //                           	console.log("확인 : "+data);
-//                           	console.log("확인111 : "+JSON.stringify(data));
+//                           	console.log("모두 확인 : "+JSON.stringify(data));
                           	
                           	var test = data.responses[0].webDetection.bestGuessLabels[0];
-                          	console.log("확인1111111 : "+test.label);
-//                             output = data;
+                          	console.log("견종 확인 : "+test.label);
 //                             var faceData = data.responses[0].faceAnnotations[0];
 //                             console.log('joy: ' + faceData.joyLikelihood);
 //                             console.log('sorrow: ' + faceData.sorrowLikelihood);
@@ -730,7 +819,7 @@
 //                        		$( "#test" ).html(test.label.replace(/ /gi, "") );
                           },
                           error: function (data, textStatus, errorThrown) {
-                            console.log('error: ' + data);
+                            console.log('비전 error: ' + data);
                           }
                         })
 	                	
@@ -775,20 +864,223 @@
 		});
 	});
 	
-	function fncAddAdopt(){
+	
 
-		var file = $("#multiFile").val(); 
+//////////////////////         check box         ////////////////////////////////////////////////
+	
+	$( 'input[name=termsAll]').on('click', function(){
+	    if (  $("input[name=termsAll]:checkbox").prop("checked")  ) {
+		    $("input[name=terms]:checkbox").prop("checked", "checked");
+		}else{
+		    $("input[name=terms]:checkbox").prop('checked', false);
+		}
+	});
+	
+	$( "input[name=terms]:checkbox" ).on('click', function(){
+		if($("input[name=terms]:checkbox:checked").length == 2){
+			$("input[name=termsAll]:checkbox").prop("checked", "checked");
+		}
+	});
+	
+//////////////////////     ↑      check box         ////////////////////////////////////////////////
+
+
+
+	var boardCode = $( 'input[name=boardCode]' ).val().trim();
+	
+	$( function() {
+	    $( "#dialog-terms, #dialog-postTitle, #dialog-postTitleLength, #dialog-img, #dialog-dogBreedLength, #dialog-dogWeight, #dialog-dogWeightLength" ).dialog({
+	    	autoOpen: false,
+		      width: 350,
+		      height: 150,
+		      modal: true
+	    });
+	});
+	
+	$( function() {
+	    $( "#dialog-dogPay, #dialog-dogPayLength, #dialog-dogDate, #dialog-dogStatus, #dialog-dogStatusLength, #dialog-dogPersonality, #dialog-dogPersonalityLength" ).dialog({
+	    	autoOpen: false,
+		      width: 350,
+		      height: 150,
+		      modal: true
+	    });
+	});
+	
+	$( function() {
+	    $( "#dialog-dogChar, #dialog-dogCharLength, #dialog-area, #dialog-location, #dialog-postContent, #dialog-postContentLength" ).dialog({
+	    	autoOpen: false,
+		      width: 350,
+		      height: 150,
+		      modal: true
+	    });
+	});
+//////////////////////      ↑  dialog        ////////////////////////////////////////////////	
+
+	$( "input[name=postTitle]" ).keyup(function( ) {
+		if($("input[name=postTitle]").val().length > 10 ){
+			$("span[name=postTitle]").text('10자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=postTitle]").text('');
+		}
+	});
+
+	$( "input[name=dogBreed]" ).keyup(function( ) {
+		if($("input[name=dogBreed]").val().length > 10 ){
+			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogBreed]").text('');
+		}
+	});
+
+	$( "input[name=dogWeight]" ).keyup(function( ) {
+		if($("input[name=dogWeight]").val().length > 6 ){
+			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogWeight]").text('');
+		}
+	});
+
+	$( "input[name=dogPay]" ).keyup(function( ) {
+		if($("input[name=dogPay]").val().length > 6 ){
+			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
+// 			$("span[name=dogDate]").text("  ");
+		}else{
+			$("span[name=dogPay]").text('');
+// 			$("span[name=dogDate]").text('');
+		}
+	});
+	
+	$( "input[name=dogStatus]" ).keyup(function( ) {
+		if($("input[name=dogStatus]").val().length > 20 ){
+			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogStatus]").text('');
+		}
+	});
+	
+	$( "input[name=dogPersonality]" ).keyup(function( ) {
+		if($("input[name=dogPersonality]").val().length > 20 ){
+			$("span[name=dogPersonality]").text('20자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogPersonality]").text('');
+		}
+	});
+
+	$( "input[name=dogChar]" ).keyup(function( ) {
+		if($("input[name=dogChar]").val().length > 20 ){
+			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogChar]").text('');
+		}
+	});
+	
+	$( "input[name=postContent]" ).keyup(function( ) {
+		if($("input[name=postContent]").val().length > 100 ){
+			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=postContent]").text('');
+		}
+	});
+
+
+	
+//////////////////////       ↑  글자수체크         ////////////////////////////////////////////////
+	
+	// 등록버튼 누르고
+	function fncAddAdopt(){
+		
+		  if( $("input:checkbox:checked").length != 3){
+			  $('#dialog-terms').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=postTitle]").val() == ''){
+			  $('#dialog-postTitle').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=postTitle]").val().length >10){
+			  $('#dialog-postTitleLength').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogBreed]").val().length >10){
+			  $('#dialog-dogBreedLength').dialog( "open" );
+			  return;
+		  }
+		  if( $(".preview-box").length == 0 ){
+			  $('#dialog-img').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogWeight]").val() == ''){
+			  $('#dialog-dogWeight').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogWeight]").val().length > 6){
+			  $('#dialog-dogWeightLength').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogPay]").val() == ''){
+			  $('#dialog-dogPay').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogPay]").val().length > 6){
+			  $('#dialog-dogPayLength').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogDate]").val() == ''){
+			  $('#dialog-dogDate').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogStatus]").val() == ''){
+			  $('#dialog-dogStatus').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogStatus]").val().length > 20 ){
+			  $('#dialog-dogStatusLength').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogPersonality]").val() == ''){
+			  $('#dialog-dogPersonality').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogPersonality]").val().length > 20 ){
+			  $('#dialog-dogPersonalityLength').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogChar]").val() == ''){
+			  $('#dialog-dogChar').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=dogChar]").val().length > 20 ){
+			  $('#dialog-dogCharLength').dialog( "open" );
+			  return;
+		  }
+		  if( boardCode == 'AD' ){
+			  if( $("input[name=adoptArea]").val() == ''){
+				  $('#dialog-area').dialog( "open" );
+				  return;
+			  }
+		  }
+		  if( $("input[name=location]").val() == ''){
+			  $('#dialog-location').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=postContent]").val() == ''){
+			  $('#dialog-postContent').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=postContent]").val().length > 100 ){
+			  $('#dialog-postContentLength').dialog( "open" );
+			  return;
+		  }
 		
 		  
 	    //============= 다중파일업로드 AJAX =============
 	    	
-	   	   
+	   	  var file = $("#multiFile").val(); 
 		
 	      $(function() {     
 		        var form = $('#uploadForm')[0];
 		        var formData = new FormData(form);
-		        var boardCode = $( 'input[name=boardCode]' ).val().trim();
-		        alert(boardCode);
+// 		        alert(boardCode);
 		
 		        for (var index = 0; index < 100; index++) {
 		            formData.append('files',files[index]);
@@ -816,7 +1108,7 @@
 			                }
 		            },
 					error: function(request, status, error){ 
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+						alert("이미지 code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
 			        }
 		        });
 	  	  });
@@ -832,7 +1124,7 @@
     
     
     $(function() {
-			$( "a:contains('등록')" ).on("click" , function() {
+			$( "button:contains('등록')" ).on("click" , function() {
 				fncAddAdopt();
 			});
 			
