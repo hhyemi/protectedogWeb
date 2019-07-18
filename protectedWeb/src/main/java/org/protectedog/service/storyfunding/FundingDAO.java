@@ -53,6 +53,15 @@ public interface FundingDAO {
 
 	// SELECT LIST
 	public List<Participate> listNoticeComment(Search search, int postNo) throws Exception;
+	
+	/////////////// 후기 게시판 /////////////////////
+	
+	public void addReview(Funding funding) throws Exception;	
+
+	public void updateReview(Funding funding) throws Exception;
+
+	public void delReview(int postNo) throws Exception;
+	
 
 	/////////////// 회원에서 요구한 Method/////////////////////
 	// SELECT LIST

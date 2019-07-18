@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Participate;
 import org.protectedog.service.domain.Funding;
+import org.protectedog.service.domain.Participate;
 
 public interface FundingService {
 
@@ -43,6 +43,14 @@ public interface FundingService {
 
 	// 참여알림댓글
 	public Map<String, Object> listNoticeComment(Search search, int postNo) throws Exception;
+
+	/////////////// 후기 게시판 /////////////////////
+	
+	public void addReview(Funding funding) throws Exception;
+
+	public void updateReview(Funding funding) throws Exception;
+
+	public void delReview(int postNo) throws Exception;
 
 	/////////////// 회원에서 요구한 Method/////////////////////
 	// 참여이력 리스트

@@ -73,22 +73,42 @@
 		<font size=6>후원 후기 등록 </font>  후기를 <strong style="color:#225cba">상세하게</strong> 작성해주세요.
 	    </div>		
 		</div>	
-		
+					<!--  table Start /////////////////////////////////////-->
+			      <table class="table table-hover table-striped" >
+			      
+			        <thead>
+			          <tr>
+			            <th ></th>
+			            <th><b>후원글 제목</b></th>
+			            <th><b>닉네임</b></th>	
+			          </tr>
+			        </thead>
+			       
+			 		<tbody>	
+			 		   <tr>			
+						  <td width="150px;" align="center"><img src="/resources/file/fileSF/${funding.mainFile}"  width="150px;" height="150px;"/></td>		
+						  <td width="150px;">${funding.postTitle}</td>					 		  
+						  <td width="150px;">${funding.nickname}</td> 
+						</tr>
+			        </tbody> 
+			  
+			      </table>
+             	  <!--  table End /////////////////////////////////////--> 	
+             	  <br/>	
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 
-		  <br/>
 		  <div class="form-group">
 			<h3><b>후기제목</b></h3><p/>		
 		    <div class=>
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
 			<h3><b>후기내용</b></h3><p/>			
 			    <div class=>
-			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;"></textarea>
+			      <textarea name="reviewContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;"></textarea>
 			    </div>
 			  </div>
 			<br/>
@@ -103,12 +123,15 @@
             <div class="form-group">
             <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
             </div>
+
         
 		  <br/><br/>
 		  <div class="form-group text-center">
 	  			<button type="button" id="btn-add">등록</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
+          <input type="hidden" class="form-control" id="postNo" name="postNo" value="${funding.postNo }" >		  
+		  <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
@@ -125,12 +148,11 @@
    <script type="text/javascript" >
 
    //============= 등록버튼 눌렀을때 함수 =============      
-   function fncAddVoting(){
+   function fncAddReview(){
       
       //Form 유효성 검증
-
-      var postTitle = $('input[name="postTitle"]').val();
-      var postContent = $('input[name="postContent"]').val(); 
+      var postTitle = $('input[name="reviewTitle"]').val();
+      var postContent = $('input[name="reviewContent"]').val();
       var file = $("#multiFile").val();    
       
       if(postTitle == null || postTitle.length<1){
@@ -147,8 +169,7 @@
          alert("파일은 반드시 입력하셔야 합니다.");
          return;
       }
-      
-      
+
       //============= 다중파일업로드 AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
@@ -183,7 +204,7 @@
         });
 
 
-      $('form').attr("method","POST").attr("action","/funding/addVoting").attr("enctype","multipart/form-data").submit();
+      $('form').attr("method","POST").attr("action","/funding/addReview").attr("enctype","multipart/form-data").submit();
    }
    
    //============= "다중파일업로드 파일명만 저장해서 value" =============   
@@ -299,12 +320,15 @@
                       $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                   }
              });
+
+             
+     }); 
    
    $(function() {
       
          //============= 등록 Event  처리 =============   
          $( "#btn-add" ).on("click" , function() {
-            fncAddVoting();
+        	 fncAddReview();
             });
          
          //============= 취소 Event  처리 =============

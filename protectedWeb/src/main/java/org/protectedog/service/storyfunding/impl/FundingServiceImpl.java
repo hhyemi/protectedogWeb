@@ -103,6 +103,27 @@ public class FundingServiceImpl implements FundingService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/////////////// 후기 게시판 /////////////////////
+
+	@Override
+	public void addReview(Funding funding) throws Exception {
+		fundingDAO.addReview(funding);
+
+	}
+
+	@Override
+	public void updateReview(Funding funding) throws Exception {
+		fundingDAO.updateReview(funding);
+
+	}
+
+	@Override
+	public void delReview(int postNo) throws Exception {
+		fundingDAO.delReview(postNo);
+
+	}
+
 	/////////////// 회원에서 요구한 Method/////////////////////
 
 	@Override
