@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    
+
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -60,7 +62,7 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="../index.jsp" class="nav-link">Home</a></li>
 	          <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -126,7 +128,10 @@
 						</div>
 						
 						<div class="form-group">
-							<div class="col-md-12"><strong>2. </strong>약관 추가</div>
+							<div class="col-md-12"><strong>2. </strong>
+								<c:if test="${param.boardCode eq 'AD' }">분양글을 등록하고, 입양신청서가 등록되거나 분양완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
+			 					<c:if test="${param.boardCode eq 'MS' }">실종글을 등록하고, 찾기완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
+							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
 								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
@@ -159,16 +164,35 @@
 	                </div>
 	          	
 	          		<div class="col-md-12">
-		                <div class="form-group">
-		                	<label for="phone"><strong>연락처</strong></label>
-		                	<input type="text" class="form-control" name="phone" value="011-2123-4567">
-		                </div>
+		                <label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone"></span></label>
 	                </div>
+	                
+	                <div class="col-md-4">
+	                	<select  class="form-control" name="phone1" id="phone1">
+			            	<option value="010">010</option>
+			            	<option value="011" selected="selected">011</option>
+			            	<option value="016">016</option>
+			            	<option value="017">017</option>
+			            	<option value="019">019</option>
+			            </select>
+	                </div>
+	                
+	          		<div class="col-md-4">
+	                	<input type="text" class="form-control" id="phone2" name="phone2" value="2123">
+	                </div>
+	                
+	          		<div class="col-md-4">
+	                	<input type="text" class="form-control" id="phone3" name="phone3" value="4567">
+	                </div>
+	               
+	                <input type="hidden" class="form-control" id="phone" name="phone">
+	                
+	                <div class="col-md-12"><br/></div>
 	                
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
-			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>사진등록</strong>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)</label></span>
+			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>이미지 등록</strong>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)</label></span>
 			                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 			            </div>
 		            </div>
@@ -180,34 +204,13 @@
 			           	 <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
 			            </div>
 		            </div>
-	                
-<!-- 	          		<div class="col-md-12"> -->
-<!-- 		            	<div class="form-group"> -->
-<!-- 		            		<label for="country" class="col-sm-offset-1 col-sm-3 control-label">연락처</label> -->
-<!-- 		            		<div class="select-wrap"> -->
-<!-- 			                	<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
-<!-- 			                	<div class="col-md-2"> -->
-<!-- 			                	<select  class="form-control" name="phone1" id="phone"> <option value="">010</option>-->
-<!-- 			                	</select></div> -->
-<!-- 			                	<div class="col-md-2"> -->
-<!-- 			                	<input type="number" class="form-control" name="phone2" placeholder=""></div> -->
-<!-- 			                	<div class="col-md-2"> -->
-<!-- 			                	<input type="number" class="form-control" name="phone3" placeholder=""></div> -->
-<!-- 		               		</div> -->
-<!-- 		            	</div> -->
-<!-- 		            </div> -->
 		            
-<!-- 		            <div class="col-md-12"> -->
-<!-- 		                <div class="form-group"> -->
-<!-- 		                	<label for="firstname"><strong>이미지</strong></label> -->
-<!-- 		                	<input type="text" class="form-control" name="" placeholder=""> -->
-<!-- 		                </div> -->
-<!-- 	                </div> -->
+		            <div class="col-md-12"><br/></div>
 	                
 	          		<div class="col-md-6">
 		                <div class="form-group">
 		                	<label for="dogBreed"><strong>견종</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
-		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="견종을 입력하세요.">
+		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="이미지 등록 시 자동으로 입력됩니다.">
 		                </div>
 	                </div>
 	                
@@ -245,7 +248,7 @@
 		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
 							    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if>
 	                		</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
-	                  		<input type="number" class="form-control" name="dogPay" value="100" placeholder="비용을 입력하세요.">
+	                  		<input type="text" class="form-control" name="dogPay" value="123456" placeholder="비용을 입력하세요.">
 	               		</div>
                		</div>
                		
@@ -327,7 +330,8 @@
                		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
-		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요.">
+<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
+		                	<textarea  class="form-control"  name="postContent"  rows="5" value="dd"  placeholder="내용을 입력하세요."></textarea>
 		                </div>
 	                </div>
                		
@@ -346,7 +350,6 @@
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
 					<p><button class="btn btn-primary py-3 px-4 col-md-12">등록</button></p>
-<!-- 					<p><a href="#"class="btn btn-primary py-3 px-4 col-md-12">등록</a></p> -->
 					
 					<div class="form-group">
 						<div class="col-md-12">
@@ -359,82 +362,85 @@
 	          </div>
 	          
 	          
- <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
+ <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
-			<div id="dialog-terms" title="확인">
+			<div id="dialog-terms" title="">
 			  <p align="center"><br/>약관동의를 모두 클릭해주세요.</p>
 			</div>       
-			<div id="dialog-postTitle" title="확인">
+			<div id="dialog-postTitle" title="">
 			  <p align="center"><br/>제목을 입력해주세요.</p>
 			</div>       
-			<div id="dialog-postTitleLength" title="확인">
+			<div id="dialog-postTitleLength" title="">
 			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-dogBreedLength" title="확인">
+			<div id="dialog-phone" title="">
+			  <p align="center"><br/>연락처를 정확히 입력하세요.</p>
+			</div>       
+			<div id="dialog-dogBreedLength" title="">
 			  <p align="center"><br/>견종은 10자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-img" title="확인">
+			<div id="dialog-img" title="">
 			  <p align="center"><br/>이미지를 등록해주세요.</p>
 			</div>        
-			<div id="dialog-dogWeight" title="확인">
+			<div id="dialog-dogWeight" title="">
 			  <p align="center"><br/>체중을 입력해주세요.</p>
 			</div>       
-			<div id="dialog-dogWeightLength" title="확인">
+			<div id="dialog-dogWeightLength" title="">
 			  <p align="center"><br/>체중은 6자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-dogPay" title="확인">
+			<div id="dialog-dogPay" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${param.boardCode eq 'AD' }">책임비를 입력해주세요.</c:if>
 			  		<c:if test="${param.boardCode eq 'MS' }">사례비를 입력해주세요.</c:if>
 			  </p>
 			</div>       
-			<div id="dialog-dogPayLength" title="확인">
+			<div id="dialog-dogPayLength" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${param.boardCode eq 'AD' }">책임비는 백만원 이상은 입력하실 수 없습니다.</c:if>
 			  		<c:if test="${param.boardCode eq 'MS' }">사례비는 백만원 이상은 입력하실 수 없습니다.</c:if>
 			  </p>
 			</div>       
-			<div id="dialog-dogDate" title="확인">
+			<div id="dialog-dogDate" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${param.boardCode eq 'AD' }">발견일자를 입력해주세요.</c:if>
 			  		<c:if test="${param.boardCode eq 'MS' }">실종일자를 입력해주세요.</c:if>
 			  </p>
 			</div>       
-			<div id="dialog-dogStatus" title="확인">
+			<div id="dialog-dogStatus" title="">
 			  <p align="center"><br/>강아지 상태를 설명해주세요.</p>
 			</div>       
-			<div id="dialog-dogStatusLength" title="확인">
+			<div id="dialog-dogStatusLength" title="">
 			  <p align="center"><br/>강아지 상태는 20자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-dogPersonality" title="확인">
+			<div id="dialog-dogPersonality" title="">
 			  <p align="center"><br/>강아지 성격을 설명해주세요.</p>
 			</div>       
-			<div id="dialog-dogPersonalityLength" title="확인">
+			<div id="dialog-dogPersonalityLength" title="">
 			  <p align="center"><br/>강아지 성격은 20자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-dogChar" title="확인">
+			<div id="dialog-dogChar" title="">
 			  <p align="center"><br/>강아지 특징을 설명해주세요.</p>
 			</div>       
-			<div id="dialog-dogCharLength" title="확인">
+			<div id="dialog-dogCharLength" title="">
 			  <p align="center"><br/>강아지 특징은 20자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-area" title="확인">
+			<div id="dialog-area" title="">
 			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
 			</div>       
-			<div id="dialog-location" title="확인">
+			<div id="dialog-location" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${param.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if>
 			  		<c:if test="${param.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if>
 			  </p>
 			</div>   
-			<div id="dialog-postContent" title="확인">
+			<div id="dialog-postContent" title="">
 			  <p align="center"><br/>내용을 입력해주세요.</p>
 			</div>      
-			<div id="dialog-postContentLength" title="확인">
+			<div id="dialog-postContentLength" title="">
 			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p>
 			</div>      
        
-<!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
+<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
 	          
 	          
           </div> <!-- .col-md-8 -->
@@ -442,89 +448,18 @@
       </div>
     </section> <!-- .section -->
 
-    <footer class="ftco-footer bg-light ftco-section">
-      <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Winkel</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Menu</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Help</h2>
-              <div class="d-flex">
-	              <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-	                <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
-	                <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
-	                <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
-	                <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-	              </ul>
-	              <ul class="list-unstyled">
-	                <li><a href="#" class="py-2 d-block">FAQs</a></li>
-	                <li><a href="#" class="py-2 d-block">Contact</a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    
     
   
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+  <!-- dialog -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
-
+  
+  <!-- 템플릿 -->
   <script src="/resources/prodmenu/js/jquery.min.js"></script>
   <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="/resources/prodmenu/js/popper.min.js"></script>
@@ -538,11 +473,11 @@
   <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
   <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
   <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-<!--   <script src="/resources/prodmenu/js/google-map.js"></script> -->
   <script src="/resources/prodmenu/js/main.js"></script>
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/resources/events.js"></script>
+  
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
   <script>
@@ -716,7 +651,9 @@
 	        markers = [];
       }
       
-      //////////////////////        ↑ map         /////////////////////////////////////////////////////////////////////////////////////////////////////////
+     // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        ↑ map         ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+     
+     
        
 
 	  //============= "다중파일업로드 파일명만 저장해서 value" =============   
@@ -742,16 +679,11 @@
 	            
 	            if (validation(file.name))
 	                 continue;
-	
+	            
 	            var fileName = file.name + "";   
 	            var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-	            var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
-	            
-	            //append할때 동영상 이미지 구분해주기
+	            var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length); 
 	            var imgSelectName = "img";
-	            if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
-	             	imgSelectName = "iframe";
-	            }                           
 	
 	            var reader = new FileReader();
 	            reader.onload = function(img) {
@@ -762,7 +694,7 @@
 	                 
 	                //8장 이상 업로드시
 	                 if(Object.keys(files).length>=5){
-	            		alert("사진은 5장까지만 업로드 가능합니다.");
+	            		alert("이미지는 5장까지 업로드 가능합니다.");
 	                    delete files[imgNum];
 	                 }else{
 	          		 // 8장 이하 
@@ -805,21 +737,22 @@
                           data: JSON.stringify(request),
                           processData: false,
                           success: function(data){
-//                           	console.log("확인 : "+data);
 //                           	console.log("모두 확인 : "+JSON.stringify(data));
                           	
                           	var test = data.responses[0].webDetection.bestGuessLabels[0];
-                          	console.log("견종 확인 : "+test.label);
+                          	var breed = test.label;
+                          	console.log("견종 확인 : "+breed);
 //                             var faceData = data.responses[0].faceAnnotations[0];
 //                             console.log('joy: ' + faceData.joyLikelihood);
 //                             console.log('sorrow: ' + faceData.sorrowLikelihood);
 //                             console.log('anger: ' + faceData.angerLikelihood);
 //                             console.log('surprise: ' + faceData.surpriseLikelihood);
-                       		$( "#dogBreed" ).val(test.label);
+//                        		$( "#dogBreed" ).val(breed);
+                       		fncBreed( breed );
 //                        		$( "#test" ).html(test.label.replace(/ /gi, "") );
                           },
                           error: function (data, textStatus, errorThrown) {
-                            console.log('비전 error: ' + data);
+                            console.log('비전 error: ' + JSON.stringify(data));
                           }
                         })
 	                	
@@ -831,6 +764,9 @@
 	     } else
 	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
 	 }
+	 
+
+	 
 
 	 //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
 	 function deletePreview(obj) {
@@ -848,8 +784,8 @@
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
-	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	         alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg') )) {
+	         alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
 	         return true;
 	     } else {
 	         return false;
@@ -864,9 +800,51 @@
 		});
 	});
 	
-	
+	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-//////////////////////         check box         ////////////////////////////////////////////////
+
+	function fncBreed(breed) {
+		if ( breed.toLowerCase().indexOf( 'bichon' ) != -1 ) {
+			breed = '비숑';
+		}else if ( breed.toLowerCase().indexOf( 'pomeranian' ) != -1 || breed.toLowerCase().indexOf( '포메' ) != -1 ) {
+			breed = '포메라니안';
+		}else if ( breed.toLowerCase().indexOf( 'bull' ) != -1 ) {
+			breed = '불독';
+		}else if ( breed.toLowerCase().indexOf( 'chihuahua' ) != -1 ) {
+			breed = '치와와';
+		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 ) {
+			breed = '말티즈';
+		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 ) {
+			breed = '푸들';
+		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 ) {
+			breed = '리트리버';
+		}else if ( breed.toLowerCase().indexOf( 'jindo' ) != -1 ) {
+			breed = '진돗개';
+		}else if ( breed.toLowerCase().indexOf( 'welsh' ) != -1 ) {
+			breed = '웰시코기';
+		}else if ( breed.toLowerCase().indexOf( 'chow' ) != -1 || breed.toLowerCase().indexOf( '차우' ) != -1 ) {
+			breed = '차우차우';
+		}else if ( breed.toLowerCase().indexOf( 'dobermann' ) != -1 ) {
+			breed = '도베르만';
+		}else if ( breed.toLowerCase().indexOf( 'spaniel' ) != -1 ) {
+			breed = '스파니엘';
+		}else if ( breed.toLowerCase().indexOf( 'spitz' ) != -1 ) {
+			breed = '스피츠';
+		}else if ( breed.toLowerCase().indexOf( 'doodle' ) != -1 ) {
+			breed = '골든두들';
+		}else if ( breed.toLowerCase().indexOf( 'husky' ) != -1 ) {
+			breed = '허스키';
+		}else if ( breed.toLowerCase().indexOf( 'shih' ) != -1 ) {
+			breed = '시츄';
+		}else{
+			breed = '알 수 없음';
+		}
+
+	    $( "#dogBreed" ).val(breed);
+	 }
+	
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■      ↑ 견종번역      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	
 	$( 'input[name=termsAll]').on('click', function(){
 	    if (  $("input[name=termsAll]:checkbox").prop("checked")  ) {
@@ -879,17 +857,19 @@
 	$( "input[name=terms]:checkbox" ).on('click', function(){
 		if($("input[name=terms]:checkbox:checked").length == 2){
 			$("input[name=termsAll]:checkbox").prop("checked", "checked");
+		}else{
+			$("input[name=termsAll]:checkbox").prop("checked", false);
 		}
 	});
 	
-//////////////////////     ↑      check box         ////////////////////////////////////////////////
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑      check box        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
 	$( function() {
-	    $( "#dialog-terms, #dialog-postTitle, #dialog-postTitleLength, #dialog-img, #dialog-dogBreedLength, #dialog-dogWeight, #dialog-dogWeightLength" ).dialog({
+	    $( "#dialog-terms, #dialog-postTitle, #dialog-postTitleLength, #dialog-phone, #dialog-img, #dialog-dogBreedLength, #dialog-dogWeight, #dialog-dogWeightLength" ).dialog({
 	    	autoOpen: false,
 		      width: 350,
 		      height: 150,
@@ -914,13 +894,24 @@
 		      modal: true
 	    });
 	});
-//////////////////////      ↑  dialog        ////////////////////////////////////////////////	
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
 		if($("input[name=postTitle]").val().length > 10 ){
 			$("span[name=postTitle]").text('10자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
+		}
+	});
+	
+	$( "input[name=phone2], input[name=phone3]" ).keyup(function( ) {
+		$( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
+		
+		if($("input[name=phone]").val().length > 13 ){
+			$("span[name=phone]").text('연락처를 정확히 입력하세요.');
+		}else{
+			$("span[name=phone]").text('');
 		}
 	});
 
@@ -974,20 +965,21 @@
 		}
 	});
 	
-	$( "input[name=postContent]" ).keyup(function( ) {
-		if($("input[name=postContent]").val().length > 100 ){
+	$( "textarea[name=postContent]" ).keyup(function( ) {
+		if($("textarea[name=postContent]").val().length > 100 ){
 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
 	});
 
-
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■      ↑  글자수체크           ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	
-//////////////////////       ↑  글자수체크         ////////////////////////////////////////////////
 	
 	// 등록버튼 누르고
 	function fncAddAdopt(){
+		
+		  $( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
 		
 		  if( $("input:checkbox:checked").length != 3){
 			  $('#dialog-terms').dialog( "open" );
@@ -999,6 +991,10 @@
 		  }
 		  if( $("input[name=postTitle]").val().length >10){
 			  $('#dialog-postTitleLength').dialog( "open" );
+			  return;
+		  }
+		  if( $("input[name=phone]").val().length > 13 || $("input[name=phone]").val().length < 12 ){
+			  $('#dialog-phone').dialog( "open" );
 			  return;
 		  }
 		  if( $("input[name=dogBreed]").val().length >10){
@@ -1063,11 +1059,11 @@
 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
-		  if( $("input[name=postContent]").val() == ''){
+		  if( $("textarea[name=postContent]").val() == ''){
 			  $('#dialog-postContent').dialog( "open" );
 			  return;
 		  }
-		  if( $("input[name=postContent]").val().length > 100 ){
+		  if( $("textarea[name=postContent]").val().length > 100 ){
 			  $('#dialog-postContentLength').dialog( "open" );
 			  return;
 		  }
@@ -1098,7 +1094,7 @@
 		            data : formData,
 		            success : function(result) {
 			                if (result === -1) {
-			                    alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+			                    alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
 			                    // 이후 동작 ...
 			                } else if (result === -2) {
 			                    alert('파일이 10MB를 초과하였습니다.');

@@ -54,14 +54,14 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">protecteddog</a>
+	      <a class="navbar-brand" href="../index.jsp">protecteddog</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="../index.jsp" class="nav-link">Home</a></li>
 	          <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -130,6 +130,32 @@
 		                </div>
 	                </div>
 	                
+<!-- 	                <div class="col-md-12"> -->
+<!-- 		                <label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone"></span></label> -->
+<!-- 	                </div> -->
+	                
+<!-- 	                <div class="col-md-4"> -->
+<!-- 	                	<select  class="form-control" name="phone1" id="phone1"> -->
+			            	<option value="010">010</option>
+			            	<option value="011" selected="selected">011</option>
+			            	<option value="016">016</option>
+			            	<option value="017">017</option>
+			            	<option value="019">019</option>
+<!-- 			            </select> -->
+<!-- 	                </div> -->
+	                
+<!-- 	          		<div class="col-md-4"> -->
+<!-- 	                	<input type="text" class="form-control" id="phone2" name="phone2" value="2123"> -->
+<!-- 	                </div> -->
+	                
+<!-- 	          		<div class="col-md-4"> -->
+<!-- 	                	<input type="text" class="form-control" id="phone3" name="phone3" value="4567"> -->
+<!-- 	                </div> -->
+	               
+<!-- 	                <input type="hidden" class="form-control" id="phone" name="phone"> -->
+	                
+<!-- 	                <div class="col-md-12"><br/></div> -->
+	                
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
@@ -151,23 +177,7 @@
 			                
 			            </div> 
 		            </div>
-	                
-<!-- 	          		<div class="col-md-12"> -->
-<!-- 		            	<div class="form-group"> -->
-<!-- 		            		<label for="country" class="col-sm-offset-1 col-sm-3 control-label">연락처</label> -->
-<!-- 		            		<div class="select-wrap"> -->
-<!-- 			                	<div class="icon"><span class="ion-ios-arrow-down"></span></div> -->
-<!-- 			                	<div class="col-md-2"> -->
-<!-- 			                	<select  class="form-control" name="phone1" id="phone"> <option value="">010</option>-->
-<!-- 			                	</select></div> -->
-<!-- 			                	<div class="col-md-2"> -->
-<!-- 			                	<input type="number" class="form-control" name="phone2" placeholder=""></div> -->
-<!-- 			                	<div class="col-md-2"> -->
-<!-- 			                	<input type="number" class="form-control" name="phone3" placeholder=""></div> -->
-<!-- 		               		</div> -->
-<!-- 		            	</div> -->
-<!-- 		            </div> -->
-		            
+      
 	                
 	          		<div class="col-md-12">
 	                </div>
@@ -210,8 +220,8 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogPay"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if>
+		                		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
+							    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if>
 	                		</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
 	                  		<input type="number" class="form-control" name="dogPay" value="${ adopt.dogPay }">
 	               		</div>
@@ -220,8 +230,8 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogDate"><strong>
-	                			<c:if test="${param.boardCode eq 'AD' }">발견일자</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">실종일자</c:if>
+	                			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
+							    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if>
 	                		</strong></label>
 	                  		<input type="date" class="form-control" name="dogDate" value="${ adopt.dogDate }" >
 	               		</div>
@@ -253,10 +263,11 @@
 	            	<div class="col-md-12">
 	            	<br/>
                 		<label><strong>
-	                		<c:if test="${param.boardCode eq 'AD' }">
-	                			지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.
+	                		<c:if test="${adopt.boardCode eq 'AD' }">
+<!-- 	                			지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.<br/> -->
+	                			분양가능지역을 수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.
 	                		</c:if>
-	                		<c:if test="${param.boardCode eq 'MS' }">
+	                		<c:if test="${adopt.boardCode eq 'MS' }">
 	                			지도를 클릭하면 마커가 생성되며, 지도를 우클릭하거나 마커를 우클릭한 경우 마커가 삭제됩니다. 
 	                		</c:if>
                 		</strong></label>
@@ -295,7 +306,8 @@
                		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="postContent"><strong>글내용</strong>&nbsp;&nbsp;<span name="postContent"></label>
-		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요.">
+<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
+		                	<textarea  class="form-control"  name="postContent"  rows="5"  placeholder="내용을 입력하세요.">${adopt.postContent }</textarea>
 		                </div>
 	                </div>
                		
@@ -328,73 +340,73 @@
 	          
  <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-			<div id="dialog-postTitle" title="확인">
+			<div id="dialog-postTitle" title="">
 			  <p align="center"><br/>제목을 입력해주세요.</p>
 			</div>       
-			<div id="dialog-postTitleLength" title="확인">
+			<div id="dialog-postTitleLength" title="">
 			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p>
 			</div>   
-			<div id="dialog-dogBreedLength" title="확인">
+			<div id="dialog-dogBreedLength" title="">
 			  <p align="center"><br/>견종은 10자까지 입력할 수 있습니다.</p>
 			</div>    
-			<div id="dialog-img" title="확인">
+			<div id="dialog-img" title="">
 			  <p align="center"><br/>이미지를 등록해주세요.</p>
 			</div>        
-			<div id="dialog-dogWeight" title="확인">
+			<div id="dialog-dogWeight" title="">
 			  <p align="center"><br/>체중을 입력해주세요.</p>
 			</div>       
-			<div id="dialog-dogWeightLength" title="확인">
+			<div id="dialog-dogWeightLength" title="">
 			  <p align="center"><br/>체중은 6자까지 입력할 수 있습니다.</p>
 			</div>  
-			<div id="dialog-dogPay" title="확인">
+			<div id="dialog-dogPay" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${adopt.boardCode eq 'AD' }">책임비를 입력해주세요.</c:if>
 			  		<c:if test="${adopt.boardCode eq 'MS' }">사례비를 입력해주세요.</c:if>
 			  </p>
 			</div>   
-			<div id="dialog-dogPayLength" title="확인">
+			<div id="dialog-dogPayLength" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${param.boardCode eq 'AD' }">책임비는 백만원 이상은 입력하실 수 없습니다.</c:if>
 			  		<c:if test="${param.boardCode eq 'MS' }">사례비는 백만원 이상은 입력하실 수 없습니다.</c:if>
 			  </p>
 			</div>    
-			<div id="dialog-dogDate" title="확인">
+			<div id="dialog-dogDate" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${adopt.boardCode eq 'AD' }">발견일자를 입력해주세요.</c:if>
 			  		<c:if test="${adopt.boardCode eq 'MS' }">실종일자를 입력해주세요.</c:if>
 			  </p>
 			</div>       
-			<div id="dialog-dogStatus" title="확인">
+			<div id="dialog-dogStatus" title="">
 			  <p align="center"><br/>강아지 상태를 설명해주세요.</p>
 			</div>       
-			<div id="dialog-dogStatusLength" title="확인">
+			<div id="dialog-dogStatusLength" title="">
 			  <p align="center"><br/>강아지 상태는 20자까지 입력할 수 있습니다.</p>
 			</div>  
-			<div id="dialog-dogPersonality" title="확인">
+			<div id="dialog-dogPersonality" title="">
 			  <p align="center"><br/>강아지 성격을 설명해주세요.</p>
 			</div>    
-			<div id="dialog-dogPersonalityLength" title="확인">
+			<div id="dialog-dogPersonalityLength" title="">
 			  <p align="center"><br/>강아지 성격은 20자까지 입력할 수 있습니다.</p>
 			</div>    
-			<div id="dialog-dogChar" title="확인">
+			<div id="dialog-dogChar" title="">
 			  <p align="center"><br/>강아지 특징을 설명해주세요.</p>
 			</div>       
-			<div id="dialog-dogCharLength" title="확인">
+			<div id="dialog-dogCharLength" title="">
 			  <p align="center"><br/>강아지 특징은 20자까지 입력할 수 있습니다.</p>
 			</div> 
-			<div id="dialog-area" title="확인">
+			<div id="dialog-area" title="">
 			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
 			</div>       
-			<div id="dialog-location" title="확인">
+			<div id="dialog-location" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${adopt.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if>
 			  		<c:if test="${adopt.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if>
 			  </p>
 			</div>   
-			<div id="dialog-postContent" title="확인">
+			<div id="dialog-postContent" title="">
 			  <p align="center"><br/>내용을 입력해주세요.</p>
 			</div>      
-			<div id="dialog-postContentLength" title="확인">
+			<div id="dialog-postContentLength" title="">
 			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p>
 			</div> 
        
@@ -982,8 +994,8 @@
 		}
 	});
 	
-	$( "input[name=postContent]" ).keyup(function( ) {
-		if($("input[name=postContent]").val().length > 100 ){
+	$( "textarea[name=postContent]" ).keyup(function( ) {
+		if($("textarea[name=postContent]").val().length > 100 ){
 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');
@@ -1011,10 +1023,10 @@
 			  $('#dialog-dogBreedLength').dialog( "open" );
 			  return;
 		  }
-		  if( $(".preview-box").length == 0 ){
-			  $('#dialog-img').dialog( "open" );
-			  return;
-		  }
+// 		  if( $(".preview-box").length == 0 ){
+// 			  $('#dialog-img').dialog( "open" );
+// 			  return;
+// 		  }
 		  if( $("input[name=dogWeight]").val() == ''){
 			  $('#dialog-dogWeight').dialog( "open" );
 			  return;
@@ -1069,11 +1081,11 @@
 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
-		  if( $("input[name=postContent]").val() == ''){
+		  if( $("textarea[name=postContent]").val() == ''){
 			  $('#dialog-postContent').dialog( "open" );
 			  return;
 		  }
-		  if( $("input[name=postContent]").val().length > 100 ){
+		  if( $("textarea[name=postContent]").val().length > 100 ){
 			  $('#dialog-postContentLength').dialog( "open" );
 			  return;
 		  }
@@ -1134,7 +1146,7 @@
 			});
 			
 			$( "a:contains('취소')" ).on("click" , function() {
-				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
+				self.location = "/adopt/getAdopt?postNo=${adopt.postNo}"
 			});
 	 });	
       

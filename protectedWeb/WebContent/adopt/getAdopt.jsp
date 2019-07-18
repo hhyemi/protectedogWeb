@@ -38,7 +38,7 @@
         	max-height: 400px;
 	    }
        	img {
-        	max-height: 400px;
+        	max-height: 450px;
         }
         
         #mapDiv{
@@ -46,6 +46,16 @@
 /*         	padding-right: 0px; */
         	padding: 0px;
         }
+        .col-lg-5.offset-lg-1{
+        	position: relative;
+        	height: 450px;
+        }
+        .card_area{
+        	position: absolute;
+        	left: 0px;
+        	bottom: 0px;
+        }
+        
     </style>
  
   </head>
@@ -87,24 +97,21 @@
                   </c:forEach>               
                      
                 </ol>
+                
                 <div class="carousel-inner">
-
-                  
-				<c:forEach var="name" items="${file}" varStatus="status">
-					<c:if test="${status.first}">	
-					<c:set var ="className" value="carousel-item active"/>
-	                </c:if>
-					<c:if test="${!(status.first)}">	
-					<c:set var ="className" value="carousel-item"/>
-	                </c:if>	                
-                    <div class="${className}">	                
-                    <img
-                      class="d-block w-100"
-                      src="/resources/file/fileAdopt/${name.fileName}" height="450px;" 
-                    />
-                  </div>			
-                  </c:forEach>
-          
+					<c:forEach var="name" items="${file}" varStatus="status">
+						<c:if test="${status.first}">	
+							<c:set var ="className" value="carousel-item active"/>
+		                </c:if>
+						<c:if test="${!(status.first)}">	
+							<c:set var ="className" value="carousel-item"/>
+		                </c:if>	                
+	                    <div class="${className}">	                
+		                    <img
+		                      class="d-block w-100"
+		                      src="/resources/file/fileAdopt/${name.fileName}" height="450px;" />
+	                  	</div>			
+	                </c:forEach>
                 </div>
                 
               </div>
@@ -112,6 +119,7 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
+            
               <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }<hr/>
               <ul class="list">
               
@@ -171,9 +179,7 @@
 						<div class="col-md-10 ">${adopt.dogChar}</div>
 					</div>
                 </li>
-                
-                <br/>
-              
+         
                	<div class="row">
 			  		<div class="col-md-2  "><strong>글내용</strong></div>
 					<div class="col-md-10 " >${adopt.postContent}</div>
@@ -196,17 +202,38 @@
                 >
                 </button>
               </div>
-              <div class="card_area">
               
+              
+              <div class="card_area" >
+<!--   ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 		세션처리해야함                  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+
+
               	<c:if test="${adopt.boardCode eq 'AD' }">
-              		<a class="main_btn" href="#" style="width: 189px">입양신청</a>
+              		<c:if test="${adopt.statusCode ne '3' }">
+              			<a class="main_btn" href="#" style="width: 189px">입양신청</a>
+              		</c:if>
+              		<c:if test="${adopt.statusCode eq '2' }">
+              			<a class="main_btn" href="#" style="width: 189px" id="confirmButton">신청서확인</a>
+              			<a class="main_btn" href="#" style="width: 189px" id="adoptCompleteButton">분양완료</a>
+              		</c:if>
+
               	</c:if>
               	
-                <a class="main_btn" href="#" style="width: 189px">문의하기</a>
-               
-                <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-                
+              	<c:if test="${adopt.boardCode eq 'MS' }">
+              		<c:if test="${adopt.statusCode eq '1' }">
+              			<a class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</a>
+              		</c:if>
+              	</c:if>
+              	
+              	<c:if test="${adopt.statusCode ne '3' }">
+               		<a class="main_btn" href="#" style="width: 189px">문의하기</a>
+               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+               	</c:if>
+               	
               </div>
+              
+              
+              
             </div>
           </div>
         </div>
@@ -241,8 +268,12 @@
         <br/><hr/><div class="col-md-12"><br/><br/></div>
         
         <div class="col-md-12" align="center">
-	        <button class="main_btn" style="width: 189px">수정</button>
-	        <button class="main_btn" style="width: 189px">삭제</button>
+       		<c:if test="${adopt.statusCode eq '1' }">
+				<button class="main_btn" style="width: 189px" id="modiButton">수정</button>
+	       		<button class="main_btn" style="width: 189px" id="delButton">삭제</button>
+			</c:if>
+        	
+	        
 	        <button class="main_btn" style="width: 189px">목록</button>
         </div>
         
@@ -254,8 +285,14 @@
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-			<div id="dialog-delAdopt" title="확인">
+			<div id="dialog-delAdopt" title="">
 			  <p align="center"><br/>삭제하시겠습니까?</p>
+			</div>  
+			<div id="dialog-adoptComplete" title="">
+			  <p align="center"><br/>분양완료 상태로 변경하시겠습니까?</p>
+			</div>  
+			<div id="dialog-missingComplete" title="">
+			  <p align="center"><br/>찾기완료 상태로 변경하시겠습니까?</p>
 			</div>  
   
     <!--================End Product Description Area =================-->
@@ -330,7 +367,7 @@
  ////////////////////////////////////////////
  
 	    mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-			    zoom: 11,
+			    zoom: 13,
 			    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
 			    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
 		});
@@ -350,30 +387,34 @@
 	    
       }
       
-      $(function() {			
-			$( "button:contains('분양완료'), button:contains('찾기완료')" ).on("click" , function() {
-				var postNo = ${adopt.postNo};
-				alert(typeof postNo);
-				$.ajax( 
-					 		{
-								url : "/adopt/json/updateStatusCode/"+postNo ,
-								method : "GET" ,
-								dataType : "json" ,
-								headers : {
-											"Accept" : "application/json",
-											"Content-Type" : "application/json"
-										  },
-								success : function(status) {
-									$( '#complete' ).text('완료됨');
-								},
-								error: function(request, status, error){ 
-									alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-						        }
-					});
-			});	
-		
-	 });
+      //////////////////////////////////////////////////////////////////////////////////////////////////////
       
+      function fncComplete() {			
+			var postNo = ${adopt.postNo};
+			var aText;
+
+// 			alert(typeof postNo);
+
+			$.ajax( 
+			 		{
+						url : "/adopt/json/updateStatusCode/"+postNo ,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								  },
+						success : function(status) {
+							$('#confirmButton, #modiButton, #delButton, #adoptCompleteButton, #missingCompleteButton').remove();
+							$( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog( "close" );
+						},
+						error: function(request, status, error){ 
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+				        }
+			});
+	 };
+
+	 //////////////////////////////////////////////////////////////////////////////////////////////////////      
       
       $( function() {
   	    $( "#dialog-delAdopt" ).dialog({
@@ -392,7 +433,25 @@
   	    });
       });
       
+      $( function() {
+  	    $( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog({
+  	    	  autoOpen: false,
+  		      width: 350,
+  		      height: 210,
+  		      modal: true,
+  		      buttons: {
+  		        	예: function() {
+  		        		fncComplete();
+  		        	},
+  		        	아니오: function() {
+  		          		$( this ).dialog( "close" );
+  		        	}
+  		      }
+  	    });
+      });
       
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+  
       $(function() {
     	    $( "button:contains('수정')" ).on("click" , function() {
 				self.location = "/adopt/updateAdopt?postNo=${adopt.postNo}"
@@ -406,11 +465,23 @@
 				self.location = "/apply/addApply?postNo=${adopt.postNo}"
 			});
 		
+			$( "a:contains('신청서확인')" ).on("click" , function() {
+				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
+			});
+		
+			$( "#adoptCompleteButton" ).on("click" , function() {
+				$('#dialog-adoptComplete').dialog( "open" );
+			});
+		
+			$( "#missingCompleteButton" ).on("click" , function() {
+				$('#dialog-missingComplete').dialog( "open" );
+			});
+		
 			$( "button:contains('목록')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
 		
-			$( "a:contains('신청글보기')" ).on("click" , function() {
+			$( "a:contains('신청서확인')" ).on("click" , function() {
 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 	  });

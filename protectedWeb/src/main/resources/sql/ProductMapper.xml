@@ -5,7 +5,7 @@
 
 <mapper namespace="ProductMapper">
 
-	<resultMap id="ProductSelectMap" type="product">
+	<resultMap id="productSelectMap" type="product">
 	
 		<result property="prodNo" column="prod_no" jdbcType="NUMERIC" />
 		<result property="prodName" column="prod_name" jdbcType="VARCHAR" />
