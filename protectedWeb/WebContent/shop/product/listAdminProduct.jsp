@@ -49,8 +49,8 @@
  <script type="text/javascript">
 	//============= "등록"  Event 연결 =============
 	
-	$( "#addproduct").on("click", function(){
-		 self.location = "/product/addProduct.jsp"
+	$("#addproduct").on("click", function(){
+		 self.location = "/shop/product/addProduct.jsp"
 
 	
 });
@@ -71,7 +71,7 @@
 
 <body>
 	<!-- ToolBar Start /////////////////////////////////////-->
-<%-- 	<jsp:include page="/layout/toolbar.jsp" /> --%>
+<jsp:include page="/layout/toolbar.jsp" /> 
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	       <h1 align="center">관리자 <small>상품 등록내역 조회<button class="mdl-button mdl-js-button mdl-button--primary" id="addProduct">

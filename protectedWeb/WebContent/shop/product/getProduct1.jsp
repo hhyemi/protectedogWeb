@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -102,12 +104,12 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
-              <h3>어덜트 사료</h3>
-              <h2>10,000원</h2>
+              <h3>${board.prodName}</h3>
+              <h2>${board.price}</h2>
               <ul class="list">
                 <li>
                   <a class="active" href="#">
-                    <span>Category</span> : ${product.prodName}</a
+                    <span>Category</span> :${board.id}</a
                   >
                 </li>
                 <li>
@@ -221,35 +223,37 @@
             role="tabpanel"
             aria-labelledby="home-tab"
           >
+          <jsp:include page="/shop/prodQna/listProdQna.jsp" >
             <p>
-              Beryl Cook is one of Britainâs most talented and amusing artists
-              .Berylâs pictures feature women of all shapes and sizes enjoying
-              themselves .Born between the two world wars, Beryl Cook eventually
-              left Kendrick School in Reading at the age of 15, where she went
-              to secretarial school and then into an insurance office. After
-              moving to London and then Hampton, she eventually married her next
-              door neighbour from Reading, John Cook. He was an officer in the
-              Merchant Navy and after he left the sea in 1956, they bought a pub
-              for a year before John took a job in Southern Rhodesia with a
-              motor company. Beryl bought their young son a box of watercolours,
-              and when showing him how to use it, she decided that she herself
-              quite enjoyed painting. John subsequently bought her a childâs
-              painting set for her birthday and it was with this that she
-              produced her first significant work, a half-length portrait of a
-              dark-skinned lady with a vacant expression and large drooping
-              breasts. It was aptly named âHangoverâ by Berylâs husband and
+<!--               Beryl Cook is one of Britainâs most talented and amusing artists -->
+<!--               .Berylâs pictures feature women of all shapes and sizes enjoying -->
+<!--               themselves .Born between the two world wars, Beryl Cook eventually -->
+<!--               left Kendrick School in Reading at the age of 15, where she went -->
+<!--               to secretarial school and then into an insurance office. After -->
+<!--               moving to London and then Hampton, she eventually married her next -->
+<!--               door neighbour from Reading, John Cook. He was an officer in the -->
+<!--               Merchant Navy and after he left the sea in 1956, they bought a pub -->
+<!--               for a year before John took a job in Southern Rhodesia with a -->
+<!--               motor company. Beryl bought their young son a box of watercolours, -->
+<!--               and when showing him how to use it, she decided that she herself -->
+<!--               quite enjoyed painting. John subsequently bought her a childâs -->
+<!--               painting set for her birthday and it was with this that she -->
+<!--               produced her first significant work, a half-length portrait of a -->
+<!--               dark-skinned lady with a vacant expression and large drooping -->
+<!--               breasts. It was aptly named âHangoverâ by Berylâs husband and -->
             </p>
             <p>
-              It is often frustrating to attempt to plan meals that are designed
-              for one. Despite this fact, we are seeing more and more recipe
-              books and Internet websites that are dedicated to the act of
-              cooking for one. Divorce and the death of spouses or grown
-              children leaving for college are all reasons that someone
-              accustomed to cooking for more than one would suddenly need to
-              learn how to adjust all the cooking practices utilized before into
-              a streamlined plan of cooking that is more efficient for one
-              person creating less
+<!--               It is often frustrating to attempt to plan meals that are designed -->
+<!--               for one. Despite this fact, we are seeing more and more recipe -->
+<!--               books and Internet websites that are dedicated to the act of -->
+<!--               cooking for one. Divorce and the death of spouses or grown -->
+<!--               children leaving for college are all reasons that someone -->
+<!--               accustomed to cooking for more than one would suddenly need to -->
+<!--               learn how to adjust all the cooking practices utilized before into -->
+<!--               a streamlined plan of cooking that is more efficient for one -->
+<!--               person creating less -->
             </p>
+
           </div>
           <div
             class="tab-pane fade"

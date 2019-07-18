@@ -1,327 +1,240 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page pageEncoding="EUC-KR"%>
+
 
 <!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+<html lang="ko">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- ////////////	Bootsrap, css ///////////////////////// -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+	rel="stylesheet">
 
-    <link rel="stylesheet" href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
-    
-    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/magnific-popup.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-    <link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
 
-    <link rel="stylesheet" href="../../resources/prodmenu/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/owl.theme.default.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="../../resources/prodmenu/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/jquery.timepicker.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
 
-    
-    <link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
-  </head>
-  <body class="goto-here">
-		<div class="py-1 bg-black">
-    	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-	    		<div class="col-lg-12 d-block">
-		    		<div class="row d-flex">
-		    			<div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
-					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
-					    </div>
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-					    </div>
-				    </div>
-			    </div>
-		    </div>
-		  </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">protecteddog</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/ionicons.min.css">
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">Shop</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-              </div>
-            </li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
-
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
-            <h1 class="mb-0 bread">DOG|SHOP Íµ¨Îß§ÌïòÍ∏∞</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-8 ftco-animate">
-						<form action="#" class="billing-form">
-							<h3 class="mb-4 billing-heading">Íµ¨Îß§Î•º ÏúÑÌïú Ï†ïÎ≥¥Îì§ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî</h3>
-	          	<div class="row align-items-end">
-	          		<div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="firstname">ÌöåÏõêÏïÑÏù¥Îîî</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="lastname">Ïó∞ÎùΩÏ≤ò</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-                </div>
-                
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                	<label for="streetaddress">Street Address</label>
-	                  <input type="text" class="form-control" placeholder="House number and street name">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                  <input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                	<label for="towncity">Town / City</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-		            		<label for="postcodezip">Postcode / ZIP *</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="phone">Phone</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="emailaddress">Email Address</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-12">
-                	<div class="form-group mt-4">
-										<div class="radio">
-										  <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-										  <label><input type="radio" name="optradio"> Ship to different address</label>
-										</div>
-									</div>
-                </div>
-	            </div>
-	          </form><!-- END -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="../../resources/prodmenu/css/bootstrap-datepicker.css"> -->
 
 
 
-	          <div class="row mt-5 pt-3 d-flex">
-	          	<div class="col-md-6 d-flex">
-	          		<div class="cart-detail cart-total bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Cart Total</h3>
-	          			<p class="d-flex">
-		    						<span>Subtotal</span>
-		    						<span>$20.60</span>
-		    					</p>
-		    					<p class="d-flex">
-		    						<span>Delivery</span>
-		    						<span>$0.00</span>
-		    					</p>
-		    					<p class="d-flex">
-		    						<span>Discount</span>
-		    						<span>$3.00</span>
-		    					</p>
-		    					<hr>
-		    					<p class="d-flex total-price">
-		    						<span>Total</span>
-		    						<span>$17.60</span>
-		    					</p>
+<link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
+<!-- <script src="./../resources/prodmenu/js/jquery.min.js"></script> -->
+<!-- jQuery UI toolTip ªÁøÎ CSS-->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+body>div.container {
+	border: 3px solid #D6CDB7;
+	margin-top: 10px;
+}
+</style>
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+	//============= "µÓ∑œ"  Event ø¨∞· =============
+	$(function() {
+
+		$("#addproduct").on(
+				"click",
+				function() {
+					//Debug..
+					//alert(  $( "td.ct_btn01:contains('µÓ∑œ')" ).html() );
+					$("form[name='addForm']").attr("method", "POST").attr("action", "/market/addMarket").submit();
+					//fncAddProduct();
+				});
+	});
+
+	//  	$(function() {
+
+	// 		$("#addproduct").on("click", function() {
+	// 			self.location = "/shop/product/addProduct"
+	// 		});
+
+	// 	});
+
+	//============= "√Îº“"  Event √≥∏Æ π◊  ø¨∞· =============
+	$(function() {
+		//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ∞˙ 3 πÊπ˝ ¡∂«’ : $("tagName.className:filter«‘ºˆ") ªÁøÎ«‘.	
+		$("a[href='#' ]").on("click", function() {
+			//Debug..
+			//alert(  $( "td.ct_btn01:contains('√Îº“')" ).html() );
+			$("form")[0].reset();
+		});
+	});
+
+	function fncAddProduct() {
+		//Form ¿Ø»øº∫ ∞À¡ı
+
+		// 		var prodName=$("input[name='prodName']").val();
+		// 	 	//var name = document.detailForm.prodName.value;
+		// 	 	var prodDetail=$("input[name='prodDetail']").val();
+		// 		//var detail = document.detailForm.prodDetail.value;
+		// 		var manuDate=$("input[name='manuDate']").val();
+		// 		//var manuDate = document.detailForm.manuDate.value;
+		// 		var price=$("input[name='price']").val();
+		// 		//var price = document.detailForm.price.value;
+
+		// 		if(prodName == null || prodName.length<1){
+		// 			alert("ªÛ«∞∏Ì¿∫ π›µÂΩ√ ¿‘∑¬«œø©æﬂ «’¥œ¥Ÿ.");
+		// 			return;
+		// 		}
+
+		// 		if(manuDate == null || manuDate.length<1){
+		// 			alert("¡¶¡∂¿œ¿⁄¥¬ π›µÂΩ√ ¿‘∑¬«œº≈æﬂ «’¥œ¥Ÿ.");
+		// 			return;
+		// 		}
+		// 		if(price == null || price.length<1){
+		// 			alert("∞°∞›¿∫ π›µÂΩ√ ¿‘∑¬«œº≈æﬂ «’¥œ¥Ÿ.");
+		// 			return;
+		// 		}
+
+		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
+	}
+
+	//============= ¥ﬁ∑¬  =============
+	$(function() {
+		$("input[name='manuDate']").datepicker({
+			dateFormat : 'yy-mm-dd'
+		});
+	});
+</script>
+</head>
+
+<body>
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
+
+	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('images/bg_6.jpg');">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">admin</a></span> <span>page</span>
+					</p>
+					<h1 class="mb-0 bread">DOG|SHOP ¡ﬂ∞Ì¿Â≈Õ</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
+
+	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-8 ftco-animate">
+
+					<!-- ///////////////////////////body navigation tag/////////////////////////// -->
+
+					<!--////////////////////////// form tag Start /////////////////////////////////-->
+					<form class="billing-form" name="addForm">
+						<h3 class="mb-4 billing-heading">±∏∏≈ ¡§∫∏∏¶ ¿‘∑¬«ÿ¡÷ººø‰</h3>
+						<div class="row align-items-end">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">∆«∏≈¿⁄</label> <input type="text"
+										class="form-control" name="id" id="id"
+										placeholder="ªÛ«∞∏Ì¿ª ¿‘∑¬«ÿ¡÷ººø‰" value="≈◊Ω∫∆Æ">
 								</div>
-	          	</div>
-	          	<div class="col-md-6">
-	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Payment Method</h3>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Direct Bank Tranfer</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Check Payment</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="checkbox">
-											   <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
-											</div>
-										</div>
-									</div>
-									<p><a href="#"class="btn btn-primary py-3 px-4">Place an order</a></p>
+							</div>
+
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<div class="form-group"> -->
+<!-- 									<label for="firstname">ø¨∂Ù√≥</label> <input type="text" -->
+<!-- 										class="form-control" name="phone" id="phone" -->
+<!-- 										placeholder="ªÛ«∞∏Ì¿ª ¿‘∑¬«ÿ¡÷ººø‰" value="≈◊Ω∫∆Æ"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">ªÛ«∞∏Ì</label> <input type="text"
+										class="form-control" name="prodName" id="prodName"
+										placeholder="ªÛ«∞∏Ì¿ª ¿‘∑¬«ÿ¡÷ººø‰" value="≈◊Ω∫∆Æ">
 								</div>
-	          	</div>
-	          </div>
-          </div> <!-- .col-md-8 -->
-        </div>
-      </div>
-    </section> <!-- .section -->
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">∆«∏≈∞°∞›</label> <input type="text"
+										class="form-control" name="price" id="price"
+										placeholder="∆«∏≈∞°∞›¿ª ¿‘∑¬«ÿ¡÷ººø‰">
+								</div>
+							</div>
+							<hr />
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="firstname"></label> <input type="text"
+										class="form-control" name="postTitle" id="postTitle"
+										placeholder="¡¶∏Ò¿ª ¿‘∑¬«ÿ¡÷ººø‰">
+								</div>
+								<div class="w-100"></div>
 
-    <footer class="ftco-footer bg-light ftco-section">
-      <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Winkel</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Menu</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Help</h2>
-              <div class="d-flex">
-	              <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-	                <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
-	                <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
-	                <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
-	                <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-	              </ul>
-	              <ul class="list-unstyled">
-	                <li><a href="#" class="py-2 d-block">FAQs</a></li>
-	                <li><a href="#" class="py-2 d-block">Contact</a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								<div class="col-md-13">
+									<div class="form-group">
+										<label for="streetaddress"></label>
+										<textarea class="form-control" rows="6" name="postContent"
+											placeholder="≥ªøÎ¿ª ¿‘∑¬«ÿ¡÷ººø‰"></textarea>
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="w-100"></div>
+						
+						<p align="center">
+							<a class="btn btn-primary py-3 px-4" id="addproduct">µÓ∑œ«œ±‚</a>
+							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">√Îº“«œ±‚</a>
 						</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-    
-  
-
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+					</form>
+					<!-- ////////////////////////////form tag end //////////////////////////////-->
+				</div>
+			</div>
+		</div>
+	</section>
 
 
-  <script src="../../resources/prodmenu/js/jquery.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../../resources/prodmenu/js/popper.min.js"></script>
-  <script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="../../resources/prodmenu/js/aos.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="../../resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="../../resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="../../https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../../resources/prodmenu/js/google-map.js"></script>
-  <script src="../../resources/prodmenu/js/main.js"></script>
-  </body>
+
+
+	<script src="../../resources/prodmenu/js/popper.min.js"></script>
+	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../resources/prodmenu/js/aos.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
+	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+	<script src="../../resources/prodmenu/js/main.js"></script>
+	<!-- ////////////////////¥ﬁ∑¬ /////////////////////////////-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</body>
 </html>

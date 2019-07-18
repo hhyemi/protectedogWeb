@@ -165,11 +165,11 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="shop.html">MARKET</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-                <a class="dropdown-item" href="/coupon/listCoupon">오늘의 쿠폰</a>
+               <a class="dropdown-item" href="/shop/maket/addMarket.jsp">중고장터 등록</a>
+              	<a class="dropdown-item" href="/shop/prodQna/addProdQna.jsp">q&a글등록</a>
+              	<a class="dropdown-item" href="/shop/product/addProduct.jsp">상품등록</a>
+                <a class="dropdown-item" href="/shop/product/listAdminProduct.jsp">관리자 상품조회(n)</a>
+                <a class="dropdown-item" href="/shop/product/listProduct">listproduct(n)</a>
               </div>
             </li>
              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>

@@ -5,9 +5,6 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-
-<head>
-<meta charset="EUC-KR">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- ////////////	Bootsrap, css ///////////////////////// -->
@@ -58,24 +55,25 @@ body>div.container {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 	//============= "등록"  Event 연결 =============
- 		$(function() {
+	$(function() {
 
- 			$("#addproduct").on("click", function() {
-				//Debug..
-				//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-			$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit();
-				//fncAddProduct();
-			});
-});
- 			
-	
-//  	$(function() {
+		$("#addproduct").on(
+				"click",
+				function() {
+					//Debug..
+					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
+					$("form[name='addForm']").attr("method", "POST").attr("action", "/market/addMarket").submit();
+					//fncAddProduct();
+				});
+	});
 
-// 		$("#addproduct").on("click", function() {
-// 			self.location = "/shop/product/addProduct"
-// 		});
+	//  	$(function() {
 
-// 	});
+	// 		$("#addproduct").on("click", function() {
+	// 			self.location = "/shop/product/addProduct"
+	// 		});
+
+	// 	});
 
 	//============= "취소"  Event 처리 및  연결 =============
 	$(function() {
@@ -130,6 +128,7 @@ body>div.container {
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
+
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
 	<div class="hero-wrap hero-bread"
 		style="background-image: url('images/bg_6.jpg');">
@@ -138,28 +137,42 @@ body>div.container {
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">admin</a></span> <span>page</span>
+						<span class="mr-2"><a href="index.html">중고</a></span> <span>장터</span>
 					</p>
-					<h1 class="mb-0 bread">DOG|SHOP 상품등록</h1>
+					<h1 class="mb-0 bread">DOG|SHOP 보호마켓</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
-	
+
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
 	<section class="ftco-section">
 		<div class="container">
-		<form class="billing-form" name="addForm">
 			<div class="row justify-content-center">
 				<div class="col-xl-8 ftco-animate">
 
 					<!-- ///////////////////////////body navigation tag/////////////////////////// -->
 
 					<!--////////////////////////// form tag Start /////////////////////////////////-->
-					
-						<h3 class="mb-4 billing-heading">상품정보를 등록해주세요</h3>
+					<form class="billing-form" name="addForm">
+						<h3 class="mb-4 billing-heading">등록정보를 입력해주세요</h3>
 						<div class="row align-items-end">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">판매자</label> <input type="text"
+										class="form-control" name="id" id="id"
+										placeholder="상품명을 입력해주세요" value="테스트">
+								</div>
+							</div>
+
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<div class="form-group"> -->
+<!-- 									<label for="firstname">연락처</label> <input type="text" -->
+<!-- 										class="form-control" name="phone" id="phone" -->
+<!-- 										placeholder="상품명을 입력해주세요" value="테스트"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">상품명</label> <input type="text"
@@ -169,76 +182,40 @@ body>div.container {
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">상품코드</label> <input type="text"
-										class="form-control" name="prodCode" id="prodCode"
-										placeholder="상품코드를 입력해주세요">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lastname">가 격</label> <input type="text"
+									<label for="firstname">판매가격</label> <input type="text"
 										class="form-control" name="price" id="price"
-										placeholder="가격을 입력해주세요">
+										placeholder="판매가격을 입력해주세요">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<hr />
+							<div class="col-md-12">
 								<div class="form-group">
-									<label for="firstname">원산지</label> <input type="text"
-										class="form-control" name="country" id="country"
-										placeholder="원산지를 입력해주세요" value="한국">
+									<label for="firstname"></label> <input type="text"
+										class="form-control" name="postTitle" id="postTitle"
+										placeholder="제목을 입력해주세요">
 								</div>
-							</div>
+								<div class="w-100"></div>
 
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="streetaddress">제조사</label> <input type="text"
-										class="form-control" name="company" id="company"
-										placeholder="제조사를 입력해주세요" value="삼성">
+								<div class="col-md-13">
+									<div class="form-group">
+										<label for="streetaddress"></label>
+										<textarea class="form-control" rows="6" name="postContent"
+											placeholder="내용을 입력해주세요"></textarea>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="streetaddress">제조일</label> <input type="text"
-										class="form-control" name="manuDate" id="manuDate" 
-										placeholder="제조일자를 입력해주세요">
-								</div>
 							</div>
 							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="towncity">할인액</label> <input type="text"
-										class="form-control" name="discountPrice" id="discountPrice" 
-										placeholder="상품의 할인가를 입력해주세요">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="postcodezip">재고수량</label> <input type="text"
-										class="form-control" name="quantity" id="quantity" 
-										placeholder="상품의 입고수량을 입력해주세요">
-								</div>
-							</div>
-							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="postcodezip">상세정보</label> <input type="text"
-										class="form-control" name="prodDetail" id="prodDetail" 
-										value="상세정보" placeholder="상품의 상세정보를 입력해주세요">
-								</div>
-							</div>
-						</div>
-
+						
 						<p align="center">
 							<a class="btn btn-primary py-3 px-4" id="addproduct">등록하기</a>
 							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">취소하기</a>
 						</p>
-					
+					</form>
 					<!-- ////////////////////////////form tag end //////////////////////////////-->
 				</div>
 			</div>
-			</form>
 		</div>
-	
 	</section>
 
 
