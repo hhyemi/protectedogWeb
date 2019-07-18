@@ -10,7 +10,7 @@
 
 		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
 		<result property="id" column="ID" jdbcType="VARCHAR" />
-		<result property="nickName" column="NICKNAME" jdbcType="VARCHAR" />
+		<result property="nickname" column="NICKNAME" jdbcType="VARCHAR" />
 		<result property="statusCode" column="STATUS_CODE" jdbcType="CHAR" />
 		<result property="phone" column="PHONE" jdbcType="VARCHAR" />
 		<result property="postTitle" column="POST_TITLE" jdbcType="VARCHAR" />		
@@ -37,7 +37,9 @@
 				
 		<!-- DOMAIN에만 존재 -->
 		<result property="voteRemainDate" column="VOTE_REMAIN_DATE" jdbcType="NUMERIC" />
-		<result property="voteRate" column="VOTE_RATE" jdbcType="NUMERIC" />		
+		<result property="voteRate" column="VOTE_RATE" jdbcType="NUMERIC" />	
+		<result property="fundRate" column="FUND_RATE" jdbcType="NUMERIC" />			
+		<result property="fundRemainDate" column="FUND_REMAIN_DATE" jdbcType="NUMERIC" />
 		</resultMap>
 		
 		
@@ -51,7 +53,7 @@
 	 	INSERT
 		INTO STORYFUNDING( POST_NO , ID , NICKNAME , STATUS_CODE , PHONE , POST_TITLE , POST_CONTENT , 
 		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ) 
-		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickName:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
+		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickname:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
 		SYSDATE , SYSDATE+30 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} , SYSDATE+31 , SYSDATE+31+#{fundTargetDay} , #{mainFile} )
 	 </insert>
 	 
@@ -60,7 +62,7 @@
 		SELECT
 		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , 		
-		TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
+		TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE , TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
 		FROM STORYFUNDING 
 		WHERE POST_NO IN #{value}
 	 </select>
@@ -96,7 +98,7 @@
 	  					FROM		(	SELECT
 													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
-											        TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
+											        TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
 											FROM STORYFUNDING 
 									     <where>
 									           <if test="searchCondition != null">
@@ -135,7 +137,7 @@
 	  	FROM(	SELECT
 						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
-						TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
+						TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
 						FROM STORYFUNDING 
 									     <where>
 									           <if test="searchCondition != null">
@@ -166,10 +168,10 @@
 	  					FROM		(	SELECT
 													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
-											        TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
-											FROM STORYFUNDING 
+											        TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
+														FROM STORYFUNDING 
  	  									     <where>
-<!--									           <if test="searchCondition != null">
+  									           <if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 														POST_TITLE LIKE #{searchKeyword}
 													</if>
@@ -178,14 +180,14 @@
 												    </if>
 										        </if> 		    
 												<if test="voteCondition != null">
-													 <if test="voteCondition == 2 and voteCondition !='' ">
-													    AND STATUS_CODE = 1
+													 <if test="voteCondition == 3 and voteCondition !='' ">
+													    AND STATUS_CODE = 3
 											         </if>
-												     <if test="voteCondition == 3 and voteCondition !='' ">
-													    AND STATUS_CODE != 1
+												     <if test="voteCondition == 4 and voteCondition !='' ">
+													    AND STATUS_CODE != 3
 													 </if>
-												 </if>	 -->
-												  STATUS_CODE IN (3,4)										
+												 </if>	 
+												AND  STATUS_CODE IN (3,4)										
 										    </where>
 											ORDER BY POST_NO ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -196,12 +198,12 @@
 	 <select  id="getFundingTotalCount"  parameterType="search" resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT
-						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
-						TRUNC((VOTE_END_DATE)-(SYSDATE)) AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
-						FROM STORYFUNDING 
-									     <where>
-			<!-- 						           <if test="searchCondition != null">
+											POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+											VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
+											TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
+												FROM STORYFUNDING 
+ 	  									     <where>
+  									           <if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 														POST_TITLE LIKE #{searchKeyword}
 													</if>
@@ -210,14 +212,14 @@
 												    </if>
 										        </if> 		    
 												<if test="voteCondition != null">
-													 <if test="voteCondition == 2 and voteCondition !='' ">
-													    AND STATUS_CODE = 1
+													 <if test="voteCondition == 3 and voteCondition !='' ">
+													    AND STATUS_CODE = 3
 											         </if>
-												     <if test="voteCondition == 3 and voteCondition !='' ">
-													    AND STATUS_CODE != 1
+												     <if test="voteCondition == 4 and voteCondition !='' ">
+													    AND STATUS_CODE != 3
 													 </if>
-												 </if>		 -->				
-												  STATUS_CODE IN (3,4)						
+												 </if>	 
+												 AND STATUS_CODE IN (3,4)										
 										    </where>
 							) countTable						
 	 </select>
@@ -227,9 +229,11 @@
 		 <update	id="updateStatusCode"	parameterType="funding" >
 		   	UPDATE STORYFUNDING
 		   	<set>
-				VOTER_COUNT        = VOTER_COUNT + #{voterCount},
-				STATUS_CODE        = #{statusCode}
-		   	</set>
+				STATUS_CODE        =      #{statusCode},
+				VOTER_COUNT        =      VOTER_COUNT + #{voterCount},
+		   		SPONSOR_COUNT      =      SPONSOR_COUNT + #{sponsorCount},
+		   		FUND_PAY           =      FUND_PAY + #{fundPay}
+ 		   	</set>
 		   	WHERE POST_NO IN #{postNo} 
 		 </update>
 </mapper> 

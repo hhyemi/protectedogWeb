@@ -87,16 +87,16 @@
 				    						
 										 <!-- 투표종료 -->
 										 <c:if test ="${!(funding.statusCode eq 1) }">
-				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
+				    						<h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
 										    <div class="progress">		 
-										    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>										 
+										    <div class="progress-bar bg-danger" role="progressbar" style="width: ${funding.voteRate}%;"></div>										 
 										    </div>
 										 </c:if>
 										 <!-- 투표중 -->
 										 <c:if test ="${funding.statusCode eq 1 }">										 
-				    					   <h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
+				    					   <h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
 										   <div class="progress">												 
-										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
+										   <div class="progress-bar" role="progressbar" style="width:${funding.voteRate}%;"></div>
 										   </div>					
 										</c:if>
 										

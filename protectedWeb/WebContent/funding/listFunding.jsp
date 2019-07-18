@@ -87,21 +87,21 @@
 				    						
 										 <!-- 후원종료 -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">
-				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
+				    						<h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
 										    <div class="progress">		 
-										    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>										 
+										    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%;"></div>										 
 										    </div>
 										 </c:if>
 										 <!-- 후원중 -->
 										 <c:if test ="${funding.statusCode eq 3 }">										 
-				    					   <h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
+				    					   <h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.fundRate}%</strong></b></a></h3>
 										   <div class="progress">												 
-										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
+										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%;"></div>	
 										   </div>					
 										</c:if>
 										
 										 <div align="right">	    						
-										<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
+										<h4 class="media-heading">D- ${funding.fundRemainDate }</h4> 	
 										</div>
 				    					</div>
 				    				</div>
@@ -115,9 +115,7 @@
 		    <input type="hidden" id="currentPage" name="currentPage" value=""/>	  
 		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
-  		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">작성하기</button>
-		  </div>  
+
     </section>
     <!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
@@ -141,7 +139,7 @@
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/funding/listVoting").submit();
+	   	$("form").attr("method" , "POST").attr("action" , "/funding/listFunding").submit();
 	 
 	}
     $(function(){
@@ -156,16 +154,11 @@
 		});    
 		//============= 썸네일 사진 클릭 Event  처리 =============	
 	 	$( ".img-prod" ).on("click" , function() {
-			$(self.location).attr("href","/funding/getVoting?postNo="+$(this).children("input").val());
+			$(self.location).attr("href","/funding/getFunding?postNo="+$(this).children("input").val());
 		});   
 	
-        //============= 작성 Event  처리 =============   
-        $( "#btn-add" ).on("click" , function() {
-        	$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
-
-           });
         
-		//============= autocomplete Event  처리 =============			
+/* 		//============= autocomplete Event  처리 =============			
 	      $("#searchKeyword").on("keyup", function(){
 	          
 	          var search = {searchKeyword : $("#searchKeyword").val(), searchCondition : $("#searchCondition").val()};
@@ -188,7 +181,7 @@
 	                });
 	             }
 	          });		
-	      });	
+	      });	 */
   	});	        
         
     </script>

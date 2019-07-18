@@ -98,31 +98,30 @@
              <div class="s_product_text">			 
             <div>
              <font size=6  ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
-			<h3>${funding.voterCount}표</h3>
-			<!-- 투표종료 -->
-			 <c:if test ="${!(funding.statusCode eq 1) }">		
-			<h3><strong style="color:#e00d31">투표종료</strong></h3>
+			<h3>${funding.fundPay}원</h3>
+			<!-- 후원종료 -->
+			 <c:if test ="${!(funding.statusCode eq 3) }">		
+			<h3><strong style="color:#e00d31">후원종료</strong></h3>			 			
 			 </c:if>
-            <!-- 투표중 -->			 
-			<c:if test ="${funding.statusCode eq 1 }">				 			
-			<h4 class="media-heading">남은기간 <b>${funding.voteRemainDate }</b>일</h4> 
-			</c:if>			    
+        	 <!-- 후원중 -->
+			<c:if test ="${funding.statusCode eq 3 }">					 
+			<h4 class="media-heading">남은기간 <b>${funding.fundRemainDate }</b>일</h4> 	
+			</c:if>		    
 			 <div class="progress">
-			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(31-funding.voteRemainDate)*100/31}%;"></div>
+			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%;"></div>
 			 </div>
-		      <div  id="voteDate" >${funding.voteStartDate}</div><div>${funding.voteEndDate}</div> 
+		      <div  id="voteDate" >${funding.fundStartDate}</div><div>${funding.fundEndDate}</div> 
 		     <br/>
+	
+				 <div><h3>후원율&ensp;<strong style="color:#225cba">${funding.fundRate}%</strong></h3></div>
+				 <div class="progress">					 
+				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%;"></div>
+				 </div>		
 
-			 <div><h3>투표율&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h3></div>
-			 <div class="progress">					 
-			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
-			 </div>		
-
-
-		      <div  id="voteDate" >0표</div> <div>&emsp;&emsp; ${funding.voteTargetCount}표</div> 			 	 		 	 
+		      <div  id="voteDate" >0원</div><div>&ensp;&ensp;${funding.fundTargetPay}원</div> 			 	 		 	 
                <br/>  
               <div class="card_area">
-                <a class="main_btn" href="#">투표하기</a><a class="main_btn" href="#">문의하기</a>  
+                <a class="main_btn" href="#">후원하기</a><a class="main_btn" href="#">문의하기</a>  
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
@@ -176,7 +175,7 @@
 		              role="tab"
 		              aria-controls="voter"
 		              aria-selected="false"
-		              >투표자</a
+		              >후원자</a
 		            >
 		          </li>
 		
@@ -190,8 +189,6 @@
 		            	<div class="col-md-10 col-md-offset-1">
 							<span class="price">글 내용</span>
 								<h2>${funding.postContent }</h2>
-							<a class="main_btn" href="#">수정하기</a> 
-							<a class="main_btn" href="#">삭제하기</a> 
 						</div>
 		          </div>
 		          <div
@@ -200,13 +197,16 @@
 		            role="tabpanel"
 		            aria-labelledby="review-tab">
 					후기후기
+					<a class="main_btn" href="#">후기작성하기</a> 
+					<a class="main_btn" href="#">후기수정하기</a> 			
+					<a class="main_btn" href="#">후기삭제하기</a> 									
 		          </div>
 		          <div
 		            class="tab-pane fade"
 		            id="voter"
 		            role="tabpanel"
 		            aria-labelledby="voter-tab">
- 					<div><h3>현재투표인원&ensp;${funding.voterCount}명</h3></div>
+ 					<div><h3>현재후원인원&ensp;${funding.sponsorCount}명</h3></div>
 		          </div>		          
 		       </div>
 	      </div>
@@ -242,13 +242,12 @@
 	<script type="text/javascript">
     $(function(){
     
-		//============= 투표하기 Event  처리 =============	
-	 	$( "a:contains('투표하기')" ).on("click" , function() {
-	 			 		
-	 		if(!(${funding.statusCode eq '1'})){
-	 			alert("투표가 종료되었습니다.")
+		//============= 후원하기 Event  처리 =============	
+	 	$( "a:contains('후원하기')" ).on("click" , function() {
+	 		if(!(${funding.statusCode eq '3'})){
+	 			alert("후원이 종료되었습니다.")
 	 		}else{
-	 		self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
+	 		self.location = "/funding/getTerms?termsTitle=SFFund&postNo=${funding.postNo}";
 	 		}
 	 	});   
 	    

@@ -86,6 +86,8 @@ public class FundingController {
 			termsTitle = "후원신청글";
 		} else if (termsTitle.equals("SFVote")) {
 			termsTitle = "투표하기";
+		} else if (termsTitle.equals("SFFund")) {
+			termsTitle = "후원하기";
 		}
 
 		model.addAttribute("termsList", termsList);
@@ -104,9 +106,9 @@ public class FundingController {
 		// 나중에 세션으로 변경//
 		Funding funding = new Funding();
 		String id = "user01";
-		String nickName = "스캇";
+		String nickname = "스캇";
 		funding.setId(id);
-		funding.setNickName(nickName);
+		funding.setNickname(nickname);
 		// 변경여기까지//
 
 		return "redirect:/funding/addVoting.jsp";
@@ -121,9 +123,9 @@ public class FundingController {
 
 		// 나중에 세션으로 변경//
 		String id = "user01";
-		String nickName = "스캇";
+		String nickname = "스캇";
 		funding.setId(id);
-		funding.setNickName(nickName);
+		funding.setNickname(nickname);
 		// 변경여기까지//
 
 		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
@@ -217,9 +219,9 @@ public class FundingController {
 
 		// 나중에 세션으로 변경//
 		String id = "user01";
-		String nickName = "스캇";
+		String nickname = "스캇";
 		funding.setId(id);
-		funding.setNickName(nickName);
+		funding.setNickname(nickname);
 
 		List<FileDog> file = fileService.getFile(funding.getPostNo());
 		funding.setMainFile(file.get(0).getFileName());
@@ -337,21 +339,35 @@ public class FundingController {
 
 		return "forward:/funding/listFunding.jsp";
 	}
-	
-	
+
+	// 펀딩 글 확인
+	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
+	public String getFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
+
+		System.out.println("/funding/getFunding ");
+
+		Funding funding = fundingService.getVoting(postNo);
+		List<FileDog> file = fileService.getFile(postNo);
+
+		model.addAttribute("file", file);
+		model.addAttribute("funding", funding);
+
+		return "forward:/funding/getFunding.jsp";
+	}
 	/////////////// FUNDING 참여/////////////////////
 
-	// 투표와 후원참여
-	@RequestMapping(value = "addFund", method = RequestMethod.GET)
-	public String addFund(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
+	// 투표참여
+	@RequestMapping(value = "addVote", method = RequestMethod.GET)
+	public String addVote(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
 
-		System.out.println("/funding/addfunding : GET");
+		System.out.println("/funding/addVote : GET");
 
-		// participate 레코드 추가
 		Participate participate = new Participate();
 		participate.setPostNo(postNo);
 		participate.setId("user01");
 		participate.setNickName("스캇");
+
+		// participate 레코드 추가 ( 1 : 투표 )
 		participate.setStatusCode("1");
 
 		fundingService.addParticipate(participate);
@@ -371,5 +387,49 @@ public class FundingController {
 		fundingService.updateStatusCode(funding);
 
 		return "redirect:/funding/getVoting?postNo=" + postNo;
+	}
+
+	// 투표와 후원참여 결제하는 페이지
+	@RequestMapping(value = "addFund", method = RequestMethod.GET)
+	public String addFunding(@RequestParam("postNo") int postNo, Model model, HttpSession session) throws Exception {
+
+		System.out.println("/funding/addFund : GET");
+
+		Funding funding = fundingService.getVoting(postNo);
+
+		model.addAttribute("funding", funding);
+
+		return "forward:/funding/addFundView.jsp";
+	}
+
+	// 후원참여
+	@RequestMapping(value = "addFund", method = RequestMethod.POST)
+	public String addFunding(@ModelAttribute("participate") Participate participate, Model model, HttpSession session)
+			throws Exception {
+
+		System.out.println("/funding/addFund : POST");
+
+		participate.setId("user01");
+		participate.setNickName("스캇");
+		// participate 레코드 추가 ( 2 : 후원 )
+		participate.setStatusCode("2");
+
+		fundingService.addParticipate(participate);
+
+		// funding테이블 voter_count += 1
+		Funding funding = new Funding();
+
+
+		funding.setSponsorCount(1);
+		funding.setFundPay(participate.getFundPay());
+		funding.setPostNo(participate.getPostNo());
+		fundingService.updateStatusCode(funding);
+		
+		Funding funding2 = fundingService.getVoting(participate.getPostNo());
+
+		model.addAttribute("funding", funding2);
+		model.addAttribute("participate", participate);
+
+		return "forward:/funding/addFund.jsp";
 	}
 }

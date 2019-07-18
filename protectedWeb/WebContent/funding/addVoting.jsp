@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
+
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -77,7 +77,7 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 		  <div class="form-group">
-			<h4 >후원목표금액</h4>
+			<h3><b>후원목표금액</b></h3>
 			투표개수는 ( <strong style="color:#225cba">목표금액 X 0.001</strong> )표로 적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )<p/>
 		    <div class="row form-form"  >
 		      <input type="text" class="form-control" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; 원
@@ -86,7 +86,7 @@
 			<br/>
          
 		  <div class="form-group" id="voteNum">
-		    <font ><b>투표수 <strong style="color:#225cba">0</strong>표</b></font>
+		    <h3><b>투표수 <strong style="color:#225cba">0</strong>표</b></h3>
 		  </div>
 		  <div class="form-group" >
 			후원게시글로 이동하려면 받아야 할 투표 수입니다.	
@@ -94,7 +94,7 @@
 		  <br/>
                 
 		  <div class="form-group">
-			<h4 >후원목표기간</h4>
+			<h3><b>후원목표기간</b></h3>
 			후원 받을기간을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br/>
 			투표가 마감되었을 때 시작 날부터의 기간입니다. 투표 기간은 <strong style="color:#225cba">30</strong>일로 고정됩니다.<p/>		
 		    <div >
@@ -107,14 +107,14 @@
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h4 class=>글제목</h4><p/>		
+			<h3><b>글제목</b></h3><p/>		
 		    <div class=>
 		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h4 class=>글내용</h4><p/>		
+			<h3><b>글내용</b></h3><p/>			
 			    <div class=>
 			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;"></textarea>
 			    </div>
@@ -133,7 +133,7 @@
             </div>
 		   <div class="form-group">
 		   <br/>
-			<h4>연락처</h4>
+			<h3><b>연락처</b></h3>	
 			문의받을 연락처를 입력해주세요.<p/>		
 			 <div class="col-sm-3" style="padding:0; margin:0;">
 		      <select class="form-control" name="phone1" id="phone1" style="height:35px;" >
@@ -380,7 +380,7 @@
                   if($(this).val().match(exp)){
                     var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);         
                     $("#voteNum").children().remove();
-                    $("#voteNum").append("<font><b>투표수 <strong  style=\"color:#225cba\">"+inputed+"</strong>표</b></font>");
+                    $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#225cba\">"+inputed+"</strong>표</b></h3>");
                    }
                    return true;
                 }else{
