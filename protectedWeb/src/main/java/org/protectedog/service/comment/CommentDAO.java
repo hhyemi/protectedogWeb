@@ -26,6 +26,9 @@ public interface CommentDAO {
 	// ´ñ±Û ½Å°í
 	public void reportComment(int commentNo) throws Exception;
 	
+	// ´ñ±Û ÁÁ¾Æ¿ä
+	public void updateLikeCnt(Map<String, Object> map) throws Exception;
+	
 	// ´ñ±Û °³¼ö
 	public int getTotalCount(int postNo) throws Exception;
 

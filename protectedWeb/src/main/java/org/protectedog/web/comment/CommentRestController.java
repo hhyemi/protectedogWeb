@@ -1,5 +1,8 @@
 package org.protectedog.web.comment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.service.comment.CommentService;
@@ -29,8 +32,27 @@ public class CommentRestController {
 		System.out.println("commentRestController Defualt Constructor");
 	}
 
+	@RequestMapping(value="json/addComment/", method=RequestMethod.POST)
+	public Comment addComment(@RequestBody Comment comment, HttpSession session) throws Exception {
+
+		System.out.println(" ============================== rest addComment ==================================");
+
+		User user = (User) session.getAttribute("user");
+		
+		// Set User
+		comment.setId(user.getId());
+		comment.setNickName(user.getNickname());
+		comment.setBoardCode(boardCode);
+
+		commentService.addComment(comment);
+		
+		comment = commentService.getComment(comment.getCommentNo());
+		
+		return comment;
+	}
+	
 	@RequestMapping("json/getComment/{commentNo}")
-	public Comment updateCommentView(@PathVariable("commentNo") int commentNo) throws Exception {
+	public Comment getCommentView(@PathVariable("commentNo") int commentNo) throws Exception {
 
 		System.out.println(" ============================== rest getComment ==================================");
 
@@ -67,5 +89,30 @@ public class CommentRestController {
 		
 		return commentNo;
 	}
+	
+	
+	@RequestMapping( value="json/updateLikeCnt/{commentNo}/{check}", method=RequestMethod.POST)
+	public Comment updateLikeCnt(@PathVariable("commentNo") int commentNo, @PathVariable("check") String check) throws Exception {
 
+		System.out.println(" ============================== rest updateLikeCnt ==================================");
+		
+		System.out.println("commentNo : " + commentNo);
+		System.out.println("check : " + check);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("commentNo", commentNo);
+		
+		if(check.equals("plus")) {
+			map.put("check", check);
+		} else {
+			map.put("check", check);
+		}
+
+		commentService.updateLikeCnt(map);
+		
+		Comment comment = commentService.getComment(commentNo);
+		
+		return comment;
+	}
 }

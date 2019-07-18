@@ -3,8 +3,6 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 
@@ -58,7 +56,7 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
 						   	 	<c:if test="${ sessionScope.user == null }">
 						   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
-                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" width="15"/>
+                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" style="height:15px; width: 15px;"/>
                         		</a>
                         		</c:if>
                         		<c:if test="${ sessionScope.user.kakao != null }">

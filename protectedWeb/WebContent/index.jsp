@@ -68,6 +68,9 @@
 						    	<input type="button" id="myInfo" value="마이페이지">
 						    </div>
 						    </c:if>
+						    <c:if test="${sessionScope.user.role eq null}">
+						    <span class="text">Sign in </span> <span class="text"> sign up</span>
+						    </c:if>
 						    <c:if test="${sessionScope.user.role != null}">
 						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
 						    </c:if>
@@ -76,9 +79,11 @@
 						    	<input type="button" id="manageMenu" value="관리자메뉴">
 						    </div>
 						    </c:if>
+						    <c:if test="${sessionScope.user.role != null}">
 						    <div class="logout">
                                 <a href="/users/logout">logout</a>
                             </div>
+                            </c:if>
 					    </div>
 				    </div>
 			    </div>

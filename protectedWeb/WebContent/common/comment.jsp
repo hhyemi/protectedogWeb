@@ -32,13 +32,47 @@ body {
 
 <script type="text/javascript">
 	$(function() {
-		
+
 		// 댓글 등록 
 		$("#commentGo").on("click",function() {
-			$("form").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
+			
+			var postNo = ${board.postNo};
+			
+			alert( $("input[name=commentContent]").val() );
+			var commentInfo = {postNo : postNo, commentContent : $("input[name=commentContent]").val()};
+			
+			var convertCommentInfo = JSON.stringify(commentInfo);
+			
+			$.ajax(
+					{
+						url : "/comment/json/addComment/",
+						method : "POST",
+						dataType : "Json",
+						data : convertCommentInfo,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						
+						success : function(JSONData, status){
+							
+							alert("success");
+							
+							
+							
+						},
+										
+						error : function(request, status, error){							
+							alert("Error");							
+						}
+				
+					}
+			);
+			
 		});
-		
-		// 댓글 수정
+	});
+	
+	$(function(){
 		$(".glyphicon-refresh").on("click", function() {
 			
 			var commentNo = $(this).parent().parent().children("input").val() ;
@@ -60,7 +94,7 @@ body {
 							
  							var modifyScreen = 
  								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' "
- 								+ "style='width: 100%; height: 40px' placeholder='"+JSONData.commentContent+"'></div>";
+ 								+ "style='width: 100%; height: 40px' placeholder='"+JSONData.commentContent+"'/></div>";
 							
  							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
  								+ "<a href='#' onclick='update(); return false;'> "
@@ -117,15 +151,68 @@ body {
 			console.log("답글")
 		});
 		
-		$(".glyphicon-chevron-up").on("click", function(){
-			console.log("업");
-			var commentNo = $(this).parent().children("input").val();
-			alert(commentNo);
+		$(".glyphicon.glyphicon-chevron-up.after").on("click", function() {
+			alert("이미 좋아요 누른 댓글");
 		});
 		
-		$(".glyphicon-chevron-down").on("click", function(){
+		$(".glyphicon.glyphicon-chevron-up.before").on("click", function(){
+			console.log("업");
+			
+			var commentNo = $(this).parent().parent().children(".col-sm-9").children("input").val();
+			
+				$.ajax({
+							url : "/comment/json/updateLikeCnt/"+commentNo+"/"+"plus",
+							method : "POST",
+							dataType : "Json",
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							success : function(JSONData, status){
+								
+								console.log("plus complete");
+								
+								$("#"+commentNo+""+".font >").remove();
+								$("#"+commentNo+""+".font").html("<b>"+ JSONData.likeCount+"</b>");
+								
+							},
+											
+							error : function(request, status, error){							
+								alert("Error");														
+							}
+				});
+
+		});
+		
+		$(".glyphicon.glyphicon-chevron-down.before").on("click", function(){
+			
+			
 			console.log("다운")
-			alert($(this).parent().parent().children().children("input").val());
+			var commentNo = $(this).parent().parent().parent().children(".col-sm-9").children("input").val();
+			var likeCnt = $("#"+commentNo+""+".font >").text();
+			if(likeCnt <= 0){
+				console.log("누르지마 새꺄");
+				return; 
+			}
+				$.ajax({
+							url : "/comment/json/updateLikeCnt/"+commentNo+"/"+"minus",
+							method : "POST",
+							dataType : "Json",
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							success : function(JSONData, status){
+								
+								$("#"+commentNo+""+".font >").remove();
+								$("#"+commentNo+""+".font").html("<b>"+ JSONData.likeCount+"</b>");
+							
+							},
+											
+							error : function(request, status, error){							
+								alert("Error");														
+							}
+				});
 		});
 			
 	});
@@ -225,22 +312,24 @@ body {
 					
 					<div id="${comment.commentNo}" class="area">
 					<h5  id="${comment.commentNo}" class="cmCont">${comment.commentContent}</h5>
+					<c:if test="${comment.id == sessionScope.user.id }">
 					<span class="glyphicon glyphicon-refresh"></span> &nbsp; 
 					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
 					<span class="glyphicon glyphicon-alert"></span> &nbsp; 
 					<span class="glyphicon glyphicon-plus"></span>
+					</c:if>
 					</div>
 				</div>
 				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-right: 0 px;">
-					<font size="8px">
+					<font size="8px" id="${comment.commentNo}" class="font">
 						<b>${comment.likeCount}</b>
 					</font>
 				</div>
 				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-left : 0 px;">
-					<span class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span>
+					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-up before" style="font-size: 20px;"></span>
 					<p/>
 					<p/>
-					<span class="glyphicon glyphicon-chevron-down" style="font-size: 20px"></span>
+					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-down before" style="font-size: 20px"></span>
 				</div>
 			</div>
 			<br/>

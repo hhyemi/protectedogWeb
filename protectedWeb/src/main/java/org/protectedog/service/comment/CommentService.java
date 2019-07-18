@@ -25,6 +25,9 @@ public interface CommentService {
 	// 댓글 신고
 	public void reportComment(int commentNo) throws Exception;
 	
+	// 댓글 좋아요
+	public void updateLikeCnt(Map<String, Object> map) throws Exception;
+	
 	// 내가 작성한 댓글 리스트
 //	public Map<String, Object> listMyComment() throws Exception;
 }

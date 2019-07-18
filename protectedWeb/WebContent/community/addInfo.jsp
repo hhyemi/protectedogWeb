@@ -245,7 +245,6 @@ $(function () {
                 	    const editorData = editor.getData();     	           
                 	} );
                 	
-                	alert(img.target.result);
                     editor.setData(editor.getData()+"<p><"+imgSelectName+" src='" + img.target.result + "' style='min-width:100%'/></p><p/>");		
                 
                     
