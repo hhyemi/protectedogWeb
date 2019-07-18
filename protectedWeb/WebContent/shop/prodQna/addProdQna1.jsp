@@ -53,22 +53,57 @@ body {
 	border: 0px;
 	border-spacing: 0px;
 }
-#postTitle{
-	padding-left: 120px;
-	padding-right:120px;}
-#id{
-	padding-left: 80px;
-	padding-right:80px;
+
+#title {
+	width: 800px;
+	/* 	 position:absolute; */
+	/*     top:50%; left:50%; */
+	/*     transform: translate(-50%, -50%); */
 }
-#no{
-	padding-left: 50px;
-	padding-right:50px;
+
+#postContent {
+	width: 800px;
+	/* 	 position:absolute; */
+	/*     top:50%; left:50%; */
+	/*     transform: translate(-50%, -50%); */
 }
+
+#qnaCode {
+	width: 200px;
+	position: absolute;
+	/* 	top:50%; left:50%;  */
+	left: 300px;
+	textsize: 2;
+}
+</style>
+<!-- ////////////////////java Script////////////////////////////// -->
+<script type="text/javascript">
+	//============= "등록"  Event 연결 =============
+	$(function() {
+
+		$("#addContent").on("click", function() {
+			fncAddProduct();
+		});
+	});
 	
 
-	</style>
-<script type="text/javascript">
-	
+	//============= "취소"  Event 처리 및  연결 =============
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+		$("a[href='#' ]").on("click", function() {
+			//Debug..
+			//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
+			$("form")[0].reset();
+		});
+	});
+
+	function fncAddProduct() {
+		//Form 유효성 검증
+
+		$("form").attr("method", "POST").attr("action" , "/product/addProduct").submit();
+	});
+});	
 </script>
 </head>
 
@@ -78,46 +113,30 @@ body {
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<h1 align="center">
-		상품 <small>Q & A
-			<button class="mdl-button mdl-js-button mdl-button--primary">
-				문의하기</button>
-		</small>
-	</h1><BR/>
+		상품 <small>문의하기 </small>
+	</h1>
+	<br />
 
 	<!-- Primary-colored flat button -->
+	<p align="center">
+		<input type="text" class="form-control" name="postTitle" id="title"><BR />
+		<textarea class="form-control" rows="6" id="postContent"
+			name="postContent"></textarea>
+	</p>
+	<select class="form-control" id="qnaCode" name="qnaCode">
+		<option>--------------------------</option>
+		<option id="1">배송</option>
+		<option id="2">상품</option>
+		<option id="3">반품</option>
+		<option id="4">교환</option>
+		<option id="5">환불</option>
+	</select>
+	<br />
+	<p align="center">
+		<button type="button" class="btn btn-primary btn-lg" id="addContent">등록하기</button>
+		<button type="button" class="btn btn-default btn-lg" href="#">취소</button>
+	</p>
 
-
-	<!--  table Start /////////////////////////////////////-->
-
-		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp" align="center">
-  <thead>
-    <tr>
-
-		<thead>
-			<tr>
-				<th class="mdl-data-table__cell--non-numeric" align="center" id="no">글번호</th>
-				<th align="left">{</th>
-				<th align="left" id="postTitle">글제목</th>
-				<th align="left" id="id">문의자</th>
-				<th align="left">등록일</th>
-
-			</tr>
-		</thead>
-
-		<tbody>
-			<c:set var="i" value="0" />
-			<c:forEach var="product" items="${list}">
-				<c:set var="i" value="${i+1}" />
-				<tr>
-					<td class="mdl-data-table__cell--non-numeric" align="center"></td>
-					<td align="center"></td>
-
-
-
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
 
 </body>
 </html>
