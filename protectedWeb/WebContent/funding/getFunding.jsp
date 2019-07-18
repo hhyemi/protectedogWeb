@@ -55,7 +55,7 @@
               >
                 <ol class="carousel-indicators">
                        
- 				<c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
+ 				<c:forEach var="i" begin="0" end="${fn:length(file)}" step="1">			
 					<c:if test="${i eq 0}">	
 	                  <li
 	                    data-target="#carouselExampleIndicators"
@@ -97,19 +97,31 @@
  			 <div class="col-lg-5 offset-lg-1">
              <div class="s_product_text">			 
             <div>
-             <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.id}</b> 
-			<h3>${funding.voterCount}표</h3>
-			<h4 class="media-heading">남은기간 ${funding.voteRemainDate }일</h4> 			    
+             <font size=6  ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
+			<h3>${funding.fundPay}원</h3>
+			<!-- 후원종료 -->
+			 <c:if test ="${!(funding.statusCode eq 3) }">		
+			<h3><strong style="color:#e00d31">후원종료</strong></h3>			 			
+			 </c:if>
+        	 <!-- 후원중 -->
+			<c:if test ="${funding.statusCode eq 3 }">					 
+			<h4 class="media-heading">남은기간 <b>${funding.fundRemainDate }</b>일</h4> 	
+			</c:if>		    
 			 <div class="progress">
-			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${30-funding.voteRemainDate}%;"></div>
+			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%;"></div>
 			 </div>
-		      <div  id="voteDate" >${funding.voteStartDate}</div>  <div >${funding.voteEndDate}</div> 
+		      <div  id="voteDate" >${funding.fundStartDate}</div><div>${funding.fundEndDate}</div> 
 		     <br/>
-			 <div><h3>투표율&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h3></div>
-			 <div><h3>현재투표인원&ensp;${funding.voterCount}명</h3></div>		 	 
+	
+				 <div><h3>후원율&ensp;<strong style="color:#225cba">${funding.fundRate}%</strong></h3></div>
+				 <div class="progress">					 
+				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%;"></div>
+				 </div>		
+
+		      <div  id="voteDate" >0원</div><div>&ensp;&ensp;${funding.fundTargetPay}원</div> 			 	 		 	 
                <br/>  
               <div class="card_area">
-                <a class="main_btn" href="#">투표하기</a><a class="main_btn" href="#">문의하기</a>  
+                <a class="main_btn" href="#">후원하기</a><a class="main_btn" href="#">문의하기</a>  
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
@@ -132,7 +144,7 @@
 	        <ul class="nav nav-tabs" id="myTab" role="tablist">
 		          <li class="nav-item">
 		            <a
-		              class="nav-link"
+		              class="nav-link show active"
 		              id="home-tab"
 		              data-toggle="tab"
 		              href="#home"
@@ -145,37 +157,67 @@
 		          <li class="nav-item">
 		            <a
 		              class="nav-link"
-		              id="profile-tab"
+		              id="review-tab"
 		              data-toggle="tab"
-		              href="#profile"
+		              href="#review"
 		              role="tab"
-		              aria-controls="profile"
+		              aria-controls="review"
 		              aria-selected="false"
-		              >후기</a
+		              >후기 </a>
+		          </li>
+		          <li class="nav-item">
+		            <a
+		              class="nav-link"
+		              id="voter-tab"
+		              data-toggle="tab"
+		              href="#voter"
+		              role="tab"
+		              aria-controls="voter"
+		              aria-selected="false"
+		              >후원자</a
 		            >
 		          </li>
-	
+		
 		        </ul>
 		        <div class="tab-content" id="myTabContent">
 		          <div
-		            class="tab-pane fade"
+		            class="tab-pane fade active show"
 		            id="home"
 		            role="tabpanel"
 		            aria-labelledby="home-tab">
 		            	<div class="col-md-10 col-md-offset-1">
 							<span class="price">글 내용</span>
 								<h2>${funding.postContent }</h2>
-							<a class="main_btn" href="#">수정하기</a> 
-							<a class="main_btn" href="#">삭제하기</a> 
 						</div>
 		          </div>
 		          <div
 		            class="tab-pane fade"
-		            id="profile"
+		            id="review"
 		            role="tabpanel"
-		            aria-labelledby="profile-tab">
-					ㅋㅋㅋㅋ
+		            aria-labelledby="review-tab">
+		            <span class="price">후기 제목</span>
+					<h2>${funding.reviewTitle }</h2>
+		            <span class="price">후기 이미지</span>
+		            <p/>
+					<c:forEach var="name" items="${fileReview}" varStatus="status">      
+	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
+	                  </c:forEach>	
+	                <p/>  
+		            <span class="price">후기 내용</span>
+					<h2>${funding.reviewContent }</h2>				
+		            <span class="price">작성 일자</span>
+					<h2>${funding.reviewRegDate }</h2>
+					<a class="main_btn" href="#">후기작성</a> 
+					<a class="main_btn" href="#">후기수정</a> 			
+					<a class="main_btn" href="#">후기삭제</a> 									
 		          </div>
+		          <div
+		            class="tab-pane fade"
+		            id="voter"
+		            role="tabpanel"
+		            aria-labelledby="voter-tab">
+ 					<div><h3>현재후원인원&ensp;${funding.sponsorCount}명</h3></div>
+		          </div>		          
 		       </div>
 	      </div>
 	    </section>
@@ -210,14 +252,18 @@
 	<script type="text/javascript">
     $(function(){
     
-		//============= 투표하기 Event  처리 =============	
-	 	$( "a:contains('투표하기')" ).on("click" , function() {
-	 		self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
-		});   
+		//============= 후원하기 Event  처리 =============	
+	 	$( "a:contains('후원하기')" ).on("click" , function() {
+	 		if(!(${funding.statusCode eq '3'})){
+	 			alert("후원이 종료되었습니다.")
+	 		}else{
+	 		self.location = "/funding/getTerms?termsTitle=SFFund&postNo=${funding.postNo}";
+	 		}
+	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-	 		self.location = "/user/getUser?userId=${sessionScope.user.userId}";
+	 		//self.location = "/user/getUser?userId=${sessionScope.user.userId}";
 		});   
 	
 		//============= SNS공유 Event  처리 =============	
@@ -237,27 +283,26 @@
 			sendLinkKakao()
 		});	
 	    
-		//============= 수정하기 Event  처리 =============	
-	 	$( "a:contains('수정하기')" ).on("click" , function() {
-	 		 self.location = "/funding/updateFunding?postNo=${funding.postNo}"
+		//============= 후기작성 Event  처리 =============	
+	 	$( "a:contains('후기작성')" ).on("click" , function() {
+	 		self.location = "/funding/addReview?postNo=${funding.postNo}";
 		});   
 		
-		//============= 삭제하기 Event  처리 =============	
-	 	$( "a:contains('삭제하기')" ).on("click" , function() {
-	 		func_confirm()
-		});   	
-    });
-    
-	  //=============삭제 알림창 Event  처리 =============    	
-            function func_confirm () {
-                if(confirm('정말 삭제하시겠습니까?')){
-                	self.location = "/funding/delFunding?postNo=${funding.postNo}"
-                	alert("삭제가 완료되었습니다.")
-                } else {
-                }
+		//============= 후기수정 Event  처리 =============	
+	 	$( "a:contains('후기수정')" ).on("click" , function() {
+	 		self.location = "/funding/updateReview?postNo=${funding.postNo}";
+		});   
+		
+		//============= 후기삭제 Event  처리 =============	
+	 	$( "a:contains('후기삭제')" ).on("click" , function() {
+            if(confirm('정말 삭제하시겠습니까?')){
+            	self.location = "/funding/delReview?postNo=${funding.postNo}"
+            	alert("삭제가 완료되었습니다.")
+            } else {
             }
-
-    
+		});   
+		
+    });
 		//============= 카카오 공유하기Event  처리 =============		
 		 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 		 function sendLinkKakao(){

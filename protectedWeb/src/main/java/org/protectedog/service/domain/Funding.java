@@ -6,7 +6,7 @@ public class Funding {
 
 	private int postNo;
 	private String id;
-	private String nickName;
+	private String nickname;
 	private String statusCode;
 	private String phone;
 	private String postTitle;
@@ -22,6 +22,9 @@ public class Funding {
 	private int fundPay;
 	private Date fundStartDate;
 	private Date fundEndDate;
+	private String reviewTitle;
+	private String reviewContent;
+	private Date reviewRegDate;
 
 	// DB에는 없고 있는 필드
 	// 전화번호 3칸
@@ -31,9 +34,11 @@ public class Funding {
 	// 투표 남은 날짜
 	private int voteRemainDate;
 	// 후원 남은 날짜
-	private Date fundRemainDate;
+	private int fundRemainDate;
 	// 투표율
 	private int VoteRate;
+	// 후원율
+	private int FundRate;
 	// 대표이미지
 	private String mainFile;
 
@@ -182,14 +187,6 @@ public class Funding {
 		this.fundEndDate = fundEndDate;
 	}
 
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
 	public String getPhone1() {
 		return phone1;
 	}
@@ -222,11 +219,11 @@ public class Funding {
 		this.voteRemainDate = voteRemainDate;
 	}
 
-	public Date getFundRemainDate() {
+	public int getFundRemainDate() {
 		return fundRemainDate;
 	}
 
-	public void setFundRemainDate(Date fundRemainDate) {
+	public void setFundRemainDate(int fundRemainDate) {
 		this.fundRemainDate = fundRemainDate;
 	}
 
@@ -246,16 +243,58 @@ public class Funding {
 		this.mainFile = mainFile;
 	}
 
+	public int getFundRate() {
+		return FundRate;
+	}
+
+	public void setFundRate(int fundRate) {
+		FundRate = fundRate;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getReviewTitle() {
+		return reviewTitle;
+	}
+
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
+	}
+
+	public String getReviewContent() {
+		return reviewContent;
+	}
+
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
+	}
+
+	public Date getReviewRegDate() {
+		return reviewRegDate;
+	}
+
+	public void setReviewRegDate(Date reviewRegDate) {
+		this.reviewRegDate = reviewRegDate;
+	}
+
 	@Override
 	public String toString() {
-		return "Funding [postNo=" + postNo + ", id=" + id + ", nickName=" + nickName + ", statusCode=" + statusCode
+		return "Funding [postNo=" + postNo + ", id=" + id + ", nickname=" + nickname + ", statusCode=" + statusCode
 				+ ", phone=" + phone + ", postTitle=" + postTitle + ", postContent=" + postContent + ", viewCount="
 				+ viewCount + ", voterCount=" + voterCount + ", voteStartDate=" + voteStartDate + ", voteEndDate="
 				+ voteEndDate + ", fundTargetPay=" + fundTargetPay + ", voteTargetCount=" + voteTargetCount
 				+ ", fundTargetDay=" + fundTargetDay + ", sponsorCount=" + sponsorCount + ", fundPay=" + fundPay
-				+ ", fundStartDate=" + fundStartDate + ", fundEndDate=" + fundEndDate + ", phone1=" + phone1
+				+ ", fundStartDate=" + fundStartDate + ", fundEndDate=" + fundEndDate + ", reviewTitle=" + reviewTitle
+				+ ", reviewContent=" + reviewContent + ", reviewRegDate=" + reviewRegDate + ", phone1=" + phone1
 				+ ", phone2=" + phone2 + ", phone3=" + phone3 + ", voteRemainDate=" + voteRemainDate
-				+ ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate + ", mainFile=" + mainFile + "]";
+				+ ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate + ", FundRate=" + FundRate
+				+ ", mainFile=" + mainFile + "]";
 	}
 
 }

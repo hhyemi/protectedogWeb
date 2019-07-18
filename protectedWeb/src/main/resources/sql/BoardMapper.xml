@@ -24,7 +24,7 @@
 		<result property="phone" 			column="phone"				jdbcType="VARCHAR"/>
 		<result property="qnaCode" 			column="qna_code"			jdbcType="CHAR"/>
 		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
-		<result property="prodName" 		column="prod_name"			jdbcType="VARCHAR"/>
+		<result property="prodNo" 			column="prod_no"			jdbcType="VARCHAR"/>
 		<result property="delCode" 			column="del_code" 			jdbcType="CHAR"/>
 
 		
@@ -37,7 +37,7 @@
 	 	</selectKey>
 	 	INSERT
 		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, recommend_count,
-						market_code, price, city , phone, qna_code, route, prod_name)  
+						market_code, price, city , phone, qna_code, route, prod_no)  
 		VALUES	 (	#{postNo}, 
 					#{boardCode},
 					#{id} , 
@@ -62,7 +62,7 @@
 	 <select 	id="getBoard"	parameterType="int"		resultMap="boardSelectMap">
 		SELECT
 		post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
-		market_code, price, city , phone, qna_code, route, prod_name, del_code
+		market_code, price, city , phone, qna_code, route, prod_no, del_code
 		FROM board 
 		WHERE post_no = #{value} 
 	 </select>

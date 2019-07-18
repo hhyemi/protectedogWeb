@@ -43,11 +43,9 @@ public class FundingRestController {
 
 	
 	
-	@RequestMapping(value="json/listFunding/", method=RequestMethod.POST)
+	@RequestMapping(value="json/listVoting/", method=RequestMethod.POST)
 	   public List<String> listProduct(@RequestBody Search search, HttpServletRequest request) throws Exception {
-		
-		System.out.println("1111"+search);
-	   
+	
 	      String keyword = search.getSearchKeyword();
 	      
 	      search.setSearchKeyword(keyword);
@@ -63,7 +61,7 @@ public class FundingRestController {
 	         searchMap.put("field", "NICKNAME");
 	      }
 	      
-	      List<String> list = fundingService.getAutoFunding(searchMap);   
+	      List<String> list = fundingService.getAutoVoting(searchMap);   
 	      System.out.println(" *********************** " +list);
 	      return list;
 	   }

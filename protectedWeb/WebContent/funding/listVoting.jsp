@@ -11,19 +11,6 @@
     <meta charset="EUC-KR">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">    
-    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/magnific-popup.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/ionicons.min.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/jquery.timepicker.css">  
-    <link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
-    <link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
 
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -67,9 +54,9 @@
 				    	<div class="right-box">
 
 						    <select class="form-control" id="voteCondition" name="voteCondition" >
-								<option value="1" ${ ! empty search.voteCondition && search.voteCondition==1 ? "selected" : "" }>전체보기</option>
-								<option value="2" ${ ! empty search.voteCondition && search.voteCondition==2 ? "selected" : "" } >투표중</option>
-								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >투표완료</option>
+								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option>
+								<option value="1" ${ ! empty search.voteCondition && search.voteCondition==1 ? "selected" : "" } >투표중</option>
+								<option value="2" ${ ! empty search.voteCondition && search.voteCondition==2 ? "selected" : "" } >투표완료</option>
 							</select>   
 						    &emsp;
 						    <select class="form-control" name="searchCondition" id="searchCondition" >
@@ -97,10 +84,22 @@
 				    					</a>
 				    					<div class="text py-3 px-3">
 				    						<h2><a href="#">${funding.postTitle}</a></h2>
-				    						<h3><a href="#">닉네임&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${30-funding.voteRemainDate}%</strong></b></a></h3>
-										 <div class="progress">
-										  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${30-funding.voteRemainDate}%;"></div>
-										 </div>	
+				    						
+										 <!-- 투표종료 -->
+										 <c:if test ="${!(funding.statusCode eq 1) }">
+				    						<h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
+										    <div class="progress">		 
+										    <div class="progress-bar bg-danger" role="progressbar" style="width: ${funding.voteRate}%;"></div>										 
+										    </div>
+										 </c:if>
+										 <!-- 투표중 -->
+										 <c:if test ="${funding.statusCode eq 1 }">										 
+				    					   <h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
+										   <div class="progress">												 
+										   <div class="progress-bar" role="progressbar" style="width:${funding.voteRate}%;"></div>
+										   </div>					
+										</c:if>
+										
 										 <div align="right">	    						
 										<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
 										</div>
@@ -114,6 +113,7 @@
 		    	</div>
 		    <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->		    	
 		    <input type="hidden" id="currentPage" name="currentPage" value=""/>	  
+		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
   		  <div class="form-group text-center">
 	  			<button type="button" id="btn-add">작성하기</button>
@@ -132,21 +132,6 @@
 
   <!-- loader -->
 
-  <script src="../../resources/prodmenu/js/jquery.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../../resources/prodmenu/js/popper.min.js"></script>
-  <script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="../../resources/prodmenu/js/aos.js"></script>
-  <script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="../../resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="../../resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../../resources/prodmenu/js/google-map.js"></script>
   <script src="../../resources/prodmenu/js/main.js"></script>
  
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -156,14 +141,14 @@
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/funding/listFunding").submit();
+	   	$("form").attr("method" , "POST").attr("action" , "/funding/listVoting").submit();
 	 
 	}
     $(function(){
     	
 		//============= "검색"  Event  처리 =============	
 		 $( "button.btn.btn-default" ).on("click" , function() {
-			fncGetList(1);
+			    fncGetList(1);
 		});
 		//============= "투표중/투표완료"  Event   처리 =============
 		$( "#voteCondition" ).change(function(){
@@ -171,12 +156,12 @@
 		});    
 		//============= 썸네일 사진 클릭 Event  처리 =============	
 	 	$( ".img-prod" ).on("click" , function() {
-			$(self.location).attr("href","/funding/getFunding?postNo="+$(this).children("input").val());
+			$(self.location).attr("href","/funding/getVoting?postNo="+$(this).children("input").val());
 		});   
 	
         //============= 작성 Event  처리 =============   
         $( "#btn-add" ).on("click" , function() {
-        	$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost");
+        	$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
 
            });
         
@@ -187,7 +172,7 @@
 	          var convertSearch = JSON.stringify(search);
 	          
 	          $.ajax({
-	             url : "/funding/json/listFunding/",
+	             url : "/funding/json/listVoting/",
 	             method : "POST",
 	             dataType : "json",
 	             data :  convertSearch ,
@@ -197,7 +182,7 @@
 	                "Content-Type" : "application/json;charset=euc_kr"
 	             },
 	             success : function(JSONData, status){
-	            	 alert(JSONData)
+	            	 //alert(JSONData)
 	                $("#searchKeyword").autocomplete({
 	                   source : JSONData
 	                });

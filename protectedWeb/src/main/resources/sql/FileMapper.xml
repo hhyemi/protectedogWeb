@@ -27,22 +27,26 @@
 	 </insert>
 	 
 	<!--   SQL : SELECT ONE -->
-	 <select 	id="getFile"	parameterType="string"	resultMap="fileSelectMap">
+	 <select 	id="getFile"	parameterType="map"	resultMap="fileSelectMap">
 		SELECT
 		FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE
 		FROM FILES 
-		WHERE POST_NO IN #{value}
+		WHERE POST_NO IN #{postNo} AND  BOARD_CODE IN #{boardCode}
 		ORDER BY FILE_NO
 	 </select>
 
 	<!-- SQL : DELETE  -->		 
 	<delete id="delFile" parameterType="file">
- 
 		DELETE 
 		FROM FILES WHERE
 		POST_NO IN #{postNo} AND FILE_NAME IN #{fileName}
-
 	</delete> 
 	
+	<!-- SQL : DELETE ALL  -->		 
+	<delete id="delAllFile" parameterType="map">
+		DELETE 
+		FROM FILES WHERE
+		POST_NO IN #{postNo} AND BOARD_CODE IN #{boardCode} 
+	</delete> 	
 	 
 </mapper>

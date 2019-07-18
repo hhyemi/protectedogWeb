@@ -27,30 +27,46 @@ public class FundingDAOImpl implements FundingDAO {
 		System.out.println(this.getClass());
 	}
 
-	/////////////// FUNDING 게시판 /////////////////////
+	/////////////// FUNDING 후원신청 게시판 /////////////////////
 
 	@Override
-	public void addFunding(Funding funding) throws Exception {
-		sqlSession.insert("FundingMapper.addFunding", funding);
+	public void addVoting(Funding funding) throws Exception {
+		sqlSession.insert("FundingMapper.addVoting", funding);
 
 	}
 
 	@Override
-	public Funding getFunding(int postNo) throws Exception {
-		return sqlSession.selectOne("FundingMapper.getFunding", postNo);
+	public Funding getVoting(int postNo) throws Exception {
+		return sqlSession.selectOne("FundingMapper.getVoting", postNo);
 	}
 
 	@Override
-	public void updateFunding(Funding funding) throws Exception {
-		sqlSession.update("FundingMapper.updateFunding", funding);
+	public void updateVoting(Funding funding) throws Exception {
+		sqlSession.update("FundingMapper.updateVoting", funding);
 
 	}
 
 	@Override
-	public void delFunding(int postNo) throws Exception {
-		sqlSession.delete("FundingMapper.delFunding", postNo);
+	public void delVoting(int postNo) throws Exception {
+		sqlSession.delete("FundingMapper.delVoting", postNo);
 
 	}
+
+	@Override
+	public List<Funding> listVoting(Search search) throws Exception {
+		return sqlSession.selectList("FundingMapper.listVoting", search);
+	}
+
+	@Override
+	public List<String> getAutoVoting(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("FundingMapper.getAutoVoting", searchMap);
+	}
+
+	@Override
+	public int getVotingTotalCount(Search search) throws Exception {
+		return sqlSession.selectOne("FundingMapper.getVotingTotalCount", search);
+	}
+	/////////////// FUNDING 후원게시 게시판 /////////////////////
 
 	@Override
 	public List<Funding> listFunding(Search search) throws Exception {
@@ -58,26 +74,20 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 
 	@Override
-	public List<String> getAutoFunding(Map<String, Object> searchMap) throws Exception {
-		return sqlSession.selectList("FundingMapper.getAutoFunding", searchMap);
+	public int getFundingTotalCount(Search search) throws Exception {
+		return sqlSession.selectOne("FundingMapper.getFundingTotalCount", search);
 	}
-
-	@Override
-	public void updateStatusCode(Funding funding) throws Exception {
-		sqlSession.update("FundingMapper.updateStatusCode", funding);
-
-	}
-
-	@Override
-	public int getTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("FundingMapper.getTotalCount", search);
-	}
-
 	/////////////// FUNDING 참여/////////////////////
 
 	@Override
 	public void addParticipate(Participate participate) throws Exception {
 		sqlSession.insert("ParticipateMapper.addParticipate", participate);
+
+	}
+
+	@Override
+	public void updateStatusCode(Funding funding) throws Exception {
+		sqlSession.update("FundingMapper.updateStatusCode", funding);
 
 	}
 
@@ -91,8 +101,27 @@ public class FundingDAOImpl implements FundingDAO {
 		return sqlSession.selectOne("ParticipateMapper.getParticipateTotalCount");
 	}
 
+	/////////////// 후기 게시판 /////////////////////
+
+	@Override
+	public void addReview(Funding funding) throws Exception {
+		sqlSession.insert("FundingMapper.addReview", funding);
+
+	}
+
+	@Override
+	public void updateReview(Funding funding) throws Exception {
+		sqlSession.update("FundingMapper.updateReview",funding);
+
+	}
+
+	@Override
+	public void delReview(int postNo) throws Exception {
+		sqlSession.delete("FundingMapper.delReview",postNo);
+
+	}
 	/////////////// 회원에서 요구한 Method/////////////////////
-	
+
 	@Override
 	public List<Participate> listParticipate(int id) throws Exception {
 		return sqlSession.selectList("ParticipateMapper.listParticipate");

@@ -158,6 +158,9 @@
 	  			<c:if test="${termsTitle eq '투표하기'}">
 	  			투표하기
 	  			</c:if>
+	  			<c:if test="${termsTitle eq '후원하기'}">
+	  			후원하기
+	  			</c:if>	  			
 	  			</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
@@ -192,10 +195,12 @@
           	}else if(!$("input[name=termsCheck5]").prop("checked")){
         		$("input[name=termsCheck5]").focus();        	       	       	       	
         	}else{
-        		if(	${termsTitle == "후원신청글"}){
-        			self.location="/funding/addFunding";
-        		}else if(${termsTitle == "투표하기"}){
+        		if(	${termsTitle eq '후원신청글'}){
+        			self.location="/funding/addVoting";
+        		}else if(${termsTitle eq '투표하기'}){
         			alert("투표하였습니다.")
+        			self.location="/funding/addVote?postNo=${postNo}";
+        		}else if(${termsTitle eq '후원하기'}){
         			self.location="/funding/addFund?postNo=${postNo}";
         		}
         	}
@@ -207,8 +212,24 @@
           $( "#btn-cancel" ).on("click" , function() {
                history.go(-1);
             });
-            
-	  		//============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 		
+         
+        //============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 	         
+	          $( "#allCheck").on('click', function(){
+	              if (  $( "#allCheck").prop("checked")  ) {
+	                 $(".termsCheck").prop("checked", "checked");
+	             }else{
+	                 $(".termsCheck").prop('checked', false);
+	             }
+	          });  
+	          $( ".termsCheck" ).on('click', function(){
+	              if($(".termsCheck:checked").length == 5){
+	                 $("#allCheck").prop("checked", "checked");
+	              }else{
+	                 $("#allCheck").prop("checked", false);
+	              }
+	           });          
+          
+/* 	  		//============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 		
 		    $("#allCheck").click(function(){
 		        //클릭되었으면
 		        if($("#allCheck").not(":disabled").prop("checked")){
@@ -219,7 +240,7 @@
 		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 false로 정의
 		            $(".termsCheck").not(":disabled").prop("checked",false);
 		        }
-		    });
+		    }); */
    });   
                
    
