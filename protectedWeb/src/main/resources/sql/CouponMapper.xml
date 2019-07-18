@@ -33,7 +33,7 @@
 		INSERT INTO coupon
 			(coupon_no, coupon_code, receiver_id, coupon_name, discount, coupon_status,
 			make_date, limit_date, use_date)
-		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiveId}, #{couponName}, #{discount}, 
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiverId}, #{couponName}, #{discount}, 
 			'1', SYSDATE, #{limitDate:DATE}, #{useDate:DATE})
 	</insert>
 

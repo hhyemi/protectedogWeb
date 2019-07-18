@@ -1,6 +1,8 @@
 package org.protectedog.service.message.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.common.Search;
@@ -40,9 +42,21 @@ public class MessageDAOImpl implements MessageDAO{
 	}
 
 	@Override
-	public List<Message> getMessageList(Search search) throws Exception {
+	public List<Message> getSendMessageList(Search search, String senderId) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("MessageMapper.getMessageList", search);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("senderId", senderId);
+		return sqlSession.selectList("MessageMapper.getSendMessageList", map);
+	}
+	
+	@Override
+	public List<Message> getReceiveMessageList(Search search, String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("receiverId", receiverId);
+		return sqlSession.selectList("MessageMapper.getReceiverMessageList", map);
 	}
 
 	@Override
@@ -52,9 +66,21 @@ public class MessageDAOImpl implements MessageDAO{
 	}
 
 	@Override
-	public int getTotalCount(Search search) throws Exception {
+	public int getSendTotalCount(Search search, String senderId) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("MessageMapper.getTotalCount", search);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("senderId", senderId);
+		return sqlSession.selectOne("MessageMapper.getSendTotalCount", map);
+	}
+	
+	@Override
+	public int getReceiveTotalCount(Search search, String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("receiverId", receiverId);
+		return sqlSession.selectOne("MessageMapper.getReceiveTotalCount", map);
 	}
 
 }

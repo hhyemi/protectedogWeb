@@ -11,8 +11,8 @@
 		<result property="messageNo"	column="message_no"		jdbcType="NUMERIC"/>
 		<result property="messageTitle"	column="message_title"		jdbcType="VARCHAR"/>
 		<result property="messageContent"	column="messasge_content"	jdbcType="VARCHAR"/>
-		<result property="sender.id"			column="send_id"		jdbcType="VARCHAR"/>
-		<result property="receiver.id"		column="receive_id"	jdbcType="VARCHAR"/>
+		<result property="senderId"			column="sender_id"		jdbcType="VARCHAR"/>
+		<result property="receiverId"		column="receiver_id"	jdbcType="VARCHAR"/>
 		<result property="sendDate"			column="send_date"	jdbcType="DATE"/>
 		<result property="receiveDate"		column="receive_date"	jdbcType="DATE"/>
 		<result property="messageStatus"		column="message_status"	jdbcType="CHAR"/>
@@ -22,10 +22,10 @@
 	<!-- SQL : INSERT -->
 	
 	<insert id="addMessage"	parameterType="message">
-		INSERT INTO message(message_no, message_title, message_content, send_id,
-		receive_id1, send_date, message_status, del_code)
-		VALUES(seq_message_message_no.NEXTVAL, #{messageTitle}, #{messageContent}, #{sender.id}, 
-		#{receiver.id}, SYSDATE, #{messageStatus}, #{delCode})
+		INSERT INTO message(message_no, message_title, message_content, sender_id,
+		receiver_id, send_date, message_status, del_code)
+		VALUES(seq_message_message_no.NEXTVAL, #{messageTitle}, #{messageContent}, #{senderId}, 
+		#{receiverId}, SYSDATE, #{messageStatus}, #{delCode})
 	</insert>
 
 	 
@@ -33,7 +33,7 @@
 
 	<select id="getMessage"	parameterType="string"	resultMap="messageSelectMap">
 		SELECT
-		message_no, message_title, message_content, send_id, send_date
+		message_no, message_title, message_content, sender_id, receiver_id, send_date
 		FROM message
 		WHERE message_no=#{messageNo}
 	</select>
@@ -52,49 +52,83 @@
 		 
 	<!-- SQL : SELECT LIST -->
 	 	
-	<select id="getMessageList"		parameterType="search"	resultMap="messageSelectMap">
-		SELECT send_id, receive_id, message_title, send_date, receive_date
+	<select id="getSendMessageList"		parameterType="map"	resultMap="messageSelectMap">
+		SELECT sender_id, receiver_id, message_title, send_date, receive_date, message_status
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT send_id, receive_id, message_title, send_date, receive_date
+			FROM( SELECT sender_id, receiver_id, message_title, send_date, receive_date, message_status
 				FROM message
-				<if test="searchCondition != null">
-					<where>
-						<if test="searchCondition==0 and searchKeyword !='' ">
-							send_id=#{searchKeyword}
-						</if>
-						<if test="searchCondition==1 and searchkeyword !='' ">
-							receive_id=#{searchKeyword}
-						</if>
-						<if test="searchCondition==2 and searchkeyword !='' ">
-							message_title=#{searchKeyword}
-						</if>
-					</where>
-				</if>
-				ORDER BY send_id ) inner_table
-			WHERE ROWNUM &lt;=#{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+
+				WHERE sender_id=#{senderId}
+<!-- 					<if test="searchCondition != null"> -->
+<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
+<!-- 							AND receiver_id=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
+<!-- 							AND message_title=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 					</if> -->
+
+				ORDER BY sender_id ) inner_table
+			WHERE ROWNUM &lt;=#{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
+	</select>
+	
+	<select id="getReceiverMessageList"		parameterType="map"	resultMap="messageSelectMap">
+		SELECT sender_id, receiver_id, message_title, send_date, receive_date, message_status
+		FROM( SELECT inner_table.*, ROWNUM AS row_seq
+			FROM( SELECT sender_id, receiver_id, message_title, send_date, receive_date, message_status
+				FROM message
+
+				WHERE receiver_id=#{receiverId}
+<!-- 					<if test="searchCondition != null"> -->
+<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
+<!-- 							AND sender_id=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
+<!-- 							AND message_title=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 					</if> -->
+
+				ORDER BY receiver_id ) inner_table
+			WHERE ROWNUM &lt;=#{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
 	</select>
 
 
 	<!-- SQL : SELECT ROW Count -->	 
 
-	<select  id="getTotalCount"		parameterType="search"	resultType="int">
+	<select  id="getSendTotalCount"		parameterType="map"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT send_id, receive_id, message_title, send_date, receive_date
+		FROM(	SELECT sender_id, receiver_id, message_title, send_date, receive_date, message_status
 			FROM message
-			<if test="searchCondition != null">
-				<where>
-						<if test="searchCondition==0 and searchKeyword !='' ">
-							send_id=#{searchKeyword}
-						</if>
-						<if test="searchCondition==1 and searchkeyword !='' ">
-							receive_id=#{searchKeyword}
-						</if>
-						<if test="searchCondition==2 and searchkeyword !='' ">
-							message_title=#{searchKeyword}
-						</if>
-					</where>
-			</if> ) countTable						
+
+				WHERE sender_id=#{senderId}
+<!-- 					<if test="searchCondition != null"> -->
+<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
+<!-- 							AND receiver_id=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
+<!-- 							AND message_title=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 					</if>  -->
+					) countTable						
+	</select>
+	
+	<select  id="getReceiveTotalCount"		parameterType="map"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT sender_id, receiver_id, message_title, send_date, receive_date, message_status
+			FROM message
+
+				WHERE receiver_id=#{receiverId}
+<!-- 					<if test="searchCondition != null"> -->
+<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
+<!-- 							AND sender_id=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
+<!-- 							AND message_title=#{searchKeyword} -->
+<!-- 						</if> -->
+<!-- 					</if> -->
+					) countTable						
 	</select>
 	 
 </mapper>
