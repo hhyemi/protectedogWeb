@@ -212,8 +212,24 @@
           $( "#btn-cancel" ).on("click" , function() {
                history.go(-1);
             });
-            
-	  		//============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 		
+         
+        //============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 	         
+	          $( "#allCheck").on('click', function(){
+	              if (  $( "#allCheck").prop("checked")  ) {
+	                 $(".termsCheck").prop("checked", "checked");
+	             }else{
+	                 $(".termsCheck").prop('checked', false);
+	             }
+	          });  
+	          $( ".termsCheck" ).on('click', function(){
+	              if($(".termsCheck:checked").length == 5){
+	                 $("#allCheck").prop("checked", "checked");
+	              }else{
+	                 $("#allCheck").prop("checked", false);
+	              }
+	           });          
+          
+/* 	  		//============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 		
 		    $("#allCheck").click(function(){
 		        //클릭되었으면
 		        if($("#allCheck").not(":disabled").prop("checked")){
@@ -224,7 +240,7 @@
 		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 false로 정의
 		            $(".termsCheck").not(":disabled").prop("checked",false);
 		        }
-		    });
+		    }); */
    });   
                
    

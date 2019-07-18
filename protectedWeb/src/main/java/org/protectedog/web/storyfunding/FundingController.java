@@ -1,6 +1,7 @@
 package org.protectedog.web.storyfunding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,10 @@ public class FundingController {
 	String fileroot;
 
 	@Value("#{commonProperties['funding']}")
-	String boardCode;
+	String fundBoardCode;
+
+	@Value("#{commonProperties['fundingReview']}")
+	String fundReviewBoardCode;
 
 	@Value("#{commonProperties['SFTermsOne']}")
 	String SFTermsOne;
@@ -142,7 +146,7 @@ public class FundingController {
 		for (String fileName : multiFile) {
 
 			FileDog files = new FileDog();
-			files.setBoardCode(boardCode);
+			files.setBoardCode(fundBoardCode);
 			files.setFileName(fileName);
 			files.setFileCode(0);
 			files.setPostNo(funding.getPostNo());
@@ -160,7 +164,11 @@ public class FundingController {
 		System.out.println("/funding/getVoting ");
 
 		Funding funding = fundingService.getVoting(postNo);
-		List<FileDog> file = fileService.getFile(postNo);
+
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundBoardCode);
+		filePost.put("postNo", postNo);
+		List<FileDog> file = fileService.getFile(filePost);
 
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
@@ -177,7 +185,10 @@ public class FundingController {
 
 		Funding funding = fundingService.getVoting(postNo);
 
-		List<FileDog> file = fileService.getFile(postNo);
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundBoardCode);
+		filePost.put("postNo", postNo);
+		List<FileDog> file = fileService.getFile(filePost);
 
 		model.addAttribute("funding", funding);
 		model.addAttribute("file", file);
@@ -208,7 +219,7 @@ public class FundingController {
 			// 파일디비에넣기
 			for (String fileName : multiFile) {
 				FileDog files = new FileDog();
-				files.setBoardCode(boardCode);
+				files.setBoardCode(fundBoardCode);
 				files.setFileName(fileName);
 				files.setFileCode(0);
 				files.setPostNo(funding.getPostNo());
@@ -223,7 +234,11 @@ public class FundingController {
 		funding.setId(id);
 		funding.setNickname(nickname);
 
-		List<FileDog> file = fileService.getFile(funding.getPostNo());
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundBoardCode);
+		filePost.put("postNo", funding.getPostNo());
+		List<FileDog> file = fileService.getFile(filePost);
+		
 		funding.setMainFile(file.get(0).getFileName());
 		// 변경여기까지//
 
@@ -242,7 +257,12 @@ public class FundingController {
 		System.out.println("/funding/delVoting");
 
 		fundingService.delVoting(postNo);
-
+		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundBoardCode);
+		filePost.put("postNo", postNo);
+		fileService.delAllFile(filePost);
+		
 		return "forward:/funding/listVoting";
 	}
 
@@ -347,9 +367,19 @@ public class FundingController {
 		System.out.println("/funding/getFunding ");
 
 		Funding funding = fundingService.getVoting(postNo);
-		List<FileDog> file = fileService.getFile(postNo);
+		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundBoardCode);
+		filePost.put("postNo", postNo);
+		List<FileDog> file = fileService.getFile(filePost);
+
+		Map<String, Object> fileReviewPost = new HashMap<String, Object>();
+		fileReviewPost.put("boardCode", fundReviewBoardCode);
+		fileReviewPost.put("postNo", postNo);
+		List<FileDog> fileReview = fileService.getFile(fileReviewPost);
 
 		model.addAttribute("file", file);
+		model.addAttribute("fileReview", fileReview);		
 		model.addAttribute("funding", funding);
 
 		return "forward:/funding/getFunding.jsp";
@@ -419,12 +449,11 @@ public class FundingController {
 		// funding테이블 voter_count += 1
 		Funding funding = new Funding();
 
-
 		funding.setSponsorCount(1);
 		funding.setFundPay(participate.getFundPay());
 		funding.setPostNo(participate.getPostNo());
 		fundingService.updateStatusCode(funding);
-		
+
 		Funding funding2 = fundingService.getVoting(participate.getPostNo());
 
 		model.addAttribute("funding", funding2);
@@ -432,4 +461,140 @@ public class FundingController {
 
 		return "forward:/funding/addFund.jsp";
 	}
+
+	//////////////////////////////// 후기///////////////////////////////////////////////
+
+	// 후기 글 작성
+	@RequestMapping(value = "addReview", method = RequestMethod.GET)
+	public String addReview(@RequestParam("postNo") int postNo, Model model, HttpSession session) throws Exception {
+
+		System.out.println("/funding/addReview : GET");
+
+		Funding funding = fundingService.getVoting(postNo);
+
+		model.addAttribute("funding", funding);
+
+		return "forward:/funding/addReview.jsp";
+	}
+
+	// 후기 글 등록
+	@RequestMapping(value = "addReview", method = RequestMethod.POST)
+	public String addReview(@RequestParam("multiFile") ArrayList<String> multiFile,
+			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
+
+		System.out.println("/funding/addReview : POST");
+
+		// 나중에 세션으로 변경//
+		String id = "user01";
+		String nickname = "스캇";
+		funding.setId(id);
+		funding.setNickname(nickname);
+		// 변경여기까지//
+
+		fundingService.addReview(funding);
+
+		List<FileDog> listFile = new ArrayList<FileDog>();
+
+		// 파일디비에넣기
+		for (String fileName : multiFile) {
+
+			FileDog files = new FileDog();
+			files.setBoardCode(fundReviewBoardCode);
+			files.setFileName(fileName);
+			files.setFileCode(0);
+			files.setPostNo(funding.getPostNo());
+			listFile.add(files);
+		}
+		fileService.addFile(listFile);
+
+		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
+	}
+
+	// 후기 글 수정작성
+	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
+	public String updateReview(@RequestParam("postNo") int postNo, Model model) throws Exception {
+
+		System.out.println("/funding/updateReview : GET");
+		// Business Logic
+
+		Funding funding = fundingService.getVoting(postNo);
+
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundReviewBoardCode);
+		filePost.put("postNo", postNo);
+		List<FileDog> file = fileService.getFile(filePost);
+
+		model.addAttribute("funding", funding);
+		model.addAttribute("file", file);
+
+		return "forward:/funding/updateReview.jsp";
+	}
+
+	// 후기 글 수정 등록
+	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
+	public String updateReview(@ModelAttribute("funding") Funding funding,
+			@RequestParam("multiFile") ArrayList<String> multiFile,
+			@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
+
+		System.out.println("/funding/updateReview : POST");
+
+		if (deleteFile != null) {
+
+			for (String fileName : deleteFile) {
+				FileDog files = new FileDog();
+				files.setFileName(fileName);
+				files.setPostNo(funding.getPostNo());
+
+				fileService.delFile(files);
+			}
+		}
+		if (multiFile.size() != 0) {
+			List<FileDog> listFile = new ArrayList<FileDog>();
+			// 파일디비에넣기
+			for (String fileName : multiFile) {
+				FileDog files = new FileDog();
+				files.setBoardCode(fundReviewBoardCode);
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(funding.getPostNo());
+				listFile.add(files);
+			}
+			fileService.addFile(listFile);
+		}
+
+		// 나중에 세션으로 변경//
+		String id = "user01";
+		String nickname = "스캇";
+		funding.setId(id);
+		funding.setNickname(nickname);
+		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundReviewBoardCode);
+		filePost.put("postNo", funding.getPostNo());
+		List<FileDog> file = fileService.getFile(filePost);
+
+		funding.setMainFile(file.get(0).getFileName());
+		// 변경여기까지//
+
+		fundingService.updateReview(funding);
+		
+		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
+	}
+	
+	// 후기 글 삭제
+	@RequestMapping(value = "delReview", method = RequestMethod.GET)
+	public String delReview(@RequestParam("postNo") int postNo, Model model) throws Exception {
+
+		System.out.println("/funding/delReview");
+
+		fundingService.delReview(postNo);
+		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", fundReviewBoardCode);
+		filePost.put("postNo", postNo);
+		fileService.delAllFile(filePost);
+		
+		return "redirect:/funding/getFunding?postNo=" + postNo;
+	}
+
 }

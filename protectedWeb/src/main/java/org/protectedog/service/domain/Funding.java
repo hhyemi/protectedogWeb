@@ -22,6 +22,9 @@ public class Funding {
 	private int fundPay;
 	private Date fundStartDate;
 	private Date fundEndDate;
+	private String reviewTitle;
+	private String reviewContent;
+	private Date reviewRegDate;
 
 	// DB에는 없고 있는 필드
 	// 전화번호 3칸
@@ -248,13 +251,36 @@ public class Funding {
 		FundRate = fundRate;
 	}
 
-
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getReviewTitle() {
+		return reviewTitle;
+	}
+
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
+	}
+
+	public String getReviewContent() {
+		return reviewContent;
+	}
+
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
+	}
+
+	public Date getReviewRegDate() {
+		return reviewRegDate;
+	}
+
+	public void setReviewRegDate(Date reviewRegDate) {
+		this.reviewRegDate = reviewRegDate;
 	}
 
 	@Override
@@ -264,9 +290,11 @@ public class Funding {
 				+ viewCount + ", voterCount=" + voterCount + ", voteStartDate=" + voteStartDate + ", voteEndDate="
 				+ voteEndDate + ", fundTargetPay=" + fundTargetPay + ", voteTargetCount=" + voteTargetCount
 				+ ", fundTargetDay=" + fundTargetDay + ", sponsorCount=" + sponsorCount + ", fundPay=" + fundPay
-				+ ", fundStartDate=" + fundStartDate + ", fundEndDate=" + fundEndDate + ", phone1=" + phone1
+				+ ", fundStartDate=" + fundStartDate + ", fundEndDate=" + fundEndDate + ", reviewTitle=" + reviewTitle
+				+ ", reviewContent=" + reviewContent + ", reviewRegDate=" + reviewRegDate + ", phone1=" + phone1
 				+ ", phone2=" + phone2 + ", phone3=" + phone3 + ", voteRemainDate=" + voteRemainDate
 				+ ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate + ", FundRate=" + FundRate
 				+ ", mainFile=" + mainFile + "]";
 	}
+
 }
