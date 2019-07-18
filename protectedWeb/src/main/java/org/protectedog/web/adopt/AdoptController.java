@@ -1,6 +1,7 @@
 package org.protectedog.web.adopt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -126,7 +127,11 @@ public class AdoptController {
 		System.out.println("/adopt/getAdopt : GET");
 		
 		Adopt adopt = adoptService.getAdopt(postNo);
-		List<FileDog> file = fileService.getFile(postNo);
+		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", adopt.getBoardCode());
+		filePost.put("postNo", postNo);
+		List<FileDog> file = fileService.getFile(filePost);
 		
 		model.addAttribute("adopt", adopt);	
 		model.addAttribute("file", file);	
@@ -143,7 +148,11 @@ public class AdoptController {
 		System.out.println("/adopt/updateAdopt : GET");
 		
 		Adopt adopt = adoptService.getAdopt(postNo);
-		List<FileDog> file = fileService.getFile(postNo);
+		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", adopt.getBoardCode());
+		filePost.put("postNo", postNo);
+		List<FileDog> file = fileService.getFile(filePost);
 		
 		model.addAttribute("adopt", adopt);
 		model.addAttribute("file", file);	
@@ -188,8 +197,10 @@ public class AdoptController {
 			fileService.addFile(listFile);
 		}
 		
-		List<FileDog> file =fileService.getFile(adopt.getPostNo());
-		adopt.setMainFile(file.get(0).getFileName());
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", adopt.getBoardCode());
+		filePost.put("postNo", adopt.getPostNo());
+		List<FileDog> file = fileService.getFile(filePost);
 
 		System.out.println(adopt);
 		System.out.println(adopt.getPostNo());
