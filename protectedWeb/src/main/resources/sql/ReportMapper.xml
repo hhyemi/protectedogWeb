@@ -9,8 +9,8 @@
  	
 	<resultMap id="reportSelectMap" type="report">
 		<result property="reportNo"		column="report_no"	jdbcType="NUMERIC"/>
-		<result property="reporter.id"	column="reporter_id"	jdbcType="VARCHAR"/>
-		<result property="reported.id"	column="reported_id"	jdbcType="VARCHAR"/>
+		<result property="reporterId"	column="reporter_id"	jdbcType="VARCHAR"/>
+		<result property="reportedId"	column="reported_id"	jdbcType="VARCHAR"/>
 		<result property="reportCategory"	column="report_category"	jdbcType="VARCHAR"/>
 		<result property="reportContent"	column="report_content"	jdbcType="VARCHAR"/>
 		<result property="reportStatus"	column="report_status"	jdbcType="NUMERIC"/>
@@ -28,7 +28,7 @@
 		(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date,
 		file1, file2, file3, del_code)
 		VALUES
-		(seq_report_report_no.NEXTVAL, #{reporter.id}, #{reported.id}, #{reportCategory}, 
+		(seq_report_report_no.NEXTVAL, #{reporterId}, #{reportedId}, #{reportCategory}, 
 		#{reportContent}, #{reportStatus}, SYSDATE, #{file1}, #{file2:VARCHAR}, #{file3:VARCHAR}, 
 		#{delCode:CHAR})
 	</insert>
@@ -58,9 +58,9 @@
 	<!-- SQL : SELECT LIST -->
 	 	
 	<select id="getReportList" 	parameterType="search" 	resultMap="reportSelectMap">
-		SELECT report_no, reporter_id, reported_id, report_category, report_date
+		SELECT report_no, reporter_id, reported_id, report_category, report_date, report_status, del_code
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT report_no, reporter_id, reported_id, report_category, report_date
+			FROM( SELECT report_no, reporter_id, reported_id, report_category, report_date, report_status, del_code
 				FROM report
 				<if test="searchCondition != null">
 					<where>
@@ -88,7 +88,7 @@
 
 	<select  id="getTotalCount"		parameterType="search"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT report_no, reporter_id, reported_id, report_category, report_date
+		FROM(	SELECT report_no, reporter_id, reported_id, report_category, report_date, report_status, del_code
 			FROM report
 			<if test="searchCondition != null">
 				<where>
