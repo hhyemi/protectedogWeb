@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -53,7 +54,7 @@
     
     <!--================Header Menu Area =================-->
 
-    
+    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
     <!--================Single Product Area =================-->
     <div class="product_image_area">
@@ -110,8 +111,8 @@
             </div>
           </div>
           <div class="col-lg-5 offset-lg-1">
-            <div class="s_product_text"><br/>
-              <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }<br/><br/>
+            <div class="s_product_text">
+              <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }<hr/>
               <ul class="list">
               
                 <li>
@@ -137,22 +138,14 @@
                 <li>
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>
-					  		<c:if test="${adopt.boardCode eq 'AD' }">
-					  			책임비
-					  		</c:if>
-						    <c:if test="${adopt.boardCode eq 'MS' }">
-					  			사례비
-					  		</c:if>
+					  		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
+						    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if>
 				  		</strong></div>
-						<div class="col-md-3 ">${adopt.dogPay}원</div>
+						<div class="col-md-3 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</div>
 			
 				  		<div class="col-md-2 " style="padding-right: 0px;"><strong>
-				  			<c:if test="${adopt.boardCode eq 'AD' }">
-					  			발견일자
-					  		</c:if>
-						    <c:if test="${adopt.boardCode eq 'MS' }">
-					  			실종일자
-					  		</c:if>
+				  			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
+						    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if>
 				  		</strong></div>
 						<div class="col-md-5">${adopt.dogDate}</div>
 					</div>
@@ -204,11 +197,15 @@
                 </button>
               </div>
               <div class="card_area">
-                <a class="main_btn" href="#" style="width: 189px">입양신청</a>
+              
+              	<c:if test="${adopt.boardCode eq 'AD' }">
+              		<a class="main_btn" href="#" style="width: 189px">입양신청</a>
+              	</c:if>
+              	
                 <a class="main_btn" href="#" style="width: 189px">문의하기</a>
-                <a class="icon_btn" href="#">
-                  <i class="lnr lnr lnr-heart"></i>
-                </a>
+               
+                <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+                
               </div>
             </div>
           </div>
@@ -244,20 +241,30 @@
         <br/><hr/><div class="col-md-12"><br/><br/></div>
         
         <div class="col-md-12" align="center">
-	        <a class="main_btn" href="#" style="width: 189px">수정</a>
-	        <a class="main_btn" href="#" style="width: 189px">목록</a>
+	        <button class="main_btn" style="width: 189px">수정</button>
+	        <button class="main_btn" style="width: 189px">삭제</button>
+	        <button class="main_btn" style="width: 189px">목록</button>
         </div>
+        
         
       </div>
     </div>
    <br><br><br/>
     <!--================End Single Product Area =================-->
+    
+    <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
+   
+			<div id="dialog-delAdopt" title="확인">
+			  <p align="center"><br/>삭제하시겠습니까?</p>
+			</div>  
   
     <!--================End Product Description Area =================-->
 
     <!--================ start footer Area  =================-->
     
     <!--================ End footer Area  =================-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -279,6 +286,7 @@
     
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
 
       var map;
@@ -311,11 +319,11 @@
 
         map = new google.maps.Map(document.getElementById('map'), {
         	zoom: 15,
-        	center: centerLoca
+        	center: {lat: localat, lng: localng}
         });
         
         marker = new google.maps.Marker({
-            position: centerLoca,
+            position: {lat: localat, lng: localng},
             map: map
         });
 
@@ -366,21 +374,39 @@
 		
 	 });
       
+      
+      $( function() {
+  	    $( "#dialog-delAdopt" ).dialog({
+  	    	autoOpen: false,
+  		      width: 350,
+  		      height: 210,
+  		      modal: true,
+  		      buttons: {
+  		        	예: function() {
+  		        		self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
+  		        	},
+  		        	아니오: function() {
+  		          		$( this ).dialog( "close" );
+  		        	}
+  		      }
+  	    });
+      });
+      
+      
       $(function() {
-    	    $( "a:contains('수정')" ).on("click" , function() {
+    	    $( "button:contains('수정')" ).on("click" , function() {
 				self.location = "/adopt/updateAdopt?postNo=${adopt.postNo}"
 			});
 		
-			$( "a:contains('삭제')" ).on("click" , function() {
-			 	alert("삭제하시겠습니까 dialog 추가");
-				self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}"
+			$( "button:contains('삭제')" ).on("click" , function() {
+				$('#dialog-delAdopt').dialog( "open" );
 			});
 		
 			$( "a:contains('입양신청')" ).on("click" , function() {
-				self.location = "../apply/getTerms.jsp?postNo=${adopt.postNo}"
+				self.location = "/apply/addApply?postNo=${adopt.postNo}"
 			});
 		
-			$( "a:contains('목록')" ).on("click" , function() {
+			$( "button:contains('목록')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
 		

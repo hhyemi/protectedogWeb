@@ -111,15 +111,16 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
-                <a class="dropdown-item" href="/adoptreview/addAdoptReview">경로테스트</a>
+                <a class="dropdown-item" href="/adoptreview/addRoute">경로테스트</a>
+                <a class="dropdown-item" href="/adoptreview/addAdoptReview">후기</a>
 
               </div>
             </li>
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토리펀딩</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="/funding/listFunding">후원신청</a>
-                <a class="dropdown-item" href="/funding/getFunding?postNo=10283">후원게시</a>
+                <a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
+                <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -185,7 +186,7 @@
   <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
   <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
   <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
   <script src="/resources/prodmenu/js/google-map.js"></script>
   <script src="/resources/prodmenu/js/main.js"></script>
   </body>

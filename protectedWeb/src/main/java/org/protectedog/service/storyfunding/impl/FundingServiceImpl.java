@@ -28,35 +28,35 @@ public class FundingServiceImpl implements FundingService {
 		System.out.println(this.getClass());
 	}
 
-	/////////////// FUNDING 게시판 /////////////////////
+	/////////////// FUNDING 후원신청게시판 /////////////////////
 
 	@Override
-	public void addFunding(Funding funding) throws Exception {
-		fundingDAO.addFunding(funding);
+	public void addVoting(Funding funding) throws Exception {
+		fundingDAO.addVoting(funding);
 
 	}
 
 	@Override
-	public Funding getFunding(int postNo) throws Exception {
-		return fundingDAO.getFunding(postNo);
+	public Funding getVoting(int postNo) throws Exception {
+		return fundingDAO.getVoting(postNo);
 	}
 
 	@Override
-	public void updateFunding(Funding funding) throws Exception {
-		fundingDAO.updateFunding(funding);
-
-	}
-
-	@Override
-	public void delFunding(int postNo) throws Exception {
-		fundingDAO.delFunding(postNo);
+	public void updateVoting(Funding funding) throws Exception {
+		fundingDAO.updateVoting(funding);
 
 	}
 
 	@Override
-	public Map<String, Object> listFunding(Search search) throws Exception {
-		List<Funding> list = fundingDAO.listFunding(search);
-		int totalCount = fundingDAO.getTotalCount(search);
+	public void delVoting(int postNo) throws Exception {
+		fundingDAO.delVoting(postNo);
+
+	}
+
+	@Override
+	public Map<String, Object> listVoting(Search search) throws Exception {
+		List<Funding> list = fundingDAO.listVoting(search);
+		int totalCount = fundingDAO.getVotingTotalCount(search);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
@@ -66,14 +66,22 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 	@Override
-	public List<String> getAutoFunding(Map<String, Object> searchMap) throws Exception {
-		return fundingDAO.getAutoFunding(searchMap);
+	public List<String> getAutoVoting(Map<String, Object> searchMap) throws Exception {
+		return fundingDAO.getAutoVoting(searchMap);
 	}
 
-	@Override
-	public void updateStatusCode(Funding funding) throws Exception {
-		// TODO Auto-generated method stub
+	/////////////// FUNDING 후원신청게시판 /////////////////////
 
+	@Override
+	public Map<String, Object> listFunding(Search search) throws Exception {
+		List<Funding> list = fundingDAO.listFunding(search);
+		int totalCount = fundingDAO.getFundingTotalCount(search);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+
+		return map;
 	}
 
 	/////////////// FUNDING 참여/////////////////////
@@ -81,6 +89,12 @@ public class FundingServiceImpl implements FundingService {
 	@Override
 	public void addParticipate(Participate participate) throws Exception {
 		fundingDAO.addParticipate(participate);
+
+	}
+
+	@Override
+	public void updateStatusCode(Funding funding) throws Exception {
+		fundingDAO.updateStatusCode(funding);
 
 	}
 

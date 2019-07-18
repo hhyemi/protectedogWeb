@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
@@ -33,7 +34,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	   #btn-add{
+	   #btn-update{
 		background: #fff;
         border:2px solid #29304d;
 		color:#29304d;
@@ -70,7 +71,7 @@
 	<div class="container ">
 		<div class="form-group">
 		<div class="page-header text-center">	
-		<font size=6>후원 신청 등록</font> 후원신청은 투표 <strong style="color:#225cba">1개</strong>이상 받을 시 <strong  style="color:#225cba">수정이 불가</strong>합니다.
+		<font size=6>후원 신청 수정</font> 후원신청은 투표 <strong style="color:#225cba">1개</strong>이상 받을 시 <strong  style="color:#225cba">수정이 불가</strong>합니다.
 	    </div>		
 		</div>	
 		
@@ -80,13 +81,15 @@
 			<h4 >후원목표금액</h4>
 			투표개수는 ( <strong style="color:#225cba">목표금액 X 0.001</strong> )표로 적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )<p/>
 		    <div class="row form-form"  >
-		      <input type="text" class="form-control" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; 원
+		      <input type="text" class="form-control" value="${funding.fundTargetPay }" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; 원
 		    </div>
 		  </div>
 			<br/>
+			
+			<fmt:parseNumber var ="test" value="${funding.fundTargetPay*0.001}" integerOnly="true"/>
          
 		  <div class="form-group" id="voteNum">
-		    <font ><b>투표수 <strong style="color:#225cba">0</strong>표</b></font>
+		    <font ><b>투표수 <strong style="color:#225cba">${test}</strong>표</b></font>
 		  </div>
 		  <div class="form-group" >
 			후원게시글로 이동하려면 받아야 할 투표 수입니다.	
@@ -99,9 +102,14 @@
 			투표가 마감되었을 때 시작 날부터의 기간입니다. 투표 기간은 <strong style="color:#225cba">30</strong>일로 고정됩니다.<p/>		
 		    <div >
 		      <select class="form-control" name="fundTargetDay" id="fundTargetDay"  style="width:700px; height:35px;">
-		      <c:forEach var ="i" begin="7" end ="30" step="1">
-				  	<option value="${i}" >${i}</option>
-				</c:forEach>	
+		       	<c:forEach var ="i" begin="7" end ="30" step="1">
+		       		<c:if test="${funding.fundTargetDay eq i }">
+				  	<option value="${funding.fundTargetDay}" selected >${funding.fundTargetDay}</option>
+		       		</c:if>
+		       		<c:if test="${!(funding.fundTargetDay eq i) }">
+		       		<option value="${i}" >${i}</option>
+		       		</c:if>
+				 </c:forEach>
 				</select>
 		    </div>
 		  </div>
@@ -109,14 +117,14 @@
 		  <div class="form-group">
 			<h4 class=>글제목</h4><p/>		
 		    <div class=>
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" value="${funding.postTitle}" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
 			<h4 class=>글내용</h4><p/>		
 			    <div class=>
-			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;"></textarea>
+			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;">${funding.postContent}</textarea>
 			    </div>
 			  </div>
 			<br/>
@@ -129,34 +137,46 @@
             
             <!-- 미리보기 영역 -->
             <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
+            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
+
+				<c:forEach var="name" items="${file}" varStatus="status">            
+				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
+                     <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
+                            <a href="#" value="${name.fileName}"  onclick="deletePreview2(this)">삭제</a></div>     
+                </c:forEach>           
+            
+
+            
+            </div> 
             </div>
 		   <div class="form-group">
 		   <br/>
 			<h4>연락처</h4>
 			문의받을 연락처를 입력해주세요.<p/>		
 			 <div class="col-sm-3" style="padding:0; margin:0;">
-		      <select class="form-control" name="phone1" id="phone1" style="height:35px;" >
-				  	<option value="010" >010</option>
-					<option value="011" >011</option>
-					<option value="016" >016</option>
-					<option value="018" >018</option>
-					<option value="019" >019</option>
+		      <select class="form-control" name="phone1" id="phone1">
+				  	<option value="010" ${ ! empty funding.phone1 && funding.phone1 == "010" ? "selected" : ""  } >010</option>
+					<option value="011" ${ ! empty funding.phone1 && funding.phone1 == "011" ? "selected" : ""  } >011</option>
+					<option value="016" ${ ! empty funding.phone1 && funding.phone1 == "016" ? "selected" : ""  } >016</option>
+					<option value="018" ${ ! empty funding.phone1 && funding.phone1 == "018" ? "selected" : ""  } >018</option>
+					<option value="019" ${ ! empty funding.phone1 && funding.phone1 == "019" ? "selected" : ""  } >019</option>
 				</select>
 		    </div>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호" maxlength="4" style="height:35px;">
+		      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty funding.phone2 ? funding.phone2 : ''}"  placeholder="변경번호">
 		    </div>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호" maxlength="4" style="height:35px;">
+		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty funding.phone3 ? funding.phone3 : ''}"   placeholder="변경번호">
 		    </div>
 		    <input type="hidden" name="phone"  />
-		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
+		    <input type="hidden" name="postNo" value="${funding.postNo }" />		    	
+		    <input type="hidden" id="multiFile" name="multiFile" />
+		    <input type="hidden" id="deleteFile" name="deleteFile" />		    
 		  </div>
         
 		  <br/><br/>
 		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">등록</button>
+	  			<button type="button" id="btn-update">수정</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -174,8 +194,8 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
 
-   //============= 등록버튼 눌렀을때 함수 =============      
-   function fncAddFunding(){
+   //============= 수정버튼 눌렀을때 함수 =============      
+   function fncUpdateVoting(){
       
       //Form 유효성 검증
 
@@ -183,8 +203,7 @@
       var postTitle = $('input[name="postTitle"]').val();
       var postContent = $('input[name="postContent"]').val();
       var phone2 = $('input[name="phone2"]').val();
-      var phone3 = $('input[name="phone3"]').val();   
-      var file = $("#multiFile").val();    
+      var phone3 = $('input[name="phone3"]').val();     
       
       if(fundTargetPay == null || fundTargetPay.length<1){
          alert("후원목표금액은 반드시 입력하여야 합니다.");
@@ -206,10 +225,6 @@
          $('input[name="postContent"]').focus();
          return;
       } */
-      if(file == null || file.length<1){
-         alert("파일은 반드시 입력하셔야 합니다.");
-         return;
-      }
       if(phone2 == null || phone2.length<1){
          alert("휴대폰번호는 반드시 입력하셔야 합니다.");
          $('input[name="phone2"]').focus();
@@ -263,13 +278,19 @@
         });
 
 
-      $('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
+      $('form').attr("method","POST").attr("action","/funding/updateVoting").attr("enctype","multipart/form-data").submit();
    }
    
-   //============= "다중파일업로드 파일명만 저장해서 value" =============   
+   //============= "다중파일업로드 파일명만 저장해서 insert할 value" =============   
    function fnAddFile(fileNameArray) {
          $("#multiFile").val(fileNameArray)    
    }   
+
+   //============= "다중파일업로드 파일명만 저장해서 delete할 value" =============   
+   function fnDeleteFile(deletefileNameArray) {
+         $("#deleteFile").val(deletefileNameArray)    
+   }   
+   
    
    //============= "다중파일업로드"  Event 처리 및  연결 =============      
 
@@ -277,6 +298,9 @@
      var files = {};
      var previewIndex = 0;
      var fileNameArray = new Array();
+     //원래있던사진 삭제할 array
+     var deletefileNameArray = new Array();
+     
      // image preview 기능 구현
      // input = file object[]
      function addPreview(input) {
@@ -342,6 +366,14 @@
          $("#preview .preview-box[value=" + imgNum + "]").remove();
          resizeHeight();
      }
+     //=============원래있던사진들 삭제버튼누를때 =============
+     function deletePreview2(obj) {
+         var imgName = obj.attributes['value'].value;
+         deletefileNameArray.push(imgName);
+         fnDeleteFile(deletefileNameArray);
+         $("#preview .preview-box2[value=\"" + imgName + "\"]").remove();
+         resizeHeight();
+     }
 
      //============= 파일 확장자 validation 체크 =============
      function validation(fileName) {
@@ -371,7 +403,7 @@
                  //후원목표금액 길이초과
                  if ($(this).val().length > $(this).attr('maxlength')-1) {
                      alert('제한길이 초과');
-                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')-1));
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                  }
                  //후원목표금액 문자 입력 검증 (정규식사용)    
                 var exp = /^[0-9]+$/;
@@ -428,9 +460,9 @@
    
    $(function() {
       
-         //============= 등록 Event  처리 =============   
-         $( "#btn-add" ).on("click" , function() {
-            fncAddFunding();
+         //============= 수정 Event  처리 =============   
+         $( "#btn-update" ).on("click" , function() {
+        	 fncUpdateVoting();
             });
          
          //============= 취소 Event  처리 =============

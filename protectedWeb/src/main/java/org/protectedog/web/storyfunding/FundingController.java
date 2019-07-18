@@ -86,6 +86,8 @@ public class FundingController {
 			termsTitle = "후원신청글";
 		} else if (termsTitle.equals("SFVote")) {
 			termsTitle = "투표하기";
+		} else if (termsTitle.equals("SFFund")) {
+			termsTitle = "후원하기";
 		}
 
 		model.addAttribute("termsList", termsList);
@@ -94,36 +96,36 @@ public class FundingController {
 		return "forward:/funding/getTerms.jsp";
 	}
 
-	/////////////// FUNDING 게시판 /////////////////////
+	/////////////// FUNDING 후원신청게시판 /////////////////////
 
 	// 펀딩 글 작성
-	@RequestMapping(value = "addFunding", method = RequestMethod.GET)
-	public String addFunding(HttpSession session) throws Exception {
+	@RequestMapping(value = "addVoting", method = RequestMethod.GET)
+	public String addVoting(HttpSession session) throws Exception {
 
-		System.out.println("/funding/addfunding : GET");
+		System.out.println("/funding/addVoting : GET");
 		// 나중에 세션으로 변경//
 		Funding funding = new Funding();
 		String id = "user01";
-		String nickName = "스캇";
+		String nickname = "스캇";
 		funding.setId(id);
-		funding.setNickName(nickName);
+		funding.setNickname(nickname);
 		// 변경여기까지//
 
-		return "redirect:/funding/addFunding.jsp";
+		return "redirect:/funding/addVoting.jsp";
 	}
 
 	// 펀딩 글 등록
-	@RequestMapping(value = "addFunding", method = RequestMethod.POST)
-	public String addFunding(@RequestParam("multiFile") ArrayList<String> multiFile,
+	@RequestMapping(value = "addVoting", method = RequestMethod.POST)
+	public String addVoting(@RequestParam("multiFile") ArrayList<String> multiFile,
 			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
-		System.out.println("/funding/addfunding : POST");
+		System.out.println("/funding/addVoting : POST");
 
 		// 나중에 세션으로 변경//
 		String id = "user01";
-		String nickName = "스캇";
+		String nickname = "스캇";
 		funding.setId(id);
-		funding.setNickName(nickName);
+		funding.setNickname(nickname);
 		// 변경여기까지//
 
 		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
@@ -132,7 +134,7 @@ public class FundingController {
 		funding.setVoteTargetCount(voteTargetCount);
 
 		System.out.println(funding);
-		fundingService.addFunding(funding);
+		fundingService.addVoting(funding);
 
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
@@ -148,51 +150,48 @@ public class FundingController {
 		}
 		fileService.addFile(listFile);
 
-		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
+		return "redirect:/funding/getVoting?postNo=" + funding.getPostNo();
 	}
 
 	// 펀딩 글 확인
-	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
-	public String getFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
+	@RequestMapping(value = "getVoting", method = RequestMethod.GET)
+	public String getVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
-		System.out.println("/funding/getFunding ");
+		System.out.println("/funding/getVoting ");
 
-		Funding funding = fundingService.getFunding(postNo);
+		Funding funding = fundingService.getVoting(postNo);
 		List<FileDog> file = fileService.getFile(postNo);
 
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
 
-		return "forward:/funding/getFunding.jsp";
+		return "forward:/funding/getVoting.jsp";
 	}
 
 	// 펀딩 글 수정작성
-	@RequestMapping(value = "updateFunding", method = RequestMethod.GET)
-	public String updateFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
+	@RequestMapping(value = "updateVoting", method = RequestMethod.GET)
+	public String updateVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
-		System.out.println("/funding/updateFunding : GET");
+		System.out.println("/funding/updateVoting : GET");
 		// Business Logic
 
-		Funding funding = fundingService.getFunding(postNo);
+		Funding funding = fundingService.getVoting(postNo);
 
 		List<FileDog> file = fileService.getFile(postNo);
 
 		model.addAttribute("funding", funding);
 		model.addAttribute("file", file);
 
-		return "forward:/funding/updateFunding.jsp";
+		return "forward:/funding/updateVoting.jsp";
 	}
 
 	// 펀딩 글 수정등록
-	@RequestMapping(value = "updateFunding", method = RequestMethod.POST)
-	public String updateFunding(@ModelAttribute("funding") Funding funding,
+	@RequestMapping(value = "updateVoting", method = RequestMethod.POST)
+	public String updateVoting(@ModelAttribute("funding") Funding funding,
 			@RequestParam("multiFile") ArrayList<String> multiFile,
 			@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
 
-		System.out.println("/funding/updateFunding : POST"); // Business Logic
-
-		System.out.println("multiFile:::" + multiFile);
-		System.out.println("deleteFile:::" + deleteFile);
+		System.out.println("/funding/updateVoting : POST");
 
 		if (deleteFile != null) {
 
@@ -220,9 +219,9 @@ public class FundingController {
 
 		// 나중에 세션으로 변경//
 		String id = "user01";
-		String nickName = "스캇";
+		String nickname = "스캇";
 		funding.setId(id);
-		funding.setNickName(nickName);
+		funding.setNickname(nickname);
 
 		List<FileDog> file = fileService.getFile(funding.getPostNo());
 		funding.setMainFile(file.get(0).getFileName());
@@ -231,21 +230,69 @@ public class FundingController {
 		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
 		funding.setVoteTargetCount(voteTargetCount);
 
-		fundingService.updateFunding(funding);
+		fundingService.updateVoting(funding);
 
-		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
+		return "redirect:/funding/getVoting?postNo=" + funding.getPostNo();
 	}
 
 	// 펀딩 글 삭제
-	@RequestMapping(value = "delFunding")
-	public String delFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
+	@RequestMapping(value = "delVoting")
+	public String delVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
-		System.out.println("/funding/delFunding");
+		System.out.println("/funding/delVoting");
 
-		fundingService.delFunding(postNo);
+		fundingService.delVoting(postNo);
 
-		return "forward:/funding/listFunding";
+		return "forward:/funding/listVoting";
 	}
+
+	// 펀딩 글 리스트
+	@RequestMapping(value = "listVoting")
+	public String listVoting(@ModelAttribute("search") Search search, Model model, HttpSession session)
+			throws Exception {
+
+		System.out.println("/funding/listVoting : GET / POST");
+
+		String originSearch = null;
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+
+		if (search.getSearchKeyword() == null) {
+			search.setSearchKeyword("");
+		} else {
+			if (!search.getSearchKeyword().equals("")) {
+				originSearch = search.getSearchKeyword();
+				String likeSearch = "%" + search.getSearchKeyword() + "%";
+				search.setSearchKeyword(likeSearch);
+			}
+		}
+
+		if (search.getSearchCondition() == null) {
+			search.setSearchCondition("");
+		}
+
+		// User user = (User) session.getAttribute("user");
+
+		Map<String, Object> map = fundingService.listVoting(search);
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+
+		search.setSearchKeyword(originSearch);
+
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+
+		return "forward:/funding/listVoting.jsp";
+	}
+
+	/////////////// FUNDING 후원게시게시판 /////////////////////
 
 	// 펀딩 글 리스트
 	@RequestMapping(value = "listFunding")
@@ -292,26 +339,97 @@ public class FundingController {
 
 		return "forward:/funding/listFunding.jsp";
 	}
+
+	// 펀딩 글 확인
+	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
+	public String getFunding(@RequestParam("postNo") int postNo, Model model) throws Exception {
+
+		System.out.println("/funding/getFunding ");
+
+		Funding funding = fundingService.getVoting(postNo);
+		List<FileDog> file = fileService.getFile(postNo);
+
+		model.addAttribute("file", file);
+		model.addAttribute("funding", funding);
+
+		return "forward:/funding/getFunding.jsp";
+	}
 	/////////////// FUNDING 참여/////////////////////
 
-	// 투표와 후원참여
-	@RequestMapping(value = "addFund", method = RequestMethod.GET)
-	public String addFund(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
+	// 투표참여
+	@RequestMapping(value = "addVote", method = RequestMethod.GET)
+	public String addVote(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
 
-		System.out.println("/funding/addfunding : GET");
+		System.out.println("/funding/addVote : GET");
 
 		Participate participate = new Participate();
 		participate.setPostNo(postNo);
 		participate.setId("user01");
 		participate.setNickName("스캇");
 
-		fundingService.addParticipate(participate);
-		
-		Funding funding = new Funding();
-		funding.setVoterCount(1);
-		
-		fundingService.updateFunding(funding);
+		// participate 레코드 추가 ( 1 : 투표 )
+		participate.setStatusCode("1");
 
-		return "redirect:/funding/getFunding?postNo=" + postNo;
+		fundingService.addParticipate(participate);
+
+		// funding테이블 voter_count += 1
+		Funding funding = new Funding();
+
+		// 투표완료 될상황
+		if (funding.getVoterCount() + 1 == funding.getVoteTargetCount()) {
+			funding.setStatusCode("3");
+		} else {
+			funding.setStatusCode("1");
+		}
+
+		funding.setVoterCount(1);
+		funding.setPostNo(postNo);
+		fundingService.updateStatusCode(funding);
+
+		return "redirect:/funding/getVoting?postNo=" + postNo;
+	}
+
+	// 투표와 후원참여 결제하는 페이지
+	@RequestMapping(value = "addFund", method = RequestMethod.GET)
+	public String addFunding(@RequestParam("postNo") int postNo, Model model, HttpSession session) throws Exception {
+
+		System.out.println("/funding/addFund : GET");
+
+		Funding funding = fundingService.getVoting(postNo);
+
+		model.addAttribute("funding", funding);
+
+		return "forward:/funding/addFundView.jsp";
+	}
+
+	// 후원참여
+	@RequestMapping(value = "addFund", method = RequestMethod.POST)
+	public String addFunding(@ModelAttribute("participate") Participate participate, Model model, HttpSession session)
+			throws Exception {
+
+		System.out.println("/funding/addFund : POST");
+
+		participate.setId("user01");
+		participate.setNickName("스캇");
+		// participate 레코드 추가 ( 2 : 후원 )
+		participate.setStatusCode("2");
+
+		fundingService.addParticipate(participate);
+
+		// funding테이블 voter_count += 1
+		Funding funding = new Funding();
+
+
+		funding.setSponsorCount(1);
+		funding.setFundPay(participate.getFundPay());
+		funding.setPostNo(participate.getPostNo());
+		fundingService.updateStatusCode(funding);
+		
+		Funding funding2 = fundingService.getVoting(participate.getPostNo());
+
+		model.addAttribute("funding", funding2);
+		model.addAttribute("participate", participate);
+
+		return "forward:/funding/addFund.jsp";
 	}
 }

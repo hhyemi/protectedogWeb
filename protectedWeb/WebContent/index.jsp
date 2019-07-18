@@ -62,16 +62,14 @@
 						   		<span class="text">youremail@email.com</span>
 					   		</div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-					    	<c:if test="${sessionScope.user.role eq null}">
-						    <span class="text">Sign in</span><span class="text">sign up</span>
-						    </c:if>
-						    <c:if test="${sessionScope.user.role != null}">
-						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
 						    <input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
 						    <c:if test="${sessionScope.user.role eq 'user' }">
 						    <div class="myInfo">
 						    	<input type="button" id="myInfo" value="마이페이지">
 						    </div>
+						    </c:if>
+						    <c:if test="${sessionScope.user.role != null}">
+						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
 						    </c:if>
 						    <c:if test="${sessionScope.user.role eq 'admin' }">
 						    <div class="myInfo">
@@ -81,7 +79,6 @@
 						    <div class="logout">
                                 <a href="/users/logout">logout</a>
                             </div>
-						    </c:if>
 					    </div>
 				    </div>
 			    </div>
@@ -103,7 +100,8 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
-                <a class="dropdown-item" href="/adoptreview/addAdoptReview">경로테스트</a>
+                <a class="dropdown-item" href="/adoptreview/addRoute">경로테스트</a>
+                <a class="dropdown-item" href="/adoptreview/addAdoptReview">후기</a>
 
               </div>
             </li>

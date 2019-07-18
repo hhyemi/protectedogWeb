@@ -3,14 +3,14 @@ package org.protectedog.service.cart.impl;
 import java.util.List;
 
 import org.protectedog.service.cart.CartDAO;
-import org.protectedog.service.cart.CartServcie;
+import org.protectedog.service.cart.CartService;
 import org.protectedog.service.domain.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("cartServiceImpl")
-public class CartServiceImpl implements CartServcie {
+public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	@Qualifier("cartDAOImpl")

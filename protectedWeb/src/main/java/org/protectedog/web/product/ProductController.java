@@ -1,5 +1,6 @@
 package org.protectedog.web.product;
 
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 //==> 회원관리 Controller
 @Controller
@@ -32,10 +31,6 @@ public class ProductController {
 
 	// setter Method 구현 않음
 
-	public ProductController() {
-		System.out.println(this.getClass());
-	}
-
 	// ==> classpath:config/common.properties ,
 	// classpath:config/commonservice.xml 참조 할것
 	// ==> 아래의 두개를 주석을 풀어 의미를 확인 할것
@@ -46,22 +41,32 @@ public class ProductController {
 	@Value("#{commonProperties['pageSize']}")
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
-
-
-	@RequestMapping(value="addProduct", method=RequestMethod.GET )
-	public String addProduct() throws Exception{
-		System.out.println("/product/addProduct : GET");
-		
-		return "/shop/product/addProduct.jsp";
+	
+	public ProductController() {
+		System.out.println(this.getClass());
 	}
 	
-	@RequestMapping(value = "addProduct", method=RequestMethod.POST)
-	public String addProduct( @ModelAttribute("product") Product product, 
-			HttpServletRequest request, @RequestParam("fileName") MultipartFile mfile) throws Exception{
 	
+	@RequestMapping(value="addProduct")
+	public String addProduct(@ModelAttribute("product") Product product,
+			HttpServletRequest request) throws Exception{
+	
+		
+		System.out.println("/shop/product/addProduct  : POST");
+
+		System.out.println(product);
+		System.out.println("////////////////////");
+
+
+		
 		productService.addProduct(product);
 		
-		return "redirect:/shop/product/listProduct?menu=manage";
+		System.out.println("Product GET : POST/");
+		
+		return "forward:/shop/product/getProduct.jsp";
+	
+
+		
 	}
 	@RequestMapping(value ="getProduct", method=RequestMethod.GET)
 	public String getProduct(@RequestParam("prodNo") int prodNo, Model model) throws Exception {
@@ -75,7 +80,7 @@ public class ProductController {
 
 		model.addAttribute("product", product);
 
-		return "forward:/shop/product/getProduct.jsp";
+		return "redirect:/product/getProduct.jsp";
 	}
 
 	@RequestMapping(value="updateProduct", method=RequestMethod.GET)
@@ -87,25 +92,24 @@ public class ProductController {
 		
 		model.addAttribute("product", product);
 		
-		return "forward:/shop/product/updateProduct.jsp";
+		return "forward:/product/updateProduct.jsp";
 	}
 		
 	@RequestMapping(value="updateProduct", method=RequestMethod.POST)
-	public String updateProduct( @ModelAttribute("product") Product product, 
-			HttpServletRequest request) throws Exception{
+		public String updateProduct( @ModelAttribute("product") Product product, 
+		HttpServletRequest request) throws Exception{
 
-		System.out.println("/shop/product/updateProduct : POST");
+		System.out.println("/product/updateProduct : POST");
 		//Business Logic
 		
 		productService.updateProduct(product);
 		
-		return "/shop/product/getProduct.jsp";
+		return "/product/getProduct.jsp";
 	
 	}
 
 	@RequestMapping( value="listProduct")
-	public String listProduct(@ModelAttribute("search") Search search, @RequestParam("menu") String menu,
-			HttpServletRequest request, Model model) throws Exception {
+	public String listProduct(@ModelAttribute("search") Search search, HttpServletRequest request, Model model) throws Exception {
 
 		System.out.println("/listProduct get");
 	
@@ -122,21 +126,17 @@ public class ProductController {
 		System.out.println(resultPage);
 
 		// Model 과 View 연결
-		ModelAndView modelAndView = new ModelAndView();
+	
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		
-		
-		modelAndView.setViewName("forward:/product/listProduct.jsp");
-
 		return "forward:/product/listProduct.jsp";
 	}
 	
 	@RequestMapping( value="listAdminProduct")
-	public String listAdminProduct(@ModelAttribute("search") Search search, @RequestParam("menu") String menu,
+	public String listAdminProduct(@ModelAttribute("search") Search search, 
 			HttpServletRequest request, Model model) throws Exception {
 
 		System.out.println("/listProduct get");
@@ -145,7 +145,7 @@ public class ProductController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		
+	
 		// Business logic 수행
 		Map<String, Object> map = productService.listProduct(search);
 
@@ -160,6 +160,6 @@ public class ProductController {
 		model.addAttribute("search", search);
 		
 
-		return "forward:/shop/product/listAdminProduct.jsp";
+		return "forward:/product/listAdminProduct.jsp";
 	}
 }

@@ -114,7 +114,7 @@ public class AdoptController {
 		
 		model.addAttribute("adopt", adopt);
 		
-		return "forward:/adopt/getAdopt.jsp";
+		return "redirect:/adopt/getAdopt?postNo="+adopt.getPostNo();
 	}
 	
 	
@@ -197,7 +197,7 @@ public class AdoptController {
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		model.addAttribute("adopt", adopt);		
 
-		return "forward:/adopt/getAdopt?postNo="+adopt.getPostNo();
+		return "redirect:/adopt/getAdopt?postNo="+adopt.getPostNo();
 	}
 	
 	
