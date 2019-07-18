@@ -24,13 +24,11 @@
 		<result property="phone" 			column="phone"				jdbcType="VARCHAR"/>
 		<result property="qnaCode" 			column="qna_code"			jdbcType="CHAR"/>
 		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
-		<result property="prodNo" 			column="prod_no"			jdbcType="NUMERIC"/>
+		<result property="prodNo" 			column="prod_no"			jdbcType="VARCHAR"/>
 		<result property="delCode" 			column="del_code" 			jdbcType="CHAR"/>
 
 		
 	 </resultMap>
-	
-
 	
 	 <!-- SQL : INSERT -->
 	 <insert 	id="addBoard"		parameterType="board" >
@@ -44,7 +42,7 @@
 					#{boardCode},
 					#{id} , 
 					#{nickName} , 
-					#{postTitle} , 
+					#{postTitle} ,
 					#{postContent} , 
 					SYSDATE , 
 					#{recommendCount:NUMERIC},
@@ -54,7 +52,7 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodNo:NUMERIC})
+					#{prodName:VARCHAR})
 	 </insert>
 	 
 	 
@@ -84,7 +82,7 @@
 			phone			= #{phone:VARCHAR},
 			qna_code		= #{qnaCode:CHAR},
 			route			= #{route:VARCHAR},
-			prod_no			= #{prodNo:NUMERIC} 
+			prod_name		= #{prodName:VARCHAR} 
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -124,7 +122,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
   				FROM ( SELECT post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_no, del_code  
+	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
 						FROM board
 						<where>
 								board_code = #{boardCode} AND del_code != '0'
@@ -159,7 +157,7 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_no, del_code  
+	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
 				FROM board
 				<where>
 						board_code = #{boardCode} AND del_code != '0'
@@ -180,7 +178,7 @@
 	 <select  id="listBoardRankingSearch"  parameterType="string"	resultMap="boardSelectMap">
 	  	SELECT inner_table.* , ROWNUM
 		FROM ( SELECT   post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  				    recommend_count, market_code, price, city , phone, qna_code, route, prod_no, del_code  
+	  				    recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
                FROM     board
                <where>
 				board_code = 'IS' AND del_code != '0'

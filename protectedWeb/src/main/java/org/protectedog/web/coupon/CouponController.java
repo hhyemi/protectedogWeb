@@ -1,4 +1,4 @@
-package org.protectedog.web.user;
+package org.protectedog.web.coupon;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +64,7 @@ public class CouponController {
 
 	
 	@RequestMapping(value="addCoupon", method=RequestMethod.GET)
-	public String addCoupon(@RequestParam("receiveId") String id, 
+	public String addCoupon(@RequestParam("receiverId") String id, 
 							@RequestParam("couponNo") int couponNo, 
 							@RequestParam("couponStatus") char couponStatus) throws Exception{
 		

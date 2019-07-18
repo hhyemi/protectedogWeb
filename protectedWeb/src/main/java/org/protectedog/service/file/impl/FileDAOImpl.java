@@ -1,6 +1,7 @@
 package org.protectedog.service.file.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.service.domain.FileDog;
@@ -30,14 +31,20 @@ public class FileDAOImpl implements FileDAO {
 	}
 
 	@Override
-	public List<FileDog> getFile(int postNo) throws Exception {
-		return sqlSession.selectList("FileMapper.getFile",postNo);
+	public List<FileDog> getFile(Map<String,Object> filePost) throws Exception {
+		return sqlSession.selectList("FileMapper.getFile",filePost);
 	}
 
 
 	@Override
 	public void delFile(FileDog file) throws Exception {
 		 sqlSession.selectList("FileMapper.delFile",file);
+	}
+
+	@Override
+	public void delAllFile(Map<String, Object> filePost) throws Exception {
+		sqlSession.delete("FileMapper.delAllFile",filePost);
+		
 	}
 
 

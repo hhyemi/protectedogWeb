@@ -6,8 +6,8 @@ public class Report {
 
 	///Field
 	private int reportNo;
-	private User reporter;
-	private User reported;
+	private String reporterId;
+	private String reportedId;
 	private String reportCategory;
 	private String reportContent;
 	private int reportStatus;
@@ -26,17 +26,17 @@ public class Report {
 	public void setReportNo(int reportNo) {
 		this.reportNo = reportNo;
 	}
-	public User getReporter() {
-		return reporter;
+	public String getReporterId() {
+		return reporterId;
 	}
-	public void setReporter(User reporter) {
-		this.reporter = reporter;
+	public void setReporterId(String reporterId) {
+		this.reporterId = reporterId;
 	}
-	public User getReported() {
-		return reported;
+	public String getReportedId() {
+		return reportedId;
 	}
-	public void setReported(User reported) {
-		this.reported = reported;
+	public void setReportedId(String reportedId) {
+		this.reportedId = reportedId;
 	}
 	public String getReportCategory() {
 		return reportCategory;
@@ -88,7 +88,7 @@ public class Report {
 	}
 	@Override
 	public String toString() {
-		return "Report [reportNo=" + reportNo + ", reporter=" + reporter + ", reported=" + reported
+		return "Report [reportNo=" + reportNo + ", reporterId=" + reporterId + ", reportedId=" + reportedId
 				+ ", reportCategory=" + reportCategory + ", reportContent=" + reportContent + ", reportStatus="
 				+ reportStatus + ", reportDate=" + reportDate + ", delCode=" + delCode + ", file1=" + file1 + ", file2="
 				+ file2 + ", file3=" + file3 + "]";

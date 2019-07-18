@@ -36,33 +36,7 @@
      </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-		
-		//============= 회원정보수정 Event  처리 =============	
-		$(function(){
-			$(".receiveCoupon").on("click", function(){
-				alert($(this).parent().parent().children("#couponNo").val());
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				var receiveId=$("#receiverId").val();
-				self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId;
-			})
-		});
-		
-		$(function(){
-			$("#couponManage").on("click", function(){
-				self.location="/coupon/addCouponManage"
-			})
-		});
-		
-		$(function(){
-			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				alert(couponNo);
-				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
-			})
-		})
-		
-	</script>
+
 	
 </head>
 
@@ -77,7 +51,6 @@
 	
 		<div class="page-header">
 			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }">
-			<input type="hidden" id="couponStatus" name="couponStatus" value="1">
 	       <h3 class=" text-info">쿠폰받아가셈</h3>
 	       	<c:if test="${ sessionScope.user.role eq 'admin' }">
 	       		<input type="button" id="couponManage" value="쿠폰등록/수정">
@@ -185,7 +158,7 @@
 				
 				
 				</div>
-			</c:forEach>
+				</c:forEach>
 			
 		
 			
@@ -200,6 +173,36 @@
 		
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
+
+	<script type="text/javascript">
+		
+		//============= 회원정보수정 Event  처리 =============	
+		$(function(){
+			$(".receiveCoupon").on("click", function(){
+				alert($(this).parent().parent().children("#couponNo").val());
+				alert($("#receiverId").val());
+				var couponNo=$(this).parent().parent().children("#couponNo").val();
+				var receiverId=$("#receiverId").val();
+				debugger;
+				self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+			})
+		});
+		
+		$(function(){
+			$("#couponManage").on("click", function(){
+				self.location="/coupon/addCouponManage"
+			})
+		});
+		
+		$(function(){
+			$(".removeCoupon").on("click", function(){
+				var couponNo=$(this).parent().parent().children("#couponNo").val();
+				alert(couponNo);
+				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+			})
+		})
+		
+	</script>
 
 </body>
 

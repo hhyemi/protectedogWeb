@@ -27,9 +27,7 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  	body {
-            padding-top : 50px;
-        }
+	  	
         img { 
      		max-height: 250px; 
      		min-height: 250px; 
@@ -83,10 +81,6 @@
 				alert("글번호 : "+$(this).children().val().trim());
 				 self.location ="/adopt/getAdopt?postNo="+$(this).children().val().trim();
 			});
-					
-			$( "button:contains('보호할개')" ).on("click" , function() {
-				self.location = "../index.jsp"
-			});
 			
 			$( "button:contains('글쓰기')" ).on("click" , function() {
 				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
@@ -116,7 +110,6 @@
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
-	<button type="button" class="btn btn-primary">보호할개</button>
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	
 		<div class="page-header text-info">
@@ -175,13 +168,19 @@
 			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: ">
 			<figure>
 			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
+				<c:if test="${adopt.statusCode ne 3}">
 				  <img src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/>
+				</c:if>
+				<c:if test="${adopt.statusCode eq 3}">
+				  <img src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
+				</c:if>
 				  <figcaption>
-					    <h3>${adopt.postTitle}</h3>
-					    <fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원
+					    <h3><strong>${adopt.postTitle}</strong></h3>
+					    <p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
 				  </figcaption>
 			</figure>
 			</div>	
+			
 			
           </c:forEach></div>
           </div>
@@ -213,7 +212,8 @@
 				  
 				</form>
 	    	</div>
-	  
+	    	
+<%-- 	  <jsp:include page="/layout/footer.jsp"></jsp:include> --%>
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	

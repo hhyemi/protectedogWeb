@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 //==> 판매관리 Controller
 @Controller
-@RequestMapping("/adoptreview/*")
+@RequestMapping("/adoptReview/*")
 public class AdoptReviewController {
 	
 	///Field
@@ -63,9 +63,9 @@ public class AdoptReviewController {
 	@RequestMapping( value="addAdoptReview", method=RequestMethod.GET )
 	public String addAdoptReview( ) throws Exception {
 
-		System.out.println("/adoptreview/addAdoptReview : GET");
+		System.out.println("/adoptReview/addAdoptReview : GET");
 
-		return "forward:/adoptreview/addAdoptReview.jsp";
+		return "forward:/adoptReview/addAdoptReview.jsp";
 	}
 	
 
@@ -76,15 +76,17 @@ public class AdoptReviewController {
 //											,MultipartHttpServletRequest mtfRequest
 											) throws Exception {
 
-		System.out.println("/adoptreview/addAdoptReview : POST");
+		System.out.println("/adoptReview/addAdoptReview : POST");
 
 		//Business Logic
 //		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		System.out.println("파일확인 : "+product.getFileName());
 		System.out.println("======================"+board);
 		boardService.addBoard(board);
+//		boardService.getBoard(board.getPostNo());
+//		System.out.println("=============="+board);
 		
-		return "forward:/adoptreview/getAdoptReview.jsp";
+		return "redirect:/adoptReview/getAdoptReview?postNo="+board.getPostNo();
 	}
 	
 	
@@ -93,7 +95,7 @@ public class AdoptReviewController {
 	@RequestMapping( value="getAdoptReview", method=RequestMethod.GET)
 	public String getAdoptReview( @RequestParam("postNo") int postNo , Model model) throws Exception {
 		
-		System.out.println("/adoptreview/getAdoptReview : GET");
+		System.out.println("/adoptReview/getAdoptReview : GET");
 		
 		//Business Logic
 		Board board = boardService.getBoard(postNo);
@@ -104,7 +106,7 @@ public class AdoptReviewController {
 //		System.out.println("파일이름 확인 : "+product.getFileName());
 	
 
-		return "forward:/adoptreview/getAdoptReview.jsp";
+		return "forward:/adoptReview/getAdoptReview.jsp";
 	}
 	
 	
@@ -113,7 +115,7 @@ public class AdoptReviewController {
 	@RequestMapping( value="updateAdoptReview", method=RequestMethod.GET)
 	public String updateAdoptReview( @RequestParam("postNo") int postNo , Model model) throws Exception{
 
-		System.out.println("/adoptreview/updateAdoptReview : GET");
+		System.out.println("/adoptReview/updateAdoptReview : GET");
 		//Business Logic
 		Board board = boardService.getBoard(postNo);
 		// Model 과 View 연결
@@ -121,7 +123,7 @@ public class AdoptReviewController {
 		System.out.println("============================================\n"+board);
 		
 
-		return "forward:/adoptreview/updateAdoptReview.jsp";
+		return "forward:/adoptReview/updateAdoptReview.jsp";
 	}
 	
 	
@@ -132,7 +134,7 @@ public class AdoptReviewController {
 //								,MultipartHttpServletRequest mtfRequest
 												) throws Exception{
 
-		System.out.println("/adoptreview/updateAdoptReview : POST");
+		System.out.println("/adoptReview/updateAdoptReview : POST");
 		//Business Logic
 //		adopt.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		boolean fileName = adopt.getFileName().endsWith("_");
@@ -147,7 +149,7 @@ public class AdoptReviewController {
 		model.addAttribute("board", board);
 		
 
-		return "forward:/adoptreview/getAdoptReview.jsp?postNo="+board.getPostNo();
+		return "forward:/adoptReview/getAdoptReview.jsp?postNo="+board.getPostNo();
 	}
 	
 	
@@ -157,7 +159,7 @@ public class AdoptReviewController {
 //														@RequestParam("menu") String menu  ,
 														Model model ) throws Exception{
 		
-		System.out.println("/adoptreview/listAdoptReview : GET / POST");
+		System.out.println("/adoptReview/listAdoptReview : GET / POST");
 		
 //		if(search.getCurrentPage() ==0 ){
 //			search.setCurrentPage(1);
@@ -181,7 +183,7 @@ public class AdoptReviewController {
 //		model.addAttribute("search", search);
 		
 
-		return "forward:/adoptreview/listAdoptReview.jsp";
+		return "forward:/adoptReview/listAdoptReview.jsp";
 	}
 	
 }

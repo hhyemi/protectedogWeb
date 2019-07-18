@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -181,7 +182,6 @@
 
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
-      var postContent = $('input[name="postContent"]').val();
       var phone2 = $('input[name="phone2"]').val();
       var phone3 = $('input[name="phone3"]').val();   
       var file = $("#multiFile").val();    
@@ -201,11 +201,11 @@
          $('input[name="postTitle"]').focus();
          return;
       }
-/*       if(postContent == null || postContent.length<1){
+      if($('textarea[name="postContent"]').val()==''){
          alert("글내용은 반드시 입력하셔야 합니다.");
-         $('input[name="postContent"]').focus();
+         $('textarea[name="postContent"]').focus();
          return;
-      } */
+      } 
       if(file == null || file.length<1){
          alert("파일은 반드시 입력하셔야 합니다.");
          return;
@@ -371,7 +371,7 @@
                  //후원목표금액 길이초과
                  if ($(this).val().length > $(this).attr('maxlength')-1) {
                      alert('제한길이 초과');
-                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')-1));
+                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                  }
                  //후원목표금액 문자 입력 검증 (정규식사용)    
                 var exp = /^[0-9]+$/;

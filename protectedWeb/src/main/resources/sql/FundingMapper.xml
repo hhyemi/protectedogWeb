@@ -61,7 +61,7 @@
 	 <select 	id="getVoting"	parameterType="string"	resultMap="fundingSelectMap">
 		SELECT
 		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , 		
+		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE ,  		
 		TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE , TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
 		FROM STORYFUNDING 
 		WHERE POST_NO IN #{value}
@@ -225,15 +225,56 @@
 	 </select>
 	  <!--///////////////  참여로 인한 update ////////////////////// --> 
 	   
-		 <!--  SQL : UPDATE (Participate)--> 
-		 <update	id="updateStatusCode"	parameterType="funding" >
+			 <!--  SQL : UPDATE (Participate)--> 
+			 <update	id="updateStatusCode"	parameterType="funding" >
+			   	UPDATE STORYFUNDING
+			   	<set>
+					STATUS_CODE        =      #{statusCode},
+					VOTER_COUNT        =      VOTER_COUNT + #{voterCount},
+			   		SPONSOR_COUNT      =      SPONSOR_COUNT + #{sponsorCount},
+			   		FUND_PAY           =      FUND_PAY + #{fundPay}
+	 		   	</set>
+			   	WHERE POST_NO IN #{postNo} 
+			 </update>
+			 
+			   <!--/////////////// 후기게시판 ////////////////////// -->
+	 	 <!-- SQL : INSERT  -->
+		 <update	id="addReview"	parameterType="funding" >
 		   	UPDATE STORYFUNDING
 		   	<set>
-				STATUS_CODE        =      #{statusCode},
-				VOTER_COUNT        =      VOTER_COUNT + #{voterCount},
-		   		SPONSOR_COUNT      =      SPONSOR_COUNT + #{sponsorCount},
-		   		FUND_PAY           =      FUND_PAY + #{fundPay}
- 		   	</set>
+				REVIEW_TITLE	 = #{reviewTitle:VARCHAR},
+				REVIEW_CONTENT 	 = #{reviewContent:VARCHAR},
+				REVIEW_REG_DATE  = SYSDATE
+		   	</set>
 		   	WHERE POST_NO IN #{postNo} 
 		 </update>
+		 
+		 <!-- SQL : SELECT ONE -->
+		 <select 	id="getReview"	parameterType="string"	resultMap="fundingSelectMap">
+			SELECT
+			POST_NO , ID , NICKNAME , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE , REVIEW_DEL_CODE
+			FROM STORYFUNDING 
+			WHERE POST_NO IN #{value}
+		 </select>
+		 
+		 <!-- SQL :  UPDATE -->
+		 <update	id="updateReview"	parameterType="funding" >
+		   	UPDATE STORYFUNDING
+		   	<set>
+				REVIEW_TITLE	 = #{reviewTitle:VARCHAR},
+				REVIEW_CONTENT 	 = #{reviewContent:VARCHAR}
+		   	</set>
+		   	WHERE POST_NO IN #{postNo} 
+		 </update>
+	
+		<!-- SQL : DELETE -->		 
+		<delete id="delReview" parameterType="string">
+		   	UPDATE STORYFUNDING
+		   	<set>
+				REVIEW_TITLE	 = null,
+				REVIEW_CONTENT 	 = null,
+				REVIEW_REG_DATE  = null
+		   	</set>
+		   	WHERE POST_NO IN #{postNo} 
+		</delete>		 
 </mapper> 

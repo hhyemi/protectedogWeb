@@ -42,16 +42,29 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public Map<String, Object> getMessageList(Search search) throws Exception {
+	public Map<String, Object> getSendMessageList(Search search, String senderId) throws Exception {
 		// TODO Auto-generated method stub
-		List<Message> list=messageDAO.getMessageList(search);
-		int totalCount=messageDAO.getTotalCount(search);
+		List<Message> list=messageDAO.getSendMessageList(search, senderId);
+		int totalCount=messageDAO.getSendTotalCount(search, senderId);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("totalCount", totalCount);
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
+	}
+	
+	@Override
+	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		List<Message> list=messageDAO.getReceiveMessageList(search, receiverId);
+		int totalCount=messageDAO.getReceiveTotalCount(search, receiverId);
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;		
 	}
 
 	@Override

@@ -10,7 +10,7 @@
 
 		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
 		<result property="id" column="ID" jdbcType="VARCHAR" />
-		<result property="nickname" column="NICKNAME" jdbcType="VARCHAR" />	
+		<result property="nickName" column="NICKNAME" jdbcType="VARCHAR" />	
 		<result property="reviewTitle" column="REVIEW_TITLE" jdbcType="VARCHAR" />
 		<result property="reviewContent" column="REVIEW_CONTENT" jdbcType="VARCHAR" />
 		<result property="reviewRegDate" column="REVIEW_REG_DATE" jdbcType="DATE" />

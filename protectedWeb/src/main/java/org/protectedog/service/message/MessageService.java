@@ -7,16 +7,19 @@ import org.protectedog.service.domain.Message;
 
 public interface MessageService {
 	
-	//ìª½ì§€ì‘ì„±
+	//ÂÊÁöÀÛ¼º
 	public void addMessage(Message message) throws Exception;
 	
-	//ìª½ì§€ì½ê¸°
+	//ÂÊÁöÀĞ±â
 	public Message getMessage(int messageNo) throws Exception;
 	
-	//ìª½ì§€ë¦¬ìŠ¤íŠ¸
-	public Map<String, Object> getMessageList(Search search) throws Exception;
+	//º¸³½ÂÊÁö¸®½ºÆ®
+	public Map<String, Object> getSendMessageList(Search search, String senderId) throws Exception;
 	
-	//ìª½ì§€ìƒíƒœ ì—…ë°ì´íŠ¸
+	//¹ŞÀºÂÊÁö¸®½ºÆ®
+	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception;
+	
+	//ÂÊÁö»óÅÂ ¾÷µ¥ÀÌÆ®
 	public void updateMessage(Message message) throws Exception;
 
 }
