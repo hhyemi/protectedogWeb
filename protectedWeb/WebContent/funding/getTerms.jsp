@@ -158,6 +158,9 @@
 	  			<c:if test="${termsTitle eq '투표하기'}">
 	  			투표하기
 	  			</c:if>
+	  			<c:if test="${termsTitle eq '후원하기'}">
+	  			후원하기
+	  			</c:if>	  			
 	  			</button>
 	  			<button type="button" id="btn-cancel">취소</button>
 		  </div>
@@ -192,10 +195,12 @@
           	}else if(!$("input[name=termsCheck5]").prop("checked")){
         		$("input[name=termsCheck5]").focus();        	       	       	       	
         	}else{
-        		if(	${termsTitle == "후원신청글"}){
-        			self.location="/funding/addFunding";
-        		}else if(${termsTitle == "투표하기"}){
+        		if(	${termsTitle eq '후원신청글'}){
+        			self.location="/funding/addVoting";
+        		}else if(${termsTitle eq '투표하기'}){
         			alert("투표하였습니다.")
+        			self.location="/funding/addVote?postNo=${postNo}";
+        		}else if(${termsTitle eq '후원하기'}){
         			self.location="/funding/addFund?postNo=${postNo}";
         		}
         	}

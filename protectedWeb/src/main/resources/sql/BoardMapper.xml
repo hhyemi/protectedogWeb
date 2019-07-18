@@ -24,11 +24,13 @@
 		<result property="phone" 			column="phone"				jdbcType="VARCHAR"/>
 		<result property="qnaCode" 			column="qna_code"			jdbcType="CHAR"/>
 		<result property="route" 			column="route"				jdbcType="VARCHAR"/>
-		<result property="prodName" 		column="prod_name"			jdbcType="VARCHAR"/>
+		<result property="prodNo" 			column="prod_no"			jdbcType="NUMERIC"/>
 		<result property="delCode" 			column="del_code" 			jdbcType="CHAR"/>
 
 		
 	 </resultMap>
+	
+
 	
 	 <!-- SQL : INSERT -->
 	 <insert 	id="addBoard"		parameterType="board" >
@@ -36,14 +38,13 @@
 	    SELECT seq_board_post_no.nextval FROM DUAL
 	 	</selectKey>
 	 	INSERT
-		INTO board (  post_no, board_code, id, nickname, post_title, post_content, post_content, reg_date, recommend_count,
-						market_code, price, city , phone, qna_code, route, prod_name)  
+		INTO board (  post_no, board_code, id, nickname, post_title, post_content, reg_date, recommend_count,
+						market_code, price, city , phone, qna_code, route, prod_no)  
 		VALUES	 (	#{postNo}, 
 					#{boardCode},
 					#{id} , 
 					#{nickName} , 
-					#{postTitle} ,
-					'testing', 
+					#{postTitle} , 
 					#{postContent} , 
 					SYSDATE , 
 					#{recommendCount:NUMERIC},
@@ -53,7 +54,7 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodName:VARCHAR})
+					#{prodNo:NUMERIC})
 	 </insert>
 	 
 	 
@@ -63,7 +64,7 @@
 	 <select 	id="getBoard"	parameterType="int"		resultMap="boardSelectMap">
 		SELECT
 		post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count,
-		market_code, price, city , phone, qna_code, route, prod_name, del_code
+		market_code, price, city , phone, qna_code, route, prod_no, del_code
 		FROM board 
 		WHERE post_no = #{value} 
 	 </select>
@@ -83,7 +84,7 @@
 			phone			= #{phone:VARCHAR},
 			qna_code		= #{qnaCode:CHAR},
 			route			= #{route:VARCHAR},
-			prod_name		= #{prodName:VARCHAR} 
+			prod_no			= #{prodNo:NUMERIC} 
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -92,7 +93,7 @@
 	 <update	id="updateViewCount"	parameterType="board" >
 	   	UPDATE board 
 	   	<set>
-			view_count	= view_count + 1
+			view_count	= view_count + 1 ;
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -101,7 +102,7 @@
 	 <update	id="updateRecommendCount"	parameterType="board" >
 	   	UPDATE board
 	   	<set>
-			recommend_count	= recommend_count + 1
+			recommend_count	= recommend_count + 1 ;
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -123,7 +124,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
   				FROM ( SELECT post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
+	  							recommend_count, market_code, price, city , phone, qna_code, route, prod_no, del_code  
 						FROM board
 						<where>
 								board_code = #{boardCode} AND del_code != '0'
@@ -158,7 +159,7 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT  post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
+	  					recommend_count, market_code, price, city , phone, qna_code, route, prod_no, del_code  
 				FROM board
 				<where>
 						board_code = #{boardCode} AND del_code != '0'
@@ -179,7 +180,7 @@
 	 <select  id="listBoardRankingSearch"  parameterType="string"	resultMap="boardSelectMap">
 	  	SELECT inner_table.* , ROWNUM
 		FROM ( SELECT   post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, 
-	  				    recommend_count, market_code, price, city , phone, qna_code, route, prod_name, del_code  
+	  				    recommend_count, market_code, price, city , phone, qna_code, route, prod_no, del_code  
                FROM     board
                <where>
 				board_code = 'IS' AND del_code != '0'

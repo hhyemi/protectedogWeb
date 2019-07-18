@@ -42,18 +42,26 @@ public class ProductController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	
+	public ProductController() {
+		System.out.println(this.getClass());
+	}
 	
 	
 	@RequestMapping(value="addProduct")
-	public String addProduct(/*@ModelAttribute("product") Product product,*/ HttpServletRequest request) throws Exception{
+	public String addProduct(@ModelAttribute("product") Product product,
+			HttpServletRequest request) throws Exception{
 	
-		
 		
 		System.out.println("/shop/product/addProduct  : POST");
 
+		System.out.println(product);
+		System.out.println("////////////////////");
+
+
 		
-//		productService.addProduct(product);
+		productService.addProduct(product);
+		
+		System.out.println("Product GET : POST/");
 		
 		return "forward:/shop/product/getProduct.jsp";
 	

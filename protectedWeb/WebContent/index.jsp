@@ -68,6 +68,9 @@
 						    	<input type="button" id="myInfo" value="마이페이지">
 						    </div>
 						    </c:if>
+						    <c:if test="${sessionScope.user.role != null}">
+						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
+						    </c:if>
 						    <c:if test="${sessionScope.user.role eq 'admin' }">
 						    <div class="myInfo">
 						    	<input type="button" id="manageMenu" value="관리자메뉴">
