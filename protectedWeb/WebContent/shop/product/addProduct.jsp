@@ -1,200 +1,259 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+<html>
 
-<html lang="ko">
-	
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
-    </style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-	
-	//============= "µî·Ï"  Event ¿¬°á =============
-	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-		 $( "button.btn.btn-primary" ).on("click" , function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('µî·Ï')" ).html() );
-			fncAddProduct();
-		});
-	});	
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- ////////////	Bootsrap, css ///////////////////////// -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+	rel="stylesheet">
 
-	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
-	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-		 $( "a[href='#' ]" ).on("click" , function() {
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
+
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/owl.theme.default.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/magnific-popup.css">
+
+<link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
+
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/ionicons.min.css">
+
+<!-- <link rel="stylesheet" -->
+<!-- 	href="../../resources/prodmenu/css/bootstrap-datepicker.css"> -->
+
+
+
+<link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
+<!-- <script src="./../resources/prodmenu/js/jquery.min.js"></script> -->
+<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+body>div.container {
+	border: 3px solid #D6CDB7;
+	margin-top: 10px;
+}
+</style>
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+	//============= "ë“±ë¡"  Event ì—°ê²° =============
+ 		$(function() {
+
+ 			$("#addproduct").on("click", function() {
 				//Debug..
-				//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
-				$("form")[0].reset();
-		});
-	});	
+				//alert(  $( "td.ct_btn01:contains('ë“±ë¡')" ).html() );
+			$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit();
+				//fncAddProduct();
+			});
+});
+ 			
+	
+//  	$(function() {
 
-	function fncAddProduct(){
-// 		//Form À¯È¿¼º °ËÁõ
-		
-// 		var name=$("input[name='prodName']").val();
-// 	 	//var name = document.detailForm.prodName.value;
-// 	 	var detail=$("input[name='prodDetail']").val();
-// 		//var detail = document.detailForm.prodDetail.value;
-// 		var manuDate=$("input[name='manuDate']").val();
-// 		//var manuDate = document.detailForm.manuDate.value;
-// 		var price=$("input[name='price']").val();
-// 		//var price = document.detailForm.price.value;
-	
-// 		if(name == null || name.length<1){
-// 			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
-// 			return;
-// 		}
-// 		if(detail == null || detail.length<1){
-// 			alert("»óÇ°»ó¼¼Á¤º¸´Â ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
-// 			return;
-// 		}
-// 		if(manuDate == null || manuDate.length<1){
-// 			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-// 			return;
-// 		}
-// 		if(price == null || price.length<1){
-// 			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-// 			return;
-// 		}
-		
-		$("form").attr("method", "POST").attr("action" , "/shop/product/addProduct").submit();
-	}
-	
+// 		$("#addproduct").on("click", function() {
+// 			self.location = "/shop/product/addProduct"
+// 		});
+
+// 	});
+
+	//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 	$(function() {
-		$( "#manuDate" ).datepicker({
-				dateFormat: "yy-mm-dd"
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
+		$("a[href='#' ]").on("click", function() {
+			//Debug..
+			//alert(  $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).html() );
+			$("form")[0].reset();
 		});
 	});
 
+	function fncAddProduct() {
+		//Form ìœ íš¨ì„± ê²€ì¦
 
+		// 		var prodName=$("input[name='prodName']").val();
+		// 	 	//var name = document.detailForm.prodName.value;
+		// 	 	var prodDetail=$("input[name='prodDetail']").val();
+		// 		//var detail = document.detailForm.prodDetail.value;
+		// 		var manuDate=$("input[name='manuDate']").val();
+		// 		//var manuDate = document.detailForm.manuDate.value;
+		// 		var price=$("input[name='price']").val();
+		// 		//var price = document.detailForm.price.value;
 
+		// 		if(prodName == null || prodName.length<1){
+		// 			alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
+		// 			return;
+		// 		}
 
+		// 		if(manuDate == null || manuDate.length<1){
+		// 			alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+		// 			return;
+		// 		}
+		// 		if(price == null || price.length<1){
+		// 			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+		// 			return;
+		// 		}
+
+		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
+	}
+
+	//============= ë‹¬ë ¥  =============
+	$(function() {
+		$("input[name='manuDate']").datepicker({
+			dateFormat : 'yy-mm-dd'
+		});
+	});
 </script>
 </head>
 
 <body>
-
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<h1 class="bg-primary text-center">»ó Ç° µî ·Ï</h1>
-		
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-		
-		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°¸í</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="»óÇ°¸íÀ» ¹İµå½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger"></strong>
-		      </span>
-		    </div>
-		   </div>
-		   <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°ÄÚµå</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodCode" name="prodCode" placeholder="»óÇ°¸íÀ» ¹İµå½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger"></strong>
-		      </span>
-		    </div>
-		   </div>
-		      
-		  <div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">¿ø»êÁö</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="country" name="country" placeholder="»óÇ° »ó¼¼Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		    </div>
-		    </div>
-		    
-		     <div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">Á¦Á¶»ç</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="company" name="company" placeholder="»óÇ° »ó¼¼Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		    </div>
-		    </div>
-	
-<!-- 		     <div class="form-group"> -->
-<!-- 		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°ÀÌ¹ÌÁö</label> -->
-<!-- 		    <div class="col-sm-4"> -->
-<!-- 		     <input type="file" class="form-control" id="fileName" name="fileName" placeholder="ÀÌ¹ÌÁö¸¦ µî·ÏÇØÁÖ¼¼¿ä"> -->
-<!-- 		    </div> -->
-<!-- 		    </div> -->
-		    
-		  <div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°»ó¼¼Á¤º¸</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="»óÇ° »ó¼¼Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		    </div>
-		    </div>
-		  
-		  <div class="form-group">
-					<label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°Á¦Á¶ÀÏÀÚ</label>
-		    			<div class="col-sm-4">
-		     				 <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="»óÇ°Á¦Á¶ÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" readonly>
-						</div>
+	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('images/bg_6.jpg');">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">admin</a></span> <span>page</span>
+					</p>
+					<h1 class="mb-0 bread">DOG|SHOP ìƒí’ˆë“±ë¡</h1>
 				</div>
-<br>
-		    
-		    <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">°¡ 	°İ</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="price" name="price" placeholder="»óÇ°°¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		    </div>
-		    </div>
-		    
-		    <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">Àç°í¼ö·®</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="stock" name="price" placeholder="Àç°í¼ö·®À» ÀÔ·ÂÇØÁÖ¼¼¿ä">
-		    </div>
-		    </div>
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >µî &nbsp;·Ï</button>
-			  <a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
-		    </div>
-		  </div>
-		</form>
-		<!-- form Start /////////////////////////////////////-->
-		
- 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+			</div>
+		</div>
+	</div>
+	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 	
-</body>
+	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-8 ftco-animate">
 
+					<!-- ///////////////////////////body navigation tag/////////////////////////// -->
+
+					<!--////////////////////////// form tag Start /////////////////////////////////-->
+					<form class="billing-form" name="addForm">
+						<h3 class="mb-4 billing-heading">ìƒí’ˆì •ë³´ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”</h3>
+						<div class="row align-items-end">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">ìƒí’ˆëª…</label> <input type="text"
+										class="form-control" name="prodName" id="prodName"
+										placeholder="ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" value="í…ŒìŠ¤íŠ¸">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">ìƒí’ˆì½”ë“œ</label> <input type="text"
+										class="form-control" name="prodCode" id="prodCode"
+										placeholder="ìƒí’ˆì½”ë“œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="lastname">ê°€ ê²©</label> <input type="text"
+										class="form-control" name="price" id="price"
+										placeholder="ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">ì›ì‚°ì§€</label> <input type="text"
+										class="form-control" name="country" id="country"
+										placeholder="ì›ì‚°ì§€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" value="í•œêµ­">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="streetaddress">ì œì¡°ì‚¬</label> <input type="text"
+										class="form-control" name="company" id="company"
+										placeholder="ì œì¡°ì‚¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" value="ì‚¼ì„±">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="streetaddress">ì œì¡°ì¼</label> <input type="text"
+										class="form-control" name="manuDate" id="manuDate" 
+										placeholder="ì œì¡°ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="towncity">í• ì¸ì•¡</label> <input type="text"
+										class="form-control" name="discountPrice" id="discountPrice" 
+										placeholder="ìƒí’ˆì˜ í• ì¸ê°€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="postcodezip">ì¬ê³ ìˆ˜ëŸ‰</label> <input type="text"
+										class="form-control" name="quantity" id="quantity" 
+										placeholder="ìƒí’ˆì˜ ì…ê³ ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="postcodezip">ìƒì„¸ì •ë³´</label> <input type="text"
+										class="form-control" name="prodDetail" id="prodDetail" 
+										value="ìƒì„¸ì •ë³´" placeholder="ìƒí’ˆì˜ ìƒì„¸ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+								</div>
+							</div>
+						</div>
+
+						<p align="center">
+							<a class="btn btn-primary py-3 px-4" id="addproduct">ë“±ë¡í•˜ê¸°</a>
+							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">ì·¨ì†Œí•˜ê¸°</a>
+						</p>
+					</form>
+					<!-- ////////////////////////////form tag end //////////////////////////////-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+	<script src="../../resources/prodmenu/js/popper.min.js"></script>
+	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../resources/prodmenu/js/aos.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
+	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+	<script src="../../resources/prodmenu/js/main.js"></script>
+	<!-- ////////////////////ë‹¬ë ¥ /////////////////////////////-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</body>
 </html>

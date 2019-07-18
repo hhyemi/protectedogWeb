@@ -10,7 +10,6 @@ import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.product.ProductService;
-import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,10 +32,6 @@ public class ProdQnaController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
-	
-	@Autowired
-	@Qualifier("userServiceImpl")
-	private UserService userService;
 
 	// setter Method 구현 않음
 
@@ -52,23 +47,99 @@ public class ProdQnaController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
+	@Value("#{commonProperties['qna']}")
+	// @Value("#{commonProperties[''] ?: 2}")
+	String qna;
+	
+	public ProdQnaController() {
+		System.out.println(this.getClass());
+	}
 	
 
 	@RequestMapping(value="addProdQna")
-	public String addProdQna(@ModelAttribute("board") Board board, HttpSession session, 
+	public String addProdQna(@ModelAttribute("board")Board board, HttpSession session, 
 			HttpServletRequest request) throws Exception {
-		System.out.println("/product/addBoard : GET/POST");
 		
-		board.setBoardCode("PR");
-		board.setId("user04");
+		System.out.println("shop/prodQna/addProdQna : GET/POST");
+		
+		board.setId("user01");
+		board.setNickName("스캇");
+		board.setBoardCode(qna);
+		board.setProdNo(10009);
+		
+		System.out.println("////////////////////");
 		
 		boardService.addBoard(board);
+		
 		System.out.println("Product GET : POST/");
 		System.out.println(board);
+		System.out.println("////////////////////");
 		
-		return "forward:/product/getboard.jsp";
+		return "forward:/shop/product/getProduct.jsp";
 	}
 	
+	
+	@RequestMapping( value="listProdQna")
+	public String listProdQna(@ModelAttribute("search") Search search, HttpServletRequest request, 
+			Model model, @RequestParam("boardCode") String boardCode, @RequestParam("order") int order) throws Exception {
+
+		System.out.println("/listProdQna get");
+	
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		// Business logic 수행
+		Map<String, Object> map = boardService.listBoard(search, boardCode, order);
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+
+		// Model 과 View 연결
+	
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		
+		return "forward:/product/listProQna.jsp";
+	}
+	
+	
+
+		@RequestMapping(value="getProdQna", method=RequestMethod.GET)
+		public String getProdQna(@ModelAttribute("board") Board board, @RequestParam("postNo") int postNo , Model model) throws Exception {
+			
+			System.out.println("/adoptreview/getAdoptReview : GET");
+			
+
+			board = boardService.getBoard(postNo);
+			System.out.println(board);
+			System.out.println("/////////ProdQna GET //////////////");
+			model.addAttribute("board", board);	
+			System.out.println("/////////ProdQna GET //////////////");
+
+		
+
+			return "forward:/shop/prodQna/getProdQna.jsp";
+		}
+		
+		@RequestMapping( value="updateProdQna", method=RequestMethod.GET)
+		public String updateProdQna(@ModelAttribute("board") Board board , Model model) throws Exception{
+
+			System.out.println("/shop/Product Q/A update : GET");
+			//Business Logic
+			boardService.updateBoard(board);
+			// Model 과 View 연결
+			model.addAttribute(board);
+			System.out.println("/////////////////////////////////");
+			System.out.println("/shop/Product Q/A update : GET");
+			
+
+			return "forward:/shop/prodQna/updateProdQna.jsp";
+		}
 		
 	
 }

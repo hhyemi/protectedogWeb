@@ -1,39 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE mapper
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProductMapper">
 
-	<resultMap id="ProductSelectMap" type="product">
+	<resultMap id="productSelectMap" type="product">
 	
-		<result property="prodNo" column="prod_no" jdbcType="NUMERIC" />
-		<result property="prodName" column="prod_name" jdbcType="VARCHAR" />
-		<result property="prodDetail" column="prod_detail" jdbcType="VARCHAR" />
-		<result property="manuDate" column="manu_date" jdbcType="DATE" />
-		<result property="price" column="price" jdbcType="NUMERIC" />
-		<result property="regDate" column="reg_date" jdbcType="DATE" />
-		<result property="quantity" column="quantity" jdbcType="NUMERIC" />
-		<result property="country" column="country" jdbcType="VARCHAR" />
-		<result property="company" column="company" jdbcType="VARCHAR" />
-		<result property="discountPrice" column="discount_price" jdbcType="NUMERIC"/>
-		<result property="prodCode" column="prod_code" jdbcType="NUMERIC"/>
+		<result property="prodNo" 			column="prod_no" 		jdbcType="NUMERIC" />
+		<result property="prodName" 		column="prod_name" 		jdbcType="VARCHAR" />
+		<result property="price" 			column="price" 			jdbcType="NUMERIC" />
+		<result property="manuDate" 		column="manu_date" 		jdbcType="DATE" />	
+		<result property="regDate" 			column="reg_date"		jdbcType="DATE" />
+		<result property="country"			column="country" 		jdbcType="VARCHAR" />
+		<result property="quantity" 		column="quantity" 		jdbcType="NUMERIC" />
+		<result property="prodDetail" 		column="prod_detail" 	jdbcType="VARCHAR" />
+		<result property="company" 			column="company" 		jdbcType="VARCHAR" />
+		<result property="discountPrice" 	column="discount_price" jdbcType="NUMERIC"/>
+		<result property="prodCode" 		column="prod_code" 		jdbcType="NUMERIC"/>
+		
 	</resultMap>
+	
+
 
 	<!-- 상품등록  : product add -->
-	<insert id="addProduct" parameterType="map">
+	<insert id="addProduct" parameterType="product">
 		INSERT 
 		INTO product (prod_no, prod_name, price, manu_date, reg_date, country, quantity, prod_detail, company, 
 		discount_price, prod_code) 
-		VALUES (seq_product_prod_no.nextval,  
-		#{prodName}, #{price}, SYSDATE, #{manuDate}, #{country}, #{quantity}, #{prodDetail}, #{company},
-		#{discountPrice}, #{prodCode}) 	
+		VALUES (SEQ_PRODUCT_PROD_NO.NEXTVAL, #{prodName}, #{price}, #{manuDate}, SYSDATE, #{country}, 
+		#{quantity}, #{prodDetail}, #{company}, #{discountPrice}, #{prodCode})
+		
 	</insert>
+
+	 
 	
 	<!-- 상품상세조회  : product read(one)  -->
-	<select id="getProduct" parameterType="string" resultMap="productSelectMap">
+	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
 		SELECT
-		prod_no, prod_name, price, country, prod_detail, price, company, discount_price
+		prod_no, prod_name, price, country, prod_detail, company, discount_price
 		FROM product
 		WHERE prod_no = #{prodNo}
 	</select>
@@ -43,14 +49,14 @@
 	<update id="updateProduct" parameterType="product">
 		UPDATE product
 		<set>		
-		prod_name = #{prodName},
-		price = #{price},
-		country= #{country},
-		prod_detail = #{prodDetail},
-		company = #{company},
-		manu_date = #{manuDate},
-		quantity = #{quantity},
-		discount_price = #{discountPrice}
+		prod_name 		= #{prodName},
+		price 			= #{price},
+		country			= #{country},
+		prod_detail	 	= #{prodDetail},
+		company 		= #{company},
+		manu_date		= #{manuDate},
+		quantity 		= #{quantity},
+		discount_price 	= #{discountPrice}
 		</set>
 		WHERE prod_no = #{prodNo}
 	</update>

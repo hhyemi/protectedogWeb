@@ -26,7 +26,7 @@ public class Board {
 	
 	private String qnaCode;
 	private String route;
-	private String prodName;
+	private int prodNo;
 	private char delCode;
 	
 
@@ -160,12 +160,12 @@ public class Board {
 		this.route = route;
 	}
 
-	public String getProdName() {
-		return prodName;
+	public int getProdNo() {
+		return prodNo;
 	}
 
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setProdNo(int prodNo) {
+		this.prodNo = prodNo;
 	}
 
 	
@@ -174,8 +174,8 @@ public class Board {
 	public String toString() {
 		return "Board [postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
-				+ ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodName="
-				+ prodName + ", delCode=" + delCode + "]";
+				+ ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodNo="
+				+ prodNo + ", delCode=" + delCode + "]";
 	}
 
 
