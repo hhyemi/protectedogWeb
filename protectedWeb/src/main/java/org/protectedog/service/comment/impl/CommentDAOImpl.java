@@ -69,8 +69,7 @@ public class CommentDAOImpl implements CommentDAO {
 
 	@Override
 	public void updateLikeCnt(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("CommentMapper.updateLikeCnt",map);
 	}
 
 }
