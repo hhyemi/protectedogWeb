@@ -43,16 +43,16 @@
 	
 		$(function() {
 			$( "button:contains('수정')" ).on("click" , function() {
-				self.location = "/adoptreview/updateAdoptReview?postNo=${board.postNo}"
+				self.location = "/adoptReview/updateAdoptReview?postNo=${board.postNo}"
 			});
 			
 			$( "button:contains('삭제')" ).on("click" , function() {
 				alert("삭제완료 dialog")
-				self.location = "/adoptreview/delAdoptReview?postNo=${board.postNo}"
+				self.location = "/adoptReview/delAdoptReview?postNo=${board.postNo}"
 			});
 			
 			$( "button:contains('목록')" ).on("click" , function() {
-				$("form").attr("method" , "POST").attr("action" , "/adoptreivew/listAdoptReview").submit();
+				$("form").attr("method" , "POST").attr("action" , "/adoptReivew/listAdoptReview").submit();
 			});
 			
 			$( "button:contains('보호할개')" ).on("click" , function() {
@@ -156,7 +156,7 @@
      
      function initMap() {
 	    map = new google.maps.Map(document.getElementById('map'), {
-			    zoom: 13,
+			    zoom: 16,
 			    center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
 			    		lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
 		});

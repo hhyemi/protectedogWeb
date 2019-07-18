@@ -68,7 +68,7 @@
 		
 		function fncAddApply() {
 // 			alert("등록완료 dialog")
-			$("form").attr("method" , "POST").attr("action" , "/adoptreview/addAdoptReview").submit();
+			$("form").attr("method" , "POST").attr("action" , "/adoptReview/addAdoptReview").submit();
 		}
 		
 		
@@ -147,7 +147,7 @@
 	      function initMap() {
 	    	  
 		        map = new google.maps.Map(document.getElementById('map'), {
-			        zoom: 15,
+			        zoom: 16,
 			        center: {lat: 37.564, lng:  127.0017} 
 		        });
 	

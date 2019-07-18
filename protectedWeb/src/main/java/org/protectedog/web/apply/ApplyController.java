@@ -75,7 +75,13 @@ public class ApplyController {
 		
 		model.addAttribute("apply", apply);//adoptNo 넘기기
 		
-		return "forward:/apply/addApply.jsp";
+		//세션조건도 추가
+		if ( adoptService.getAdopt(postNo).getStatusCode().equals("3") ) {
+			return "redirect:/adopt/getAdopt?postNo="+postNo;
+		}else {
+			return "forward:/apply/addApply.jsp";
+		}
+		
 	}
 	
 
@@ -93,7 +99,7 @@ public class ApplyController {
 		
 		model.addAttribute("adopt", adopt);
 		
-		return "forward:/adopt/getAdopt.jsp?postNo="+apply.getAdoptNo();
+		return "redirect:/adopt/getAdopt?postNo="+apply.getAdoptNo();
 	}
 	
 	
