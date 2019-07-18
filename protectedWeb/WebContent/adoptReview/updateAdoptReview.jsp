@@ -72,7 +72,7 @@
 		
 		function fncAddApply() {
 			alert("신청완료 dialog")
-			$("form").attr("method" , "POST").attr("action" , "/adoptreview/updateAdoptReview").submit();
+			$("form").attr("method" , "POST").attr("action" , "/adoptReview/updateAdoptReview").submit();
 		}
 		
 		
@@ -167,7 +167,7 @@
 	      
 	      function initMap() {
 		        map = new google.maps.Map(document.getElementById('map'), {
-			        zoom: 13,
+			        zoom: 16,
 			        center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
 			    			lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
 				});

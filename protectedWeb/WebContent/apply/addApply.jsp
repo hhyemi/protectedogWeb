@@ -136,7 +136,7 @@
 						
 						<div class="form-group">
 							<div class="col-md-12"><strong>3. </strong>
-								입양인은 입양 후에도, 만일 단체에서 입양인이 입양동물을 돌볼 여건과 환경이 적합하지 않다고 판단하여 입양동물의 반환을 요구하는 경우에는 이에 이의를 제기하지 않고 적극 협조할 의무가 있습니다.
+								입양 신청 후, 신청글은 수정하거나 삭제하실 수 없습니다.
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
@@ -216,13 +216,14 @@
 	               		</div>
                		</div>
                		
-	            	<div class="col-md-12">
-	              		<div class="form-group">
-	                		<label for=""><strong><u>동거인 여부에서 있음을 선택한 경우</u>, 동거인의 동의 여부를 선택하세요.</strong></label><br/>
-	                		<div class="col-md-2"><input type="radio"  name="mateAgree" value="1">동의</div>
-	                		<div class="col-md-5"><input type="radio"  name="mateAgree" value="2">동의하지 않음</div>
-	               		</div>
-               		</div>
+               		<span name="mateAgree"></span>
+<!-- 	            	<div class="col-md-12" id="divMateAgree"> -->
+<!-- 	              		<div class="form-group"> -->
+<!-- 	                		<label for=""><strong><font color="#225cba">동거인 여부에서 있음을 선택한 경우</font>, 동거인의 동의 여부를 선택하세요.</strong></label><br/> -->
+<!-- 	                		<div class="col-md-2"><input type="radio"  name="mateAgree" value="1">동의</div> -->
+<!-- 	                		<div class="col-md-5"><input type="radio"  name="mateAgree" value="2">동의하지 않음</div> -->
+<!-- 	               		</div> -->
+<!--                		</div> -->
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
@@ -232,13 +233,14 @@
 	               		</div>
                		</div>
                		
-	            	<div class="col-md-12">
-	              		<div class="form-group">
-	                		<label for=""><strong><u>양육경험 여부에서 있음을 선택한 경우</u>, 현재 양육여부를 선택하세요.</strong></label><br/>
-	                		<div class="col-md-2"><input type="radio"  name="currently" value="1">양육중</div>
-	                		<div class="col-md-6"><input type="radio"  name="currently" value="2">양육하고있지 않음</div>
-	               		</div>
-               		</div>
+               		<span name="currently"></span>
+<!-- 	            	<div class="col-md-12" id="divCurrently"> -->
+<!-- 	              		<div class="form-group"> -->
+<!-- 	                		<label for=""><strong><font color="#225cba">양육경험 여부에서 있음을 선택한 경우</font>, 현재 양육여부를 선택하세요.</strong></label><br/> -->
+<!-- 	                		<div class="col-md-2"><input type="radio"  name="currently" value="1">양육중</div> -->
+<!-- 	                		<div class="col-md-6"><input type="radio"  name="currently" value="2">양육하고있지 않음</div> -->
+<!-- 	               		</div> -->
+<!--                		</div> -->
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
@@ -298,50 +300,59 @@
 	          
  <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
 
-			<div id="dialog-terms" title="확인">
+			<div id="dialog-terms" title="">
 			  <p align="center"><br/>약관동의를 모두 클릭하세요.</p>
 			</div>       
-			<div id="dialog-job" title="확인">
+			<div id="dialog-job" title="">
 			  <p align="center"><br/>직업을 선택하세요.</p>
 			</div>       
-			<div id="dialog-addr" title="확인">
+			<div id="dialog-addr" title="">
 			  <p align="center"><br/>거주지 유형을 선택하세요.</p>
 			</div>       
-			<div id="dialog-mate" title="확인">
+			<div id="dialog-mate" title="">
 			  <p align="center"><br/>동거인 여부를 선택하세요.</p>
 			</div>       
-			<div id="dialog-mateAgree" title="확인">
+			<div id="dialog-mateAgree" title="">
 			  <p align="center"><br/>동거인 동의 여부를 선택하세요.</p>
 			</div>       
-			<div id="dialog-raise" title="확인">
+			<div id="dialog-afterMateAgree" title="">
+			  <p align="center"><br/>동거인 여부를 먼저 선택하세요.</p>
+			</div>       
+			<div id="dialog-raise" title="">
 			  <p align="center"><br/>양육경험 여부를 선택하세요.</p>
 			</div>       
-			<div id="dialog-currently" title="확인">
+			<div id="dialog-currently" title="">
 			  <p align="center"><br/>현재 양육 여부를 선택하세요.</p>
 			</div>      
-			<div id="dialog-plan" title="확인">
+			<div id="dialog-afterCurrently" title="">
+			  <p align="center"><br/>양육경험 여부를 먼저 선택하세요.</p>
+			</div>      
+			<div id="dialog-plan" title="">
 			  <p align="center"><br/>계획을 입력해주세요.</p>
 			</div>       
-			<div id="dialog-planLength" title="확인">
+			<div id="dialog-planLength" title="">
 			  <p align="center"><br/>계획은 300자까지 입력할 수 있습니다.</p>
 			</div>           
-			<div id="dialog-pay" title="확인">
+			<div id="dialog-pay" title="">
 			  <p align="center"><br/>예상비용을 입력해주세요.</p>
 			</div>       
-			<div id="dialog-payLength" title="확인">
+			<div id="dialog-payLength" title="">
 			  <p align="center"><br/>예상비용은 300자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-reason" title="확인">
+			<div id="dialog-reason" title="">
 			  <p align="center"><br/>입양 이유를 설명해주세요.</p>
 			</div>       
-			<div id="dialog-reasonLength" title="확인">
+			<div id="dialog-reasonLength" title="">
 			  <p align="center"><br/>입양 이유는 300자까지 입력할 수 있습니다.</p>
 			</div>       
-			<div id="dialog-situation" title="확인">
+			<div id="dialog-situation" title="">
 			  <p align="center"><br/>상황에 따른 대처를 설명해주세요.</p>
 			</div>       
-			<div id="dialog-situationLength" title="확인">
-			  <p align="center"><br/>강아지 성격은 300자까지 입력할 수 있습니다.</p>
+			<div id="dialog-situationLength" title="">
+			  <p align="center"><br/>상황에 따른 대처는 300자까지 입력할 수 있습니다.</p>
+			</div>     
+			<div id="dialog-confirm" title="신청서 확인">
+			  <p align="left" id="confirm" ></p>
 			</div>     
        
 <!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
@@ -456,7 +467,34 @@
 
  	  
 
-//////////////////////         check box         ////////////////////////////////////////////////
+	
+	$( function() {
+	    $( "#dialog-terms, #dialog-job, #dialog-addr, #dialog-mate, #dialog-mateAgree, #dialog-afterMateAgree, #dialog-raise, #dialog-currently, #dialog-afterCurrently, #dialog-plan, #dialog-planLength, #dialog-pay, #dialog-payLength, #dialog-reason, #dialog-reasonLength, #dialog-situation, #dialog-situationLength" ).dialog({
+	    	  autoOpen: false,
+		      width: 350,
+		      height: 150,
+		      modal: true
+	    });
+	});
+	
+	$( function() {
+	    $( "#dialog-confirm" ).dialog({
+	    	  autoOpen: false,
+		      width: 470,
+		      height: 600,
+		      modal: true,
+		      buttons: {
+		        	신청: function() {
+		        		$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
+		        	},
+		        	취소: function() {
+		          		$( this ).dialog( "close" );
+		        	}
+		      }
+	    });
+	});
+
+//////////////////////    ↑  dialog        ////////////////////////////////////////////////	
 	
 	$( 'input[name=termsAll]').on('click', function(){
 	    if (  $("input[name=termsAll]:checkbox").prop("checked")  ) {
@@ -469,6 +507,23 @@
 	$( "input[name=terms]:checkbox" ).on('click', function(){
 		if($("input[name=terms]:checkbox:checked").length == 3){
 			$("input[name=termsAll]:checkbox").prop("checked", "checked");
+		}else{
+			$("input[name=termsAll]:checkbox").prop("checked", false);
+		}
+	});
+	
+	$( "input[name=mateAgree]" ).on('click', function(){
+		if( $('input[name=mate]').length != 1 ){
+			$('#dialog-afterMateAgree').dialog( "open" );
+			$( "input[name=mateAgree]").prop('checked', false);
+		}
+	});
+	
+	$( "input[name=currently]" ).on('click', function(){
+		if( $('input[name=raise]').length != 1 ){
+			$('#dialog-afterCurrently').dialog( "open" );
+			$( "input[name=currently]").prop('checked', false);
+// 			$($( "input[name=raise]")[0]).focus();
 		}
 	});
 	
@@ -476,8 +531,20 @@
 		if( $(this).val() == 2 ){
 			$( 'input[name=mateAgree]').attr('disabled', true);
 			$( "input[name=mateAgree]").prop('checked', false);
+			$( '#divMateAgree').hide('blind','slow');
 		}else{
 			$( 'input[name=mateAgree]').attr('disabled', false);
+			if( $('#divMateAgree').length = 1 ){
+				$( '#divMateAgree').remove();
+			}
+			var divMateAgree = "<div class=\"col-md-12\" id=\"divMateAgree\">"
+	      		+"<div class=\"form-group\">"
+	    		+"<label for=\"\"><strong><font color=\"#225cba\">동거인 여부에서 있음을 선택한 경우</font>, 동거인의 동의 여부를 선택하세요.</strong></label><br/>"
+	    		+"<div class=\"col-md-2\"><input type=\"radio\"  name=\"mateAgree\" value=\"1\">동의</div>"
+	    		+"<div class=\"col-md-5\"><input type=\"radio\"  name=\"mateAgree\" value=\"2\">동의하지 않음</div>"
+	    		+"</div></div>";
+// 			$( 'span[name=mateAgree]').html(divMateAgree);
+			$( 'span[name=mateAgree]').append(divMateAgree).hide().show('blind','slow');
 		}
 	});
 	
@@ -485,25 +552,25 @@
 		if( $(this).val() == 2 ){
 			$( 'input[name=currently]').attr('disabled', true);
 			$( "input[name=currently]").prop('checked', false);
+			$( '#divCurrently').hide('blind','slow');
 		}else{
 			$( 'input[name=currently]').attr('disabled', false);
+			if( $('#divCurrently').length = 1 ){
+				$( '#divCurrently').remove();
+			}
+			var divCurrently = "<div class=\"col-md-12\" id=\"divCurrently\">"
+			      			+"<div class=\"form-group\">"
+			        		+"<label for=\"\"><strong><font color=\"#225cba\">양육경험 여부에서 있음을 선택한 경우</font>, 현재 양육여부를 선택하세요.</strong></label><br/>"
+			        		+"<div class=\"col-md-4\"><input type=\"radio\"  name=\"currently\" value=\"1\">양육 중</div>"
+			        		+"<div class=\"col-md-6\"><input type=\"radio\"  name=\"currently\" value=\"2\">양육하고 있지 않음</div>"
+			       			+"</div></div>";
+			$( 'span[name=currently]').append(divCurrently).hide().show('blind','slow');
 		}
 	});
 	
 //////////////////////     ↑      check box         ////////////////////////////////////////////////
 
 
-	
-	$( function() {
-	    $( "#dialog-terms, #dialog-job, #dialog-addr, #dialog-mate, #dialog-mateAgree, #dialog-raise, #dialog-currently, #dialog-plan, #dialog-planLength, #dialog-pay, #dialog-payLength, #dialog-reason, #dialog-reasonLength, #dialog-situation, #dialog-situationLength" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 150,
-		      modal: true
-	    });
-	});
-
-//////////////////////      ↑  dialog        ////////////////////////////////////////////////	
 
 	$( "input[name=plan]" ).keyup(function( ) {
 		if($("input[name=plan]").val().length > 300 ){
@@ -537,105 +604,170 @@
 		}
 	});
 	
-
-	
 //////////////////////       ↑  글자수체크         ////////////////////////////////////////////////
+
 	
 	// 등록버튼 누르고
 	function fncAddApply(){
 		
-		  // 약관 동의
-		  if( $("input:checkbox:checked").length != 4){
-			  $('#dialog-terms').dialog( "open" );
-			  return;
-		  }
-		  // 직업체크
-		  if( $("input[name=job]:radio:checked").length != 1){
-			  $('#dialog-job').dialog( "open" );
-			  return;
-		  }
-		  // 거주지체크
-		  if( $("input[name=addr]:checked").length != 1){
-			  $('#dialog-addr').dialog( "open" );
-			  return;
-		  }
-		  // 동거인여부체크
-		  if( $("input[name=mate]:checked").length != 1){
-			  $('#dialog-mate').dialog( "open" );
-			  return;
+		// 약관 동의
+		if( $("input:checkbox:checked").length != 4){
+			$('#dialog-terms').dialog( "open" );
+			return;
+		}
+		// 직업체크
+		if( $("input[name=job]:radio:checked").length != 1){
+			$('#dialog-job').dialog( "open" );
+			return;
+		}
+		// 거주지체크
+		if( $("input[name=addr]:checked").length != 1){
+			$('#dialog-addr').dialog( "open" );
+			return;
+		}
+		// 동거인여부체크
+		if( $("input[name=mate]:checked").length != 1){
+			$('#dialog-mate').dialog( "open" );
+			return;
+		}else{
+			// 동거인있음에 체크했는데 동의여부체크 안했을 경우
+			if( $( "input[name=mate]:checked" ).val() == 1 ){
+				if( $("input[name=mateAgree]:checked").length != 1){
+					$('#dialog-mateAgree').dialog( "open" );
+					return;
+				}
+			}
+		}
+		// 양육여부체크
+		if( $("input[name=raise]:checked").length != 1){
+			$('#dialog-raise').dialog( "open" );
+			return;
 			  
-		  }else{
-			  // 동거인있음에 체크했는데 동의여부체크 안했을 경우
-			  if( $( "input[name=mate]:checked" ).val() == 1 ){
-					if( $("input[name=mateAgree]:checked").length != 1){
-						$('#dialog-mateAgree').dialog( "open" );
-						return;
-					}
-			  }
-		  }
-		  // 양육여부체크
-		  if( $("input[name=raise]:checked").length != 1){
-			  $('#dialog-raise').dialog( "open" );
-			  return;
-			  
-		  }else{
-			  // 양육경험있음에 체크했는데 현재양육여부체크 안했을 경우
-			  if( $( "input[name=raise]:checked" ).val() == 1 ){
-					if( $("input[name=currently]:checked").length != 1){
-						$('#dialog-currently').dialog( "open" );
-						return;
-					}
-			  }
-		  }
-		  // 입력 안했을 경우 || 길이제한 넘었을 경우
-		  if( $("input[name=plan]").val() == ''){
-			  $('#dialog-plan').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=plan]").val().length > 300 ){
-			  $('#dialog-planLength').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=pay]").val() == ''){
-			  $('#dialog-pay').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=pay]").val().length > 300 ){
-			  $('#dialog-payLength').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=reason]").val() == ''){
-			  $('#dialog-reason').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=reason]").val().length > 300 ){
-			  $('#dialog-reasonLength').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=situation]").val() == ''){
-			  $('#dialog-situation').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=situation]").val().length > 300 ){
-			  $('#dialog-situationLength').dialog( "open" );
-			  return;
-		  }
+		}else{
+			// 양육경험있음에 체크했는데 현재양육여부체크 안했을 경우
+			if( $( "input[name=raise]:checked" ).val() == 1 ){
+				if( $("input[name=currently]:checked").length != 1){
+					$('#dialog-currently').dialog( "open" );
+					return;
+				}
+			}
+		}
+		// 입력 안했을 경우 || 길이제한 넘었을 경우
+		if( $("input[name=plan]").val() == ''){
+			$('#dialog-plan').dialog( "open" );
+			return;
+		}
+		if( $("input[name=plan]").val().length > 300 ){
+			$('#dialog-planLength').dialog( "open" );
+			return;
+		}
+		if( $("input[name=pay]").val() == ''){
+			$('#dialog-pay').dialog( "open" );
+			 return;
+		}
+		if( $("input[name=pay]").val().length > 300 ){
+			$('#dialog-payLength').dialog( "open" );
+			return;
+		}
+		if( $("input[name=reason]").val() == ''){
+			$('#dialog-reason').dialog( "open" );
+			return;
+		}
+		if( $("input[name=reason]").val().length > 300 ){
+			$('#dialog-reasonLength').dialog( "open" );
+			return;
+		}
+		if( $("input[name=situation]").val() == ''){
+			$('#dialog-situation').dialog( "open" );
+			return;
+		}
+		if( $("input[name=situation]").val().length > 300 ){
+			$('#dialog-situationLength').dialog( "open" );
+			return;
+		}
 		
+
+    	
+    	var job;
+    	var addr;
+    	var mate;
+    	var mateAgree='';
+    	var raise;
+    	var currently='';
+    	var plan = $("input[name=plan]").val();
+    	var pay = $("input[name=pay]").val();
+    	var reason = $("input[name=reason]").val();
+    	var situation = $("input[name=situation]").val();
+    	
+    	// 직업
+    	if( $("input[name=job]:checked").val() == 1 ){
+    		job = '학생';
+    	}else if($("input[name=job]:checked").val() == 2) {
+    		job = '직장인';
+    	}else if($("input[name=job]:checked").val() == 3) {
+    		job = '기타';
+    	}
+    	// 거주지
+    	if( $("input[name=addr]:checked").val() == 1 ){
+    		addr = '주택';
+    	}else if($("input[name=addr]:checked").val() == 2) {
+    		addr = '아파트';
+    	}else if($("input[name=addr]:checked").val() == 3) {
+    		addr = '빌라';
+    	}else if($("input[name=addr]:checked").val() == 4) {
+    		addr = '기타';
+    	}
+    	// 동거인
+    	if( $("input[name=mate]:checked").val() == 1 ){
+    		mate = '있음';
+    		// 동의
+        	if( $("input[name=mateAgree]:checked").val() == 1 ){
+        		mateAgree = '동의';
+        	}else if($("input[name=mateAgree]:checked").val() == 2) {
+        		mateAgree = '동의하지 않음';
+        	}
+    	}else if($("input[name=mate]:checked").val() == 2) {
+    		mate = '없음';
+    	}
+    	// 양육경험
+    	if( $("input[name=raise]:checked").val() == 1 ){
+    		raise = '있음';
+    		// 현재
+        	if( $("input[name=currently]:checked").val() == 1 ){
+        		currently = '양육 중';
+        	}else if($("input[name=currently]:checked").val() == 2) {
+        		currently = '양육하고 있지 않음';
+        	}
+    	}else if( $("input[name=raise]:checked").val() == 2) {
+    		raise = '없음';
+    	}
+    	
+
+		$('#confirm').html( '<strong>직업</strong> : '+job
+							+'<br/><strong>거주지 유형</strong> : '+addr
+							+'<br/><strong>동거인 여부</strong> : '+mate
+							+'<br/><strong>동의 여부</strong> : '+mateAgree
+							+'<br/><strong>양육경험</strong> : '+raise
+							+'<br/><strong>현재 양육 여부</strong> : '+currently
+							+'<br/><strong>앞으로의 계획</strong> : <br/>'+plan
+							+'<br/><strong>1년 예상비용</strong> : <br/>'+pay
+							+'<br/><strong>입양신청 이유</strong> : <br/>'+reason
+							+'<br/><strong>상황에 따른 대처</strong> : <br/>'+situation 
+							+'<br/><br/><br/><strong>신청 후 <u>조회, 수정, 삭제</u>는 불가능합니다. 신청하시겠습니까?</strong>');
 		
-		$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
-		
+		$('#dialog-confirm').dialog( "open" );
+				
 	}
-	
 	
     
     $(function() {
-			$( "button:contains('신청')" ).on("click" , function() {
-				fncAddApply();
-			});
-			
-			$( "a:contains('취소')" ).on("click" , function() {
-				self.location = "/adopt/getAdopt?postNo=${apply.adoptNo}"
-			});
+		$( "button:contains('신청')" ).on("click" , function() {
+			fncAddApply();
+		});
+		
+		$( "a:contains('취소')" ).on("click" , function() {
+			self.location = "/adopt/getAdopt?postNo=${apply.adoptNo}"
+		});
 	 });	
       
       
