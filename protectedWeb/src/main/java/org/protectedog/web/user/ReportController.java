@@ -2,7 +2,6 @@ package org.protectedog.web.user;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Report;
-import org.protectedog.service.domain.User;
 import org.protectedog.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
