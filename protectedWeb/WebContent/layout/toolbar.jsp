@@ -74,9 +74,7 @@
 						    <c:if test="${ sessionScope.user eq null }">
 						    	<span class="text">Sign in</span><span class="text">Sign Up</span>
 						    </c:if>
-						    <c:if test="${ sessionScope.user != null }">
-						    	<span class="text">${ sessionScope.user.nickname } 님 환영합니다</span>
-						    </c:if>
+
 						    <c:if test="${sessionScope.user.role eq 'user' }">
 						    <div class="myInfo">
 						    	<input type="button" id="myInfo" value="마이페이지">

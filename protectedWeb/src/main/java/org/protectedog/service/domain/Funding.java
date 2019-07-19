@@ -11,13 +11,14 @@ public class Funding {
 	private String phone;
 	private String postTitle;
 	private String postContent;
-	private int viewCount;
+	private int voteViewCount;
 	private int voterCount;
 	private Date voteStartDate;
 	private Date voteEndDate;
 	private int fundTargetPay;
 	private int voteTargetCount;
 	private int fundTargetDay;
+	private int fundViewCount;
 	private int sponsorCount;
 	private int fundPay;
 	private Date fundStartDate;
@@ -99,13 +100,6 @@ public class Funding {
 		this.postContent = postContent;
 	}
 
-	public int getViewCount() {
-		return viewCount;
-	}
-
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
-	}
 
 	public int getVoteTargetCount() {
 		return voteTargetCount;
@@ -283,18 +277,37 @@ public class Funding {
 		this.reviewRegDate = reviewRegDate;
 	}
 
+	public int getVoteViewCount() {
+		return voteViewCount;
+	}
+
+	public void setVoteViewCount(int voteViewCount) {
+		this.voteViewCount = voteViewCount;
+	}
+
+	public int getFundViewCount() {
+		return fundViewCount;
+	}
+
+	public void setFundViewCount(int fundViewCount) {
+		this.fundViewCount = fundViewCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Funding [postNo=" + postNo + ", id=" + id + ", nickname=" + nickname + ", statusCode=" + statusCode
-				+ ", phone=" + phone + ", postTitle=" + postTitle + ", postContent=" + postContent + ", viewCount="
-				+ viewCount + ", voterCount=" + voterCount + ", voteStartDate=" + voteStartDate + ", voteEndDate="
+				+ ", phone=" + phone + ", postTitle=" + postTitle + ", postContent=" + postContent + ", voteViewCount="
+				+ voteViewCount + ", voterCount=" + voterCount + ", voteStartDate=" + voteStartDate + ", voteEndDate="
 				+ voteEndDate + ", fundTargetPay=" + fundTargetPay + ", voteTargetCount=" + voteTargetCount
-				+ ", fundTargetDay=" + fundTargetDay + ", sponsorCount=" + sponsorCount + ", fundPay=" + fundPay
-				+ ", fundStartDate=" + fundStartDate + ", fundEndDate=" + fundEndDate + ", reviewTitle=" + reviewTitle
-				+ ", reviewContent=" + reviewContent + ", reviewRegDate=" + reviewRegDate + ", phone1=" + phone1
-				+ ", phone2=" + phone2 + ", phone3=" + phone3 + ", voteRemainDate=" + voteRemainDate
-				+ ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate + ", FundRate=" + FundRate
-				+ ", mainFile=" + mainFile + "]";
+				+ ", fundTargetDay=" + fundTargetDay + ", fundViewCount=" + fundViewCount + ", sponsorCount="
+				+ sponsorCount + ", fundPay=" + fundPay + ", fundStartDate=" + fundStartDate + ", fundEndDate="
+				+ fundEndDate + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", reviewRegDate="
+				+ reviewRegDate + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
+				+ ", voteRemainDate=" + voteRemainDate + ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate
+				+ ", FundRate=" + FundRate + ", mainFile=" + mainFile + "]";
 	}
+
+
+	
 
 }
