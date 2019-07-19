@@ -15,11 +15,15 @@ public interface CouponService {
 	
 	// 쿠폰 상세조회
 	public Coupon getCoupon(int couponNo) throws Exception;
+
 	
 	// 쿠폰 마리스트조회
 	public Map<String, Object> getCouponList(Map<String, Object> sMap) throws Exception;
 	
 	// 쿠폰상태 수정
 	public void updateCouponStatus(Coupon coupon) throws Exception;
+	
+	// 쿠폰 유효성체크
+	public int checkCoupon(String couponCode, String receiverId) throws Exception;
 	
 }

@@ -65,7 +65,7 @@ public class ProdQnaController {
 		board.setId("user01");
 		board.setNickName("스캇");
 		board.setBoardCode(qna);
-		board.setProdNo(10009);
+		board.setProdNo(10000);
 		
 		System.out.println("////////////////////");
 		
@@ -81,30 +81,40 @@ public class ProdQnaController {
 	
 	@RequestMapping( value="listProdQna")
 	public String listProdQna(@ModelAttribute("search") Search search, HttpServletRequest request, 
-			Model model, @RequestParam("boardCode") String boardCode, @RequestParam("order") int order) throws Exception {
+			Model model, @RequestParam("order") int order) throws Exception {
 
-		System.out.println("/listProdQna get");
+		
+		System.out.println("/listProdQna GET / POST");
 	
+		
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
+		
+		
 		search.setPageSize(pageSize);
 		
 		// Business logic 수행
-		Map<String, Object> map = boardService.listBoard(search, boardCode, order);
+		Map<String, Object> map = boardService.listBoard(search, qna, 1);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
 		// Model 과 View 연결
+
+		System.out.println("/shop/prodQna/listProdQna ///////////////////////");
+		System.out.println("/listProdQna GET / POST");
+
+
+		
 	
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/product/listProQna.jsp";
+		return "forward:/shop/prodQna/listProdQna.jsp";
 	}
 	
 	
@@ -117,9 +127,9 @@ public class ProdQnaController {
 
 			board = boardService.getBoard(postNo);
 			System.out.println(board);
-			System.out.println("/////////ProdQna GET //////////////");
+			System.out.println("/////////ProdQna GET////POST //////////////");
 			model.addAttribute("board", board);	
-			System.out.println("/////////ProdQna GET //////////////");
+			System.out.println("/////////ProdQna GET////POST//////////////");
 
 		
 

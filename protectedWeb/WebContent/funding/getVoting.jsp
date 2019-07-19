@@ -239,7 +239,7 @@
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-	 		//self.location = "/user/getUser?userId=${sessionScope.user.userId}";
+	 		//self.location = "/user/getUsers?id=${sessionScope.user.id}";
 		});   
 	
 		//============= SNS공유 Event  처리 =============	

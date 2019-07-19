@@ -90,7 +90,7 @@ body {
 		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
 		//document.detailForm.submit();	
-		$("form").attr("method", "POST").attr("action","/prodQna/listProdQna?order={param.order}").submit();
+		$("form").attr("method", "POST").attr("action","/product/listProduct").submit();
 	}
 
 	//============= Event 처리 및  연결 =============
@@ -136,10 +136,7 @@ body {
 
 	<div class="container">
 		<h1 align="center">
-			상품<small>&nbsp;Q&nbsp;&&nbsp;A <a href="#" id="button"><button
-						class="mdl-button mdl-js-button mdl-button--primary">
-						문의하기</button></a>
-			</small>
+			상품<small>&nbsp;리&nbsp;스&nbsp;트 </small>
 		</h1>
 	</div>
 	<BR />
@@ -194,24 +191,23 @@ body {
 					<tr>
 						<th class="mdl-data-table__cell--non-numeric" align="center"
 							id="no">글번호</th>
-						<th align="center" id="boardfont">제목</th>
-						<th align="center" id="boardfont">질문유형</th>
-						<th align="center" id="boardfont">등록일</th>
+						<th align="center" id="boardfont">상품명</th>
+						<th align="center" id="boardfont">상품가격</th>
+						<th align="center" id="boardfont">할인액</th>
 
 					</tr>
 				</thead>
 
 				<c:set var="i" value="0" />
-				<c:forEach var="board" items="${list}">
+				<c:forEach var="product" items="${list}">
 					<c:set var="i" value="${i+1}" />
 					<tbody>
 					<tr>
 					<td class="mdl-data-table__cell--non-numeric" align="center">${ i }</td>
-					<td align="center">${board.postTitle}
-					<input type="hidden" name="postNo" value="${board.postNo}" /> 
-					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
-					<td align="center">${board.qnaCode}</td>
-					<td align="center">${board.regDate}</td>
+					<td align="center">${product.prodName}
+					<input type="hidden" name="prodNo" value="${product.prodNo}" /> 
+					<td align="center">${product.price}</td>
+					<td align="center">${product.discountPrice}</td>
 					</tr>
 					</tbody>
 				</c:forEach>
