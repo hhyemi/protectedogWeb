@@ -26,6 +26,7 @@
 		<result property="levelPoint"	column="level_point"	jdbcType="NUMERIC"/>
 		<result property="levels"		column="levels"		jdbcType="VARCHAR"/>
 		<result property="accessDate"	column="access_date"	jdbcType="DATE"/>
+		<result property="accessIp" 	column="access_ip" 		jdbcType="VARCHAR"/>
 		<result property="role"		column="role"		jdbcType="VARCHAR"/>
 		<result property="purpose1"	column="purpose1"	jdbcType="VARCHAR"/>
 		<result property="purpose2"	column="purpose2"	jdbcType="VARCHAR"/>
@@ -51,6 +52,14 @@
 			account=#{account:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
 			gender=#{gender:CHAR}
+		</set>
+		WHERE id=#{id}
+	</update>
+	<update id="addAccessInfo" parameterType="users">
+		UPDATE users
+		<set>
+			access_date=SYSDATE,
+			access_ip=#{accessIp}
 		</set>
 		WHERE id=#{id}
 	</update>
