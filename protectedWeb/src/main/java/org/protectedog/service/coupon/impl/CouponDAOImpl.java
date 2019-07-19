@@ -44,6 +44,15 @@ public class CouponDAOImpl implements CouponDAO{
 	}
 
 	@Override
+	public Map<String, Object> getMyCoupon(String couponCode, String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("couponCode", couponCode);
+		map.put("receiverId", receiverId);
+		return sqlSession.selectOne("CouponMapper.getMyCoupon", map);
+	}
+	
+	@Override
 	public List<Coupon> getMyCouponList(Map<String, Object> sMap) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> rMap=new HashMap<String, Object>();

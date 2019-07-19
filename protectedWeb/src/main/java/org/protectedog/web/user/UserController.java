@@ -1,5 +1,6 @@
 package org.protectedog.web.user;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -119,18 +120,35 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+	public String login(@ModelAttribute("user") User user, HttpSession session, HttpServletRequest request) throws Exception{
 		
 		System.out.println("/users/login : POST");
 		
 		User dbUser=userService.getUsers(user.getId());
 		
+		String ip=request.getHeader("X-FORWARDED-FOR");
+		
+		if(ip==null || ip.length()==0) {
+			ip=request.getHeader("Proxy-Client-IP");
+		}
+		if(ip==null || ip.length()==0) {
+			ip=request.getHeader("WL-Proxy-Client-IP");
+		}
+		if(ip==null || ip.length()==0) {
+			ip=request.getRemoteAddr();
+		}
+		
+		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String accessTime=format.format(System.currentTimeMillis());
+		
+		System.out.println("立加IP? : "+ip);
+		System.out.println("立加矫埃? : "+accessTime);
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
 		if(user.getPw().equals(dbUser.getPw())) {
-			System.out.println("hi");
 			session.setAttribute("user", dbUser);
+			
 
 			System.out.println("session : "+dbUser);
 
