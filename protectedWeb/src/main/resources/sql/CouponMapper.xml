@@ -46,6 +46,14 @@
 		FROM coupon
 		WHERE coupon_no=#{couponNo}
 	</select>
+	
+	<select id="getMyCoupon" parameterType="map" resultMap="couponSelectMap">
+		SELECT
+		coupon_no, coupon_code, coupon_name, receiver_id, coupon_status
+		FROM coupon
+		WHERE coupon_code=#{couponCode}
+		AND receiver_id=#{receiverId}
+	</select>
 	 
 
 	 <!-- SQL : UPDATE -->

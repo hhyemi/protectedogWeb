@@ -55,7 +55,7 @@
 							<input type="text" class="form-control" name="receiverId" value="${ param.receiveId }"/>
 						</c:if>
 						<c:if test="${ param.receiveId eq null }">
-							<input type="text" class="form-control" name="receiverId" value=" "/>
+							<input type="text" class="form-control" name="receiverId" value=""/>
 						</c:if>
 					</div>
 				</div>
