@@ -36,32 +36,7 @@
      </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-		
-		//============= 회원정보수정 Event  처리 =============	
-		$(function(){
-			$("#moreView").on("click", function(){
-				var reportNo=$(this).parent().children().children("#reportNo").val();
-				alert(reportNo);
-				self.location="/report/getReport?reportNo="+reportNo;
-			})
-		});
-		
-		$(function(){
-			$("#couponManage").on("click", function(){
-				self.location="/coupon/addCouponManage"
-			})
-		});
-		
-		$(function(){
-			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				alert(couponNo);
-				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
-			})
-		})
-		
-	</script>
+
 	
 </head>
 
@@ -114,7 +89,7 @@
 						<c:if test="${ report.reportStatus == 1 }">
 							<td align="left">(${ report.reportStatus })처리완료</td>
 						</c:if>
-						<td id="moreView" align="right">상세보기</td>
+						<td align="right">상세보기</td>
 					</tr>
 				</c:forEach>
 			
@@ -131,6 +106,34 @@
 		
 		<jsp:include page="../common/pageNavigator_new.jsp"/>
 		<jsp:include page="../layout/footer.jsp"></jsp:include>
+
+
+
+	<script type="text/javascript">
+		
+		//============= 회원정보수정 Event  처리 =============	
+		$(function(){
+			$("td:nth-child(7)").on("click", function(){
+				var reportNo=$(this).parent().children().children("#reportNo").val();
+				self.location="/report/getReport?reportNo="+reportNo;
+			})
+		});
+		
+		$(function(){
+			$("#couponManage").on("click", function(){
+				self.location="/coupon/addCouponManage"
+			})
+		});
+		
+		$(function(){
+			$(".removeCoupon").on("click", function(){
+				var couponNo=$(this).parent().parent().children("#couponNo").val();
+				alert(couponNo);
+				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+			})
+		})
+		
+	</script>
 
 </body>
 

@@ -29,8 +29,8 @@
 		INSERT 
 		INTO product (prod_no, prod_name, price, manu_date, reg_date, country, quantity, prod_detail, company, 
 		discount_price, prod_code) 
-		VALUES (SEQ_PRODUCT_PROD_NO.NEXTVAL, #{prodName}, #{price}, #{manuDate}, SYSDATE, #{country}, 
-		#{quantity}, #{prodDetail}, #{company}, #{discountPrice}, #{prodCode})
+		VALUES (SEQ_PRODUCT_PROD_NO.NEXTVAL, #{prodName:VARCHAR}, #{price:NUMERIC}, #{manuDate}, SYSDATE, #{country:VARCHAR}, 
+		#{quantity:NUMERIC}, #{prodDetail:VARCHAR}, #{company:VARCHAR}, #{discountPrice:NUMERIC}, #{prodCode:NUMERIC})
 		
 	</insert>
 

@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page pageEncoding="EUC-KR"%>
+
 
 <!DOCTYPE html>
-<html>
+
+<html lang="ko">
 
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- ////////////	Bootsrap, css ///////////////////////// -->
@@ -40,7 +42,7 @@
 <link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
 <link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
 <!-- <script src="./../resources/prodmenu/js/jquery.min.js"></script> -->
-<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+<!-- jQuery UI toolTip »ç¿ë CSS-->
 <!-- <link rel="stylesheet" -->
 <!-- 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
@@ -55,12 +57,12 @@ body>div.container {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//============= "ë“±ë¡"  Event ì—°ê²° =============
+	//============= "µî·Ï"  Event ¿¬°á =============
  		$(function() {
 
  			$("#addproduct").on("click", function() {
 				//Debug..
-				//alert(  $( "td.ct_btn01:contains('ë“±ë¡')" ).html() );
+				//alert(  $( "td.ct_btn01:contains('µî·Ï')" ).html() );
 			$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit();
 				//fncAddProduct();
 			});
@@ -75,19 +77,19 @@ body>div.container {
 
 // 	});
 
-	//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
+	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
 	$(function() {
-		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
+		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
 		$("a[href='#' ]").on("click", function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
 			$("form")[0].reset();
 		});
 	});
 
 	function fncAddProduct() {
-		//Form ìœ íš¨ì„± ê²€ì¦
+		//Form À¯È¿¼º °ËÁõ
 
 		// 		var prodName=$("input[name='prodName']").val();
 		// 	 	//var name = document.detailForm.prodName.value;
@@ -99,23 +101,23 @@ body>div.container {
 		// 		//var price = document.detailForm.price.value;
 
 		// 		if(prodName == null || prodName.length<1){
-		// 			alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
+		// 			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
 		// 			return;
 		// 		}
 
 		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+		// 			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
 		// 			return;
 		// 		}
 		// 		if(price == null || price.length<1){
-		// 			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+		// 			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
 		// 			return;
 		// 		}
 
 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 	}
 
-	//============= ë‹¬ë ¥  =============
+	//============= ´Ş·Â  =============
 	$(function() {
 		$("input[name='manuDate']").datepicker({
 			dateFormat : 'yy-mm-dd'
@@ -128,7 +130,6 @@ body>div.container {
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
-
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
 	<div class="hero-wrap hero-bread"
 		style="background-image: url('images/bg_6.jpg');">
@@ -139,7 +140,7 @@ body>div.container {
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="index.html">admin</a></span> <span>page</span>
 					</p>
-					<h1 class="mb-0 bread">DOG|SHOP ìƒí’ˆë“±ë¡</h1>
+					<h1 class="mb-0 bread">DOG|SHOP »óÇ°µî·Ï</h1>
 				</div>
 			</div>
 		</div>
@@ -149,92 +150,95 @@ body>div.container {
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
 	<section class="ftco-section">
 		<div class="container">
+		<form class="billing-form" name="addForm">
 			<div class="row justify-content-center">
 				<div class="col-xl-8 ftco-animate">
 
 					<!-- ///////////////////////////body navigation tag/////////////////////////// -->
 
 					<!--////////////////////////// form tag Start /////////////////////////////////-->
-					<form class="billing-form" name="addForm">
-						<h3 class="mb-4 billing-heading">ìƒí’ˆì •ë³´ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”</h3>
+					
+						<h3 class="mb-4 billing-heading">»óÇ°Á¤º¸¸¦ µî·ÏÇØÁÖ¼¼¿ä</h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">ìƒí’ˆëª…</label> <input type="text"
+									<label for="firstname">»óÇ°¸í</label> <input type="text"
 										class="form-control" name="prodName" id="prodName"
-										placeholder="ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" value="í…ŒìŠ¤íŠ¸">
+										placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" value="Å×½ºÆ®">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">ìƒí’ˆì½”ë“œ</label> <input type="text"
+									<label for="firstname">»óÇ°ÄÚµå</label> <input type="text"
 										class="form-control" name="prodCode" id="prodCode"
-										placeholder="ìƒí’ˆì½”ë“œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+										placeholder="»óÇ°ÄÚµå¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="lastname">ê°€ ê²©</label> <input type="text"
+									<label for="lastname">°¡ °İ</label> <input type="text"
 										class="form-control" name="price" id="price"
-										placeholder="ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
+										placeholder="°¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">ì›ì‚°ì§€</label> <input type="text"
+									<label for="firstname">¿ø»êÁö</label> <input type="text"
 										class="form-control" name="country" id="country"
-										placeholder="ì›ì‚°ì§€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" value="í•œêµ­">
+										placeholder="¿ø»êÁö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" value="ÇÑ±¹">
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="streetaddress">ì œì¡°ì‚¬</label> <input type="text"
+									<label for="streetaddress">Á¦Á¶»ç</label> <input type="text"
 										class="form-control" name="company" id="company"
-										placeholder="ì œì¡°ì‚¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" value="ì‚¼ì„±">
+										placeholder="Á¦Á¶»ç¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" value="»ï¼º">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="streetaddress">ì œì¡°ì¼</label> <input type="text"
+									<label for="streetaddress">Á¦Á¶ÀÏ</label> <input type="text"
 										class="form-control" name="manuDate" id="manuDate" 
-										placeholder="ì œì¡°ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+										placeholder="Á¦Á¶ÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="towncity">í• ì¸ì•¡</label> <input type="text"
+									<label for="towncity">ÇÒÀÎ¾×</label> <input type="text"
 										class="form-control" name="discountPrice" id="discountPrice" 
-										placeholder="ìƒí’ˆì˜ í• ì¸ê°€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+										placeholder="»óÇ°ÀÇ ÇÒÀÎ°¡¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="postcodezip">ì¬ê³ ìˆ˜ëŸ‰</label> <input type="text"
+									<label for="postcodezip">Àç°í¼ö·®</label> <input type="text"
 										class="form-control" name="quantity" id="quantity" 
-										placeholder="ìƒí’ˆì˜ ì…ê³ ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
+										placeholder="»óÇ°ÀÇ ÀÔ°í¼ö·®À» ÀÔ·ÂÇØÁÖ¼¼¿ä">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="postcodezip">ìƒì„¸ì •ë³´</label> <input type="text"
+									<label for="postcodezip">»ó¼¼Á¤º¸</label> <input type="text"
 										class="form-control" name="prodDetail" id="prodDetail" 
-										value="ìƒì„¸ì •ë³´" placeholder="ìƒí’ˆì˜ ìƒì„¸ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
+										value="»ó¼¼Á¤º¸" placeholder="»óÇ°ÀÇ »ó¼¼Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
 								</div>
 							</div>
 						</div>
 
 						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">ë“±ë¡í•˜ê¸°</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">ì·¨ì†Œí•˜ê¸°</a>
+							<a class="btn btn-primary py-3 px-4" id="addproduct">µî·ÏÇÏ±â</a>
+							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">Ãë¼ÒÇÏ±â</a>
 						</p>
-					</form>
+					
 					<!-- ////////////////////////////form tag end //////////////////////////////-->
 				</div>
 			</div>
+			</form>
 		</div>
+	
 	</section>
 
 
@@ -252,7 +256,7 @@ body>div.container {
 	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
 	<script src="../../resources/prodmenu/js/main.js"></script>
-	<!-- ////////////////////ë‹¬ë ¥ /////////////////////////////-->
+	<!-- ////////////////////´Ş·Â /////////////////////////////-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </body>

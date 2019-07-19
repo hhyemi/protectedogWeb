@@ -30,16 +30,15 @@
 
 <script type="text/javascript">
 	
-	var cnt = 3;	
+	var cnt = 5;	
 	var searchKeyword = '애견상식';
 	
-// 	$(function () {
-// 		$("button").on("click",function(){
-// 			searchKeyword = $(this).text();
-// 			alert(searchKeyword)
-// 			fnGetList();
-// 		});
-// 	});
+	$(function () {
+		$("button").on("click",function(){
+			searchKeyword = $(this).text();
+			fnGetList();
+		});
+	});
 	
 	
 	function fnGetList(sGetToken){
@@ -58,7 +57,7 @@
 		$("#nav_view").empty();
 		
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w";
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults=9";
 		
 		console.log(sTargetUrl);
 		
@@ -66,7 +65,7 @@
 // 			sTargetUrl += "&pageToken=" + sGetToken;
 			cnt += 3 ;
 			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
-			sTargetUrl += "&maxResults="+cnt;
+			sTargetUrl += "&maxResults="+ 10;
 		}
 		
 		$.ajax({
@@ -86,12 +85,12 @@
 					console.log(" sinppet.description : " + this.snippet.description) ; 
 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
 					$("#get_view").append(
-							  "<div class='col-md-4 style='border : 1px solid black;''>"
+							  "<div class='col-md-4 style='border : 1px solid black; min-width : 350px''>"
 							+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
 							+ "<span class='box'>"
-							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title'>"+this.snippet.title+"</span></a><br>"										
-							+ this.snippet.publishedAt+"<br>"
-							+ "<span class='description'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
+							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
+							+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
+							+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
 							+ "</div>");
 									
 				}).promise().done(function(){
@@ -166,6 +165,10 @@ span {
 .btn btn-default :hover{
 	background-color : #1062e6;
 }
+
+a :hover{
+	color : #1062e6;
+}
 </style>
 </head>
 <body onload="fnGetList();">
@@ -173,12 +176,15 @@ span {
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
 	<div class="container">
-
-	<button class="btn btn-default">#애견상식</button>
-	<button class="btn btn-default">#애견훈련</button>
-	<button class="btn btn-default">#애견분양</button>
-	<button class="btn btn-default">#애견음악</button>
-	<button class="btn btn-default">#애견카페</button>
+	
+	<div class="row">
+	<button class="btn btn-default col-md-2">#애견상식</button>
+	<button class="btn btn-default col-md-2">#애견훈련</button>
+	<button class="btn btn-default col-md-2">#애견분양</button>
+	<button class="btn btn-default col-md-2">#애견음악</button>
+	<button class="btn btn-default col-md-2">#애견카페</button>
+	<button class="btn btn-default col-md-2">#애견사건</button>
+	</div>
 	
 <!-- 	<form name="form1" method="post" onsubmit="return false;"> -->
 <!-- 		<input type="text" id="search_box" /> -->
@@ -187,7 +193,7 @@ span {
 	
 	<hr>
 	<div id="get_view" class="row"></div>
-	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div>
+<!-- 	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div> -->
 	</div>
 
 </body>

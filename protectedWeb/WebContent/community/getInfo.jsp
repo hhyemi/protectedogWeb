@@ -20,12 +20,23 @@
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
 <script type="text/javascript">
 	$(function() {
-
-		$("button:contains('수정')").on("click", function() {
-			//alert($("input[type='hidden']").val());
-			// 			$(self.location).attr("href","/community/updateInfo.jsp");
-			self.location = "/info/updateView?postNo="+$("input[type='hidden']").val();
+		
+		$("button:contains('핫개')").on("click", function(){
+			alert("추천기능추가");
 		});
+		
+		$("button:contains('비추천')").on("click", function(){
+			alert("비추천기능추가");
+		});
+		
+		$("button:contains('수정')").on(
+				"click",
+				function() {
+					//alert($("input[type='hidden']").val());
+					// 			$(self.location).attr("href","/community/updateInfo.jsp");
+					self.location = "/info/updateView?postNo="
+							+ $("input[type='hidden']").val();
+				});
 
 		$("button:contains('삭제')").on(
 				"click",
@@ -38,15 +49,14 @@
 								"action", "/info/delInfo").attr("enctype",
 								"multipart/form-data").submit();
 					}
-
 				});
 	});
 </script>
 <style type="text/css">
-
 body {
 	position: relative;
 }
+
 .container {
 	font-size: 14px;
 }
@@ -64,15 +74,18 @@ body {
 .goto-here {
 	padding: 0px;
 }
+.minibox{
+	padding : 1px solid black;
+}
 </style>
 </head>
 
 <body>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-		
+
 	<div class="container">
-		
+
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
 
@@ -86,7 +99,8 @@ body {
 					| ${board.regDate}</div>
 				<div class="col-md-4" align="right"
 					style="position: absolute; right: 0px; bottom: 0px;">조회수 :
-					${board.viewCount} 추천수 : ${board.recommendCount} 댓글수 : 50</div>
+					${board.viewCount} 추천수 : ${board.recommendCount} 댓글수 :
+					${totalCount}</div>
 			</div>
 			<p />
 
@@ -94,16 +108,29 @@ body {
 
 			<div class="content">${board.postContent}</div>
 
+			<br />
+
 		</form>
 
-		<div class="button" align="right">
-			<button>수정</button>
-			<button>삭제</button>
+		<div class="minibox" align="center">
+			<div style="float: left;">
+				<button>핫개</button>
+			</div>
+			<div style="float: right;">
+				<button>비추천</button>
+			</div>
 		</div>
+
+		<c:if test="${board.id == sessionScope.user.id }">
+			<div class="button" align="right">
+				<button>수정</button>
+				<button>삭제</button>
+			</div>
+		</c:if>
 	</div>
 
-		<jsp:include page="/common/comment.jsp"></jsp:include>
-		
-		<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<jsp:include page="/common/comment.jsp"></jsp:include>
+
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

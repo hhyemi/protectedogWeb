@@ -107,7 +107,7 @@ $(function () {
 		<div style="border: 1px solid #d7dade; padding: 3px;">
 
 			<form class="form-horizontal" name="detailForm">
-					
+
 				<input type="hidden" name="postNo" value="${board.postNo}">
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
@@ -136,7 +136,8 @@ $(function () {
 							</div>
 
 							<!-- 미리보기 영역 -->
-							<div id="preview" class="content" align="center" style="display:inline; min-width:600px;"></div>
+							<div id="preview" class="content" align="center"
+								style="display: inline; min-width: 600px;"></div>
 
 							<!-- multipart 업로드시 영역 -->
 							<div id="uploadForm" style="display: none;"></div>
@@ -172,6 +173,28 @@ $(function () {
 
 	<script>
 	
+	let editor;
+	
+	ClassicEditor
+    .create( document.querySelector( '#editor' ),{
+    
+    	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+    	heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    	
+    })
+    .then( newEditor => {
+        editor = newEditor;
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+	
 	 $(document).ready(function() {
 
          //============= 사진미리보기 =============
@@ -180,24 +203,15 @@ $(function () {
         });
 	 });
          
-	ClassicEditor.create( document.querySelector( '#editor' ),{
-        	
-        	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-        	heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                ]
-            }
-        	
-        } ) .catch( error => {
-            console.error( error );
-        } ) ;
-    
 	function fncUpdateInfo(){
 	         
 	      //============= 다중파일업로드 AJAX =============
+	    	  
+	    	  var title = $("#postTitle").val();
+	      
+	      	  if(title.length < 1 || title == null ){
+	      		  alert("제목을 입력해 주세요");
+	      	  }
 	          $(function() {     
 	            var form = $('#uploadForm')[0];
 	            var formData = new FormData(form);
@@ -286,6 +300,13 @@ $(function () {
 	                        delete files[imgNum];
 	                     }else{
 	               // 8장 이하 
+	               
+	               			document.querySelector( '#editor' ).addEventListener( 'click', () => {
+                	    const editorData = editor.getData();     	           
+                		} );
+	               
+	               		 editor.setData(editor.getData()+"<p><"+imgSelectName+" src='" + img.target.result + "' style='min-width:100%'/></p><p/>");
+	          
 	                     $("#preview").append(
 	                                     "<div class=\"preview-box\"  id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"

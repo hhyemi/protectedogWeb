@@ -28,10 +28,7 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-		#voteDate{
-		width:375px;
-		float:left;
-		}
+
 	</style> 
  
  
@@ -48,6 +45,8 @@
         <div class="row s_product_inner">
           <div class="col-lg-6">
             <div class="s_product_img">
+            조회 ${funding.voteViewCount } / 등록날짜 ${funding.voteStartDate}
+            <p/>
               <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
@@ -108,9 +107,12 @@
 			<h4 class="media-heading">남은기간 <b>${funding.voteRemainDate }</b>일</h4> 
 			</c:if>			    
 			 <div class="progress">
-			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(31-funding.voteRemainDate)*100/31}%;"></div>
+			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(30-funding.voteRemainDate)*100/30}%;"></div>
 			 </div>
-		      <div  id="voteDate" >${funding.voteStartDate}</div><div>${funding.voteEndDate}</div> 
+			<div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >${funding.voteStartDate}</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.voteEndDate}</div>
+			 </div>					 
 		     <br/>
 
 			 <div><h3>투표율&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h3></div>
@@ -118,8 +120,10 @@
 			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
 			 </div>		
 
-
-		      <div  id="voteDate" >0표</div> <div>&emsp;&emsp; ${funding.voteTargetCount}표</div> 			 	 		 	 
+			<div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > 0표</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.voteTargetCount}표</div>
+			 </div>		 	 		 	 
                <br/>  
               <div class="card_area">
                 <a class="main_btn" href="#">투표하기</a><a class="main_btn" href="#">문의하기</a>  
@@ -158,18 +162,6 @@
 		          <li class="nav-item">
 		            <a
 		              class="nav-link"
-		              id="review-tab"
-		              data-toggle="tab"
-		              href="#review"
-		              role="tab"
-		              aria-controls="review"
-		              aria-selected="false"
-		              >후기</a
-		            >
-		          </li>
-		          <li class="nav-item">
-		            <a
-		              class="nav-link"
 		              id="voter-tab"
 		              data-toggle="tab"
 		              href="#voter"
@@ -193,13 +185,6 @@
 							<a class="main_btn" href="#">수정하기</a> 
 							<a class="main_btn" href="#">삭제하기</a> 
 						</div>
-		          </div>
-		          <div
-		            class="tab-pane fade"
-		            id="review"
-		            role="tabpanel"
-		            aria-labelledby="review-tab">
-					후기후기
 		          </div>
 		          <div
 		            class="tab-pane fade"
@@ -254,7 +239,7 @@
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-	 		//self.location = "/user/getUser?userId=${sessionScope.user.userId}";
+	 		//self.location = "/user/getUsers?id=${sessionScope.user.id}";
 		});   
 	
 		//============= SNS공유 Event  처리 =============	

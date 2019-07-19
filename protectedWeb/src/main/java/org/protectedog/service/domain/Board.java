@@ -28,9 +28,18 @@ public class Board {
 	private String route;
 	private int prodNo;
 	private char delCode;
+	private String prodName;
 	
 
 
+
+	public String getProdName() {
+		return prodName;
+	}
+
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
 
 	public int getPostNo() {
 		return postNo;
@@ -168,18 +177,13 @@ public class Board {
 		this.prodNo = prodNo;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "Board [postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
+				+ viewCount + ", recommendCount=" + recommendCount + ", marketCode=" + marketCode + ", price=" + price
 				+ ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodNo="
-				+ prodNo + ", delCode=" + delCode + "]";
+				+ prodNo + ", delCode=" + delCode + ", prodName=" + prodName + "]";
 	}
-
-
-	
-	
 	
 }

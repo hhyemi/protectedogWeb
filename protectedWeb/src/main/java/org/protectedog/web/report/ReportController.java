@@ -1,4 +1,4 @@
-package org.protectedog.web.user;
+package org.protectedog.web.report;
 
 import java.io.File;
 import java.io.IOException;

@@ -3,8 +3,6 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 
@@ -58,7 +56,7 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
 						   	 	<c:if test="${ sessionScope.user == null }">
 						   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
-                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" width="15"/>
+                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" style="height:15px; width: 15px;"/>
                         		</a>
                         		</c:if>
                         		<c:if test="${ sessionScope.user.kakao != null }">
@@ -69,27 +67,29 @@
 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
 						   		<span class="text">youremail@email.com</span>
 					   		</div>
+					   		
+					   		
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-					    	<c:if test="${sessionScope.user.role eq null}">
-						    <span class="text">Sign in</span><span class="text">sign up</span>
+					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
+						    <c:if test="${ sessionScope.user eq null }">
+						    	<span class="text">Sign in</span><span class="text">Sign Up</span>
 						    </c:if>
-						    <c:if test="${sessionScope.user.role != null}">
-						    <span class="text">${sessionScope.user.nickname} 님 환영합니다.</span>
-						    <input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
+
 						    <c:if test="${sessionScope.user.role eq 'user' }">
 						    <div class="myInfo">
 						    	<input type="button" id="myInfo" value="마이페이지">
 						    </div>
 						    </c:if>
 						    <c:if test="${sessionScope.user.role eq 'admin' }">
-						    <div class="myInfo">
+						    <div class="manageMenu">
 						    	<input type="button" id="manageMenu" value="관리자메뉴">
 						    </div>
 						    </c:if>
+						    <c:if test="${ sessionScope.user != null }">
 						    <div class="logout">
                                 <a href="/users/logout">logout</a>
                             </div>
-						    </c:if>
+                            </c:if>
 					    </div>
                 </div>
              </div>
@@ -150,14 +150,23 @@
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USERS</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
+                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
+                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
+                <a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
+                <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
+              </div>
+            </li>
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="shop.html">MARKET</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-                <a class="dropdown-item" href="/coupon/listCoupon">오늘의 쿠폰</a>
+               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
+                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
+                <a class="dropdown-item" href="/product/listProduct">상품리스트</a>
+                <a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
               </div>
             </li>
              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>

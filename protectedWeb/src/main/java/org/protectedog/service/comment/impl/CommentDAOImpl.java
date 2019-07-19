@@ -67,4 +67,9 @@ public class CommentDAOImpl implements CommentDAO {
 		sqlSession.insert("CommentMapper.addReport", commentNo);
 	}
 
+	@Override
+	public void updateLikeCnt(Map<String, Object> map) throws Exception {
+		sqlSession.update("CommentMapper.updateLikeCnt",map);
+	}
+
 }

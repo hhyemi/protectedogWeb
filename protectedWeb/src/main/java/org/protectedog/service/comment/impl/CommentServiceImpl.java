@@ -67,5 +67,10 @@ public class CommentServiceImpl implements CommentService{
 	public void reportComment(int commentNo) throws Exception {
 		commentDAO.reportComment(commentNo);
 	}
+
+	@Override
+	public void updateLikeCnt(Map<String, Object> map) throws Exception {
+		commentDAO.updateLikeCnt(map);
+	}
 	
 }

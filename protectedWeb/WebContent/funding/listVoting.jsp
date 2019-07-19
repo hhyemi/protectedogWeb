@@ -70,39 +70,60 @@
 
 						</div>
 			    	</div>    
-    		    	<p/>
+    		    	<br/>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
-		    			<div class="col-md-8 col-lg-10 order-md-last">
+		    			<div class="col-md-10 col-lg-12 order-md-last">
 		    				<div class="row">
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 				    				<div class="product">
-				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px;" >
+				    				
+				    					 <!-- 투표종료 -->
+										 <c:if test ="${!(funding.statusCode eq 1) }">
+										 조회 ${funding.voteViewCount }
+				                        <a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; min-width:300px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
+				    					</c:if>
+				    					
+										 <!-- 투표중 -->
+										 <c:if test ="${funding.statusCode eq 1 }">		
+										 조회 ${funding.voteViewCount }
+										<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:300px;" >
+				    					<input type="hidden" value="${funding.postNo }" />		    					
+				    					</a>
+				    					</c:if>		
+				    						    					
 				    					<div class="text py-3 px-3">
-				    						<h2><a href="#">${funding.postTitle}</a></h2>
+				    					
+				    					<font size="5">${funding.postTitle}</font>
 				    						
+										<div class="row" style="position:relative;height:35px;">
+										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <h3>${funding.nickname}</h3></div>
+										         <div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><h3><b><strong style="color:#225cba">${funding.voteRate}%</strong></b></h3></div>
+										 </div>										   				
 										 <!-- 투표종료 -->
 										 <c:if test ="${!(funding.statusCode eq 1) }">
-				    						<h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
-										    <div class="progress">		 
-										    <div class="progress-bar bg-danger" role="progressbar" style="width: ${funding.voteRate}%;"></div>										 
-										    </div>
+										   <div class="progress">												 
+										   <div class="progress-bar bg-danger" role="progressbar" style="width:${funding.voteRate}%;"></div>
+										   </div>	
+											 <div align="right">    						
+											<h4 class="media-heading"  style="color:#e33941">종료</h4> 	
+											</div>
 										 </c:if>
+										 
 										 <!-- 투표중 -->
 										 <c:if test ="${funding.statusCode eq 1 }">										 
-				    					   <h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.voteRate}%</strong></b></a></h3>
 										   <div class="progress">												 
-										   <div class="progress-bar" role="progressbar" style="width:${funding.voteRate}%;"></div>
-										   </div>					
+										   <div class="progress-bar " role="progressbar" style="width:${funding.voteRate}%;"></div>
+										   </div>											 
+											 <div align="right">						
+											<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
+											</div>
 										</c:if>
 										
-										 <div align="right">	    						
-										<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
-										</div>
 				    					</div>
 				    				</div>
 				    			</div>
