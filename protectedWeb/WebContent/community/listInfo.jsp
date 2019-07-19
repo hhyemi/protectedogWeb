@@ -55,13 +55,9 @@ h7 {
 <script type="text/javascript">
 
 	function fncGetList(currentPage) {
-
 		$("#currentPage").val(currentPage)
 
-		$("form").attr("method", "POST").attr(
-				"action",
-				"/info/listInfo").submit();
-
+		$("form").attr("method", "POST").attr("action","/info/listInfo").submit();
 	}
 
 	function getPageSize() {
@@ -135,9 +131,9 @@ h7 {
 				}
 			});
 		});
-// 		$("button.btn.btn-default").on("click", function() {
-// 			fncGetUserList(1);
-// 		});
+		$("#searchSubmmit").on("click", function() {
+			fncGetList(1);
+		});
 		
 		$("button:contains('글 쓰기')").on("click", function(){
 			self.location = "/community/addInfo.jsp"
@@ -196,15 +192,14 @@ h7 {
 		
 		<div class="row">
 			<div class="col-md-6 col-sm-5 col-xm-12">
-					<span>표시개수</span>
-						<span> <select name="pageSize" id="selectPageSize"
+				<span> <select name="pageSize" id="selectPageSize"
 								onchange="javascript:getPageSize()">
-								<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8</option>
-								<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15</option>
-								<option value="30" ${ search.pageSize == 30 ? "selected" : "" } >30</option>
-								<option value="50" ${ search.pageSize == 50 ? "selected" : "" } >50</option>
+								<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8 개씩</option>
+								<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15 개씩</option>
+								<option value="30" ${ search.pageSize == 30 ? "selected" : "" } >30 개씩</option>
+								<option value="50" ${ search.pageSize == 50 ? "selected" : "" } >50 개씩</option>
 							</select>
-						</span>
+				</span>
 			</div>
 		</div>
 

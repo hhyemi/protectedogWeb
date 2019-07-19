@@ -111,24 +111,24 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
-                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
-                <a class="dropdown-item" href="/adoptReview/addAdoptReview">경로테스트</a>
-                <a class="dropdown-item" href="../adoptReview/REALaddAdoptReview.jsp">후기</a>
+              	<a class="dropdown-item" href="http://192.168.0.19:8080/adopt/listAdopt?boardCode=AD">분양리스트</a>
+                <a class="dropdown-item" href="http://192.168.0.19:8080/adopt/listAdopt?boardCode=MS">실종리스트</a>
+                <a class="dropdown-item" href="http://192.168.0.19:8080/adoptReview/addAdoptReview">경로테스트</a>
+                <a class="dropdown-item" href="http://192.168.0.19:8080/adoptReview/REALaddAdoptReview.jsp">후기</a>
 
               </div>
             </li>
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토리펀딩</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
-                <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
+                <a class="dropdown-item" href="http://192.168.0.33:8080/funding/listVoting">투표게시판</a>
+                <a class="dropdown-item" href="http://192.168.0.33:8080/funding/listFunding">후원게시판</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/community/getHospital.jsp">병원</a>
+                 <a class="dropdown-item" href="http://192.168.0.30:8080/community/getHospital.jsp">병원</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>

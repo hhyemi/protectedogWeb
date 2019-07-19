@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 
 import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Comment;
+import org.protectedog.service.domain.Interest;
 import org.protectedog.service.domain.User;
+import org.protectedog.service.interest.InterestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +26,10 @@ public class CommentRestController {
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
+	
+	@Autowired
+	@Qualifier("interestServiceImpl")
+	private InterestService interestService;
 	
 	@Value("#{commonProperties['info']}")
 	String boardCode;
@@ -73,10 +79,11 @@ public class CommentRestController {
 		comment.setBoardCode(boardCode);
 		
 		System.out.println(" comment : " + comment );
+		
 		commentService.updateComment(comment);
 		
 		comment = commentService.getComment(comment.getCommentNo());
-
+		
 		return comment;
 	}
 	
@@ -92,12 +99,14 @@ public class CommentRestController {
 	
 	
 	@RequestMapping( value="json/updateLikeCnt/{commentNo}/{check}", method=RequestMethod.POST)
-	public Comment updateLikeCnt(@PathVariable("commentNo") int commentNo, @PathVariable("check") String check) throws Exception {
+	public Comment updateLikeCnt(@PathVariable("commentNo") int commentNo, @PathVariable("check") String check, HttpSession session) throws Exception {
 
 		System.out.println(" ============================== rest updateLikeCnt ==================================");
 		
 		System.out.println("commentNo : " + commentNo);
 		System.out.println("check : " + check);
+		
+		User user = (User) session.getAttribute("user");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -111,8 +120,38 @@ public class CommentRestController {
 
 		commentService.updateLikeCnt(map);
 		
-		Comment comment = commentService.getComment(commentNo);
+		Comment comment = new Comment();
+		comment.setCommentNo(commentNo);
+		
+		Interest interest = new Interest();
+		interest.setBoardCode(boardCode);
+		interest.setInterestComment(comment);
+		interest.setinterestId(user);
+
+		interestService.addInterest(interest);
+		
+		comment = commentService.getComment(commentNo);
 		
 		return comment;
+	}
+	
+	@RequestMapping( value="json/check/{commentNo}/{id}", method=RequestMethod.POST)
+	public int check(@PathVariable("commentNo") int commentNo, @PathVariable("id") String checkId) throws Exception {
+
+		System.out.println(" ============================== rest updateLikeCnt ==================================");
+		
+		System.out.println("commentNo : " + commentNo);
+		System.out.println("id : " + checkId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("id",checkId);
+		map.put("searchNo",commentNo);
+		map.put("searchType","comment");
+		map.put("boardCode",boardCode);
+		
+		int result = interestService.getInterestCheck(map);
+		
+		return result;
 	}
 }
