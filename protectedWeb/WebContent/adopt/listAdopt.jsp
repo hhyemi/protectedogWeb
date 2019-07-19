@@ -4,6 +4,7 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 
 <!DOCTYPE html>
@@ -121,6 +122,8 @@
 	  			실종글 리스트
 	  		</c:if>
 	       </h3>
+	       
+				  <button type="button" class="btn btn-primary">글쓰기</button>
 	    </div>
 	    
 
@@ -134,7 +137,6 @@
 		    
 		    <div class="col-md-5 text-right" style="padding-right: 0px;">
 		    		<span>
-			    		<c:if test="${param.boardCode eq 'AD' }">책임비 낮은순</c:if>
 					    <c:if test="${param.boardCode eq 'MS' }">사례비 높은순</c:if>
 		    		</span>
 		    </div>
@@ -176,7 +178,12 @@
 				</c:if>
 				  <figcaption>
 					    <h3><strong>${adopt.postTitle}</strong></h3>
-					    <p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
+					    <c:if test="${param.boardCode eq 'AD' }">
+					   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
+					   	</c:if>
+					    <c:if test="${param.boardCode eq 'MS' }">
+					   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
+					   	</c:if>
 				  </figcaption>
 			</figure>
 			</div>	
@@ -206,7 +213,6 @@
 				  </div>
 				  
 				  <button type="button" class="btn btn-default">검색</button>
-				  <button type="button" class="btn btn-primary">글쓰기</button>
 				  
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  

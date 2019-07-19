@@ -11,12 +11,12 @@ public class Apply {
 	private int adoptNo;
 	private String id;
 	private String phone;
-	private int job;
-	private int addr;
-	private int mate;
-	private int mateAgree;
-	private int raise;
-	private int currently;
+	private String job;
+	private String addr;
+	private String mate;
+	private String mateAgree;
+	private String raise;
+	private String currently;
 	private String plan;
 	private String pay;
 	private String reason;
@@ -49,40 +49,40 @@ public class Apply {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getJob() {
+	public String getJob() {
 		return job;
 	}
-	public void setJob(int job) {
+	public void setJob(String job) {
 		this.job = job;
 	}
-	public int getAddr() {
+	public String getAddr() {
 		return addr;
 	}
-	public void setAddr(int addr) {
+	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public int getMate() {
+	public String getMate() {
 		return mate;
 	}
-	public void setMate(int mate) {
+	public void setMate(String mate) {
 		this.mate = mate;
 	}
-	public int getMateAgree() {
+	public String getMateAgree() {
 		return mateAgree;
 	}
-	public void setMateAgree(int mateAgree) {
+	public void setMateAgree(String mateAgree) {
 		this.mateAgree = mateAgree;
 	}
-	public int getRaise() {
+	public String getRaise() {
 		return raise;
 	}
-	public void setRaise(int raise) {
+	public void setRaise(String raise) {
 		this.raise = raise;
 	}
-	public int getCurrently() {
+	public String getCurrently() {
 		return currently;
 	}
-	public void setCurrently(int currently) {
+	public void setCurrently(String currently) {
 		this.currently = currently;
 	}
 	public String getPlan() {
