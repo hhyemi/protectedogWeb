@@ -15,7 +15,10 @@ public interface UserDAO {
 	public void addUsersAdditional(User user) throws Exception;
 	
 	// Select One
-	public User getUsers(String id) throws Exception;
+	public User getUsersById(String id) throws Exception;
+	
+	// Select One
+	public User getUsersByNick(String nickname) throws Exception;
 	
 	// Select List
 	public List<User> getUsersList(Search search) throws Exception;

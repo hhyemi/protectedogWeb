@@ -37,7 +37,7 @@
 		    <label for="id" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="id" name="id" placeholder="중복확인하세요">
-		       <span id="helpBlock" class="help-block">
+		       <span id="helpBlock1" class="help-block">
 		      </span>
 		    </div>
 		  </div>
@@ -67,6 +67,8 @@
 		    <label for="nickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임">
+		      <span id="helpBlock2" class="help-block">
+		      </span>
 		    </div>
 		  </div>
 		  
@@ -132,15 +134,42 @@
 				$.ajax({
 					type : "POST",
 					contentType : "application/json",
-					url : "/users/json/checkDuplication",
+					url : "/users/json/checkId",
 					data : checkId,
 					datatype : "json" ,
 					success : function(response){
 						if($.trim(response.result)==0){
-							$('#helpBlock').html("사용가능");
+							$('#helpBlock1').html("사용가능");
 							$('#submit').attr('disabled', false);
 						}else{
-							$('#helpBlock').html("사용불가");
+							$('#helpBlock1').html("사용불가");
+							$('#submit').attr('disabled', true);
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+			});
+		});
+		
+		$(function(){
+			
+			$("#nickname").keyup(function(){
+				var nickname=$("#nickname").val();
+				var checkNick=JSON.stringify({nickname:nickname});
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/users/json/checkNick",
+					data : checkNick,
+					datatype : "json" ,
+					success : function(response){
+						if($.trim(response.result)==0){
+							$('#helpBlock2').html("사용가능");
+							$('#submit').attr('disabled', false);
+						}else{
+							$('#helpBlock2').html("사용불가");
 							$('#submit').attr('disabled', true);
 						}
 					},

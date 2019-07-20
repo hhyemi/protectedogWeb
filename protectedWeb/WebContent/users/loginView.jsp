@@ -125,6 +125,13 @@
 				}
 				
 				$("form").attr("method","POST").attr("action","/users/login").attr("target","_parent").submit();
+
+				if(${ requestScope.check != false }){
+					alert("로그인 실패");
+				}else {
+					alert("로그인 성공");
+				}
+			
 			});
 		});	
 		

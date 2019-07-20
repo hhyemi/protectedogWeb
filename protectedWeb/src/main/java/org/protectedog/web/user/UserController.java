@@ -120,7 +120,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user, HttpSession session, HttpServletRequest request) throws Exception{
+	public String login(@ModelAttribute("user") User user, 
+						HttpSession session, 
+						HttpServletRequest request) throws Exception{
 		
 		System.out.println("/users/login : POST");
 		
@@ -146,20 +148,26 @@ public class UserController {
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
+		boolean check;
+		
 		if(user.getPw().equals(dbUser.getPw())) {
+			check=true;
 			session.setAttribute("user", dbUser);
-			
-
+			request.setAttribute("check", check);
+			System.out.println(check);
 			System.out.println("session : "+dbUser);
-
 			System.out.println(session.getAttribute("user"));
 		}else {
+			check=false;
 			System.out.println("ERROR");
-
+			request.setAttribute("check", check);
+			System.out.println(check);
+			return "forward:/users/loginView.jsp";
 		}
 		
 		System.out.println("ANG : "+session.getAttribute("user"));
 		
+
 		return "redirect:/index.jsp";
 	}
 	

@@ -76,11 +76,18 @@
 	 
 	 <!-- SQL : SELECT ONE -->
 
-	<select id="getUsers"	parameterType="string"	resultMap="usersSelectMap">
+	<select id="getUsersById"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
 		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
 		FROM users
-		WHERE id=#{value}
+		WHERE id=#{id}
+	</select>
+	
+	<select id="getUsersByNick"	parameterType="string"	resultMap="usersSelectMap">
+		SELECT
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
+		FROM users
+		WHERE nickname=#{nickname}
 	</select>
 	 
 

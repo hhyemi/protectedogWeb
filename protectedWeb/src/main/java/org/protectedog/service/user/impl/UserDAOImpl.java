@@ -42,9 +42,20 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public User getUsers(String id) throws Exception {
+	public User getUsersById(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UsersMapper.getUsers", id);
+		User user=sqlSession.selectOne("UsersMapper.getUsersById", id);
+		System.out.println("UserDAOImpl 끝 : "+user);
+		return user;
+	}
+	
+	@Override
+	public User getUsersByNick(String nickname) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("UserDAOImpl 시작 : "+nickname);
+		User user=sqlSession.selectOne("UsersMapper.getUsersByNick", nickname);
+		System.out.println("UserDAOImpl 끝 : "+user);
+		return user;
 	}
 
 	@Override
