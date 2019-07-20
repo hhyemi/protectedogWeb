@@ -28,7 +28,10 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-
+		.form-group2{
+		padding-left:408px;
+		padding-right:100px;
+		}	
 	</style> 
  
  
@@ -45,7 +48,7 @@
         <div class="row s_product_inner">
           <div class="col-lg-6">
             <div class="s_product_img">
-            조회 ${funding.voteViewCount } / 등록날짜 ${funding.voteStartDate}
+            조회 ${funding.voteViewCount } / 작성일 ${funding.voteStartDate}
             <p/>
               <div
                 id="carouselExampleIndicators"
@@ -179,12 +182,12 @@
 		            id="home"
 		            role="tabpanel"
 		            aria-labelledby="home-tab">
-		            	<div class="col-md-10 col-md-offset-1">
-							<span class="price">글 내용</span>
-								<h2>${funding.postContent }</h2>
+				 			${funding.postContent }
+				         	<hr/><br/>									
+							<div class="form-group2">
 							<a class="main_btn" href="#">수정하기</a> 
 							<a class="main_btn" href="#">삭제하기</a> 
-						</div>
+						    </div>
 		          </div>
 		          <div
 		            class="tab-pane fade"

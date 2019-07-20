@@ -11,6 +11,7 @@ public class Participate {
 	private Date regDate;
 	private int fundPay;
 	private String statusCode;
+	private String paymentCode;
 
 	public Participate() {
 	}
@@ -71,10 +72,19 @@ public class Participate {
 		this.statusCode = statusCode;
 	}
 
+	public String getPaymentCode() {
+		return paymentCode;
+	}
+
+	public void setPaymentCode(String paymentCode) {
+		this.paymentCode = paymentCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Participate [participateNo=" + participateNo + ", id=" + id + ", nickName=" + nickName + ", postNo="
-				+ postNo + ", regDate=" + regDate + ", fundPay=" + fundPay + ", statusCode=" + statusCode + "]";
+				+ postNo + ", regDate=" + regDate + ", fundPay=" + fundPay + ", statusCode=" + statusCode
+				+ ", paymentCode=" + paymentCode + "]";
 	}
 
 }

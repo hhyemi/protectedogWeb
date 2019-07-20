@@ -86,6 +86,7 @@ public class FundingController {
 		termsList.add(SFTermsThree);
 		termsList.add(SFTermsFour);
 		termsList.add(SFTermsFive);
+		
 		if (termsTitle.equals("SFPost")) {
 			termsTitle = "후원신청글";
 		} else if (termsTitle.equals("SFVote")) {
@@ -97,6 +98,7 @@ public class FundingController {
 		model.addAttribute("termsList", termsList);
 		model.addAttribute("termsTitle", termsTitle);
 		model.addAttribute("postNo", postNo);
+		
 		return "forward:/funding/getTerms.jsp";
 	}
 
@@ -132,7 +134,7 @@ public class FundingController {
 		funding.setNickname(nickname);
 		// 변경여기까지//
 
-		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
+		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.0001);
 
 		funding.setMainFile(multiFile.get(0));
 		funding.setVoteTargetCount(voteTargetCount);
@@ -258,7 +260,7 @@ public class FundingController {
 		funding.setMainFile(file.get(0).getFileName());
 		// 변경여기까지//
 
-		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.001);
+		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.0001);
 		funding.setVoteTargetCount(voteTargetCount);
 
 		fundingService.updateVoting(funding);
@@ -475,6 +477,7 @@ public class FundingController {
 		funding.setSponsorCount(1);
 		funding.setFundPay(participate.getFundPay());
 		funding.setPostNo(participate.getPostNo());
+		funding.setStatusCode("3");
 		fundingService.updateStatusCode(funding);
 
 		Funding funding2 = fundingService.getVoting(participate.getPostNo());
@@ -524,7 +527,7 @@ public class FundingController {
 			if (fileName != null && fileName.length() > 0) {
 
 				FileDog files = new FileDog();
-				files.setBoardCode(fundBoardCode);
+				files.setBoardCode(fundReviewBoardCode);
 				files.setFileName(fileName);
 				files.setFileCode(0);
 				files.setPostNo(funding.getPostNo());

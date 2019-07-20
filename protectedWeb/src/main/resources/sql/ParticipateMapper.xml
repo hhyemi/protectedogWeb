@@ -14,6 +14,7 @@
 		<result property="regDate" column="REG_DATE" jdbcType="DATE" />
 		<result property="fundPay" column="FUND_PAY " jdbcType="NUMERIC" />
 		<result property="statusCode" column="STATUS_CODE" jdbcType="CHAR" />
+		<result property="paymentCode" column="PAYMENT_CODE" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	 <!-- /////////////// FUNDING 참여/////////////////////  -->
@@ -21,8 +22,8 @@
 	<!-- SQL : INSERT -->
 	<insert id="addParticipate" parameterType="participate">
 		INSERT
-		INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY ,STATUS_CODE )
-		VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL , #{id:VARCHAR} , #{nickName:VARCHAR} , #{postNo:NUMERIC}, SYSDATE , #{fundPay:NUMERIC},#{statusCode:CHAR})
+		INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY ,STATUS_CODE ,PAYMENT_CODE )
+		VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL , #{id:VARCHAR} , #{nickName:VARCHAR} , #{postNo:NUMERIC}, SYSDATE , #{fundPay:NUMERIC},#{statusCode:CHAR}, #{paymentCode:VARCHAR})
 	</insert>
 
 	<!-- SQL : SELECT ONE 

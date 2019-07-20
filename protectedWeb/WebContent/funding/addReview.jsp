@@ -30,7 +30,11 @@
     <!-- jQuery UI toolTip 사용 CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- jQuery UI toolTip 사용 JS-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+    <!-- ckeditor 사용 CSS-->   
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+    
+    	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	   #btn-add{
@@ -58,6 +62,15 @@
 		.form-form{
 	    padding-left:15px;	
 		}
+		.ck.ck-editor {
+			max-width: 700px;
+		}
+		
+		.ck-editor__editable {
+			text-align: left;
+			min-height: 300px;
+			max-width: 700px;
+		}			
     </style>
 
 	</head>
@@ -108,7 +121,9 @@
 		  <div class="form-group">
 			<h3><b>후기내용</b></h3><p/>			
 			    <div class=>
-			      <textarea name="reviewContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;"></textarea>
+			   <textarea id="editor" name="reviewContent" style="text-align: left;" placeholder="내용을 입력해주세요." >
+					
+					</textarea>
 			    </div>
 			  </div>
 			<br/>
@@ -151,13 +166,13 @@
    function fncAddReview(){
       
       //Form 유효성 검증
-      var postTitle = $('input[name="reviewTitle"]').val();
+      var reviewTitle = $('input[name="reviewTitle"]').val();
       var postContent = $('input[name="reviewContent"]').val();
       var file = $("#multiFile").val();    
       
-      if(postTitle == null || postTitle.length<1){
+      if(reviewTitle == null || reviewTitle.length<1){
          alert("글제목은 반드시 입력하여야 합니다.");
-         $('input[name="postTitle"]').focus();
+         $('input[name="reviewTitle"]').focus();
          return;
       }
 /*       if(postContent == null || postContent.length<1){
@@ -206,6 +221,29 @@
 
       $('form').attr("method","POST").attr("action","/funding/addReview").attr("enctype","multipart/form-data").submit();
    }
+   
+   //============= "Editor" =============   
+	let editor;
+
+	ClassicEditor
+	    .create( document.querySelector( '#editor' ),{
+	    
+       	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+       	heading: {
+               options: [
+                   { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                   { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                   { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+               ]
+           }
+	    	
+	    })
+	    .then( newEditor => {
+	        editor = newEditor;
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
    
    //============= "다중파일업로드 파일명만 저장해서 value" =============   
    function fnAddFile(fileNameArray) {

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +29,10 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
+		.form-group2{
+		padding-left:350px;
+		padding-right:100px;
+		}		
 	</style> 
  
  
@@ -44,7 +49,7 @@
         <div class="row s_product_inner">
           <div class="col-lg-6">
             <div class="s_product_img">
-            조회 ${funding.fundViewCount } / 등록날짜 ${funding.fundStartDate}
+            조회 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
             <p/>            
               <div
                 id="carouselExampleIndicators"
@@ -66,6 +71,7 @@
 	                    data-target="#carouselExampleIndicators"
 	                    data-slide-to="${i}"
 	                  >
+
 	                </c:if>	                
                   </c:forEach>               
                      
@@ -120,7 +126,7 @@
 				 </div>		
 			<div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > 0원</div>
-					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.fundTargetPay}원</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><fmt:formatNumber value="${funding.fundTargetPay}" pattern="#,###" />원</div>
 			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
@@ -198,18 +204,18 @@
 		            id="review"
 		            role="tabpanel"
 		            aria-labelledby="review-tab">
-		            <span class="price">후기 제목</span>
-					<h2>${funding.reviewTitle }</h2>
-		            <span class="price">후기 이미지</span>
-		            <p/>
+					<div class="row" style="position:relative;height:35px;">
+							 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><h2>${funding.reviewTitle }</h2></div>
+							<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >작성일 ${funding.reviewRegDate }</div>
+					 </div>			            
+		            <hr/><br/>
 					<c:forEach var="name" items="${fileReview}" varStatus="status">      
 	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
 	                  </c:forEach>	
 	                <p/>  
-		            <span class="price">후기 내용</span>
-					<h2>${funding.reviewContent }</h2>				
-		            <span class="price">작성 일자</span>
-					<h2>${funding.reviewRegDate }</h2>
+					${funding.reviewContent }
+					<hr/><br/>		
+					<div class="form-group2">
 					<a class="main_btn" href="#">후기작성</a> 
 					<a class="main_btn" href="#">후기수정</a> 			
 					<a class="main_btn" href="#">후기삭제</a> 									

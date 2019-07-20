@@ -32,9 +32,12 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- jQuery UI toolTip 사용 JS-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
+     <!-- ckeditor 사용 CSS-->   
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+    
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	   #btn-add{
+/* 	   #btn-add{
 		background: #fff;
         border:2px solid #29304d;
 		color:#29304d;
@@ -47,7 +50,7 @@
 		color:#29304d;
 		height:40px;
 		width:150px;
-		}
+		} */
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -56,9 +59,22 @@
 		padding-left:170px;
 		padding-right:100px;
 		}
+		.form-group2{
+		padding-left:450px;
+		padding-right:100px;
+		}		
 		.form-form{
 	    padding-left:15px;	
 		}
+		.ck.ck-editor {
+			max-width: 700px;
+		}
+		
+		.ck-editor__editable {
+			text-align: left;
+			min-height: 300px;
+			max-width: 700px;
+		}				
     </style>
 
 	</head>
@@ -79,9 +95,9 @@
 		<form id ="uploadForm" class="form-horizontal">
 		  <div class="form-group">
 			<h3><b>후원목표금액</b></h3>
-			투표개수는 ( <strong style="color:#225cba">목표금액 X 0.001</strong> )표로 적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )<p/>
+			투표개수는 ( <strong style="color:#225cba">목표금액 0.01%</strong> )표로 적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )<p/>
 		    <div class="row form-form"  >
-		      <input type="text" class="form-control" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; 원
+		      <input type="text" class="form-control" id="fundTargetPay" name="fundTargetPay" placeholder="0" style="width:600px; height:35px;" >&ensp; 원
 		    </div>
 		  </div>
 			<br/>
@@ -114,10 +130,12 @@
 		    </div>
 		  </div>
 		  <br/>
+		  
 		  <div class="form-group">
 			<h3><b>글내용</b></h3><p/>			
-			    <div class=>
-			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;"></textarea>
+			    <div>
+					<textarea id="editor" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
+					</textarea>
 			    </div>
 			  </div>
 			<br/>
@@ -156,9 +174,9 @@
 		  </div>
         
 		  <br/><br/>
-		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">등록</button>
-	  			<button type="button" id="btn-cancel">취소</button>
+		  <div class="form-group2">
+	  			<button class="btn btn-primary py-3 px-4 col-md-3"  type="button" id="btn-add">등록</button>
+	  			<button class="btn btn-primary py-3 px-4 col-md-3 "  type="button"   id="btn-cancel">취소</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
@@ -229,6 +247,8 @@
       }
       $("input:hidden[name='phone']").val( value );
       
+      $('input[name="fundTargetPay"]').val(removeCommas($('input[name="fundTargetPay"]').val()));
+      
       //============= 다중파일업로드 AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
@@ -265,6 +285,30 @@
 
       $('form').attr("method","POST").attr("action","/funding/addVoting").attr("enctype","multipart/form-data").submit();
    }
+   
+   //============= "Editor" =============   
+	let editor;
+
+	ClassicEditor
+	    .create( document.querySelector( '#editor' ),{
+	    
+        	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        	heading: {
+                options: [
+                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                ]
+            }
+	    	
+	    })
+	    .then( newEditor => {
+	        editor = newEditor;
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
+   
    
    //============= "다중파일업로드 파일명만 저장해서 value" =============   
    function fnAddFile(fileNameArray) {
@@ -340,7 +384,7 @@
          fileNameArray.splice(imgNum,1);
          fnAddFile(fileNameArray);
          $("#preview .preview-box[value=" + imgNum + "]").remove();
-         resizeHeight();
+         //resizeHeight();
      }
 
      //============= 파일 확장자 validation 체크 =============
@@ -357,6 +401,17 @@
          }
      }
      
+   //3자리 단위마다 콤마 생성
+     function addCommas(x) {
+         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     }
+      
+     //모든 콤마 제거
+     function removeCommas(x) {
+         if(!x || x.length == 0) return "";
+         else return x.split(",").join("");
+     }
+      
 
        $(document).ready(function() {
 
@@ -367,29 +422,25 @@
 
           //============= 후원목표금액 =============
              $('#fundTargetPay').keyup(function(){
+            	 
+            	 //입력시 콤마 적용
+            	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+            	 //투표수 계산
+                 var inputed = Math.round(removeCommas($(this).val())*0.0001);         
+                 $("#voteNum").children().remove();
+                 $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#225cba\">"+inputed+"</strong>표</b></h3>");
                 
                  //후원목표금액 길이초과
-                 if ($(this).val().length > $(this).attr('maxlength')-1) {
-                     alert('제한길이 초과');
-                     $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+                 if (removeCommas($(this).val()).length > 7 ) {
+                     alert('30만원이하로 입력해주세요');
+                     $(this).val(removeCommas($(this).val()).substr(0, 7));
+                     
+                     $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
+                     var inputed = Math.round(removeCommas($(this).val())*0.0001);         
+                     $("#voteNum").children().remove();
+                     $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#225cba\">"+inputed+"</strong>표</b></h3>");                    
+                     
                  }
-                 //후원목표금액 문자 입력 검증 (정규식사용)    
-                var exp = /^[0-9]+$/;
-                if($(this).val().match(exp)){
-                  //금액에 따른 표개수
-                  if($(this).val().match(exp)){
-                    var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);         
-                    $("#voteNum").children().remove();
-                    $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#225cba\">"+inputed+"</strong>표</b></h3>");
-                   }
-                   return true;
-                }else{
-                  alert("숫자만 입력하세요.")
-                  var val = $(this).val(); 
-                  var len = val.length; 
-                  $(this).val(val.substring(0,len-1));        
-                }
-               
              });
           
            //============= 글제목 길이 입력 검증 =============
@@ -409,7 +460,6 @@
              $('#phone2').keyup(function(){
                 var val = $(this).val(); 
             if(isNaN(val)){
-                  alert("숫자만 입력하세요.")
                   var len = val.length; 
                   $(this).val(val.substring(0,len-1));        
                 }            
@@ -418,7 +468,6 @@
              $('#phone3').keyup(function(){
                 var val = $(this).val(); 
             if(isNaN(val)){
-                  alert("숫자만 입력하세요.")
                   var len = val.length; 
                   $(this).val(val.substring(0,len-1));        
                 }            

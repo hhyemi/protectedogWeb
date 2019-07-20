@@ -14,13 +14,7 @@
 
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-  	   #btn-add{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		} 
+
 		.right-box {
 		  float: right;
 		}		     
@@ -137,7 +131,7 @@
 		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
   		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">작성하기</button>
+	  			<button id="btn-add" class="btn btn-primary py-3 px-4 col-md-3">작성하기</button>
 		  </div>  
     </section>
     <!-- PageNavigation Start... -->
