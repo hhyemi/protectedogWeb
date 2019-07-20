@@ -90,7 +90,7 @@ body {
 		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
 		//document.detailForm.submit();	
-		$("form").attr("method", "POST").attr("action","/prodQna/listProdQna?order={param.order}").submit();
+		$("form").attr("method", "POST").attr("action","/market/listMarket?order={param.order}").submit();
 	}
 
 	//============= Event 처리 및  연결 =============
@@ -98,7 +98,7 @@ body {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 		$("#button").on("click", function() {
-			self.location = "/shop/prodQna/addProdQna.jsp";
+			self.location = "/shop/market/addMarket.jsp";
 		});
 
 		// 	$(function() {
@@ -136,9 +136,9 @@ body {
 
 	<div class="container">
 		<h1 align="center">
-			상품<small>&nbsp;Q&nbsp;&&nbsp;A <a href="#" id="button"><button
+			보호 마켓<small>&nbsp;#proteced Market<a href="#" id="button"><button
 						class="mdl-button mdl-js-button mdl-button--primary">
-						문의하기</button></a>
+						글등록</button></a>
 			</small>
 		</h1>
 	</div>
@@ -194,9 +194,10 @@ body {
 					<tr>
 						<th class="mdl-data-table__cell--non-numeric" align="center"
 							id="no">글번호</th>
-						<th align="center" id="boardfont">제목</th>
-						<th align="center" id="boardfont">질문유형</th>
-						<th align="center" id="boardfont">등록일</th>
+						<th align="left" id="boardfont">제목</th>
+						<th align="left" id="boardfont">상품명</th>
+						<th align="left" id="boardfont">조회수</th>
+						<th align="left" id="boardfont">가격</th>
 
 					</tr>
 				</thead>
@@ -207,11 +208,11 @@ body {
 					<tbody>
 					<tr>
 					<td class="mdl-data-table__cell--non-numeric" align="center">${ i }</td>
-					<td align="center">${board.postTitle}
+					<td align="left">${board.postTitle}
 					<input type="hidden" name="postNo" value="${board.postNo}" /> 
 					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
-					<td align="center">${board.qnaCode}</td>
-					<td align="center">${board.regDate}</td>
+					<td align="left">${board.viewCount}</td>
+					<td align="left">${board.price}</td>
 					</tr>
 					</tbody>
 				</c:forEach>

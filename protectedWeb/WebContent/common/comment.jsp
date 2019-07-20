@@ -21,6 +21,7 @@
 
 <!--  CSS -->
 <style>
+
 body {
 	padding-top: 50px;
 }
@@ -31,44 +32,12 @@ body {
 </style>
 
 <script type="text/javascript">
-	$(function() {
 
+// 댓글 CURD function();
+	$(function() {
 		// 댓글 등록 
 		$("#commentGo").on("click",function() {
-			
-			var postNo = ${board.postNo};
-			
-			alert( $("input[name=commentContent]").val() );
-			var commentInfo = {postNo : postNo, commentContent : $("input[name=commentContent]").val()};
-			
-			var convertCommentInfo = JSON.stringify(commentInfo);
-			
-			$.ajax(
-					{
-						url : "/comment/json/addComment/",
-						method : "POST",
-						dataType : "Json",
-						data : convertCommentInfo,
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						
-						success : function(JSONData, status){
-							
-							alert("success");
-							
-							
-							
-						},
-										
-						error : function(request, status, error){							
-							alert("Error");							
-						}
-				
-					}
-			);
-			
+			$("form[name=commentGo]").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
 		});
 	});
 	
@@ -93,8 +62,7 @@ body {
 							$("#"+commentNo+""+".area").hide();
 							
  							var modifyScreen = 
- 								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' "
- 								+ "style='width: 100%; height: 40px' placeholder='"+JSONData.commentContent+"'/></div>";
+ 								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 30px' placeholder='"+JSONData.commentContent+"'/></div>";
 							
  							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
  								+ "<a href='#' onclick='update(); return false;'> "
@@ -102,8 +70,8 @@ body {
  								+ "수정" 								
  								+ "</span></div>"
  							
-							$("#"+commentNo+"").append(modifyScreen);
- 							$("#"+commentNo+"").append(button);
+							$("#"+commentNo+""+".h4tag").append(modifyScreen);
+ 							$("#"+commentNo+""+".h4tag").append(button);
 						},
 										
 						error : function(request, status, error){							
@@ -144,23 +112,34 @@ body {
 		
 		$(".glyphicon-alert").on("click", function() {
 			console.log("신고");
-			// $("form").attr("action","/comment/updateComment?commentNo=")
 		});
 		
 		$(".glyphicon-plus").on("click", function() {
 			console.log("답글")
 		});
 		
-		$(".glyphicon.glyphicon-chevron-up.after").on("click", function() {
-			alert("이미 좋아요 누른 댓글");
-		});
-		
-		$(".glyphicon.glyphicon-chevron-up.before").on("click", function(){
+		$(".glyphicon.glyphicon-chevron-up").on("click", function(){
 			console.log("업");
-			
+				
 			var commentNo = $(this).parent().parent().children(".col-sm-9").children("input").val();
-			
+			var id = '${sessionScope.user.id}';
 				$.ajax({
+					url : "/comment/json/check/"+commentNo+"/"+id,
+					method : "POST",
+					dataType : "Json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					success : function(JSONData, status){
+						
+						if(JSONData == 1){
+							alert("이미 추천한 댓글입니다.");
+							return;
+						}
+						
+						if(JSONData == 0){
+						$.ajax({
 							url : "/comment/json/updateLikeCnt/"+commentNo+"/"+"plus",
 							method : "POST",
 							dataType : "Json",
@@ -175,44 +154,12 @@ body {
 								$("#"+commentNo+""+".font >").remove();
 								$("#"+commentNo+""+".font").html("<b>"+ JSONData.likeCount+"</b>");
 								
-							},
-											
-							error : function(request, status, error){							
-								alert("Error");														
 							}
+						});
+						} // JSONDATA 0 END			
+					}
 				});
-
-		});
-		
-		$(".glyphicon.glyphicon-chevron-down.before").on("click", function(){
-			
-			
-			console.log("다운")
-			var commentNo = $(this).parent().parent().parent().children(".col-sm-9").children("input").val();
-			var likeCnt = $("#"+commentNo+""+".font >").text();
-			if(likeCnt <= 0){
-				console.log("누르지마 새꺄");
-				return; 
-			}
-				$.ajax({
-							url : "/comment/json/updateLikeCnt/"+commentNo+"/"+"minus",
-							method : "POST",
-							dataType : "Json",
-							headers : {
-								"Accept" : "application/json",
-								"Content-Type" : "application/json"
-							},
-							success : function(JSONData, status){
-								
-								$("#"+commentNo+""+".font >").remove();
-								$("#"+commentNo+""+".font").html("<b>"+ JSONData.likeCount+"</b>");
 							
-							},
-											
-							error : function(request, status, error){							
-								alert("Error");														
-							}
-				});
 		});
 			
 	});
@@ -240,10 +187,10 @@ body {
  						$("#"+JSONData.commentNo+""+".area").show();
  						
  							var modifyScreen = 	
- 								  "<div id="+JSONData.commentNo+"class='area'>"
- 								+ "<h5 id="+JSONData.commentNo+"class='cmCont'>"+JSONData.commentContent+"</h5>";
+ 								  "<div id="+JSONData.commentNo+" class='area'>"
+ 								+ "<h5 id="+JSONData.commentNo+" class='cmCont'>"+JSONData.commentContent+"</h5><div>";
 						
- 						$("#"+JSONData.commentNo+"").append(modifyScreen);
+ 						$("#"+JSONData.commentNo+""+".h4tag").append(modifyScreen);
  	
 					},
 					
@@ -260,7 +207,7 @@ body {
 
 <body>
 
-	<form class="container">
+	<div class="container">
 		<!-- 		<div class="row"> -->
 		<!-- 			<div class="col-xs-4 col-md-12" align="left"> -->
 		<!-- 				<b><h3>한줄평</h3></b> -->
@@ -272,7 +219,7 @@ body {
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row">
 			<div class="col-sm-12 col-md-12" align="center">
-				비회원은 댓글을 달 수 없습니다 <a href="#" style="color: #0b43b3;">로그인</a> 후 이용해
+				비회원은 댓글을 달 수 없습니다 <button id="login" style="color: #0b43b3;">로그인</button> 후 이용해
 				주시길 바랍니다.
 			</div>
 		</div>
@@ -280,6 +227,7 @@ body {
 		</c:if>
 		
 		<c:if test="${sessionScope.user.role != null}">
+		<form name="commentGo">
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
 				<input type="text" name="commentContent" class="form-control"
@@ -294,6 +242,7 @@ body {
 				</button>
 			</div>
 		</div>
+		</form>
 		<br>
 		</c:if>
 
@@ -305,7 +254,7 @@ body {
 				</div>
 				<div class="col-sm-9 col-md-9" align="left">
 					
-					<h4 id="${comment.commentNo}">
+					<h4 id="${comment.commentNo}" class="h4tag">
 						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp;
 					</h4>
 					<input type="hidden" name="commentNo" value="${comment.commentNo}">
@@ -326,10 +275,10 @@ body {
 					</font>
 				</div>
 				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-left : 0 px;">
-					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-up before" style="font-size: 20px;"></span>
+					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span>
 					<p/>
 					<p/>
-					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-down before" style="font-size: 20px"></span>
+<%-- 					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-down" style="font-size: 20px"></span> --%>
 				</div>
 			</div>
 			<br/>
@@ -343,9 +292,8 @@ body {
 
 
 		<br>
-
-	</form>
-
+		
+	</div>
 
 
 

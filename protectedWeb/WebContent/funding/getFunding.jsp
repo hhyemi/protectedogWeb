@@ -28,10 +28,6 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-		#voteDate{
-		width:375px;
-		float:left;
-		}
 	</style> 
  
  
@@ -48,6 +44,8 @@
         <div class="row s_product_inner">
           <div class="col-lg-6">
             <div class="s_product_img">
+            조회 ${funding.fundViewCount } / 등록날짜 ${funding.fundStartDate}
+            <p/>            
               <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
@@ -110,15 +108,20 @@
 			 <div class="progress">
 			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%;"></div>
 			 </div>
-		      <div  id="voteDate" >${funding.fundStartDate}</div><div>${funding.fundEndDate}</div> 
+			<div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > ${funding.fundStartDate}</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.fundEndDate}</div>
+			 </div>					 
 		     <br/>
 	
 				 <div><h3>후원율&ensp;<strong style="color:#225cba">${funding.fundRate}%</strong></h3></div>
 				 <div class="progress">					 
 				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%;"></div>
 				 </div>		
-
-		      <div  id="voteDate" >0원</div><div>&ensp;&ensp;${funding.fundTargetPay}원</div> 			 	 		 	 
+			<div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > 0원</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.fundTargetPay}원</div>
+			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
                 <a class="main_btn" href="#">후원하기</a><a class="main_btn" href="#">문의하기</a>  

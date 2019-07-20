@@ -1,14 +1,19 @@
 package org.protectedog.web.product;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Product;
 import org.protectedog.service.product.ProductService;
+import org.protectedog.service.product.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,28 +47,57 @@ public class ProductController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
+	@Value("#{commonProperties['fileShop']}")
+	String fileShopRoot;
+	
 	public ProductController() {
 		System.out.println(this.getClass());
 	}
 	
 	
 	@RequestMapping(value="addProduct")
-	public String addProduct(@ModelAttribute("product") Product product,
-			HttpServletRequest request) throws Exception{
+	public String addProduct(HttpServletRequest request) throws Exception{
 	
 		
 		System.out.println("/shop/product/addProduct  : POST");
 
-		System.out.println(product);
-		System.out.println("////////////////////");
-
+		Product product=new Product();
+		String date1 = (request.getParameter("manuDate"));
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date tempDate = sdFormat.parse(date1);
+		
+		product.setProdName(request.getParameter("prodName"));
+		product.setProdDetail(request.getParameter("prodDetail"));
+		product.setCountry(request.getParameter("country"));
+		product.setCompany(request.getParameter("company"));
+		product.setManuDate(tempDate);
+		System.out.println("test///////////////////////////////1");
+		product.setPrice(Integer.parseInt(request.getParameter("price")));
+		System.out.println("test///////////////////////////////2");
+		product.setDiscountPrice(Integer.parseInt(request.getParameter("discountPrice")));
+		System.out.println("test///////////////////////////////3");
+		product.setProdCode(Integer.parseInt(request.getParameter("prodCode")));
+		System.out.println("test///////////////////////////////4/");
+		product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 
 		
+		
+		System.out.println(product);
+		
+		
 		productService.addProduct(product);
+		
+
+		
+		
+		System.out.println(product);
+		System.out.println("////////////////////");
 		
 		System.out.println("Product GET : POST/");
 		
 		return "forward:/shop/product/getProduct.jsp";
+		
+		
 	
 
 		
@@ -132,14 +166,14 @@ public class ProductController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/product/listProduct.jsp";
+		return "forward:/shop/product/listProduct.jsp";
 	}
 	
 	@RequestMapping( value="listAdminProduct")
 	public String listAdminProduct(@ModelAttribute("search") Search search, 
 			HttpServletRequest request, Model model) throws Exception {
 
-		System.out.println("/listProduct get");
+		System.out.println("listAdminProduct");
 	
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -147,7 +181,7 @@ public class ProductController {
 		search.setPageSize(pageSize);
 	
 		// Business logic ผ๖วเ
-		Map<String, Object> map = productService.listProduct(search);
+		Map<String, Object> map = productService.listAdminProduct(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -160,6 +194,6 @@ public class ProductController {
 		model.addAttribute("search", search);
 		
 
-		return "forward:/product/listAdminProduct.jsp";
+		return "forward:/shop/product/listAdminProduct.jsp";
 	}
 }

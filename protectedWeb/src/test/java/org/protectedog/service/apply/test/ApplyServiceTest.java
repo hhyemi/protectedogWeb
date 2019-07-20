@@ -43,12 +43,12 @@ public class ApplyServiceTest {
 		apply.setAdoptNo(10001);
 		apply.setId("'user03'");
 		apply.setPhone("'01121234567'");
-		apply.setJob(1);
-		apply.setAddr(1);
-		apply.setMate(1);
-		apply.setMateAgree(1);
-		apply.setRaise(1);
-		apply.setCurrently(1);
+//		apply.setJob();
+//		apply.setAddr(1);
+//		apply.setMate(1);
+//		apply.setMateAgree(1);
+//		apply.setRaise(1);
+//		apply.setCurrently(1);
 		apply.setPlan("'어떻게 키울 계획인지'");
 		apply.setPay("'돈은 어느정도 들어갈지'");
 		apply.setReason("'입양을 신청한 이유'");

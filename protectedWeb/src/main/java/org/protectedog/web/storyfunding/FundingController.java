@@ -44,7 +44,7 @@ public class FundingController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 
-	@Value("#{commonProperties['pageSize']}")
+	@Value("#{commonProperties['fundingPageSize']}")
 	int pageSize;
 
 	@Value("#{commonProperties['fileSF']}")
@@ -145,12 +145,15 @@ public class FundingController {
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
 
-			FileDog files = new FileDog();
-			files.setBoardCode(fundBoardCode);
-			files.setFileName(fileName);
-			files.setFileCode(0);
-			files.setPostNo(funding.getPostNo());
-			listFile.add(files);
+			if (fileName != null && fileName.length() > 0) {
+
+				FileDog files = new FileDog();
+				files.setBoardCode(fundBoardCode);
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(funding.getPostNo());
+				listFile.add(files);
+			}
 		}
 		fileService.addFile(listFile);
 
@@ -163,8 +166,16 @@ public class FundingController {
 
 		System.out.println("/funding/getVoting ");
 
+		// 조회수 증가
+		Funding voteViewFunding = new Funding();
+		voteViewFunding.setPostNo(postNo);
+		voteViewFunding.setVoteViewCount(1);
+		fundingService.updateStatusCode(voteViewFunding);
+
+		// 글 가져오기
 		Funding funding = fundingService.getVoting(postNo);
 
+		// 파일가져오기
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", postNo);
@@ -216,14 +227,19 @@ public class FundingController {
 		}
 		if (multiFile.size() != 0) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
+
 			// 파일디비에넣기
 			for (String fileName : multiFile) {
-				FileDog files = new FileDog();
-				files.setBoardCode(fundBoardCode);
-				files.setFileName(fileName);
-				files.setFileCode(0);
-				files.setPostNo(funding.getPostNo());
-				listFile.add(files);
+
+				if (fileName != null && fileName.length() > 0) {
+
+					FileDog files = new FileDog();
+					files.setBoardCode(fundBoardCode);
+					files.setFileName(fileName);
+					files.setFileCode(0);
+					files.setPostNo(funding.getPostNo());
+					listFile.add(files);
+				}
 			}
 			fileService.addFile(listFile);
 		}
@@ -238,7 +254,7 @@ public class FundingController {
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", funding.getPostNo());
 		List<FileDog> file = fileService.getFile(filePost);
-		
+
 		funding.setMainFile(file.get(0).getFileName());
 		// 변경여기까지//
 
@@ -257,12 +273,12 @@ public class FundingController {
 		System.out.println("/funding/delVoting");
 
 		fundingService.delVoting(postNo);
-		
+
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", postNo);
 		fileService.delAllFile(filePost);
-		
+
 		return "forward:/funding/listVoting";
 	}
 
@@ -366,8 +382,16 @@ public class FundingController {
 
 		System.out.println("/funding/getFunding ");
 
+		// 조회수 증가
+		Funding voteViewFunding = new Funding();
+		voteViewFunding.setPostNo(postNo);
+		voteViewFunding.setFundViewCount(1);
+		fundingService.updateStatusCode(voteViewFunding);
+
+		// 글 가져오기
 		Funding funding = fundingService.getVoting(postNo);
-		
+
+		// 파일가져오기
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", postNo);
@@ -379,7 +403,7 @@ public class FundingController {
 		List<FileDog> fileReview = fileService.getFile(fileReviewPost);
 
 		model.addAttribute("file", file);
-		model.addAttribute("fileReview", fileReview);		
+		model.addAttribute("fileReview", fileReview);
 		model.addAttribute("funding", funding);
 
 		return "forward:/funding/getFunding.jsp";
@@ -403,7 +427,7 @@ public class FundingController {
 		fundingService.addParticipate(participate);
 
 		// funding테이블 voter_count += 1
-		Funding funding = new Funding();
+		Funding funding = fundingService.getVoting(postNo);
 
 		// 투표완료 될상황
 		if (funding.getVoterCount() + 1 == funding.getVoteTargetCount()) {
@@ -413,7 +437,6 @@ public class FundingController {
 		}
 
 		funding.setVoterCount(1);
-		funding.setPostNo(postNo);
 		fundingService.updateStatusCode(funding);
 
 		return "redirect:/funding/getVoting?postNo=" + postNo;
@@ -498,12 +521,15 @@ public class FundingController {
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
 
-			FileDog files = new FileDog();
-			files.setBoardCode(fundReviewBoardCode);
-			files.setFileName(fileName);
-			files.setFileCode(0);
-			files.setPostNo(funding.getPostNo());
-			listFile.add(files);
+			if (fileName != null && fileName.length() > 0) {
+
+				FileDog files = new FileDog();
+				files.setBoardCode(fundBoardCode);
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(funding.getPostNo());
+				listFile.add(files);
+			}
 		}
 		fileService.addFile(listFile);
 
@@ -552,12 +578,16 @@ public class FundingController {
 			List<FileDog> listFile = new ArrayList<FileDog>();
 			// 파일디비에넣기
 			for (String fileName : multiFile) {
-				FileDog files = new FileDog();
-				files.setBoardCode(fundReviewBoardCode);
-				files.setFileName(fileName);
-				files.setFileCode(0);
-				files.setPostNo(funding.getPostNo());
-				listFile.add(files);
+
+				if (fileName != null && fileName.length() > 0) {
+
+					FileDog files = new FileDog();
+					files.setBoardCode(fundBoardCode);
+					files.setFileName(fileName);
+					files.setFileCode(0);
+					files.setPostNo(funding.getPostNo());
+					listFile.add(files);
+				}
 			}
 			fileService.addFile(listFile);
 		}
@@ -567,7 +597,7 @@ public class FundingController {
 		String nickname = "스캇";
 		funding.setId(id);
 		funding.setNickname(nickname);
-		
+
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundReviewBoardCode);
 		filePost.put("postNo", funding.getPostNo());
@@ -577,10 +607,10 @@ public class FundingController {
 		// 변경여기까지//
 
 		fundingService.updateReview(funding);
-		
+
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
 	}
-	
+
 	// 후기 글 삭제
 	@RequestMapping(value = "delReview", method = RequestMethod.GET)
 	public String delReview(@RequestParam("postNo") int postNo, Model model) throws Exception {
@@ -588,12 +618,12 @@ public class FundingController {
 		System.out.println("/funding/delReview");
 
 		fundingService.delReview(postNo);
-		
+
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundReviewBoardCode);
 		filePost.put("postNo", postNo);
 		fileService.delAllFile(filePost);
-		
+
 		return "redirect:/funding/getFunding?postNo=" + postNo;
 	}
 
