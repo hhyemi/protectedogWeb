@@ -48,11 +48,12 @@ body {
 	background: #fff;
 	border-radius: 4px;
 	padding: 20px;
-	font-size: 12px;
+	font-size: 14px;
 	text-align: left;
 	transition: all 0.2s;
 	margin: 0 auto;
 	width: 500px;
+	color: black;
 }
 
 #breed_image {
@@ -66,6 +67,10 @@ body {
 	COLOR: WHITE;
 	WIDTH: 50%;
 }
+
+td{
+	color : red;
+}
 </style>
 </head>
 <body>
@@ -75,11 +80,21 @@ body {
 	<!-- 	</div> -->
 	<jsp:include page="/layout/toolbar.jsp" />
 	
-	<div class="container">
-
-		<div class="page-header text-info">
-			견종백과
+	<div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">정보</a></span> <span>공유</span>
+					</p>
+					<h1 class="mb-0 bread">견종백과</h1>
+				</div>
+			</div>
 		</div>
+	</div>
+	
+	<div class="container">
 		
 		<div id="banner-message">
 			<p>품종선택</p>
@@ -328,7 +343,11 @@ body {
 
 		getBreeds();
 	</script>
-
+	
+	<div style="min-height: 200px;">
+	
+	</div>
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 
 </html>

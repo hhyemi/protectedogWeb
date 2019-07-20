@@ -125,9 +125,7 @@
             
               <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }<hr/>
               <ul class="list">
-              	
-              	<input type="hidden" name="postNo" value="${adopt.postNo }">
-              	
+              
                 <li>
                    	<div class="row">
 				  		<div class="col-md-2 " ><strong>견종</strong></div>
@@ -476,65 +474,64 @@
       });
       
   //////////////////////////////////////////////////////////////////////////////////////////////////////
-//   	  function listApply(){
-// 	  	var adoptNo = parseInt(  $('input[name=postNo]').val().trim()  );
-// 	  	console.log(adoptNo);
-//   		$.ajax( 
-// 		 		{
-// 					url : "/apply/json/listApply/"+adoptNo ,
-// 					method : "GET" ,
-// 					dataType : "JSONObject" ,
-// 					headers : {
-// 								"Accept" : "application/json",
-// 								"Content-Type" : "application/json"
-// 							  },
-// 					success : function(xhr , status) {
-// 							alert(status);
+  	  function listApply(){
+	  	var adoptNo = ${adopt.postNo};
+  		$.ajax( 
+		 		{
+					url : "/apply/json/listApply/"+adoptNo ,
+					method : "POST" ,
+					dataType : "json" ,
+					headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							  },
+					success : function(JSONData , status) {
+//							alert(status);
 			
-// 						var displayValue = 
-// 							'<table class=\"table table-hover table-striped\" >'
-// 						        +'<thead>'
-// 						        	+'<tr>'
-// 							            +'<th><p align="center">No</p></th>'
-// 							            +'<th><p align="center">신청자 ID</p></th>'
-// 							            +'<th><p align="center">신청일자</p></th>' 
-// 					           		+'</tr>'
-// 					            +'</thead>'
-// 					            +'<tbody>'
-// 						            +'<c:set var="i" value="0" />'
-// 						            	+'<c:forEach var="apply" items="${list}">'
-// 						            	+'<c:set var="i" value="${ i+1 }" />'
-// 						            		+'<tr name="${ apply.applyNo }">'
-// 						            			+'<input type="hidden" name="applyNo" value="${ apply.applyNo }">'
-// 							            		+'<td align="left">${ i }</td>'
-// 							            		+'<td align="left">${apply.id}</td>'
-// 							            		+'<td align="left">${apply.regDate}'
-// 							            			+'<button class="btn btn-primary py-0 px-2">제외</button>'
-// 							            		+'</td>'
-// 						            		+'</tr>'
-// 						            +'</c:forEach>'
-// 						         +'</tbody>'
-// 						     +'</table>';
+						var displayValue = 
+							'<table class=\"table table-hover table-striped\" >'
+						        +'<thead>'
+						        	+'<tr>'
+							            +'<th><p align="center">No</p></th>'
+							            +'<th><p align="center">신청자 ID</p></th>'
+							            +'<th><p align="center">신청일자</p></th>' 
+					           		+'</tr>'
+					            +'</thead>'
+					            +'<tbody>'
+						            +'<c:set var="i" value="0" />'
+						            	+'<c:forEach var="apply" items="${list}">'
+						            	+'<c:set var="i" value="${ i+1 }" />'
+						            		+'<tr name="${ apply.applyNo }">'
+						            			+'<input type="hidden" name="applyNo" value="${ apply.applyNo }">'
+							            		+'<td align="left">${ i }</td>'
+							            		+'<td align="left">${apply.id}</td>'
+							            		+'<td align="left">${apply.regDate}'
+							            			+'<button class="btn btn-primary py-0 px-2">제외</button>'
+							            		+'</td>'
+						            		+'</tr>'
+						            +'</c:forEach>'
+						         +'</tbody>'
+						     +'</table>';
 							
 													
-// 						$( "#listJSON" ).html(displayValue);
-// 						$('#dialog-listApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 						$( "#dialog-listApply" ).dialog( "open" );
+						$( "#getJSON" ).html(displayValue);
+						$('#dialog-getApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+						$( "#dialog-getApply" ).dialog( "open" );
 						
-// 				},
-// 				error: function(request, status, error){ 
-// 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-// //						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-// 		        }
+				},
+				error: function(request, status, error){ 
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+//						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+		        }
 				
 				
-// 			});
+			});
 	  
 	  
 	  
 	  		
-// 	  		$('#dialog-listApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-listApply').dialog( "open" );
+	  		$('#dialog-listApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+			$('#dialog-listApply').dialog( "open" );
  	  }
   
   
@@ -554,7 +551,7 @@
 			});
 		
 			$( "a:contains('신청서확인')" ).on("click" , function() {
-// 				listApply();
+				listApply();
 // 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 		
@@ -571,7 +568,10 @@
 			$( "button:contains('목록')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
-
+		
+			$( "a:contains('신청서확인')" ).on("click" , function() {
+				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
+			});
 	  });
       
 
