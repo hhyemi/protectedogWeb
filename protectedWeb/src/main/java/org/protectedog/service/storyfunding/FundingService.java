@@ -10,6 +10,10 @@ import org.protectedog.service.domain.Participate;
 public interface FundingService {
 
 	/////////////// FUNDING 후원신청게시판 /////////////////////
+	
+	// 펀딩 한달 전 글 있는지 확인
+	public Funding getPost(String id) throws Exception;
+	
 	// 펀딩 글 작성
 	public void addVoting(Funding funding) throws Exception;
 

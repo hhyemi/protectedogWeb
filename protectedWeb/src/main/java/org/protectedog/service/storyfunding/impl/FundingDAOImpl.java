@@ -28,6 +28,11 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 
 	/////////////// FUNDING 후원신청 게시판 /////////////////////
+	
+	@Override
+	public Funding getPost(String id) throws Exception {
+		return sqlSession.selectOne("FundingMapper.getPost",id);
+	}
 
 	@Override
 	public void addVoting(Funding funding) throws Exception {
@@ -111,13 +116,13 @@ public class FundingDAOImpl implements FundingDAO {
 
 	@Override
 	public void updateReview(Funding funding) throws Exception {
-		sqlSession.update("FundingMapper.updateReview",funding);
+		sqlSession.update("FundingMapper.updateReview", funding);
 
 	}
 
 	@Override
 	public void delReview(int postNo) throws Exception {
-		sqlSession.delete("FundingMapper.delReview",postNo);
+		sqlSession.delete("FundingMapper.delReview", postNo);
 
 	}
 	/////////////// 회원에서 요구한 Method/////////////////////

@@ -142,7 +142,7 @@
 				<c:forEach var="name" items="${file}" varStatus="status">            
 				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
                      <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
-                            <a href="#" value="${name.fileName}"  onclick="deletePreview2(this)">昏力</a></div>     
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)">昏力</span></div>     
                 </c:forEach>           
        
             </div> 
@@ -308,10 +308,10 @@
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-                                             + "<a href=\"#\" value=\""
+                                             + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   昏力" + "</a>" + "</div>");
+                                             + "   昏力" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;

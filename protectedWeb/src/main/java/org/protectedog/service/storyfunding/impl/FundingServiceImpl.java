@@ -29,7 +29,12 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 	/////////////// FUNDING 후원신청게시판 /////////////////////
-
+	
+	@Override
+	public Funding getPost(String id) throws Exception {
+		return fundingDAO.getPost(id);
+	}
+	
 	@Override
 	public void addVoting(Funding funding) throws Exception {
 		fundingDAO.addVoting(funding);

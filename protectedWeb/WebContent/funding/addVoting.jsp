@@ -155,19 +155,19 @@
 			<h3><b>연락처</b></h3>	
 			문의받을 연락처를 입력해주세요.<p/>		
 			 <div class="col-sm-3" style="padding:0; margin:0;">
-		      <select class="form-control" name="phone1" id="phone1" style="height:35px;" >
-				  	<option value="010" >010</option>
-					<option value="011" >011</option>
-					<option value="016" >016</option>
-					<option value="018" >018</option>
-					<option value="019" >019</option>
+		      <select class="form-control" name="phone1" id="phone1">
+				  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
+					<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
+					<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
+					<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
+					<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
 				</select>
 		    </div>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호" maxlength="4" style="height:35px;">
+		      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}" placeholder="번호" maxlength="4" style="height:35px;">
 		    </div>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호" maxlength="4" style="height:35px;">
+		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}" placeholder="번호" maxlength="4" style="height:35px;">
 		    </div>
 		    <input type="hidden" name="phone"  />
 		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
@@ -359,10 +359,10 @@
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-                                             + "<a href=\"#\" value=\""
+                                             + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   삭제" + "</a>" + "</div>");
+                                             + "   삭제" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;

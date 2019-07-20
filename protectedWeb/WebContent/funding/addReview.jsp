@@ -294,10 +294,10 @@
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-                                             + "<a href=\"#\" value=\""
+                                             + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   삭제" + "</a>" + "</div>");
+                                             + "   삭제" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;

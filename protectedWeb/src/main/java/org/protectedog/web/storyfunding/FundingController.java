@@ -12,6 +12,7 @@ import org.protectedog.common.Search;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.Participate;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
 import org.protectedog.service.storyfunding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,17 +77,17 @@ public class FundingController {
 	// 약관보기
 	@RequestMapping(value = "getTerms", method = RequestMethod.GET)
 	public String getTerms(@RequestParam("termsTitle") String termsTitle, @RequestParam("postNo") String postNo,
-			Model model) throws Exception {
+			Model model, HttpSession session) throws Exception {
 
 		System.out.println("/funding/getTerms");
-
+		
 		List<String> termsList = new ArrayList<String>();
 		termsList.add(SFTermsOne);
 		termsList.add(SFTermsTwo);
 		termsList.add(SFTermsThree);
 		termsList.add(SFTermsFour);
 		termsList.add(SFTermsFive);
-		
+
 		if (termsTitle.equals("SFPost")) {
 			termsTitle = "후원신청글";
 		} else if (termsTitle.equals("SFVote")) {
@@ -98,7 +99,7 @@ public class FundingController {
 		model.addAttribute("termsList", termsList);
 		model.addAttribute("termsTitle", termsTitle);
 		model.addAttribute("postNo", postNo);
-		
+
 		return "forward:/funding/getTerms.jsp";
 	}
 
@@ -106,16 +107,13 @@ public class FundingController {
 
 	// 펀딩 글 작성
 	@RequestMapping(value = "addVoting", method = RequestMethod.GET)
-	public String addVoting(HttpSession session) throws Exception {
+	public String addVoting(HttpSession session, Model model) throws Exception {
 
 		System.out.println("/funding/addVoting : GET");
-		// 나중에 세션으로 변경//
-		Funding funding = new Funding();
-		String id = "user01";
-		String nickname = "스캇";
-		funding.setId(id);
-		funding.setNickname(nickname);
-		// 변경여기까지//
+
+		// 세션
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
 
 		return "redirect:/funding/addVoting.jsp";
 	}
@@ -127,12 +125,10 @@ public class FundingController {
 
 		System.out.println("/funding/addVoting : POST");
 
-		// 나중에 세션으로 변경//
-		String id = "user01";
-		String nickname = "스캇";
-		funding.setId(id);
-		funding.setNickname(nickname);
-		// 변경여기까지//
+		// 세션
+		User user = (User) session.getAttribute("user");
+		funding.setId(user.getId());
+		funding.setNickname(user.getNickname());
 
 		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.0001);
 
@@ -164,7 +160,7 @@ public class FundingController {
 
 	// 펀딩 글 확인
 	@RequestMapping(value = "getVoting", method = RequestMethod.GET)
-	public String getVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
+	public String getVoting(@RequestParam("postNo") int postNo, Model model,HttpSession session) throws Exception {
 
 		System.out.println("/funding/getVoting ");
 
@@ -182,9 +178,13 @@ public class FundingController {
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", postNo);
 		List<FileDog> file = fileService.getFile(filePost);
+		
+		//세션
+		User user = (User) session.getAttribute("user");
 
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
+		model.addAttribute("user", user);
 
 		return "forward:/funding/getVoting.jsp";
 	}
@@ -246,11 +246,10 @@ public class FundingController {
 			fileService.addFile(listFile);
 		}
 
-		// 나중에 세션으로 변경//
-		String id = "user01";
-		String nickname = "스캇";
-		funding.setId(id);
-		funding.setNickname(nickname);
+		// 세션
+		User user = (User) session.getAttribute("user");
+		funding.setId(user.getId());
+		funding.setNickname(user.getNickname());
 
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundBoardCode);
@@ -312,8 +311,6 @@ public class FundingController {
 			search.setSearchCondition("");
 		}
 
-		// User user = (User) session.getAttribute("user");
-
 		Map<String, Object> map = fundingService.listVoting(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
@@ -360,7 +357,6 @@ public class FundingController {
 			search.setSearchCondition("");
 		}
 
-		// User user = (User) session.getAttribute("user");
 
 		Map<String, Object> map = fundingService.listFunding(search);
 
@@ -420,9 +416,10 @@ public class FundingController {
 
 		Participate participate = new Participate();
 		participate.setPostNo(postNo);
-		participate.setId("user01");
-		participate.setNickName("스캇");
-
+		//세션
+		User user = (User) session.getAttribute("user");
+		participate.setId(user.getId());
+		participate.setNickname(user.getNickname());
 		// participate 레코드 추가 ( 1 : 투표 )
 		participate.setStatusCode("1");
 
@@ -464,8 +461,9 @@ public class FundingController {
 
 		System.out.println("/funding/addFund : POST");
 
-		participate.setId("user01");
-		participate.setNickName("스캇");
+		User user = (User) session.getAttribute("user");
+		participate.setId(user.getId());
+		participate.setNickname(user.getNickname());
 		// participate 레코드 추가 ( 2 : 후원 )
 		participate.setStatusCode("2");
 
@@ -510,11 +508,11 @@ public class FundingController {
 
 		System.out.println("/funding/addReview : POST");
 
-		// 나중에 세션으로 변경//
-		String id = "user01";
-		String nickname = "스캇";
-		funding.setId(id);
-		funding.setNickname(nickname);
+		//세션 
+		User user = (User) session.getAttribute("user");
+		funding.setId(user.getId());
+		funding.setNickname(user.getNickname());
+
 		// 변경여기까지//
 
 		fundingService.addReview(funding);
@@ -595,11 +593,10 @@ public class FundingController {
 			fileService.addFile(listFile);
 		}
 
-		// 나중에 세션으로 변경//
-		String id = "user01";
-		String nickname = "스캇";
-		funding.setId(id);
-		funding.setNickname(nickname);
+		//세션 
+		User user = (User) session.getAttribute("user");
+		funding.setId(user.getId());
+		funding.setNickname(user.getNickname());
 
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundReviewBoardCode);

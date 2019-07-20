@@ -10,7 +10,10 @@ import org.protectedog.service.domain.Participate;
 public interface FundingDAO {
 
 	/////////////// FUNDING 후원신청 게시판 /////////////////////
-
+	
+	// SELECT ONE
+	public Funding getPost(String id) throws Exception;
+	
 	// INSERT
 	public void addVoting(Funding funding) throws Exception;
 

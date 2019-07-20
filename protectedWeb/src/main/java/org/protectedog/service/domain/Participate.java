@@ -6,7 +6,7 @@ public class Participate {
 
 	private int participateNo;
 	private String id;
-	private String nickName;
+	private String nickname;
 	private int postNo;
 	private Date regDate;
 	private int fundPay;
@@ -32,12 +32,12 @@ public class Participate {
 		this.id = id;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getPostNo() {
@@ -82,7 +82,7 @@ public class Participate {
 
 	@Override
 	public String toString() {
-		return "Participate [participateNo=" + participateNo + ", id=" + id + ", nickName=" + nickName + ", postNo="
+		return "Participate [participateNo=" + participateNo + ", id=" + id + ", nickname=" + nickname + ", postNo="
 				+ postNo + ", regDate=" + regDate + ", fundPay=" + fundPay + ", statusCode=" + statusCode
 				+ ", paymentCode=" + paymentCode + "]";
 	}

@@ -22,19 +22,19 @@
 	<!-- SQL : INSERT -->
 	<insert id="addParticipate" parameterType="participate">
 		INSERT
-		INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY ,STATUS_CODE ,PAYMENT_CODE )
+		INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE )
 		VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL , #{id:VARCHAR} , #{nickName:VARCHAR} , #{postNo:NUMERIC}, SYSDATE , #{fundPay:NUMERIC},#{statusCode:CHAR}, #{paymentCode:VARCHAR})
 	</insert>
 
-	<!-- SQL : SELECT ONE 
+	<!-- SQL : SELECT ONE -->
 	<select id="getParticipate" parameterType="string" resultMap="participateSelectMap">
 		SELECT
 		
-		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
 		FROM PARTICIPATE
-		WHERE PARTICIPATE_NO = #{value}
+		WHERE ID = #{id} AND STATUS_CODE = #{statusCode}
 	</select>
-
+<!-- 
 	SQL : SELECT LIST
 	<select id="listParticipate" parameterType="search" resultMap="participateSelectMap">
 		SELECT *

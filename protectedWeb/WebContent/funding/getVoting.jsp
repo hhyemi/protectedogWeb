@@ -185,8 +185,10 @@
 				 			${funding.postContent }
 				         	<hr/><br/>									
 							<div class="form-group2">
+							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
 							<a class="main_btn" href="#">수정하기</a> 
 							<a class="main_btn" href="#">삭제하기</a> 
+							</c:if>
 						    </div>
 		          </div>
 		          <div
@@ -232,17 +234,25 @@
     
 		//============= 투표하기 Event  처리 =============	
 	 	$( "a:contains('투표하기')" ).on("click" , function() {
-	 			 		
-	 		if(!(${funding.statusCode eq '1'})){
-	 			alert("투표가 종료되었습니다.")
+	 		if(${user==null}){
+	 			alert("로그인이 필요합니다.")
 	 		}else{
-	 		self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
+	 			 		
+		 		if(!(${funding.statusCode eq '1'})){
+		 			alert("투표가 종료되었습니다.")
+		 		}else{
+		 		self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
+		 		}
 	 		}
 	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-	 		//self.location = "/user/getUsers?id=${sessionScope.user.id}";
+	 		if(${user==null}){
+	 			alert("로그인이 필요합니다.")
+	 		}else{
+
+	 		}
 		});   
 	
 		//============= SNS공유 Event  처리 =============	
@@ -264,23 +274,22 @@
 	    
 		//============= 수정하기 Event  처리 =============	
 	 	$( "a:contains('수정하기')" ).on("click" , function() {
+	 		if(${!(funding.voterCount eq 0) || !(user.id eq 'admin')}){
+	 			alert("투표 1개이상 받을 시 수정이 불가합니다. ")
+	 		}else{
 	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
+	 		}
 		});   
 		
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "a:contains('삭제하기')" ).on("click" , function() {
-	 		func_confirm()
+            if(confirm('삭제시 한달간 글 작성 불가입니다.')){
+                self.location = "/funding/delVoting?postNo=${funding.postNo}"
+            	alert("삭제가 완료되었습니다.")
+            } else {
+            }
 		});   	
     });
-    
-	  //=============삭제 알림창 Event  처리 =============    	
-            function func_confirm () {
-                if(confirm('정말 삭제하시겠습니까?')){
-                	self.location = "/funding/delVoting?postNo=${funding.postNo}"
-                	alert("삭제가 완료되었습니다.")
-                } else {
-                }
-            }
 
     
 		//============= 카카오 공유하기Event  처리 =============		

@@ -14,7 +14,10 @@
 
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-
+		.form-group2{
+			padding-left:1000px;
+			padding-right:100px;
+			}	
 		.right-box {
 		  float: right;
 		}		     
@@ -39,7 +42,9 @@
     </div>
 
     <section class="ftco-section bg-light">    
-    
+      		  <div class="form-group2 text-center">
+	  			<button id="btn-add" class="btn btn-primary ">작성하기</button>
+		  </div>  
 		 <form class="form-inline" name="detailForm">
 		    	<div class="container" >
 		    	
@@ -61,7 +66,6 @@
 						    <label class="sr-only" for="searchKeyword">검색어</label>
 						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" >
 						    <button type="button" class="btn btn-default">검색</button>
-
 						</div>
 			    	</div>    
     		    	<br/>
@@ -130,9 +134,7 @@
 		    <input type="hidden" id="currentPage" name="currentPage" value=""/>	  
 		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
-  		  <div class="form-group text-center">
-	  			<button id="btn-add" class="btn btn-primary py-3 px-4 col-md-3">작성하기</button>
-		  </div>  
+
     </section>
     <!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
@@ -176,8 +178,35 @@
 	
         //============= 작성 Event  처리 =============   
         $( "#btn-add" ).on("click" , function() {
-        	$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
+        	
+        	if('${user == null}'){
+        		alert("로그인이 필요합니다.")
+        		return;
+        	}
+        	
+   		 $.ajax( 
+					{
+			        	url : "/funding/json/addVoting",
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						error:function(request,status,error){
+                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+                           },
+						success : function(JSONData , status) {
+		
+			                if(JSONData ==1 ) {
+			                	alert("한달에 한번만 글 작성 가능합니다. \n(이미 한달안에 글을 작성하였습니다.)")
+			                } else {
+		        				$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
 
+			                } 
+						}
+						
+				});
            });
         
 		//============= autocomplete Event  처리 =============			
