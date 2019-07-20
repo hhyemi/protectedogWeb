@@ -97,7 +97,7 @@
 		});
 
 		$(function() {
-			$("span:contains('Sign Up')").on("click", function() {
+			$("span:contains('Sign up')").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
 			});
 		});

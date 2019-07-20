@@ -72,7 +72,7 @@
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
 						    <c:if test="${ sessionScope.user eq null }">
-						    	<span class="text">Sign in</span><span class="text">Sign Up</span>
+						    	<span class="text">Sign in</span><span class="text">Sign up</span>
 						    </c:if>
 
 						    <c:if test="${sessionScope.user.role eq 'user' }">
