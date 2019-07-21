@@ -22,7 +22,6 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
     	 body >  div.container{ 
-        	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
     </style>
@@ -126,11 +125,11 @@
 				
 				$("form").attr("method","POST").attr("action","/users/login").attr("target","_parent").submit();
 
-				if(${ requestScope.check != false }){
-					alert("로그인 실패");
-				}else {
-					alert("로그인 성공");
-				}
+// 				if(${ requestScope.check != false }){
+// 					alert("로그인 실패");
+// 				}else {
+// 					alert("로그인 성공");
+// 				}
 			
 			});
 		});	

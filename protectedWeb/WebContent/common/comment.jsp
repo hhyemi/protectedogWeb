@@ -33,7 +33,15 @@ body {
 
 <script type="text/javascript">
 
-// 댓글 CURD function();
+	$(function(){
+		
+		$("#login").on("click",function(){
+			
+			
+		});
+	});
+
+	// 댓글 CURD function();
 	$(function() {
 		// 댓글 등록 
 		$("#commentGo").on("click",function() {
@@ -219,7 +227,7 @@ body {
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row">
 			<div class="col-sm-12 col-md-12" align="center">
-				비회원은 댓글을 달 수 없습니다 <button id="login" style="color: #0b43b3;">로그인</button> 후 이용해
+				비회원은 댓글을 달 수 없습니다<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> 로그인 </button>후 이용해
 				주시길 바랍니다.
 			</div>
 		</div>
@@ -292,9 +300,29 @@ body {
 
 
 		<br>
-		
+ 
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="button" id="login" class="btn btn-primary">로그인</button>
+					</div>
+				</div>
+			</div>
+		</div>		
 	</div>
-
+	
+	
 
 
 </body>
