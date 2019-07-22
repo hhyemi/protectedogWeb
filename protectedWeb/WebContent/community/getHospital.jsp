@@ -102,7 +102,7 @@
   	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
   	
     <input id="pac-input" class="controls" type="text" style="height: 40px; margin-top: 10px; width:50%;" placeholder="검색어 입력">
-    <div id="map" style="width: 1100px; margin-left: 15%;"></div>
+    <div id="map" align="center" style="width: 1140px; margin-left: 20%;"></div>
     
     <div class="container">
     	<div style="min-height: 50px;">
