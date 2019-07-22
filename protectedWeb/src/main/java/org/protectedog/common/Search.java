@@ -15,7 +15,7 @@ public class Search {
 	// ==> 참조
 	private int endRowNum;
 	private int startRowNum;
-
+	private int commentEndRowNum;
 	// 스토리펀딩
 	private String voteCondition;
 
@@ -65,6 +65,11 @@ public class Search {
 	public int getStartRowNum() {
 		return (getCurrentPage() - 1) * getPageSize() + 1;
 	}
+	
+	// Comment ROWNUM 마지막 값
+	public int getCommentEndRowNum() {
+		return getPageSize() + 5;
+	}
 
 	public String getVoteCondition() {
 		return voteCondition;
@@ -78,7 +83,7 @@ public class Search {
 	public String toString() {
 		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", searchKeyword="
 				+ searchKeyword + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum
-				+ ", voteCondition=" + voteCondition + "]";
+				+ ", commentEndRowNum=" + commentEndRowNum + ", voteCondition=" + voteCondition + "]";
 	}
-
+	
 }

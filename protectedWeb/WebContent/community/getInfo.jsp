@@ -20,7 +20,11 @@
 	$(function() {
 		
 		$("button:contains('추천')").on("click", function(){
-			
+				
+			if(${sessionScope.user == null}){
+				alert("로그인 하십쇼");
+				return;
+			}
 			var postNo = "${board.postNo}" ;
 			var id = '${sessionScope.user.id}';
 			$.ajax({
@@ -186,6 +190,8 @@ body {
 	
 	<script type="text/javascript">
 	
+	
+	if(${board.route != null}){
     var map;
     var markers = [];
     var loca = "${board.route}";
@@ -193,11 +199,11 @@ body {
     var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
     var marker;
     
-	 var mapArea;
-     var markerArea;
-     var adArea = "${board.route}";
-     var arrayTest = [];
-     var arrayMark = [];
+	var mapArea;
+    var markerArea;
+    var adArea = "${board.route}";
+    var arrayTest = [];
+    var arrayMark = [];
      
      
      if (adArea.indexOf("#") != -1){
@@ -244,7 +250,8 @@ body {
 	    });
 		 	
     }//$('#pop').text(aaa);
-	  
+	
+     }
 	//============= SNS공유 Event  처리 =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
