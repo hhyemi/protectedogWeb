@@ -9,10 +9,10 @@
 	<resultMap id="participateSelectMap" type="participate">
 		<result property="participateNo" column="PARTICIPATE_NO" jdbcType="NUMERIC" />
 		<result property="id" column="ID" jdbcType="VARCHAR" />
-		<result property="nickName" column="NICKNAME" jdbcType="VARCHAR" />
+		<result property="nickname" column="NICKNAME" jdbcType="VARCHAR" />
 		<result property="postNo" column="POST_NO" jdbcType="NUMERIC" />
 		<result property="regDate" column="REG_DATE" jdbcType="DATE" />
-		<result property="fundPay" column="FUND_PAY " jdbcType="NUMERIC" />
+		<result property="fundPay" column="FUND_PAY" jdbcType="NUMERIC" />
 		<result property="statusCode" column="STATUS_CODE" jdbcType="CHAR" />
 		<result property="paymentCode" column="PAYMENT_CODE" jdbcType="VARCHAR" />
 	</resultMap>
@@ -23,28 +23,28 @@
 	<insert id="addParticipate" parameterType="participate">
 		INSERT
 		INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE )
-		VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL , #{id:VARCHAR} , #{nickName:VARCHAR} , #{postNo:NUMERIC}, SYSDATE , #{fundPay:NUMERIC},#{statusCode:CHAR}, #{paymentCode:VARCHAR})
+		VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL , #{id:VARCHAR} , #{nickname:VARCHAR} , #{postNo:NUMERIC}, SYSDATE , #{fundPay:NUMERIC},#{statusCode:CHAR}, #{paymentCode:VARCHAR})
 	</insert>
 
 	<!-- SQL : SELECT ONE -->
-	<select id="getParticipate" parameterType="string" resultMap="participateSelectMap">
+	<select id="getParticipate" parameterType="participate" resultMap="participateSelectMap">
 		SELECT
 		
 		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
 		FROM PARTICIPATE
-		WHERE ID = #{id} AND STATUS_CODE = #{statusCode}
+		WHERE ID = #{id} AND STATUS_CODE = #{statusCode} AND POST_NO = #{postNo}
 	</select>
-<!-- 
-	SQL : SELECT LIST
-	<select id="listParticipate" parameterType="search" resultMap="participateSelectMap">
+
+   <!-- SQL : SELECT LIST  -->
+	<select id="listNoticeComment" parameterType="map" resultMap="participateSelectMap">
 		SELECT *
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
 		FROM (	SELECT
-		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
 		FROM PARTICIPATE
 		<where>
 			<if test="postNo != null ">
-			AND POST_NO = #{postNo}
+			AND POST_NO = #{postNo} AND STATUS_CODE = #{statusCode}
 			</if>
 		</where>
 		 ORDER BY REG_DATE DESC	
@@ -54,7 +54,9 @@
 		#{startRowNum} AND
 		#{endRowNum}
 	</select>
-
+	
+	
+<!-- 
 	<SQL : USER에서 쓰는 SELECT LIST
 	<select id="listParticipateUser" parameterType="string" resultMap="participateSelectMap">
 		SELECT

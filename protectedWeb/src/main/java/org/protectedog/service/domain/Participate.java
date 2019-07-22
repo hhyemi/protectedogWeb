@@ -56,14 +56,6 @@ public class Participate {
 		this.regDate = regDate;
 	}
 
-	public int getFundPay() {
-		return fundPay;
-	}
-
-	public void setFundPay(int fundPay) {
-		this.fundPay = fundPay;
-	}
-
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -80,11 +72,19 @@ public class Participate {
 		this.paymentCode = paymentCode;
 	}
 
+
+	public int getFundPay() {
+		return fundPay;
+	}
+
+	public void setFundPay(int fundPay) {
+		this.fundPay = fundPay;
+	}
+
 	@Override
 	public String toString() {
 		return "Participate [participateNo=" + participateNo + ", id=" + id + ", nickname=" + nickname + ", postNo="
 				+ postNo + ", regDate=" + regDate + ", fundPay=" + fundPay + ", statusCode=" + statusCode
 				+ ", paymentCode=" + paymentCode + "]";
 	}
-
 }

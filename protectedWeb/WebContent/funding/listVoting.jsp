@@ -20,15 +20,22 @@
 			}	
 		.right-box {
 		  float: right;
-		}		     
+		}	
+		#checkPostTitle{
+	      width:300px;
+	      padding:0 5px;
+	      overflow:hidden;
+	      text-overflow:ellipsis;
+	      white-space:nowrap;
+	  } 
     </style>
     
     
   </head>
   <body class="goto-here">
- 	<!-- ToolBar Start /////////////////////////////////////-->
+ 	<!-- ToolBar Start ///////////////////////////////////// -->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-   	<!-- ToolBar End /////////////////////////////////////-->  
+   	<!--ToolBar End /////////////////////////////////////  --> 
    	
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
       <div class="container">
@@ -64,7 +71,7 @@
 							</select>
 							&emsp;
 						    <label class="sr-only" for="searchKeyword">검색어</label>
-						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" >
+						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 						    <button type="button" class="btn btn-default">검색</button>
 						</div>
 			    	</div>    
@@ -72,7 +79,7 @@
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-10 col-lg-12 order-md-last">
-		    				<div class="row">
+		    				<div class="row" id="thumbnailRow">
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
@@ -95,27 +102,27 @@
 				    					</c:if>		
 				    						    					
 				    					<div class="text py-3 px-3">
-				    					
+				    					<div id="checkPostTitle">
 				    					<font size="5">${funding.postTitle}</font>
-				    						
+				    					</div>
 										<div class="row" style="position:relative;height:35px;">
 										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <h3>${funding.nickname}</h3></div>
-										         <div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><h3><b><strong style="color:#225cba">${funding.voteRate}%</strong></b></h3></div>
+										         <div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><h3><b><strong style="color:#4E8092">${funding.voteRate}%</strong></b></h3></div>
 										 </div>										   				
 										 <!-- 투표종료 -->
 										 <c:if test ="${!(funding.statusCode eq 1) }">
 										   <div class="progress">												 
-										   <div class="progress-bar bg-danger" role="progressbar" style="width:${funding.voteRate}%;"></div>
+										   <div class="progress-bar" role="progressbar" style="width:${funding.voteRate}%; background-color:#C9BFB0!important;"></div>
 										   </div>	
 											 <div align="right">    						
-											<h4 class="media-heading"  style="color:#e33941">종료</h4> 	
+											<h4 class="media-heading"  style="color:#8c8479">종료</h4> 	
 											</div>
 										 </c:if>
 										 
 										 <!-- 투표중 -->
 										 <c:if test ="${funding.statusCode eq 1 }">										 
 										   <div class="progress">												 
-										   <div class="progress-bar " role="progressbar" style="width:${funding.voteRate}%;"></div>
+										   <div class="progress-bar " role="progressbar" style="width:${funding.voteRate}%; background-color:#4E8092!important;" ></div>
 										   </div>											 
 											 <div align="right">						
 											<h4 class="media-heading">D- ${funding.voteRemainDate }</h4> 	
@@ -136,24 +143,26 @@
 		 </form>
 
     </section>
-    <!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
-    
-    <!--================ start footer Area  =================-->
-    <!-- footer Start /////////////////////////////////////-->
-	 <jsp:include page="/layout/footer.jsp"></jsp:include>
-   	<!-- footer End /////////////////////////////////////-->  
-    <!--================ End footer Area  =================-->
+		<!--     PageNavigation Start... -->
+		 	    <jsp:include page="../common/pageNavigator_new.jsp"/> 
+		<!--     PageNavigation End... --> 
+		    
+		<!--     ================ start footer Area  ================= -->
+		<!--     footer Start ///////////////////////////////////// -->
+		 	     <jsp:include page="/layout/footer.jsp"></jsp:include> 
+		<!--    	footer End /////////////////////////////////////   -->
+		<!--     ================ End footer Area  ================= -->
   
 
   <!-- loader -->
 
   <script src="../../resources/prodmenu/js/main.js"></script>
  
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"> </script>
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-
+	
 	//=============    검색 / page 두가지 경우 모두  Event  처리 =============
 	function fncGetList(currentPage) {
 	   	
@@ -161,7 +170,10 @@
 	   	$("form").attr("method" , "POST").attr("action" , "/funding/listVoting").submit();
 	 
 	}
+
+		 
     $(function(){
+    	
     	
 		//============= "검색"  Event  처리 =============	
 		 $( "button.btn.btn-default" ).on("click" , function() {
@@ -179,7 +191,7 @@
         //============= 작성 Event  처리 =============   
         $( "#btn-add" ).on("click" , function() {
         	
-        	if('${user == null}'){
+        	if(${user == null}){
         		alert("로그인이 필요합니다.")
         		return;
         	}
@@ -216,7 +228,7 @@
 	          var convertSearch = JSON.stringify(search);
 	          
 	          $.ajax({
-	             url : "/funding/json/listVoting/",
+	             url : "/funding/json/autocomplete/",
 	             method : "POST",
 	             dataType : "json",
 	             data :  convertSearch ,

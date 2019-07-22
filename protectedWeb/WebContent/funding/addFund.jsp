@@ -37,13 +37,6 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
-		#btn-ok{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -124,7 +117,7 @@
 			<br/><hr/>        
 		  <br/><br/>
 		  <div class="form-group ">
-	  			<button type="button" id="btn-ok">확인</button>
+	  			<button type="button"  class="btn btn-primary py-3 px-4 col-md-4" id="btn-ok">확인</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>

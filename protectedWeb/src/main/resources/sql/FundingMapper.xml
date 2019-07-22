@@ -125,7 +125,7 @@
 													    AND STATUS_CODE = 1 AND STATUS_CODE !=0
 											         </if>
 												     <if test="voteCondition == 2 and voteCondition !='' ">
-													    AND STATUS_CODE IN (2,3)  AND STATUS_CODE !=0
+													    AND STATUS_CODE IN (2,3,4)  AND STATUS_CODE !=0
 													 </if>
 												 </if>	
 												<if test="voteCondition == null">	
@@ -139,10 +139,13 @@
 
 	  <!-- SQL : AUTOCOMPLETE -->
 	 <select 	id="getAutoVoting"	parameterType="map"	resultType="string">
-		SELECT
+		SELECT DISTINCT
 		${field}
 		FROM STORYFUNDING 
-		WHERE ${field} LIKE '%'||#{searchKeyword}||'%'
+		WHERE ${field} LIKE '%'||#{searchKeyword}||'%' 
+		<if test="statusCode == 1">
+		AND STATUS_CODE IN (3,4)
+		</if>
 	 </select>	 
 	  
      <!-- SQL : SELECT ROW Count	--> 
@@ -167,7 +170,7 @@
 													    AND STATUS_CODE = 1 AND STATUS_CODE !=0
 											         </if>
 												     <if test="voteCondition == 2 and voteCondition !='' ">
-													    AND STATUS_CODE IN (2,3)  AND STATUS_CODE !=0
+													    AND STATUS_CODE IN (2,3,4)  AND STATUS_CODE !=0
 													 </if>
 												 </if>	
 												<if test="voteCondition == null">	

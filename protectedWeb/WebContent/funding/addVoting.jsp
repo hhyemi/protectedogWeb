@@ -134,7 +134,7 @@
 		  <div class="form-group">
 			<h3><b>글내용</b></h3><p/>			
 			    <div>
-					<textarea id="editor" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
+					<textarea id="postContent" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
 					</textarea>
 			    </div>
 			  </div>
@@ -200,6 +200,8 @@
 
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
+//       var ckeditor = CKEDITOR.instances.postContent.getData();
+//       alert(ckeditor)
       var phone2 = $('input[name="phone2"]').val();
       var phone3 = $('input[name="phone3"]').val();   
       var file = $("#multiFile").val();    
@@ -219,11 +221,14 @@
          $('input[name="postTitle"]').focus();
          return;
       }
-      if($('textarea[name="postContent"]').val()==''){
-         alert("글내용은 반드시 입력하셔야 합니다.");
-         $('textarea[name="postContent"]').focus();
-         return;
-      } 
+      
+ /*     if (ckeditor.getData()=="")
+      {
+       alert("내용은 반드시 입력하여야 합니다.");
+       ckeditor.focus();
+       return;
+      }  */
+      
       if(file == null || file.length<1){
          alert("파일은 반드시 입력하셔야 합니다.");
          return;
@@ -290,7 +295,7 @@
 	let editor;
 
 	ClassicEditor
-	    .create( document.querySelector( '#editor' ),{
+	    .create( document.querySelector( '#postContent' ),{
 	    
         	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
         	heading: {
@@ -447,14 +452,15 @@
              $('#postTitle').keyup(function(){
             	 var byteText = $(this).val();
               	 var byteNum = 0;
-            	 
+              	 
                   for(var i = 0; i < byteText.length ; i++) {
-                     byteNum += ( byteText.charCodeAt(i) > 127 ) ? 2 : 1;
+                     byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+	                  if(byteNum > 50) {              	 
+	                      alert('제한길이 초과');
+	                      $(this).val($(this).val().substr(0,i));
+	                  }
                   }
-                  if(byteNum > 30) {              	 
-                      alert('제한길이 초과');
-                      $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
-                  }
+
              });
            //============= 연락처 문자 입력 검증 (JavaScript 함수사용)=============
              $('#phone2').keyup(function(){

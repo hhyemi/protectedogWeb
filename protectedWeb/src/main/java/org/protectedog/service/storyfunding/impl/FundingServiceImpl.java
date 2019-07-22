@@ -29,12 +29,12 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 	/////////////// FUNDING 후원신청게시판 /////////////////////
-	
+
 	@Override
 	public Funding getPost(String id) throws Exception {
 		return fundingDAO.getPost(id);
 	}
-	
+
 	@Override
 	public void addVoting(Funding funding) throws Exception {
 		fundingDAO.addVoting(funding);
@@ -92,21 +92,9 @@ public class FundingServiceImpl implements FundingService {
 	/////////////// FUNDING 참여/////////////////////
 
 	@Override
-	public void addParticipate(Participate participate) throws Exception {
-		fundingDAO.addParticipate(participate);
-
-	}
-
-	@Override
 	public void updateStatusCode(Funding funding) throws Exception {
 		fundingDAO.updateStatusCode(funding);
 
-	}
-
-	@Override
-	public Map<String, Object> listNoticeComment(Search search, int postNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/////////////// 후기 게시판 /////////////////////
@@ -127,14 +115,6 @@ public class FundingServiceImpl implements FundingService {
 	public void delReview(int postNo) throws Exception {
 		fundingDAO.delReview(postNo);
 
-	}
-
-	/////////////// 회원에서 요구한 Method/////////////////////
-
-	@Override
-	public List<Participate> listParticipate(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

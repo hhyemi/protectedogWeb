@@ -85,26 +85,11 @@ public class FundingDAOImpl implements FundingDAO {
 	/////////////// FUNDING 참여/////////////////////
 
 	@Override
-	public void addParticipate(Participate participate) throws Exception {
-		sqlSession.insert("ParticipateMapper.addParticipate", participate);
-
-	}
-
-	@Override
 	public void updateStatusCode(Funding funding) throws Exception {
 		sqlSession.update("FundingMapper.updateStatusCode", funding);
 
 	}
 
-	@Override
-	public List<Participate> listNoticeComment(Search search, int postNo) throws Exception {
-		return sqlSession.selectList("ParticipateMapper.listParticipate");
-	}
-
-	@Override
-	public int getParticipateTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("ParticipateMapper.getParticipateTotalCount");
-	}
 
 	/////////////// 후기 게시판 /////////////////////
 
@@ -125,11 +110,6 @@ public class FundingDAOImpl implements FundingDAO {
 		sqlSession.delete("FundingMapper.delReview", postNo);
 
 	}
-	/////////////// 회원에서 요구한 Method/////////////////////
 
-	@Override
-	public List<Participate> listParticipate(int id) throws Exception {
-		return sqlSession.selectList("ParticipateMapper.listParticipate");
-	}
 
 }
