@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUsers(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return userDAO.getUsers(id);
+		return userDAO.getUsersById(id);
 	}
 
 	@Override
@@ -69,10 +69,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int checkDuplication(String id) throws Exception {
+	public int checkId(String id) throws Exception {
 		// TODO Auto-generated method stub
 		int result=0;
-		User user=userDAO.getUsers(id);
+		User user=userDAO.getUsersById(id);
 		System.out.println("chkDup :"+id);
 		System.out.println("chkDup : "+user);
 		if(user!=null) {
@@ -82,9 +82,34 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User getSocial(Map<String, Object> map) throws Exception {
+	public User getKakao(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return userDAO.getSocial(map);
+		return userDAO.getKakao(map);
+	}
+	
+	@Override
+	public User getGoogle(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userDAO.getGoogle(map);
+	}
+	
+	@Override
+	public User getNaver(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userDAO.getNaver(map);
+	}
+	
+	@Override
+	public int checkNick(String nickname) throws Exception {
+		// TODO Auto-generated method stub
+		int result=0;
+		User user=userDAO.getUsersByNick(nickname);
+		System.out.println("chkDup :"+nickname);
+		System.out.println("chkDup : "+user);
+		if(user!=null) {
+			result=1;
+		}
+		return result;
 	}
 
 

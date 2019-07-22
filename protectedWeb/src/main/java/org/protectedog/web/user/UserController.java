@@ -47,7 +47,7 @@ public class UserController {
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("kakao", kakao);
 		
-		User user=userService.getSocial(map);
+		User user=userService.getKakao(map);
 		if(user==null) {
 			request.setAttribute("kakao", kakao);
 			return "forward:/users/addUsersBaseView.jsp";
@@ -55,8 +55,34 @@ public class UserController {
 			session.setAttribute("user", user);
 			return "redirect:/";
 		}
-		
 	}
+	
+	@RequestMapping(value="google", method=RequestMethod.GET)
+	public String google(@RequestParam("google") String google, 
+						@RequestParam("idToken") String idToken, 
+//						Model model, 
+						HttpServletRequest request, 
+						HttpSession session) throws Exception{
+
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("google", google);
+		
+		User user=userService.getGoogle(map);
+		if(user==null) {
+			request.setAttribute("google", google);
+			return "forward:/users/addUsersBaseView.jsp";
+		}else {
+			session.setAttribute("user", user);
+//			request.setAttribute("idToken", idToken);
+//			model.addAttribute("idToken", idToken);
+			session.setAttribute("idToken", idToken);
+			System.out.println("login : "+idToken);
+			return "redirect:/";
+		}
+		
+	
+	}
+
 	
 	@RequestMapping(value="addUsersBase", method=RequestMethod.GET)
 	public String addUsersBase() throws Exception{
@@ -120,7 +146,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user, HttpSession session, HttpServletRequest request) throws Exception{
+	public String login(@ModelAttribute("user") User user, 
+						HttpSession session, 
+						HttpServletRequest request) throws Exception{
 		
 		System.out.println("/users/login : POST");
 		
@@ -146,20 +174,19 @@ public class UserController {
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
-		if(user.getPw().equals(dbUser.getPw())) {
+		
+		
+		if(user.getPw().equals(dbUser.getPw()) && user.getId().equals(dbUser.getId())) {
+			String check="true";
 			session.setAttribute("user", dbUser);
-			
-
+			request.setAttribute("check", check);
+			System.out.println(check);
 			System.out.println("session : "+dbUser);
-
-			System.out.println(session.getAttribute("user"));
-		}else {
-			System.out.println("ERROR");
-
-		}
+		} 
 		
 		System.out.println("ANG : "+session.getAttribute("user"));
 		
+
 		return "redirect:/index.jsp";
 	}
 	

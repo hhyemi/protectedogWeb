@@ -23,10 +23,15 @@ public interface UserService {
 	public void updateUsers(User user) throws Exception;
 	
 	//아이디 중복체크
-	public int checkDuplication(String id) throws Exception;
+	public int checkId(String id) throws Exception;
 	
 	//SNS 연동
-	public User getSocial(Map<String, Object> map) throws Exception;
+	public User getKakao(Map<String, Object> map) throws Exception;
+	public User getGoogle(Map<String, Object> map) throws Exception;
+	public User getNaver(Map<String, Object> map) throws Exception;
+
+	//닉네임 중복체크
+	public int checkNick(String nickname) throws Exception;
 	
 
 	

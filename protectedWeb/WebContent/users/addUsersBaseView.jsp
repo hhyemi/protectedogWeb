@@ -33,11 +33,12 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" name="formal">
 		<input type="hidden" id="kakao" name="kakao" value="${ kakao }">
+		<input type="hidden" id="google" name="google" value="${ google }">
 		  <div class="form-group">
 		    <label for="id" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="id" name="id" placeholder="중복확인하세요">
-		       <span id="helpBlock" class="help-block">
+		       <span id="helpBlock1" class="help-block">
 		      </span>
 		    </div>
 		  </div>
@@ -67,6 +68,8 @@
 		    <label for="nickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임">
+		      <span id="helpBlock2" class="help-block">
+		      </span>
 		    </div>
 		  </div>
 		  
@@ -121,6 +124,8 @@
 				}
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersBase");
+				
+				alert("미인증회원으로 가입되셨습니다. 인증하시려면 개인정보수정란에서 추가정보를 기입해주십시오.")
 			});
 		});	
 		
@@ -132,15 +137,42 @@
 				$.ajax({
 					type : "POST",
 					contentType : "application/json",
-					url : "/users/json/checkDuplication",
+					url : "/users/json/checkId",
 					data : checkId,
 					datatype : "json" ,
 					success : function(response){
 						if($.trim(response.result)==0){
-							$('#helpBlock').html("사용가능");
+							$('#helpBlock1').html("사용가능");
 							$('#submit').attr('disabled', false);
 						}else{
-							$('#helpBlock').html("사용불가");
+							$('#helpBlock1').html("사용불가");
+							$('#submit').attr('disabled', true);
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+			});
+		});
+		
+		$(function(){
+			
+			$("#nickname").keyup(function(){
+				var nickname=$("#nickname").val();
+				var checkNick=JSON.stringify({nickname:nickname});
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/users/json/checkNick",
+					data : checkNick,
+					datatype : "json" ,
+					success : function(response){
+						if($.trim(response.result)==0){
+							$('#helpBlock2').html("사용가능");
+							$('#submit').attr('disabled', false);
+						}else{
+							$('#helpBlock2').html("사용불가");
 							$('#submit').attr('disabled', true);
 						}
 					},
@@ -185,6 +217,8 @@
 				}
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersBase2");
+				
+				alert("인증페이지로 넘어갑니다.")
 			});
 		});	
 		
