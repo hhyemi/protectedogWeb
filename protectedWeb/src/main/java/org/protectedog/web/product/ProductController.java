@@ -3,7 +3,10 @@ package org.protectedog.web.product;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +14,10 @@ import javax.xml.crypto.Data;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
+import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Product;
+import org.protectedog.service.file.FileService;
 import org.protectedog.service.product.ProductService;
-import org.protectedog.service.product.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +37,10 @@ public class ProductController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
+	
+	@Autowired
+	@Qualifier("fileServiceImpl")
+	private FileService fileService;
 
 	// setter Method 구현 않음
 
@@ -56,7 +64,7 @@ public class ProductController {
 	
 	
 	@RequestMapping(value="addProduct")
-	public String addProduct(HttpServletRequest request) throws Exception{
+	public String addProduct(HttpServletRequest request, @RequestParam("multiFile") ArrayList<String> multiFile) throws Exception{
 	
 		
 		System.out.println("/shop/product/addProduct  : POST");
@@ -87,15 +95,27 @@ public class ProductController {
 		
 		productService.addProduct(product);
 		
-
-		
-		
 		System.out.println(product);
 		System.out.println("////////////////////");
 		
 		System.out.println("Product GET : POST/");
 		
-		return "forward:/shop/product/getProduct.jsp";
+		List<FileDog> listFile = new ArrayList<FileDog>();
+	
+		// 파일디비에넣기
+		for (String fileName : multiFile) {
+
+		FileDog files = new FileDog();
+		files.setBoardCode(fileShopRoot);
+		files.setFileName(fileName);
+		files.setFileCode(0);
+		files.setPostNo(product.getProdNo());
+		listFile.add(files);
+		}
+		
+		fileService.addFile(listFile);
+		
+		return "redirect:/shop/product/getProduct?prodNo="+product.getProdNo();
 		
 		
 	
@@ -110,11 +130,11 @@ public class ProductController {
 		System.out.println(prodNo);
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
-		
-
 		model.addAttribute("product", product);
+	
 
-		return "redirect:/product/getProduct.jsp";
+		return "forward:/shop/product/getProduct.jsp";
+		
 	}
 
 	@RequestMapping(value="updateProduct", method=RequestMethod.GET)
@@ -138,7 +158,7 @@ public class ProductController {
 		
 		productService.updateProduct(product);
 		
-		return "/product/getProduct.jsp";
+		return "/shop/product/getProduct.jsp";
 	
 	}
 
