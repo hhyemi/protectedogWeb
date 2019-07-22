@@ -195,6 +195,8 @@ a :hover{
 	<div id="get_view" class="row"></div>
 <!-- 	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div> -->
 	</div>
+	
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 
 </body>
 </html>

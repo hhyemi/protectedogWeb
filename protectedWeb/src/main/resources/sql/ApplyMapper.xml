@@ -12,12 +12,12 @@
 		<result property="adoptNo" 		column="adopt_no" 		jdbcType="NUMERIC"/>
 		<result property="id" 			column="id" 			jdbcType="VARCHAR"/>
 		<result property="phone" 		column="phone" 			jdbcType="VARCHAR"/>
-		<result property="job" 			column="job" 			jdbcType="NUMERIC"/>
-		<result property="addr" 		column="addr" 			jdbcType="NUMERIC"/>
-		<result property="mate" 		column="mate" 			jdbcType="NUMERIC"/>
-		<result property="mateAgree"	column="mateAgree" 		jdbcType="NUMERIC"/>
-		<result property="raise" 		column="raise" 			jdbcType="NUMERIC"/>
-		<result property="currently"	column="currently" 		jdbcType="NUMERIC"/>
+		<result property="job" 			column="job" 			jdbcType="VARCHAR"/>
+		<result property="addr" 		column="addr" 			jdbcType="VARCHAR"/>
+		<result property="mate" 		column="mate" 			jdbcType="VARCHAR"/>
+		<result property="mateAgree"	column="mate_agree" 	jdbcType="VARCHAR"/>
+		<result property="raise" 		column="raise" 			jdbcType="VARCHAR"/>
+		<result property="currently"	column="currently" 		jdbcType="VARCHAR"/>
 		<result property="plan"			column="plan" 			jdbcType="VARCHAR"/>
 		<result property="pay" 			column="pay" 			jdbcType="VARCHAR"/>
 		<result property="reason" 		column="reason" 		jdbcType="VARCHAR"/>
@@ -36,8 +36,8 @@
 					job, addr, mate, mate_agree, raise, 
 					currently, plan, pay, reason, situation, reg_date) 
 		VALUES	 (	seq_apply_apply_no.nextval, #{adoptNo}, #{id}, #{phone}, 
-					#{job}, #{addr}, #{mate}, #{mateAgree}, #{raise}, 
-					#{currently}, #{plan}, #{pay}, #{reason}, #{situation}, SYSDATE  )
+					#{job}, #{addr}, #{mate}, #{mateAgree:VARCHAR}, #{raise}, 
+					#{currently:VARCHAR}, #{plan}, #{pay}, #{reason}, #{situation}, SYSDATE  )
 	 </insert>
 	 
 	 

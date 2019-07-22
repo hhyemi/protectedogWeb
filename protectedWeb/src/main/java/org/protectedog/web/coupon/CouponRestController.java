@@ -42,12 +42,19 @@ public class CouponRestController {
 		
 		String couponCode=(String)checkCoupon.get("couponCode");
 		String receiverId=(String)checkCoupon.get("receiverId");
+		System.out.println("json/checkCoupon(forward) : "+couponCode);
+		System.out.println("json/checkCoupon(forward) : "+receiverId);
 		int result=couponService.checkCoupon(couponCode, receiverId);
+		System.out.println("json/checkCoupon : "+couponCode);
+		System.out.println("json/checkCoupon : "+receiverId);
+		System.out.println("json/checkCoupon : "+result);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("result", new Integer(result));
 		map.put("couponCode", couponCode);
-		map.put("receiver", receiverId);
+		map.put("receiverId", receiverId);
+		
+		System.out.println("json/checkCoupon : "+map.toString());
 		
 		return map;
 		

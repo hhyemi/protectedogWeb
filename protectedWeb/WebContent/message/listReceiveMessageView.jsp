@@ -68,7 +68,7 @@
 			<tbody>
 			
 				<c:set var="i" value="0"/>
-				<c:forEach var="message" items="${ list }">
+				<c:forEach var="message" items="${ list }">			
 					<tr>
 						<td>
 							<input type="hidden" id="messageNo" name="messageNo" value="${ message.messageNo }">

@@ -16,7 +16,7 @@
 		<result property="postTitle" column="POST_TITLE" jdbcType="VARCHAR" />		
 		<result property="postContent" column="POST_CONTENT" jdbcType="VARCHAR" />
 		<!-- default 0 -->
-		<result property="viewCount" column="VIEW_COUNT" jdbcType="NUMERIC" />
+		<result property="voteViewCount" column="VOTE_VIEW_COUNT" jdbcType="NUMERIC" />
 		<!-- default 0 -->
 		<result property="voterCount" column="VOTER_COUNT" jdbcType="NUMERIC" />		
 		<result property="voteStartDate" column="VOTE_START_DATE" jdbcType="DATE" />
@@ -24,6 +24,8 @@
 		<result property="fundTargetPay" column="FUND_TARGET_PAY" jdbcType="NUMERIC" />
 		<result property="voteTargetCount" column="VOTE_TARGET_COUNT" jdbcType="NUMERIC" />
 		<result property="fundTargetDay" column="FUND_TARGET_DAY" jdbcType="NUMERIC" />
+		<!-- default 0 -->
+		<result property="fundViewCount" column="FUND_VIEW_COUNT" jdbcType="NUMERIC" />
 		<!-- default 0 -->
 		<result property="sponsorCount" column="SPONSOR_COUNT" jdbcType="NUMERIC" />
 		<!-- default 0 -->		
@@ -52,17 +54,17 @@
 		</selectKey>
 	 	INSERT
 		INTO STORYFUNDING( POST_NO , ID , NICKNAME , STATUS_CODE , PHONE , POST_TITLE , POST_CONTENT , 
-		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ) 
+		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , MAIN_FILE ) 
 		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickname:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
-		SYSDATE , SYSDATE+30 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} , SYSDATE+31 , SYSDATE+31+#{fundTargetDay} , #{mainFile} )
+		SYSDATE , SYSDATE+29 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} ,  #{mainFile} )
 	 </insert>
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getVoting"	parameterType="string"	resultMap="fundingSelectMap">
 		SELECT
-		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE ,  		
-		TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE , TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
+		POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+		VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE ,  		
+		TRUNC((VOTE_END_DATE)-(SYSDATE))+1 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE , TRUNC((FUND_END_DATE)-(SYSDATE))+1 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
 		FROM STORYFUNDING 
 		WHERE POST_NO IN #{value}
 	 </select>
@@ -96,9 +98,9 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT
-													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
-											        TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
+													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
+											        TRUNC((VOTE_END_DATE)-(SYSDATE))+1 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
 											FROM STORYFUNDING 
 									     <where>
 									           <if test="searchCondition != null">
@@ -118,7 +120,7 @@
 													 </if>
 												 </if>											
 										    </where>
-											ORDER BY POST_NO ) inner_table
+											ORDER BY POST_NO DESC) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -135,9 +137,9 @@
 	 <select  id="getVotingTotalCount"  parameterType="search" resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT
-						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
-						TRUNC((VOTE_END_DATE)-(SYSDATE))+2 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
+						POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
+						TRUNC((VOTE_END_DATE)-(SYSDATE))+1 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
 						FROM STORYFUNDING 
 									     <where>
 									           <if test="searchCondition != null">
@@ -166,9 +168,9 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT
-													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
-											        TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
+													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
+											        TRUNC((FUND_END_DATE)-(SYSDATE))+1 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
 														FROM STORYFUNDING 
  	  									     <where>
   									           <if test="searchCondition != null">
@@ -189,7 +191,7 @@
 												 </if>	 
 												AND  STATUS_CODE IN (3,4)										
 										    </where>
-											ORDER BY POST_NO ) inner_table
+											ORDER BY POST_NO DESC ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>	  
@@ -198,9 +200,9 @@
 	 <select  id="getFundingTotalCount"  parameterType="search" resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT
-											POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
-											VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
-											TRUNC((FUND_END_DATE)-(SYSDATE))+2 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
+											POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+											VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
+											TRUNC((FUND_END_DATE)-(SYSDATE))+1 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
 												FROM STORYFUNDING 
  	  									     <where>
   									           <if test="searchCondition != null">
@@ -229,10 +231,23 @@
 			 <update	id="updateStatusCode"	parameterType="funding" >
 			   	UPDATE STORYFUNDING
 			   	<set>
+					
+					<if test="voterCount==1 || sponsorCount==1"   > 				   	
 					STATUS_CODE        =      #{statusCode},
 					VOTER_COUNT        =      VOTER_COUNT + #{voterCount},
 			   		SPONSOR_COUNT      =      SPONSOR_COUNT + #{sponsorCount},
-			   		FUND_PAY           =      FUND_PAY + #{fundPay}
+			   		FUND_PAY           =      FUND_PAY + #{fundPay},
+			   		<if test="statusCode==3">
+			   		FUND_START_DATE    =      SYSDATE + 1,
+			   		FUND_END_DATE      =      SYSDATE + 1 + FUND_TARGET_DAY
+					</if>
+					</if>
+					
+					<if test="voteViewCount==1 || fundViewCount==1"   > 	
+			   		VOTE_VIEW_COUNT    =      VOTE_VIEW_COUNT + #{voteViewCount},
+			   		FUND_VIEW_COUNT    =      FUND_VIEW_COUNT + #{fundViewCount},
+					</if>	  
+					
 	 		   	</set>
 			   	WHERE POST_NO IN #{postNo} 
 			 </update>

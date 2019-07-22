@@ -43,6 +43,8 @@ public class BoardDAOImpl implements BoardDAO{
 	public Map<String, Object> listBoard(Search search, String boardCode, int order) throws Exception {
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
+		map.put("searchCondition",  search.getSearchCondition());
+		map.put("searchKeyword",  search.getSearchKeyword());
 		map.put("endRowNum",  search.getEndRowNum()+"" );
 		map.put("startRowNum",  search.getStartRowNum()+"" );
 		map.put("order", order);

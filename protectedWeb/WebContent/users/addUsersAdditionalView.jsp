@@ -34,6 +34,8 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" name="formal">
 			<input type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
+			<input type="hidden" name="levels" value="브론즈">
+			<input type="hidden" name="levelPoint" value=100>
 		  <div class="form-group">
 		    <label for="email" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
@@ -144,6 +146,8 @@
 				$("input:hidden[name='phone']").val( value );
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersAdditional");
+				
+				alert("인증회원으로 가입되셨습니다!");
 			});
 		});	
 		

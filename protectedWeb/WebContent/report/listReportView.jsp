@@ -119,19 +119,19 @@
 			})
 		});
 		
-		$(function(){
-			$("#couponManage").on("click", function(){
-				self.location="/coupon/addCouponManage"
-			})
-		});
+// 		$(function(){
+// 			$("#couponManage").on("click", function(){
+// 				self.location="/coupon/addCouponManage"
+// 			})
+// 		});
 		
-		$(function(){
-			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				alert(couponNo);
-				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
-			})
-		})
+// 		$(function(){
+// 			$(".removeCoupon").on("click", function(){
+// 				var couponNo=$(this).parent().parent().children("#couponNo").val();
+// 				alert(couponNo);
+// 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+// 			})
+// 		})
 		
 	</script>
 

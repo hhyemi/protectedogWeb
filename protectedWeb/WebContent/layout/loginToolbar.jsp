@@ -50,70 +50,8 @@
     </style>
   </head>
   <body class="goto-here">
-      <div class="py-1 bg-black">
-       <div class="container">
-          <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-             <div class="col-lg-12 d-block">
-                <div class="row d-flex">
-                   <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center">
-						    	<span class="icon-phone2">
-						    		<span class="text">${ sessionScope.user.phone }</span>
-						    	</span>
-					    	</div>
-						   	 	<c:if test="${ sessionScope.user == null }">
-							   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
-	                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" style="height:15px; width: 15px;"/>
-	                        		</a>
-                        		</c:if>
-<%--                         		<c:if test="${ sessionScope.user.kakao != null }"> --%>
-<!--                         			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a> -->
-<%--                         		</c:if> --%>
-<%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
-<!-- 								<a id="googleLogout" href="#" onclick="signOut();">google 로그아웃</a> -->
-<%-- 							</c:if> --%>
-					    	</div>
-					   		<div class="col-md pr-4 d-flex topper align-items-center">
-					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						   		<span class="text">${ sessionScope.user.email }</span>
-					   		</div>
-					   		
-					   		
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
-						    <c:if test="${ sessionScope.user eq null }">
-						    	<span id="login" class="text">Sign in</span>
-						    	<span id="regist" class="text">Sign up</span>
-						    </c:if>
 
-<%-- 						    <c:if test="${sessionScope.user.role eq 'user' }"> --%>
-<!-- 						    <div class="myInfo"> -->
-<!-- 						    	<input type="button" id="myInfo" value="마이페이지"> -->
-<!-- 						    </div> -->
-<%-- 						    </c:if> --%>
-						    <c:if test="${sessionScope.user.role eq 'admin' }">
-						    <div class="manageMenu">
-						    	<input type="button" id="manageMenu" value="관리자메뉴">
-						    </div>
-						    </c:if>
-						    
-						    <c:if test="${ sessionScope.user != null }">
-							    <div class="userInfo">
-							    	<span class="text">${sessionScope.user.nickname } 님</span>
-							    </div>
-							    <div class="logout" style="float:right">
-							    	<span class="text">
-							    		<a href="/users/logout">logout</a>
-							    	</span>
-	                            </div>
-                            </c:if>
-                            
-					    </div>
-                </div>
-             </div>
-          </div>
-        </div>
-    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
        <div class="container">
          <a class="navbar-brand" href="/index.jsp">#PROTECTEDOG</a>
@@ -127,24 +65,24 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
-                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
-                <a class="dropdown-item" href="/adoptReview/addAdoptReview">경로테스트</a>
-                <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a>
+              	<a class="dropdown-item" href="http://192.168.0.19:8080/adopt/listAdopt?boardCode=AD">분양리스트</a>
+                <a class="dropdown-item" href="http://192.168.0.19:8080/adopt/listAdopt?boardCode=MS">실종리스트</a>
+                <a class="dropdown-item" href="http://192.168.0.19:8080/adoptReview/addAdoptReview">경로테스트</a>
+                <a class="dropdown-item" href="http://192.168.0.19:8080/adoptReview/REALaddAdoptReview.jsp">후기</a>
 
               </div>
             </li>
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토리펀딩</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
-                <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
+                <a class="dropdown-item" href="http://192.168.0.33:8080/funding/listVoting">투표게시판</a>
+                <a class="dropdown-item" href="http://192.168.0.33:8080/funding/listFunding">후원게시판</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/community/getHospital.jsp">병원</a>
+                 <a class="dropdown-item" href="http://192.168.0.30:8080/community/getHospital.jsp">병원</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="cart.html">Cart</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
@@ -189,9 +127,7 @@
                <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
                 <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
                 <a class="dropdown-item" href="/product/listProduct">상품리스트</a>
-                <c:if test="${ sessionScope.user.role eq 'admin' }">
-                	<a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
-                </c:if>
+                <a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
               </div>
             </li>
              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
