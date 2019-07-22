@@ -187,7 +187,7 @@ body {
 		<!--  table Start /////////////////////////////////////-->
 
 		<div class="container" align="left">
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp" align="center">
 				<thead>
 					<tr><td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
 				<thead>
@@ -226,7 +226,6 @@ body {
 					</tr>
 					</tbody>
 				</c:forEach>
-				
 			</table>
 			<!--  table end /////////////////////////////////////-->
 

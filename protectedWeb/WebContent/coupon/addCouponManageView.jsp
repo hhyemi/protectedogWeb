@@ -36,38 +36,6 @@
   		<link rel="stylesheet" href="/resources/demos/style.css">
   		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-	
-		$(function(){
-			$("#datepicker1").datepicker({
-				dateFormat: "yy-mm-dd",
-				minDate: '-100y',
-				yearRange: 'c-100:c+10',
-				changeMonth: true,
-				changeYear: true
-			});
-		});
-		
-		$(function(){
-			$("#datepicker2").datepicker({
-				dateFormat: "yy-mm-dd",
-				minDate: '-100y',
-				yearRange: 'c-100:c+10',
-				changeMonth: true,
-				changeYear: true
-			});
-		});
-		
-		//============= 회원정보수정 Event  처리 =============	
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $( "#submit" ).on("click" , function() {
-				 $("form[name=formal]").attr("method" , "POST").attr("action" , "/coupon/addCouponManage");
-				});
-		});
-		
-	</script>
 	
 </head>
 
@@ -159,7 +127,36 @@
 	</div>
 	
 	
- 	<!--  화면구성 div Start /////////////////////////////////////-->
+ 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
+	
+		$(function(){
+			$("#datepicker1").datepicker({
+				dateFormat: "yy-mm-dd",
+				minDate: '-100y',
+				yearRange: 'c-100:c+10',
+				changeMonth: true,
+				changeYear: true
+			});
+		});
+		
+		$(function(){
+			$("#datepicker2").datepicker({
+				dateFormat: "yy-mm-dd",
+				minDate: '-100y',
+				yearRange: 'c-100:c+10',
+				changeMonth: true,
+				changeYear: true
+			});
+		});
+		
+		 $(function() {
+			 $( "#submit" ).on("click" , function() {
+				 $("form[name=formal]").attr("method" , "POST").attr("action" , "/coupon/addCouponManage");
+				});
+		});
+		
+	</script>
 
 </body>
 

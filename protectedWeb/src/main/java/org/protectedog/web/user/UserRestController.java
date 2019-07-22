@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.protectedog.common.AuthKey;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,18 +34,35 @@ public class UserRestController {
 	}
 	
 	///Method
-	@RequestMapping( value="json/checkDuplication", method=RequestMethod.POST )
-	public Map<String, Object> checkDuplication( @RequestBody Map<String, String> checkId) throws Exception{
+	@RequestMapping( value="json/checkId", method=RequestMethod.POST )
+	public Map<String, Object> checkId( @RequestBody Map<String, String> checkId) throws Exception{
 		
-		System.out.println("/users/json/checkDuplication : POST");
+		System.out.println("/users/json/checkId : POST");
 		//Business Logic
 		String id=checkId.get("id");
-		int result=userService.checkDuplication(id);
+		System.out.println("CheckId : "+id);
+		int result=userService.checkId(id);
 
-		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("result", new Integer(result));
 		map.put("id", id);
+
+
+		return map;
+	}
+	
+	@RequestMapping(value="json/checkNick", method=RequestMethod.POST )
+	public Map<String, Object> checkNick( @RequestBody Map<String, String> checkNick) throws Exception{
+		
+		System.out.println("/users/json/checkNick : POST");
+		//Business Logic
+		String nickname=checkNick.get("nickname");
+		System.out.println("checkNick : "+nickname);
+		int result=userService.checkNick(nickname);
+
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("result", new Integer(result));
+		map.put("nickname", nickname);
 
 
 		return map;
@@ -79,6 +97,16 @@ public class UserRestController {
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("authKey", authKey);
 		return map;
+	}
+	
+	@RequestMapping(value="json/login", method=RequestMethod.POST)
+	public User login(@RequestBody Map<String, Object> chkLogin) throws Exception{
+		
+		System.out.println("json-login : POST");
+		
+		User user=userService.getUsers((String)chkLogin.get("id"));
+		
+		return user;
 	}
 	
 }

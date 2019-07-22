@@ -42,9 +42,20 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public User getUsers(String id) throws Exception {
+	public User getUsersById(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UsersMapper.getUsers", id);
+		User user=sqlSession.selectOne("UsersMapper.getUsersById", id);
+		System.out.println("UserDAOImpl 끝 : "+user);
+		return user;
+	}
+	
+	@Override
+	public User getUsersByNick(String nickname) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("UserDAOImpl 시작 : "+nickname);
+		User user=sqlSession.selectOne("UsersMapper.getUsersByNick", nickname);
+		System.out.println("UserDAOImpl 끝 : "+user);
+		return user;
 	}
 
 	@Override
@@ -66,11 +77,22 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public User getSocial(Map<String, Object> map) throws Exception {
+	public User getKakao(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UsersMapper.getSocial", map);
+		return sqlSession.selectOne("UsersMapper.getKakao", map);
 	}
 
-
+	@Override
+	public User getGoogle(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UsersMapper.getGoogle", map);
+	}
+	
+	
+	@Override
+	public User getNaver(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UsersMapper.getNaver", map);
+	}
 
 }

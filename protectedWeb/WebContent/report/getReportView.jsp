@@ -27,19 +27,19 @@
 			self.location = "/report/updateReport?reportNo="+${ report.reportNo }+"&reportStatus=1&delCode=0"
 		});
 
-		$("button:contains('삭제')").on(
-				"click",
-				function() {
+// 		$("button:contains('삭제')").on(
+// 				"click",
+// 				function() {
 
-					var result = confirm("정말 삭제 하시겠습니까?");
+// 					var result = confirm("정말 삭제 하시겠습니까?");
 
-					if (result) {
-						$("form[name='info']").attr("method", "POST").attr(
-								"action", "/info/delInfo").attr("enctype",
-								"multipart/form-data").submit();
-					}
+// 					if (result) {
+// 						$("form[name='info']").attr("method", "POST").attr(
+// 								"action", "/info/delInfo").attr("enctype",
+// 								"multipart/form-data").submit();
+// 					}
 
-				});
+// 				});
 	});
 </script>
 <style type="text/css">

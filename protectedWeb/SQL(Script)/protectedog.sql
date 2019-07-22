@@ -161,7 +161,7 @@ CREATE TABLE REPORT (
 
 CREATE TABLE MILEAGE (
 	MILEAGE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	MILEAGE_CODE 		NUMBER(3,0) 	UNIQUE, 
+	MILEAGE_CODE 		NUMBER(3,0), 
 	MILEAGE 			NUMBER(7,0) 	DEFAULT 0, 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	MILEAGE_REASON 		VARCHAR2(200) 	NOT NULL, 
@@ -256,7 +256,7 @@ CREATE TABLE ORDERS (
 	TOTAL_PRICE 		NUMBER(10,0) 	NOT NULL, 
 	ORDER_CODE 		NUMBER(2,0) 	DEFAULT 0,  
 	DELIVERY_CODE 		NUMBER(7,0),
- 	MILEAGE_NO 		NUMBER(6,0) 	NOT NULL REFERENCES MILEAGE(MILEAGE_NO),  
+ 	MILEAGE_NO 		NUMBER(6,0) 	REFERENCES MILEAGE(MILEAGE_NO),  
 	PRIMARY KEY (ORDER_NO));
 	 
 
@@ -431,17 +431,17 @@ VALUES
 INSERT INTO users
 (user_no, id, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1, purpose2)
 VALUES
-(seq_users_user_no.NEXTVAL, 'user01', '87654321', 'scott', '스캇', 'scott@tiger.com', '011-1123-4567', '서울시 성북구', '110-234-567890', '900314', '5600', 'm', 'user', '골드', '정보공유', '입양');
+(seq_users_user_no.NEXTVAL, 'user01', '11111111', 'scott', '스캇', 'scott@tiger.com', '011-1123-4567', '서울시 성북구', '110-234-567890', '900314', '5600', 'm', 'user', '골드', '정보공유', '입양');
 
 INSERT INTO users
 (user_no, id, kakao, pw, user_name, nickname, level_point, role, levels)
 VALUES
-(seq_users_user_no.NEXTVAL, 'user02', '29343041834', 'qwerty12', 'tiger', '호랭이', 0, 'user', '미인증회원');
+(seq_users_user_no.NEXTVAL, 'user02', '29343041834', '22222222', 'tiger', '호랭이', 0, 'user', '미인증회원');
 
 INSERT INTO users
 (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user03', '123124124', 'ytrewq21', 'hello', '안녕', 'hello@tiger.com', '011-2123-4567', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
+(seq_users_user_no.NEXTVAL, 'user03', '123124124', '33333333', 'hello', '안녕', 'hello@tiger.com', '011-2123-4567', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
 
 INSERT INTO message
 (message_no, message_title, message_content, sender_id, receiver_id, send_date, 

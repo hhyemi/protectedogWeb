@@ -76,10 +76,12 @@ public class CouponServiceImpl implements CouponService{
 		// TODO Auto-generated method stub
 		int result=0;
 		Coupon coupon=(Coupon)couponDAO.getMyCoupon(couponCode, receiverId);
+		System.out.println("couponService 쿠폰: "+coupon);
 		
 		if(coupon.getReceiverId()!=null) {
 			result=1;
 		}
+		System.out.println("couponService 결과값: "+result);
 		return result;
 	}
 	

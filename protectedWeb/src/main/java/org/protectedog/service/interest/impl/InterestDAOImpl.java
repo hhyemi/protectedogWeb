@@ -1,6 +1,7 @@
 package org.protectedog.service.interest.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.common.Search;
@@ -55,6 +56,15 @@ public class InterestDAOImpl implements InterestDAO{
 	public int getTotalCount(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getInterestCheck(Map<String, Object> map) throws Exception {
+		
+		System.out.println(" InterestDAOImpl : " + map.get("searchType")+"" );
+		System.out.println(" InterestDAOImpl : " + map.get("boardCode")+"" );
+		
+		return sqlSession.selectOne("InterestMapper.getInterestCheck",map);
 	}
 	
 

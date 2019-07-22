@@ -46,7 +46,15 @@
 		
 		
   <!--/////////////// FUNDING 후원신청게시판 ////////////////////// -->
-  
+ 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getPost"	parameterType="string"	resultMap="fundingSelectMap">
+		SELECT
+		POST_NO
+		FROM STORYFUNDING 
+		WHERE ID = #{value} AND VOTE_START_DATE  >=  SYSDATE-31
+	 </select>
+	   
 	<!-- SQL : INSERT -->
 	<insert 	id="addVoting"		parameterType="funding" >
 		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
@@ -88,8 +96,9 @@
 	 
 	 <!-- SQL : DELETE -->
 	<delete id="delVoting" parameterType="string">
-		DELETE
-		FROM STORYFUNDING
+		UPDATE STORYFUNDING
+		SET
+		STATUS_CODE = '0'
 		WHERE POST_NO = #{value}
 	</delete>	
 		 	 
@@ -102,7 +111,7 @@
 													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
 											        TRUNC((VOTE_END_DATE)-(SYSDATE))+1 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
 											FROM STORYFUNDING 
-									     <where>
+									     <where>	     			
 									           <if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 														POST_TITLE LIKE #{searchKeyword}
@@ -113,12 +122,15 @@
 										        </if> 		    
 												<if test="voteCondition != null">
 													 <if test="voteCondition == 1 and voteCondition !='' ">
-													    AND STATUS_CODE = 1
+													    AND STATUS_CODE = 1 AND STATUS_CODE !=0
 											         </if>
 												     <if test="voteCondition == 2 and voteCondition !='' ">
-													    AND STATUS_CODE != 1
+													    AND STATUS_CODE IN (2,3,4)  AND STATUS_CODE !=0
 													 </if>
-												 </if>											
+												 </if>	
+												<if test="voteCondition == null">	
+														AND STATUS_CODE != 0
+												</if>											 										
 										    </where>
 											ORDER BY POST_NO DESC) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -127,10 +139,13 @@
 
 	  <!-- SQL : AUTOCOMPLETE -->
 	 <select 	id="getAutoVoting"	parameterType="map"	resultType="string">
-		SELECT
+		SELECT DISTINCT
 		${field}
 		FROM STORYFUNDING 
-		WHERE ${field} LIKE '%'||#{searchKeyword}||'%'
+		WHERE ${field} LIKE '%'||#{searchKeyword}||'%' 
+		<if test="statusCode == 1">
+		AND STATUS_CODE IN (3,4)
+		</if>
 	 </select>	 
 	  
      <!-- SQL : SELECT ROW Count	--> 
@@ -141,7 +156,7 @@
 						VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,
 						TRUNC((VOTE_END_DATE)-(SYSDATE))+1 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE  		
 						FROM STORYFUNDING 
-									     <where>
+									     <where>		     			
 									           <if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 														POST_TITLE LIKE #{searchKeyword}
@@ -151,13 +166,16 @@
 												    </if>
 										        </if> 		    
 												<if test="voteCondition != null">
-													 <if test="voteCondition == 2 and voteCondition !='' ">
-													    AND STATUS_CODE = 1
+													 <if test="voteCondition == 1 and voteCondition !='' ">
+													    AND STATUS_CODE = 1 AND STATUS_CODE !=0
 											         </if>
-												     <if test="voteCondition == 3 and voteCondition !='' ">
-													    AND STATUS_CODE != 1
+												     <if test="voteCondition == 2 and voteCondition !='' ">
+													    AND STATUS_CODE IN (2,3,4)  AND STATUS_CODE !=0
 													 </if>
-												 </if>											
+												 </if>	
+												<if test="voteCondition == null">	
+														AND STATUS_CODE != 0
+												</if>											 										
 										    </where>
 							) countTable						
 	 </select>
@@ -180,15 +198,18 @@
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 												    	NICKNAME LIKE #{searchKeyword}
 												    </if>
-										        </if> 		    
+										        </if> 		  							          
 												<if test="voteCondition != null">
 													 <if test="voteCondition == 3 and voteCondition !='' ">
-													    AND STATUS_CODE = 3
+													    AND STATUS_CODE = 3 AND STATUS_CODE !=0
 											         </if>
 												     <if test="voteCondition == 4 and voteCondition !='' ">
-													    AND STATUS_CODE != 3
+													    AND STATUS_CODE = 4 AND STATUS_CODE !=0
 													 </if>
 												 </if>	 
+												<if test="voteCondition == null">	
+														AND STATUS_CODE != 0
+												</if>		
 												AND  STATUS_CODE IN (3,4)										
 										    </where>
 											ORDER BY POST_NO DESC ) inner_table
@@ -212,16 +233,19 @@
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 												    	NICKNAME LIKE #{searchKeyword}
 												    </if>
-										        </if> 		    
+										        </if> 		  							          
 												<if test="voteCondition != null">
 													 <if test="voteCondition == 3 and voteCondition !='' ">
-													    AND STATUS_CODE = 3
+													    AND STATUS_CODE = 3 AND STATUS_CODE !=0
 											         </if>
 												     <if test="voteCondition == 4 and voteCondition !='' ">
-													    AND STATUS_CODE != 3
+													    AND STATUS_CODE = 4 AND STATUS_CODE !=0
 													 </if>
 												 </if>	 
-												 AND STATUS_CODE IN (3,4)										
+												<if test="voteCondition == null">	
+														AND STATUS_CODE != 0
+												</if>		
+												AND  STATUS_CODE IN (3,4)										
 										    </where>
 							) countTable						
 	 </select>

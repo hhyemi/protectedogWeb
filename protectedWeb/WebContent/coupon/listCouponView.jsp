@@ -92,7 +92,7 @@
 			
 					<div class="row">
 				  		<div class="col-xs-4 col-md-6"><strong>쿠폰코드</strong></div>
-						<div class="col-xs-8 col-md-6">${ coupon.couponCode }</div>
+						<div class="col-xs-8 col-md-6" id="couponCode">${ coupon.couponCode }</div>
 					</div>
 					
 					<hr/>
@@ -177,16 +177,17 @@
 	<script type="text/javascript">
 		
 		//============= 회원정보수정 Event  처리 =============	
-		$(function(){
-			$(".receiveCoupon").on("click", function(){
-				alert($(this).parent().parent().children("#couponNo").val());
-				alert($("#receiverId").val());
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				var receiverId=$("#receiverId").val();
-				debugger;
-				self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
-			})
-		});
+// 		function fncAddCoupon(couponNo, receiverId) {
+// 			alert("addcoupon펑션 쿠폰번호 : "+couponNo);
+// 			alert("addcoupon펑션 받는사람 : "+receiverId);
+//			self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+// 		}
+		
+// 		$(function(){
+// 			$(".receiveCoupon").on("click", function({
+// 				fncAddCoupon();
+// 			}))
+// 		})
 		
 		$(function(){
 			$("#couponManage").on("click", function(){
@@ -196,11 +197,48 @@
 		
 		$(function(){
 			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("#couponNo").val();
-				alert(couponNo);
+				var couponNo=$("#couponNo").val();
+// 				alert(couponNo);
 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 			})
 		})
+		
+		$(function (){
+		
+			$(".receiveCoupon").on("click", function(){
+				var couponCode=$(this).parent().parent().children("div").find("#couponCode").html();
+				var receiverId=$("#receiverId").val();
+				var checkCoupon = { couponCode:couponCode , receiverId:receiverId }
+				var couponNo=$(this).parent().parent().children("input").val();
+// 				alert("ajax통신 쿠폰코드 : "+couponCode);
+// 				alert("ajax통신 받는사람 : "+receiverId);
+// 				alert("ajax통신 체크쿠폰 : "+JSON.stringify(checkCoupon));
+// 				alert("ajax통신 쿠폰번호 : "+couponNo)
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/coupon/json/checkCoupon",
+					data : JSON.stringify(checkCoupon),
+					datatype : "json",
+					success : function(response){
+						if($.trim(response.result)==0){
+							alert("쿠폰을 받았습니다");
+// 							alert(couponNo);
+// 							alert(receiverId);
+							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+						}else{
+							alert("이미 받은 쿠폰입니다");
+							return;
+						}
+					},
+					error : function(request, status, error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+
+			});
+		});
+		
 		
 	</script>
 

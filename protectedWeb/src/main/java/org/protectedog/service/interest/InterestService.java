@@ -1,5 +1,6 @@
 package org.protectedog.service.interest;
 
+import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
@@ -19,5 +20,8 @@ public interface InterestService {
 	
 	// 관심등록 삭제
 	public void deleteInterest(Interest interest) throws Exception;
+	
+	// 중복체크
+	public int getInterestCheck(Map<String, Object> map ) throws Exception;
 	
 }
