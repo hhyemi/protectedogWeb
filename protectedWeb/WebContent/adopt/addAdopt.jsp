@@ -115,7 +115,7 @@
 	          	
 	          	
 				<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
-				<input type="hidden" name="id" value="user03" >
+				<input type="hidden" name="id" value="${ sessionScope.user.id }" >
 				<input type="hidden" name="statusCode" value="1" >
 				<input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 				
@@ -154,18 +154,9 @@
 						</div>
 						
 					</div>
-					
-<!-- 					<div class="alert alert-danger" role="alert"> -->
-<!-- 					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> -->
-<!-- 					  <span class="sr-only">Error:</span> -->
-<!-- 					  체크 -->
-<!-- 					</div> -->
 				</div>
 				
-				
-				
-	   
-	          	
+			
 	          	
 	          	<div class="col-md-12"><br/><hr/><br/></div>
 	          	
@@ -177,28 +168,30 @@
 	                </div>
 	          	
 	          		<div class="col-md-12">
-		                <label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone"></span></label>
+		                <div class="form-group">
+		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
+		                	<input type="text" class="form-control" name="phone" value="${ sessionScope.user.phone }" >
+		                </div>
 	                </div>
+	          	
+<!-- 	          		<div class="col-md-12"> -->
+<!-- 		                <label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone"></span></label> -->
+<!-- 	                </div> -->
 	                
-	                <div class="col-md-4">
-	                	<select  class="form-control" name="phone1" id="phone1">
-			            	<option value="010">010</option>
-			            	<option value="011" selected="selected">011</option>
-			            	<option value="016">016</option>
-			            	<option value="017">017</option>
-			            	<option value="019">019</option>
-			            </select>
-	                </div>
+<!-- 	                <div class="col-md-4"> -->
+<!-- 	                	<select  class="form-control" name="phone1" id="phone1"> -->
+<!-- 			            </select> -->
+<!-- 	                </div> -->
 	                
-	          		<div class="col-md-4">
-	                	<input type="text" class="form-control" id="phone2" name="phone2" value="2123">
-	                </div>
+<!-- 	          		<div class="col-md-4"> -->
+<!-- 	                	<input type="text" class="form-control" id="phone2" name="phone2" value="2123"> -->
+<!-- 	                </div> -->
 	                
-	          		<div class="col-md-4">
-	                	<input type="text" class="form-control" id="phone3" name="phone3" value="4567">
-	                </div>
+<!-- 	          		<div class="col-md-4"> -->
+<!-- 	                	<input type="text" class="form-control" id="phone3" name="phone3" value="4567"> -->
+<!-- 	                </div> -->
 	               
-	                <input type="hidden" class="form-control" id="phone" name="phone">
+<!-- 	                <input type="hidden" class="form-control" id="phone" name="phone"> -->
 	                
 	                <div class="col-md-12"><br/></div>
 	                
@@ -727,7 +720,7 @@
                           data: JSON.stringify(request),
                           processData: false,
                           success: function(data){
-//                           	console.log("모두 확인 : "+JSON.stringify(data));
+                          	console.log("모두 확인 : "+JSON.stringify(data));
                           	
 	                          	var test = data.responses[0].webDetection.bestGuessLabels[0];
 	                          	var breed = test.label;

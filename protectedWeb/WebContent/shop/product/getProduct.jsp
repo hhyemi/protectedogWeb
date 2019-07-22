@@ -1,5 +1,7 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
@@ -7,151 +9,136 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
-
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<link href="/css/styles.css">
-
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-<!--  ///////////////////////// CSS ////////////////////////// -->
-<style>
-body {
-	padding-top: 50px;
-}
-</style>
-
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
-<script type="text/javascript">
-	//============= È¸¿øÁ¤º¸¼öÁ¤ Event  Ã³¸® =============	
-
-	$(function() {
-		$("#buy").bind("click", function() {
-			alert("±¸¸ÅÁ¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
-			self.location = "/order/addOrder?prodNo=${product.prodNo }";
-
-		});
-
-		$("#re").bind("click", function() {
-			self.location = "/product/updateProduct?prodNo=${product.prodNo}"
-		});
-
-		$("#yes").on("click", function() {
-			self.location = "/product/listProduct.jsp";
-		});
-	});
-</script>
-
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   <link href="/css/styles.css">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+ 		body {
+            padding-top : 50px;
+        }
+     </style>
+    
+     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
+		
+		//============= íšŒì›ì •ë³´ìˆ˜ì • Event  ì²˜ë¦¬ =============	
+		
+		 $( function() {
+				$("#buy").bind("click", function() {
+					alert("êµ¬ë§¤ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.")
+					self.location = "/purchase/addOrder?prodNo=${product.prodNo }";
+					
+				});
+				
+				$("#re").bind("click", function() {
+					self.location = "/product/updateProduct?prodNo=${product.prodNo}"
+				});
+				
+				
+				$( "#yes" ).on("click" , function() {
+					self.location = "/product/listProduct?menu=search";
+				});
+			});
+		
+	</script>
+	
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar End /////////////////////////////////////-->
-
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+   	<!-- ToolBar End /////////////////////////////////////-->
+	
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
-
+	
 		<div class="page-header">
-			<h3 class=" text-info">»óÇ°»ó¼¼Á¶È¸</h3>
-
-			<h5 class="text-muted">
-				³» Á¤º¸¸¦ <strong class="text-danger">ÃÖ½ÅÁ¤º¸·Î °ü¸®</strong>ÇØ ÁÖ¼¼¿ä.
-			</h5>
-		</div>
-
-		<hr />
+							<h3 class=" text-info">ìƒí’ˆìƒì„¸ì¡°íšŒ</h3>
+							
+							 <h5 class="text-muted">ë‚´ ì •ë³´ë¥¼ <strong class="text-danger">ìµœì‹ ì •ë³´ë¡œ ê´€ë¦¬</strong>í•´ ì£¼ì„¸ìš”.</h5>
+	    </div>
+		
+		<hr/>
 		<div class="row">
-			<div class="col-xs-4 col-md-2">
-				<strong>»óÇ°¹øÈ£</strong>
-			</div>
+	  		<div class="col-xs-4 col-md-2"><strong>ìƒí’ˆë²ˆí˜¸</strong></div>
 			<div class="col-xs-8 col-md-4">${product.prodNo }</div>
 		</div>
-
-		<hr />
-
+		
+		<hr/>
+		
 		<div class="row">
-			<div class="col-xs-4 col-md-2 ">
-				<strong>»óÇ°¸í</strong>
-			</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆëª…</strong></div>
 			<div class="col-xs-8 col-md-4">${product.prodName }</div>
 		</div>
-
-		<hr />
-
+		
+		<hr/>
+		
 		<div class="row">
-			<div class="col-xs-4 col-md-2 ">
-				<strong>»óÇ°»ó¼¼Á¤º¸</strong>
-			</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆìƒì„¸ì •ë³´</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodDetail}</div>
 		</div>
-
-		<hr />
-
+		
+		<hr/>
+		
 		<div class="row">
-			<div class="col-xs-4 col-md-2 ">
-				<strong>Á¦Á¶ÀÏÀÚ</strong>
-			</div>
-			<div class="col-xs-8 col-md-4">${product.manuDate }</div>
-		</div>
-
-		<hr />
-
-		<div class="row">
-			<div class="col-xs-4 col-md-2 ">
-				<strong>°¡°İ</strong>
-			</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆê°€ê²©</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.price}</div>
 		</div>
-		<hr />
+		
+		<hr/>
+		
+		
+		
 		<div class="row">
-			<div class="col-xs-4 col-md-2 ">
-				<strong>Àç°í¼ö·®</strong>
-			</div>
-			<div class="col-xs-8 col-md-4">${ product.quantity}</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>í• ì¸ê°€ê²©</strong></div>
+			<div class="col-xs-8 col-md-4">${product.discountPrice}</div>
 		</div>
-		<hr />
+		
+		<hr/>
 		<div class="row">
-			<div class="col-xs-4 col-md-2 ">
-				<strong>µî·ÏÀÏÀÚ</strong>
-			</div>
-			<div class="col-xs-8 col-md-4">${ product.regDate}</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ì œì¡°ì‚¬</strong></div>
+			<div class="col-xs-8 col-md-4">${ product.company}</div>
 		</div>
-
-
-
-		<hr />
-
+		
+		<hr/>
+		
 		<div class="row">
-			<div class="col-md-12 text-center ">
-
-				<button type="button" class="btn btn-primary" id="buy">±¸¸Å</button>
-
-				<button type="button" class="btn btn-primary" id="yes">ÀÌÀü</button>
-			</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ì›ì‚°ì§€</strong></div>
+			<div class="col-xs-8 col-md-4">${ product.country}</div>
 		</div>
-
-		<br />
-
-	</div>
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-md-12 text-center ">
+	  			       
+	  			       <button type="button" class="btn btn-primary" id="buy">êµ¬ë§¤</button>
+	  			
+	  			<button type="button" class="btn btn-primary" id="yes">ì´ì „</button>
+	  		</div>
+		</div>
+		
+		<br/>
+		
+ 	</div>
+ 	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
+ 	
 
 </body>
 

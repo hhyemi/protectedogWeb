@@ -28,7 +28,10 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-
+		.form-group2{
+		padding-left:408px;
+		padding-right:100px;
+		}	
 	</style> 
  
  
@@ -44,8 +47,8 @@
       <div class="container">
         <div class="row s_product_inner">
           <div class="col-lg-6">
-            <div class="s_product_img">
-            조회 ${funding.voteViewCount } / 등록날짜 ${funding.voteStartDate}
+
+            조회 ${funding.voteViewCount } / 작성일 ${funding.voteStartDate}
             <p/>
               <div
                 id="carouselExampleIndicators"
@@ -54,7 +57,7 @@
               >
                 <ol class="carousel-indicators">
                        
- 				<c:forEach var="i" begin="0" end="${fn:length(file)}" step="1">			
+ 				<c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
 					<c:if test="${i eq 0}">	
 	                  <li
 	                    data-target="#carouselExampleIndicators"
@@ -90,7 +93,7 @@
                   </c:forEach>
           
                 </div>
-              </div>
+
             </div>
           </div>
  			 <div class="col-lg-5 offset-lg-1">
@@ -100,14 +103,14 @@
 			<h3>${funding.voterCount}표</h3>
 			<!-- 투표종료 -->
 			 <c:if test ="${!(funding.statusCode eq 1) }">		
-			<h3><strong style="color:#e00d31">투표종료</strong></h3>
+			<h3><strong style="color:#8c8479">투표종료</strong></h3>
 			 </c:if>
             <!-- 투표중 -->			 
 			<c:if test ="${funding.statusCode eq 1 }">				 			
 			<h4 class="media-heading">남은기간 <b>${funding.voteRemainDate }</b>일</h4> 
 			</c:if>			    
 			 <div class="progress">
-			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(30-funding.voteRemainDate)*100/30}%;"></div>
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(30-funding.voteRemainDate)*100/30}%; background-color:#C9BFB0!important;"></div>
 			 </div>
 			<div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >${funding.voteStartDate}</div>
@@ -115,9 +118,9 @@
 			 </div>					 
 		     <br/>
 
-			 <div><h3>투표율&ensp;<strong style="color:#225cba">${funding.voteRate}%</strong></h3></div>
+			 <div><h3>투표율&ensp;<strong style="color:#4E8092">${funding.voteRate}%</strong></h3></div>
 			 <div class="progress">					 
-			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%;"></div>
+			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%; background-color:#4E8092!important;"></div>
 			 </div>		
 
 			<div class="row" style="position:relative;height:35px;">
@@ -179,19 +182,30 @@
 		            id="home"
 		            role="tabpanel"
 		            aria-labelledby="home-tab">
-		            	<div class="col-md-10 col-md-offset-1">
-							<span class="price">글 내용</span>
-								<h2>${funding.postContent }</h2>
+				 			<h2>${funding.postContent }</h2>
+				         	<hr/><br/>									
+							<div class="form-group2">
+							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
 							<a class="main_btn" href="#">수정하기</a> 
 							<a class="main_btn" href="#">삭제하기</a> 
-						</div>
+							</c:if>
+						    </div>
 		          </div>
 		          <div
 		            class="tab-pane fade"
 		            id="voter"
 		            role="tabpanel"
 		            aria-labelledby="voter-tab">
- 					<div><h3>현재투표인원&ensp;${funding.voterCount}명</h3></div>
+		            
+ 					<div><h3>현재 <font color="#8c8479">${funding.voterCount}명</font>의 참여가 이루어졌습니다.</h3></div>
+ 					<hr/>
+		 				<c:forEach var="participate" items="${list}">						
+							<div class="row" style="position:relative;height:35px;">
+									 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><h4 ><b>${participate.nickname}</b>&nbsp; <small>님이 투표를 하셨습니다.</small>&nbsp;</h4></div>
+									<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${participate.regDate}</div>
+							 </div>																 		
+					    <hr/>       
+				       </c:forEach>
 		          </div>		          
 		       </div>
 	      </div>
@@ -229,17 +243,49 @@
     
 		//============= 투표하기 Event  처리 =============	
 	 	$( "a:contains('투표하기')" ).on("click" , function() {
-	 			 		
-	 		if(!(${funding.statusCode eq '1'})){
-	 			alert("투표가 종료되었습니다.")
+	 		if(${user==null}){
+	 			alert("로그인이 필요합니다.")
 	 		}else{
-	 		self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
+	 			 		
+		 		if(!(${funding.statusCode eq '1'})){
+		 			alert("투표가 종료되었습니다.")
+		 		}else{
+		 	   		 $.ajax( 
+		 					{
+		 			        	url : "/funding/json/addVote/"+${funding.postNo},
+		 						method : "GET" ,
+		 						dataType : "json" ,
+		 						headers : {
+		 							"Accept" : "application/json",
+		 							"Content-Type" : "application/json"
+		 						},
+		 						error:function(request,status,error){
+		                             alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		                            },
+		 						success : function(JSONData , status) {
+		 		
+		 			                if(JSONData ==1 ) {
+		 			                	alert("이미 투표한 글 입니다.")
+		 			                } else {
+		 			   		 	     	self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
+
+		 			                } 
+		 						}
+		 						
+		 				});		 			
+		 		
+		 				
+		 		}
 	 		}
 	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-	 		//self.location = "/user/getUsers?id=${sessionScope.user.id}";
+	 		if(${user==null}){
+	 			alert("로그인이 필요합니다.")
+	 		}else{
+
+	 		}
 		});   
 	
 		//============= SNS공유 Event  처리 =============	
@@ -261,23 +307,22 @@
 	    
 		//============= 수정하기 Event  처리 =============	
 	 	$( "a:contains('수정하기')" ).on("click" , function() {
+	 		if(${!(funding.voterCount eq 0) || !(user.id eq 'admin')}){
+	 			alert("투표 1개이상 받을 시 수정이 불가합니다. ")
+	 		}else{
 	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
+	 		}
 		});   
 		
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "a:contains('삭제하기')" ).on("click" , function() {
-	 		func_confirm()
+            if(confirm('삭제시 한달간 글 작성 불가입니다.')){
+                self.location = "/funding/delVoting?postNo=${funding.postNo}"
+            	alert("삭제가 완료되었습니다.")
+            } else {
+            }
 		});   	
     });
-    
-	  //=============삭제 알림창 Event  처리 =============    	
-            function func_confirm () {
-                if(confirm('정말 삭제하시겠습니까?')){
-                	self.location = "/funding/delVoting?postNo=${funding.postNo}"
-                	alert("삭제가 완료되었습니다.")
-                } else {
-                }
-            }
 
     
 		//============= 카카오 공유하기Event  처리 =============		

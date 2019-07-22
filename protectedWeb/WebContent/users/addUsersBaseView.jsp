@@ -33,6 +33,8 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" name="formal">
 		<input type="hidden" id="kakao" name="kakao" value="${ kakao }">
+		<input type="hidden" id="google" name="google" value="${ google }">
+		<input type="text" id="naver" name="naver" value="${ naver }">
 		  <div class="form-group">
 		    <label for="id" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
@@ -123,6 +125,8 @@
 				}
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersBase");
+				
+				alert("미인증회원으로 가입되셨습니다. 인증하시려면 개인정보수정란에서 추가정보를 기입해주십시오.")
 			});
 		});	
 		
@@ -214,6 +218,8 @@
 				}
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersBase2");
+				
+				alert("인증페이지로 넘어갑니다.")
 			});
 		});	
 		

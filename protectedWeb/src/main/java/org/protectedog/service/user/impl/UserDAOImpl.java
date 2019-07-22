@@ -77,11 +77,22 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public User getSocial(Map<String, Object> map) throws Exception {
+	public User getKakao(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UsersMapper.getSocial", map);
+		return sqlSession.selectOne("UsersMapper.getKakao", map);
 	}
 
-
+	@Override
+	public User getGoogle(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UsersMapper.getGoogle", map);
+	}
+	
+	
+	@Override
+	public User getNaver(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UsersMapper.getNaver", map);
+	}
 
 }

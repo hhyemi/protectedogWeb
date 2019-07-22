@@ -852,6 +852,14 @@
 						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
 						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong>';
     	}
+    	
+    	if( mateAgree == '' ){
+    		$("input[name=mateAgree]:checked").val('X');
+    	}
+    	if( currently == '' ){
+    		$("input[name=currently]:checked").val('X');
+    	}
+    	
 		$('#cfHTML').remove();
 		$('#confirm').html( confirmHTML );
 		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();

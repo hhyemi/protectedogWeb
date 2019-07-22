@@ -30,7 +30,9 @@ public interface UserDAO {
 	public int getTotalCount(Search search) throws Exception;
 	
 	// SNS Insert, Select
-	public User getSocial(Map<String, Object> map) throws Exception;
+	public User getKakao(Map<String, Object> map) throws Exception;
+	public User getGoogle(Map<String, Object> map) throws Exception;
+	public User getNaver(Map<String, Object> map) throws Exception;
 	
 
 	

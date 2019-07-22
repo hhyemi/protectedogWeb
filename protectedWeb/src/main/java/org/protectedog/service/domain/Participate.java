@@ -6,11 +6,12 @@ public class Participate {
 
 	private int participateNo;
 	private String id;
-	private String nickName;
+	private String nickname;
 	private int postNo;
 	private Date regDate;
 	private int fundPay;
 	private String statusCode;
+	private String paymentCode;
 
 	public Participate() {
 	}
@@ -31,12 +32,12 @@ public class Participate {
 		this.id = id;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getPostNo() {
@@ -55,14 +56,6 @@ public class Participate {
 		this.regDate = regDate;
 	}
 
-	public int getFundPay() {
-		return fundPay;
-	}
-
-	public void setFundPay(int fundPay) {
-		this.fundPay = fundPay;
-	}
-
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -71,10 +64,27 @@ public class Participate {
 		this.statusCode = statusCode;
 	}
 
-	@Override
-	public String toString() {
-		return "Participate [participateNo=" + participateNo + ", id=" + id + ", nickName=" + nickName + ", postNo="
-				+ postNo + ", regDate=" + regDate + ", fundPay=" + fundPay + ", statusCode=" + statusCode + "]";
+	public String getPaymentCode() {
+		return paymentCode;
 	}
 
+	public void setPaymentCode(String paymentCode) {
+		this.paymentCode = paymentCode;
+	}
+
+
+	public int getFundPay() {
+		return fundPay;
+	}
+
+	public void setFundPay(int fundPay) {
+		this.fundPay = fundPay;
+	}
+
+	@Override
+	public String toString() {
+		return "Participate [participateNo=" + participateNo + ", id=" + id + ", nickname=" + nickname + ", postNo="
+				+ postNo + ", regDate=" + regDate + ", fundPay=" + fundPay + ", statusCode=" + statusCode
+				+ ", paymentCode=" + paymentCode + "]";
+	}
 }

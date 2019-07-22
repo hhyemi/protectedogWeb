@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.protectedog.common.AuthKey;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -96,6 +97,16 @@ public class UserRestController {
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("authKey", authKey);
 		return map;
+	}
+	
+	@RequestMapping(value="json/login", method=RequestMethod.POST)
+	public User login(@RequestBody Map<String, Object> chkLogin) throws Exception{
+		
+		System.out.println("json-login : POST");
+		
+		User user=userService.getUsers((String)chkLogin.get("id"));
+		
+		return user;
 	}
 	
 }

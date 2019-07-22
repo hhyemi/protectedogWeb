@@ -12,7 +12,9 @@ import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.FileDog;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +41,10 @@ public class AdoptController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	private FileService fileService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	//setter Method 구현 않음
 	
@@ -68,18 +74,17 @@ public class AdoptController {
 	
 	
 	@RequestMapping( value="addAdopt", method=RequestMethod.GET )
-	public String addAdopt(  @RequestParam("boardCode") String boardCode, HttpSession session 
-//								, Model model
-																		) throws Exception {
+	public String addAdopt(  @RequestParam("boardCode") String boardCode, HttpSession session, Model model ) throws Exception {
 
 		System.out.println("/adopt/addAdopt : GET \n"+boardCode);
 		
-//		adopt.setId(((User)session.getAttribute("user")).getId());
-//		adopt.setPhone(((User)session.getAttribute("user")).getPhone());
-//		model.addAttribute("adopt", adopt);
-		
-
-		return "forward:/adopt/addAdopt.jsp?boardCode="+boardCode;
+		if( ((User)session.getAttribute("user")) == null  ) {
+			return "redirect:/adopt/listAdopt?boardCode="+boardCode;
+		}else if(   !((User)session.getAttribute("user")).getLevels().equals("미인증회원") ||  !((User)session.getAttribute("user")).getLevels().equals("운영자")  ) {
+			return "forward:/adopt/addAdopt.jsp?boardCode="+boardCode;
+		}else {
+			return "redirect:/adopt/listAdopt?boardCode="+boardCode;
+		}
 	}
 	
 
@@ -122,11 +127,12 @@ public class AdoptController {
 	
 	// 글 상세조회
 	@RequestMapping( value="getAdopt")
-	public String getAdopt( @RequestParam("postNo") int postNo , Model model) throws Exception {
+	public String getAdopt( @RequestParam("postNo") int postNo , Model model ) throws Exception {
 		
 		System.out.println("/adopt/getAdopt : GET");
 		
 		Adopt adopt = adoptService.getAdopt(postNo);
+		
 		
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", adopt.getBoardCode());
@@ -234,16 +240,26 @@ public class AdoptController {
 	// 글 리스트 조회
 	@RequestMapping( value="listAdopt" )
 	public String listAdopt( @ModelAttribute("search") Search search,
-							 @RequestParam("boardCode") String boardCode, Model model ) throws Exception{
+							 @RequestParam("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
 		
 		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
+		System.out.println("===================================="+search);
+		if(search.getSearchCondition() == null ) {
+			search.setSearchCondition("");
+		}
+		if(search.getSearchKeyword() == null) {
+			search.setSearchKeyword("");
+		}
+		if(search.getAreaCondition() == null) {
+			search.setAreaCondition("");
+		}
+		search.setVoteCondition("");
 		
-		search.setSearchCondition("");
 		
 		if (search.getCurrentPage() ==0 ) {
 			search.setCurrentPage(1);
 		}
-		
+		System.out.println("====================================");
 		search.setPageSize(pageSize);
 		System.out.println("■■■■ 검색어 확인 : "+search.getSearchKeyword()
 						+"\n■■■■ search 확인 : "+search);

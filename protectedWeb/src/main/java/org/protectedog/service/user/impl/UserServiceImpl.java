@@ -82,11 +82,23 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User getSocial(Map<String, Object> map) throws Exception {
+	public User getKakao(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return userDAO.getSocial(map);
+		return userDAO.getKakao(map);
 	}
-
+	
+	@Override
+	public User getGoogle(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userDAO.getGoogle(map);
+	}
+	
+	@Override
+	public User getNaver(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userDAO.getNaver(map);
+	}
+	
 	@Override
 	public int checkNick(String nickname) throws Exception {
 		// TODO Auto-generated method stub

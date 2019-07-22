@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="resources/prodmenu/css/style.css">
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://apis.google.com/js/api:client.js"></script>
 
 <style type="text/css">
 </style>
@@ -48,7 +50,6 @@
 <body class="goto-here">
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-
 
 	<div style="min-height: 500px"></div>
 
@@ -91,16 +92,25 @@
 		});
 
 		$(function() {
-			$("span:contains('Sign in')").on("click", function() {
+			$("#login").on("click", function() {
 				$(self.location).attr("href", "/users/login");
 			});
 		});
 
 		$(function() {
-			$("span:contains('Sign up')").on("click", function() {
+			$("#regist").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
 			});
 		});
+		
+// 		$(function(){
+// 			$("#googleLogout").on("click", function(){
+// 				var auth2=gapi.auth2.getAuthInstance();
+// 				auth2.setToken(null);
+// 				auth2.signOut();
+// 			});
+// 		})
+
 	</script>
 
 
