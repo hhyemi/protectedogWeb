@@ -79,8 +79,22 @@ public class UserController {
 			System.out.println("login : "+idToken);
 			return "redirect:/";
 		}
-		
+	}
 	
+	@RequestMapping(value="naver", method=RequestMethod.GET)
+	public String naver(@RequestParam("naver") String naver, HttpServletRequest request, HttpSession session) throws Exception{
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("naver", naver);
+		
+		User user=userService.getNaver(map);
+		if(user==null) {
+			request.setAttribute("naver", naver);
+			return "forward:/users/addUsersBaseView.jsp";
+		}else {
+			session.setAttribute("user", user);
+			return "redirect:/";
+		}
 	}
 
 	

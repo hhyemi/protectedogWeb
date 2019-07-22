@@ -18,6 +18,12 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js"></script>
+	
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -26,11 +32,6 @@
             margin-top: 10px;
         }
     </style>
-    
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js"></script>
-	
 	
 </head>
 
@@ -72,6 +73,8 @@
 					  	<div class="col-sm-offset-4 col-sm-6 text-center">
 					      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 					    </div>
+					    
+					    <div id="naver_id_login"></div>
 					  
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
 					        <a id="kakao-login-btn"></a>
@@ -189,6 +192,14 @@
 			        
 			$(location).attr('href', '/users/google?google='+profile.getId()+"&idToken="+id_token);
 		}
+
+		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("white", 2,40);
+	  	naver_id_login.setDomain("http://localhost:8080/");
+	  	naver_id_login.setState(state);
+// 	  	naver_id_login.setPopup();
+	  	naver_id_login.init_naver_id_login();
 		      
 
 
