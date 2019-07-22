@@ -272,7 +272,6 @@ $(function () {
   
 function addMarker(location, str) {
 	  
-	  
 	if ( str == "area"){
 		  
 		 if (markersArea.length <3){

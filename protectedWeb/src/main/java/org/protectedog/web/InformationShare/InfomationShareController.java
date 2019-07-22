@@ -78,6 +78,7 @@ public class InfomationShareController {
 
 		System.out.println(" ============================== listInfo ==================================");
 		
+		System.out.println(request.getRequestURL());
 		int order;
 		
 		if (search.getCurrentPage() == 0) {

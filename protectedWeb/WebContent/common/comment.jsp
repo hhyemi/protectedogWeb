@@ -413,9 +413,11 @@ body {
 		</c:forEach>
 		</div>
 		
+		<c:if test="${totalCount > list.size()}">
 		<div class="col-md-12">
 			<button type="button" class="btn btn-default"> ´õº¸±â </button>
 		</div>
+		</c:if>
 		<div class="row">
 			&nbsp;
 			<p>&nbsp;

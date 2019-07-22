@@ -191,7 +191,7 @@ body {
 	<script type="text/javascript">
 	
 	
-	if(${board.route != null}){
+	if(${board.route != ''}){
     var map;
     var markers = [];
     var loca = "${board.route}";
