@@ -29,6 +29,15 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    
+    
+    <style type="text/css">
+	    html {
+	 	 scroll-behavior: smooth;
+		}
+	</style>
+	
+	
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-black">
@@ -340,60 +349,11 @@
 	          
  <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-			<div id="dialog-postTitle" title="">
-			  <p align="center"><br/>제목을 입력해주세요.</p>
-			</div>       
-			<div id="dialog-postTitleLength" title="">
-			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p>
-			</div>   
-			<div id="dialog-dogBreedLength" title="">
-			  <p align="center"><br/>견종은 10자까지 입력할 수 있습니다.</p>
-			</div>    
+ 
+ 
 			<div id="dialog-img" title="">
 			  <p align="center"><br/>이미지를 등록해주세요.</p>
 			</div>        
-			<div id="dialog-dogWeight" title="">
-			  <p align="center"><br/>체중을 입력해주세요.</p>
-			</div>       
-			<div id="dialog-dogWeightLength" title="">
-			  <p align="center"><br/>체중은 6자까지 입력할 수 있습니다.</p>
-			</div>  
-			<div id="dialog-dogPay" title="">
-			  <p align="center"><br/>
-			  		<c:if test="${adopt.boardCode eq 'AD' }">책임비를 입력해주세요.</c:if>
-			  		<c:if test="${adopt.boardCode eq 'MS' }">사례비를 입력해주세요.</c:if>
-			  </p>
-			</div>   
-			<div id="dialog-dogPayLength" title="">
-			  <p align="center"><br/>
-			  		<c:if test="${param.boardCode eq 'AD' }">책임비는 백만원 이상은 입력하실 수 없습니다.</c:if>
-			  		<c:if test="${param.boardCode eq 'MS' }">사례비는 백만원 이상은 입력하실 수 없습니다.</c:if>
-			  </p>
-			</div>    
-			<div id="dialog-dogDate" title="">
-			  <p align="center"><br/>
-			  		<c:if test="${adopt.boardCode eq 'AD' }">발견일자를 입력해주세요.</c:if>
-			  		<c:if test="${adopt.boardCode eq 'MS' }">실종일자를 입력해주세요.</c:if>
-			  </p>
-			</div>       
-			<div id="dialog-dogStatus" title="">
-			  <p align="center"><br/>강아지 상태를 설명해주세요.</p>
-			</div>       
-			<div id="dialog-dogStatusLength" title="">
-			  <p align="center"><br/>강아지 상태는 20자까지 입력할 수 있습니다.</p>
-			</div>  
-			<div id="dialog-dogPersonality" title="">
-			  <p align="center"><br/>강아지 성격을 설명해주세요.</p>
-			</div>    
-			<div id="dialog-dogPersonalityLength" title="">
-			  <p align="center"><br/>강아지 성격은 20자까지 입력할 수 있습니다.</p>
-			</div>    
-			<div id="dialog-dogChar" title="">
-			  <p align="center"><br/>강아지 특징을 설명해주세요.</p>
-			</div>       
-			<div id="dialog-dogCharLength" title="">
-			  <p align="center"><br/>강아지 특징은 20자까지 입력할 수 있습니다.</p>
-			</div> 
 			<div id="dialog-area" title="">
 			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
 			</div>       
@@ -403,12 +363,7 @@
 			  		<c:if test="${adopt.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if>
 			  </p>
 			</div>   
-			<div id="dialog-postContent" title="">
-			  <p align="center"><br/>내용을 입력해주세요.</p>
-			</div>      
-			<div id="dialog-postContentLength" title="">
-			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p>
-			</div> 
+
        
 <!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
 	          
@@ -641,6 +596,15 @@
 	    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	    	         success: function(data){
 	    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+	    	           			if( markTest.indexOf('특별') != -1  ){
+	    	           				markTest = markTest.replace('특별' ,   '');
+	    	           			}
+	    	           			if( markTest.indexOf('광역') != -1  ){
+	    	           				markTest = markTest.replace('광역' ,   '');
+	    	           			}
+	    	           			if( markTest.indexOf('자치') != -1  ){
+	    	           				markTest = markTest.replace('자치' ,   '');
+	    	           			}
 	    	          			$("#areaKr").val($("#areaKr").val()+markTest);
 	    	         }
 	    	 	});
@@ -674,6 +638,15 @@
   		    	            success: function(data){
 //	  		   	               		alert(JSON.stringify(data));
   		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+  		    	                if( markTest.indexOf('특별') != -1  ){
+	    	           				markTest = markTest.replace('특별' ,   '');
+	    	           			}
+	    	           			if( markTest.indexOf('광역') != -1  ){
+	    	           				markTest = markTest.replace('광역' ,   '');
+	    	           			}
+	    	           			if( markTest.indexOf('자치') != -1  ){
+	    	           				markTest = markTest.replace('자치' ,   '');
+	    	           			}
   		    	       			$("#areaKr").val(markTest);
   		    	            }
   		    	 		});
@@ -715,7 +688,17 @@
 	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	            success: function(data){
 //		                $('#locationKr').val(JSON.stringify(data));
-	                $('#locationKr').val(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
+	            	var locaKrkr = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
+	                if( locaKrkr.indexOf('특별') != -1  ){
+	                	locaKrkr = locaKrkr.replace('특별' ,   '');
+           			}
+           			if( locaKrkr.indexOf('광역') != -1  ){
+           				locaKrkr = locaKrkr.replace('광역' ,   '');
+           			}
+           			if( locaKrkr.indexOf('자치') != -1  ){
+           				locaKrkr = locaKrkr.replace('자치' ,   '');
+           			}
+	                $('#locationKr').val( locaKrkr );
 	            }
 	 		});
 	  }
@@ -908,29 +891,47 @@
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
 	$( function() {
-	    $( "#dialog-postTitle, #dialog-postTitleLength, #dialog-img, #dialog-dogBreedLength, #dialog-dogWeight, #dialog-dogWeightLength" ).dialog({
+	    $( "#dialog-img" ).dialog({
 	    	autoOpen: false,
 		      width: 350,
-		      height: 150,
-		      modal: true
+		      height: 180,
+		      modal: true,
+		      buttons: {
+		    	  닫기: function(){
+		    		  $( this ).dialog( "close" );
+		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		    	  }
+		      }
 	    });
 	});
 	
 	$( function() {
-	    $( "#dialog-dogPay, #dialog-dogPayLength, #dialog-dogDate, #dialog-dogStatus, #dialog-dogStatusLength, #dialog-dogPersonality, #dialog-dogPersonalityLength" ).dialog({
+	    $( "#dialog-area" ).dialog({
 	    	autoOpen: false,
 		      width: 350,
-		      height: 150,
-		      modal: true
+		      height: 180,
+		      modal: true,
+		      buttons: {
+		    	  닫기: function(){
+		    		  $( this ).dialog( "close" );
+		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
+		    	  }
+		      }
 	    });
 	});
 	
 	$( function() {
-	    $( "#dialog-dogChar, #dialog-dogCharLength, #dialog-area, #dialog-location, #dialog-postContent, #dialog-postContentLength" ).dialog({
+	    $( "#dialog-location" ).dialog({
 	    	autoOpen: false,
 		      width: 350,
-		      height: 150,
-		      modal: true
+		      height: 180,
+		      modal: true,
+		      buttons: {
+		    	  닫기: function(){
+		    		  $( this ).dialog( "close" );
+		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+		    	  }
+		      }
 	    });
 	});
 
@@ -1011,82 +1012,52 @@
 	// 등록버튼 누르고
 	function fncUpdateAdopt(){
 		
-		if( $("input[name=postTitle]").val() == ''){
-			  $('#dialog-postTitle').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=postTitle]").val().length >10){
-			  $('#dialog-postTitleLength').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=dogBreed]").val().length >10){
-			  $('#dialog-dogBreedLength').dialog( "open" );
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >10){
+			  $("input[name=postTitle]").focus();
 			  return;
 		  }
 // 		  if( $(".preview-box").length == 0 ){
 // 			  $('#dialog-img').dialog( "open" );
 // 			  return;
 // 		  }
-		  if( $("input[name=dogWeight]").val() == ''){
-			  $('#dialog-dogWeight').dialog( "open" );
+		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
+			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogWeight]").val().length > 6){
-			  $('#dialog-dogWeightLength').dialog( "open" );
+		  if( $("input[name=dogPay]").val().trim() == '' || $("input[name=dogPay]").val().length > 6 ){
+			  $("input[name=dogPay]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPay]").val() == ''){
-			  $('#dialog-dogPay').dialog( "open" );
+		  if( $("input[name=dogDate]").val().trim() == '' ){
+			  $("input[name=dogDate]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPay]").val().length > 6){
-			  $('#dialog-dogPayLength').dialog( "open" );
+		  if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
+			  $("input[name=dogStatus]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogDate]").val() == ''){
-			  $('#dialog-dogDate').dialog( "open" );
+		  if( $("input[name=dogPersonality]").val().trim() == '' || $("input[name=dogPersonality]").val().length > 20 ){
+			  $("input[name=dogPersonality]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogStatus]").val() == ''){
-			  $('#dialog-dogStatus').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=dogStatus]").val().length > 20 ){
-			  $('#dialog-dogStatusLength').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=dogPersonality]").val() == ''){
-			  $('#dialog-dogPersonality').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=dogPersonality]").val().length > 20 ){
-			  $('#dialog-dogPersonalityLength').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=dogChar]").val() == ''){
-			  $('#dialog-dogChar').dialog( "open" );
-			  return;
-		  }
-		  if( $("input[name=dogChar]").val().length > 20 ){
-			  $('#dialog-dogCharLength').dialog( "open" );
+		  if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
+			  $("input[name=dogChar]").focus();
 			  return;
 		  }
 		  if( boardCode == 'AD' ){
-			  if( $("input[name=adoptArea]").val() == ''){
+			  if( $("input[name=adoptArea]").val().trim() == ''){
+				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
-		  if( $("input[name=location]").val() == ''){
+		  if( $("input[name=location]").val().trim() == ''){
+			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
-		  if( $("textarea[name=postContent]").val() == ''){
-			  $('#dialog-postContent').dialog( "open" );
-			  return;
-		  }
-		  if( $("textarea[name=postContent]").val().length > 100 ){
-			  $('#dialog-postContentLength').dialog( "open" );
+		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+			  $("textarea[name=postContent]").focus();
 			  return;
 		  }
 		
@@ -1125,7 +1096,7 @@
 			                }
 		            },
 					error: function(request, status, error){ 
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
 			        }
 		        });
 	  	  });

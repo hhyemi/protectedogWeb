@@ -61,6 +61,9 @@ public class InterestServiceImpl implements InterestService{
 		interestDAO.deleteInterest(interest);
 	}
 
+	@Override
+	public int getInterestCheck(Map<String, Object> map) throws Exception {
+		return interestDAO.getInterestCheck(map);
+	}
 
-	
 }

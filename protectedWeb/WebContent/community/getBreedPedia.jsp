@@ -48,11 +48,12 @@ body {
 	background: #fff;
 	border-radius: 4px;
 	padding: 20px;
-	font-size: 12px;
+	font-size: 14px;
 	text-align: left;
 	transition: all 0.2s;
 	margin: 0 auto;
 	width: 500px;
+	color: black;
 }
 
 #breed_image {
@@ -66,24 +67,34 @@ body {
 	COLOR: WHITE;
 	WIDTH: 50%;
 }
+
+td{
+	color : black;
+	width : 300px;
+}
 </style>
 </head>
 <body>
 
-	<!-- 	<div class="breed_select1"> -->
-	<!-- 		<span></span> -->
-	<!-- 	</div> -->
 	<jsp:include page="/layout/toolbar.jsp" />
 	
-	<div class="container">
-
-		<div class="page-header text-info">
-			견종백과
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
+					</p>
+					<h1 class="mb-0 bread">견종백과</h1>
+				</div>
+			</div>
 		</div>
+	</div>
+	
+	<div class="container">
 		
 		<div id="banner-message">
-			<p>품종선택</p>
-
 
 			<select class="breed_select">
 				<option></option>
@@ -92,7 +103,7 @@ body {
 		</div>
 		<div id="breed_data">
 			<img id="breed_image" src="" />
-			<p>품종 정보</p>
+			<p><b>품종 정보</b></p>
 			<table id="breed_data_table">
 
 			</table>
@@ -328,7 +339,26 @@ body {
 
 		getBreeds();
 	</script>
-
+	
+	<div style="min-height: 200px;">
+	
+	</div>
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	
+	<script src="../../resources/prodmenu/js/popper.min.js"></script>
+	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../resources/prodmenu/js/aos.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
+	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+	<script src="../../resources/prodmenu/js/main.js"></script>
+	<!-- ////////////////////달력 /////////////////////////////-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 
 </html>

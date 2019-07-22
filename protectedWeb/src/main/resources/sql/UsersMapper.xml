@@ -11,9 +11,8 @@
 		<result property="userNo"		column="user_no"		jdbcType="NUMERIC"/>
 		<result property="id"		column="id"		jdbcType="VARCHAR"/>
 		<result property="kakao"		column="kakao"		jdbcType="VARCHAR"/>
-		<result property="naver"		column="id"		jdbcType="VARCHAR"/>
-		<result property="google"		column="id"		jdbcType="VARCHAR"/>
-		<result property="facebook"		column="id"		jdbcType="VARCHAR"/>
+		<result property="naver"		column="naver"		jdbcType="VARCHAR"/>
+		<result property="google"		column="google"		jdbcType="VARCHAR"/>
 		<result property="pw"		column="pw"		jdbcType="VARCHAR"/>
 		<result property="userName"	column="user_name"	jdbcType="VARCHAR"/>
 		<result property="nickname"	column="nickname"	jdbcType="VARCHAR"/>
@@ -26,6 +25,7 @@
 		<result property="levelPoint"	column="level_point"	jdbcType="NUMERIC"/>
 		<result property="levels"		column="levels"		jdbcType="VARCHAR"/>
 		<result property="accessDate"	column="access_date"	jdbcType="DATE"/>
+		<result property="accessIp" 	column="access_ip" 		jdbcType="VARCHAR"/>
 		<result property="role"		column="role"		jdbcType="VARCHAR"/>
 		<result property="purpose1"	column="purpose1"	jdbcType="VARCHAR"/>
 		<result property="purpose2"	column="purpose2"	jdbcType="VARCHAR"/>
@@ -36,10 +36,10 @@
 	<!-- SQL : INSERT -->
 	
 	<insert id="addUsersBase"	parameterType="users">
-		INSERT INTO users(user_no, id, kakao, naver, google, facebook, pw, user_name, nickname, 
+		INSERT INTO users(user_no, id, kakao, naver, google, pw, user_name, nickname, 
 				level_point, levels, role, purpose1, purpose2, purpose3)
 		VALUES(seq_users_user_no.NEXTVAL, #{id}, #{kakao:VARCHAR}, #{naver:VARCHAR}, #{google:VARCHAR},
-			#{facebook:VARCHAR}, #{pw}, #{userName}, #{nickname}, 0, '미인증회원', 'user', #{purpose1:VARCHAR}, 
+			#{pw}, #{userName}, #{nickname}, 0, '미인증회원', 'user', #{purpose1:VARCHAR}, 
 			#{purpose2:VARCHAR}, #{purpose3:VARCHAR})
 	</insert>
 	<update id="addUsersAdditional"	parameterType="users">
@@ -50,28 +50,61 @@
 			user_addr=#{userAddr:VARCHAR},
 			account=#{account:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
-			gender=#{gender:CHAR}
+			gender=#{gender:CHAR},
+			levels=#{levels},
+			level_point=#{levelPoint}
+		</set>
+		WHERE id=#{id}
+	</update>
+	<update id="addAccessInfo" parameterType="users">
+		UPDATE users
+		<set>
+			access_date=SYSDATE,
+			access_ip=#{accessIp}
 		</set>
 		WHERE id=#{id}
 	</update>
 	
 	<!-- SQL : SELECT SOCIAL -->
 
-	<select id="getSocial" 	parameterType="map" resultMap="usersSelectMap">
+	<select id="getKakao" 	parameterType="map" resultMap="usersSelectMap">
 		SELECT
 		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
 		access_date, profile, kakao
 		FROM users
 		WHERE kakao=#{kakao}
 	</select>
+	
+	<select id="getGoogle" 	parameterType="map" resultMap="usersSelectMap">
+		SELECT
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
+		access_date, profile, google
+		FROM users
+		WHERE google=#{google}
+	</select>
+	
+	<select id="getNaver" 	parameterType="map" resultMap="usersSelectMap">
+		SELECT
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
+		access_date, profile, kakao
+		FROM users
+		WHERE naver=#{naver}
+	</select>
 	 
 	 <!-- SQL : SELECT ONE -->
 
-	<select id="getUsers"	parameterType="string"	resultMap="usersSelectMap">
+	<select id="getUsersById"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
 		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
 		FROM users
-		WHERE id=#{value}
+		WHERE id=#{id}
+	</select>
+	
+	<select id="getUsersByNick"	parameterType="string"	resultMap="usersSelectMap">
+		SELECT
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
+		FROM users
+		WHERE nickname=#{nickname}
 	</select>
 	 
 

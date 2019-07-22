@@ -32,12 +32,15 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js"></script>
     <script type="text/javascript">
-    	$(function(){
-    		$("span:contains('Sign in')").on("click", function(){
-    			$(self.location).attr("href","/users/login");
-    		});
-    	});
+//     	$(function(){
+//     		$("span:contains('Sign in')").on("click", function(){
+//     			$(self.location).attr("href","/users/login");
+//     		});
+//     	});
     </script>
     
     <style type="text/css">
@@ -53,45 +56,58 @@
              <div class="col-lg-12 d-block">
                 <div class="row d-flex">
                    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center">
+						    	<span class="icon-phone2">
+						    		<span class="text">${ sessionScope.user.phone }</span>
+						    	</span>
+					    	</div>
 						   	 	<c:if test="${ sessionScope.user == null }">
-						   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
-                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" style="height:15px; width: 15px;"/>
-                        		</a>
+							   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
+	                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" style="height:15px; width: 15px;"/>
+	                        		</a>
                         		</c:if>
-                        		<c:if test="${ sessionScope.user.kakao != null }">
-                        		<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a>
-                        		</c:if>
+<%--                         		<c:if test="${ sessionScope.user.kakao != null }"> --%>
+<!--                         			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a> -->
+<%--                         		</c:if> --%>
+<%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
+<!-- 								<a id="googleLogout" href="#" onclick="signOut();">google 로그아웃</a> -->
+<%-- 							</c:if> --%>
 					    	</div>
 					   		<div class="col-md pr-4 d-flex topper align-items-center">
 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						   		<span class="text">youremail@email.com</span>
+						   		<span class="text">${ sessionScope.user.email }</span>
 					   		</div>
 					   		
 					   		
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
 						    <c:if test="${ sessionScope.user eq null }">
-						    	<span class="text">Sign in</span><span class="text">Sign Up</span>
+						    	<span id="login" class="text">Sign in</span>
+						    	<span id="regist" class="text">Sign up</span>
 						    </c:if>
-						    <c:if test="${ sessionScope.user != null }">
-						    	<span class="text">${ sessionScope.user.nickname } 님 환영합니다</span>
-						    </c:if>
-						    <c:if test="${sessionScope.user.role eq 'user' }">
-						    <div class="myInfo">
-						    	<input type="button" id="myInfo" value="마이페이지">
-						    </div>
-						    </c:if>
+
+<%-- 						    <c:if test="${sessionScope.user.role eq 'user' }"> --%>
+<!-- 						    <div class="myInfo"> -->
+<!-- 						    	<input type="button" id="myInfo" value="마이페이지"> -->
+<!-- 						    </div> -->
+<%-- 						    </c:if> --%>
 						    <c:if test="${sessionScope.user.role eq 'admin' }">
 						    <div class="manageMenu">
 						    	<input type="button" id="manageMenu" value="관리자메뉴">
 						    </div>
 						    </c:if>
+						    
 						    <c:if test="${ sessionScope.user != null }">
-						    <div class="logout">
-                                <a href="/users/logout">logout</a>
-                            </div>
+							    <div class="userInfo">
+							    	<span class="text">${sessionScope.user.nickname } 님</span>
+							    </div>
+							    <div class="logout" style="float:right">
+							    	<span class="text">
+							    		<a href="/users/logout">logout</a>
+							    	</span>
+	                            </div>
                             </c:if>
+                            
 					    </div>
                 </div>
              </div>
@@ -114,7 +130,7 @@
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
                 <a class="dropdown-item" href="/adoptReview/addAdoptReview">경로테스트</a>
-                <a class="dropdown-item" href="../adoptReview/REALaddAdoptReview.jsp">후기</a>
+                <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a>
 
               </div>
             </li>
@@ -129,18 +145,12 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                  <a class="dropdown-item" href="/community/getHospital.jsp">병원</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                  <a class="dropdown-item" href="/community/getBreedPedia.jsp">PEDIA</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
             </li>
              <li class="nav-item dropdown">
@@ -148,28 +158,33 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                 <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
+                <a class="dropdown-item" href="/community/getDogSense.jsp">뉴스</a>
               </div>
             </li>
+            <c:if test="${ sessionScope.user != null }">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USERS</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
                 <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
                 <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
-                <a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
+                <c:if test="${ sessionScope.user.role eq 'admin' }">
+                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
+                </c:if>
                 <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
+                <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
               </div>
             </li>
+            </c:if>
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-               <a class="dropdown-item" href="/shop/maket/addMarket.jsp">중고장터 등록</a>
-              	<a class="dropdown-item" href="/shop/prodQna/addProdQna.jsp">q&a글등록</a>
-              	<a class="dropdown-item" href="/shop/product/addProduct.jsp">상품등록</a>
-                <a class="dropdown-item" href="/shop/product/listAdminProduct.jsp">관리자 상품조회(n)</a>
-                <a class="dropdown-item" href="/shop/product/listProduct">listproduct(n)</a>
+               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
+                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
+                <a class="dropdown-item" href="/product/listProduct">상품리스트</a>
+                <c:if test="${ sessionScope.user.role eq 'admin' }">
+                	<a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
+                </c:if>
               </div>
             </li>
              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
@@ -199,7 +214,7 @@
   <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
   <script src="/resources/prodmenu/js/scrollax.min.js"></script>
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-  <script src="/resources/prodmenu/js/google-map.js"></script>
+<!--   <script src="/resources/prodmenu/js/google-map.js"></script> -->
   <script src="/resources/prodmenu/js/main.js"></script>
   </body>
 </html>

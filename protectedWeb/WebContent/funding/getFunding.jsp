@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -28,10 +29,14 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-		#voteDate{
-		width:375px;
-		float:left;
-		}
+		.form-group2{
+		padding-left:420px;
+		padding-right:100px;
+		}	
+		.form-group3{
+		padding-left:465px;
+		padding-right:100px;
+		}				
 	</style> 
  
  
@@ -47,7 +52,8 @@
       <div class="container">
         <div class="row s_product_inner">
           <div class="col-lg-6">
-            <div class="s_product_img">
+            조회 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
+            <p/>            
               <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
@@ -55,7 +61,7 @@
               >
                 <ol class="carousel-indicators">
                        
- 				<c:forEach var="i" begin="0" end="${fn:length(file)}" step="1">			
+ 				<c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
 					<c:if test="${i eq 0}">	
 	                  <li
 	                    data-target="#carouselExampleIndicators"
@@ -68,6 +74,7 @@
 	                    data-target="#carouselExampleIndicators"
 	                    data-slide-to="${i}"
 	                  >
+
 	                </c:if>	                
                   </c:forEach>               
                      
@@ -90,7 +97,6 @@
                   </div>			
                   </c:forEach>
           
-                </div>
               </div>
             </div>
           </div>
@@ -101,24 +107,29 @@
 			<h3>${funding.fundPay}원</h3>
 			<!-- 후원종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
-			<h3><strong style="color:#e00d31">후원종료</strong></h3>			 			
+			<h3><strong style="color:#8c8479">후원종료</strong></h3>			 			
 			 </c:if>
         	 <!-- 후원중 -->
 			<c:if test ="${funding.statusCode eq 3 }">					 
 			<h4 class="media-heading">남은기간 <b>${funding.fundRemainDate }</b>일</h4> 	
 			</c:if>		    
 			 <div class="progress">
-			  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%;"></div>
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%; background-color:#C9BFB0!important;"></div>
 			 </div>
-		      <div  id="voteDate" >${funding.fundStartDate}</div><div>${funding.fundEndDate}</div> 
+			<div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > ${funding.fundStartDate}</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.fundEndDate}</div>
+			 </div>					 
 		     <br/>
 	
-				 <div><h3>후원율&ensp;<strong style="color:#225cba">${funding.fundRate}%</strong></h3></div>
+				 <div><h3>후원율&ensp;<strong style="color:#4E8092">${funding.fundRate}%</strong></h3></div>
 				 <div class="progress">					 
-				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%;"></div>
+				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%; background-color:#4E8092!important;"></div>
 				 </div>		
-
-		      <div  id="voteDate" >0원</div><div>&ensp;&ensp;${funding.fundTargetPay}원</div> 			 	 		 	 
+			<div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > 0원</div>
+					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><fmt:formatNumber value="${funding.fundTargetPay}" pattern="#,###" />원</div>
+			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
                 <a class="main_btn" href="#">후원하기</a><a class="main_btn" href="#">문의하기</a>  
@@ -186,37 +197,60 @@
 		            role="tabpanel"
 		            aria-labelledby="home-tab">
 		            	<div class="col-md-10 col-md-offset-1">
-							<span class="price">글 내용</span>
 								<h2>${funding.postContent }</h2>
 						</div>
 		          </div>
+		          
 		          <div
 		            class="tab-pane fade"
 		            id="review"
 		            role="tabpanel"
 		            aria-labelledby="review-tab">
-		            <span class="price">후기 제목</span>
-					<h2>${funding.reviewTitle }</h2>
-		            <span class="price">후기 이미지</span>
-		            <p/>
+		            
+					<c:if test="${funding.reviewContent == null}">
+					<h4>등록된 후기가 없습니다.</h4>
+					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
+					<div class="form-group3">
+					<a class="main_btn" href="#">후기작성</a> 								
+		            </div>					
+					</c:if>						
+					</c:if>
+					
+					<c:if test="${!(funding.reviewContent == null) }">
+					<div class="row" style="position:relative;height:35px;">
+							 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><h2>${funding.reviewTitle }</h2></div>
+							<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >작성일 ${funding.reviewRegDate }</div>
+					 </div>			            
+		            <hr/><br/>
 					<c:forEach var="name" items="${fileReview}" varStatus="status">      
 	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
 	                  </c:forEach>	
 	                <p/>  
-		            <span class="price">후기 내용</span>
-					<h2>${funding.reviewContent }</h2>				
-		            <span class="price">작성 일자</span>
-					<h2>${funding.reviewRegDate }</h2>
-					<a class="main_btn" href="#">후기작성</a> 
+					${funding.reviewContent }
+					<hr/><br/>	
+					<div class="form-group2">
+					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
 					<a class="main_btn" href="#">후기수정</a> 			
-					<a class="main_btn" href="#">후기삭제</a> 									
+					<a class="main_btn" href="#">후기삭제</a> 
+					</c:if>									
+		            </div>
+					</c:if>	
 		          </div>
+		          
 		          <div
 		            class="tab-pane fade"
 		            id="voter"
 		            role="tabpanel"
 		            aria-labelledby="voter-tab">
- 					<div><h3>현재후원인원&ensp;${funding.sponsorCount}명</h3></div>
+ 					<div><h3>현재 <font color="#8c8479">${funding.sponsorCount}명</font>의 참여가 이루어졌습니다.</h3></div>		            
+	 					<hr/>
+		 				<c:forEach var="participate" items="${list}">						
+							<div class="row" style="position:relative;height:35px;">
+									 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><h4 ><b>${participate.nickname}</b>&nbsp; <small>님이 ${participate.fundPay }원을 후원하셨습니다.</small>&nbsp;</h4></div>
+									<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${participate.regDate}</div>
+							 </div>																 		
+					    <hr/>       
+				       </c:forEach>
 		          </div>		          
 		       </div>
 	      </div>
@@ -254,16 +288,20 @@
     
 		//============= 후원하기 Event  처리 =============	
 	 	$( "a:contains('후원하기')" ).on("click" , function() {
-	 		if(!(${funding.statusCode eq '3'})){
-	 			alert("후원이 종료되었습니다.")
+	 		if(${user == null}){
+	 			alert("로그인이 필요합니다.");
 	 		}else{
-	 		self.location = "/funding/getTerms?termsTitle=SFFund&postNo=${funding.postNo}";
+		 		if(!(${funding.statusCode eq '3'})){
+		 			alert("후원이 종료되었습니다.")
+		 		}else{
+		 		self.location = "/funding/getTerms?termsTitle=SFFund&postNo=${funding.postNo}";
+		 		}
 	 		}
 	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "a:contains('문의하기')" ).on("click" , function() {
-	 		//self.location = "/user/getUser?userId=${sessionScope.user.userId}";
+
 		});   
 	
 		//============= SNS공유 Event  처리 =============	

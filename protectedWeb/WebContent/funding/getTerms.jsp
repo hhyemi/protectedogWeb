@@ -33,21 +33,10 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	
-
-	   #btn-add{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
-		#btn-cancel{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
+		.form-group2{
+		padding-left:450px;
+		padding-right:100px;
+		}		
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -150,8 +139,8 @@
 		</div>	
 		<br/><br/><br/><br/>
 	
-		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">
+		  <div class="form-group2">
+	  			<button type="button" class="btn btn-primary py-3 px-4 col-md-3" id="btn-add">
 	  			<c:if test="${termsTitle eq '후원신청글'}">
 	  			작성하기
 	  			</c:if>
@@ -162,8 +151,10 @@
 	  			후원하기
 	  			</c:if>	  			
 	  			</button>
-	  			<button type="button" id="btn-cancel">취소</button>
+	  			&nbsp;
+	  			<button type="button" class="btn btn-primary py-3 px-4 col-md-3" id="btn-cancel">취소</button>
 		  </div>
+		  
 		<br/><br/><br/><br/>	  		  
 		</form>
 		<!-- form Start /////////////////////////////////////-->

@@ -55,7 +55,7 @@
 							<input type="text" class="form-control" name="receiverId" value="${ param.receiveId }"/>
 						</c:if>
 						<c:if test="${ param.receiveId eq null }">
-							<input type="text" class="form-control" name="receiverId" value=" "/>
+							<input type="text" class="form-control" name="receiverId" value=""/>
 						</c:if>
 					</div>
 				</div>
@@ -125,14 +125,13 @@
 // 				return;
 // 			}
 			
-			alert("왔다면?");
 			$("#uploadForm").attr("method", "POST").attr("action", "/message/addMessage");
-
+			alert("쪽지를 전송하였습니다");
 		}
 
 			$(function(){
 				$('#submit').on('click',function(){
-					alert("ssss");
+// 					alert("ssss");
 					fncAddMessage();
 				});
 			});

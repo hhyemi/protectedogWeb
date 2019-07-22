@@ -8,6 +8,7 @@ import org.protectedog.common.Search;
 import org.protectedog.service.coupon.CouponDAO;
 import org.protectedog.service.coupon.CouponService;
 import org.protectedog.service.domain.Coupon;
+import org.protectedog.service.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class CouponServiceImpl implements CouponService{
 		// TODO Auto-generated method stub
 		return couponDAO.getCoupon(couponNo);
 	}
+	
 
 	@Override
 	public Map<String, Object> getCouponList(Map<String, Object> sMap) throws Exception {
@@ -69,6 +71,18 @@ public class CouponServiceImpl implements CouponService{
 		couponDAO.addCouponManage(coupon);
 	}
 
-
+	@Override
+	public int checkCoupon(String couponCode, String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		int result=0;
+		Coupon coupon=(Coupon)couponDAO.getMyCoupon(couponCode, receiverId);
+		System.out.println("couponService ÄíÆù: "+coupon);
+		
+		if(coupon.getReceiverId()!=null) {
+			result=1;
+		}
+		System.out.println("couponService °á°ú°ª: "+result);
+		return result;
+	}
 	
 }

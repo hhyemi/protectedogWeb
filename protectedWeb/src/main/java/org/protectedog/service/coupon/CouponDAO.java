@@ -17,6 +17,9 @@ public interface CouponDAO {
 	// Select One
 	public Coupon getCoupon(int couponNo) throws Exception;
 	
+	// Select One(MyCoupon)
+	public Coupon getMyCoupon(String couponCode, String receiverId) throws Exception;
+	
 	// Select List
 	public List<Coupon> getCouponList(Search search) throws Exception;
 	

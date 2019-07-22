@@ -7,21 +7,22 @@
 <mapper namespace="ReviewMapper">
 
 
-	<resultMap id="ReviewSelectMap" type="review">
+	<resultMap id="reviewSelectMap" type="review">
 		<!-- Flied -->
-		<result property="postNo" column="post_no" jdbcType="NUMERIC" />
-		<result property="boardCode" column="board_code" jdbcType="CHAR" />
-		<result property="id" column="id" jdbcType="VARCHAR" />
-		<result property="nickName" column="nickname" jdbcType="VARCHAR" />
-		<result property="postTitle" column="post_title" jdbcType="VARCHAR" />
-		<result property="postContent" column="post_content" jdbcType="VARCHAR" />
-		<result property="regDate" column="reg_date" jdbcType="DATE" />
-		<result property="delCode" column="del_code" jdbcType="CHAR" />
+		<result property="postNo" 				column="post_no" 		jdbcType="NUMERIC" />
+		<result property="boardCode" 			column="board_code" 	jdbcType="CHAR" />
+		<result property="id" 					column="id" 			jdbcType="VARCHAR" />
+		<result property="nickName" 			column="nickname" jdbcType="VARCHAR" />
+		<result property="postTitle" 			column="post_title" jdbcType="VARCHAR" />
+		<result property="postContent" 			column="post_content" jdbcType="VARCHAR" />
+		<result property="regDate" 				column="reg_date" jdbcType="DATE" />
+		<result property="delCode" 				column="del_code" jdbcType="CHAR" />
+		
 		<!-- nullable -->
-		<result property="grade" column="grade" jdbcType="NUMERIC" />
-		<result property="hospitalLongitude" column="hospital_longitude" jdbcType="NUMERIC" />
-		<result property="hospitalLatitude" column="hospital_latitude" jdbcType="NUMERIC" />
-		<result property="orderNo" column="order_no" jdbcType="NUMERIC" />
+		<result property="grade" 				column="grade" jdbcType="NUMERIC" />
+		<result property="hospitalLongitude" 	column="hospital_longitude" jdbcType="NUMERIC" />
+		<result property="hospitalLatitude" 	column="hospital_latitude" jdbcType="NUMERIC" />
+		<result property="orderNo" 				column="order_no" jdbcType="NUMERIC" />
 
 	</resultMap>
 
@@ -31,22 +32,87 @@
 	<insert id="addReview" parameterType="review">
 		INSERT
 		INTO board ( post_no, board_code, id, nickname, post_title, post_content, reg_date, grade, hospital_longitude,
-		hospital_latitude, orderNo)
-		VALUES ( seq_review_post_no.nextval,
-		#{boardCode},
-		#{id},
-		#{nickName},
-		#{postTitle},
-		#{postContent},
-		SYSDATE
-		#{grade},
-		#{hospital_longitude},
-		#{hospital_latitude},
+		hospital_latitude, order_no)
+		
+		VALUES ( 
+		seq_review_post_no.nextval,
+		#{boardCode}, 
+		#{id}, 
+		#{nickName}, 
+		#{postTitle}, 
+		#{postContent}, 
+		SYSDATE, 
+		#{grade}, 
+		#{hospitalLongitude},
+		#{hospitalLatitude}, 
 		#{orderNo})
 	</insert>
 	
-
-
-
+	
+	<!-- SQL : SELECT ONE -->
+	 <select 	id="getReview"	parameterType="int"		resultMap="reviewSelectMap">
+	SELECT
+	post_no, board_code, id, nickname, post_title, post_content, reg_date, grade, hospital_longitude,
+	hospital_latitude, order_no
+	From review
+	
+	</select>
+	
+	<!-- SQL : UPDATE -->
+	<update id="updateReview"	parameterType="review">
+	UPDATE review
+	<set>
+		post_title			=	#{postTitle} , 
+		post_content		=	#{postContent} , 
+		grade				=	#{grade:NUMERIC},
+		hospital_longitude	=	#{hospitalLongitude},
+		hospital_latitude	=	#{hospitalLatitude}	
+	</set>
+	WHERE post_no=#{postNo}
+	</update>
+	
+	<update	id="delReview"	parameterType="review" >
+	   	UPDATE review
+		<set>
+		del_code = '0'
+		</set>
+	   	WHERE post_no = #{postNo}
+	 </update>
+	 
+	 <!-- SQL : SELECT LIST -->
+	<select  id="listReview"  parameterType="map"	resultMap="reviewSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM ( SELECT post_no, board_code, id, nickname, post_title, del_code)
+						FROM board
+						<where>
+								board_code = #{boardCode} AND del_code != '0'
+								<if test="searchCondition != null">
+									<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+									</if>
+									<if test="searchCondition == 1 and searchKeyword !='' ">
+										AND nickname  LIKE '%'||#{searchKeyword}||'%'
+							 			OR id        LIKE '%'||#{searchKeyword}||'%'
+									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+									</if> 
+								</if>
+						</where>
+						ORDER BY 
+						<if test="order == 0 or order == 1">
+						reg_date DESC
+						</if>
+						<if test="order == 2 ">
+						view_count DESC
+						</if>
+						<if test="order == 3 ">
+						recommend_count DESC
+						</if> ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+ 	
 
 </mapper>

@@ -23,7 +23,14 @@
 		} 
 		.right-box {
 		  float: right;
-		}		     
+		}	
+		#checkPostTitle{
+	      width:300px;
+	      padding:0 5px;
+	      overflow:hidden;
+	      text-overflow:ellipsis;
+	      white-space:nowrap;
+	  } 			     
     </style>
     
     
@@ -65,7 +72,7 @@
 							</select>
 							&emsp;
 						    <label class="sr-only" for="searchKeyword">검색어</label>
-						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" >
+						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 						    <button type="button" class="btn btn-default">검색</button>
 
 						</div>
@@ -73,36 +80,56 @@
     		    	<p/>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
-		    			<div class="col-md-8 col-lg-10 order-md-last">
+		    			<div class="col-md-8 col-lg-12 order-md-last">
 		    				<div class="row">
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 				    				<div class="product">
-				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px;" >
+				    				
+										 <!-- 후원종료 -->
+										 <c:if test ="${!(funding.statusCode eq 3) }">		
+										 조회 ${funding.fundViewCount }										 		    											 				    		
+					    					<a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; min-width:300px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
+					    					<input type="hidden" value="${funding.postNo }" />		    					
+					    					</a>
+										 </c:if>
+										 
+										 <!-- 후원중 -->
+										 <c:if test ="${funding.statusCode eq 3 }">		
+										 조회 ${funding.fundViewCount }													 											 				    		
+				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:300px;" >
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
+				    					</c:if>
+				    					
 				    					<div class="text py-3 px-3">
-				    						<h2><a href="#">${funding.postTitle}</a></h2>
-				    						
+					    					<div id="checkPostTitle">
+					    					<font size="5">${funding.postTitle}</font>
+					    					</div>
+										<div class="row" style="position:relative;height:35px;">
+										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <h3>${funding.nickname}</h3></div>
+										         <div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><h3><b><strong style="color:#4E8092">${funding.fundRate}%</strong></b></h3></div>
+										 </div>
 										 <!-- 후원종료 -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">
-				    						<h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#e33941">종료</strong></b></a></h3>
-										    <div class="progress">		 
-										    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%;"></div>										 
-										    </div>
+									   <div class="progress">												 
+										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%; background-color:#C9BFB0!important;"></div>
+										   </div>											 
+										 <div align="right">	    						
+										<h4 class="media-heading" style="color:#8c8479">종료</h4> 	
+										</div>
 										 </c:if>
 										 <!-- 후원중 -->
 										 <c:if test ="${funding.statusCode eq 3 }">										 
-				    					   <h3><a href="#">${funding.nickname }&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><strong style="color:#225cba">${funding.fundRate}%</strong></b></a></h3>
 										   <div class="progress">												 
-										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%;"></div>	
+										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%; background-color:#4E8092!important;" ></div>
 										   </div>					
-										</c:if>
-										
 										 <div align="right">	    						
 										<h4 class="media-heading">D- ${funding.fundRemainDate }</h4> 	
 										</div>
+										</c:if>
+										
 				    					</div>
 				    				</div>
 				    			</div>
@@ -131,7 +158,8 @@
   <!-- loader -->
 
   <script src="../../resources/prodmenu/js/main.js"></script>
- 
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"> </script> 
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
@@ -142,7 +170,7 @@
 	   	$("form").attr("method" , "POST").attr("action" , "/funding/listFunding").submit();
 	 
 	}
-    $(function(){
+    $(function(){	
     	
 		//============= "검색"  Event  처리 =============	
 		 $( "button.btn.btn-default" ).on("click" , function() {
@@ -158,14 +186,14 @@
 		});   
 	
         
-/* 		//============= autocomplete Event  처리 =============			
+		//============= autocomplete Event  처리 =============			
 	      $("#searchKeyword").on("keyup", function(){
 	          
-	          var search = {searchKeyword : $("#searchKeyword").val(), searchCondition : $("#searchCondition").val()};
+	          var search = {searchKeyword : $("#searchKeyword").val(), searchCondition : $("#searchCondition").val(), voteCondition : 1 };
 	          var convertSearch = JSON.stringify(search);
 	          
 	          $.ajax({
-	             url : "/funding/json/listVoting/",
+	             url : "/funding/json/autocomplete/",
 	             method : "POST",
 	             dataType : "json",
 	             data :  convertSearch ,
@@ -181,7 +209,7 @@
 	                });
 	             }
 	          });		
-	      });	 */
+	      });	 
   	});	        
         
     </script>

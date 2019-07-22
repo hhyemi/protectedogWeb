@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=euc-kr" %>
 <%@ page pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
@@ -42,14 +43,16 @@
 			<h1 class="bg-primary text-center">신 고 하 기</h1>
 			
 			<form id ="uploadForm" class="form-horizontal">
-			<input type="text" id="reporterId" name="reporterId" value="${ sessionScope.user.id }"/>
+			<input type="hidden" id="reporterId" name="reporterId" value="${ sessionScope.user.id }"/>
 			
  				<div class="form-group">
  					<div class="col-sm-2">
  						<p>신고대상</p>
  					</div>
  					<div class="col-sm-10">
-<%-- 						<input type="text" readonly="readonly" class="form-control" name="reportedId" value="${ param.id }"> --%>
+ 						<c:if test='${ param.id != null }'>
+							<input type="text" readonly="readonly" class="form-control" name="reportedId" value="${ param.id }">
+						</c:if>
 						<input type="text" class="form-control" name="reportedId" value="${ param.id }">
 					</div>
 				</div>
@@ -148,9 +151,9 @@
 		   
 
 			
-			alert("왔다면?");
 			$("#uploadForm").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
 
+			alert("신고가 완료되었습니다.");
 		}
 		
 		   //============= "다중파일업로드 파일명만 저장해서 value" =============   
@@ -255,7 +258,7 @@
 		
 			$(function(){
 				$('#submit').on('click',function(){
-					alert("ssss");
+// 					alert("ssss");
 					fncAddReport();
 				});
 			});

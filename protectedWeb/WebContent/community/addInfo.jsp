@@ -157,6 +157,19 @@ $(function () {
 				
 
 				</div>
+				
+				<p>
+				
+				<input type="checkbox" class="googleMapCheck" value="hide">지도공유
+		  
+		  		<div class="form-group googleMap">
+		   			<div class="col-sm-4">
+		    				<div id="map" style="width: 1100px; height: 600px;"></div>
+		     					<input type="hidden" class="form-control" id="route" name="route" style="width: 1100px;">
+		      					<span id="pop"></span>
+		    		</div>
+		    		<p> 경로 수정을 원하시면 마커 위에서 마우스 우클릭을 해주시길 바랍니다.</p>
+		  		</div>
 			</form>
 		</div>
 
@@ -176,6 +189,100 @@ $(function () {
 	</div>
 
 	<script>
+	
+	//============= 구글 지도 =============
+	  	
+	  	
+	  	  var poly;
+	      var map;
+	      var markers = [];
+          var infowindowF;
+          var infowindowL;
+
+	      function initMap() {
+	    	  
+		        map = new google.maps.Map(document.getElementById('map'), {
+			        zoom: 16,
+			        center: {lat: 37.564, lng:  127.0017} 
+		        });
+	
+		        poly = new google.maps.Polyline({
+			        strokeColor: '#000000',
+			        strokeOpacity: 0.5,
+			        strokeWeight: 5,
+			        map: map
+		        });
+		        
+		        infowindowF = new google.maps.InfoWindow();
+		        infowindowL = new google.maps.InfoWindow();
+		        
+		        map.addListener('click', addLatLng);
+	      }
+
+	      
+	      function addLatLng(event) {
+	    	  
+		        if (markers.length <5){
+		        	 
+		        	var path = poly.getPath();
+		 	        path.push(event.latLng);
+		 	        
+		       		var marker = new google.maps.Marker({
+				        position: event.latLng,
+				        title: '#' + path.getLength(),
+				        map: map
+		       		});
+		       		markers.push(marker);
+		       		
+		        	$( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
+		        	
+		        	// pop up
+		        	infowindowF.setContent("출발");
+		 	        infowindowF.open(map, markers[0]);
+		 	        
+		 	        if(markers.length > 1){
+			        	infowindowL.setContent("도착");
+			 	        infowindowL.open(map, marker);
+		 	        }
+		        	
+		        }else{
+			        alert("5개까지 지정 가능함 dialog 추가");
+			    }
+		        
+		       
+		        if (marker != undefined){
+		        	
+		            marker.addListener('rightclick', function() {
+		            	
+						for (var i = 0; i < markers.length; i++) {
+					    	if (markers[i] === marker) {
+								markers[i].setMap(null);
+								markers.splice(i, 1);
+				
+								poly.getPath().removeAt(i);
+					    	}
+						}
+						
+						var test = "";
+						
+				    	for (var i = 0; i < markers.length; i++) {
+				    		test += markers[i].position+"#";
+				    		
+				    		//pop up
+				        	infowindowF.setContent("출발");
+				 	        infowindowF.open(map, markers[0]);
+				 	        
+				 	        infowindowL.setContent("도착");
+				 	        infowindowL.open(map, markers[markers.length-1]);
+					 	}
+				    	
+				    	$( "#route ").val(  test  );
+					 	
+		            });
+		        }
+	      }
+	
+	
 	let editor;
 
 	ClassicEditor
@@ -290,57 +397,33 @@ $(function () {
         }
     }
 
-	 		$(document).ready(function() {
-        //submit 등록. 실제로 submit type은 아니다.
-	 /*
-        $('.submit a').on('click',function() {                        
-            var form = $('#uploadForm')[0];
-            var formData = new FormData(form);
-
-            for (var index = 0; index < Object.keys(files).length; index++) {
-                //formData 공간에 files라는 이름으로 파일을 추가한다.
-                //동일명으로 계속 추가할 수 있다.
-                formData.append('files',files[index]);
-            }
-
-            //ajax 통신으로 multipart form을 전송한다.
-            $.ajax({
-                type : 'POST',
-                enctype : 'multipart/form-data',
-                processData : false,
-                contentType : false,
-                cache : false,
-                timeout : 600000,
-                url : '/imageupload',
-                dataType : 'JSON',
-                data : formData,
-                success : function(result) {
-                    //이 부분을 수정해서 다양한 행동을 할 수 있으며,
-                    //여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
-                    //-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
-                    if (result === -1) {
-                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-                        // 이후 동작 ...
-                    } else if (result === -2) {
-                        alert('파일이 10MB를 초과하였습니다.');
-                        // 이후 동작 ...
-                    } else {
-                        alert('이미지 업로드 성공');
-                        // 이후 동작 ...
-                    }
-                }
-                //전송실패에대한 핸들링은 고려하지 않음
-            });
-        });
-        */
-        // <input type=file> 태그 기능 구현
+	 
+    $(document).ready(function() { 
+	
+    	$(".googleMap").hide();
+    	
+    	$(".googleMapCheck").on("click",function(){
+    		
+    		alert($(this).val())
+    		if( $(this).val() == 'hide' ) {
+    			$(".googleMap").show('slow');
+    			$(this).val("show");
+    			return;
+    		}
+    		
+    		if( $(this).val() == "show") {
+    			$(".googleMap").hide('slow');
+    			$(this).val("hide");
+    			return;
+    		}
+    	});
         $('#attach input[type=file]').change(function() {
             addPreview($(this)); //preview form 추가하기
         });
     }); 
 
 </script>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap"></script>
 
 </body>
 </html>

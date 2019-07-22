@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.protectedog.common.Page;
+import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.domain.Board;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,32 +157,32 @@ public class AdoptReviewController {
 	
 	@RequestMapping( value="listAdoptReview" )
 	public String listAdoptReview(
-			//			@ModelAttribute("search") Search search,
-//														@RequestParam("menu") String menu  ,
+						@ModelAttribute("search") Search search,
+														@RequestParam("boardCode") String boardCode  ,
 														Model model ) throws Exception{
 		
 		System.out.println("/adoptReview/listAdoptReview : GET / POST");
 		
-//		if(search.getCurrentPage() ==0 ){
-//			search.setCurrentPage(1);
-//		}
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
 		
-//		search.setPageSize(pageSize);
-//		System.out.println("■■■■■ 검색어 확인 : "+search.getSearchKeyword());
-//		System.out.println("■■■■■ 확인 : "+search);
+		search.setPageSize(pageSize);
+		System.out.println("■■■■■ 검색어 확인 : "+search.getSearchKeyword());
+		System.out.println("■■■■■ 확인 : "+search);
 		
 		// Business logic 수행
-//		Map<String , Object> map=adoptService.listAdopt(search);
-//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println(resultPage);
+		Map<String , Object> map=boardService.listBoard(search, boardCode, 0 );
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println(resultPage);
 			
-//		System.out.println("확인                                 :  "+map);
-//		System.out.println("확인     222                            :  "+map.get("list"));
+		System.out.println("확인                                 :  "+map);
+		System.out.println("확인     222                            :  "+map.get("list"));
 		
 		// Model 과 View 연결
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
 		
 
 		return "forward:/adoptReview/listAdoptReview.jsp";

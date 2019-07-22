@@ -1,6 +1,7 @@
 package org.protectedog.service.interest;
 
 import java.util.List;
+import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Interest;
@@ -23,5 +24,8 @@ public interface InterestDAO {
 	
 	// List Paging
 	public int getTotalCount(Search search) throws Exception;
+	
+	// 중복체크
+	public int getInterestCheck(Map<String, Object> map) throws Exception;
 	
 }

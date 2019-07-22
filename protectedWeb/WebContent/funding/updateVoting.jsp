@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- jQuery UI toolTip 사용 JS-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
+     <!-- ckeditor 사용 CSS-->   
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>    	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	   #btn-update{
@@ -59,6 +61,15 @@
 		.form-form{
 	    padding-left:15px;	
 		}
+		.ck.ck-editor {
+			max-width: 700px;
+		}
+		
+		.ck-editor__editable {
+			text-align: left;
+			min-height: 300px;
+			max-width: 700px;
+		}			
     </style>
 
 	</head>
@@ -123,8 +134,10 @@
 		  <br/>
 		  <div class="form-group">
 			<h4 class=>글내용</h4><p/>		
-			    <div class=>
-			      <textarea name="postContent" class="form-control" rows="5"  placeholder="내용을 입력해주세요."  style="width:700px;">${funding.postContent}</textarea>
+			    <div >
+			    <textarea id="editor" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
+				${funding.postContent}				
+				</textarea>			    
 			    </div>
 			  </div>
 			<br/>
@@ -142,7 +155,7 @@
 				<c:forEach var="name" items="${file}" varStatus="status">            
 				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
                      <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
-                            <a href="#" value="${name.fileName}"  onclick="deletePreview2(this)">삭제</a></div>     
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)">삭제</span></div>     
                 </c:forEach>           
             
 
@@ -280,7 +293,31 @@
 
       $('form').attr("method","POST").attr("action","/funding/updateVoting").attr("enctype","multipart/form-data").submit();
    }
-   
+ 
+   //============= "Editor" =============   
+	let editor;
+
+	ClassicEditor
+	    .create( document.querySelector( '#editor' ),{
+	    
+       	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+       	heading: {
+               options: [
+                   { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                   { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                   { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+               ]
+           }
+	    	
+	    })
+	    .then( newEditor => {
+	        editor = newEditor;
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
+  
+     
    //============= "다중파일업로드 파일명만 저장해서 insert할 value" =============   
    function fnAddFile(fileNameArray) {
          $("#multiFile").val(fileNameArray)    
@@ -339,10 +376,10 @@
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-                                             + "<a href=\"#\" value=\""
+                                             + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   삭제" + "</a>" + "</div>");
+                                             + "   삭제" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;

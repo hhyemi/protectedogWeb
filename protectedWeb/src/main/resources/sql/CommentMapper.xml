@@ -80,6 +80,19 @@
 		#{endRowNum}
 	</select>
 
+	<select id="listCommentMoreView" parameterType="map" resultMap="commentSelectMap">		
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+		FROM ( SELECT comment_no, post_no, board_code, id, comment_content,
+		reg_date, like_count, nickName
+		FROM comments
+		WHERE post_no = #{postNo} AND status_code != '0'
+		ORDER BY reg_date DESC ) inner_table
+		WHERE ROWNUM &lt;= #{commentEndRowNum} )
+		WHERE row_seq BETWEEN 1 AND
+		#{commentEndRowNum}	
+	</select>
+	
 	<select id="getTotalCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM( SELECT comment_no, post_no, board_code, id, comment_content,

@@ -71,5 +71,10 @@ public class CommentDAOImpl implements CommentDAO {
 	public void updateLikeCnt(Map<String, Object> map) throws Exception {
 		sqlSession.update("CommentMapper.updateLikeCnt",map);
 	}
+	
+	public List<Comment> listCommentMoreView(Map<String, Object> map) throws Exception{
+		List<Comment> list = sqlSession.selectList("CommentMapper.listCommentMoreView",map);
+		return list;
+	}
 
 }
