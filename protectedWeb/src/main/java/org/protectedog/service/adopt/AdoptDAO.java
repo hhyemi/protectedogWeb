@@ -26,6 +26,6 @@ public interface AdoptDAO {
 	public void updateStatusCode(Adopt adopt) throws Exception ;
 	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
-	public int getTotalCount(String boardCode) throws Exception ;
+	public int getTotalCount(Search search, String boardCode) throws Exception ;
 	
 }

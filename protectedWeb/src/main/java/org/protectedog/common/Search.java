@@ -18,6 +18,8 @@ public class Search {
 
 	// ½ºÅä¸®ÆÝµù
 	private String voteCondition;
+	
+	private String areaCondition;
 
 	/// Constructor
 	public Search() {
@@ -74,11 +76,19 @@ public class Search {
 		this.voteCondition = voteCondition;
 	}
 
+	public String getAreaCondition() {
+		return areaCondition;
+	}
+
+	public void setAreaCondition(String areaCondition) {
+		this.areaCondition = areaCondition;
+	}
+
 	@Override
 	public String toString() {
 		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", searchKeyword="
 				+ searchKeyword + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum
-				+ ", voteCondition=" + voteCondition + "]";
+				+ ", voteCondition=" + voteCondition + ", areaCondition=" + areaCondition + "]";
 	}
 
 }

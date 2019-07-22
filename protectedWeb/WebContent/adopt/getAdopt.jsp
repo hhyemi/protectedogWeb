@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="/resources/get/css/responsive.css" />
     
     
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    
     
     <style>
     
@@ -55,10 +58,17 @@
         	left: 0px;
         	bottom: 0px;
         }
+        
+        #appendTr>td{
+        	align: letf;
+        	word-break: break-all;	
+        }
+        
+        
 /*         .lnr-heart:before { */
 /* 			content: "\e813"; */
 /* 		} */
-        
+      
     </style>
  
   </head>
@@ -74,7 +84,7 @@
       <div class="container">
         <div class="row s_product_inner">
           <div class="col-lg-6">
-            <div class="s_product_img">
+<!--             <div class="s_product_img"> -->
               <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
@@ -118,15 +128,26 @@
                 </div>
                 
               </div>
-            </div>
+<!--             </div> -->
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
             
-              <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }<hr/>
+<%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
+              
+              
               <ul class="list">
               	
               	<input type="hidden" name="postNo" value="${adopt.postNo }">
+              	
+                <li>
+                   	<div class="row" style="position:relative;height:35px;">
+			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><font size="5px">${adopt.postTitle}</font>&nbsp;&nbsp;${adopt.id}</div>
+			        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"></font>${adopt.regDate}</div>
+			        </div>
+                </li>
+                
+                <hr/>
               	
                 <li>
                    	<div class="row">
@@ -189,6 +210,7 @@
 			  		<div class="col-md-2  "><strong>글내용</strong></div>
 					<div class="col-md-10 " >${adopt.postContent}</div>
 				</div>
+
 				
               </ul>
               
@@ -210,33 +232,42 @@
               
               
               <div class="card_area" >
-<!--   ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 		세션처리해야함                  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
-
+				<!-- 분양 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'AD' }">
-              		<c:if test="${adopt.statusCode ne '3' }">
-              			<a class="main_btn" href="#" style="width: 189px">입양신청</a>
-              		</c:if>
-              		<c:if test="${adopt.statusCode eq '2' }">
-              			<a class="main_btn" href="#" style="width: 189px" id="confirmButton">신청서확인</a>
-              			<a class="main_btn" href="#" style="width: 189px" id="adoptCompleteButton">분양완료</a>
-              		</c:if>
-
+	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
+	              			<a class="main_btn" href="#" style="width: 189px">입양신청</a>
+	              		</c:if>
+	              		
+	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
+	              			<button class="main_btn" style="width: 189px" id="confirmButton">신청서확인</button>
+	              			<button class="main_btn" style="width: 189px" id="adoptCompleteButton">분양완료</button>
+	              		</c:if>
+	              		
+	              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
+	              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+	              		</c:if>
               	</c:if>
               	
+              	<!-- 실종 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'MS' }">
-              		<c:if test="${adopt.statusCode eq '1' }">
+              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
               			<a class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</a>
               		</c:if>
               	</c:if>
               	
-              	<c:if test="${adopt.statusCode ne '3' }">
+              	<!-- 공통  -->
+              	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }">
                		<a class="main_btn" href="#" style="width: 189px">문의하기</a>
                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
                	</c:if>
                	
+              	<c:if test="${adopt.statusCode eq '3'}">
+               		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>
+               	</c:if>
+              	
               </div>
-              
+ 
               
               
             </div>
@@ -273,7 +304,7 @@
         <br/><hr/><div class="col-md-12"><br/><br/></div>
         
         <div class="col-md-12" align="center">
-       		<c:if test="${adopt.statusCode eq '1' }">
+       		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
 				<button class="main_btn" style="width: 189px" id="modiButton">수정</button>
 	       		<button class="main_btn" style="width: 189px" id="delButton">삭제</button>
 			</c:if>
@@ -281,7 +312,7 @@
 	        
 	        <button class="main_btn" style="width: 189px">목록</button>
         </div>
-        
+<!--         <p><a href="#ex1" rel="modal:open">Open Modal</a></p> -->
         
       </div>
     </div>
@@ -300,16 +331,38 @@
 			  <p align="center"><br/>찾기완료 상태로 변경하시겠습니까?</p>
 			</div>  
 			<div id="dialog-listApply" title="">
-				<p align="left" id="listJSON"></p>
+<!-- 			  <p id="listJSON"></p> -->
 			</div> 
+			
+			<div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">×</button>
+			          <h4 class="modal-title">Modal Header</h4>
+			        </div>
+			        <div class="modal-body">
+			          <p>Some text in the modal.</p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
+
+
+
   
     <!--================End Product Description Area =================-->
 
     <!--================ start footer Area  =================-->
     
     <!--================ End footer Area  =================-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -328,6 +381,7 @@
     <script src="/resources/get/js/jquery.waypoints.min.js"></script>
     <script src="/resources/get/js/jquery.counterup.js"></script>
     <script src="/resources/get/js/theme.js"></script>
+    
     
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -461,8 +515,8 @@
       $( function() {
   	    $( "#dialog-listApply" ).dialog({
   	    	  autoOpen: false,
-  		      width: 350,
-  		      height: 180,
+  		      width: 500,
+  		      height: 600,
   		      modal: true,
   		      buttons: {
 //   		        	예: function() {
@@ -475,71 +529,170 @@
   	    });
       });
       
+
+      
   //////////////////////////////////////////////////////////////////////////////////////////////////////
-//   	  function listApply(){
-// 	  	var adoptNo = parseInt(  $('input[name=postNo]').val().trim()  );
-// 	  	console.log(adoptNo);
-//   		$.ajax( 
-// 		 		{
-// 					url : "/apply/json/listApply/"+adoptNo ,
-// 					method : "GET" ,
-// 					dataType : "JSONObject" ,
-// 					headers : {
-// 								"Accept" : "application/json",
-// 								"Content-Type" : "application/json"
-// 							  },
-// 					success : function(xhr , status) {
-// 							alert(status);
-			
-// 						var displayValue = 
-// 							'<table class=\"table table-hover table-striped\" >'
-// 						        +'<thead>'
-// 						        	+'<tr>'
-// 							            +'<th><p align="center">No</p></th>'
-// 							            +'<th><p align="center">신청자 ID</p></th>'
-// 							            +'<th><p align="center">신청일자</p></th>' 
-// 					           		+'</tr>'
-// 					            +'</thead>'
-// 					            +'<tbody>'
-// 						            +'<c:set var="i" value="0" />'
-// 						            	+'<c:forEach var="apply" items="${list}">'
-// 						            	+'<c:set var="i" value="${ i+1 }" />'
-// 						            		+'<tr name="${ apply.applyNo }">'
-// 						            			+'<input type="hidden" name="applyNo" value="${ apply.applyNo }">'
-// 							            		+'<td align="left">${ i }</td>'
-// 							            		+'<td align="left">${apply.id}</td>'
-// 							            		+'<td align="left">${apply.regDate}'
-// 							            			+'<button class="btn btn-primary py-0 px-2">제외</button>'
-// 							            		+'</td>'
-// 						            		+'</tr>'
-// 						            +'</c:forEach>'
-// 						         +'</tbody>'
-// 						     +'</table>';
+
+  
+    function listApply(){
+		var adoptNo = parseInt(  $('input[name=postNo]').val().trim()  );
+	  	console.log(adoptNo);
+  		$.ajax( 
+		 		{
+					url : "/apply/json/listApply/"+adoptNo ,
+					method : "GET" ,
+					dataType : "json" ,
+					headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							  },
+					success : function(data , status) {
+// 							console.log(JSON.stringify(data));
+// 							alert( data.list.length );
 							
-													
-// 						$( "#listJSON" ).html(displayValue);
-// 						$('#dialog-listApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 						$( "#dialog-listApply" ).dialog( "open" );
+							var displayValue = '<table class="table table-hover" >'
+										        +'<thead>'
+										        	+'<tr>'
+											            +'<th style="width: 15%"><strong>No</strong></th>'
+											            +'<th style="width: 55%"><strong>신청자 ID</strong></th>'
+											            +'<th style="width: 30%"><strong>신청일자</strong></th>' 
+									           		+'</tr>'
+									            +'</thead>'
+									            +'<tbody>';
+					            
+							for( i=0; i<data.list.length; i++ ){
+		 						displayValue += 
+							            		'<tr class="trApplyNo" id="'+data.list[i].applyNo+'">'
+							            			+'<input type="hidden" name="inputApplyNo" value="'+data.list[i].applyNo+'">'
+								            		+'<td align="center">'+(i+1)+'</td>'
+								            		+'<td align="center">'+data.list[i].id+'</td>'
+								            		+'<td align="center">'+data.list[i].regDate+'</td>'
+	// 							            		+'<td align="left"><button class="main_btn"">확인확인</button></td>'
+							            		+'</tr>';	
+							            		
+							}
+							displayValue += '</tbody>'+'</table>';
+				
+							$( "#dialog-listApply" ).html(displayValue);
+							$( '#dialog-listApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+							$( "#dialog-listApply" ).dialog( "open" );
 						
-// 				},
-// 				error: function(request, status, error){ 
-// 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-// //						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-// 		        }
+				},
+				error: function(request, status, error){ 
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+//						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+		        }
 				
-				
-// 			});
+			});
+
 	  
-	  
-	  
-	  		
 // 	  		$('#dialog-listApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 // 			$('#dialog-listApply').dialog( "open" );
- 	  }
+ 	}
+  
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  
+// 	  $( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
+		function getApply(applyNo){
+//     		var applyNo = parseInt( $(this).children($('input')).val().trim()  );
+		  	console.log(applyNo);
+		  	
+// 		  	var displayValue;
+		  	
+	  		$.ajax( 
+			 		{
+						url : "/apply/json/getApply/"+applyNo ,
+						method : "POST" ,
+						dataType : "json" ,
+						headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								  },
+						success : function(data , status) {
+								console.log(JSON.stringify(data));
+								console.log(data.raise);
+							
+								var displayValue;
+								
+								if( data.mate == "있음" && data.raise == "있음" ){
+									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+													+'<br\/><strong>[직업]<\/strong> : '+data.job
+													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
+													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
+													+'<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree
+													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
+													+'<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently
+													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
+													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
+													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation ;
+									
+								}else if( data.mate == "있음" && data.raise == "없음" ){
+									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+													+'<br\/><strong>[직업]<\/strong> : '+data.job
+													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
+													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
+													+'<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree
+													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
+													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
+													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
+													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation ;
+									
+								}else if( data.mate == "없음" && data.raise == "있음" ){
+									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+													+'<br\/><strong>[직업]<\/strong> : '+data.job
+													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
+													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
+													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
+													+'<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently
+													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
+													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
+													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation;
+									
+								}else{
+									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+													+'<br\/><strong>[직업]<\/strong> : '+data.job
+													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
+													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
+													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
+													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
+													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
+													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation ;
+								}
+								console.log("-----"+displayValue);
+				 				$('#'+data.applyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
+							
+					},
+					error: function(request, status, error){ 
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	//						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+			        }
+					
+				});
+	  		return displayValue;
+	  		console.log("return 확인 : "+displayValue);
+	 	}
+// 		);
+	    
   
   
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
   
       $(function() {
+    		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
+    			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
+    			console.log("확인111 : "+applyNo);
+    			$('#appendTr').remove();
+    			getApply(applyNo);
+    			
+//     			console.log("return 확인 : "+displayValue);
+   		    });
+         	
+		
     	    $( "button:contains('수정')" ).on("click" , function() {
 				self.location = "/adopt/updateAdopt?postNo=${adopt.postNo}"
 			});
@@ -553,8 +706,8 @@
 				self.location = "/apply/addApply?postNo=${adopt.postNo}"
 			});
 		
-			$( "a:contains('신청서확인')" ).on("click" , function() {
-// 				listApply();
+			$( "button:contains('신청서확인')" ).on("click" , function() {
+				listApply();
 // 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 		
@@ -573,6 +726,9 @@
 			});
 
 	  });
+  
+
+
       
 
     </script>

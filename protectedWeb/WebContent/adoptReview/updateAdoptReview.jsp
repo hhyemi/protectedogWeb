@@ -1,295 +1,489 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!DOCTYPE html>
+<html>
 
-<html lang="ko">
-	
 <head>
-<title> 경로 테스트</title>
-	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-        body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
-        #map {
-	    	height: 100%;
-	    }
-	    html, body {
-		    height: 100%;
-		    margin: 0;
-		    padding: 0;
-	    }
-    </style>
+	<title>ADD ADOPTREVIEW</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-	
-// 		$(function() {
-// 			$( "button" ).on("click" , function() {
-// 				alert( $('#pop').text().trim() );
-// 			});
-// 	  	});
-  	
-	
-		 $(function() {
-			$( "button:contains('수정')" ).on("click" , function() {
-				fncAddApply();
-			});
-			
-// 			$( "button:contains('확인')" ).on("click" , function() {
-// 				alert(  $('#inputTest').val()  );
-// 			});
-			
-			$( "button:contains('보호할개')" ).on("click" , function() {
-				self.location = "../index.jsp"
-			});
-		});	
-		
-		$(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-// 				$("form")[0].reset();
-				alert("글 등록 취소 -> 목록으로")
-			});
-		});	
-	
-		
-		function fncAddApply() {
-			alert("신청완료 dialog")
-			$("form").attr("method" , "POST").attr("action" , "/adoptReview/updateAdoptReview").submit();
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="/resources/prodmenu/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/prodmenu/css/animate.css">
+    
+    <link rel="stylesheet" href="/resources/prodmenu/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/resources/prodmenu/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/resources/prodmenu/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/resources/prodmenu/css/aos.css">
+
+    <link rel="stylesheet" href="/resources/prodmenu/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/resources/prodmenu/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/resources/prodmenu/css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
+    <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
+    <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    
+    <style type="text/css">
+    	html {
+	 	 scroll-behavior: smooth;
+		}
+    	#editor {
+			min-height: 600px;
+			max-width: 1130px;
+			margin-left: 15px;
+			text-align: left;
+		}
+		.ck.ck-editor {
+			min-width: 95%;
 		}
 		
+		.ck-editor__editable {
+			text-align: left;
+			min-height: 300px;
+			min-width: 95%;
+		}
+		#preview img {
+			width: 100px;
+			height: 100px;
+		}
 		
-	</script>		
-
-</head>
-
-<body>
-
-
-
-
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	<button type="button" class="btn btn-primary">보호할개</button>
-	
-		<h1 class="bg-primary text-center">경로테스트</h1>
+		#preview p {
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 		
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-		<input type="hidden" name="id" value="user03" >
-		<input type="hidden" name="nickName" value="안녕" >
-		<input type="hidden" name="boardCode" value="AR" >
-		<input type="hidden" name="postNo" value="${ board.postNo }" >
+		.preview-box {
+			padding: 5px;
+			border-radius: 2px;
+			margin-bottom: 10px;
+		}
+		.waves-effect waves-teal btn-flat {
+			background-color: #3e6dad;
+			color: white;
+			border-radius: 10px;
+		}
 		
-		  
+    
+    </style>
+  </head>
+  <body class="goto-here">
+<%-- 		<jsp:include page="/layout/toolbar.jsp"></jsp:include> --%>
 
+    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
+            <h1 class="mb-0 bread" id="h1">
+           		후기 수정
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
 
-
-
-		  <div class="form-group">
-		    <label for="postTitle" class="col-sm-offset-1 col-sm-3 control-label">글제목</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" value="${board.postTitle }" >
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="postContent" class="col-sm-offset-1 col-sm-3 control-label">글내용</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="postContent" name="postContent" value="${board.postContent}">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="route" class="col-sm-offset-1 col-sm-3 control-label">루트</label>
-		    <div class="col-sm-4">
-		    <div id="map" style="width: 600px; height: 400px;">${board.route }</div>
-		      <input type="hidden" class="form-control" id="route" name="route" value="${board.route }">
-		      <span id="pop"></span>
-		      <p>경로를 변경할 경우, 지도를 우클릭하고 다시 설정하세요.</p>
-		    </div>
-		    <p></p>
-		  </div>
-		  
-		  &nbsp;
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >수정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취소</a>
-			</div>
-		  </div>
-		</form>
-		<!-- form Start /////////////////////////////////////-->
-		
- 	</div>
-	<!--  화면구성 div end /////////////////////////////////////-->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  	<script>
-	  	
-	  	
-	  	  var poly;
-	      var map;
-	      var marker;
-	      var markers = [];
-	      var route = $('#route').val();
-	      var routeTest = [];
-	      var routeMark = [];
-          var infowindowF;
-          var infowindowL;
-	      
-	      //마커가 하나라도 있을때
-	      if (route.indexOf("#") != -1){
-	       	  var routeArray = route.split("#");
-	       	  
-	       	  for ( i=0; i<routeArray.length-1; i++){
-	       		routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
-	       		routeMark[i] = "marker"+i.toString();
-	       	  }   	  
-	      }
-	      
-	      function initMap() {
-		        map = new google.maps.Map(document.getElementById('map'), {
-			        zoom: 16,
-			        center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
-			    			lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
-				});
-	
-		        poly = new google.maps.Polyline({
-			        strokeColor: '#000000',
-			        strokeOpacity: 0.5,
-			        strokeWeight: 5,
-			        map: map
-		        });
-		        
-		        var aaa = "";
-		        
-		        for ( i=0; i<routeTest.length; i++){
-			    	
-			 	    var path = poly.getPath();
-	
-		 	        path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
-		 	        								parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
-
-				    marker= routeMark[i];
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 ftco-animate">
+			<form  class="billing-form" name="detailForm">
+	          	<div class="row align-items-end">
+	          	
+	          	
+				<input type="hidden" name="boardCode" value="${board.boardCode }" >
+				<input type="hidden" name="id" value="${board.id }" >
+				<input type="hidden" name="nickName" value="${board.nickName }" >
+				<input type="hidden" name="postContent" value="${board.postContent }" >
+				<input type="hidden" name="regDate" value="${board.regDate }" >
+				<input type="hidden" name="postNo" value="${board.postNo }" >
+				<input type="hidden" name="viewCount" value="${board.viewCount }" >
+<!-- 				<input type="hidden" class="form-control" id="multiFile" name="multiFile" > -->
 				
-				    marker = new google.maps.Marker({
-				        position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
-							lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
-		    			title: '#' + path.getLength(),
-		    			map: map
-				    });
-				    
-				    markers.push(marker);
-				    
-			    }
-	
-		        infowindowF = new google.maps.InfoWindow();
-		        infowindowL = new google.maps.InfoWindow();
-		        infowindowF.setContent("출발");
-	 	        infowindowF.open(map, markers[0]);
-	 	        infowindowL.setContent("도착");
-	 	        infowindowL.open(map, markers[markers.length-1]);
-	
-		        map.addListener('click', addLatLng);
-		        map.addListener('rightclick', function() {
-		        	for (var i = markers.length-1; i >=0; i--) {
-		        		markers[i].setMap(null);
-		        		markers.splice(i, 1 );
-		        		poly.getPath().removeAt(i);
-		        		$( "#route ").val( '' );
-		            }
-	       	    });
-	      }
-
-	     
-	      function addLatLng(event) {
-	    	  
-		        if (markers.length <5){
-		        	 
-		        	var path = poly.getPath();
-		 	        path.push(event.latLng);
-		 	        
-		       		var marker = new google.maps.Marker({
-				        position: event.latLng,
-				        title: '#' + path.getLength(),
-				        map: map
-		       		});
-		       		
-		       		markers.push(marker);
-		        	
-		        	$( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
-		        	
-		        	// pop up
-		        	infowindowF.setContent("출발");
-		 	        infowindowF.open(map, markers[0]);
-		 	        
-		 	        if(markers.length > 1){
-			        	infowindowL.setContent("도착");
-			 	        infowindowL.open(map, marker);
-		 	        }
-		 	        
-		        }else{
-			        alert("5개까지 지정 가능함 dialog 추가");
-			    }
-		        
-		        
-		        if (marker != undefined){
-		        	
-		            marker.addListener('rightclick', function() {
-		            	
-						for (var i = 0; i < markers.length; i++) {
-					    	if (markers[i] === marker) {
-								markers[i].setMap(null);
-								markers.splice(i, 1);
+				<div class="col-md-12">
+	          		<div class="cart-detail bg-light p-3 p-md-4">
+						<div class="form-group">
+							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.</strong></p></div>
+						</div>
+					</div>
+				</div>
 				
-								poly.getPath().removeAt(i);
-					    	}
-						}
-						
-						var test = "";
-						
-				    	for (var i = 0; i < markers.length; i++) {
-				    		test += markers[i].position+"#";
-				    		
-				    		//pop up
-				        	infowindowF.setContent("출발");
-				 	        infowindowF.open(map, markers[0]);
-				 	        
-				 	        infowindowL.setContent("도착");
-				 	        infowindowL.open(map, markers[markers.length-1]);
-					 	}
-				    	
-				    	$( "#route ").val(  test  );
-					 	
-		            });
-		        }
-		        
-	      }
-	      
- 	 </script>
-  
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap"
-    async defer></script>
-  
-  
-</body>
+	          	
+	          	<div class="col-md-12"><br/><hr/><br/></div>
+	          	
+	          		<div class="col-md-12">
+		                <div class="form-group">
+		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<input type="text" class="form-control" name="postTitle" value="${board.postTitle }" placeholder="제목을 입력하세요.">
+		                </div>
+	                </div>
 
+	                <div class="col-md-12"></div>
+	                
+	                
+	                <div class="col-md-12"><br/>
+	                <div class="row">
+					<div class="col-xs-12 col-md-12">
+						<div class="body">
+							<!-- 첨부 버튼 -->
+							<div id="attach">
+								<label class="waves-effect waves-teal btn-flat"
+									for="uploadInputBox"><strong>사진첨부</strong></label> <input id="uploadInputBox"
+									style="display: none" type="file" name="filedata" multiple />
+							</div>
+
+							<!-- 미리보기 영역 -->
+							<div id="preview" class="content"></div>
+
+							<!-- multipart 업로드시 영역 -->
+ 							<div id="uploadForm" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+</div>
+			
+		            
+		            <div class="col-md-12"><br/></div>
+	
+               		<div class="col-md-12">
+		                <div class="form-group">
+		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
+<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
+<!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="내용을 입력하세요."></textarea> -->
+		               
+		                 <div class="postForm" align="center">
+						<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
+						<textarea class="col-xs-12 col-md-12" id="editor"
+						name="postContent" style="text-align: left;">
+						${board.postContent}
+					</textarea>
+					</div>
+		               
+		                </div>
+	                </div>
+	                
+	                
+               		
+               		<div class="w-100"></div>
+		            <div class="w-100"></div>
+               		<div class="w-100"></div>
+                
+	            </div>
+	          </form>
+	          
+	          <!-- END -->
+
+
+	          <div class="row mt-5 pt-3 d-flex">
+	          	<div class="col-md-12">
+					<p><button class="btn btn-primary py-3 px-4 col-md-12">수정</button></p>
+					
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="radio" align="right">
+								<p><a href="#" ><font color="gray">취소</font></a></p>
+							</div>
+						</div>
+					</div>
+	          	</div>
+	          </div>
+	          
+	          
+ <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+  
+<!-- 			<div id="dialog-postTitle" title=""> -->
+<!-- 			  <p align="center"><br/>제목을 입력해주세요.</p> -->
+<!-- 			</div>        -->
+<!-- 			<div id="dialog-postTitleLength" title=""> -->
+<!-- 			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p> -->
+<!-- 			</div>        -->
+<!-- 			<div id="dialog-img" title=""> -->
+<!-- 			  <p align="center"><br/>이미지를 등록해주세요.</p> -->
+<!-- 			</div>    -->
+			<div id="dialog-postContent" title="">
+			  <p align="center"><br/>내용을 입력해주세요.</p>
+			</div>      
+			<div id="dialog-postContentLength" title="">
+			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p>
+			</div>      
+       
+<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
+	          
+	          
+          </div> <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section> <!-- .section -->
+
+    
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- dialog -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  <!-- 템플릿 -->
+  <script src="/resources/prodmenu/js/jquery.min.js"></script>
+  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/resources/prodmenu/js/popper.min.js"></script>
+  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
+  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
+  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
+  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
+  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
+  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+  <script src="/resources/prodmenu/js/aos.js"></script>
+  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
+  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
+  <script src="/resources/prodmenu/js/main.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/resources/events.js"></script>
+  
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+  <script>
+  
+ 	 let editor;
+
+		ClassicEditor
+	    .create( document.querySelector( '#editor' ),{
+	    
+      	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+      	heading: {
+              options: [
+                  { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                  { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                  { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+              ]
+          }
+	    	
+	    })
+	    .then( newEditor => {
+	        editor = newEditor;
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
+		
+		var content= $('input[name=postContent]').val();
+// 		editor.setData(content);
+// 		$('textarea').val(content);
+
+
+	  //============= "다중파일업로드"  Event 처리 및  연결 =============      
+
+	  //임의의 file object영역
+	 var files = {};
+	 var previewIndex = 0;
+	 var fileNameArray = new Array();
+	 
+	 // image preview 기능 구현
+	 // input = file object[]
+	 function addPreview(input) {
+        if (input[0].files) {
+            //파일 선택이 여러개였을 시의 대응
+            for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+                var file = input[0].files[fileIndex];
+
+                if (validation(file.name))
+                    continue;
+
+    	        var fileName = file.name + "";   
+    	        var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+    	        var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
+    	        
+					var imgSelectName = "img";
+
+					if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
+						imgSelectName = "iframe";
+					}	                        
+                
+
+                var reader = new FileReader();
+                reader.onload = function(img) {
+                    //div id="preview" 내에 동적코드추가.
+                    //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
+                    var imgNum = previewIndex++;
+                    
+                    var previewId = "";
+                   
+                    if(imgNum==0){
+                    	previewId = "start";
+                    }else{
+                    	previewId = "startNo";	
+                    }
+                	
+                	document.querySelector( '#editor' ).addEventListener( 'click', () => {
+                	    const editorData = editor.getData();     	           
+                	} );
+                	
+                	alert(img.target.result);
+                    editor.setData(editor.getData()+"<p><"+imgSelectName+" src='" + img.target.result + "' style='min-width:100%'/></p><p/>");		
+                
+                    
+                    $("#preview").append(
+                                    "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:208px' >"
+                                            + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"200px;\" height=\"200px;\"/>"
+                                            + "<a href=\"#\" value=\""
+                                            + imgNum
+                                            + "\" onclick=\"deletePreview(this)\">"
+                                            + "삭제" + "</a>" + "</div>");
+                    files[imgNum] = file;
+                    
+                    fileNameArray[imgNum]=file.name;
+                    fnAddFile(fileNameArray);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        } else
+            alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+    }
+	 
+
+	 
+
+	 //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
+	 function deletePreview(obj) {
+        var imgNum = obj.attributes['value'].value;
+        delete files[imgNum];
+        $("#preview .preview-box[value=" + imgNum + "]").remove();
+        resizeHeight();
+    }
+
+	 //============= 파일 확장자 validation 체크 =============
+	 function validation(fileName) {
+        fileName = fileName + "";
+        var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+        var fileNameExtension = fileName.toLowerCase().substring(
+                fileNameExtensionIndex, fileName.length);
+        if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
+            alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+            return true;
+        } else {
+            return false;
+        }
+    }
+	 
+
+	$(document).ready(function() {
+	      //============= 사진미리보기 =============
+		$('#attach input[type=file]').change(function() {
+			addPreview($(this)); //preview form 추가하기
+		});
+	});
+	
+	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+
+	var boardCode = $( 'input[name=boardCode]' ).val().trim();
+	
+	$( function() {
+	    $( "#dialog-postContent, #dialog-postContentLength" ).dialog({
+	    	autoOpen: false,
+		      width: 350,
+		      height: 180,
+		      modal: true,
+		      buttons: {
+		    	  닫기: function(){
+		    		  $( this ).dialog( "close" );
+		    		  jQuery($("textarea[name=postContent]"))[0].scrollIntoView(true);
+		    	  }
+		      }
+	    });
+	});
+	
+
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
+
+	$( "input[name=postTitle]" ).keyup(function( ) {
+		if($("input[name=postTitle]").val().length > 10 ){
+			$("span[name=postTitle]").text('10자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=postTitle]").text('');
+		}
+	});
+	
+	
+	$( "textarea[name=postContent]" ).keyup(function( ) {
+		if($("textarea[name=postContent]").text().length > 100 ){
+			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=postContent]").text('');
+		}
+	});
+
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■      ↑  글자수체크           ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	
+	
+	// 등록버튼 누르고
+	function fncAddAdoptReview(){
+
+// 		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >10 ){
+// 			  $("input[name=postTitle]").focus();
+// 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-postContent').dialog( "open" );
+// 			  return;
+// 		  }
+// 		  if(){
+// 			  $('#dialog-postTitleLength').dialog( "open" );
+// 			  return;
+// 		  }
+// 		  if( $("textarea[name=postContent]").text().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+// 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-postContent').dialog( "open" );
+// 			  return;
+// 		  }
+// 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+// 			  $("textarea[name=postContent]").focus();
+// // 			  $('#dialog-postContent').dialog( "open" );
+// 			  return;
+// 		  }
+// 		  if( $("input[name=postContent]").val().length > 100 ){
+// 			  $('#dialog-postContentLength').dialog( "open" );
+// 			  return;
+// 		  }
+		
+
+		var postContent = $("#editor").text();
+		$("form[name=detailForm]").attr("method" , "POST").attr("action" , "/adoptReview/updateAdoptReview").attr("enctype","multipart/form-data").submit();
+		
+	}
+	
+
+    $(function() {
+			$( "button:contains('수정')" ).on("click" , function() {
+				$('textarea').val(editor.getData());
+				console.log($('textarea').val());
+				fncAddAdoptReview();
+			});
+			
+			$( "a:contains('취소')" ).on("click" , function() {
+				self.location = "/adopt/listAdoptReview"
+			});
+	 });	
+      
+      
+    </script>
+
+  
+  
+  
+  
+  </body>
 </html>
