@@ -20,32 +20,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--  bootstrap Dropdown CSS & JS  -->
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
-<script type="text/javascript">
-	$(function() {
 
-		$("button:contains('답장')").on("click", function() {
-			self.location = "/message/addMessage?receiverId="+${ message.senderId }
-		});
-		
-		$("button:contains('처리')").on("click", function() {
-			self.location = "/report/updateReport?reportNo="+${ report.reportNo }+"&reportStatus=1&delCode=0"
-		});
-
-		$("button:contains('삭제')").on(
-				"click",
-				function() {
-
-					var result = confirm("정말 삭제 하시겠습니까?");
-
-					if (result) {
-						$("form[name='info']").attr("method", "POST").attr(
-								"action", "/info/delInfo").attr("enctype",
-								"multipart/form-data").submit();
-					}
-
-				});
-	});
-</script>
 <style type="text/css">
 
 body {
@@ -125,5 +100,37 @@ body {
 	</div>
 		
 		<jsp:include page="/layout/footer.jsp"></jsp:include>
+		
+<script type="text/javascript">
+	$(function() {
+
+		$("button:contains('답장')").on("click", function() {
+			self.location = "/message/addMessage?receiverId="+${ message.senderId }
+		});
+		
+		$("button:contains('목록')").on("click", function() {
+			if(${ message.receiverId == sessionScope.user.id }){
+				self.location='/message/listReceiveMessage?receiverId=${sessionScope.user.id}';
+			}
+			if(${ message.receiverId != sessionScope.user.id }){
+				self.location='/message/listSendMessage?senderId=${sessionScope.user.id}';
+			}
+		});
+
+// 		$("button:contains('삭제')").on(
+// 				"click",
+// 				function() {
+
+// 					var result = confirm("정말 삭제 하시겠습니까?");
+
+// 					if (result) {
+// 						$("form[name='info']").attr("method", "POST").attr(
+// 								"action", "/info/delInfo").attr("enctype",
+// 								"multipart/form-data").submit();
+// 					}
+
+// 				});
+	});
+</script>
 </body>
 </html>

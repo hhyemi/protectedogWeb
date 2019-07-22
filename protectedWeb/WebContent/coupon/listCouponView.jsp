@@ -198,7 +198,7 @@
 		$(function(){
 			$(".removeCoupon").on("click", function(){
 				var couponNo=$("#couponNo").val();
-				alert(couponNo);
+// 				alert(couponNo);
 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 			})
 		})
@@ -210,10 +210,10 @@
 				var receiverId=$("#receiverId").val();
 				var checkCoupon = { couponCode:couponCode , receiverId:receiverId }
 				var couponNo=$(this).parent().parent().children("input").val();
-				alert("ajax통신 쿠폰코드 : "+couponCode);
-				alert("ajax통신 받는사람 : "+receiverId);
-				alert("ajax통신 체크쿠폰 : "+JSON.stringify(checkCoupon));
-				alert("ajax통신 쿠폰번호 : "+couponNo)
+// 				alert("ajax통신 쿠폰코드 : "+couponCode);
+// 				alert("ajax통신 받는사람 : "+receiverId);
+// 				alert("ajax통신 체크쿠폰 : "+JSON.stringify(checkCoupon));
+// 				alert("ajax통신 쿠폰번호 : "+couponNo)
 				$.ajax({
 					type : "POST",
 					contentType : "application/json",
@@ -223,8 +223,8 @@
 					success : function(response){
 						if($.trim(response.result)==0){
 							alert("쿠폰을 받았습니다");
-							alert(couponNo);
-							alert(receiverId);
+// 							alert(couponNo);
+// 							alert(receiverId);
 							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
 						}else{
 							alert("이미 받은 쿠폰입니다");
