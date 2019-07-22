@@ -110,6 +110,7 @@ public class MarketController {
 		return "forward:/shop/market/listMarket.jsp";
 	}
 	
+	
 }
 	
 		

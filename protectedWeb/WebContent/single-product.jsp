@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -15,25 +13,219 @@
 
     <link rel="icon" href="resources/get/img/favicon.png" type="image/png" />
     <!-- Bootstrap CSS -->
-     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../resources/get/css/bootstrap.css" />
-    <link rel="stylesheet" href="../../resources/get/css/icon/style.css" />
-    <link rel="stylesheet" href="../../resources/get/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../../resources/get/css/themify-icons.css" />
-    <link rel="stylesheet" href="../../resources/get/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="../../resources/get/css/simpleLightbox.css" />
-    <link rel="stylesheet" href="../../resources/get/css/nice-select.css" />
-    <link rel="stylesheet" href="../../resources/get/css/animate.css" />
-    <link rel="stylesheet" href="../../resources/get/css/jquery-ui.css" />
+    <link rel="stylesheet" href="resources/get/css/bootstrap.css" />
+    <link rel="stylesheet" href="resources/get/css/icon/style.css" />
+    <link rel="stylesheet" href="resources/get/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="resources/get/css/themify-icons.css" />
+    <link rel="stylesheet" href="resources/get/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="resources/get/css/simpleLightbox.css" />
+    <link rel="stylesheet" href="resources/get/css/nice-select.css" />
+    <link rel="stylesheet" href="resources/get/css/animate.css" />
+    <link rel="stylesheet" href="resources/get/css/jquery-ui.css" />
     <!-- main css -->
-    <link rel="stylesheet" href="../../resources/get/css/style.css" />
-    <link rel="stylesheet" href="../../resources/get/css/responsive.css" />
+    <link rel="stylesheet" href="resources/get/css/style.css" />
+    <link rel="stylesheet" href="resources/get/css/responsive.css" />
   </head>
 
   <body>
-    <!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+      <div class="top_menu">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-7">
+              <div class="float-left">
+                <p>Phone: +01 256 25 235</p>
+                <p>email: info@eiser.com</p>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="float-right">
+                <ul class="right_side">
+                  <li>
+                    <a href="cart.html">
+                      gift card
+                    </a>
+                  </li>
+                  <li>
+                    <a href="tracking.html">
+                      track order
+                    </a>
+                  </li>
+                  <li>
+                    <a href="contact.html">
+                      Contact Us
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main_menu">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-light w-100">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="index.html">
+              <img src="resources/get/img/logo.png" alt="" />
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div
+              class="collapse navbar-collapse offset w-100"
+              id="navbarSupportedContent"
+            >
+              <div class="row w-100 mr-0">
+                <div class="col-lg-7 pr-0">
+                  <ul class="nav navbar-nav center_nav pull-right">
+                    <li class="nav-item">
+                      <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item active submenu dropdown">
+                      <a
+                        href="#"
+                        class="nav-link dropdown-toggle"
+                        data-toggle="dropdown"
+                        role="button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >Shop</a
+                      >
+                      <ul class="dropdown-menu">
+                        <li class="nav-item">
+                          <a class="nav-link" href="category.html"
+                            >Shop Category</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="single-product.html"
+                            >Product Details</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="checkout.html"
+                            >Product Checkout</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="cart.html">Shopping Cart</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item submenu dropdown">
+                      <a
+                        href="#"
+                        class="nav-link dropdown-toggle"
+                        data-toggle="dropdown"
+                        role="button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >Blog</a
+                      >
+                      <ul class="dropdown-menu">
+                        <li class="nav-item">
+                          <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="single-blog.html"
+                            >Blog Details</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item submenu dropdown">
+                      <a
+                        href="#"
+                        class="nav-link dropdown-toggle"
+                        data-toggle="dropdown"
+                        role="button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >Pages</a
+                      >
+                      <ul class="dropdown-menu">
+                        <li class="nav-item">
+                          <a class="nav-link" href="tracking.html">Tracking</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="elements.html">Elements</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-lg-5 pr-0">
+                  <ul class="nav navbar-nav navbar-right right_nav pull-right">
+                    <li class="nav-item">
+                      <a href="#" class="icons">
+                        <i class="ti-search" aria-hidden="true"></i>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="icons">
+                        <i class="ti-shopping-cart"></i>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="icons">
+                        <i class="ti-user" aria-hidden="true"></i>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="icons">
+                        <i class="ti-heart" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!--================Header Menu Area =================-->
+
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+              <h2>Product Details</h2>
+              <p>Very us move be blessed multiply night</p>
+            </div>
+            <div class="page_link">
+              <a href="index.html">Home</a>
+              <a href="single-product.html">Product Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
 
     <!--================Single Product Area =================-->
     <div class="product_image_area">
@@ -104,12 +296,12 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
-              <h3>${board.prodName}</h3>
-              <h2>${board.price}</h2>
+              <h3>Faded SkyBlu Denim Jeans</h3>
+              <h2>$149.99</h2>
               <ul class="list">
                 <li>
                   <a class="active" href="#">
-                    <span>Category</span> :${board.id}</a
+                    <span>Category</span> : Household</a
                   >
                 </li>
                 <li>
@@ -117,9 +309,10 @@
                 </li>
               </ul>
               <p>
-                원산지 : ${product.country}<br/>
-                제조사 : ${product.company}<br/>
-                기본 적립 포인트 : <br/>
+                Mill Oil is an innovative oil filled radiator with the most
+                modern technology. If you are looking for something that can
+                make your interior look awesome, and at the same time give you
+                the pleasant warm feeling during the winter.
               </p>
               <div class="product_count">
                 <label for="qty">Quantity:</label>
@@ -140,7 +333,7 @@
                   <i class="lnr lnr-chevron-up"></i>
                 </button>
                 <button
-                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false";
+                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                   class="reduced items-count"
                   type="button"
                 >
@@ -148,7 +341,7 @@
                 </button>
               </div>
               <div class="card_area">
-                <a class="main_btn" href="#">장바구니에 담기</a>
+                <a class="main_btn" href="#">Add to Cart</a>
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-diamond"></i>
                 </a>
@@ -176,7 +369,7 @@
               role="tab"
               aria-controls="home"
               aria-selected="true"
-              >상품상세정보</a
+              >Description</a
             >
           </li>
           <li class="nav-item">
@@ -188,7 +381,7 @@
               role="tab"
               aria-controls="profile"
               aria-selected="false"
-              >상품 문의</a
+              >Specification</a
             >
           </li>
           <li class="nav-item">
@@ -200,7 +393,7 @@
               role="tab"
               aria-controls="contact"
               aria-selected="false"
-              >구매후기</a
+              >Comments</a
             >
           </li>
           <li class="nav-item">
@@ -212,7 +405,7 @@
               role="tab"
               aria-controls="review"
               aria-selected="false"
-              >배송/교환/환불</a
+              >Reviews</a
             >
           </li>
         </ul>
@@ -223,37 +416,35 @@
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-          <jsp:include page="/shop/prodQna/listProdQna.jsp" >
             <p>
-<!--               Beryl Cook is one of Britainâs most talented and amusing artists -->
-<!--               .Berylâs pictures feature women of all shapes and sizes enjoying -->
-<!--               themselves .Born between the two world wars, Beryl Cook eventually -->
-<!--               left Kendrick School in Reading at the age of 15, where she went -->
-<!--               to secretarial school and then into an insurance office. After -->
-<!--               moving to London and then Hampton, she eventually married her next -->
-<!--               door neighbour from Reading, John Cook. He was an officer in the -->
-<!--               Merchant Navy and after he left the sea in 1956, they bought a pub -->
-<!--               for a year before John took a job in Southern Rhodesia with a -->
-<!--               motor company. Beryl bought their young son a box of watercolours, -->
-<!--               and when showing him how to use it, she decided that she herself -->
-<!--               quite enjoyed painting. John subsequently bought her a childâs -->
-<!--               painting set for her birthday and it was with this that she -->
-<!--               produced her first significant work, a half-length portrait of a -->
-<!--               dark-skinned lady with a vacant expression and large drooping -->
-<!--               breasts. It was aptly named âHangoverâ by Berylâs husband and -->
+              Beryl Cook is one of Britainâs most talented and amusing artists
+              .Berylâs pictures feature women of all shapes and sizes enjoying
+              themselves .Born between the two world wars, Beryl Cook eventually
+              left Kendrick School in Reading at the age of 15, where she went
+              to secretarial school and then into an insurance office. After
+              moving to London and then Hampton, she eventually married her next
+              door neighbour from Reading, John Cook. He was an officer in the
+              Merchant Navy and after he left the sea in 1956, they bought a pub
+              for a year before John took a job in Southern Rhodesia with a
+              motor company. Beryl bought their young son a box of watercolours,
+              and when showing him how to use it, she decided that she herself
+              quite enjoyed painting. John subsequently bought her a childâs
+              painting set for her birthday and it was with this that she
+              produced her first significant work, a half-length portrait of a
+              dark-skinned lady with a vacant expression and large drooping
+              breasts. It was aptly named âHangoverâ by Berylâs husband and
             </p>
             <p>
-<!--               It is often frustrating to attempt to plan meals that are designed -->
-<!--               for one. Despite this fact, we are seeing more and more recipe -->
-<!--               books and Internet websites that are dedicated to the act of -->
-<!--               cooking for one. Divorce and the death of spouses or grown -->
-<!--               children leaving for college are all reasons that someone -->
-<!--               accustomed to cooking for more than one would suddenly need to -->
-<!--               learn how to adjust all the cooking practices utilized before into -->
-<!--               a streamlined plan of cooking that is more efficient for one -->
-<!--               person creating less -->
+              It is often frustrating to attempt to plan meals that are designed
+              for one. Despite this fact, we are seeing more and more recipe
+              books and Internet websites that are dedicated to the act of
+              cooking for one. Divorce and the death of spouses or grown
+              children leaving for college are all reasons that someone
+              accustomed to cooking for more than one would suddenly need to
+              learn how to adjust all the cooking practices utilized before into
+              a streamlined plan of cooking that is more efficient for one
+              person creating less
             </p>
-
           </div>
           <div
             class="tab-pane fade"
@@ -801,20 +992,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Optional JavaScript -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../../resources/get/js/jquery-3.2.1.min.js"></script>
-    <script src="../../resources/get/js/popper.js"></script>
-    <script src="../../resources/get/js/bootstrap.min.js"></script>
-    <script src="../../resources/get/js/stellar.js"></script>
-    <script src="../../resources/get/js/simpleLightbox.min.js"></script>
-    <script src="../../resources/get/js/jquery.nice-select.min.js"></script>
-    <script src="../../resources/get/js/imagesloaded.pkgd.min.js"></script>
-    <script src="../../resources/get/js/isotope-min.js"></script>
-    <script src="../../resources/get/js/owl.carousel.min.js"></script>
-    <script src="../../resources/get/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../../resources/get/js/mail-script.js"></script>
-    <script src="../../resources/get/js/jquery-ui.js"></script>
-    <script src="../../resources/get/js/jquery.waypoints.min.js"></script>
-    <script src="../../resources/get/js/jquery.counterup.js"></script>
-    <script src="../../resources/get/js/theme.js"></script>
+    <script src="resources/get/js/jquery-3.2.1.min.js"></script>
+    <script src="resources/get/js/popper.js"></script>
+    <script src="resources/get/js/bootstrap.min.js"></script>
+    <script src="resources/get/js/stellar.js"></script>
+    <script src="resources/get/js/simpleLightbox.min.js"></script>
+    <script src="resources/get/js/jquery.nice-select.min.js"></script>
+    <script src="resources/get/js/imagesloaded.pkgd.min.js"></script>
+    <script src="resources/get/js/isotope-min.js"></script>
+    <script src="resources/get/js/owl.carousel.min.js"></script>
+    <script src="resources/get/js/jquery.ajaxchimp.min.js"></script>
+    <script src="resources/get/js/mail-script.js"></script>
+    <script src="resources/get/js/jquery-ui.js"></script>
+    <script src="resources/get/js/jquery.waypoints.min.js"></script>
+    <script src="resources/get/js/jquery.counterup.js"></script>
+    <script src="resources/get/js/theme.js"></script>
   </body>
 </html>
