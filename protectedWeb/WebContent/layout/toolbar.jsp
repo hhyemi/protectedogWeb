@@ -41,6 +41,15 @@
 //     			$(self.location).attr("href","/users/login");
 //     		});
 //     	});
+
+		//=============  채팅방 Event  처리 =============	
+	 $(function() {
+		$( "a:contains('채팅방')" ).on("click" , function() {
+	 		 window.open("/chatting/roomchat.jsp",
+						"_blank",
+						"left=500, top=100, width=500, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+				});	
+	 });
     </script>
     
     <style type="text/css">
@@ -139,6 +148,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
                 <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
+                 <a class="dropdown-item" href="#">채팅방</a>
               </div>
             </li>
             <li class="nav-item dropdown">
