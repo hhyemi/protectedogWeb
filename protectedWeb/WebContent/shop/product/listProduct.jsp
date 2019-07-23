@@ -57,40 +57,31 @@
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	
-	
-<script type="text/javascript">
-	
-	//=============    상품상세조회  Event  처리 		=============
-		//////상품상세조회 button click() ///////////////
-		$(function(){
-			$( "#getproduct").bind("click", function() {
-				
-				var prodNo = $( "input[name=prodNo]", $(this) ).val();
-				
-				alert( $( "input[name=prodNo]", $(this) ).val() );
-				console.log( $( "input[name=prodNo]", $(this) ).val() );
-				self.location="/product/getProduct/"+prodNo;
-		
-			});
-		});
 
+
+<script type="text/javascript">
+	//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
+	function fncGetList(currentPage) {
+		$("#currentPage").val(currentPage)
+		$("form").attr("method", "POST").attr("action",
+				"/product/listProduct").submit();
+	}
+
+	//=============    상품상세조회(썸네일)  Event  처리 		=============
+	//============= 썸네일 사진 클릭 Event  처리 =============	
+	 	$(function() {
+		$(".img-prod").on("click",function() {
+			alert($(this).children("input").val())
+					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
+				});
 		
-		//=============    상품상세조회(썸네일)  Event  처리 		=============
-// 		$(function(){
-// 			$("a.thumbnail_image").bind("click", function() {
-				
-// 				var prodNo = $( "input[name=prodNo]", $(this) ).val();
-				
-// 				//alert( $( "input[name=prodNo]", $(this) ).val() );
-// 				console.log( $( ".thumbnail_image img", $(this) ).val() );
-// 				self.location="/product/getProduct/${menu}/"+prodNo;
-		
-// 			});
-// 		}); 
+		$("#getproduct").on("click",function() {
+			alert($(this).children("input").val())
+					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
+				});
+	 	});	 
 	
-	
-	
+
 </script>
 
 
@@ -131,7 +122,9 @@
 										<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 											<div align="center">
 												<div class="product">
-													<a href="#" class="img-prod"><img class="img-fluid"
+													<a class="img-prod">
+													<input type="hidden" value="${product.prodNo}"/>
+													<img class="img-fluid"
 														src="../../resources/file/fileShop/100s.jpg"
 														alt="Colorlib Template"> <span class="status">
 															<!-- 30% -->
@@ -139,7 +132,7 @@
 														<div class="overlay"></div> </a>
 													<div class="text py-3 px-3">
 														<h3>
-														<a href="#">${product.prodName}</a>
+															<a href="#">${product.prodName}</a>
 														</h3>
 														<div class="d-flex">
 															<div class="pricing">
@@ -154,7 +147,7 @@
 														<p class="bottom-area d-flex px-3">
 															<a href="#" class="add-to-cart text-center py-2 mr-1"><span>장바구니에
 																	담기&nbsp;&nbsp;<i class="ion-ios-add ml-1"></i>
-															</span></a> <a class="buy-now text-center py-2" id="getproduct">상세정보&nbsp;&nbsp;&nbsp;<span><i
+															</span></a> <a class="buy-now text-center py-2" id="getproduct"><input type="hidden" value="${product.prodNo}"/>상세정보&nbsp;&nbsp;&nbsp;<span><i
 																	class="ion-ios-cart ml-1"></i></span></a>
 														</p>
 													</div>
@@ -229,12 +222,19 @@
 						<ul>
 							<li><a href="#">올인원</a></li>
 							<li><a href="#">기타</a></li>
-							<BR />
 
 						</ul>
+						<br>
 						<div class="sidebar-box-2">
 							<h2 class="heading mb-4">
 								<a href="#">중고마켓</a>
+							</h2>
+
+						</div>
+
+						<div class="sidebar-box-2">
+							<h2 class="heading mb-4">
+								<a href="#">장바구니</a>
 							</h2>
 
 						</div>

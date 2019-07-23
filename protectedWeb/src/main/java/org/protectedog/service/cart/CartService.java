@@ -6,7 +6,7 @@ import org.protectedog.service.domain.Cart;
 
 public interface CartService {
 
-	public void Cart(Cart cart)throws Exception;
+	public void addCart(Cart cart)throws Exception;
 	
 	public void updateCart(Cart cart)throws Exception;
 	

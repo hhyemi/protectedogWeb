@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
 	
 	
 	@Override
-	public void Cart(Cart cart) throws Exception {
+	public void addCart(Cart cart) throws Exception {
 		// TODO Auto-generated method stub
 		cartDAO.addCart(cart);
 		
