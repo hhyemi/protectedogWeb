@@ -86,6 +86,7 @@
 		    	</p>
 		    </div>
 
+			<div class="col-md-6" align="right">
 			<form class="form-inline" name="detailForm">
 		    	<div class="form-group">
 					<select name="searchCondition" >
@@ -101,7 +102,7 @@
 					<button type="button" class="btn btn-default">검색</button>
 				</div>
 		    
-		   		<div class="col-md-1 text-right">
+		   		<div class="form-group">
 		    		<select name="areaCondition" >
 						<option value="">전체</option>
 						<option value="강원"  ${ ! empty search.areaCondition && search.areaCondition=="강원" ? "selected" : "" }>강원도</option>
@@ -118,6 +119,7 @@
 					</select>
 		    	</div>
 		    </form>
+		    </div>
 		    
 		</div>
 			    
@@ -128,9 +130,6 @@
 	<!-- 		    		</span> -->
 	<!-- 		    </div> -->
 			    
-
-		
-
 
       <div class="row">
       <div class="col-md-12"></div>
@@ -190,70 +189,7 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	var area;
-	function listApply(area){
-  		$.ajax( 
-		 		{
-					url : "/adopt/json/listAdopt/AD/"+area,
-					method : "POST" ,
-					dataType : "json" ,
-					headers : {
-								"Accept" : "application/json",
-								"Content-Type" : "application/json"
-							  },
-					success : function(data , status) {
-							console.log(JSON.stringify(data));
-							alert( data.list.length );
-// 							alert( data.list[0].postNo );
-							alert( data.areaCondition[0] );
-							alert( data.list[0].areaKr );
-// 							console.log( JSON.stringify(data.list) );
-							
-							var displayValue ;
-							var sCode;
-// 							var bCode;
-							
-							
-							for( i=0; i<data.list.length; i++ ){
-								
-								
-								if ( data.list[i].statusCode != 3 ){
-									sCode = '<img class="listImg" src="../resources/file/fileAdopt/'+data.list[i].mainFile+'"  onerror="this.src=\'http://placehold.it/400x400\'"/>';		
-								}else{
-									sCdoe = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url(\'../resources/file/fileAdopt/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
-								}
-								if( data.list[i].areaKr.toString().indexOf(data.areaCondition.toString()) == -1   ){
-									continue;
-								}
 
-								displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: ">'
-									      			+'<figure>'
-									      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-									      				+sCode
-									      				+'<figcaption>'
-									      					+'<h3><strong>'+data.list[i].postTitle+'</strong></h3>'
-									      					+ data.list[i].areaKr
-									      				+'</figcaption>'
-									      			+'</figure>'
-								      			+'</div>';	
-					            
-							}
-							
-							$('#listAdoptJSON').html('');
-							$('#listAdoptJSON').html(displayValue);
-			
-						
-					},
-					error: function(request, status, error){ 
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			        }
-				
-			});
-
- 	}
-	
-		
-		
 		//============= "검색"  Event  처리 =============	
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -296,18 +232,14 @@
 			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		});	
 	
-		
-		
-
 	
+		
 		$('select[name=areaCondition]').change( function(){
 // 			alert($('select[name=areaCondition]').val());
-// 			fncGetList(1);
-
-
-			area = $('select[name=areaCondition]').val();
-			listApply(area);
+			fncGetList(1);
 		});
+		
+		
 		
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
