@@ -2,16 +2,30 @@ package org.protectedog.web.user;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.protectedog.common.AuthKey;
+import org.protectedog.common.SendMail;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.nurigo.java_sdk.Coolsms;
@@ -26,7 +40,7 @@ public class UserRestController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-	
+		
 	///Constructor
 	public UserRestController() {
 		// TODO Auto-generated constructor stub
@@ -99,6 +113,27 @@ public class UserRestController {
 		return map;
 	}
 	
+	@RequestMapping(value="json/mailSender", method=RequestMethod.POST)
+	public Map<String, Object> mailSender(@RequestBody Map<String, String> email) throws Exception{
+		
+		System.out.println("/users/json/mailSender : POST");
+		
+		String authKey=new AuthKey().excuteGenerate();
+		System.out.println("mailSender authKey : "+authKey);
+		
+		String receiver=email.get("email");
+		System.out.println("mailSender email : "+email);
+		String title="[#protected] 계정인증메일";
+		String content="[#protected] 계정인증 안내 메일입니다. 인증번호는 [ "+authKey+" ] 입니다.";
+		
+		SendMail.mailSend(title, content, receiver);
+
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("authKey", authKey);
+		
+		return map;
+	}
+	
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
 	public User login(@RequestBody Map<String, Object> chkLogin) throws Exception{
 		
@@ -110,3 +145,4 @@ public class UserRestController {
 	}
 	
 }
+
