@@ -26,6 +26,8 @@
 </head>
 <body>
 
+	<jsp:include page="/layout/loginToolbar.jsp"></jsp:include>
+
 		<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
@@ -40,8 +42,11 @@
 		    <label for="email" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일 입력">
-		       <span id="helpBlock" class="help-block">
-		      </span>
+		      <div id="mailAuth" style="display:none">
+		      	<input type="text" id="checkMail"/>
+		      	<input type="button" id="mailClick" value="전송"/>
+		      </div>
+		      <input type="button" id="authMail" name="authMail" value="인증하기">
 		    </div>
 		  </div>
 		  
@@ -64,8 +69,8 @@
 		    </div>
 		    <input type="hidden" name="phone"/>
 		    <div id="authButton" style="display:none">
-		    <input type="text" id="checkAuth"/>
-		    <input type="button" id="authClick" value="전송"/>
+		   		<input type="text" id="checkAuth"/>
+		    	<input type="button" id="authClick" value="전송"/>
 		    </div>
  		    <input type="button" id="authPhone" name="authPhone" value="인증하기">
 		  </div>
@@ -91,12 +96,12 @@
 			  </div>
 		   </div>
 		  
-		  <div class="form-group">
-		    <label for="account" class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="account" name="account" placeholder="계좌번호">
-		    </div>
-		  </div>
+<!-- 		  <div class="form-group"> -->
+<!-- 		    <label for="account" class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<!-- 		      <input type="text" class="form-control" id="account" name="account" placeholder="계좌번호"> -->
+<!-- 		    </div> -->
+<!-- 		  </div> -->
 		  
 		  <div class="form-group">
 		    <label for="birthDate" class="col-sm-offset-1 col-sm-3 control-label">생년월일</label>
@@ -177,8 +182,8 @@
 						"content-type":"application/json"
 					},
 					success:function(authPhone, status){
-						alert(status);
-						alert(authPhone.authKey);
+// 						alert(status);
+// 						alert(authPhone.authKey);
 						$("#authKeyReturn").val(authPhone.authKey);
 						$("#authButton").show();
 					}
@@ -202,19 +207,60 @@
 		});
 		
 		
-		 $(function() {
-			 
-			 $("input[name='email']").on("change" , function() {
-				
-				 var email=$("input[name='email']").val();
-			    
-				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("이메일 형식이 아닙니다.");
-			    	return;
-			     }
+		$(function(){
+			
+			$("#authMail").on("click", function(){
+
+				var check=$("input[name='email']").val();
+
+					$.ajax({
+						
+						url:"/users/json/mailSender",
+						method:"POST",
+						data:JSON.stringify({email:check}),
+						headers: {
+							"accept":"application/json",
+							"content-type":"application/json"
+						},
+						success:function(authMail, status){
+// 							alert(status);
+// 							alert(authMail.authKey);
+							$("#authKeyReturn").val(authMail.authKey);
+							$("#mailAuth").show();
+						}
+									
+					})
+		
+				})
+					
 			});
+
+			$(function() {
+				$("#mailClick").on("click", function(){
+					if($("#checkMail").val()==$("#authKeyReturn").val()){
+						$("#authMail").hide();
+						$("#mailAuth").hide();
+						alert("인증되었습니다.");
+					}else{
+						alert("인증번호가 맞지 않습니다.");
+					}
+				})
+			});
+		
+		
+			$(function() {
 			 
-		});
+				$("input[name='email']").on("change" , function() {
+				
+					var email=$("input[name='email']").val();
+			    
+					if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+						alert("이메일 형식이 아닙니다.");
+						return;
+					}
+				});
+			 
+			});
 		 
 			function execDaumPostcode() {
 			    new daum.Postcode({
