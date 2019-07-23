@@ -31,11 +31,13 @@ public interface BoardDAO {
 	// DELETE
 	public void delBoard(Board board) throws Exception ;
 	
-	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
-	
+	// 게시판 Page 처리를 위한 전체Row(totalCount)  return	
 	public int getTotalCount(String boardCode) throws Exception ;
 	
 	// SELECT LIST RANKING TOP 5
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
+	
+	// 글 리스트 + 댓글 개수 조회
+	public Map<String, Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception;
 	
 }

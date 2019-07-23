@@ -158,7 +158,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                 <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-                <a class="dropdown-item" href="/community/getDogSense.jsp">뉴스</a>
+                <a class="dropdown-item" href="/community/listNews.jsp">뉴스</a>
               </div>
             </li>
             <c:if test="${ sessionScope.user != null }">

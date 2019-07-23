@@ -32,7 +32,6 @@
 h7 {
 	color: red;
 }
-
 #searchSubmmit{
 	width : 60px;
 	height : 52px;
@@ -48,6 +47,10 @@ h7 {
 
 .glyphicon-search{
 	font-size : 15px;
+}
+
+td:hover{
+	color : #3E6B79;
 }
 </style>
 
@@ -120,12 +123,24 @@ h7 {
 
 		$("td:nth-child(2)").on("click",function() {
 
-					alert($(this).children("input").val())
-					$(self.location).attr("href","/info/getInfo?postNo="+ $(this).children("input").val());
+					//alert($(this).children("input").val())
+					var postNo = $(this).children("input").val();
+					if(postNo == undefined){
+						return;
+					}
+					$(self.location).attr("href","/info/getInfo?postNo="+postNo);
 				});
 
 		// 		페이지 처리를 위한 스크립트
 		
+		$("td:nth-child(1)").on("click",function(){
+				
+			var postNo = $(this).children("input").val();
+			if(postNo == undefined){
+				return;
+			}
+			$(self.location).attr("href","/info/getInfo?postNo="+postNo);
+		});
 		$(document).ready(function(){
 			$("#searchKeyword").keydown(function(key){
 				if(key.keyCode == 13){
@@ -182,8 +197,8 @@ h7 {
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 					<thead>
 						<tr align="center">
-							<th width="10%" align="center">번호</th>
-							<th width="30%">제목</th>
+							<th width="10%" class="text-center">번호</th>
+							<th width="30%" align="center" class="text-center">제목</th>
 							<th width="10%">글쓴이</th>
 							<th width="10%">작성일</th>
 							<th width="5%">조회수</th>
@@ -196,10 +211,10 @@ h7 {
 						<c:forEach var="board" items="${list}">
 							<c:set var="i" value="${ i+1 }" />
 							<tr>
-								<td align="center">${i}</td>
-								<td align="center">
+								<td align="center" class="text-center">${i}</td>
+								<td align="center" class="mdl-data-table__cell--non-numeric">
 									<input type="hidden" name="postNo" value="${board.postNo}">
-									${board.postTitle}
+									${board.postTitle} [${board.commentCount}]
 								</td>
 								<td align="center">${board.nickName}</td>
 								<td align="center">${board.regDate}</td>
@@ -222,8 +237,8 @@ h7 {
 					<thead>
 						<tr align="center">
 <!-- 							<th class="mdl-data-table__cell--non-numeric" width="10%">번호</th> -->
-							<th width="30%">제목</th>
-							<th width="10%">작성자</th>
+<!-- 							<th width="30%" class="text-center">제목</th> -->
+<!-- 							<th width="10%">작성자</th> -->
 <!-- 							<th width="10%">작성일</th> -->
 <!-- 							<th width="5%">조회수</th> -->
 <!-- 							<th width="5%">추천수</th> -->
@@ -233,18 +248,16 @@ h7 {
 					<tbody>
 						<c:set var="i" value="0" />
 						<c:forEach var="best" items="${listRanking}">
-							<c:if test="${best.viewCount != 0 }">
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
-<%-- 									<td class="mdl-data-table__cell--non-numeric" align="center">${i}</td> --%>
-									<td align="center"><input type="hidden" name="postNo"
+									<td class="mdl-data-table__cell--non-numeric"> <span style="padding: 1px solid black">${i}</span></td>
+									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
 										value="${best.postNo}"> ${best.postTitle}</td>
-									<td align="center">${best.nickName}</td>
+<%-- 									<td align="center">${best.nickName}</td> --%>
 <%-- 									<td align="center">${best.regDate}</td> --%>
 <%-- 									<td align="center">${best.viewCount}</td> --%>
 <%-- 									<td align="center">${best.recommendCount}</td> --%>
 								</tr>
-							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -261,14 +274,14 @@ h7 {
 	</div>
 	
 	<br/>
+	<p/>
 	<div class="col-md-9" align="center">
 	<jsp:include page="/common/pageNavigator.jsp" />
 	</div>
 
 	<br/>
 		<div class="container">
-		<div class="row col-md-9">
-			<div class="col-md-12 col-sm-12 col-xm-12" align="center">
+			<div class="col-md-9 col-sm-9 col-xm-9" style="padding-left: 200px">
 				<form class="form-inline" name="detailForm">
 					<div class="form-group">
 						<select class="form-control" id="searchCondition" name="searchCondition">
@@ -295,7 +308,6 @@ h7 {
 					<input type="hidden" id="currentPage" name="currentPage" value="" />
 				</form>
 			</div>
-		</div>
 		</div>
 	</div>
 	
