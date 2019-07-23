@@ -57,35 +57,64 @@ public class AdoptRestController {
 	
 	// 글 리스트 조회
 	@SuppressWarnings("unchecked")
-	@RequestMapping( value="json/listAdopt/{boardCode}" )
+	@RequestMapping( value="json/listAdopt/{boardCode}/{pazeSize}/{areaCondition}" )
 	public JSONObject listAdopt( @ModelAttribute("search") Search search,
-						@PathVariable("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
+						@PathVariable("boardCode") String boardCode, @PathVariable("pazeSize") int pazeSize, 
+						@PathVariable("areaCondition") String areaCondition,
+//						@RequestParam("searchCondition") String searchCondition, @RequestParam("searchKeyword") String searchKeyword,
+																								Model model, HttpSession session ) throws Exception{
 		
-		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
-		System.out.println("===================================="+search);
+		System.out.println("\n\n/adopt/json/listAdopt : GET / POST "+boardCode);
+		
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
 		}
-		if(search.getSearchKeyword() == null) {
+//		System.out.println("확인@@@@ : "+searchCondition+", "+searchKeyword);
+		System.out.println("검색어 확인1 : "+search.getSearchKeyword());
+		if(search.getSearchKeyword() == null ) {
 			search.setSearchKeyword("");
+//			if(searchKeyword != null) {
+//				search.setSearchKeyword(searchKeyword);
+//			}
 		}
-		if(search.getAreaCondition() == null) {
+		System.out.println("검색어 확인2 : "+search.getSearchKeyword());
+		if(search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
 			search.setAreaCondition("");
+		}else if(search.getAreaCondition().equals("kw")) {
+			search.setAreaCondition("강원");
+		}else if(search.getAreaCondition().equals("kk")) {
+			search.setAreaCondition("경기");
+		}else if(search.getAreaCondition().equals("ks")) {
+			search.setAreaCondition("경상");
+		}else if(search.getAreaCondition().equals("kj")) {
+			search.setAreaCondition("광주");
+		}else if(search.getAreaCondition().equals("dj")) {
+			search.setAreaCondition("대전");
+		}else if(search.getAreaCondition().equals("bs")) {
+			search.setAreaCondition("부산");
+		}else if(search.getAreaCondition().equals("su")) {
+			search.setAreaCondition("서울");
+		}else if(search.getAreaCondition().equals("us")) {
+			search.setAreaCondition("울산");
+		}else if(search.getAreaCondition().equals("ic")) {
+			search.setAreaCondition("인천");
+		}else if(search.getAreaCondition().equals("jr")) {
+			search.setAreaCondition("전라");
+		}else if(search.getAreaCondition().equals("cc")) {
+			search.setAreaCondition("충청");
 		}
 		search.setVoteCondition("");
 		
-		
-		if (search.getCurrentPage() ==0 ) {
-			search.setCurrentPage(1);
-		}
+		search.setCurrentPage(pazeSize);
+		System.out.println(search.getAreaCondition()+"◀확인▶"+pazeSize);
 		
 		search.setPageSize(pageSize);
-		System.out.println("search===================================="+search);
+		System.out.println("search 확인 : "+search);
 		
 		Map<String , Object> map=adoptService.listAdopt(search, boardCode);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("map===================================="+map);
 		map.put("list", map.get("list"));
+//		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
 
 		JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));
@@ -98,10 +127,8 @@ public class AdoptRestController {
         jsonObject.put("totalCount", map.get("totalCount"));
 
       
-        System.out.println("json5========================================================\n"+jsonObject);
+//        System.out.println("json5========================================================\n"+jsonObject);
       
-		
-		// 파라미터값으로 보드코드? 
 		return jsonObject;
 	}
 	

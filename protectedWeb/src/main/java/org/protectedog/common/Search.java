@@ -18,7 +18,7 @@ public class Search {
 
 	// 스토리펀딩
 	private String voteCondition;
-	
+	// 분양
 	private String areaCondition;
 
 	/// Constructor

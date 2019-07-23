@@ -243,14 +243,15 @@ public class AdoptController {
 							 @RequestParam("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
 		
 		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
-		System.out.println("===================================="+search);
+//		System.out.println("===================================="+search);
+		
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
 		}
 		if(search.getSearchKeyword() == null) {
 			search.setSearchKeyword("");
 		}
-		if(search.getAreaCondition() == null) {
+		if(search.getAreaCondition() == null || search.getAreaCondition().equals("all") ) {
 			search.setAreaCondition("");
 		}
 		search.setVoteCondition("");
@@ -259,23 +260,22 @@ public class AdoptController {
 		if (search.getCurrentPage() ==0 ) {
 			search.setCurrentPage(1);
 		}
-		System.out.println("====================================");
+		
 		search.setPageSize(pageSize);
-		System.out.println("■■■■ 검색어 확인 : "+search.getSearchKeyword()
-						+"\n■■■■ search 확인 : "+search);
+//		System.out.println("■■■■ 검색어 확인 : "+search.getSearchKeyword()
+//						+"\n■■■■ search 확인 : "+search);
 		
 		Map<String , Object> map=adoptService.listAdopt(search, boardCode);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			
-		System.out.println("■■■■ map 확인 : "+map
-						+"\n■■■■ map.get(\"list\") 확인  : "+map.get("list"));
+//		System.out.println("■■■■ map 확인 : "+map
+//						+"\n■■■■ map.get(\"list\") 확인  : "+map.get("list"));
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		// 파라미터값으로 보드코드? 
 		return "forward:/adopt/listAdopt.jsp?boardCode="+boardCode;
 	}
 	

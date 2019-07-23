@@ -8,26 +8,7 @@
 	<title>ADD ADOPTREVIEW</title>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-    <link rel="stylesheet" href="/resources/prodmenu/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/animate.css">
-    
-    <link rel="stylesheet" href="/resources/prodmenu/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/magnific-popup.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/aos.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/jquery.timepicker.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
     
     <style type="text/css">
     	html {
@@ -73,7 +54,7 @@
     </style>
   </head>
   <body class="goto-here">
-<%-- 		<jsp:include page="/layout/toolbar.jsp"></jsp:include> --%>
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
       <div class="container">
@@ -94,7 +75,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-8 ftco-animate">
-			<form  class="billing-form" name="detailForm">
+			<form  class="form-horizontal" name="detailForm">
 	          	<div class="row align-items-end">
 	          	
 	          	
@@ -158,13 +139,15 @@
 <!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
 <!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="내용을 입력하세요."></textarea> -->
 		               
-		                 <div class="postForm" align="center">
-						<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
-						<textarea class="col-xs-12 col-md-12" id="editor"
+		                 <div id="ckEditor" align="center">
+
+					<div id="toolbar-container" align="center"
+						class="col-xs-12 col-md-12"></div>
+					<textarea class="col-xs-12 col-md-12" id="editor"
 						name="postContent" style="text-align: left;">
 						${board.postContent}
 					</textarea>
-					</div>
+				</div>
 		               
 		                </div>
 	                </div>
@@ -222,12 +205,10 @@
       </div>
     </section> <!-- .section -->
 
-    
+    <jsp:include page="/layout/footer.jsp"></jsp:include>
     
   
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   <!-- dialog -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -469,7 +450,8 @@
     $(function() {
 			$( "button:contains('수정')" ).on("click" , function() {
 				$('textarea').val(editor.getData());
-				console.log($('textarea').val());
+				alert("=====콘솔로그 "+$('textarea').val());
+				$("#editor").text($('textarea').val())
 				fncAddAdoptReview();
 			});
 			

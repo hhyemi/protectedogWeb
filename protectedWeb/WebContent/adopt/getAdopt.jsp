@@ -63,7 +63,18 @@
         	align: letf;
         	word-break: break-all;	
         }
-        
+        @media screen and (min-width: 768px) { 
+	        .modal:before {
+	                display: inline-block;
+/* 	                vertical-align: middle; */
+	                content: " ";
+/* 	                height: 100%; */
+	        }
+		}
+        .modal{
+      	  display: inline-block;
+        	vertical-align: middle;
+        }
         
 /*         .lnr-heart:before { */
 /* 			content: "\e813"; */
@@ -306,7 +317,7 @@
         <div class="col-md-12" align="center">
        		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
 				<button class="main_btn" style="width: 189px" id="modiButton">수정</button>
-	       		<button class="main_btn" style="width: 189px" id="delButton">삭제</button>
+	       		<button class="main_btn" style="width: 189px" id="delButton"  data-toggle="modal" data-target="#delModal">삭제</button>
 			</c:if>
         	
 	        
@@ -321,9 +332,24 @@
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-			<div id="dialog-delAdopt" title="">
-			  <p align="center"><br/>삭제하시겠습니까?</p>
-			</div>  
+			<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm" style="vertical-align: middle;" role="document">
+					<div class="modal-content">
+<!-- 						<div class="modal-header"> -->
+<!-- 							<h5 class="modal-title" id="exampleModalLabel"></h5> -->
+<!-- 							<button type="button" class="close" data-dismiss="modal" -->
+<!-- 								aria-label="Close"> -->
+<!-- 								<span aria-hidden="true">&times;</span> -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+						<div class="modal-body" align="center">삭제하시겠습니까?</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">예</button>
+							<button type="button"  class="btn btn-primary"  data-dismiss="modal">아니오</button>
+						</div>
+					</div>
+				</div>
+			</div>	 
 			<div id="dialog-adoptComplete" title="">
 			  <p align="center"><br/>분양완료 상태로 변경하시겠습니까?</p>
 			</div>  
@@ -355,7 +381,7 @@
 			  </div>
 
 
-
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
   
     <!--================End Product Description Area =================-->
 
@@ -469,6 +495,7 @@
 						success : function(status) {
 							$('#confirmButton, #modiButton, #delButton, #adoptCompleteButton, #missingCompleteButton').remove();
 							$( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog( "close" );
+							$('.card_area').html('<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>');
 						},
 						error: function(request, status, error){ 
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
@@ -664,6 +691,7 @@
 								}
 								console.log("-----"+displayValue);
 				 				$('#'+data.applyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
+				 				$('#appendTr').focus();
 							
 					},
 					error: function(request, status, error){ 
@@ -672,8 +700,8 @@
 			        }
 					
 				});
-	  		return displayValue;
-	  		console.log("return 확인 : "+displayValue);
+// 	  		return displayValue;
+// 	  		console.log("return 확인 : "+displayValue);
 	 	}
 // 		);
 	    
@@ -687,6 +715,7 @@
     			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
     			console.log("확인111 : "+applyNo);
     			$('#appendTr').remove();
+
     			getApply(applyNo);
     			
 //     			console.log("return 확인 : "+displayValue);

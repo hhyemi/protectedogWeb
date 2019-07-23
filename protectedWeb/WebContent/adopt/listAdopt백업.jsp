@@ -24,14 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		
-		
-		@font-face { 
-			font-family: 'S-CoreDream-3Light'; 
-			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); 
-			font-weight: normal; 
-			font-style: normal; 
-		}
+		div.row { font-family: 'NanumSquare', sans-serif !important; }
 
 		@font-face { 
 			font-family: 'yg-jalnan'; 
@@ -39,22 +32,6 @@
 			font-weight: normal; 
 			font-style: normal; 
 		}
-		
-		@font-face { 
-			font-family: 'BMJUA'; 
-			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff'); 
-			font-weight: normal; 
-			font-style: normal; 
-		}
-		
-		h3{
-			font-family: 'BMJUA' !important; 
-		}
-		
-		div.row { 
-			font-family: 'S-CoreDream-3Light' !important; 
-		}
-		
 		
 /* 		#pagename { */
 /* 			font-family: 'yg-jalnan' !important; */
@@ -64,55 +41,38 @@
 /* 	  	html { */
 /* 	 	 scroll-behavior: smooth; */
 /* 		} */
-        .getadopt {
-		    position: relative;
-		    max-height: 250px; 
-			min-height: 250px; 
-			min-width: 255px;
-			max-width: 255px;
+        .listImg { 
+     		max-height: 250px; 
+     		min-height: 250px; 
+     		width: 100%; 
+     		vertical-align: middle;
+       }
+        
+        figure.snip1384 {
+			font-family: 'Raleway', Arial, sans-serif;
+			position: relative;
+			overflow: hidden;
+			margin: 10px;
+			min-height: 
+			min-width: 230px;
+			max-width: 315px;
+			width: 100%;
+			color: #ffffff;
+			text-align: left;
+			font-size: 16px;
+			background-color: #000000;
 		}
-		.getadopt img {
-		    max-height: 250px; 
-			min-height: 250px; 
-			min-width: 255px;
-			max-width: 255px;
-/* 		    transition: all 0.3s; */
-		    display: block;
-		    height: auto;
-/* 		    transform: scale(1); */
+		.getadopt {
+			border: 1px solid #ccc;
 		}
 		
-		
-		.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  overflow: hidden;
-  opacity: 0.7;
+		.getadopt img:hover {
+			transform: scale(0.95);
+			transition-duration: 1s;
+		}
 
-			min-width: 255px;
-			max-width: 255px;
-  height: 60px;
-  transition: 1s ease;
-}
 
-.getadopt:hover .overlay {
-  height: 0%;
-}
 
-.text {
-  color: #3E6B79;
-  font-size: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  t
-		
     </style>
 
 </head>
@@ -130,8 +90,12 @@
 			<div class="row" style="position:relative;height:35px;">
 	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >
 	        	<font size="5px" id="pagename">
-					<c:if test="${param.boardCode eq 'AD' }">분양글 리스트</c:if>
-				    <c:if test="${param.boardCode eq 'MS' }">실종글 리스트</c:if>
+					<c:if test="${param.boardCode eq 'AD' }">
+			  			분양글 리스트
+			  		</c:if>
+				    <c:if test="${param.boardCode eq 'MS' }">
+			  			실종글 리스트
+			  		</c:if>
 	        	</font></div>
 	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px">
 		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '미인증회원' }">
@@ -141,7 +105,6 @@
 	        </div>
 		
 	    </div>
-
 
 
 		<div class="row">
@@ -196,64 +159,39 @@
 			    
 
 		
-		<div class="row"><div class="col-md-12"></div><br/></div>
+		<div class="row"><div class="col-md-12"></div></div>
 
       <div class="row">
       <div class="col-md-12"></div>
       <div class="col-md-12" >
 <!--       <div class="col-md-12" style="background-color: #CADEE3;"> -->
       
-      <div class="col-md-12" id="listAdoptJSON" style="padding-left: 0px">
+      <div class="col-md-12" id="listAdoptJSON">
       <c:set var="i" value="0" />
 		  <c:forEach var="adopt" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 
-			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">
+			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 20px;">
 			
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-		
+			
 			<figure class="getadopt">
 			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
-				<span id="image-box"><c:if test="${adopt.statusCode ne 3}">
+				<c:if test="${adopt.statusCode ne 3}">
 				  <img class="listImg" src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/>
 				</c:if>
 				<c:if test="${adopt.statusCode eq 3}">
 				  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
-				</c:if></span>
-				<c:if test="${adopt.statusCode ne 3}">
-				  <figcaption class="overlay">
-					    <span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >${adopt.postTitle}ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</h3>
+				</c:if>
+				  <figcaption>
+					    <h3 align="center"><strong>${adopt.postTitle}</strong></h3>
 					    <c:if test="${param.boardCode eq 'AD' }">
 					   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
 					   	</c:if>
 					    <c:if test="${param.boardCode eq 'MS' }">
 					   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
-					   	</c:if></span>
-				  </figcaption></c:if>
+					   	</c:if>
+				  </figcaption>
 			</figure>
-			
-			
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-			
-<!-- 			<figure class="getadopt"> -->
-<%-- 			<input type="hidden" name="postNo" value="${adopt.postNo}"/> --%>
-<%-- 				<c:if test="${adopt.statusCode ne 3}"> --%>
-<%-- 				  <img class="listImg" src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/> --%>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${adopt.statusCode eq 3}"> --%>
-<%-- 				  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" /> --%>
-<%-- 				</c:if> --%>
-<!-- 				  <figcaption> -->
-<%-- 					    <h3 align="center"><strong>${adopt.postTitle}</strong></h3> --%>
-<%-- 					    <c:if test="${param.boardCode eq 'AD' }"> --%>
-<%-- 					   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p> --%>
-<%-- 					   	</c:if> --%>
-<%-- 					    <c:if test="${param.boardCode eq 'MS' }"> --%>
-<%-- 					   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p> --%>
-<%-- 					   	</c:if> --%>
-<!-- 				  </figcaption> -->
-<!-- 			</figure> -->
-			
 			</div>	
 		
        </c:forEach>
@@ -363,7 +301,7 @@
 									sCode = '<img class="listImg" src="../resources/file/fileAdopt/'+data.list[i].mainFile+'"  onerror="this.src=\'http://placehold.it/400x400\'"/>';		
 								}
 								
-								displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">'
+								displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 20px;">'
 									      			+'<figure class="getadopt">'
 									      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
 									      				+sCode
