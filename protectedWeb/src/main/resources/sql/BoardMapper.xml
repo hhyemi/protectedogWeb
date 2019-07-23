@@ -84,7 +84,7 @@
 			phone			= #{phone:VARCHAR},
 			qna_code		= #{qnaCode:CHAR},
 			route			= #{route:VARCHAR},
-			prod_name		= #{prodName:VARCHAR} 
+			prod_no		= #{prodno:NUMERIC} 
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>

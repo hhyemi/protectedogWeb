@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
@@ -47,7 +48,7 @@ public class ApplyRestController {
 	
 
 	//신청서 조회
-	@RequestMapping( value="json/getApply/{applyNo}", method=RequestMethod.GET)
+	@RequestMapping( value="json/getApply/{applyNo}", method=RequestMethod.POST)
 	public Apply getApply( @PathVariable("applyNo") int applyNo ) throws Exception {
 		
 		System.out.println("/apply/json/getApply : GET");
@@ -74,8 +75,10 @@ public class ApplyRestController {
 	
 	
 	// 리스트 조회
+	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listApply/{adoptNo}")
-	public Map<String , Object> listApply( @PathVariable("adoptNo") int adoptNo
+	public JSONObject listApply( @PathVariable("adoptNo") int adoptNo
+//			public Map<String,Object> listApply( @PathVariable("adoptNo") int adoptNo
 //											,@RequestBody Search search ,HttpSession session
 																							) throws Exception{
 		
@@ -88,81 +91,28 @@ public class ApplyRestController {
 		}
 		search.setPageSize(pageSize);
 		
-		System.out.println("1========================================================");
 		// Business logic 수행
 		Map<String , Object> map= applyService.listApply(search, adoptNo);
-//		Map<String , Object> map= new HashMap<String, Object>();
-		System.out.println("2========================================================");
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
-		System.out.println("3========================================================");
+
 		// Model 과 View 연결
 		map.put("list", map.get("list"));
 //		map.put("resultPage", resultPage);
 //		map.put("search", search);
-//		map.put("message","purchaseOK");
-		System.out.println("4========================================================"+map.get("list"));
 		
-		
-//		JSONObject jsonObject = new JSONObject();
-//        for( Map.Entry<String, Object> entry : map.entrySet() ) {
-//            String key = entry.getKey();
-//            Object value = entry.getValue();
-//            jsonObject.put(key, value);
-//        }
-//        
-//        return jsonObject;
-		
-		
-		return map;
-		
-		
+		map.remove("adoptNo");
+		map.remove("startRowNum");
+		map.remove("endRowNum");
+		map.remove("totalCount");
+		System.out.println("map확인 : "+map);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", map.get("list"));
+        
+        System.out.println("json\n"+jsonObject);
+        
+        return jsonObject;
 	}
-//	public static JSONObject getJsonStringFromMap( Map<String, Object> map )
-//    {
-//        JSONObject jsonObject = new JSONObject();
-//        for( Map.Entry<String, Object> entry : map.entrySet() ) {
-//            String key = entry.getKey();
-//            Object value = entry.getValue();
-//            jsonObject.put(key, value);
-//        }
-//        
-//        return jsonObject;
-//    }
-	
-	
-	
-//	public Map<String , Object> listApply( @PathVariable("adoptNo") int adoptNo
-//		//			,@RequestBody Search search ,HttpSession session
-//																	) throws Exception{
-//		
-//		System.out.println("/apply/json/listApply : GET / POST");
-//		
-//		Search search = new Search();
-//		
-//		if(search.getCurrentPage() ==0 ){
-//		search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-//		
-//		System.out.println("1========================================================");
-//		// Business logic 수행
-//		Map<String , Object> map= applyService.listApply(search, adoptNo);
-//		//Map<String , Object> map= new HashMap<String, Object>();
-//		System.out.println("2========================================================");
-//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println(resultPage);
-//		System.out.println("3========================================================");
-//		// Model 과 View 연결
-//		map.put("list", map.get("list"));
-//		map.put("resultPage", resultPage);
-//		map.put("search", search);
-//		map.put("message","purchaseOK");
-//		System.out.println("4========================================================");
-//		return map;
-//		
-//	
-//	}
 	
 	
 }

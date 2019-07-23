@@ -41,8 +41,12 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 	
 	public Map<String, Object> listAdopt(Search search, String boardCode) throws Exception {
+		System.out.println("=================디에이오");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
+		map.put("searchCondition",  search.getSearchCondition()+"" );
+		map.put("searchKeyword",  search.getSearchKeyword()+"" );
+		map.put("areaCondition",  search.getAreaCondition()+"" );
 		map.put("endRowNum",  search.getEndRowNum()+"" );
 		map.put("startRowNum",  search.getStartRowNum()+"" );
 		
@@ -51,7 +55,7 @@ public class AdoptDAOImpl implements AdoptDAO{
 		//selectOne: 쿼리 결과가 없으면 return null 
 		map.put("totalCount", sqlSession.selectOne("AdoptMapper.getTotalCount", map));
 		map.put("list", list);
-
+		
 		return map;
 	}
 	
@@ -64,7 +68,15 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
-	public int getTotalCount(String boardCode) throws Exception {
-		return sqlSession.selectOne("AdoptMapper.getTotalCount", boardCode);
+	public int getTotalCount(Search search, String boardCode) throws Exception {
+		System.out.println("=================디에이오 겟토탈카운트");
+		Map<String , Object>  map = new HashMap<String, Object>();
+		map.put("boardCode",  boardCode );
+		map.put("searchCondition",  search.getSearchCondition()+"" );
+		map.put("searchKeyword",  search.getSearchKeyword()+"" );
+		map.put("areaCondition",  search.getAreaCondition()+"" );
+		map.put("endRowNum",  search.getEndRowNum()+"" );
+		map.put("startRowNum",  search.getStartRowNum()+"" );
+		return sqlSession.selectOne("AdoptMapper.getTotalCount", map);
 	}
 }

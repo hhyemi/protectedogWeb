@@ -1,6 +1,7 @@
 package org.protectedog.web.user;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,8 +81,22 @@ public class UserController {
 			System.out.println("login : "+idToken);
 			return "redirect:/";
 		}
-		
+	}
 	
+	@RequestMapping(value="naver", method=RequestMethod.GET)
+	public String naver(@RequestParam("naver") String naver, HttpServletRequest request, HttpSession session) throws Exception{
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("naver", naver);
+		
+		User user=userService.getNaver(map);
+		if(user==null) {
+			request.setAttribute("naver", naver);
+			return "forward:/users/addUsersBaseView.jsp";
+		}else {
+			session.setAttribute("user", user);
+			return "redirect:/";
+		}
 	}
 
 	
@@ -93,9 +109,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="addUsersBase", method=RequestMethod.POST)
-	public String addUsersBase(@ModelAttribute("user") User user) throws Exception{
+	public String addUsersBase(@ModelAttribute("user") User user, @RequestParam("purpose[]") ArrayList<Object> purpose) throws Exception{
 		
 		System.out.println("/users/addUsersBase : POST");
+		
+		System.out.println("addUsersBase purpose : "+purpose.get(0).toString());
+		System.out.println("addUsersBase purpose : "+purpose.get(1).toString());
+		System.out.println("addUsersBase purpose : "+purpose.get(2).toString());
+		
+		if(purpose.size() != 0) {
+			user.setPurpose1((String)purpose.get(0));
+			user.setPurpose2((String)purpose.get(1));
+			user.setPurpose3((String)purpose.get(2));
+		}
 		
 		userService.addUsersBase(user);
 		
@@ -247,3 +273,14 @@ public class UserController {
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+

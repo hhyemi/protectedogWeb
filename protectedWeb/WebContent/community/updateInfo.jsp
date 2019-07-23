@@ -15,10 +15,8 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--  bootstrap Dropdown CSS & JS  -->
-<link href="../resources/css/others/animate.css" rel="stylesheet">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
@@ -156,6 +154,22 @@ $(function () {
 						${board.postContent}
 					</textarea>
 				</div>
+				
+					            	<div class="col-md-12">
+	            	<br/>
+                		<label><strong>
+	                		수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.
+                		</strong></label>
+               		</div>
+               		
+               		
+               		
+		            <div class="col-md-12">
+		              	<div class="form-group">
+		                	<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
+		                  	<input type="text" class="form-control" id="route" name="route"  value="${ board.route }">
+		               	</div>
+	               </div>
 			</form>
 		</div>
 
@@ -170,9 +184,136 @@ $(function () {
 
 
 	</div>
-
+	
+			<jsp:include page="/layout/footer.jsp"></jsp:include>
+			
 	<script>
 	
+	
+	// =============================== 구글 지도 ============================================
+		
+  var map;
+  var marker;
+  var markers = [];
+  var loca = "${board.route}";
+  var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
+  var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
+  
+  var mapArea;
+  var markerArea;
+  var markersArea = [];
+  var adArea = "${board.route}";
+  var arrayTest = [];
+  var arrayMark = [];
+  
+  var str = "";
+  var markTest="";
+  var mmm = "";
+  
+  
+  if (adArea.indexOf("#") != -1){
+	  var areaArray = adArea.split("#");
+	  
+	  for ( i=0; i<areaArray.length-1; i++){
+		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
+		  arrayMark[i] = "markerArea"+i.toString();
+	  }   	  
+  }
+  
+  
+  
+  function initMap() {
+	     
+	  mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+		    zoom: 11,
+		    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
+		    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
+	});
+  
+  for ( i=0; i<arrayTest.length; i++){
+  	
+	    markerArea= arrayMark[i];
+	
+	    markerArea = new google.maps.Marker({
+	        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
+	    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
+	        map: mapArea
+ 		});
+	    
+	    markersArea.push(markerArea);
+		}
+  
+  mapArea.addListener('click', function(event) {
+  	addMarker(event.latLng, "area");
+  });
+  
+  mapArea.addListener('rightclick', function() {
+  	if( markersArea.length > 0 ){
+	        	
+  		for (var i = markersArea.length-1; i >=0; i--) {
+	        		markersArea[i].setMap(null);
+	        		markersArea.splice(i, 1 );
+	            }
+	        	
+	        	$('#route').val('');
+  	}
+  });
+  	
+//////////////////////////////////////////////////////////////
+  
+  marker = new google.maps.Marker({
+      position: {lat: localat, lng: localng},
+      map: map
+  });
+  
+  markers.push(marker);
+   
+  }
+  
+function addMarker(location, str) {
+	  
+	if ( str == "area"){
+		  
+		 if (markersArea.length <3){
+		        var markerArea = new google.maps.Marker({
+			        position: location,
+			        map: mapArea
+		        });
+		        
+		     	markersArea.push(markerArea);
+		   		 
+	   			$("#route").val( $("#route").val()+location+"#");
+	   			
+   	    		var localat = parseFloat(  location.toString().substring( location.toString().indexOf("(")+1 ,location.toString().indexOf(",") )  );
+		 		var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
+   	    
+   	    		$.ajax({ 
+   	    	
+   	    		url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
+   	    
+   	        	success: function(data){
+   	           		markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+   	           		if( markTest.indexOf('특별') != -1  ){
+   	           			markTest = markTest.replace('특별' ,   '');
+   	           		}
+   	           		if( markTest.indexOf('광역') != -1  ){
+   	           			markTest = markTest.replace('광역' ,   '');
+   	           		}
+   	           		if( markTest.indexOf('자치') != -1  ){
+   	           			markTest = markTest.replace('자치' ,   '');
+   	           		}
+   	          		$("#route").val($("#route").val()+markTest);
+   	         	}
+   	 			
+   	    		}); // ajax End
+		 }
+	}
+}  		
+  	        
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////	        
+	  	      	
+
+	      //  ================================ CKEditor ============================================== 
 	let editor;
 	
 	ClassicEditor
@@ -352,7 +493,8 @@ $(function () {
 	         }
 	     }
 </script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap" async defer></script>
+  
 
 </body>
 </html>

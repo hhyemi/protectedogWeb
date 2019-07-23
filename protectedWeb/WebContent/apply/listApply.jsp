@@ -88,6 +88,10 @@
         </tbody>
       
       </table>
+      
+      
+      
+      
 	  <!--  table End /////////////////////////////////////-->
           
 		<button class="btn btn-primary py-3 px-4 col-md-3">돌아가기</button>

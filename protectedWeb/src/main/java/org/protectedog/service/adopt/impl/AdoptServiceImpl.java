@@ -42,11 +42,11 @@ public class AdoptServiceImpl implements AdoptService{
 
 	public Map<String , Object> listAdopt(Search search, String boardCode) throws Exception {
 		Map<String, Object> map= adoptDAO.listAdopt(search, boardCode);
-		int totalCount = adoptDAO.getTotalCount(boardCode);
+		int totalCount = adoptDAO.getTotalCount(search, boardCode);
 		
 		map.put("map", map );
 		map.put("totalCount", new Integer(totalCount));
-		
+		System.out.println("===================¼­ºñ½º");
 		return map;
 	}
 

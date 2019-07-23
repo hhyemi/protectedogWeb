@@ -25,6 +25,8 @@
 </head>
 <body>
 
+	<jsp:include page="/layout/loginToolbar.jsp"></jsp:include>
+
 		<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
@@ -34,6 +36,7 @@
 		<form class="form-horizontal" name="formal">
 		<input type="hidden" id="kakao" name="kakao" value="${ kakao }">
 		<input type="hidden" id="google" name="google" value="${ google }">
+		<input type="hidden" id="naver" name="naver" value="${ naver }">
 		  <div class="form-group">
 		    <label for="id" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
@@ -73,7 +76,24 @@
 		    </div>
 		  </div>
 		  
-
+		  <div class="form-group">
+		    <label for="purpose" class="col-sm-offset-1 col-sm-3 control-label">이용목적</label>
+		    <div class="col-sm-4">
+		      <span>이용목적을 3개 입력해주세요</span>
+		      <br/>
+		      <input type="checkbox" name="purpose[]" id="fund" value="펀딩참여"/>펀딩참여
+		      <br/>
+              <input type="checkbox" name="purpose[]" id="adopt" value="입양 및 분양"/>입양 및 분양
+              <br/>
+              <input type="checkbox" name="purpose[]" id="buying" value="물품구매"/>물품구매
+              <br/>
+              <input type="checkbox" name="purpose[]" id="selling" value="물품판매"/>물품판매
+              <br/>
+              <input type="checkbox" name="purpose[]" id="info" value="정보공유"/>정보공유
+              <br/>
+              <input type="checkbox" name="purpose[]" id="etc" value="기타"/>기타
+		    </div>
+		  </div>	  
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
@@ -98,14 +118,22 @@
 				var pw=$("input[name='pw']").val();
 				var pw_confirm=$("input[name='pw2']").val();
 				var name=$("input[name='userName']").val();
-				
+				var check=$("input:checkbox[name='purpose[]']:checked");
 				
 				if(id == null || id.length <1){
 					alert("아이디는 반드시 입력하셔야 합니다.");
 					return;
 				}
+				if(id.length < 8 || id.length > 12){
+					alert("아이디는 8자 이상 12자 이하로 입력하셔야 합니다.");
+					return;
+				}
 				if(pw == null || pw.length <1){
 					alert("패스워드는  반드시 입력하셔야 합니다.");
+					return;
+				}
+				if(pw.length < 8 || pw.length > 12){
+					alert("패스워드는 8자 이상 12자 이하로 입력하셔야 합니다.");
 					return;
 				}
 				if(pw_confirm == null || pw_confirm.length <1){
@@ -116,10 +144,13 @@
 					alert("이름은  반드시 입력하셔야 합니다.");
 					return;
 				}
-				
 				if( pw != pw_confirm ) {				
 					alert("비밀번호 확인이 일치하지 않습니다.");
 					$("input:text[name='password2']").focus();
+					return;
+				}
+				if( check.length != 3 || check.length == 0){
+					alert("이용목적을 3개 체크해주세요");
 					return;
 				}
 				
@@ -221,6 +252,22 @@
 				alert("인증페이지로 넘어갑니다.")
 			});
 		});	
+		
+		$(function(){
+			$($("input:checkbox")).on("click", function(){
+// 				alert($(this).is(":checked"));
+				var chkNo=$('input:checkbox:checked').length;
+				alert(chkNo);
+				var purpose=$("input:checkbox[name='purpose[]']:checked");
+				$.each(purpose, function(index, value){
+					alert($(value).val());
+				})
+				if(chkNo>3){
+					alert("3개까지 선택 가능합니다.");
+					$(this).prop("checked", false);
+				}
+			})
+		})
 		
 		
 		//============= "취소"  Event 처리 및  연결 =============
