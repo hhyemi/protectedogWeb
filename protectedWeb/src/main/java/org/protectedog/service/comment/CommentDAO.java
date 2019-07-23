@@ -31,5 +31,8 @@ public interface CommentDAO {
 	
 	// ´ñ±Û °³¼ö
 	public int getTotalCount(int postNo) throws Exception;
+	
+	// ´ñ±Û ÆäÀÌÂ¡
+	public List<Comment> listCommentMoreView(Map<String, Object> map) throws Exception;
 
 }

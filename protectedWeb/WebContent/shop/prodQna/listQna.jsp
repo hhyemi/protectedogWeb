@@ -185,7 +185,7 @@ body {
 						<td align="left">${board.qnaCode}</td>
 						<td align="left">${board.postTitle}</td>
 						<td align="left">${board.postContent}</td>
-						<td align="lefr">${board.regDate}</td>
+						<td align="left">${board.regDate}</td>
 					</c:forEach>
 				</table>
 				<!--  table end /////////////////////////////////////-->

@@ -25,6 +25,7 @@
 		<typeAlias alias="board" type="org.protectedog.service.domain.Board" />
 		<typeAlias alias="breed" type="org.protectedog.service.domain.Breed" />
 		<typeAlias alias="comment" type="org.protectedog.service.domain.Comment" />
+		<typeAlias alias="reComment" type="org.protectedog.service.domain.ReComment" />
 		<typeAlias alias="funding" type="org.protectedog.service.domain.Funding" />	
 		<typeAlias alias="interest" type="org.protectedog.service.domain.Interest"/>
 		<typeAlias alias="file" type="org.protectedog.service.domain.FileDog"/>
@@ -52,7 +53,7 @@
 		<mapper resource="sql/OrderMapper.xml"/>
 		<mapper resource="sql/CartMapper.xml"/>
 		<mapper resource="sql/ParticipateMapper.xml"/>
-
+		<mapper resource="sql/ReCommentMapper.xml"/>
 	</mappers>
 
 </configuration>

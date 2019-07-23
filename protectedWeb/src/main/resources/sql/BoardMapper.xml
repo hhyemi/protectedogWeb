@@ -27,7 +27,8 @@
 		<result property="prodNo" 			column="prod_no"			jdbcType="VARCHAR"/>
 		<result property="delCode" 			column="del_code" 			jdbcType="CHAR"/>
 		<result property="prodName"			column="prod_name"			jdbcType="VARCHAR"/>
-
+		<result property="commentCount"		column="commentCount"		jdbcType="NUMERIC"/>
+		
 		
 	 </resultMap>
 	
@@ -84,7 +85,7 @@
 			phone			= #{phone:VARCHAR},
 			qna_code		= #{qnaCode:CHAR},
 			route			= #{route:VARCHAR},
-			prod_name		= #{prodName:VARCHAR} 
+			prod_no		= #{prodno:NUMERIC} 
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -116,9 +117,6 @@
 	   	WHERE post_no = #{postNo}
 	 </update>
 	 
-	 
-		 
-		 
 	<!-- SQL : SELECT LIST -->
 	<select  id="listBoard"  parameterType="map"	resultMap="boardSelectMap">
 	  	SELECT *
@@ -186,8 +184,44 @@
 				board_code = 'IS' AND del_code != '0'
 			   </where>
 			   ORDER BY view_count DESC ) inner_table
-	 	WHERE ROWNUM &lt;= 3
+	 	WHERE ROWNUM &lt;= 5
 	 </select>
 	 
+	 <select id="listBoardMoreCommentCount" parameterType="map" resultMap="boardSelectMap">
+	 	SELECT *
+		FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM ( SELECT b.post_no , b.board_code, b.id, b.nickname, b.post_title, b.reg_date, b.view_count, 
+			        		  b.recommend_count, b.market_code, b.price, b.city , b.phone, b.qna_code, b.route, b.prod_no, b.prod_name, b.del_code ,count(t.COMMENT_CONTENT) commentCount 
+	    	           FROM board b, comments t 
+		      		   	<where> 
+					   	b.post_no = t.post_no(+) AND b.board_code = #{boardCode} AND b.del_code != '0'
+						<if test="searchCondition != null">
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+								AND b.post_title  LIKE '%'||#{searchKeyword}||'%' 
+							</if>
+							<if test="searchCondition == 1 and searchKeyword !='' ">
+								AND b.nickname  LIKE '%'||#{searchKeyword}||'%'
+								OR b.id        LIKE '%'||#{searchKeyword}||'%'
+							</if>
+							<if test="searchCondition == 2 and searchKeyword !='' ">
+								AND b.post_content LIKE '%'||#{searchKeyword}||'%' 
+							</if> 
+						</if>
+						</where>
+		        		GROUP BY b.post_no, b.board_code, b.id, b.nickname, b.post_title,  b.reg_date, b.view_count, 
+                				 b.recommend_count, b.market_code, b.price, b.city , b.phone, b.qna_code, b.route, b.prod_no, b.prod_name, b.del_code
+	            		ORDER BY 
+						<if test="order == 0 or order == 1">
+							b.reg_date DESC
+						</if>
+						<if test="order == 2 ">
+							b.view_count DESC
+						</if>
+						<if test="order == 3 ">
+							b.recommend_count DESC
+						</if> ) inner_table
+           		WHERE ROWNUM &lt; = #{endRowNum} )
+ 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
 	 
 </mapper>

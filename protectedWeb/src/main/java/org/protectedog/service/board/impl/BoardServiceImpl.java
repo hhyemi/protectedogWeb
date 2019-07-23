@@ -1,6 +1,5 @@
 package org.protectedog.service.board.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +42,16 @@ public class BoardServiceImpl implements BoardService{
 
 	public Map<String , Object> listBoard(Search search, String boardCode, int order) throws Exception {
 		Map<String, Object> map= boardDAO.listBoard(search, boardCode, order);
+		int totalCount = boardDAO.getTotalCount(boardCode);
+		
+		map.put("map", map );
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+	}
+	
+	public Map<String , Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception {
+		Map<String, Object> map= boardDAO.listBoardMoreCommentCount(search, boardCode, order);
 		int totalCount = boardDAO.getTotalCount(boardCode);
 		
 		map.put("map", map );

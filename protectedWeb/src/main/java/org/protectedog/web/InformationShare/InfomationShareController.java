@@ -14,6 +14,7 @@ import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Comment;
 import org.protectedog.service.domain.Funding;
+import org.protectedog.service.recomment.ReCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +37,10 @@ public class InfomationShareController {
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
+	
+	@Autowired
+	@Qualifier("reCommentServiceImpl")
+	private ReCommentService reCommentService;
 
 	public InfomationShareController() {
 		System.out.println(this.getClass());
@@ -73,6 +78,7 @@ public class InfomationShareController {
 
 		System.out.println(" ============================== listInfo ==================================");
 		
+		System.out.println(request.getRequestURL());
 		int order;
 		
 		if (search.getCurrentPage() == 0) {
@@ -99,7 +105,7 @@ public class InfomationShareController {
 		System.out.println(" listInfo search : " + search);
 
 		// 게시글 목록 조회
-		Map<String, Object> map = boardService.listBoard(search, boardCode, order);
+		Map<String, Object> map = boardService.listBoardMoreCommentCount(search, boardCode, order);
 		
 		List<Board> list = boardService.listBoardRankingSearch(boardCode);
 		
@@ -129,7 +135,6 @@ public class InfomationShareController {
 		
 		// 댓글 페이지 사이즈 5로 고정
 		search.setPageSize(5);
-		
 		// Search 디버깅
 		System.out.println(" listInfo search : " + search);
 				
@@ -141,7 +146,13 @@ public class InfomationShareController {
 		
 		// 댓글 불러오기
 		Map<String, Object> map = commentService.listComment(postNo, search);
-		
+		// 대댓글 불러오기
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("postNo",postNo);
+		searchMap.put("startRowNum",search.getStartRowNum());
+		searchMap.put("endRowNum",search.getEndRowNum());
+		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap);
+
 		// 페이징 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
@@ -153,9 +164,11 @@ public class InfomationShareController {
 		
 		// 댓글 디버깅
 		System.out.println(" getInfo listComment : " +map.get("list"));
+		System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
 		System.out.println(" getInfo totalCount : " +map.get("totalCount"));
 		
 		model.addAttribute("list", map.get("list"));
+		model.addAttribute("relist", reCommmetMap.get("list"));
 		model.addAttribute("totalCount", map.get("totalCount"));
 		model.addAttribute("board", board);
 		

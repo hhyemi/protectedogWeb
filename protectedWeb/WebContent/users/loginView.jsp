@@ -28,7 +28,6 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
     	 body >  div.container{ 
-        	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
     </style>
@@ -170,7 +169,7 @@
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 					}
 				});
-				
+
 			});
 			
 		});
