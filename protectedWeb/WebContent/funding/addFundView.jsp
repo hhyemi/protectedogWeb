@@ -37,20 +37,6 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
-	   #btn-fund{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
-		#btn-cancel{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -62,6 +48,10 @@
 		.form-form{
 	    padding-left:15px;	
 		}
+		.form-group2{
+		padding-left:450px;
+		padding-right:100px;
+		}				
     </style>
 
 	</head>
@@ -107,7 +97,7 @@
 			<h3><b>후원금액</b></h3>
 			해당 게시글에 후원하실금액은 ( <strong style="color:#225cba">최대 300만원</strong> )입니다. <p/>
 		    <div class="row form-form"  >
-		      <input type="text" class="form-control" id="fundPay" name="fundPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; 원을 후원합니다.
+		      <input type="text" class="form-control" id="fundPay" name="fundPay" placeholder="0" style="width:600px; height:35px;" >&ensp; 원을 후원합니다.
 		    </div>
 		  </div>
 			<br/>
@@ -116,17 +106,17 @@
 				* 브라우저 환경에 따라 결제창 실행 시간이 길어질 수 있습니다. (Explorer 11 권장)<br/>
 				* 브라우저 설정에서 팝업창이 제한되어있는지 확인해 주세요.<br/><br/>
 			    <div class="row form-form "  >
-			    <label class="btn btn-primary"> <input type="radio" name="payment" value="card">신용카드</label>
+			    <label class="btn btn-primary py-2 px-2 col-md-1" > <input type="radio" name="paymentCode" value="card">신용카드</label>
 			   &emsp;
-			     <label class="btn btn-primary"> <input type="radio" name="payment" value="trans">계좌이체	</label>		     
+			     <label class="btn btn-primary py-2 px-2 col-md-1"> <input type="radio" name="paymentCode" value="trans">계좌이체	</label>		     
 			 
 			    </div>
 			 </div>        
         	 <input type="hidden" name="postNo" value="${funding.postNo }"  />
 		  <br/><br/>
-		  <div class="form-group text-center">
-	  			<button type="button" id="btn-fund"> 후원 </button>
-	  			<button type="button" id="btn-cancel">뒤로</button>
+		  <div class="form-group2">
+	  			<button type="button"   type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-fund"> 후원하기 </button>
+	  			<button type="button"  type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-cancel">뒤로가기</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
@@ -149,6 +139,18 @@
 
       $('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
    }
+   
+   //3자리 단위마다 콤마 생성
+   function addCommas(x) {
+       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   }
+    
+   //모든 콤마 제거
+   function removeCommas(x) {
+       if(!x || x.length == 0) return "";
+       else return x.split(",").join("");
+   }
+   
    //============= 아임포트 결제 Event  처리 ============        
    function fncPayment(){
 	   
@@ -162,24 +164,28 @@
 	          $('input[name="fundPay"]').focus();
 	          return;
 	       } 
-	      if(!($('input[name="payment"]').is(':checked'))){
+	      if(!($('input[name="paymentCode"]').is(':checked'))){
 	          alert("결제방법은 반드시 선택하여야 합니다.");
 	          return;
 	       }
 	      	   
-	     $(function() {      
+	     $(function() {
 	    	 
-		      $("input[name='payment']:checked").each(function() {
+	         
+	         $('input[name="fundPay"]').val(removeCommas($('input[name="fundPay"]').val()));
+	         var fundPay2 = removeCommas($('input[name="fundPay"]').val());
+	    	 
+		      $("input[name='paymentCode']:checked").each(function() {
 		    	   payment = $(this).val(); 
 		      });
 		      
 				IMP.init('imp85290840'); 
 				
 				IMP.request_pay({
-			    pay_method : payment,
+			    pay_method : removeCommas(payment),
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : '보호할개후원',
-				amount : fundPay,
+				amount : fundPay2,
 /*				buyer_email : 'iamport@siot.do',
 				buyer_name : '구매자',
 				buyer_tel : '010-1234-5678',
@@ -202,11 +208,29 @@
 				}
 				
 				});
+				
+				
     	});
-	      
-		
 		
 	   }	      
+	     $(document).ready(function() {
+	      
+		        //============= 후원금액 =============
+	             $('#fundPay').keyup(function(){
+	            	 
+	            	 //입력시 콤마 적용
+	            	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+	                 //후원목표금액 길이초과
+	                 if (removeCommas($(this).val()).length > 7 ) {
+	                     alert('300만원이하로 입력해주세요');
+	                     $(this).val(removeCommas($(this).val()).substr(0, 7));
+	                     
+	                     $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
+
+	                 }
+	             });				
+	     });
  
  
    $(function() {

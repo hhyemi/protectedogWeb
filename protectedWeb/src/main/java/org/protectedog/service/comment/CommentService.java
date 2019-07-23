@@ -1,5 +1,6 @@
 package org.protectedog.service.comment;
 
+import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
@@ -30,4 +31,10 @@ public interface CommentService {
 	
 	// ³»°¡ ÀÛ¼ºÇÑ ´ñ±Û ¸®½ºÆ®
 //	public Map<String, Object> listMyComment() throws Exception;
+	
+	// ´ñ±Û ÆäÀÌÂ¡
+	public List<Comment> listCommentMoreView(Map<String, Object> map) throws Exception;
+	
+	// ´ñ±Û ÃÑ °³¼ö
+	public int getTotalCount(int postNo) throws Exception;
 }

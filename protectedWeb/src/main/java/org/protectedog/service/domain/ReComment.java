@@ -10,10 +10,12 @@ public class ReComment {
 	private String id;
 	private Date regDate;
 	private String nickName;
-	private char delCode;
+	private String recommentContent;
+	private char statusCode;
+	private int postNo;
 	
 	/// Constructor
-	
+
 	/// Method
 	public int getRecommentNo() {
 		return recommentNo;
@@ -45,16 +47,32 @@ public class ReComment {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public char getDelCode() {
-		return delCode;
+	public char getStatusCode() {
+		return statusCode;
 	}
-	public void setDelCode(char delCode) {
-		this.delCode = delCode;
+	public void setStatusCode(char statusCode) {
+		this.statusCode = statusCode;
+	}
+	public int getPostNo() {
+		return postNo;
+	}
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
+	}
+	public String getRecommentContent() {
+		return recommentContent;
+	}
+	public void setRecommentContent(String recommentContent) {
+		this.recommentContent = recommentContent;
 	}
 	
 	@Override
 	public String toString() {
-		return "Recomment [recommentNo=" + recommentNo + ", commentNo=" + commentNo + ", id=" + id + ", regDate="
-				+ regDate + ", nickName=" + nickName + ", delCode=" + delCode + "]";
+		return "ReComment [recommentNo=" + recommentNo + ", commentNo=" + commentNo + ", id=" + id + ", regDate="
+				+ regDate + ", nickName=" + nickName + ", recommentContent=" + recommentContent + ", statusCode="
+				+ statusCode + ", postNo=" + postNo + "]";
 	}
+	
+
+
 }

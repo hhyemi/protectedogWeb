@@ -69,24 +69,22 @@ body {
 }
 
 td{
-	color : red;
+	color : black;
+	width : 300px;
 }
 </style>
 </head>
 <body>
 
-	<!-- 	<div class="breed_select1"> -->
-	<!-- 		<span></span> -->
-	<!-- 	</div> -->
 	<jsp:include page="/layout/toolbar.jsp" />
 	
-	<div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">정보</a></span> <span>공유</span>
+						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
 					</p>
 					<h1 class="mb-0 bread">견종백과</h1>
 				</div>
@@ -97,8 +95,6 @@ td{
 	<div class="container">
 		
 		<div id="banner-message">
-			<p>품종선택</p>
-
 
 			<select class="breed_select">
 				<option></option>
@@ -107,7 +103,7 @@ td{
 		</div>
 		<div id="breed_data">
 			<img id="breed_image" src="" />
-			<p>품종 정보</p>
+			<p><b>품종 정보</b></p>
 			<table id="breed_data_table">
 
 			</table>
@@ -348,6 +344,21 @@ td{
 	
 	</div>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	
+	<script src="../../resources/prodmenu/js/popper.min.js"></script>
+	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../resources/prodmenu/js/aos.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
+	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+	<script src="../../resources/prodmenu/js/main.js"></script>
+	<!-- ////////////////////달력 /////////////////////////////-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 
 </html>

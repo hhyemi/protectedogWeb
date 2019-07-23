@@ -72,5 +72,15 @@ public class CommentServiceImpl implements CommentService{
 	public void updateLikeCnt(Map<String, Object> map) throws Exception {
 		commentDAO.updateLikeCnt(map);
 	}
+
+	@Override
+	public List<Comment> listCommentMoreView(Map<String, Object> map) throws Exception {
+		return commentDAO.listCommentMoreView(map);
+	}
+
+	@Override
+	public int getTotalCount(int postNo) throws Exception {
+		return commentDAO.getTotalCount(postNo);
+	}
 	
 }

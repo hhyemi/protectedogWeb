@@ -34,6 +34,7 @@
 		<form class="form-horizontal" name="formal">
 		<input type="hidden" id="kakao" name="kakao" value="${ kakao }">
 		<input type="hidden" id="google" name="google" value="${ google }">
+		<input type="text" id="naver" name="naver" value="${ naver }">
 		  <div class="form-group">
 		    <label for="id" class="col-sm-offset-1 col-sm-3 control-label">¾Æ ÀÌ µð</label>
 		    <div class="col-sm-4">
