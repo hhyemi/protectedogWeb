@@ -34,7 +34,7 @@ import org.springframework.stereotype.Repository;
 	@Override
 	public void addOrder(Order order) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert("ordereMapper.addPurchase", order);
+		sqlSession.insert("orderMapper.addOrder", order);
 
 	}
 

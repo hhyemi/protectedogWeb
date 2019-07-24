@@ -1,9 +1,8 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -11,220 +10,269 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- ////////////	Bootsrap, css ///////////////////////// -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+	rel="stylesheet">
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
-	type="text/css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+<link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
 
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-
-<!-- jQuery UI toolTip »ç¿ë CSS-->
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip »ç¿ë JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	href="../../resources/prodmenu/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/owl.theme.default.min.css">
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/magnific-popup.css">
 
+<link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
+
+<link rel="stylesheet"
+	href="../../resources/prodmenu/css/ionicons.min.css">
+
+<!-- <link rel="stylesheet" -->
+<!-- 	href="../../resources/prodmenu/css/bootstrap-datepicker.css"> -->
+
+
+
+<link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
+<link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
+<!-- <script src="./../resources/prodmenu/js/jquery.min.js"></script> -->
+<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-body {
-	border: 0px;
-	border-spacing: 0px;
+#prolist {
+	white-space: nowrap;
 }
-
-#postTitle {
-	padding-left: 120px;
-	padding-right: 120px;
-}
-
-#id {
-	padding-left: 80px;
-	padding-right: 80px;
-}
-
-#no {
-	padding-left: 50px;
-	padding-right: 50px;
-	font-size: x-small;
-	
-}
-
-#countfont{
-	font-size: x-small;
-	}
-#boardfont{
-	font-size: x-small;
-	padding-left: 50px;
-	padding-right: 50px;
-	}
-
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
-<script type="text/javascript">
-	//=============    °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ  Event  Ã³¸® =============
 
-	// °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
+
+<script type="text/javascript">
+	//=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬	 =============	
 	function fncGetList(currentPage) {
-		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
-		//document.detailForm.submit();	
-		$("form").attr("method", "POST").attr("action","/market/listMarket?order={param.order}").submit();
+		$("form").attr("method", "POST").attr("action",
+				"/market/listProduct").submit();
 	}
 
-	//============= Event Ã³¸® ¹×  ¿¬°á =============
-	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-		$("#button").on("click", function() {
-			self.location = "/shop/market/addMarket.jsp";
-		});
-
-		// 	$(function() {
-
-		// 		$("td.ct_btn01:contains('°Ë»ö')").on("click", function() {
-		// 			fncGetList(1);
-		// 		});
-
-		// 		$("#change2").on(
-		// 				"click",
-		// 				function() {
-		// 					var prodNo = $(this).data('param1');
-		// 					self.location = "/purchase/updateTranCodeByProd?prodNo="
-		// 							+ prodNo + "&tranCode=2";
-		// 				})
-		// 		$("#prod").on(
-		// 				"click",
-		// 				function() {
-		// 					self.location = "/product/getProduct?prodNo="
-		// 							+ $(this).text().trim();
-		// 				});
-
-	});
-</script>
-</head>
-
-<body>
-
-	<!-- //////////////////////ToolBar Start ///////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!--/////////////////////// ToolBar End ////////////////////////////////-->
-
-
-
-
-	<div class="container">
-		<h1 align="center">
-			º¸È£ ¸¶ÄÏ<small>&nbsp;#proteced Market<a href="#" id="button"><button
-						class="mdl-button mdl-js-button mdl-button--primary">
-						±Ûµî·Ï</button></a>
-			</small>
-		</h1>
-	</div>
-	<BR />
-	<!--/////////////////////// form start /////////////////////////////////-->
-	<form class="form-inline" name="detailForm">
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
-
-		<td align="right">
+	//=============    ìƒí’ˆìƒì„¸ì¡°íšŒ(ì¸ë„¤ì¼)  Event  ì²˜ë¦¬ 		=============
+	//============= ì¸ë„¤ì¼ ì‚¬ì§„ í´ë¦­ Event  ì²˜ë¦¬ =============	
+	 	$(function() {
+		$(".img-prod").on("click",function() {
+			alert($(this).children("input").val())
+					$(self.location).attr("href","/market/getMarket?postNo="+ $(this).children("input").val());
+				});
+		
+		$("#getproduct").on("click",function() {
+			alert($(this).children("input").val())
+					$(self.location).attr("href","/market/getMarket?postNo="+ $(this).children("input").val());
+				});
+	 	});	 
+	
+		$(function() {
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
+			$("#button").on("click", function() {
+				self.location = "/shop/market/addMarket.jsp";
+			});
 			
-			<select name="searchCondition" class="ct_input_g" style="width:80px">
-				<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>»óÇ°¹øÈ£</option>
-				<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>»óÇ°¸í</option>
-				<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>»óÇ°°¡°İ</option>
-			</select>
-
-			<input type="text" name="searchKeyword" value="${search.searchKeyword}" class="ct_input_g" style="width:200px; height:19px" />
-		
-		</td>
-		
-		<td align="right" width="70">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23">
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:fncGetList('1');">°Ë»ö</a> -->
-						°Ë»ö
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23">
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+		});
+			
 
 	
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+
+</script>
 
 
-		<!--  table Start /////////////////////////////////////-->
-
-		<div class="container" align="center">
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
-				<thead>
-					<tr><td colspan="11" id="countfont">ÀüÃ¼ ${resultPage.totalCount} °Ç, ÇöÀç ${resultPage.currentPage} ÆäÀÌÁö</td></tr>
-				<thead>
-					<tr>
-						<th class="mdl-data-table__cell--non-numeric" align="center"
-							id="no">±Û¹øÈ£</th>
-						<th align="left" id="boardfont">Á¦¸ñ</th>
-						<th align="left" id="boardfont">»óÇ°¸í</th>
-						<th align="left" id="boardfont">Á¶È¸¼ö</th>
-						<th align="left" id="boardfont">°¡°İ</th>
-
-					</tr>
-				</thead>
-
-				<c:set var="i" value="0" />
-				<c:forEach var="board" items="${list}">
-					<c:set var="i" value="${i+1}" />
-					<tbody>
-					<tr>
-					<td class="mdl-data-table__cell--non-numeric" align="center">${ i }</td>
-					<td align="left">${board.postTitle}
-					<input type="hidden" name="postNo" value="${board.postNo}" /> 
-					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
-					<td align="left">${board.viewCount}</td>
-					<td align="left">${board.price}</td>
-					</tr>
-					</tbody>
-				</c:forEach>
-				
-			</table>
-			<!--  table end /////////////////////////////////////-->
-
-			<input type="hidden" id="currentPage" name="currentPage" value="0" />
-			<jsp:include page="../../common/pageNavigator.jsp" />
-
+</head>
+<body>
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
+	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
+	<div class="hero-wrap hero-bread">
+		<a style="background-image: url('/resources/file/fileMarket/');">
+		<input type="hidden" value="${board.postNo}"/></a>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
+					</p>
+					<h1 class="mb-0 bread">ë³´í˜¸ ë§ˆì¼“</h1><a href="#" id="button">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+						class="mdl-button mdl-js-button mdl-button--primary">
+						ê¸€ë“±ë¡</button></a>
+				</div>
+			</div>
 		</div>
-	</form>
-	<!--///////////////////////////////// form end /////////////////////////////////////-->
+	</div>
+
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-lg-10 order-md-last">
+					<div class="container">
+						<div class="row">
+							<input type="hidden" id="currentPageList" name="currentPageList"
+								value="${resultPage.currentPage}" />
+							<div class="col-md-8 col-lg-10 order-md-last" id="prolist">
+								<div class="row" align="center">
+									<c:set var="i" value="0" />
+									<c:forEach var="board" items="${list}">
+										<c:set var="i" value="${i+1}" />
+										<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
+											<div align="center">
+												<div class="product">
+													<a class="img-prod">
+													<input type="hidden" value="${board.postNo}"/>
+													<img class="img-fluid"
+														 src="/resources/file/fileMarket/${name.fileName}"
+														alt="Colorlib Template"> <span class="status">
+															<!-- 30% -->
+													</span>
+														<div class="overlay"></div> </a>
+													<div class="text py-3 px-3">
+														<h3>
+															<a href="#">${board.prodName}</a>
+														</h3>
+														<div class="d-flex">
+															<div class="pricing">
+																<p class="price" align="right">
+																	<fmt:formatNumber value="${board.price }" pattern="#,###"/>ì›
+																</p>
+																<span class="price-sale">${board.postTitle}</span>
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- thumbnail -->
+					<div class="row mt-5">
+						<div class="col text-center">
+							<div class="block-27">
+								<ul>
+									<li><a href="#">&lt;</a></li>
+									<li class="active"><span>1</span></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">&gt;</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-lg-2 sidebar">
+					<div class="sidebar-box-2">
+						<h2 class="heading mb-2">
+							<a href="#"></a>
+						</h2>
+						<h2 class="heading mb-2">
+							<a href="#">BEST</a>
+						</h2>
+					</div>
+					<div class="sidebar-box-2">
+						<h2 class="heading mb-4">
+							<a href="#">TIMESALE</a>
+						</h2>
+
+					</div>
+					<div class="sidebar-box-2">
+						<h2 class="heading mb-4">
+							<a href="#">ì‚¬ë£Œ</a>
+						</h2>
+						<ul>
+							<li><a href="#">ì „ì—°ë ¹ìš©</a></li>
+							<li><a href="#">ì‹œë‹ˆì–´(ë…¸ê²¬ìš©)</a></li>
+							<li><a href="#">ì–´ëœíŠ¸(ì„±ê²¬ìš©)</a></li>
+							<li><a href="#">í¼í”¼(ìê²¬ìš©)</a></li>
+
+						</ul>
+					</div>
+					<div class="sidebar-box-2">
+						<h2 class="heading mb-4">
+							<a href="#">ê°„ì‹</a>
+						</h2>
+						<ul>
+							<li><a href="#">ì†Œì‹œì§€</a></li>
+							<li><a href="#">ìœ¡í¬</a></li>
+							<li><a href="#">ê»Œ</a></li>
+						</ul>
+					</div>
+					<div class="sidebar-box-2">
+						<h2 class="heading mb-4">
+							<a href="#">ì˜ë¥˜</a>
+						</h2>
+						<ul>
+							<li><a href="#">ì˜¬ì¸ì›</a></li>
+							<li><a href="#">ê¸°íƒ€</a></li>
+
+						</ul>
+						<br>
+						<div class="sidebar-box-2">
+							<h2 class="heading mb-4">
+								<a href="#">ì¤‘ê³ ë§ˆì¼“</a>
+							</h2>
+
+						</div>
+
+						<div class="sidebar-box-2">
+							<h2 class="heading mb-4">
+								<a href="#">ì¥ë°”êµ¬ë‹ˆ</a>
+							</h2>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+	<script src="../../resources/prodmenu/js/popper.min.js"></script>
+	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
+	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
+	<script src="../../resources/prodmenu/js/aos.js"></script>
+	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
+	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
+	<script src="../../resources/prodmenu/js/main.js"></script>
+	<!-- ////////////////////ë‹¬ë ¥ /////////////////////////////-->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </body>
 </html>

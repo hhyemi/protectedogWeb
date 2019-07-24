@@ -81,7 +81,7 @@
 							<tbody>
 
 							<c:set var="i" value="0" />
-							<c:forEach var="cart" items="${cart}">
+							<c:forEach var="cart" items="${list}">
   							<c:set var="i" value="${ i+1 }" />
 						      <tr class="text-center">
 								<td class="product-remove"><a href="#"><span

@@ -532,15 +532,36 @@
 		
 		<script type="text/javascript">
 		
+		//============= 상품정보 GET/UPDATE Event  처리 =============
 		 $(function() {
-				
+			
 			 //manage//====================================================
-			 $( "button:contains('구매하기')" ).on("click" , function() {
+			 $( "button:contains('확인')" ).on("click" , function() {
 				//Debug..
-				console.log($( "td.ct_btn01:contains('구매하기')" ).html());
+				console.log($( "td.ct_btn01:contains('확인')" ).html());
 				/* self.location = "/product/listProduct/manage" */
-				self.location = "/order/addOrder/${product.prodNo}"
+				self.location = "/product/listProduct"
 			});
+			
+			 $( "button:contains('수정')" ).on("click" , function() {
+				//Debug..
+				console.log($( "button:contains('수정')" ).html());
+				history.go(-1);
+			});
+			
+			//구매하기//====================================================
+			$( ".main_btn" ).on("click" , function() {
+				//Debug..
+				self.location = "/order/addOrder?prodNo=${product.prodNo}"
+			});
+			
+			 $( "button:contains('뒤로')" ).on("click" , function() {
+				//Debug..
+				console.log($( "button:contains('뒤로')" ).html());
+				self.location = "/product/listProduct"
+			});
+		});
+		
 		
 		
 		
