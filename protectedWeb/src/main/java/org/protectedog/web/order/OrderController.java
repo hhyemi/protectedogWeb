@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -55,37 +54,46 @@ public class OrderController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-
-	@RequestMapping(value="addOrder", method=RequestMethod.GET)
-	public String addPurchaseView(@RequestParam("prodNo") int prodNo, Model model) throws Exception{
-		System.out.println("addOrder");
+	@RequestMapping("/addOrderView")
+	public String addPurchaseView(@ModelAttribute("product") Product product, Model model) throws Exception{
+		System.out.println("/addPurchaseView");
 		
-		Product product = productService.getProduct(prodNo);
-		
+		product = productService.getProduct(product.getProdNo());
+		System.out.println(product);
 		model.addAttribute("product", product);
-		System.out.println("¹¹°¡³ª¿ÀÁÕ");
 		
-		return "forward:/shop/order/addOrder.jsp";
-
+		return "forward:/purchase/addPurchaseView.jsp";
 	}
-	
-	@RequestMapping(value="addOrder", method=RequestMethod.POST)
-	public String addProduct(@ModelAttribute("order") Order order, 
-			@RequestParam("prodNo") int prodNo, HttpSession session) throws Exception{
+
+	@RequestMapping("/addOrder")
+	public String addPurchase(@ModelAttribute("order") Order order, @RequestParam("prodNo") int prodNo, @RequestParam("id") String id) throws Exception {
+		
 		
 		System.out.println("/addPurchase");
-		
-		User user = (User)session.getAttribute("user");
-		Product product = productService.getProduct(prodNo);
-		order.setProdNo(product);
+		User user = userService.getUsers(id);
+		System.out.println(order);
 		order.setId(user);
-		System.out.println("¹¹°¡ ³ª¿À³ª¿À");
-		
 		orderService.addOrder(order);
 		
 		
-		return "forward:/order/getOrder?orderNo="+order.getOrderNo();
+
+		return "forward:shop/order/addOrder.jsp";
 	}
+	
+	@RequestMapping("/getOrder")
+	public String getOrder (@RequestParam("orderNo")int orderNo, Model model) throws Exception{
+		
+		System.out.println("/getPurchase");
+		
+		System.out.println(orderNo);
+
+		Order order =orderService.getOrder(orderNo);
+
+		model.addAttribute("order", order);
+		
+		return "forward:shop/order/getorder.jsp";
+	}
+	
 	
 	@RequestMapping("/listOrder")
 	public String listPurchaes(@ModelAttribute("search") Search search, 
@@ -143,7 +151,8 @@ public class OrderController {
 		System.out.println(prodNo);
 		System.out.println(id);
 		System.out.println();
-		//order.setProdNo(productService.getProduct(prodNo));
+		order.setId(userService.getUsers(id));
+		order.setProdNo(productService.getProduct(prodNo));
 		System.out.println(order +"purchase");
 		
 		orderService.updateOrder(order);
@@ -155,6 +164,7 @@ public class OrderController {
 		return "redirect:/shop/order/getOrder?orderNo="+order.getOrderNo();
 	}
 }
+	
 //	//@RequestMapping("updateTranCode.do")
 //	@RequestMapping(value="updateTranCode")
 //	public String updateTranCode(@ModelAttribute("order") Order order, @RequestParam("tranCode") String tranCode,
@@ -191,3 +201,4 @@ public class OrderController {
 //		
 //		return "forward:/purchase/deletePurchase.jsp";
 //	}
+//}
