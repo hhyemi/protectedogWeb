@@ -158,7 +158,7 @@ public class AdoptReviewController {
 	@RequestMapping( value="listAdoptReview" )
 	public String listAdoptReview(
 						@ModelAttribute("search") Search search,
-														@RequestParam("boardCode") String boardCode  ,
+//														@RequestParam("boardCode") String boardCode  ,
 														Model model ) throws Exception{
 		
 		System.out.println("/adoptReview/listAdoptReview : GET / POST");
@@ -172,7 +172,7 @@ public class AdoptReviewController {
 		System.out.println("■■■■■ 확인 : "+search);
 		
 		// Business logic 수행
-		Map<String , Object> map=boardService.listBoard(search, boardCode, 0 );
+		Map<String , Object> map=boardService.listBoard(search, "AR", 0 );
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			

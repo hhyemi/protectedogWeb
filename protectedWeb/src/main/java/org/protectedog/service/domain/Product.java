@@ -15,8 +15,19 @@ public class Product {
 	private String company;
 	private int discountPrice;
 	private int prodCode;
+	private String mainFile;
 	
 	
+	public String getMainFile() {
+		return mainFile;
+	}
+
+
+	public void setMainFile(String mainFile) {
+		this.mainFile = mainFile;
+	}
+
+
 	public Product() {
 	}
 
@@ -136,8 +147,11 @@ public class Product {
 		return "Product [prodNo=" + prodNo + ", prodName=" + prodName + ", price=" + price + ", manuDate=" + manuDate
 				+ ", regDate=" + regDate + ", country=" + country + ", quantity=" + quantity + ", prodDetail="
 				+ prodDetail + ", company=" + company + ", discountPrice=" + discountPrice + ", prodCode=" + prodCode
-				+ "]";
+				+ ", mainFile=" + mainFile + "]";
 	}
+
+
+	
 	
 }
 	

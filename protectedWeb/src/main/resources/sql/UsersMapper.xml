@@ -95,14 +95,14 @@
 
 	<select id="getUsersById"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile, birth_date
 		FROM users
 		WHERE id=#{id}
 	</select>
 	
 	<select id="getUsersByNick"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile, birth_date
 		FROM users
 		WHERE nickname=#{nickname}
 	</select>
@@ -119,7 +119,7 @@
 			email=#{email:VARCHAR},
 			phone=#{phone:NUMERIC},
 			user_addr=#{userAddr:VARCHAR},
-			account=#{account:NUMERIC},
+			birth_date=#{birthDate:NUMERIC},
 			profile=#{profile:VARCHAR}
 		</set>
 		WHERE id=#{id}

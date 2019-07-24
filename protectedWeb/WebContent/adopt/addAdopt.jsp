@@ -11,24 +11,6 @@
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-    <link rel="stylesheet" href="/resources/prodmenu/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/animate.css">
-    
-    <link rel="stylesheet" href="/resources/prodmenu/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/magnific-popup.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/aos.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/jquery.timepicker.css">
-
-    <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
-    <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
-    
     <style type="text/css">
 	    html {
 	 	 scroll-behavior: smooth;
@@ -37,57 +19,12 @@
     
 
   </head>
+  
+  
   <body class="goto-here">
-		<div class="py-1 bg-black">
-    	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-	    		<div class="col-lg-12 d-block">
-		    		<div class="row d-flex">
-		    			<div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
-					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
-					    </div>
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-					    </div>
-				    </div>
-			    </div>
-		    </div>
-		  </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="/index.jsp">protecteddog</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+  <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="../index.jsp" class="nav-link">Home</a></li>
-	          <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">Shop</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-              </div>
-            </li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
       <div class="container">
@@ -125,7 +62,10 @@
 	          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
 	          			
 						<div class="form-group">
-							<div class="col-md-12"><strong>1. </strong>약관 추가</div>
+							<div class="col-md-12"><strong>1. </strong>
+								<c:if test="${param.boardCode eq 'AD' }">분양글을 등록하고, 입양신청서가 등록되거나 분양완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
+			 					<c:if test="${param.boardCode eq 'MS' }">실종글을 등록하고, 찾기완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
+							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
 								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
@@ -134,10 +74,7 @@
 						</div>
 						
 						<div class="form-group">
-							<div class="col-md-12"><strong>2. </strong>
-								<c:if test="${param.boardCode eq 'AD' }">분양글을 등록하고, 입양신청서가 등록되거나 분양완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
-			 					<c:if test="${param.boardCode eq 'MS' }">실종글을 등록하고, 찾기완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
-							</div>
+							<div class="col-md-12"><strong>2. </strong>신청서는 상세조회 화면에서 확인하실 수 있으며, 신청서를 확인하고 직접 연락하시면 됩니다.</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
 								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
@@ -163,36 +100,17 @@
 	          		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
-		                	<input type="text" class="form-control" name="postTitle" placeholder="제목을 입력하세요.">
+		                	<input type="text" class="form-control" name="postTitle" value="제목" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
-		                	<input type="text" class="form-control" name="phone" value="${ sessionScope.user.phone }" >
+		                	<input type="text" class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly >
 		                </div>
 	                </div>
-	          	
-<!-- 	          		<div class="col-md-12"> -->
-<!-- 		                <label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone"></span></label> -->
-<!-- 	                </div> -->
-	                
-<!-- 	                <div class="col-md-4"> -->
-<!-- 	                	<select  class="form-control" name="phone1" id="phone1"> -->
-<!-- 			            </select> -->
-<!-- 	                </div> -->
-	                
-<!-- 	          		<div class="col-md-4"> -->
-<!-- 	                	<input type="text" class="form-control" id="phone2" name="phone2" value="2123"> -->
-<!-- 	                </div> -->
-	                
-<!-- 	          		<div class="col-md-4"> -->
-<!-- 	                	<input type="text" class="form-control" id="phone3" name="phone3" value="4567"> -->
-<!-- 	                </div> -->
-	               
-<!-- 	                <input type="hidden" class="form-control" id="phone" name="phone"> -->
-	                
+
 	                <div class="col-md-12"><br/></div>
 	                
 	                <!-- 첨부 버튼 -->
@@ -371,7 +289,23 @@
 	          
 	          
  <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-
+			<div class="modal fade " id="imgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm" style="vertical-align: middle;" role="document">
+					<div class="modal-content">
+<!-- 						<div class="modal-header"> -->
+<!-- 							<h5 class="modal-title" id="exampleModalLabel"></h5> -->
+<!-- 							<button type="button" class="close" data-dismiss="modal" -->
+<!-- 								aria-label="Close"> -->
+<!-- 								<span aria-hidden="true">&times;</span> -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+						<div class="modal-body" align="center">이미지를 등록해주세요.</div>
+						<div class="modal-footer">
+							<button type="button"  class="btn btn-primary"  data-dismiss="modal">예</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div id="dialog-terms" title="">
 			  <p align="center"><br/>약관에 모두 동의해야 등록할 수 있습니다.</p>
 			</div>  
@@ -399,11 +333,9 @@
     </section> <!-- .section -->
 
     
-    
+    <jsp:include page="/layout/footer.jsp"></jsp:include>
   
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   <!-- dialog -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -427,9 +359,11 @@
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/resources/events.js"></script>
-  
+<!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script><script type="text/javascript" src="js/bootstrap.js"></script>
   <script>
 
  	  var mapArea;
@@ -796,7 +730,7 @@
 		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 || breed.toLowerCase().indexOf( '말티즈' ) != -1 ) {
 			breed = '말티즈';
 			$('select[name=dogSize]').val('소형견').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( '푸들' ) != -1 ) {
+		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( 'poedel' ) != -1 || breed.toLowerCase().indexOf( '푸들' ) != -1 ) {
 			breed = '푸들';
 			$('select[name=dogSize]').val('소형견').attr("selected","selected");
 		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 || breed.toLowerCase().indexOf( '리트리버' ) != -1 ) {
@@ -1023,8 +957,9 @@
 			  return;
 		  }
 		  if( $(".preview-box").length == 0 ){
-			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-img').dialog( "open" );
+			  $('#imgModal').modal('show');
+// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-img').dialog( "open" );
 			  return;
 		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){

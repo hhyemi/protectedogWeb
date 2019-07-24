@@ -15,6 +15,7 @@ public class Board {
 	private String postContent;
 	private Date regDate;
 	private int viewCount;
+	private int commentCount;
 	
 	// null °¡´É
 	private int recommendCount;
@@ -177,13 +178,22 @@ public class Board {
 		this.prodNo = prodNo;
 	}
 
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
-				+ viewCount + ", recommendCount=" + recommendCount + ", marketCode=" + marketCode + ", price=" + price
-				+ ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode + ", route=" + route + ", prodNo="
-				+ prodNo + ", delCode=" + delCode + ", prodName=" + prodName + "]";
+				+ viewCount + ", commentCount=" + commentCount + ", recommendCount=" + recommendCount + ", marketCode="
+				+ marketCode + ", price=" + price + ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode
+				+ ", route=" + route + ", prodNo=" + prodNo + ", delCode=" + delCode + ", prodName=" + prodName + "]";
 	}
+	
 	
 }

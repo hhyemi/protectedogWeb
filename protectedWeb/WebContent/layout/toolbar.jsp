@@ -137,9 +137,10 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
-                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
-                <a class="dropdown-item" href="/adoptReview/addAdoptReview">경로테스트</a>
-                <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a>
+<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a> -->
+                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
+                <a class="dropdown-item" href="../adopt/thumnail.jsp">테스트</a>
+<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
 
               </div>
             </li>
@@ -168,13 +169,14 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                 <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-                <a class="dropdown-item" href="/community/getDogSense.jsp">뉴스</a>
+                <a class="dropdown-item" href="/community/listNews.jsp">뉴스</a>
               </div>
             </li>
             <c:if test="${ sessionScope.user != null }">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USERS</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
                 <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
                 <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
@@ -183,6 +185,9 @@
                 </c:if>
                 <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
                 <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
+                <c:if test="${ sessionScope.user.role eq 'admin' }">
+                <a class="dropdown-item" href="/report/listReport">신고글목록</a>
+                </c:if>
               </div>
             </li>
             </c:if>
@@ -207,7 +212,7 @@
 
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#94BFCA"/></svg></div>
 
 
   <script src="/resources/prodmenu/js/jquery.min.js"></script>
@@ -226,6 +231,67 @@
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!--   <script src="/resources/prodmenu/js/google-map.js"></script> -->
   <script src="/resources/prodmenu/js/main.js"></script>
+  
+  	<script type="text/javascript">
+		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+		function loginWithKakao() {
+			Kakao.Auth.login({
+				success : function(authObj) {
+					Kakao.API.request({
+						url : "/v2/user/me",
+						success : function(result) {
+							var info = JSON.stringify(result);
+							$(location).attr('href',
+									'/users/kakao?kakao=' + result.id);
+						}
+					});
+					Kakao.Auth.getAccessToken();
+				},
+				fail : function(err) {
+					alert(JSON.stringify(err));
+					alert("로그인 실패")
+				}
+			})
+		}
+
+		function logoutWithKakao() {
+			Kakao.Auth.logout();
+			location.href = 'https://accounts.kakao.com/logout?continue=https://pf.kakao.com/logged_out';
+		}
+
+		$(function() {
+			$("#myInfo").on(
+					"click",
+					function() {
+						$(self.location).attr('href',
+								"/users/getUsers?id=${sessionScope.user.id}");
+					})
+		});
+
+		$(function() {
+			$("#login").on("click", function() {
+				$(self.location).attr("href", "/users/login");
+			});
+		});
+
+		$(function() {
+			$("#regist").on("click", function() {
+				$(self.location).attr("href", "/users/addUsersBase");
+			});
+		});rms
+		
+		
+		
+// 		$(function(){
+// 			$("#googleLogout").on("click", function(){
+// 				var auth2=gapi.auth2.getAuthInstance();
+// 				auth2.setToken(null);
+// 				auth2.signOut();
+// 			});
+// 		})
+
+	</script>
+	
   </body>
 </html>
     

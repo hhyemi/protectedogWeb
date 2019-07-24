@@ -26,5 +26,7 @@ public interface MessageDAO {
 	
 	// List Paging(RECEIVE)
 	public int getReceiveTotalCount(Search search, String receiverId) throws Exception;
+
+	public Message getUnreadMessage(String receiverId);
 	
 }

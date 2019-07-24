@@ -18,6 +18,7 @@ public interface ReviewDAO {
 	//DELETE
 	public void delReivew(Review review)throws Exception;
 	//TOTALCOUNT
-	public int getTotalCount(String boardCode) throws Exception ;
+    public int getTotalCount(Search search) throws Exception;
+
 
 }

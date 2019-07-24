@@ -198,16 +198,22 @@ body {
 		
 		});
 		
+		var flag= false;
+		
 		$(document).on("click",".glyphicon-plus", function() {
 			
 			var commentNo = $(this).parents().parents().children("input").val();
-		
+			
 			$.ajax({
 				url : "/common/recomment.jsp?commentNo="+commentNo+"&postNo="+${board.postNo},
 				type:"GET",
 				dataType : "text",
 				success : function(data){
-					$("#"+commentNo+""+".row").append(data);
+					
+					if(!flag){
+						$("#"+commentNo+""+".row").append(data);
+						flag = true;
+					}
 				},
 				error : function(){
 					alert(2);

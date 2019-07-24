@@ -105,7 +105,7 @@ public class InfomationShareController {
 		System.out.println(" listInfo search : " + search);
 
 		// 게시글 목록 조회
-		Map<String, Object> map = boardService.listBoard(search, boardCode, order);
+		Map<String, Object> map = boardService.listBoardMoreCommentCount(search, boardCode, order);
 		
 		List<Board> list = boardService.listBoardRankingSearch(boardCode);
 		
