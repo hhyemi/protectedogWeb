@@ -19,6 +19,14 @@
 	WHERE id=#{id}
 	</update>
 	
+	<select id="getuserMileage" parameterType="mileage">
+	select id, sum(mileage)
+	from mileage
+	where id='user01' and mileage_code='1'
+	group by id;
+	
+	</select>
+	
 	
 
 	<select  id="listMileage"  parameterType="map"	resultMap="mileageSelectMap">

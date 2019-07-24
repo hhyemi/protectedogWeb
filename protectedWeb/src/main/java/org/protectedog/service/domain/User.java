@@ -19,7 +19,7 @@ public class User {
 	private String phone3;
 	private String userAddr;
 	private String account;
-	private String birthDate;
+	private int birthDate;
 	private int levelPoint;
 	private String accessDate;
 	private String mileage;
@@ -135,10 +135,10 @@ public class User {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public String getBirthDate() {
+	public int getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(int birthDate) {
 		this.birthDate = birthDate;
 	}
 	public int getLevelPoint() {

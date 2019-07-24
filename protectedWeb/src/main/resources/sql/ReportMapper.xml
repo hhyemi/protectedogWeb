@@ -16,20 +16,18 @@
 		<result property="reportStatus"	column="report_status"	jdbcType="NUMERIC"/>
 		<result property="reportDate"	column="report_date"	jdbcType="DATE"/>
 		<result property="delCode"		column="del_code"	jdbcType="CHAR"/>
-		<result property="file1"		column="file1"		jdbcType="VARCHAR"/>
-		<result property="file2"		column="file2"		jdbcType="VARCHAR"/>
-		<result property="file3"		column="file3"		jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	
 	<insert id="addReport"	parameterType="report">
+		<selectKey keyProperty="reportNo" resultType="int" order="BEFORE">
+	    SELECT seq_report_report_no.nextval FROM DUAL
+	    </selectKey>
 		INSERT INTO report
-		(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date,
-		file1, file2, file3, del_code)
+		(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
 		VALUES
-		(seq_report_report_no.NEXTVAL, #{reporterId}, #{reportedId}, #{reportCategory}, 
-		#{reportContent}, #{reportStatus}, SYSDATE, #{file1}, #{file2:VARCHAR}, #{file3:VARCHAR}, 
+		(#{reportNo}, #{reporterId}, #{reportedId}, #{reportCategory}, #{reportContent}, #{reportStatus}, SYSDATE, 
 		#{delCode:CHAR})
 	</insert>
 	 
@@ -37,10 +35,9 @@
 
 	<select id="getReport"	parameterType="string"	resultMap="reportSelectMap">
 		SELECT
-		report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code, 
-		file1, file2, file3
-		FROM report
-		WHERE report_no=#{reportNo}
+		r.report_no, r.reporter_id, r.reported_id, r.report_category, r.report_content, r.report_status, r.report_date, r.del_code
+		FROM report r
+		WHERE r.report_no=#{reportNo}
 	</select>
 	
 
