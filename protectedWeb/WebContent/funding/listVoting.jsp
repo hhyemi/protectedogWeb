@@ -37,7 +37,7 @@
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!--ToolBar End /////////////////////////////////////  --> 
    	
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -47,8 +47,8 @@
         </div>
       </div>
     </div>
-
-    <section class="ftco-section bg-light">    
+	<br/><p/>
+    <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
       		  <div class="form-group2 text-center">
 	  			<button id="btn-add" class="btn btn-primary ">작성하기</button>
 		  </div>  

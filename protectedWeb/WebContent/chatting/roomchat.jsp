@@ -139,7 +139,7 @@
  			            		            			alert("로그인하세요")
  			            		            		}else{
  			            		
- 			            		            		var socket = io("http://192.168.0.33:82/"+room);
+ 			            		            		var socket = io("http://192.168.0.33:82/");
  			            		            		}            		
  			            		            		socket.emit("updateUser", userName);
  			            		            		

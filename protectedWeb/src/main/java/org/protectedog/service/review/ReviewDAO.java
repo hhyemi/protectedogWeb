@@ -19,5 +19,5 @@ public interface ReviewDAO {
 	public void delReivew(Review review)throws Exception;
 	//TOTALCOUNT
 	public int getTotalCount(String boardCode) throws Exception ;
-	
+
 }
