@@ -82,5 +82,11 @@ public class MessageDAOImpl implements MessageDAO{
 		map.put("receiverId", receiverId);
 		return sqlSession.selectOne("MessageMapper.getReceiveTotalCount", map);
 	}
+	
+	@Override
+	public Message getUnreadMessage(String receiverId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("MessageMapper.getUnreadMessage", receiverId);
+	}
 
 }

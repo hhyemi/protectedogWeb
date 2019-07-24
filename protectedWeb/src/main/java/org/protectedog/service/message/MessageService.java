@@ -22,4 +22,7 @@ public interface MessageService {
 	//쪽지상태 업데이트
 	public void updateMessage(Message message) throws Exception;
 
+	//안읽은 쪽지 체크
+	public int getUnreadMessage(String receiverId) throws Exception;
+
 }
