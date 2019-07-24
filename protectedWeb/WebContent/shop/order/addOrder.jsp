@@ -117,6 +117,7 @@ body>div.container {
 	</div>
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 	<div class="container" id="orderinfo">
+	<input type="hidden" value="${product.prodNo}"/>
 		<div class="container">
 			<div class="cart_inner">
 				<table class="table" id="ordertable">
@@ -136,18 +137,18 @@ body>div.container {
 										<img src="resources/file/fileShop/100s.jpg" alt="" />
 									</div>
 									<div class="media-body">
-										<p>웰니스 스몰브리드 헬시웨이트 5.4kg</p>
+										<p></p>
 									</div>
 								</div>
 							</td>
 							<td>
-								<h5 id="texth5">20,0000원</h5>
+								<h5 id="texth5"></h5>
 							</td>
 							<td>
-								<h5 id="texth5">30개</h5>
+								<h5 id="texth5"></h5>
 							</td>
 							<td>
-								<h5 id="texth5">600,000원</h5>
+								<h5 id="texth5"></h5>
 							</td>
 						</tr>
 					</tbody>
@@ -178,8 +179,8 @@ body>div.container {
 							<!-- 							</div> -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">${user.id} <input type="hidden"
-										value="${sessionScope.user.id }"></label> <input type="text"
+									<label for="firstname"> <input type="hidden"
+										value=""></label> <input type="text"
 										class="form-control" name="proName" id="prodName"
 										placeholder="상품명을 입력해주세요" value="테스트">
 								</div>
