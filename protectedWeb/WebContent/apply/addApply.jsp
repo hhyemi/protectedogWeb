@@ -5,24 +5,23 @@
 <html>
 
 <head>
+
 	<title>ADD APPLY</title>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-
-    
     <style type="text/css">
 	    html {
 	 	 scroll-behavior: smooth;
 		}
 	</style>
 	
-  </head>
+</head>
   
   
-  <body class="goto-here">
+<body class="goto-here">
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
@@ -35,8 +34,6 @@
       </div>
     </div>
     
-    
-
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
@@ -45,7 +42,7 @@
 	          	<div class="row align-items-end">
 	          	
 	          	
-				<input type="hidden" name="id" value="user03" >
+				<input type="hidden" name="id" value="${ apply.id }" >
 				<input type="hidden" name="statusCode" value="1" >
 				<input type="hidden" name="adoptNo" value="${ apply.adoptNo }" >
 				
@@ -110,7 +107,7 @@
 	          		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
-		                	<input type="text" class="form-control" name="phone" value="011-2123-4567" readonly>
+		                	<input type="text" class="form-control" name="phone" value="${ apply.phone }" readonly>
 		                </div>
 	                </div>
     
@@ -142,13 +139,6 @@
                		</div>
                		
                		<span name="mateAgree"></span>
-<!-- 	            	<div class="col-md-12" id="divMateAgree"> -->
-<!-- 	              		<div class="form-group"> -->
-<!-- 	                		<label for=""><strong><font color="#225cba">동거인 여부에서 있음을 선택한 경우</font>, 동거인의 동의 여부를 선택하세요.</strong></label><br/> -->
-<!-- 	                		<div class="col-md-2"><input type="radio"  name="mateAgree" value="1">동의</div> -->
-<!-- 	                		<div class="col-md-5"><input type="radio"  name="mateAgree" value="2">동의하지 않음</div> -->
-<!-- 	               		</div> -->
-<!--                		</div> -->
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
@@ -159,44 +149,34 @@
                		</div>
                		
                		<span name="currently"></span>
-<!-- 	            	<div class="col-md-12" id="divCurrently"> -->
-<!-- 	              		<div class="form-group"> -->
-<!-- 	                		<label for=""><strong><font color="#225cba">양육경험 여부에서 있음을 선택한 경우</font>, 현재 양육여부를 선택하세요.</strong></label><br/> -->
-<!-- 	                		<div class="col-md-2"><input type="radio"  name="currently" value="1">양육중</div> -->
-<!-- 	                		<div class="col-md-6"><input type="radio"  name="currently" value="2">양육하고있지 않음</div> -->
-<!-- 	               		</div> -->
-<!--                		</div> -->
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="plan"><strong>반려견을 입양하게될 경우, 앞으로의 계획을 입력하세요.</strong>&nbsp;&nbsp;<span name="plan"></span></label>
-	                  		<input type="text" class="form-control" name="plan" value="앞으로의 계획" placeholder="내용을 입력하세요.">
+	                  		<input type="text" class="form-control" name="plan" value="" placeholder="내용을 입력하세요.">
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="pay"><strong>반려견을 입양하게될 경우, 1년간의 예상 비용과 그 이유를 입력하세요.</strong>&nbsp;&nbsp;<span name="pay"></span></label>
-	                  		<input type="text" class="form-control" name="pay" value="예상비용" placeholder="내용을 입력하세요.">
+	                  		<input type="text" class="form-control" name="pay" value="" placeholder="내용을 입력하세요.">
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="reason"><strong>반려견을 입양하고 싶은 이유를 입력하세요.</strong>&nbsp;&nbsp;<span name="reason"></span></label>
-	                  		<input type="text" class="form-control" name="reason" value="입양이유" placeholder="내용을 입력하세요.">
+	                  		<input type="text" class="form-control" name="reason" value="" placeholder="내용을 입력하세요.">
 	               		</div>
                		</div>
-               		
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="situation"><strong>반려견을 입양하고 상황이 바뀔 경우, 어떻게 대처할 지 입력하세요.</strong>&nbsp;&nbsp;<span name="situation"></span></label>
-	                  		<input type="text" class="form-control" name="situation" value="상황바뀜" placeholder="내용을 입력하세요.">
+	                  		<input type="text" class="form-control" name="situation" value="" placeholder="내용을 입력하세요.">
 	               		</div>
                		</div>
-               		
-       
                		
                		<div class="w-100"></div>
 		            <div class="w-100"></div>
@@ -210,6 +190,7 @@
 
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
+	          	
 					<p><button class="btn btn-primary py-3 px-4 col-md-12">신청</button></p>
 					
 					<div class="form-group">
@@ -219,6 +200,7 @@
 							</div>
 						</div>
 					</div>
+					
 	          	</div>
 	          </div>
 	          
@@ -496,7 +478,6 @@
 	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"동의\">동의<\/div>"
 	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"동의하지 않음\">동의하지 않음<\/div>"
 	    		+"<\/div><\/div>";
-// 			$( 'span[name=mateAgree]').html(divMateAgree);
 			$( 'span[name=mateAgree]').append(divMateAgree).hide().show('blind','slow');
 		}
 	});
@@ -629,11 +610,6 @@
 			$("input[name=situation]").focus();
 			return;
 		}
-// 		if( $("input[name=situation]").val().length > 300 ){
-// 			$('#dialog-situationLength').dialog( "open" );
-// 			return;
-// 		}
-		
 
     	
     	var job = $("input[name=job]:checked").val();

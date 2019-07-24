@@ -64,7 +64,7 @@
 		WHERE post_no = #{value}
 	 </select>
 	 
-	 
+
 	 
 	 
 	 <!-- SQL : UPDATE -->
@@ -127,6 +127,15 @@
 						ORDER BY post_no DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	 
+	 
+	 
+	 <select  id="listAdopt2"  parameterType="map"	resultMap="adoptSelectMap">
+	  	SELECT board_code, post_no, id,  status_code
+		FROM adopt
+		WHERE id = #{id} AND status_code = '3'
 	 </select>
 
 

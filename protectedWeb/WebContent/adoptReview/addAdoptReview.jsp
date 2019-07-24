@@ -83,15 +83,16 @@
 	          	
 	          	
 				<input type="hidden" name="boardCode" value="AR" >
-				<input type="hidden" name="id" value="user03" >
+				<input type="hidden" name="id" value="${user.id }" >
 				<input type="hidden" name="delCode" value="1" >
-				<input type="hidden" name="nickName" value="안녕" >
+				<input type="hidden" name="nickName" value="${user.nickname}" >
+				<input type="hidden" name="phone" value="${user.phone }" >
 <!-- 				<input type="hidden" class="form-control" id="multiFile" name="multiFile" > -->
 				
 				<div class="col-md-12">
 	          		<div class="cart-detail bg-light p-3 p-md-4">
 						<div class="form-group">
-							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.</strong></p></div>
+							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.${user.nickname}</strong></p></div>
 						</div>
 					</div>
 				</div>
@@ -176,21 +177,21 @@
 	          
  <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
   
-<!-- 			<div id="dialog-postTitle" title=""> -->
-<!-- 			  <p align="center"><br/>제목을 입력해주세요.</p> -->
-<!-- 			</div>        -->
+			<div id="dialog-postTitle" title="">
+			  <p align="center"><br/>제목을 입력해주세요.</p>
+			</div>       
 <!-- 			<div id="dialog-postTitleLength" title=""> -->
 <!-- 			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p> -->
 <!-- 			</div>        -->
-<!-- 			<div id="dialog-img" title=""> -->
-<!-- 			  <p align="center"><br/>이미지를 등록해주세요.</p> -->
-<!-- 			</div>    -->
+			<div id="dialog-img" title="">
+			  <p align="center"><br/>이미지를 등록해주세요.</p>
+			</div>   
 			<div id="dialog-postContent" title="">
 			  <p align="center"><br/>내용을 입력해주세요.</p>
 			</div>      
-			<div id="dialog-postContentLength" title="">
-			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p>
-			</div>      
+<!-- 			<div id="dialog-postContentLength" title=""> -->
+<!-- 			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p> -->
+<!-- 			</div>       -->
        
 <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
 	          
@@ -365,6 +366,23 @@
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
 	$( function() {
+	    $( "#dialog-postTitle" ).dialog({
+	    	autoOpen: false,
+		      width: 350,
+		      height: 180,
+		      modal: true,
+		      buttons: {
+		    	  닫기: function(){
+		    		  $( this ).dialog( "close" );
+		    		  $("input[name=postTitle]").focus();
+// 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+		    	  }
+		      }
+	    });
+	});
+	
+	
+	$( function() {
 	    $( "#dialog-postContent, #dialog-postContentLength" ).dialog({
 	    	autoOpen: false,
 		      width: 350,
@@ -379,7 +397,22 @@
 	    });
 	});
 	
-
+	
+	$( function() {
+	    $( "#dialog-img" ).dialog({
+	    	autoOpen: false,
+		      width: 350,
+		      height: 180,
+		      modal: true,
+		      buttons: {
+		    	  닫기: function(){
+		    		  $( this ).dialog( "close" );
+		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+		    	  }
+		      }
+	    });
+	});
+	
 	
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
@@ -406,31 +439,23 @@
 	// 등록버튼 누르고
 	function fncAddAdoptReview(){
 
-// 		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >10 ){
-// 			  $("input[name=postTitle]").focus();
-// 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-postContent').dialog( "open" );
+		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >10 ){
+			  $("input[name=postTitle]").focus();
+			  $('#dialog-postTitle').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+			  $('#dialog-postTitle').dialog( "open" );
+			  return;
+		  }
+// 		  if( $(".preview-box").length == 0 ){
+// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-img').dialog( "open" );
 // 			  return;
-// 		  }
-// 		  if(){
-// 			  $('#dialog-postTitleLength').dialog( "open" );
-// 			  return;
-// 		  }
-// 		  if( $("textarea[name=postContent]").text().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
-// 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-postContent').dialog( "open" );
-// 			  return;
-// 		  }
-// 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
-// 			  $("textarea[name=postContent]").focus();
-// // 			  $('#dialog-postContent').dialog( "open" );
-// 			  return;
-// 		  }
-// 		  if( $("input[name=postContent]").val().length > 100 ){
-// 			  $('#dialog-postContentLength').dialog( "open" );
-// 			  return;
-// 		  }
-		
+// 	  	  }
+		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+			  $('#dialog-postContent').dialog( "open" );
+			  return;
+		  }
+		  
 
 		var postContent = $("#editor").text();
 		$("form[name=detailForm]").attr("method" , "POST").attr("action" , "/adoptReview/addAdoptReview").attr("enctype","multipart/form-data").submit();
@@ -442,6 +467,7 @@
 			$( "button:contains('등록')" ).on("click" , function() {
 				$('textarea').val(editor.getData());
 				console.log($('textarea').val());
+				
 				fncAddAdoptReview();
 			});
 			

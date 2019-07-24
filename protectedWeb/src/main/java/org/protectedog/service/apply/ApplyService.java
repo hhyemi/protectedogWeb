@@ -18,6 +18,8 @@ public interface ApplyService {
 	
 	// 신청글 리스트 
 	public Map<String , Object> listApply(Search search,int adoptNo) throws Exception;
+	// 후기등록 권한 
+	public Map<String , Object> listApply2(String id) throws Exception;
 	
 	// 신청글 삭제
 	public void delApply(Apply apply) throws Exception;

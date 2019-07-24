@@ -36,7 +36,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		System.out.println("============================================="+apply);
 		sqlSession.insert("ApplyMapper.addApply", apply);
 	}
-
+	//글에 등록된 신청서 불러오기
 	public Apply getApply(int applyNo) throws Exception {
 		return sqlSession.selectOne("ApplyMapper.getApply", applyNo);
 	}
@@ -53,6 +53,18 @@ public class ApplyDAOImpl implements ApplyDAO{
 		map.put("totalCount", sqlSession.selectOne("ApplyMapper.getTotalCount", map));
 		map.put("list", list);
 
+		return map;
+	}
+	
+	public Map<String, Object> listApply2(String id) throws Exception {
+		Map<String , Object>  map = new HashMap<String, Object>();
+		map.put("id",  id );
+		
+		List<Apply> list = sqlSession.selectList("ApplyMapper.listApply2", map); 
+		
+		//selectOne: 쿼리 결과가 없으면 return null 
+		map.put("list", list);
+		
 		return map;
 	}
 	

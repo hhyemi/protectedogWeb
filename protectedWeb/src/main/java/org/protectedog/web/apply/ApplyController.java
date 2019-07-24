@@ -15,6 +15,7 @@ import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.apply.ApplyService;
 import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Apply;
+import org.protectedog.service.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,7 +72,9 @@ public class ApplyController {
 		System.out.println("/apply/addApply : GET");
 		
 		apply.setAdoptNo(postNo);
-//		apply.setBuyer((User)session.getAttribute("user"));
+		apply.setId(  ((User)session.getAttribute("user")).getId() );
+		apply.setPhone(  ((User)session.getAttribute("user")).getPhone() );
+		System.out.println("확인  = "+apply.getPhone());
 		
 		model.addAttribute("apply", apply);//adoptNo 넘기기
 		
