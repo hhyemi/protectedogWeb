@@ -36,7 +36,9 @@
     
     
     <style>
-    
+    	figure {
+    		width: wrap;
+    	}
 	
       
     </style>
@@ -51,45 +53,45 @@
 
     <!--================Single Product Area =================-->
     
-      <div class="container">
+      <div class="container" align="center">
 <!--       <div class="row justify-content-center"> -->
 <!--           <div class="col-xl-8 ftco-animate"> -->
 
-          <div class="col-lg-12" >
+          <div class="col-lg-8" align="left" >
 <!--           <div class="col-lg-5 offset-lg-1"> -->
             <div class="s_product_text">
             
 <%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
               
-              
-              <ul class="list">
+              <div class="col-md-12 "><br/><br/></div>
+              <ul class="list col-md-12">
               	
               	<input type="hidden" name="postNo" value="${board.postNo }">
               	<input type="hidden" name="postNo" value="${board.id }">
               	
                 <li>
-                   	<div class="row" style="position:relative;height:35px;">
-			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><font size="5px">${board.postTitle}</font></div>
+                   	<div class="row" style="position:relative;height:30px;">
+			        	<div class="col-xs-12 col-md-12" style="position:absolute; left:0px; bottom:0px;" ><font size="5px">${board.postTitle}</font></div>
 			        </div>
                 </li>
                 
                 <hr/>
                 
                 <li >
-                   	<div class="row" style="position:relative;height:35px;">
+                   	<div class="row" style="position:relative;height:30px;">
 			        	<div class="col-xs-4 col-md-4" style="position:absolute; left:0px; bottom:0px;" >작성자 ${board.nickName}</div>
-			        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >조회수 ${board.viewCount}&nbsp;&nbsp;&nbsp;&nbsp;작성일자 ${board.regDate}</div>
+			        	<div class="col-xs-8 col-md8" align="right" style="position:absolute; right:0px; bottom:0px; " >조회수 ${board.viewCount}&nbsp;&nbsp;&nbsp;&nbsp;작성일자 ${board.regDate}</div>
 			        </div>
                 </li>
                 
-                <hr/>
-                 <div class="col-md-12 "><br/><br/></div>
-                 <div class="col-md-12 "><br/><br/></div>
+<!--                 <hr/> -->
+<!--                  <div class="col-md-12 "><br/><br/></div> -->
+<!--                  <div class="col-md-12 "><br/><br/></div> -->
                  
                  
 <!--                 <li > -->
-                   	<div class="row" style="height:35px;">
-			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > ${board.postContent}</div>
+                   	<div class="row" style="position:relative;height:500px;">
+			        	<div class="col-xs-12 col-md-12" style="position:absolute; left:0px; " > ${board.postContent}</div>
 			        </div>
 <!--                 </li> -->
               	
@@ -135,6 +137,9 @@
      
     </div>
    <br><br><br/>
+    <!--================ start footer Area  =================-->
+    <jsp:include page="/layout/footer.jsp"></jsp:include>
+    <!--================ End footer Area  =================-->
     <!--================End Single Product Area =================-->
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
@@ -148,9 +153,7 @@
   
     <!--================End Product Description Area =================-->
 
-    <!--================ start footer Area  =================-->
     
-    <!--================ End footer Area  =================-->
     
 
     <!-- Optional JavaScript -->

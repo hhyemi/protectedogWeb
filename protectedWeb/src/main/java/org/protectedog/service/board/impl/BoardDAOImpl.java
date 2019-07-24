@@ -85,6 +85,39 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return sqlSession.selectList("BoardMapper.listBoardRankingSearch", boardCode);
 	}
+	
+	public Map<String, Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception {
+		
+		// CREATE MAP OBJECT
+		Map<String , Object>  map = new HashMap<String, Object>();
+		
+		System.out.println("===================================== BOARD DAP IMPL =====================================");
+		
+		// DEBUG
+		System.out.println(" boardCode : " + boardCode);
+		System.out.println(" searchCondition : " + search.getSearchCondition());
+		System.out.println(" searchKeyword : " +  search.getSearchKeyword());
+		System.out.println(" endRowNum : " +  search.getEndRowNum());
+		System.out.println(" startRowNum : " + search.getStartRowNum());
+		System.out.println(" order : " + order);
+		
+		// PUT MAP
+		map.put("boardCode",  boardCode );
+		map.put("searchCondition",  search.getSearchCondition());
+		map.put("searchKeyword",  search.getSearchKeyword());
+		map.put("endRowNum",  search.getEndRowNum()+"" );
+		map.put("startRowNum",  search.getStartRowNum()+"" );
+		map.put("order", order);
+		
+		// SQL EXECUTE
+		List<Board> list = sqlSession.selectList("BoardMapper.listBoardMoreCommentCount", map); 
+
+		// RETURN PUT MAP 
+		map.put("totalCount", sqlSession.selectOne("BoardMapper.getTotalCount", map));
+		map.put("list", list);
+
+		return map;
+	}
 
 
 }

@@ -128,9 +128,10 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
-                <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a>
-                <a class="dropdown-item" href="/adoptReview/addAdoptReview">경로테스트</a>
-                <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a>
+<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a> -->
+                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
+                <a class="dropdown-item" href="../adopt/thumnail.jsp">테스트</a>
+<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
 
               </div>
             </li>
@@ -158,7 +159,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                 <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-                <a class="dropdown-item" href="/community/getDogSense.jsp">뉴스</a>
+                <a class="dropdown-item" href="/community/listNews.jsp">뉴스</a>
               </div>
             </li>
             <c:if test="${ sessionScope.user != null }">
@@ -197,7 +198,7 @@
 
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#94BFCA"/></svg></div>
 
 
   <script src="/resources/prodmenu/js/jquery.min.js"></script>

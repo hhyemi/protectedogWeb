@@ -35,5 +35,8 @@ public interface BoardService {
 	// SELECT LIST RANKING TOP 5
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
 	
+	// 글 리스트 + 댓글 개수 조회
+	public Map<String, Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception;
+	
 
 }

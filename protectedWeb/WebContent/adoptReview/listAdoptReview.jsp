@@ -37,18 +37,28 @@
 <%-- 	<input type="hidden" id="boardCode" value="${param.boardCode }"> --%>
 	
 		<div class="page-header text-info">
-	       <h3 class="billing-heading mb-4"><strong>리뷰 리스트</strong></h3>
-<!-- 	          각 행을 클릭하면 신청서를 확인할 수 있습니다. -->
+		
+			<div class="row" style="position:relative;height:35px;">
+	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >
+	        		<font size="5px">리뷰 리스트</font>
+	        	</div>
+	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px">
+		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '미인증회원' }">
+		       		 	<button type="button" class="btn btn-primary">글쓰기</button>
+		        	</c:if>
+	        	</font></div>
+	        </div>
+		
 	    </div>
-	    
 
 	    <div class="row">
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		    </div>
+		    
 		    
 		</div>
 
@@ -59,57 +69,46 @@
       
         <thead>
           <tr>
-            <th><p align="center">No</p></th>
-            <th><p align="center">제목</p></th>
-            <th><p align="center">닉네임</p></th>
-            <th><p align="center">조회수</p></th>
-            <th><p align="center">신청일자</p></th>
-<!-- 			<th align="right">신청서 번호</th> -->
-<!--             <th align="right">신청자 아이디</th> -->
-<!-- 		    <th align="right">신청일자</th> -->
+            <th style="width: 10%"><p align="center"><strong>No</strong></p></th>
+            <th style="width: 60%"><p align="center"><strong>제목</strong></p></th>
+            <th style="width: 10%"><p align="center"><strong>닉네임</strong></p></th>
+            <th style="width: 10%"><p align="center"><strong>조회수</strong></p></th>
+            <th style="width: 10%"><p align="center"><strong>신청일자</strong></p></th>
           </tr>
         </thead>
        
 		<tbody>
-		
 		  <c:set var="i" value="0" />
 		  <c:forEach var="board" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
+			
 			<tr name="${ board.postNo }">
-<%-- 				<input type="hidden" name="applyNo" value="${ apply.applyNo }"> --%>
-				<td align="left">${ i }</td>
-<%-- 				<td align="left">${ apply.applyNo }</td> --%>
-				<td align="left"  title="Click : 상품정보 확인">${board.postTitle}</td>
-				<td align="left"  title="Click : 상품정보 확인">${board.nickName}</td>
-				<td align="left"  title="Click : 상품정보 확인">${board.viewCount}</td>
-				<td align="left">${board.regDate}
-<!-- 					<button class="btn btn-primary py-0 px-2">제외</button> -->
-				</td>
+				<input type="hidden" name="postNo" value="${ board.postNo }">
+				<td align="center">${ i }</td>
+				<td align="left"><strong>${board.postTitle}</strong></td>
+				<td align="center">${board.nickName}</td>
+				<td align="center">${board.viewCount}</td>
+				<td align="center">${board.regDate}</td>
 			</tr>
 			
           </c:forEach>
-        
         </tbody>
       
       </table>
       
-      
-      
-      
 	  <!--  table End /////////////////////////////////////-->
           
-		<button class="btn btn-primary py-3 px-4 col-md-3">돌아가기</button>
 	    	
-<%-- 	  <jsp:include page="/layout/footer.jsp"></jsp:include> --%>
+
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
- 	
  
 <!--  	■■■■■■■■■■■■■■■■■■■■■■■■■■ dialog ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
  	<!-- PageNavigation Start... -->
-<%-- 	<jsp:include page="../common/pageNavigator_new.jsp"/> --%>
+	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
 	
+ 		  <jsp:include page="/layout/footer.jsp"></jsp:include>
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -128,13 +127,6 @@
 	  <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		$(function() {
-			 
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
-			$("h7").css("color" , "red");
-			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
-		});	
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
@@ -145,33 +137,19 @@
 		
 		
 		//============= "검색"  Event  처리 =============	
-		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$(function() {
+			 
+			$( "button:contains('글쓰기')" ).on("click" , function() {
+				self.location = "/adoptReview/addAdoptReview";
+			});
+			 
+			$( "tr" ).on("click" , function() {
+				self.location ="/adoptReview/getAdoptReview?postNo="+$(this).children( $('input')).val().trim();
+			});
+ 
+			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 
-			 $( "figure" ).on("click" , function() {
-// 				 self.location ="/adopt/getAdopt?postNo="+$(this).children( $('input')).val().trim();
-			});
-		 });
-		
-		
-		//============= userId 에 회원정보보기  Event  처리(Click) =============	
-		 $(function() {
-		
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(3)" ).on("click" , function() {
-// 				alert("글번호 : "+$(this).children().val().trim());
-// 				 self.location ="/adopt/getAdopt?postNo="+$(this).children().val().trim();
-			});
-			
-			$( $( "tbody tr" ) ).on("click" , function() {
-				var applyNo =    parseInt( $( this).children( $('input') ).val().trim()  );
-// 				var userAjax =  $(   $(  "td:nth-child(3) " ).children()[  $(  "td:nth-child(3) " ).index(this)   ]    );
-				console.log("확인ok : "+applyNo);
-				getApply(applyNo);
-			});
-
-			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( "td:nth-child(2)" ).css("color" , "red");
+			$( "td:nth-child(3)" ).css("color" , "#326B79");
 			
 		});	
 		
