@@ -81,6 +81,19 @@
 				});
 	 	});	 
 	
+	 	 $(function() {
+				
+			 
+			 $( "td.ct_btn01:contains('장바구니로 이동')" ).on("click" , function() {
+				 //alert("");
+				 self.location ="/shop/addCart?prodNo=${product.prodNo}"
+		
+					
+			 });
+			 
+		
+		});
+	
 
 </script>
 
@@ -91,8 +104,9 @@
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_6.jpg');">
+	<div class="hero-wrap hero-bread">
+		<a style="background-image: url('/resources/file/fileShop/${product.mainFile}');">
+		<input type="hidden" value="${product.prodNo}"/></a>
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -125,7 +139,7 @@
 													<a class="img-prod">
 													<input type="hidden" value="${product.prodNo}"/>
 													<img class="img-fluid"
-														src="../../resources/file/fileShop/100s.jpg"
+														src="../../resources/file/fileShop/${product.mainFile}"
 														alt="Colorlib Template"> <span class="status">
 															<!-- 30% -->
 													</span>

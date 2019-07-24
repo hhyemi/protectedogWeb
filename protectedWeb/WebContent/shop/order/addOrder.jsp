@@ -61,83 +61,35 @@ body>div.container {
 	font-size: small;
 }
 
-#ordertable{
-width:60%;
-height: 100px;
-
-margin : auto;
-text-align: center;
+#ordertable {
+	width: 60%;
+	height: 100px;
+	margin: auto;
+	text-align: center;
 }
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//============= "등록"  Event 연결 =============
-	$(function() {
 
-		$("#addproduct").on(
-				"click",
-				function() {
-					//Debug..
-					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-					$("form[name='addForm']").attr("method", "POST").attr(
-							"action", "/market/addMarket").submit();
-					//fncAddProduct();
-				});
-	});
+	function fncAddPurchase() {
+		$("form").attr("method", "POST").attr("action", "/order/addOrder")
+				.submit();
+	}
 
-	//  	$(function() {
-
-	// 		$("#addproduct").on("click", function() {
-	// 			self.location = "/shop/product/addProduct"
-	// 		});
-
-	// 	});
-
-	//============= "취소"  Event 처리 및  연결 =============
+	//============= "구매"  Event 연결 =============
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-		$("a[href='#' ]").on("click", function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
-			$("form")[0].reset();
+		$("button.btn.btn-primary").on("click", function() {
+			fncAddPurchase();
 		});
 	});
 
-	function fncAddProduct() {
-		//Form 유효성 검증
-
-		// 		var prodName=$("input[name='prodName']").val();
-		// 	 	//var name = document.detailForm.prodName.value;
-		// 	 	var prodDetail=$("input[name='prodDetail']").val();
-		// 		//var detail = document.detailForm.prodDetail.value;
-		// 		var manuDate=$("input[name='manuDate']").val();
-		// 		//var manuDate = document.detailForm.manuDate.value;
-		// 		var price=$("input[name='price']").val();
-		// 		//var price = document.detailForm.price.value;
-
-		// 		if(prodName == null || prodName.length<1){
-		// 			alert("상품명은 반드시 입력하여야 합니다.");
-		// 			return;
-		// 		}
-
-		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("제조일자는 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-		// 		if(price == null || price.length<1){
-		// 			alert("가격은 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-
-		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
-	}
-
-	//============= 달력  =============
+	//============= "뒤로"  Event 처리 및  연결 =============
 	$(function() {
-		$("input[name='manuDate']").datepicker({
-			dateFormat : 'yy-mm-dd'
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("a[href='#']").on("click", function() {
+			history.go(-1);
 		});
 	});
 </script>
@@ -226,15 +178,16 @@ text-align: center;
 							<!-- 							</div> -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">주문자 id</label> <input type="text"
-										class="form-control" name="prodName" id="prodName"
+									<label for="firstname">${user.id} <input type="hidden"
+										value="${sessionScope.user.id }"></label> <input type="text"
+										class="form-control" name="proName" id="prodName"
 										placeholder="상품명을 입력해주세요" value="테스트">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">주문자 폰번호</label> <input type="text"
-										class="form-control" name="price" id="price"
+										class="form-control" name="phone" id="phone"
 										placeholder="판매가격을 입력해주세요">
 								</div>
 							</div>
@@ -248,7 +201,7 @@ text-align: center;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">이름</label> <input type="text"
-										class="form-control" name="prodName" id="prodName"
+										class="form-control" name="receiverName" id="receiverName"
 										placeholder="상품명을 입력해주세요" value="테스트">
 								</div>
 							</div>
@@ -265,8 +218,8 @@ text-align: center;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">우편번호</label> <input type="text"
-										class="form-control" name="price" id="sample4_postcode"
-										placeholder="우편번호 입력해주세요">
+										class="form-control" name="receiverAdder"
+										id="sample4_postcode" placeholder="우편번호 입력해주세요">
 								</div>
 							</div>
 							<p align="center">
@@ -312,7 +265,7 @@ text-align: center;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">연락처</label> <input type="text"
-										class="form-control" name="price" id="price"
+										class="form-control" name="receiverPhone" id="price"
 										placeholder="판매가격을 입력해주세요">
 								</div>
 							</div>
@@ -322,7 +275,7 @@ text-align: center;
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">배송요청사항</label> <input type="text"
-										class="form-control" name="price" id="price"
+										class="form-control" name="orderRequest" id="price"
 										placeholder="판매가격을 입력해주세요">
 								</div>
 							</div>
@@ -336,7 +289,7 @@ text-align: center;
 							</div>
 							<p align="center">
 								<a class="btn btn-primary py-3 px-4"
-									onclick="sample4_execDaumPostcode()" id="sample4_postcode">우편번호</a>
+									onclick="sample4_execDaumPostcode()" id="sample4_postcode">조회하기</a>
 								&nbsp;&nbsp;
 							<div class="col-md-6">
 								<div class="form-group">
@@ -349,7 +302,7 @@ text-align: center;
 
 
 							<p class="buttos">
-								<a class="btn btn-primary py-3 px-4" id="addproduct">등록하기</a>
+								<a class="btn btn-primary py-3 px-4" id="addproduct">구매하기</a>
 								&nbsp;&nbsp;<a href="#" class="btn btn-primary py-3 px-4">취소하기</a>
 							</p>
 						</div>
