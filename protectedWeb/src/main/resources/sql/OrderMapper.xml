@@ -5,21 +5,21 @@
 
 <mapper namespace="OrderMapper">
 	<resultMap type="order" id="orderSelectMap">
-		<result property="orderNo" column="order_no" jdbcType="NUMERIC"/>
-		<result property="prodNo" column="prod_no" jdbcType="NUMERIC" />
-		<result property="id" column="id" jdbcType="VARCHAR"/>
-		<result property="phone" column="phone" jdbcType="VARCHAR" />
-		<result property="couponNo" column="payment_option" jdbcType="CHAR" />
-		<result property="receiverAdder" column="receiver_addr" jdbcType="VARCHAR" />
-		<result property="receiverName" column="receiver_name" jdbcType="VARCHAR" />
-		<result property="receiverPhone" column="receiver_phone" jdbcType="VARCHAR" />
-		<result property="orderRequest" column="order_request" jdbcType="VARCHAR" />
-		<result property="paymentCode" column="payment_code" jdbcType="NUMERIC" />
-		<result property="orderDate" column="order_date" jdbcType="DATE"/>
-		<result property="orderQuantity" column="order_quantity" jdbcType="NUMERIC"/>
-		<result property="totalPrice" column="total_price" jdbcType="NUMERIC" />
-		<result property="orderCode" column ="order_code" jdbcType="NUMERIC"/>
-		<result property="deliveryCode" column="delivery_code" jdbcType="NUMERIC"/>
+		<result property="orderNo" 			column="order_no" 			jdbcType="NUMERIC"/>
+		<result property="prodNo" 			column="prod_no" 			jdbcType="NUMERIC" />
+		<result property="id" 				column="id" 				jdbcType="VARCHAR"/>
+		<result property="phone" 			column="phone" 				jdbcType="VARCHAR" />
+		<result property="couponNo"			column="payment_option" 	jdbcType="CHAR" />
+		<result property="receiverAdder" 	column="receiver_addr" 		jdbcType="VARCHAR" />
+		<result property="receiverName" 	column="receiver_name" 		jdbcType="VARCHAR" />
+		<result property="receiverPhone" 	column="receiver_phone"	 	jdbcType="VARCHAR" />
+		<result property="orderRequest" 	column="order_request" 		jdbcType="VARCHAR" />
+		<result property="paymentCode" 		column="payment_code" 		jdbcType="NUMERIC" />
+		<result property="orderDate"		column="order_date" 		jdbcType="DATE"/>
+		<result property="orderQuantity" 	column="order_quantity" 	jdbcType="NUMERIC"/>
+		<result property="totalPrice" 		column="total_price" 		jdbcType="NUMERIC" />
+		<result property="orderCode" 		column ="order_code" 		jdbcType="NUMERIC"/>
+		<result property="deliveryCode" 	column="delivery_code" 		jdbcType="NUMERIC"/>
 	</resultMap>
 
 	<sql id="select-Order">
