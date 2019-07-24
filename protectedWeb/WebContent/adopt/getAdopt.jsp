@@ -34,12 +34,28 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
     
     <style>
+
+		#title {
+			font-family: 'NanumSquare', sans-serif !important;
+			font-size: 22px !important;
+			font-weight: bold;
+		}
+		
+		.product_image_area { 
+			font-family: 'NanumSquare', sans-serif !important;
+		}
+		
+ 		button{ 
+ 			font-family: 'NanumSquare', sans-serif !important; 
+ 		} 
     
 	    #carouselExampleIndicators{
         	max-height: 400px;
 	    }
+	    
        	img {
         	max-height: 450px;
         }
@@ -150,10 +166,11 @@
               <ul class="list">
               	
               	<input type="hidden" name="postNo" value="${adopt.postNo }">
+              	<input type="hidden" name="userId" value="${user.id }">
               	
                 <li>
                    	<div class="row" style="position:relative;height:35px;">
-			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><font size="5px">${adopt.postTitle}</font>&nbsp;&nbsp;${adopt.id}</div>
+			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><font id="title" size="5px">${adopt.postTitle}</font>&nbsp;&nbsp;${adopt.id}</div>
 			        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"></font>${adopt.regDate}</div>
 			        </div>
                 </li>
@@ -173,7 +190,7 @@
                 <li>
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>체중</strong></div>
-						<div class="col-md-3 ">${adopt.dogWeight}kg</div>
+						<div class="col-md-3 ">${adopt.dogWeight}kg ${user.id }</div>
 			
 				  		<div class="col-md-2 "><strong>성별</strong></div>
 						<div class="col-md-5 ">${adopt.dogGender}</div>
@@ -184,13 +201,13 @@
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>
 					  		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
-						    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if>
+<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if> --%>
 				  		</strong></div>
 						<div class="col-md-3 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</div>
 			
 				  		<div class="col-md-2 " style="padding-right: 0px;"><strong>
 				  			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
-						    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if>
+<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if> --%>
 				  		</strong></div>
 						<div class="col-md-5">${adopt.dogDate}</div>
 					</div>
@@ -247,7 +264,7 @@
 				<!-- 분양 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'AD' }">
 	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
-	              			<a class="main_btn" href="#" style="width: 189px">입양신청</a>
+	              			<a id="adoptApply" class="main_btn" href="#" style="width: 189px">입양신청</a>
 	              		</c:if>
 	              		
 	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
@@ -317,13 +334,12 @@
         <div class="col-md-12" align="center">
        		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
 				<button class="main_btn" style="width: 189px" id="modiButton">수정</button>
-	       		<button class="main_btn" style="width: 189px" id="delButton"  data-toggle="modal" data-target="#delModal">삭제</button>
+	       		<button class="main_btn" style="width: 189px" id="delButton">삭제</button>
 			</c:if>
         	
 	        
 	        <button class="main_btn" style="width: 189px">목록</button>
         </div>
-<!--         <p><a href="#ex1" rel="modal:open">Open Modal</a></p> -->
         
       </div>
     </div>
@@ -332,53 +348,22 @@
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-			<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm" style="vertical-align: middle;" role="document">
-					<div class="modal-content">
-<!-- 						<div class="modal-header"> -->
-<!-- 							<h5 class="modal-title" id="exampleModalLabel"></h5> -->
-<!-- 							<button type="button" class="close" data-dismiss="modal" -->
-<!-- 								aria-label="Close"> -->
-<!-- 								<span aria-hidden="true">&times;</span> -->
-<!-- 							</button> -->
-<!-- 						</div> -->
-						<div class="modal-body" align="center">삭제하시겠습니까?</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">예</button>
-							<button type="button"  class="btn btn-primary"  data-dismiss="modal">아니오</button>
-						</div>
-					</div>
-				</div>
-			</div>	 
+			<div id="dialog-delAdopt" title="">
+			  <p align="center"><br/>삭제하시겠습니까?</p>
+			</div>  
 			<div id="dialog-adoptComplete" title="">
 			  <p align="center"><br/>분양완료 상태로 변경하시겠습니까?</p>
 			</div>  
 			<div id="dialog-missingComplete" title="">
 			  <p align="center"><br/>찾기완료 상태로 변경하시겠습니까?</p>
 			</div>  
+			<div id="dialog-alreadyApply" title="">
+			  <p align="center"><br/></p>
+			</div>  
 			<div id="dialog-listApply" title="">
 <!-- 			  <p id="listJSON"></p> -->
 			</div> 
 			
-			<div class="modal fade" id="myModal" role="dialog">
-			    <div class="modal-dialog">
-			    
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">×</button>
-			          <h4 class="modal-title">Modal Header</h4>
-			        </div>
-			        <div class="modal-body">
-			          <p>Some text in the modal.</p>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        </div>
-			      </div>
-			      
-			    </div>
-			  </div>
 
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -413,6 +398,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+      $(document).ready(function() { 
+    	  listApply('load');
+      });
 
       var map;
       var markers = [];
@@ -427,6 +415,7 @@
       var arrayTest = [];
       var arrayMark = [];
       
+      var id = $('input[name=userId]').val().trim();
       
       if (adArea.indexOf("#") != -1){
     	  var areaArray = adArea.split("#");
@@ -556,12 +545,27 @@
   	    });
       });
       
+      $( function() {
+  	    $( "#dialog-alreadyApply" ).dialog({
+  	    	  autoOpen: false,
+  		      width: 350,
+  		      height: 180,
+  		      modal: true,
+  		      buttons: {
+  		        	닫기: function() {
+  		          		$( this ).dialog( "close" );
+  		        	}
+  		      }
+  	    });
+      });
+      
 
       
   //////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	var str = '';
   
-    function listApply(){
+    function listApply(str){
+	  	
 		var adoptNo = parseInt(  $('input[name=postNo]').val().trim()  );
 	  	console.log(adoptNo);
   		$.ajax( 
@@ -594,32 +598,50 @@
 								            		+'<td align="center">'+(i+1)+'</td>'
 								            		+'<td align="center">'+data.list[i].id+'</td>'
 								            		+'<td align="center">'+data.list[i].regDate+'</td>'
-	// 							            		+'<td align="left"><button class="main_btn"">확인확인</button></td>'
 							            		+'</tr>';	
 							            		
 							}
 							displayValue += '</tbody>'+'</table>';
-				
-							$( "#dialog-listApply" ).html(displayValue);
-							$( '#dialog-listApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-							$( "#dialog-listApply" ).dialog( "open" );
-						
+							
+							
+							if ( str == '확인' ) {
+								
+								$( "#dialog-listApply" ).html(displayValue);
+								$( '#dialog-listApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+								$( "#dialog-listApply" ).dialog( "open" );
+								
+							} else if ( str == '' ){
+							
+								if ( id == null ) {
+									$( '#dialog-alreadyApply p' ).html("<br/>인증회원만 신청할 수 있습니다.");
+									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+									$( "#dialog-alreadyApply" ).dialog( "open" );
+								} else if ( displayValue.indexOf(id) != -1 ) {
+									$( '#dialog-alreadyApply p' ).html("<br/>이미 신청하셨습니다.");
+									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+									$( "#dialog-alreadyApply" ).dialog( "open" );
+								} else {
+									self.location = "/apply/addApply?postNo=${adopt.postNo}";
+								}
+								
+								
+								
+							} else if ( str == 'load' && displayValue.indexOf(id) != -1 ) {
+								
+								$( '#adoptApply' ).text("신청완료");
+								
+							}
+							
 				},
 				error: function(request, status, error){ 
 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-//						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
 		        }
 				
 			});
-
-	  
-// 	  		$('#dialog-listApply').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-listApply').dialog( "open" );
  	}
   
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   
-// 	  $( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
 		function getApply(applyNo){
 //     		var applyNo = parseInt( $(this).children($('input')).val().trim()  );
 		  	console.log(applyNo);
@@ -732,11 +754,12 @@
 			});
 		
 			$( "a:contains('입양신청')" ).on("click" , function() {
-				self.location = "/apply/addApply?postNo=${adopt.postNo}"
+				listApply('');
+// 				self.location = "/apply/addApply?postNo=${adopt.postNo}"
 			});
 		
 			$( "button:contains('신청서확인')" ).on("click" , function() {
-				listApply();
+				listApply('확인');
 // 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 		

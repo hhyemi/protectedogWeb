@@ -20,13 +20,6 @@
 		seq_Cart_cart_no.NEXTVAL, #{id}, #{prodNo}, #{quantity}, #{totalPrice})
 	</insert>
 
-	<update id="updateCart" parameterType="cart">
-		UPDATE cart
-		SET
-		quantity=#{quantity}
-		WHERE cart_no=#{cartNo}
-	</update>
-
 	<delete id="delCart" parameterType="cart">
 		DELETE
 		FROM cart
@@ -44,13 +37,43 @@
 
 	 <select  id="listCart"  parameterType="cart"	resultMap="cartSelectMap">
 	  	SELECT 
-		c.cart_no, c.id, c.prod_no, p.prod_name, p.price, c.quantity,
-		(p.price*c.quantity)
+		c.cart_no, 
+		c.id, 
+		c.prod_no, 
+		p.prod_name, 
+		p.price, 
+		c.quantity,
+		(p.price*c.quantity) totalPrice
+		
 		FROM 
+		
 		cart c, product p
 		WHERE 
-		c.id = #{id} AND c.prod_no = p.prod_no
-	 </select> 
-
+		c.id = #{id} 
+		AND c.prod_no = p.prod_no
+	 </select>
+	 
+	 <update id="modifyCart">
+	 UPDATE cart
+	 set quantity = #{quantity}
+	 WHERE id=#{id}
+	 AND prodNo=#{prodNo}
+	 
+	 
+	 </update>
+	 
+	 <select id="countCart" resultMap="cartSelectMap">
+	 SELECT COUNT(*)
+	 FROM cart
+	 WHERE id=#{id}
+	 AND prodNo=#{prodNo}
+	 </select>
+	 
+	 <update id="updateCart">
+	 UPDATE cart
+	 SET quantity = quantity + #{quantity}
+	 where id = #{id}
+	 AND prodNo = #{prodNo} 
+	 </update>
 
 </mapper>

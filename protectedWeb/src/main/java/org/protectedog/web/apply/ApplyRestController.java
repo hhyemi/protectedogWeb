@@ -1,5 +1,6 @@
 package org.protectedog.web.apply;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -8,7 +9,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
+import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.apply.ApplyService;
+import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Apply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,6 +35,9 @@ public class ApplyRestController {
 	@Autowired
 	@Qualifier("applyServiceImpl")
 	private ApplyService applyService;
+	@Autowired
+	@Qualifier("adoptServiceImpl")
+	private AdoptService adoptService;
 
 		
 	public ApplyRestController(){
@@ -55,9 +61,7 @@ public class ApplyRestController {
 			
 		return applyService.getApply(applyNo);
 	}
-	
-	
-	
+
 	//신청서 삭제
 	@RequestMapping( value="json/delApply/{applyNo}", method=RequestMethod.GET)
 	public void delApply( 	@PathVariable("applyNo") int applyNo ) throws Exception{
@@ -97,9 +101,7 @@ public class ApplyRestController {
 
 		// Model 과 View 연결
 		map.put("list", map.get("list"));
-//		map.put("resultPage", resultPage);
-//		map.put("search", search);
-		
+
 		map.remove("adoptNo");
 		map.remove("startRowNum");
 		map.remove("endRowNum");
@@ -112,6 +114,38 @@ public class ApplyRestController {
         System.out.println("json\n"+jsonObject);
         
         return jsonObject;
+	}
+	
+	
+	// 리스트 조회
+	@SuppressWarnings("unchecked")
+	@RequestMapping( value="json/listApply2/{adoptNo}")
+	public JSONObject listApply2( @PathVariable("adoptNo") String id ) throws Exception{
+		
+		System.out.println("/apply/json/listApply2 : GET / POST" +id);
+		
+		// Business logic 수행
+		Map<String , Object> map= applyService.listApply2(id);
+	
+		// Model 과 View 연결
+		map.put("list", map.get("list"));
+//		List<Adopt> list = (List)map.get("list");
+//		System.out.println( list );
+//		
+//		for (int i=0; i< list.size(); i++) {
+//			String str = list.get(i);
+//			System.out.println(str);
+//		}
+		
+
+		System.out.println("map확인 : "+map);
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("list", map.get("list"));
+		
+		System.out.println("json\n"+jsonObject);
+		
+		return jsonObject;
 	}
 	
 	

@@ -55,8 +55,9 @@ public class ProductController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	@Value("#{commonProperties['fileShop']}")
-	String fileShopRoot;
+	@Value("#{commonProperties['product']}")
+	String Shop;
+
 	
 	public ProductController() {
 		System.out.println(this.getClass());
@@ -79,6 +80,8 @@ public class ProductController {
 		product.setCountry(request.getParameter("country"));
 		product.setCompany(request.getParameter("company"));
 		product.setManuDate(tempDate);
+		product.setMainFile(multiFile.get(0));
+		
 		System.out.println("test///////////////////////////////1");
 		product.setPrice(Integer.parseInt(request.getParameter("price")));
 		System.out.println("test///////////////////////////////2");
@@ -87,7 +90,6 @@ public class ProductController {
 		product.setProdCode(Integer.parseInt(request.getParameter("prodCode")));
 		System.out.println("test///////////////////////////////4/");
 		product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-
 		
 		
 		System.out.println(product);
@@ -101,21 +103,24 @@ public class ProductController {
 		System.out.println("Product GET : POST/");
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
-	
+
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
 
-		FileDog files = new FileDog();
-		files.setBoardCode(fileShopRoot);
-		files.setFileName(fileName);
-		files.setFileCode(0);
-		files.setPostNo(product.getProdNo());
-		listFile.add(files);
+			if (fileName != null && fileName.length() > 0) {
+
+				FileDog files = new FileDog();
+				files.setBoardCode(Shop);
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(product.getProdNo());
+				listFile.add(files);
+			}
 		}
 		
 		fileService.addFile(listFile);
 		
-		return "redirect:/shop/product/getProduct?prodNo="+product.getProdNo();
+		return "redirect:/product/getProduct?prodNo="+product.getProdNo();
 		
 		
 	
@@ -131,7 +136,15 @@ public class ProductController {
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		model.addAttribute("product", product);
-	
+		
+		// 파일가져오기
+		Map<String, Object> filePost = new HashMap<String, Object>();
+				filePost.put("boardCode", Shop);
+				filePost.put("postNo", prodNo);
+				List<FileDog> file = fileService.getFile(filePost);
+
+		model.addAttribute("file", file);
+		model.addAttribute("product", product);
 
 		return "forward:/shop/product/getProduct.jsp";
 		

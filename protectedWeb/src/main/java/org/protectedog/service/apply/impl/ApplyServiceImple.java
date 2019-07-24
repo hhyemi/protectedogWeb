@@ -49,6 +49,14 @@ public class ApplyServiceImple implements ApplyService{
 		
 		return map;
 	}
+	
+	public Map<String , Object > listApply2(String id) throws Exception {
+		Map<String, Object> map= applyDAO.listApply2(id);
+		
+		map.put("map", map );
+		
+		return map;
+	}
 
 	public void delApply(Apply apply) throws Exception {
 		applyDAO.delApply(apply);

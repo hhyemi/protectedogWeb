@@ -192,7 +192,7 @@ body {
 					<tr><td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
 				<thead>
 					<tr>
-						<th class="mdl-data-table__cell--non-numeric" align="center"
+						<th class="mdl-data-table__cell--non-numeric" text-align="center"
 							id="no">글번호</th>
 						<th align="center" id="boardfont">제목</th>
 						<th align="center" id="boardfont">질문유형</th>

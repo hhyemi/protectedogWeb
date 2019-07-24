@@ -52,6 +52,7 @@
 		WHERE apply_no = #{value}
 	 </select>
 	 
+	 
 
 	 
 	 
@@ -78,8 +79,16 @@
 								adopt_no = #{adoptNo} AND status_code != '0' 
 						</where>
 						ORDER BY apply_no DESC ) inner_table
-				WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+				)
+		
+	 </select>
+	 
+	 
+	 
+	 <select  id="listApply2"  parameterType="map"	resultMap="applySelectMap">
+	  	SELECT ad.post_no, ap.id, ad.status_code
+		FROM  adopt ad, apply ap
+		WHERE ad.post_no(+) = ap.adopt_no AND ad.status_code = '3'
 	 </select>
 
 	

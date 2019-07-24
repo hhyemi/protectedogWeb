@@ -19,6 +19,7 @@
 		<result property="company" 			column="company" 		jdbcType="VARCHAR" />
 		<result property="discountPrice" 	column="discount_price" jdbcType="NUMERIC"/>
 		<result property="prodCode" 		column="prod_code" 		jdbcType="NUMERIC"/>
+		<result property="mainFile"			column="main_file"		jdbcType="VARCHAR"/>
 		
 	</resultMap>
 	
@@ -26,11 +27,15 @@
 
 	<!-- 상품등록  : product add -->
 	<insert id="addProduct" parameterType="product">
+		<selectKey keyProperty="prodNo" resultType="int" order="BEFORE">
+		SELECT SEQ_PRODUCT_PROD_NO.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT 
 		INTO product (prod_no, prod_name, price, manu_date, reg_date, country, quantity, prod_detail, company, 
-		discount_price, prod_code) 
-		VALUES (SEQ_PRODUCT_PROD_NO.NEXTVAL, #{prodName:VARCHAR}, #{price:NUMERIC}, #{manuDate}, SYSDATE, #{country:VARCHAR}, 
-		#{quantity:NUMERIC}, #{prodDetail:VARCHAR}, #{company:VARCHAR}, #{discountPrice:NUMERIC}, #{prodCode:NUMERIC})
+		discount_price, prod_code, main_file) 
+		VALUES (#{prodNo}, #{prodName:VARCHAR}, #{price:NUMERIC}, #{manuDate}, SYSDATE, #{country:VARCHAR}, 
+		#{quantity:NUMERIC}, #{prodDetail:VARCHAR}, #{company:VARCHAR}, #{discountPrice:NUMERIC}, #{prodCode:NUMERIC},
+		#{mainFile:VARCHAR})
 		
 	</insert>
 
@@ -39,7 +44,7 @@
 	<!-- 상품상세조회  : product read(one)  -->
 	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
 		SELECT
-		prod_no, prod_name, price, country, prod_detail, company, discount_price
+		prod_no, prod_name, price, country, prod_detail, company, discount_price, main_file
 		FROM product
 		WHERE prod_no = #{prodNo}
 	</select>
@@ -65,7 +70,7 @@
 	<select  id="listProduct"  parameterType="search"	resultMap="productSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT prod_no, prod_name, price, discount_price
+	  		FROM (	SELECT prod_no, prod_name, price, discount_price, main_file
 	  						 FROM product 	  					 
 									<if test="searchCondition != null">
 												<where>

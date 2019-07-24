@@ -72,5 +72,19 @@ public class MessageServiceImpl implements MessageService{
 		// TODO Auto-generated method stub
 		messageDAO.updateMessage(message);
 	}
+	
+	@Override
+	public int getUnreadMessage(String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		int result=0;
+		
+		Message message=messageDAO.getUnreadMessage(receiverId);
+		System.out.println("message ¿÷¿Ω? : "+message);
+		if(message != null) {
+			result=1;
+		}
+		
+		return result;
+	}
 
 }

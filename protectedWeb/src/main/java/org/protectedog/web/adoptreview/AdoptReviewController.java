@@ -1,31 +1,24 @@
 package org.protectedog.web.adoptreview;
 
-import java.io.File;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.domain.Board;
+import org.protectedog.service.domain.User;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 
 
@@ -39,6 +32,10 @@ public class AdoptReviewController {
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	//setter Method 구현 않음
 	
@@ -63,9 +60,15 @@ public class AdoptReviewController {
 	
 	
 	@RequestMapping( value="addAdoptReview", method=RequestMethod.GET )
-	public String addAdoptReview( ) throws Exception {
+	public String addAdoptReview( Model model, HttpSession session ) throws Exception {
 
 		System.out.println("/adoptReview/addAdoptReview : GET");
+		
+		System.out.println("세션들어왔나 "+session.getAttribute("user") );
+		if ( session.getAttribute("user") != null) {
+			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
+			model.addAttribute("user", user);
+		}
 
 		return "forward:/adoptReview/addAdoptReview.jsp";
 	}
@@ -95,17 +98,20 @@ public class AdoptReviewController {
 	
 	// board 글 상세조회+조회수 증가
 	@RequestMapping( value="getAdoptReview", method=RequestMethod.GET)
-	public String getAdoptReview( @RequestParam("postNo") int postNo , Model model) throws Exception {
+	public String getAdoptReview( @RequestParam("postNo") int postNo , Model model, HttpSession session ) throws Exception {
 		
 		System.out.println("/adoptReview/getAdoptReview : GET");
 		
+		System.out.println("세션들어왔나 "+session.getAttribute("user") );
+		if ( session.getAttribute("user") != null) {
+			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
+			model.addAttribute("user", user);
+		}
 		//Business Logic
 		Board board = boardService.getBoard(postNo);
-//		board.setViewCount(board.getViewCount()+1);
 		boardService.updateViewCount(board);
 		// Model 과 View 연결
 		model.addAttribute("board", board);	
-//		System.out.println("파일이름 확인 : "+product.getFileName());
 	
 
 		return "forward:/adoptReview/getAdoptReview.jsp";
@@ -146,7 +152,9 @@ public class AdoptReviewController {
 //		}
 		
 		boardService.updateBoard(board);
+		System.out.println("업데이트까지는 됨");
 		board = boardService.getBoard(board.getPostNo());
+		System.out.println("겟까지 됨");
 		
 		model.addAttribute("board", board);
 		

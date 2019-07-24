@@ -42,7 +42,7 @@ public class FileUploadRestController {
 	@Value("#{commonProperties['fileOthers']}")
 	String fileOtherRoot;
 	
-	@Value("{commonProperties['fileReport']}")
+	@Value("#{commonProperties['fileReport']}")
 	String fileReportRoot;
 
 	/// Constructor
@@ -94,7 +94,7 @@ public class FileUploadRestController {
 				} else if (boardCode.equals("Other")) {
 					File f = new File(fileOtherRoot, fileName);
 					image.transferTo(f);
-				} else if (boardCode.equals("Report")) {
+				} else if (boardCode.equals("RP")) {
 					File f = new File(fileReportRoot, fileName);
 					image.transferTo(f);
 				}

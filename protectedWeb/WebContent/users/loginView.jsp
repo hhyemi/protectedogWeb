@@ -29,7 +29,15 @@
 	<style>
     	 body >  div.container{ 
             margin-top: 10px;
-        }
+         }
+        
+		#kakao-login-btn { 
+			width:104px; height:40px;
+		 }
+		 
+		button {
+			width:150px; height:40px;
+		}
     </style>
 	
 </head>
@@ -65,47 +73,50 @@
 					      <input type="password" class="form-control" name="pw" id="pw" placeholder="패스워드" >
 					    </div>
 					  </div>
-
 					  
-					  <div class="form-group">
-					  
-					  	<div class="col-sm-offset-4 col-sm-6 text-center">
-					      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-					    </div>
-					    
-					    <div id="naver_id_login"></div>
-					  
-					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					        <a id="kakao-login-btn"></a>
+					 </form>
+					 
+					 
+					  <div class="row" style="padding-left: 38%; padding-right: 22%;">
+					      <span style="width:104px" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></span>
+					      <span id="naver_id_login"></span>
+					      <span>
+					        <a style="width:600px" id="kakao-login-btn"></a>
 						    <a href="http://developers.kakao.com/logout"></a>
-						    <script type='text/javascript'>
-						    Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
-
-					        Kakao.Auth.createLoginButton({
-					          container: '#kakao-login-btn',
-					          size : 'small',
-					          success: function(authObj) {
-					        	  Kakao.API.request({
-					                  url : "/v2/user/me",
-					                  success : function(result){
-					                     var info=JSON.stringify(result);
-					                     $(location).attr('href', '/users/kakao?kakao='+result.id);
-					                  }
-					               })
-					          },
-					          fail: function(err) {
-					             alert(JSON.stringify(err));
-					          }
-					        });
-
-						    </script>
-						    
-					      <button type="button" class="btn btn-primary"  >로 &nbsp;그 &nbsp;인</button>
-					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
+							    <script type='text/javascript'>
+							    Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+	
+						        Kakao.Auth.createLoginButton({
+						          container: '#kakao-login-btn',
+						          size : 'small',
+						          success: function(authObj) {
+						        	  Kakao.API.request({
+						                  url : "/v2/user/me",
+						                  success : function(result){
+						                     var info=JSON.stringify(result);
+						                     $(location).attr('href', '/users/kakao?kakao='+result.id);
+						                  }
+						               })
+						          },
+						          fail: function(err) {
+						             alert(JSON.stringify(err));
+						          }
+						        });
+	
+							    </script>	
+					    	</span>
 					    </div>
-					  </div>
+						
+						<p/>
+						<p/>
+
+					    <div class="signIn" style="padding-left: 35%; padding-right: 30%;" align="center">
+					      <button type="button" id="login" class="btn btn-primary"  >로 &nbsp;그 &nbsp;인</button>
+					      <button type="button" id="regist" class="btn btn-primary"  >회 &nbsp;원 &nbsp;가 &nbsp;입</button>
+					    </div>
+
 			
-					</form>
+
 			   	 </div>
 			
 			</div>
@@ -124,7 +135,7 @@
 		$( function() {
 			
 			$("#id").focus();
-			$("button").on("click" , function() {
+			$("#login").on("click" , function() {
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
 				
@@ -174,6 +185,14 @@
 			
 		});
 		
+		$(document).ready(function(){
+			$("#pw").keyup(function(key){
+				if(key.keyCode==13){
+					$("#login").click();
+				}
+			})
+		})
+		
 		$(function(){
 			$(".g-signin2").on("click", function(){
 				onSignIn(googleUser);
@@ -204,7 +223,7 @@
 
 		//============= 회원원가입화면이동 =============
 		$( function() {
-			$("a[href='#' ]").on("click" , function() {
+			$("#regist").on("click" , function() {
 				self.location = "/users/addUsersBase"
 			});
 		});

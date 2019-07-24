@@ -1,5 +1,8 @@
 package org.protectedog.web.user;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/users/*")
@@ -29,6 +33,7 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
 	
 	///Constructor
 	public UserController() {
@@ -41,6 +46,10 @@ public class UserController {
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
+	///
+	@Value("#{commonProperties['fileUser']}")
+	String path;
 	
 	///Method
 	@RequestMapping(value="kakao", method=RequestMethod.GET)
@@ -255,9 +264,34 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="updateUsers", method=RequestMethod.POST)
-	public String updateUsers(@ModelAttribute("user") User user, Model model, HttpSession session) throws Exception{
+	public String updateUsers(@ModelAttribute("user") User user, 
+								Model model, 
+								HttpSession session, 
+								@RequestParam("file") MultipartFile file) throws Exception{
 		
 		System.out.println("/users/updateUsers : POST");
+		
+		String savePath=path;
+		
+		String originalFile=file.getOriginalFilename();	
+		
+		System.out.println(file.isEmpty());
+		
+		if(!file.isEmpty()) {
+			try {
+				byte[] bytes=file.getBytes();
+				BufferedOutputStream stream=new BufferedOutputStream(new FileOutputStream(new File(savePath, originalFile)));
+				stream.write(bytes);
+				stream.close();
+				model.addAttribute("resultMSG", "파일 업로드 성공");
+			} catch(Exception e) {
+				model.addAttribute("resultMSG", "업로드 실패");
+			} 
+		} else {
+			model.addAttribute("resultMSG", "파일 선택 요망");
+		}
+	
+		user.setProfile(originalFile);
 		
 		userService.updateUsers(user);
 		
