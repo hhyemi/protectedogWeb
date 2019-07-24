@@ -122,11 +122,11 @@ body {
 </head>
 
 <body>
-
+	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-
+	
 	<div class="container">
-
+		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
 
@@ -190,8 +190,6 @@ body {
 	
 	<script type="text/javascript">
 	
-	
-	if(${board.route != ''}){
     var map;
     var markers = [];
     var loca = "${board.route}";
@@ -251,7 +249,6 @@ body {
 		 	
     }//$('#pop').text(aaa);
 	
-     }
 	//============= SNS공유 Event  처리 =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
@@ -275,8 +272,8 @@ body {
 	     Kakao.Link.sendDefault({
 	       objectType: 'feed',
 	       content: {
-	         title: '유기견보호',
-	         description: '멍멍',
+	         title: '${board.postTitle}',
+	         description: '${board.nickName} 님의 작성글 입니다.',
 	         imageUrl:document.location.href,
 	         link: {
 	           mobileWebUrl: document.location.href,
@@ -299,6 +296,6 @@ body {
      
 	</script>
 	
-	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap" async defer></script>
 </body>
 </html>

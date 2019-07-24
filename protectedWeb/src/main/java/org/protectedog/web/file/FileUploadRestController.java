@@ -42,7 +42,7 @@ public class FileUploadRestController {
 	@Value("#{commonProperties['fileOthers']}")
 	String fileOtherRoot;
 	
-	@Value("{commonProperties['flieReport']}")
+	@Value("{commonProperties['fileReport']}")
 	String fileReportRoot;
 
 	/// Constructor

@@ -11,32 +11,45 @@
 <!--  meta  -->
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>애견상식</title>
 <!--  bootstrap CDN  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- jQuery CSS -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
 	
-	var cnt = 5;	
+	var cnt = 9;	
 	var searchKeyword = '애견상식';
 	
 	$(function () {
 		$("button").on("click",function(){
 			searchKeyword = $(this).text();
 			fnGetList();
+		});
+		
+		var event = false;
+		var display = "";
+		
+		$(window).on("scroll", function(){
+				if($(window).scrollTop() == ( $(document).height() - $(window).height() )){
+					if(event == true){
+// 						alert("return !");
+// 						return;
+					} else {
+						alert("!");
+						event = true;
+						console.log(cnt+3);
+						
+						fnGetList();
+					}
+				}
 		});
 	});
 	
@@ -57,7 +70,7 @@
 		$("#nav_view").empty();
 		
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults=9";
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
 		
 		console.log(sTargetUrl);
 		
@@ -105,7 +118,7 @@
 					}
 				})
 			}
-		});	
+		});
 	}
 </script>
 
