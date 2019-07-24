@@ -166,6 +166,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USERS</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
                 <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
                 <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
@@ -174,6 +175,9 @@
                 </c:if>
                 <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
                 <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
+                <c:if test="${ sessionScope.user.role eq 'admin' }">
+                <a class="dropdown-item" href="/report/listReport">신고글목록</a>
+                </c:if>
               </div>
             </li>
             </c:if>
@@ -217,6 +221,67 @@
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!--   <script src="/resources/prodmenu/js/google-map.js"></script> -->
   <script src="/resources/prodmenu/js/main.js"></script>
+  
+  	<script type="text/javascript">
+		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+		function loginWithKakao() {
+			Kakao.Auth.login({
+				success : function(authObj) {
+					Kakao.API.request({
+						url : "/v2/user/me",
+						success : function(result) {
+							var info = JSON.stringify(result);
+							$(location).attr('href',
+									'/users/kakao?kakao=' + result.id);
+						}
+					});
+					Kakao.Auth.getAccessToken();
+				},
+				fail : function(err) {
+					alert(JSON.stringify(err));
+					alert("로그인 실패")
+				}
+			})
+		}
+
+		function logoutWithKakao() {
+			Kakao.Auth.logout();
+			location.href = 'https://accounts.kakao.com/logout?continue=https://pf.kakao.com/logged_out';
+		}
+
+		$(function() {
+			$("#myInfo").on(
+					"click",
+					function() {
+						$(self.location).attr('href',
+								"/users/getUsers?id=${sessionScope.user.id}");
+					})
+		});
+
+		$(function() {
+			$("#login").on("click", function() {
+				$(self.location).attr("href", "/users/login");
+			});
+		});
+
+		$(function() {
+			$("#regist").on("click", function() {
+				$(self.location).attr("href", "/users/addUsersBase");
+			});
+		});rms
+		
+		
+		
+// 		$(function(){
+// 			$("#googleLogout").on("click", function(){
+// 				var auth2=gapi.auth2.getAuthInstance();
+// 				auth2.setToken(null);
+// 				auth2.signOut();
+// 			});
+// 		})
+
+	</script>
+	
   </body>
 </html>
     

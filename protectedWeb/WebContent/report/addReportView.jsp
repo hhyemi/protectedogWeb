@@ -149,7 +149,37 @@
 // 				return;
 // 			}
 		   
+          $(function() {     
+            var form = $('#uploadForm')[0];
+            var formData = new FormData(form);
 
+            for (var index = 0; index < 100; index++) {
+                formData.append('files',files[index]);
+            }
+                
+                $.ajax({
+                type : 'POST',
+                enctype : 'multipart/form-data',
+                processData : false,
+                contentType : false,
+                cache : false,
+                timeout : 600000,
+                url : '/Images/json/imageupload/RP',
+                dataType : 'JSON',
+                data : formData,
+                success : function(result) {
+                    if (result === -1) {
+                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+                        // 이후 동작 ...
+                    } else if (result === -2) {
+                        alert('파일이 10MB를 초과하였습니다.');
+                        // 이후 동작 ...
+                    } else {
+                        alert('이미지 업로드 성공');
+                    }
+                }
+            });
+        });
 			
 			$("#uploadForm").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
 

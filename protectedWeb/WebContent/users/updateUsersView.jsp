@@ -56,7 +56,7 @@
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form class="form-horizontal" enctype="multipart/form-data">
 		<input type="hidden" id="id" name="id" value="${ user.id }">
 		  <div class="form-group">
 		    <label for="pw" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
@@ -135,12 +135,12 @@
 			  </div>
 		   </div>
 		  
-		  <div class="form-group">
-		    <label for="account" class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="account" name="account" value="${ user.account }">
-		    </div>
-		  </div>
+<!-- 		  <div class="form-group"> -->
+<!-- 		    <label for="account" class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="account" name="account" value="${ user.account }"> --%>
+<!-- 		    </div> -->
+<!-- 		  </div> -->
 		  
 		  <div class="form-group">
 		    <label for="birthDate" class="col-sm-offset-1 col-sm-3 control-label">생년월일</label>
@@ -148,6 +148,14 @@
 		      <input type="text" class="form-control" id="birthDate" name="birthDate" value="${ user.birthDate }">
 		    </div>
 		  </div>
+		  
+		  <div class="form-group">
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">프로필사진</label>
+			   <div class="col-sm-4">
+				  <input type="file" class="form-control" id="profile" name="file" style="width: 300px; 
+						height: 40px" maxLength="13" value="${ user.profile }"/>
+			   </div>
+		  </div>		  
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
@@ -169,13 +177,18 @@
 			
 			$( "#submit" ).on("click" , function() {
 				var value = "";	
+				
+				if($("input:text[name='phone2']").val() == "" && $("input:text[name='phone3']").val() != "" ){
+					$("input:hidden[name='phone']").val(${user.phone});
+					
+				}
 				if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 					var value = $("option:selected").val() + "-" 
 								+ $("input[name='phone2']").val() + "-" 
 								+ $("input[name='phone3']").val();
+					$("input:hidden[name='phone']").val( value );
 				}
 
-				$("input:hidden[name='phone']").val( value );
 				
 				$("form").attr("method" , "POST").attr("action" , "/users/updateUsers");
 			});
