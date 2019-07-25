@@ -1,76 +1,75 @@
 package org.protectedog.service.domain;
 
 public class Cart {
-	
-	//Field
-	private int cartNO;
-	private int prodNo;
-	private String id;
-	private int totalPrice;
-	private int quantity;
-	
-	
-	public Cart() {
 		
-	}
+		//Field
+		private int cartNo;
+		private Product prodNo;
+		private User id;
+		private int totalPrice;
+		private int quantity;
+		
+		
+		public Cart() {
+			
+		}
 
 
-	public int getCartNO() {
-		return cartNO;
-	}
+		public int getCartNo() {
+			return cartNo;
+		}
 
 
-	public void setCartNO(int cartNO) {
-		this.cartNO = cartNO;
-	}
+		public void setCartNo(int cartNo) {
+			this.cartNo = cartNo;
+		}
 
 
-	public int getProdNo() {
-		return prodNo;
-	}
+		public Product getProdNo() {
+			return prodNo;
+		}
 
 
-	public void setProdNo(int prodNo) {
-		this.prodNo = prodNo;
-	}
+		public void setProdNo(Product prodNo) {
+			this.prodNo = prodNo;
+		}
 
 
-	public String getId() {
-		return id;
-	}
+		public User getId() {
+			return id;
+		}
 
 
-	public void setId(String id) {
-		this.id = id;
-	}
+		public void setId(User id) {
+			this.id = id;
+		}
 
 
-	public int getTotalPrice() {
-		return totalPrice;
-	}
+		public int getTotalPrice() {
+			return totalPrice;
+		}
 
 
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+		public void setTotalPrice(int totalPrice) {
+			this.totalPrice = totalPrice;
+		}
 
 
-	public int getQuantity() {
-		return quantity;
-	}
+		public int getQuantity() {
+			return quantity;
+		}
 
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+		public void setQuantity(int quantity) {
+			this.quantity = quantity;
+		}
 
 
-	@Override
-	public String toString() {
-		return "Cart [cartNO=" + cartNO + ", prodNo=" + prodNo + ", id=" + id + ", totalPrice=" + totalPrice
-				+ ", quantity=" + quantity + "]";
-	}
-	
+		@Override
+		public String toString() {
+			return "Cart [cartNo=" + cartNo + ", prodNo=" + prodNo + ", id=" + id + ", totalPrice=" + totalPrice
+					+ ", quantity=" + quantity + "]";
+		}
+		
+
 }
-	
-	

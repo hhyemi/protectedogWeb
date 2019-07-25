@@ -52,6 +52,8 @@
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 
+					<input type="hidden" name="price" value="${product.price}" />
+
 					<p />
 					<div id="carouselExampleIndicators" class="carousel slide"
 						data-ride="carousel">
@@ -88,38 +90,40 @@
 
 						</div>
 					</div>
+
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<div>
-							<input type="hidden" value="${product.prodNo}" />
-							<h3>${product.prodName}</h3>
-							<del>
+							<form name="addCart">
+								<input type="hidden" value="${product.prodNo}" />
+								<h3>${product.prodName}</h3>
+								<del>
+									<h2>
+										<fmt:formatNumber value="${product.price}" pattern="#,###" />
+										원
+									</h2>
+								</del>
+
 								<h2>
-									<fmt:formatNumber value="${product.price}" pattern="#,###" />
+									<fmt:formatNumber value="${product.discountPrice}"
+										pattern="#,###" />
 									원
 								</h2>
-							</del>
 
-							<h2>
-								<fmt:formatNumber value="${product.discountPrice}"
-									pattern="#,###" />
-								원
-							</h2>
-
-							<ul class="list">
-								<li><a class="active" href="#"> <span>Category</span>
-										:<c:if test="${product.prodCode == 10}">
+								<ul class="list">
+									<li><a class="active" href="#"> <span>Category</span>
+											:<c:if test="${product.prodCode == 10}">
 										전체</c:if>
-								</a></li>
-								<li><a href="#"> <span>Availibility</span> : In Stock
-								</a></li>
-							</ul>
-							<p>
-								원산지 : ${product.country}<br /> 제조사 : ${product.company}<br />
-								기본 적립 포인트 : <br />
-							</p>
-							<form name="addCart">
+									</a></li>
+									<li><a href="#"> <span>Availibility</span> : In Stock
+									</a></li>
+								</ul>
+								<p>
+									원산지 : ${product.country}<br /> 제조사 : ${product.company}<br />
+									기본 적립 포인트 : <br />
+								</p>
+
 								<input type="hidden" value="${product.prodNo }" />
 
 								<table>
@@ -152,6 +156,8 @@
 								<a><p>
 										Total price: <span id="total" name="totalPrice"></span>원
 									</p> <input type="hidden" name="totalPrice"></a>
+									<input type="hidden" name="prodNo" value="${product.prodNo}"/>
+									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/>
 
 							</form>
 							<div class="card_area">
@@ -562,6 +568,16 @@
 	<script src="../../resources/get/js/theme.js"></script>
 
 	<script type="text/javascript">
+	var prodNo = ${product.prodNo};
+	
+	//==================장바구니 추가 ===============================
+	$(function() {
+		$(".icon-shopping_cart").on("click", function() {
+			alert($("form[name='addCart']").html());
+			$("form[name='addCart']").attr("method","POST").attr("action" , "/cart/addCart").submit();
+		});
+	});
+		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		$(function() {
 
@@ -579,17 +595,7 @@
 				history.go(-1);
 			});
 
-			//==================장바구니 추가 ===============================
-
-			$(".icon-shopping_cart").on(
-					"click",
-					function() {
-						//Debug..
-						alert($("form[name='addCart']").html());
-						$("form[name='addCart']").attr("method", "POST").attr(
-								"action", "/cart/addCart").submit();
-						//fncAddProduct();
-					});
+			
 
 			//구매하기//====================================================
 			$(".main_btn").on("click", function() {
@@ -604,17 +610,17 @@
 			});
 		});
 
-		//=============장바구니 이동========================================
+// 		//=============장바구니 이동========================================
 
-		$(document).ready(function() {
-			const p = $("#price").data('price');
+// 		$(document).ready(function() {
+// 			const p = $("#price").data('price');
 
-			$("#quantity").change(function() {
-				const q = $(this).find(':selected').data('quantity');
-				const total = p * q;
-				$("#total").text(total);
-			});
-		});
+// 			$("#quantity").change(function() {
+// 				const q = $(this).find(':selected').data('quantity');
+// 				const total = p * q;
+// 				$("#total").text(total);
+// 			});
+// 		});
 	</script>
 </body>
 </html>
