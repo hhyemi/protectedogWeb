@@ -130,7 +130,6 @@
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
 <!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a> -->
                 <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
-                <a class="dropdown-item" href="../adopt/thumnail.jsp">테스트</a>
 <!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
 
               </div>
