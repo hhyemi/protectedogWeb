@@ -26,10 +26,11 @@
     <link rel="stylesheet" href="/resources/prodmenu/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/jquery.timepicker.css">
 
-    
     <link rel="stylesheet" href="/resources/prodmenu/css/flaticon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/icomoon.css">
     <link rel="stylesheet" href="/resources/prodmenu/css/style.css">
+    
+<!--     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
     <meta name="google-signin-scope" content="profile email">
@@ -51,6 +52,21 @@
     	.goto-here{
     		color : black;
     	}
+    	
+    	.pr-4{
+    		padding-right : 17px;
+    	}
+    	
+		@font-face {
+    		font-family: 'YouandiModernTR';
+   		 	font-style: normal;
+    		font-weight: normal;
+    		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
+		}
+    	body{
+    		font-family: 'YouandiModernTR', sans-serif !important;
+    		transform: rotate(0.03deg);
+    	}
     </style>
   </head>
   <body class="goto-here">
@@ -60,7 +76,7 @@
              <div class="col-lg-12 d-block">
                 <div class="row d-flex">
                    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center">
+					    	<div class="col-md-4 pr-4">
 					    		
 						    	<span class="icon-phone2">
 						    		<span class="text">${ sessionScope.user.phone }</span>
@@ -80,17 +96,19 @@
 <%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
 <!-- 								<a id="googleLogout" href="#" onclick="signOut();">google 로그아웃</a> -->
 <%-- 							</c:if> --%>
-<!-- 					   		<div class="col-md pr-4 d-flex topper align-items-center"> -->
-<!-- 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
-<%-- 						   		<span class="text">${ sessionScope.user.email }</span> --%>
-<!-- 					   		</div> -->
+					   		<div class="col-md-4 pr-4" align="center">
+<!-- 					    		<span class="icon-paper-plane"></span> -->
+					    		<span class="text">${ sessionScope.user.email }</span>
+					   		</div>
 					   		
 					   		
-					    	<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+					    	<div class="col-md-4 pr-4" align="right">
 					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
 						    <c:if test="${ sessionScope.user eq null }">
-						    	<span id="login" class="text">로그인</span>
+						    	<div align="right">
+						    	<span id="login" class="text">로그인</span> &nbsp;
 						    	<span id="regist" class="text">회원가입</span>
+						    	</div>
 						    </c:if>
 
 <%-- 						    <c:if test="${sessionScope.user.role eq 'user' }"> --%>
@@ -98,21 +116,19 @@
 <!-- 						    	<input type="button" id="myInfo" value="마이페이지"> -->
 <!-- 						    </div> -->
 <%-- 						    </c:if> --%>
-						    <c:if test="${sessionScope.user.role eq 'admin' }">
-						    <div class="manageMenu">
-						    	<input type="button" id="manageMenu" value="관리자메뉴">
-						    </div>
-						    </c:if>
+<%-- 						    <c:if test="${sessionScope.user.role eq 'admin' }"> --%>
+<!-- 						    <div class="manageMenu"> -->
+<!-- 						    	<input type="button" id="manageMenu" value="관리자메뉴"> -->
+<!-- 						    </div> -->
+<%-- 						    </c:if> --%>
 						    
 						    <c:if test="${ sessionScope.user != null }">
-							    <div class="userInfo">
+<!-- 							    <div class="col-md-5 pr-4 userInfo"> -->
 							    	<span class="text">${sessionScope.user.nickname } 님</span>
-							    </div>
-							    <div class="logout" style="float:right">
-							    	<span class="text">
+							    	<span class="text" class="logout">
 							    		<a href="/users/logout">로그아웃</a>
 							    	</span>
-	                            </div>
+<!-- 	                            </div> -->
                             </c:if>
                             </div>
 					    </div>
@@ -130,7 +146,7 @@
 
          <div class="collapse navbar-collapse" id="ftco-nav">
            <ul class="navbar-nav ml-auto">
-             <li class="nav-item active"><a href="/index.jsp" class="nav-link">집</a></li>
+
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -150,16 +166,15 @@
               </div>
             </li>
              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">담소나눔</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                 <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-                <a class="dropdown-item" href="/community/listNews.jsp">뉴스</a>
               </div>
             </li>
             <c:if test="${ sessionScope.user != null }">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사람</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
@@ -177,7 +192,7 @@
             </li>
             </c:if>
              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">벼룩시장</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토어</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
                 <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
@@ -191,7 +206,7 @@
               <a class="nav-link" href="/community/getBreedPedia.jsp">견종백과</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="/community/getHospital.jsp">병원</a>
+              <a class="nav-link" href="/community/getHospital.jsp">동물병원</a>
             </li>
            </ul>
          </div>
@@ -230,8 +245,7 @@
 						url : "/v2/user/me",
 						success : function(result) {
 							var info = JSON.stringify(result);
-							$(location).attr('href',
-									'/users/kakao?kakao=' + result.id);
+							$(location).attr('href','/users/kakao?kakao=' + result.id);
 						}
 					});
 					Kakao.Auth.getAccessToken();
@@ -249,27 +263,19 @@
 		}
 
 		$(function() {
-			$("#myInfo").on(
-					"click",
-					function() {
-						$(self.location).attr('href',
-								"/users/getUsers?id=${sessionScope.user.id}");
-					})
-		});
-
-		$(function() {
+			
+			$("#myInfo").on("click",function() {
+				$(self.location).attr('href',"/users/getUsers?id=${sessionScope.user.id}");
+			});
+			
 			$("#login").on("click", function() {
 				$(self.location).attr("href", "/users/login");
 			});
-		});
-
-		$(function() {
+			
 			$("#regist").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
 			});
-		});rms
-		
-		
+		});
 		
 // 		$(function(){
 // 			$("#googleLogout").on("click", function(){

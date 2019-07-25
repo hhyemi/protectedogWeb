@@ -115,6 +115,7 @@ body {
  	 								
  	 								display += "<span class='glyphicon glyphicon-alert'></span> &nbsp;"
  	 									    + "</div>"
+ 	 	 									+ "<br/>"
  	 									+ "</div>"
  	 								+ "</div>" ;
  	 							}
@@ -442,6 +443,7 @@ body {
 					</div>
 				</div>
 			</div>
+			<br/>
 			</c:if>
 			</c:forEach>
 		</c:forEach>

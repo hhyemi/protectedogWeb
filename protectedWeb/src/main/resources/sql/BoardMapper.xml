@@ -161,17 +161,18 @@
 				FROM board
 				<where>
 						board_code = #{boardCode} AND del_code != '0'
-<!-- 						<if test="searchCondition != null"> -->
-<!-- 							<if test="searchCondition == 0 and searchKeyword !='' "> -->
-<!-- 					 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 							</if> -->
-<!-- 							<if test="searchCondition == 1 and searchKeyword !='' "> -->
-<!-- 					 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
-<!-- 							</if> -->
-<!-- 							<if test="searchCondition == 2 and searchKeyword !='' "> -->
-<!-- 					 			AND nickname  LIKE '%'||#{searchKeyword}||'%' -->
-<!-- 							</if>  -->
-<!-- 						</if> -->
+						<if test="searchCondition != null">
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+							 			AND post_title  LIKE '%'||#{searchKeyword}||'%' 
+							</if>
+							<if test="searchCondition == 1 and searchKeyword !='' ">
+										AND nickname  LIKE '%'||#{searchKeyword}||'%'
+							 			OR id        LIKE '%'||#{searchKeyword}||'%'
+							</if>
+							<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
+							</if> 
+						</if>
 				</where> ) countTable						
 	 </select>
 	 

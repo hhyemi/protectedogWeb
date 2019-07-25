@@ -76,8 +76,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
-	public int getTotalCount(String boardCode) throws Exception {
-		return sqlSession.selectOne("BoardMapper.getTotalCount", boardCode);
+	public int getTotalCount(Map<String, Object> map) throws Exception {
+		return sqlSession.selectOne("BoardMapper.getTotalCount", map);
 	}
 	
 	// 게시판 상위 5개의 게시글을 조회수 내림차순으로 출력하는 메소드
