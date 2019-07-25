@@ -42,7 +42,11 @@ public class BoardServiceImpl implements BoardService{
 
 	public Map<String , Object> listBoard(Search search, String boardCode, int order) throws Exception {
 		Map<String, Object> map= boardDAO.listBoard(search, boardCode, order);
-		int totalCount = boardDAO.getTotalCount(boardCode);
+		
+		map.put("boardCode",boardCode);
+		map.put("searchKeyword", search.getSearchKeyword());
+		
+		int totalCount = boardDAO.getTotalCount(map);
 		
 		map.put("map", map );
 		map.put("totalCount", new Integer(totalCount));
@@ -52,7 +56,11 @@ public class BoardServiceImpl implements BoardService{
 	
 	public Map<String , Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception {
 		Map<String, Object> map= boardDAO.listBoardMoreCommentCount(search, boardCode, order);
-		int totalCount = boardDAO.getTotalCount(boardCode);
+		
+		map.put("boardCode",boardCode);
+		map.put("searchKeyword", search.getSearchKeyword());
+		
+		int totalCount = boardDAO.getTotalCount(map);
 		
 		map.put("map", map );
 		map.put("totalCount", new Integer(totalCount));

@@ -18,5 +18,7 @@ public interface ProductService {
 	public void updateProduct(Product product) throws Exception;
 	//관리자 상품조회
 	public Map<String,Object> listAdminProduct(Search search) throws Exception;
+	//상품 재고수량 조절
+	public void updateQuantity(Product product)throws Exception;
 	
 }

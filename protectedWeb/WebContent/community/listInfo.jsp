@@ -75,6 +75,10 @@ $(function(){
 	
 	$(document).ready(function(){
 		listNews();
+		
+		if(${totalCount == 0}){
+ 			$("#listTable").hide(); 
+		}
 	});
 	
 	$(document).on("click",".go",function(){
@@ -84,10 +88,11 @@ $(function(){
 });
 
 function listNews(){
-	
+		
 	$.ajax({
 		url : "/News/json/listNews/",
 		method : "POST",
+		data : JSON.stringify({searchKeyword : $("#searchKeyword").val()}),
 		dataType : "json",
 		contentType : "application/x-www-form-urlencoded; charset=euc-kr",
 		headers : {
@@ -134,8 +139,8 @@ function listNews(){
 }
 
 	function fncGetList(currentPage) {
-		$("#currentPage").val(currentPage)
-
+		
+		$("#currentPage").val(currentPage);
 		$("form").attr("method", "POST").attr("action","/info/listInfo").submit();
 	}
 
@@ -164,40 +169,34 @@ function listNews(){
 		var pageSize = $("#selectPageSize").val();
 		var menu = $("#menu").val();
 
-		$("#searchKeyword")
-				.on(
-						"keyup",
-						function() {
+		$("#searchKeyword").on("keyup", function() {
 
-							var search = {
-								searchKeyword : $("#searchKeyword").val(),
-								searchCondition : $("#searchCondition").val()
-							};
-							var convertSearch = JSON.stringify(search);
+			var search = {
+				searchKeyword : $("#searchKeyword").val(),
+				searchCondition : $("#searchCondition").val()
+			};
+			var convertSearch = JSON.stringify(search);
 
-							$
-									.ajax({
-										url : "/product/json/listProduct/"
-												+ menu + "/" + pageSize,
-										method : "POST",
-										dataType : "json",
-										data : convertSearch,
-										contentType : "application/x-www-form-urlencoded; charset=euc-kr",
-										headers : {
-											"Accept" : "application/json",
-											"Content-Type" : "application/json;charset=euc_kr"
-										},
-										success : function(JSONData, status) {
-											$("#searchKeyword").autocomplete({
-												source : JSONData
-											});
-										}
-									});
-						});
+			$.ajax({
+				url : "/product/json/listProduct/"+ menu + "/" + pageSize,
+				method : "POST",
+				dataType : "json",
+				data : convertSearch,
+				contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json;charset=euc_kr"
+				},
+				success : function(JSONData, status) {
+					$("#searchKeyword").autocomplete({
+						source : JSONData
+					});
+				}
+			});
+		});
 
 		$("td:nth-child(2)").on("click",function() {
 
-					//alert($(this).children("input").val())
 					var postNo = $(this).children("input").val();
 					if(postNo == undefined){
 						return;
@@ -205,8 +204,6 @@ function listNews(){
 					$(self.location).attr("href","/info/getInfo?postNo="+postNo);
 				});
 
-		// 		페이지 처리를 위한 스크립트
-		
 		$("td:nth-child(1)").on("click",function(){
 				
 			var postNo = $(this).children("input").val();
@@ -215,6 +212,7 @@ function listNews(){
 			}
 			$(self.location).attr("href","/info/getInfo?postNo="+postNo);
 		});
+		
 		$(document).ready(function(){
 			$("#searchKeyword").keydown(function(key){
 				if(key.keyCode == 13){
@@ -222,6 +220,7 @@ function listNews(){
 				}
 			});
 		});
+		
 		$("#searchSubmmit").on("click", function() {
 			fncGetList(1);
 		});
@@ -245,6 +244,7 @@ function listNews(){
 		
 		<br/>
 		
+		
 <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
 		<div class="row">
 			<div class="col-md-9" style="">
@@ -265,8 +265,41 @@ function listNews(){
 			</div>
 		</div>
 		
+				<c:if test="${totalCount == 0}">
+				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
+					검색결과 없음
+					<form class="form-inline" name="detailForm">
+						<div class="form-group">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+							</select>
+						</div>
+
+
+						<div class="form-group">
+							<label class="sr-only" for="searchKeyword">검색어</label> <input
+								type="text" class="form-control" id="searchKeyword"
+								name="searchKeyword" placeholder="검색어"
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit" class="btn btn-default">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+
+						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
+				</div>
+				</c:if>
+		
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-9" id="listTable">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 					<thead>
 						<tr align="center">
@@ -346,7 +379,6 @@ function listNews(){
 				</div>
 			</div>
 			</div>
-
 <!-- 		■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ HOT AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 			<div class="col-md-3">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
