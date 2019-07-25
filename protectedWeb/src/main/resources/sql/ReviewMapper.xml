@@ -12,16 +12,16 @@
 		<result property="postNo" 				column="POST_NO" 		jdbcType="NUMERIC" />
 		<result property="boardCode" 			column="BOARD_CODE" 	jdbcType="CHAR" />
 		<result property="id" 					column="ID" 			jdbcType="VARCHAR" />
-		<result property="nickName" 			column="NICKNAME" jdbcType="VARCHAR" />
-		<result property="postTitle" 			column="POST_TITLE" jdbcType="VARCHAR" />
-		<result property="postContent" 			column="POST_CONTENT" jdbcType="VARCHAR" />
-		<result property="regDate" 				column="REG_DATE" jdbcType="DATE" />
-		<result property="statusCode" 			column="STATUS_CODE" jdbcType="CHAR" />
+		<result property="nickName" 			column="NICKNAME"       jdbcType="VARCHAR" />
+		<result property="postTitle" 			column="POST_TITLE"     jdbcType="VARCHAR" />
+		<result property="postContent" 			column="POST_CONTENT"   jdbcType="VARCHAR" />
+		<result property="regDate" 				column="REG_DATE"       jdbcType="DATE" />
+		<result property="statusCode" 			column="STATUS_CODE"    jdbcType="CHAR" />
 		
 		<!-- nullable -->
-		<result property="grade" 				column="GRADE" jdbcType="NUMERIC" />
-		<result property="orderNo" 				column="ORDER_NO" jdbcType="NUMERIC" />
-		<result property="hospitalName" 	    column="HOSPITAL_NAME" jdbcType="VARCHAR" />
+		<result property="grade" 				column="GRADE"          jdbcType="NUMERIC" />
+		<result property="orderNo" 				column="ORDER_NO"       jdbcType="NUMERIC" />
+		<result property="hospitalName" 	    column="HOSPITAL_NAME"  jdbcType="VARCHAR" />
 
 	</resultMap>
 
@@ -29,33 +29,24 @@
 
 	<!-- SQL : INSERT -->
 	<insert id="addReview" parameterType="review">
+		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+		SELECT SEQ_REVIEW_POST_NO.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT
-		INTO REVIEW( POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, STATUS_CODE , GRADE , ORDER_NO , HOSPITAL_NAME)
-		
-		VALUES ( 
-		SEQ_REVIEW_POST_NO.NEXTVAL,
-		#{boardCode}, 
-		#{id}, 
-		#{nickName}, 
-		#{postTitle}, 
-		#{postContent}, 
-		SYSDATE, 
-		#{statusCode},
-		#{grade}, 
-		#{orderNo},
-		#{hospitalName})
+			INTO REVIEW( POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, STATUS_CODE , GRADE , ORDER_NO , HOSPITAL_NAME)		
+				VALUES (#{postNo}, #{boardCode:CHAR}, #{id:VARCHAR}, #{nickName:VARCHAR}, #{postTitle:VARCHAR}, #{postContent:VARCHAR}, SYSDATE, 1, #{grade:NUMERIC}, #{orderNo:NUMERIC}, #{hospitalName:VARCHAR})
 	</insert>
-	
-	
-	<!-- SQL : SELECT ONE -->
+		
+  <!-- SQL : SELECT ONE -->
 	 <select 	id="getReview"	parameterType="int"		resultMap="reviewSelectMap">
 	SELECT
 	POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, STATUS_CODE , GRADE , ORDER_NO , HOSPITAL_NAME
-	From REVIEW
+		FROM REVIEW
+			WHERE POST_NO IN #{value}
 	
 	</select>
-	
-	<!-- SQL : UPDATE -->
+	<!-- 
+	SQL : UPDATE
 	<update id="updateReview"	parameterType="review">
 	UPDATE REVIEW
 	<set>
@@ -74,7 +65,7 @@
 	   	WHERE POST_NO = #{postNo}
 	 </update>
 	 
-	 <!-- SQL : SELECT LIST -->
+	 SQL : SELECT LIST
 	<select  id="listReview"  parameterType="map"	resultMap="reviewSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
@@ -100,5 +91,5 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
  	
-
+ -->
 </mapper>

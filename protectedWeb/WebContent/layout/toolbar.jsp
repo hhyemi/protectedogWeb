@@ -166,19 +166,6 @@
                  <a class="dropdown-item" href="#">채팅방</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/hospital/getHospital.jsp">병원</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/community/getBreedPedia.jsp">PEDIA</a>
-              </div>
-            </li>
-
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">담소나눔</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -221,7 +208,7 @@
               <a class="nav-link" href="/community/getBreedPedia.jsp">견종백과</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="/community/getHospital.jsp">병원</a>
+              <a class="nav-link" href="/hospital/getHospital.jsp">동물병원</a>
             </li>
            </ul>
          </div>

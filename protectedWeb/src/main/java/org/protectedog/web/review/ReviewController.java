@@ -36,6 +36,7 @@ public class ReviewController {
 		System.out.println("/review/getHospitalReview : GET");
 		
 		User user = (User) session.getAttribute("user");
+		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("placeName", URLDecoder.decode(placeName,"UTF-8"));
 		map.put("placeAddr", URLDecoder.decode(placeAddr,"UTF-8"));
