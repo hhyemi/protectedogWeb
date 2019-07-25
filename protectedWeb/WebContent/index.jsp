@@ -103,13 +103,7 @@
 			});
 		});
 		
-// 		$(function(){
-// 			$("#googleLogout").on("click", function(){
-// 				var auth2=gapi.auth2.getAuthInstance();
-// 				auth2.setToken(null);
-// 				auth2.signOut();
-// 			});
-// 		})
+
 
 	</script>
 

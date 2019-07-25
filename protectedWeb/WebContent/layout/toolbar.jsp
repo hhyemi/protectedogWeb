@@ -45,6 +45,8 @@
 //     	});
 
 		//=============  채팅방 Event  처리 =============	
+
+			
 	 $(function() {
 		$( "a:contains('채팅방')" ).on("click" , function() {
 	 		 window.open("/chatting/roomchat.jsp",
@@ -58,6 +60,8 @@
     			$(self.location).attr("href","/users/login");
     		});
     	});
+    	
+    	
 
     </script>
     
@@ -258,28 +262,12 @@
   <script src="/resources/prodmenu/js/main.js"></script>
 
 
+	
+
   
   	<script type="text/javascript">
-		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
-		function loginWithKakao() {
-			Kakao.Auth.login({
-				success : function(authObj) {
-					Kakao.API.request({
-						url : "/v2/user/me",
-						success : function(result) {
-							var info = JSON.stringify(result);
-							$(location).attr('href',
-									'/users/kakao?kakao=' + result.id);
-						}
-					});
-					Kakao.Auth.getAccessToken();
-				},
-				fail : function(err) {
-					alert(JSON.stringify(err));
-					alert("로그인 실패")
-				}
-			})
-		}
+  
+
 
 		
 		function logoutWithKakao() {
@@ -308,32 +296,64 @@
 			});
 		});
 		
-		$(document).ready(function(){
+		$(function(){
+			$(document).ready(function(){
+				alert("gd & top");
+			})
+			
+		})
+
 		
-			var id=$("#registId").val();
-			var msgId=JSON.stringify({id:id});
+// 		$(document).ready(function(){
+// 			alert("gd");
+// 		});
+		
+		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
+		function loginWithKakao() {
+			Kakao.Auth.login({
+				success : function(authObj) {
+					Kakao.API.request({
+						url : "/v2/user/me",
+						success : function(result) {
+							var info = JSON.stringify(result);
+							$(location).attr('href',
+									'/users/kakao?kakao=' + result.id);
+						}
+					});
+					Kakao.Auth.getAccessToken();
+				},
+				fail : function(err) {
+					alert(JSON.stringify(err));
+					alert("로그인 실패")
+				}
+			})
+		}
+		
+// 		$(function() {
+// 			alert("gd");	
+// 			var id=$("#registId").val();
+// 			var msgId=JSON.stringify({id:id});
 // 			alert(id);
 // 			alert(msgId);
-			$.ajax({
-				type : "POST",
-				contentType : "application/json",
-				url : "/message/json/getUnreadMessage",
-				data : msgId,
-				datatype : "json",
-				success : function(response){
-					if(id!=null && $.trim(response.result)==0){
+// 			$.ajax({
+// 				type : "POST",
+// 				contentType : "application/json",
+// 				url : "/message/json/getUnreadMessage",
+// 				data : msgId,
+// 				datatype : "json",
+// 				success : function(response){
+// 					if(id!=null && $.trim(response.result)==0){
 // 						alert($.trim(response.result));
-						$(".msg").hide();
-					}
-					if(id!=null && $.trim(response.result)==1){
+// 						$(".msg").hide();
+// 					}
+// 					if(id!=null && $.trim(response.result)==1){
 // 						alert($.trim(response.result));
-						$(".msg").show();
-					}
-				}
+// 						$(".msg").show();
+// 					}
+// 				}
 				
-			});
-		});
-		
+// 			});
+// 		});
 
 
 		
