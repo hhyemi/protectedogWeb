@@ -16,8 +16,7 @@ public class Review {
 	
 	// nullable
 	private int grade;
-	private int hospital_longitude;
-	private int hospital_latitude;
+	private int hospitalName;
 	private int orderNo;
 	
 	/// Constuctor
@@ -77,18 +76,7 @@ public class Review {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public int getHospital_longitude() {
-		return hospital_longitude;
-	}
-	public void setHospital_longitude(int hospital_longitude) {
-		this.hospital_longitude = hospital_longitude;
-	}
-	public int getHospital_latitude() {
-		return hospital_latitude;
-	}
-	public void setHospital_latitude(int hospital_latitude) {
-		this.hospital_latitude = hospital_latitude;
-	}
+	
 	public int getOrderNo() {
 		return orderNo;
 	}
@@ -96,11 +84,17 @@ public class Review {
 		this.orderNo = orderNo;
 	}
 	
+	public int getHospitalName() {
+		return hospitalName;
+	}
+	public void setHospitalName(int hospitalName) {
+		this.hospitalName = hospitalName;
+	}
 	@Override
 	public String toString() {
 		return "Review [postNo=" + postNo + ", id=" + id + ", nickName=" + nickName + ", boardCode=" + boardCode
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", delCode="
-				+ delCode + ", grade=" + grade + ", hospital_longitude=" + hospital_longitude + ", hospital_latitude="
-				+ hospital_latitude + ", orderNo=" + orderNo + "]";
+				+ delCode + ", grade=" + grade + ", hospitalName=" + hospitalName + ", orderNo=" + orderNo + "]";
 	}
+	
 }

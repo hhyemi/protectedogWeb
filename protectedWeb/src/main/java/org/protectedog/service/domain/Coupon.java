@@ -9,6 +9,7 @@ public class Coupon {
 	private String couponName;
 	private String couponCode;
 	private int discount;
+	private String couponImage;
 	private int couponNo;
 	private char couponStatus;
 	private Date makeDate;
@@ -41,6 +42,12 @@ public class Coupon {
 	}
 	public void setDiscount(int discount) {
 		this.discount = discount;
+	}
+	public String getCouponImage() {
+		return couponImage;
+	}
+	public void setCouponImage(String couponImage) {
+		this.couponImage = couponImage;
 	}
 	public int getCouponNo() {
 		return couponNo;
@@ -76,7 +83,7 @@ public class Coupon {
 	@Override
 	public String toString() {
 		return "Coupon [receiveId=" + receiverId + ", couponName=" + couponName + ", couponCode=" + couponCode
-				+ ", discount=" + discount + ", couponNo=" + couponNo + ", couponStatus=" + couponStatus + ", makeDate="
+				+ ", discount=" + discount + ", couponImage=" + couponImage + ", couponNo=" + couponNo + ", couponStatus=" + couponStatus + ", makeDate="
 				+ makeDate + ", limitDate=" + limitDate + ", UseDate=" + UseDate + "]";
 	}
 

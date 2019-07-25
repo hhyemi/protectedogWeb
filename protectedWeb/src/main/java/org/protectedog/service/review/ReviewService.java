@@ -12,7 +12,9 @@ public interface ReviewService {
 		//리뷰글 조회
 		public Review getReview(int postNo)throws Exception;
 		//리뷰글 리스트 조회
-//		public Map<String, Object>listReview(Search search)throws Exception;
+
+		public Map<String, Object>listReview(Search search,String boardCode)throws Exception;
+
 		//리뷰글 업데이트
 		public void updateReivew(Review Review)throws Exception;
 		//리뷰글 삭제

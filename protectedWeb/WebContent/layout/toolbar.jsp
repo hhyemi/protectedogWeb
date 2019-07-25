@@ -270,6 +270,37 @@
 		});
 		
 		
+		$(document).ready(function(){
+		
+			var id=$("#registId").val();
+			var msgId=JSON.stringify({id:id});
+// 			alert(id);
+// 			alert(msgId);
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "/message/json/getUnreadMessage",
+				data : msgId,
+				datatype : "json",
+				success : function(response){
+					if(id!=null && $.trim(response.result)==0){
+// 						alert($.trim(response.result));
+						$(".msg").hide();
+					}
+					if(id!=null && $.trim(response.result)==1){
+// 						alert($.trim(response.result));
+						$(".msg").show();
+					}
+				}
+				
+			});
+		});
+		
+
+
+		
+		
+		
 		
 // 		$(function(){
 // 			$("#googleLogout").on("click", function(){

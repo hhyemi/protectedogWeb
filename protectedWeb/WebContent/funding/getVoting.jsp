@@ -284,7 +284,9 @@
 	 		if(${user==null}){
 	 			alert("로그인이 필요합니다.")
 	 		}else{
-
+		 		 window.open("/chatting/addChattingUser?postId=${funding.id}",
+							"_blank",
+							"left=500, top=100, width=500, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 	 		}
 		});   
 	
@@ -321,7 +323,8 @@
             	alert("삭제가 완료되었습니다.")
             } else {
             }
-		});   	
+		});  
+	
     });
 
     

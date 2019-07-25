@@ -55,6 +55,8 @@
 	       <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
 	    </div>
 	    
+	    <input type="hidden" id="authKeyReturn">
+	    
 	    <!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
 		<input type="hidden" id="id" name="id" value="${ user.id }">
@@ -83,9 +85,12 @@
 		    <label for="email" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" value="${ user.email }">
-		       <span id="helpBlock" class="help-block">
-		      </span>
 		    </div>
+		    <div id="mailAuth" style="display:none">
+		      <input type="text" id="checkMail"/>
+		      <input type="button" id="mailClick" value="전송"/>
+		    </div>
+		    <input type="button" id="authMail" name="authMail" value="인증하기">
 		  </div>
 		  
 		  <div class="form-group">
@@ -111,7 +116,6 @@
 				<input type="button" id="authClick" value="전송"/>
 		    </div>
  		    <input type="button" id="authPhone" name="authPhone" value="인증하기">
- 		    <input type="hidden" id="authKeyReturn">
 		  </div>
 		  
 		  <div class="form-group">
@@ -243,6 +247,46 @@
 				}
 			})
 		});
+		
+		$(function(){
+			
+			$("#authMail").on("click", function(){
+
+				var check=$("input[name='email']").val();
+
+					$.ajax({
+						
+						url:"/users/json/mailSender",
+						method:"POST",
+						data:JSON.stringify({email:check}),
+						headers: {
+							"accept":"application/json",
+							"content-type":"application/json"
+						},
+						success:function(authMail, status){
+// 							alert(status);
+// 							alert(authMail.authKey);
+							$("#authKeyReturn").val(authMail.authKey);
+							$("#mailAuth").show();
+						}
+									
+					})
+		
+				})
+					
+			});
+
+			$(function() {
+				$("#mailClick").on("click", function(){
+					if($("#checkMail").val()==$("#authKeyReturn").val()){
+						$("#authMail").hide();
+						$("#mailAuth").hide();
+						alert("인증되었습니다.");
+					}else{
+						alert("인증번호가 맞지 않습니다.");
+					}
+				})
+			});
 		
 		
 		 $(function() {

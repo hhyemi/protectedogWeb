@@ -150,6 +150,8 @@
             <div class="form-group">
             <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
             </div>
+            
+            
 		   <div class="form-group">
 		   <br/>
 			<h3><b>ฟฌถ๔รณ</b></h3>	
