@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
 body {
@@ -251,14 +252,14 @@ body {
 			})
 		});
 		
-		$(document).on("click", ".glyphicon.glyphicon-chevron-up", function(){
+		$(document).on("click", ".far.fa-thumbs-up", function(){
 			
 			if(${sessionScope.user == null}){
 				alert("로그인 합십쇼");
 				return;
 			}
 				
-			var commentNo = $(this).parent().parent().children(".col-sm-9").children("input").val();
+			var commentNo = $(this).parent().parent().children("input").val();
 			var id = '${sessionScope.user.id}';
 				$.ajax({
 					url : "/comment/json/check/"+commentNo+"/"+id,
@@ -404,18 +405,12 @@ body {
 					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
 					</c:if>
 					<span class="glyphicon glyphicon-alert"></span> &nbsp; 
-					<span class="glyphicon glyphicon-plus"></span>
-					
-					</div>
-				</div>
-				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-right: 0 px;">
-					<font size="8px" id="${comment.commentNo}" class="font">
+					<span class="glyphicon glyphicon-plus"></span> &nbsp; 
+					<i id="${comment.commentNo}" class="far fa-thumbs-up"></i>
+					<font id="${comment.commentNo}" class="font">
 						<b>${comment.likeCount}</b>
 					</font>
-				</div>
-				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-left : 0 px;">
-					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span>
-					<p/>
+					</div>
 				</div>
 			</div>
 			<br/>
@@ -423,6 +418,7 @@ body {
 			<c:forEach var="recomment" items="${relist}">
 			<c:if test="${comment.commentNo == recomment.commentNo}">
 			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;">
+				ㄴ
 				<div class="col-sm-1 col-md-1" align="center">
 					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
 				</div>

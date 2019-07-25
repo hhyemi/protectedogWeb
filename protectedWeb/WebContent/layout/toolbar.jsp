@@ -56,7 +56,7 @@
     	.pr-4{
     		padding-right : 17px;
     	}
-    	
+    	    	
 		@font-face {
     		font-family: 'YouandiModernTR';
    		 	font-style: normal;
@@ -65,7 +65,6 @@
 		}
     	body{
     		font-family: 'YouandiModernTR', sans-serif !important;
-    		transform: rotate(0.03deg);
     	}
     </style>
   </head>
@@ -81,7 +80,7 @@
 						    	<span class="icon-phone2">
 						    		<span class="text">${ sessionScope.user.phone }</span>
 						    	</span>
-<!-- 					    	</div> -->
+					    	</div>
 						   	 	<c:if test="${ sessionScope.user == null }">
 						   	 	<span>
 							   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
@@ -131,7 +130,7 @@
 <!-- 	                            </div> -->
                             </c:if>
                             </div>
-					    </div>
+
                 </div>
              </div>
           </div>
