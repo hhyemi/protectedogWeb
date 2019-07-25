@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<title>GET ADOPT</title>
+	<title>보호할개 · 분양글 상세조회</title>
 	<meta charset="EUC-KR">
 	
 	<meta
@@ -34,9 +34,14 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
     
     <style>
+    	.row {
+			transform: rotate(0.03deg);
+		}
 
 		#title {
 			font-family: 'NanumSquare', sans-serif !important;
@@ -79,6 +84,7 @@
         	align: letf;
         	word-break: break-all;	
         }
+        
         @media screen and (min-width: 768px) { 
 	        .modal:before {
 	                display: inline-block;
@@ -87,10 +93,17 @@
 /* 	                height: 100%; */
 	        }
 		}
+		
         .modal{
       	  display: inline-block;
         	vertical-align: middle;
         }
+        
+        #modiButton, #delButton, #listButton {
+		    padding: 0px 10px;
+ 		    line-height: 20px; 
+ 		    border-radius: 3px; 
+		}
         
 /*         .lnr-heart:before { */
 /* 			content: "\e813"; */
@@ -105,6 +118,17 @@
     <!--================Header Menu Area =================-->
 
     <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+    
+<!--         <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');"> -->
+<!--       <div class="container"> -->
+<!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!--           <div class="col-md-9 ftco-animate text-center"> -->
+<!--             <h1 class="mb-0 bread" id="h1">분양 -->
+<!--             </h1> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
 
     <!--================Single Product Area =================-->
     <div class="product_image_area">
@@ -264,7 +288,7 @@
 				<!-- 분양 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'AD' }">
 	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
-	              			<a id="adoptApply" class="main_btn" href="#" style="width: 189px">입양신청</a>
+	              			<button id="adoptApply" class="main_btn" href="#" style="width: 189px">입양신청</button>
 	              		</c:if>
 	              		
 	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
@@ -280,13 +304,13 @@
               	<!-- 실종 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'MS' }">
               		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-              			<a class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</a>
+              			<button class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</button>
               		</c:if>
               	</c:if>
               	
               	<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }">
-               		<a class="main_btn" href="#" style="width: 189px">문의하기</a>
+               		<button class="main_btn" href="#" style="width: 189px">문의하기</button>
                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
                	</c:if>
                	
@@ -326,20 +350,25 @@
 	  		<div id="map" style="width: wrap; height: 300px;"  align="center"></div>
 	  		<input type="hidden" class="form-control" id="location" name="location" value="${adopt.location}">
 			<div>${adopt.locationKr }</div>
+			<br/><br/><br/>
         
         </div>
+
+        <div class="col-md-12"><hr/></div>
         
-        <br/><hr/><div class="col-md-12"><br/><br/></div>
-        
-        <div class="col-md-12" align="center">
+        <p align="right">
        		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-				<button class="main_btn" style="width: 189px" id="modiButton">수정</button>
-	       		<button class="main_btn" style="width: 189px" id="delButton">삭제</button>
+				<button class="main_btn" id="modiButton">수정</button>
+	       		<button class="main_btn" id="delButton">삭제</button>
 			</c:if>
-        	
-	        
-	        <button class="main_btn" style="width: 189px">목록</button>
-        </div>
+			
+	        <button class="main_btn" id="listButton">목록</button>
+        </p>
+        
+        
+<%--         <jsp:include page="/common/comment.jsp"></jsp:include> --%>
+        
+        
         
       </div>
     </div>
@@ -397,6 +426,7 @@
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
       $(document).ready(function() { 
     	  listApply('load');
@@ -612,7 +642,7 @@
 								
 							} else if ( str == '' ){
 							
-								if ( id == null ) {
+								if ( id == '' ) {
 									$( '#dialog-alreadyApply p' ).html("<br/>인증회원만 신청할 수 있습니다.");
 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 									$( "#dialog-alreadyApply" ).dialog( "open" );
@@ -626,7 +656,7 @@
 								
 								
 								
-							} else if ( str == 'load' && displayValue.indexOf(id) != -1 ) {
+							} else if ( str == 'load' && id != '' && displayValue.indexOf(id) != -1 ) {
 								
 								$( '#adoptApply' ).text("신청완료");
 								
@@ -728,10 +758,9 @@
 // 		);
 	    
   
-  
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-  
+	    
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
       $(function() {
     		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
     			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
@@ -753,7 +782,7 @@
 				$('#dialog-delAdopt').dialog( "open" );
 			});
 		
-			$( "a:contains('입양신청')" ).on("click" , function() {
+			$( "button:contains('입양신청')" ).on("click" , function() {
 				listApply('');
 // 				self.location = "/apply/addApply?postNo=${adopt.postNo}"
 			});

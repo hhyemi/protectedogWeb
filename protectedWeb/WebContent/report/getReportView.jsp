@@ -20,28 +20,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--  bootstrap Dropdown CSS & JS  -->
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
-<script type="text/javascript">
-	$(function() {
 
-		$("button:contains('처리')").on("click", function() {
-			self.location = "/report/updateReport?reportNo="+${ report.reportNo }+"&reportStatus=1&delCode=0"
-		});
-
-// 		$("button:contains('삭제')").on(
-// 				"click",
-// 				function() {
-
-// 					var result = confirm("정말 삭제 하시겠습니까?");
-
-// 					if (result) {
-// 						$("form[name='info']").attr("method", "POST").attr(
-// 								"action", "/info/delInfo").attr("enctype",
-// 								"multipart/form-data").submit();
-// 					}
-
-// 				});
-	});
-</script>
 <style type="text/css">
 
 body {
@@ -103,22 +82,17 @@ body {
 			<div class="content">${report.reportContent}</div>
 			<hr />
 			<hr />
-			<div class="content">
-				<img src="../resources/file/fileReport/${report.file1}">
-			</div>
-			<c:if test="${ report.file2 != null }">
-				<div class="content">${report.file2 }</div>
-			</c:if>
-			<c:if test="${ report.file3 != null }">
-				<div class="content">${report.file3 }</div>
-			</c:if>
+			<c:forEach var="name" items="${ file }">
+				<img src="../resources/file/fileReport/${ name.fileName }" width="300px" height="300px" 
+					style="cursor:pointer;" onclick="doImgPop('../resources/file/fileReport/${ name.fileName }')">
+			</c:forEach>
 			<hr />
 			<hr />
 		</form>
 
 		<div class="button" align="right">
 			<button>처리</button>
-			<button>삭제</button>
+			<button>목록</button>
 		</div>
 		<br/>
 		<br/>
@@ -128,6 +102,60 @@ body {
 		<br/>
 		<br/>
 	</div>
+	
+	<script type="text/javascript">
+	$(function() {
+
+		$("button:contains('처리')").on("click", function() {
+			self.location = "/report/updateReport?reportNo="+${ report.reportNo }+"&reportStatus=1&delCode=0"
+		});
+		
+		$("button:contains('목록')").on("click", function() {
+			self.location = "/report/listReport"
+		});
+
+// 		$("button:contains('삭제')").on(
+// 				"click",
+// 				function() {
+
+// 					var result = confirm("정말 삭제 하시겠습니까?");
+
+// 					if (result) {
+// 						$("form[name='info']").attr("method", "POST").attr(
+// 								"action", "/info/delInfo").attr("enctype",
+// 								"multipart/form-data").submit();
+// 					}
+
+// 				});
+	});
+	
+	function doImgPop(img){
+		img1=new Image();
+		img1.src=(img);
+		imgControll(img);
+	}
+	
+	function imgControll(img){
+		if((img1.width!=0)&&(img1.height!=0)){
+			viewImage(img);
+		}else{
+			controller="imgControll('"+img+"')";
+			intervalId=setTimeout(controller, 20);
+		}
+	}
+	
+	function viewImage(img){
+		W=img.width;
+		H=img.height;
+		O="width="+W+", height="+H+",scrollbars=yes";
+		imgWin=window.open("","",O);
+		imgWin.document.write("<html><head><title>:*:*:*: 이미지 상세보기 :*:*:*:*:*:*:</title></head>");
+		imgWin.document.write("<body topmargin=0 leftmargin=0>");
+		imgWin.document.write("<img src="+img+" onclick='self.close()' style='cursor:pointer;' title='클릭시 창이 닫힙니다.'>");
+		
+	} 
+	</script>
+	
 		
 		<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>

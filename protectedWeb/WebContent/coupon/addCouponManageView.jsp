@@ -55,14 +55,15 @@
 	       	</c:if>
 	    </div>
 		
-		<form class="form-horizontal" name="formal">
-		
+		<form class="form-horizontal" name="formal" enctype="multipart/form-data">
+			
 		<div class="row">
-			<div style="float:left" class="col-md-4">
-				<div class="col-xs-12 col-md-4">
-					<img src="/resources/file/others/anonymous-250.jpg">
-				</div>
-			</div>
+		    <div style="float:left" class="col-md-4">
+			   <div style="float:left" class="col-sm-4">
+				  <input type="file" class="form-control" id="couponImage" 
+				  name="couponImg" style="width: 300px; height: 40px" maxLength="13"/>
+			   </div>
+		  	</div>	
 				
 				<div style="float:right; min-width:65%" class="col-md-8"> 
 			

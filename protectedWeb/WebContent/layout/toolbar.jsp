@@ -36,28 +36,11 @@
     <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js"></script>
     <script type="text/javascript">
-
-//     	$(function(){
-//     		$("span:contains('Sign in')").on("click", function(){
-//     			$(self.location).attr("href","/users/login");
-//     		});
-//     	});
-
-		//=============  채팅방 Event  처리 =============	
-	 $(function() {
-		$( "a:contains('채팅방')" ).on("click" , function() {
-	 		 window.open("/chatting/roomchat.jsp",
-						"_blank",
-						"left=500, top=100, width=500, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
-				});	
-	 });
-
     	$(function(){
     		$("span:contains('로그인')").on("click", function(){
     			$(self.location).attr("href","/users/login");
     		});
     	});
-
     </script>
     
     <style type="text/css">
@@ -68,6 +51,7 @@
     	.goto-here{
     		color : black;
     	}
+    	
     </style>
   </head>
   <body class="goto-here">
@@ -163,7 +147,6 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
                 <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
-                 <a class="dropdown-item" href="#">채팅방</a>
               </div>
             </li>
              <li class="nav-item dropdown">
@@ -284,7 +267,38 @@
 			$("#regist").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
 			});
-		});rms
+		});
+		
+		
+		$(document).ready(function(){
+		
+			var id=$("#registId").val();
+			var msgId=JSON.stringify({id:id});
+// 			alert(id);
+// 			alert(msgId);
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "/message/json/getUnreadMessage",
+				data : msgId,
+				datatype : "json",
+				success : function(response){
+					if(id!=null && $.trim(response.result)==0){
+// 						alert($.trim(response.result));
+						$(".msg").hide();
+					}
+					if(id!=null && $.trim(response.result)==1){
+// 						alert($.trim(response.result));
+						$(".msg").show();
+					}
+				}
+				
+			});
+		});
+		
+
+
+		
 		
 		
 		
