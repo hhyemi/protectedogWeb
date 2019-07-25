@@ -6,7 +6,7 @@
 
 <head>
 
-	<title>ADD APPLY</title>
+	<title>보호할개 · 입양신청서</title>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     

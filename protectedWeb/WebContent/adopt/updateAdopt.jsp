@@ -6,7 +6,7 @@
 <html>
 
 <head>
-	<title>UPDATE ADOPT</title>
+	<title>보호할개 · 분양글 수정</title>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     

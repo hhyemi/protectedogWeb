@@ -12,7 +12,7 @@
 <html lang="ko">
 	
 <head>
-	<title>LIST ADOPT</title>
+	<title>보호할개 · 분양글 리스트</title>
 	<meta charset="EUC-KR">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,9 +30,11 @@
 		
 		
  	  	html { 
- 	 	 scroll-behavior: smooth; 
+ 	 		scroll-behavior: smooth; 
  		} 
-
+		p, strong, select {
+			transform: rotate(0.1deg);
+		}
 		
 		h3{
 			font-family: 'NanumSquare', sans-serif !important;
@@ -47,18 +49,23 @@
 			font-family: 'NanumSquare', sans-serif !important;
 			font-weight: bold;
 		}
+		
+		#listAdoptJSON>div{
+			padding-left: 0px;
+			padding-right: 0px;
+		}
 
 	    .getadopt {
 			position: relative;
-			max-height: 300px; 
-			min-height: 300px; 
+			max-height: 330px; 
+			min-height: 330px; 
 			min-width: 255px;
 			max-width: 255px;
 		}
 	
 		.getadopt img {
-			max-height: 300px; 
-			min-height: 300px; 
+			max-height: 330px; 
+			min-height: 330px; 
 			min-width: 255px;
 			max-width: 255px;
 	/* 		    transition: all 0.3s; */
@@ -85,7 +92,7 @@
 			height: 0%;
 		}
 	
-		.text {
+		.textList {
 			color: #3E6B79;
 			font-size: 20px;
 			position: absolute;
@@ -231,7 +238,7 @@
 				</c:if></span>
 <%-- 				<c:if test="${adopt.statusCode ne 3}"> --%>
 				  <figcaption class="overlay">
-					    <span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >${adopt.postTitle}</h3>
+					    <span id="textList"><h3 align="center" style="width: 255px;padding-right: 0px;" >${adopt.postTitle}</h3>
 					    <c:if test="${param.boardCode eq 'AD' }">
 					   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
 					   	</c:if>
@@ -287,7 +294,6 @@
 		var postSize = 2;
 		var area = '';
 		var str = '';
-		var event = false;
 		
 		$(function(){
 	        $(window).scroll(function(){
@@ -296,7 +302,7 @@
 	//             if( $(this).scrollTop() == $(document).height() -  $(this).height() ){
 	            if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){
 	            	postSize++;
-	            	listApply(postSize,"");
+	            	listAdopt(postSize,"");
 	            }
 	        })//스크롤 
 	//         listApply(postSize,"");
@@ -304,7 +310,7 @@
 	
 	
 	
-		function listApply(postSize, str){
+		function listAdopt(postSize, str){
 	// 		console.log("dd "+$("#listAdoptJSON").html());
 	// 		console.log(area+'들어옴'+postSize+", "+str);
 	// 		var sendData = jQuery("form[name=detailForm]").serialize();
@@ -333,16 +339,12 @@
 								var displayValue = '';
 								
 								for( i=0; i<data.list.length; i++ ){
-									var figover = '';
+// 									var figover = '';
 									var bCode = data.list[i].areaKr.substring( 0, data.list[i].areaKr.indexOf('시')+1 );
 									var sCode = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
 									
 									if ( data.list[i].statusCode != 3 ) {
 										sCode = '<img class="listImg" src="../resources/file/fileAdopt/'+data.list[i].mainFile+'"  onerror="this.src=\'http://placehold.it/400x400\'"/>';		
-	// 									figover =   '<figcaption class="overlay">'
-	// 							      					+'<span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >'+data.list[i].postTitle+'</h3>'
-	// 							      					+'<p align="right">'+bCode+'</p></span>'
-	// 							      				+'</figcaption>';
 									}
 									
 									displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">'
@@ -392,14 +394,17 @@
 			//엔터검색
 			$('#searchKeyword').keydown( function(e) {
 				if(e.keyCode == 13) {
-// 					alert("엔터 "+$('#boardCode').val());
-// 					return;
-					if ( $( '#searchKeyword').val() == '' ){
-						$("#searchKeyword").focus();
-						return;
-					}else {
-						fncGetList(1); 
-					}
+					postSize = 1;
+					listAdopt(postSize,"dd");
+				
+// 					alert("엔터 "+$( '#searchKeyword').val());
+// // 					return;
+// 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
+// 						$("#searchKeyword").focus();
+// 						return;
+// 					}else {
+// 						fncGetList(1); 
+// 					}
 				}
 			});
 			// 상세조회
@@ -423,7 +428,7 @@
 	
 		$('select[name=areaCondition]').change( function(){
 			postSize = 1;
-			listApply(postSize,"dd");
+			listAdopt(postSize,"dd");
 		});
 		
 		

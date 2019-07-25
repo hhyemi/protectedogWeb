@@ -51,6 +51,7 @@
     	.goto-here{
     		color : black;
     	}
+    	
     </style>
   </head>
   <body class="goto-here">
@@ -266,7 +267,7 @@
 			$("#regist").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
 			});
-		});rms
+		});
 		
 		
 		
