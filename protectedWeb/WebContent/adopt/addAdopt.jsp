@@ -5,114 +5,129 @@
 <html>
 
 <head>
-	<title>ADD ADOPT</title>
+
+	<title>보호할개 · 분양글 작성</title>
+	
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
 
     <style type="text/css">
+    
 	    html {
 	 	 scroll-behavior: smooth;
 		}
+		
+		h1 {
+			font-family: 'NanumSquare', sans-serif !important;
+/* 			font-size: 22px !important; */
+		}
+		
+		section { 
+			font-family: 'NanumSquare', sans-serif !important;
+		}
+		
+		.waves-effect>strong {
+			background-color: #94bfca;
+		}
+		
+		
 	</style>
     
-
   </head>
   
   
   <body class="goto-here">
-  <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-
-
+  
+  	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
             <h1 class="mb-0 bread" id="h1">
            		<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
-			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if>
+<%-- 			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if> --%>
             </h1>
           </div>
         </div>
       </div>
     </div>
     
-    
-
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-8 ftco-animate">
-						<form  id ="uploadForm"  action="#" class="billing-form">
-<!-- 							<h3 class="mb-4 billing-heading">미정</h3> -->
+			<form  id ="uploadForm"  action="#" class="billing-form">
 	          	<div class="row align-items-end">
 	          	
 	          	
-				<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
-				<input type="hidden" name="id" value="${ sessionScope.user.id }" >
-				<input type="hidden" name="statusCode" value="1" >
-				<input type="hidden" class="form-control" id="multiFile" name="multiFile" >
+					<!-- hidden -->
+					<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
+					<input type="hidden" name="id" value="${ sessionScope.user.id }" >
+					<input type="hidden" name="statusCode" value="1" >
+					<input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 				
-				<div class="col-md-12">
 				
-	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
-	          			
-						<div class="form-group">
-							<div class="col-md-12"><strong>1. </strong>
-								<c:if test="${param.boardCode eq 'AD' }">분양글을 등록하고, 입양신청서가 등록되거나 분양완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
-			 					<c:if test="${param.boardCode eq 'MS' }">실종글을 등록하고, 찾기완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
-							</div>
-							<div class="col-md-12">
-								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+					<!-- 약관 시작 -->
+					<div class="col-md-12">
+					
+		          		<div class="cart-detail bg-light p-3 p-md-4">
+		          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
+		          			
+							<div class="form-group">
+								<div class="col-md-12"><strong>1. </strong>
+									<c:if test="${param.boardCode eq 'AD' }">분양글을 등록하고, 입양신청서가 등록되거나 분양완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
+	<%-- 			 					<c:if test="${param.boardCode eq 'MS' }">실종글을 등록하고, 찾기완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if> --%>
+								</div>
+								<div class="col-md-12">
+									<div class="radio" align="right">
+									   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-md-12"><strong>2. </strong>신청서는 상세조회 화면에서 확인하실 수 있으며, 신청서를 확인하고 직접 연락하시면 됩니다.</div>
-							<div class="col-md-12">
-								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+							
+							<div class="form-group">
+								<div class="col-md-12"><strong>2. </strong>신청서는 상세조회 화면에서 확인하실 수 있으며, 신청서를 확인하고 직접 연락하시면 됩니다.</div>
+								<div class="col-md-12">
+									<div class="radio" align="right">
+									   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-md-12">
-								<div class="radio" align="right">
-								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 동의</strong></label>
+							
+							<div class="form-group">
+								<div class="col-md-12">
+									<div class="radio" align="right">
+									   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 동의</strong></label>
+									</div>
 								</div>
 							</div>
+							
 						</div>
-						
 					</div>
-				</div>
+					<!-- 약관 끝 -->
 				
-			
-	          	
-	          	<div class="col-md-12"><br/><hr/><br/></div>
-	          	
+		          	
+		          	<div class="col-md-12"><br/><hr/><br/></div>
+		          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
-		                	<input type="text" class="form-control" name="postTitle" value="제목" placeholder="제목을 입력하세요.">
+		                	<input type="text" class="form-control" name="postTitle" value="" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
-	          	
+		          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
 		                	<input type="text" class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly >
 		                </div>
 	                </div>
-
+	
 	                <div class="col-md-12"><br/></div>
-	                
+		                
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
@@ -122,8 +137,9 @@
 			                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 			            </div>
 		            </div>
-		           	<br/>
 		            
+		           	<br/>
+			            
 		            <!-- 미리보기 영역 -->
 		            <div class="col-md-12">
 			            <div class="form-group">
@@ -132,14 +148,14 @@
 		            </div>
 		            
 		            <div class="col-md-12"><br/></div>
-	                
+		                
 	          		<div class="col-md-6">
 		                <div class="form-group">
 		                	<label for="dogBreed"><strong>견종</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="이미지 등록 시 자동으로 입력됩니다.">
 		                </div>
 	                </div>
-	                
+		                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for=""><strong>크기</strong></label>
@@ -149,15 +165,15 @@
 									<option value="대형견" >대형견</option>
 								</select>
 	               		</div>
-               		</div>
-               		
+	            	</div>
+	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogWeight"><strong>체중</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
-	                  		<input type="number" class="form-control" name="dogWeight"  value="5.5" placeholder="강아지 체중을 입력하세요.">
+	                  		<input type="number" min="0" class="form-control" name="dogWeight"  value="" placeholder="강아지 체중을 입력하세요.">
 	               		</div>
-               		</div>
-               		
+	              	</div>
+	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogGender"><strong>성별</strong></label>
@@ -166,66 +182,62 @@
 									<option value="여아" >여아</option>
 								</select>
 	               		</div>
-               		</div>
-               		
+	              	</div>
+	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogPay"><strong>
 		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if>
-	                		</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
-	                  		<input type="text" class="form-control" name="dogPay" value="123456" placeholder="비용을 입력하세요.">
+	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if> --%>
+	                		</strong>&nbsp;&nbsp;<span name="dogPay">원하지 않을 경우 0원을 입력하세요.</span></label>
+	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="비용을 입력하세요.">
 	               		</div>
-               		</div>
-               		
+	              	</div>
+	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogDate"><strong>
 	                			<c:if test="${param.boardCode eq 'AD' }">발견일자</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">실종일자</c:if>
+	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">실종일자</c:if> --%>
 	                		</strong></label>
-	                  		<input type="date" class="form-control" name="dogDate" value="2019-07-07" >
+	                  		<input type="date" class="form-control" name="dogDate" value="" >
 	               		</div>
-               		</div>
-               		
+	              	</div>
+	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="dogStatus"><strong>상태</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
-	                  		<input type="text" class="form-control" name="dogStatus" value="dd" placeholder="강아지 상태를 설명해주세요.">
+	                  		<input type="text" class="form-control" name="dogStatus" value="" placeholder="강아지 상태를 설명해주세요.">
 	               		</div>
-               		</div>
-               		
+	               	</div>
+	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="dogPersonality"><strong>성격</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
-	                  		<input type="text" class="form-control" name="dogPersonality" value="dd" placeholder="강아지 성격을 설명해주세요.">
+	                  		<input type="text" class="form-control" name="dogPersonality" value="" placeholder="강아지 성격을 설명해주세요.">
 	               		</div>
-               		</div>
-               		
+	              	</div>
+	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="dogChar"><strong>특징</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
-	                  		<input type="text" class="form-control" name="dogChar" value="dd" placeholder="강아지 특징을  설명해주세요.">
+	                  		<input type="text" class="form-control" name="dogChar" value="" placeholder="강아지 특징을  설명해주세요.">
 	               		</div>
-               		</div>
-               		
-               		
-               		
-	            	<div class="col-md-12" id="areaFocus">
-	            	<br/>
-                		<label><strong>
-                		<c:if test="${param.boardCode eq 'AD' }">
-                			※ 지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.
-                		</c:if>
-                		<c:if test="${param.boardCode eq 'MS' }">
-                			지도를 클릭하면 마커가 생성되며, 지도를 우클릭하거나 마커를 우클릭한 경우 마커가 삭제됩니다. 
-                		</c:if>
-                		</strong></label>
-               		</div>
-               		
-               		
-               		
-               		<c:if test="${param.boardCode eq 'AD' }">
+	               	</div>
+	               		
+		            <div class="col-md-12" id="areaFocus">
+		            <br/>
+	               		<label><strong>
+		               		<c:if test="${param.boardCode eq 'AD' }">
+		               			※ 지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.
+		               		</c:if>
+	<%-- 	               		<c:if test="${param.boardCode eq 'MS' }"> --%>
+	<!-- 	               			지도를 클릭하면 마커가 생성되며, 지도를 우클릭하거나 마커를 우클릭한 경우 마커가 삭제됩니다.  -->
+	<%-- 	               		</c:if> --%>
+	               		</strong></label>
+	               	</div>
+	               		
+	              	<c:if test="${param.boardCode eq 'AD' }">
 		            	<div class="col-md-12">
 		              		<div class="form-group">
 		                		<label for="adoptArea"><strong>분양가능지역</strong> &nbsp;(3곳까지 지정가능하며, 처음 지정한 지역이 리스트에 표시됩니다.)</label>
@@ -234,47 +246,39 @@
 		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" placeholder="마커 위치가 입력됩니다." readonly="readonly">
 		               		</div>
 	               		</div>
-               		</c:if>
-               		
-	            	<div class="col-md-12">
+	              	</c:if>
+	               		
+		            <div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="location"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">
-						  			발견위치
-						  		</c:if>
-							    <c:if test="${param.boardCode eq 'MS' }">
-						  			실종위치
-						  		</c:if>
+		                		<c:if test="${param.boardCode eq 'AD' }">발견위치</c:if>
+	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">실종위치</c:if> --%>
 	                		</strong></label>
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location">
 	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" placeholder="마커 위치가 입력됩니다." readonly>
 	               		</div>
-               		</div>
-               		
-               		
-               		<div class="col-md-12">
+	              	</div>
+	               		
+	               		
+	               	<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
-<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
 		                	<textarea  class="form-control"  name="postContent"  rows="5" value="dd"  placeholder="내용을 입력하세요."></textarea>
 		                </div>
 	                </div>
-               		
-
-               		
-               		<div class="w-100"></div>
+	               		
+	              	<div class="w-100"></div>
 		            <div class="w-100"></div>
-               		<div class="w-100"></div>
+	              	<div class="w-100"></div>
                 
-	            </div>
-	          </form>
-	          
-	          <!-- END -->
+	         	</div>
+	         </form>
+	         <!-- END -->
 
-
-	          <div class="row mt-5 pt-3 d-flex">
+	         <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
+	          	
 					<p><button class="btn btn-primary py-3 px-4 col-md-12">등록</button></p>
 					
 					<div class="form-group">
@@ -284,31 +288,18 @@
 							</div>
 						</div>
 					</div>
+					
 	          	</div>
-	          </div>
+	         </div>
 	          
 	          
  <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-			<div class="modal fade " id="imgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm" style="vertical-align: middle;" role="document">
-					<div class="modal-content">
-<!-- 						<div class="modal-header"> -->
-<!-- 							<h5 class="modal-title" id="exampleModalLabel"></h5> -->
-<!-- 							<button type="button" class="close" data-dismiss="modal" -->
-<!-- 								aria-label="Close"> -->
-<!-- 								<span aria-hidden="true">&times;</span> -->
-<!-- 							</button> -->
-<!-- 						</div> -->
-						<div class="modal-body" align="center">이미지를 등록해주세요.</div>
-						<div class="modal-footer">
-							<button type="button"  class="btn btn-primary"  data-dismiss="modal">예</button>
-						</div>
-					</div>
-				</div>
-			</div>
+ 
+ 
 			<div id="dialog-terms" title="">
 			  <p align="center"><br/>약관에 모두 동의해야 등록할 수 있습니다.</p>
 			</div>  
+			
 			<div id="dialog-img" title="">
 			  <p align="center"><br/>이미지를 등록해주세요.</p>
 			</div>        
@@ -316,6 +307,7 @@
 			<div id="dialog-area" title="">
 			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
 			</div>       
+			
 			<div id="dialog-location" title="">
 			  <p align="center"><br/>
 			  		<c:if test="${param.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if>
@@ -789,7 +781,6 @@
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑      check box        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 
-
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
 	$( function() {
@@ -882,7 +873,7 @@
 		}
 	});
 
-	$( "input[name=dogWeight]" ).keyup(function( ) {
+	$( "input[name=dogWeight]" ).keyup(function( e ) {
 		if($("input[name=dogWeight]").val().length > 6 ){
 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
 		}else{
@@ -957,16 +948,15 @@
 			  return;
 		  }
 		  if( $(".preview-box").length == 0 ){
-			  $('#imgModal').modal('show');
-// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-img').dialog( "open" );
+			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+			  $('#dialog-img').dialog( "open" );
 			  return;
 		  }
-		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
+		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 || $("input[name=dogWeight]").val() < 1 ){
 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPay]").val().trim() == '' || $("input[name=dogPay]").val().length > 6 ){
+		  if( $("input[name=dogPay]").val().trim() == '' || $("input[name=dogPay]").val().length > 6 || $("input[name=dogPay]").val() < 0 ){
 			  $("input[name=dogPay]").focus();
 			  return;
 		  }

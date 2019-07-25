@@ -32,6 +32,16 @@
 		padding-left:408px;
 		padding-right:100px;
 		}	
+       @font-face{
+          font-family: NanumSquare;
+          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
+       }
+       body{
+          font-family: NanumSquare, sans-serif !important;
+       }	
+       b, sup, sub, u{
+ 			color : #000000 !important;      
+       }	
 	</style> 
  
  
@@ -99,7 +109,7 @@
  			 <div class="col-lg-5 offset-lg-1">
              <div class="s_product_text">			 
             <div>
-             <font size=6  ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
+             <font size=6><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
 			<h3>${funding.voterCount}표</h3>
 			<!-- 투표종료 -->
 			 <c:if test ="${!(funding.statusCode eq 1) }">		
@@ -284,7 +294,9 @@
 	 		if(${user==null}){
 	 			alert("로그인이 필요합니다.")
 	 		}else{
-
+		 		 window.open("/chatting/addChattingUser?postId=${funding.id}",
+							"_blank",
+							"left=500, top=100, width=500, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 	 		}
 		});   
 	
@@ -321,7 +333,8 @@
             	alert("삭제가 완료되었습니다.")
             } else {
             }
-		});   	
+		});  
+	
     });
 
     

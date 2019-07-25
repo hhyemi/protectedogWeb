@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/comment/*")
@@ -37,11 +38,13 @@ public class CommentController {
 	int pageSize;
 
 
-	@RequestMapping(value = "addComment")
+	@RequestMapping(value = "addComment", method = RequestMethod.POST)
 	public String addComment(@ModelAttribute("comment") Comment comment, HttpSession session, HttpServletRequest request) throws Exception {
 
 		System.out.println(" ============================== addComment ==================================");
-
+		
+		System.out.println(" commentContent : " + comment.getCommentContent());
+		
 		User user = (User) session.getAttribute("user");
 		comment.setId(user.getId());
 		comment.setNickName(user.getNickname());

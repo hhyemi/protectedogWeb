@@ -49,6 +49,14 @@ public class AdoptServiceImpl implements AdoptService{
 		System.out.println("===================서비스");
 		return map;
 	}
+	
+	public Map<String , Object> listAdopt2(String id) throws Exception {
+		Map<String, Object> map= adoptDAO.listAdopt2(id);
+		
+		map.put("map", map );
+		System.out.println("===================서비스");
+		return map;
+	}
 
 	public void updateAdopt(Adopt adopt) throws Exception {
 		adoptDAO.updateAdopt(adopt);

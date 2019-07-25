@@ -55,8 +55,10 @@
 	       <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
 	    </div>
 	    
+	    <input type="hidden" id="authKeyReturn">
+	    
 	    <!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form class="form-horizontal" enctype="multipart/form-data">
 		<input type="hidden" id="id" name="id" value="${ user.id }">
 		  <div class="form-group">
 		    <label for="pw" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
@@ -83,9 +85,12 @@
 		    <label for="email" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" value="${ user.email }">
-		       <span id="helpBlock" class="help-block">
-		      </span>
 		    </div>
+		    <div id="mailAuth" style="display:none">
+		      <input type="text" id="checkMail"/>
+		      <input type="button" id="mailClick" value="전송"/>
+		    </div>
+		    <input type="button" id="authMail" name="authMail" value="인증하기">
 		  </div>
 		  
 		  <div class="form-group">
@@ -111,7 +116,6 @@
 				<input type="button" id="authClick" value="전송"/>
 		    </div>
  		    <input type="button" id="authPhone" name="authPhone" value="인증하기">
- 		    <input type="hidden" id="authKeyReturn">
 		  </div>
 		  
 		  <div class="form-group">
@@ -135,12 +139,12 @@
 			  </div>
 		   </div>
 		  
-		  <div class="form-group">
-		    <label for="account" class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="account" name="account" value="${ user.account }">
-		    </div>
-		  </div>
+<!-- 		  <div class="form-group"> -->
+<!-- 		    <label for="account" class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="account" name="account" value="${ user.account }"> --%>
+<!-- 		    </div> -->
+<!-- 		  </div> -->
 		  
 		  <div class="form-group">
 		    <label for="birthDate" class="col-sm-offset-1 col-sm-3 control-label">생년월일</label>
@@ -148,6 +152,14 @@
 		      <input type="text" class="form-control" id="birthDate" name="birthDate" value="${ user.birthDate }">
 		    </div>
 		  </div>
+		  
+		  <div class="form-group">
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">프로필사진</label>
+			   <div class="col-sm-4">
+				  <input type="file" class="form-control" id="profile" name="file" style="width: 300px; 
+						height: 40px" maxLength="13" value="${ user.profile }"/>
+			   </div>
+		  </div>		  
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
@@ -169,13 +181,18 @@
 			
 			$( "#submit" ).on("click" , function() {
 				var value = "";	
+				
+				if($("input:text[name='phone2']").val() == "" && $("input:text[name='phone3']").val() != "" ){
+					$("input:hidden[name='phone']").val(${user.phone});
+					
+				}
 				if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 					var value = $("option:selected").val() + "-" 
 								+ $("input[name='phone2']").val() + "-" 
 								+ $("input[name='phone3']").val();
+					$("input:hidden[name='phone']").val( value );
 				}
 
-				$("input:hidden[name='phone']").val( value );
 				
 				$("form").attr("method" , "POST").attr("action" , "/users/updateUsers");
 			});
@@ -230,6 +247,46 @@
 				}
 			})
 		});
+		
+		$(function(){
+			
+			$("#authMail").on("click", function(){
+
+				var check=$("input[name='email']").val();
+
+					$.ajax({
+						
+						url:"/users/json/mailSender",
+						method:"POST",
+						data:JSON.stringify({email:check}),
+						headers: {
+							"accept":"application/json",
+							"content-type":"application/json"
+						},
+						success:function(authMail, status){
+// 							alert(status);
+// 							alert(authMail.authKey);
+							$("#authKeyReturn").val(authMail.authKey);
+							$("#mailAuth").show();
+						}
+									
+					})
+		
+				})
+					
+			});
+
+			$(function() {
+				$("#mailClick").on("click", function(){
+					if($("#checkMail").val()==$("#authKeyReturn").val()){
+						$("#authMail").hide();
+						$("#mailAuth").hide();
+						alert("인증되었습니다.");
+					}else{
+						alert("인증번호가 맞지 않습니다.");
+					}
+				})
+			});
 		
 		
 		 $(function() {

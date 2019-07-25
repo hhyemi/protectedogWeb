@@ -22,7 +22,11 @@
 		       body > div.container{
 		        	border: 3px solid #D6CDB7;
 		            margin-top: 10px;
-		        }
+		       }
+		        
+		       button {
+			        width:150px; height:40px;
+		       }
 		    </style>
 
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

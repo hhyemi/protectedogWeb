@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.protectedog.common.Page;
+import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.domain.Adopt;
@@ -42,13 +45,11 @@ public class AdoptReviewRestController {
 	
 	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
 	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
-//	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
-//	int pageUnit;
+	@Value("#{commonProperties['pageUnit']}")
+	int pageUnit;
 	
-//	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
-//	int pageSize;
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
 	
 	
 
@@ -69,5 +70,53 @@ public class AdoptReviewRestController {
 		return board;
 	}
 	
+	
+	// 글 리스트 조회
+	@SuppressWarnings("unchecked")
+	@RequestMapping( value="json/listAdoptReview" )
+	public JSONObject listAdoptReview( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
+																			Model model, HttpSession session ) throws Exception{
+		
+		System.out.println("\n\n/adoptReview/json/listAdoptReview : GET / POST "+params.get("boardCode").toString());
+		System.out.println(params);
+		
+		search.setSearchCondition( params.get("searchCondition").toString() );
+		if(search.getSearchCondition() == null ) {
+			search.setSearchCondition("");
+		}
+		
+		search.setSearchKeyword( params.get("searchKeyword").toString() );
+		if(search.getSearchKeyword() == null ) {
+			search.setSearchKeyword("");
+		}
+		
+		search.setAreaCondition("");
+		search.setVoteCondition("");
+		
+		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
+//		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
+		
+		search.setPageSize(pageSize);
+//		System.out.println("search 확인 : "+search);
+		
+		Map<String , Object> map=boardService.listBoard(search, params.get("boardCode").toString(), 0);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		map.put("list", map.get("list"));
+//		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+
+		JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", map.get("list"));
+        jsonObject.put("startRowNum", map.get("startRowNum"));
+        jsonObject.put("searchCondition", map.get("searchCondition"));
+        jsonObject.put("endRowNum", map.get("endRowNum"));
+        jsonObject.put("boardCode", map.get("boardCode"));
+        jsonObject.put("searchKeyword", map.get("searchKeyword"));
+        jsonObject.put("totalCount", map.get("totalCount"));
+
+      
+//        System.out.println("json5========================================================\n"+jsonObject);
+      
+		return jsonObject;
+	}	
 	
 }

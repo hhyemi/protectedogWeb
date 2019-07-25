@@ -52,8 +52,7 @@ body {
 					var totalCount = JSONData.totalCount;
 					var reList = JSONData.reList;
 					
-					alert();
-					
+					console.log(reList);
 					var list = JSONData.list; 
 					
 					var display = "<div class='col-sm-12 col-md-12 commentList'>";
@@ -93,6 +92,33 @@ body {
  	 								"</div>" +
  	 							"</div>" +
  	 							"<br/>";
+ 	 							
+ 	 						$.each(reList, function(index, recomment){
+ 	 							if(comment.commentNo == recomment.commentNo){
+ 	 								display += 
+ 	 								  "<div class='row' id='"+recomment.recommentNo+"'style='padding-left: 50px;'>"
+ 	 									+ "<div class='col-sm-1 col-md-1' align='center'>"
+ 	 									+ "  <img src='https://via.placeholder.com/80' style='boder-radius : 5px; min-height : 80px; min-width : 60px;'/>"
+ 	 									+ "</div>"
+ 	 									+ "<div class='col-sm-9 col-md-9 align='left'"
+ 	 										+ "<h4 id='"+recomment.recommentNo+"' class='h4tag'>"
+ 	 										+ "<b>"+recomment.nickName+"</b>&nbsp; <small>"+recomment.regDate+"</small> &nbsp;"
+ 	 										+ "</h4>"
+ 	 										+ "<div id='"+recomment.recommentNo+"' class='area'>"
+ 	 											+ "<h5 id='"+recomment.recommentNo+" class='cmCont'>"+recomment.recommentContent+"</h5>";
+ 	 								
+ 	 								if(recomment.id == '${sessionScope.user.id}'){
+ 	 									display +=
+ 	 											"<span class='glyphicon glyphicon-refresh'></span> &nbsp; "
+ 	 								  			+ "<span class='glyphicon glyphicon-remove'></span> &nbsp; ";
+ 	 								}
+ 	 								
+ 	 								display += "<span class='glyphicon glyphicon-alert'></span> &nbsp;"
+ 	 									    + "</div>"
+ 	 									+ "</div>"
+ 	 								+ "</div>" ;
+ 	 							}
+ 	 						});
 					});
 					
 					display +="</div>";
@@ -165,6 +191,8 @@ body {
 			
 			//alert();
 			var commentNo = $(this).parent().parent().children("input").val();
+			var hr = $(this).parent().html();
+			alert(hr);
 			var result = confirm("정말 삭제 하시겠습니까?");
 			
 			if (result) {
@@ -274,6 +302,11 @@ body {
 
 	function update(){
 		
+		if( $("#commentContent").val() == ''){
+			alert("내용을 입력해주세요.");
+			return;
+		}
+		
 		var search 	= {commentNo : $("#commentNo").val(), commentContent : $("#commentContent").val()};
 		var convertSearch = JSON.stringify(search);
 		
@@ -293,36 +326,30 @@ body {
  						$(".ajax").remove();
  						$("#"+JSONData.commentNo+""+".area").show();
  						
- 							var modifyScreen = 	
- 								  "<div id="+JSONData.commentNo+" class='area'>"
- 								+ "<h5 id="+JSONData.commentNo+" class='cmCont'>"+JSONData.commentContent+"</h5><div>";
+ 						var modifyScreen = 	
+ 							"<div id="+JSONData.commentNo+" class='area'>"
+ 							+ "<h5 id="+JSONData.commentNo+" class='cmCont'>"+JSONData.commentContent+"</h5><div>";
 						
  						$("#"+JSONData.commentNo+""+".h4tag").append(modifyScreen);
  	
 					},
-					
-					
  					error : function(request, status, error){
 						
  						alert("error");
 						
  					}
  				});
-	}
+	} // end of update function()
 </script>
 </head>
 
 <body>
 
 	<div class="container">
-		<!-- 		<div class="row"> -->
-		<!-- 			<div class="col-xs-4 col-md-12" align="left"> -->
-		<!-- 				<b><h3>한줄평</h3></b> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
 
 		<hr />
 	
+		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 비회원 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
@@ -333,6 +360,7 @@ body {
 		<br>
 		</c:if>
 		
+		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 회원 처리  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<c:if test="${sessionScope.user.role != null}">
 		<form name="commentGo">
 		<div class="row">
@@ -353,6 +381,7 @@ body {
 		<br>
 		</c:if>
 		
+		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 댓글 처리  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<div id="moreView"></div>
 		<div class="commentList">
 		<c:forEach var="comment" items="${list}">
@@ -386,53 +415,53 @@ body {
 				<div class="col-sm-1 col-md-1" align="center" style="padding-top: 10px; padding-left : 0 px;">
 					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span>
 					<p/>
-					<p/>
-<%-- 					<span id="${comment.commentNo}" class="glyphicon glyphicon-chevron-down" style="font-size: 20px"></span> --%>
 				</div>
 			</div>
-<%-- 			<c:forEach var="recomment" items="${relist}"> --%>
-<%-- 			<c:if test="${comment.likeCount == 0}"> --%>
-<%-- 			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;"> --%>
-<!-- 				<div class="col-sm-1 col-md-1" align="center"> -->
-<!-- 					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-sm-9 col-md-9" align="left"> -->
-					
-<%-- 					<h4 id="${recomment.recommentNo}" class="h4tag"> --%>
-<%-- 						<b>${recomment.nickName}</b>&nbsp; <small>${recomment.regDate}</small>&nbsp; --%>
-<!-- 					</h4> -->
-<%-- 					<input type="hidden" name="commentNo" value="${recomment.commentNo}"> --%>
-					
-<%-- 					<div id="${recomment.recommentNo}" class="area"> --%>
-<%-- 					<h5  id="${recomment.recommentNo}" class="cmCont">${recomment.recommentContent}</h5> --%>
-<%-- 					<c:if test="${recomment.id == sessionScope.user.id }"> --%>
-<!-- 					<span class="glyphicon glyphicon-refresh"></span> &nbsp;  -->
-<!-- 					<span class="glyphicon glyphicon-remove"></span> &nbsp;  -->
-<%-- 					</c:if> --%>
-<!-- 					<span class="glyphicon glyphicon-alert"></span> &nbsp; 					 -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 			</c:if> --%>
-<%-- 			</c:forEach> --%>
 			<br/>
+			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 대댓글 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+			<c:forEach var="recomment" items="${relist}">
+			<c:if test="${comment.commentNo == recomment.commentNo}">
+			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;">
+				<div class="col-sm-1 col-md-1" align="center">
+					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
+				</div>
+				<div class="col-sm-9 col-md-9" align="left">
+					
+					<h4 id="${recomment.recommentNo}" class="h4tag">
+						<b>${recomment.nickName}</b>&nbsp; <small>${recomment.regDate}</small>&nbsp;
+					</h4>
+					<input type="hidden" name="commentNo" value="${recomment.commentNo}">
+					
+					<div id="${recomment.recommentNo}" class="area">
+					<h5  id="${recomment.recommentNo}" class="cmCont">${recomment.recommentContent}</h5>
+					<c:if test="${recomment.id == sessionScope.user.id }">
+					<span class="glyphicon glyphicon-refresh"></span> &nbsp; 
+					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
+					</c:if>
+					<span class="glyphicon glyphicon-alert"></span> &nbsp; 					
+					</div>
+				</div>
+			</div>
+			</c:if>
+			</c:forEach>
 		</c:forEach>
 		</div>
 		
+		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 더보기 버튼 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<c:if test="${totalCount > list.size()}">
 		<div class="col-md-12">
 			<button type="button" class="btn btn-default"> 더보기 </button>
 		</div>
 		</c:if>
-		<div class="row">
-			&nbsp;
-			<p>&nbsp;
-			<p>
+		
+		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 하단 공백 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+		<div style="min-height: 50px;">
+			
 		</div>
 
-
 		<br>
- 
+ 		
+ 		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 모달 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -451,11 +480,9 @@ body {
 					</div>
 				</div>
 			</div>
-		</div>		
-	</div>
-	
-	
-
-
+		</div>
+		
+				
+	</div> <!--  END of Container -->
 </body>
 </html>

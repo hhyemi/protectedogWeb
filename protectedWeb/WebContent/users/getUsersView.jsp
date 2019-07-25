@@ -65,7 +65,7 @@
 			<div style="float:left" class="col-md-4">
 				<c:if test="${user.profile!=null }">
 				<div class="col-xs-12 col-md-4">
-					<img src="/resources/file/fileUser/profile/${user.profile}">
+					<img src="/resources/file/fileUser/${user.profile}" style="max-height: 250px; max-width: 250px">
 				</div>
 				</c:if>
 				<c:if test="${user.profile==null}">
@@ -155,6 +155,8 @@
 		
  	</div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
+ 	
+ 	<jsp:include page="/layout/footer.jsp" />
 
 </body>
 

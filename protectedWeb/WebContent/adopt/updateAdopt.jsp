@@ -6,16 +6,28 @@
 <html>
 
 <head>
-	<title>UPDATE ADOPT</title>
+	<title>보호할개 · 분양글 수정</title>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
 
     
     <style type="text/css">
+		
 	    html {
 	 	 scroll-behavior: smooth;
 		}
+		
+		h1 {
+			font-family: 'NanumSquare', sans-serif !important;
+/* 			font-size: 22px !important; */
+		}
+		
+		section { 
+			font-family: 'NanumSquare', sans-serif !important;
+		}
+		
 	</style>
 	
 	
@@ -66,36 +78,10 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="phone"><strong>연락처</strong></label>
-		                	<input type="text" class="form-control" name="phone" value="${ adopt.phone }">
+		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
+		                	<input type="text" class="form-control" name="phone" value="${ adopt.phone }" readonly>
 		                </div>
 	                </div>
-	                
-<!-- 	                <div class="col-md-12"> -->
-<!-- 		                <label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone"></span></label> -->
-<!-- 	                </div> -->
-	                
-<!-- 	                <div class="col-md-4"> -->
-<!-- 	                	<select  class="form-control" name="phone1" id="phone1"> -->
-			            	<option value="010">010</option>
-			            	<option value="011" selected="selected">011</option>
-			            	<option value="016">016</option>
-			            	<option value="017">017</option>
-			            	<option value="019">019</option>
-<!-- 			            </select> -->
-<!-- 	                </div> -->
-	                
-<!-- 	          		<div class="col-md-4"> -->
-<!-- 	                	<input type="text" class="form-control" id="phone2" name="phone2" value="2123"> -->
-<!-- 	                </div> -->
-	                
-<!-- 	          		<div class="col-md-4"> -->
-<!-- 	                	<input type="text" class="form-control" id="phone3" name="phone3" value="4567"> -->
-<!-- 	                </div> -->
-	               
-<!-- 	                <input type="hidden" class="form-control" id="phone" name="phone"> -->
-	                
-<!-- 	                <div class="col-md-12"><br/></div> -->
 	                
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">

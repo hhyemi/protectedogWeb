@@ -1,5 +1,6 @@
 package org.protectedog.web.adopt;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,12 +10,14 @@ import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.domain.Adopt;
+import org.protectedog.service.domain.Apply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +45,8 @@ public class AdoptRestController {
 	}
 	
 
+	
+	
 	// 글상태 완료로 변경
 	@RequestMapping( value="json/updateStatusCode/{postNo}", method=RequestMethod.GET)
 	public Adopt updateStatusCode( @PathVariable("postNo") int postNo ) throws Exception{
@@ -57,20 +62,22 @@ public class AdoptRestController {
 	
 	// 글 리스트 조회
 	@SuppressWarnings("unchecked")
-	@RequestMapping( value="json/listAdopt/{boardCode}/{pazeSize}/{areaCondition}" )
-	public JSONObject listAdopt( @ModelAttribute("search") Search search,
-						@PathVariable("boardCode") String boardCode, @PathVariable("pazeSize") int pazeSize, 
-						@PathVariable("areaCondition") String areaCondition,
-//						@RequestParam("searchCondition") String searchCondition, @RequestParam("searchKeyword") String searchKeyword,
-																								Model model, HttpSession session ) throws Exception{
+	@RequestMapping( value="json/listAdopt" )
+	public JSONObject listAdopt( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
+																			Model model, HttpSession session ) throws Exception{
 		
-		System.out.println("\n\n/adopt/json/listAdopt : GET / POST "+boardCode);
+		System.out.println("\n\n/adopt/json/listAdopt : GET / POST "+params.get("boardCode").toString());
+		System.out.println(params);
 		
+		search.setSearchCondition( params.get("searchCondition").toString() );
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
 		}
 //		System.out.println("확인@@@@ : "+searchCondition+", "+searchKeyword);
+		
+		search.setSearchKeyword( params.get("searchKeyword").toString() );
 		System.out.println("검색어 확인1 : "+search.getSearchKeyword());
+		
 		if(search.getSearchKeyword() == null ) {
 			search.setSearchKeyword("");
 //			if(searchKeyword != null) {
@@ -78,6 +85,7 @@ public class AdoptRestController {
 //			}
 		}
 		System.out.println("검색어 확인2 : "+search.getSearchKeyword());
+		search.setAreaCondition( params.get("areaCondition").toString() );
 		if(search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
 			search.setAreaCondition("");
 		}else if(search.getAreaCondition().equals("kw")) {
@@ -105,13 +113,13 @@ public class AdoptRestController {
 		}
 		search.setVoteCondition("");
 		
-		search.setCurrentPage(pazeSize);
-		System.out.println(search.getAreaCondition()+"◀확인▶"+pazeSize);
+		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
+		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		
 		search.setPageSize(pageSize);
 		System.out.println("search 확인 : "+search);
 		
-		Map<String , Object> map=adoptService.listAdopt(search, boardCode);
+		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
 //		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
@@ -129,6 +137,25 @@ public class AdoptRestController {
       
 //        System.out.println("json5========================================================\n"+jsonObject);
       
+		return jsonObject;
+	}
+	
+	// 후기등록 권한
+	@SuppressWarnings("unchecked")
+	@RequestMapping( value="json/listAdopt2/{id}" )
+	public JSONObject listAdopt2( Model model, HttpSession session, @PathVariable("id") String id ) throws Exception{
+		
+		System.out.println("\n\n/adopt/json/listAdopt2 : GET / POST "+id);
+
+		
+		Map<String , Object> map=adoptService.listAdopt2(id);
+		map.put("list", map.get("list"));
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("list", map.get("list"));
+		
+//        System.out.println("json5========================================================\n"+jsonObject);
+		
 		return jsonObject;
 	}
 	

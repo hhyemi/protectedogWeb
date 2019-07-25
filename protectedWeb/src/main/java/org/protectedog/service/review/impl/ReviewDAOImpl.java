@@ -1,46 +1,40 @@
-//package org.protectedog.service.review.impl;
-//
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//import org.apache.ibatis.session.SqlSession;
-//import org.protectedog.common.Search;
-//import org.protectedog.service.domain.Review;
-//import org.protectedog.service.review.ReviewDAO;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.stereotype.Repository;
-//
-//
-//@Repository("reviewDAOImpl")
-//public class ReviewDAOImpl implements ReviewDAO {
-//	
-//	///Field
-//	@Autowired
-//	@Qualifier("sqlSessionTemplate")
-//	private SqlSession sqlSession;
-//			
-//	public void setSqlSession(SqlSession sqlSession){
-//		this.sqlSession = sqlSession;
-//	}
-//		
-//	///Constructor
-//	public ReviewDAOImpl(){
-//		System.out.println(this.getClass());
-//	}
-//
-//	@Override
-//	public void addReview(Review review) throws Exception {
-//		sqlSession.insert("reviewMapper.addReview", review);
-//
-//	}
-//
-//	@Override
-//	public Review getReview(int postNo) throws Exception {
-//		// TODO Auto-generated method stub
-//		return sqlSession.selectOne("reviewMapper.getReview", postNo);
-//	}
+package org.protectedog.service.review.impl;
+
+import org.apache.ibatis.session.SqlSession;
+import org.protectedog.service.domain.Review;
+import org.protectedog.service.review.ReviewDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+
+@Repository("reviewDAOImpl")
+public class ReviewDAOImpl implements ReviewDAO {
+	
+	///Field
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	private SqlSession sqlSession;
+			
+	public void setSqlSession(SqlSession sqlSession){
+		this.sqlSession = sqlSession;
+	}
+		
+	///Constructor
+	public ReviewDAOImpl(){
+		System.out.println(this.getClass());
+	}
+
+	@Override
+	public void addReview(Review review) throws Exception {
+		sqlSession.insert("ReviewMapper.addReview", review);
+
+	}
+
+	@Override
+	public Review getReview(int postNo) throws Exception {
+		return sqlSession.selectOne("ReviewMapper.getReview", postNo);
+	}
 //
 //	@Override
 //	public List<Review> listReview(Search search, String boardCode) throws Exception {
@@ -66,9 +60,9 @@
 //	}
 //
 //	@Override
-//	public int getTotalCount(String boardCode) throws Exception {
+//	public int getTotalCount(Search search) throws Exception {
 //		// TODO Auto-generated method stub
-//		return sqlSession.selectOne("reviewMapper.getTotalCount",boardCode);
+//		return 0;
 //	}
-//
-//}
+
+}
