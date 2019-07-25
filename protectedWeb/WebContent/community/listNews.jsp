@@ -44,8 +44,6 @@
 		
 		$(document).on("click",".go",function(){
 			
-// 			debugger;
-// 			alert($(this).children("input").val());
 			window.open($(this).children("input").val(),"new","width=800, height=600o, top=100, left=100");
 		});
 	});

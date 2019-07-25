@@ -52,12 +52,86 @@ h7 {
 td:hover{
 	color : #3E6B79;
 }
+
+.go{
+	color : #808080;
+}
+.go:hover{
+	color : #3E6B79;
+}
+.btn.btn-default{
+	width: 100px;
+	height :30px;
+	border-radius: 0px;
+}
 </style>
 
 <title>정보공유</title>
 
 <!-- JavaScript -->
 <script type="text/javascript">
+	
+$(function(){
+	
+	$(document).ready(function(){
+		listNews();
+	});
+	
+	$(document).on("click",".go",function(){
+		
+		window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+	});
+});
+
+function listNews(){
+	
+	$.ajax({
+		url : "/News/json/listNews/",
+		method : "POST",
+		dataType : "json",
+		contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+		headers : {
+			"Accept" : "application/json",
+			"Content-Type" : "application/json;charset=euc_kr"
+		},
+		success : function(JSONData, status) {
+			
+			console.log(JSON.stringify(JSONData));
+			
+			var list = JSONData.items;
+			
+			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>뉴스</b></h4></td></tr>");
+		
+			$.each(list, function(index, items) {
+				
+				console.log("index : " + index );
+				console.log("items : " + JSON.stringify(items) );
+				var title = items.title;
+				
+				$(".newstbody").append(
+						  "<tr>"
+						+	 "<td colspan='2'  class='mdl-data-table__cell--non-numeric' style='max-width:200px;'>"
+								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,20)
+								+ "<input type='hidden' name='link' value='"+items.link+"'>"
+								+ "</a>"
+						+	 "</td>"
+						+ "</tr>"
+				);
+				
+				
+			});
+				
+			//alert("success");
+			
+		},
+		error : function(request, status, error){	
+		
+			alert("error");
+
+			
+		}
+	});
+}
 
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
@@ -167,20 +241,17 @@ td:hover{
 
 	<div class="container">
 
-		
-
 		<br/>
-
-
 		
 		<br/>
-
+		
+<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
 		<div class="row">
 			<div class="col-md-9" style="">
 				<div style="float: left;">
-					<button type="button" class="btn btn-default">전체보기</button>
-					<button type="button" class="btn btn-default">조회수 ▼</button>
-					<button type="button" class="btn btn-default">추천수 ▼</button>
+					<button type="button" class="btn btn-default"><h5>전체보기</h5></button>
+					<button type="button" class="btn btn-default"><h5>조회수 ▼</h5></button>
+					<button type="button" class="btn btn-default"><h5>추천수 ▼</h5></button>
 				</div>
 				<div style="float: right;">
 					<select name="pageSize" id="selectPageSize"
@@ -192,7 +263,9 @@ td:hover{
 					</select>
 				</div>
 			</div>
-			
+		</div>
+		
+		<div class="row">
 			<div class="col-md-9">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 					<thead>
@@ -224,14 +297,58 @@ td:hover{
 						</c:forEach>	
 					</tbody>
 				</table>
-			</div>
-			
+				
+				<div class="col-md-12" align="right">
 
-			<div class="col-md-3" style="border: 1px solid #4E8092;">
-				<h3 align="center">
-					<b>HOT 개</b>
-				</h3>
-				<p>
+					<br />
+
+					<c:if test="${ ! empty sessionScope.user }">
+						<button>글 쓰기</button>
+					</c:if>
+					
+					<div align="center">
+					<jsp:include page="/common/pageNavigator.jsp" />
+					</div>
+					
+					<div style="min-height: 40px">
+					</div>
+					
+					<div align="center">
+					<div class="col-md-12 col-sm-12 col-xm-12" style="padding-left: 28%;">
+					<form class="form-inline" name="detailForm">
+						<div class="form-group">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+							</select>
+						</div>
+
+
+						<div class="form-group">
+							<label class="sr-only" for="searchKeyword">검색어</label> <input
+								type="text" class="form-control" id="searchKeyword"
+								name="searchKeyword" placeholder="검색어"
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit" class="btn btn-default">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+
+						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+<!-- 		■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ HOT AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+			<div class="col-md-3">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 
 					<thead>
@@ -245,12 +362,16 @@ td:hover{
 						</tr>
 					</thead>
 
-					<tbody>
+					<tbody class="newstbody">
+								<tr align="center">
+									<td colspan='2' class='text-center'><h4><b>HOT 개</b></h4>
+									</td>
+								</tr>
 						<c:set var="i" value="0" />
 						<c:forEach var="best" items="${listRanking}">
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
-									<td class="mdl-data-table__cell--non-numeric"> <span style="padding: 1px solid black">${i}</span></td>
+									<td class="mdl-data-table__cell--non-numeric">${i}</td>
 									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
 										value="${best.postNo}"> ${best.postTitle}</td>
 <%-- 									<td align="center">${best.nickName}</td> --%>
@@ -263,57 +384,34 @@ td:hover{
 				</table>
 			</div>
 			<br />
-		</div>
-
-		
-	<div class="col-md-9" align="right">
-	
-	<br/>
-	
-	<button>글 쓰기</button>
-	</div>
-	
-	<br/>
-	<p/>
-	<div class="col-md-9" align="center">
-	<jsp:include page="/common/pageNavigator.jsp" />
-	</div>
-
-	<br/>
-		<div class="container">
-			<div class="col-md-9 col-sm-9 col-xm-9" style="padding-left: 200px">
-				<form class="form-inline" name="detailForm">
-					<div class="form-group">
-						<select class="form-control" id="searchCondition" name="searchCondition">
-							<option value="0"
-								${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-							<option value="1"
-								${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
-							<option value="2"
-								${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">검색어</label> <input
-							type="text" class="form-control" id="searchKeyword"
-							name="searchKeyword" placeholder="검색어"
-							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-						<button type="button" id="searchSubmmit" class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</div>
-
-					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-					<input type="hidden" id="currentPage" name="currentPage" value="" />
-				</form>
+			
 			</div>
-		</div>
+			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ NEWS AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  -->
+			
+			<div class="row">
+				
+				
+<!-- 				<div class="col-md-3"> -->
+<!-- 					<h3 align="center"> -->
+<!-- 						<b>뉴스</b> -->
+<!-- 					</h3> -->
+<!-- 					<p> -->
+<!-- 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"> -->
+<!-- 						<tbody class="newstbody"> -->
+<!-- 						</tbody> -->
+<!-- 					</table> -->
+<!-- 				</div> -->
+				
+				<br />
+				<p />
+				<br/>
+			</div>	
 	</div>
 	
 	<div class="empty" style="min-height: 100px">
 		
 	</div>
-	<jsp:include page="/layout/footer.jsp"/>
+	<jsp:include page="/layout/footer.jsp"/>\
+	
 </body>
 </html>

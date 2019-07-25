@@ -36,16 +36,20 @@
     <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js"></script>
     <script type="text/javascript">
-//     	$(function(){
-//     		$("span:contains('Sign in')").on("click", function(){
-//     			$(self.location).attr("href","/users/login");
-//     		});
-//     	});
+    	$(function(){
+    		$("span:contains('로그인')").on("click", function(){
+    			$(self.location).attr("href","/users/login");
+    		});
+    	});
     </script>
     
     <style type="text/css">
     	.py-1 bg-black{
     		min-height: 27px;
+    	}
+    	
+    	.goto-here{
+    		color : black;
     	}
     </style>
   </head>
@@ -57,33 +61,36 @@
                 <div class="row d-flex">
                    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center">
+					    		
 						    	<span class="icon-phone2">
 						    		<span class="text">${ sessionScope.user.phone }</span>
 						    	</span>
-					    	</div>
+<!-- 					    	</div> -->
 						   	 	<c:if test="${ sessionScope.user == null }">
+						   	 	<span>
 							   	 	<a id="custom-login-btn" href="javascript:loginWithKakao()">
 	                        			<img src="/resources/img/kakao/kakaolink_btn_small.png" style="height:15px; width: 15px;"/>
 	                        		</a>
+	                        	</span>
                         		</c:if>
+                        		</div>
 <%--                         		<c:if test="${ sessionScope.user.kakao != null }"> --%>
 <!--                         			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a> -->
 <%--                         		</c:if> --%>
 <%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
 <!-- 								<a id="googleLogout" href="#" onclick="signOut();">google 로그아웃</a> -->
 <%-- 							</c:if> --%>
-					    	</div>
-					   		<div class="col-md pr-4 d-flex topper align-items-center">
-					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						   		<span class="text">${ sessionScope.user.email }</span>
-					   		</div>
+<!-- 					   		<div class="col-md pr-4 d-flex topper align-items-center"> -->
+<!-- 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
+<%-- 						   		<span class="text">${ sessionScope.user.email }</span> --%>
+<!-- 					   		</div> -->
 					   		
 					   		
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+					    	<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 					    	<input type="hidden" id="id" name="id" value="${ sessionScope.user.id }">
 						    <c:if test="${ sessionScope.user eq null }">
-						    	<span id="login" class="text">Sign in</span>
-						    	<span id="regist" class="text">Sign up</span>
+						    	<span id="login" class="text">로그인</span>
+						    	<span id="regist" class="text">회원가입</span>
 						    </c:if>
 
 <%-- 						    <c:if test="${sessionScope.user.role eq 'user' }"> --%>
@@ -103,11 +110,11 @@
 							    </div>
 							    <div class="logout" style="float:right">
 							    	<span class="text">
-							    		<a href="/users/logout">logout</a>
+							    		<a href="/users/logout">로그아웃</a>
 							    	</span>
 	                            </div>
                             </c:if>
-                            
+                            </div>
 					    </div>
                 </div>
              </div>
@@ -116,14 +123,14 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
        <div class="container">
-         <a class="navbar-brand" href="/index.jsp">#PROTECTEDOG</a>
+         <a class="navbar-brand" href="/index.jsp">#보호할개</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="oi oi-menu"></span> Menu
+           <span class="oi oi-menu"></span>
          </button>
 
          <div class="collapse navbar-collapse" id="ftco-nav">
            <ul class="navbar-nav ml-auto">
-             <li class="nav-item active"><a href="/index.jsp" class="nav-link">Home</a></li>
+             <li class="nav-item active"><a href="/index.jsp" class="nav-link">집</a></li>
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -141,20 +148,8 @@
                 <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/community/getHospital.jsp">병원</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/community/getBreedPedia.jsp">PEDIA</a>
-              </div>
-            </li>
              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">COMMUNITY</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">담소나눔</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/info/listInfo">정보공유</a>
                 <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
@@ -163,7 +158,7 @@
             </li>
             <c:if test="${ sessionScope.user != null }">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USERS</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사람</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
@@ -181,7 +176,7 @@
             </li>
             </c:if>
              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MARKET</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">벼룩시장</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
                 <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
@@ -191,8 +186,12 @@
                 </c:if>
               </div>
             </li>
-             <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
+            <li class="nav-item">
+              <a class="nav-link" href="/community/getBreedPedia.jsp">견종백과</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="/community/getHospital.jsp">병원</a>
+            </li>
            </ul>
          </div>
        </div>
