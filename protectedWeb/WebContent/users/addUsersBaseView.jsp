@@ -257,10 +257,10 @@
 			$($("input:checkbox")).on("click", function(){
 // 				alert($(this).is(":checked"));
 				var chkNo=$('input:checkbox:checked').length;
-				alert(chkNo);
+// 				alert(chkNo);
 				var purpose=$("input:checkbox[name='purpose[]']:checked");
 				$.each(purpose, function(index, value){
-					alert($(value).val());
+// 					alert($(value).val());
 				})
 				if(chkNo>3){
 					alert("3개까지 선택 가능합니다.");

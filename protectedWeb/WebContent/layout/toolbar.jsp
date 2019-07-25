@@ -52,7 +52,6 @@
     	.goto-here{
     		color : black;
     	}
-    	
     	.pr-4{
     		padding-right : 17px;
     	}
@@ -152,7 +151,6 @@
               	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
 <!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a> -->
                 <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
-                <a class="dropdown-item" href="../adopt/thumnail.jsp">테스트</a>
 <!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
 
               </div>
@@ -205,7 +203,7 @@
               <a class="nav-link" href="/community/getBreedPedia.jsp">견종백과</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="/community/getHospital.jsp">동물병원</a>
+              <a class="nav-link" href="/hospital/getHospital.jsp">동물병원</a>
             </li>
            </ul>
          </div>
@@ -273,6 +271,32 @@
 			
 			$("#regist").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
+			});
+		});
+				
+		$(document).ready(function(){
+		
+			var id=$("#registId").val();
+			var msgId=JSON.stringify({id:id});
+// 			alert(id);
+// 			alert(msgId);
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "/message/json/getUnreadMessage",
+				data : msgId,
+				datatype : "json",
+				success : function(response){
+					if(id!=null && $.trim(response.result)==0){
+// 						alert($.trim(response.result));
+						$(".msg").hide();
+					}
+					if(id!=null && $.trim(response.result)==1){
+// 						alert($.trim(response.result));
+						$(".msg").show();
+					}
+				}
+				
 			});
 		});
 		

@@ -1,42 +1,48 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
 <html lang="ko">
-	
+
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<meta charset="EUC-KR">
 
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
-	<!-- Bootstrap Dropdown Hover CSS -->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-    <!-- jQuery UI toolTip 사용 CSS-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip 사용 JS-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
-     <!-- ckeditor 사용 CSS-->   
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
-    
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap Dropdown Hover CSS -->
+<link href="/css/animate.min.css" rel="stylesheet">
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<!-- Bootstrap Dropdown Hover JS -->
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+
+
+<!-- jQuery UI toolTip 사용 CSS-->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery UI toolTip 사용 JS-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- ckeditor 사용 CSS-->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
 /* 	   #btn-add{
 		background: #fff;
         border:2px solid #29304d;
@@ -51,157 +57,215 @@
 		height:40px;
 		width:150px;
 		} */
-		.container{
-		width: 1000px;
-		font-size :15px;
-		}		
-		.form-group{
-		padding-left:170px;
-		padding-right:100px;
-		}
-		.form-group2{
-		padding-left:450px;
-		padding-right:100px;
-		}		
-		.form-form{
-	    padding-left:15px;	
-		}
-		.ck.ck-editor {
-			max-width: 700px;
-		}
-		
-		.ck-editor__editable {
-			text-align: left;
-			min-height: 300px;
-			max-width: 700px;
-		}				
-    </style>
+.container {
+	width: 1000px;
+	font-size: 15px;
+}
 
-	</head>
-	<body>
+.form-group {
+	padding-left: 170px;
+	padding-right: 100px;
+}
+
+.form-group2 {
+	padding-left: 450px;
+	padding-right: 100px;
+}
+
+.form-form {
+	padding-left: 15px;
+}
+
+.ck.ck-editor {
+	max-width: 700px;
+}
+
+.ck-editor__editable {
+	text-align: left;
+	min-height: 300px;
+	max-width: 700px;
+}
+       @font-face{
+          font-family: NanumSquare;
+          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
+       }
+       body{
+          font-family: NanumSquare, sans-serif !important;
+       }
+</style>
+
+</head>
+<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
-	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-   	<!-- ToolBar End /////////////////////////////////////-->
-      
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	<!-- ToolBar End /////////////////////////////////////-->
+
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
 		<div class="form-group">
-		<div class="page-header text-center">	
-		<font size=6>후원 신청 등록</font> 후원신청은 투표 <strong style="color:#225cba">1개</strong>이상 받을 시 <strong  style="color:#225cba">수정이 불가</strong>합니다.
-	    </div>		
-		</div>	
-		
+			<div class="page-header text-center">
+				<font size=6>후원 신청 등록</font> 후원신청은 투표 <strong style="color: #225cba">1개</strong>이상
+				받을 시 <strong style="color: #225cba">수정이 불가</strong>합니다.
+			</div>
+		</div>
+
 		<!-- form Start /////////////////////////////////////-->
-		<form id ="uploadForm" class="form-horizontal">
-		  <div class="form-group">
-			<h3><b>후원목표금액</b></h3>
-			투표개수는 ( <strong style="color:#225cba">목표금액 0.01%</strong> )표로 적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )<p/>
-		    <div class="row form-form"  >
-		      <input type="text" class="form-control" id="fundTargetPay" name="fundTargetPay" placeholder="0" style="width:600px; height:35px;" >&ensp; 원
-		    </div>
-		  </div>
-			<br/>
-         
-		  <div class="form-group" id="voteNum">
-		    <h3><b>투표수 <strong style="color:#225cba">0</strong>표</b></h3>
-		  </div>
-		  <div class="form-group" >
-			후원게시글로 이동하려면 받아야 할 투표 수입니다.	
-		  </div>
-		  <br/>
-                
-		  <div class="form-group">
-			<h3><b>후원목표기간</b></h3>
-			후원 받을기간을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br/>
-			투표가 마감되었을 때 시작 날부터의 기간입니다. 투표 기간은 <strong style="color:#225cba">30</strong>일로 고정됩니다.<p/>		
-		    <div >
-		      <select class="form-control" name="fundTargetDay" id="fundTargetDay"  style="width:700px; height:35px;">
-		      <c:forEach var ="i" begin="7" end ="30" step="1">
-				  	<option value="${i}" >${i}</option>
-				</c:forEach>	
-				</select>
-		    </div>
-		  </div>
-		  <br/>
-		  <div class="form-group">
-			<h3><b>글제목</b></h3><p/>		
-		    <div class=>
-		      <input type="text" class="form-control" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
-		    </div>
-		  </div>
-		  <br/>
-		  
-		  <div class="form-group">
-			<h3><b>글내용</b></h3><p/>			
-			    <div>
-					<textarea id="postContent" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
+		<form id="uploadForm" class="form-horizontal">
+			<div class="form-group">
+				<h3>
+					<b>후원목표금액</b>
+				</h3>
+				투표개수는 ( <strong style="color: #225cba">목표금액 0.01%</strong> )표로
+				적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )
+				<p />
+				<div class="row form-form">
+					<input type="text" class="form-control" id="fundTargetPay"
+						name="fundTargetPay" placeholder="0"
+						style="width: 600px; height: 35px;">&ensp; 원
+				</div>
+			</div>
+			<br />
+
+			<div class="form-group" id="voteNum">
+				<h3>
+					<b>투표수 <strong style="color: #225cba">0</strong>표
+					</b>
+				</h3>
+			</div>
+			<div class="form-group">후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>
+			<br />
+
+			<div class="form-group">
+				<h3>
+					<b>후원목표기간</b>
+				</h3>
+				후원 받을기간을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br /> 투표가 마감되었을 때 시작 날부터의
+				기간입니다. 투표 기간은 <strong style="color: #225cba">30</strong>일로 고정됩니다.
+				<p />
+				<div>
+					<select class="form-control" name="fundTargetDay"
+						id="fundTargetDay" style="width: 700px; height: 35px;">
+						<c:forEach var="i" begin="7" end="30" step="1">
+							<option value="${i}">${i}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<h3>
+					<b>글제목</b>
+				</h3>
+				<p />
+				<div class=>
+					<input type="text" class="form-control" id="postTitle"
+						name="postTitle" placeholder="제목을 입력해주세요."
+						style="width: 700px; height: 35px;">
+				</div>
+			</div>
+			<br />
+
+			<div class="form-group">
+				<h3>
+					<b>글내용</b>
+				</h3>
+				<p />
+				<div>
+					<textarea id="postContent" name="postContent"
+						style="text-align: left;" placeholder="내용을 입력해주세요.">
 					</textarea>
-			    </div>
-			  </div>
-			<br/>
-            <!-- 첨부 버튼 -->
-            <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
-                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
-            </div>
-           <br/>
-            
-            <!-- 미리보기 영역 -->
-            <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
-            </div>
-		   <div class="form-group">
-		   <br/>
-			<h3><b>연락처</b></h3>	
-			문의받을 연락처를 입력해주세요.<p/>		
-			 <div class="col-sm-3" style="padding:0; margin:0;">
-		      <select class="form-control" name="phone1" id="phone1">
-				  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
-					<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
-					<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
-					<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
-					<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
-				</select>
-		    </div>
-		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}" placeholder="번호" maxlength="4" style="height:35px;">
-		    </div>
-		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}" placeholder="번호" maxlength="4" style="height:35px;">
-		    </div>
-		    <input type="hidden" name="phone"  />
-		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
-		  </div>
-        
-		  <br/><br/>
-		  <div class="form-group2">
-	  			<button class="btn btn-primary py-3 px-4 col-md-3"  type="button" id="btn-add">등록</button>
-	  			<button class="btn btn-primary py-3 px-4 col-md-3 "  type="button"   id="btn-cancel">취소</button>
-		  </div>
-		  <br/><br/><br/><br/><br/><br/><br/><br/>
+				</div>
+			</div>
+			<br />
+			<!-- 첨부 버튼 -->
+			<div id="attach" class="form-group">
+				<span class="label label-primary "><label
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞
+				이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.) <input id="uploadInputBox"
+					style="display: none" type="file" value="등록" name="filedata" />
+			</div>
+			<br />
+
+			<!-- 미리보기 영역 -->
+			<div class="form-group">
+				<div id="preview" class="col-md-3" align="center"
+					style='display: inline; min-width: 600px;'></div>
+			</div>
+
+
+			<div class="form-group">
+				<br />
+				<h3>
+					<b>연락처</b>
+				</h3>
+				문의받을 연락처를 입력해주세요.
+				<p />
+				<div class="col-sm-3" style="padding: 0; margin: 0;">
+					<select class="form-control" name="phone1" id="phone1">
+						<option value="010"
+							${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  }>010</option>
+						<option value="011"
+							${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  }>011</option>
+						<option value="016"
+							${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  }>016</option>
+						<option value="018"
+							${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  }>018</option>
+						<option value="019"
+							${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  }>019</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="phone2" name="phone2"
+						value="${ ! empty user.phone2 ? user.phone2 : ''}"
+						placeholder="번호" maxlength="4" style="height: 35px;">
+				</div>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="phone3" name="phone3"
+						value="${ ! empty user.phone3 ? user.phone3 : ''}"
+						placeholder="번호" maxlength="4" style="height: 35px;">
+				</div>
+				<input type="hidden" name="phone" /> <input type="hidden"
+					class="form-control" id="multiFile" name="multiFile">
+			</div>
+
+			<br />
+			<br />
+			<div class="form-group2">
+				<button class="btn btn-primary py-3 px-4 col-md-3" type="button"
+					id="btn-add">등록</button>
+				<button class="btn btn-primary py-3 px-4 col-md-3 " type="button"
+					id="btn-cancel">취소</button>
+			</div>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 
-    </div>
-   <!--  화면구성 div end /////////////////////////////////////-->
-    <!--================ start footer Area  =================-->
-    <!-- footer Start /////////////////////////////////////-->
-	 <jsp:include page="/layout/footer.jsp"></jsp:include>
-   	<!-- footer End /////////////////////////////////////-->  
-    <!--================ End footer Area  =================-->
+	</div>
+	<!--  화면구성 div end /////////////////////////////////////-->
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
+	<!--================ End footer Area  =================-->
 
-    <!--  ///////////////////////// JavaScript ////////////////////////// -->    
-   <script type="text/javascript" >
+	<!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
 
    //============= 등록버튼 눌렀을때 함수 =============      
    function fncAddVoting(){
       
       //Form 유효성 검증
-
+	  $('textarea').val(editor.getData());
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
-//       var ckeditor = CKEDITOR.instances.postContent.getData();
-//       alert(ckeditor)
+      var postContent = $('textarea').val()
       var phone2 = $('input[name="phone2"]').val();
       var phone3 = $('input[name="phone3"]').val();   
       var file = $("#multiFile").val();    
@@ -222,12 +286,11 @@
          return;
       }
       
- /*     if (ckeditor.getData()=="")
-      {
-       alert("내용은 반드시 입력하여야 합니다.");
-       ckeditor.focus();
-       return;
-      }  */
+      if(postContent == ''){
+	         alert("글내용은 반드시 입력하여야 합니다.");
+	         $("textarea[name=postContent]").focus();
+	         return;
+	      }
       
       if(file == null || file.length<1){
          alert("파일은 반드시 입력하셔야 합니다.");
@@ -497,8 +560,8 @@
                
    
    </script>
-   
-      
+
+
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>UPDATE ADOPTREVIEW</title>
+	<title>보호할개 · 분양후기글 수정</title>
 	<!--  meta  -->
 	<meta charset="EUC-KR">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

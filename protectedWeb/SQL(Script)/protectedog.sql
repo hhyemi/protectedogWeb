@@ -140,6 +140,7 @@ CREATE TABLE COUPON (
 	RECEIVER_ID 		VARCHAR2(12) 	REFERENCES USERS(ID),
 	COUPON_NAME 		VARCHAR2(50)  	NOT NULL,
 	DISCOUNT 		NUMBER(5,0)  	NOT NULL,
+	IMAGE 			VARCHAR2(100) 	NOT NULL,
 	COUPON_STATUS 		CHAR(1),
 	MAKE_DATE 		DATE,
 	LIMIT_DATE 		DATE,
@@ -245,7 +246,7 @@ CREATE TABLE ORDERS (
    	ORDER_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	PROD_NO 		NUMBER(6,0) 	REFERENCES PRODUCT(PROD_NO) NOT NULL, 
 	ID 			VARCHAR2(12) 	REFERENCES USERS(ID) NOT NULL, 
-	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE) NOT NULL,
+	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE),
 	RECEIVER_ADDR 		VARCHAR2(100) 	NOT NULL, 
 	RECEIVER_NAME 		VARCHAR2(50) 	NOT NULL, 
 	RECEIVER_PHONE 		VARCHAR2(13) 	NOT NULL, 
@@ -284,22 +285,22 @@ CREATE TABLE APPLY (
 CREATE TABLE BOARD (
    	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
-	ID 				VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
+	ID 			VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
 	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE  REFERENCES USERS(NICKNAME), 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
-	POST_CONTENT 	CLOB	 		NOT NULL ENABLE, 
-	REG_DATE 		DATE 			NOT NULL ENABLE, 
+	POST_CONTENT 		CLOB 		NOT NULL ENABLE, 
+	REG_DATE 		DATE 		NOT NULL ENABLE, 
 	VIEW_COUNT 		NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
-	RECOMMEND_COUNT NUMBER(5,0), 
-	MARKET_CODE 	NUMBER(2,0), 
+	RECOMMEND_COUNT 	NUMBER(5,0), 
+	MARKET_CODE 		NUMBER(2,0), 
 	PRICE 			NUMBER(10,0), 
 	CITY 			VARCHAR2(20), 
 	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE), 
 	QNA_CODE 		CHAR(2), 
 	ROUTE 			VARCHAR2(250), 
-	PROD_NO			NUMBER(6,0)		REFERENCES PRODUCT(PROD_NO),
+	PROD_NO		NUMBER(6,0),
 	PROD_NAME 		VARCHAR2(40),
-	DEL_CODE		CHAR(1)			DEFAULT '1',
+	DEL_CODE		CHAR(1)		DEFAULT '1',
 	PRIMARY KEY (POST_NO));
 
 CREATE TABLE PARTICIPATE (
@@ -528,6 +529,7 @@ INSERT INTO FILES(FILE_NO , BOARD_CODE  ,  POST_NO , FILE_NAME , FILE_CODE) VALU
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
 VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'호랭이' ,10001 , '20190629' ,'1');
+
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
 VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'안녕' ,10001 , '20190701' ,'1');
@@ -602,15 +604,7 @@ VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'호랭이' ,10003 , '201
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'안녕' ,10003 , '20190701' ,'1',200000,'card');
-
-
-INSERT INTO users (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
-		VALUES (seq_users_user_no.NEXTVAL, 'user04', '132456788', '12341234', 'hello', '신청자1', 'hello@tiger.com', '011-2123-4568', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
-INSERT INTO users (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
-		VALUES (seq_users_user_no.NEXTVAL, 'user05', '123456789', '12341234', 'hello', '신청자2', 'hello@tiger.com', '011-2123-4569', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
-INSERT INTO users (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
-		VALUES (seq_users_user_no.NEXTVAL, 'user06', '123456780', '12341234', 'hello', '신청자3', 'hello@tiger.com', '011-2123-4560', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'안녕' ,10003 , '20190701' ,'1',200000,'card'); 
 
 
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
@@ -796,11 +790,6 @@ INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, r
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
 		VALUES	 (	seq_apply_apply_no.nextval, 10047, 'user05', '011-2123-4569', '학생', '아파트', '있음', '동의', '없음', '계획', '예상비용', '이유', '상황', SYSDATE  );
 
-		
-UPDATE adopt SET status_code = 3 where post_no = 10047;
-UPDATE adopt SET status_code = 2 where post_no = 10046;
-UPDATE adopt SET status_code = 2 where post_no = 10048;
-UPDATE adopt SET status_code = 2 where post_no = 10049;
 				
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
@@ -816,6 +805,21 @@ INSERT INTO BOARD
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
 (15557, 'IS', 'user03' , '안녕', 'InfoShareTestTitle2' ,  'InfoShareTestContent2' , SYSDATE , 1002, 1002, '39.499135, 129.022593');
+
+INSERT INTO BOARD 
+(POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 
+VALUES 
+(10099, 'MK', 'user01', '스캇', '마켓 제목1', '마켓 글내용1', '2015-07-21', '3000', '중고장터상품1');
+
+INSERT INTO BOARD 
+(POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 
+VALUES 
+(10098, 'MK', 'user01', '스캇', '마켓 제목2', '마켓 글내용2', '2015-07-11', '4000', '중고장터상품2');
+
+INSERT INTO BOARD 
+(POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 
+VALUES 
+(10097, 'MK', 'user01', '스캇', '마켓 제목3', '마켓 글내용3', '2015-07-10', '4500', '중고장터상품3');
 
 
 INSERT INTO BREED_PEDIA( breed_no , weight , height , avg_life, add_Info, types, characters, files, name) 
@@ -848,19 +852,19 @@ VALUES (10002, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user03', '3번 대댓글선수 잘 
 
 
 INSERT INTO coupon
-(coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, limit_date)
+(coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원권', 5000, '0', '2019/07/11', '2019/09/11');
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원권', 5000, 'coupon5000.jpg', '0', '2019/07/11', '2019/12/01');
 
 INSERT INTO coupon
-(coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, limit_date)
+(coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'SS23F11XT', '한계돌파1만원권', 10000, '0', '2019/07/11', '2019/09/11');
+(seq_coupon_coupon_no.NEXTVAL, 'SS23F11XT', '한계돌파1만원권', 10000, 'coupon10000.jpg', '0', '2019/07/11', '2019/12/01');
 
 INSERT INTO coupon
-(coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, limit_date)
+(coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'P29FSF33CE', '한계돌파2만원권', 20000, '0', '2019/07/11', '2019/09/11');
+(seq_coupon_coupon_no.NEXTVAL, 'P29FSF33CE', '한계돌파2만원권', 20000, 'coupon20000.jpg', '0', '2019/07/11', '2019/12/01');
 
 
 INSERT INTO interest
@@ -877,4 +881,80 @@ INSERT INTO interest
 (interest_no, board_code, comment_no, post_no, id, reg_date)
 VALUES
 (SEQ_INTEREST_INTEREST_NO.nextval, 'IS', 10002, 15555, 'user03', '2019-07-11');
+
+
+INSERT INTO MILEAGE 
+(MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
+VALUES 
+('10000', '1', '20000', 'user01', '상품 구매', TO_DATE('2019-07-18 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO MILEAGE 
+(MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
+VALUES 
+('10002', '1', '500', 'user01', '이벤트 적립', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO MILEAGE 
+(MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
+VALUES 
+('10003', '1', '1000', 'user02', '상품 구매', TO_DATE('2018-03-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO MILEAGE 
+(MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
+VALUES 
+('10001', '2', '-500', 'user01', '상품 구매', TO_DATE('2019-01-10 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO MILEAGE 
+(MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
+VALUES 
+('10004', '2', '-100', 'user02', '상품 구매', TO_DATE('2019-01-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO MILEAGE 
+(MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
+VALUES 
+('10005', '1', '5000', 'user02', '이벤트 적립', TO_DATE('2019-01-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+
+INSERT INTO PRODUCT 
+(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10001', '사료1', '20000', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '프랑스', '1', '상세정보3', '현대', '19000', '10', 'A031426.jpg');
+
+INSERT INTO PRODUCT 
+(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10002', '사료11', '2000', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '프랑스', '1', '상세정보4', '현대', '19000', '10', 'A031426.jpg');
+
+INSERT INTO PRODUCT 
+(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10003', '사료4', '20004', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '이탈리아', '1', '상세정보6', '현대', '19000', '10', 'A031426.jpg');
+
+
+INSERT INTO ORDERS 
+(ORDER_NO, PROD_NO, ID, PHONE, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
+VALUES 
+('10000', '10001', 'user01', '011-1123-4567', '서울시 강남구', '강낭구', '010-2222-3333', '빨리요망', '2', TO_DATE('2019-02-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '30000', '1');
+
+INSERT INTO ORDERS
+(ORDER_NO, PROD_NO, ID, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
+VALUES 
+('10001', '10002', 'user02', '충북 제천시', '충재', '010-2223-8888', '기다립니다', '1', TO_DATE('2018-03-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '10000', '1');
+
+INSERT INTO ORDERS 
+(ORDER_NO, PROD_NO, ID, PHONE, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
+VALUES 
+('10002', '10003', 'user01', '011-1123-4567', '대전 광역시', '대광', '011-4555-2222', '배송전연락', '1', TO_DATE('2017-03-06 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '40000', '1');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

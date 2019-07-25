@@ -1,5 +1,6 @@
 package org.protectedog.web.adopt;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -44,7 +45,8 @@ public class AdoptRestController {
 	}
 	
 
-
+	
+	
 	// 글상태 완료로 변경
 	@RequestMapping( value="json/updateStatusCode/{postNo}", method=RequestMethod.GET)
 	public Adopt updateStatusCode( @PathVariable("postNo") int postNo ) throws Exception{

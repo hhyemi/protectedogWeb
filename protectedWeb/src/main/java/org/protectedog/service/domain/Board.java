@@ -31,6 +31,9 @@ public class Board {
 	private char delCode;
 	private String prodName;
 	
+	//분양 후기 썸네일
+	private String thumnail;
+	
 
 
 
@@ -186,13 +189,21 @@ public class Board {
 		this.commentCount = commentCount;
 	}
 
+	public String getThumnail() {
+		return thumnail;
+	}
+
+	public void setThumnail(String thumnail) {
+		this.thumnail = thumnail;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [postNo=" + postNo + ", boardCode=" + boardCode + ", id=" + id + ", nickName=" + nickName
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", viewCount="
 				+ viewCount + ", commentCount=" + commentCount + ", recommendCount=" + recommendCount + ", marketCode="
 				+ marketCode + ", price=" + price + ", city=" + city + ", phone=" + phone + ", qnaCode=" + qnaCode
-				+ ", route=" + route + ", prodNo=" + prodNo + ", delCode=" + delCode + ", prodName=" + prodName + "]";
+				+ ", route=" + route + ", prodNo=" + prodNo + ", delCode=" + delCode + ", prodName=" + prodName +", thumnail=" + thumnail+"]";
 	}
 	
 	

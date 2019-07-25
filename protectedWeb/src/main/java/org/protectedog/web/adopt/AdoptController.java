@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -245,10 +246,11 @@ public class AdoptController {
 	
 	// 글 리스트 조회
 	@RequestMapping( value="listAdopt" )
-	public String listAdopt( @ModelAttribute("search") Search search,
-							 @RequestParam("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
+	public String listAdopt( @ModelAttribute("search") Search search, Model model, HttpSession session, 
+							 @RequestParam(value="boardCode", required=false) String boardCode ) throws Exception{
 		
 		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
+		
 //		System.out.println("===================================="+search);
 		
 		if(search.getSearchCondition() == null ) {

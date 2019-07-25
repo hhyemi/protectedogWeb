@@ -52,6 +52,13 @@
 		.form-form{
 	    padding-left:15px;	
 		}
+       @font-face{
+          font-family: NanumSquare;
+          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
+       }
+       body{
+          font-family: NanumSquare, sans-serif !important;
+       }		
     </style>
 
 	</head>
