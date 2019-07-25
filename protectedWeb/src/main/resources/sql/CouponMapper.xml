@@ -13,6 +13,7 @@
 		<result property="receiverId"	column="receiver_id"	jdbcType="VARCHAR"/>
 		<result property="couponName"	column="coupon_name"	jdbcType="VARCHAR"/>
 		<result property="discount"		column="discount"	jdbcType="NUMERIC"/>
+		<result property="couponImage" 	column="image" 		jdbcType="VARCHAR"/>
 		<result property="couponStatus"	column="coupon_status"	jdbcType="CHAR"/>
 		<result property="makeDate"	column="make_date"	jdbcType="DATE"/>
 		<result property="limitDate"		column="limit_date"	jdbcType="DATE"/>
@@ -23,17 +24,17 @@
 	
 	<insert id="addCouponManage" parameterType="coupon">
 		INSERT INTO coupon
-			(coupon_no, coupon_code, coupon_name, discount, coupon_status,
+			(coupon_no, coupon_code, coupon_name, discount, image, coupon_status,
 			make_date, limit_date)
-		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{couponName}, #{discount}, 
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{couponName}, #{discount}, #{couponImage},
 			#{couponStatus}, SYSDATE, #{limitDate})
 	</insert>
 	
 	<insert id="addCoupon"	parameterType="coupon">
 		INSERT INTO coupon
-			(coupon_no, coupon_code, receiver_id, coupon_name, discount, coupon_status,
+			(coupon_no, coupon_code, receiver_id, coupon_name, discount, image, coupon_status, 
 			make_date, limit_date, use_date)
-		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiverId}, #{couponName}, #{discount}, 
+		VALUES(seq_coupon_coupon_no.NEXTVAL, #{couponCode}, #{receiverId}, #{couponName}, #{discount}, #{couponImage},
 			'1', SYSDATE, #{limitDate:DATE}, #{useDate:DATE})
 	</insert>
 
@@ -42,14 +43,14 @@
 
 	<select id="getCoupon"	parameterType="string"	resultMap="couponSelectMap">
 		SELECT
-		coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, use_date, limit_date 
+		coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, use_date, limit_date 
 		FROM coupon
 		WHERE coupon_no=#{couponNo}
 	</select>
 	
 	<select id="getMyCoupon" parameterType="map" resultMap="couponSelectMap">
 		SELECT
-		coupon_no, coupon_code, coupon_name, receiver_id, coupon_status
+		coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, use_date, limit_date 
 		FROM coupon
 		WHERE coupon_code=#{couponCode}
 		AND receiver_id=#{receiverId}
@@ -71,9 +72,9 @@
 	<!-- SQL : SELECT LIST -->
 	 	
 	<select id="getCouponList"	parameterType="search"	resultMap="couponSelectMap">
-		SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
+		SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, image, coupon_status, make_date, use_date, limit_date
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
+			FROM( SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, image, coupon_status, make_date, use_date, limit_date
 				FROM coupon
 				WHERE coupon_status='0'
 				AND receiver_id IS NULL
@@ -83,9 +84,9 @@
 	</select>
 	
 	<select id="getMyCouponList"	parameterType="map"	resultMap="couponSelectMap">
-		SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
+		SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, image, coupon_status, make_date, use_date, limit_date
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, coupon_status, make_date, use_date, limit_date
+			FROM( SELECT coupon_no, coupon_code, coupon_name, receiver_id, discount, image, coupon_status, make_date, use_date, limit_date
 				FROM coupon
 				WHERE coupon_status='1'
 				AND receiver_id = #{receiverId}
@@ -99,7 +100,7 @@
 
 	<select  id="getTotalCount"		parameterType="search"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT coupon_no, coupon_code, coupon_name, discount, coupon_status, make_date, use_date, limit_date
+		FROM(	SELECT coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, use_date, limit_date
 			FROM coupon
 			<if test="searchCondition != null">
 				<where>

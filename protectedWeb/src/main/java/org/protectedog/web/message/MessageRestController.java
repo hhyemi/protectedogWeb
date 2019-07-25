@@ -30,12 +30,12 @@ public class MessageRestController {
 	
 	///Method
 	@RequestMapping(value="json/getUnreadMessage", method=RequestMethod.POST)
-	public Map<String, Object> getUnreadMessage(@RequestBody Map<String, String> id) throws Exception{
+	public Map<String, Object> getUnreadMessage(@RequestBody Map<String, String> msgId) throws Exception{
 		
 		System.out.println("/message/json/getUnreadMessage : POST");
 		
 		//Business Logic
-		String receiverId=id.get("id");
+		String receiverId=msgId.get("id");
 		System.out.println("receiverId : "+receiverId);
 		int result=messageService.getUnreadMessage(receiverId);
 		

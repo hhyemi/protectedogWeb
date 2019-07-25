@@ -2,6 +2,7 @@ package org.protectedog.web.report;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -135,7 +136,13 @@ public class ReportController {
 		
 		Report report=reportService.getReport(reportNo);
 		
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", reportBoardCode);
+		filePost.put("postNo", reportNo);
+		List<FileDog> file = fileService.getFile(filePost);
+		
 		model.addAttribute("report", report);
+		model.addAttribute("file", file);
 		
 		return "forward:/report/getReportView.jsp";
 		

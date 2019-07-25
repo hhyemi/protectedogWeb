@@ -64,26 +64,10 @@
 			<c:set var="i" value="0"/>
 			<c:forEach var="coupon" items="${ list }">		
 			<div style="float:left" class="col-md-4">
-				<c:if test="${ coupon.discount le 3000 }">
 				<div class="col-xs-12 col-md-4">
-					<img src="/resources/file/others/facebook.png">
+					<img src="../resources/file/fileCoupon/${ coupon.couponImage }" align="middle" width="300px" height="150px">
 				</div>
-				</c:if>
-				<c:if test="${ coupon.discount le 5000 && coupon.discount gt 3000}">
-				<div class="col-xs-12 col-md-4">
-					<img src="/resources/file/others/kakao.png">
-				</div>
-				</c:if>
-				<c:if test="${ coupon.discount le 10000 && coupon.discount gt 5000 }">
-				<div class="col-xs-12 col-md-4">
-					<img src="/resources/file/others/naver.png">
-				</div>
-				</c:if>
-				<c:if test="${ coupon.discount gt 10000 }">
-				<div class="col-xs-12 col-md-4">
-					<img src="/resources/file/others/twitter.png">
-				</div>
-				</c:if>
+
 			</div>
 				
 				<div style="float:right; min-width:65%" class="col-md-8"> 
@@ -139,18 +123,7 @@
 						<input type="button" id="removeCoupon" class="removeCoupon" value="삭제">
 					</div>
 					</c:if>
-<%-- 					<c:set var="flag" value="false"/> --%>
-<%-- 					<c:forEach var="myCoupon" items="${ sList }">	 --%>
-<%-- 						<c:if test="${ flag == false }"> --%>
-<%-- 							<c:if test="${ myCoupon.couponCode != coupon.couponCode }"> --%>
-<!-- 								<p>수령가능</p> -->
-<%-- 							</c:if> --%>
-<%-- 							<c:if test="${ myCoupon.couponCode eq coupon.couponCode }"> --%>
-<%-- 								<c:set var="flag" value="true"/> --%>
-<!-- 								<p>수령불가</p> -->
-<%-- 							</c:if> --%>
-<%-- 						</c:if> --%>
-<%-- 					</c:forEach> --%>
+
 					<br/>
 					<br/>
 					<br/>
@@ -197,7 +170,7 @@
 		
 		$(function(){
 			$(".removeCoupon").on("click", function(){
-				var couponNo=$("#couponNo").val();
+				var couponNo=$(this).parent().parent().children("input").val();
 // 				alert(couponNo);
 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 			})

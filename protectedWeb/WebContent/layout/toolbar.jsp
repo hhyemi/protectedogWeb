@@ -35,6 +35,7 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script type="text/javascript">
 
 //     	$(function(){
@@ -72,6 +73,7 @@
   </head>
   <body class="goto-here">
       <div class="py-1 bg-black">
+      <input type="hidden" id="registId" name="registId" value="${ sessionScope.user.id }">
        <div class="container">
           <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
              <div class="col-lg-12 d-block">
@@ -91,16 +93,20 @@
 	                        	</span>
                         		</c:if>
                         		</div>
-<%--                         		<c:if test="${ sessionScope.user.kakao != null }"> --%>
-<!--                         			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a> -->
-<%--                         		</c:if> --%>
+                        		<c:if test="${ sessionScope.user.kakao != null }">
+                        			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a>
+                        		</c:if>
 <%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
 <!-- 								<a id="googleLogout" href="#" onclick="signOut();">google 로그아웃</a> -->
 <%-- 							</c:if> --%>
-<!-- 					   		<div class="col-md pr-4 d-flex topper align-items-center"> -->
-<!-- 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
-<%-- 						   		<span class="text">${ sessionScope.user.email }</span> --%>
-<!-- 					   		</div> -->
+
+							<c:if test="${ sessionScope.user.id != null }">
+					   		<div class="col-md  msg" id="unRead">
+					    		<div class="icon mr-2 d-flex justify-content-center align-items-center">
+					    			<a class="icon-paper-plane" href="/message/listReceiveMessage">쪽지읽으쏘</a>
+					    		</div>
+					   		</div>
+					   		</c:if>
 					   		
 					   		
 					    	<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -194,9 +200,9 @@
                 <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
                 <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
-                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
+                <a class="dropdown-item" id="addMessage" href="/message/addMessage">쪽지쓰기</a>
                 <c:if test="${ sessionScope.user.role eq 'admin' }">
-                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
+                	<a class="dropdown-item" href="/coupon/addCouponManage">쿠폰생성</a>
                 </c:if>
                 <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
                 <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
@@ -250,6 +256,8 @@
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!--   <script src="/resources/prodmenu/js/google-map.js"></script> -->
   <script src="/resources/prodmenu/js/main.js"></script>
+
+
   
   	<script type="text/javascript">
 		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
@@ -273,6 +281,7 @@
 			})
 		}
 
+		
 		function logoutWithKakao() {
 			Kakao.Auth.logout();
 			location.href = 'https://accounts.kakao.com/logout?continue=https://pf.kakao.com/logged_out';
@@ -297,7 +306,37 @@
 			$("#regist").on("click", function() {
 				$(self.location).attr("href", "/users/addUsersBase");
 			});
-		});rms
+		});
+		
+		$(document).ready(function(){
+		
+			var id=$("#registId").val();
+			var msgId=JSON.stringify({id:id});
+// 			alert(id);
+// 			alert(msgId);
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "/message/json/getUnreadMessage",
+				data : msgId,
+				datatype : "json",
+				success : function(response){
+					if(id!=null && $.trim(response.result)==0){
+// 						alert($.trim(response.result));
+						$(".msg").hide();
+					}
+					if(id!=null && $.trim(response.result)==1){
+// 						alert($.trim(response.result));
+						$(".msg").show();
+					}
+				}
+				
+			});
+		});
+		
+
+
+		
 		
 		
 		
