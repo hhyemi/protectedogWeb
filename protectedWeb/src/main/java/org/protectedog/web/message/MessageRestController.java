@@ -41,6 +41,7 @@ public class MessageRestController {
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("result", new Integer(result));
+		System.out.println("getUnreadMessage result : "+map.get("result"));
 
 		return map;
 		

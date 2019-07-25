@@ -285,22 +285,23 @@ CREATE TABLE APPLY (
 CREATE TABLE BOARD (
    	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
-	ID 			VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
+	ID 				VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
 	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE  REFERENCES USERS(NICKNAME), 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
-	POST_CONTENT 		CLOB 		NOT NULL ENABLE, 
-	REG_DATE 		DATE 		NOT NULL ENABLE, 
+	POST_CONTENT 	CLOB	 		NOT NULL ENABLE, 
+	REG_DATE 		DATE 			NOT NULL ENABLE, 
 	VIEW_COUNT 		NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
-	RECOMMEND_COUNT 	NUMBER(5,0), 
-	MARKET_CODE 		NUMBER(2,0), 
+	RECOMMEND_COUNT NUMBER(5,0), 
+	MARKET_CODE 	NUMBER(2,0), 
 	PRICE 			NUMBER(10,0), 
 	CITY 			VARCHAR2(20), 
 	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE), 
 	QNA_CODE 		CHAR(2), 
 	ROUTE 			VARCHAR2(250), 
-	PROD_NO		NUMBER(6,0),
+	PROD_NO			NUMBER(6,0)		REFERENCES PRODUCT(PROD_NO),
 	PROD_NAME 		VARCHAR2(40),
-	DEL_CODE		CHAR(1)		DEFAULT '1',
+	DEL_CODE		CHAR(1)			DEFAULT '1',
+	THUMNAIL		CLOB,	
 	PRIMARY KEY (POST_NO));
 
 CREATE TABLE PARTICIPATE (
@@ -854,17 +855,17 @@ VALUES (10002, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user03', '3번 대댓글선수 잘 
 INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원권', 5000, 'coupon5000.jpg', '0', '2019/07/11', '2019/12/01');
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', '한계돌파5천원권', 5000, 'coupon5000.jpg', '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'SS23F11XT', '한계돌파1만원권', 10000, 'coupon10000.jpg', '0', '2019/07/11', '2019/12/01');
+(seq_coupon_coupon_no.NEXTVAL, 'SS23F11XT', '한계돌파1만원권', 10000, 'coupon10000.jpg', '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'P29FSF33CE', '한계돌파2만원권', 20000, 'coupon20000.jpg', '0', '2019/07/11', '2019/12/01');
+(seq_coupon_coupon_no.NEXTVAL, 'P29FSF33CE', '한계돌파2만원권', 20000, 'coupon20000.jpg', '0', '2019/07/11', '2019/09/11');
 
 
 INSERT INTO interest
@@ -922,6 +923,22 @@ INSERT INTO PRODUCT
 
 INSERT INTO PRODUCT 
 (PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10003', '사료4', '20004', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '이탈리아', '1', '상세정보6', '현대', '19000', '10', 'A031426.jpg');
+
+
+INSERT INTO files
+(file_no, board_code, post_no, file_name, file_code)
+VALUES
+(SEQ_FILES_FILE_NO.nextval, 'SH', 10001, 'A031426.jpg', 0);
+
+INSERT INTO files
+(file_no, board_code, post_no, file_name, file_code)
+VALUES
+(SEQ_FILES_FILE_NO.nextval, 'SH', 10002, 'A031426.jpg', 0);
+
+INSERT INTO files
+(file_no, board_code, post_no, file_name, file_code)
+VALUES
+(SEQ_FILES_FILE_NO.nextval, 'SH', 10003, 'A031426.jpg', 0);
 
 
 INSERT INTO ORDERS 

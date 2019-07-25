@@ -214,8 +214,8 @@ td:hover{
 	$(function(){
 		$("td:nth-child(5)").on("click", function(){
 			var messageNo=$(this).children("input").val();
-			alert(messageNo);
-			self.location="/message/getMessage?messageNo="+meesageNo;
+// 			alert(messageNo);
+			self.location="/message/getMessage?messageNo="+messageNo;
 		})
 	});
 
