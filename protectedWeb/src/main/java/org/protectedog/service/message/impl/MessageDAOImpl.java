@@ -86,7 +86,11 @@ public class MessageDAOImpl implements MessageDAO{
 	@Override
 	public Message getUnreadMessage(String receiverId) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("MessageMapper.getUnreadMessage", receiverId);
+		System.out.println("³Í ½ÇÇàÀÌ µÇ³Ä");
+		Message message=sqlSession.selectOne("MessageMapper.getUnreadMessage", receiverId);
+		System.out.println("³ª¿ÍºÁ¶ó : "+message);
+		return message;
+
 	}
 
 }

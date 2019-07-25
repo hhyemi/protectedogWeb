@@ -35,6 +35,7 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script type="text/javascript">
 
     	$(function(){
@@ -57,6 +58,7 @@
     </style>
   </head>
   <body class="goto-here">
+  		<input type="hidden" id="registId" value="${ sessionScope.user.id }">
       <div class="py-1 bg-black">
        <div class="container">
           <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -83,10 +85,12 @@
 <%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
 <!-- 								<a id="googleLogout" href="#" onclick="signOut();">google ·Î±×¾Æ¿ô</a> -->
 <%-- 							</c:if> --%>
-<!-- 					   		<div class="col-md pr-4 d-flex topper align-items-center"> -->
-<!-- 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
-<%-- 						   		<span class="text">${ sessionScope.user.email }</span> --%>
-<!-- 					   		</div> -->
+							<c:if test="${ sessionScope.user.id != null }">
+					    	<a class="icon mr-2 d-flex justify-content-center align-items-center" >
+					    		<span class="icon-paper-plane msg">³¯·¡¹ÞÀ¸¼õ</span>
+					    	</a>
+
+					   		</c:if>
 					   		
 					   		
 					    	<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -275,11 +279,10 @@
 		}
 		
 		$(function() {
-			alert("gd");	
 			var id=$("#registId").val();
 			var msgId=JSON.stringify({id:id});
-			alert(id);
-			alert(msgId);
+// 			alert(id);
+// 			alert(msgId);
 			$.ajax({
 				type : "POST",
 				contentType : "application/json",
@@ -288,15 +291,18 @@
 				datatype : "json",
 				success : function(response){
 					if(id!=null && $.trim(response.result)==0){
-						alert($.trim(response.result));
+// 						alert($.trim(response.result));
 						$(".msg").hide();
 					}
 					if(id!=null && $.trim(response.result)==1){
-						alert($.trim(response.result));
+// 						alert($.trim(response.result));
 						$(".msg").show();
 					}
+				},
+				error : function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
-				
+
 			});
 		});
 

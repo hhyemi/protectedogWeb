@@ -76,6 +76,7 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int getUnreadMessage(String receiverId) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("왜 안들어가지지?");
 		int result=0;
 		
 		Message message=messageDAO.getUnreadMessage(receiverId);
