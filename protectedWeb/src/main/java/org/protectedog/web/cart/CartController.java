@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.service.cart.CartService;
 import org.protectedog.service.domain.Cart;
+import org.protectedog.service.domain.Product;
+import org.protectedog.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +28,9 @@ public class CartController {
 	@Autowired
 	@Qualifier("cartServiceImpl")
 	private CartService cartService;
+	@Autowired
+	@Qualifier("productServiceImpl")
+	private ProductService productService;
 
 	public CartController() {
 		System.out.println(this.getClass());
@@ -37,16 +43,25 @@ public class CartController {
 	int pageSize;
 
 	// 1. 장바구니 추가
-	@RequestMapping("addCart")
-	public String addCart(@ModelAttribute("cart")Cart cart, HttpSession session) throws Exception{
-	
-		String id = (String) session.getAttribute("userId");
+	@RequestMapping(value="addCart")
+	public String addCart(@ModelAttribute("cart")Cart cart, HttpSession session, Model model, HttpServletRequest request) throws Exception{
+		
+		
+		int quantity=0;
+		int totalPrice=0;
+		
+		cart.setQuantity(quantity);
+		cart.setTotalPrice(totalPrice);
+		
+		
+		cart.setId("user01");
+		
+		String id = (String) session.getAttribute("id");
 		cart.setId(id);
 		
 		
-		// 장바구니에 기존 상품이 있는지 검사
 		int count = cartService.countCart(cart.getProdNo(), id);
-		//count == 0 ? cartService.updateCart(cart) : cartService.addCart(cart);
+
 		if(count == 0){
 			// 없으면 insert
 		cartService.addCart(cart);
@@ -55,33 +70,38 @@ public class CartController {
 			// 있으면 update
 		cartService.updateCart(cart);
 		}
-		return "redirect:/shop/cart/listCart";
+		
+		
+		return "redirect:/shop/cart/listCart.jsp";
 		}
+	
+	
+	
 
 	// 2. 장바구니 목록
 	@RequestMapping("listCart")
 	public String listCart(HttpSession session, Model model) throws Exception {
 
-		String id = (String) session.getAttribute("id"); // session에 저장된 userId
+		String id = (String) session.getAttribute("id"); 
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Cart> list = cartService.listCart(id); // 장바구니 정보
-		int totalPrice = cartService.totalPrice(id); // 장바구니 전체 금액 호출
+		List<Cart> list = cartService.listCart(id); 
+		int totalPrice = cartService.totalPrice(id); 
 
-		map.put("count", list.size()); // 장바구니 상품의 유무
-		map.put("totalPrice", totalPrice); // 장바구니 전체 금액
+		map.put("count", list.size()); 
+		map.put("totalPrice", totalPrice);
 
 		model.addAttribute("map", map);
-		return "cart/listCart";
+		return "redirect:/cart/listCart";
 	}
 
-	// 3. 장바구니 삭제
+
 	@RequestMapping("delCart")
 	public String delCart(@RequestParam int cartNo) throws Exception{
 	cartService.delCart(cartNo);
 	return "redirect:/cart/listCart";
 	}
 
-	// 4. 장바구니 수정
+
 	@RequestMapping("updateCart")
 	public String updateCart(@RequestParam int[] quantity, @RequestParam int[] prodNo, HttpSession session) throws Exception {
 	// session의 id
@@ -97,7 +117,7 @@ public class CartController {
 	cart.setProdNo(prodNo[i]);
 	cartService.modifyCart(cart);
 	}
-	return "redirect:/shop/cart/listCart";
+	return "redirect:/cart/listCart";
 	}
 }
 

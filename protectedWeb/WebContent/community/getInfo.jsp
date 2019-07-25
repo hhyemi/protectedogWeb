@@ -118,6 +118,9 @@ body {
 .minibox{
 	padding : 1px solid black;
 }
+img{
+	max-width: 600px;
+}
 </style>
 </head>
 

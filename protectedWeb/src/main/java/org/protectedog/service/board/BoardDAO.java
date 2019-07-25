@@ -32,7 +32,7 @@ public interface BoardDAO {
 	public void delBoard(Board board) throws Exception ;
 	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return	
-	public int getTotalCount(String boardCode) throws Exception ;
+	public int getTotalCount(Map<String, Object> map) throws Exception ;
 	
 	// SELECT LIST RANKING TOP 5
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;

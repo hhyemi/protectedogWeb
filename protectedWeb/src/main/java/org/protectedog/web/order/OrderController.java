@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -54,31 +55,37 @@ public class OrderController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	@RequestMapping("/addOrderView")
-	public String addPurchaseView(@ModelAttribute("product") Product product, Model model) throws Exception{
-		System.out.println("/addPurchaseView");
+	@RequestMapping(value="addOrder", method=RequestMethod.GET)
+	public String addOrder(@RequestParam("prodNo") int prodNo, Model model) throws Exception{
+		System.out.println("/addPurchaseView.do");
 		
-		product = productService.getProduct(product.getProdNo());
-		System.out.println(product);
+		Product product = productService.getProduct(prodNo);
+		
 		model.addAttribute("product", product);
 		
-		return "forward:/purchase/addPurchaseView.jsp";
-	}
+		return "forward:/shop/order/addOrder.jsp";
 
-	@RequestMapping("/addOrder")
-	public String addPurchase(@ModelAttribute("order") Order order, @RequestParam("prodNo") int prodNo, @RequestParam("id") String id) throws Exception {
+	}
+	
+	@RequestMapping(value="addOrder", method=RequestMethod.POST)
+	public String addProduct(@ModelAttribute("order") Order order, 
+			@RequestParam("prodNo") int prodNo, 
+			HttpSession session) throws Exception{
 		
+		System.out.println("/addorder");
 		
-		System.out.println("/addPurchase");
-		User user = userService.getUsers(id);
-		System.out.println(order);
+		User user = (User)session.getAttribute("user");
+		Product product = productService.getProduct(prodNo);
+		order.setProdNo(product);
 		order.setId(user);
+		
 		orderService.addOrder(order);
 		
-		
-
-		return "forward:shop/order/addOrder.jsp";
+		return "forward:/purchase/addPurchase.jsp";
 	}
+	
+	
+
 	
 	@RequestMapping("/getOrder")
 	public String getOrder (@RequestParam("orderNo")int orderNo, Model model) throws Exception{

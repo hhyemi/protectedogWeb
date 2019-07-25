@@ -19,9 +19,10 @@ public class Order {
 	private int totalPrice;
 	private int orderCode;
 	private int deliveryCode;
-
+	
 	
 	public Order() {
+		
 	}
 
 
@@ -173,17 +174,11 @@ public class Order {
 	public void setDeliveryCode(int deliveryCode) {
 		this.deliveryCode = deliveryCode;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Order [orderNo=" + orderNo + ", prodNo=" + prodNo + ", id=" + id + ", phone=" + phone + ", couponNo="
-				+ couponNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
-				+ receiverPhone + ", orderRequest=" + orderRequest + ", paymentCode=" + paymentCode + ", orderDate="
-				+ orderDate + ", orderQuantity=" + orderQuantity + ", totalPrice=" + totalPrice + ", orderCode="
-				+ orderCode + ", deliveryCode=" + deliveryCode + "]";
-	}
-	
 }
+	
+	
+	
+	
+
 	
 	

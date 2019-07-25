@@ -163,6 +163,25 @@
 	<div class="clear"></div>
 	</div>
 	
+	
+	<!-- 마일리지 선택 -->
+				<div class="col-md-7">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h1 class="panel-title">
+								마일리지<small> &nbsp;&nbsp;사용 할 마일리지를 확인해주세요.</small>
+							</h1>
+						</div>
+						<div class="panel-body" style="height: 500px;">
+							<form>
+								<div class="form-group">
+									<label class="col-sm-6 control-label" for="">사용가능한 마일리지</label>
+									<div>
+										<div class="input-group col-sm-5">
+											<input class="form-control" id="userMileage" name="" type="number"
+												value="${sessionScope.login.userMileage}"
+												readonly="readonly">
+	
 
 </body>
 
