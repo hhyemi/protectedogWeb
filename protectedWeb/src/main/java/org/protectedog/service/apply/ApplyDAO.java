@@ -18,6 +18,7 @@ public interface ApplyDAO {
 
 	// SELECT LIST
 	public Map<String , Object> listApply(Search search, int adoptNo) throws Exception ;
+	public Map<String , Object> listApply2(String id) throws Exception ;
 	
 	// DELETE
 	public void delApply(Apply apply) throws Exception ;

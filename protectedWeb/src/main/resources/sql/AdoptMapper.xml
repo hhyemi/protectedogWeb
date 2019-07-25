@@ -64,7 +64,7 @@
 		WHERE post_no = #{value}
 	 </select>
 	 
-	 
+
 	 
 	 
 	 <!-- SQL : UPDATE -->
@@ -119,6 +119,9 @@
 									<if test="searchCondition == 1 and searchKeyword !='' ">
 							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
 									</if>
+									<if test="searchCondition == 2 and searchKeyword !='' ">
+							 			AND dog_breed LIKE '%'||#{searchKeyword}||'%' 
+									</if>
 								</if>
 								<if test="areaCondition != ''">
 									AND area_kr LIKE '%'||#{areaCondition}||'%' 
@@ -127,6 +130,15 @@
 						ORDER BY post_no DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	 
+	 
+	 
+	 <select  id="listAdopt2"  parameterType="map"	resultMap="adoptSelectMap">
+	  	SELECT board_code, post_no, id,  status_code
+		FROM adopt
+		WHERE id = #{id} AND status_code = '3'
 	 </select>
 
 
@@ -148,10 +160,9 @@
 							<if test="searchCondition == 1 and searchKeyword !='' ">
 					 			AND post_content LIKE '%'||#{searchKeyword}||'%' 
 							</if>
-<!-- 							<if test="searchCondition == 2 "> -->
-<!-- 							크기순 정렬  -->
-<!-- 								AND dog_size = #{dogSize}  -->
-<!-- 							</if> -->
+							<if test="searchCondition == 2 and searchKeyword !='' ">
+					 			AND dog_breed LIKE '%'||#{searchKeyword}||'%' 
+							</if>
 						</if>
 						<if test="areaCondition != ''">
 							AND area_kr LIKE '%'||#{areaCondition}||'%' 

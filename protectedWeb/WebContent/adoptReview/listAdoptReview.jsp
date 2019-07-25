@@ -34,7 +34,9 @@
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
-<%-- 	<input type="hidden" id="boardCode" value="${param.boardCode }"> --%>
+	<input type="hidden" id="userId" value="${sessionScope.user.id}">
+	<input type="hidden" id="adoptConfirm" value="">
+	<input type="hidden" id="applyConfirm" value="">
 	
 		<div class="page-header text-info">
 		
@@ -55,7 +57,7 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건, 현재 ${resultPage.currentPage}  페이지  ${sessionScope.user.id}
 		    	</p>
 		    </div>
 		    
@@ -96,9 +98,13 @@
       
       </table>
       
+    
+      
 	  <!--  table End /////////////////////////////////////-->
           
-	    	
+    <div id="dialog-cant" title="">
+	  <p align="center"><br/>후기를 등록하려면 등록한 분양글이 완료상태이거나,<br/>입양 신청한 분양글이 완료상태여야 합니다.</p>
+	</div> 	
 
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
@@ -115,19 +121,99 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+<!--     <link rel="stylesheet" href="/resources/demos/style.css"> -->
 	
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+<!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 	  <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+		var adoptConfirm;
+		var applyConfirm;
+		var id = $('#userId').val().trim();
+		
+		// 후기글 등록 가능한지 확인
+		function confirmAdopt(){
+			console.log(id);
+			// 분양글 등록+ 그 글이 완료상태
+			$.ajax( 
+			 		{
+						url : "/adopt/json/listAdopt2/"+id,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								  },
+						success : function(data , status) {
+	 							console.log("adopt "+JSON.stringify(data));
+								
+	 							if ( data.list.length > 0 ) {
+									console.log("ajax에서 adopt 결과 있음 "+data.list.length);
+									self.location = "/adoptReview/addAdoptReview";
+	 							} else {
+	 								confirmApply();
+	 							}
+
+						},
+						error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				        }
+					
+			});
+		}//adopt 
+		
+		function confirmApply(){
+			
+			// 신청서 등록+ 그 글이 완료상태
+	  		$.ajax( 
+			 		{
+						url : "/apply/json/listApply2/"+id,
+						method : "GET" ,
+						dataType : "json" ,
+// 						async: false,
+						headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								  },
+						success : function(data , status) {
+								console.log("apply "+JSON.stringify(data));
+								
+								if ( data.list.length > 0 ){
+									console.log("ajax에서 apply 결과 있음 "+ data.list.length);
+									self.location = "/adoptReview/addAdoptReview";
+								} else {
+									$( '#dialog-cant' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+									$( "#dialog-cant" ).dialog( "open" );
+								}
+								
+						},
+						error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				     	}
+			});
+ 		}//apply
+ 		
+ 		//글 등록 불가 안내 dialog
+ 		$( function() {
+ 	  	    $( "#dialog-cant" ).dialog({
+ 	  	    	autoOpen: false,
+ 	  		      width: 370,
+ 	  		      height: 180,
+ 	  		      modal: true,
+ 	  		      buttons: {
+ 	  		        	닫기: function() {
+ 	  		          		$( this ).dialog( "close" );
+ 	  		        	}
+ 	  		      }
+ 	  	    });
+ 	    });
+ 	      
 	
-	
+			 		
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 // 			var ccc = $( '#boardCode' ).val();
@@ -140,7 +226,7 @@
 		$(function() {
 			 
 			$( "button:contains('글쓰기')" ).on("click" , function() {
-				self.location = "/adoptReview/addAdoptReview";
+				confirmAdopt();
 			});
 			 
 			$( "tr" ).on("click" , function() {
