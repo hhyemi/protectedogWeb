@@ -140,9 +140,8 @@
 												<div class="product">
 													<a class="img-prod">
 													<input type="hidden" value="${board.postNo}"/>
-													<img class="img-fluid"
-														 src="/resources/file/fileMarket/${name.fileName}"
-														alt="Colorlib Template"> <span class="status">
+													<img class="d-block w-100"
+										src="/resources/file/fileMarket/${name.fileName}"><span class="status">
 															<!-- 30% -->
 													</span>
 														<div class="overlay"></div> </a>

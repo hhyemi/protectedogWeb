@@ -36,6 +36,7 @@ public class MarketController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	private FileService fileService;
+	
 
 
 	// setter Method 구현 않음
@@ -52,12 +53,9 @@ public class MarketController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	@Value("#{commonProperties['market']}")
-	// @Value("#{commonProperties[''] ?: 2}")
-	String market;
 	
-	@Value("#{commonProperties['fileMarket']}")
-	String fileMKRoot;
+	@Value("#{commonProperties['market']}")
+	String MK;
 	
 	public MarketController() {
 		System.out.println(this.getClass());
@@ -66,13 +64,13 @@ public class MarketController {
 
 	@RequestMapping(value="addMarket")
 	public String addProdQna(@ModelAttribute("board")Board board, HttpSession session, 
-			HttpServletRequest request, @RequestParam("multiFile") ArrayList<String> multiFile) throws Exception {
+			HttpServletRequest request, @RequestParam("multiFile") ArrayList<String> multiFile, Model model) throws Exception {
 		
 		System.out.println("shop/market/addMarket : GET/POST");
 		
 		board.setId("user01");
 		board.setNickName("스캇");
-		board.setBoardCode(market);
+		board.setBoardCode(MK);
 		board.setViewCount(0);
 		board.setProdNo(10000);
 		
@@ -93,15 +91,17 @@ public class MarketController {
 			if (fileName != null && fileName.length() > 0) {
 
 				FileDog files = new FileDog();
-				files.setBoardCode(market);
+				files.setBoardCode(MK);
 				files.setFileName(fileName);
 				files.setFileCode(0);
-				files.setPostNo(board.getProdNo());
+				files.setPostNo(board.getPostNo());
 				listFile.add(files);
 			}
 		}
 		
 		fileService.addFile(listFile);
+		model.addAttribute("board", board);
+		
 		
 		return "forward:/shop/market/addMarket.jsp";
 	}
@@ -122,7 +122,7 @@ public class MarketController {
 		search.setPageSize(pageSize);
 		
 		// Business logic 수행
-		Map<String, Object> map = boardService.listBoard(search, market, 1);
+		Map<String, Object> map = boardService.listBoard(search, MK, 1);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -152,7 +152,7 @@ public class MarketController {
 		
 		// 파일가져오기
 		Map<String, Object> filePost = new HashMap<String, Object>();
-				filePost.put("boardCode", market);
+				filePost.put("boardCode", MK);
 				filePost.put("postNo", postNo);
 				List<FileDog> file = fileService.getFile(filePost);
 

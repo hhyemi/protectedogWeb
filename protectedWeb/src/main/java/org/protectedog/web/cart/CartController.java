@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.service.cart.CartService;
 import org.protectedog.service.domain.Cart;
+import org.protectedog.service.domain.Product;
+import org.protectedog.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +28,9 @@ public class CartController {
 	@Autowired
 	@Qualifier("cartServiceImpl")
 	private CartService cartService;
+	@Autowired
+	@Qualifier("productServiceImpl")
+	private ProductService productService;
 
 	public CartController() {
 		System.out.println(this.getClass());
@@ -37,9 +43,19 @@ public class CartController {
 	int pageSize;
 
 	// 1. 장바구니 추가
-	@RequestMapping("addCart")
-	public String addCart(@ModelAttribute("cart")Cart cart, HttpSession session) throws Exception{
-	
+	@RequestMapping(value="addCart")
+	public String addCart(@ModelAttribute("cart")Cart cart, HttpSession session, Model model, HttpServletRequest request) throws Exception{
+		
+		
+		int quantity=0;
+		int totalPrice=0;
+		
+		cart.setQuantity(quantity);
+		cart.setTotalPrice(totalPrice);
+		
+		
+		cart.setId("user01");
+		
 		String id = (String) session.getAttribute("id");
 		cart.setId(id);
 		
@@ -54,8 +70,13 @@ public class CartController {
 			// 있으면 update
 		cartService.updateCart(cart);
 		}
-		return "redirect:/shop/cart/listCart";
+		
+		
+		return "redirect:/shop/cart/listCart.jsp";
 		}
+	
+	
+	
 
 	// 2. 장바구니 목록
 	@RequestMapping("listCart")

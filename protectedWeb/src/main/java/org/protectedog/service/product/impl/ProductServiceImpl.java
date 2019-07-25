@@ -83,4 +83,11 @@ public class ProductServiceImpl implements ProductService {
 		return map;
 	}
 
+
+	@Override
+	public void updateQuantity(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		productDAO.updateQuantity(product);
+	}
+
 }

@@ -64,6 +64,13 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("ProductMapper.listProduct", search);
 	}
 
+	@Override
+	public void updateQuantity(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("ProductMapper.updateQuantity", product);
+		
+	}
+
 
 
 

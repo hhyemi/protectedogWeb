@@ -104,7 +104,7 @@
 									</div>
 								</td>
 
-								<td class="total">$4.90</td>
+								<td class="total">${cart.totalPrice}</td>
 							</tr>
 							<!-- END TR-->
 
