@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
+import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
@@ -87,6 +88,22 @@ public class AdoptReviewController {
 //		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		System.out.println("파일확인 : "+product.getFileName());
 		System.out.println("======================"+board);
+		
+		String thumnail;
+		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src="),  (  board.getPostContent().substring   (  board.getPostContent().indexOf("<img src=")).indexOf(">")+board.getPostContent().indexOf("<img src="))) ;
+		
+		board.setThumnail(thumnail);
+		
+
+//		String str = "바나나 : 1000원, 사과 : 2000원, 배 : 3000원";
+//		String target = "사과";
+//		int target_num = str.indexOf("사과"); 
+//		String result; result = str.substring       (               str.indexOf("사과"),                    (   str.substring                 (          str.indexOf("사과")).indexOf("원")+str.indexOf("사과")    )         );
+		
+		
+		
+
+		
 		boardService.addBoard(board);
 //		boardService.getBoard(board.getPostNo());
 //		System.out.println("=============="+board);
@@ -108,8 +125,9 @@ public class AdoptReviewController {
 			model.addAttribute("user", user);
 		}
 		//Business Logic
+		boardService.updateViewCount(boardService.getBoard(postNo));
 		Board board = boardService.getBoard(postNo);
-		boardService.updateViewCount(board);
+		
 		// Model 과 View 연결
 		model.addAttribute("board", board);	
 	
@@ -163,6 +181,21 @@ public class AdoptReviewController {
 	}
 	
 	
+	
+	// 글 삭제
+	@RequestMapping( value="delAdoptReview" , method=RequestMethod.GET)
+	public String delAdoptReview(@RequestParam("postNo") int postNo ,
+									@ModelAttribute("board") Board board ) throws Exception{
+		
+		System.out.println("/adoptReview/delAdoptReview : POST  "+board);
+
+		boardService.delBoard(board);
+
+		return "redirect:/adoptReview/listAdoptReview";
+	}
+	
+		
+		
 	@RequestMapping( value="listAdoptReview" )
 	public String listAdoptReview(
 						@ModelAttribute("search") Search search,

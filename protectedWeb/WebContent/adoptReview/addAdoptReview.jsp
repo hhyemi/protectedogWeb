@@ -5,7 +5,7 @@
 <html>
 
 <head>
-	<title>ADD ADOPTREVIEW</title>
+	<title>보호할개 · 분양후기글 작성</title>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -47,11 +47,11 @@
 			border-radius: 2px;
 			margin-bottom: 10px;
 		}
-		.waves-effect waves-teal btn-flat {
-			background-color: #3e6dad;
-			color: white;
-			border-radius: 10px;
-		}
+/* 		.waves-effect waves-teal btn-flat { */
+/* 			background-color: #3e6dad; */
+/* 			color: white; */
+/* 			border-radius: 10px; */
+/* 		} */
 		
     
     </style>
@@ -92,7 +92,7 @@
 				<div class="col-md-12">
 	          		<div class="cart-detail bg-light p-3 p-md-4">
 						<div class="form-group">
-							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.${user.nickname}</strong></p></div>
+							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.</strong></p></div>
 						</div>
 					</div>
 				</div>
@@ -304,7 +304,7 @@
                 	    const editorData = editor.getData();     	           
                 	} );
                 	
-                	alert(img.target.result);
+//                 	alert(img.target.result);
                     editor.setData(editor.getData()+"<p><"+imgSelectName+" src='" + img.target.result + "' style='min-width:100%'/></p><p/>");		
                 
                     
@@ -450,11 +450,11 @@
 // 			  $('#dialog-img').dialog( "open" );
 // 			  return;
 // 	  	  }
-		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
-			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-postContent').dialog( "open" );
-			  return;
-		  }
+// 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+// 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-postContent').dialog( "open" );
+// 			  return;
+// 		  }
 		  
 
 		var postContent = $("#editor").text();
@@ -465,8 +465,8 @@
 
     $(function() {
 			$( "button:contains('등록')" ).on("click" , function() {
-				$('textarea').val(editor.getData());
-				console.log($('textarea').val());
+// 				$('textarea').val(editor.getData());
+// 				console.log($('textarea').val());
 				
 				fncAddAdoptReview();
 			});

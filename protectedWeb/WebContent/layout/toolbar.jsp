@@ -35,33 +35,13 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="848949930774-4ka6kl79kq1fv7h3q89leonj9ki1o6v7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js"></script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script type="text/javascript">
-
-//     	$(function(){
-//     		$("span:contains('Sign in')").on("click", function(){
-//     			$(self.location).attr("href","/users/login");
-//     		});
-//     	});
-
-		//=============  채팅방 Event  처리 =============	
-
-			
-	 $(function() {
-		$( "a:contains('채팅방')" ).on("click" , function() {
-	 		 window.open("/chatting/roomchat.jsp",
-						"_blank",
-						"left=500, top=100, width=500, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
-				});	
-	 });
 
     	$(function(){
     		$("span:contains('로그인')").on("click", function(){
     			$(self.location).attr("href","/users/login");
     		});
     	});
-    	
-    	
 
     </script>
     
@@ -73,11 +53,11 @@
     	.goto-here{
     		color : black;
     	}
+    	
     </style>
   </head>
   <body class="goto-here">
       <div class="py-1 bg-black">
-      <input type="hidden" id="registId" name="registId" value="${ sessionScope.user.id }">
        <div class="container">
           <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
              <div class="col-lg-12 d-block">
@@ -97,20 +77,16 @@
 	                        	</span>
                         		</c:if>
                         		</div>
-                        		<c:if test="${ sessionScope.user.kakao != null }">
-                        			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a>
-                        		</c:if>
+<%--                         		<c:if test="${ sessionScope.user.kakao != null }"> --%>
+<!--                         			<a id="" href="javascript:logoutWithKakao()">카카오 로그아웃</a> -->
+<%--                         		</c:if> --%>
 <%-- 							<c:if test="${ sessionScope.user.google != null }"> --%>
 <!-- 								<a id="googleLogout" href="#" onclick="signOut();">google 로그아웃</a> -->
 <%-- 							</c:if> --%>
-
-							<c:if test="${ sessionScope.user.id != null }">
-					   		<div class="col-md  msg" id="unRead">
-					    		<div class="icon mr-2 d-flex justify-content-center align-items-center">
-					    			<a class="icon-paper-plane" href="/message/listReceiveMessage">쪽지읽으쏘</a>
-					    		</div>
-					   		</div>
-					   		</c:if>
+<!-- 					   		<div class="col-md pr-4 d-flex topper align-items-center"> -->
+<!-- 					    		<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div> -->
+<%-- 						   		<span class="text">${ sessionScope.user.email }</span> --%>
+<!-- 					   		</div> -->
 					   		
 					   		
 					    	<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
@@ -173,22 +149,8 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
                 <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
-                 <a class="dropdown-item" href="#">채팅방</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">병원</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/hospital/getHospital.jsp">병원</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PEDIA</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="/community/getBreedPedia.jsp">PEDIA</a>
-              </div>
-            </li>
-
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">담소나눔</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -204,9 +166,9 @@
                 <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
               	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
                 <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
-                <a class="dropdown-item" id="addMessage" href="/message/addMessage">쪽지쓰기</a>
+                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
                 <c:if test="${ sessionScope.user.role eq 'admin' }">
-                	<a class="dropdown-item" href="/coupon/addCouponManage">쿠폰생성</a>
+                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
                 </c:if>
                 <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
                 <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
@@ -231,7 +193,7 @@
               <a class="nav-link" href="/community/getBreedPedia.jsp">견종백과</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="/community/getHospital.jsp">병원</a>
+              <a class="nav-link" href="/hospital/getHospital.jsp">동물병원</a>
             </li>
            </ul>
          </div>
@@ -261,15 +223,10 @@
 <!--   <script src="/resources/prodmenu/js/google-map.js"></script> -->
   <script src="/resources/prodmenu/js/main.js"></script>
 
-
-	
-
-  
   	<script type="text/javascript">
   
 
 
-		
 		function logoutWithKakao() {
 			Kakao.Auth.logout();
 			location.href = 'https://accounts.kakao.com/logout?continue=https://pf.kakao.com/logged_out';
@@ -296,18 +253,6 @@
 			});
 		});
 		
-		$(function(){
-			$(document).ready(function(){
-				alert("gd & top");
-			})
-			
-		})
-
-		
-// 		$(document).ready(function(){
-// 			alert("gd");
-// 		});
-		
 		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54');
 		function loginWithKakao() {
 			Kakao.Auth.login({
@@ -329,44 +274,32 @@
 			})
 		}
 		
-// 		$(function() {
-// 			alert("gd");	
-// 			var id=$("#registId").val();
-// 			var msgId=JSON.stringify({id:id});
-// 			alert(id);
-// 			alert(msgId);
-// 			$.ajax({
-// 				type : "POST",
-// 				contentType : "application/json",
-// 				url : "/message/json/getUnreadMessage",
-// 				data : msgId,
-// 				datatype : "json",
-// 				success : function(response){
-// 					if(id!=null && $.trim(response.result)==0){
-// 						alert($.trim(response.result));
-// 						$(".msg").hide();
-// 					}
-// 					if(id!=null && $.trim(response.result)==1){
-// 						alert($.trim(response.result));
-// 						$(".msg").show();
-// 					}
-// 				}
+		$(function() {
+			alert("gd");	
+			var id=$("#registId").val();
+			var msgId=JSON.stringify({id:id});
+			alert(id);
+			alert(msgId);
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "/message/json/getUnreadMessage",
+				data : msgId,
+				datatype : "json",
+				success : function(response){
+					if(id!=null && $.trim(response.result)==0){
+						alert($.trim(response.result));
+						$(".msg").hide();
+					}
+					if(id!=null && $.trim(response.result)==1){
+						alert($.trim(response.result));
+						$(".msg").show();
+					}
+				}
 				
-// 			});
-// 		});
+			});
+		});
 
-
-		
-		
-		
-		
-// 		$(function(){
-// 			$("#googleLogout").on("click", function(){
-// 				var auth2=gapi.auth2.getAuthInstance();
-// 				auth2.setToken(null);
-// 				auth2.signOut();
-// 			});
-// 		})
 
 	</script>
 	
