@@ -48,7 +48,7 @@ public class AdoptReviewRestController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
+	@Value("#{commonProperties['fundingPageSize']}")
 	int pageSize;
 	
 	
