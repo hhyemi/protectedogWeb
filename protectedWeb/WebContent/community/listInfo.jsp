@@ -17,21 +17,18 @@
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 <!--  bootstrap CDN  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <!-- jQuery CSS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!--  CSS -->
 <style>
-h7 {
-	color: red;
-}
 #searchSubmmit{
 	width : 60px;
 	height : 52px;
@@ -44,197 +41,28 @@ h7 {
 	height :30px;
 	border-radius : 15px 0px 0px 15px;
 }
-
-.glyphicon-search{
-	font-size : 15px;
-}
-
-td:hover{
-	color : #3E6B79;
-}
-
-.go{
-	color : #808080;
-}
-.go:hover{
-	color : #3E6B79;
-}
-.btn.btn-default{
-	width: 100px;
-	height :30px;
-	border-radius: 0px;
-}
 </style>
 
-<title>정보공유</title>
 
-<!-- JavaScript -->
-<script type="text/javascript">
-	
-$(function(){
-	
-	$(document).ready(function(){
-		listNews();
-		
-		if(${totalCount == 0}){
- 			$("#listTable").hide(); 
-		}
-	});
-	
-	$(document).on("click",".go",function(){
-		
-		window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
-	});
-});
-
-function listNews(){
-		
-	$.ajax({
-		url : "/News/json/listNews/",
-		method : "POST",
-		data : JSON.stringify({searchKeyword : $("#searchKeyword").val()}),
-		dataType : "json",
-		contentType : "application/x-www-form-urlencoded; charset=euc-kr",
-		headers : {
-			"Accept" : "application/json",
-			"Content-Type" : "application/json;charset=euc_kr"
-		},
-		success : function(JSONData, status) {
-			
-			console.log(JSON.stringify(JSONData));
-			
-			var list = JSONData.items;
-			
-			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>뉴스</b></h4></td></tr>");
-		
-			$.each(list, function(index, items) {
-				
-				console.log("index : " + index );
-				console.log("items : " + JSON.stringify(items) );
-				var title = items.title;
-				
-				$(".newstbody").append(
-						  "<tr>"
-						+	 "<td colspan='2'  class='mdl-data-table__cell--non-numeric' style='max-width:200px;'>"
-								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,20)
-								+ "<input type='hidden' name='link' value='"+items.link+"'>"
-								+ "</a>"
-						+	 "</td>"
-						+ "</tr>"
-				);
-				
-				
-			});
-				
-			//alert("success");
-			
-		},
-		error : function(request, status, error){	
-		
-			alert("error");
-
-			
-		}
-	});
-}
-
-	function fncGetList(currentPage) {
-		
-		$("#currentPage").val(currentPage);
-		$("form").attr("method", "POST").attr("action","/info/listInfo").submit();
-	}
-
-	function getPageSize() {
-		$(self.location).attr("href","/info/listInfo?&pageSize="+ $("#selectPageSize").val());
-	}
-	
-	
-	$(function(){
-		
-		$("button:contains('전체보기')").on("click", function(){
-			$(self.location).attr("href","/info/listInfo?order=1&pageSize=${search.pageSize}");
-		});
-		
-		$("button:contains('조회수')").on("click", function(){
-			$(self.location).attr("href","/info/listInfo?order=2&pageSize=${search.pageSize}");
-		});
-		
-		$("button:contains('추천수')").on("click", function(){
-			$(self.location).attr("href","/info/listInfo?order=3&pageSize=${search.pageSize}");
-		});
-		
-	});
-	$(function() {
-
-		var pageSize = $("#selectPageSize").val();
-		var menu = $("#menu").val();
-
-		$("#searchKeyword").on("keyup", function() {
-
-			var search = {
-				searchKeyword : $("#searchKeyword").val(),
-				searchCondition : $("#searchCondition").val()
-			};
-			var convertSearch = JSON.stringify(search);
-
-			$.ajax({
-				url : "/product/json/listProduct/"+ menu + "/" + pageSize,
-				method : "POST",
-				dataType : "json",
-				data : convertSearch,
-				contentType : "application/x-www-form-urlencoded; charset=euc-kr",
-				headers : {
-					"Accept" : "application/json",
-					"Content-Type" : "application/json;charset=euc_kr"
-				},
-				success : function(JSONData, status) {
-					$("#searchKeyword").autocomplete({
-						source : JSONData
-					});
-				}
-			});
-		});
-
-		$("td:nth-child(2)").on("click",function() {
-
-					var postNo = $(this).children("input").val();
-					if(postNo == undefined){
-						return;
-					}
-					$(self.location).attr("href","/info/getInfo?postNo="+postNo);
-				});
-
-		$("td:nth-child(1)").on("click",function(){
-				
-			var postNo = $(this).children("input").val();
-			if(postNo == undefined){
-				return;
-			}
-			$(self.location).attr("href","/info/getInfo?postNo="+postNo);
-		});
-		
-		$(document).ready(function(){
-			$("#searchKeyword").keydown(function(key){
-				if(key.keyCode == 13){
-					fncGetList(1);
-				}
-			});
-		});
-		
-		$("#searchSubmmit").on("click", function() {
-			fncGetList(1);
-		});
-		
-		$("button:contains('글 쓰기')").on("click", function(){
-			self.location = "/community/addInfo.jsp"
-		});
-	});
-</script>
+<title>보호할개.정보공유</title>
+<jsp:include page="/layout/toolbar.jsp" />
 </head>
 
 <body>
 
-	<jsp:include page="/layout/toolbar.jsp" />
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
+					</p>
+					<h1 class="mb-0 bread">견종백과</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<%-- 	<input type="hidden" id="menu" name="menu" value="${param.menu}"/> --%>
 
@@ -443,7 +271,170 @@ function listNews(){
 	<div class="empty" style="min-height: 100px">
 		
 	</div>
-	<jsp:include page="/layout/footer.jsp"/>\
+	<jsp:include page="/layout/footer.jsp"/>
 	
 </body>
+	
+	<!-- JavaScript -->
+<script type="text/javascript">
+	
+$(function(){
+	
+	$(document).ready(function(){
+		listNews();
+		
+		if(${totalCount == 0}){
+ 			$("#listTable").hide(); 
+		}
+	});
+	
+	$(document).on("click",".go",function(){
+		
+		window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+	});
+});
+
+function listNews(){
+		
+	$.ajax({
+		url : "/News/json/listNews/",
+		method : "POST",
+		data : JSON.stringify({searchKeyword : $("#searchKeyword").val()}),
+		dataType : "json",
+		contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+		headers : {
+			"Accept" : "application/json",
+			"Content-Type" : "application/json;charset=euc_kr"
+		},
+		success : function(JSONData, status) {
+			
+			console.log(JSON.stringify(JSONData));
+			
+			var list = JSONData.items;
+			
+			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>뉴스</b></h4></td></tr>");
+		
+			$.each(list, function(index, items) {
+				
+				console.log("index : " + index );
+				console.log("items : " + JSON.stringify(items) );
+				var title = items.title;
+				
+				$(".newstbody").append(
+						  "<tr>"
+						+	 "<td colspan='2'  class='mdl-data-table__cell--non-numeric' style='max-width:200px;'>"
+								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,20)
+								+ "<input type='hidden' name='link' value='"+items.link+"'>"
+								+ "</a>"
+						+	 "</td>"
+						+ "</tr>"
+				);
+				
+				
+			});
+				
+			//alert("success");
+			
+		},
+		error : function(request, status, error){	
+		
+			alert("error");
+
+			
+		}
+	});
+}
+
+	function fncGetList(currentPage) {
+		
+		$("#currentPage").val(currentPage);
+		$("form").attr("method", "POST").attr("action","/info/listInfo").submit();
+	}
+
+	function getPageSize() {
+		$(self.location).attr("href","/info/listInfo?&pageSize="+ $("#selectPageSize").val());
+	}
+	
+	
+	$(function(){
+		
+		$("button:contains('전체보기')").on("click", function(){
+			$(self.location).attr("href","/info/listInfo?order=1&pageSize=${search.pageSize}");
+		});
+		
+		$("button:contains('조회수')").on("click", function(){
+			$(self.location).attr("href","/info/listInfo?order=2&pageSize=${search.pageSize}");
+		});
+		
+		$("button:contains('추천수')").on("click", function(){
+			$(self.location).attr("href","/info/listInfo?order=3&pageSize=${search.pageSize}");
+		});
+		
+	});
+	$(function() {
+
+		var pageSize = $("#selectPageSize").val();
+		var menu = $("#menu").val();
+
+		$("#searchKeyword").on("keyup", function() {
+
+			var search = {
+				searchKeyword : $("#searchKeyword").val(),
+				searchCondition : $("#searchCondition").val()
+			};
+			var convertSearch = JSON.stringify(search);
+
+			$.ajax({
+				url : "/product/json/listProduct/"+ menu + "/" + pageSize,
+				method : "POST",
+				dataType : "json",
+				data : convertSearch,
+				contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json;charset=euc_kr"
+				},
+				success : function(JSONData, status) {
+					$("#searchKeyword").autocomplete({
+						source : JSONData
+					});
+				}
+			});
+		});
+
+		$("td:nth-child(2)").on("click",function() {
+
+					var postNo = $(this).children("input").val();
+					if(postNo == undefined){
+						return;
+					}
+					$(self.location).attr("href","/info/getInfo?postNo="+postNo);
+				});
+
+		$("td:nth-child(1)").on("click",function(){
+				
+			var postNo = $(this).children("input").val();
+			if(postNo == undefined){
+				return;
+			}
+			$(self.location).attr("href","/info/getInfo?postNo="+postNo);
+		});
+		
+		$(document).ready(function(){
+			$("#searchKeyword").keydown(function(key){
+				if(key.keyCode == 13){
+					fncGetList(1);
+				}
+			});
+		});
+		
+		$("#searchSubmmit").on("click", function() {
+			fncGetList(1);
+		});
+		
+		$("button:contains('글 쓰기')").on("click", function(){
+			self.location = "/community/addInfo.jsp"
+		});
+	});
+</script>
 </html>

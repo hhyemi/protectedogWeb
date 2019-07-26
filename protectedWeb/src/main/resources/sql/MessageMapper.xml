@@ -40,9 +40,9 @@
 	
 	<!-- SQL : SELECT UNREADED MESSAGE -->
 	
-	<select id="getUnreadMessage" parameterType="int" resultMap="messageSelectMap">
+	<select id="getUnreadMessage" parameterType="string" resultMap="messageSelectMap">
 		SELECT * FROM message
-		WHERE receiver_id=#{value}
+		WHERE receiver_id=#{receiverId}
 		AND message_status=0
 	</select>
 	

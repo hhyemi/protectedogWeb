@@ -11,17 +11,9 @@
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
-body {
-	padding-top: 50px;
-}
-
 .temp {
 	height: 300px;
 }
@@ -141,41 +133,40 @@ body {
 	// 댓글 CURD function();
 	$(function() {
 		// 댓글 등록 
-		
-		$.ajax(
-					{
-						url : "/comment/json/getComment/"+commentNo,
-						method : "POST",
-						dataType : "Json",
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
+// 		var commentNo
+// 		$.ajax({
+// 						url : "/comment/json/getComment/"+commentNo,
+// 						method : "POST",
+// 						dataType : "Json",
+// 						headers : {
+// 							"Accept" : "application/json",
+// 							"Content-Type" : "application/json"
+// 						},
 						
-						success : function(JSONData, status){
+// 						success : function(JSONData, status){
 							
-							$("#"+commentNo+""+".cmCont").remove();
-							$("#"+commentNo+""+".area").hide();
+// 							$("#"+commentNo+""+".cmCont").remove();
+// 							$("#"+commentNo+""+".area").hide();
 							
- 							var modifyScreen = 
- 								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 30px' placeholder='"+JSONData.commentContent+"'/></div>";
+//  							var modifyScreen = 
+//  								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 30px' placeholder='"+JSONData.commentContent+"'/></div>";
 							
- 							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
- 								+ "<a href='#' onclick='update(); return false;'> "
- 								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
- 								+ "수정" 								
- 								+ "</span></div>"
+//  							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
+//  								+ "<a href='#' onclick='update(); return false;'> "
+//  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
+//  								+ "수정" 								
+//  								+ "</span></div>"
  							
-							$("#"+commentNo+""+".h4tag").append(modifyScreen);
- 							$("#"+commentNo+""+".h4tag").append(button);
-						},
+// 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
+//  							$("#"+commentNo+""+".h4tag").append(button);
+// 						},
 										
-						error : function(request, status, error){							
-							alert("Error");							
-						}
+// 						error : function(request, status, error){							
+// 							alert("Error");							
+// 						}
 				
-					}
-		);
+// 					}
+// 		);
 // 		$(document).on("click","#commentGo",function() {
 // 			$("form[name=commentGo]").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
 // 		});
@@ -436,7 +427,7 @@ body {
 					<div id="${comment.commentNo}" class="area">
 					<h5  id="${comment.commentNo}" class="cmCont">${comment.commentContent}</h5>
 					<c:if test="${comment.id == sessionScope.user.id }">
-					<span class="glyphicon glyphicon-refresh"></span> &nbsp; 
+					<span class="fas fa-retweet"></span> &nbsp; 
 					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
 					</c:if>
 					<span class="glyphicon glyphicon-alert"></span> &nbsp; 

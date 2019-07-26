@@ -7,7 +7,7 @@ public class Review {
 	/// Field
 	private int postNo;
 	private String id;
-	private String nickName;
+	private String nickname;
 	private String boardCode;
 	private String postTitle;
 	private String postContent;
@@ -33,14 +33,6 @@ public class Review {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
 	}
 
 	public String getBoardCode() {
@@ -107,9 +99,17 @@ public class Review {
 		this.orderNo = orderNo;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [postNo=" + postNo + ", id=" + id + ", nickName=" + nickName + ", boardCode=" + boardCode
+		return "Review [postNo=" + postNo + ", id=" + id + ", nickname=" + nickname + ", boardCode=" + boardCode
 				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", regDate=" + regDate + ", statusCode="
 				+ statusCode + ", grade=" + grade + ", hospitalName=" + hospitalName + ", orderNo=" + orderNo + "]";
 	}

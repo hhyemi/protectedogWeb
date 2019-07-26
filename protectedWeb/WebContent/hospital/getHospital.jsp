@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>보호할개 · 동물병원</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -221,12 +222,12 @@
           font-family: NanumSquare, sans-serif !important;
        }
 </style>
-</head>
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
 	
+</head>
+<body>
 	<div class="container" >
 		<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
 		<div class="container">
@@ -236,7 +237,7 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="/index.jsp">Animal Hospital</a></span>
 					</p>
-					<h1 class="mb-0 bread">동물병원</h1>
+					<h1 class="mb-0 bread">동 물 병 원 검 색</h1>
 				</div>
 			</div>
 		</div>

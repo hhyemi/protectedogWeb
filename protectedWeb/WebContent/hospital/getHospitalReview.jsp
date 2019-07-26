@@ -71,12 +71,12 @@
           font-family: NanumSquare, sans-serif !important;
        }
 </style>
-
-</head>
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
+
+</head>
+<body>
 
 	<div class="container">
 		<form id="uploadForm" class="form-horizontal">
@@ -111,7 +111,7 @@
 			<p/><hr/>
 			<h1>동물병원후기</h1>
 			<p />
-			사용자 후기 [ 0건 ] &ensp;
+			사용자 후기 [ ${resultPage.totalCount}건 ] &ensp;
 
 			<!-- Button trigger modal -->
 				<c:if test="${user == null }">
@@ -120,9 +120,48 @@
 				<c:if test="${user != null }">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">후기등록</button>
 				</c:if>
-				<p/><hr/>
+				<p/>
+				<p>후기 평균 평점 :&ensp; 
+					  <span class="evgStarR" >☆</span>
+					  <span class="evgStarR" >☆</span>
+					  <span class="evgStarR">☆</span>
+					  <span class="evgStarR">☆</span>
+					  <span class="evgStarR">☆</span>			
+				</p>
+
+				<div id="ListDiv" >
+				  <c:forEach var="review" items="${list}">
+				  <div style="background-color: #f0f0f0; padding-left:20px"   >
+				  			<hr/>
+							  <h3>${review.postTitle}</h3>
+							  <b>${review.nickname }</b>
+							  
+							  &emsp;${review.regDate }
+							&emsp;
+							<c:if test="${review.grade eq 1 }">
+									<strong class="text-danger">★☆☆☆☆</strong> <strong>1</strong>
+							</c:if>
+							<c:if test="${review.grade eq 2}">
+									<strong class="text-danger">★★☆☆☆</strong> <strong>2</strong>
+							</c:if>
+							<c:if test="${review.grade eq 3 }">
+									<strong class="text-danger">★★★☆☆</strong> <strong>3</strong>
+							</c:if>
+							<c:if test="${review.grade eq 4}">
+									<strong class="text-danger">★★★★☆</strong> <strong>4</strong>
+							</c:if>
+							<c:if test="${review.grade eq 5}">
+									<strong class="text-danger">★★★★★</strong> <strong>5</strong>
+							</c:if>	
+							${review.postContent }
+							더보기<i class="glyphicon glyphicon-menu-down"></i>
+			        
+			          </div></c:forEach>
+          					
+				</div>				
+				<hr/>	
 				<!-- Modal -->
-				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal fade bs-example-modal-lg" id= "myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
 				    <div class="modal-content ">
 				      <div class="modal-header">
@@ -166,14 +205,7 @@
 				  </div>
 				</div>
 				
-				<p>후기 평균 평점 :&ensp; 
-					  <span class="evgStarR" >☆</span>
-					  <span class="evgStarR" >☆</span>
-					  <span class="evgStarR">☆</span>
-					  <span class="evgStarR">☆</span>
-					  <span class="evgStarR">☆</span>			
-				</p>
-				<hr/>		   
+	   
 	     <br/>
 	   </div></div>
 		 <input type="hidden" id="hospitalName"  name="hospitalName" value="${placeList.placeName}" />	
@@ -241,28 +273,28 @@
                 formData.append('files',files[index]);
             }
                 //////////////파일저장///////////////
-//                 $.ajax({
-//                 type : 'POST',
-//                 enctype : 'multipart/form-data',
-//                 processData : false,
-//                 contentType : false,
-//                 cache : false,
-//                 timeout : 600000,
-//                 url : '/Images/json/imageupload/HP',
-//                 dataType : 'JSON',
-//                 data : formData,
-//                 success : function(result) {
-//                     if (result === -1) {
-//                         alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-//                         // 이후 동작 ...
-//                     } else if (result === -2) {
-//                         alert('파일이 10MB를 초과하였습니다.');
-//                         // 이후 동작 ...
-//                     } else {
-//                         alert('이미지 업로드 성공');
-//                     }
-//                 }
-//             });
+                $.ajax({
+                type : 'POST',
+                enctype : 'multipart/form-data',
+                processData : false,
+                contentType : false,
+                cache : false,
+                timeout : 600000,
+                url : '/Images/json/imageupload/HP',
+                dataType : 'JSON',
+                data : formData,
+                success : function(result) {
+                    if (result === -1) {
+                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+                        // 이후 동작 ...
+                    } else if (result === -2) {
+                        alert('파일이 10MB를 초과하였습니다.');
+                        // 이후 동작 ...
+                    } else {
+                        alert('이미지 업로드 성공');
+                    }
+                }
+            });
                 
 
                 //////////////리뷰등록///////////////          
@@ -283,8 +315,8 @@
 	   					}),
 	   					
 	   		             success : function(JSONData) {
-	   		         		alert(JSONData); 
-	   		         		alert(typeof(JSONData));
+	   		            	//alert(JSONData.grade);
+	   		            	$('#myModal').modal("hide");
 	   	
 	   		            }  
 	   			  });                

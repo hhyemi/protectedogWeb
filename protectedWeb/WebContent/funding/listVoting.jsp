@@ -8,10 +8,9 @@
 <html>
 
 <head>
-    <meta charset="EUC-KR">
-    
+    <meta charset="EUC-KR">  
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-
+<title>보호할개 · 후원신청</title>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 		.form-group2{
@@ -37,19 +36,18 @@
        }
     </style>
     
-    
-  </head>
-  <body class="goto-here">
  	<!-- ToolBar Start ///////////////////////////////////// -->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!--ToolBar End /////////////////////////////////////  --> 
-   	
+    
+  </head>
+  <body class="goto-here">
     <div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
-            <h1 class="mb-0 bread">후원신청</h1>
+            <h1 >후원신청</h1>
           </div>
         </div>
       </div>
@@ -90,27 +88,27 @@
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
-				    				<div class="product">
+				    				<div class="desc-comp-offer-cont" style="padding-top:10px">
 				    				
 				    					 <!-- 투표종료 -->
 										 <c:if test ="${!(funding.statusCode eq 1) }">
-										 조회 ${funding.voteViewCount }
-				                        <a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; min-width:300px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
+										 &emsp;조회 ${funding.voteViewCount }
+				                        <a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
 				    					</c:if>
 				    					
 										 <!-- 투표중 -->
 										 <c:if test ="${funding.statusCode eq 1 }">		
-										 조회 ${funding.voteViewCount }
-										<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:300px;" >
+										  &emsp;조회 ${funding.voteViewCount }
+										<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:330px; max-width:330px;" >
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
 				    					</c:if>		
 				    						    					
 				    					<div class="text py-3 px-3">
 				    					<div id="checkPostTitle">
-				    					<font size="5">${funding.postTitle}</font>
+				    					<font size="5"><b>${funding.postTitle}</b></font>
 				    					</div>
 										<div class="row" style="position:relative;height:35px;">
 										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <h3>${funding.nickname}</h3></div>

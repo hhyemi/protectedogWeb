@@ -194,8 +194,8 @@
 	 <select id="listBoardMoreCommentCount" parameterType="map" resultMap="boardSelectMap">
 	 	SELECT *
 		FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-  				FROM ( SELECT b.post_no , b.board_code, b.id, b.nickname, b.post_title, b.reg_date, b.view_count, 
-			        		  b.recommend_count, b.market_code, b.price, b.city , b.phone, b.qna_code, b.route, b.prod_no, b.prod_name, b.del_code, count(t.COMMENT_CONTENT) commentCount 
+  				FROM ( SELECT b.post_no, b.board_code, b.id, b.nickname, b.post_title, b.reg_date, b.view_count, 
+			        		  b.recommend_count, b.market_code, b.price, b.city, b.phone, b.qna_code, b.route, b.prod_no, b.prod_name, b.del_code, count(t.COMMENT_CONTENT) commentCount 
 	    	           FROM board b, comments t 
 		      		   	<where> 
 					   	b.post_no = t.post_no(+) AND b.board_code = #{boardCode} AND b.del_code != '0'
@@ -212,7 +212,7 @@
 							</if> 
 						</if>
 						</where>
-		        		GROUP BY b.post_no, b.board_code, b.id, b.nickname, b.post_title,  b.reg_date, b.view_count, 
+		        		GROUP BY b.post_no, b.board_code, b.id, b.nickname, b.post_title, b.reg_date, b.view_count, 
                 				 b.recommend_count, b.market_code, b.price, b.city , b.phone, b.qna_code, b.route, b.prod_no, b.prod_name, b.del_code
 	            		ORDER BY 
 						<if test="order == 0 or order == 1">
