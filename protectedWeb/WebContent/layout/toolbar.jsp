@@ -187,7 +187,7 @@
                 <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
                 <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
                 <c:if test="${ sessionScope.user.role eq 'admin' }">
-                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
+                	<a class="dropdown-item" href="/coupon/addCouponManage">쿠폰생성</a>
                 </c:if>
                 <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
                 <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
