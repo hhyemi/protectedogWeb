@@ -71,12 +71,12 @@
           font-family: NanumSquare, sans-serif !important;
        }
 </style>
-
-</head>
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
+
+</head>
+<body>
 
 	<div class="container">
 		<form id="uploadForm" class="form-horizontal">
