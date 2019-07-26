@@ -57,7 +57,7 @@ public class AdoptController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
+	@Value("#{commonProperties['fundingPageSize']}")
 	int pageSize;
 
 	@Value("#{commonProperties['fileAdopt']}")
@@ -291,7 +291,7 @@ public class AdoptController {
 			search.setCurrentPage(1);
 		}
 		
-		search.setPageSize(16);
+		search.setPageSize(18);
 //		search.setPageSize(pageSize);
 //		System.out.println("■■■■ 검색어 확인 : "+search.getSearchKeyword()
 //						+"\n■■■■ search 확인 : "+search);

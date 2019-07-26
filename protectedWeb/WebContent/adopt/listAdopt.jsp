@@ -68,14 +68,15 @@
 /* 			margin-top: 10px !important; */
 /* 		} */
 		
-/* 		.desc-comp-offer-cont { */
-/* 			margin-bottom: 40px !important; */
-/* 		} */
+ 		.getadopt { 
+/*  			margin-left: 5px !important;  */
+/*  			margin-right: 5px !important;  */
+ 		} 
 /* 		.desc-comp-offer-cont:hover { */
 /* 			margin-bottom: 0px !important; */
 /* 		} */
  		
- 		img { 
+ 		.listImg { 
  			max-height: 330px;  
  			min-height: 330px;  
  			min-width: wrap; 
@@ -135,6 +136,13 @@
 			height: 33px;
 		}
 		
+		.col-md-4 {
+/* 			margin-right: 5px !important; */
+/* 			margin-left: 5px !important; */
+/* 			padding-right: 5px !important; */
+/* 			padding-left: 5px !important; */
+		}
+		
 /* 		select[name=areaCondition] { */
 /* 			margin-left: 200px; */
 /* 		} */
@@ -151,22 +159,33 @@
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	
 	
-		<div class="page-header text-info">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+             <p ><span class="mr-2"><a href="">Adopt</a></span> <span>List</span></p>
+            <font size="7">분양리스트</font>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+<!-- 		<div class="page-header text-info"> -->
 		
-			<div class="row" style="position:relative;height:35px;">
-	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >
-	        	<font size="5px" id="pagename"><strong>
-					<c:if test="${param.boardCode eq 'AD' }">분양글 리스트</c:if>
+<!-- 			<div class="row" style="position:relative;height:35px;"> -->
+<!-- 	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > -->
+<!-- 	        	<font size="5px" id="pagename"><strong> -->
+<%-- 					<c:if test="${param.boardCode eq 'AD' }">분양글 리스트</c:if> --%>
 <%-- 				    <c:if test="${param.boardCode eq 'MS' }">실종글 리스트</c:if> --%>
-	        	</strong></font></div>
-	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px">
-		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '미인증회원' }">
-		       		 	<button type="button" class="btn btn-primary"><font size="3px">글쓰기</font></button>
-		        	</c:if>
-	        	</font></div>
-	        </div>
+<!-- 	        	</strong></font></div> -->
+<!-- 	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"> -->
+<%-- 		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '미인증회원' }"> --%>
+<!-- 		       		 	<button type="button" class="btn btn-primary"><font size="3px">글쓰기</font></button> -->
+<%-- 		        	</c:if> --%>
+<!-- 	        	</font></div> -->
+<!-- 	        </div> -->
 		
-	    </div>
+<!-- 	    </div> -->
 
 
 
@@ -228,13 +247,13 @@
       <div class="col-md-12"></div>
       <div class="col-md-12" >
       
-      <div class="col-md-12" id="listAdoptJSON" style="padding-left: 0px">
+      <div class="col-md-12"  style="padding-left: 0px">
       
       <c:if test="${resultPage.totalCount eq 0 }">
      	 <br/><br/><br/><br/><br/><p align="center"><font size="4px">검색결과가 없습니다.</font><br/><br/><br/><br/><br/><br/></p>
       </c:if>
 	
-	  <div class="row">
+	  <div class="row"  id="listAdoptJSON">
       <c:set var="i" value="0" />
 
 		  <c:forEach var="adopt" items="${list}">
@@ -249,7 +268,7 @@
 			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
 				<span id="image-box">
 					<c:if test="${adopt.statusCode ne 3}">
-					  <img class="listImg" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;"   onerror="this.src='http://placehold.it/400x400'"/>
+					  <img class="listImg" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover; "   onerror="this.src='http://placehold.it/400x400'"/>
 					</c:if>
 					<c:if test="${adopt.statusCode eq 3}">
 					  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
@@ -355,24 +374,40 @@
 								var displayValue = '';
 								
 								for( i=0; i<data.list.length; i++ ){
-// 									var figover = '';
+									
+								
 									var bCode = data.list[i].areaKr.substring( 0, data.list[i].areaKr.indexOf('시')+1 );
-									var sCode = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
-									
+									var sCode = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
+
 									if ( data.list[i].statusCode != 3 ) {
-										sCode = '<img class="listImg" style="background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';		
-									}
-									
-									displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 20px;">'
-										      			+'<figure class="getadopt">'
-										      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-										      				+sCode
-										      				+'<figcaption class="overlay">'
-									      					+'<span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >'+data.list[i].postTitle+'</h3>'
-									      					+'<p align="right">'+bCode+'</p></span>'
-									      				+'</figcaption>'
-										      			+'</figure>'
-									      			+'</div>';	
+										sCode = '<img class="listImg" style="width:100%;background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';	
+									}	
+
+// 								       <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+									displayValue += 
+										'<div class="col-md-4" ><div class="desc-comp-offer-cont">'
+										+'<figure class="getadopt">'
+										+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
+											+'<span id="image-box">'+sCode+'</span>'
+										    +'<span id="textList">'
+										    	+'<h3 align="center" style="width: 255px;padding-right: 0px;" >'
+										   			+data.list[i].postTitle
+										   		+'</h3>'
+										   		+'<p align="right">'
+										   			+bCode
+										   		+'</p>'
+										   	+'</span>'
+										+'</figure>'
+									+'</div></div>'	;
+										
+// 										'<div class="desc-comp-offer-cont">'
+// 										      			+'<figure class="getadopt">'
+// 										      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
+// 										      				+sCode
+// 									      					+'<span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >'+data.list[i].postTitle+'</h3>'
+// 									      					+'<p align="right">'+bCode+'</p></span>'
+// 										      			+'</figure>'
+// 									      			+'</div>';	
 						            
 								}
 								if(str!=""){
@@ -434,7 +469,7 @@
 				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
 			});
 			
-			$( "strong:contains('분양글 리스트')" ).on("click" , function() {
+			$( "font:contains('분양리스트')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
 
