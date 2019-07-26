@@ -141,9 +141,44 @@ body {
 	// ´ñ±Û CURD function();
 	$(function() {
 		// ´ñ±Û µî·Ï 
-		$(document).on("click","#commentGo",function() {
-			$("form[name=commentGo]").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
-		});
+		
+		$.ajax(
+					{
+						url : "/comment/json/getComment/"+commentNo,
+						method : "POST",
+						dataType : "Json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						
+						success : function(JSONData, status){
+							
+							$("#"+commentNo+""+".cmCont").remove();
+							$("#"+commentNo+""+".area").hide();
+							
+ 							var modifyScreen = 
+ 								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 30px' placeholder='"+JSONData.commentContent+"'/></div>";
+							
+ 							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
+ 								+ "<a href='#' onclick='update(); return false;'> "
+ 								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
+ 								+ "¼öÁ¤" 								
+ 								+ "</span></div>"
+ 							
+							$("#"+commentNo+""+".h4tag").append(modifyScreen);
+ 							$("#"+commentNo+""+".h4tag").append(button);
+						},
+										
+						error : function(request, status, error){							
+							alert("Error");							
+						}
+				
+					}
+		);
+// 		$(document).on("click","#commentGo",function() {
+// 			$("form[name=commentGo]").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
+// 		});
 	});
 	
 	$(function(){
