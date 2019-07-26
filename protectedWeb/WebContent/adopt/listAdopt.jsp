@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  	<link rel="stylesheet" href="/resources/demos/style.css">
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
+<!-- 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">  -->
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 		
@@ -32,76 +32,88 @@
  	  	html { 
  	 		scroll-behavior: smooth; 
  		} 
-		p, strong, select {
-			transform: rotate(0.1deg);
-		}
+/* 		p, strong, select { */
+/* 			transform: rotate(0.1deg); */
+/* 		} */
 		
-		h3{
-			font-family: 'NanumSquare', sans-serif !important;
-			font-size: 20px !important;
-			padding-bottom: 0px;
-			margin-bottom: 0px !important;
-			opacity: 1  !important;
-			font-weight: bold;
-		}
+ 		h3{ 
+/* 			font-family: 'NanumSquare', sans-serif !important; */
+/* 			font-size: 20px !important; */
+ 			padding-bottom: 0px; 
+ 			padding-top: 10px !important;
+/* 			margin-bottom: 0px !important; */
+/* 			opacity: 1  !important; */
+/* 			font-weight: bold; */
+ 		} 
 		
-		div.row { 
-			font-family: 'NanumSquare', sans-serif !important;
-			font-weight: bold;
-		}
+/* 		div.row {  */
+/* 			font-family: 'NanumSquare', sans-serif !important; */
+/* 			font-weight: bold; */
+/* 		} */
 		
-		#listAdoptJSON>div{
-			padding-left: 0px;
-			padding-right: 0px;
-		}
+/* 		#listAdoptJSON>div{ */
+/* 			padding-left: 0px; */
+/* 			padding-right: 0px; */
+/* 		} */
 
-	    .getadopt {
-			position: relative;
-			max-height: 330px; 
-			min-height: 330px; 
-			min-width: 255px;
-			max-width: 255px;
-		}
-	
-		.getadopt img {
-			max-height: 330px; 
-			min-height: 330px; 
-			min-width: 255px;
-			max-width: 255px;
-	/* 		    transition: all 0.3s; */
-			display: block;
-			height: auto;
-	/* 		    transform: scale(1); */
-		}
+/* 	    .getadopt { */
+/* 			position: relative; */
+/* 			max-height: 330px;  */
+/* 			min-height: 330px;  */
+/* 			min-width: 255px; */
+/* 			max-width: 255px; */
+/* 		} */
 		
-		.overlay {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			background-color: white;
-			overflow: hidden;
-			opacity: 1;
-			min-width: 255px;
-			max-width: 255px;
-			height: 50px;
-			transition: 1s ease;
-		}
+/* 		.desc-comp-offer { */
+/* 			margin-top: 10px !important; */
+/* 		} */
+		
+/* 		.desc-comp-offer-cont { */
+/* 			margin-bottom: 40px !important; */
+/* 		} */
+/* 		.desc-comp-offer-cont:hover { */
+/* 			margin-bottom: 0px !important; */
+/* 		} */
+ 		
+ 		img { 
+ 			max-height: 330px;  
+ 			min-height: 330px;  
+ 			min-width: wrap; 
+ 			max-width: wrap; 
+	/* 		    transition: all 0.3s; */
+ 			display: block; 
+/*  			height: auto;  */
+	/* 		    transform: scale(1); */
+ 		} 
+		
+/* 		.overlay { */
+/* 			position: absolute; */
+/* 			bottom: 0; */
+/* 			left: 0; */
+/* 			right: 0; */
+/* 			background-color: white; */
+/* 			overflow: hidden; */
+/* 			opacity: 1; */
+/* 			min-width: 255px; */
+/* 			max-width: 255px; */
+/* 			height: 50px; */
+/* 			transition: 1s ease; */
+/* 		} */
 	
-		.getadopt:hover .overlay {
-			height: 0%;
-		}
+/* 		.getadopt:hover .overlay { */
+/* 			height: 0%; */
+/* 		} */
 	
-		.textList {
-			color: #3E6B79;
-			font-size: 20px;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			-webkit-transform: translate(-50%, -50%);
-			-ms-transform: translate(-50%, -50%);
-			transform: translate(-50%, -50%);
-		}
+/* 		.textList { */
+/* 			color: #3E6B79; */
+/* 			font-size: 20px; */
+/* 			position: absolute; */
+/* 			top: 50%; */
+/* 			left: 50%; */
+/* 			-webkit-transform: translate(-50%, -50%); */
+/* 			-ms-transform: translate(-50%, -50%); */
+/* 			transform: translate(-50%, -50%); */
+/* 		} */
 		
 		form {
 			text-align: right;
@@ -212,7 +224,7 @@
 		
 		<div class="row"><div class="col-md-12"></div><br/></div>
 
-      <div class="row">
+
       <div class="col-md-12"></div>
       <div class="col-md-12" >
       
@@ -221,35 +233,38 @@
       <c:if test="${resultPage.totalCount eq 0 }">
      	 <br/><br/><br/><br/><br/><p align="center"><font size="4px">검색결과가 없습니다.</font><br/><br/><br/><br/><br/><br/></p>
       </c:if>
+	
+	  <div class="row">
       <c:set var="i" value="0" />
+
 		  <c:forEach var="adopt" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-
-			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 20px;">
+			
+			<div class="col-md-4" >
 			
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+
+			<div class="desc-comp-offer-cont">
 			<figure class="getadopt">
 			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
-				<span id="image-box"><c:if test="${adopt.statusCode ne 3}">
-				  <img class="listImg" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;"   onerror="this.src='http://placehold.it/400x400'"/>
-<%-- 				  <img class="listImg" src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/> --%>
-				</c:if>
-				<c:if test="${adopt.statusCode eq 3}">
-				  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
-				</c:if></span>
-<%-- 				<c:if test="${adopt.statusCode ne 3}"> --%>
-				  <figcaption class="overlay">
-					    <span id="textList"><h3 align="center" style="width: 255px;padding-right: 0px;" >${adopt.postTitle}</h3>
-					    <c:if test="${param.boardCode eq 'AD' }">
-					   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
-					   	</c:if>
-					    <c:if test="${param.boardCode eq 'MS' }">
-					   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
-					   	</c:if></span>
-				  </figcaption>
-<%-- 				  </c:if> --%>
+				<span id="image-box">
+					<c:if test="${adopt.statusCode ne 3}">
+					  <img class="listImg" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;"   onerror="this.src='http://placehold.it/400x400'"/>
+					</c:if>
+					<c:if test="${adopt.statusCode eq 3}">
+					  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
+					</c:if>
+				</span>
+			    <span id="textList"><h3 align="center" style="width: 255px;padding-right: 0px;" >${adopt.postTitle}</h3>
+				    <c:if test="${param.boardCode eq 'AD' }">
+				   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
+				   	</c:if>
+				    <c:if test="${param.boardCode eq 'MS' }">
+				   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
+				   	</c:if>
+			   	</span>
 			</figure>
-			
+			</div>
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 			
 			</div>	

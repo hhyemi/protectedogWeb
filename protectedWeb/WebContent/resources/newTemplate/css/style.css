@@ -1252,7 +1252,6 @@ p {
 
     .desc-comp-offer-cont:hover {
         margin-bottom: 10px;
-        border-bottom: 5px solid #2196f3;
         margin-top: -5px;
         cursor: pointer;
     }
