@@ -129,8 +129,9 @@
 					  <span class="evgStarR">¡Ù</span>			
 				</p>
 
-				<div id="ListDiv">
+				<div id="ListDiv" >
 				  <c:forEach var="review" items="${list}">
+				  <div style="background-color: #f0f0f0; padding-left:20px"   >
 				  			<hr/>
 							  <h3>${review.postTitle}</h3>
 							  <b>${review.nickname }</b>
@@ -154,7 +155,8 @@
 							</c:if>	
 							${review.postContent }
 							´õº¸±â<i class="glyphicon glyphicon-menu-down"></i>
-			        </c:forEach>
+			        
+			          </div></c:forEach>
           					
 				</div>				
 				<hr/>	
