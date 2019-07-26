@@ -8,10 +8,9 @@
 <html>
 
 <head>
-    <meta charset="EUC-KR">
-    
+    <meta charset="EUC-KR">     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-
+<title>보호할개 · 후원게시</title>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
   	   #btn-add{
@@ -41,11 +40,11 @@
     </style>
     
     
-  </head>
-  <body class="goto-here">
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->  
+  </head>
+  <body class="goto-here">
    	
     <div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
       <div class="container">
@@ -92,20 +91,20 @@
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
-				    				<div class="product">
+				    				<div class="desc-comp-offer-cont"  style="padding-top:10px">
 				    				
 										 <!-- 후원종료 -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">		
-										 조회 ${funding.fundViewCount }										 		    											 				    		
-					    					<a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; min-width:300px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
+										  &emsp;조회 ${funding.fundViewCount }										 		    											 				    		
+					    					<a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 					    					<input type="hidden" value="${funding.postNo }" />		    					
 					    					</a>
 										 </c:if>
 										 
 										 <!-- 후원중 -->
 										 <c:if test ="${funding.statusCode eq 3 }">		
-										 조회 ${funding.fundViewCount }													 											 				    		
-				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:300px;" >
+										  &emsp;조회 ${funding.fundViewCount }													 											 				    		
+				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:330px; max-width:330px;" >
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
 				    					</c:if>
@@ -164,7 +163,6 @@
 
   <!-- loader -->
 
-  <script src="../../resources/prodmenu/js/main.js"></script>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"> </script> 
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->

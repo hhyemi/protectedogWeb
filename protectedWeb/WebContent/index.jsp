@@ -23,7 +23,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
-
+</head><body>
 <!--====================================================
                     LOGIN OR REGISTER
 ======================================================-->
