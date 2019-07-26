@@ -128,7 +128,9 @@
 			<div class="container"></div>
 			<hr>
 			
-			물건 팝니다 사주세요
+			<TextBox Name="tbSettingText">  
+			
+			</TextBox> 
 		</section>
 		<!--================End Product Description Area =================-->
 

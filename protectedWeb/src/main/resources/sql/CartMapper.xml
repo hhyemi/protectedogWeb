@@ -15,9 +15,9 @@
 
 	<insert id="addCart" parameterType="cart">
 		INSET
-		INTO cart(cart_no, id, prod_no, quantity, total_price)
+		INTO cart(cart_no, id, prod_no, quantity)
 		VALUES (
-		seq_Cart_cart_no.NEXTVAL, #{id}, #{prodNo}, #{quantity}, #{totalPrice})
+		seq_Cart_cart_no.NEXTVAL, #{id}, #{prodNo}, #{quantity}
 	</insert>
 
 	<delete id="delCart" parameterType="cart">
@@ -29,7 +29,7 @@
 
 	<select id="totalPrice" parameterType="cart">
 		SELECT
-		NVL(sum(price*quantity), 0) totalPrice
+		NVL(sum(p.discountPrice*c.quantity), 0) totalPrice
 		FROM cart c, product p
 		WHERE c.prod_no=p.prod_no 
 		AND c.id = #{value}
