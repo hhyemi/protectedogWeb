@@ -225,13 +225,14 @@
 		  <c:forEach var="adopt" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 
-			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">
+			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 20px;">
 			
 <!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
 			<figure class="getadopt">
 			<input type="hidden" name="postNo" value="${adopt.postNo}"/>
 				<span id="image-box"><c:if test="${adopt.statusCode ne 3}">
-				  <img class="listImg" src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/>
+				  <img class="listImg" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;"   onerror="this.src='http://placehold.it/400x400'"/>
+<%-- 				  <img class="listImg" src="../resources/file/fileAdopt/${adopt.mainFile}"  onerror="this.src='http://placehold.it/400x400'"/> --%>
 				</c:if>
 				<c:if test="${adopt.statusCode eq 3}">
 				  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
@@ -344,10 +345,10 @@
 									var sCode = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
 									
 									if ( data.list[i].statusCode != 3 ) {
-										sCode = '<img class="listImg" src="../resources/file/fileAdopt/'+data.list[i].mainFile+'"  onerror="this.src=\'http://placehold.it/400x400\'"/>';		
+										sCode = '<img class="listImg" style="background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';		
 									}
 									
-									displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">'
+									displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 20px;">'
 										      			+'<figure class="getadopt">'
 										      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
 										      				+sCode

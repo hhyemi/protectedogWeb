@@ -89,13 +89,13 @@
 				<input type="hidden" name="phone" value="${user.phone }" >
 <!-- 				<input type="hidden" class="form-control" id="multiFile" name="multiFile" > -->
 				
-				<div class="col-md-12">
-	          		<div class="cart-detail bg-light p-3 p-md-4">
-						<div class="form-group">
-							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.</strong></p></div>
-						</div>
-					</div>
-				</div>
+<!-- 				<div class="col-md-12"> -->
+<!-- 	          		<div class="cart-detail bg-light p-3 p-md-4"> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<div class="col-md-12"><p align="center"><strong>후기글을 등록하면 15일간은 삭제하실 수 없습니다.</strong></p></div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				
 	          	
 	          	<div class="col-md-12"><br/><hr/><br/></div>
