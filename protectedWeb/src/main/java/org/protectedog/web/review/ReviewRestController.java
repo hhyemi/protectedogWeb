@@ -49,7 +49,7 @@ public class ReviewRestController {
 		//리뷰 디비에 넣기
 		Review review = new Review();
 		review.setId(user.getId());
-		review.setNickName(user.getNickname());
+		review.setNickname(user.getNickname());
 		review.setBoardCode(hospitalCode);
 		review.setGrade(grade);
 		review.setPostTitle((String) mapReview.get("postTitle"));
@@ -77,8 +77,7 @@ public class ReviewRestController {
 			}
 		}
 		fileService.addFile(listFile);
-
-
+		
 		return review;
 	}
 }
