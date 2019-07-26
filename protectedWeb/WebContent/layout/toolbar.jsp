@@ -9,9 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <link rel="shortcut icon" href="img/favicon.ico">
-
+    
+	<link rel="shortcut icon" href="/resources/file/others/favicon.png">
+	<link rel="icon" href="/resources/file/others/favicon.png">  
+	
     <!-- Global Stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
     <link href="/resources/newTemplate/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +21,22 @@
     <link rel="stylesheet" href="/resources/newTemplate/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/resources/newTemplate/css/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
+    
+	
+  	<style type="text/css">
+ 		@font-face {
+    		font-family: 'YouandiModernTR';
+   		 	font-style: normal;
+    		font-weight: normal;
+    		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
+		}
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand{
+    		font-family: 'YouandiModernTR', sans-serif !important;
+    	} 	
+
+  	</style>
   </head>
+  
 <body id="page-top">
 
 <!--====================================================
@@ -58,11 +74,11 @@
       </div> 
       
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
+      <div class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
-          <a class="navbar-brand smooth-scroll" href="index.html">
-            <img src="img/logo-s.png" alt="logo">
-          </a> 
+         <b> <a class="navbar-brand smooth-scroll" href="index.html">
+            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;보호할개
+          </a></b> 
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span>
           </button>  
@@ -70,7 +86,8 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html">집</a></li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양 · 실종
+                 </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
 	<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">실종리스트</a> -->
@@ -155,7 +172,7 @@
             </ul>  
           </div>
         </div>
-      </nav>
+      </div>
     </header> 
 
     <!--Global JavaScript -->
