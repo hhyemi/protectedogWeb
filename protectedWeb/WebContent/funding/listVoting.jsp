@@ -110,7 +110,7 @@
 				    						    					
 				    					<div class="text py-3 px-3">
 				    					<div id="checkPostTitle">
-				    					<font size="5">${funding.postTitle}</font>
+				    					<font size="5"><b>${funding.postTitle}</b></font>
 				    					</div>
 										<div class="row" style="position:relative;height:35px;">
 										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <h3>${funding.nickname}</h3></div>

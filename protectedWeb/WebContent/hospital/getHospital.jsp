@@ -236,7 +236,7 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="/index.jsp">Animal Hospital</a></span>
 					</p>
-					<h1 class="mb-0 bread">동물병원</h1>
+					<h1 class="mb-0 bread">동 물 병 원 검 색</h1>
 				</div>
 			</div>
 		</div>
