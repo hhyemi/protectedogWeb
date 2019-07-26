@@ -10,7 +10,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
                 Font Family                 : Roboto Condensed
                 
-                Greenish Blue               : #2196f3       (Buttons, Icons, Links, Lines & Backgrounds)
+                Greenish Blue               : #f04f23       (Buttons, Icons, Links, Lines & Backgrounds)
                 Steel Gray                  : #41464b       (Headings)
                 light Gray                  : #61666b       (Heading Second)
                 Gray                        : #717171       (Paragraphs)
@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5 {
 
 a {
     font-family: 'Hind', sans-serif;
-    color: #2196f3;
+    color: #f04f23;
 }
 
 p {
@@ -245,7 +245,7 @@ p {
 
     .navbar-nav>li:hover,
     .navbar-nav>li:active {
-        border-bottom: 2px solid #2196f3;
+        border-bottom: 2px solid #f04f23;
         background: #f0f0f0;
     }
 
@@ -261,7 +261,7 @@ p {
 
     .navbar-nav>li>a:hover,
     .navbar-nav>li>a:active {
-        color: #2196f3!important;
+        color: #f04f23!important;
     }
 
     
@@ -280,7 +280,7 @@ p {
     }
 
     .navbar-nav li>.search:hover {
-        color: #2196f3;
+        color: #f04f23;
     }
 
     .navbar .search-open {
@@ -298,12 +298,12 @@ p {
     .navbar .search-open input,
     .navbar .search-open span {
         height: 40px;
-        border-color: #2196f3;
+        border-color: #f04f23;
         line-height: 50px;
     }
 
     .navbar .search-open span {
-        background: #2196f3;
+        background: #f04f23;
         color: #fff;
     }
 
@@ -322,7 +322,7 @@ p {
     }
 
     .vesco-top-nav ul.navbar-nav>li>a.active {
-        color: #2196f3!important;
+        color: #f04f23!important;
     }
       
     @media (min-width: 992px){
@@ -340,10 +340,10 @@ p {
             margin-top: 0px;
             min-width: 450px;
             padding: 0;
-            border-top: 2px solid #2196f3;
+            border-top: 2px solid #f04f23;
             border-left: 2px solid rgba(1, 1, 1, 0);
             border-right: 2px solid rgba(1, 1, 1, 0);
-            border-bottom: 2px solid #2196f3;
+            border-bottom: 2px solid #f04f23;
             border-radius: 0;
         }
     } 
@@ -357,12 +357,12 @@ p {
 
     .dropdown-cust {
         margin-top: 0px;
-        min-width: 220px;
+        min-width: 125px;
         padding: 0;
-        border-top: 2px solid #2196f3;
+        border-top: 2px solid #f04f23;
         border-left: 2px solid rgba(1, 1, 1, 0);
         border-right: 2px solid rgba(1, 1, 1, 0);
-        border-bottom: 2px solid #2196f3;
+        border-bottom: 2px solid #f04f23;
         border-radius: 0;
     } 
 
@@ -452,7 +452,7 @@ p {
             padding: 0;
             border-left: 2px solid rgba(1, 1, 1, 0);
             border-right: 2px solid rgba(1, 1, 1, 0);
-            border-bottom: 2px solid #2196f3;
+            border-bottom: 2px solid #f04f23;
             border-radius: 0;
             z-index: 0;
             overflow: hidden;
@@ -531,26 +531,26 @@ p {
     }
 
     .btn-white {
-        border-color: #2196f3;
-        background-color: #2196f3;
+        border-color: #f04f23;
+        background-color: #f04f23;
         color: #fff;
     }
 
     .btn-white:hover,
     .btn-white:focus {
         background-color: transparent;
-        color: #2196f3;
+        color: #f04f23;
         cursor: pointer;
     }
 
     .btn-green {
-        border-color: #2196f3;
-        color: #2196f3;
+        border-color: #f04f23;
+        color: #f04f23;
     }
 
     .btn-green:hover,
     .btn-green:focus {
-        background-color: #2196f3;
+        background-color: #f04f23;
         color: #fff;
         cursor: pointer;
     }
@@ -613,7 +613,7 @@ p {
     }
 
     .hero h1 span a {
-        color: #2196f3;
+        color: #f04f23;
         text-decoration: none;
     }
 
@@ -836,14 +836,14 @@ p {
     .title-bar .heading-border {
         width: 60px;
         height: 10px;
-        background-color: #2196f3;
+        background-color: #f04f23;
         margin: 0 auto 20px auto;
     }
 
     .heading-border-light {
         width: 30px;
         height: 5px;
-        background-color: #2196f3;
+        background-color: #f04f23;
         margin: 0 0 20px 0;
     }
 
@@ -913,7 +913,7 @@ p {
     }
 
     .bg-atlantis {
-        background: #2196f3;
+        background: #f04f23;
     }
 
     .bg-starship {
@@ -974,7 +974,7 @@ p {
 
         .modal-content {
             /*background-color: #ececec;*/
-            border: 3px solid #2196f3;
+            border: 3px solid #f04f23;
             border-radius: 0px;
             outline: 0;
         }
@@ -1104,7 +1104,7 @@ p {
     }
 
     .story-desc>h6 {
-        color: #2196f3;
+        color: #f04f23;
         font-weight: 700;
     }
 
@@ -1123,7 +1123,7 @@ p {
 
     .story-descb:hover {
         box-shadow: 2px 2px 6px 1px rgba(158, 158, 158, 0.77);
-        border-bottom: 5px solid #2196f3;
+        border-bottom: 5px solid #f04f23;
         margin-top: 55px;
         cursor: pointer;
     }
@@ -1244,7 +1244,7 @@ p {
     }
 
     .desc-comp-offer-cont {
-        margin-bottom: 10px;
+        margin-bottom: 30px;
         box-shadow: 3px 3px 10px 1px rgba(158, 158, 158, 0.68);
         -webkit-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;
@@ -1466,7 +1466,7 @@ p {
     }
 
     .service-h-desc>h6 {
-        color: #2196f3;
+        color: #f04f23;
         font-weight: 700;
     }
 
@@ -1482,7 +1482,7 @@ p {
         width: 130%;
         margin: 50px -60px 70px 65px;
         box-shadow: 3px 3px 8px 1px #505050;
-        border: 1px solid #2196f3;
+        border: 1px solid #f04f23;
     }
 
     .service-h-tab {
@@ -1501,8 +1501,8 @@ p {
 
     .service-h-tab .nav-tabs>a.active {
         color: #fff;
-        border: 1px solid #2196f3;
-        background: #2196f3;
+        border: 1px solid #f04f23;
+        background: #f04f23;
     }
 
     .service-h-tab .tab-content .tab-pane {
@@ -1527,7 +1527,7 @@ p {
             width: 100%;
             margin: 50px auto 70px auto;
             box-shadow: 3px 3px 8px 1px #505050;
-            border: 1px solid #2196f3;
+            border: 1px solid #f04f23;
         }
     }
 
@@ -1537,7 +1537,7 @@ p {
             height: 370px;
             width: 100%;
             box-shadow: 3px 3px 8px 1px #505050;
-            border: 1px solid #2196f3;
+            border: 1px solid #f04f23;
         }
     }
 
@@ -1557,7 +1557,7 @@ p {
             width: 100%;
             margin: 50px auto 70px auto;
             box-shadow: 3px 3px 8px 1px #505050;
-            border: 1px solid #2196f3;
+            border: 1px solid #f04f23;
         }
 
         .service-h-tab .nav-tabs>a {
@@ -1576,7 +1576,7 @@ p {
             width: 100%;
             margin: 50px auto 70px auto;
             box-shadow: 3px 3px 8px 1px #505050;
-            border: 1px solid #2196f3;
+            border: 1px solid #f04f23;
         }
 
         .service-h-desc {
@@ -1600,7 +1600,7 @@ p {
         padding: 30px;
         background: #fff;
         margin: 0 auto;
-        border-bottom: 5px solid #2196F3;
+        border-bottom: 5px solid #f04f23;
     }
 
     .client-cont img {
@@ -1663,7 +1663,7 @@ p {
 
     @media (max-width: 420px) {
         h5 {
-            color: #2196f3;
+            color: #f04f23;
             font-size: 16px;
             text-transform: uppercase;
         }
@@ -1694,13 +1694,13 @@ p {
 
     .contact-h-cont button {
         background: #fff;
-        color: #2196f3;
+        color: #f04f23;
         margin-top: 10px;
         text-align: center;
     }
 
     .contact-h-cont button:hover {
-        background: #2196f3;
+        background: #f04f23;
         color: #fff;
     }
 
