@@ -67,18 +67,17 @@ body {
 	padding-left: 50px;
 	padding-right: 50px;
 	font-size: x-small;
-	
 }
 
-#countfont{
+#countfont {
 	font-size: x-small;
-	}
-#boardfont{
+}
+
+#boardfont {
 	font-size: x-small;
 	padding-left: 50px;
 	padding-right: 50px;
-	}
-
+}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -90,7 +89,8 @@ body {
 		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
 		//document.detailForm.submit();	
-		$("form").attr("method", "POST").attr("action","/product/listAdminProduct").submit();
+		$("form").attr("method", "POST").attr("action",
+				"/product/listAdminProduct").submit();
 	}
 
 	//============= Event 처리 및  연결 =============
@@ -136,7 +136,7 @@ body {
 
 	<div class="container">
 		<h1 align="center">
-			관리자<small>&nbsp;리&nbsp;스&nbsp;트 <a href="#" id="button"><button
+			관리자<small>상품 &nbsp;리&nbsp;스&nbsp;트 <a href="#" id="button"><button
 						class="mdl-button mdl-js-button mdl-button--primary">
 						상품등록</button></a>
 			</small>
@@ -146,50 +146,51 @@ body {
 	<!--/////////////////////// form start /////////////////////////////////-->
 	<form class="form-inline" name="detailForm">
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			style="margin-top: 10px;">
+			<tr>
 
-		<td align="right">
-			
-			<select name="searchCondition" class="ct_input_g" style="width:80px">
-				<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
-				<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
-				<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
-			</select>
+				<td align="right"><select name="searchCondition"
+					class="ct_input_g" style="width: 80px">
+						<option value="0"
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
+						<option value="1"
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
+						<option value="2"
+							${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
+				</select> <input type="text" name="searchKeyword"
+					value="${search.searchKeyword}" class="ct_input_g"
+					style="width: 200px; height: 19px" /></td>
 
-			<input type="text" name="searchKeyword" value="${search.searchKeyword}" class="ct_input_g" style="width:200px; height:19px" />
-		
-		</td>
-		
-		<td align="right" width="70">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23">
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:fncGetList('1');">검색</a> -->
-						검색
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23">
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+				<td align="right" width="70">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="ct_btn01" style="padding-top: 3px;">
+								<button class="mdl-button mdl-js-button mdl-button--primary">
+									검색</button>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
 
-	
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 
 		<!--  table Start /////////////////////////////////////-->
 
 		<div class="container" align="left">
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp" align="center">
+			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"
+				align="center">
 				<thead>
-					<tr><td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
+					<tr>
+						<td colspan="11" id="countfont">기본 내역 조회 : 전체
+							${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td>
+					</tr>
 				<thead>
 					<tr>
 						<th class="mdl-data-table__cell--non-numeric" align="center"
@@ -199,9 +200,6 @@ body {
 						<th align="center" id="boardfont">할인액</th>
 						<th align="center" id="boardfont">원산지</th>
 						<th align="center" id="boardfont">제조사</th>
-						<th align="center" id="boardfont">제조일</th>
-						<th align="center" id="boardfont">등록일</th>
-						<th align="center" id="boardfont">재고수량</th>
 
 					</tr>
 				</thead>
@@ -210,30 +208,79 @@ body {
 				<c:forEach var="product" items="${list}">
 					<c:set var="i" value="${i+1}" />
 					<tbody>
-					<tr>
-					<td class="mdl-data-table__cell--non-numeric" align="center">${product.prodNo }</td>
-					<td align="center">${product.prodName}
-					<input type="hidden" name="prodNo" value="${product.prodNo}" /> </td>
-					<td align="center">${product.price}</td>
-					<td align="center">${product.discountPrice}</td>
-					<td align="center">${product.country}</td>
-					<td align="center">${product.company}</td>
-					<td align="center">${product.manuDate}</td>
-					<td align="center">${product.country}</td>
-					<td align="center">${product.regDate}</td>
-					<td align="center">${product.quantity}</td>
-					
-					</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric" align="center">${product.prodNo }</td>
+							<td align="center">${product.prodName}<input type="hidden"
+								name="prodNo" value="${product.prodNo}" />
+							</td>
+							<td align="center">${product.price}</td>
+							<td align="center">${product.discountPrice}</td>
+							<td align="center">${product.country}</td>
+							<td align="center">${product.company}</td>
+
+						</tr>
 					</tbody>
 				</c:forEach>
 			</table>
 			<!--  table end /////////////////////////////////////-->
+			<br>
+			<hr>
+			<br>
+			
+			<!--  table Start /////////////////////////////////////-->
 
-			<input type="hidden" id="currentPage" name="currentPage" value="0" />
-			<jsp:include page="../../common/pageNavigator.jsp" />
+			<div class="container" align="left">
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"
+					align="center">
+					<thead>
+						<tr>
+							<td colspan="11" id="countfont">상세 내역 조회 : 전체
+								${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td>
+						</tr>
+					<thead>
+						<tr>
+							<th class="mdl-data-table__cell--non-numeric" align="center"
+								id="no">상품번호</th>
+							<th align="center" id="boardfont">상품명</th>
+							<th align="center" id="boardfont">제조일</th>
+							<th align="center" id="boardfont">등록일</th>
+							<th align="center" id="boardfont">재고수량</th>
 
-		</div>
+						</tr>
+					</thead>
+
+					<c:set var="i" value="0" />
+					<c:forEach var="product" items="${list}">
+						<c:set var="i" value="${i+1}" />
+						<tbody>
+							<tr>
+								<td class="mdl-data-table__cell--non-numeric" align="center">${product.prodNo }</td>
+								<td align="center">${product.prodName}<input type="hidden"
+									name="prodNo" value="${product.prodNo}" />
+								</td>
+								<td align="center">${product.manuDate}</td>
+								<td align="center">${product.regDate}</td>
+								<td align="center">${product.quantity}</td>
+
+							</tr>
+						</tbody>
+					</c:forEach>
+				</table>
+				<br><br><br>
+				<!--  table end /////////////////////////////////////-->
+
+				<input type="hidden" id="currentPage" name="currentPage" value="0" />
+				<jsp:include page="../../common/pageNavigator.jsp" />
+
+			</div>
 	</form>
+	<br><br><br>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
+	 <!--================ start footer Area  =================-->
+    <!-- footer Start /////////////////////////////////////-->
+	 <jsp:include page="/layout/footer.jsp"></jsp:include>
+   	<!-- footer End /////////////////////////////////////-->  
+    <!--================ End footer Area  =================-->
+    
 </body>
 </html>

@@ -9,7 +9,6 @@
 		<result property="prodNo" 			column="prod_no" 			jdbcType="NUMERIC" />
 		<result property="id" 				column="id" 				jdbcType="VARCHAR"/>
 		<result property="phone" 			column="phone" 				jdbcType="VARCHAR" />
-		<result property="couponNo"			column="payment_option" 	jdbcType="CHAR" />
 		<result property="receiverAdder" 	column="receiver_addr" 		jdbcType="VARCHAR" />
 		<result property="receiverName" 	column="receiver_name" 		jdbcType="VARCHAR" />
 		<result property="receiverPhone" 	column="receiver_phone"	 	jdbcType="VARCHAR" />
@@ -20,8 +19,9 @@
 		<result property="totalPrice" 		column="total_price" 		jdbcType="NUMERIC" />
 		<result property="orderCode" 		column ="order_code" 		jdbcType="NUMERIC"/>
 		<result property="deliveryCode" 	column="delivery_code" 		jdbcType="NUMERIC"/>
-	</resultMap>
+		<result property="mileageNo"		column="mileage_no"			jdbcType="NUMERIC"/>
 
+</resultMap>
 	<sql id="select-Order">
 		SELECT 
 		order_no, id, phone, receiver_addr, receiver_name, receiver_phone, order_request, payment_code, 
@@ -32,7 +32,7 @@
 
 <insert id="addOrder" parameterType="order">
 		INSERT 
-		INTO orders(order_no, prod_no, id, phone, receiver_name, receiver_phone, receiver_addr, order_request, paymentCode, order_date, order_quantity, total_price, order_code, delivery_code)
+		INTO orders(order_no, prod_no, id, phone, receiver_name, receiver_phone, receiver_addr, order_request, payment_code, order_date, order_quantity, total_price, order_code, delivery_code)
 		VALUES (
 		seq_Order_order_no.NEXTVAL,
 		#{prodNo},
@@ -68,7 +68,9 @@
 	<update id="updateOrder" parameterType="order">
 	UPDATE orders
 	SET
-	receiver_name = #{receiverName}, receiver_phone = #{receiverPhone}, receiver_addr = #{receiverAddr},
+	receiver_name = #{receiverName}, 
+	receiver_phone = #{receiverPhone}, 
+	receiver_addr = #{receiverAddr},
 	order_request = #{orderRequest}
 	WHERE order_no = #{orderNo}
 	</update>
@@ -81,8 +83,8 @@
 	 <select  id="listOrder"  parameterType="search"	resultMap="orderSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT order_no , prod_no , prod_name, total_price, order_code
-					FROM orders
+	  		FROM (	SELECT order_no , prod_no , total_price, order_code
+					FROM orders ,
 					WHERE id =#{id}					
 					ORDER BY order_no) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -103,7 +105,7 @@
 	 <select  id="listSwapOrder"  parameterType="search"	resultMap="orderSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT order_no , prod_no , prod_name, total_price, order_code
+	  		FROM (	SELECT order_no , prod_no , total_price, order_code
 					FROM orders
 					WHERE id =#{id}					
 					ORDER BY order_no) inner_table
@@ -118,6 +120,5 @@
 		FROM(SELECT * FROM orders) countTable
 		</select>
 		
-		
-		
+	
 		</mapper>

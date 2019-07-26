@@ -193,7 +193,7 @@ body>div.container {
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="index.html">admin</a></span> <span>page</span>
 					</p>
-					<h1 class="mb-0 bread">DOG|SHOP 상품등록</h1>
+					<h1 class="mb-0 bread">PROTECTED|SHOP 상품등록</h1>
 				</div>
 			</div>
 		</div>

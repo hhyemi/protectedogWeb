@@ -122,4 +122,13 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select> 
 	 
+	 <!-- 상품 재고수량 조절 -->
+	 
+	 <update id="updateQuantity">
+	 	UPDATE PRODUCT
+	 	SET quantity = quantity - #{quantity}
+	 	WHERE prod_no = #{prodNo}
+	 
+	 </update>
+	 
  </mapper> 

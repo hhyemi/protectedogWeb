@@ -118,6 +118,7 @@ public class InfomationShareController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("listRanking", list);
 		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("totalCount",map.get("totalCount"));
 		model.addAttribute("search", search);
 
 		return "forward:/community/listInfo.jsp";

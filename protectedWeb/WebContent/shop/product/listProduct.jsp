@@ -71,12 +71,12 @@
 	//============= 썸네일 사진 클릭 Event  처리 =============	
 	 	$(function() {
 		$(".img-prod").on("click",function() {
-			alert($(this).children("input").val())
+			//alert($(this).children("input").val())
 					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
 				});
 		
 		$("#getproduct").on("click",function() {
-			alert($(this).children("input").val())
+			//alert($(this).children("input").val())
 					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
 				});
 	 	});	 
@@ -86,7 +86,7 @@
 			 
 			 $( "td.ct_btn01:contains('장바구니로 이동')" ).on("click" , function() {
 				 //alert("");
-				 self.location ="/shop/addCart?prodNo=${product.prodNo}"
+				 self.location ="/shop/addCart?prodNo=${param.prodNo}"
 		
 					
 			 });
@@ -159,7 +159,8 @@
 
 														</div>
 														<p class="bottom-area d-flex px-3">
-															<a href="#" class="add-to-cart text-center py-2 mr-1"><span>장바구니에
+															<a class="add-to-cart text-center py-2 mr-1"><input type="hidden" value="${product.prodNo}"/>
+															<span>장바구니에
 																	담기&nbsp;&nbsp;<i class="ion-ios-add ml-1"></i>
 															</span></a> <a class="buy-now text-center py-2" id="getproduct"><input type="hidden" value="${product.prodNo}"/>상세정보&nbsp;&nbsp;&nbsp;<span><i
 																	class="ion-ios-cart ml-1"></i></span></a>

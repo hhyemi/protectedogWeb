@@ -19,5 +19,7 @@ public interface ProductDAO {
 	//SELECTLIST
 	public List<Product>listAdminProduct(Search search)throws Exception;
 	
+	public void updateQuantity(Product product)throws Exception;
+	
 
 }
