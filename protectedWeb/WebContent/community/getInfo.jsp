@@ -8,91 +8,11 @@
 <!--  meta  -->
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--  bootstrap CDN  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- KAKAO -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
-<script type="text/javascript">
-	$(function() {
-		
-		$("button:contains('추천')").on("click", function(){
-				
-			if(${sessionScope.user == null}){
-				alert("로그인 하십쇼");
-				return;
-			}
-			var postNo = "${board.postNo}" ;
-			var id = '${sessionScope.user.id}';
-			$.ajax({
-				url : "/info/json/check/"+postNo+"/"+id,
-				method : "POST",
-				dataType : "Json",
-				headers : {
-					"Accept" : "application/json",
-					"Content-Type" : "application/json"
-				},
-				success : function(JSONData, status){
-					
-					if(JSONData == 1){
-						alert("이미 추천한 글입니다.");
-						return;
-					}
-					
-					if(JSONData == 0){
-					$.ajax({
-						url : "/info/json/updateRecommandCnt/"+postNo,
-						method : "POST",
-						dataType : "Json",
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : function(JSONData, status){
-							
-							$(".minibox").children("div").children("span").remove();
-							
-							var result = "<span>"+JSONData.recommendCount+"</span>";
-							
-							$(".minibox").children("div").prepend(result);
-						}
-					});
-					} // JSONDATA 0 END			
-				}
-			});
-		
-		});
-		
-		$("button:contains('비추천')").on("click", function(){
-			alert("비추천기능추가");
-		});
-		
-		$("button:contains('수정')").on(
-				"click",
-				function() {
-					//alert($("input[type='hidden']").val());
-					// 			$(self.location).attr("href","/community/updateInfo.jsp");
-					self.location = "/info/updateView?postNo="
-							+ $("input[name='postNo']").val();
-				});
 
-		$("button:contains('삭제')").on(
-				"click",
-				function() {
-
-					var result = confirm("정말 삭제 하시겠습니까?");
-
-					if (result) {
-						$("form[name='info']").attr("method", "POST").attr(
-								"action", "/info/delInfo").attr("enctype",
-								"multipart/form-data").submit();
-					}
-				});
-	});
-</script>
 <style type="text/css">
 body {
 	position: relative;
@@ -191,8 +111,87 @@ img{
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script type="text/javascript">
-	
+
+	$(function() {
+		
+		$("button:contains('추천')").on("click", function(){
+				
+			if(${sessionScope.user == null}){
+				alert("로그인 하십쇼");
+				return;
+			}
+			var postNo = "${board.postNo}" ;
+			var id = '${sessionScope.user.id}';
+			$.ajax({
+				url : "/info/json/check/"+postNo+"/"+id,
+				method : "POST",
+				dataType : "Json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success : function(JSONData, status){
+					
+					if(JSONData == 1){
+						alert("이미 추천한 글입니다.");
+						return;
+					}
+					
+					if(JSONData == 0){
+					$.ajax({
+						url : "/info/json/updateRecommandCnt/"+postNo,
+						method : "POST",
+						dataType : "Json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData, status){
+							
+							$(".minibox").children("div").children("span").remove();
+							
+							var result = "<span>"+JSONData.recommendCount+"</span>";
+							
+							$(".minibox").children("div").prepend(result);
+						}
+					});
+					} // JSONDATA 0 END			
+				}
+			});
+		
+		});
+		
+		$("button:contains('비추천')").on("click", function(){
+			alert("비추천기능추가");
+		});
+		
+		$("button:contains('수정')").on(
+				"click",
+				function() {
+					//alert($("input[type='hidden']").val());
+					// 			$(self.location).attr("href","/community/updateInfo.jsp");
+					self.location = "/info/updateView?postNo="
+							+ $("input[name='postNo']").val();
+				});
+
+		$("button:contains('삭제')").on(
+				"click",
+				function() {
+
+					var result = confirm("정말 삭제 하시겠습니까?");
+
+					if (result) {
+						$("form[name='info']").attr("method", "POST").attr(
+								"action", "/info/delInfo").attr("enctype",
+								"multipart/form-data").submit();
+					}
+				});
+	});
+
     var map;
     var markers = [];
     var loca = "${board.route}";
@@ -232,11 +231,14 @@ img{
 //        });
 
 ////////////////////////////////////////////
+		if(${board.route == null}){
+			return;
+		}
 
 	    mapArea = new google.maps.Map(document.getElementById('mapArea'), {
 		    zoom: 12,
-		    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
-		    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
+		  	center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
+		    lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
 	});
     
     var aaa = "";

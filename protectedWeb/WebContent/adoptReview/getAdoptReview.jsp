@@ -162,15 +162,27 @@
 	          </form>
 	          
 	          <!-- END -->
-
+		<div class="minibox" align="center">
+			<div>
+				<br/>
+				<p/>
+				<br/>
+				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
+				<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
+				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
+			</div>
+		</div>
+		
         
 		        <p align="right">
 		       		<c:if test="${sessionScope.user.id eq board.id }">
-						<button class="main_btn" id="modiButton">수정${board.regDate+15 }</button>
+						<button class="main_btn" id="modiButton">수정</button>
 						
-						<c:if test="${board.regDate+15 }">
-			       			<button class="main_btn" id="delButton">삭제</button>
-			       		</c:if>
+<%-- 						<c:if test="${board.regDate+15 }"> --%>
+			       			<button class="main_btn" id="delButton">삭제
+<%-- 			       			<c:set var="year" value="<%=new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365)%>"/></button> --%>
+<%-- 			       		</c:if> --%>
 					</c:if>
 					
 			        <button class="main_btn" id="listButton">목록</button>
@@ -234,7 +246,9 @@
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/resources/events.js"></script>
-  
+  <!-- KAKAO -->
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  	
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
@@ -268,15 +282,51 @@
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
 	
-	// 등록버튼 누르고
-	function fncAddAdoptReview(){
-
-
-// 		var postContent = $("#editor").text();
-// 		$("form[name=detailForm]").attr("method" , "POST").attr("action" , "/adoptReview/addAdoptReview").attr("enctype","multipart/form-data").submit();
-		
-	}
+	//============= SNS공유 Event  처리 =============	
+	$( "#twitter" ).on("click" , function() {
+ 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+	});		
 	
+	$( "#naver" ).on("click" , function() {
+ 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+	});		
+	
+	$( "#facebook" ).on("click" , function() {
+ 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+	});			
+	
+	$( "#kakao" ).on("click" , function() {
+		sendLinkKakao()
+	});	
+	
+  //============= 카카오 공유하기Event  처리 =============		
+	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+  
+	 function sendLinkKakao(){
+	     Kakao.Link.sendDefault({
+	     	objectType: 'feed',
+	     	content: {
+	     		title: '유기견보호',
+	     		description: '멍멍',
+	     		imageUrl:document.location.href,
+	     		link: {
+			     		mobileWebUrl: document.location.href,
+			     		webUrl:document.location.href
+	     			  }
+	     		},
+	    	buttons: [       
+	        			{
+	        				title: '링크 열기',
+	        				link: {
+	       							mobileWebUrl: document.location.href,
+	        						webUrl: document.location.href
+	        					  }
+	        			}
+	      			  ]
+	     }); 
+	 }  
+	 
+  //==================================================
 
     $(function() {
     	
