@@ -104,6 +104,25 @@
  		    line-height: 20px; 
  		    border-radius: 3px; 
 		}
+		
+		button {
+		    display: inline-block;
+		    background: #94BFCA;
+		    padding: 0px 10px;
+		    letter-spacing: 0.25px;
+		    color: #fff;
+		    font-size: 12px;
+		    font-weight: 500;
+		    line-height: 44px;
+		    outline: none !important;
+		    box-shadow: none !important;
+		    text-align: center;
+		    border: 1px solid #94BFCA;
+		    cursor: pointer;
+		    text-transform: uppercase;
+		    transition: all 300ms linear 0s;
+		    border-radius: 5px;
+		}
         
 /*         .lnr-heart:before { */
 /* 			content: "\e813"; */
@@ -189,8 +208,9 @@
               
               <ul class="list">
               	
-              	<input type="hidden" name="postNo" value="${adopt.postNo }">
-              	<input type="hidden" name="userId" value="${user.id }">
+              	<input type="hidden" name="postNo" value="${adopt.postNo}">
+              	<input type="hidden" name="userId" value="${user.id}">
+              	<input type="hidden" name="levels" value="${user.levels}">
               	
                 <li>
                    	<div class="row" style="position:relative;height:35px;">
@@ -214,7 +234,7 @@
                 <li>
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>체중</strong></div>
-						<div class="col-md-3 ">${adopt.dogWeight}kg ${user.id }</div>
+						<div class="col-md-3 ">${adopt.dogWeight}kg</div>
 			
 				  		<div class="col-md-2 "><strong>성별</strong></div>
 						<div class="col-md-5 ">${adopt.dogGender}</div>
@@ -354,6 +374,17 @@
         
         </div>
 
+		<div class="minibox" align="center">
+			<div>
+				<br/>
+				<p/>
+				<br/>
+				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
+				<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
+				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
+			</div>
+		</div>
         <div class="col-md-12"><hr/></div>
         
         <p align="right">
@@ -422,7 +453,8 @@
     <script src="/resources/get/js/jquery.counterup.js"></script>
     <script src="/resources/get/js/theme.js"></script>
     
-    
+    <!-- KAKAO -->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -524,6 +556,54 @@
 
 	 //////////////////////////////////////////////////////////////////////////////////////////////////////      
       
+	
+	 //============= SNS공유 Event  처리 =============	
+	$( "#twitter" ).on("click" , function() {
+ 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+	});		
+	
+	$( "#naver" ).on("click" , function() {
+ 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+	});		
+	
+	$( "#facebook" ).on("click" , function() {
+ 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+	});			
+	
+	$( "#kakao" ).on("click" , function() {
+		sendLinkKakao()
+	});	
+	
+  //============= 카카오 공유하기Event  처리 =============		
+	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+  
+	 function sendLinkKakao(){
+	     Kakao.Link.sendDefault({
+	     	objectType: 'feed',
+	     	content: {
+	     		title: '유기견보호',
+	     		description: '멍멍',
+	     		imageUrl:document.location.href,
+	     		link: {
+			     		mobileWebUrl: document.location.href,
+			     		webUrl:document.location.href
+	     			  }
+	     		},
+	    	buttons: [       
+	        			{
+	        				title: '링크 열기',
+	        				link: {
+	       							mobileWebUrl: document.location.href,
+	        						webUrl: document.location.href
+	        					  }
+	        			}
+	      			  ]
+	     }); 
+	 }  
+	 
+  //==================================================
+
+	 
       $( function() {
   	    $( "#dialog-delAdopt" ).dialog({
   	    	autoOpen: false,
@@ -595,9 +675,10 @@
 	var str = '';
   
     function listApply(str){
-	  	
+    	var lv = $('input[name=levels]').val();
+    	console.log("lv 확인 : "+lv);
 		var adoptNo = parseInt(  $('input[name=postNo]').val().trim()  );
-	  	console.log(adoptNo);
+		
   		$.ajax( 
 		 		{
 					url : "/apply/json/listApply/"+adoptNo ,
@@ -641,15 +722,17 @@
 								$( "#dialog-listApply" ).dialog( "open" );
 								
 							} else if ( str == '' ){
-							
-								if ( id == '' ) {
+								//로그인 안했을때
+								if ( id == '' || lv == '미인증회원' ) {
 									$( '#dialog-alreadyApply p' ).html("<br/>인증회원만 신청할 수 있습니다.");
 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 									$( "#dialog-alreadyApply" ).dialog( "open" );
+								//받아온 데이터에 아이디가 있을때	
 								} else if ( displayValue.indexOf(id) != -1 ) {
 									$( '#dialog-alreadyApply p' ).html("<br/>이미 신청하셨습니다.");
 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 									$( "#dialog-alreadyApply" ).dialog( "open" );
+								//로그인한상태+아이디가 없을때
 								} else {
 									self.location = "/apply/addApply?postNo=${adopt.postNo}";
 								}

@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,7 +33,9 @@
     	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand{
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
-
+		.navbar-brand{
+			font-weight: bold;
+		}
   	</style>
   </head>
   
@@ -140,71 +142,71 @@
       <!-- Navbar -->
       <div class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
-         <b> <a class="navbar-brand smooth-scroll" href="index.html">
-            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;º¸È£ÇÒ°³
+         <b><a class="navbar-brand smooth-scroll" href="/index.jsp">
+            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;ë³´í˜¸í• ê°œ
           </a></b> 
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span>
           </button>  
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html">Áý</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html">ì§‘</a></li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ºÐ¾ç ¡¤ ½ÇÁ¾
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë¶„ì–‘ Â· ì‹¤ì¢…
                  </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">ºÐ¾ç¸®½ºÆ®</a>
-	<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">½ÇÁ¾¸®½ºÆ®</a> -->
-	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">ÈÄ±â</a>
-	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">ÈÄ±â</a> -->
+	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">ë¶„ì–‘ë¦¬ìŠ¤íŠ¸</a>
+	<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">ì‹¤ì¢…ë¦¬ìŠ¤íŠ¸</a> -->
+	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">í›„ê¸°</a>
+	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">í›„ê¸°</a> -->
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">½ºÅä¸®ÆÝµù</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ìŠ¤í† ë¦¬íŽ€ë”©</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	              	<a class="dropdown-item" href="/funding/listVoting">ÅõÇ¥°Ô½ÃÆÇ</a>
-	                <a class="dropdown-item" href="/funding/listFunding">ÈÄ¿ø°Ô½ÃÆÇ</a>
+	              	<a class="dropdown-item" href="/funding/listVoting">íˆ¬í‘œê²Œì‹œíŒ</a>
+	                <a class="dropdown-item" href="/funding/listFunding">í›„ì›ê²Œì‹œíŒ</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ä¿¹Â´ÏÆ¼</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ì»¤ë®¤ë‹ˆí‹°</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	                <a class="dropdown-item" href="/info/listInfo">Á¤º¸°øÀ¯</a>
-	                <a class="dropdown-item" href="/community/getDogSense.jsp">¾Ö°ß»ó½Ä</a>
+	                <a class="dropdown-item" href="/info/listInfo">ì •ë³´ê³µìœ </a>
+	                <a class="dropdown-item" href="/community/getDogSense.jsp">ì• ê²¬ìƒì‹</a>
                   </div>
                 </li>
               <c:if test="${ sessionScope.user != null }">
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´íŽ˜ì´ì§€</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">³»Á¤º¸º¸±â</a>
-		              	<a class="dropdown-item" href="/message/listReceiveMessage">¹ÞÀºÂÊÁöÇÔ</a>
-		                <a class="dropdown-item" href="/message/listSendMessage">º¸³½ÂÊÁöÇÔ</a>
-		                <a class="dropdown-item" href="/message/addMessage">ÂÊÁö¾²±â</a>
+		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">ë‚´ì •ë³´ë³´ê¸°</a>
+		              	<a class="dropdown-item" href="/message/listReceiveMessage">ë°›ì€ìª½ì§€í•¨</a>
+		                <a class="dropdown-item" href="/message/listSendMessage">ë³´ë‚¸ìª½ì§€í•¨</a>
+		                <a class="dropdown-item" href="/message/addMessage">ìª½ì§€ì“°ê¸°</a>
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
-		                	<a class="dropdown-item" href="/coupon/addCoupon">ÄíÆù»ý¼º</a>
+		                	<a class="dropdown-item" href="/coupon/addCoupon">ì¿ í°ìƒì„±</a>
 		                </c:if>
-		                <a class="dropdown-item" href="/coupon/listCoupon">ÄíÆù¹Þ±â</a>
-		                <a class="dropdown-item" href="/report/addReportView.jsp">½Å°íÇÏ±â</a>
+		                <a class="dropdown-item" href="/coupon/listCoupon">ì¿ í°ë°›ê¸°</a>
+		                <a class="dropdown-item" href="/report/addReportView.jsp">ì‹ ê³ í•˜ê¸°</a>
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
-		                <a class="dropdown-item" href="/report/listReport">½Å°í±Û¸ñ·Ï</a>
+		                <a class="dropdown-item" href="/report/listReport">ì‹ ê³ ê¸€ëª©ë¡</a>
 		                </c:if>
                   </div>
                 </li>
                  </c:if>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">½ºÅä¾î</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ìŠ¤í† ì–´</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">»óÇ°Q&a</a>
-	                <a class="dropdown-item" href="/market/listMarket?order=1">º¸È£¸¶ÄÏ</a>
-	                <a class="dropdown-item" href="/product/listProduct">»óÇ°¸®½ºÆ®</a>
+	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">ìƒí’ˆQ&a</a>
+	                <a class="dropdown-item" href="/market/listMarket?order=1">ë³´í˜¸ë§ˆì¼“</a>
+	                <a class="dropdown-item" href="/product/listProduct">ìƒí’ˆë¦¬ìŠ¤íŠ¸</a>
 	                <c:if test="${ sessionScope.user.role eq 'admin' }">
-	                	<a class="dropdown-item" href="/product/listAdminProduct">°ü¸®ÀÚ»óÇ°¸®½ºÆ®</a>
+	                	<a class="dropdown-item" href="/product/listAdminProduct">ê´€ë¦¬ìžìƒí’ˆë¦¬ìŠ¤íŠ¸</a>
 	                </c:if>
                   </div>
                 </li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">°ßÁ¾¹é°ú</a></li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp">µ¿¹°º´¿ø</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">ê²¬ì¢…ë°±ê³¼</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp">ë™ë¬¼ë³‘ì›</a></li>
                 <li>
                   <div class="top-menubar-nav">
                     <div class="topmenu ">
@@ -245,7 +247,7 @@
     <script src="/resources/newTemplate/js/bootstrap/bootstrap.min.js"></script>
     <script src="/resources/newTemplate/js/wow/wow.min.js"></script>
     <script src="/resources/newTemplate/js/owl-carousel/owl.carousel.min.js"></script>
-
+	
     <!-- Plugin JavaScript -->
     <script src="/resources/newTemplate/js/jquery-easing/jquery.easing.min.js"></script> 
     <script src="/resources/newTemplate/js/custom.js"></script> 

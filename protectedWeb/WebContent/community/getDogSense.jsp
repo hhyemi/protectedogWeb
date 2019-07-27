@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	
@@ -9,16 +9,9 @@
 <head>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>¾Ö°ß»ó½Ä</title>
-<!--  bootstrap CDN  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- jQuery CSS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<title>ë³´í˜¸í• ê°œ.ì• ê²¬ìƒì‹</title>
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -26,31 +19,18 @@
 <script type="text/javascript">
 	
 	var cnt = 9;	
-	var searchKeyword = '¾Ö°ß»ó½Ä';
+	var searchKeyword = 'ì• ê²¬ìƒì‹';
+	var flag = false;
+	
+	$(document).ready(function(){
+		fnGetList();
+	});
 	
 	$(function () {
 		$("button").on("click",function(){
 			searchKeyword = $(this).text();
 			fnGetList();
-		});
-		
-		var event = false;
-		var display = "";
-		
-		$(window).on("scroll", function(){
-				if($(window).scrollTop() == ( $(document).height() - $(window).height() )){
-					if(event == true){
-// 						alert("return !");
-// 						return;
-					} else {
-						alert("!");
-						event = true;
-						console.log(cnt+3);
-						
-						fnGetList();
-					}
-				}
-		});
+		});		
 	});
 	
 	
@@ -61,7 +41,7 @@
 // 			var $getval = $("#search_box").val();
 		
 // 			if($getval == ""){
-// 			//alert("°Ë»ö¾î ÀÔ·Â !");
+// 			//alert("ê²€ìƒ‰ì–´ ì…ë ¥ !");
 // 				$("#search_box").focus();
 // 				return;
 // 			}
@@ -74,12 +54,12 @@
 		
 		console.log(sTargetUrl);
 		
-		if(sGetToken){
-// 			sTargetUrl += "&pageToken=" + sGetToken;
-			cnt += 3 ;
-			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
-			sTargetUrl += "&maxResults="+ 10;
-		}
+// 		if(sGetToken){
+// // 			sTargetUrl += "&pageToken=" + sGetToken;
+// 			cnt += 3 ;
+// 			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
+// 			sTargetUrl += "&maxResults="+ 10;
+// 		}
 		
 		$.ajax({
 			
@@ -93,7 +73,7 @@
 				$(jdata.items).each(function(i){
 					
 					var videoId = this.id.videoId;
-					console.log(" ºñµğ¿À ¾ÆÀÌµğ : " + videoId) ;
+					console.log(" ë¹„ë””ì˜¤ ì•„ì´ë”” : " + videoId) ;
 					console.log(" sinppet.title : " + this.snippet.title) ; 
 					console.log(" sinppet.description : " + this.snippet.description) ; 
 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
@@ -108,17 +88,44 @@
 									
 				}).promise().done(function(){
 					
-// 					if(jdata.prevPageToken){
-// 						$("#nav_view").append("<button class='paging' onclick='javascript:fnGetList(\""+jdata.prevPageToken+"\");'> < </button>");
-// 					}				
-				
-				
-					if(jdata.nextPageToken){
-						$("#nav_view").append("<button class='paging btn btn-default' onclick='javascript:fnGetList(\""+jdata.nextPageToken+"\");'> ´õ º¸±â </button>");
-					}
-				})
+					$(window).on("scroll", function(){
+		 				
+						if($(window).scrollTop() == ( $(document).height() - $(window).height() )){
+														
+							flag = true;
+			 				cnt += 3; 
+			 			
+			 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+							+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
+						$.ajax({
+							
+							type : "POST",
+							url : sTargetUrl,
+							dataType : "jsonp",
+							success : function(jdata) {
+
+		 						console.log(" ê²€ìƒ‰ê°œìˆ˜ : " + cnt);
+		 						if(flag == true){
+		 							fnGetList();
+		 							flag = false;
+		 							return;
+		 						}
+		 					}
+		 				}); // ajax End
+						} // If End
+						}); // window End						
+				}); // promise End
 			}
 		});
+				
+// 					if(jdata.nextPageToken){
+// 						$("#nav_view").append("<button class='paging btn btn-default' onclick='javascript:fnGetList(\""+jdata.nextPageToken+"\");'> ë” ë³´ê¸° </button>");
+// 					}
+// 				})
+// 			}
+// 		});
+		
+		
 	}
 </script>
 
@@ -146,9 +153,9 @@ span {
 	/* 	padding-bottom: 1px; */
 }
 
-#get_view {
-	float: left;
-}
+/* #get_view { */
+/* 	float: left; */
+/* } */
 
 .paging btn btn-default {
 	width: 100%;
@@ -184,30 +191,31 @@ a :hover{
 }
 </style>
 </head>
-<body onload="fnGetList();">
+<body>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
 	<div class="container">
 	
 	<div class="row">
-	<button class="btn btn-default col-md-2">#¾Ö°ß»ó½Ä</button>
-	<button class="btn btn-default col-md-2">#¾Ö°ßÈÆ·Ã</button>
-	<button class="btn btn-default col-md-2">#¾Ö°ßºĞ¾ç</button>
-	<button class="btn btn-default col-md-2">#¾Ö°ßÀ½¾Ç</button>
-	<button class="btn btn-default col-md-2">#¾Ö°ßÄ«Æä</button>
-	<button class="btn btn-default col-md-2">#¾Ö°ß»ç°Ç</button>
+	<button class="btn btn-default col-md-2">#ì• ê²¬ìƒì‹</button>
+	<button class="btn btn-default col-md-2">#ì• ê²¬í›ˆë ¨</button>
+	<button class="btn btn-default col-md-2">#ì• ê²¬ë¶„ì–‘</button>
+	<button class="btn btn-default col-md-2">#ì• ê²¬ìŒì•…</button>
+	<button class="btn btn-default col-md-2">#ì• ê²¬ì¹´í˜</button>
+	<button class="btn btn-default col-md-2">#ì• ê²¬ì‚¬ê±´</button>
 	</div>
 	
 <!-- 	<form name="form1" method="post" onsubmit="return false;"> -->
 <!-- 		<input type="text" id="search_box" /> -->
-<!-- 		<button onClick="fnGetList();">°¡Á®¿À±â</button> -->
+<!-- 		<button onClick="fnGetList();">ê°€ì ¸ì˜¤ê¸°</button> -->
 <!-- 	</form> -->
 	
 	<hr>
 	<div id="get_view" class="row"></div>
 <!-- 	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div> -->
 	</div>
+	
 	
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 
