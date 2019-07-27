@@ -135,11 +135,21 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
-	public User login(@RequestBody Map<String, Object> chkLogin) throws Exception{
+	public User login(@RequestBody Map<String, Object> chkLogin, HttpSession session) throws Exception{
 		
 		System.out.println("json-login : POST");
 		
 		User user=userService.getUsers((String)chkLogin.get("id"));
+		System.out.println("session 저장 전 user : "+user);
+		System.out.println("session 저장 전 chkLogin pw : "+chkLogin.get("pw"));
+		System.out.println("session 저장 전 user pw :"+user.getPw());
+		if(chkLogin.get("pw").equals(user.getPw())) {
+			session.setAttribute("user", user);
+			System.out.println("json/login 성공 user : "+user);
+			System.out.println("json/login 성공 sessison"+session.getAttribute("user"));
+		}else {
+			System.out.println("json/login 실패 : "+user);
+		}
 		
 		return user;
 	}
