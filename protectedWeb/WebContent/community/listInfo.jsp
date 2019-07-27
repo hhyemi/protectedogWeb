@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -9,7 +9,7 @@
 <head>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  ETC CDN -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -44,7 +44,7 @@
 </style>
 
 
-<title>º¸È£ÇÒ°³.Á¤º¸°øÀ¯</title>
+<title>ë³´í˜¸í• ê°œ.ì •ë³´ê³µìœ </title>
 <jsp:include page="/layout/toolbar.jsp" />
 </head>
 
@@ -56,9 +56,9 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">Á¤º¸°øÀ¯</a></span>
+						<span class="mr-2"><a href="/index.jsp">ì •ë³´ê³µìœ </a></span>
 					</p>
-					<h1 class="mb-0 bread">°ßÁ¾¹é°ú</h1>
+					<h1 class="mb-0 bread">ê²¬ì¢…ë°±ê³¼</h1>
 				</div>
 			</div>
 		</div>
@@ -73,21 +73,21 @@
 		<br/>
 		
 		
-<!-- 	¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á TABLE AREA ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á	 -->
+<!-- 	â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  TABLE AREA â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	 -->
 		<div class="row">
 			<div class="col-md-9" style="">
 				<div style="float: left;">
-					<button type="button" class="btn btn-default"><h5>ÀüÃ¼º¸±â</h5></button>
-					<button type="button" class="btn btn-default"><h5>Á¶È¸¼ö ¡å</h5></button>
-					<button type="button" class="btn btn-default"><h5>ÃßÃµ¼ö ¡å</h5></button>
+					<button type="button" class="btn btn-default"><h5>ì „ì²´ë³´ê¸°</h5></button>
+					<button type="button" class="btn btn-default"><h5>ì¡°íšŒìˆ˜ â–¼</h5></button>
+					<button type="button" class="btn btn-default"><h5>ì¶”ì²œìˆ˜ â–¼</h5></button>
 				</div>
 				<div style="float: right;">
 					<select name="pageSize" id="selectPageSize"
 						onchange="javascript:getPageSize()">
-						<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8 °³¾¿</option>
-						<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15 °³¾¿</option>
-						<option value="30" ${ search.pageSize == 30 ? "selected" : "" }>30 °³¾¿</option>
-						<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50 °³¾¿</option>
+						<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8 ê°œì”©</option>
+						<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15 ê°œì”©</option>
+						<option value="30" ${ search.pageSize == 30 ? "selected" : "" }>30 ê°œì”©</option>
+						<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50 ê°œì”©</option>
 					</select>
 				</div>
 			</div>
@@ -95,32 +95,32 @@
 		
 				<c:if test="${totalCount == 0}">
 				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
-					°Ë»ö°á°ú ¾øÀ½
+					ê²€ìƒ‰ê²°ê³¼ ì—†ìŒ
 					<form class="form-inline" name="detailForm">
 						<div class="form-group">
-							<select class="form-control" id="searchCondition"
+							<select class="form-control searchCondition" id="searchCondition"
 								name="searchCondition">
 								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>Á¦¸ñ</option>
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ì œëª©</option>
 								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ÀÛ¼ºÀÚ</option>
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ì‘ì„±ì</option>
 								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>±Û³»¿ë</option>
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ê¸€ë‚´ìš©</option>
 							</select>
 						</div>
 
 
 						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label> <input
-								type="text" class="form-control" id="searchKeyword"
-								name="searchKeyword" placeholder="°Ë»ö¾î"
+							<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label> <input
+								type="text" class="form-control searchKeyword" id="searchKeyword"
+								name="searchKeyword" placeholder="ê²€ìƒ‰ì–´"
 								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default">
+							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</div>
 
-						<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+						<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 						<input type="hidden" id="currentPage" name="currentPage" value="" />
 					</form>
 				</div>
@@ -131,12 +131,12 @@
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 					<thead>
 						<tr align="center">
-							<th width="10%" class="text-center">¹øÈ£</th>
-							<th width="30%" align="center" class="text-center">Á¦¸ñ</th>
-							<th width="10%">±Û¾´ÀÌ</th>
-							<th width="10%">ÀÛ¼ºÀÏ</th>
-							<th width="5%">Á¶È¸¼ö</th>
-							<th width="5%">ÃßÃµ¼ö</th>					
+							<th width="10%" class="text-center">ë²ˆí˜¸</th>
+							<th width="30%" align="center" class="text-center">ì œëª©</th>
+							<th width="10%">ê¸€ì“´ì´</th>
+							<th width="10%">ì‘ì„±ì¼</th>
+							<th width="5%">ì¡°íšŒìˆ˜</th>
+							<th width="5%">ì¶”ì²œìˆ˜</th>					
 						</tr>
 					</thead>
 					
@@ -164,7 +164,7 @@
 					<br />
 
 					<c:if test="${ ! empty sessionScope.user }">
-						<button>±Û ¾²±â</button>
+						<button>ê¸€ ì“°ê¸°</button>
 					</c:if>
 					
 					<div align="center">
@@ -181,50 +181,50 @@
 							<select class="form-control" id="searchCondition"
 								name="searchCondition">
 								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>Á¦¸ñ</option>
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ì œëª©</option>
 								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ÀÛ¼ºÀÚ</option>
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ì‘ì„±ì</option>
 								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>±Û³»¿ë</option>
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ê¸€ë‚´ìš©</option>
 							</select>
 						</div>
 
 
 						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label> <input
-								type="text" class="form-control" id="searchKeyword"
-								name="searchKeyword" placeholder="°Ë»ö¾î"
+							<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label> <input
+								type="text" class="form-control searchKeyword" id="searchKeyword"
+								name="searchKeyword" placeholder="ê²€ìƒ‰ì–´"
 								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default">
+							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</div>
 
-						<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+						<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 						<input type="hidden" id="currentPage" name="currentPage" value="" />
 					</form>
 				</div>
 				</div>
 			</div>
 			</div>
-<!-- 		¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á HOT AREA ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
+<!-- 		â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  HOT AREA â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
 			<div class="col-md-3">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 
 					<thead>
 						<tr align="center">
-<!-- 							<th class="mdl-data-table__cell--non-numeric" width="10%">¹øÈ£</th> -->
-<!-- 							<th width="30%" class="text-center">Á¦¸ñ</th> -->
-<!-- 							<th width="10%">ÀÛ¼ºÀÚ</th> -->
-<!-- 							<th width="10%">ÀÛ¼ºÀÏ</th> -->
-<!-- 							<th width="5%">Á¶È¸¼ö</th> -->
-<!-- 							<th width="5%">ÃßÃµ¼ö</th> -->
+<!-- 							<th class="mdl-data-table__cell--non-numeric" width="10%">ë²ˆí˜¸</th> -->
+<!-- 							<th width="30%" class="text-center">ì œëª©</th> -->
+<!-- 							<th width="10%">ì‘ì„±ì</th> -->
+<!-- 							<th width="10%">ì‘ì„±ì¼</th> -->
+<!-- 							<th width="5%">ì¡°íšŒìˆ˜</th> -->
+<!-- 							<th width="5%">ì¶”ì²œìˆ˜</th> -->
 						</tr>
 					</thead>
 
 					<tbody class="newstbody">
 								<tr align="center">
-									<td colspan='2' class='text-center'><h4><b>HOT °³</b></h4>
+									<td colspan='2' class='text-center'><h4><b>HOT ê°œ</b></h4>
 									</td>
 								</tr>
 						<c:set var="i" value="0" />
@@ -246,14 +246,14 @@
 			<br />
 			
 			</div>
-			<!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á NEWS AREA ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á  -->
+			<!-- â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  NEWS AREA â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–   -->
 			
 			<div class="row">
 				
 				
 <!-- 				<div class="col-md-3"> -->
 <!-- 					<h3 align="center"> -->
-<!-- 						<b>´º½º</b> -->
+<!-- 						<b>ë‰´ìŠ¤</b> -->
 <!-- 					</h3> -->
 <!-- 					<p> -->
 <!-- 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"> -->
@@ -301,10 +301,10 @@ function listNews(){
 		method : "POST",
 		data : JSON.stringify({searchKeyword : $("#searchKeyword").val()}),
 		dataType : "json",
-		contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 		headers : {
 			"Accept" : "application/json",
-			"Content-Type" : "application/json;charset=euc_kr"
+			"Content-Type" : "application/json;charset=UTF-8"
 		},
 		success : function(JSONData, status) {
 			
@@ -312,7 +312,7 @@ function listNews(){
 			
 			var list = JSONData.items;
 			
-			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>´º½º</b></h4></td></tr>");
+			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>ë‰´ìŠ¤</b></h4></td></tr>");
 		
 			$.each(list, function(index, items) {
 				
@@ -358,15 +358,15 @@ function listNews(){
 	
 	$(function(){
 		
-		$("button:contains('ÀüÃ¼º¸±â')").on("click", function(){
+		$("button:contains('ì „ì²´ë³´ê¸°')").on("click", function(){
 			$(self.location).attr("href","/info/listInfo?order=1&pageSize=${search.pageSize}");
 		});
 		
-		$("button:contains('Á¶È¸¼ö')").on("click", function(){
+		$("button:contains('ì¡°íšŒìˆ˜')").on("click", function(){
 			$(self.location).attr("href","/info/listInfo?order=2&pageSize=${search.pageSize}");
 		});
 		
-		$("button:contains('ÃßÃµ¼ö')").on("click", function(){
+		$("button:contains('ì¶”ì²œìˆ˜')").on("click", function(){
 			$(self.location).attr("href","/info/listInfo?order=3&pageSize=${search.pageSize}");
 		});
 		
@@ -376,11 +376,11 @@ function listNews(){
 		var pageSize = $("#selectPageSize").val();
 		var menu = $("#menu").val();
 
-		$("#searchKeyword").on("keyup", function() {
+		$(".searchKeyword").on("keyup", function() {
 
 			var search = {
-				searchKeyword : $("#searchKeyword").val(),
-				searchCondition : $("#searchCondition").val()
+				searchKeyword : $(".searchKeyword").val(),
+				searchCondition : $(".searchCondition").val()
 			};
 			var convertSearch = JSON.stringify(search);
 
@@ -389,13 +389,13 @@ function listNews(){
 				method : "POST",
 				dataType : "json",
 				data : convertSearch,
-				contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+				contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 				headers : {
 					"Accept" : "application/json",
-					"Content-Type" : "application/json;charset=euc_kr"
+					"Content-Type" : "application/json;charset=UTF-8"
 				},
 				success : function(JSONData, status) {
-					$("#searchKeyword").autocomplete({
+					$(".searchKeyword").autocomplete({
 						source : JSONData
 					});
 				}
@@ -421,18 +421,18 @@ function listNews(){
 		});
 		
 		$(document).ready(function(){
-			$("#searchKeyword").keydown(function(key){
+			$(".searchKeyword").keydown(function(key){
 				if(key.keyCode == 13){
 					fncGetList(1);
 				}
 			});
 		});
 		
-		$("#searchSubmmit").on("click", function() {
+		$(".searchSubmmit").on("click", function() {
 			fncGetList(1);
 		});
 		
-		$("button:contains('±Û ¾²±â')").on("click", function(){
+		$("button:contains('ê¸€ ì“°ê¸°')").on("click", function(){
 			self.location = "/community/addInfo.jsp"
 		});
 	});

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 <head>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN -->
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
@@ -120,7 +120,7 @@
 					$("#moreView").append(display);
 					
 					if(totalCount >= list.length){
-						$("button:contains('┤ї║╕▒т')").remove();
+						$("button:contains('ыНФы│┤ъ╕░')").remove();
 					}
 				},					
 				error : function(request, status, error){							
@@ -130,9 +130,9 @@
 		});
 	});
 
-	// ┤ё▒█ CURD function();
+	// ыМУъ╕А CURD function();
 	$(function() {
-		// ┤ё▒█ ╡ю╖╧ 
+		// ыМУъ╕А ыУ▒ыбЭ 
 // 		var commentNo
 // 		$.ajax({
 // 						url : "/comment/json/getComment/"+commentNo,
@@ -154,7 +154,7 @@
 //  							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
 //  								+ "<a href='#' onclick='update(); return false;'> "
 //  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
-//  								+ "╝Ў┴д" 								
+//  								+ "ьИШьаХ" 								
 //  								+ "</span></div>"
  							
 // 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
@@ -174,7 +174,7 @@
 	
 	$(function(){
 		
-		// ┤ё▒█ ╝Ў┴д
+		// ыМУъ╕А ьИШьаХ
 		$(document).on("click", ".glyphicon-refresh", function() {
 			
 			var commentNo = $(this).parent().parent().children("input").val() ;
@@ -200,7 +200,7 @@
  							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
- 								+ "╝Ў┴д" 								
+ 								+ "ьИШьаХ" 								
  								+ "</span></div>"
  							
 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
@@ -221,7 +221,7 @@
 			var commentNo = $(this).parent().parent().children("input").val();
 			var hr = $(this).parent().html();
 			alert(hr);
-			var result = confirm("┴д╕╗ ╗ш┴ж ╟╧╜├░┌╜└┤╧▒ю?");
+			var result = confirm("ьаХызР ьВньаЬ эХШьЛЬъ▓аьК╡ыЛИъ╣М?");
 			
 			if (result) {
 				$.ajax({
@@ -281,7 +281,7 @@
 		$(document).on("click", ".far.fa-thumbs-up", function(){
 			
 			if(${sessionScope.user == null}){
-				alert("╖╬▒╫└╬ ╟╒╜╩╝ю");
+				alert("ыбЬъ╖╕ьЭ╕ эХйьЛньЗ╝");
 				return;
 			}
 				
@@ -298,7 +298,7 @@
 					success : function(JSONData, status){
 						
 						if(JSONData == 1){
-							alert("└╠╣╠ ├▀├╡╟╤ ┤ё▒█└╘┤╧┤┘.");
+							alert("ьЭ┤ып╕ ь╢Фь▓ЬэХЬ ыМУъ╕АьЮЕыЛИыЛд.");
 							return;
 						}
 						
@@ -331,7 +331,7 @@
 	function update(){
 		
 		if( $("#commentContent").val() == ''){
-			alert("│╗┐ы└╗ └╘╖┬╟╪┴╓╝╝┐ф.");
+			alert("ыВ┤ьЪйьЭД ьЮЕыаеэХ┤ьг╝ьД╕ьЪФ.");
 			return;
 		}
 		
@@ -377,30 +377,30 @@
 
 		<hr />
 	
-		<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ║ё╚╕┐° ├│╕о бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+		<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа ы╣ДэЪМьЫР ь▓Шыжм тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
-				║ё╚╕┐°└║ ┤ё▒█└╗ ┤▐ ╝Ў ╛°╜└┤╧┤┘<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> ╖╬▒╫└╬ </button>╚─ └╠┐ы╟╪
-				┴╓╜├▒ц ╣┘╢°┤╧┤┘.
+				ы╣ДэЪМьЫРьЭА ыМУъ╕АьЭД ыЛм ьИШ ьЧЖьК╡ыЛИыЛд<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> ыбЬъ╖╕ьЭ╕ </button>эЫД ьЭ┤ьЪйэХ┤
+				ьг╝ьЛЬъ╕╕ ы░ФыЮНыЛИыЛд.
 			</div>
 		</div>
 		<br>
 		</c:if>
 		
-		<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ╚╕┐° ├│╕о  бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+		<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа эЪМьЫР ь▓Шыжм  тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 		<c:if test="${sessionScope.user.role != null}">
 		<form name="commentGo">
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
 				<input type="text" name="commentContent" class="form-control"
-					style="width: 100%; height: 40px" placeholder="┤ё▒█└╘╖┬" />
+					style="width: 100%; height: 40px" placeholder="ыМУъ╕АьЮЕыае" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
 				<button id="commentGo"
 					style="background-color: #6190ed; color: white; width: 100%; height: 40px; border: 1px solid #1449b3">
 					<h6>
-						<b>┤ё▒█╡ю╖╧</b>
+						<b>ыМУъ╕АыУ▒ыбЭ</b>
 					</h6>
 				</button>
 			</div>
@@ -409,7 +409,7 @@
 		<br>
 		</c:if>
 		
-		<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ┤ё▒█ ├│╕о  бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+		<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа ыМУъ╕А ь▓Шыжм  тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 		<div id="moreView"></div>
 		<div class="commentList">
 		<c:forEach var="comment" items="${list}">
@@ -440,11 +440,11 @@
 				</div>
 			</div>
 			<br/>
-			<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ┤ы┤ё▒█ ├│╕о бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+			<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа ыМАыМУъ╕А ь▓Шыжм тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 			<c:forEach var="recomment" items="${relist}">
 			<c:if test="${comment.commentNo == recomment.commentNo}">
 			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;">
-				дд
+				уД┤
 				<div class="col-sm-1 col-md-1" align="center">
 					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
 				</div>
@@ -471,21 +471,21 @@
 		</c:forEach>
 		</div>
 		
-		<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ┤ї║╕▒т ╣Ў╞░ ├│╕о бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+		<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа ыНФы│┤ъ╕░ ы▓ДэК╝ ь▓Шыжм тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 		<c:if test="${totalCount > list.size()}">
 		<div class="col-md-12">
-			<button type="button" class="btn btn-default"> ┤ї║╕▒т </button>
+			<button type="button" class="btn btn-default"> ыНФы│┤ъ╕░ </button>
 		</div>
 		</c:if>
 		
-		<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ╟╧┤▄ ░°╣щ ├│╕о бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+		<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа эХШыЛи ъ│╡ы░▒ ь▓Шыжм тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 		<div style="min-height: 50px;">
 			
 		</div>
 
 		<br>
  		
- 		<!-- бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс ╕Ё┤▐ ├│╕о бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+ 		<!-- тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа ыкиыЛм ь▓Шыжм тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -500,7 +500,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
-						<button type="button" id="login" class="btn btn-primary">╖╬▒╫└╬</button>
+						<button type="button" id="login" class="btn btn-primary">ыбЬъ╖╕ьЭ╕</button>
 					</div>
 				</div>
 			</div>

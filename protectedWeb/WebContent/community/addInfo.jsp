@@ -1,37 +1,21 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--  bootstrap Dropdown CSS & JS  -->
-<link href="../resources/css/others/animate.css" rel="stylesheet">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
-@font-face {
-	font-family: ng;
-	src: url(NanumGothic.eot);
-	src: local(¡Ø), url(NanumGothic.woff) format(¡®woff¡¯);
-}
-
-body {
-	font-family: '³ª´®°íµñ', 'NanumGothic', ng;
-}
-
 #editor {
 	min-height: 600px;
 	max-width: 1130px;
@@ -104,7 +88,7 @@ $(function () {
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
 	<div class="container">
-		<h3 class=" text-info">»õ ±Û ¾²±â</h3>
+		<h3 class=" text-info">ìƒˆ ê¸€ ì“°ê¸°</h3>
 
 		<hr>
 
@@ -115,13 +99,13 @@ $(function () {
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
-							id="postTitle" style="height: 50px; font-size: 20px" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." />
+							id="postTitle" style="height: 50px; font-size: 20px" placeholder="ì œëª©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”." />
 					</div>
 				</div>
 
 				<!-- 			<div class="row"> -->
 				<!-- 				<div class="col-xs-4 col-md-2"> -->
-				<!-- 					<strong>ÀÌ¹ÌÁö</strong> -->
+				<!-- 					<strong>ì´ë¯¸ì§€</strong> -->
 				<!-- 				</div> -->
 				<!-- 			</div> -->
 
@@ -130,17 +114,17 @@ $(function () {
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<div class="body">
-							<!-- Ã·ºÎ ¹öÆ° -->
+							<!-- ì²¨ë¶€ ë²„íŠ¼ -->
 							<div id="attach">
 								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox">»çÁøÃ·ºÎ</label> <input id="uploadInputBox"
+									for="uploadInputBox">ì‚¬ì§„ì²¨ë¶€</label> <input id="uploadInputBox"
 									style="display: none" type="file" name="filedata" multiple />
 							</div>
 
-							<!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+							<!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
 							<div id="preview" class="content"></div>
 
-							<!-- multipart ¾÷·Îµå½Ã ¿µ¿ª -->
+							<!-- multipart ì—…ë¡œë“œì‹œ ì˜ì—­ -->
  							<div id="uploadForm" style="display: none;"></div>
 						</div>
 					</div>
@@ -160,7 +144,7 @@ $(function () {
 				
 				<p>
 				
-				<input type="checkbox" class="googleMapCheck" value="hide">Áöµµ°øÀ¯
+				<input type="checkbox" class="googleMapCheck" value="hide">ì§€ë„ê³µìœ 
 		  
 		  		<div class="form-group googleMap">
 		   			<div class="col-sm-4">
@@ -168,7 +152,7 @@ $(function () {
 		     					<input type="hidden" class="form-control" id="route" name="route" style="width: 1100px;">
 		      					<span id="pop"></span>
 		    		</div>
-		    		<p> °æ·Î ¼öÁ¤À» ¿øÇÏ½Ã¸é ¸¶Ä¿ À§¿¡¼­ ¸¶¿ì½º ¿ìÅ¬¸¯À» ÇØÁÖ½Ã±æ ¹Ù¶ø´Ï´Ù.</p>
+		    		<p> ê²½ë¡œ ìˆ˜ì •ì„ ì›í•˜ì‹œë©´ ë§ˆì»¤ ìœ„ì—ì„œ ë§ˆìš°ìŠ¤ ìš°í´ë¦­ì„ í•´ì£¼ì‹œê¸¸ ë°”ëë‹ˆë‹¤.</p>
 		  		</div>
 			</form>
 		</div>
@@ -176,112 +160,115 @@ $(function () {
 		<hr />
 		<div class="row">
 			<div class="col-md-12 text-center ">
-				<button type="button" class="btn btn-primary">µî·Ï</button>
-				<a id="reset" class="btn btn-primary btn" role="button">Ãë¼Ò</a>
+				<button type="button" class="btn btn-primary">ë“±ë¡</button>
+				<a id="reset" class="btn btn-primary btn" role="button">ì·¨ì†Œ</a>
 			</div>
 		</div>	
 		
 		<div class="row" style="height: 100px">
 		
 		</div>
-	<jsp:include page="/layout/footer.jsp"></jsp:include>
-
+	
 	</div>
-
+	
+		<jsp:include page="/layout/footer.jsp"></jsp:include>
+	
 	<script>
 	
-	//============= ±¸±Û Áöµµ =============
-	  	
-	  	
-	  	  var poly;
-	      var map;
-	      var markers = [];
+	//============= êµ¬ê¸€ ì§€ë„ =============
+  var poly;
+         var map;
+         var markers = [];
           var infowindowF;
           var infowindowL;
 
-	      function initMap() {
-	    	  
-		        map = new google.maps.Map(document.getElementById('map'), {
-			        zoom: 16,
-			        center: {lat: 37.564, lng:  127.0017} 
-		        });
-	
-		        poly = new google.maps.Polyline({
-			        strokeColor: '#000000',
-			        strokeOpacity: 0.5,
-			        strokeWeight: 5,
-			        map: map
-		        });
-		        
-		        infowindowF = new google.maps.InfoWindow();
-		        infowindowL = new google.maps.InfoWindow();
-		        
-		        map.addListener('click', addLatLng);
-	      }
+         function initMap() {
+            
+              map = new google.maps.Map(document.getElementById('map'), {
+                 zoom: 16,
+                 center: {lat: 37.564, lng:  127.0017} 
+              });
+   
+              poly = new google.maps.Polyline({
+                 strokeColor: '#000000',
+                 strokeOpacity: 0.5,
+                 strokeWeight: 5,
+                 map: map
+              });
+              
+              infowindowF = new google.maps.InfoWindow();
+              infowindowL = new google.maps.InfoWindow();
+              
+              map.addListener('click', addLatLng);
+         }
 
-	      
-	      function addLatLng(event) {
-	    	  
-		        if (markers.length <5){
-		        	 
-		        	var path = poly.getPath();
-		 	        path.push(event.latLng);
-		 	        
-		       		var marker = new google.maps.Marker({
-				        position: event.latLng,
-				        title: '#' + path.getLength(),
-				        map: map
-		       		});
-		       		markers.push(marker);
-		       		
-		        	$( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
-		        	
-		        	// pop up
-		        	infowindowF.setContent("Ãâ¹ß");
-		 	        infowindowF.open(map, markers[0]);
-		 	        
-		 	        if(markers.length > 1){
-			        	infowindowL.setContent("µµÂø");
-			 	        infowindowL.open(map, marker);
-		 	        }
-		        	
-		        }else{
-			        alert("5°³±îÁö ÁöÁ¤ °¡´ÉÇÔ dialog Ãß°¡");
-			    }
-		        
-		       
-		        if (marker != undefined){
-		        	
-		            marker.addListener('rightclick', function() {
-		            	
-						for (var i = 0; i < markers.length; i++) {
-					    	if (markers[i] === marker) {
-								markers[i].setMap(null);
-								markers.splice(i, 1);
-				
-								poly.getPath().removeAt(i);
-					    	}
-						}
-						
-						var test = "";
-						
-				    	for (var i = 0; i < markers.length; i++) {
-				    		test += markers[i].position+"#";
-				    		
-				    		//pop up
-				        	infowindowF.setContent("Ãâ¹ß");
-				 	        infowindowF.open(map, markers[0]);
-				 	        
-				 	        infowindowL.setContent("µµÂø");
-				 	        infowindowL.open(map, markers[markers.length-1]);
-					 	}
-				    	
-				    	$( "#route ").val(  test  );
-					 	
-		            });
-		        }
-	      }
-	
+         
+         function addLatLng(event) {
+            
+              if (markers.length <5){
+                  
+                 var path = poly.getPath();
+                  path.push(event.latLng);
+                  
+                   var marker = new google.maps.Marker({
+                    position: event.latLng,
+                    title: '#' + path.getLength(),
+                    map: map
+                   });
+                   markers.push(marker);
+                   
+                 $( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
+                 
+                 // pop up
+                 infowindowF.setContent("ì¶œë°œ");
+                  infowindowF.open(map, markers[0]);
+                  
+                  if(markers.length > 1){
+                    infowindowL.setContent("ë„ì°©");
+                     infowindowL.open(map, marker);
+                     
+//                      if(infowindowL.getPosition() != undefined){
+//                        infowindowL.setContent("ë„ì°©");
+//                         infowindowL.open(map, marker);
+//                      }
+                  }
+                 
+              }else{
+                 alert("5ê°œê¹Œì§€ ì§€ì • ê°€ëŠ¥í•¨ dialog ì¶”ê°€");
+             }
+              
+             
+              if (marker != undefined){
+                 
+                  marker.addListener('rightclick', function() {
+                     
+                  for (var i = 0; i < markers.length; i++) {
+                      if (markers[i] === marker) {
+                        markers[i].setMap(null);
+                        markers.splice(i, 1);
+            
+                        poly.getPath().removeAt(i);
+                      }
+                  }
+                  
+                  var test = "";
+                  
+                   for (var i = 0; i < markers.length; i++) {
+                      test += markers[i].position+"#";
+                      
+                      //pop up
+                       infowindowF.setContent("ì¶œë°œ");
+                        infowindowF.open(map, markers[0]);
+                        
+                        infowindowL.setContent("ë„ì°©");
+                        infowindowL.open(map, markers[markers.length-1]);
+                   }
+                   
+                   $( "#route ").val(  test  );
+                   
+                  });
+              }
+         }
 	
 	let editor;
 
@@ -305,18 +292,18 @@ $(function () {
 	        console.error( error );
 	    } );
     
-  //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============		
+  //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============		
 
-    //ÀÓÀÇÀÇ file object¿µ¿ª
+    //ì„ì˜ì˜ file objectì˜ì—­
     var files = {};
     var previewIndex = 0;
     var fileNameArray = new Array();
 
-    // image preview ±â´É ±¸Çö
+    // image preview ê¸°ëŠ¥ êµ¬í˜„
     // input = file object[]
     function addPreview(input) {
         if (input[0].files) {
-            //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+            //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
                 var file = input[0].files[fileIndex];
 
@@ -336,8 +323,8 @@ $(function () {
 
                 var reader = new FileReader();
                 reader.onload = function(img) {
-                    //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-                    //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+                    //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+                    //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
                     var imgNum = previewIndex++;
                     
                     var previewId = "";
@@ -361,7 +348,7 @@ $(function () {
                                             + "<a href=\"#\" value=\""
                                             + imgNum
                                             + "\" onclick=\"deletePreview(this)\">"
-                                            + "»èÁ¦" + "</a>" + "</div>");
+                                            + "ì‚­ì œ" + "</a>" + "</div>");
                     files[imgNum] = file;
                     
                     fileNameArray[imgNum]=file.name;
@@ -371,10 +358,10 @@ $(function () {
                 reader.readAsDataURL(file);
             }
         } else
-            alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+            alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
     }
 
-    //preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦
+    //preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ
     function deletePreview(obj) {
         var imgNum = obj.attributes['value'].value;
         delete files[imgNum];
@@ -390,7 +377,7 @@ $(function () {
         var fileNameExtension = fileName.toLowerCase().substring(
                 fileNameExtensionIndex, fileName.length);
         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-            alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+            alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
             return true;
         } else {
             return false;
@@ -418,7 +405,7 @@ $(function () {
     		}
     	});
         $('#attach input[type=file]').change(function() {
-            addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+            addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
         });
     }); 
 

@@ -19,13 +19,13 @@
 <script type="text/javascript">
 	
 	var cnt = 9;	
-	var searchKeyword = '애견상식';
+	var searchKeyword = '애견상식';	
 	var flag = false;
 	
-	$(document).ready(function(){
-		fnGetList();
-	});
-	
+// 	$(document).ready(function(){
+// 		fnGetList();
+// 	});
+
 	$(function () {
 		$("button").on("click",function(){
 			searchKeyword = $(this).text();
@@ -52,14 +52,53 @@
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
 				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
 		
+		// 은우꺼 : AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w
+		// 민희누나꺼 : AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0
+		
 		console.log(sTargetUrl);
 		
-// 		if(sGetToken){
-// // 			sTargetUrl += "&pageToken=" + sGetToken;
-// 			cnt += 3 ;
-// 			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
-// 			sTargetUrl += "&maxResults="+ 10;
-// 		}
+		if(sGetToken){
+			
+			flag = true;
+//				if(sGetToken){
+//		 			sTargetUrl += "" + sGetToken;
+// //					cnt += 3 ;
+//					console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
+// //					sTargetUrl += "&maxResults="+ 10;
+//				}	
+
+			console.log(" sGetToken : " + sGetToken)
+			
+
+				var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+			+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&pageToken="+sGetToken;
+
+				$.ajax({
+			
+			type : "POST",
+			url : sTargetUrl,
+			dataType : "jsonp",
+			success : function(jdata) {
+
+//						console.log(" 검색개수 : " + cnt);
+					if(flag == true){
+						$("#get_view").append(
+								  "<div class='col-md-4 style='border : 1px solid black; min-width : 350px''>"
+								+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
+								+ "<span class='box'>"
+								+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
+								+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
+								+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
+								+ "</div>");
+										
+						flag = false;
+						return;
+					}
+				}
+			}); // ajax End
+		}
+
+		
 		
 		$.ajax({
 			
@@ -70,13 +109,15 @@
 				
 				//console.log(jdata);
 				
+				alert("성공 했음니다")
+				
 				$(jdata.items).each(function(i){
 					
 					var videoId = this.id.videoId;
-					console.log(" 비디오 아이디 : " + videoId) ;
-					console.log(" sinppet.title : " + this.snippet.title) ; 
-					console.log(" sinppet.description : " + this.snippet.description) ; 
-					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
+// 					console.log(" 비디오 아이디 : " + videoId) ;
+// 					console.log(" sinppet.title : " + this.snippet.title) ; 
+// 					console.log(" sinppet.description : " + this.snippet.description) ; 
+// 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
 					$("#get_view").append(
 							  "<div class='col-md-4 style='border : 1px solid black; min-width : 350px''>"
 							+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
@@ -89,52 +130,24 @@
 				}).promise().done(function(){
 					
 					$(window).on("scroll", function(){
-		 				
-						if($(window).scrollTop() == ( $(document).height() - $(window).height() )){
-														
-							flag = true;
-			 				cnt += 3; 
-			 			
-			 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-							+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
-						$.ajax({
-							
-							type : "POST",
-							url : sTargetUrl,
-							dataType : "jsonp",
-							success : function(jdata) {
+						
+							if( Math.round( $(window).scrollTop() ) == $(document).height() - $(window).height() ){
+								
+								fnGetList( jdata.nextPageToken ) ;
 
-		 						console.log(" 검색개수 : " + cnt);
-		 						if(flag == true){
-		 							fnGetList();
-		 							flag = false;
-		 							return;
-		 						}
-		 					}
-		 				}); // ajax End
-						} // If End
-						}); // window End						
+							} // If End
+							}); // window End
+				
+											
 				}); // promise End
 			}
 		});
-				
-// 					if(jdata.nextPageToken){
-// 						$("#nav_view").append("<button class='paging btn btn-default' onclick='javascript:fnGetList(\""+jdata.nextPageToken+"\");'> 더 보기 </button>");
-// 					}
-// 				})
-// 			}
-// 		});
 		
-		
+					
 	}
 </script>
 
 <style type="text/css">
-img {
-	width: 100px;
-	height: 100px;
-}
-
 span {
 	max-width: 900px;
 	/* 	background-color: green; */
@@ -153,9 +166,9 @@ span {
 	/* 	padding-bottom: 1px; */
 }
 
-/* #get_view { */
-/* 	float: left; */
-/* } */
+/*  #get_view {  */
+/* 	float: left;  */
+/*  }  */
 
 .paging btn btn-default {
 	width: 100%;

@@ -192,123 +192,145 @@ $(function () {
 	
 	// =============================== 구글 지도 ============================================
 		
-  var map;
-  var marker;
-  var markers = [];
-  var loca = "${board.route}";
-  var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
-  var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
-  
-  var mapArea;
-  var markerArea;
-  var markersArea = [];
-  var adArea = "${board.route}";
-  var arrayTest = [];
-  var arrayMark = [];
-  
-  var str = "";
-  var markTest="";
-  var mmm = "";
-  
-  
-  if (adArea.indexOf("#") != -1){
-	  var areaArray = adArea.split("#");
-	  
-	  for ( i=0; i<areaArray.length-1; i++){
-		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
-		  arrayMark[i] = "markerArea"+i.toString();
-	  }   	  
-  }
-  
-  
-  
-  function initMap() {
-	     
-	  mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-		    zoom: 11,
-		    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
-		    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
-	});
-  
-  for ( i=0; i<arrayTest.length; i++){
-  	
-	    markerArea= arrayMark[i];
-	
-	    markerArea = new google.maps.Marker({
-	        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
-	    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
-	        map: mapArea
- 		});
-	    
-	    markersArea.push(markerArea);
-		}
-  
-  mapArea.addListener('click', function(event) {
-  	addMarker(event.latLng, "area");
-  });
-  
-  mapArea.addListener('rightclick', function() {
-  	if( markersArea.length > 0 ){
-	        	
-  		for (var i = markersArea.length-1; i >=0; i--) {
-	        		markersArea[i].setMap(null);
-	        		markersArea.splice(i, 1 );
-	            }
-	        	
-	        	$('#route').val('');
-  	}
-  });
-  	
-//////////////////////////////////////////////////////////////
-  
-  marker = new google.maps.Marker({
-      position: {lat: localat, lng: localng},
-      map: map
-  });
-  
-  markers.push(marker);
+          
+          var poly;
+         var map;
+         var marker;
+         var markers = [];
+         var route = $('#route').val();
+         var routeTest = [];
+         var routeMark = [];
+          var infowindowF;
+          var infowindowL;
+         
+         //마커가 하나라도 있을때
+         if (route.indexOf("#") != -1){
+               var routeArray = route.split("#");
+               
+               for ( i=0; i<routeArray.length-1; i++){
+                routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
+                routeMark[i] = "marker"+i.toString();
+               }        
+         }
+         
+         function initMap() {
+              map = new google.maps.Map(document.getElementById('map'), {
+                 zoom: 16,
+                 center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
+                      lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
+            });
    
-  }
-  
-function addMarker(location, str) {
-	  
-	if ( str == "area"){
-		  
-		 if (markersArea.length <3){
-		        var markerArea = new google.maps.Marker({
-			        position: location,
-			        map: mapArea
-		        });
-		        
-		     	markersArea.push(markerArea);
-		   		 
-	   			$("#route").val( $("#route").val()+location+"#");
-	   			
-   	    		var localat = parseFloat(  location.toString().substring( location.toString().indexOf("(")+1 ,location.toString().indexOf(",") )  );
-		 		var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
-   	    
-   	    		$.ajax({ 
-   	    	
-   	    		url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
-   	    
-   	        	success: function(data){
-   	           		markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
-   	           		if( markTest.indexOf('특별') != -1  ){
-   	           			markTest = markTest.replace('특별' ,   '');
-   	           		}
-   	           		if( markTest.indexOf('광역') != -1  ){
-   	           			markTest = markTest.replace('광역' ,   '');
-   	           		}
-   	           		if( markTest.indexOf('자치') != -1  ){
-   	           			markTest = markTest.replace('자치' ,   '');
-   	           		}
-   	          		$("#route").val($("#route").val()+markTest);
-   	         	}
-   	 			
-   	    		}); // ajax End
-		 }
-	}
-}  		
+              poly = new google.maps.Polyline({
+                 strokeColor: '#000000',
+                 strokeOpacity: 0.5,
+                 strokeWeight: 5,
+                 map: map
+              });
+              
+              var aaa = "";
+              
+              for ( i=0; i<routeTest.length; i++){
+                
+                 var path = poly.getPath();
+   
+                  path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
+                                          parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
+
+                marker= routeMark[i];
+            
+                marker = new google.maps.Marker({
+                    position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
+                     lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
+                   title: '#' + path.getLength(),
+                   map: map
+                });
+                
+                markers.push(marker);
+                
+             }
+   
+              infowindowF = new google.maps.InfoWindow();
+              infowindowL = new google.maps.InfoWindow();
+              infowindowF.setContent("출발");
+               infowindowF.open(map, markers[0]);
+               infowindowL.setContent("도착");
+               infowindowL.open(map, markers[markers.length-1]);
+   
+              map.addListener('click', addLatLng);
+              map.addListener('rightclick', function() {
+                 for (var i = markers.length-1; i >=0; i--) {
+                    markers[i].setMap(null);
+                    markers.splice(i, 1 );
+                    poly.getPath().removeAt(i);
+                    $( "#route ").val( '' );
+                  }
+                 });
+         }
+
+        
+         function addLatLng(event) {
+            
+              if (markers.length <5){
+                  
+                 var path = poly.getPath();
+                  path.push(event.latLng);
+                  
+                   var marker = new google.maps.Marker({
+                    position: event.latLng,
+                    title: '#' + path.getLength(),
+                    map: map
+                   });
+                   
+                   markers.push(marker);
+                 
+                 $( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
+                 
+                 // pop up
+                 infowindowF.setContent("출발");
+                  infowindowF.open(map, markers[0]);
+                  
+                  if(markers.length > 1){
+                    infowindowL.setContent("도착");
+                     infowindowL.open(map, marker);
+                  }
+                  
+              }else{
+                 alert("5개까지 지정 가능함 dialog 추가");
+             }
+              
+              
+              if (marker != undefined){
+                 
+                  marker.addListener('rightclick', function() {
+                     
+                  for (var i = 0; i < markers.length; i++) {
+                      if (markers[i] === marker) {
+                        markers[i].setMap(null);
+                        markers.splice(i, 1);
+            
+                        poly.getPath().removeAt(i);
+                      }
+                  }
+                  
+                  var test = "";
+                  
+                   for (var i = 0; i < markers.length; i++) {
+                      test += markers[i].position+"#";
+                      
+                      //pop up
+                       infowindowF.setContent("출발");
+                        infowindowF.open(map, markers[0]);
+                        
+                        infowindowL.setContent("도착");
+                        infowindowL.open(map, markers[markers.length-1]);
+                   }
+                   
+                   $( "#route ").val(  test  );
+                   
+                  });
+              }
+              
+         }
   	        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	        
 	  	      	
