@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
@@ -25,7 +26,10 @@
 
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
+<style>
 
+
+</style>
 
 <script type="text/javascript">
 	//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
@@ -186,9 +190,8 @@
 											</a>
 										</div>
 										<del>
-											<strong>${product.price}</strong>
-										</del>
-										<br /> <strong>${product.discountPrice}</strong>
+											<fmt:formatNumber value="${product.price}" pattern="#,###"/>
+										</del> <strong>&nbsp;&nbsp;<fmt:formatNumber value="${product.discountPrice}" pattern="#,###"/>원</strong>
 										<div class="cart-icon text-center">
 											<a href="#"><i class="fa fa-cart-plus"></i> 구매하기</a>
 										</div>

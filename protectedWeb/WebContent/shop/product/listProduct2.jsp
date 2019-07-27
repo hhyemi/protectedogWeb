@@ -1,4 +1,4 @@
-0...........<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -22,6 +22,53 @@
 
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
+
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+
+
+<script type="text/javascript">
+	//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
+	function fncGetList(currentPage) {
+		$("#currentPage").val(currentPage)
+		$("form").attr("method", "POST").attr("action", "/product/listProduct")
+				.submit();
+	}
+
+	//=============    상품상세조회(썸네일)  Event  처리 		=============
+	//============= 썸네일 사진 클릭 Event  처리 =============	
+	$(function() {
+		$(".img-prod").on(
+				"click",
+				function() {
+					//alert($(this).children("input").val())
+					$(self.location).attr(
+							"href",
+							"/product/getProduct?prodNo="
+									+ $(this).children("input").val());
+				});
+
+		$("#getproduct").on(
+				"click",
+				function() {
+					//alert($(this).children("input").val())
+					$(self.location).attr(
+							"href",
+							"/product/getProduct?prodNo="
+									+ $(this).children("input").val());
+				});
+	});
+
+	$(function() {
+
+		$("td.ct_btn01:contains('장바구니로 이동')").on("click", function() {
+			//alert("");
+			self.location = "/shop/addCart?prodNo=${param.prodNo}"
+
+		});
+
+	});
+</script>
 
 </head>
 
@@ -81,22 +128,51 @@
 	<!--====================================================
                         SHOP-P1
 ======================================================-->
-<BR><BR/>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" >
-  <a class="navbar-brand" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">사료 <span class="sr-only">(current)</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </div>
-  </div>
-</nav>
-<br><br>
+	<section id="shop-p1" class="shop-p1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="shop-p1-title">
+						<h3>보호마켓</h3>
+						<div class="heading-border-light"></div>
+					</div>
+				</div>
+
+				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
+				<div class="col-lg-9">
+					<div class="row">
+						<c:set var="i" value="0" />
+						<c:forEach var="product" items="${list}">
+							<c:set var="i" value="${i+1}" />
+							<div class="col-lg-4 col-md-6 mb-4">
+								<div class="card ">
+									<a><input type="hidden" value="${product.prodNo}" /> <img
+										class="img-fluid"
+										src="../../resources/file/fileShop/${product.mainFile}" alt=""></a>
+									<div class="card-body text-center">
+										<div class="card-title">
+											<a href="#">${product.prodName} <input type="hidden"
+												value="${product.prodNo}">
+											</a>
+										</div>
+										<del>
+											<strong>${product.price}</strong>
+										</del>
+										<br /> <strong>${product.discountPrice}</strong>
+										<div class="cart-icon text-center">
+											<a href="#"><i class="fa fa-cart-plus"></i> 구매하기</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- <div class="row my-4">-->
 
 
 	<!--====================================================
