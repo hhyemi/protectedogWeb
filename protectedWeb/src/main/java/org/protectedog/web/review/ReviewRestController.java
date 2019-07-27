@@ -46,7 +46,7 @@ public class ReviewRestController {
 		int grade = Integer.parseInt((String) mapReview.get("grade"));
 		User user = (User)session.getAttribute("user");
 
-		//¸®ºä µğºñ¿¡ ³Ö±â
+		//ë¦¬ë·° ë””ë¹„ì— ë„£ê¸°
 		Review review = new Review();
 		review.setId(user.getId());
 		review.setNickname(user.getNickname());
@@ -60,7 +60,7 @@ public class ReviewRestController {
 		review = reviewService.getReview(review.getPostNo());
 		
 		
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		String[] fileList =  mapReview.get("file").toString().split(",");
 		

@@ -110,18 +110,19 @@
  			 <div class="col-lg-5 offset-lg-1">
              <div class="s_product_text">			 
             <div>
-             <font size=6  ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
-			<h3>${funding.fundPay}원</h3>
+             <h4>&emsp;</h4>
+             <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> </div>
+			<div style="padding-bottom:10px"><font size="5" >${funding.fundPay}원</font></div>
 			<!-- 후원종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
-			<h3><strong style="color:#8c8479">후원종료</strong></h3>			 			
+			<font size="5"><strong style="color:#d43333">후원종료</strong></font>		 			
 			 </c:if>
         	 <!-- 후원중 -->
 			<c:if test ="${funding.statusCode eq 3 }">					 
-			<h4 class="media-heading">남은기간 <b>${funding.fundRemainDate }</b>일</h4> 	
+			<font size="5" class="media-heading">남은기간 <b>${funding.fundRemainDate }</b>일</font> 	
 			</c:if>		    
 			 <div class="progress">
-			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%; background-color:#C9BFB0!important;"></div>
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundTargetDay-funding.fundRemainDate}%; background-color:#e8cec8!important;"></div>
 			 </div>
 			<div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > ${funding.fundStartDate}</div>
@@ -129,9 +130,9 @@
 			 </div>					 
 		     <br/>
 	
-				 <div><h3>후원율&ensp;<strong style="color:#4E8092">${funding.fundRate}%</strong></h3></div>
+				 <div><font size="5" >후원율&ensp;<strong style="color:#f04f23">${funding.fundRate}%</strong></font></div>
 				 <div class="progress">					 
-				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%; background-color:#4E8092!important;"></div>
+				 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.fundRate}%; background-color:#e66447!important;"></div>
 				 </div>		
 			<div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > 0원</div>
@@ -139,7 +140,7 @@
 			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
-                <a class="main_btn" href="#">후원하기</a><a class="main_btn" href="#">문의하기</a>  
+                <button id="btnFund" class="btn btn-default">후원하기</button><button id="btnQuestion" class="btn btn-default">문의하기</button>  
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
@@ -237,8 +238,8 @@
 					<hr/><br/>	
 					<div class="form-group2">
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-					<a class="main_btn" href="#">후기수정</a> 			
-					<a class="main_btn" href="#">후기삭제</a> 
+					<button href="#">후기수정</button> 			
+					<button href="#">후기삭제</button> 
 					</c:if>									
 		            </div>
 					</c:if>	
@@ -294,7 +295,7 @@
     $(function(){
     
 		//============= 후원하기 Event  처리 =============	
-	 	$( "a:contains('후원하기')" ).on("click" , function() {
+	 	$( "#btnFund" ).on("click" , function() {
 	 		if(${user == null}){
 	 			alert("로그인이 필요합니다.");
 	 		}else{
@@ -307,7 +308,7 @@
 	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	
-	 	$( "a:contains('문의하기')" ).on("click" , function() {
+	 	$( "#btnQuestion" ).on("click" , function() {
 
 		});   
 	

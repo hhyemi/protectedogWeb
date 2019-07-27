@@ -9,7 +9,9 @@
 
 <head>
     <meta charset="EUC-KR">  
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+    <meta name="description" content="">
+    <meta name="author" content="">  
 <title>보호할개 · 후원신청</title>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -34,6 +36,21 @@
        body{
           font-family: NanumSquare, sans-serif !important;
        }
+/* 	   button { */
+/* 		  background-color: #f04f23; */
+/* 		  border: none; */
+/* 		  color: white; */
+/* 		  padding: 16px 32px; */
+/* 		  text-align: center; */
+/* 		  font-size: 16px; */
+/* 		  margin: 4px 2px; */
+/* 		  opacity: 0.6; */
+/* 		  transition: 0.3s; */
+/* 		  display: inline-block; */
+/* 		  text-decoration: none; */
+/* 		  cursor: pointer; */
+/* 		} */
+/*          button:hover {opacity: 1} */
     </style>
     
  	<!-- ToolBar Start ///////////////////////////////////// -->
@@ -42,12 +59,12 @@
     
   </head>
   <body class="goto-here">
-    <div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
-            <h1 >후원신청</h1>
+          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
+            <font size="7">후원신청</font>
           </div>
         </div>
       </div>
@@ -55,7 +72,7 @@
 	<br/><p/>
     <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
       		  <div class="form-group2 text-center">
-	  			<button id="btn-add" class="btn btn-primary ">작성하기</button>
+	  			<button id="btn-add" class="btn btn-default">작성</button>
 		  </div>  
 		 <form class="form-inline" name="detailForm">
 		    	<div class="container" >
@@ -161,9 +178,7 @@
 
   <!-- loader -->
 
-  <script src="../../resources/prodmenu/js/main.js"></script>
  
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"> </script>
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">

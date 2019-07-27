@@ -52,14 +52,14 @@ public class ReviewController {
 		
 		User user = (User) session.getAttribute("user");
 		
-		//ÁöµµÁ¤º¸
+		//ì§€ë„ì •ë³´
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("placeName", URLDecoder.decode(placeName,"UTF-8"));
 		map.put("placeAddr", URLDecoder.decode(placeAddr,"UTF-8"));
 		map.put("placeJIAddr", URLDecoder.decode(placeJIAddr,"UTF-8"));
 		map.put("placeTel", URLDecoder.decode(placeTel,"UTF-8"));
 		
-		//ÈÄ±âÁ¤º¸
+		//í›„ê¸°ì •ë³´
 		String originSearch = null;
 
 		if (search.getCurrentPage() == 0) {
@@ -90,7 +90,7 @@ public class ReviewController {
 		search.setSearchKeyword(originSearch);
 
 
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("list", reviewMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
