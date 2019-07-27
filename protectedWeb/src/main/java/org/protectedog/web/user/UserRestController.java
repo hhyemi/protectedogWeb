@@ -97,7 +97,7 @@ public class UserRestController {
 		params.put("to", phone);
 		params.put("from", "01047576528");
 		params.put("type", "SMS");
-		params.put("text", "��ȣ�Ұ� ������ȣ �����ڸ��Դϴ�. : ["+authKey+"] ");
+		params.put("text", "[#protected] 휴대전화 인증번호입니다. : ["+authKey+"] ");
 		params.put("app_version", "test app 1.2"); // application name and version
 
 		try {

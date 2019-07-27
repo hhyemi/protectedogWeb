@@ -791,7 +791,11 @@ INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, r
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
 		VALUES	 (	seq_apply_apply_no.nextval, 10047, 'user05', '011-2123-4569', '학생', '아파트', '있음', '동의', '없음', '계획', '예상비용', '이유', '상황', SYSDATE  );
 
-				
+UPDATE adopt SET status_code = 3 where post_no = 10047;
+UPDATE adopt SET status_code = 2 where post_no = 10046;
+UPDATE adopt SET status_code = 2 where post_no = 10048;
+UPDATE adopt SET status_code = 2 where post_no = 10049;
+		
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 

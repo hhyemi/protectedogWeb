@@ -114,7 +114,7 @@ public class UserController {
 		
 		System.out.println("/users/addUsersBase : GET");
 		
-		return "redirect:/users/addUsersBaseView.jsp";
+		return "redirect:/users/addUsersBase.jsp";
 	}
 	
 	@RequestMapping(value="addUsersBase", method=RequestMethod.POST)
@@ -146,7 +146,7 @@ public class UserController {
 		
 		Session.setAttribute("user", user);
 		
-		return "redirect:/users/addUsersAdditionalView.jsp";
+		return "redirect:/users/addUsersAddition.jsp";
 	}
 	
 	@RequestMapping(value="addUsersAdditional", method=RequestMethod.GET)
@@ -154,7 +154,7 @@ public class UserController {
 		
 		System.out.println("/users/addUsersAddtional : GET");
 		
-		return "redirect:/users/addUsersAdditionalView.jsp";
+		return "redirect:/users/addUsersAddition.jsp";
 	}
 	
 	@RequestMapping(value="addUsersAdditional", method=RequestMethod.POST)
@@ -169,7 +169,7 @@ public class UserController {
 		
 		userService.addUsersAdditional(user);
 		
-		return "redirect:/users/loginView.jsp";
+		return "redirect:/users/login.jsp";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
@@ -177,7 +177,7 @@ public class UserController {
 		
 		System.out.println("/users/login : GET");
 		
-		return "redirect:/users/loginView.jsp";
+		return "redirect:/users/login.jsp";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
@@ -204,8 +204,8 @@ public class UserController {
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String accessTime=format.format(System.currentTimeMillis());
 		
-		System.out.println("����IP? : "+ip);
-		System.out.println("���ӽð�? : "+accessTime);
+		System.out.println("현재 IP? : "+ip);
+		System.out.println("현재 접속시간? : "+accessTime);
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
