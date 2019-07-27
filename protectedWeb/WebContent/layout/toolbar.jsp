@@ -130,7 +130,8 @@
                   <li><a href="#" class="log-top login-modal" data-toggle="modal" data-target="#login-modal">Login</a></li>
                   </c:if>
                   <c:if test="${ sessionScope.user != null }">
-                  <li><a href="#" class="log-top profile">${ sessionScope.user.nickname } ¥‘</a></li>
+                  <li><a href="#" class="log-top profile">${ sessionScope.user.nickname } Îãò</a></li>
+                  <li><a href="/users/logout" class="log-top logOut">LogOut</a>
                   </c:if>
                 </ul>
               </div>
@@ -255,12 +256,12 @@
     
         	<script type="text/javascript">
 
-		//============= "∑Œ±◊¿Œ"  Event ø¨∞· =============
+		//============= "Î°úÍ∑∏Ïù∏"  Event Ï≤òÎ¶¨ =============
 		$(".login-modal").on("click", function() {
 			
-			alert("§æ§∑");
+			alert("„Öé„Öá");
 			fncLogin();
-			alert("§æ§∑");
+			alert("„Öé„Öá");
 			
 		});
 		
@@ -272,13 +273,13 @@
 				alert(id);
 				alert(pw);
 				if(id == null || id.length <1) {
-					alert('ID ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
+					alert('IDÎ•º ÏûÖÎ†•ÌïòÏã≠ÏãúÏò§.');
 					$("#login_username").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('∆–Ω∫øˆµÂ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
+					alert('ÎπÑÎ∞ÄÎ≤àÌò∏Î•º ÏûÖÎ†•ÌïòÏã≠ÏãúÏò§.');
 					$("#login_password").focus();
 					return;
 				}
@@ -296,14 +297,14 @@
 					success : function(response){
 						alert("pw : "+JSON.stringify(response))
 						if(response.pw == pw && response.id == id){
-							alert("µÈæÓøÕº≠ : "+response.pw);
-							alert(response.nickname+" ¥‘ »Øøµ«’¥œ¥Ÿ!");
+							alert("Î°úÍ∑∏Ïù∏ ÏÑ±Í≥µ pw : "+response.pw);
+							alert(response.nickname+" Îãò ÌôòÏòÅÌï©ÎãàÎã§!");
 // 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
 							self.location="/index.jsp";
 						}
 						if(response.pw != pw || response.id != id){
 							alert(response.pw);
-							alert("æ∆¿Ãµ »§¿∫ ∫Òπ–π¯»£∞° ¿œƒ°«œ¡ˆ æ Ω¿¥œ¥Ÿ.");
+							alert("ÏïÑÏù¥Îîî ÌòπÏùÄ ÎπÑÎ∞ÄÎ≤àÌò∏Í∞Ä ÎßûÏßÄ ÏïäÏäµÎãàÎã§.");
 							$("form")[0].reset();
 							return;
 							$("#id").focus();
@@ -353,7 +354,7 @@
 		      
 
 
-		//============= »∏ø¯ø¯∞°¿‘»≠∏È¿Ãµø =============
+		//============= ÌöåÏõêÍ∞ÄÏûÖ EventÏ≤òÎ¶¨ =============
 		$( function() {
 			$("#regist").on("click" , function() {
 				self.location = "/users/addUsersBase"

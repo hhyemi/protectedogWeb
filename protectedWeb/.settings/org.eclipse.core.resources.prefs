@@ -4,16 +4,10 @@
 eclipse.preferences.version=1
 encoding//SQL(Script)/protectedog.sql=EUC-KR
 encoding//WebContent/shop/cart/reviewtest.jsp=UTF-8
-<<<<<<< HEAD
 encoding//WebContent/shop/order/pointexample.jsp=UTF-8
-=======
->>>>>>> refs/remotes/origin/master
 encoding//WebContent/shop/product/getProduct.jsp=UTF-8
 encoding//WebContent/shop/product/listProduct.jsp=UTF-8
-<<<<<<< HEAD
 encoding//WebContent/shop/product/shop.jsp=UTF-8
-=======
->>>>>>> refs/remotes/origin/master
 encoding//WebContent/users/callback.jsp=UTF-8
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR
 encoding//src/main/java/org/protectedog/common/openAPI/NewsAPI.java=UTF-8
@@ -22,4 +16,6 @@ encoding//src/main/java/org/protectedog/web/InformationShare/InfomationShareCont
 encoding//src/main/java/org/protectedog/web/comment/CommentController.java=EUC-KR
 encoding//src/main/java/org/protectedog/web/storyfunding/FundingController.java=EUC-KR
 encoding//src/main/java/org/protectedog/web/storyfunding/FundingRestController.java=EUC-KR
+encoding//src/main/java/org/protectedog/web/user/UserController.java=UTF-8
+encoding//src/main/java/org/protectedog/web/user/UserRestController.java=UTF-8
 encoding/<project>=EUC-KR
