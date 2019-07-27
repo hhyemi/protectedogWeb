@@ -97,7 +97,7 @@ public class UserRestController {
 		params.put("to", phone);
 		params.put("from", "01047576528");
 		params.put("type", "SMS");
-		params.put("text", "º¸È£ÇÒ°³ ÀÎÁõ¹øÈ£ ¿©¼¸ÀÚ¸®ÀÔ´Ï´Ù. : ["+authKey+"] ");
+		params.put("text", "ï¿½ï¿½È£ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ô´Ï´ï¿½. : ["+authKey+"] ");
 		params.put("app_version", "test app 1.2"); // application name and version
 
 		try {
@@ -123,8 +123,8 @@ public class UserRestController {
 		
 		String receiver=email.get("email");
 		System.out.println("mailSender email : "+email);
-		String title="[#protected] °èÁ¤ÀÎÁõ¸ŞÀÏ";
-		String content="[#protected] °èÁ¤ÀÎÁõ ¾È³» ¸ŞÀÏÀÔ´Ï´Ù. ÀÎÁõ¹øÈ£´Â [ "+authKey+" ] ÀÔ´Ï´Ù.";
+		String title="[#protected] ê³„ì •ì¸ì¦ ë©”ì¼ì…ë‹ˆë‹¤";
+		String content="[#protected] ê³„ì • ì¸ì¦ ì‹œë„ì¤‘ì…ë‹ˆë‹¤. ê³„ì • ì¸ì¦ ë²ˆí˜¸ëŠ” [ "+authKey+" ] ì…ë‹ˆë‹¤.";
 		
 		SendMail.mailSend(title, content, receiver);
 
@@ -135,11 +135,21 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
-	public User login(@RequestBody Map<String, Object> chkLogin) throws Exception{
+	public User login(@RequestBody Map<String, Object> chkLogin, HttpSession session) throws Exception{
 		
 		System.out.println("json-login : POST");
 		
 		User user=userService.getUsers((String)chkLogin.get("id"));
+		System.out.println("session ìƒì„± ì „ user : "+user);
+		System.out.println("session ìƒì„± ì „ chkLogin pw : "+chkLogin.get("pw"));
+		System.out.println("session ìƒì„± ì „ user pw :"+user.getPw());
+		if(chkLogin.get("pw").equals(user.getPw())) {
+			session.setAttribute("user", user);
+			System.out.println("json/login ìˆ˜í–‰ í›„ user : "+user);
+			System.out.println("json/login ìˆ˜í–‰ í›„ sessison"+session.getAttribute("user"));
+		}else {
+			System.out.println("json/login ìˆ˜í–‰ í›„ : "+user);
+		}
 		
 		return user;
 	}

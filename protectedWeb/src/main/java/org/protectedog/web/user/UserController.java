@@ -41,7 +41,7 @@ public class UserController {
 		System.out.println(this.getClass());
 	}
 	
-	///PagingÀ» À§ÇÑ Value¼³Á¤
+	///Pagingì²˜ë¦¬ë¥¼ ìœ„í•œ Value ìƒì„±
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
@@ -204,8 +204,8 @@ public class UserController {
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String accessTime=format.format(System.currentTimeMillis());
 		
-		System.out.println("Á¢¼ÓIP? : "+ip);
-		System.out.println("Á¢¼Ó½Ã°£? : "+accessTime);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½IP? : "+ip);
+		System.out.println("ï¿½ï¿½ï¿½Ó½Ã°ï¿½? : "+accessTime);
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
@@ -283,12 +283,12 @@ public class UserController {
 				BufferedOutputStream stream=new BufferedOutputStream(new FileOutputStream(new File(savePath, originalFile)));
 				stream.write(bytes);
 				stream.close();
-				model.addAttribute("resultMSG", "ÆÄÀÏ ¾÷·Îµå ¼º°ø");
+				model.addAttribute("resultMSG", "ì—…ë¡œë“œ ì„±ê³µ");
 			} catch(Exception e) {
-				model.addAttribute("resultMSG", "¾÷·Îµå ½ÇÆĞ");
+				model.addAttribute("resultMSG", "ì—…ë¡œë“œ ì‹¤íŒ¨");
 			} 
 		} else {
-			model.addAttribute("resultMSG", "ÆÄÀÏ ¼±ÅÃ ¿ä¸Á");
+			model.addAttribute("resultMSG", "ì˜¬ë°”ë¥¸ íŒŒì¼ì„ ì—…ë¡œë“œí•˜ì‹­ì‹œì˜¤.");
 		}
 	
 		user.setProfile(originalFile);

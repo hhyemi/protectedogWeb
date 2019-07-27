@@ -147,7 +147,8 @@ public class MessageController {
 		model.addAttribute("search", search);
 		model.addAttribute("receiveId", receiveId);
 		
-		return "forward:/message/listReceiveMessageView.jsp";
+//		return "forward:/message/listReceiveMessageView.jsp";
+		return "forward:/message/listReceiveMessage.jsp";
 	}
 	
 }

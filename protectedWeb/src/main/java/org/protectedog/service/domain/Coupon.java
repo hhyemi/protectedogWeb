@@ -82,7 +82,7 @@ public class Coupon {
 	}
 	@Override
 	public String toString() {
-		return "Coupon [receiveId=" + receiverId + ", couponName=" + couponName + ", couponCode=" + couponCode
+		return "Coupon [receiverId=" + receiverId + ", couponName=" + couponName + ", couponCode=" + couponCode
 				+ ", discount=" + discount + ", couponImage=" + couponImage + ", couponNo=" + couponNo + ", couponStatus=" + couponStatus + ", makeDate="
 				+ makeDate + ", limitDate=" + limitDate + ", UseDate=" + UseDate + "]";
 	}
