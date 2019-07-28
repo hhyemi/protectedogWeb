@@ -1,39 +1,23 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ë³´í˜¸í• ê°œ.ê¸€ìˆ˜ì •</title>
 <!--  bootstrap CDN  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
-@font-face {
-	font-family: ng;
-	src: url(NanumGothic.eot);
-	src: local(¡Ø), url(NanumGothic.woff) format(¡®woff¡¯);
-}
-
-body {
-	font-family: '³ª´®°íµñ', 'NanumGothic', ng
-}
-
-body {
-	padding-top: 50px;
-}
-
 #preview img {
 	width: 100px;
 	height: 100px;
@@ -92,17 +76,30 @@ $(function () {
 
 	</script>
 
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
 <body>
-
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">ì •ë³´ê³µìœ </a></span>
+					</p>
+					<h1 class="mb-0 bread">ê¸€ ìˆ˜ì •</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<br/>
+	
 	<div class="container">
-		<h3 class=" text-info">±Û ¼öÁ¤</h3>
 
-		<hr>
-
-		<div style="border: 1px solid #d7dade; padding: 3px;">
+		<div style="border: 2px solid #d7dade; padding: 3px;">
 
 			<form class="form-horizontal" name="detailForm">
 
@@ -111,45 +108,17 @@ $(function () {
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
 							id="postTitle" style="height: 50px; font-size: 20px"
-							placeholder="${board.postTitle}" />
+							value="${board.postTitle}" />
 					</div>
 				</div>
 
-				<!-- 			<div class="row"> -->
-				<!-- 				<div class="col-xs-4 col-md-2"> -->
-				<!-- 					<strong>ÀÌ¹ÌÁö</strong> -->
-				<!-- 				</div> -->
-				<!-- 			</div> -->
-
-				<br />
-
-				<div class="row">
-					<div class="col-xs-12 col-md-12">
-						<div class="body">
-							<!-- Ã·ºÎ ¹öÆ° -->
-							<div id="attach">
-								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox">»çÁøÃ·ºÎ</label> <input id="uploadInputBox"
-									style="display: none" type="file" name="filedata" multiple />
-							</div>
-
-							<!-- ¹Ì¸®º¸±â ¿µ¿ª -->
-							<div id="preview" class="content" align="center"
-								style="display: inline; min-width: 600px;"></div>
-
-							<!-- multipart ¾÷·Îµå½Ã ¿µ¿ª -->
-							<div id="uploadForm" style="display: none;"></div>
-						</div>
-					</div>
-				</div>
-
-				<hr />
+				<br/>
 
 				<div id="ckEditor" align="center">
 
 					<div id="toolbar-container" align="center"
 						class="col-xs-12 col-md-12"></div>
-					<textarea class="col-xs-12 col-md-12" id="editor"
+					<textarea class="col-xs-12 col-md-12" id="editor1"
 						name="postContent" style="text-align: left;">
 						${board.postContent}
 					</textarea>
@@ -158,7 +127,7 @@ $(function () {
 					            	<div class="col-md-12">
 	            	<br/>
                 		<label><strong>
-	                		¼öÁ¤ÇÏ½Ç °æ¿ì Áöµµ¸¦ ¿ìÅ¬¸¯ÇÏ°í ¸¶Ä¿¸¦ ´Ù½Ã »ı¼ºÇØÁÖ¼¼¿ä.
+	                		ìˆ˜ì •í•˜ì‹¤ ê²½ìš° ì§€ë„ë¥¼ ìš°í´ë¦­í•˜ê³  ë§ˆì»¤ë¥¼ ë‹¤ì‹œ ìƒì„±í•´ì£¼ì„¸ìš”.
                 		</strong></label>
                		</div>
                		
@@ -176,8 +145,8 @@ $(function () {
 		<hr />
 		<div class="row">
 			<div class="col-md-12 text-center ">
-				<button type="button" class="btn btn-primary">¼öÁ¤</button>
-				<a id="reset" class="btn btn-primary btn" role="button">Ãë¼Ò</a>
+				<button type="button" class="btn btn-primary">ìˆ˜ì •</button>
+				<a id="reset" class="btn btn-primary btn" role="button">ì·¨ì†Œ</a>
 			</div>
 		</div>
 
@@ -190,7 +159,7 @@ $(function () {
 	<script>
 	
 	
-	// =============================== ±¸±Û Áöµµ ============================================
+	// =============================== êµ¬ê¸€ ì§€ë„ ============================================
 		
           
           var poly;
@@ -203,7 +172,7 @@ $(function () {
           var infowindowF;
           var infowindowL;
          
-         //¸¶Ä¿°¡ ÇÏ³ª¶óµµ ÀÖÀ»¶§
+         //ë§ˆì»¤ê°€ í•˜ë‚˜ë¼ë„ ìˆì„ë•Œ
          if (route.indexOf("#") != -1){
                var routeArray = route.split("#");
                
@@ -214,7 +183,7 @@ $(function () {
          }
          
          function initMap() {
-              map = new google.maps.Map(document.getElementById('map'), {
+              map = new google.maps.Map(document.getElementById('mapArea'), {
                  zoom: 16,
                  center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
                       lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
@@ -251,9 +220,9 @@ $(function () {
    
               infowindowF = new google.maps.InfoWindow();
               infowindowL = new google.maps.InfoWindow();
-              infowindowF.setContent("Ãâ¹ß");
+              infowindowF.setContent("ì¶œë°œ");
                infowindowF.open(map, markers[0]);
-               infowindowL.setContent("µµÂø");
+               infowindowL.setContent("ë„ì°©");
                infowindowL.open(map, markers[markers.length-1]);
    
               map.addListener('click', addLatLng);
@@ -286,16 +255,16 @@ $(function () {
                  $( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
                  
                  // pop up
-                 infowindowF.setContent("Ãâ¹ß");
+                 infowindowF.setContent("ì¶œë°œ");
                   infowindowF.open(map, markers[0]);
                   
                   if(markers.length > 1){
-                    infowindowL.setContent("µµÂø");
+                    infowindowL.setContent("ë„ì°©");
                      infowindowL.open(map, marker);
                   }
                   
               }else{
-                 alert("5°³±îÁö ÁöÁ¤ °¡´ÉÇÔ dialog Ãß°¡");
+                 alert("5ê°œê¹Œì§€ ì§€ì • ê°€ëŠ¥í•¨ dialog ì¶”ê°€");
              }
               
               
@@ -318,10 +287,10 @@ $(function () {
                       test += markers[i].position+"#";
                       
                       //pop up
-                       infowindowF.setContent("Ãâ¹ß");
+                       infowindowF.setContent("ì¶œë°œ");
                         infowindowF.open(map, markers[0]);
                         
-                        infowindowL.setContent("µµÂø");
+                        infowindowL.setContent("ë„ì°©");
                         infowindowL.open(map, markers[markers.length-1]);
                    }
                    
@@ -423,20 +392,20 @@ $(function () {
 	
 	 $(document).ready(function() {
 
-         //============= »çÁø¹Ì¸®º¸±â =============
+         //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
          $('#attach input[type=file]').change(function() {
-            addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+            addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
         });
 	 });
          
 	function fncUpdateInfo(){
 	         
-	      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+	      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 	    	  
 	    	  var title = $("#postTitle").val();
 	      
 	      	  if(title.length < 1 || title == null ){
-	      		  alert("Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä");
+	      		  alert("ì œëª©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”");
 	      	  }
 	          $(function() {     
 	            var form = $('#uploadForm')[0];
@@ -458,13 +427,13 @@ $(function () {
 	                data : formData,
 	                success : function(result) {
 	                    if (result === -1) {
-	                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-	                        // ÀÌÈÄ µ¿ÀÛ ...
+	                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+	                        // ì´í›„ ë™ì‘ ...
 	                    } else if (result === -2) {
-	                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-	                        // ÀÌÈÄ µ¿ÀÛ ...
+	                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+	                        // ì´í›„ ë™ì‘ ...
 	                    } else {
-	                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+	                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 	                    }
 	                }
 	            });
@@ -474,22 +443,22 @@ $(function () {
 	      $('form').attr("method","POST").attr("action","/info/updateInfo").attr("enctype","multipart/form-data").submit();
 	   }
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	   function fnAddFile(fileNameArray) {
 	         $("#multiFile").val(fileNameArray)    
 	   }   
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	       //ÀÓÀÇÀÇ file object¿µ¿ª
+	       //ì„ì˜ì˜ file objectì˜ì—­
 	     var files = {};
 	     var previewIndex = 0;
 	     var fileNameArray = new Array();
-	     // image preview ±â´É ±¸Çö
+	     // image preview ê¸°ëŠ¥ êµ¬í˜„
 	     // input = file object[]
 	     function addPreview(input) {
 	         if (input[0].files) {
-	             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
 	                 var file = input[0].files[fileIndex];
@@ -501,7 +470,7 @@ $(function () {
 	                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 	                
-	                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+	                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 	               var imgSelectName = "img";
 	               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 	                  imgSelectName = "iframe";
@@ -509,8 +478,8 @@ $(function () {
 
 	                 var reader = new FileReader();
 	                 reader.onload = function(img) {
-	                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                     
 	                     var imgNum = previewIndex++;
 	                     
@@ -520,12 +489,12 @@ $(function () {
 	                     }else{
 	                        previewId = "startNo";   
 	                     }
-	                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                     if(Object.keys(files).length>=8){
-	                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                        delete files[imgNum];
 	                     }else{
-	               // 8Àå ÀÌÇÏ 
+	               // 8ì¥ ì´í•˜ 
 	               
 	               			document.querySelector( '#editor' ).addEventListener( 'click', () => {
                 	    const editorData = editor.getData();     	           
@@ -539,7 +508,7 @@ $(function () {
 	                                             + "<a href=\"#\" value=\""
 	                                             + imgNum
 	                                             + "\" onclick=\"deletePreview(this)\">"
-	                                             + "   »èÁ¦" + "</a>" + "</div>");
+	                                             + "   ì‚­ì œ" + "</a>" + "</div>");
 
 	                     files[imgNum] = file;
 	                     fileNameArray[imgNum]=file.name;
@@ -551,10 +520,10 @@ $(function () {
 	                 reader.readAsDataURL(file);
 	             }
 	         } else
-	             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	     }
 
-	     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	     function deletePreview(obj) {
 	         var imgNum = obj.attributes['value'].value;
 	         delete files[imgNum];
@@ -564,14 +533,14 @@ $(function () {
 	         resizeHeight();
 	     }
 
-	     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	     function validation(fileName) {
 	         fileName = fileName + "";
 	         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	             return true;
 	         } else {
 	             return false;

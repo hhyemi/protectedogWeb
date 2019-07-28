@@ -90,8 +90,6 @@ $(function () {
 	<div class="container">
 		<h3 class=" text-info">새 글 쓰기</h3>
 
-		<hr>
-
 		<div style="border: 1px solid #d7dade; padding: 3px;">
 
 			<form class="form-horizontal" name="detailForm">
@@ -291,7 +289,7 @@ $(function () {
 // 	    .catch( error => {
 // 	        console.error( error );
 // 	    } );
-	
+
 	CKEDITOR.addCss('figure[class*=easyimage-gradient]::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; }' +
 		      'figure[class*=easyimage-gradient] figcaption { position: relative; z-index: 2; }' +
 		      '.easyimage-gradient-1::before { background-image: linear-gradient( 135deg, rgba( 115, 110, 254, 0 ) 0%, rgba( 66, 174, 234, .72 ) 100% ); }' +
@@ -331,7 +329,23 @@ $(function () {
 		        {
 		          name: 'insert',
 		          items: ['EasyImageUpload']
-		        }
+		        },
+		        {
+		        	name : 'max',
+		        	items:['Maximize', 'ShowBlocks']
+		        },
+		        {
+		        	name : 'fontSize',
+		        	items:['Styles','Format','Font','FontSize']
+		        },
+		        {
+		        	name : 'sourceView',
+		        	items:['Source','-','Save','NewPage','Preview','-','Templates']
+		    	},
+		        {
+		        	name : 'align',
+		        	items:['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']
+		    	},
 		      ],
 		      height: 630,
 		      cloudServices_uploadUrl: 'https://33333.cke-cs.com/easyimage/upload/',

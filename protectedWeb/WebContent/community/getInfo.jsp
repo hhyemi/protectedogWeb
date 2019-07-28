@@ -11,6 +11,7 @@
 
 <!-- KAKAO -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
 
 <style type="text/css">
@@ -41,6 +42,11 @@ body {
 img{
 	max-width: 600px;
 }
+
+.fa-medal{
+	font-size: 15px;
+}
+
 </style>
 </head>
 
@@ -48,7 +54,7 @@ img{
 	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
-	<div class="container">
+	<div class="container" style="padding-top: 30px">
 		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
@@ -87,8 +93,8 @@ img{
 		  	
 		<div class="minibox" align="center">
 			<div>
-				<span>${board.recommendCount}</span>
-				<button type="button" class="recommand btn btn-primary">추천</button>
+				<span style="font-size: 15px; border: 1px solid black; padding: 3px">${board.recommendCount}</span>
+				<span class="recommand fas fa-medal">HOT개로</span>
 				<br/>
 				<p/>
 				<br/>
@@ -118,7 +124,7 @@ img{
 
 	$(function() {
 		
-		$("button:contains('추천')").on("click", function(){
+		$(".fa-medal").on("click", function(){
 				
 			if(${sessionScope.user == null}){
 				alert("로그인 하십쇼");
