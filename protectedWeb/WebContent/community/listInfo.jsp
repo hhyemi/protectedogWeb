@@ -27,20 +27,29 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
+
 <!--  CSS -->
 <style>
+
+#searchKeyword{
+	height: 40px;
+	width: 150px;
+}
 #searchSubmmit{
 	width : 60px;
-	height : 52px;
+	height : 40px;
 	
 	border-radius : 0px 15px 15px 0px;
 	border : 1px solid #D3D3D3;
 }
 
 #searchCondition{
-	height :30px;
+	height : 40px;
 	border-radius : 15px 0px 0px 15px;
 }
+
+
 </style>
 
 
@@ -80,8 +89,7 @@
 					<button type="button" class="btn btn-default"><h5>전체보기</h5></button>
 					<button type="button" class="btn btn-default"><h5>조회수 ▼</h5></button>
 					<button type="button" class="btn btn-default"><h5>추천수 ▼</h5></button>
-				</div>
-				<div style="float: right;">
+					
 					<select name="pageSize" id="selectPageSize"
 						onchange="javascript:getPageSize()">
 						<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8 개씩</option>
@@ -90,15 +98,10 @@
 						<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50 개씩</option>
 					</select>
 				</div>
-			</div>
-		</div>
-		
-				<c:if test="${totalCount == 0}">
-				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
-					검색결과 없음
+				<div style="float: right;">
 					<form class="form-inline" name="detailForm">
 						<div class="form-group">
-							<select class="form-control searchCondition" id="searchCondition"
+							<select class="form-control" id="searchCondition"
 								name="searchCondition">
 								<option value="0"
 									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
@@ -116,7 +119,7 @@
 								name="searchKeyword" placeholder="검색어"
 								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
 							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
-								<span class="glyphicon glyphicon-search"></span>
+								<span class="fas fa-search"></span>
 							</button>
 						</div>
 
@@ -124,8 +127,21 @@
 						<input type="hidden" id="currentPage" name="currentPage" value="" />
 					</form>
 				</div>
+			</div>
+		</div>
+		
+				<c:if test="${totalCount == 0}">
+				<div class="row">
+				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
+					검색결과 없음<p/>
+						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					
+					</form>
+				</div>
 				</c:if>
 		
+		<c:if test="${totalCount != 0}">
 		<div class="row">
 			<div class="col-md-9" id="listTable">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
@@ -173,54 +189,14 @@
 					
 					<div style="min-height: 40px">
 					</div>
-					
-					<div align="center">
-					<div class="col-md-12 col-sm-12 col-xm-12" style="padding-left: 28%;">
-					<form class="form-inline" name="detailForm">
-						<div class="form-group">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
-								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
-							</select>
-						</div>
-
-
-						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">검색어</label> <input
-								type="text" class="form-control searchKeyword" id="searchKeyword"
-								name="searchKeyword" placeholder="검색어"
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</div>
-
-						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form>
-				</div>
-				</div>
+	
 			</div>
 			</div>
+
+			</c:if>
 <!-- 		■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ HOT AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 			<div class="col-md-3">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
-
-					<thead>
-						<tr align="center">
-<!-- 							<th class="mdl-data-table__cell--non-numeric" width="10%">번호</th> -->
-<!-- 							<th width="30%" class="text-center">제목</th> -->
-<!-- 							<th width="10%">작성자</th> -->
-<!-- 							<th width="10%">작성일</th> -->
-<!-- 							<th width="5%">조회수</th> -->
-<!-- 							<th width="5%">추천수</th> -->
-						</tr>
-					</thead>
 
 					<tbody class="newstbody">
 								<tr align="center">
@@ -234,38 +210,17 @@
 									<td class="mdl-data-table__cell--non-numeric">${i}</td>
 									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
 										value="${best.postNo}"> ${best.postTitle}</td>
-<%-- 									<td align="center">${best.nickName}</td> --%>
-<%-- 									<td align="center">${best.regDate}</td> --%>
-<%-- 									<td align="center">${best.viewCount}</td> --%>
-<%-- 									<td align="center">${best.recommendCount}</td> --%>
 								</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 			<br />
-			
 			</div>
-			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ NEWS AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  -->
-			
-			<div class="row">
-				
-				
-<!-- 				<div class="col-md-3"> -->
-<!-- 					<h3 align="center"> -->
-<!-- 						<b>뉴스</b> -->
-<!-- 					</h3> -->
-<!-- 					<p> -->
-<!-- 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"> -->
-<!-- 						<tbody class="newstbody"> -->
-<!-- 						</tbody> -->
-<!-- 					</table> -->
-<!-- 				</div> -->
-				
-				<br />
-				<p />
-				<br/>
-			</div>	
+			</div>
+		
+			<p />
+			<br/>	
 	</div>
 	
 	<div class="empty" style="min-height: 100px">
@@ -299,7 +254,7 @@ function listNews(){
 	$.ajax({
 		url : "/News/json/listNews/",
 		method : "POST",
-		data : JSON.stringify({searchKeyword : $("#searchKeyword").val()}),
+		data : JSON.stringify({searchKeyword : $(".searchKeyword").val()}),
 		dataType : "json",
 		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 		headers : {

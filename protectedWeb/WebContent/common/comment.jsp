@@ -175,7 +175,7 @@
 	$(function(){
 		
 		// 댓글 수정
-		$(document).on("click", ".glyphicon-refresh", function() {
+		$(document).on("click", ".fa-pen", function() {
 			
 			var commentNo = $(this).parent().parent().children("input").val() ;
 			
@@ -215,7 +215,7 @@
 			);
 		});
 		
-		$(document).on("click", ".glyphicon-remove", function() {
+		$(document).on("click", ".fa-transh-alt", function() {
 			
 			//alert();
 			var commentNo = $(this).parent().parent().children("input").val();
@@ -246,7 +246,7 @@
 		});
 		
 		
-		$(document).on("click",".glyphicon-alert",function() {
+		$(document).on("click",".fa-exclamation-triangle",function() {
 
 			popWin = window.open("/common/report.jsp",
 								"popWin",
@@ -256,7 +256,7 @@
 		
 		var flag= false;
 		
-		$(document).on("click",".glyphicon-plus", function() {
+		$(document).on("click",".fa-plus", function() {
 			
 			var commentNo = $(this).parents().parents().children("input").val();
 			
@@ -394,7 +394,7 @@
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
 				<input type="text" name="commentContent" class="form-control"
-					style="width: 100%; height: 40px" placeholder="댓글입력" />
+					style="width: 100%; height: 50px" placeholder="댓글입력" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
 				<button id="commentGo"
@@ -427,11 +427,11 @@
 					<div id="${comment.commentNo}" class="area">
 					<h5  id="${comment.commentNo}" class="cmCont">${comment.commentContent}</h5>
 					<c:if test="${comment.id == sessionScope.user.id }">
-					<span class="fas fa-retweet"></span> &nbsp; 
-					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
+					<span class="fas fa-pen"></span> &nbsp; 
+					<span class="fas fa-trash-alt"></span> &nbsp; 
 					</c:if>
-					<span class="glyphicon glyphicon-alert"></span> &nbsp; 
-					<span class="glyphicon glyphicon-plus"></span> &nbsp; 
+					<span class="fas fa-exclamation-triangle"></span> &nbsp;
+					<span class="fas fa-plus"></span> &nbsp; 
 					<i id="${comment.commentNo}" class="far fa-thumbs-up"></i>
 					<font id="${comment.commentNo}" class="font">
 						<b>${comment.likeCount}</b>

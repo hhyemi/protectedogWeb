@@ -21,19 +21,20 @@
 	var cnt = 9;	
 	var searchKeyword = '애견상식';	
 	var flag = false;
+//	var html = $("#get_view").html();
 	
-// 	$(document).ready(function(){
-// 		fnGetList();
-// 	});
+	$(document).ready(function(){
+		fnGetList();
+	});
 
 	$(function () {
 		$("button").on("click",function(){
 			searchKeyword = $(this).text();
+			$("#get_view").empty();
 			fnGetList();
 		});		
 	});
-	
-	
+
 	function fnGetList(sGetToken){
 		
 		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+sGetToken);
@@ -46,11 +47,11 @@
 // 				return;
 // 			}
 		
-		$("#get_view").empty();
-		$("#nav_view").empty();
+// 		$("#get_view").empty();
+// 		$("#nav_view").empty();
 		
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults="+cnt;
 		
 		// 은우꺼 : AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w
 		// 민희누나꺼 : AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0
@@ -59,47 +60,13 @@
 		
 		if(sGetToken){
 			
-			flag = true;
-//				if(sGetToken){
-//		 			sTargetUrl += "" + sGetToken;
-// //					cnt += 3 ;
-//					console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
-// //					sTargetUrl += "&maxResults="+ 10;
-//				}	
-
 			console.log(" sGetToken : " + sGetToken)
 			
+			sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+			+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=3&pageToken="+sGetToken;
 
-				var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-			+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&pageToken="+sGetToken;
-
-				$.ajax({
-			
-			type : "POST",
-			url : sTargetUrl,
-			dataType : "jsonp",
-			success : function(jdata) {
-
-//						console.log(" 검색개수 : " + cnt);
-					if(flag == true){
-						$("#get_view").append(
-								  "<div class='col-md-4 style='border : 1px solid black; min-width : 350px''>"
-								+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
-								+ "<span class='box'>"
-								+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
-								+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
-								+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
-								+ "</div>");
-										
-						flag = false;
-						return;
-					}
-				}
-			}); // ajax End
 		}
-
-		
-		
+			
 		$.ajax({
 			
 			type : "POST",
@@ -118,24 +85,27 @@
 // 					console.log(" sinppet.title : " + this.snippet.title) ; 
 // 					console.log(" sinppet.description : " + this.snippet.description) ; 
 // 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
-					$("#get_view").append(
-							  "<div class='col-md-4 style='border : 1px solid black; min-width : 350px''>"
-							+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
-							+ "<span class='box'>"
-							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
-							+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
-							+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
-							+ "</div>");
+					
+					var display = "<div class='col-md-4 display' style='min-width : 350px'>"
+						+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
+						+ "<span class='box'>"
+						+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
+						+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
+						+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
+						+ "</div>";
+					
+					$("#get_view").append(display);
 									
 				}).promise().done(function(){
 					
 					$(window).on("scroll", function(){
 						
-							if( Math.round( $(window).scrollTop() ) == $(document).height() - $(window).height() ){
-								
-								fnGetList( jdata.nextPageToken ) ;
-
-							} // If End
+							if( Math.round( $(this).scrollTop() ) +  $(this).height() + 484 > $(document).height() ){
+									var count = 1;
+									alert(count++);
+									fnGetList( jdata.nextPageToken ) ;
+									return;
+								} // If End
 							}); // window End
 				
 											
@@ -226,6 +196,7 @@ a :hover{
 	
 	<hr>
 	<div id="get_view" class="row"></div>
+	<div id="viewAppend" class="row"></div>
 <!-- 	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div> -->
 	</div>
 	
