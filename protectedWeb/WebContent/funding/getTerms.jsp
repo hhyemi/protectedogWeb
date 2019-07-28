@@ -1,23 +1,24 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ë³´í˜¸í• ê°œ Â· ì •ì±…</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > 
+<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > -->
+<!--  	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!--  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  -->
 
 	<!-- Bootstrap Dropdown Hover CSS -->
     <link href="/css/animate.min.css" rel="stylesheet">
@@ -26,9 +27,9 @@
     <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
-    <!-- jQuery UI toolTip »ç¿ë CSS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip »ç¿ë JS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© JS-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -64,102 +65,109 @@
        }
     </style>
 
-	</head>
-	<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
+	</head>
+	<body>
       
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container ">
-		<div class="form-group">
-		<div class="page-header text-center">	
-		<font size=6>${termsTitle}  </font>Á¤Ã¥À»<strong style="color:#225cba"> ²Ä²ÄÈ÷ </strong> È®ÀÎÇØÁÖ¼¼¿ä.
-	    </div>		
-		</div>	
-		
+	
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2"><a href="index.html">protected</a></span> <span>terms</span></p>
+	            <font size="7">${termsTitle}</font>ì •ì±…ì„<strong style="color:#f04f23"> ê¼¼ê¼¼íˆ </strong> í™•ì¸í•´ì£¼ì„¸ìš”.
+	          </div>
+	        </div>
+	      </div>
+	    </div>	
+	    <br/><p/>
+		<hr/><br/>
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 		
 		  <div class="form-group" id="voteNum">
-		    <font ><b>Á¦1Á¶ (¸ñÀû)</b></font>
+		    <font ><b>ì œ1ì¡° (ëª©ì )</b></font>
 		  </div>
 		  <div class="form-group" >
 			${termsList.get(0) }
 		  </div>
 		  <br/>		
 		  <div align="right" style="padding-right:100px;">
-		<input type="checkbox" class="termsCheck" name="termsCheck1" >µ¿ÀÇ ÇÕ´Ï´Ù.
+		<input type="checkbox" class="termsCheck" name="termsCheck1" >ë™ì˜ í•©ë‹ˆë‹¤.
 		</div>	
 		 <br/>			
 			
 		  <div class="form-group" id="voteNum">
-		    <font ><b>Á¦2Á¶ (Á¤ÀÇ)</b></font>
+		    <font ><b>ì œ2ì¡° (ì •ì˜)</b></font>
 		  </div>
 		  <div class="form-group" >
 			${termsList.get(1) }
 		  </div>
 		  <br/>		
 		  <div align="right" style="padding-right:100px;">
-		<input type="checkbox" class="termsCheck"  name="termsCheck2" >µ¿ÀÇ ÇÕ´Ï´Ù.
+		<input type="checkbox" class="termsCheck"  name="termsCheck2" >ë™ì˜ í•©ë‹ˆë‹¤.
 		</div>	
 		 <br/>			
 					  
 		  <div class="form-group" id="voteNum">
-		    <font ><b>Á¦3Á¶ (¼­ºñ½ºÀÇ Á¦°ø)</b></font>
+		    <font ><b>ì œ3ì¡° (ì„œë¹„ìŠ¤ì˜ ì œê³µ)</b></font>
 		  </div>
 		  <div class="form-group" >
 			${termsList.get(2) }
 		  </div>
 		  <br/>		
 		  <div align="right" style="padding-right:100px;">
-		<input type="checkbox" class="termsCheck"  name="termsCheck3" >µ¿ÀÇ ÇÕ´Ï´Ù.
+		<input type="checkbox" class="termsCheck"  name="termsCheck3" >ë™ì˜ í•©ë‹ˆë‹¤.
 		</div>	
 		 <br/>			
 			
 		  <div class="form-group" id="voteNum">
-		    <font ><b>Á¦4Á¶ (¼­ºñ½ºÀÇ ½ÅÃ»)</b></font>
+		    <font ><b>ì œ4ì¡° (ì„œë¹„ìŠ¤ì˜ ì‹ ì²­)</b></font>
 		  </div>
 		  <div class="form-group" >
 			${termsList.get(3) }
 		  </div>
 		  <br/>			  
 		  <div align="right" style="padding-right:100px;">
-		<input type="checkbox" class="termsCheck"  name="termsCheck4" >µ¿ÀÇ ÇÕ´Ï´Ù.
+		<input type="checkbox" class="termsCheck"  name="termsCheck4" >ë™ì˜ í•©ë‹ˆë‹¤.
 		</div>	
 		 <br/>			
 			
 		  <div class="form-group" id="voteNum">
-		    <font ><b>Á¦5Á¶ (¼­ºñ½ºÀÇ ÀÌ¿ë·á µî)</b></font>
+		    <font ><b>ì œ5ì¡° (ì„œë¹„ìŠ¤ì˜ ì´ìš©ë£Œ ë“±)</b></font>
 		  </div>
 		  <div class="form-group" >
 			${termsList.get(4) }
 		  </div>
 		  <br/>
 		  <div align="right" style="padding-right:100px;">
-		<input type="checkbox" class="termsCheck"  name="termsCheck5" >µ¿ÀÇ ÇÕ´Ï´Ù.
+		<input type="checkbox" class="termsCheck"  name="termsCheck5" >ë™ì˜ í•©ë‹ˆë‹¤.
 		</div>	
 		 <br/><br/>		
 		 <hr/>
 		  <div align="right" style="padding-right:100px;">
-		<input type="checkbox" id="allCheck" >¸ğµÎ µ¿ÀÇÇÕ´Ï´Ù.
+		<input type="checkbox" id="allCheck" >ëª¨ë‘ ë™ì˜í•©ë‹ˆë‹¤.
 		</div>	
 		<br/><br/><br/><br/>
 	
 		  <div class="form-group2">
-	  			<button type="button" class="btn btn-primary py-3 px-4 col-md-3" id="btn-add">
-	  			<c:if test="${termsTitle eq 'ÈÄ¿ø½ÅÃ»±Û'}">
-	  			ÀÛ¼ºÇÏ±â
+	  			<button type="button" class="btn btn-default" id="btn-add">
+	  			<c:if test="${termsTitle eq 'í›„ì›ì‹ ì²­ê¸€'}">
+	  			ì‘ì„±í•˜ê¸°
 	  			</c:if>
-	  			<c:if test="${termsTitle eq 'ÅõÇ¥ÇÏ±â'}">
-	  			ÅõÇ¥ÇÏ±â
+	  			<c:if test="${termsTitle eq 'íˆ¬í‘œí•˜ê¸°'}">
+	  			íˆ¬í‘œí•˜ê¸°
 	  			</c:if>
-	  			<c:if test="${termsTitle eq 'ÈÄ¿øÇÏ±â'}">
-	  			ÈÄ¿øÇÏ±â
+	  			<c:if test="${termsTitle eq 'í›„ì›í•˜ê¸°'}">
+	  			í›„ì›í•˜ê¸°
 	  			</c:if>	  			
 	  			</button>
 	  			&nbsp;
-	  			<button type="button" class="btn btn-primary py-3 px-4 col-md-3" id="btn-cancel">Ãë¼Ò</button>
+	  			<button type="button" class="btn btn-default" id="btn-cancel">ì·¨ì†Œ</button>
 		  </div>
 		  
 		<br/><br/><br/><br/>	  		  
@@ -167,7 +175,7 @@
 		<!-- form Start /////////////////////////////////////-->
 
     </div>
-   <!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+   <!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -179,7 +187,7 @@
 
    $(function() {
       
-         //============= µî·Ï Event  Ã³¸® =============   
+         //============= ë“±ë¡ Event  ì²˜ë¦¬ =============   
          $( "#btn-add" ).on("click" , function() {
 
         	if( !$("input[name=termsCheck1]").prop("checked")){
@@ -193,12 +201,12 @@
           	}else if(!$("input[name=termsCheck5]").prop("checked")){
         		$("input[name=termsCheck5]").focus();        	       	       	       	
         	}else{
-        		if(	${termsTitle eq 'ÈÄ¿ø½ÅÃ»±Û'}){
+        		if(	${termsTitle eq 'í›„ì›ì‹ ì²­ê¸€'}){
         			self.location="/funding/addVoting";
-        		}else if(${termsTitle eq 'ÅõÇ¥ÇÏ±â'}){
-        			alert("ÅõÇ¥ÇÏ¿´½À´Ï´Ù.")
+        		}else if(${termsTitle eq 'íˆ¬í‘œí•˜ê¸°'}){
+        			alert("íˆ¬í‘œí•˜ì˜€ìŠµë‹ˆë‹¤.")
         			self.location="/funding/addVote?postNo=${postNo}";
-        		}else if(${termsTitle eq 'ÈÄ¿øÇÏ±â'}){
+        		}else if(${termsTitle eq 'í›„ì›í•˜ê¸°'}){
         			self.location="/funding/addFund?postNo=${postNo}";
         		}
         	}
@@ -206,12 +214,12 @@
  
             });
          
-         //============= Ãë¼Ò Event  Ã³¸® =============
+         //============= ì·¨ì†Œ Event  ì²˜ë¦¬ =============
           $( "#btn-cancel" ).on("click" , function() {
                history.go(-1);
             });
          
-        //============= "Ã¼Å©¹Ú½º ÀüÃ¼ÇØÁ¦ ÀüÃ¼»èÁ¦"  Event Ã³¸® ¹×  ¿¬°á ============= 	         
+        //============= "ì²´í¬ë°•ìŠ¤ ì „ì²´í•´ì œ ì „ì²´ì‚­ì œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° ============= 	         
 	          $( "#allCheck").on('click', function(){
 	              if (  $( "#allCheck").prop("checked")  ) {
 	                 $(".termsCheck").prop("checked", "checked");
@@ -227,15 +235,15 @@
 	              }
 	           });          
           
-/* 	  		//============= "Ã¼Å©¹Ú½º ÀüÃ¼ÇØÁ¦ ÀüÃ¼»èÁ¦"  Event Ã³¸® ¹×  ¿¬°á ============= 		
+/* 	  		//============= "ì²´í¬ë°•ìŠ¤ ì „ì²´í•´ì œ ì „ì²´ì‚­ì œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° ============= 		
 		    $("#allCheck").click(function(){
-		        //Å¬¸¯µÇ¾úÀ¸¸é
+		        //í´ë¦­ë˜ì—ˆìœ¼ë©´
 		        if($("#allCheck").not(":disabled").prop("checked")){
-		            //inputÅÂ±×ÀÇ nameÀÌ termsCheckÀÎ ÅÂ±×µéÀ» Ã£¾Æ¼­ checked¿É¼ÇÀ» true·Î Á¤ÀÇ
+		            //inputíƒœê·¸ì˜ nameì´ termsCheckì¸ íƒœê·¸ë“¤ì„ ì°¾ì•„ì„œ checkedì˜µì…˜ì„ trueë¡œ ì •ì˜
 		            $(".termsCheck").not(":disabled").prop("checked",true);
-		            //Å¬¸¯ÀÌ ¾ÈµÇÀÖÀ¸¸é
+		            //í´ë¦­ì´ ì•ˆë˜ìˆìœ¼ë©´
 		        }else{
-		            //inputÅÂ±×ÀÇ nameÀÌ termsCheckÀÎ ÅÂ±×µéÀ» Ã£¾Æ¼­ checked¿É¼ÇÀ» false·Î Á¤ÀÇ
+		            //inputíƒœê·¸ì˜ nameì´ termsCheckì¸ íƒœê·¸ë“¤ì„ ì°¾ì•„ì„œ checkedì˜µì…˜ì„ falseë¡œ ì •ì˜
 		            $(".termsCheck").not(":disabled").prop("checked",false);
 		        }
 		    }); */

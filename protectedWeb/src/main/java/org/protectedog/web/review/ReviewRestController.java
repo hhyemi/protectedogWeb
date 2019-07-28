@@ -1,6 +1,7 @@
 package org.protectedog.web.review;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class ReviewRestController {
 	}
 
 	@RequestMapping(value = "json/addHospitalReview/", method = RequestMethod.POST)
-	public Review addHospitalReview(@RequestBody Map<String,Object> mapReview , HttpSession session) throws Exception {
+	public Map<String, Object> addHospitalReview(@RequestBody Map<String,Object> mapReview , HttpSession session) throws Exception {
 
 		System.out.println("/review/json/addHospitalReview : POST");
 
@@ -78,6 +79,16 @@ public class ReviewRestController {
 		}
 		fileService.addFile(listFile);
 		
-		return review;
+		// 파일가져오기
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", hospitalCode);
+		filePost.put("postNo", review.getPostNo());
+		List<FileDog> file = fileService.getFile(filePost);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("review", review);
+		map.put("file", file);
+		
+		return map;
 	}
 }
