@@ -40,6 +40,65 @@
   </head>
   
 <body id="page-top">
+<!--====================================================
+                    LOGIN OR REGISTER
+======================================================-->
+    <section id="login">
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+              <div class="modal-content loginSection">
+                  <div class="modal-header" align="center">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span class="fa fa-times" aria-hidden="true"></span>
+                      </button>
+                  </div>
+                  <div id="div-forms">
+                      <form id="login-form">
+                          <h3 class="text-center">Login</h3>
+                          <div class="modal-body">
+                              <label for="username">Username</label> 
+                              <input id="login_username" name="id" class="form-control id" type="text" placeholder="Enter username " required>
+                              <label for="username">Password</label> 
+                              <input id="login_password" name="pw" class="form-control pw" type="password" placeholder="Enter password" required>
+<!--                               <div class="checkbox"> -->
+<!--                                   <label> -->
+<!--                                       <input type="checkbox"> Remember me -->
+<!--                                   </label> -->
+<!--                               </div> -->
+                          </div>
+                          <div class="modal-footer text-center">
+                              <div>
+                                  <button type="submit" id="submitLogin" class="btn btn-general btn-white">Login</button>
+                              </div>
+                              <div>
+                                  <button id="login_register_btn" id="regist" type="button" class="btn btn-link">Register</button>
+                              </div>
+                          </div>
+                      </form>
+                      <form id="register-form" style="display:none;">
+                          <h3 class="text-center">Register</h3>
+                          <div class="modal-body"> 
+                              <label for="username">Username</label> 
+                              <input id="register_username" class="form-control" type="text" placeholder="Enter username" required>
+                              <label for="register_email">E-mailId</label> 
+                              <input id="register_email" class="form-control" type="text" placeholder="Enter eMail" required>
+                              <label for="register_password">Password</label> 
+                              <input id="register_password" class="form-control" type="password" placeholder="Password" required>
+                          </div>
+                          <div class="modal-footer">
+                              <div>
+                                  <button type="submit" class="btn btn-general btn-white">Register</button>
+                              </div>
+                              <div>
+                                  <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>      
 
 <!--====================================================
                          HEADER
@@ -66,8 +125,14 @@
                 <ul class="list-inline top-data">
                   <li><a href="#" target="_empty"><i class="fa top-social fa-facebook"></i></a></li>
                   <li><a href="#" target="_empty"><i class="fa top-social fa-twitter"></i></a></li>
-                  <li><a href="#" target="_empty"><i class="fa top-social fa-google-plus"></i></a></li> 
-                  <li><a href="#" class="log-top" data-toggle="modal" data-target="#login-modal">Login</a></li>  
+                  <li><a href="#" target="_empty"><i class="fa top-social fa-google-plus"></i></a></li>
+                  <c:if test="${ sessionScope.user == null }">
+                  <li><a href="#" class="log-top login-modal" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                  </c:if>
+                  <c:if test="${ sessionScope.user != null }">
+                  <li><a href="#" class="log-top profile">${ sessionScope.user.nickname } 님</a></li>
+                  <li><a href="/users/logout" class="log-top logOut">LogOut</a>
+                  </c:if>
                 </ul>
               </div>
             </div>
@@ -188,6 +253,115 @@
     <script src="/resources/newTemplate/js/jquery-easing/jquery.easing.min.js"></script> 
     <script src="/resources/newTemplate/js/custom.js"></script> 
     <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+    
+        	<script type="text/javascript">
+
+		//============= "로그인"  Event 처리 =============
+		$(".login-modal").on("click", function() {
+			
+			alert("ㅎㅇ");
+			fncLogin();
+			alert("ㅎㅇ");
+			
+		});
+		
+		function fncLogin(){
+			$(".id").focus();
+			$("#submitLogin").on("click" , function() {
+				var id=$("input:text").val();
+				var pw=$("input:password").val();
+				alert(id);
+				alert(pw);
+				if(id == null || id.length <1) {
+					alert('ID를 입력하십시오.');
+					$("#login_username").focus();
+					return;
+				}
+				
+				if(pw == null || pw.length <1) {
+					alert('비밀번호를 입력하십시오.');
+					$("#login_password").focus();
+					return;
+				}
+				
+				var chkLogin={id:id, pw:pw};
+				alert("ajax id : "+id);
+				alert("ajax pw : "+pw);
+				$.ajax({
+					
+					type : "POST",
+					contentType : "application/json",
+					url : "/users/json/login",
+					data : JSON.stringify(chkLogin),
+					datatype : "json",
+					success : function(response){
+						alert("pw : "+JSON.stringify(response))
+						if(response.pw == pw && response.id == id){
+							alert("로그인 성공 pw : "+response.pw);
+							alert(response.nickname+" 님 환영합니다!");
+// 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
+							self.location="/index.jsp";
+						}
+						if(response.pw != pw || response.id != id){
+							alert(response.pw);
+							alert("아이디 혹은 비밀번호가 맞지 않습니다.");
+							$("form")[0].reset();
+							return;
+							$("#id").focus();
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				});
+
+			});
+		}
+		
+		$(document).ready(function(){
+			$("#pw").keyup(function(key){
+				if(key.keyCode==13){
+					$("#login").click();
+				}
+			})
+		})
+		
+// 		$(function(){
+// 			$(".g-signin2").on("click", function(){
+// 				onSignIn(googleUser);
+// 			})
+// 		});
+			
+// 		function onSignIn(googleUser) {
+// 			// Useful data for your client-side scripts:
+// 			var profile = googleUser.getBasicProfile();
+// 			alert("ID: " + profile.getId()); // Don't send this directly to your server!
+			
+// 			// The ID token you need to pass to your backend:
+// 			var id_token = googleUser.getAuthResponse().id_token;
+// 			alert("ID Token: " + id_token);
+			        
+// 			$(location).attr('href', '/users/google?google='+profile.getId()+"&idToken="+id_token);
+// 		}
+
+// 		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+// 	  	var state = naver_id_login.getUniqState();
+// 	  	naver_id_login.setButton("white", 2,40);
+// 	  	naver_id_login.setDomain("http://localhost:8080/");
+// 	  	naver_id_login.setState(state);
+// // 	  	naver_id_login.setPopup();
+// 	  	naver_id_login.init_naver_id_login();
+		      
+
+
+		//============= 회원가입 Event처리 =============
+		$( function() {
+			$("#regist").on("click" , function() {
+				self.location = "/users/addUsersBase"
+			});
+		});
+		
+	</script>	
   
   
 </body>
