@@ -11,6 +11,7 @@ import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Apply;
+import org.protectedog.service.domain.Interest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +47,25 @@ public class AdoptRestController {
 	
 
 	
+	
+	// 관심목록 추가
+	@RequestMapping( value="json/addInterest/{postNo}/{id}", method=RequestMethod.GET)
+	public String addInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
+		
+		System.out.println("/adopt/json/addInterest : GET");
+		
+		Interest interest = new Interest();
+		interest.setBoardCode("AD");
+
+//		interestService.addInterest(interest);
+		
+		
+//		Adopt adopt = adoptService.getAdopt(postNo);	// postNo로 adopt 가져오기	
+//		adopt.setStatusCode("3");						// 완료상태(3)로 필드값 변경
+//		adoptService.updateStatusCode(adopt);			// 디비 업데이트
+		
+		return "{\"message\" : \"interest ok\" }";
+	}
 	
 	// 글상태 완료로 변경
 	@RequestMapping( value="json/updateStatusCode/{postNo}", method=RequestMethod.GET)

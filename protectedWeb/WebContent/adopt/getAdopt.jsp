@@ -23,7 +23,7 @@
     <style>
     
     	.row {
-			transform: rotate(0.03deg);
+/* 			transform: rotate(0.03deg); */
 		}
     
 	    #carouselExampleIndicators{
@@ -39,9 +39,11 @@
 /*         	padding-right: 0px; */
         	padding: 0px;
         }
-        .col-lg-5.offset-lg-1{
+        .offset-lg-1{
         	position: relative;
         	height: 450px;
+        	display: flex;
+         	padding-right: 0px !important;
         }
         .card_area{
         	position: absolute;
@@ -93,11 +95,6 @@
 /* 		    border-radius: 5px; */
 /* 		} */
 		
-		div {
-/* 			font-size: 20px; */
-		}
-
-		
 		.col-md-2 {
 			padding-right: 0px !important;
 		}
@@ -106,15 +103,30 @@
 			padding-right: 15px !important;
 		}
  		
- 		.col-md-12{ 
-/*           	position: absolute !important;   */
-/*          	bottom: 0px !important;  */
-         } 
+        .glyphicon-heart-empty {
+         	color: #f04f23;
+         	padding-top: 5px;
+        }
+         
+        ol.carousel-indicators {
+         	width: 70% !important;
+        }
         
-/*         .lnr-heart:before { */
-/* 			content: "\e813"; */
-/* 		} */
-      
+/*         .offset-lg-1 { */
+         	
+/*         } */
+        .s_product_inner {
+        
+        	padding-right: 0px !important;
+        }
+        .s_product_text {
+         	flex: 1;
+        }
+         
+         
+	
+        
+
     </style>
   <jsp:include page="/layout/toolbar.jsp"></jsp:include>
   </head>
@@ -151,7 +163,7 @@
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <ol class="carousel-indicators" style="width: wrap;" >
+                <ol class="carousel-indicators">
                 
                 
                   <c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
@@ -182,8 +194,8 @@
 		                </c:if>	                
 	                    <div class="${className}">	                
 		                    <img 
-		                      class="d-block w-100"
-		                      src="/resources/file/fileAdopt/${name.fileName}" height="450px;" />
+		                      class="d-block w-100" style="width:100%;background:url('../resources/file/fileAdopt/${name.fileName}') no-repeat center center;background-size:cover; " 
+		                      height="450px;" />
 	                  	</div>			
 	                </c:forEach>
                 </div>
@@ -192,12 +204,12 @@
 <!--             </div> -->
           </div>
           <div class="col-lg-6 offset-lg-1">
-            <div class="s_product_text" style="height: wrap;">
+            <div class="s_product_text">
             
 <%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
               
               
-              <ul class="list">
+<!--               <ul class="list" > -->
               	
               	<input type="hidden" name="postNo" value="${adopt.postNo}">
               	<input type="hidden" name="userId" value="${user.id}">
@@ -205,8 +217,19 @@
               	
 <!--                 <li> -->
                    	<div class="row" style="position:relative;height:35px;">
-			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><font id="title" size="5px">${adopt.postTitle}</font>&nbsp;&nbsp;${adopt.id}</div>
-			        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"></font>${adopt.regDate}</div>
+			        	<div class="col-xs-11 col-md-11" style="position:absolute;height:35px; left:0px; bottom:0px;" >
+			        		<font id="title" size="5px"><strong>${adopt.postTitle}</strong></font>
+<%-- 			        	&nbsp;&nbsp;${adopt.id} --%>
+			        	</div>
+			        	
+			        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-left: 0;" >
+							<font size="5px" id="heartIcon"><span class="glyphicon glyphicon-heart-empty"></span></font>
+			        	</div>
+			        	
+<!-- 			        	<div class="col-xs-2 col-md-2" align="right" style="position:absolute; right:0px; bottom:0px; " > -->
+<%-- 			        	<font size="5px"></font>${adopt.id} --%>
+<%-- 			        	${adopt.regDate} --%>
+<!-- 			        	</div> -->
 			        </div>
 <!--                 </li> -->
                 
@@ -214,57 +237,64 @@
               	
 <!--                 <li> -->
                    	<div class="row">
-				  		<div class="col-md-2 " ><strong>견종</strong></div>
-						<div class="col-md-4 ">${adopt.dogBreed}</div>
+				  		<div class="col-md-2 " ><font size="4px"><strong>작성자</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${adopt.id}</font></div>
 						
-						<div class="col-md-2 " style="padding-left: 0px;"><strong>크기</strong></div>
-						<div class="col-md-4 ">${adopt.dogSize}</div>
+						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>작성일자</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${adopt.regDate}</font></div>
+					</div>
+                   	<div class="row">
+				  		<div class="col-md-2 " ><font size="4px"><strong>견종</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${adopt.dogBreed}</font></div>
+						
+						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>크기</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${adopt.dogSize}</font></div>
 					</div>
 <!--                 </li> -->
                 
 <!--                 <li> -->
                    	<div class="row">
-				  		<div class="col-md-2 "><strong>체중</strong></div>
-						<div class="col-md-4 ">${adopt.dogWeight}kg</div>
+				  		<div class="col-md-2 "><font size="4px"><strong>체중</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${adopt.dogWeight}kg</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>성별</strong></div>
-						<div class="col-md-4 ">${adopt.dogGender}</div>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>성별</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${adopt.dogGender}</font></div>
 					</div>
 <!--                 </li> -->
                 
 <!--                 <li> -->
                    	<div class="row">
-				  		<div class="col-md-2 "><strong>
+				  		<div class="col-md-2 "><font size="4px"><strong>
 					  		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
 <%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if> --%>
-				  		</strong></div>
-						<div class="col-md-4 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</div>
+				  		</font></strong></div>
+						<div class="col-md-4 "><font size="4px"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>
 				  			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
 <%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if> --%>
-				  		</strong></div>
-						<div class="col-md-4">${adopt.dogDate}</div>
+				  		</font></strong></div>
+						<div class="col-md-4"><font size="4px">${adopt.dogDate}</font></div>
 					</div>
 
                 	<div class="row">
-				  		<div class="col-md-2  "><strong>상태</strong></div>
-						<div class="col-md-10 ">${adopt.dogStatus}</div>
+				  		<div class="col-md-2  "><font size="4px"><strong>상태</strong></font></div>
+						<div class="col-md-10 "><font size="4px">${adopt.dogStatus}</font></div>
 					</div>
 
                 	<div class="row">
-				  		<div class="col-md-2  "><strong>성격</strong></div>
-						<div class="col-md-10 ">${adopt.dogPersonality}</div>
+				  		<div class="col-md-2  "><font size="4px"><strong>성격</strong></font></div>
+						<div class="col-md-10 "><font size="4px">${adopt.dogPersonality}</font></div>
 					</div>
 					
                 	<div class="row">
-				  		<div class="col-md-2  "><strong>특징</strong></div>
-						<div class="col-md-10 ">${adopt.dogChar}</div>
+				  		<div class="col-md-2  "><font size="4px"><strong>특징</strong></font></div>
+						<div class="col-md-10 "><font size="4px">${adopt.dogChar}</font></div>
 					</div>
          
 	               	<div class="row">
-				  		<div class="col-md-2  "><strong>글내용</strong></div>
-						<div class="col-md-10 " style="padding-right: 0px;" >${adopt.postContent}</div>
+				  		<div class="col-md-2  "><font size="4px"><strong>글내용</strong></font></div>
+						<div class="col-md-10 " style="padding-right: 0px;" ><font size="4px">${adopt.postContent}</font></div>
 					</div>
 					
 <!-- 	               	<div class="row"> -->
@@ -309,7 +339,7 @@
               
               
               
-              <div class="product_count">
+<!--               <div class="product_count"> -->
 <!--                 <button -->
 <!--                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" -->
 <!--                   class="increase items-count" -->
@@ -322,42 +352,44 @@
 <!--                   type="button" -->
 <!--                 > -->
 <!--                 </button> -->
-              </div>
-              
-             <div class="row">
+<!--               </div> -->
+             
+             
+    <!-- 글내용 밑에 버튼  --> 
+             <div class="row" style="flex: 1;bottom: 0px;position: absolute;" >
               <div class="col-md-12 card_area" >
 
 				<!-- 분양 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'AD' }">
 	              		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }">
-	              			<button id="adoptApply" class="btn btn-default" href="#" style="width: 189px">입양신청</button>
+	              			<button id="adoptApply" class="btn btn-default" style="width: 250px">입양신청</button>
 	              		</c:if>
 	              		
 	              		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
-	              			<button class="btn btn-default" style="width: 189px" id="confirmButton">신청서확인</button>
-	              			<button class="btn btn-default" style="width: 189px" id="adoptCompleteButton">분양완료</button>
+	              			<button class="btn btn-default" style="width: 250px" id="confirmButton">신청서확인</button>
+	              			<button class="btn btn-default" style="width: 250px" id="adoptCompleteButton">분양완료</button>
 	              		</c:if>
 	              		
 	              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-	              			<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+	              			<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
 	              		</c:if>
               	</c:if>
               	
 				<!-- 실종 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'MS' }">
               		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-              			<button class="btn btn-default" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</button>
+              			<button class="btn btn-default"style="width: 250px" id="missingCompleteButton">찾기완료</button>
               		</c:if>
               	</c:if>
               	
 				<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
-               		<button class="btn btn-default" href="#" style="width: 189px">문의하기</button>
-               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+               		<button class="btn btn-default" style="width: 250px">문의하기</button>
+<!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
                	</c:if>
                	
               	<c:if test="${adopt.statusCode eq '3'}">
-               		<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>
+               		<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">완료된 글입니다.</button>
                	</c:if>
               	
               </div>
@@ -366,7 +398,7 @@
  			
  			
  			
-              </ul>
+<!--               </ul> -->
               
             </div>
            
@@ -382,22 +414,22 @@
         <div id="mapDiv"  class="col-md-12 " style="padding-left: 15px;padding-right: 15px;">
         
         	<c:if test="${adopt.boardCode eq 'AD' }">
-				<strong>분양가능지역</strong><br/>
+				<font size="4px"><strong>분양가능지역</strong></font><br/>
 		  		<div id="mapArea" style="width:wrap; height: 300px;"  align="center"></div>
-				<div>${adopt.areaKr }</div><br/>
+				<div><font size="4px">${adopt.areaKr }</font></div><br/>
 			</c:if>
 			
-	  		<strong>
+	  		<font size="4px"><strong>
 	  			<c:if test="${adopt.boardCode eq 'AD' }">
 		  			발견위치
 		  		</c:if>
 			    <c:if test="${adopt.boardCode eq 'MS' }">
 		  			실종위치
 		  		</c:if>
-	  		</strong><br/>
+	  		</strong></font><br/>
 	  		<div id="map" style="width: wrap; height: 300px;"  align="center"></div>
 	  		<input type="hidden" class="form-control" id="location" name="location" value="${adopt.location}">
-			<div>${adopt.locationKr }</div>
+			<div><font size="4px">${adopt.locationKr }</font></div>
 			<br/><br/><br/>
         
         </div>
@@ -443,6 +475,22 @@
 			<div id="dialog-alreadyApply" title="">
 			  <p align="center"><br/></p>
 			</div>  
+			
+			<div id="dialog-message" title="">
+			  <p align="center"><br/>
+			  	<form name="message">
+				  	<input type="hidden" name="senderId" value="${ sessionScope.user.id }"/>
+					<input type="hidden" name="messageStatus" value="0"/>
+					<input type="hidden" name="delCode" value="0"/>
+					
+					<div class="col-md-12">
+						받는이 <input type="text"/>
+					</div>
+					
+				</form>
+			  </p>
+			</div>  
+			
 			<div id="dialog-listApply" title="">
 <!-- 			  <p id="listJSON"></p> -->
 			</div> 
@@ -465,7 +513,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script>
       $(document).ready(function() { 
     	  listApply('load');
@@ -676,6 +724,21 @@
   	    });
       });
       
+      
+      $( function() {
+  	    $( "#dialog-message" ).dialog({
+  	    	  autoOpen: false,
+  		      width: 350,
+  		      height: 300,
+  		      modal: true,
+  		      buttons: {
+  		        	닫기: function() {
+  		          		$( this ).dialog( "close" );
+  		        	}
+  		      }
+  	    });
+      });
+      
 
       
   //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -731,14 +794,22 @@
 							} else if ( str == '' ){
 								//로그인 안했을때
 								if ( id == '' || lv == '미인증회원' ) {
-									$( '#dialog-alreadyApply p' ).html("<br/>인증회원만 신청할 수 있습니다.");
-									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-									$( "#dialog-alreadyApply" ).dialog( "open" );
+									swal({
+								           text: "인증회원만 신청할 수 있습니다.",
+								           buttons: "닫기",
+								    });
+// 									$( '#dialog-alreadyApply p' ).html("<br/>인증회원만 신청할 수 있습니다.");
+// 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 									$( "#dialog-alreadyApply" ).dialog( "open" );
 								//받아온 데이터에 아이디가 있을때	
 								} else if ( displayValue.indexOf(id) != -1 ) {
-									$( '#dialog-alreadyApply p' ).html("<br/>이미 신청하셨습니다.");
-									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-									$( "#dialog-alreadyApply" ).dialog( "open" );
+									swal({
+								           text: "이미 신청하셨습니다.",
+								           buttons: "닫기",
+								    });
+// 									$( '#dialog-alreadyApply p' ).html("<br/>이미 신청하셨습니다.");
+// 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 									$( "#dialog-alreadyApply" ).dialog( "open" );
 								//로그인한상태+아이디가 없을때
 								} else {
 									self.location = "/apply/addApply?postNo=${adopt.postNo}";
@@ -851,6 +922,47 @@
 
 	    
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+  
+  	 function addInterest(postNo, id){
+	 		console.log(postNo+","+id);
+	  
+	  		if ( id == "" ){
+	  			
+	  			swal({
+			           text: "회원만 이용할 수 있는 기능입니다.",
+			           dangerMode: true,
+			           buttons: {
+								 cancel: "닫기",
+					   }
+	  			});
+	  			
+	  		}else{
+	  			
+	  			$.ajax( 
+	  			 		{
+	  						url : "/adopt/json/addInterest/"+postNo+"/"+id,
+	  						method : "GET" ,
+	  						dataType : "json" ,
+	  						headers : {
+	  									"Accept" : "application/json",
+	  									"Content-Type" : "application/json"
+	  								  },
+	  						success : function(data , status) {
+	  								console.log(JSON.stringify(data));
+	  							
+	  					},
+	  						error: function(request, status, error){ 
+	  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	  			        }
+	  					
+	  				});
+	  		}
+  		
+  	 }
+  
+  
+  
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
       $(function() {
     		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
     			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
@@ -903,6 +1015,11 @@
 // 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 		
+			$( "button:contains('문의')" ).on("click" , function() {
+				$('#dialog-message').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+				$('#dialog-message').dialog( "open" );
+			});
+		
 			$( "#adoptCompleteButton" ).on("click" , function() {
 				swal({
 // 			           title: "분양완료 상태로 변경하시겠습니까?",
@@ -928,13 +1045,48 @@
 			});
 		
 			$( "#missingCompleteButton" ).on("click" , function() {
-				$('#dialog-missingComplete').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				$('#dialog-missingComplete').dialog( "open" );
+				swal({
+			           text: "찾기완료 상태로 변경하시겠습니까?",
+//			           icon: "success",
+			           buttons: {
+								 catch: {
+								 	text: "예",
+//								 	value: "catch",
+								 },
+								 cancel: "아니오",
+					   },
+					   
+			    }).then((willDelete) => {
+			           if (willDelete) {
+			        	    fncComplete();
+			           		swal("변경되었습니다.", {
+				           		icon: "success",
+				           		buttons: "닫기"
+			           		});
+			           }
+			    });
+// 				$('#dialog-missingComplete').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				$('#dialog-missingComplete').dialog( "open" );
 			});
 		
 			$( "button:contains('목록')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
+		
+			$( ".glyphicon-heart-empty" ).on("click" , function() {
+// 				alert("sdas");
+				addInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+			});
+			
+
+// 			$( "#heartIcon" ).hover(
+// 				function() {
+// 					$( this ).html( "<span class=\"glyphicon glyphicon-heart\"></span>" );
+// 				}, function() {
+// 					$( this ).html( "<span class=\"glyphicon glyphicon-heart-empty\" color=\"#f04f23\"></span>" );
+// 				}
+// 			);
+
 
 	  });
   

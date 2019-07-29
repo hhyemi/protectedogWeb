@@ -94,13 +94,13 @@
 		           	<br/>
 		            
 		            <!-- 미리보기 영역 -->
-		            <div class="form-group">
+		            <div class="form-group col-md-12">
 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
 			
 							<c:forEach var="name" items="${file}" varStatus="status">            
 							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
 			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="120px;" height="120px;"/><br/>
-			                            <a href="#" value="${name.fileName}"  onclick="deletePreview2(this)">삭제</a></div>     
+			                            <span value="${name.fileName}"  onclick="deletePreview2(this)">삭제</span></div>     
 			                </c:forEach>     
 			                
 			            </div> 
@@ -157,11 +157,11 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate"><strong>
+	                		<label for="dogDate" id="dogDateLabel"><strong>
 	                			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
 							    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if>
 	                		</strong></label>
-	                  		<input type="date" class="form-control" name="dogDate" value="${ adopt.dogDate }" >
+	                  		<input type="text" class="form-control" name="dogDate" value="${ adopt.dogDate }" readonly>
 	               		</div>
                		</div>
                		
@@ -188,7 +188,7 @@
                		
                		
                		
-	            	<div class="col-md-12">
+	            	<div class="col-md-12" id="areaFocus">
 	            	<br/>
                 		<label><strong>
 	                		<c:if test="${adopt.boardCode eq 'AD' }">
@@ -304,6 +304,7 @@
   
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script>
 
   var map;
@@ -607,10 +608,10 @@
 	                	$("#preview").append(
 	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<a href=\"#\" value=\""
+	                                         + "<span value=\""
 	                                         + imgNum
 	                                         + "\" onclick=\"deletePreview(this)\">"
-                                             + "삭제" + "</a>" + "</div> ");
+                                             + "삭제" + "</span>" + "</div> ");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -653,11 +654,12 @@
 //                             console.log('sorrow: ' + faceData.sorrowLikelihood);
 //                             console.log('anger: ' + faceData.angerLikelihood);
 //                             console.log('surprise: ' + faceData.surpriseLikelihood);
-                       		$( "#dogBreed" ).val(test.label);
+                       		fncBreed( test.label );
 //                        		$( "#test" ).html(test.label.replace(/ /gi, "") );
                           },
                           error: function (data, textStatus, errorThrown) {
                             console.log('error: ' + data);
+                            fncBreed( '모름' );
                           }
                         })
 	                	
@@ -712,7 +714,64 @@
 		});
 	});
 	
+	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	
+	
+	function fncBreed(breed) {
+		if ( breed.toLowerCase().indexOf( 'bichon' ) != -1 || breed.toLowerCase().indexOf( '비숑' ) != -1  ) {
+			breed = '비숑';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'pomeranian' ) != -1 || breed.toLowerCase().indexOf( '포메' ) != -1 ) {
+			breed = '포메라니안';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'bull' ) != -1 || breed.toLowerCase().indexOf( '불독' ) != -1) {
+			breed = '불독';
+			$('select[name=dogSize]').val('중형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'chihuahua' ) != -1 || breed.toLowerCase().indexOf( '치와와' ) != -1  ) {
+			breed = '치와와';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 || breed.toLowerCase().indexOf( '말티즈' ) != -1 ) {
+			breed = '말티즈';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( 'poedel' ) != -1 || breed.toLowerCase().indexOf( '푸들' ) != -1 ) {
+			breed = '푸들';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 || breed.toLowerCase().indexOf( '리트리버' ) != -1 ) {
+			breed = '리트리버';
+			$('select[name=dogSize]').val('대형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'jindo' ) != -1 || breed.toLowerCase().indexOf( '진돗개' ) != -1 ) {
+			breed = '진돗개';
+			$('select[name=dogSize]').val('중형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'welsh' ) != -1 || breed.toLowerCase().indexOf( 'corgi' ) != -1 || breed.toLowerCase().indexOf( '웰시' ) != -1 ) {
+			breed = '웰시코기';
+			$('select[name=dogSize]').val('중형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'chow' ) != -1 || breed.toLowerCase().indexOf( '차우' ) != -1 ) {
+			breed = '차우차우';
+			$('select[name=dogSize]').val('대형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'dobermann') != -1 || breed.toLowerCase().indexOf( '도베르만' ) != -1 ) {
+			breed = '도베르만';
+			$('select[name=dogSize]').val('대형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'spaniel') != -1 || breed.toLowerCase().indexOf( '니엘' ) != -1 || breed.toLowerCase().indexOf( '니얼' ) != -1 ) {
+			breed = '스파니엘';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'spitz') != -1 || breed.toLowerCase().indexOf( '스피츠' ) != -1 ) {
+			breed = '스피츠';
+			$('select[name=dogSize]').val('중형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'husky' ) != -1 || breed.toLowerCase().indexOf( '허스키' ) != -1 ) {
+			breed = '허스키';
+			$('select[name=dogSize]').val('대형견').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'shih' ) != -1 || breed.toLowerCase().indexOf( '시츄' ) != -1 ) {
+			breed = '시츄';
+			$('select[name=dogSize]').val('소형견').attr("selected","selected");
+		}else{
+			breed = '알 수 없음';
+		}
+
+	    $( "#dogBreed" ).val(breed);
+	 }
+	
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■      ↑ 견종번역      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -767,8 +826,8 @@
 //////////////////////↑  dialog        ////////////////////////////////////////////////
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
-		if($("input[name=postTitle]").val().length > 10 ){
-			$("span[name=postTitle]").text('10자까지 입력할 수 있습니다.');
+		if($("input[name=postTitle]").val().length > 20 ){
+			$("span[name=postTitle]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -841,14 +900,27 @@
 	// 등록버튼 누르고
 	function fncUpdateAdopt(){
 		
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >10){
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
-// 		  if( $(".preview-box").length == 0 ){
+		  if( $(".preview-box").length == 0 || $(".thumbnail").length == 0 ){
+			  swal({
+		           text: "이미지를 등록해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
 // 			  $('#dialog-img').dialog( "open" );
-// 			  return;
-// 		  }
+			  return;
+		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
 			  $("input[name=dogWeight]").focus();
 			  return;
@@ -875,14 +947,42 @@
 		  }
 		  if( boardCode == 'AD' ){
 			  if( $("input[name=adoptArea]").val().trim() == ''){
-				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				  $('#dialog-area').dialog( "open" );
+				  swal({
+			           text: "분양가능지역을 선택해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "닫기"
+								 }
+					   },
+					   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			        	   jQuery($("#areaFocus"))[0].scrollIntoView(true);
+			           }
+			      });
+// 				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
 		  if( $("input[name=location]").val().trim() == ''){
-			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-location').dialog( "open" );
+			  swal({
+		           text: "발견위치를 선택해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+		           }
+		      });
+// 			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -948,6 +1048,26 @@
 			$( "a:contains('취소')" ).on("click" , function() {
 				self.location = "/adopt/getAdopt?postNo=${adopt.postNo}"
 			});
+			
+			$( "input[name=dogDate]" ).datepicker({
+				showOn: "button",
+				buttonImage: "/resources/file/others/calendar.png",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				dateFormat: "yy-mm-dd",
+				maxDate: "+0d",
+				prevText: '이전 달',
+		        nextText: '다음 달',
+		        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		        showMonthAfterYear: true,
+		        yearSuffix: '년'
+			});
+			
+			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
       
       

@@ -30,7 +30,7 @@
     		font-weight: normal;
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, p, th, td{
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, p, a, th, td{
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
 		.navbar-brand{

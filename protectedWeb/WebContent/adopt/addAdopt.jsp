@@ -19,8 +19,20 @@
 		
 		.waves-effect>strong {
 			background-color: #f04f23;
+			border-radius: 3px;
 		}
 		
+		input[name=dogDate] {
+			height: 38px;
+/* 			width: 80%; */
+/* 			margin-right: 0px !important; */
+/* 			padding-right: 0px !important; */
+		}
+		
+/* 		.swal-button { */
+/* 		  background-color: #f04f23; */
+/* 		} */
+
 		
 	</style>
    <jsp:include page="/layout/toolbar.jsp"></jsp:include> 
@@ -180,20 +192,23 @@
 	                		<label for="dogPay"><strong>
 		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
 	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if> --%>
-	                		</strong>&nbsp;&nbsp;<span name="dogPay">원하지 않을 경우 0원을 입력하세요.</span></label>
+	                		</strong>&nbsp;<span name="dogPay">원하지 않을 경우 0원을 입력하세요.</span></label>
 	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="비용을 입력하세요.">
 	               		</div>
 	              	</div>
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate"><strong>
+	                		<label for="dogDate" id="dogDateLabel"><strong>
 	                			<c:if test="${param.boardCode eq 'AD' }">발견일자</c:if>
 	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">실종일자</c:if> --%>
 	                		</strong></label>
-	                  		<input type="date" class="form-control" name="dogDate" value="" >
-	               		</div>
-	              	</div>
+<!-- 	                		<img src="/resources/file/others/calendar.png" alt="logo" id="calIcon" height="20px" width="20px"> -->
+<!-- 	                  		<div class="col-md-12" style="padding-right: 0px;padding-left: 0px;margin-right: 0px;"> -->
+	                  		<input type="text" class="form-control" name="dogDate" value="" readonly>
+	                  	</div>
+	               	</div>
+	              	
 	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
@@ -262,15 +277,15 @@
 	              	<div class="w-100"></div>
 		            <div class="w-100"></div>
 	              	<div class="w-100"></div>
-                
+                </div>
 	         	</div>
 	         </form>
 	         <!-- END -->
 
-	         <div class="row mt-5 pt-3 d-flex">
-	          	<div class="col-md-12">
+	         <div class="col-xl-8 row mt-5 pt-3 d-flex">
+	          	<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
 	          	
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">등록</button></p>
+					<p><button class="btn btn-default py-3 px-4 col-md-12">등록</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">
@@ -279,7 +294,7 @@
 							</div>
 						</div>
 					</div>
-					
+					<br/><br/>
 	          	</div>
 	         </div>
 	          
@@ -287,24 +302,24 @@
  <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
  
  
-			<div id="dialog-terms" title="">
-			  <p align="center"><br/>약관에 모두 동의해야 등록할 수 있습니다.</p>
-			</div>  
+<!-- 			<div id="dialog-terms" title=""> -->
+<!-- 			  <p align="center"><br/>약관에 모두 동의해야 등록할 수 있습니다.</p> -->
+<!-- 			</div>   -->
 			
-			<div id="dialog-img" title="">
-			  <p align="center"><br/>이미지를 등록해주세요.</p>
-			</div>        
+<!-- 			<div id="dialog-img" title=""> -->
+<!-- 			  <p align="center"><br/>이미지를 등록해주세요.</p> -->
+<!-- 			</div>         -->
 
-			<div id="dialog-area" title="">
-			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
-			</div>       
+<!-- 			<div id="dialog-area" title=""> -->
+<!-- 			  <p align="center"><br/>분양가능지역을 선택해주세요.</p> -->
+<!-- 			</div>        -->
 			
-			<div id="dialog-location" title="">
-			  <p align="center"><br/>
-			  		<c:if test="${param.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if>
-			  		<c:if test="${param.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if>
-			  </p>
-			</div>   
+<!-- 			<div id="dialog-location" title=""> -->
+<!-- 			  <p align="center"><br/> -->
+<%-- 			  		<c:if test="${param.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if> --%>
+<%-- 			  		<c:if test="${param.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if> --%>
+<!-- 			  </p> -->
+<!-- 			</div>    -->
 
        
 <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
@@ -324,29 +339,16 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   
-  <!-- 템플릿 -->
-  <script src="/resources/prodmenu/js/jquery.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/resources/prodmenu/js/popper.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="/resources/prodmenu/js/aos.js"></script>
-  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="/resources/prodmenu/js/main.js"></script>
-  
+<!--   <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="/resources/events.js"></script>
+<!--   <script type="text/javascript" src="/resources/events.js"></script> -->
 <!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script><script type="text/javascript" src="js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script>
 
  	  var mapArea;
@@ -596,10 +598,10 @@
 	                	$("#preview").append(
 	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<a href=\"#\" value=\""
+	                                         + "<span value=\""
 	                                         + imgNum
 	                                         + "\" onclick=\"deletePreview(this)\">"
-                                             + "삭제" + "</a>" + "</div> ");
+                                             + "삭제" + "</span>" + "</div> ");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -774,73 +776,73 @@
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-	$( function() {
-	    $( "#dialog-terms" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-terms" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  닫기: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
-	$( function() {
-	    $( "#dialog-img" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-img" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  닫기: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
-	$( function() {
-	    $( "#dialog-area" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-area" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  닫기: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
-	$( function() {
-	    $( "#dialog-location" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-location" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  닫기: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
 
 	
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
-		if($("input[name=postTitle]").val().length > 10 ){
-			$("span[name=postTitle]").text('10자까지 입력할 수 있습니다.');
+		if($("input[name=postTitle]").val().length > 20 ){
+			$("span[name=postTitle]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -921,12 +923,26 @@
 		  $( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
 		
 		  if( $("input:checkbox:checked").length != 3){
-			  $('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-terms').dialog("open");
+			  swal({
+		           text: "약관에 모두 동의해야 등록하실 수 있습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=terms]:checkbox").prop('checked', false).focus();
+		           }
+		      });
+// 			  $('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-terms').dialog("open");
 // 			  $("input[name=terms]:checkbox").prop('checked', false).focus();
 			  return;
 		  }
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >10){
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
@@ -939,8 +955,21 @@
 			  return;
 		  }
 		  if( $(".preview-box").length == 0 ){
-			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-img').dialog( "open" );
+			  swal({
+		           text: "이미지를 등록해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
+// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-img').dialog( "open" );
 			  return;
 		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 || $("input[name=dogWeight]").val() < 1 ){
@@ -969,14 +998,42 @@
 		  }
 		  if( boardCode == 'AD' ){
 			  if( $("input[name=adoptArea]").val().trim() == ''){
-				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				  $('#dialog-area').dialog( "open" );
+				  swal({
+			           text: "분양가능지역을 선택해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "닫기"
+								 }
+					   },
+					   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			        	   jQuery($("#areaFocus"))[0].scrollIntoView(true);
+			           }
+			      });
+// 				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
 		  if( $("input[name=location]").val().trim() == ''){
-			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-location').dialog( "open" );
+			  swal({
+		           text: "발견위치를 선택해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+		           }
+		      });
+// 			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -1042,6 +1099,26 @@
 			$( "a:contains('취소')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
+			
+			$( "input[name=dogDate]" ).datepicker({
+				showOn: "button",
+				buttonImage: "/resources/file/others/calendar.png",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				dateFormat: "yy-mm-dd",
+				maxDate: "+0d",
+				prevText: '이전 달',
+		        nextText: '다음 달',
+		        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		        showMonthAfterYear: true,
+		        yearSuffix: '년'
+			});
+			
+			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
       
       

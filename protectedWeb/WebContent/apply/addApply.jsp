@@ -1,13 +1,13 @@
- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 
-	<title>º¸È£ÇÒ°³ ¡¤ ÀÔ¾ç½ÅÃ»¼­</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>ë³´í˜¸í• ê°œ Â· ì…ì–‘ì‹ ì²­ì„œ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -17,18 +17,19 @@
 	 	 scroll-behavior: smooth;
 		}
 	</style>
-	
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
   
   
 <body class="goto-here">
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread" id="h1">ÀÔ¾ç ½ÅÃ»</h1>
+          	<p ><span class="mr-2"><a href="index.html">Add</a></span> <span>Adopt</span></p>
+            <font size="7">ì…ì–‘ì‹ ì²­</font>
           </div>
         </div>
       </div>
@@ -49,39 +50,39 @@
 				<div class="col-md-12">
 				
 	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4"><strong>¾à°ü µ¿ÀÇ</strong></h3>
+	          			<h3 class="billing-heading mb-4"><strong>ì•½ê´€ ë™ì˜</strong></h3>
 	          			
 						<div class="form-group">
 							<div class="col-md-12"><strong>1. </strong>
-								ÀÔ¾çÀÎÀº ÀÔ¾çµ¿¹°¿¡°Ô ¾çÁúÀÇ »ç·á¿Í ±ú²ıÇÑ ¹°À» °ø±ŞÇÏ°í, ÀûÇÕÇÏ°í ÀûÀıÇÑ ¿îµ¿, Áúº´¿¡ ´ëÇÑ ¿¹¹æÁ¢Á¾, Á¤±â °Ç°­°ËÁøÀ» ½ÃÇàÇÏ´Â µî ²À ÇÊ¿äÇÑ º¹Áö¸¦ Á¦°øÇÒ ÀÇ¹«°¡ ÀÖ½À´Ï´Ù.
+								ì…ì–‘ì¸ì€ ì…ì–‘ë™ë¬¼ì—ê²Œ ì–‘ì§ˆì˜ ì‚¬ë£Œì™€ ê¹¨ë—í•œ ë¬¼ì„ ê³µê¸‰í•˜ê³ , ì í•©í•˜ê³  ì ì ˆí•œ ìš´ë™, ì§ˆë³‘ì— ëŒ€í•œ ì˜ˆë°©ì ‘ì¢…, ì •ê¸° ê±´ê°•ê²€ì§„ì„ ì‹œí–‰í•˜ëŠ” ë“± ê¼­ í•„ìš”í•œ ë³µì§€ë¥¼ ì œê³µí•  ì˜ë¬´ê°€ ìˆìŠµë‹ˆë‹¤.
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">µ¿ÀÇ</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">ë™ì˜</label>
 								</div>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="col-md-12"><strong>2. </strong>
-								¸¸ÀÏ ÀÔ¾çµ¿¹°ÀÌ Áúº´¿¡ °É·ÈÀ» ¶§ ÀÔ¾çÀÎÀº ½Å¼ÓÇÏ°Ô ÇÊ¿äÇÑ ¼öÀÇÇĞÀû Ä¡·á¸¦ ¹Ş°Ô ÇÏ°í ¼º½ÇÇÏ°Ô ±× Ä¡·á¿¡ ÀÓÇÒ °ÍÀÌ¸ç ¸¸ÀÏ ÀÔ¾çµ¿¹°ÀÇ ¿ÏÄ¡°¡ ºÒ°¡´ÉÇÏ°í 
-								±× °íÅëÀÌ ±Ø½ÉÇÑ °æ¿ì¿¡´Â ÀÌ¸¦ ´ÜÃ¼¿¡ ÅëÁöÇÏ°í ´ÜÃ¼¿ÍÀÇ ÇùÀÇ ÇÏ¿¡ ´ë¾ÈÀ» °­±¸ÇÏ¿©¾ß ÇÏ¸ç ÀÓÀÇ·Î Ã³¸®ÇØ¼­´Â ¾È µË´Ï´Ù. 
-								ÀÔ¾çÀÎÀº ÀÔ¾çµ¿¹°ÀÌ ÀÚ¿¬»çÇÑ °æ¿ì¿¡µµ Áï½Ã ÀÌ »ç½ÇÀ» ´ÜÃ¼¿¡ ÅëÁöÇÒ ÀÇ¹«°¡ ÀÖ½À´Ï´Ù.
+								ë§Œì¼ ì…ì–‘ë™ë¬¼ì´ ì§ˆë³‘ì— ê±¸ë ¸ì„ ë•Œ ì…ì–‘ì¸ì€ ì‹ ì†í•˜ê²Œ í•„ìš”í•œ ìˆ˜ì˜í•™ì  ì¹˜ë£Œë¥¼ ë°›ê²Œ í•˜ê³  ì„±ì‹¤í•˜ê²Œ ê·¸ ì¹˜ë£Œì— ì„í•  ê²ƒì´ë©° ë§Œì¼ ì…ì–‘ë™ë¬¼ì˜ ì™„ì¹˜ê°€ ë¶ˆê°€ëŠ¥í•˜ê³  
+								ê·¸ ê³ í†µì´ ê·¹ì‹¬í•œ ê²½ìš°ì—ëŠ” ì´ë¥¼ ë‹¨ì²´ì— í†µì§€í•˜ê³  ë‹¨ì²´ì™€ì˜ í˜‘ì˜ í•˜ì— ëŒ€ì•ˆì„ ê°•êµ¬í•˜ì—¬ì•¼ í•˜ë©° ì„ì˜ë¡œ ì²˜ë¦¬í•´ì„œëŠ” ì•ˆ ë©ë‹ˆë‹¤. 
+								ì…ì–‘ì¸ì€ ì…ì–‘ë™ë¬¼ì´ ìì—°ì‚¬í•œ ê²½ìš°ì—ë„ ì¦‰ì‹œ ì´ ì‚¬ì‹¤ì„ ë‹¨ì²´ì— í†µì§€í•  ì˜ë¬´ê°€ ìˆìŠµë‹ˆë‹¤.
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">µ¿ÀÇ</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">ë™ì˜</label>
 								</div>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="col-md-12"><strong>3. </strong>
-								ÀÔ¾ç ½ÅÃ» ÈÄ, ½ÅÃ»±ÛÀº ¼öÁ¤ÇÏ°Å³ª »èÁ¦ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.
+								ì…ì–‘ ì‹ ì²­ í›„, ì‹ ì²­ê¸€ì€ ìˆ˜ì •í•˜ê±°ë‚˜ ì‚­ì œí•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">µ¿ÀÇ</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">ë™ì˜</label>
 								</div>
 							</div>
 						</div>
@@ -89,7 +90,7 @@
 						<div class="form-group">
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>¸ğµÎ µ¿ÀÇ</strong></label>
+								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>ëª¨ë‘ ë™ì˜</strong></label>
 								</div>
 							</div>
 						</div>
@@ -106,35 +107,35 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="phone"><strong>¿¬¶ôÃ³</strong>&nbsp;&nbsp;<span name="phone">¿¬¶ôÃ³°¡ ´Ù¸¦ °æ¿ì È¸¿øÁ¤º¸¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä.</span></label>
+		                	<label for="phone"><strong>ì—°ë½ì²˜</strong>&nbsp;&nbsp;<span name="phone">ì—°ë½ì²˜ê°€ ë‹¤ë¥¼ ê²½ìš° íšŒì›ì •ë³´ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”.</span></label>
 		                	<input type="text" class="form-control" name="phone" value="${ apply.phone }" readonly>
 		                </div>
 	                </div>
     
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for=""><strong>Á÷¾÷À» ¼±ÅÃÇÏ¼¼¿ä.</strong></label><br/>
-	                		<div class="col-md-2"><input type="radio"  name="job" value="ÇĞ»ı">ÇĞ»ı</div>
-	                		<div class="col-md-2"><input type="radio"  name="job" value="Á÷ÀåÀÎ">Á÷ÀåÀÎ</div>
-	                		<div class="col-md-2"><input type="radio"  name="job" value="±âÅ¸">±âÅ¸</div>
+	                		<label for=""><strong>ì§ì—…ì„ ì„ íƒí•˜ì„¸ìš”.</strong></label><br/>
+	                		<div class="col-md-2"><input type="radio"  name="job" value="í•™ìƒ">&nbsp;í•™ìƒ</div>
+	                		<div class="col-md-2"><input type="radio"  name="job" value="ì§ì¥ì¸">&nbsp;ì§ì¥ì¸</div>
+	                		<div class="col-md-2"><input type="radio"  name="job" value="ê¸°íƒ€">&nbsp;ê¸°íƒ€</div>
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for=""><strong>°ÅÁÖÁö À¯ÇüÀ» ¼±ÅÃÇÏ¼¼¿ä.</strong></label><br/>
-	                		<div class="col-md-2"><input type="radio"  name="addr" value="ÁÖÅÃ">ÁÖÅÃ</div>
-	                		<div class="col-md-2"><input type="radio"  name="addr" value="¾ÆÆÄÆ®">¾ÆÆÄÆ®</div>
-	                		<div class="col-md-2"><input type="radio"  name="addr" value="ºô¶ó">ºô¶ó</div>
-	                		<div class="col-md-2"><input type="radio"  name="addr" value="±âÅ¸">±âÅ¸</div>
+	                		<label for=""><strong>ê±°ì£¼ì§€ ìœ í˜•ì„ ì„ íƒí•˜ì„¸ìš”.</strong></label><br/>
+	                		<div class="col-md-2"><input type="radio"  name="addr" value="ì£¼íƒ">&nbsp;ì£¼íƒ</div>
+	                		<div class="col-md-2"><input type="radio"  name="addr" value="ì•„íŒŒíŠ¸">&nbsp;ì•„íŒŒíŠ¸</div>
+	                		<div class="col-md-2"><input type="radio"  name="addr" value="ë¹Œë¼">&nbsp;ë¹Œë¼</div>
+	                		<div class="col-md-2"><input type="radio"  name="addr" value="ê¸°íƒ€">&nbsp;ê¸°íƒ€</div>
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for=""><strong>µ¿°ÅÀÎ ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.</strong></label><br/>
-	                		<div class="col-md-2"><input type="radio"  name="mate" value="ÀÖÀ½">ÀÖÀ½</div>
-	                		<div class="col-md-2"><input type="radio"  name="mate" value="¾øÀ½">¾øÀ½</div>
+	                		<label for=""><strong>ë™ê±°ì¸ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.</strong></label><br/>
+	                		<div class="col-md-2"><input type="radio"  name="mate" value="ìˆìŒ">&nbsp;ìˆìŒ</div>
+	                		<div class="col-md-2"><input type="radio"  name="mate" value="ì—†ìŒ">&nbsp;ì—†ìŒ</div>
 	               		</div>
                		</div>
                		
@@ -142,9 +143,9 @@
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for=""><strong>¹İ·Á°ß ¾çÀ°°æÇè ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.</strong></label><br/>
-	                		<div class="col-md-2"><input type="radio"  name="raise" value="ÀÖÀ½">ÀÖÀ½</div>
-	                		<div class="col-md-5"><input type="radio"  name="raise" value="¾øÀ½">¾øÀ½</div>
+	                		<label for=""><strong>ë°˜ë ¤ê²¬ ì–‘ìœ¡ê²½í—˜ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.</strong></label><br/>
+	                		<div class="col-md-2"><input type="radio"  name="raise" value="ìˆìŒ">&nbsp;ìˆìŒ</div>
+	                		<div class="col-md-5"><input type="radio"  name="raise" value="ì—†ìŒ">&nbsp;ì—†ìŒ</div>
 	               		</div>
                		</div>
                		
@@ -152,29 +153,29 @@
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="plan"><strong>¹İ·Á°ßÀ» ÀÔ¾çÇÏ°ÔµÉ °æ¿ì, ¾ÕÀ¸·ÎÀÇ °èÈ¹À» ÀÔ·ÂÇÏ¼¼¿ä.</strong>&nbsp;&nbsp;<span name="plan"></span></label>
-	                  		<input type="text" class="form-control" name="plan" value="" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+	                		<label for="plan"><strong>ë°˜ë ¤ê²¬ì„ ì…ì–‘í•˜ê²Œë  ê²½ìš°, ì•ìœ¼ë¡œì˜ ê³„íšì„ ì…ë ¥í•˜ì„¸ìš”.</strong>&nbsp;&nbsp;<span name="plan"></span></label>
+	                  		<input type="text" class="form-control" name="plan" value="" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="pay"><strong>¹İ·Á°ßÀ» ÀÔ¾çÇÏ°ÔµÉ °æ¿ì, 1³â°£ÀÇ ¿¹»ó ºñ¿ë°ú ±× ÀÌÀ¯¸¦ ÀÔ·ÂÇÏ¼¼¿ä.</strong>&nbsp;&nbsp;<span name="pay"></span></label>
-	                  		<input type="text" class="form-control" name="pay" value="" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+	                		<label for="pay"><strong>ë°˜ë ¤ê²¬ì„ ì…ì–‘í•˜ê²Œë  ê²½ìš°, 1ë…„ê°„ì˜ ì˜ˆìƒ ë¹„ìš©ê³¼ ê·¸ ì´ìœ ë¥¼ ì…ë ¥í•˜ì„¸ìš”.</strong>&nbsp;&nbsp;<span name="pay"></span></label>
+	                  		<input type="text" class="form-control" name="pay" value="" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="reason"><strong>¹İ·Á°ßÀ» ÀÔ¾çÇÏ°í ½ÍÀº ÀÌÀ¯¸¦ ÀÔ·ÂÇÏ¼¼¿ä.</strong>&nbsp;&nbsp;<span name="reason"></span></label>
-	                  		<input type="text" class="form-control" name="reason" value="" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+	                		<label for="reason"><strong>ë°˜ë ¤ê²¬ì„ ì…ì–‘í•˜ê³  ì‹¶ì€ ì´ìœ ë¥¼ ì…ë ¥í•˜ì„¸ìš”.</strong>&nbsp;&nbsp;<span name="reason"></span></label>
+	                  		<input type="text" class="form-control" name="reason" value="" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="situation"><strong>¹İ·Á°ßÀ» ÀÔ¾çÇÏ°í »óÈ²ÀÌ ¹Ù²ğ °æ¿ì, ¾î¶»°Ô ´ëÃ³ÇÒ Áö ÀÔ·ÂÇÏ¼¼¿ä.</strong>&nbsp;&nbsp;<span name="situation"></span></label>
-	                  		<input type="text" class="form-control" name="situation" value="" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+	                		<label for="situation"><strong>ë°˜ë ¤ê²¬ì„ ì…ì–‘í•˜ê³  ìƒí™©ì´ ë°”ë€” ê²½ìš°, ì–´ë–»ê²Œ ëŒ€ì²˜í•  ì§€ ì…ë ¥í•˜ì„¸ìš”.</strong>&nbsp;&nbsp;<span name="situation"></span></label>
+	                  		<input type="text" class="form-control" name="situation" value="" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 	               		</div>
                		</div>
                		
@@ -191,12 +192,12 @@
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
 	          	
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">½ÅÃ»</button></p>
+					<p><button class="btn btn-primary py-3 px-4 col-md-12">ì‹ ì²­</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">
 							<div class="radio" align="right">
-								<p><a href="#" ><font color="gray">Ãë¼Ò</font></a></p>
+								<p><a href="#" ><font color="gray">ì·¨ì†Œ</font></a></p>
 							</div>
 						</div>
 					</div>
@@ -208,31 +209,31 @@
  <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
 
 			<div id="dialog-terms" title="">
-			  <p align="center"><br/>¾à°ü¿¡ ¸ğµÎ µ¿ÀÇÇØ¾ß ½ÅÃ»ÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
+			  <p align="center"><br/>ì•½ê´€ì— ëª¨ë‘ ë™ì˜í•´ì•¼ ì‹ ì²­í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p>
 			</div>       
 			<div id="dialog-job" title="">
-			  <p align="center"><br/>Á÷¾÷À» ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ì§ì—…ì„ ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-addr" title="">
-			  <p align="center"><br/>°ÅÁÖÁö À¯ÇüÀ» ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ê±°ì£¼ì§€ ìœ í˜•ì„ ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-mate" title="">
-			  <p align="center"><br/>µ¿°ÅÀÎ ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ë™ê±°ì¸ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-mateAgree" title="">
-			  <p align="center"><br/>µ¿°ÅÀÎ µ¿ÀÇ ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ë™ê±°ì¸ ë™ì˜ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-afterMateAgree" title="">
-			  <p align="center"><br/>µ¿°ÅÀÎ ¿©ºÎ¸¦ ¸ÕÀú ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ë™ê±°ì¸ ì—¬ë¶€ë¥¼ ë¨¼ì € ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-raise" title="">
-			  <p align="center"><br/>¾çÀ°°æÇè ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ì–‘ìœ¡ê²½í—˜ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-currently" title="">
-			  <p align="center"><br/>ÇöÀç ¾çÀ° ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>í˜„ì¬ ì–‘ìœ¡ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>      
 			<div id="dialog-afterCurrently" title="">
-			  <p align="center"><br/>¾çÀ°°æÇè ¿©ºÎ¸¦ ¸ÕÀú ¼±ÅÃÇÏ¼¼¿ä.</p>
+			  <p align="center"><br/>ì–‘ìœ¡ê²½í—˜ ì—¬ë¶€ë¥¼ ë¨¼ì € ì„ íƒí•˜ì„¸ìš”.</p>
 			</div>   
 			<div id="dialog-confirm" title="">
 			  <p align="left" id="confirm" ></p>
@@ -250,26 +251,27 @@
     
     
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
 
-  <script src="/resources/prodmenu/js/jquery.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/resources/prodmenu/js/popper.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="/resources/prodmenu/js/aos.js"></script>
-  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="/resources/prodmenu/js/main.js"></script>
+<!--   <script src="/resources/prodmenu/js/jquery.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/popper.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/bootstrap.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/owl.carousel.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/aos.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/scrollax.min.js"></script> -->
+<!--   <script src="/resources/prodmenu/js/main.js"></script> -->
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="/resources/events.js"></script>
+<!--   <script type="text/javascript" src="/resources/events.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   <script>
 
  	  
@@ -282,7 +284,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
 		    	  }
@@ -297,7 +299,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=job]:radio").prop('checked', false).focus();
 		    	  }
@@ -312,7 +314,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=addr]:radio").prop('checked', false).focus();
 		    	  }
@@ -327,7 +329,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=mate]:radio").prop('checked', false).focus();
 		    	  }
@@ -342,7 +344,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=mateAgree]:radio").prop('checked', false).focus();
 		    	  }
@@ -357,7 +359,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=afterMateAgree]:radio").prop('checked', false).focus();
 		    	  }
@@ -372,7 +374,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=raise]:radio").prop('checked', false).focus();
 		    	  }
@@ -387,7 +389,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=currently]:radio").prop('checked', false).focus();
 		    	  }
@@ -402,7 +404,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  $("input[name=afterCurrently]:radio").prop('checked', false).focus();
 		    	  }
@@ -418,17 +420,17 @@
 		      height: 500,
 		      modal: true,
 		      buttons: {
-		        	½ÅÃ»: function() {
+		        	ì‹ ì²­: function() {
 		        		$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
 		        	},
-		        	Ãë¼Ò: function() {
+		        	ì·¨ì†Œ: function() {
 		          		$( this ).dialog( "close" );
 		        	}
 		      }
 	    });
 	});
 
-//////////////////////    ¡è  dialog        ////////////////////////////////////////////////	
+//////////////////////    â†‘  dialog        ////////////////////////////////////////////////	
 	
 	$( 'input[name=termsAll]').on('click', function(){
 	    if (  $("input[name=termsAll]:checkbox").prop("checked")  ) {
@@ -463,7 +465,7 @@
 	});
 	
 	$( "input[name=mate]" ).on('click', function(){
-		if( $(this).val() == "¾øÀ½" ){
+		if( $(this).val() == "ì—†ìŒ" ){
 			$( 'input[name=mateAgree]').attr('disabled', true);
 			$( "input[name=mateAgree]").prop('checked', false);
 			$( '#divMateAgree').hide('blind','slow');
@@ -474,16 +476,16 @@
 			}
 			var divMateAgree = "<div class=\"col-md-12\" id=\"divMateAgree\">"
 	      		+"<div class=\"form-group\">"
-	    		+"<label for=\"\"><strong>µ¿°ÅÀÎÀÇ µ¿ÀÇ ¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.<\/strong></label><br/>"
-	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"µ¿ÀÇ\">µ¿ÀÇ<\/div>"
-	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"µ¿ÀÇÇÏÁö ¾ÊÀ½\">µ¿ÀÇÇÏÁö ¾ÊÀ½<\/div>"
+	    		+"<label for=\"\"><strong>ë™ê±°ì¸ì˜ ë™ì˜ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.<\/strong></label><br/>"
+	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"ë™ì˜\">ë™ì˜<\/div>"
+	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"ë™ì˜í•˜ì§€ ì•ŠìŒ\">ë™ì˜í•˜ì§€ ì•ŠìŒ<\/div>"
 	    		+"<\/div><\/div>";
 			$( 'span[name=mateAgree]').append(divMateAgree).hide().show('blind','slow');
 		}
 	});
 	
 	$( "input[name=raise]" ).on('click', function(){
-		if( $(this).val() == "¾øÀ½" ){
+		if( $(this).val() == "ì—†ìŒ" ){
 			$( 'input[name=currently]').attr('disabled', true);
 			$( "input[name=currently]").prop('checked', false);
 			$( '#divCurrently').hide('blind','slow');
@@ -494,21 +496,21 @@
 			}
 			var divCurrently = "<div class=\"col-md-12\" id=\"divCurrently\">"
 			      			+"<div class=\"form-group\">"
-			        		+"<label for=\"\"><strong>ÇöÀç ¾çÀ°¿©ºÎ¸¦ ¼±ÅÃÇÏ¼¼¿ä.<\/strong></label><br/>"
-			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"¾çÀ° Áß\">¾çÀ° Áß<\/div>"
-			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"¾çÀ°ÇÏ°í ÀÖÁö ¾ÊÀ½\">¾çÀ°ÇÏ°í ÀÖÁö ¾ÊÀ½<\/div>"
+			        		+"<label for=\"\"><strong>í˜„ì¬ ì–‘ìœ¡ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.<\/strong></label><br/>"
+			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"ì–‘ìœ¡ ì¤‘\">ì–‘ìœ¡ ì¤‘<\/div>"
+			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"ì–‘ìœ¡í•˜ê³  ìˆì§€ ì•ŠìŒ\">ì–‘ìœ¡í•˜ê³  ìˆì§€ ì•ŠìŒ<\/div>"
 			       			+"<\/div><\/div>";
 			$( 'span[name=currently]').append(divCurrently).hide().show('blind','slow');
 		}
 	});
 	
-//////////////////////     ¡è      check box         ////////////////////////////////////////////////
+//////////////////////     â†‘      check box         ////////////////////////////////////////////////
 
 
 
 	$( "input[name=plan]" ).keyup(function( ) {
 		if($("input[name=plan]").val().length > 300 ){
-			$("span[name=plan]").text('300ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=plan]").text('300ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=plan]").text('');
 		}
@@ -516,7 +518,7 @@
 
 	$( "input[name=pay]" ).keyup(function( ) {
 		if($("input[name=pay]").val().length > 300 ){
-			$("span[name=pay]").text('300ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=pay]").text('300ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=pay]").text('');
 		}
@@ -524,7 +526,7 @@
 
 	$( "input[name=reason]" ).keyup(function( ) {
 		if($("input[name=reason]").val().length > 300 ){
-			$("span[name=reason]").text('300ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=reason]").text('300ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=reason]").text('');
 		}
@@ -532,68 +534,164 @@
 
 	$( "input[name=situation]" ).keyup(function( ) {
 		if($("input[name=situation]").val().length > 300 ){
-			$("span[name=situation]").text('300ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=situation]").text('300ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=situation]").text('');
 		}
 	});
 	
-//////////////////////       ¡è  ±ÛÀÚ¼öÃ¼Å©         ////////////////////////////////////////////////
+//////////////////////       â†‘  ê¸€ììˆ˜ì²´í¬         ////////////////////////////////////////////////
 
 	
-	// µî·Ï¹öÆ° ´©¸£°í
+	// ë“±ë¡ë²„íŠ¼ ëˆ„ë¥´ê³ 
 	function fncAddApply(){
 		
-		// ¾à°ü µ¿ÀÇ
+		// ì•½ê´€ ë™ì˜
 		if( $("input:checkbox:checked").length != 4){
-			$('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-terms').dialog( "open" );
+			swal({
+		           text: "ì•½ê´€ì— ëª¨ë‘ ë™ì˜í•´ì•¼ ì‹ ì²­í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=terms]:checkbox").prop('checked', false).focus();
+		           }
+		    });
+// 			$('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			$('#dialog-terms').dialog( "open" );
 			return;
 		}
-		// Á÷¾÷Ã¼Å©
+		// ì§ì—…ì²´í¬
 		if( $("input[name=job]:radio:checked").length != 1){
-			$('#dialog-job').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-job').dialog( "open" );
+			swal({
+		           text: "ì§ì—…ì„ ì„ íƒí•˜ì„¸ìš”",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=job]:radio").prop('checked', false).focus();
+		           }
+		    });
+// 			$('#dialog-job').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			$('#dialog-job').dialog( "open" );
 			return;
 		}
-		// °ÅÁÖÁöÃ¼Å©
+		// ê±°ì£¼ì§€ì²´í¬
 		if( $("input[name=addr]:checked").length != 1){
-			$('#dialog-addr').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-addr').dialog( "open" );
+			swal({
+		           text: "ì£¼ì†Œë¥¼ ì„ íƒí•˜ì„¸ìš”.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=addr]:radio").prop('checked', false).focus();
+		           }
+		    });
+// 			$('#dialog-addr').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			$('#dialog-addr').dialog( "open" );
 			return;
 		}
-		// µ¿°ÅÀÎ¿©ºÎÃ¼Å©
+		
+		// ë™ê±°ì¸ì—¬ë¶€ì²´í¬
 		if( $("input[name=mate]:checked").length != 1){
-			$('#dialog-mate').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-mate').dialog( "open" );
+			swal({
+		           text: "ë™ê±°ì¸ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=mate]:radio").prop('checked', false).focus();
+		           }
+		    });
+// 			$('#dialog-mate').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			$('#dialog-mate').dialog( "open" );
 			return;
 		}else{
-			// µ¿°ÅÀÎÀÖÀ½¿¡ Ã¼Å©Çß´Âµ¥ µ¿ÀÇ¿©ºÎÃ¼Å© ¾ÈÇßÀ» °æ¿ì
-			if( $( "input[name=mate]:checked" ).val() == 1 ){
+			
+			// ë™ê±°ì¸ìˆìŒì— ì²´í¬í–ˆëŠ”ë° ë™ì˜ì—¬ë¶€ì²´í¬ ì•ˆí–ˆì„ ê²½ìš°
+			if( $( "input[name=mate]:checked" ).val() == 'ìˆìŒ' ){
+// 				alert("ë“¤ì–´ì˜´");
 				if( $("input[name=mateAgree]:checked").length != 1){
-					$('#dialog-mateAgree').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-					$('#dialog-mateAgree').dialog( "open" );
+// 					alert("ë“¤ì–´ì˜´2222");
+					swal({
+				           text: "ë™ê±°ì¸ ë™ì˜ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.",
+				           dangerMode: true,
+				           buttons: {
+									 catch: {
+									 	text: "ë‹«ê¸°"
+									 }
+						   },
+				    }).then((willDelete) => {
+				           if (willDelete) {
+				        	   $("input[name=mateAgree]:radio").prop('checked', false).focus();
+				           }
+				    });
+// 					$('#dialog-mateAgree').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 					$('#dialog-mateAgree').dialog( "open" );
 					return;
 				}
 			}
 		}
-		// ¾çÀ°¿©ºÎÃ¼Å©
+		// ì–‘ìœ¡ì—¬ë¶€ì²´í¬
 		if( $("input[name=raise]:checked").length != 1){
-			$('#dialog-raise').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-raise').dialog( "open" );
+// 			alert("ë“¤ì–´ì˜´333"+ $( "input[name=mate]:checked" ).val() + $("input[name=mateAgree]:checked").length);
+			swal({
+		           text: "ì–‘ìœ¡ê²½í—˜ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=raise]:radio").prop('checked', false).focus();
+		           }
+		    });
+// 			$('#dialog-raise').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			$('#dialog-raise').dialog( "open" );
 			return;
 			  
 		}else{
-			// ¾çÀ°°æÇèÀÖÀ½¿¡ Ã¼Å©Çß´Âµ¥ ÇöÀç¾çÀ°¿©ºÎÃ¼Å© ¾ÈÇßÀ» °æ¿ì
-			if( $( "input[name=raise]:checked" ).val() == 1 ){
+			// ì–‘ìœ¡ê²½í—˜ìˆìŒì— ì²´í¬í–ˆëŠ”ë° í˜„ì¬ì–‘ìœ¡ì—¬ë¶€ì²´í¬ ì•ˆí–ˆì„ ê²½ìš°
+			if( $( "input[name=raise]:checked" ).val() == 'ìˆìŒ' ){
 				if( $("input[name=currently]:checked").length != 1){
-					$('#dialog-currently').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-					$('#dialog-currently').dialog( "open" );
+					swal({
+				           text: "í˜„ì¬ ì–‘ìœ¡ ì—¬ë¶€ë¥¼ ì„ íƒí•˜ì„¸ìš”.",
+				           dangerMode: true,
+				           buttons: {
+									 catch: {
+									 	text: "ë‹«ê¸°"
+									 }
+						   },
+				    }).then((willDelete) => {
+				           if (willDelete) {
+				        	   $("input[name=currently]:radio").prop('checked', false).focus();
+				           }
+				    });
+// 					$('#dialog-currently').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 					$('#dialog-currently').dialog( "open" );
 					return;
 				}
 			}
 		}
-		// ÀÔ·Â ¾ÈÇßÀ» °æ¿ì || ±æÀÌÁ¦ÇÑ ³Ñ¾úÀ» °æ¿ì
+		// ì…ë ¥ ì•ˆí–ˆì„ ê²½ìš° || ê¸¸ì´ì œí•œ ë„˜ì—ˆì„ ê²½ìš°
 		if( $("input[name=plan]").val() == '' || $("input[name=plan]").val().length > 300 ){
 			$("input[name=plan]").focus();
 			return;
@@ -625,51 +723,51 @@
     	var confirmHTML;
     	
     	
-    	if( $("input[name=mate]:checked").val() == "¾øÀ½" && $("input[name=raise]:checked").val() == "ÀÖÀ½" ){
-    		confirmHTML = '<strong>[Á÷¾÷]<\/strong> : '+job
-						+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+addr
-						+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+mate
-						+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+raise
-						+'<br\/><strong>[ÇöÀç ¾çÀ° ¿©ºÎ]<\/strong> : '+currently
-						+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+plan
-						+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+pay
-						+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+reason
-						+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>½ÅÃ» ÈÄ <u>Á¶È¸, ¼öÁ¤, »èÁ¦<\/u>´Â ºÒ°¡´ÉÇÕ´Ï´Ù. ½ÅÃ»ÇÏ½Ã°Ú½À´Ï±î?<\/strong>';
+    	if( $("input[name=mate]:checked").val() == "ì—†ìŒ" && $("input[name=raise]:checked").val() == "ìˆìŒ" ){
+    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[ì§ì—…]<\/strong> : '+job
+						+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+addr
+						+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+mate
+						+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+raise
+						+'<br\/><strong>[í˜„ì¬ ì–‘ìœ¡ ì—¬ë¶€]<\/strong> : '+currently
+						+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+plan
+						+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+pay
+						+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+reason
+						+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+situation 
+						+'<br\/><br\/><br\/><strong>ì‹ ì²­ í›„ <u>ì¡°íšŒ, ìˆ˜ì •, ì‚­ì œ<\/u>ëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤. ì‹ ì²­í•˜ì‹œê² ìŠµë‹ˆê¹Œ?<\/strong></p>';
     		
-    	}else if($("input[name=mate]:checked").val() == "¾øÀ½" &&  $("input[name=raise]:checked").val() == "¾øÀ½"  ) {
-    		confirmHTML = '<strong>[Á÷¾÷]<\/strong> : '+job
-						+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+addr
-						+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+mate
-						+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+raise
-						+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+plan
-						+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+pay
-						+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+reason
-						+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>½ÅÃ» ÈÄ <u>Á¶È¸, ¼öÁ¤, »èÁ¦<\/u>´Â ºÒ°¡´ÉÇÕ´Ï´Ù. ½ÅÃ»ÇÏ½Ã°Ú½À´Ï±î?<\/strong>';
-    	}else if($("input[name=mate]:checked").val() == "ÀÖÀ½" &&  $("input[name=raise]:checked").val() == "¾øÀ½"  ) {
-    		confirmHTML = '<strong>[Á÷¾÷]<\/strong> : '+job
-						+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+addr
-						+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+mate
-						+'<br\/><strong>[µ¿ÀÇ ¿©ºÎ]<\/strong> : '+mateAgree
-						+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+raise
-						+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+plan
-						+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+pay
-						+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+reason
-						+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>½ÅÃ» ÈÄ <u>Á¶È¸, ¼öÁ¤, »èÁ¦<\/u>´Â ºÒ°¡´ÉÇÕ´Ï´Ù. ½ÅÃ»ÇÏ½Ã°Ú½À´Ï±î?<\/strong>';
+    	}else if($("input[name=mate]:checked").val() == "ì—†ìŒ" &&  $("input[name=raise]:checked").val() == "ì—†ìŒ"  ) {
+    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[ì§ì—…]<\/strong> : '+job
+						+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+addr
+						+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+mate
+						+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+raise
+						+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+plan
+						+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+pay
+						+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+reason
+						+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+situation 
+						+'<br\/><br\/><br\/><strong>ì‹ ì²­ í›„ <u>ì¡°íšŒ, ìˆ˜ì •, ì‚­ì œ<\/u>ëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤. ì‹ ì²­í•˜ì‹œê² ìŠµë‹ˆê¹Œ?<\/strong></p>';
+    	}else if($("input[name=mate]:checked").val() == "ìˆìŒ" &&  $("input[name=raise]:checked").val() == "ì—†ìŒ"  ) {
+    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[ì§ì—…]<\/strong> : '+job
+						+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+addr
+						+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+mate
+						+'<br\/><strong>[ë™ì˜ ì—¬ë¶€]<\/strong> : '+mateAgree
+						+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+raise
+						+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+plan
+						+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+pay
+						+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+reason
+						+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+situation 
+						+'<br\/><br\/><br\/><strong>ì‹ ì²­ í›„ <u>ì¡°íšŒ, ìˆ˜ì •, ì‚­ì œ<\/u>ëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤. ì‹ ì²­í•˜ì‹œê² ìŠµë‹ˆê¹Œ?<\/strong></p>';
     	}else{
-    		confirmHTML = '<strong>[Á÷¾÷]<\/strong> : '+job
-						+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+addr
-						+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+mate
-						+'<br\/><strong>[µ¿ÀÇ ¿©ºÎ]<\/strong> : '+mateAgree
-						+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+raise
-						+'<br\/><strong>[ÇöÀç ¾çÀ° ¿©ºÎ]<\/strong> : '+currently
-						+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+plan
-						+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+pay
-						+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+reason
-						+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>½ÅÃ» ÈÄ <u>Á¶È¸, ¼öÁ¤, »èÁ¦<\/u>´Â ºÒ°¡´ÉÇÕ´Ï´Ù. ½ÅÃ»ÇÏ½Ã°Ú½À´Ï±î?<\/strong>';
+    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[ì§ì—…]<\/strong> : '+job
+						+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+addr
+						+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+mate
+						+'<br\/><strong>[ë™ì˜ ì—¬ë¶€]<\/strong> : '+mateAgree
+						+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+raise
+						+'<br\/><strong>[í˜„ì¬ ì–‘ìœ¡ ì—¬ë¶€]<\/strong> : '+currently
+						+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+plan
+						+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+pay
+						+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+reason
+						+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+situation 
+						+'<br\/><br\/><br\/><strong>ì‹ ì²­ í›„ <u>ì¡°íšŒ, ìˆ˜ì •, ì‚­ì œ<\/u>ëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤. ì‹ ì²­í•˜ì‹œê² ìŠµë‹ˆê¹Œ?<\/strong></p>';
     	}
     	
     	if( mateAgree == '' ){
@@ -679,20 +777,56 @@
     		$("input[name=currently]:checked").val('X');
     	}
     	
-		$('#cfHTML').remove();
-		$('#confirm').html( confirmHTML );
-		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-		$('#dialog-confirm').dialog( "open" );
+    	Swal.fire({
+	           html: confirmHTML,
+	           dangerMode: true,
+	           confirmButtonText:"ì‹ ì²­",
+	           cancelButtonText: "ì·¨ì†Œ",
+	           showCancelButton: true,
+	           showCloseButton: true
+// 	           buttons: {
+// 						 catch: {
+// 						 	text: "ì‹ ì²­"
+// 						 },
+// 						 cancelButtonText: "ì·¨ì†Œ",
+// 			   },
+	    }).then((result) => {
+	    	  if (result.value) {
+    		    	$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
+    		  } else if (
+    		    // Read more about handling dismissals
+    		    result.dismiss === Swal.DismissReason.cancel
+    		  ) {
+    		    swalWithBootstrapButtons.fire(
+    		      'Cancelled',
+    		      'Your imaginary file is safe :)',
+    		      'error'
+    		    )
+    		  }
+   		})
+	    
+	    
+// 	    then((willDelete) => {
+// 	           if (willDelete) {
+// 	        	   $("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
+// 	           }
+// 	    });
+    	
+// 		$('#cfHTML').remove();
+// 		$('#confirm').html( confirmHTML );
+		
+// 		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 		$('#dialog-confirm').dialog( "open" );
 				
 	}
 	
     
     $(function() {
-		$( "button:contains('½ÅÃ»')" ).on("click" , function() {
+		$( "button:contains('ì‹ ì²­')" ).on("click" , function() {
 			fncAddApply();
 		});
 		
-		$( "a:contains('Ãë¼Ò')" ).on("click" , function() {
+		$( "a:contains('ì·¨ì†Œ')" ).on("click" , function() {
 			self.location = "/adopt/getAdopt?postNo=${apply.adoptNo}"
 		});
 	 });	

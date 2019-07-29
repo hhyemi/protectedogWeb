@@ -18,10 +18,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -35,13 +36,26 @@
  			padding-bottom: 0px; 
  			padding-top: 10px !important;
  		} 
+		#image-box{
+/* 			background-origin: content-box; */
+/* 			padding-top: 5px; */
+/* 			padding-left: 50px; */
+		}
 		
- 		.listImg { 
+		.getadopt {
+			padding-top: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+		
+ 		.listImg {
  			max-height: 330px;  
  			min-height: 330px;  
  			min-width: wrap; 
  			max-width: wrap; 
- 			background-size: 95%;
+/*  			 */
+/*  			background-size: 95%; */
+ 			
 	/* 		    transition: all 0.3s; */
  			display: block; 
 /*  			height: auto;  */
@@ -49,13 +63,10 @@
  		} 
 
 		form {
-			text-align: right;
-			padding-left: 199px;
+			text-align: left;
+/* 			padding-left: 199px; */
 		}
 		
-		.justify {
-			margin-right: 0px;
-		}
 		
 		.form-group {
 			display: inline-block;
@@ -66,6 +77,34 @@
 		
 		select, #searchKeyword {
 			height: 33px;
+		}
+		
+		#searchKeyword {
+			height: 40px;
+			width: 150px;
+		}
+		
+		#searchSubmmit {
+			width : 60px;
+			height : 40px;
+			
+			border-radius : 0px 15px 15px 0px;
+			border : 1px solid #D3D3D3;
+		}
+		
+		#areaCondition {
+			height : 40px;
+			border-radius : 15px 0px 0px 15px;
+			padding-left: 10px;
+		}
+		
+		#searchCondition {
+			height : 40px;
+		}
+		
+		.col-md-6 {
+			padding-left: 30px !important;
+			padding-right: 45px !important;
 		}
 		
 
@@ -115,16 +154,16 @@
 
 		<div class="row">
 	    
-		    <div class="col-md-6 text-left">
+		    <div class="col-md-12 text-left">
 		    	<p class="text-primary" style="padding-left: 15px;">
 		    		전체  ${resultPage.totalCount } 건
 		    	</p>
 		    </div>
 		    
-			<div class="col-md-6" id="justify" align="right">
+			<div class="col-md-6" align="left">
 				<form class="form-inline" name="detailForm">
 					<div class="form-group">
-			    		<select name="areaCondition" >
+			    		<select name="areaCondition" id="areaCondition" >
 							<option value="all">전체</option>
 							<option value="kw"  ${ ! empty search.areaCondition && search.areaCondition=="강원" ? "selected" : "" }>강원도</option>
 							<option value="kk"  ${ ! empty search.areaCondition && search.areaCondition=="경기" ? "selected" : "" }>경기도</option>
@@ -138,7 +177,7 @@
 							<option value="jr"  ${ ! empty search.areaCondition && search.areaCondition=="전라" ? "selected" : "" }>전라도</option>
 							<option value="cc"  ${ ! empty search.areaCondition && search.areaCondition=="충청" ? "selected" : "" }>충청도</option>
 						</select>
-			    	</div>&nbsp;
+			    	</div>
 
 			    	<div class="form-group">
 						<select name="searchCondition" id="searchCondition">
@@ -154,12 +193,19 @@
 						    	value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 					</div>
 
-					<div class="form-group" >
-						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">검색</button>
-						<button type="button" class="btn btn-primary"><font size="3px">글쓰기</font></button>
-					</div>
+<!-- 					<div class="form-group" > -->
+						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-top: 0px;">
+							<span class="fas fa-search"></span>
+						</button>
+<!-- 						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">검색</button> -->
+						
+<!-- 					</div> -->
 			    
 			    </form>
+		    </div>
+		    
+		    <div class="col-md-6" id="justify" align="right">
+		    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">글쓰기</font></button>
 		    </div>
 		    
 		</div>
@@ -175,7 +221,9 @@
       <div class="col-md-12"  style="padding-left: 0px;">
       
       <c:if test="${resultPage.totalCount eq 0 }">
-     	 <br/><br/><br/><br/><br/><p align="center" style="width: 50%;"><font size="4px">검색결과가 없습니다.</font><br/><br/><br/><br/><br/><br/></p>
+      	<div id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">
+			<font size="4px">검색결과가 없습니다.</font>
+		</div>
       </c:if>
 	
 	  <div class="row"  id="listAdoptJSON">
@@ -199,7 +247,7 @@
 					  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 					</c:if>
 				</span>
-			    <span id="textList"><h3 align="center" style="padding-right: 0px;"><b>${adopt.postTitle}</b></h3>
+			    <span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>${adopt.postTitle}</b></h3>
 				    <c:if test="${param.boardCode eq 'AD' }">
 				   	 	<p align="right" style="padding-bottom: 10px;">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
 				   	</c:if>
@@ -307,30 +355,21 @@
 									}	
 
 // 								       <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-									displayValue += 
-										'<div class="col-md-4" ><div class="desc-comp-offer-cont">'
-										+'<figure class="getadopt">'
-										+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-											+'<span id="image-box">'+sCode+'</span>'
-										    +'<span id="textList">'
-										    	+'<h3 align="center" style="padding-right: 0px;" ><b>'
-										   			+data.list[i].postTitle
-										   		+'</b></h3>'
-										   		+'<p align="right" style="padding-bottom: 10px;">'
-										   			+bCode
-										   		+'</p>'
-										   	+'</span>'
-										+'</figure>'
-									+'</div></div>'	;
+									displayValue += '<div class="col-md-4" ><div class="desc-comp-offer-cont">'
+														+'<figure class="getadopt">'
+														+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
+															+'<span id="image-box">'+sCode+'</span>'
+														    +'<span id="textList">'
+														    	+'<h3 align="center" style="padding-right: 0px;" ><b>'
+														   			+data.list[i].postTitle
+														   		+'</b></h3>'
+														   		+'<p align="right" style="padding-bottom: 10px;">'
+														   			+bCode
+														   		+'</p>'
+														   	+'</span>'
+														+'</figure>'
+													+'</div></div>'	;
 										
-// 										'<div class="desc-comp-offer-cont">'
-// 										      			+'<figure class="getadopt">'
-// 										      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-// 										      				+sCode
-// 									      					+'<span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >'+data.list[i].postTitle+'</h3>'
-// 									      					+'<p align="right">'+bCode+'</p></span>'
-// 										      			+'</figure>'
-// 									      			+'</div>';	
 						            
 								}
 								if(str!=""){
@@ -339,7 +378,10 @@
 								}
 								if( postSize == 1 && data.list.length == 0 ){
 									console.log('결과없음');
-									displayValue = '<br/><br/><br/><br/><br/><p align="center"><font size="4px">검색결과가 없습니다.</font><br/><br/><br/><br/><br/><br/></p>';
+									$('#searchEmpty').remove();
+									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">'
+													+'<font size="4px">검색결과가 없습니다.</font>'
+													+'</div>';
 								}
 								$('#listAdoptJSON').append(displayValue);
 								
@@ -358,7 +400,8 @@
 		
 		
 		$(function() {
-			$( "button:contains('검색')" ).on("click" , function() {
+			$( "#searchSubmmit" ).on("click" , function() {
+// 			$( "button:contains('검색')" ).on("click" , function() {
 				if ( $( '#searchKeyword').val() == '' ){
 					$("#searchKeyword").focus();
 					return;
