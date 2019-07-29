@@ -7,23 +7,23 @@ import org.protectedog.service.domain.Adopt;
 
 
 
-//==> ºĞ¾ç°ü¸®¿¡¼­ ¼­ºñ½ºÇÒ ³»¿ë Ãß»óÈ­/Ä¸½¶È­ÇÑ Service  Interface Definition  
+//==> ë¶„ì–‘ê´€ë¦¬ì—ì„œ ì„œë¹„ìŠ¤í•  ë‚´ìš© ì¶”ìƒí™”/ìº¡ìŠí™”í•œ Service  Interface Definition  
 public interface AdoptService {
 	
-	// ±Û µî·Ï
+	// ê¸€ ë“±ë¡
 	public void addAdopt(Adopt adopt) throws Exception;
 	
-	// ±Û »ó¼¼Á¶È¸
+	// ê¸€ ìƒì„¸ì¡°íšŒ
 	public Adopt getAdopt(int postNo) throws Exception;
 	
-	// ±Û ¸®½ºÆ® Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public Map<String , Object> listAdopt(Search search, String boardCode) throws Exception;
 	public Map<String , Object> listAdopt2(String id) throws Exception;
 	
-	// ±Û ¼öÁ¤
+	// ê¸€ ìˆ˜ì •
 	public void updateAdopt(Adopt adopt) throws Exception;
 	
-	// ±Û »óÅÂ º¯°æ | ±Û »èÁ¦
+	// ê¸€ ìƒíƒœ ë³€ê²½ | ê¸€ ì‚­ì œ
 	public void updateStatusCode(Adopt adopt) throws Exception;
 	
 

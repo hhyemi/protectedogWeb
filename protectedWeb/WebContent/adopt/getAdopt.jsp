@@ -27,7 +27,7 @@
 		}
     
 	    #carouselExampleIndicators{
-        	max-height: 400px;
+        	max-height: 450px;
 	    }
 	    
        	img {
@@ -46,7 +46,7 @@
         .card_area{
         	position: absolute;
         	left: 0px;
-        	bottom: 0px;
+        	bottom: 0px !important;
         }
         
         #appendTr>td{
@@ -68,39 +68,44 @@
         	vertical-align: middle;
         }
         
-        #modiButton, #delButton, #listButton {
-		    padding: 0px 10px;
- 		    line-height: 20px; 
+/*         #modiButton, #delButton, #listButton { */
+/* 		    padding: 0px 10px; */
+/*  		    line-height: 20px;  */
 /*  		    border-radius: 3px;  */
-		}
+/* 		} */
 		
-		button {
-/* 		    display: inline-block; */
-		    background: #94BFCA;
-		    padding: 0px 10px;
-		    letter-spacing: 0.25px;
-		    color: #fff;
-		    font-size: 30px;
-		    font-weight: 500;
-		    line-height: 44px;
-		    outline: none !important;
-		    box-shadow: none !important;
-		    text-align: center;
-		    border: 1px solid #94BFCA;
-		    cursor: pointer;
-		    text-transform: uppercase;
-		    transition: all 300ms linear 0s;
-		    border-radius: 5px;
-		}
+/* 		button { */
+/* /* 		    display: inline-block; */ */
+/* 		    background: #94BFCA; */
+/* 		    padding: 0px 10px; */
+/* 		    letter-spacing: 0.25px; */
+/* 		    color: #fff; */
+/* 		    font-size: 30px; */
+/* 		    font-weight: 500; */
+/* 		    line-height: 44px; */
+/* 		    outline: none !important; */
+/* 		    box-shadow: none !important; */
+/* 		    text-align: center; */
+/* 		    border: 1px solid #94BFCA; */
+/* 		    cursor: pointer; */
+/* 		    text-transform: uppercase; */
+/* 		    transition: all 300ms linear 0s; */
+/* 		    border-radius: 5px; */
+/* 		} */
 		
 		div {
-			font-size: 20px;
+/* 			font-size: 20px; */
 		}
+
 		
 		.col-md-2 {
 			padding-right: 0px !important;
 		}
-		
+ 		
+		.col-md-10 {
+			padding-right: 15px !important;
+		}
+ 		
  		.col-md-12{ 
 /*           	position: absolute !important;   */
 /*          	bottom: 0px !important;  */
@@ -111,14 +116,14 @@
 /* 		} */
       
     </style>
- 
+  <jsp:include page="/layout/toolbar.jsp"></jsp:include>
   </head>
   
   <body>
     
     <!--================Header Menu Area =================-->
 
-    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+    
     
     <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
@@ -130,21 +135,15 @@
         </div>
       </div>
     </div>
-<!--         <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');"> -->
-<!--       <div class="container"> -->
-<!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
-<!--           <div class="col-md-9 ftco-animate text-center"> -->
-<!--             <h1 class="mb-0 bread" id="h1">분양 -->
-<!--             </h1> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
+
 
     <!--================Single Product Area =================-->
+    
     <div class="product_image_area">
       <div class="container">
+      <div class="col-md-12"><hr/><br/></div>
         <div class="row s_product_inner col-md-12">
+        
           <div class="col-lg-6">
 <!--             <div class="s_product_img"> -->
               <div
@@ -152,7 +151,7 @@
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <ol class="carousel-indicators" >
+                <ol class="carousel-indicators" style="width: wrap;" >
                 
                 
                   <c:forEach var="i" begin="0" end="${fn:length(file)-1}" step="1">			
@@ -193,7 +192,7 @@
 <!--             </div> -->
           </div>
           <div class="col-lg-6 offset-lg-1">
-            <div class="s_product_text">
+            <div class="s_product_text" style="height: wrap;">
             
 <%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
               
@@ -265,52 +264,52 @@
          
 	               	<div class="row">
 				  		<div class="col-md-2  "><strong>글내용</strong></div>
-						<div class="col-md-10 " style="padding-right: 0px;" >${adopt.postContent}?${user.id},!${adopt.id }</div>
+						<div class="col-md-10 " style="padding-right: 0px;" >${adopt.postContent}</div>
 					</div>
 					
-	               	<div class="row">
-				  		<div class="col-md-12 card-area ">
-				  			<!-- 분양 메뉴일때  -->
-			              	<c:if test="${adopt.boardCode eq 'AD' }">
-				              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
-				              			<button id="adoptApply" class="main_btn" >입양신청</button>
-				              		</c:if>
+<!-- 	               	<div class="row"> -->
+<!-- 				  		<div class="col-md-12 card-area "> -->
+<!-- 				  			분양 메뉴일때  -->
+<%-- 			              	<c:if test="${adopt.boardCode eq 'AD' }"> --%>
+<%-- 				              		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }"> --%>
+<!-- 				              			<button id="adoptApply" class="btn btn-default" >입양신청</button> -->
+<%-- 				              		</c:if> --%>
 				              		
-				              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
-				              			<button class="main_btn"  id="confirmButton">신청서확인</button>
-				              			<button class="main_btn"  id="adoptCompleteButton">분양완료</button>
-				              		</c:if>
+<%-- 				              		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }"> --%>
+<!-- 				              			<button class="btn btn-default"  id="confirmButton">신청서확인</button> -->
+<!-- 				              			<button class="btn btn-default"  id="adoptCompleteButton">분양완료</button> -->
+<%-- 				              		</c:if> --%>
 				              		
-				              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-				              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
-				              		</c:if>
-			              	</c:if>
+<%-- 				              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }"> --%>
+<!-- 				              			<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button> -->
+<%-- 				              		</c:if> --%>
+<%-- 			              	</c:if> --%>
 			              	
-			              	<!-- 실종 메뉴일때  -->
-			              	<c:if test="${adopt.boardCode eq 'MS' }">
-			              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-			              			<button class="main_btn"  id="missingCompleteButton">찾기완료</button>
-			              		</c:if>
-			              	</c:if>
+<!-- 			              	실종 메뉴일때  -->
+<%-- 			              	<c:if test="${adopt.boardCode eq 'MS' }"> --%>
+<%-- 			              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }"> --%>
+<!-- 			              			<button class="btn btn-default"  id="missingCompleteButton">찾기완료</button> -->
+<%-- 			              		</c:if> --%>
+<%-- 			              	</c:if> --%>
 			              	
-			              	<!-- 공통  -->
-			              	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }">
-			               		<button class="main_btn" href="#" >문의하기</button>
-			               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-			               	</c:if>
+<!-- 			              	공통  -->
+<%-- 			              	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }"> --%>
+<!-- 			               		<button class="btn btn-default" href="#" >문의하기</button> -->
+<!-- 			               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
+<%-- 			               	</c:if> --%>
 			               	
-			              	<c:if test="${adopt.statusCode eq '3'}">
-			               		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>
-			               	</c:if>
+<%-- 			              	<c:if test="${adopt.statusCode eq '3'}"> --%>
+<!-- 			               		<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button> -->
+<%-- 			               	</c:if> --%>
 				  		
-				  		</div>
-					</div>
+<!-- 				  		</div> -->
+<!-- 					</div> -->
 
 				
               
               
               
-<!--               <div class="product_count"> -->
+              <div class="product_count">
 <!--                 <button -->
 <!--                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" -->
 <!--                   class="increase items-count" -->
@@ -323,46 +322,46 @@
 <!--                   type="button" -->
 <!--                 > -->
 <!--                 </button> -->
-<!--               </div> -->
+              </div>
               
-<!--              <div class="row"> -->
-<!--               <div class="col-md-12 card_area" >ddddd -->
+             <div class="row">
+              <div class="col-md-12 card_area" >
 
-<!-- 				분양 메뉴일때  -->
-<%--               	<c:if test="${adopt.boardCode eq 'AD' }"> --%>
-<%-- 	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }"> --%>
-<!-- 	              			<button id="adoptApply" class="main_btn" href="#" style="width: 189px">입양신청</button> -->
-<%-- 	              		</c:if> --%>
+				<!-- 분양 메뉴일때  -->
+              	<c:if test="${adopt.boardCode eq 'AD' }">
+	              		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }">
+	              			<button id="adoptApply" class="btn btn-default" href="#" style="width: 189px">입양신청</button>
+	              		</c:if>
 	              		
-<%-- 	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }"> --%>
-<!-- 	              			<button class="main_btn" style="width: 189px" id="confirmButton">신청서확인</button> -->
-<!-- 	              			<button class="main_btn" style="width: 189px" id="adoptCompleteButton">분양완료</button> -->
-<%-- 	              		</c:if> --%>
+	              		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
+	              			<button class="btn btn-default" style="width: 189px" id="confirmButton">신청서확인</button>
+	              			<button class="btn btn-default" style="width: 189px" id="adoptCompleteButton">분양완료</button>
+	              		</c:if>
 	              		
-<%-- 	              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }"> --%>
-<!-- 	              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button> -->
-<%-- 	              		</c:if> --%>
-<%--               	</c:if> --%>
+	              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
+	              			<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+	              		</c:if>
+              	</c:if>
               	
-<!--               	실종 메뉴일때  -->
-<%--               	<c:if test="${adopt.boardCode eq 'MS' }"> --%>
-<%--               		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }"> --%>
-<!--               			<button class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</button> -->
-<%--               		</c:if> --%>
-<%--               	</c:if> --%>
+				<!-- 실종 메뉴일때  -->
+              	<c:if test="${adopt.boardCode eq 'MS' }">
+              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
+              			<button class="btn btn-default" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</button>
+              		</c:if>
+              	</c:if>
               	
-<!--               	공통  -->
-<%--               	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }"> --%>
-<!--                		<button class="main_btn" href="#" style="width: 189px">문의하기</button> -->
-<!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
-<%--                	</c:if> --%>
+				<!-- 공통  -->
+              	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
+               		<button class="btn btn-default" href="#" style="width: 189px">문의하기</button>
+               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+               	</c:if>
                	
-<%--               	<c:if test="${adopt.statusCode eq '3'}"> --%>
-<!--                		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button> -->
-<%--                	</c:if> --%>
+              	<c:if test="${adopt.statusCode eq '3'}">
+               		<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>
+               	</c:if>
               	
-<!--               </div> -->
-<!--  			</div> -->
+              </div>
+ 			</div>
  			
  			
  			
@@ -370,21 +369,17 @@
               </ul>
               
             </div>
-            
-            
-            
-            
-            
+           
             
           </div>
         </div>
         
         
-        <div class="col-md-12 "><br/><br/></div>
-        <hr/><br/>
+        <div class="col-md-12 "><br/><hr/><br/></div>
         
         
-        <div id="mapDiv"  class="col-md-12 ">
+        
+        <div id="mapDiv"  class="col-md-12 " style="padding-left: 15px;padding-right: 15px;">
         
         	<c:if test="${adopt.boardCode eq 'AD' }">
 				<strong>분양가능지역</strong><br/>
@@ -420,18 +415,16 @@
 		</div>
         <div class="col-md-12"><hr/></div>
         
-        <p align="right">
+        <p align="right" style="padding-right: 15px;">
        		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-				<button class="main_btn" id="modiButton">수정</button>
-	       		<button class="main_btn" id="delButton">삭제</button>
+				<button class="btn btn-default" id="modiButton">수정</button>
+	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
 			
-	        <button class="main_btn" id="listButton">목록</button>
+	        <button class="btn btn-default" id="listButton">목록</button>
         </p>
         
-        
-<%--         <jsp:include page="/common/comment.jsp"></jsp:include> --%>
-        
+       
         
         
       </div>
@@ -441,15 +434,12 @@
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-			<div id="dialog-delAdopt" title="">
-			  <p align="center"><br/>삭제하시겠습니까?</p>
-			</div>  
-			<div id="dialog-adoptComplete" title="">
-			  <p align="center"><br/>분양완료 상태로 변경하시겠습니까?</p>
-			</div>  
-			<div id="dialog-missingComplete" title="">
-			  <p align="center"><br/>찾기완료 상태로 변경하시겠습니까?</p>
-			</div>  
+<!-- 			<div id="dialog-delAdopt" title=""> -->
+<!-- 			  <p align="center"><br/>삭제하시겠습니까?</p> -->
+<!-- 			</div>    -->
+<!-- 			<div id="dialog-missingComplete" title=""> -->
+<!-- 			  <p align="center"><br/>찾기완료 상태로 변경하시겠습니까?</p> -->
+<!-- 			</div>   -->
 			<div id="dialog-alreadyApply" title="">
 			  <p align="center"><br/></p>
 			</div>  
@@ -475,6 +465,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
       $(document).ready(function() { 
     	  listApply('load');
@@ -637,22 +628,22 @@
   	    });
       });
       
-      $( function() {
-  	    $( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog({
-  	    	  autoOpen: false,
-  		      width: 350,
-  		      height: 180,
-  		      modal: true,
-  		      buttons: {
-  		        	예: function() {
-  		        		fncComplete();
-  		        	},
-  		        	아니오: function() {
-  		          		$( this ).dialog( "close" );
-  		        	}
-  		      }
-  	    });
-      });
+//       $( function() {
+//   	    $( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog({
+//   	    	  autoOpen: false,
+//   		      width: 350,
+//   		      height: 180,
+//   		      modal: true,
+//   		      buttons: {
+//   		        	예: function() {
+//   		        		fncComplete();
+//   		        	},
+//   		        	아니오: function() {
+//   		          		$( this ).dialog( "close" );
+//   		        	}
+//   		      }
+//   	    });
+//       });
       
       $( function() {
   	    $( "#dialog-listApply" ).dialog({
@@ -711,9 +702,9 @@
 							var displayValue = '<table class="table table-hover" >'
 										        +'<thead>'
 										        	+'<tr>'
-											            +'<th style="width: 15%"><strong>No</strong></th>'
-											            +'<th style="width: 55%"><strong>신청자 ID</strong></th>'
-											            +'<th style="width: 30%"><strong>신청일자</strong></th>' 
+											            +'<th style="width: 15%"><p align="center" text-weight="bold"><b>No</b></p></th>'
+											            +'<th style="width: 55%"><p align="center"><b>신청자 ID</b></p></th>'
+											            +'<th style="width: 30%"><p align="center"><b>신청일자</b></p></th>' 
 									           		+'</tr>'
 									            +'</thead>'
 									            +'<tbody>';
@@ -722,9 +713,9 @@
 		 						displayValue += 
 							            		'<tr class="trApplyNo" id="'+data.list[i].applyNo+'">'
 							            			+'<input type="hidden" name="inputApplyNo" value="'+data.list[i].applyNo+'">'
-								            		+'<td align="center">'+(i+1)+'</td>'
-								            		+'<td align="center">'+data.list[i].id+'</td>'
-								            		+'<td align="center">'+data.list[i].regDate+'</td>'
+								            		+'<td align="center"><p>'+(i+1)+'</p></td>'
+								            		+'<td align="center"><p>'+data.list[i].id+'</p></td>'
+								            		+'<td align="center"><p>'+data.list[i].regDate+'</p></td>'
 							            		+'</tr>';	
 							            		
 							}
@@ -793,7 +784,7 @@
 								var displayValue;
 								
 								if( data.mate == "있음" && data.raise == "있음" ){
-									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
 													+'<br\/><strong>[직업]<\/strong> : '+data.job
 													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
 													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
@@ -803,10 +794,10 @@
 													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
 													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
 													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation ;
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
 									
 								}else if( data.mate == "있음" && data.raise == "없음" ){
-									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
 													+'<br\/><strong>[직업]<\/strong> : '+data.job
 													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
 													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
@@ -815,10 +806,10 @@
 													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
 													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
 													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation ;
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
 									
 								}else if( data.mate == "없음" && data.raise == "있음" ){
-									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
 													+'<br\/><strong>[직업]<\/strong> : '+data.job
 													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
 													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
@@ -827,10 +818,10 @@
 													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
 													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
 													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation;
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
 									
 								}else{
-									displayValue = 	 '<strong>[연락처]<\/strong> : '+data.phone
+									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
 													+'<br\/><strong>[직업]<\/strong> : '+data.job
 													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
 													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
@@ -838,7 +829,7 @@
 													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
 													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
 													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation ;
+													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
 								}
 								console.log("-----"+displayValue);
 				 				$('#'+data.applyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
@@ -877,8 +868,29 @@
 			});
 		
 			$( "button:contains('삭제')" ).on("click" , function() {
-				$('#dialog-delAdopt').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				$('#dialog-delAdopt').dialog( "open" );
+				swal({
+			           text: "삭제하시겠습니까?",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "예",
+//								 	value: "catch",
+								 },
+								 cancel: "아니오",
+					   },
+					   
+			    }).then((willDelete) => {
+			           if (willDelete) {
+			        	    self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
+// 			           		swal("삭제되었습니다.", {
+// 				           		icon: "success",
+// 				           		buttons: "닫기"
+// 			           		});
+			           }
+			    });
+				
+// 				$('#dialog-delAdopt').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				$('#dialog-delAdopt').dialog( "open" );
 			});
 		
 			$( "button:contains('입양신청')" ).on("click" , function() {
@@ -892,8 +904,27 @@
 			});
 		
 			$( "#adoptCompleteButton" ).on("click" , function() {
-				$('#dialog-adoptComplete').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				$('#dialog-adoptComplete').dialog( "open" );
+				swal({
+// 			           title: "분양완료 상태로 변경하시겠습니까?",
+			           text: "분양완료 상태로 변경하시겠습니까?",
+// 			           icon: "success",
+			           buttons: {
+								 catch: {
+								 	text: "예",
+// 								 	value: "catch",
+								 },
+								 cancel: "아니오",
+					   },
+					   
+			    }).then((willDelete) => {
+			           if (willDelete) {
+			        	    fncComplete();
+			           		swal("변경되었습니다.", {
+				           		icon: "success",
+				           		buttons: "닫기"
+			           		});
+			           }
+			    });
 			});
 		
 			$( "#missingCompleteButton" ).on("click" , function() {

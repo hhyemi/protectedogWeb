@@ -8,34 +8,34 @@ import org.protectedog.service.domain.Board;
 
 
 
-//==> °Ô½ÃÆÇ°ü¸®¿¡¼­ ¼­ºñ½ºÇÒ ³»¿ë Ãß»óÈ­/Ä¸½¶È­ÇÑ Service  Interface Definition  
+//==> ê²Œì‹œíŒê´€ë¦¬ì—ì„œ ì„œë¹„ìŠ¤í•  ë‚´ìš© ì¶”ìƒí™”/ìº¡ìŠí™”í•œ Service  Interface Definition  
 public interface BoardService {
 	
-	// ±Û µî·Ï
+	// ê¸€ ë“±ë¡
 	public void addBoard(Board board) throws Exception;
 	
-	// ±Û »ó¼¼Á¶È¸
+	// ê¸€ ìƒì„¸ì¡°íšŒ
 	public Board getBoard(int postNo) throws Exception;
 	
-	// ±Û ¸®½ºÆ® Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public Map<String , Object> listBoard(Search search, String boardCode, int order) throws Exception;
 	
-	// ±Û ¼öÁ¤
+	// ê¸€ ìˆ˜ì •
 	public void updateBoard(Board board) throws Exception;
 	
-	// Á¶È¸¼ö
+	// ì¡°íšŒìˆ˜
 	public void updateViewCount(Board board) throws Exception;
 	
-	// ÃßÃµ¼ö
+	// ì¶”ì²œìˆ˜
 	public void updateRecommendCount(Board board) throws Exception;
 	
-	// ±Û »èÁ¦
+	// ê¸€ ì‚­ì œ
 	public void delBoard(Board board) throws Exception;
 	
 	// SELECT LIST RANKING TOP 5
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
 	
-	// ±Û ¸®½ºÆ® + ´ñ±Û °³¼ö Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ + ëŒ“ê¸€ ê°œìˆ˜ ì¡°íšŒ
 	public Map<String, Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception;
 	
 

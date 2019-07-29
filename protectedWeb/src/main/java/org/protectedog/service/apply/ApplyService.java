@@ -7,21 +7,21 @@ import org.protectedog.service.domain.Apply;
 
 
 
-//==> ºĞ¾ç½ÅÃ»°ü¸®¿¡¼­ ¼­ºñ½ºÇÒ ³»¿ë Ãß»óÈ­/Ä¸½¶È­ÇÑ Service  Interface Definition  
+//==> ë¶„ì–‘ì‹ ì²­ê´€ë¦¬ì—ì„œ ì„œë¹„ìŠ¤í•  ë‚´ìš© ì¶”ìƒí™”/ìº¡ìŠí™”í•œ Service  Interface Definition  
 public interface ApplyService {
 	
-	// ½ÅÃ»±Û µî·Ï
+	// ì‹ ì²­ê¸€ ë“±ë¡
 	public void addApply(Apply apply) throws Exception;
 	
-	// ½ÅÃ»±Û »ó¼¼Á¶È¸
+	// ì‹ ì²­ê¸€ ìƒì„¸ì¡°íšŒ
 	public Apply getApply(int applyNo) throws Exception;
 	
-	// ½ÅÃ»±Û ¸®½ºÆ® 
+	// ì‹ ì²­ê¸€ ë¦¬ìŠ¤íŠ¸ 
 	public Map<String , Object> listApply(Search search,int adoptNo) throws Exception;
-	// ÈÄ±âµî·Ï ±ÇÇÑ 
+	// í›„ê¸°ë“±ë¡ ê¶Œí•œ 
 	public Map<String , Object> listApply2(String id) throws Exception;
 	
-	// ½ÅÃ»±Û »èÁ¦
+	// ì‹ ì²­ê¸€ ì‚­ì œ
 	public void delApply(Apply apply) throws Exception;
 	
 }

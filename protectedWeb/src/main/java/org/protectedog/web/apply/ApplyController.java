@@ -33,7 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
-//==> ÆÇ¸Å°ü¸® Controller
+//==> ì…ì–‘ì‹ ì²­ê´€ë¦¬ Controller
 @Controller
 @RequestMapping("/apply/*")
 public class ApplyController {
@@ -51,7 +51,7 @@ public class ApplyController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
+	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -61,7 +61,7 @@ public class ApplyController {
 
 	
 	
-	// ¾à°üµ¿ÀÇÈÄ->½ÅÃ»
+	// ì•½ê´€ë™ì˜í›„->ì‹ ì²­
 	@RequestMapping( value="addApply", method=RequestMethod.GET)
 	public String addApply(@ModelAttribute("apply") Apply apply, 
 												@RequestParam("postNo") int postNo,
@@ -73,11 +73,11 @@ public class ApplyController {
 		apply.setAdoptNo(postNo);
 		apply.setId(  ((User)session.getAttribute("user")).getId() );
 		apply.setPhone(  ((User)session.getAttribute("user")).getPhone() );
-		System.out.println("È®ÀÎ  = "+apply.getPhone());
+		System.out.println("í™•ì¸  = "+apply.getPhone());
 		
-		model.addAttribute("apply", apply);//adoptNo ³Ñ±â±â
+		model.addAttribute("apply", apply);//adoptNo ë„˜ê¸°ê¸°
 		
-		//¼¼¼ÇÁ¶°Çµµ Ãß°¡
+		//ì„¸ì…˜ì¡°ê±´ë„ ì¶”ê°€
 		if ( adoptService.getAdopt(postNo).getStatusCode().equals("3") ) {
 			return "redirect:/adopt/getAdopt?postNo="+postNo;
 		}else {
@@ -88,7 +88,7 @@ public class ApplyController {
 	
 
 	
-	// ½ÅÃ» µî·ÏÇÏ°í ´Ù½Ã ºĞ¾ç±Û »ó¼¼Á¶È¸·Î
+	// ì‹ ì²­ ë“±ë¡í•˜ê³  ë‹¤ì‹œ ë¶„ì–‘ê¸€ ìƒì„¸ì¡°íšŒë¡œ
 	@RequestMapping( value="addApply", method=RequestMethod.POST )
 	public String addApply( @ModelAttribute("apply") Apply apply, Model model ) throws Exception {
 
@@ -97,7 +97,7 @@ public class ApplyController {
 		applyService.addApply(apply);
 		Adopt adopt = adoptService.getAdopt(apply.getAdoptNo());
 		adopt.setStatusCode("2");
-		adoptService.updateStatusCode(adopt);    //½ÅÃ»¼­ µî·ÏÇßÀ¸´Ï ºĞ¾ç±Û »óÅÂÄÚµå 2·Î º¯°æ
+		adoptService.updateStatusCode(adopt);    //ì‹ ì²­ì„œ ë“±ë¡í–ˆìœ¼ë‹ˆ ë¶„ì–‘ê¸€ ìƒíƒœì½”ë“œ 2ë¡œ ë³€ê²½
 		
 		model.addAttribute("adopt", adopt);
 		
@@ -106,7 +106,7 @@ public class ApplyController {
 	
 	
 
-	// ½ÅÃ»±Û ¸ñ·Ï
+	// ì‹ ì²­ê¸€ ëª©ë¡
 	@RequestMapping( value="listApply" )
 	public String listApply( @RequestParam("adoptNo") int adoptNo,
 							 @ModelAttribute("search") Search search, Model model ) throws Exception{
@@ -118,18 +118,18 @@ public class ApplyController {
 		}
 		
 		search.setPageSize(pageSize);
-		System.out.println("¡á¡á¡á¡á¡á °Ë»ö¾î È®ÀÎ : "+search.getSearchKeyword());
-		System.out.println("¡á¡á¡á¡á¡á È®ÀÎ : "+search);
+		System.out.println("â– â– â– â– â–  ê²€ìƒ‰ì–´ í™•ì¸ : "+search.getSearchKeyword());
+		System.out.println("â– â– â– â– â–  í™•ì¸ : "+search);
 		
-		// Business logic ¼öÇà
+		// Business logic ìˆ˜í–‰
 		Map<String , Object> map=applyService.listApply(search, adoptNo );
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			
-		System.out.println("È®ÀÎ                                 :  "+map);
-		System.out.println("È®ÀÎ     222                            :  "+map.get("list"));
+		System.out.println("í™•ì¸                                 :  "+map);
+		System.out.println("í™•ì¸     222                            :  "+map.get("list"));
 		
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

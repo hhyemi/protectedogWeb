@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
-//==> ∫–æÁΩ≈√ª∞¸∏Æ RestController
+//==> ÏûÖÏñëÏã†Ï≤≠Í¥ÄÎ¶¨ RestController
 @RestController
 @RequestMapping("/apply/*")
 public class ApplyRestController {
@@ -44,7 +44,7 @@ public class ApplyRestController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ¬¸¡∂ «“∞Õ
+	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml Ï∞∏Ï°∞ Ìï†Í≤É
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -53,7 +53,7 @@ public class ApplyRestController {
 	
 	
 
-	//Ω≈√ªº≠ ¡∂»∏
+	//Ïã†Ï≤≠ÏÑú Ï°∞Ìöå
 	@RequestMapping( value="json/getApply/{applyNo}", method=RequestMethod.POST)
 	public Apply getApply( @PathVariable("applyNo") int applyNo ) throws Exception {
 		
@@ -62,7 +62,7 @@ public class ApplyRestController {
 		return applyService.getApply(applyNo);
 	}
 
-	//Ω≈√ªº≠ ªË¡¶
+	//Ïã†Ï≤≠ÏÑú ÏÇ≠Ï†ú
 	@RequestMapping( value="json/delApply/{applyNo}", method=RequestMethod.GET)
 	public void delApply( 	@PathVariable("applyNo") int applyNo ) throws Exception{
 
@@ -70,7 +70,7 @@ public class ApplyRestController {
 		
 		Apply apply = applyService.getApply(applyNo);
 	
-		apply.setStatusCode("0");	// Ω≈√ªº≠ ªË¡¶
+		apply.setStatusCode("0");	// Ïã†Ï≤≠ÏÑú ÏÇ≠Ï†ú
 		
 		//Business Logic
 		applyService.delApply(apply);
@@ -78,7 +78,7 @@ public class ApplyRestController {
 	
 	
 	
-	// ∏ÆΩ∫∆Æ ¡∂»∏
+	// Î¶¨Ïä§Ìä∏ Ï°∞Ìöå
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listApply/{adoptNo}")
 	public JSONObject listApply( @PathVariable("adoptNo") int adoptNo
@@ -95,18 +95,18 @@ public class ApplyRestController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ºˆ«‡
+		// Business logic ÏàòÌñâ
 		Map<String , Object> map= applyService.listApply(search, adoptNo);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 
-		// Model ∞˙ View ø¨∞·
+		// Model Í≥º View Ïó∞Í≤∞
 		map.put("list", map.get("list"));
 
 		map.remove("adoptNo");
 		map.remove("startRowNum");
 		map.remove("endRowNum");
 		map.remove("totalCount");
-		System.out.println("map»Æ¿Œ : "+map);
+		System.out.println("mapÌôïÏù∏ : "+map);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));
@@ -117,17 +117,17 @@ public class ApplyRestController {
 	}
 	
 	
-	// ∏ÆΩ∫∆Æ ¡∂»∏
+	// Î¶¨Ïä§Ìä∏ Ï°∞Ìöå
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listApply2/{adoptNo}")
 	public JSONObject listApply2( @PathVariable("adoptNo") String id ) throws Exception{
 		
 		System.out.println("/apply/json/listApply2 : GET / POST" +id);
 		
-		// Business logic ºˆ«‡
+		// Business logic ÏàòÌñâ
 		Map<String , Object> map= applyService.listApply2(id);
 	
-		// Model ∞˙ View ø¨∞·
+		// Model Í≥º View Ïó∞Í≤∞
 		map.put("list", map.get("list"));
 //		List<Adopt> list = (List)map.get("list");
 //		System.out.println( list );
@@ -138,7 +138,7 @@ public class ApplyRestController {
 //		}
 		
 
-		System.out.println("map»Æ¿Œ : "+map);
+		System.out.println("mapÌôïÏù∏ : "+map);
 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("list", map.get("list"));

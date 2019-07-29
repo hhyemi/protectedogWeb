@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 
 
-//==> ºĞ¾ç°ü¸® DAO CRUD ±¸Çö
+//==> ë¶„ì–‘ê´€ë¦¬ DAO CRUD êµ¬í˜„
 @Repository("adoptDAOImpl")
 public class AdoptDAOImpl implements AdoptDAO{
 	
@@ -41,7 +41,7 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 	
 	public Map<String, Object> listAdopt(Search search, String boardCode) throws Exception {
-		System.out.println("=================µğ¿¡ÀÌ¿À");
+		System.out.println("=================ë””ì—ì´ì˜¤");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
 		map.put("searchCondition",  search.getSearchCondition()+"" );
@@ -52,7 +52,7 @@ public class AdoptDAOImpl implements AdoptDAO{
 		
 		List<Adopt> list = sqlSession.selectList("AdoptMapper.listAdopt", map); 
 
-		//selectOne: Äõ¸® °á°ú°¡ ¾øÀ¸¸é return null 
+		//selectOne: ì¿¼ë¦¬ ê²°ê³¼ê°€ ì—†ìœ¼ë©´ return null 
 		map.put("totalCount", sqlSession.selectOne("AdoptMapper.getTotalCount", map));
 		map.put("list", list);
 		
@@ -60,13 +60,13 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 	
 	public Map<String, Object> listAdopt2(String id) throws Exception {
-		System.out.println("=================µğ¿¡ÀÌ¿À");
+		System.out.println("=================ë””ì—ì´ì˜¤");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("id",  id );
 		
 		List<Adopt> list = sqlSession.selectList("AdoptMapper.listAdopt2", map); 
 		
-		//selectOne: Äõ¸® °á°ú°¡ ¾øÀ¸¸é return null 
+		//selectOne: ì¿¼ë¦¬ ê²°ê³¼ê°€ ì—†ìœ¼ë©´ return null 
 		map.put("list", list);
 		
 		return map;
@@ -80,9 +80,9 @@ public class AdoptDAOImpl implements AdoptDAO{
 		sqlSession.update("AdoptMapper.updateStatusCode", adopt);
 	}
 
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼ Row(totalCount)  return
+	// ê²Œì‹œíŒ Page ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´ Row(totalCount)  return
 	public int getTotalCount(Search search, String boardCode) throws Exception {
-		System.out.println("=================µğ¿¡ÀÌ¿À °ÙÅäÅ»Ä«¿îÆ®");
+		System.out.println("=================ë””ì—ì´ì˜¤ ê²Ÿí† íƒˆì¹´ìš´íŠ¸");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
 		map.put("searchCondition",  search.getSearchCondition()+"" );

@@ -31,25 +31,25 @@
 		
 	</style>
 	
-	
-  </head>
-  <body class="goto-here">
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+  </head>
+  
+  
+  <body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
-            <h1 class="mb-0 bread">
+            <p ><span class="mr-2">Get</span> <span>Adopt</span></p>
+            <font size="7">
             	<c:if test="${adopt.boardCode eq 'AD' }">분양글 수정</c:if>
 			    <c:if test="${adopt.boardCode eq 'MS' }">실종글 수정</c:if>
-            </h1>
+            </font>
           </div>
         </div>
       </div>
     </div>
-    
     
 
     <section class="ftco-section">

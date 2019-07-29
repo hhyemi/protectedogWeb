@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 
-//==> ºÐ¾ç°ü¸® ¼­ºñ½º ±¸Çö
+//==> ë¶„ì–‘ê´€ë¦¬ ì„œë¹„ìŠ¤ êµ¬í˜„
 @Service("adoptServiceImpl")
 public class AdoptServiceImpl implements AdoptService{
 	
@@ -46,7 +46,7 @@ public class AdoptServiceImpl implements AdoptService{
 		
 		map.put("map", map );
 		map.put("totalCount", new Integer(totalCount));
-		System.out.println("===================¼­ºñ½º");
+		System.out.println("===================ì„œë¹„ìŠ¤");
 		return map;
 	}
 	
@@ -54,7 +54,7 @@ public class AdoptServiceImpl implements AdoptService{
 		Map<String, Object> map= adoptDAO.listAdopt2(id);
 		
 		map.put("map", map );
-		System.out.println("===================¼­ºñ½º");
+		System.out.println("===================ì„œë¹„ìŠ¤");
 		return map;
 	}
 

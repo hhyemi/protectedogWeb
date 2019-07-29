@@ -22,7 +22,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- 	<link rel="stylesheet" href="/resources/demos/style.css">
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -72,27 +71,28 @@
 
 
     </style>
-
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
-<body>
-
-<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	<input type="hidden" id="boardCode" value="${param.boardCode }">
-	
-	
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+<body class="goto-here">
+   	
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-             <p ><span class="mr-2">List</span> <span>Adopt</span></p>
+          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>post</span></p>
             <font size="7">분양리스트</font>
           </div>
         </div>
       </div>
     </div>
+
+    
+	<div class="container">
+	<input type="hidden" id="boardCode" value="${param.boardCode }">
+	
+	
+	
 	
 <!-- 		<div class="page-header text-info"> -->
 		
@@ -116,7 +116,7 @@
 		<div class="row">
 	    
 		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
+		    	<p class="text-primary" style="padding-left: 15px;">
 		    		전체  ${resultPage.totalCount } 건
 		    	</p>
 		    </div>
@@ -156,6 +156,7 @@
 
 					<div class="form-group" >
 						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">검색</button>
+						<button type="button" class="btn btn-primary"><font size="3px">글쓰기</font></button>
 					</div>
 			    
 			    </form>
@@ -171,10 +172,10 @@
       <div class="col-md-12"></div>
       <div class="col-md-12" >
       
-      <div class="col-md-12"  style="padding-left: 0px">
+      <div class="col-md-12"  style="padding-left: 0px;">
       
       <c:if test="${resultPage.totalCount eq 0 }">
-     	 <br/><br/><br/><br/><br/><p align="center"><font size="4px">검색결과가 없습니다.</font><br/><br/><br/><br/><br/><br/></p>
+     	 <br/><br/><br/><br/><br/><p align="center" style="width: 50%;"><font size="4px">검색결과가 없습니다.</font><br/><br/><br/><br/><br/><br/></p>
       </c:if>
 	
 	  <div class="row"  id="listAdoptJSON">
@@ -231,11 +232,9 @@
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
- 	
- 	<!-- PageNavigation Start... -->
-<%-- 	<jsp:include page="../common/pageNavigator_new.jsp"/> --%>
-	<!-- PageNavigation End... -->
+
 <!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	

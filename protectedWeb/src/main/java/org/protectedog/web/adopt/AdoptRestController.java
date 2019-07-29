@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-//==> ºĞ¾ç|½ÇÁ¾°ü¸® RestController
+//==> ë¶„ì–‘|ì‹¤ì¢…ê´€ë¦¬ RestController
 @RestController
 @RequestMapping("/adopt/*")
 public class AdoptRestController {
@@ -47,20 +47,20 @@ public class AdoptRestController {
 
 	
 	
-	// ±Û»óÅÂ ¿Ï·á·Î º¯°æ
+	// ê¸€ìƒíƒœ ì™„ë£Œë¡œ ë³€ê²½
 	@RequestMapping( value="json/updateStatusCode/{postNo}", method=RequestMethod.GET)
 	public Adopt updateStatusCode( @PathVariable("postNo") int postNo ) throws Exception{
 
 		System.out.println("/adopt/json/updateStatusCode : GET");
 		
-		Adopt adopt = adoptService.getAdopt(postNo);	// postNo·Î adopt °¡Á®¿À±â	
-		adopt.setStatusCode("3");						// ¿Ï·á»óÅÂ(3)·Î ÇÊµå°ª º¯°æ
-		adoptService.updateStatusCode(adopt);			// µğºñ ¾÷µ¥ÀÌÆ®
+		Adopt adopt = adoptService.getAdopt(postNo);	// postNoë¡œ adopt ê°€ì ¸ì˜¤ê¸°	
+		adopt.setStatusCode("3");						// ì™„ë£Œìƒíƒœ(3)ë¡œ í•„ë“œê°’ ë³€ê²½
+		adoptService.updateStatusCode(adopt);			// ë””ë¹„ ì—…ë°ì´íŠ¸
 
 		return adopt;
 	}
 	
-	// ±Û ¸®½ºÆ® Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listAdopt" )
 	public JSONObject listAdopt( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
@@ -73,10 +73,10 @@ public class AdoptRestController {
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
 		}
-//		System.out.println("È®ÀÎ@@@@ : "+searchCondition+", "+searchKeyword);
+//		System.out.println("í™•ì¸@@@@ : "+searchCondition+", "+searchKeyword);
 		
 		search.setSearchKeyword( params.get("searchKeyword").toString() );
-		System.out.println("°Ë»ö¾î È®ÀÎ1 : "+search.getSearchKeyword());
+		System.out.println("ê²€ìƒ‰ì–´ í™•ì¸1 : "+search.getSearchKeyword());
 		
 		if(search.getSearchKeyword() == null ) {
 			search.setSearchKeyword("");
@@ -84,45 +84,45 @@ public class AdoptRestController {
 //				search.setSearchKeyword(searchKeyword);
 //			}
 		}
-		System.out.println("°Ë»ö¾î È®ÀÎ2 : "+search.getSearchKeyword());
+		System.out.println("ê²€ìƒ‰ì–´ í™•ì¸2 : "+search.getSearchKeyword());
 		search.setAreaCondition( params.get("areaCondition").toString() );
 		if(search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
 			search.setAreaCondition("");
 		}else if(search.getAreaCondition().equals("kw")) {
-			search.setAreaCondition("°­¿ø");
+			search.setAreaCondition("ê°•ì›");
 		}else if(search.getAreaCondition().equals("kk")) {
-			search.setAreaCondition("°æ±â");
+			search.setAreaCondition("ê²½ê¸°");
 		}else if(search.getAreaCondition().equals("ks")) {
-			search.setAreaCondition("°æ»ó");
+			search.setAreaCondition("ê²½ìƒ");
 		}else if(search.getAreaCondition().equals("kj")) {
-			search.setAreaCondition("±¤ÁÖ");
+			search.setAreaCondition("ê´‘ì£¼");
 		}else if(search.getAreaCondition().equals("dj")) {
-			search.setAreaCondition("´ëÀü");
+			search.setAreaCondition("ëŒ€ì „");
 		}else if(search.getAreaCondition().equals("bs")) {
-			search.setAreaCondition("ºÎ»ê");
+			search.setAreaCondition("ë¶€ì‚°");
 		}else if(search.getAreaCondition().equals("su")) {
-			search.setAreaCondition("¼­¿ï");
+			search.setAreaCondition("ì„œìš¸");
 		}else if(search.getAreaCondition().equals("us")) {
-			search.setAreaCondition("¿ï»ê");
+			search.setAreaCondition("ìš¸ì‚°");
 		}else if(search.getAreaCondition().equals("ic")) {
-			search.setAreaCondition("ÀÎÃµ");
+			search.setAreaCondition("ì¸ì²œ");
 		}else if(search.getAreaCondition().equals("jr")) {
-			search.setAreaCondition("Àü¶ó");
+			search.setAreaCondition("ì „ë¼");
 		}else if(search.getAreaCondition().equals("cc")) {
-			search.setAreaCondition("ÃæÃ»");
+			search.setAreaCondition("ì¶©ì²­");
 		}
 		search.setVoteCondition("");
 		
 		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
-		System.out.println(search.getAreaCondition()+"¢¸È®ÀÎ¢º"+Integer.parseInt( params.get("pazeSize").toString() ));
+		System.out.println(search.getAreaCondition()+"â—€í™•ì¸â–¶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		
 		search.setPageSize(pageSize);
-		System.out.println("search È®ÀÎ : "+search);
+		System.out.println("search í™•ì¸ : "+search);
 		
 		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
-//		System.out.println("¡á¡á¡á¡á ¸®½ºÆ® È®ÀÎ : "+map.get("list"));
+//		System.out.println("â– â– â– â–  ë¦¬ìŠ¤íŠ¸ í™•ì¸ : "+map.get("list"));
 
 		JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));
@@ -140,7 +140,7 @@ public class AdoptRestController {
 		return jsonObject;
 	}
 	
-	// ÈÄ±âµî·Ï ±ÇÇÑ
+	// í›„ê¸°ë“±ë¡ ê¶Œí•œ
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listAdopt2/{id}" )
 	public JSONObject listAdopt2( Model model, HttpSession session, @PathVariable("id") String id ) throws Exception{

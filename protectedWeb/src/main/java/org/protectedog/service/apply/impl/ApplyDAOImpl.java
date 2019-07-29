@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 
 
-//==> ºĞ¾ç½ÅÃ»°ü¸® DAO CRUD ±¸Çö
+//==> ë¶„ì–‘ì‹ ì²­ê´€ë¦¬ DAO CRUD êµ¬í˜„
 @Repository("applyDAOImpl")
 public class ApplyDAOImpl implements ApplyDAO{
 	
@@ -36,7 +36,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		System.out.println("============================================="+apply);
 		sqlSession.insert("ApplyMapper.addApply", apply);
 	}
-	//±Û¿¡ µî·ÏµÈ ½ÅÃ»¼­ ºÒ·¯¿À±â
+	//ê¸€ì— ë“±ë¡ëœ ì‹ ì²­ì„œ ë¶ˆëŸ¬ì˜¤ê¸°
 	public Apply getApply(int applyNo) throws Exception {
 		return sqlSession.selectOne("ApplyMapper.getApply", applyNo);
 	}
@@ -49,7 +49,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		
 		List<Apply> list = sqlSession.selectList("ApplyMapper.listApply", map); 
 
-		//selectOne: Äõ¸® °á°ú°¡ ¾øÀ¸¸é return null 
+		//selectOne: ì¿¼ë¦¬ ê²°ê³¼ê°€ ì—†ìœ¼ë©´ return null 
 		map.put("totalCount", sqlSession.selectOne("ApplyMapper.getTotalCount", map));
 		map.put("list", list);
 
@@ -62,7 +62,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		
 		List<Apply> list = sqlSession.selectList("ApplyMapper.listApply2", map); 
 		
-		//selectOne: Äõ¸® °á°ú°¡ ¾øÀ¸¸é return null 
+		//selectOne: ì¿¼ë¦¬ ê²°ê³¼ê°€ ì—†ìœ¼ë©´ return null 
 		map.put("list", list);
 		
 		return map;
@@ -72,7 +72,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		sqlSession.update("ApplyMapper.delApply", apply);
 	}
 
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼ Row(totalCount)  return
+	// ê²Œì‹œíŒ Page ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´ Row(totalCount)  return
 	public int getTotalCount(int adoptNo) throws Exception {
 		return sqlSession.selectOne("ApplyMapper.getTotalCount", adoptNo);
 	}

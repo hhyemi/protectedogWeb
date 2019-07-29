@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-//==> ºĞ¾ç|½ÇÁ¾°ü¸® Controller
+//==> ë¶„ì–‘|ì‹¤ì¢…ê´€ë¦¬ Controller
 @Controller
 @RequestMapping("/adopt/*")
 public class AdoptController {
@@ -47,13 +47,13 @@ public class AdoptController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	//setter Method ±¸Çö ¾ÊÀ½
+	//setter Method êµ¬í˜„ ì•ŠìŒ
 	
 //	@Resource(name = "uploadPath")
 //	private String uploadPath;
 	
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
+	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -81,7 +81,7 @@ public class AdoptController {
 		
 		if( ((User)session.getAttribute("user")) == null  ) {
 			return "redirect:/adopt/listAdopt?boardCode="+boardCode;
-		}else if(   !((User)session.getAttribute("user")).getLevels().equals("¹ÌÀÎÁõÈ¸¿ø") ||  !((User)session.getAttribute("user")).getLevels().equals("¿î¿µÀÚ")  ) {
+		}else if(   !((User)session.getAttribute("user")).getLevels().equals("ë¯¸ì¸ì¦íšŒì›") ||  !((User)session.getAttribute("user")).getLevels().equals("ìš´ì˜ì")  ) {
 			return "forward:/adopt/addAdopt.jsp?boardCode="+boardCode;
 		}else {
 			return "redirect:/adopt/listAdopt?boardCode="+boardCode;
@@ -90,7 +90,7 @@ public class AdoptController {
 	
 
 	
-	// ±Û µî·ÏÇÏ°í »ó¼¼Á¶È¸ È­¸éÀ¸·Î 
+	// ê¸€ ë“±ë¡í•˜ê³  ìƒì„¸ì¡°íšŒ í™”ë©´ìœ¼ë¡œ 
 	@RequestMapping( value="addAdopt", method=RequestMethod.POST )
 	public String addAdopt( @ModelAttribute("adopt") Adopt adopt, Model model,
 							@RequestParam("multiFile") ArrayList<String> multiFile 
@@ -99,15 +99,17 @@ public class AdoptController {
 		System.out.println("/adopt/addAdopt : POST \n"+adopt);
 	
 
-		// ÆÄÀÏ
+		// íŒŒì¼
 		adopt.setMainFile(multiFile.get(0));
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		System.out.println("=========================="+adopt);
 		
+		userService.getUsers(adopt.getId());
+		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 		for (String fileName : multiFile) {
 
 			FileDog files = new FileDog();
@@ -126,7 +128,7 @@ public class AdoptController {
 	
 	
 	
-	// ±Û »ó¼¼Á¶È¸
+	// ê¸€ ìƒì„¸ì¡°íšŒ
 	@RequestMapping( value="getAdopt")
 	public String getAdopt( @RequestParam("postNo") int postNo , Model model, HttpSession session ) throws Exception {
 		
@@ -140,7 +142,7 @@ public class AdoptController {
 		filePost.put("postNo", postNo);
 		List<FileDog> file = fileService.getFile(filePost);
 		
-		System.out.println("¼¼¼Çµé¾î¿Ô³ª "+session.getAttribute("user") );
+		System.out.println("ì„¸ì…˜ë“¤ì–´ì™”ë‚˜ "+session.getAttribute("user") );
 		if ( session.getAttribute("user") != null) {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
 			model.addAttribute("user", user);
@@ -154,7 +156,7 @@ public class AdoptController {
 	
 	
 	
-	// ±Û ¼öÁ¤È­¸éÀ¸·Î
+	// ê¸€ ìˆ˜ì •í™”ë©´ìœ¼ë¡œ
 	@RequestMapping( value="updateAdopt", method=RequestMethod.GET)
 	public String updateAdopt( @RequestParam("postNo") int postNo , Model model) throws Exception{
 
@@ -175,8 +177,8 @@ public class AdoptController {
 	
 	
 	
-	// ±Û ¼öÁ¤ÇÏ°í Á¶È¸
-	// ±Û»óÅÂÈ®ÀÎÀº jsp¿¡¼­
+	// ê¸€ ìˆ˜ì •í•˜ê³  ì¡°íšŒ
+	// ê¸€ìƒíƒœí™•ì¸ì€ jspì—ì„œ
 	@RequestMapping( value="updateAdopt" , method=RequestMethod.POST)
 	public String updateAdopt( @ModelAttribute("adopt") Adopt adopt, Model model,
 								@RequestParam("multiFile") ArrayList<String> multiFile,
@@ -198,7 +200,7 @@ public class AdoptController {
 		}
 		if (multiFile.size() != 0) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
-			// ÆÄÀÏµğºñ¿¡³Ö±â
+			// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 			for (String fileName : multiFile) {
 				FileDog files = new FileDog();
 				files.setBoardCode(adopt.getBoardCode());
@@ -226,7 +228,7 @@ public class AdoptController {
 	
 	
 	
-	// ±Û »èÁ¦
+	// ê¸€ ì‚­ì œ
 	@RequestMapping( value="updateStatusCode" , method=RequestMethod.GET)
 	public String updateStatusCode( @RequestParam("postNo") int postNo ,
 									@ModelAttribute("adopt") Adopt adopt ) throws Exception{
@@ -237,14 +239,14 @@ public class AdoptController {
 		adopt.setStatusCode("0");
 		adoptService.updateStatusCode(adopt);
 		
-		// ÆÄ¶ó¹ÌÅÍ°ªÀ¸·Î º¸µåÄÚµå? 
+		// íŒŒë¼ë¯¸í„°ê°’ìœ¼ë¡œ ë³´ë“œì½”ë“œ? 
 		return "forward:/adopt/listAdopt?boardCode="+adopt.getBoardCode();
 	}
 	
 	
 	
 	
-	// ±Û ¸®½ºÆ® Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	@RequestMapping( value="listAdopt" )
 	public String listAdopt( @ModelAttribute("search") Search search, Model model, HttpSession session, 
 							 @RequestParam(value="boardCode", required=false) String boardCode ) throws Exception{
@@ -262,27 +264,27 @@ public class AdoptController {
 		if(search.getAreaCondition() == null || search.getAreaCondition().equals("all") ) {
 			search.setAreaCondition("");
 		}else if(search.getAreaCondition().equals("kw")) {
-			search.setAreaCondition("°­¿ø");
+			search.setAreaCondition("ê°•ì›");
 		}else if(search.getAreaCondition().equals("kk")) {
-			search.setAreaCondition("°æ±â");
+			search.setAreaCondition("ê²½ê¸°");
 		}else if(search.getAreaCondition().equals("ks")) {
-			search.setAreaCondition("°æ»ó");
+			search.setAreaCondition("ê²½ìƒ");
 		}else if(search.getAreaCondition().equals("kj")) {
-			search.setAreaCondition("±¤ÁÖ");
+			search.setAreaCondition("ê´‘ì£¼");
 		}else if(search.getAreaCondition().equals("dj")) {
-			search.setAreaCondition("´ëÀü");
+			search.setAreaCondition("ëŒ€ì „");
 		}else if(search.getAreaCondition().equals("bs")) {
-			search.setAreaCondition("ºÎ»ê");
+			search.setAreaCondition("ë¶€ì‚°");
 		}else if(search.getAreaCondition().equals("su")) {
-			search.setAreaCondition("¼­¿ï");
+			search.setAreaCondition("ì„œìš¸");
 		}else if(search.getAreaCondition().equals("us")) {
-			search.setAreaCondition("¿ï»ê");
+			search.setAreaCondition("ìš¸ì‚°");
 		}else if(search.getAreaCondition().equals("ic")) {
-			search.setAreaCondition("ÀÎÃµ");
+			search.setAreaCondition("ì¸ì²œ");
 		}else if(search.getAreaCondition().equals("jr")) {
-			search.setAreaCondition("Àü¶ó");
+			search.setAreaCondition("ì „ë¼");
 		}else if(search.getAreaCondition().equals("cc")) {
-			search.setAreaCondition("ÃæÃ»");
+			search.setAreaCondition("ì¶©ì²­");
 		}
 		search.setVoteCondition("");
 		
@@ -293,16 +295,16 @@ public class AdoptController {
 		
 		search.setPageSize(18);
 //		search.setPageSize(pageSize);
-//		System.out.println("¡á¡á¡á¡á °Ë»ö¾î È®ÀÎ : "+search.getSearchKeyword()
-//						+"\n¡á¡á¡á¡á search È®ÀÎ : "+search);
+//		System.out.println("â– â– â– â–  ê²€ìƒ‰ì–´ í™•ì¸ : "+search.getSearchKeyword()
+//						+"\nâ– â– â– â–  search í™•ì¸ : "+search);
 		
 		Map<String , Object> map=adoptService.listAdopt(search, boardCode);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 16);
 //		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			
-//		System.out.println("¡á¡á¡á¡á map È®ÀÎ : "+map
-//						+"\n¡á¡á¡á¡á map.get(\"list\") È®ÀÎ  : "+map.get("list"));
+//		System.out.println("â– â– â– â–  map í™•ì¸ : "+map
+//						+"\nâ– â– â– â–  map.get(\"list\") í™•ì¸  : "+map.get("list"));
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);

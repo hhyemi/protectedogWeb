@@ -10,50 +10,41 @@
 	
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
 
     <style type="text/css">
     
 	    html {
-	 	 scroll-behavior: smooth;
-		}
-		
-		h1 {
-			font-family: 'NanumSquare', sans-serif !important;
-/* 			font-size: 22px !important; */
-		}
-		
-		section { 
-			font-family: 'NanumSquare', sans-serif !important;
+	 		scroll-behavior: smooth;
 		}
 		
 		.waves-effect>strong {
-			background-color: #94bfca;
+			background-color: #f04f23;
 		}
 		
 		
 	</style>
-    
+   <jsp:include page="/layout/toolbar.jsp"></jsp:include> 
   </head>
   
   
   <body class="goto-here">
   
-  	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+  	
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread" id="h1">
-           		<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
-<%-- 			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if> --%>
-            </h1>
+          	<p ><span class="mr-2"><a href="index.html">Add</a></span> <span>Adopt</span></p>
+            <font size="7">
+            	<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
+			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if>
+            </font>
           </div>
         </div>
       </div>
     </div>
+    
     
     <section class="ftco-section">
       <div class="container">

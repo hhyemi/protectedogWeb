@@ -7,7 +7,7 @@ import org.protectedog.common.Search;
 import org.protectedog.service.domain.Adopt;
 
 
-//==> ºĞ¾ç°ü¸®¿¡¼­ CRUD Ãß»óÈ­/Ä¸½¶È­ÇÑ DAO Interface Definition
+//==> ë¶„ì–‘ê´€ë¦¬ì—ì„œ CRUD ì¶”ìƒí™”/ìº¡ìŠí™”í•œ DAO Interface Definition
 public interface AdoptDAO {
 	
 	// INSERT
@@ -26,7 +26,7 @@ public interface AdoptDAO {
 	// Status UPDATE | DELETE
 	public void updateStatusCode(Adopt adopt) throws Exception ;
 	
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼Row(totalCount)  return
+	// ê²Œì‹œíŒ Page ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´Row(totalCount)  return
 	public int getTotalCount(Search search, String boardCode) throws Exception ;
 	
 }
