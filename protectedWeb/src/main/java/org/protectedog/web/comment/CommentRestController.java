@@ -45,7 +45,10 @@ public class CommentRestController {
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
-
+	
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
+	
 	public CommentRestController() {
 		System.out.println("commentRestController Defualt Constructor");
 	}
@@ -167,38 +170,38 @@ public class CommentRestController {
 		return result;
 	}
 	
-	@RequestMapping( value="json/listComment/{postNo}/{pageSize}", method=RequestMethod.POST)
-	public Map<String, Object> listComment(@PathVariable("postNo") int postNo, @ModelAttribute("search") Search search, @PathVariable("pageSize") int pageSize) throws Exception {
+	@RequestMapping( value="json/listComment/{postNo}", method=RequestMethod.POST)
+	public Map<String, Object> listComment(@PathVariable("postNo") int postNo, @ModelAttribute("search") Search search) throws Exception {
 		
 		System.out.println(" ============================== rest listComment ==================================");
 		
 		if ( search.getCurrentPage() == 0 ) {
 			search.setCurrentPage(1);
 		}
-		// pageSize È®ÀÎ
-		System.out.println("pageSize : " + pageSize);
+		// pageSize È®ï¿½ï¿½
 		search.setPageSize(pageSize);
+		
 		System.out.println("search.getCommentEndRowNum : " + search.getCommentEndRowNum());
 		
-		// Comment Paging Map °´Ã¼ »ý¼º
+		// Comment Paging Map ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("postNo",postNo);
 		map.put("commentEndRowNum",search.getCommentEndRowNum());
 		map.put("startRowNum", search.getStartRowNum());
 		map.put("endRowNum", search.getEndRowNum());
 		
-		// µð¹ö±ë
+		// ï¿½ï¿½ï¿½ï¿½ï¿½
 		System.out.println("postNo :" + postNo);
 		
-		// µ¥ÀÌÅÍ °¡Á®¿À´Â BL ¼öÇà
-		List<Comment> list = commentService.listCommentMoreView(map);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ BL ï¿½ï¿½ï¿½ï¿½
+		Map<String, Object> commentMap = commentService.listComment(postNo, search);
 		int totalCount = commentService.getTotalCount(postNo);
-		Map<String, Object> reMap = reCommentService.listReComment(map);
+		//Map<String, Object> reMap = reCommentService.listReComment(map);
 		
 		
-		// returnÇÒ Map °´Ã¼¿¡ put
-		map.put("reList", reMap.get("list"));
-		map.put("list", list);
+		// returnï¿½ï¿½ Map ï¿½ï¿½Ã¼ï¿½ï¿½ put
+		//map.put("reList", reMap.get("list"));
+		map.put("list", commentMap.get("list"));
 		map.put("totalCount", totalCount);
 		map.put("search",search);
 		

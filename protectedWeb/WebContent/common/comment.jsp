@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -8,9 +8,13 @@
 <head>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
@@ -25,13 +29,13 @@
 </style>
 
 <script type="text/javascript">	
+
+	
 	$(function(){
-		
-		var pageSize = 5;
 		
 		$(document).on("click",".btn.btn-default",function(){
 			$.ajax({
-				url : "/comment/json/listComment/${board.postNo}"+"/"+pageSize,
+				url : "/comment/json/listComment/${board.postNo}",
 				method : "POST",
 				dataType : "JSON",
 				headers : {
@@ -51,68 +55,68 @@
 					var display = "<div class='col-sm-12 col-md-12 commentList'>";
 					$.each(list, function(index, comment){
 						
-						display +=
-							"<div class='row' id='"+comment.commentNo+"'>" +
-								"<div class='col-sm-1 col-md-1' align='center'>" +
-									"<img src='https://via.placeholder.com/80' style='border-radius:5px; min-height: 80px; min-width: 60px;'/>" +
-								"</div>" +
-								"<div class='col-sm-9 col-md-9' align='left'>" + 
-									"<h4 id="+comment.commentNo+" class='h4tag'>" +	
-									"<b>"+comment.nickName+"</b>&nbsp; <small>"+comment.regDate+"</small>&nbsp;" + 
-									"</h4>" +
-	 								"<input type='hidden' name='commentNo' value='"+comment.commentNo+"'/>" +
-						   			"<div id="+comment.commentNo+" class='area'>" +
-										"<h5  id="+comment.commentNo+" class='cmCont'>"+comment.commentContent+"</h5>";
+// 						display +=
+// 							"<div class='row' id='"+comment.commentNo+"'>" +
+// 								"<div class='col-sm-1 col-md-1' align='center'>" +
+// 									"<img src='https://via.placeholder.com/80' style='border-radius:5px; min-height: 80px; min-width: 60px;'/>" +
+// 								"</div>" +
+// 								"<div class='col-sm-9 col-md-9' align='left'>" + 
+// 									"<h4 id="+comment.commentNo+" class='h4tag'>" +	
+// 									"<b>"+comment.nickName+"</b>&nbsp; <small>"+comment.regDate+"</small>&nbsp;" + 
+// 									"</h4>" +
+// 	 								"<input type='hidden' name='commentNo' value='"+comment.commentNo+"'/>" +
+// 						   			"<div id="+comment.commentNo+" class='area'>" +
+// 										"<h5  id="+comment.commentNo+" class='cmCont'>"+comment.commentContent+"</h5>";
 					    	
-							if(comment.id == '${sessionScope.user.id}'){
-			 					display += "<span class='glyphicon glyphicon-refresh'></span> &nbsp;" + 
-			 					           "<span class='glyphicon glyphicon-remove'></span> &nbsp;";
-							}
+// 							if(comment.id == '${sessionScope.user.id}'){
+// 			 					display += "<span class='glyphicon glyphicon-refresh'></span> &nbsp;" + 
+// 			 					           "<span class='glyphicon glyphicon-remove'></span> &nbsp;";
+// 							}
 							
-							display += 
-										"<span class='glyphicon glyphicon-alert'></span> &nbsp;" + 
- 										"<span class='glyphicon glyphicon-plus'></span>" +
- 									"</div>" +
- 								"</div>" +
- 									"<div class='col-sm-1 col-md-1' align='center' style='padding-top:10px; padding-right: 0 px;'>" +
- 										"<font size='8px' id='"+ comment.commentNo+"' class='font'>" +
- 										"<b>"+comment.likeCount+"</b>"+
- 										"</font>" +
- 									"</div>" +
- 									"<div class='col-sm-1 col-md-1' align='center' style='padding-top: 10px; padding-left : 0 px;'>"+
- 	 									"<span id='"+comment.commentNo+"' class='glyphicon glyphicon-chevron-up' style='font-size: 20px;'></span>"+
-	 									"<p/>" +
- 	 								"</div>" +
- 	 							"</div>" +
- 	 							"<br/>";
+// 							display += 
+// 										"<span class='glyphicon glyphicon-alert'></span> &nbsp;" + 
+//  										"<span class='glyphicon glyphicon-plus'></span>" +
+//  									"</div>" +
+//  								"</div>" +
+//  									"<div class='col-sm-1 col-md-1' align='center' style='padding-top:10px; padding-right: 0 px;'>" +
+//  										"<font size='8px' id='"+ comment.commentNo+"' class='font'>" +
+//  										"<b>"+comment.likeCount+"</b>"+
+//  										"</font>" +
+//  									"</div>" +
+//  									"<div class='col-sm-1 col-md-1' align='center' style='padding-top: 10px; padding-left : 0 px;'>"+
+//  	 									"<span id='"+comment.commentNo+"' class='glyphicon glyphicon-chevron-up' style='font-size: 20px;'></span>"+
+// 	 									"<p/>" +
+//  	 								"</div>" +
+//  	 							"</div>" +
+//  	 							"<br/>";
  	 							
- 	 						$.each(reList, function(index, recomment){
- 	 							if(comment.commentNo == recomment.commentNo){
- 	 								display += 
- 	 								  "<div class='row' id='"+recomment.recommentNo+"'style='padding-left: 50px;'>"
- 	 									+ "<div class='col-sm-1 col-md-1' align='center'>"
- 	 									+ "  <img src='https://via.placeholder.com/80' style='boder-radius : 5px; min-height : 80px; min-width : 60px;'/>"
- 	 									+ "</div>"
- 	 									+ "<div class='col-sm-9 col-md-9 align='left'"
- 	 										+ "<h4 id='"+recomment.recommentNo+"' class='h4tag'>"
- 	 										+ "<b>"+recomment.nickName+"</b>&nbsp; <small>"+recomment.regDate+"</small> &nbsp;"
- 	 										+ "</h4>"
- 	 										+ "<div id='"+recomment.recommentNo+"' class='area'>"
- 	 											+ "<h5 id='"+recomment.recommentNo+" class='cmCont'>"+recomment.recommentContent+"</h5>";
+//  	 						$.each(reList, function(index, recomment){
+//  	 							if(comment.commentNo == recomment.commentNo){
+//  	 								display += 
+//  	 								  "<div class='row' id='"+recomment.recommentNo+"'style='padding-left: 50px;'>"
+//  	 									+ "<div class='col-sm-1 col-md-1' align='center'>"
+//  	 									+ "  <img src='https://via.placeholder.com/80' style='boder-radius : 5px; min-height : 80px; min-width : 60px;'/>"
+//  	 									+ "</div>"
+//  	 									+ "<div class='col-sm-9 col-md-9 align='left'"
+//  	 										+ "<h4 id='"+recomment.recommentNo+"' class='h4tag'>"
+//  	 										+ "<b>"+recomment.nickName+"</b>&nbsp; <small>"+recomment.regDate+"</small> &nbsp;"
+//  	 										+ "</h4>"
+//  	 										+ "<div id='"+recomment.recommentNo+"' class='area'>"
+//  	 											+ "<h5 id='"+recomment.recommentNo+" class='cmCont'>"+recomment.recommentContent+"</h5>";
  	 								
- 	 								if(recomment.id == '${sessionScope.user.id}'){
- 	 									display +=
- 	 											"<span class='glyphicon glyphicon-refresh'></span> &nbsp; "
- 	 								  			+ "<span class='glyphicon glyphicon-remove'></span> &nbsp; ";
- 	 								}
+//  	 								if(recomment.id == '${sessionScope.user.id}'){
+//  	 									display +=
+//  	 											"<span class='glyphicon glyphicon-refresh'></span> &nbsp; "
+//  	 								  			+ "<span class='glyphicon glyphicon-remove'></span> &nbsp; ";
+//  	 								}
  	 								
- 	 								display += "<span class='glyphicon glyphicon-alert'></span> &nbsp;"
- 	 									    + "</div>"
- 	 	 									+ "<br/>"
- 	 									+ "</div>"
- 	 								+ "</div>" ;
- 	 							}
- 	 						});
+//  	 								display += "<span class='glyphicon glyphicon-alert'></span> &nbsp;"
+//  	 									    + "</div>"
+//  	 	 									+ "<br/>"
+//  	 									+ "</div>"
+//  	 								+ "</div>" ;
+//  	 							}
+//  	 						});
 					});
 					
 					display +="</div>";
@@ -120,7 +124,7 @@
 					$("#moreView").append(display);
 					
 					if(totalCount >= list.length){
-						$("button:contains('¥ı∫∏±‚')").remove();
+						$("button:contains('ÎçîÎ≥¥Í∏∞')").remove();
 					}
 				},					
 				error : function(request, status, error){							
@@ -130,52 +134,78 @@
 		});
 	});
 
-	// ¥Ò±€ CURD function();
+	// ÎåìÍ∏Ä CURD function();
 	$(function() {
-		// ¥Ò±€ µÓ∑œ 
-// 		var commentNo
-// 		$.ajax({
-// 						url : "/comment/json/getComment/"+commentNo,
-// 						method : "POST",
-// 						dataType : "Json",
-// 						headers : {
-// 							"Accept" : "application/json",
-// 							"Content-Type" : "application/json"
-// 						},
-						
-// 						success : function(JSONData, status){
-							
-// 							$("#"+commentNo+""+".cmCont").remove();
-// 							$("#"+commentNo+""+".area").hide();
-							
-//  							var modifyScreen = 
-//  								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 30px' placeholder='"+JSONData.commentContent+"'/></div>";
-							
-//  							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
-//  								+ "<a href='#' onclick='update(); return false;'> "
-//  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
-//  								+ "ºˆ¡§" 								
-//  								+ "</span></div>"
- 							
-// 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
-//  							$("#"+commentNo+""+".h4tag").append(button);
-// 						},
-										
-// 						error : function(request, status, error){							
-// 							alert("Error");							
-// 						}
-				
-// 					}
-// 		);
-// 		$(document).on("click","#commentGo",function() {
-// 			$("form[name=commentGo]").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
-// 		});
+		// ÎåìÍ∏Ä Îì±Î°ù
+		
+		var postNo = $("input[name=postNo]").val();
+		$(document).on("click","#commentGo",function() {
+			
+			var data =  
+			{
+					commentContent : $("input[name=commentContent]").val(),
+					postNo		   : postNo
+			} ;
+			$.ajax({
+				url : "/comment/json/addComment/",
+				method : "POST",
+				dataType : "Json",
+				data : JSON.stringify(data),
+				headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+							},
+				success : function(JSONData, status){
+								
+// 								$("#"+commentNo+""+".cmCont").remove();
+// 								$("#"+commentNo+""+".area").hide();
+								
+	 							var display = 
+	 								"<div class=row id="+JSONData.commentNo+">"
+	 								+"<div class=col-sm-1 col-md-1 align=center>"
+	 									+"<img src=https://via.placeholder.com/80 style='border-radius: 5px; min-height: 80px; min-width: 60px;'/>"
+	 								+"</div>"
+	 								+"<div class=col-sm-11 col-md-11 align=left>"
+	 									+"<h4 id='"+JSONData.commentNo+"' class=h4tag>"
+	 									+"<b>"+JSONData.nickName+"</b> &nbsp; <small>"+JSONData.regDate+"</small> &nbsp;"
+	 									+"</h4>"
+	 									+"<input type='hidden' name='commentNo' value='"+JSONData.commentNo+"'>"					
+	 									+"<div id='"+JSONData.commentNo+"' class=area>"
+	 									+"<h5  id='"+JSONData.commentNo+"' class=cmCont>"+JSONData.commentContent+"</h5>";
+	 										
+	 											if(JSONData.id == '${sessionScope.user.id}' ){
+	 												display += "<span class='fas fa-pen'></span>  &nbsp;" 
+		 												+"<span class='fas fa-trash-alt'></span>  &nbsp;" ;
+	 											}
+	 												
+	 											display += "<span class='fas fa-exclamation-triangle'></span>  &nbsp;"
+// 	 													+"<span class='fas fa-plus'></span> &nbsp;" 
+			 											+"<span id='"+JSONData.commentNo+"' class='far fa-thumbs-up'></span>  &nbsp;"
+	 													+"<font id='"+JSONData.commentNo+"' class='font'>"
+	 														+"<b>"+JSONData.likeCount+"</b>"
+	 													+"</font>"
+	 									+"</div>"
+	 								+"</div>"
+	 							+"</div>"
+	 							+"<br/>"
+	 								
+	 							
+								$(".commentList").prepend(display);
+							},
+											
+							error : function(request, status, error){							
+								alert("Error");							
+							}
+					
+						});
+			//$("form[name=commentGo]").attr("action", "/comment/addComment?postNo=${board.postNo}").attr("method", "POST").submit();
+		});
 	});
 	
 	$(function(){
 		
-		// ¥Ò±€ ºˆ¡§
-		$(document).on("click", ".glyphicon-refresh", function() {
+		// ÎåìÍ∏Ä ÏàòÏ†ï
+		$(document).on("click", ".fa-pen", function() {
 			
 			var commentNo = $(this).parent().parent().children("input").val() ;
 			
@@ -195,13 +225,13 @@
 							$("#"+commentNo+""+".area").hide();
 							
  							var modifyScreen = 
- 								"<div class='ajax'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 30px' placeholder='"+JSONData.commentContent+"'/></div>";
+ 								"<div class='ajax col-md-10'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 50px' placeholder='"+JSONData.commentContent+"'/></div>";
 							
- 							var button = "<div class='ajax'><span class='glyphicon glyphicon-ok'>"
+ 							var button = "<div class='ajax col-md-2'>" 								
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
- 								+ "ºˆ¡§" 								
- 								+ "</span></div>"
+ 								+ "<button>ÏàòÏ†ïÏôÑÎ£å</button>" 								
+ 								+ "</div>"
  							
 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
  							$("#"+commentNo+""+".h4tag").append(button);
@@ -215,14 +245,34 @@
 			);
 		});
 		
-		$(document).on("click", ".glyphicon-remove", function() {
+		$(document).on("click", ".fa-trash-alt", function() {
 			
 			//alert();
+			
 			var commentNo = $(this).parent().parent().children("input").val();
 			var hr = $(this).parent().html();
 			alert(hr);
-			var result = confirm("¡§∏ª ªË¡¶ «œΩ√∞⁄Ω¿¥œ±Ó?");
-			
+			var result = confirm("Ï†ïÎßê ÏÇ≠Ï†ú ÌïòÏãúÍ≤†ÏäµÎãàÍπå?");
+				
+// 				swal({
+// 				  title: "Are you sure?",
+// 				  text: "You will not be able to recover this imaginary file!",
+// 				  type: "warning",
+// 				  showCancelButton: true,
+// 				  confirmButtonClass: "btn-danger",
+// 				  confirmButtonText: "Yes, delete it!",
+// 				  cancelButtonText: "No, cancel plx!",
+// 				  closeOnConfirm: false,
+// 				  closeOnCancel: false
+// 				},
+// 				function(isConfirm) {
+// 				  if (isConfirm) {
+// 				    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+// 				  } else {
+// 				    swal("Cancelled", "Your imaginary file is safe :)", "error");
+// 				  }
+// 				});
+		
 			if (result) {
 				$.ajax({
 							url : "/comment/json/delComment/"+commentNo,
@@ -246,7 +296,7 @@
 		});
 		
 		
-		$(document).on("click",".glyphicon-alert",function() {
+		$(document).on("click",".fa-exclamation-triangle",function() {
 
 			popWin = window.open("/common/report.jsp",
 								"popWin",
@@ -256,7 +306,7 @@
 		
 		var flag= false;
 		
-		$(document).on("click",".glyphicon-plus", function() {
+		$(document).on("click",".fa-plus", function() {
 			
 			var commentNo = $(this).parents().parents().children("input").val();
 			
@@ -281,7 +331,7 @@
 		$(document).on("click", ".far.fa-thumbs-up", function(){
 			
 			if(${sessionScope.user == null}){
-				alert("∑Œ±◊¿Œ «’Ω ºÓ");
+				alert("Î°úÍ∑∏Ïù∏ Ìï©Ïã≠Ïáº");
 				return;
 			}
 				
@@ -298,7 +348,7 @@
 					success : function(JSONData, status){
 						
 						if(JSONData == 1){
-							alert("¿ÃπÃ √ﬂ√µ«— ¥Ò±€¿‘¥œ¥Ÿ.");
+							alert("Ïù¥ÎØ∏ Ï∂îÏ≤úÌïú ÎåìÍ∏ÄÏûÖÎãàÎã§.");
 							return;
 						}
 						
@@ -331,7 +381,7 @@
 	function update(){
 		
 		if( $("#commentContent").val() == ''){
-			alert("≥ªøÎ¿ª ¿‘∑¬«ÿ¡÷ººø‰.");
+			alert("ÎÇ¥Ïö©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
 			return;
 		}
 		
@@ -377,30 +427,30 @@
 
 		<hr />
 	
-		<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· ∫Ò»∏ø¯ √≥∏Æ °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
+		<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† ÎπÑÌöåÏõê Ï≤òÎ¶¨ ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
-				∫Ò»∏ø¯¿∫ ¥Ò±€¿ª ¥ﬁ ºˆ æ¯Ω¿¥œ¥Ÿ<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> ∑Œ±◊¿Œ </button>»ƒ ¿ÃøÎ«ÿ
-				¡÷Ω√±Ê πŸ∂¯¥œ¥Ÿ.
+				ÎπÑÌöåÏõêÏùÄ ÎåìÍ∏ÄÏùÑ Îã¨ Ïàò ÏóÜÏäµÎãàÎã§<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Î°úÍ∑∏Ïù∏ </button>ÌõÑ Ïù¥Ïö©Ìï¥
+				Ï£ºÏãúÍ∏∏ Î∞îÎûçÎãàÎã§.
 			</div>
 		</div>
 		<br>
 		</c:if>
 		
-		<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· »∏ø¯ √≥∏Æ  °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
+		<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† ÌöåÏõê Ï≤òÎ¶¨  ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
 		<c:if test="${sessionScope.user.role != null}">
 		<form name="commentGo">
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
 				<input type="text" name="commentContent" class="form-control"
-					style="width: 100%; height: 40px" placeholder="¥Ò±€¿‘∑¬" />
+					style="width: 100%; height: 50px" placeholder="ÎåìÍ∏ÄÏûÖÎ†•" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
-				<button id="commentGo"
+				<button type="button" id="commentGo"
 					style="background-color: #6190ed; color: white; width: 100%; height: 40px; border: 1px solid #1449b3">
 					<h6>
-						<b>¥Ò±€µÓ∑œ</b>
+						<b>ÎåìÍ∏ÄÎì±Î°ù</b>
 					</h6>
 				</button>
 			</div>
@@ -409,30 +459,32 @@
 		<br>
 		</c:if>
 		
-		<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· ¥Ò±€ √≥∏Æ  °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
+		<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† ÎåìÍ∏Ä Ï≤òÎ¶¨  ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
 		<div id="moreView"></div>
 		<div class="commentList">
+		<c:set var="rank" value="0"></c:set>
 		<c:forEach var="comment" items="${list}">
+			<c:set var="rank" value="${ rank+1 }" />
 			<div class="row" id="${comment.commentNo}">
 				<div class="col-sm-1 col-md-1" align="center">
 					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
 				</div>
-				<div class="col-sm-9 col-md-9" align="left">
+				<div class="col-sm-11 col-md-11" align="left">
 					
 					<h4 id="${comment.commentNo}" class="h4tag">
-						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp;
+						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp; <small><c:if test="${rank <= 3 and comment.likeCount != 0}"><span class="fas fa-medal"> ${ rank } Îì±</span></c:if></small>
 					</h4>
 					<input type="hidden" name="commentNo" value="${comment.commentNo}">
 					
 					<div id="${comment.commentNo}" class="area">
 					<h5  id="${comment.commentNo}" class="cmCont">${comment.commentContent}</h5>
 					<c:if test="${comment.id == sessionScope.user.id }">
-					<span class="fas fa-retweet"></span> &nbsp; 
-					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
+					<span class="fas fa-pen"></span> &nbsp; 
+					<span class="fas fa-trash-alt"></span> &nbsp; 
 					</c:if>
-					<span class="glyphicon glyphicon-alert"></span> &nbsp; 
-					<span class="glyphicon glyphicon-plus"></span> &nbsp; 
-					<i id="${comment.commentNo}" class="far fa-thumbs-up"></i>
+					<span class="fas fa-exclamation-triangle"></span> &nbsp;
+<!-- 					<span class="fas fa-plus"></span> &nbsp;  -->
+					<span id="${comment.commentNo}" class="far fa-thumbs-up"></span>
 					<font id="${comment.commentNo}" class="font">
 						<b>${comment.likeCount}</b>
 					</font>
@@ -440,52 +492,53 @@
 				</div>
 			</div>
 			<br/>
-			<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· ¥Î¥Ò±€ √≥∏Æ °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
-			<c:forEach var="recomment" items="${relist}">
-			<c:if test="${comment.commentNo == recomment.commentNo}">
-			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;">
-				§§
-				<div class="col-sm-1 col-md-1" align="center">
-					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
-				</div>
-				<div class="col-sm-9 col-md-9" align="left">
+			<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† ÎåÄÎåìÍ∏Ä Ï≤òÎ¶¨ ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
+<%-- 			<c:forEach var="recomment" items="${relist}"> --%>
+<%-- 			<c:if test="${comment.commentNo == recomment.commentNo}"> --%>
+<%-- 			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;"> --%>
+<!-- 				„Ñ¥ -->
+<!-- 				<div class="col-sm-1 col-md-1" align="center"> -->
+<!-- 					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-sm-9 col-md-9" align="left"> -->
 					
-					<h4 id="${recomment.recommentNo}" class="h4tag">
-						<b>${recomment.nickName}</b>&nbsp; <small>${recomment.regDate}</small>&nbsp;
-					</h4>
-					<input type="hidden" name="commentNo" value="${recomment.commentNo}">
+<%-- 					<h4 id="${recomment.recommentNo}" class="h4tag"> --%>
+<%-- 						<b>${recomment.nickName}</b>&nbsp; <small>${recomment.regDate}</small>&nbsp; --%>
+<!-- 					</h4> -->
+<%-- 					<input type="hidden" name="commentNo" value="${recomment.commentNo}"> --%>
 					
-					<div id="${recomment.recommentNo}" class="area">
-					<h5  id="${recomment.recommentNo}" class="cmCont">${recomment.recommentContent}</h5>
-					<c:if test="${recomment.id == sessionScope.user.id }">
-					<span class="glyphicon glyphicon-refresh"></span> &nbsp; 
-					<span class="glyphicon glyphicon-remove"></span> &nbsp; 
-					</c:if>
-					<span class="glyphicon glyphicon-alert"></span> &nbsp; 					
-					</div>
-				</div>
-			</div>
-			<br/>
-			</c:if>
-			</c:forEach>
+<%-- 					<div id="${recomment.recommentNo}" class="area"> --%>
+<%-- 					<h5  id="${recomment.recommentNo}" class="cmCont">${recomment.recommentContent}</h5> --%>
+<%-- 					<c:if test="${recomment.id == sessionScope.user.id }"> --%>
+<!-- 					<span class="fas fa-pen"></span> &nbsp;  -->
+<!-- 					<span class="fas fa-trash-alt"></span> &nbsp;  -->
+<%-- 					</c:if> --%>
+<!-- 					<span class="fas fa-exclamation-triangle"></span> &nbsp; 					 -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<br/> -->
+<%-- 			</c:if> --%>
+<%-- 			</c:forEach> --%>
+
 		</c:forEach>
 		</div>
 		
-		<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· ¥ı∫∏±‚ πˆ∆∞ √≥∏Æ °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
+		<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† ÎçîÎ≥¥Í∏∞ Î≤ÑÌäº Ï≤òÎ¶¨ ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
 		<c:if test="${totalCount > list.size()}">
 		<div class="col-md-12">
-			<button type="button" class="btn btn-default"> ¥ı∫∏±‚ </button>
+			<button type="button" class="btn btn-default" value="${search.currentPage}"> ÎçîÎ≥¥Í∏∞ </button>
 		</div>
 		</c:if>
 		
-		<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· «œ¥‹ ∞¯πÈ √≥∏Æ °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
+		<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† ÌïòÎã® Í≥µÎ∞± Ï≤òÎ¶¨ ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
 		<div style="min-height: 50px;">
 			
 		</div>
 
 		<br>
  		
- 		<!-- °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· ∏¥ﬁ √≥∏Æ °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
+ 		<!-- ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† Î™®Îã¨ Ï≤òÎ¶¨ ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ† -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -500,7 +553,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
-						<button type="button" id="login" class="btn btn-primary">∑Œ±◊¿Œ</button>
+						<button type="button" id="login" class="btn btn-primary">Î°úÍ∑∏Ïù∏</button>
 					</div>
 				</div>
 			</div>

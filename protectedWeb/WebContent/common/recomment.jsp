@@ -1,27 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
 <!--  meta  -->
-<meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script type="text/javascript">
 	$(function(){
 		
-		$("button:contains('´ä±Ûµî·Ï')").on("click",function(){
+		$("button:contains('ë‹µê¸€ë“±ë¡')").on("click",function(){
 			
 			if(${sessionScope.user == null}){
-				alert("·Î±×ÀÎ ÇÏ½Ê¼î");
+				alert("ë¡œê·¸ì¸ í•˜ì‹­ì‡¼");
 				return;
 			}
 			
@@ -77,9 +76,22 @@
 </head>
 <body>
 	<div class="container">
-		<div id="${param.commentNo}" class="reComment">
-			<input type='text' name="context" />
-			<button type='button'>´ä±Ûµî·Ï</button>
+		<br/>
+		<div id="${param.commentNo}" class="row reComment">
+			<div class="col-sm-1 col-md-1" align="center">
+				&nbsp;&nbsp; <span>ã„´</span>
+			</div>
+			<div class="col-sm-9 col-md-9" align="center">
+				<input type="text" name="context" class="form-control"
+					style="width: 100%; height: 50px" placeholder="ë‹µê¸€ì…ë ¥" />
+			</div>
+			<div class="col-sm-2 col-md-2" align="center">
+				<button type="button" style="background-color: #6190ed; color: white; width: 100%; height: 40px; border: 1px solid #1449b3">
+					<h6>
+						<b>ë‹µê¸€ë“±ë¡</b>
+					</h6>
+				</button>
+			</div>
 		</div>
 	</div>
 </body>

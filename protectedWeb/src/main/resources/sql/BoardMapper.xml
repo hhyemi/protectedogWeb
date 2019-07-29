@@ -55,7 +55,12 @@
 					#{phone:VARCHAR},
 					#{qnaCode:CHAR},
 					#{route:VARCHAR},
-					#{prodNo:NUMERIC},
+					<if test="prodNo == 0">
+						10001,
+					</if>
+					<if test="prodNo != 0">
+						#{prodNo:NUMERIC},
+					</if>
 					#{prodName:VARCHAR},
 					#{thumnail:CLOB})
 	 </insert>

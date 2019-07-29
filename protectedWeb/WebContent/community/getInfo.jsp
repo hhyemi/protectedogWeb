@@ -1,16 +1,17 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- KAKAO -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
 
 <style type="text/css">
@@ -41,6 +42,11 @@ body {
 img{
 	max-width: 600px;
 }
+
+.fa-medal{
+	font-size: 15px;
+}
+
 </style>
 </head>
 
@@ -48,7 +54,7 @@ img{
 	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
-	<div class="container">
+	<div class="container" style="padding-top: 30px">
 		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
@@ -62,8 +68,8 @@ img{
 					style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id})
 					| ${board.regDate}</div>
 				<div class="col-md-4" align="right"
-					style="position: absolute; right: 0px; bottom: 0px;">Á¶È¸¼ö :
-					${board.viewCount} ÃßÃµ¼ö : ${board.recommendCount} ´ñ±Û¼ö :
+					style="position: absolute; right: 0px; bottom: 0px;">ì¡°íšŒìˆ˜ :
+					${board.viewCount} ì¶”ì²œìˆ˜ : ${board.recommendCount} ëŒ“ê¸€ìˆ˜ :
 					${totalCount}</div>
 			</div>
 			<p />
@@ -87,22 +93,22 @@ img{
 		  	
 		<div class="minibox" align="center">
 			<div>
-				<span>${board.recommendCount}</span>
-				<button type="button" class="recommand btn btn-primary">ÃßÃµ</button>
+				<span style="font-size: 15px; border: 1px solid black; padding: 3px">${board.recommendCount}</span>
+				<span class="recommand fas fa-medal">HOTê°œë¡œ</span>
 				<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="Æ®À§ÅÍ·Î °øÀ¯"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="ÆäÀÌ½ººÏÀ¸·Î °øÀ¯"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="³×ÀÌ¹ö·Î °øÀ¯"><img src="/resources/file/others/naver.png"></a>
-				<a href="#"  id="kakao" title="Ä«Ä«¿ÀÅåÀ¸·Î °øÀ¯"> <img src="/resources/file/others/kakao.png" ></a>
+				<a href="#"  id="twitter"  title="íŠ¸ìœ„í„°ë¡œ ê³µìœ "><img src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="í˜ì´ìŠ¤ë¶ìœ¼ë¡œ ê³µìœ "><img src="/resources/file/others/facebook.png"></a>
+				<a href="#"  id="naver" title="ë„¤ì´ë²„ë¡œ ê³µìœ "><img src="/resources/file/others/naver.png"></a>
+				<a href="#"  id="kakao" title="ì¹´ì¹´ì˜¤í†¡ìœ¼ë¡œ ê³µìœ "> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
 
 		<c:if test="${board.id == sessionScope.user.id }">
 			<div class="button" align="right">
-				<button>¼öÁ¤</button>
-				<button>»èÁ¦</button>
+				<button>ìˆ˜ì •</button>
+				<button>ì‚­ì œ</button>
 			</div>
 		</c:if>
 	</div>
@@ -118,10 +124,10 @@ img{
 
 	$(function() {
 		
-		$("button:contains('ÃßÃµ')").on("click", function(){
+		$(".fa-medal").on("click", function(){
 				
 			if(${sessionScope.user == null}){
-				alert("·Î±×ÀÎ ÇÏ½Ê¼î");
+				alert("ë¡œê·¸ì¸ í•˜ì‹­ì‡¼");
 				return;
 			}
 			var postNo = "${board.postNo}" ;
@@ -137,7 +143,7 @@ img{
 				success : function(JSONData, status){
 					
 					if(JSONData == 1){
-						alert("ÀÌ¹Ì ÃßÃµÇÑ ±ÛÀÔ´Ï´Ù.");
+						alert("ì´ë¯¸ ì¶”ì²œí•œ ê¸€ì…ë‹ˆë‹¤.");
 						return;
 					}
 					
@@ -165,11 +171,11 @@ img{
 		
 		});
 		
-		$("button:contains('ºñÃßÃµ')").on("click", function(){
-			alert("ºñÃßÃµ±â´ÉÃß°¡");
+		$("button:contains('ë¹„ì¶”ì²œ')").on("click", function(){
+			alert("ë¹„ì¶”ì²œê¸°ëŠ¥ì¶”ê°€");
 		});
 		
-		$("button:contains('¼öÁ¤')").on(
+		$("button:contains('ìˆ˜ì •')").on(
 				"click",
 				function() {
 					//alert($("input[type='hidden']").val());
@@ -178,11 +184,11 @@ img{
 							+ $("input[name='postNo']").val();
 				});
 
-		$("button:contains('»èÁ¦')").on(
+		$("button:contains('ì‚­ì œ')").on(
 				"click",
 				function() {
 
-					var result = confirm("Á¤¸» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?");
+					var result = confirm("ì •ë§ ì‚­ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 
 					if (result) {
 						$("form[name='info']").attr("method", "POST").attr(
@@ -191,70 +197,77 @@ img{
 					}
 				});
 	});
-
+	
+    var poly;
     var map;
-    var markers = [];
-    var loca = "${board.route}";
-    var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
-    var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
-    var marker;
+   var marker;
+   var markers = [];
+   var route = "${board.route}";
+   var routeTest = [];
+   var routeMark = [];
+   var infowindowF;
+   var infowindowL;
+   
+   
+   if (route.indexOf("#") != -1){
+      var routeArray = route.split("#");
+      
+      for ( i=0; i<routeArray.length-1; i++){
+       routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
+       routeMark[i] = "marker"+i.toString();
+      }        
+   }
+   
+   
+   
+   function initMap() {
+     map = new google.maps.Map(document.getElementById('mapArea'), {
+           zoom: 16,
+           center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
+                 lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
+    });
+     
+     poly = new google.maps.Polyline({
+         strokeColor: '#000000',
+         strokeOpacity: 0.5,
+         strokeWeight: 5,
+         map: map
+      });
+     
+     infowindowF = new google.maps.InfoWindow();
+      infowindowL = new google.maps.InfoWindow();
+     
+     var aaa = "";
+     
+     for ( i=0; i<routeTest.length; i++){
+        
+         var path = poly.getPath();
+
+          path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
+                                  parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
+//           console.log("í™•ì¸ : "+centerLocaArea);
+        marker= routeMark[i];
     
-	var mapArea;
-    var markerArea;
-    var adArea = "${board.route}";
-    var arrayTest = [];
-    var arrayMark = [];
-     
-     
-     if (adArea.indexOf("#") != -1){
-   	  var areaArray = adArea.split("#");
-   	  
-   	  for ( i=0; i<areaArray.length-1; i++){
-   		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
-   		  arrayMark[i] = "markerArea"+i.toString();
-   	  }   	  
+        marker = new google.maps.Marker({
+            position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
+             lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
+           title: '#' + path.getLength(),
+           map: map
+        });
+        
+        markers.push(marker);
      }
      
-     
-     
-     function initMap() {
-       var centerLoca = {lat: localat, lng: localng};
+    // pop up
+     infowindowF.setContent("ì¶œë°œ");
+      infowindowF.open(map, markers[0]);
+      
+      infowindowL.setContent("ë„ì°©");
+      infowindowL.open(map, markers[markers.length-1]);
+   }
 
-//        map = new google.maps.Map(document.getElementById('map'), {
-//        	zoom: 15,
-//        	center: {lat: localat, lng: localng}
-//        });
-       
-//        marker = new google.maps.Marker({
-//            position: {lat: localat, lng: localng},
-//            map: map
-//        });
-
-////////////////////////////////////////////
-		if(${board.route == null}){
-			return;
-		}
-
-	    mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-		    zoom: 12,
-		  	center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
-		    lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
-	});
-    
-    var aaa = "";
-    for ( i=0; i<arrayTest.length; i++){
-    	
-	    markerArea= arrayMark[i];
 	
-	    markerArea = new google.maps.Marker({
-	        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
-	    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
-	        map: mapArea
-	    });
-		 	
-    }//$('#pop').text(aaa);
-	
-	//============= SNS°øÀ¯ Event  Ã³¸® =============	
+	//============= SNSê³µìœ  Event  ì²˜ë¦¬ =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
 		});		
@@ -271,14 +284,14 @@ img{
 		sendLinkKakao()
 	});	
 	
-  //============= Ä«Ä«¿À °øÀ¯ÇÏ±âEvent  Ã³¸® =============		
+  //============= ì¹´ì¹´ì˜¤ ê³µìœ í•˜ê¸°Event  ì²˜ë¦¬ =============		
 	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 	 function sendLinkKakao(){
 	     Kakao.Link.sendDefault({
 	       objectType: 'feed',
 	       content: {
 	         title: '${board.postTitle}',
-	         description: '${board.nickName} ´ÔÀÇ ÀÛ¼º±Û ÀÔ´Ï´Ù.',
+	         description: '${board.nickName} ë‹˜ì˜ ì‘ì„±ê¸€ ì…ë‹ˆë‹¤.',
 	         imageUrl:document.location.href,
 	         link: {
 	           mobileWebUrl: document.location.href,
@@ -287,7 +300,7 @@ img{
 	       },
 	       buttons: [       
 	         {
-	           title: '¸µÅ© ¿­±â',
+	           title: 'ë§í¬ ì—´ê¸°',
 	           link: {
 	             mobileWebUrl: document.location.href,
 	             webUrl: document.location.href
@@ -296,8 +309,6 @@ img{
 	       ]
 	     }); 
 	 }    
-	 
-     }
      
 	</script>
 	
