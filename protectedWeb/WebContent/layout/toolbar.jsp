@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="/resources/newTemplate/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/resources/newTemplate/css/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
-    
-	
+   
   	<style type="text/css">
  		@font-face {
     		font-family: 'YouandiModernTR';
@@ -253,6 +252,9 @@
     <script src="/resources/newTemplate/js/jquery-easing/jquery.easing.min.js"></script> 
     <script src="/resources/newTemplate/js/custom.js"></script> 
     <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+    
+    <!-- fontawesome key -->
+    <script src="https://kit.fontawesome.com/e26616618e.js"></script>
     
     <!-- sweetalter CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
