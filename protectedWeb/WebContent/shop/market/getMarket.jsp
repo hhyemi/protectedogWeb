@@ -53,7 +53,9 @@ margin: auto;
 text-align: center;
 text-size: small;
 }
-</
+.pricecolor{
+	color: #f04f23;
+}
 </style>
 
 
@@ -114,7 +116,7 @@ text-size: small;
 								type="hidden" value="${board.boardCode}" />
 							<h3>${board.postTitle}</h3>${board.id}
 							<h3>${board.prodName}</h3>
-							<h2>
+							<h2 class="pricecolor">
 								<fmt:formatNumber value="${board.price}" pattern="#,###" />
 								원
 							</h2>

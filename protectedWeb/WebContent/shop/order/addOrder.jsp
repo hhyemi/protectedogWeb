@@ -181,7 +181,7 @@
 								<div class="form-group">
 									<label for="firstname">구매회원</label> <input type="text"
 										class="form-control" name="id" id="id"
-										placeholder="상품명을 입력해주세요" value="${ sessionScope.user.id }"
+										placeholder="상품명을 입력해주세요" value="${sessionScope.user.id }"
 										readonly>
 								</div>
 							</div>
@@ -197,7 +197,7 @@
 								<div class="form-group">
 									<label for="firstname">받는이</label> <input type="text"
 										class="form-control" name="receiverName" id="receiverName"
-										placeholder="배송받을 받는지 이름을 입력해주세요" value="테스트">
+										placeholder="배송받는분 이름을 입력해주세요">
 								</div>
 							</div>
 
@@ -238,10 +238,6 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 							<div class="w-100"></div>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="sample6_detailAddress"
-									placeholder="상세주소" style="height: 35px;">
-							</div>
-							<div class="col-sm-4">
 								<input type="text" class="form-control"
 									id="sample6_address" placeholder="주소"
 									style="height: 35px;">
@@ -250,6 +246,10 @@
 								<input type="text" class="form-control"
 									id="sample6_extraAddress" placeholder="참고항목"
 									style="height: 35px;">
+							</div>
+								<div class="col-sm-4">
+								<input type="text" class="form-control" id="sample6_detailAddress"
+									placeholder="상세주소" style="height: 35px;">
 							</div>
 							<input type="hidden" name="receiverAddr" />
 

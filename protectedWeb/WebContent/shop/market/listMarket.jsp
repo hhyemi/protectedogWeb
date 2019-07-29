@@ -33,6 +33,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Google Mdl -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -43,6 +49,8 @@
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <style>
+
+.view { font-size: x-small; }
 </style>
 
 </head>
@@ -73,7 +81,10 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="shop-p1-title">
-						<h3>보호마켓</h3>
+						<h3>보호마켓</h3><a href="#" id="button">
+							<button class="mdl-button mdl-js-button mdl-button--primary">
+								게시글 등록</button>
+						</a>
 						<div class="heading-border-light"></div>
 						<input type="hidden" value="${board.postNo}" /> <input
 							type="hidden" value="${board.boardCode}" />
@@ -96,41 +107,31 @@
 							<c:set var="i" value="${i+1}" />
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="card ">
-									<a> <c:forEach var="name" items="${file}"
-											varStatus="status">
-											<c:if test="${status.first}">
-												<c:set var="className" value="carousel-item active" />
-											</c:if>
-											<c:if test="${!(status.first)}">
-												<c:set var="className" value="carousel-item" />
-											</c:if>
-											<div class="${className}">
-												<img class="d-block w-100"
-													src="../../resources/file/fileMarket/${name.fileName}"
-													height="450px;" />
-											</div>
-										</c:forEach>
+									<a> <c:forEach var="name" items="${file}" varStatus="status">
+
+							<c:if test="${(status.first)}">
+								<img class="d-block w-100"
+									src="/resources/file/fileMarket/${name.fileName}" />
+							</c:if>
+
+						</c:forEach>
 									</a>
 									<div class="card-body text-center">
 										<div class="card-title">
-											<a>${board.postTitle} </a> <input type="hidden"
+											<a><b>${board.postTitle}</b> </a> <input type="hidden"
 												value="${board.postNo}" />
 										</div>
-
 										${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${board.price}" pattern="#,###" />원
 										</strong>
+										<hr><p class="view">${board.id} &nbsp;&nbsp;&nbsp;조회수 : ${board.viewCount}</p>
 
 									</div>
 								</div>
 							</div>
 						</c:forEach>
 
-						<a href="#" id="button">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="mdl-button mdl-js-button mdl-button--primary">
-								글등록</button>
-						</a>
+						
 					</div>
 				</div>
 			</div>

@@ -39,11 +39,11 @@ public class MarketController {
 	
 
 
-	// setter Method ±¸Çö ¾ÊÀ½
+	// setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
+	// classpath:config/commonservice.xml ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
+	// ==> ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Î°ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ ï¿½Ç¹Ì¸ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½
 	
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
@@ -69,7 +69,7 @@ public class MarketController {
 		System.out.println("shop/market/addMarket : GET/POST");
 		
 		board.setId("user01");
-		board.setNickName("½ºÄ±");
+		board.setNickName("ï¿½ï¿½Ä±");
 		board.setBoardCode(MK);
 		board.setViewCount(0);
 		board.setProdNo(10001);
@@ -86,7 +86,7 @@ public class MarketController {
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
-		// ÆÄÀÏµðºñ¿¡³Ö±â
+		// ï¿½ï¿½ï¿½Ïµï¿½ñ¿¡³Ö±ï¿½
 		for (String fileName : multiFile) {
 
 			if (fileName != null && fileName.length() > 0) {
@@ -120,16 +120,16 @@ public class MarketController {
 		}
 		
 		
-		search.setPageSize(pageSize);
+		search.setPageSize(20);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = boardService.listBoard(search, MK, 1);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 
 		System.out.println("/shop/Maket/listMarket ///////////////////////");
 		System.out.println("/listMarket GET / POST");
@@ -148,10 +148,12 @@ public class MarketController {
 		// Business Logic
 		System.out.println(postNo);
 		Board board = boardService.getBoard(postNo);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("board", board);
 		
-		// ÆÄÀÏ°¡Á®¿À±â
+		boardService.updateViewCount(board);
+		
+		// ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> filePost = new HashMap<String, Object>();
 				filePost.put("boardCode", MK);
 				filePost.put("postNo", postNo);

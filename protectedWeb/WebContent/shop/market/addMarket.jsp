@@ -143,20 +143,18 @@
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_6.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">중고</a></span> <span>장터</span>
-					</p>
-					<h1 class="mb-0 bread">DOG|SHOP 보호마켓</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+	<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2"><a href="index.html">protected</a></span> <span>Market</span></p>
+            <font size="7">보호마켓 상품등록</font>
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
@@ -169,13 +167,14 @@
 
 					<!--////////////////////////// form tag Start /////////////////////////////////-->
 					<form class="billing-form" name="addForm">
-						<h3 class="mb-4 billing-heading">등록정보를 입력해주세요</h3>
+						<h3 class="mb-4 billing-heading">
+						등록정보를 입력해주세요</h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">판매자</label> <input type="text"
 										class="form-control" name="id" id="id"
-										placeholder="상품명을 입력해주세요" value="테스트">
+										placeholder="" value="${sessionScope.user.id }" readonly>
 								</div>
 							</div>
 
@@ -193,11 +192,19 @@
 										placeholder="상품명을 입력해주세요" value="테스트">
 								</div>
 							</div>
+							<br/>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">판매가격</label> <input type="text"
 										class="form-control" name="price" id="price"
 										placeholder="판매가격을 입력해주세요">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">판매자 거주지</label> <input type="text"
+										class="form-control" name="city" id="city"
+										placeholder="ex)서울시 강남구">
 								</div>
 							</div>
 							
@@ -225,7 +232,7 @@
 								<div class="col-md-13">
 									<div class="form-group">
 										<label for="streetaddress"></label>
-										<textarea class="form-control" rows="10" name="postContent"
+										<textarea class="form-control" rows="11" name="postContent"
 											placeholder="내용을 입력해주세요"></textarea>
 									</div>
 								</div>
