@@ -18,9 +18,10 @@ public interface ReviewDAO {
 
 	// //UPDATE
 	// public void updateReivew(Review Review)throws Exception;
-	// //DELETE
-	// public void delReivew(Review review)throws Exception;
+	// DELETE
+	public void delReivew(int postNo) throws Exception;
+
 	// TOTALCOUNT
-	public int getTotalCount(Search search, String boardCode,String hospitalName) throws Exception;
+	public int getTotalCount(Search search, String boardCode, String hospitalName) throws Exception;
 
 }

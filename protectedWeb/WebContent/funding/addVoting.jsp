@@ -17,26 +17,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
 
-<!-- jQuery UI toolTip 사용 CSS-->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip 사용 JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- ckeditor 사용 CSS-->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
@@ -72,13 +55,8 @@
 	min-height: 300px;
 	max-width: 700px;
 }
-       @font-face{
-          font-family: NanumSquare;
-          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
-       }
-       body{
-          font-family: NanumSquare, sans-serif !important;
-       }
+
+
 </style>
 
 </head>
@@ -175,11 +153,12 @@
 
 			<!-- 미리보기 영역 -->
 			<div class="form-group">
-				<div id="preview" class="col-md-3" align="center"
+				<div id="preview" class="col-md-6" align="center"
 					style='display: inline; min-width: 600px;'></div>
 			</div>
 
 
+			<br/><br/><br/><br/><br/>
 			<div class="form-group">
 				<br />
 				<h3>
@@ -187,8 +166,8 @@
 				</h3>
 				문의받을 연락처를 입력해주세요.
 				<p />
-				<div class="col-sm-3" style="padding: 0; margin: 0;">
-					<select class="form-control" name="phone1" id="phone1">
+				<div class="row">
+					<select name="phone1" id="phone1">
 						<option value="010"
 							${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  }>010</option>
 						<option value="011"
@@ -200,14 +179,13 @@
 						<option value="019"
 							${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  }>019</option>
 					</select>
-				</div>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone2" name="phone2"
+					&emsp;
+
+					<input type="text" id="phone2" name="phone2"
 						value="${ ! empty user.phone2 ? user.phone2 : ''}"
 						placeholder="번호" maxlength="4" style="height: 35px;">
-				</div>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone3" name="phone3"
+					&emsp;
+					<input type="text"id="phone3" name="phone3"
 						value="${ ! empty user.phone3 ? user.phone3 : ''}"
 						placeholder="번호" maxlength="4" style="height: 35px;">
 				</div>
@@ -417,7 +395,7 @@
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   삭제" + "</span>" + "</div>");
+                                             + "   &ensp;삭제" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;

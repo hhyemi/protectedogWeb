@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,22 +14,6 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<!-- jQuery UI toolTip 사용 CSS-->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip 사용 JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- ckeditor 사용 CSS-->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
@@ -59,22 +44,11 @@
 			min-height: 200px;
 			min-width: 700px;
 		}
+		.modal-content{
+			border: 0px ;
+		}
+		
 
-/* 	   button { */
-/* 		  background-color: #f04f23; */
-/* 		  border: none; */
-/* 		  color: white; */
-/* 		  padding: 16px 32px; */
-/* 		  text-align: center; */
-/* 		  font-size: 16px; */
-/* 		  margin: 4px 2px; */
-/* 		  opacity: 0.6; */
-/* 		  transition: 0.3s; */
-/* 		  display: inline-block; */
-/* 		  text-decoration: none; */
-/* 		  cursor: pointer; */
-/* 		} */
-/*          button:hover {opacity: 1} */
 </style>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
@@ -123,19 +97,41 @@
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">후기등록</button>
 				</c:if><br/>
 				후기 평균 평점 :&ensp; 
-					  <span class="evgStarR" >☆</span>
-					  <span class="evgStarR" >☆</span>
-					  <span class="evgStarR">☆</span>
-					  <span class="evgStarR">☆</span>
-					  <span class="evgStarR">☆</span>			
+							<c:if test="${avgGrade eq 1 }">
+									<strong class="text-danger">★☆☆☆☆</strong>
+							</c:if>
+							<c:if test="${avgGrade eq 2}">
+									<strong class="text-danger">★★☆☆☆</strong>
+							</c:if>
+							<c:if test="${avgGrade eq 3 }">
+									<strong class="text-danger">★★★☆☆</strong> 
+							</c:if>
+							<c:if test="${avgGrade eq 4}">
+									<strong class="text-danger">★★★★☆</strong> 
+							</c:if>
+							<c:if test="${avgGrade eq 5}">
+									<strong class="text-danger">★★★★★</strong>
+							</c:if>			
 				
 
 				<div id="ListDiv" >
 				  <c:forEach var="review" items="${list}">
 				  
-				  <div style="background-color: #f7f7f7; padding-left:20px"   >
+				  <div style="background-color: #f7f7f7; padding-left:20px"  onclick="show('${review.postNo}')">
 				  			<hr/>
-							   <font size="5" >${review.postTitle}</font><br/>
+				  			
+				  	<c:if test="${user.id eq review.id || user.id eq 'admin'}">	
+				    <div class="row" style="position:relative;height:35px;">
+					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <font size="5" >${review.postTitle}</font></div>
+				  	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " > 
+				  	    <button  type="button" class="btnUpdate btn btn-default" >수정</button>
+						<button type="button" class="btnDelete btn btn-default">삭제</button>
+						<input type="hidden" value="${review.postNo }" /></div>
+					 </div>
+					 </c:if>
+					 
+							   <br/>
+							 
 							  <b>${review.nickname }</b>				
 							  &emsp;${review.regDate }
 						      &emsp;
@@ -159,22 +155,63 @@
 
 						  <c:forEach var="file" items="${file}">
 						  	<c:if test="${file.postNo == review.postNo }">
-		                    <img src="/resources/file/fileHospital/${file.fileName}" height="100px;" width="100px" >				  		
+		                    <img src="/resources/file/fileHospital/${file.fileName}" height="100px;" width="100px"  >				  		
 						  	</c:if>
 						  </c:forEach>
 						  <br/>&emsp;			          
 			        	</div>
 				  			
 			        </c:forEach>
-          					
+
+		<div class="modal fade" id="myModal" role="dialog">
+		
+		    <div class="modal-dialog">
+
+			    <div class="modal-content" style="max-width:700px; max-height:505px; min-width:700px; min-height:505px;">
+
+	              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
+              >
+                <ol class="carousel-indicators">
+                       
+ 				<c:forEach var="i" begin="0" end="2" step="1">			
+					<c:if test="${i eq 0}">	
+	                  <li
+	                    data-target="#carouselExampleIndicators"
+	                    data-slide-to="${i}"
+	                    class="active"
+	                  >
+	                </c:if>
+					<c:if test="${!(i eq 0)}">	
+	                  <li
+	                    data-target="#carouselExampleIndicators"
+	                    data-slide-to="${i}"
+	                  >
+
+	                </c:if>	                
+                  </c:forEach>               
+                     
+                </ol>		  
+			  <!-- Wrapper for slides -->
+			<div class="carousel-inner">
+	
+
+			  </div>
+			</div>
+			
+			</div>
+			</div></div>
+			  					
 				</div>				
 				<hr/>	
 				<!-- Modal -->
-				<div class="modal fade bs-example-modal-lg" id= "myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal fade bs-example-modal-lg" id= "myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
 				    <div class="modal-content ">
 				      <div class="modal-header">
-				        <h4 class="modal-title" id="myModalLabel" style="padding-left:20px">동물병원 후기</h4>
+				        <h4 class="modal-title" id="myModal2Label" style="padding-left:20px">동물병원 후기</h4>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				      </div>
 				      <div class="modal-body">
@@ -217,27 +254,41 @@
 	   
 	     <br/>
 	   </div></div>
-		 <input type="hidden" id="hospitalName"  name="hospitalName" value="${placeList.placeName}" />	
+		 <input type="hidden" id="placeName"  name="placeName" value="${placeList.placeName}" />	
+		 <input type="hidden" id="placeAddr"  name="placeAddr" value="${placeList.placeAddr}" />	
+		 <input type="hidden" id="placeJIAddr"  name="placeJIAddr" value="${placeList.placeJIAddr}" />	
+		 <input type="hidden" id="placeTel"  name="placeTel" value="${placeList.placeTel}" />	
+		 
 		 <input type="hidden" id="grade" name="grade"  />	
 		 <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
-		 
+		    <input type="hidden" id="currentPage" name="currentPage" value=""/>	  	 
 		</form>
 		<p/>
+	<jsp:include page="../common/pageNavigator.jsp"/>
 	</div>
 
 	<br />
 	<br />
-
+    <!-- PageNavigation Start... -->
+	<!-- PageNavigation End... -->
 	<!--================ start footer Area  =================-->
 	<!-- footer Start /////////////////////////////////////-->
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<!-- footer End /////////////////////////////////////-->
 	<!--================ End footer Area  =================-->
 
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=153d14a106a978cdc7a42f3f236934a6&libraries=services"></script>
-	<script>
-	
+	<script type="text/javascript">
+
+	//=============    검색 / page 두가지 경우 모두  Event  처리 =============
+	function fncGetList(currentPage) {
+	   	
+	   	$("#currentPage").val(currentPage)
+	   	$("form").attr("method" , "POST").attr("action" , "/review/getHospitalReview").submit();
+	 
+	}
 	   //============= 등록버튼 눌렀을때 함수 =============      
 	   function fncAddReview(){
 	      
@@ -309,7 +360,7 @@
 	   		        		postTitle : $("input[name=postTitle]").val(),
 	   		        		postContent : $('textarea').val(),
 	   		        		file : $("#multiFile").val(),
-	   		        		hospitalName : $("#hospitalName").val()
+	   		        		hospitalName : $("#placeName").val()
 	   					}),
 	   					
 	   		             success : function(JSONData) {
@@ -317,9 +368,9 @@
 	   		            	 var review = JSONData.review;
 	   		            	 var file = JSONData.file;
 	   		            	 
-	   		            	 
-	   		            	 
-	   		            	$('#myModal').modal("hide");
+		   		            	$('#myModal2').modal("hide");
+
+									   	 
 	   		            	var display = "<div style=\"background-color: #f7f7f7; padding-left:20px\">";
 	   						 display += "<hr/> <font size=\"5\" >"+review.postTitle+"</font><br/>"+
 											"<b>"+review.nickname+"</b>"+
@@ -342,10 +393,10 @@
 								if(file.postNo == review.postNo){
 									display += 	"<img src=\"/resources/file/fileHospital/"+file.fileName+"\" height=\"100px;\" width=\"100px\" > <br/>&emsp;</div>";  											
 								}   
-								
 							});
 						 
 							$("#ListDiv").prepend(display);
+	   		            	 
 	   		            }  
 	   			  });                
         });
@@ -428,7 +479,7 @@
 		                                             + "<span href=\"#\" value=\""
 		                                             + imgNum
 		                                             + "\" onclick=\"deletePreview(this)\">"
-		                                             + "   삭제" + "</span>");
+		                                             + "   &ensp;삭제" + "</span>");
 
 		                     files[imgNum] = file;
 		                     fileNameArray[imgNum]=file.name;
@@ -543,9 +594,67 @@
 		         $( "#btn-add" ).on("click" , function() {   
 		        	fncAddReview();
 		        });
-
+		         //============= 수정 Event  처리 =============   
+		         $( ".btnUpdate" ).on("click" , function() {   
+		        	 self.location = "/review/delHospitalReview?postNo="+$(this).parent().children("input").val()
+			        	//alert($(this).parent().children("input").val())
+		        });
+		         //============= 삭제 Event  처리 =============   
+		         $( ".btnDelete" ).on("click" , function() {  
+		        	 alert("삭제");
+		        	 alert($(this).parent().children("input").val())
+		        	 	$(self.location).attr("href","/review/delHospitalReview?postNo="+$(this).parent().children("input").val());
+		        	// $(location).("href","/review/delHospitalReview");
+		        	//alert($(this).parent().children("input").val())
+		        });		        
 		            
-		   });   
+		   });
+			function show(str){
+
+		   		 $.ajax({
+					        	url : "/review/json/getReviewFile/"+str,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								error:function(request,status,error){
+		                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		                           },
+								success : function(JSONData , status) {
+									
+									var file = JSONData.file;
+									
+									var display="";
+									
+									$.each(file, function(index, file){   
+
+									if(index==0){
+								      display += "<div class=\"carousel-item active\">"
+									             +"<img class=\"d-block w-100\" src=\"/resources/file/fileHospital/"+file.fileName+"\" style=\"max-width:700px; max-height:500px; min-width:700px; min-height:500px;\"></div>"										
+									}else{
+									      display += "<div class=\"carousel-item\">"
+									             +"<img class=\"d-block w-100\" src=\"/resources/file/fileHospital/"+file.fileName+"\"  style=\"max-width:700px; max-height:500px; min-width:700px; min-height:500px;\"></div>"		
+									}
+										
+									});
+									
+									$(".carousel-inner").html(display)
+								}
+								
+						});
+	
+			    //modal을 띄워준다.  
+
+			    $("#myModal").modal('show');
+
+	  
+
+			}
+
+
+
 	</script>
 </body>
 </html>

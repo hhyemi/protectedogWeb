@@ -7,19 +7,19 @@ import org.protectedog.service.domain.Review;
 
 public interface ReviewService {
 
-	// ¸®ºä±Û µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void addReview(Review review) throws Exception;
 
-	// ¸®ºä±Û Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public Review getReview(int postNo) throws Exception;
 
-	// ¸®ºä±Û ¸®½ºÆ® Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 	public Map<String, Object> listReview(Search search, String boardCode, String hospitalName) throws Exception;
 
-	// //¸®ºä±Û ¾÷µ¥ÀÌÆ®
+	// //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	// public void updateReivew(Review Review)throws Exception;
-	// //¸®ºä±Û »èÁ¦
-	// public void delReivew(Review review)throws Exception;
-	//
-	//
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 public void delReivew(int postNo)throws Exception;
+	
+	
 }
