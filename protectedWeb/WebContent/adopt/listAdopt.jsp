@@ -24,7 +24,6 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  	<link rel="stylesheet" href="/resources/demos/style.css">
 
-<!-- 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">  -->
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 		
@@ -32,90 +31,24 @@
  	  	html { 
  	 		scroll-behavior: smooth; 
  		} 
-/* 		p, strong, select { */
-/* 			transform: rotate(0.1deg); */
-/* 		} */
-		
+
  		h3{ 
-/* 			font-family: 'NanumSquare', sans-serif !important; */
-/* 			font-size: 20px !important; */
  			padding-bottom: 0px; 
  			padding-top: 10px !important;
-/* 			margin-bottom: 0px !important; */
-/* 			opacity: 1  !important; */
-/* 			font-weight: bold; */
  		} 
 		
-/* 		div.row {  */
-/* 			font-family: 'NanumSquare', sans-serif !important; */
-/* 			font-weight: bold; */
-/* 		} */
-		
-/* 		#listAdoptJSON>div{ */
-/* 			padding-left: 0px; */
-/* 			padding-right: 0px; */
-/* 		} */
-
-/* 	    .getadopt { */
-/* 			position: relative; */
-/* 			max-height: 330px;  */
-/* 			min-height: 330px;  */
-/* 			min-width: 255px; */
-/* 			max-width: 255px; */
-/* 		} */
-		
-/* 		.desc-comp-offer { */
-/* 			margin-top: 10px !important; */
-/* 		} */
-		
- 		.getadopt { 
-/*  			margin-left: 5px !important;  */
-/*  			margin-right: 5px !important;  */
- 		} 
-/* 		.desc-comp-offer-cont:hover { */
-/* 			margin-bottom: 0px !important; */
-/* 		} */
- 		
  		.listImg { 
  			max-height: 330px;  
  			min-height: 330px;  
  			min-width: wrap; 
  			max-width: wrap; 
+ 			background-size: 95%;
 	/* 		    transition: all 0.3s; */
  			display: block; 
 /*  			height: auto;  */
 	/* 		    transform: scale(1); */
  		} 
-		
-/* 		.overlay { */
-/* 			position: absolute; */
-/* 			bottom: 0; */
-/* 			left: 0; */
-/* 			right: 0; */
-/* 			background-color: white; */
-/* 			overflow: hidden; */
-/* 			opacity: 1; */
-/* 			min-width: 255px; */
-/* 			max-width: 255px; */
-/* 			height: 50px; */
-/* 			transition: 1s ease; */
-/* 		} */
-	
-/* 		.getadopt:hover .overlay { */
-/* 			height: 0%; */
-/* 		} */
-	
-/* 		.textList { */
-/* 			color: #3E6B79; */
-/* 			font-size: 20px; */
-/* 			position: absolute; */
-/* 			top: 50%; */
-/* 			left: 50%; */
-/* 			-webkit-transform: translate(-50%, -50%); */
-/* 			-ms-transform: translate(-50%, -50%); */
-/* 			transform: translate(-50%, -50%); */
-/* 		} */
-		
+
 		form {
 			text-align: right;
 			padding-left: 199px;
@@ -136,16 +69,7 @@
 			height: 33px;
 		}
 		
-		.col-md-4 {
-/* 			margin-right: 5px !important; */
-/* 			margin-left: 5px !important; */
-/* 			padding-right: 5px !important; */
-/* 			padding-left: 5px !important; */
-		}
-		
-/* 		select[name=areaCondition] { */
-/* 			margin-left: 200px; */
-/* 		} */
+
 
     </style>
 
@@ -163,7 +87,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-             <p ><span class="mr-2"><a href="">Adopt</a></span> <span>List</span></p>
+             <p ><span class="mr-2">List</span> <span>Adopt</span></p>
             <font size="7">분양리스트</font>
           </div>
         </div>
@@ -274,9 +198,9 @@
 					  <img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url('../resources/file/fileAdopt/${adopt.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 					</c:if>
 				</span>
-			    <span id="textList"><h3 align="center" style="width: 255px;padding-right: 0px;" >${adopt.postTitle}</h3>
+			    <span id="textList"><h3 align="center" style="padding-right: 0px;"><b>${adopt.postTitle}</b></h3>
 				    <c:if test="${param.boardCode eq 'AD' }">
-				   	 	<p align="right">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
+				   	 	<p align="right" style="padding-bottom: 10px;">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
 				   	</c:if>
 				    <c:if test="${param.boardCode eq 'MS' }">
 				   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
@@ -390,10 +314,10 @@
 										+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
 											+'<span id="image-box">'+sCode+'</span>'
 										    +'<span id="textList">'
-										    	+'<h3 align="center" style="width: 255px;padding-right: 0px;" >'
+										    	+'<h3 align="center" style="padding-right: 0px;" ><b>'
 										   			+data.list[i].postTitle
-										   		+'</h3>'
-										   		+'<p align="right">'
+										   		+'</b></h3>'
+										   		+'<p align="right" style="padding-bottom: 10px;">'
 										   			+bCode
 										   		+'</p>'
 										   	+'</span>'

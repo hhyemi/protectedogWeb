@@ -17,45 +17,13 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
-    <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
-    <link rel="stylesheet" href="/resources/get/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/resources/get/css/themify-icons.css" />
-    <link rel="stylesheet" href="/resources/get/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="/resources/get/css/simpleLightbox.css" />
-    <link rel="stylesheet" href="/resources/get/css/nice-select.css" />
-    <link rel="stylesheet" href="/resources/get/css/animate.css" />
-    <link rel="stylesheet" href="/resources/get/css/jquery-ui.css" />
-    <!-- main css -->
-    <link rel="stylesheet" href="/resources/get/css/style.css" />
-    <link rel="stylesheet" href="/resources/get/css/responsive.css" />
-    
-    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
-    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >    
     <style>
     	.row {
 			transform: rotate(0.03deg);
 		}
-
-		#title {
-			font-family: 'NanumSquare', sans-serif !important;
-			font-size: 22px !important;
-			font-weight: bold;
-		}
-		
-		.product_image_area { 
-			font-family: 'NanumSquare', sans-serif !important;
-		}
-		
- 		button{ 
- 			font-family: 'NanumSquare', sans-serif !important; 
- 		} 
     
 	    #carouselExampleIndicators{
         	max-height: 400px;
@@ -102,16 +70,16 @@
         #modiButton, #delButton, #listButton {
 		    padding: 0px 10px;
  		    line-height: 20px; 
- 		    border-radius: 3px; 
+/*  		    border-radius: 3px;  */
 		}
 		
 		button {
-		    display: inline-block;
+/* 		    display: inline-block; */
 		    background: #94BFCA;
 		    padding: 0px 10px;
 		    letter-spacing: 0.25px;
 		    color: #fff;
-		    font-size: 12px;
+		    font-size: 30px;
 		    font-weight: 500;
 		    line-height: 44px;
 		    outline: none !important;
@@ -123,6 +91,19 @@
 		    transition: all 300ms linear 0s;
 		    border-radius: 5px;
 		}
+		
+		div {
+			font-size: 20px;
+		}
+		
+		.col-md-2 {
+			padding-right: 0px !important;
+		}
+		
+ 		.col-md-12{ 
+/*           	position: absolute !important;   */
+/*          	bottom: 0px !important;  */
+         } 
         
 /*         .lnr-heart:before { */
 /* 			content: "\e813"; */
@@ -138,6 +119,16 @@
 
     <jsp:include page="/layout/toolbar.jsp"></jsp:include>
     
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+             <p ><span class="mr-2">Get</span> <span>Adopt</span></p>
+            <font size="7">분양상세조회</font>
+          </div>
+        </div>
+      </div>
+    </div>
 <!--         <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');"> -->
 <!--       <div class="container"> -->
 <!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
@@ -152,7 +143,7 @@
     <!--================Single Product Area =================-->
     <div class="product_image_area">
       <div class="container">
-        <div class="row s_product_inner">
+        <div class="row s_product_inner col-md-12">
           <div class="col-lg-6">
 <!--             <div class="s_product_img"> -->
               <div
@@ -200,7 +191,7 @@
               </div>
 <!--             </div> -->
           </div>
-          <div class="col-lg-5 offset-lg-1">
+          <div class="col-lg-6 offset-lg-1">
             <div class="s_product_text">
             
 <%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
@@ -212,137 +203,178 @@
               	<input type="hidden" name="userId" value="${user.id}">
               	<input type="hidden" name="levels" value="${user.levels}">
               	
-                <li>
+<!--                 <li> -->
                    	<div class="row" style="position:relative;height:35px;">
 			        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><font id="title" size="5px">${adopt.postTitle}</font>&nbsp;&nbsp;${adopt.id}</div>
 			        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"></font>${adopt.regDate}</div>
 			        </div>
-                </li>
+<!--                 </li> -->
                 
                 <hr/>
               	
-                <li>
+<!--                 <li> -->
                    	<div class="row">
 				  		<div class="col-md-2 " ><strong>견종</strong></div>
-						<div class="col-md-3 ">${adopt.dogBreed}</div>
+						<div class="col-md-4 ">${adopt.dogBreed}</div>
 						
-						<div class="col-md-2 "><strong>크기</strong></div>
-						<div class="col-md-5 ">${adopt.dogSize}</div>
+						<div class="col-md-2 " style="padding-left: 0px;"><strong>크기</strong></div>
+						<div class="col-md-4 ">${adopt.dogSize}</div>
 					</div>
-                </li>
+<!--                 </li> -->
                 
-                <li>
+<!--                 <li> -->
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>체중</strong></div>
-						<div class="col-md-3 ">${adopt.dogWeight}kg</div>
+						<div class="col-md-4 ">${adopt.dogWeight}kg</div>
 			
-				  		<div class="col-md-2 "><strong>성별</strong></div>
-						<div class="col-md-5 ">${adopt.dogGender}</div>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>성별</strong></div>
+						<div class="col-md-4 ">${adopt.dogGender}</div>
 					</div>
-                </li>
+<!--                 </li> -->
                 
-                <li>
+<!--                 <li> -->
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>
 					  		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
 <%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if> --%>
 				  		</strong></div>
-						<div class="col-md-3 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</div>
+						<div class="col-md-4 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</div>
 			
-				  		<div class="col-md-2 " style="padding-right: 0px;"><strong>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>
 				  			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
 <%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if> --%>
 				  		</strong></div>
-						<div class="col-md-5">${adopt.dogDate}</div>
+						<div class="col-md-4">${adopt.dogDate}</div>
 					</div>
-                </li>
-                
-                <li>
+
                 	<div class="row">
 				  		<div class="col-md-2  "><strong>상태</strong></div>
 						<div class="col-md-10 ">${adopt.dogStatus}</div>
 					</div>
-                </li>
-                
-                <li>
+
                 	<div class="row">
 				  		<div class="col-md-2  "><strong>성격</strong></div>
 						<div class="col-md-10 ">${adopt.dogPersonality}</div>
 					</div>
-                </li>
-                
-                <li>
+					
                 	<div class="row">
 				  		<div class="col-md-2  "><strong>특징</strong></div>
 						<div class="col-md-10 ">${adopt.dogChar}</div>
 					</div>
-                </li>
          
-               	<div class="row">
-			  		<div class="col-md-2  "><strong>글내용</strong></div>
-					<div class="col-md-10 " >${adopt.postContent}</div>
-				</div>
+	               	<div class="row">
+				  		<div class="col-md-2  "><strong>글내용</strong></div>
+						<div class="col-md-10 " style="padding-right: 0px;" >${adopt.postContent}</div>
+					</div>
+					
+	               	<div class="row">
+				  		<div class="col-md-12 card-area ">
+				  			<!-- 분양 메뉴일때  -->
+			              	<c:if test="${adopt.boardCode eq 'AD' }">
+				              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
+				              			<button id="adoptApply" class="main_btn" >입양신청</button>
+				              		</c:if>
+				              		
+				              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
+				              			<button class="main_btn"  id="confirmButton">신청서확인</button>
+				              			<button class="main_btn"  id="adoptCompleteButton">분양완료</button>
+				              		</c:if>
+				              		
+				              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
+				              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+				              		</c:if>
+			              	</c:if>
+			              	
+			              	<!-- 실종 메뉴일때  -->
+			              	<c:if test="${adopt.boardCode eq 'MS' }">
+			              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
+			              			<button class="main_btn"  id="missingCompleteButton">찾기완료</button>
+			              		</c:if>
+			              	</c:if>
+			              	
+			              	<!-- 공통  -->
+			              	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }">
+			               		<button class="main_btn" href="#" >문의하기</button>
+			               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+			               	</c:if>
+			               	
+			              	<c:if test="${adopt.statusCode eq '3'}">
+			               		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>
+			               	</c:if>
+				  		
+				  		</div>
+					</div>
 
 				
+              
+              
+              
+<!--               <div class="product_count"> -->
+<!--                 <button -->
+<!--                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" -->
+<!--                   class="increase items-count" -->
+<!--                   type="button" -->
+<!--                 > -->
+<!--                 </button> -->
+<!--                 <button -->
+<!--                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" -->
+<!--                   class="reduced items-count" -->
+<!--                   type="button" -->
+<!--                 > -->
+<!--                 </button> -->
+<!--               </div> -->
+              
+<!--              <div class="row"> -->
+<!--               <div class="col-md-12 card_area" >ddddd -->
+
+<!-- 				분양 메뉴일때  -->
+<%--               	<c:if test="${adopt.boardCode eq 'AD' }"> --%>
+<%-- 	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }"> --%>
+<!-- 	              			<button id="adoptApply" class="main_btn" href="#" style="width: 189px">입양신청</button> -->
+<%-- 	              		</c:if> --%>
+	              		
+<%-- 	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }"> --%>
+<!-- 	              			<button class="main_btn" style="width: 189px" id="confirmButton">신청서확인</button> -->
+<!-- 	              			<button class="main_btn" style="width: 189px" id="adoptCompleteButton">분양완료</button> -->
+<%-- 	              		</c:if> --%>
+	              		
+<%-- 	              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }"> --%>
+<!-- 	              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button> -->
+<%-- 	              		</c:if> --%>
+<%--               	</c:if> --%>
+              	
+<!--               	실종 메뉴일때  -->
+<%--               	<c:if test="${adopt.boardCode eq 'MS' }"> --%>
+<%--               		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }"> --%>
+<!--               			<button class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</button> -->
+<%--               		</c:if> --%>
+<%--               	</c:if> --%>
+              	
+<!--               	공통  -->
+<%--               	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }"> --%>
+<!--                		<button class="main_btn" href="#" style="width: 189px">문의하기</button> -->
+<!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
+<%--                	</c:if> --%>
+               	
+<%--               	<c:if test="${adopt.statusCode eq '3'}"> --%>
+<!--                		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button> -->
+<%--                	</c:if> --%>
+              	
+<!--               </div> -->
+<!--  			</div> -->
+ 			
+ 			
+ 			
+ 			
               </ul>
               
-              
-              <div class="product_count">
-                <button
-                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                  class="increase items-count"
-                  type="button"
-                >
-                </button>
-                <button
-                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                  class="reduced items-count"
-                  type="button"
-                >
-                </button>
-              </div>
-              
-              
-              <div class="card_area" >
-
-				<!-- 분양 메뉴일때  -->
-              	<c:if test="${adopt.boardCode eq 'AD' }">
-	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
-	              			<button id="adoptApply" class="main_btn" href="#" style="width: 189px">입양신청</button>
-	              		</c:if>
-	              		
-	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
-	              			<button class="main_btn" style="width: 189px" id="confirmButton">신청서확인</button>
-	              			<button class="main_btn" style="width: 189px" id="adoptCompleteButton">분양완료</button>
-	              		</c:if>
-	              		
-	              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-	              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
-	              		</c:if>
-              	</c:if>
-              	
-              	<!-- 실종 메뉴일때  -->
-              	<c:if test="${adopt.boardCode eq 'MS' }">
-              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-              			<button class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">찾기완료</button>
-              		</c:if>
-              	</c:if>
-              	
-              	<!-- 공통  -->
-              	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }">
-               		<button class="main_btn" href="#" style="width: 189px">문의하기</button>
-               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-               	</c:if>
-               	
-              	<c:if test="${adopt.statusCode eq '3'}">
-               		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>
-               	</c:if>
-              	
-              </div>
- 
-              
-              
             </div>
+            
+            
+            
+            
+            
+            
           </div>
         </div>
         
@@ -435,23 +467,6 @@
     <!--================ End footer Area  =================-->
     
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/resources/get/js/jquery-3.2.1.min.js"></script>
-    <script src="/resources/get/js/popper.js"></script>
-    <script src="/resources/get/js/bootstrap.min.js"></script>
-    <script src="/resources/get/js/stellar.js"></script>
-    <script src="/resources/get/js/simpleLightbox.min.js"></script>
-    <script src="/resources/get/js/jquery.nice-select.min.js"></script>
-    <script src="/resources/get/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/resources/get/js/isotope-min.js"></script>
-    <script src="/resources/get/js/owl.carousel.min.js"></script>
-    <script src="/resources/get/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/resources/get/js/mail-script.js"></script>
-    <script src="/resources/get/js/jquery-ui.js"></script>
-    <script src="/resources/get/js/jquery.waypoints.min.js"></script>
-    <script src="/resources/get/js/jquery.counterup.js"></script>
-    <script src="/resources/get/js/theme.js"></script>
     
     <!-- KAKAO -->
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
