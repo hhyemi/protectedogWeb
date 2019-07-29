@@ -1,5 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
     <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,11 +8,34 @@
 <html>
 
 <head>
-    <meta charset="EUC-KR">     
+    <meta charset="UTF-8">   
+      
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-<title>º¸È£ÇÒ°³ ¡¤ ÈÄ¿ø°Ô½Ã</title>
+<title>ë³´í˜¸í• ê°œ Â· í›„ì›ê²Œì‹œ</title>
+
+	<script src="https://kit.fontawesome.com/e26616618e.js"></script>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+
+
+		#searchKeyword{
+			height: 40px;
+			width: 150px;
+		}
+		#searchSubmmit{
+			width : 60px;
+			height : 40px;
+			
+			border-radius : 0px 15px 15px 0px;
+			border : 1px solid #D3D3D3;
+		}
+		
+		#searchCondition{
+			height : 40px;
+			border-radius : 15px 0px 0px 15px;
+		}
+
+	
   	   #btn-add{
 		background: #fff;
         border:2px solid #29304d;
@@ -30,13 +53,7 @@
 	      text-overflow:ellipsis;
 	      white-space:nowrap;
 	  } 			     
-       @font-face{
-          font-family: NanumSquare;
-          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
-       }
-       body{
-          font-family: NanumSquare, sans-serif !important;
-       }
+
     </style>
     
     
@@ -46,45 +63,70 @@
   </head>
   <body class="goto-here">
    	
-    <div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">support</a></span> <span>post</span></p>
-            <h1 class="mb-0 bread">ÈÄ¿ø°Ô½Ã</h1>
+          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>post</span></p>
+            <font size="7">í›„ì›ê²Œì‹œ</font>
           </div>
         </div>
       </div>
     </div>
 	<br/><p/>
+	
     <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 30px;">      
     
 		 <form class="form-inline" name="detailForm">
 		    	<div class="container" >
 		    	
-				<!--°Ë»ö ºÎÅÍ -->		    	
-		    		<div class="row">  
-				    	<div class="right-box">
+				<!--ê²€ìƒ‰ ë¶€í„° -->		    	
+<!-- 		    		<div class="row">   -->
+<!-- 				    	<div class="right-box"> -->
 
-						    <select class="form-control" id="voteCondition" name="voteCondition" >
-								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>ÀüÃ¼º¸±â</option>
-								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >ÈÄ¿øÁß</option>
-								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >ÈÄ¿ø¿Ï·á</option>
-							</select>   
-						    &emsp;
-						    <select class="form-control" name="searchCondition" id="searchCondition" >
-								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >Á¦¸ñ</option>
-								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>´Ğ³×ÀÓ</option>
+<!-- 						    <select class="form-control" id="voteCondition" name="voteCondition" > -->
+<%-- 								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>ì „ì²´ë³´ê¸°</option> --%>
+<%-- 								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >í›„ì›ì¤‘</option> --%>
+<%-- 								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >í›„ì›ì™„ë£Œ</option> --%>
+<!-- 							</select>    -->
+<!-- 						    &emsp; -->
+<!-- 						    <select class="form-control" name="searchCondition" id="searchCondition" > -->
+<%-- 								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >ì œëª©</option> --%>
+<%-- 								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ë‹‰ë„¤ì„</option> --%>
+<!-- 							</select> -->
+<!-- 							&emsp; -->
+<!-- 						    <label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label> -->
+<%-- 						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="ê²€ìƒ‰ì–´" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  > --%>
+<!-- 						    <button type="button" class="btn btn-default">ê²€ìƒ‰</button> -->
+
+<!-- 						</div> -->
+<!-- 			    	</div>     -->
+				
+						<div class="form-group">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ì œëª©</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ì‘ì„±ì</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ê¸€ë‚´ìš©</option>
 							</select>
-							&emsp;
-						    <label class="sr-only" for="searchKeyword">°Ë»ö¾î</label>
-						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="°Ë»ö¾î" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-						    <button type="button" class="btn btn-default">°Ë»ö</button>
 
+							<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label> <input
+								type="text" class="form-control searchKeyword" id="searchKeyword"
+								name="searchKeyword" placeholder="ê²€ìƒ‰ì–´"
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
+								<span class="fas fa-search"></span>
+							</button>
 						</div>
-			    	</div>    
+
+						<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
     		    	<p/>
-				<!-- ½æ³×ÀÏ ºÎÅÍ -->
+				<!-- ì¸ë„¤ì¼ ë¶€í„° -->
 		    		<div class="row">
 		    			<div class="col-md-8 col-lg-12 order-md-last">
 		    				<div class="row">
@@ -93,17 +135,17 @@
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 				    				<div class="desc-comp-offer-cont"  style="padding-top:10px">
 				    				
-										 <!-- ÈÄ¿øÁ¾·á -->
+										 <!-- í›„ì›ì¢…ë£Œ -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">		
-										  &emsp;Á¶È¸ ${funding.fundViewCount }										 		    											 				    		
+										  &emsp;ì¡°íšŒ ${funding.fundViewCount }										 		    											 				    		
 					    					<a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 					    					<input type="hidden" value="${funding.postNo }" />		    					
 					    					</a>
 										 </c:if>
 										 
-										 <!-- ÈÄ¿øÁß -->
+										 <!-- í›„ì›ì¤‘ -->
 										 <c:if test ="${funding.statusCode eq 3 }">		
-										  &emsp;Á¶È¸ ${funding.fundViewCount }													 											 				    		
+										  &emsp;ì¡°íšŒ ${funding.fundViewCount }													 											 				    		
 				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:330px; max-width:330px;" >
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
@@ -114,25 +156,25 @@
 					    					<font size="5"><b>${funding.postTitle}</b></font>
 					    					</div>
 										<div class="row" style="position:relative;height:35px;">
-										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <h3>${funding.nickname}</h3></div>
-										         <div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><h3><b><strong style="color:#4E8092">${funding.fundRate}%</strong></b></h3></div>
+										         <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <font size="3">${funding.nickname}</font></div>
+										         <div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="4"><b><strong style="color:#f04f23">${funding.fundRate}%</strong></b></font></div>
 										 </div>
-										 <!-- ÈÄ¿øÁ¾·á -->
+										 <!-- í›„ì›ì¢…ë£Œ -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">
 									   <div class="progress">												 
-										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%; background-color:#C9BFB0!important;"></div>
+										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%; background-color:#e8cec8!important;"></div>
 										   </div>											 
 										 <div align="right">	    						
-										<h4 class="media-heading" style="color:#8c8479">Á¾·á</h4> 	
+										<font size="5"  style="color:#d43333"><b>ì¢…ë£Œ</b></font> 	
 										</div>
 										 </c:if>
-										 <!-- ÈÄ¿øÁß -->
+										 <!-- í›„ì›ì¤‘ -->
 										 <c:if test ="${funding.statusCode eq 3 }">										 
 										   <div class="progress">												 
-										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%; background-color:#4E8092!important;" ></div>
+										   <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width:  ${funding.fundRate}%; background-color:#e66447!important;" ></div>
 										   </div>					
 										 <div align="right">	    						
-										<h4 class="media-heading">D- ${funding.fundRemainDate }</h4> 	
+										<font size="5" >D- ${funding.fundRemainDate }</font> 	
 										</div>
 										</c:if>
 										
@@ -144,7 +186,7 @@
 				    	</div>
 		    		</div>	
 		    	</div>
-		    <!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->		    	
+		    <!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->		    	
 		    <input type="hidden" id="currentPage" name="currentPage" value=""/>	  
 		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
@@ -168,7 +210,7 @@
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-	//=============    °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ  Event  Ã³¸® =============
+	//=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
@@ -177,21 +219,21 @@
 	}
     $(function(){	
     	
-		//============= "°Ë»ö"  Event  Ã³¸® =============	
+		//============= "ê²€ìƒ‰"  Event  ì²˜ë¦¬ =============	
 		 $( "button.btn.btn-default" ).on("click" , function() {
 			    fncGetList(1);
 		});
-		//============= "ÅõÇ¥Áß/ÅõÇ¥¿Ï·á"  Event   Ã³¸® =============
+		//============= "íˆ¬í‘œì¤‘/íˆ¬í‘œì™„ë£Œ"  Event   ì²˜ë¦¬ =============
 		$( "#voteCondition" ).change(function(){
 				fncGetList('1');
 		});    
-		//============= ½æ³×ÀÏ »çÁø Å¬¸¯ Event  Ã³¸® =============	
+		//============= ì¸ë„¤ì¼ ì‚¬ì§„ í´ë¦­ Event  ì²˜ë¦¬ =============	
 	 	$( ".img-prod" ).on("click" , function() {
 			$(self.location).attr("href","/funding/getFunding?postNo="+$(this).children("input").val());
 		});   
 	
         
-		//============= autocomplete Event  Ã³¸® =============			
+		//============= autocomplete Event  ì²˜ë¦¬ =============			
 	      $("#searchKeyword").on("keyup", function(){
 	          
 	          var search = {searchKeyword : $("#searchKeyword").val(), searchCondition : $("#searchCondition").val(), voteCondition : 1 };

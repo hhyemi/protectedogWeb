@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
@@ -28,11 +28,11 @@
     <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
-    <!-- jQuery UI toolTip »ç¿ë CSS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip »ç¿ë JS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© JS-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
-     <!-- ckeditor »ç¿ë CSS-->   
+     <!-- ckeditor ì‚¬ìš© CSS-->   
     <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>    	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -85,21 +85,21 @@
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
       
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container ">
 		<div class="form-group">
 		<div class="page-header text-center">	
-		<font size=6>ÈÄ¿ø ½ÅÃ» ¼öÁ¤</font> ÈÄ¿ø½ÅÃ»Àº ÅõÇ¥ <strong style="color:#225cba">1°³</strong>ÀÌ»ó ¹ŞÀ» ½Ã <strong  style="color:#225cba">¼öÁ¤ÀÌ ºÒ°¡</strong>ÇÕ´Ï´Ù.
+		<font size=6>í›„ì› ì‹ ì²­ ìˆ˜ì •</font> í›„ì›ì‹ ì²­ì€ íˆ¬í‘œ <strong style="color:#225cba">1ê°œ</strong>ì´ìƒ ë°›ì„ ì‹œ <strong  style="color:#225cba">ìˆ˜ì •ì´ ë¶ˆê°€</strong>í•©ë‹ˆë‹¤.
 	    </div>		
 		</div>	
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 		  <div class="form-group">
-			<h4 >ÈÄ¿ø¸ñÇ¥±İ¾×</h4>
-			ÅõÇ¥°³¼ö´Â ( <strong style="color:#225cba">¸ñÇ¥±İ¾× X 0.001</strong> )Ç¥·Î Àû¿ëµË´Ï´Ù. ( 10¸¸¿ø ~ 300¸¸¿ø±îÁö ÀÔ·Â°¡´ÉÇÕ´Ï´Ù. )<p/>
+			<h4 >í›„ì›ëª©í‘œê¸ˆì•¡</h4>
+			íˆ¬í‘œê°œìˆ˜ëŠ” ( <strong style="color:#225cba">ëª©í‘œê¸ˆì•¡ X 0.001</strong> )í‘œë¡œ ì ìš©ë©ë‹ˆë‹¤. ( 10ë§Œì› ~ 300ë§Œì›ê¹Œì§€ ì…ë ¥ê°€ëŠ¥í•©ë‹ˆë‹¤. )<p/>
 		    <div class="row form-form"  >
-		      <input type="text" class="form-control" value="${funding.fundTargetPay }" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; ¿ø
+		      <input type="text" class="form-control" value="${funding.fundTargetPay }" id="fundTargetPay" name="fundTargetPay" placeholder="0" maxlength="7"  style="width:600px; height:35px;" >&ensp; ì›
 		    </div>
 		  </div>
 			<br/>
@@ -107,17 +107,17 @@
 			<fmt:parseNumber var ="test" value="${funding.fundTargetPay*0.001}" integerOnly="true"/>
          
 		  <div class="form-group" id="voteNum">
-		    <font ><b>ÅõÇ¥¼ö <strong style="color:#225cba">${test}</strong>Ç¥</b></font>
+		    <font ><b>íˆ¬í‘œìˆ˜ <strong style="color:#225cba">${test}</strong>í‘œ</b></font>
 		  </div>
 		  <div class="form-group" >
-			ÈÄ¿ø°Ô½Ã±Û·Î ÀÌµ¿ÇÏ·Á¸é ¹Ş¾Æ¾ß ÇÒ ÅõÇ¥ ¼öÀÔ´Ï´Ù.	
+			í›„ì›ê²Œì‹œê¸€ë¡œ ì´ë™í•˜ë ¤ë©´ ë°›ì•„ì•¼ í•  íˆ¬í‘œ ìˆ˜ì…ë‹ˆë‹¤.	
 		  </div>
 		  <br/>
                 
 		  <div class="form-group">
-			<h4 >ÈÄ¿ø¸ñÇ¥±â°£</h4>
-			ÈÄ¿ø ¹ŞÀ»±â°£À» ÀÔ·ÂÇÏ¼¼¿ä. ( 7ÀÏ ~ 30ÀÏ±îÁö ¼±ÅÃ°¡´ÉÇÕ´Ï´Ù. )<br/>
-			ÅõÇ¥°¡ ¸¶°¨µÇ¾úÀ» ¶§ ½ÃÀÛ ³¯ºÎÅÍÀÇ ±â°£ÀÔ´Ï´Ù. ÅõÇ¥ ±â°£Àº <strong style="color:#225cba">30</strong>ÀÏ·Î °íÁ¤µË´Ï´Ù.<p/>		
+			<h4 >í›„ì›ëª©í‘œê¸°ê°„</h4>
+			í›„ì› ë°›ì„ê¸°ê°„ì„ ì…ë ¥í•˜ì„¸ìš”. ( 7ì¼ ~ 30ì¼ê¹Œì§€ ì„ íƒê°€ëŠ¥í•©ë‹ˆë‹¤. )<br/>
+			íˆ¬í‘œê°€ ë§ˆê°ë˜ì—ˆì„ ë•Œ ì‹œì‘ ë‚ ë¶€í„°ì˜ ê¸°ê°„ì…ë‹ˆë‹¤. íˆ¬í‘œ ê¸°ê°„ì€ <strong style="color:#225cba">30</strong>ì¼ë¡œ ê³ ì •ë©ë‹ˆë‹¤.<p/>		
 		    <div >
 		      <select class="form-control" name="fundTargetDay" id="fundTargetDay"  style="width:700px; height:35px;">
 		       	<c:forEach var ="i" begin="7" end ="30" step="1">
@@ -133,36 +133,36 @@
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h4 class=>±ÛÁ¦¸ñ</h4><p/>		
+			<h4 class=>ê¸€ì œëª©</h4><p/>		
 		    <div class=>
-		      <input type="text" class="form-control" value="${funding.postTitle}" id="postTitle" name="postTitle" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä." style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" value="${funding.postTitle}" id="postTitle" name="postTitle" placeholder="ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”." style="width:700px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h4 class=>±Û³»¿ë</h4><p/>		
+			<h4 class=>ê¸€ë‚´ìš©</h4><p/>		
 			    <div >
-			    <textarea id="editor" name="postContent" style="text-align: left;" placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.">
+			    <textarea id="editor" name="postContent" style="text-align: left;" placeholder="ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.">
 				${funding.postContent}				
 				</textarea>			    
 			    </div>
 			  </div>
 			<br/>
-            <!-- Ã·ºÎ ¹öÆ° -->
+            <!-- ì²¨ë¶€ ë²„íŠ¼ -->
             <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">»çÁøµî·Ï</label></span>&nbsp;&nbsp;¸Ç¾Õ ÀÌ¹ÌÁö´Â ´ëÇ¥ÀÌ¹ÌÁöÀÔ´Ï´Ù. (ÃÖ´ë 8Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.)
-                <input id="uploadInputBox" style="display: none" type="file" value="µî·Ï" name="filedata"  />
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">ì‚¬ì§„ë“±ë¡</label></span>&nbsp;&nbsp;ë§¨ì• ì´ë¯¸ì§€ëŠ” ëŒ€í‘œì´ë¯¸ì§€ì…ë‹ˆë‹¤. (ìµœëŒ€ 8ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.)
+                <input id="uploadInputBox" style="display: none" type="file" value="ë“±ë¡" name="filedata"  />
             </div>
            <br/>
             
-            <!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+            <!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
             <div class="form-group">
             <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
 
 				<c:forEach var="name" items="${file}" varStatus="status">            
 				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
                      <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
-                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)">»èÁ¦</span></div>     
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)">ì‚­ì œ</span></div>     
                 </c:forEach>           
             
 
@@ -171,8 +171,8 @@
             </div>
 		   <div class="form-group">
 		   <br/>
-			<h4>¿¬¶ôÃ³</h4>
-			¹®ÀÇ¹ŞÀ» ¿¬¶ôÃ³¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.<p/>		
+			<h4>ì—°ë½ì²˜</h4>
+			ë¬¸ì˜ë°›ì„ ì—°ë½ì²˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.<p/>		
 			 <div class="col-sm-3" style="padding:0; margin:0;">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" ${ ! empty funding.phone1 && funding.phone1 == "010" ? "selected" : ""  } >010</option>
@@ -183,10 +183,10 @@
 				</select>
 		    </div>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty funding.phone2 ? funding.phone2 : ''}"  placeholder="º¯°æ¹øÈ£">
+		      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty funding.phone2 ? funding.phone2 : ''}"  placeholder="ë³€ê²½ë²ˆí˜¸">
 		    </div>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty funding.phone3 ? funding.phone3 : ''}"   placeholder="º¯°æ¹øÈ£">
+		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty funding.phone3 ? funding.phone3 : ''}"   placeholder="ë³€ê²½ë²ˆí˜¸">
 		    </div>
 		    <input type="hidden" name="phone"  />
 		    <input type="hidden" name="postNo" value="${funding.postNo }" />		    	
@@ -196,15 +196,15 @@
         
 		  <br/><br/>
 		  <div class="form-group text-center">
-	  			<button type="button" id="btn-update">¼öÁ¤</button>
-	  			<button type="button" id="btn-cancel">Ãë¼Ò</button>
+	  			<button type="button" id="btn-update">ìˆ˜ì •</button>
+	  			<button type="button" id="btn-cancel">ì·¨ì†Œ</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 
     </div>
-   <!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+   <!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -214,10 +214,10 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
 
-   //============= ¼öÁ¤¹öÆ° ´­·¶À»¶§ ÇÔ¼ö =============      
+   //============= ìˆ˜ì •ë²„íŠ¼ ëˆŒë €ì„ë•Œ í•¨ìˆ˜ =============      
    function fncUpdateVoting(){
       
-      //Form À¯È¿¼º °ËÁõ
+      //Form ìœ íš¨ì„± ê²€ì¦
 
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
@@ -226,32 +226,32 @@
       var phone3 = $('input[name="phone3"]').val();     
       
       if(fundTargetPay == null || fundTargetPay.length<1){
-         alert("ÈÄ¿ø¸ñÇ¥±İ¾×Àº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+         alert("í›„ì›ëª©í‘œê¸ˆì•¡ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="fundTargetPay"]').focus();
          return;
       }
       if(fundTargetPay < 100000 || fundTargetPay > 3000000){
-         alert("ÈÄ¿ø¸ñÇ¥±İ¾×Àº 10¸¸¿øÀÌ»ó 300¸¸¿øÀÌÇÏ·Î ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.")
+         alert("í›„ì›ëª©í‘œê¸ˆì•¡ì€ 10ë§Œì›ì´ìƒ 300ë§Œì›ì´í•˜ë¡œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.")
          $('input[name="fundTargetPay"]').focus();
          return;
       }
       if(postTitle == null || postTitle.length<1){
-         alert("±ÛÁ¦¸ñÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+         alert("ê¸€ì œëª©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="postTitle"]').focus();
          return;
       }
 /*       if(postContent == null || postContent.length<1){
-         alert("±Û³»¿ëÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+         alert("ê¸€ë‚´ìš©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="postContent"]').focus();
          return;
       } */
       if(phone2 == null || phone2.length<1){
-         alert("ÈŞ´ëÆù¹øÈ£´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+         alert("íœ´ëŒ€í°ë²ˆí˜¸ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="phone2"]').focus();
          return;
       }
       if(phone3 == null || phone3.length<1){
-         alert("ÈŞ´ëÆù¹øÈ£´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+         alert("íœ´ëŒ€í°ë²ˆí˜¸ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="phone3"]').focus();
          return;
       }
@@ -264,7 +264,7 @@
       }
       $("input:hidden[name='phone']").val( value );
       
-      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
             var formData = new FormData(form);
@@ -285,13 +285,13 @@
                 data : formData,
                 success : function(result) {
                     if (result === -1) {
-                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-                        // ÀÌÈÄ µ¿ÀÛ ...
+                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                        // ì´í›„ ë™ì‘ ...
                     } else if (result === -2) {
-                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-                        // ÀÌÈÄ µ¿ÀÛ ...
+                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+                        // ì´í›„ ë™ì‘ ...
                     } else {
-                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
                     }
                 }
             });
@@ -325,31 +325,31 @@
 	    } );
   
      
-   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ insertÇÒ value" =============   
+   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ insertí•  value" =============   
    function fnAddFile(fileNameArray) {
          $("#multiFile").val(fileNameArray)    
    }   
 
-   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ deleteÇÒ value" =============   
+   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ deleteí•  value" =============   
    function fnDeleteFile(deletefileNameArray) {
          $("#deleteFile").val(deletefileNameArray)    
    }   
    
    
-   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-       //ÀÓÀÇÀÇ file object¿µ¿ª
+       //ì„ì˜ì˜ file objectì˜ì—­
      var files = {};
      var previewIndex = 0;
      var fileNameArray = new Array();
-     //¿ø·¡ÀÖ´ø»çÁø »èÁ¦ÇÒ array
+     //ì›ë˜ìˆë˜ì‚¬ì§„ ì‚­ì œí•  array
      var deletefileNameArray = new Array();
      
-     // image preview ±â´É ±¸Çö
+     // image preview ê¸°ëŠ¥ êµ¬í˜„
      // input = file object[]
      function addPreview(input) {
          if (input[0].files) {
-             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
              for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
                  var file = input[0].files[fileIndex];
@@ -361,7 +361,7 @@
                 var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
                 var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
                 
-                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
                var imgSelectName = "img";
                if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
                   imgSelectName = "iframe";
@@ -369,24 +369,24 @@
 
                  var reader = new FileReader();
                  reader.onload = function(img) {
-                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
                      
                      var imgNum = previewIndex++;
                      
-                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
                      if(Object.keys(files).length>=8){
-                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
                         delete files[imgNum];
                      }else{
-               // 8Àå ÀÌÇÏ 
+               // 8ì¥ ì´í•˜ 
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   »èÁ¦" + "</span>" + "</div>");
+                                             + "   ì‚­ì œ" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;
@@ -398,10 +398,10 @@
                  reader.readAsDataURL(file);
              }
          } else
-             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
      }
 
-     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
      function deletePreview(obj) {
          var imgNum = obj.attributes['value'].value;
          delete files[imgNum];
@@ -410,7 +410,7 @@
          $("#preview .preview-box[value=" + imgNum + "]").remove();
          resizeHeight();
      }
-     //=============¿ø·¡ÀÖ´ø»çÁøµé »èÁ¦¹öÆ°´©¸¦¶§ =============
+     //=============ì›ë˜ìˆë˜ì‚¬ì§„ë“¤ ì‚­ì œë²„íŠ¼ëˆ„ë¥¼ë•Œ =============
      function deletePreview2(obj) {
          var imgName = obj.attributes['value'].value;
          deletefileNameArray.push(imgName);
@@ -419,14 +419,14 @@
          resizeHeight();
      }
 
-     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
      function validation(fileName) {
          fileName = fileName + "";
          var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
          var fileNameExtension = fileName.toLowerCase().substring(
                  fileNameExtensionIndex, fileName.length);
          if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
              return true;
          } else {
              return false;
@@ -436,31 +436,31 @@
 
        $(document).ready(function() {
 
-          //============= »çÁø¹Ì¸®º¸±â =============
+          //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
           $('#attach input[type=file]').change(function() {
-             addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+             addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
          });
 
-          //============= ÈÄ¿ø¸ñÇ¥±İ¾× =============
+          //============= í›„ì›ëª©í‘œê¸ˆì•¡ =============
              $('#fundTargetPay').keyup(function(){
                 
-                 //ÈÄ¿ø¸ñÇ¥±İ¾× ±æÀÌÃÊ°ú
+                 //í›„ì›ëª©í‘œê¸ˆì•¡ ê¸¸ì´ì´ˆê³¼
                  if ($(this).val().length > $(this).attr('maxlength')-1) {
-                     alert('Á¦ÇÑ±æÀÌ ÃÊ°ú');
+                     alert('ì œí•œê¸¸ì´ ì´ˆê³¼');
                      $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                  }
-                 //ÈÄ¿ø¸ñÇ¥±İ¾× ¹®ÀÚ ÀÔ·Â °ËÁõ (Á¤±Ô½Ä»ç¿ë)    
+                 //í›„ì›ëª©í‘œê¸ˆì•¡ ë¬¸ì ì…ë ¥ ê²€ì¦ (ì •ê·œì‹ì‚¬ìš©)    
                 var exp = /^[0-9]+$/;
                 if($(this).val().match(exp)){
-                  //±İ¾×¿¡ µû¸¥ Ç¥°³¼ö
+                  //ê¸ˆì•¡ì— ë”°ë¥¸ í‘œê°œìˆ˜
                   if($(this).val().match(exp)){
                     var inputed = Math.round($("input[name='fundTargetPay']").val()*0.001);         
                     $("#voteNum").children().remove();
-                    $("#voteNum").append("<font><b>ÅõÇ¥¼ö <strong  style=\"color:#225cba\">"+inputed+"</strong>Ç¥</b></font>");
+                    $("#voteNum").append("<font><b>íˆ¬í‘œìˆ˜ <strong  style=\"color:#225cba\">"+inputed+"</strong>í‘œ</b></font>");
                    }
                    return true;
                 }else{
-                  alert("¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä.")
+                  alert("ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”.")
                   var val = $(this).val(); 
                   var len = val.length; 
                   $(this).val(val.substring(0,len-1));        
@@ -468,7 +468,7 @@
                
              });
           
-           //============= ±ÛÁ¦¸ñ ±æÀÌ ÀÔ·Â °ËÁõ =============
+           //============= ê¸€ì œëª© ê¸¸ì´ ì…ë ¥ ê²€ì¦ =============
              $('#postTitle').keyup(function(){
             	 var byteText = $(this).val();
               	 var byteNum = 0;
@@ -477,15 +477,15 @@
                      byteNum += ( byteText.charCodeAt(i) > 127 ) ? 2 : 1;
                   }
                   if(byteNum > 30) {              	 
-                      alert('Á¦ÇÑ±æÀÌ ÃÊ°ú');
+                      alert('ì œí•œê¸¸ì´ ì´ˆê³¼');
                       $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
                   }
              });
-           //============= ¿¬¶ôÃ³ ¹®ÀÚ ÀÔ·Â °ËÁõ (JavaScript ÇÔ¼ö»ç¿ë)=============
+           //============= ì—°ë½ì²˜ ë¬¸ì ì…ë ¥ ê²€ì¦ (JavaScript í•¨ìˆ˜ì‚¬ìš©)=============
              $('#phone2').keyup(function(){
                 var val = $(this).val(); 
             if(isNaN(val)){
-                  alert("¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä.")
+                  alert("ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”.")
                   var len = val.length; 
                   $(this).val(val.substring(0,len-1));        
                 }            
@@ -494,7 +494,7 @@
              $('#phone3').keyup(function(){
                 var val = $(this).val(); 
             if(isNaN(val)){
-                  alert("¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä.")
+                  alert("ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”.")
                   var len = val.length; 
                   $(this).val(val.substring(0,len-1));        
                 }            
@@ -504,12 +504,12 @@
    
    $(function() {
       
-         //============= ¼öÁ¤ Event  Ã³¸® =============   
+         //============= ìˆ˜ì • Event  ì²˜ë¦¬ =============   
          $( "#btn-update" ).on("click" , function() {
         	 fncUpdateVoting();
             });
          
-         //============= Ãë¼Ò Event  Ã³¸® =============
+         //============= ì·¨ì†Œ Event  ì²˜ë¦¬ =============
           $( "#btn-cancel" ).on("click" , function() {
                history.go(-1);
             });

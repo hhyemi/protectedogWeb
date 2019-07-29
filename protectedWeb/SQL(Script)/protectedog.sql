@@ -799,17 +799,17 @@ UPDATE adopt SET status_code = 2 where post_no = 10049;
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
-(15555, 'IS', 'user01', '½ºÄ±', 'InfoShareTestTitle' ,  'InfoShareTestContent' , SYSDATE , 1000, 1000, '37.499135, 127.022593');
+(15555, 'IS', 'user01', '½ºÄ±', 'InfoShareTestTitle' ,  'InfoShareTestContent' , SYSDATE , 1000, 1000, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
 
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
-(15556, 'IS', 'user02', 'È£·©ÀÌ', 'InfoShareTestTitle1' ,  'InfoShareTestContent1' , SYSDATE , 1001, 1001, '38.499135, 128.022593');
+(15556, 'IS', 'user02', 'È£·©ÀÌ', 'InfoShareTestTitle1' ,  'InfoShareTestContent1' , SYSDATE , 1001, 1001, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
 
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
-(15557, 'IS', 'user03' , '¾È³ç', 'InfoShareTestTitle2' ,  'InfoShareTestContent2' , SYSDATE , 1002, 1002, '39.499135, 129.022593');
+(15557, 'IS', 'user03' , '¾È³ç', 'InfoShareTestTitle2' ,  'InfoShareTestContent2' , SYSDATE , 1002, 1002, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
 
 INSERT INTO BOARD 
 (POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 

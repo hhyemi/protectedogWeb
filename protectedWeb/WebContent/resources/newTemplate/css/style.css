@@ -264,7 +264,7 @@ p {
         color: #f04f23!important;
     }
 
-    
+        
     /*This is item search bar*/
 
     .navbar-nav li>.search {
@@ -1703,7 +1703,21 @@ p {
         background: #f04f23;
         color: #fff;
     }
-
+	   button {
+		  background-color: #f04f23;
+		  border: none;
+		  color: white;
+		  padding: 16px 32px;
+		  text-align: center;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  opacity: 0.6;
+		  transition: 0.3s;
+		  display: inline-block;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+         button:hover {opacity: 1}
 
 
 /*====================================================

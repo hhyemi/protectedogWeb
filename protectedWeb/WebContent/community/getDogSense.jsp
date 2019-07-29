@@ -46,21 +46,33 @@
 // 				return;
 // 			}
 		
-		$("#get_view").empty();
-		$("#nav_view").empty();
+// 		$("#get_view").empty();
+// 		$("#nav_view").empty();
 		
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyCVwWk8DuaQGG-80_4PNzstgcKjdTX4PH0&maxResults=9";
 		
-		console.log(sTargetUrl);
+		// 민희 : AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0
+		// 은우 : AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w
+		// 혜미 : AIzaSyDaxq2wYvYelkT22k9ZLzBVM4xDqT2Jai8
+		// 지수 : AIzaSyCVwWk8DuaQGG-80_4PNzstgcKjdTX4PH0
+		console.log("Token before : "+sTargetUrl);
 		
-// 		if(sGetToken){
-// // 			sTargetUrl += "&pageToken=" + sGetToken;
-// 			cnt += 3 ;
-// 			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ cnt);
-// 			sTargetUrl += "&maxResults="+ 10;
-// 		}
 		
+		console.log("sGetToken : " + sGetToken);
+		
+ 		if(sGetToken){
+ 			
+ 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyCVwWk8DuaQGG-80_4PNzstgcKjdTX4PH0&maxResults=3";
+ 			sTargetUrl += "&pageToken=" + sGetToken;
+ 			
+ 			debugger;
+			//sTargetUrl += "&maxResults="+ 10;
+ 		}
+		
+ 		console.log("Token after : "+sTargetUrl);
+ 		
 		$.ajax({
 			
 			type : "POST",
@@ -69,49 +81,53 @@
 			success : function(jdata) {
 				
 				//console.log(jdata);
+				sGetToken = undefined;
 				
 				$(jdata.items).each(function(i){
 					
+					//debugger;
+					
 					var videoId = this.id.videoId;
-					console.log(" 비디오 아이디 : " + videoId) ;
-					console.log(" sinppet.title : " + this.snippet.title) ; 
-					console.log(" sinppet.description : " + this.snippet.description) ; 
-					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
+// 					console.log(" 비디오 아이디 : " + videoId) ;
+// 					console.log(" sinppet.title : " + this.snippet.title) ; 
+// 					console.log(" sinppet.description : " + this.snippet.description) ; 
+// 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
 					$("#get_view").append(
-							  "<div class='col-md-4 style='border : 1px solid black; min-width : 350px''>"
-							+ "<iframe width='300' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
+							  "<div class='col-md-4' style='min-width : 350px'>"
+							+ "<iframe width='300px' height='200px' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
 							+ "<span class='box'>"
 							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
 							+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
 							+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
 							+ "</div>");
 									
-				}).promise().done(function(){
+				}).promise().done(function(){					
+					
+					
 					
 					$(window).on("scroll", function(){
 		 				
 						if($(window).scrollTop() == ( $(document).height() - $(window).height() )){
-														
-							flag = true;
-			 				cnt += 3; 
-			 			
-			 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-							+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w&maxResults="+cnt;
-						$.ajax({
 							
-							type : "POST",
-							url : sTargetUrl,
-							dataType : "jsonp",
-							success : function(jdata) {
+							console.log("sGetToken"+sGetToken); 
+							javascript:fnGetList(jdata.nextPageToken);
+			 				
+						
+// 						$.ajax({
+							
+// 							type : "POST",
+// 							url : sTargetUrl,
+// 							dataType : "jsonp",
+// 							success : function(jdata) {
 
-		 						console.log(" 검색개수 : " + cnt);
-		 						if(flag == true){
-		 							fnGetList();
-		 							flag = false;
-		 							return;
-		 						}
-		 					}
-		 				}); // ajax End
+// 		 						console.log(" 검색개수 : " + cnt);
+// 		 						if(flag == true){
+// 		 							fnGetList();
+// 		 							flag = false;
+// 		 							return;
+// 		 						}
+// 		 					}
+// 		 				}); // ajax End
 						} // If End
 						}); // window End						
 				}); // promise End

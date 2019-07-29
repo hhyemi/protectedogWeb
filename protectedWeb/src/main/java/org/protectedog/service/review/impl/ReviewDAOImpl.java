@@ -60,13 +60,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 //
 //	}
 //
-//	@Override
-//	public void delReivew(Review review) throws Exception {
-//		// TODO Auto-generated method stub
-//		sqlSession.delete("ReviewMapper.delReview", review);
-//
-//	}
-//
+	@Override
+	public void delReivew(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete("ReviewMapper.delReview", postNo);
+
+	}
+
 	@Override
 	public int getTotalCount(Search search, String boardCode,String hospitalName) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();

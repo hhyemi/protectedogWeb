@@ -144,7 +144,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                     if ($rg_username == "ERROR") {
                         msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
                     } else {
-                        msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+                        //msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
                     }
                     return false;
                     break;

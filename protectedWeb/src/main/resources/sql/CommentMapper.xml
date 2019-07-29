@@ -8,19 +8,14 @@
 
 
 	<resultMap id="commentSelectMap" type="comment">
-		<result property="commentNo" column="comment_no"
-			jdbcType="NUMERIC" />
-		<result property="postNo" column="post_no" jdbcType="NUMERIC" />
-		<result property="boardCode" column="board_code"
-			jdbcType="VARCHAR" />
-		<result property="id" column="id" jdbcType="VARCHAR" />
-		<result property="commentContent" column="COMMENT_CONTENT"
-			jdbcType="VARCHAR" />
-		<result property="regDate" column="reg_date" jdbcType="DATE" />
-		<result property="likeCount" column="like_count"
-			jdbcType="NUMERIC" />
-		<result property="nickName" column="nickname"
-			jdbcType="VARCHAR" />
+		<result property="commentNo" 		column="comment_no"			jdbcType="NUMERIC" />
+		<result property="postNo" 			column="post_no" 			jdbcType="NUMERIC" />
+		<result property="boardCode" 		column="board_code"			jdbcType="VARCHAR" />
+		<result property="id" 				column="id" 				jdbcType="VARCHAR" />
+		<result property="commentContent" 	column="COMMENT_CONTENT"	jdbcType="VARCHAR" />
+		<result property="regDate" 			column="reg_date" 			jdbcType="DATE" />
+		<result property="likeCount" 		column="like_count"			jdbcType="NUMERIC" />
+		<result property="nickName" 		column="nickname"			jdbcType="VARCHAR" />
 	</resultMap>
 
 	<!-- SQL : INSERT -->
@@ -30,7 +25,6 @@
 		</selectKey>
 		INSERT INTO comments( comment_no, post_no, board_code, id, COMMENT_CONTENT, reg_date, like_count, nickName)
 		VALUES (#{commentNo}, #{postNo}, #{boardCode}, #{id}, #{commentContent}, SYSDATE, #{likeCount}, #{nickName})
-		<!-- to_date(sysdate, 'yyyy/mm/dd hh:mi:ss') -->
 	</insert>
 
 	<select id="getComment" parameterType="int"
@@ -61,8 +55,8 @@
 	</update>
 
 	<delete id="delComment" parameterType="int">
-		DELETE
-		FROM comments
+		UPDATE comments
+		SET status_code = '0'
 		WHERE comment_no = #{value}
 	</delete>
 
@@ -74,7 +68,7 @@
 		reg_date, like_count, nickName
 		FROM comments
 		WHERE post_no = #{postNo} AND status_code != '0'
-		ORDER BY reg_date DESC ) inner_table
+		ORDER BY  LIKE_COUNT DESC, reg_date DESC ) inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND
 		#{endRowNum}

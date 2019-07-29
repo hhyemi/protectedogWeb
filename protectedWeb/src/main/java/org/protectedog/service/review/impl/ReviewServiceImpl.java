@@ -58,13 +58,13 @@ public class ReviewServiceImpl implements ReviewService {
 //		reviewDAO.updateReivew(Review);
 //
 //	}
-//
-//	@Override
-//	public void delReivew(Review review) throws Exception {
-//		// TODO Auto-generated method stub
-//		reviewDAO.delReivew(review);
-//
-//	}
+
+	@Override
+	public void delReivew(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		reviewDAO.delReivew(postNo);
+
+	}
 
 
 }

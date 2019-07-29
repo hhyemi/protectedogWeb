@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -7,9 +7,9 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -17,46 +17,16 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
 
-<!-- jQuery UI toolTip »ç¿ë CSS-->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip »ç¿ë JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- ckeditor »ç¿ë CSS-->
+<!-- ckeditor ì‚¬ìš© CSS-->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-/* 	   #btn-add{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
-		#btn-cancel{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		} */
+
 .container {
 	width: 1000px;
 	font-size: 15px;
@@ -85,13 +55,8 @@
 	min-height: 300px;
 	max-width: 700px;
 }
-       @font-face{
-          font-family: NanumSquare;
-          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
-       }
-       body{
-          font-family: NanumSquare, sans-serif !important;
-       }
+
+
 </style>
 
 </head>
@@ -100,12 +65,12 @@
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container ">
 		<div class="form-group">
 			<div class="page-header text-center">
-				<font size=6>ÈÄ¿ø ½ÅÃ» µî·Ï</font> ÈÄ¿ø½ÅÃ»Àº ÅõÇ¥ <strong style="color: #225cba">1°³</strong>ÀÌ»ó
-				¹ŞÀ» ½Ã <strong style="color: #225cba">¼öÁ¤ÀÌ ºÒ°¡</strong>ÇÕ´Ï´Ù.
+				<font size=6>í›„ì› ì‹ ì²­ ë“±ë¡</font> í›„ì›ì‹ ì²­ì€ íˆ¬í‘œ <strong style="color: #f04f23">1ê°œ</strong>ì´ìƒ
+				ë°›ì„ ì‹œ <strong style="color: #f04f23">ìˆ˜ì •ì´ ë¶ˆê°€</strong>í•©ë‹ˆë‹¤.
 			</div>
 		</div>
 
@@ -113,34 +78,34 @@
 		<form id="uploadForm" class="form-horizontal">
 			<div class="form-group">
 				<h3>
-					<b>ÈÄ¿ø¸ñÇ¥±İ¾×</b>
+					<b>í›„ì›ëª©í‘œê¸ˆì•¡</b>
 				</h3>
-				ÅõÇ¥°³¼ö´Â ( <strong style="color: #225cba">¸ñÇ¥±İ¾× 0.01%</strong> )Ç¥·Î
-				Àû¿ëµË´Ï´Ù. ( 10¸¸¿ø ~ 300¸¸¿ø±îÁö ÀÔ·Â°¡´ÉÇÕ´Ï´Ù. )
+				íˆ¬í‘œê°œìˆ˜ëŠ” ( <strong style="color: #f04f23">ëª©í‘œê¸ˆì•¡ 0.01%</strong> )í‘œë¡œ
+				ì ìš©ë©ë‹ˆë‹¤. ( 10ë§Œì› ~ 300ë§Œì›ê¹Œì§€ ì…ë ¥ê°€ëŠ¥í•©ë‹ˆë‹¤. )
 				<p />
 				<div class="row form-form">
 					<input type="text" class="form-control" id="fundTargetPay"
 						name="fundTargetPay" placeholder="0"
-						style="width: 600px; height: 35px;">&ensp; ¿ø
+						style="width: 600px; height: 35px;">&ensp; ì›
 				</div>
 			</div>
 			<br />
 
 			<div class="form-group" id="voteNum">
 				<h3>
-					<b>ÅõÇ¥¼ö <strong style="color: #225cba">0</strong>Ç¥
+					<b>íˆ¬í‘œìˆ˜ <strong style="color: #f04f23">0</strong>í‘œ
 					</b>
 				</h3>
 			</div>
-			<div class="form-group">ÈÄ¿ø°Ô½Ã±Û·Î ÀÌµ¿ÇÏ·Á¸é ¹Ş¾Æ¾ß ÇÒ ÅõÇ¥ ¼öÀÔ´Ï´Ù.</div>
+			<div class="form-group">í›„ì›ê²Œì‹œê¸€ë¡œ ì´ë™í•˜ë ¤ë©´ ë°›ì•„ì•¼ í•  íˆ¬í‘œ ìˆ˜ì…ë‹ˆë‹¤.</div>
 			<br />
 
 			<div class="form-group">
 				<h3>
-					<b>ÈÄ¿ø¸ñÇ¥±â°£</b>
+					<b>í›„ì›ëª©í‘œê¸°ê°„</b>
 				</h3>
-				ÈÄ¿ø ¹ŞÀ»±â°£À» ÀÔ·ÂÇÏ¼¼¿ä. ( 7ÀÏ ~ 30ÀÏ±îÁö ¼±ÅÃ°¡´ÉÇÕ´Ï´Ù. )<br /> ÅõÇ¥°¡ ¸¶°¨µÇ¾úÀ» ¶§ ½ÃÀÛ ³¯ºÎÅÍÀÇ
-				±â°£ÀÔ´Ï´Ù. ÅõÇ¥ ±â°£Àº <strong style="color: #225cba">30</strong>ÀÏ·Î °íÁ¤µË´Ï´Ù.
+				í›„ì› ë°›ì„ê¸°ê°„ì„ ì…ë ¥í•˜ì„¸ìš”. ( 7ì¼ ~ 30ì¼ê¹Œì§€ ì„ íƒê°€ëŠ¥í•©ë‹ˆë‹¤. )<br /> íˆ¬í‘œê°€ ë§ˆê°ë˜ì—ˆì„ ë•Œ ì‹œì‘ ë‚ ë¶€í„°ì˜
+				ê¸°ê°„ì…ë‹ˆë‹¤. íˆ¬í‘œ ê¸°ê°„ì€ <strong style="color: #f04f23">30</strong>ì¼ë¡œ ê³ ì •ë©ë‹ˆë‹¤.
 				<p />
 				<div>
 					<select class="form-control" name="fundTargetDay"
@@ -154,12 +119,12 @@
 			<br />
 			<div class="form-group">
 				<h3>
-					<b>±ÛÁ¦¸ñ</b>
+					<b>ê¸€ì œëª©</b>
 				</h3>
 				<p />
 				<div class=>
 					<input type="text" class="form-control" id="postTitle"
-						name="postTitle" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä."
+						name="postTitle" placeholder="ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”."
 						style="width: 700px; height: 35px;">
 				</div>
 			</div>
@@ -167,41 +132,42 @@
 
 			<div class="form-group">
 				<h3>
-					<b>±Û³»¿ë</b>
+					<b>ê¸€ë‚´ìš©</b>
 				</h3>
 				<p />
 				<div>
 					<textarea id="postContent" name="postContent"
-						style="text-align: left;" placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.">
+						style="text-align: left;" placeholder="ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.">
 					</textarea>
 				</div>
 			</div>
 			<br />
-			<!-- Ã·ºÎ ¹öÆ° -->
+			<!-- ì²¨ë¶€ ë²„íŠ¼ -->
 			<div id="attach" class="form-group">
 				<span class="label label-primary "><label
-					class="waves-effect waves-teal btn-flat" for="uploadInputBox">»çÁøµî·Ï</label></span>&nbsp;&nbsp;¸Ç¾Õ
-				ÀÌ¹ÌÁö´Â ´ëÇ¥ÀÌ¹ÌÁöÀÔ´Ï´Ù. (ÃÖ´ë 8Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.) <input id="uploadInputBox"
-					style="display: none" type="file" value="µî·Ï" name="filedata" />
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox">ì‚¬ì§„ë“±ë¡</label></span>&nbsp;&nbsp;ë§¨ì•
+				ì´ë¯¸ì§€ëŠ” ëŒ€í‘œì´ë¯¸ì§€ì…ë‹ˆë‹¤. (ìµœëŒ€ 8ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.) <input id="uploadInputBox"
+					style="display: none" type="file" value="ë“±ë¡" name="filedata" />
 			</div>
 			<br />
 
-			<!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+			<!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
 			<div class="form-group">
-				<div id="preview" class="col-md-3" align="center"
+				<div id="preview" class="col-md-6" align="center"
 					style='display: inline; min-width: 600px;'></div>
 			</div>
 
 
+			<br/><br/><br/><br/><br/>
 			<div class="form-group">
 				<br />
 				<h3>
-					<b>¿¬¶ôÃ³</b>
+					<b>ì—°ë½ì²˜</b>
 				</h3>
-				¹®ÀÇ¹ŞÀ» ¿¬¶ôÃ³¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.
+				ë¬¸ì˜ë°›ì„ ì—°ë½ì²˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.
 				<p />
-				<div class="col-sm-3" style="padding: 0; margin: 0;">
-					<select class="form-control" name="phone1" id="phone1">
+				<div class="row">
+					<select name="phone1" id="phone1">
 						<option value="010"
 							${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  }>010</option>
 						<option value="011"
@@ -213,16 +179,15 @@
 						<option value="019"
 							${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  }>019</option>
 					</select>
-				</div>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone2" name="phone2"
+					&emsp;
+
+					<input type="text" id="phone2" name="phone2"
 						value="${ ! empty user.phone2 ? user.phone2 : ''}"
-						placeholder="¹øÈ£" maxlength="4" style="height: 35px;">
-				</div>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone3" name="phone3"
+						placeholder="ë²ˆí˜¸" maxlength="4" style="height: 35px;">
+					&emsp;
+					<input type="text"id="phone3" name="phone3"
 						value="${ ! empty user.phone3 ? user.phone3 : ''}"
-						placeholder="¹øÈ£" maxlength="4" style="height: 35px;">
+						placeholder="ë²ˆí˜¸" maxlength="4" style="height: 35px;">
 				</div>
 				<input type="hidden" name="phone" /> <input type="hidden"
 					class="form-control" id="multiFile" name="multiFile">
@@ -231,10 +196,10 @@
 			<br />
 			<br />
 			<div class="form-group2">
-				<button class="btn btn-primary py-3 px-4 col-md-3" type="button"
-					id="btn-add">µî·Ï</button>
-				<button class="btn btn-primary py-3 px-4 col-md-3 " type="button"
-					id="btn-cancel">Ãë¼Ò</button>
+				<button class="btn btn-dafault" type="button"
+					id="btn-add">ë“±ë¡</button>
+				<button class="btn btn-dafault " type="button"
+					id="btn-cancel">ì·¨ì†Œ</button>
 			</div>
 			<br />
 			<br />
@@ -248,7 +213,7 @@
 		<!-- form Start /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 	<!--================ start footer Area  =================-->
 	<!-- footer Start /////////////////////////////////////-->
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -258,10 +223,10 @@
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-   //============= µî·Ï¹öÆ° ´­·¶À»¶§ ÇÔ¼ö =============      
+   //============= ë“±ë¡ë²„íŠ¼ ëˆŒë €ì„ë•Œ í•¨ìˆ˜ =============      
    function fncAddVoting(){
       
-      //Form À¯È¿¼º °ËÁõ
+      //Form ìœ íš¨ì„± ê²€ì¦
 	  $('textarea').val(editor.getData());
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
@@ -271,38 +236,38 @@
       var file = $("#multiFile").val();    
       
       if(fundTargetPay == null || fundTargetPay.length<1){
-         alert("ÈÄ¿ø¸ñÇ¥±İ¾×Àº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+         alert("í›„ì›ëª©í‘œê¸ˆì•¡ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="fundTargetPay"]').focus();
          return;
       }
       if(fundTargetPay < 100000 || fundTargetPay > 3000000){
-         alert("ÈÄ¿ø¸ñÇ¥±İ¾×Àº 10¸¸¿øÀÌ»ó 300¸¸¿øÀÌÇÏ·Î ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.")
+         alert("í›„ì›ëª©í‘œê¸ˆì•¡ì€ 10ë§Œì›ì´ìƒ 300ë§Œì›ì´í•˜ë¡œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.")
          $('input[name="fundTargetPay"]').focus();
          return;
       }
       if(postTitle == null || postTitle.length<1){
-         alert("±ÛÁ¦¸ñÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+         alert("ê¸€ì œëª©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="postTitle"]').focus();
          return;
       }
       
       if(postContent == ''){
-	         alert("±Û³»¿ëÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+	         alert("ê¸€ë‚´ìš©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 	         $("textarea[name=postContent]").focus();
 	         return;
 	      }
       
       if(file == null || file.length<1){
-         alert("ÆÄÀÏÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+         alert("íŒŒì¼ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
          return;
       }
       if(phone2 == null || phone2.length<1){
-         alert("ÈŞ´ëÆù¹øÈ£´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+         alert("íœ´ëŒ€í°ë²ˆí˜¸ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="phone2"]').focus();
          return;
       }
       if(phone3 == null || phone3.length<1){
-         alert("ÈŞ´ëÆù¹øÈ£´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+         alert("íœ´ëŒ€í°ë²ˆí˜¸ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
          $('input[name="phone3"]').focus();
          return;
       }
@@ -317,7 +282,7 @@
       
       $('input[name="fundTargetPay"]').val(removeCommas($('input[name="fundTargetPay"]').val()));
       
-      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
             var formData = new FormData(form);
@@ -338,13 +303,13 @@
                 data : formData,
                 success : function(result) {
                     if (result === -1) {
-                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-                        // ÀÌÈÄ µ¿ÀÛ ...
+                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                        // ì´í›„ ë™ì‘ ...
                     } else if (result === -2) {
-                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-                        // ÀÌÈÄ µ¿ÀÛ ...
+                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+                        // ì´í›„ ë™ì‘ ...
                     } else {
-                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
                     }
                 }
             });
@@ -378,22 +343,22 @@
 	    } );
    
    
-   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
    function fnAddFile(fileNameArray) {
          $("#multiFile").val(fileNameArray)    
    }   
    
-   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-       //ÀÓÀÇÀÇ file object¿µ¿ª
+       //ì„ì˜ì˜ file objectì˜ì—­
      var files = {};
      var previewIndex = 0;
      var fileNameArray = new Array();
-     // image preview ±â´É ±¸Çö
+     // image preview ê¸°ëŠ¥ êµ¬í˜„
      // input = file object[]
      function addPreview(input) {
          if (input[0].files) {
-             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
              for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
                  var file = input[0].files[fileIndex];
@@ -405,7 +370,7 @@
                 var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
                 var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
                 
-                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
                var imgSelectName = "img";
                if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
                   imgSelectName = "iframe";
@@ -413,24 +378,24 @@
 
                  var reader = new FileReader();
                  reader.onload = function(img) {
-                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
                      
                      var imgNum = previewIndex++;
                      
-                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
                      if(Object.keys(files).length>=8){
-                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
                         delete files[imgNum];
                      }else{
-               // 8Àå ÀÌÇÏ 
+               // 8ì¥ ì´í•˜ 
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   »èÁ¦" + "</span>" + "</div>");
+                                             + "   &ensp;ì‚­ì œ" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;
@@ -442,10 +407,10 @@
                  reader.readAsDataURL(file);
              }
          } else
-             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
      }
 
-     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
      function deletePreview(obj) {
          var imgNum = obj.attributes['value'].value;
          delete files[imgNum];
@@ -455,26 +420,26 @@
          //resizeHeight();
      }
 
-     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
      function validation(fileName) {
          fileName = fileName + "";
          var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
          var fileNameExtension = fileName.toLowerCase().substring(
                  fileNameExtensionIndex, fileName.length);
          if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
              return true;
          } else {
              return false;
          }
      }
      
-   //3ÀÚ¸® ´ÜÀ§¸¶´Ù ÄŞ¸¶ »ı¼º
+   //3ìë¦¬ ë‹¨ìœ„ë§ˆë‹¤ ì½¤ë§ˆ ìƒì„±
      function addCommas(x) {
          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
      }
       
-     //¸ğµç ÄŞ¸¶ Á¦°Å
+     //ëª¨ë“  ì½¤ë§ˆ ì œê±°
      function removeCommas(x) {
          if(!x || x.length == 0) return "";
          else return x.split(",").join("");
@@ -483,35 +448,35 @@
 
        $(document).ready(function() {
 
-          //============= »çÁø¹Ì¸®º¸±â =============
+          //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
           $('#attach input[type=file]').change(function() {
-             addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+             addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
          });
 
-          //============= ÈÄ¿ø¸ñÇ¥±İ¾× =============
+          //============= í›„ì›ëª©í‘œê¸ˆì•¡ =============
              $('#fundTargetPay').keyup(function(){
             	 
-            	 //ÀÔ·Â½Ã ÄŞ¸¶ Àû¿ë
+            	 //ì…ë ¥ì‹œ ì½¤ë§ˆ ì ìš©
             	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
-            	 //ÅõÇ¥¼ö °è»ê
+            	 //íˆ¬í‘œìˆ˜ ê³„ì‚°
                  var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                  $("#voteNum").children().remove();
-                 $("#voteNum").append("<h3><b>ÅõÇ¥¼ö <strong  style=\"color:#225cba\">"+inputed+"</strong>Ç¥</b></h3>");
+                 $("#voteNum").append("<h3><b>íˆ¬í‘œìˆ˜ <strong  style=\"color:#f04f23\">"+inputed+"</strong>í‘œ</b></h3>");
                 
-                 //ÈÄ¿ø¸ñÇ¥±İ¾× ±æÀÌÃÊ°ú
+                 //í›„ì›ëª©í‘œê¸ˆì•¡ ê¸¸ì´ì´ˆê³¼
                  if (removeCommas($(this).val()).length > 7 ) {
-                     alert('30¸¸¿øÀÌÇÏ·Î ÀÔ·ÂÇØÁÖ¼¼¿ä');
+                     alert('30ë§Œì›ì´í•˜ë¡œ ì…ë ¥í•´ì£¼ì„¸ìš”');
                      $(this).val(removeCommas($(this).val()).substr(0, 7));
                      
                      $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
                      var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                      $("#voteNum").children().remove();
-                     $("#voteNum").append("<h3><b>ÅõÇ¥¼ö <strong  style=\"color:#225cba\">"+inputed+"</strong>Ç¥</b></h3>");                    
+                     $("#voteNum").append("<h3><b>íˆ¬í‘œìˆ˜ <strong  style=\"color:#f04f23\">"+inputed+"</strong>í‘œ</b></h3>");                    
                      
                  }
              });
           
-           //============= ±ÛÁ¦¸ñ ±æÀÌ ÀÔ·Â °ËÁõ =============
+           //============= ê¸€ì œëª© ê¸¸ì´ ì…ë ¥ ê²€ì¦ =============
              $('#postTitle').keyup(function(){
             	 var byteText = $(this).val();
               	 var byteNum = 0;
@@ -519,39 +484,31 @@
                   for(var i = 0; i < byteText.length ; i++) {
                      byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
 	                  if(byteNum > 50) {              	 
-	                      alert('Á¦ÇÑ±æÀÌ ÃÊ°ú');
+	                      alert('ì œí•œê¸¸ì´ ì´ˆê³¼');
 	                      $(this).val($(this).val().substr(0,i));
 	                  }
                   }
 
              });
-           //============= ¿¬¶ôÃ³ ¹®ÀÚ ÀÔ·Â °ËÁõ (JavaScript ÇÔ¼ö»ç¿ë)=============
+           //============= ì—°ë½ì²˜ ë¬¸ì ì…ë ¥ ê²€ì¦ (JavaScript í•¨ìˆ˜ì‚¬ìš©)=============
              $('#phone2').keyup(function(){
-                var val = $(this).val(); 
-            if(isNaN(val)){
-                  var len = val.length; 
-                  $(this).val(val.substring(0,len-1));        
-                }            
+                $(this).val($(this).val().replace(/[^0-9]/g,""));          
              });
            
              $('#phone3').keyup(function(){
-                var val = $(this).val(); 
-            if(isNaN(val)){
-                  var len = val.length; 
-                  $(this).val(val.substring(0,len-1));        
-                }            
+                 $(this).val($(this).val().replace(/[^0-9]/g,""));              
              });
              
      }); 
    
    $(function() {
       
-         //============= µî·Ï Event  Ã³¸® =============   
+         //============= ë“±ë¡ Event  ì²˜ë¦¬ =============   
          $( "#btn-add" ).on("click" , function() {
             fncAddVoting();
             });
          
-         //============= Ãë¼Ò Event  Ã³¸® =============
+         //============= ì·¨ì†Œ Event  ì²˜ë¦¬ =============
           $( "#btn-cancel" ).on("click" , function() {
                history.go(-1);
             });

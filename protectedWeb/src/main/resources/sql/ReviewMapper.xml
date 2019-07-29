@@ -55,16 +55,16 @@
 		GRADE				=	#{grade:NUMERIC}
 	</set>
 	WHERE POST_NO=#{postNo}
-	</update>
-	
-	<update	id="delReview"	parameterType="review" >
-	   	UPDATE REVIEW
-		<set>
-		STATUS_CODE = '0'
-		</set>
-	   	WHERE POST_NO = #{postNo}
-	 </update>
-	--> 
+	</update>-->
+		<!-- SQL :  DELETE --> 
+		<update	id="delReview"	parameterType="int" >
+		   	UPDATE REVIEW
+			<set>
+			STATUS_CODE = '0'
+			</set>
+		   	WHERE POST_NO = #{value}
+		 </update>
+
 	 <!--  SQL : SELECT LIST  -->
 	<select  id="listReview"  parameterType="map"	resultMap="reviewSelectMap">
 	  	SELECT *
@@ -77,7 +77,7 @@
 									AND HOSPITAL_NAME = #{hospitalName} 
 								</if>
 						</where>
-						ORDER BY POST_NO  ) inner_table
+						ORDER BY POST_NO DESC  ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>

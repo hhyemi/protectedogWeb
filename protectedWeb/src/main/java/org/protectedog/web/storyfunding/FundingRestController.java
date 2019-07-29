@@ -74,7 +74,7 @@ public class FundingRestController {
 		return list;
 	}
 			
-	// ÇÑ´Ş¿¡ ÇÑ¹ø ±Û ÀÛ¼º È®ÀÎ
+	// í•œë‹¬ì— í•œë²ˆ ê¸€ ì‘ì„± í™•ì¸
 	@RequestMapping(value = "json/addVoting", method = RequestMethod.GET)
 	public int addVoting(HttpSession session) throws Exception {
 
@@ -90,7 +90,7 @@ public class FundingRestController {
 		return 0;
 	}		
 	
-	// ±Û¿¡ ÇÑ¹ø ÅõÇ¥ È®ÀÎ
+	// ê¸€ì— í•œë²ˆ íˆ¬í‘œ í™•ì¸
 	@RequestMapping(value = "json/addVote/{postNo}", method = RequestMethod.GET)
 	public int addVote(@PathVariable int postNo,HttpSession session) throws Exception {
 
@@ -111,7 +111,7 @@ public class FundingRestController {
 		return 0;
 	}			
 
-	// ¹«ÇÑ½ºÅ©·Ñ
+	// ë¬´í•œìŠ¤í¬ë¡¤
 	@RequestMapping(value = "json/listVoting/", method = RequestMethod.POST)
 	public Object listVoting(@RequestBody Search search, HttpServletRequest request) throws Exception {
 
@@ -146,7 +146,7 @@ public class FundingRestController {
 
 		search.setSearchKeyword(originSearch);
 
-//		// Model °ú View ¿¬°á
+//		// Model ê³¼ View ì—°ê²°
 //		model.addAttribute("list", map.get("list"));
 //		model.addAttribute("resultPage", resultPage);
 //		model.addAttribute("search", search);
