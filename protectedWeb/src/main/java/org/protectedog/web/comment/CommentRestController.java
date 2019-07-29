@@ -107,6 +107,7 @@ public class CommentRestController {
 
 		System.out.println(" ============================== rest delComment ==================================");
 		
+		System.out.println(" commentNo : " + commentNo );
 		commentService.delComment(commentNo);
 		
 		return commentNo;
