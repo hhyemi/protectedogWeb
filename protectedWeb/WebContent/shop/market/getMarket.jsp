@@ -135,8 +135,8 @@ text-size: small;
 				</div>
 			</div>
 		</div>
-		<p align="right"><button class="mdl-button mdl-js-button mdl-button--primary">
- 수정하기
+		<p align="right"><button class="mdl-button mdl-js-button mdl-button--primary" id="update">
+ 수정
 </button><!-- Accent-colored flat button -->
 <button class="mdl-button mdl-js-button mdl-button--accent">
   삭제하기
@@ -167,8 +167,11 @@ text-size: small;
 		<script src="../../resources/get/js/jquery.waypoints.min.js"></script>
 		<script src="../../resources/get/js/jquery.counterup.js"></script>
 		<script src="../../resources/get/js/theme.js"></script>
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 
 		<script type="text/javascript">
+		
+		
 		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		 $(function() {
@@ -189,12 +192,11 @@ text-size: small;
 				/* self.location = "/product/listProduct/manage" */
 				self.location = "/product/listProduct"
 			});
-				console.log($( "button:contains('수정')" ).html());
-				$("#re").bind("click", function() {
-					self.location = "/product/updateProduct?prodNo=${product.prodNo}"
-				});
-			});
-			 
+
+
+		 $( "#update" ).on("click" , function() {
+		 		self.location = "/market/updateMarket?postNo=${board.postNo}";
+			}); 
 
 			
 			 $( "button:contains('뒤로')" ).on("click" , function() {

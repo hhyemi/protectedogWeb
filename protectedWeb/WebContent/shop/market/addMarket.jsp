@@ -75,7 +75,8 @@
 			        });
 					//Debug..
 					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-					$("form[name='addForm']").attr("method", "POST").attr("action", "/market/addMarket").attr("enctype","multipart/form-data").submit();
+					$("form[name='addForm']").attr("method", "POST").attr(
+							"action", "/market/addMarket").attr("enctype","multipart/form-data").submit();
 					//fncAddProduct();
 				});
 	});

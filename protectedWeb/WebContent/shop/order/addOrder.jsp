@@ -1,12 +1,12 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN  -->
 <link rel="stylesheet"
@@ -30,13 +30,13 @@
 </style>
 
 <script type="text/javascript">
-	//============= "µî·Ï"  Event ¿¬°á =============
+	//============= "ë“±ë¡"  Event ì—°ê²° =============
 	$(function() {
 		$("#addproduct").on(
 				"click",
 				function() {
 					//Debug..
-					alert( $( "form[name='addForm']" ).html() );
+					console.log($("form[name='addForm']").html());
 					$("form[name='addForm']").attr("method", "POST").attr("action", "/order/addOrder").submit();
 					//fncAddProduct();
 				});
@@ -50,19 +50,19 @@
 
 	// 	});
 
-	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
+	//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
 		$("a[href='#' ]").on("click", function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).html() );
 			$("form")[0].reset();
 		});
 	});
 
 	function fncAddProduct() {
-		//Form À¯È¿¼º °ËÁõ
+		//Form ìœ íš¨ì„± ê²€ì¦
 
 		// 		var prodName=$("input[name='prodName']").val();
 		// 	 	//var name = document.detailForm.prodName.value;
@@ -74,16 +74,16 @@
 		// 		//var price = document.detailForm.price.value;
 
 		// 		if(prodName == null || prodName.length<1){
-		// 			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 
 		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		// 		if(price == null || price.length<1){
-		// 			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 
@@ -107,9 +107,9 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Áß°í</a></span> <span>ÀåÅÍ</span>
+						<span class="mr-2"><a href="index.html">ì¤‘ê³ </a></span> <span>ì¥í„°</span>
 					</p>
-					<h1 class="mb-0 bread">DOG|SHOP ±¸¸ÅÇÏ±â</h1>
+					<h1 class="mb-0 bread">DOG|SHOP êµ¬ë§¤í•˜ê¸°</h1>
 				</div>
 			</div>
 		</div>
@@ -135,9 +135,9 @@
 										<table id="cart" class="table table-hover table-condensed">
 											<thead>
 												<tr>
-													<th style="width: 50%">»óÇ°¸í</th>
-													<th style="width: 10%">»óÇ°°¡</th>
-													<th style="width: 22%" class="text-center">ÃÑ¾×</th>
+													<th style="width: 50%">ìƒí’ˆëª…</th>
+													<th style="width: 10%">ìƒí’ˆê°€</th>
+													<th style="width: 22%" class="text-center">ì´ì•¡</th>
 													<th style="width: 10%"></th>
 												</tr>
 											</thead>
@@ -174,14 +174,14 @@
 							</div>
 						</div>
 						<!--////////////////////////// form tag Start /////////////////////////////////-->
-						<h3 class="mb-4 billing-heading">±¸¸ÅÁ¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä</h3>
+						<h3 class="mb-4 billing-heading">êµ¬ë§¤ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”</h3>
 						<div class="row align-items-end">
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">±¸¸ÅÈ¸¿ø</label> <input type="text"
+									<label for="firstname">êµ¬ë§¤íšŒì›</label> <input type="text"
 										class="form-control" name="id" id="id"
-										placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" value="${sessionScope.user.id }"
+										placeholder="ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" value="${sessionScope.user.id }"
 										readonly>
 								</div>
 							</div>
@@ -190,20 +190,20 @@
 							<div class="w-100"></div>
 							<div class="w-100"></div>
 
-							<h3 class="mb-4 billing-heading">&nbsp;&nbsp;¹è¼ÛÁöÁ¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä</h3>
+							<h3 class="mb-4 billing-heading">&nbsp;&nbsp;ë°°ì†¡ì§€ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”</h3>
 							<div class="w-100"></div>
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">¹Ş´ÂÀÌ</label> <input type="text"
+									<label for="firstname">ë°›ëŠ”ì´</label> <input type="text"
 										class="form-control" name="receiverName" id="receiverName"
-										placeholder="¹è¼Û¹Ş´ÂºĞ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ë°°ì†¡ë°›ëŠ”ë¶„ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 
 							<div class="w-100"></div>
 							<div class="col-sm-3">
-								<label for="firstname">¹è¼Û¿¬¶ôÃ³</label> <select
+								<label for="firstname">ë°°ì†¡ì—°ë½ì²˜</label> <select
 									class="form-control" name="receiverPhone2" id="receiverPhone1">
 									<option value="010">010</option>
 									<option value="011">011</option>
@@ -215,13 +215,13 @@
 							-
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="receiverPhone2"
-									name="receiverPhone2" placeholder="¹øÈ£" maxlength="4"
+									name="receiverPhone2" placeholder="ë²ˆí˜¸" maxlength="4"
 									style="height: 35px;">
 							</div>
 							-
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="receiverPhone3"
-									name="receiverPhone3" placeholder="¹øÈ£" maxlength="4"
+									name="receiverPhone3" placeholder="ë²ˆí˜¸" maxlength="4"
 									style="height: 35px;">
 							</div>
 							<input type="hidden" name="receiverPhone" />
@@ -231,34 +231,34 @@
 							<div class="w-100"></div>
 							<br />
 							<div class="col-sm-4">
-								<label for="firstname">ÁÖ¼Ò|¿ìÆí¹øÈ£</label> <input type="text"
-									class="form-control" id="sample6_postcode" placeholder="¹øÈ£"
+								<label for="firstname">ì£¼ì†Œ|ìš°í¸ë²ˆí˜¸</label> <input type="text"
+									class="form-control" id="sample6_postcode" placeholder="ë²ˆí˜¸"
 									style="height: 35px;">
 							</div>
-							&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="sample6_execDaumPostcode()" value="¿ìÆí¹øÈ£ Ã£±â">
+							&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="sample6_execDaumPostcode()" value="ìš°í¸ë²ˆí˜¸ ì°¾ê¸°">
 							<div class="w-100"></div>
 							<div class="col-sm-4">
 								<input type="text" class="form-control"
-									id="sample6_address" placeholder="ÁÖ¼Ò"
+									id="sample6_address" placeholder="ì£¼ì†Œ"
 									style="height: 35px;">
 							</div>
 							<div class="col-sm-4">
 								<input type="text" class="form-control"
-									id="sample6_extraAddress" placeholder="Âü°íÇ×¸ñ"
+									id="sample6_extraAddress" placeholder="ì°¸ê³ í•­ëª©"
 									style="height: 35px;">
 							</div>
 								<div class="col-sm-4">
 								<input type="text" class="form-control" id="sample6_detailAddress"
-									placeholder="»ó¼¼ÁÖ¼Ò" style="height: 35px;">
+									placeholder="ìƒì„¸ì£¼ì†Œ" style="height: 35px;">
 							</div>
 							<input type="hidden" name="receiverAddr" />
 
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">¹è¼Û¿äÃ»»çÇ×</label> <input type="text"
+									<label for="firstname">ë°°ì†¡ìš”ì²­ì‚¬í•­</label> <input type="text"
 										class="form-control" name="orderRequest" id="orderRequest"
-										placeholder="¹è¼Û¿äÃ»»çÇ×À» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ë°°ì†¡ìš”ì²­ì‚¬í•­ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<hr />
@@ -266,17 +266,17 @@
 
 							<div class="col-md-13">
 								<div class="form-group">
-									<label for="streetaddress">°áÁ¦¼ö´Ü</label> <select
+									<label for="streetaddress">ê²°ì œìˆ˜ë‹¨</label> <select
 										class="form-control" name="paymentCode" id="paymentCode">
-										<option value="1">¹«ÅëÀå°áÁ¦</option>
-										<option value="2">Ä«µå°áÁ¦</option>
+										<option value="1">ë¬´í†µì¥ê²°ì œ</option>
+										<option value="2">ì¹´ë“œê²°ì œ</option>
 									</select>
 								</div>
 							</div>
 						</div>
 						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">µî·ÏÇÏ±â</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">Ãë¼ÒÇÏ±â</a>
+							<a class="btn btn-primary py-3 px-4" id="addproduct">ë“±ë¡í•˜ê¸°</a>
+							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">ì·¨ì†Œí•˜ê¸°</a>
 						</p>
 
 						<!-- ////////////////////////////form tag end //////////////////////////////-->
@@ -292,46 +292,46 @@
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // ÆË¾÷¿¡¼­ °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºĞ.
+                // íŒì—…ì—ì„œ ê²€ìƒ‰ê²°ê³¼ í•­ëª©ì„ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  ì½”ë“œë¥¼ ì‘ì„±í•˜ëŠ” ë¶€ë¶„.
 
-                // °¢ ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-                // ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºĞ±â ÇÑ´Ù.
-                var addr = ''; // ÁÖ¼Ò º¯¼ö
-                var extraAddr = ''; // Âü°íÇ×¸ñ º¯¼ö
+                // ê° ì£¼ì†Œì˜ ë…¸ì¶œ ê·œì¹™ì— ë”°ë¼ ì£¼ì†Œë¥¼ ì¡°í•©í•œë‹¤.
+                // ë‚´ë ¤ì˜¤ëŠ” ë³€ìˆ˜ê°€ ê°’ì´ ì—†ëŠ” ê²½ìš°ì—” ê³µë°±('')ê°’ì„ ê°€ì§€ë¯€ë¡œ, ì´ë¥¼ ì°¸ê³ í•˜ì—¬ ë¶„ê¸° í•œë‹¤.
+                var addr = ''; // ì£¼ì†Œ ë³€ìˆ˜
+                var extraAddr = ''; // ì°¸ê³ í•­ëª© ë³€ìˆ˜
 
-                //»ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò Å¸ÀÔ¿¡ µû¶ó ÇØ´ç ÁÖ¼Ò °ªÀ» °¡Á®¿Â´Ù.
-                if (data.userSelectedType === 'R') { // »ç¿ëÀÚ°¡ µµ·Î¸í ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì
+                //ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œ íƒ€ì…ì— ë”°ë¼ í•´ë‹¹ ì£¼ì†Œ ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
+                if (data.userSelectedType === 'R') { // ì‚¬ìš©ìê°€ ë„ë¡œëª… ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°
                     addr = data.roadAddress;
-                } else { // »ç¿ëÀÚ°¡ Áö¹ø ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì(J)
+                } else { // ì‚¬ìš©ìê°€ ì§€ë²ˆ ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°(J)
                     addr = data.jibunAddress;
                 }
 
-                // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò°¡ µµ·Î¸í Å¸ÀÔÀÏ¶§ Âü°íÇ×¸ñÀ» Á¶ÇÕÇÑ´Ù.
+                // ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œê°€ ë„ë¡œëª… íƒ€ì…ì¼ë•Œ ì°¸ê³ í•­ëª©ì„ ì¡°í•©í•œë‹¤.
                 if(data.userSelectedType === 'R'){
-                    // ¹ıÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù. (¹ıÁ¤¸®´Â Á¦¿Ü)
-                    // ¹ıÁ¤µ¿ÀÇ °æ¿ì ¸¶Áö¸· ¹®ÀÚ°¡ "µ¿/·Î/°¡"·Î ³¡³­´Ù.
-                    if(data.bname !== '' && /[µ¿|·Î|°¡]$/g.test(data.bname)){
+                    // ë²•ì •ë™ëª…ì´ ìˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤. (ë²•ì •ë¦¬ëŠ” ì œì™¸)
+                    // ë²•ì •ë™ì˜ ê²½ìš° ë§ˆì§€ë§‰ ë¬¸ìê°€ "ë™/ë¡œ/ê°€"ë¡œ ëë‚œë‹¤.
+                    if(data.bname !== '' && /[ë™|ë¡œ|ê°€]$/g.test(data.bname)){
                         extraAddr += data.bname;
                     }
-                    // °Ç¹°¸íÀÌ ÀÖ°í, °øµ¿ÁÖÅÃÀÏ °æ¿ì Ãß°¡ÇÑ´Ù.
+                    // ê±´ë¬¼ëª…ì´ ìˆê³ , ê³µë™ì£¼íƒì¼ ê²½ìš° ì¶”ê°€í•œë‹¤.
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // Ç¥½ÃÇÒ Âü°íÇ×¸ñÀÌ ÀÖÀ» °æ¿ì, °ıÈ£±îÁö Ãß°¡ÇÑ ÃÖÁ¾ ¹®ÀÚ¿­À» ¸¸µç´Ù.
+                    // í‘œì‹œí•  ì°¸ê³ í•­ëª©ì´ ìˆì„ ê²½ìš°, ê´„í˜¸ê¹Œì§€ ì¶”ê°€í•œ ìµœì¢… ë¬¸ìì—´ì„ ë§Œë“ ë‹¤.
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                    // Á¶ÇÕµÈ Âü°íÇ×¸ñÀ» ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                    // ì¡°í•©ëœ ì°¸ê³ í•­ëª©ì„ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
                     document.getElementById("sample6_extraAddress").value = extraAddr;
                 
                 } else {
                     document.getElementById("sample6_extraAddress").value = '';
                 }
 
-                // ¿ìÆí¹øÈ£¿Í ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                // ìš°í¸ë²ˆí˜¸ì™€ ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
-                // Ä¿¼­¸¦ »ó¼¼ÁÖ¼Ò ÇÊµå·Î ÀÌµ¿ÇÑ´Ù.
+                // ì»¤ì„œë¥¼ ìƒì„¸ì£¼ì†Œ í•„ë“œë¡œ ì´ë™í•œë‹¤.
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();

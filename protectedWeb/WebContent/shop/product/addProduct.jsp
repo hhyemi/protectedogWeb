@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -8,10 +8,10 @@
 <html lang="ko">
    
 <head>
-<title> »óÇ° µî·Ï</title>
-   <meta charset="EUC-KR">
+<title> ìƒí’ˆ ë“±ë¡</title>
+   <meta charset="UTF-8">
    
-   <!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+   <!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -34,14 +34,14 @@
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//============= "µî·Ï"  Event ¿¬°á =============
+	//============= "ë“±ë¡"  Event ì—°ê²° =============
 	$(function() {
 
 		$("#addproduct").on(
 				"click",
 				function() {
 					
-				      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+				      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 			          $(function() {     
 			            var form = $('#uploadForm')[0];
 			            var formData = new FormData(form);
@@ -62,20 +62,20 @@
 			                data : formData,
 			                success : function(result) {
 			                    if (result === -1) {
-			                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-			                        // ÀÌÈÄ µ¿ÀÛ ...
+			                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+			                        // ì´í›„ ë™ì‘ ...
 			                    } else if (result === -2) {
-			                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-			                        // ÀÌÈÄ µ¿ÀÛ ...
+			                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+			                        // ì´í›„ ë™ì‘ ...
 			                    } else {
-			                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+			                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 			                    }
 			                }
 			            });
 			        });
 					
 					//Debug..
-					//alert(  $( "td.ct_btn01:contains('µî·Ï')" ).html() );
+					//alert(  $( "td.ct_btn01:contains('ë“±ë¡')" ).html() );
 					$("form[name='addForm']").attr("method", "POST").attr(
 							"action", "/product/addProduct").submit();
 					//fncAddProduct();
@@ -90,19 +90,19 @@
 
 	// 	});
 
-	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
+	//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
 		$("a[href='#' ]").on("click", function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).html() );
 			$("form")[0].reset();
 		});
 	});
 
 	function fncAddProduct() {
-		//Form À¯È¿¼º °ËÁõ
+		//Form ìœ íš¨ì„± ê²€ì¦
 
 		// 		var prodName=$("input[name='prodName']").val();
 		// 	 	//var name = document.detailForm.prodName.value;
@@ -114,22 +114,22 @@
 		// 		//var price = document.detailForm.price.value;
 
 		// 		if(prodName == null || prodName.length<1){
-		// 			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 
 		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		// 		if(price == null || price.length<1){
-		// 			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 	}
 
-	//============= ´Ş·Â  =============
+	//============= ë‹¬ë ¥  =============
 	$(function() {
 		$("input[name='manuDate']").datepicker({
 			dateFormat : 'yy-mm-dd'
@@ -152,7 +152,7 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="#">admin</a></span> <span>page</span>
 					</p>
-					<h1 class="mb-0 bread">PROTECTED | SHOP »óÇ°µî·Ï</h1>
+					<h1 class="mb-0 bread">PROTECTED | SHOP ìƒí’ˆë“±ë¡</h1>
 				</div>
 			</div>
 		</div>
@@ -171,79 +171,79 @@
 
 						<!--////////////////////////// form tag Start /////////////////////////////////-->
 
-						<h3 class="mb-4 billing-heading">»óÇ°Á¤º¸¸¦ µî·ÏÇØÁÖ¼¼¿ä</h3>
+						<h3 class="mb-4 billing-heading">ìƒí’ˆì •ë³´ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”</h3>
 						<div class="w-100"></div>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">»óÇ°¸í</label> <input type="text"
+									<label for="firstname">ìƒí’ˆëª…</label> <input type="text"
 										class="form-control" name="prodName" id="prodName"
-										placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">»óÇ°ÄÚµå</label> <input type="text"
+									<label for="firstname">ìƒí’ˆì½”ë“œ</label> <input type="text"
 										class="form-control" name="prodCode" id="prodCode"
-										placeholder="»óÇ°ÄÚµå¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ìƒí’ˆì½”ë“œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="lastname">°¡ °İ</label> <input type="text"
+									<label for="lastname">ê°€ ê²©</label> <input type="text"
 										class="form-control" name="price" id="price"
-										placeholder="°¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">¿ø»êÁö</label> <input type="text"
+									<label for="firstname">ì›ì‚°ì§€</label> <input type="text"
 										class="form-control" name="country" id="country"
-										placeholder="¿ø»êÁö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ì›ì‚°ì§€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="streetaddress">Á¦Á¶»ç</label> <input type="text"
+									<label for="streetaddress">ì œì¡°ì‚¬</label> <input type="text"
 										class="form-control" name="company" id="company"
-										placeholder="Á¦Á¶»ç¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ì œì¡°ì‚¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="streetaddress">Á¦Á¶ÀÏ</label> <input type="text"
+									<label for="streetaddress">ì œì¡°ì¼</label> <input type="text"
 										class="form-control" name="manuDate" id="manuDate"
-										placeholder="Á¦Á¶ÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ì œì¡°ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="towncity">ÇÒÀÎ¾×</label> <input type="text"
+									<label for="towncity">í• ì¸ì•¡</label> <input type="text"
 										class="form-control" name="discountPrice" id="discountPrice"
-										placeholder="»óÇ°ÀÇ ÇÒÀÎ°¡¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ìƒí’ˆì˜ í• ì¸ê°€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="postcodezip">Àç°í¼ö·®</label> <input type="text"
+									<label for="postcodezip">ì¬ê³ ìˆ˜ëŸ‰</label> <input type="text"
 										class="form-control" name="quantity" id="quantity"
-										placeholder="»óÇ°ÀÇ ÀÔ°í¼ö·®À» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ìƒí’ˆì˜ ì…ê³ ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="w-100"></div>
 							
 						
-            <!-- Ã·ºÎ ¹öÆ° -->
+            <!-- ì²¨ë¶€ ë²„íŠ¼ -->
             &nbsp;&nbsp;&nbsp;&nbsp;<div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">»çÁøµî·Ï</label></span>&nbsp;&nbsp;¸Ç¾Õ ÀÌ¹ÌÁö´Â ´ëÇ¥ÀÌ¹ÌÁöÀÔ´Ï´Ù. (ÃÖ´ë 8Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.)
-                <input id="uploadInputBox" style="display: none" type="file" value="µî·Ï" name="filedata"  />
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">ì‚¬ì§„ë“±ë¡</label></span>&nbsp;&nbsp;ë§¨ì• ì´ë¯¸ì§€ëŠ” ëŒ€í‘œì´ë¯¸ì§€ì…ë‹ˆë‹¤. (ìµœëŒ€ 8ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.)
+                <input id="uploadInputBox" style="display: none" type="file" value="ë“±ë¡" name="filedata"  />
             </div>
            <br/>
             
-            <!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+            <!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
             <div class="form-group">
             <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
             </div>
@@ -252,15 +252,15 @@
 						
 						<div class="col-md-6">
 								<div class="form-group">
-									<label for="postcodezip">»ó¼¼Á¤º¸</label> <input type="text"
+									<label for="postcodezip">ìƒì„¸ì •ë³´</label> <input type="text"
 										class="form-control" name="prodDetail" id="prodDetail"
-										placeholder="»óÇ°ÀÇ »ó¼¼Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+										placeholder="ìƒí’ˆì˜ ìƒì„¸ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 						</div>
 						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">µî·ÏÇÏ±â</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">Ãë¼ÒÇÏ±â</a>
+							<a class="btn btn-primary py-3 px-4" id="addproduct">ë“±ë¡í•˜ê¸°</a>
+							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">ì·¨ì†Œí•˜ê¸°</a>
 						</p>
 
 						<!-- ////////////////////////////form tag end //////////////////////////////-->
@@ -286,26 +286,26 @@
 	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
 	<script src="../../resources/prodmenu/js/main.js"></script>
-	<!-- ////////////////////´Ş·Â /////////////////////////////-->
+	<!-- ////////////////////ë‹¬ë ¥ /////////////////////////////-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<script>
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	   function fnAddFile(fileNameArray) {
 	         $("#multiFile").val(fileNameArray)    
 	   }   
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	       //ÀÓÀÇÀÇ file object¿µ¿ª
+	       //ì„ì˜ì˜ file objectì˜ì—­
 	     var files = {};
 	     var previewIndex = 0;
 	     var fileNameArray = new Array();
-	     // image preview ±â´É ±¸Çö
+	     // image preview ê¸°ëŠ¥ êµ¬í˜„
 	     // input = file object[]
 	     function addPreview(input) {
 	         if (input[0].files) {
-	             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
 	                 var file = input[0].files[fileIndex];
@@ -317,7 +317,7 @@
 	                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 	                
-	                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+	                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 	               var imgSelectName = "img";
 	               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 	                  imgSelectName = "iframe";
@@ -325,24 +325,24 @@
 
 	                 var reader = new FileReader();
 	                 reader.onload = function(img) {
-	                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                     
 	                     var imgNum = previewIndex++;
 	                     
-	                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                     if(Object.keys(files).length>=8){
-	                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                        delete files[imgNum];
 	                     }else{
-	               // 8Àå ÀÌÇÏ 
+	               // 8ì¥ ì´í•˜ 
 	                     $("#preview").append(
 	                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
 	                                             + "<span href=\"#\" value=\""
 	                                             + imgNum
 	                                             + "\" onclick=\"deletePreview(this)\">"
-	                                             + "   »èÁ¦" + "</span>" + "</div>");
+	                                             + "   ì‚­ì œ" + "</span>" + "</div>");
 
 	                     files[imgNum] = file;
 	                     fileNameArray[imgNum]=file.name;
@@ -354,10 +354,10 @@
 	                 reader.readAsDataURL(file);
 	             }
 	         } else
-	             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	     }
 
-	     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	     function deletePreview(obj) {
 	         var imgNum = obj.attributes['value'].value;
 	         delete files[imgNum];
@@ -367,14 +367,14 @@
 	         //resizeHeight();
 	     }
 
-	     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	     function validation(fileName) {
 	         fileName = fileName + "";
 	         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	             return true;
 	         } else {
 	             return false;
@@ -385,9 +385,9 @@
 	    	 
 	         $(document).ready(function() {
 
-	             //============= »çÁø¹Ì¸®º¸±â =============
+	             //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
 	             $('#attach input[type=file]').change(function() {
-	                addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+	                addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
 	            });
 	     });
 	     

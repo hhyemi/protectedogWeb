@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-//==> È¸¿ø°ü¸® Controller
+//==> íšŒì›ê´€ë¦¬ Controller
 @Controller
 @RequestMapping("/order/*")
 public class OrderController {
@@ -32,7 +32,7 @@ public class OrderController {
 	@Autowired
 	@Qualifier("orderServiceImpl")
 	private OrderService orderService;
-	// setter Method ±¸Çö ¾ÊÀ½
+	// setter Method êµ¬í˜„ ì•ŠìŒ
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
@@ -45,8 +45,8 @@ public class OrderController {
 	}
 
 	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
+		// classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
+		// ==> ì•„ë˜ì˜ ë‘ê°œë¥¼ ì£¼ì„ì„ í’€ì–´ ì˜ë¯¸ë¥¼ í™•ì¸ í• ê²ƒ
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
@@ -60,7 +60,7 @@ public class OrderController {
 		System.out.println("/addPurchaseView.do");
 		
 		Product product = productService.getProduct(prodNo);
-		System.out.println("±¸¸ÅÁøÀÔÇß½À´Ï´Ù ±¸¸Å GET/////////////////////////");
+		System.out.println("Order GET/////////////////////////");
 		
 		model.addAttribute("product", product);
 		
@@ -69,14 +69,13 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="addOrder", method=RequestMethod.POST)
-	public String addOrder(@RequestParam("prodNo") int prodNo, 
+	public String addOrder(@ModelAttribute("order")Order order, @RequestParam("prodNo") int prodNo, 
 			@RequestParam("id") String id) throws Exception {
 		
 		
 		System.out.println("/addOrder");
-		User user = userService.getUsers(id);
+		User user=new User();
 		Product product = productService.getProduct(prodNo);
-		Order order=new Order();
 		System.out.println(order);
 		order.setId(user);
 		order.setProdNo(product);
@@ -122,7 +121,7 @@ public class OrderController {
 		
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = orderService.listOrder(search, id);
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -169,9 +168,6 @@ public class OrderController {
 		orderService.updateOrder(order);
 		
 		
-		
-		
-		
 		return "redirect:/shop/order/getOrder?orderNo="+order.getOrderNo();
 	}
 }
@@ -199,7 +195,7 @@ public class OrderController {
 //		Purchase purchase = purchaseService.getPurchase(tranNo);
 //		model.addAttribute("purchase", purchase);
 //		
-//		// Model °ú View ¿¬°á
+//		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 //
 //		return "forward:/purchase/deletePurchaseView.jsp";
 //	}
