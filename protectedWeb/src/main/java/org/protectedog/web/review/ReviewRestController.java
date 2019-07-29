@@ -1,6 +1,7 @@
 package org.protectedog.web.review;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,14 +40,14 @@ public class ReviewRestController {
 	}
 
 	@RequestMapping(value = "json/addHospitalReview/", method = RequestMethod.POST)
-	public Review addHospitalReview(@RequestBody Map<String,Object> mapReview , HttpSession session) throws Exception {
+	public Map<String, Object> addHospitalReview(@RequestBody Map<String,Object> mapReview , HttpSession session) throws Exception {
 
 		System.out.println("/review/json/addHospitalReview : POST");
 
 		int grade = Integer.parseInt((String) mapReview.get("grade"));
 		User user = (User)session.getAttribute("user");
 
-		//¸®ºä µğºñ¿¡ ³Ö±â
+		//ë¦¬ë·° ë””ë¹„ì— ë„£ê¸°
 		Review review = new Review();
 		review.setId(user.getId());
 		review.setNickname(user.getNickname());
@@ -60,7 +61,7 @@ public class ReviewRestController {
 		review = reviewService.getReview(review.getPostNo());
 		
 		
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		String[] fileList =  mapReview.get("file").toString().split(",");
 		
@@ -78,6 +79,16 @@ public class ReviewRestController {
 		}
 		fileService.addFile(listFile);
 		
-		return review;
+		// íŒŒì¼ê°€ì ¸ì˜¤ê¸°
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", hospitalCode);
+		filePost.put("postNo", review.getPostNo());
+		List<FileDog> file = fileService.getFile(filePost);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("review", review);
+		map.put("file", file);
+		
+		return map;
 	}
 }

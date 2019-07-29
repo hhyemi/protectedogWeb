@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadRestController {
 
 	/// Filed
-	/* °¢ °Ô½ÃÆÇ º° ÆÄÀÏ ¾÷·Îµå °æ·Î */
+	/* ê° ê²Œì‹œíŒ ë³„ íŒŒì¼ ì—…ë¡œë“œ ê²½ë¡œ */
 	@Value("#{commonProperties['fileSF']}")
 	String fileSFRoot;
 
@@ -63,7 +63,7 @@ public class FileUploadRestController {
 			String fileName = image.getOriginalFilename();
 
 			try {
-				// ÇØ´ç °æ·Î¿¡ ¸Â°Ô ÀúÀå
+				// í•´ë‹¹ ê²½ë¡œì— ë§ê²Œ ì €ì¥
 				if (boardCode.equals("SF")) {
 					File f = new File(fileSFRoot, fileName);
 					image.transferTo(f);
@@ -108,8 +108,8 @@ public class FileUploadRestController {
 				
 			
 			} catch (IOException e) {
-				// ÀúÀå ¿À·ù ¸Ş½ÃÁö
-				System.out.println(" ÆÄÀÏ ¾÷·Îµå °úÁ¤¿¡¼­ ¹®Á¦°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù. È®ÀÎ ÈÄ ´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä.");
+				// ì €ì¥ ì˜¤ë¥˜ ë©”ì‹œì§€
+				System.out.println(" íŒŒì¼ ì—…ë¡œë“œ ê³¼ì •ì—ì„œ ë¬¸ì œê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤. í™•ì¸ í›„ ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”.");
 				e.printStackTrace();
 			}
 		}

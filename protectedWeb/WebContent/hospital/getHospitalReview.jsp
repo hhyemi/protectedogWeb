@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>º¸È£ÇÒ°³ ¡¤ µ¿¹°º´¿ø</title>
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<title>ë³´í˜¸í• ê°œ Â· ë™ë¬¼ë³‘ì›</title>
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -22,21 +23,16 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
-
-<!-- jQuery UI toolTip »ç¿ë CSS-->
+<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip »ç¿ë JS-->
+<!-- jQuery UI toolTip ì‚¬ìš© JS-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- ckeditor »ç¿ë CSS-->
+<!-- ckeditor ì‚¬ìš© CSS-->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+
 <style>
 		.starR {
 			background:
@@ -55,21 +51,30 @@
 		}
 		
 		.ck.ck-editor {
-			min-width: 740px;
+			min-width: 700px;
 		}
 		
 		.ck-editor__editable {
 			text-align: left;
 			min-height: 200px;
-			min-width: 740px;
+			min-width: 700px;
 		}
-       @font-face{
-          font-family: NanumSquare;
-          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
-       }
-       body{
-          font-family: NanumSquare, sans-serif !important;
-       }
+
+/* 	   button { */
+/* 		  background-color: #f04f23; */
+/* 		  border: none; */
+/* 		  color: white; */
+/* 		  padding: 16px 32px; */
+/* 		  text-align: center; */
+/* 		  font-size: 16px; */
+/* 		  margin: 4px 2px; */
+/* 		  opacity: 0.6; */
+/* 		  transition: 0.3s; */
+/* 		  display: inline-block; */
+/* 		  text-decoration: none; */
+/* 		  cursor: pointer; */
+/* 		} */
+/*          button:hover {opacity: 1} */
 </style>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
@@ -80,83 +85,87 @@
 
 	<div class="container">
 		<form id="uploadForm" class="form-horizontal">
-			<div class="hero-wrap hero-bread"
-				style="padding-bottom: 0px; padding-top: 10px;">
-				<div class="container">
-					<div
-						class="row no-gutters slider-text align-items-center justify-content-center">
-						<div class="col-md-9 ftco-animate text-center">
-							<p class="breadcrumbs">
-								<span class="mr-2"><a href="/index.jsp">Animal
-										Hospital</a></span>
-							</p>
-							<h1 class="mb-0 bread">µ¿¹°º´¿ø</h1>
-						</div>
-					</div>
-				</div>
-			</div>
+		
+			    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+		      <div class="container">
+		        <div class="row no-gutters slider-text align-items-center justify-content-center">
+		          <div class="col-md-9 ftco-animate text-center">
+		          	<p ><span class="mr-2"><a href="index.html">Animal</a></span> <span>Hospital</span></p>
+		            <font size="7">ë™ë¬¼ë³‘ì› ê²€ ìƒ‰</font>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+			<br/><p/>
+		
 			<br />
 			<p />
 			<div id="map" style="width: 100%; height: 350px;"></div>
-			<br /> <font size="6" color="#252236">${placeList.placeName}</font> <br />
+			<br /> <font size="6" ><b>${placeList.placeName}</b></font> <br />
 			<p/><hr/>
-			<h1>µµ·Î¸íÁÖ¼Ò</h1>
+			 <font size="6" >ë„ë¡œëª…ì£¼ì†Œ</font><br/>
 			${placeList.placeAddr } <br />
 			<br />
-			<h1>Áö¹øÁÖ¼Ò</h1>
+		    <font size="6" >ì§€ë²ˆì£¼ì†Œ</font><br/>
 			${placeList.placeJIAddr } <br />
 			<br />
-			<h1>¿¬¶ôÃ³</h1>
+		    <font size="6" >ì—°ë½ì²˜</font><br/>
 			<font size="4" color="#d65a5a">${placeList.placeTel}</font> <br />
 			<p/><hr/>
-			<h1>µ¿¹°º´¿øÈÄ±â</h1>
-			<p />
-			»ç¿ëÀÚ ÈÄ±â [ ${resultPage.totalCount}°Ç ] &ensp;
+		    <font size="6" >ë™ë¬¼ë³‘ì›í›„ê¸°</font><br/>
+			ì‚¬ìš©ì í›„ê¸° [ ${resultPage.totalCount}ê±´ ] &ensp;
 
 			<!-- Button trigger modal -->
 				<c:if test="${user == null }">
-				<button type="button" class="btn btn-primary" id="nonMember">ÈÄ±âµî·Ï</button>
+				<button type="button" class="btn btn-default" id="nonMember">í›„ê¸°ë“±ë¡</button>
 				</c:if>
 				<c:if test="${user != null }">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">ÈÄ±âµî·Ï</button>
-				</c:if>
-				<p/>
-				<p>ÈÄ±â Æò±Õ ÆòÁ¡ :&ensp; 
-					  <span class="evgStarR" >¡Ù</span>
-					  <span class="evgStarR" >¡Ù</span>
-					  <span class="evgStarR">¡Ù</span>
-					  <span class="evgStarR">¡Ù</span>
-					  <span class="evgStarR">¡Ù</span>			
-				</p>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">í›„ê¸°ë“±ë¡</button>
+				</c:if><br/>
+				í›„ê¸° í‰ê·  í‰ì  :&ensp; 
+					  <span class="evgStarR" >â˜†</span>
+					  <span class="evgStarR" >â˜†</span>
+					  <span class="evgStarR">â˜†</span>
+					  <span class="evgStarR">â˜†</span>
+					  <span class="evgStarR">â˜†</span>			
+				
 
 				<div id="ListDiv" >
 				  <c:forEach var="review" items="${list}">
-				  <div style="background-color: #f0f0f0; padding-left:20px"   >
+				  
+				  <div style="background-color: #f7f7f7; padding-left:20px"   >
 				  			<hr/>
-							  <h3>${review.postTitle}</h3>
-							  <b>${review.nickname }</b>
-							  
+							   <font size="5" >${review.postTitle}</font><br/>
+							  <b>${review.nickname }</b>				
 							  &emsp;${review.regDate }
-							&emsp;
+						      &emsp;
 							<c:if test="${review.grade eq 1 }">
-									<strong class="text-danger">¡Ú¡Ù¡Ù¡Ù¡Ù</strong> <strong>1</strong>
+									<strong class="text-danger">â˜…â˜†â˜†â˜†â˜†</strong> <strong>1</strong>
 							</c:if>
 							<c:if test="${review.grade eq 2}">
-									<strong class="text-danger">¡Ú¡Ú¡Ù¡Ù¡Ù</strong> <strong>2</strong>
+									<strong class="text-danger">â˜…â˜…â˜†â˜†â˜†</strong> <strong>2</strong>
 							</c:if>
 							<c:if test="${review.grade eq 3 }">
-									<strong class="text-danger">¡Ú¡Ú¡Ú¡Ù¡Ù</strong> <strong>3</strong>
+									<strong class="text-danger">â˜…â˜…â˜…â˜†â˜†</strong> <strong>3</strong>
 							</c:if>
 							<c:if test="${review.grade eq 4}">
-									<strong class="text-danger">¡Ú¡Ú¡Ú¡Ú¡Ù</strong> <strong>4</strong>
+									<strong class="text-danger">â˜…â˜…â˜…â˜…â˜†</strong> <strong>4</strong>
 							</c:if>
 							<c:if test="${review.grade eq 5}">
-									<strong class="text-danger">¡Ú¡Ú¡Ú¡Ú¡Ú</strong> <strong>5</strong>
+									<strong class="text-danger">â˜…â˜…â˜…â˜…â˜…</strong> <strong>5</strong>
 							</c:if>	
+							<p>
 							${review.postContent }
-							´õº¸±â<i class="glyphicon glyphicon-menu-down"></i>
-			        
-			          </div></c:forEach>
+
+						  <c:forEach var="file" items="${file}">
+						  	<c:if test="${file.postNo == review.postNo }">
+		                    <img src="/resources/file/fileHospital/${file.fileName}" height="100px;" width="100px" >				  		
+						  	</c:if>
+						  </c:forEach>
+						  <br/>&emsp;			          
+			        	</div>
+				  			
+			        </c:forEach>
           					
 				</div>				
 				<hr/>	
@@ -165,7 +174,7 @@
 				<div class="modal-dialog modal-lg">
 				    <div class="modal-content ">
 				      <div class="modal-header">
-				        <h4 class="modal-title" id="myModalLabel" style="padding-left:20px">µ¿¹°º´¿ø ÈÄ±â</h4>
+				        <h4 class="modal-title" id="myModalLabel" style="padding-left:20px">ë™ë¬¼ë³‘ì› í›„ê¸°</h4>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				      </div>
 				      <div class="modal-body">
@@ -175,33 +184,33 @@
 							  <span class="starR">3</span>
 							  <span class="starR">4</span>
 							  <span class="starR">5</span>
-							  <font size="4" color="#000000" id = "starText">0/5 Æò°¡ÇØÁÖ¼¼¿ä</font>
+							  <font size="4" color="#000000" id = "starText">0/5 í‰ê°€í•´ì£¼ì„¸ìš”</font>
 						   </div>
 						<p/>				      
 						  <div class="row" style="padding-left:35px">
-							 <input type="text" id="postTitle" name="postTitle"  placeholder="ÈÄ±âÁ¦¸ñÀ» ÀÛ¼ºÇØÁÖ¼¼¿ä." style="width:740px; height:35px;">		
+							 <input type="text" id="postTitle" name="postTitle"  placeholder="í›„ê¸°ì œëª©ì„ ì‘ì„±í•´ì£¼ì„¸ìš”." style="width:740px; height:35px;">		
 						  </div>
 						  <p/>					      
 						  <div class="row" style="padding-left:35px">
-							 <textarea id="postContent" name="postContent" style="text-align: left;"  placeholder="ÈÄ±â³»¿ëÀ» ÀÛ¼ºÇØÁÖ¼¼¿ä." ></textarea>
+							 <textarea id="postContent" name="postContent" style="text-align: left;"  placeholder="í›„ê¸°ë‚´ìš©ì„ ì‘ì„±í•´ì£¼ì„¸ìš”." ></textarea>
 					      </div>	
 							<p/>
-			            <!-- Ã·ºÎ ¹öÆ° -->
+			            <!-- ì²¨ë¶€ ë²„íŠ¼ -->
 			            <div id="attach" class="form-group" style="padding-left:35px">
-			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">»çÁøµî·Ï</label></span>&nbsp;&nbsp;ÃÖ´ë 3Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.
-			                <input id="uploadInputBox" style="display: none" type="file" value="µî·Ï" name="filedata"  />
+			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">ì‚¬ì§„ë“±ë¡</label></span>&nbsp;&nbsp;ìµœëŒ€ 3ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.
+			                <input id="uploadInputBox" style="display: none" type="file" value="ë“±ë¡" name="filedata"  />
 			            </div>
 			           <br/>
 
-			            <!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+			            <!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
 			            <div class="form-group" style="padding-left:35px">
 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
 			            </div>
 				   
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Ãë¼Ò</button>
-				        <button type="button" class="btn btn-primary" id="btn-add"> µî·Ï</button>
+				        <button class="btn btn-default" data-dismiss="modal">ì·¨ì†Œ</button>
+				        <button type="button" class="btn btn-default" id="btn-add"> ë“±ë¡</button>
 				  </div>
 				</div>
 				
@@ -224,47 +233,36 @@
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<!-- footer End /////////////////////////////////////-->
 	<!--================ End footer Area  =================-->
-	<script src="../../resources/prodmenu/js/popper.min.js"></script>
-	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
-	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-	<script src="../../resources/prodmenu/js/aos.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
-	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
-	<script src="../../resources/prodmenu/js/main.js"></script>
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=153d14a106a978cdc7a42f3f236934a6&libraries=services"></script>
 	<script>
 	
-	   //============= µî·Ï¹öÆ° ´­·¶À»¶§ ÇÔ¼ö =============      
+	   //============= ë“±ë¡ë²„íŠ¼ ëˆŒë €ì„ë•Œ í•¨ìˆ˜ =============      
 	   function fncAddReview(){
 	      
-	      //Form À¯È¿¼º °ËÁõ
+	      //Form ìœ íš¨ì„± ê²€ì¦
 		  $('textarea').val(editor.getData());
 	      var grade = $("#grade").val();	  
 	      var postTitle = $("input[name=postTitle]").val();
 	      var postContent = $('textarea').val()
 		
 	      if(grade == ''){
-	         alert("Æò°¡Á¡¼ö´Â ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+	         alert("í‰ê°€ì ìˆ˜ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 	         return;
 	      }	      
 	      if(postTitle == null || postTitle.length<1){
-	          alert("ÈÄ±âÁ¦¸ñÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+	          alert("í›„ê¸°ì œëª©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 	          $('input[name="postTitle"]').focus();
 	          return;
 	       }
 	      if(postContent == ''){
-	         alert("ÈÄ±â³»¿ëÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+	         alert("í›„ê¸°ë‚´ìš©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 	         $("textarea[name=postContent]").focus();
 	         return;
 	      }
       
-	      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+	      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
             var formData = new FormData(form);
@@ -272,7 +270,7 @@
             for (var index = 0; index < 100; index++) {
                 formData.append('files',files[index]);
             }
-                //////////////ÆÄÀÏÀúÀå///////////////
+                //////////////íŒŒì¼ì €ì¥///////////////
                 $.ajax({
                 type : 'POST',
                 enctype : 'multipart/form-data',
@@ -285,19 +283,19 @@
                 data : formData,
                 success : function(result) {
                     if (result === -1) {
-                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-                        // ÀÌÈÄ µ¿ÀÛ ...
+                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                        // ì´í›„ ë™ì‘ ...
                     } else if (result === -2) {
-                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-                        // ÀÌÈÄ µ¿ÀÛ ...
+                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+                        // ì´í›„ ë™ì‘ ...
                     } else {
-                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
                     }
                 }
             });
                 
 
-                //////////////¸®ºäµî·Ï///////////////          
+                //////////////ë¦¬ë·°ë“±ë¡///////////////          
 	   		        $.ajax({
 	   		        	url : "/review/json/addHospitalReview/",
 	   		            method :  "POST" ,
@@ -315,9 +313,39 @@
 	   					}),
 	   					
 	   		             success : function(JSONData) {
-	   		            	//alert(JSONData.grade);
+	   		            	 
+	   		            	 var review = JSONData.review;
+	   		            	 var file = JSONData.file;
+	   		            	 
+	   		            	 
+	   		            	 
 	   		            	$('#myModal').modal("hide");
-	   	
+	   		            	var display = "<div style=\"background-color: #f7f7f7; padding-left:20px\">";
+	   						 display += "<hr/> <font size=\"5\" >"+review.postTitle+"</font><br/>"+
+											"<b>"+review.nickname+"</b>"+
+											" &emsp;"+review.regDate+"&emsp;";
+							if(review.grade==1){
+								display += 	"<strong class=\"text-danger\">â˜…â˜†â˜†â˜†â˜†</strong> <strong>1</strong>";								
+							}else if(review.grade==2){
+								display += 	"<strong class=\"text-danger\">â˜…â˜†â˜†â˜†â˜†</strong> <strong>2</strong>";			
+							}else if(review.grade==3){
+								display += 	"<strong class=\"text-danger\">â˜…â˜†â˜†â˜†â˜†</strong> <strong>3</strong>";											
+							}else if(review.grade==4){
+								display += 	"<strong class=\"text-danger\">â˜…â˜†â˜†â˜†â˜†</strong> <strong>4</strong>";											
+							}else if(review.grade==5){
+								display += 	"<strong class=\"text-danger\">â˜…â˜†â˜†â˜†â˜†</strong> <strong>5</strong>";										
+							}
+							   display += "<p>"+review.postContent;
+							
+							$.each(file, function(index, file){   
+
+								if(file.postNo == review.postNo){
+									display += 	"<img src=\"/resources/file/fileHospital/"+file.fileName+"\" height=\"100px;\" width=\"100px\" > <br/>&emsp;</div>";  											
+								}   
+								
+							});
+						 
+							$("#ListDiv").prepend(display);
 	   		            }  
 	   			  });                
         });
@@ -348,22 +376,22 @@
 		        console.error( error );
 		    } );
 	
-		   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+		   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 		   function fnAddFile(fileNameArray) {
 		         $("#multiFile").val(fileNameArray)    
 		   }   
 		   
-		   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+		   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-		       //ÀÓÀÇÀÇ file object¿µ¿ª
+		       //ì„ì˜ì˜ file objectì˜ì—­
 		     var files = {};
 		     var previewIndex = 0;
 		     var fileNameArray = new Array();
-		     // image preview ±â´É ±¸Çö
+		     // image preview ê¸°ëŠ¥ êµ¬í˜„
 		     // input = file object[]
 		     function addPreview(input) {
 		         if (input[0].files) {
-		             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+		             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 		             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
 		                 var file = input[0].files[fileIndex];
@@ -375,7 +403,7 @@
 		                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 		                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 		                
-		                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+		                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 		               var imgSelectName = "img";
 		               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 		                  imgSelectName = "iframe";
@@ -383,24 +411,24 @@
 
 		                 var reader = new FileReader();
 		                 reader.onload = function(img) {
-		                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-		                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+		                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+		                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 		                     
 		                     var imgNum = previewIndex++;
 		                     
-		                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+		                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 		                     if(Object.keys(files).length>=3){
-		                        alert("»çÁøÀº 3Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+		                        alert("ì‚¬ì§„ì€ 3ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 		                        delete files[imgNum];
 		                     }else{
-		               // 8Àå ÀÌÇÏ 
+		               // 8ì¥ ì´í•˜ 
 		                     $("#preview").append(
 		                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 		                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
 		                                             + "<span href=\"#\" value=\""
 		                                             + imgNum
 		                                             + "\" onclick=\"deletePreview(this)\">"
-		                                             + "   »èÁ¦" + "</span>");
+		                                             + "   ì‚­ì œ" + "</span>");
 
 		                     files[imgNum] = file;
 		                     fileNameArray[imgNum]=file.name;
@@ -412,10 +440,10 @@
 		                 reader.readAsDataURL(file);
 		             }
 		         } else
-		             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+		             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 		     }
 
-		     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+		     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 		     function deletePreview(obj) {
 		         var imgNum = obj.attributes['value'].value;
 		         delete files[imgNum];
@@ -425,14 +453,14 @@
 		         //resizeHeight();
 		     }
 
-		     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+		     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 		     function validation(fileName) {
 		         fileName = fileName + "";
 		         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 		         var fileNameExtension = fileName.toLowerCase().substring(
 		                 fileNameExtensionIndex, fileName.length);
 		         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-		             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+		             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 		             return true;
 		         } else {
 		             return false;
@@ -441,47 +469,47 @@
 		     
 		       $(document).ready(function() {
 
-		           //============= »çÁø¹Ì¸®º¸±â =============
+		           //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
 		           $('#attach input[type=file]').change(function() {
-		              addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+		              addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
 		          });
 		       });
 		       
 		   //============= "MAP" =============     
-		var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
+		var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
 		mapOption = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
+			center : new kakao.maps.LatLng(33.450701, 126.570667), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
 			level : 3
-		// ÁöµµÀÇ È®´ë ·¹º§
+		// ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
 		};
 
-		//Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù    
+		//ì§€ë„ë¥¼ ìƒì„±í•©ë‹ˆë‹¤    
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 
-		//ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
+		//ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
 		var geocoder = new kakao.maps.services.Geocoder();
 
-		//ÁÖ¼Ò·Î ÁÂÇ¥¸¦ °Ë»öÇÕ´Ï´Ù
+		//ì£¼ì†Œë¡œ ì¢Œí‘œë¥¼ ê²€ìƒ‰í•©ë‹ˆë‹¤
 		geocoder.addressSearch('${placeList.placeAddr}', function(result,
 				status) {
 
-			// Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é 
+			// ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´ 
 			if (status === kakao.maps.services.Status.OK) {
 
 				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-				// °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡¸¦ ¸¶Ä¿·Î Ç¥½ÃÇÕ´Ï´Ù
+				// ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¥¼ ë§ˆì»¤ë¡œ í‘œì‹œí•©ë‹ˆë‹¤
 				var marker = new kakao.maps.Marker({
 					map : map,
 					position : coords
 				});
 
-				// ÁöµµÀÇ Áß½ÉÀ» °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡·Î ÀÌµ¿½ÃÅµ´Ï´Ù
+				// ì§€ë„ì˜ ì¤‘ì‹¬ì„ ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¡œ ì´ë™ì‹œí‚µë‹ˆë‹¤
 				map.setCenter(coords);
 			}
 		});
 		
-		 //============= "º°Á¡" =============     
+		 //============= "ë³„ì " =============     
 		$('.starRev span').hover(function(){
 			  $(this).parent().children('span').removeClass('on');
 			  $(this).addClass('on').prevAll('span').addClass('on');
@@ -489,15 +517,15 @@
 			  var sNum = $(this).parent().children('span.starR.on').length;
 			  var sText = null;
 			  if(sNum==1){
-				  sText = "1/5 º°·Î¿¹¿ä"
+				  sText = "1/5 ë³„ë¡œì˜ˆìš”"
 			  }else if (sNum==2){
-				  sText = "2/5 Á¶±İ ¾Æ½¬¿ö¿ä";				  
+				  sText = "2/5 ì¡°ê¸ˆ ì•„ì‰¬ì›Œìš”";				  
 			  }else if(sNum ==3){
-				  sText = "3/5 º¸ÅëÀÌ¿¡¿ä";
+				  sText = "3/5 ë³´í†µì´ì—ìš”";
 			  }else if(sNum==4){
-				  sText = "4/5 ÁÁ¾Æ¿ä";
+				  sText = "4/5 ì¢‹ì•„ìš”";
 			  }else{
-				  sText = "5/5 ÃÖ°í¿¹¿ä";
+				  sText = "5/5 ìµœê³ ì˜ˆìš”";
 			  }
 
 			  $("#starText").text(sText);
@@ -507,11 +535,11 @@
 
 		
 		   $(function() {
-		         //============= ºñÈ¸¿øÀÏ¶§ ÈÄ±â¸ğ´Ş Event  Ã³¸® =============   
+		         //============= ë¹„íšŒì›ì¼ë•Œ í›„ê¸°ëª¨ë‹¬ Event  ì²˜ë¦¬ =============   
 		         $( "#nonMember" ).on("click" , function() {   
-		        	alert("·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.")
+		        	alert("ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.")
 		        });		      
-		         //============= µî·Ï Event  Ã³¸® =============   
+		         //============= ë“±ë¡ Event  ì²˜ë¦¬ =============   
 		         $( "#btn-add" ).on("click" , function() {   
 		        	fncAddReview();
 		        });

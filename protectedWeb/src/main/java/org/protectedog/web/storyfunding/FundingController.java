@@ -79,9 +79,9 @@ public class FundingController {
 	@Value("#{commonProperties['SFTermsFive']}")
 	String SFTermsFive;
 
-	/////////////// ¾à°üº¸±â /////////////////////
+	/////////////// ì•½ê´€ë³´ê¸° /////////////////////
 
-	// ¾à°üº¸±â
+	// ì•½ê´€ë³´ê¸°
 	@RequestMapping(value = "getTerms", method = RequestMethod.GET)
 	public String getTerms(@RequestParam("termsTitle") String termsTitle, @RequestParam("postNo") String postNo,
 			Model model, HttpSession session) throws Exception {
@@ -96,11 +96,11 @@ public class FundingController {
 		termsList.add(SFTermsFive);
 
 		if (termsTitle.equals("SFPost")) {
-			termsTitle = "ÈÄ¿ø½ÅÃ»±Û";
+			termsTitle = "í›„ì›ì‹ ì²­ê¸€";
 		} else if (termsTitle.equals("SFVote")) {
-			termsTitle = "ÅõÇ¥ÇÏ±â";
+			termsTitle = "íˆ¬í‘œí•˜ê¸°";
 		} else if (termsTitle.equals("SFFund")) {
-			termsTitle = "ÈÄ¿øÇÏ±â";
+			termsTitle = "í›„ì›í•˜ê¸°";
 		}
 
 		model.addAttribute("termsList", termsList);
@@ -110,29 +110,29 @@ public class FundingController {
 		return "forward:/funding/getTerms.jsp";
 	}
 
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ»°Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING í›„ì›ì‹ ì²­ê²Œì‹œíŒ /////////////////////
 
-	// Æİµù ±Û ÀÛ¼º
+	// í€ë”© ê¸€ ì‘ì„±
 	@RequestMapping(value = "addVoting", method = RequestMethod.GET)
 	public String addVoting(HttpSession session, Model model) throws Exception {
 
 		System.out.println("/funding/addVoting : GET");
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
 
 		return "redirect:/funding/addVoting.jsp";
 	}
 
-	// Æİµù ±Û µî·Ï
+	// í€ë”© ê¸€ ë“±ë¡
 	@RequestMapping(value = "addVoting", method = RequestMethod.POST)
 	public String addVoting(@RequestParam("multiFile") ArrayList<String> multiFile,
 			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
 		System.out.println("/funding/addVoting : POST");
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 		funding.setId(user.getId());
 		funding.setNickname(user.getNickname());
@@ -147,7 +147,7 @@ public class FundingController {
 
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 		for (String fileName : multiFile) {
 
 			if (fileName != null && fileName.length() > 0) {
@@ -165,29 +165,29 @@ public class FundingController {
 		return "redirect:/funding/getVoting?postNo=" + funding.getPostNo();
 	}
 
-	// Æİµù ±Û È®ÀÎ
+	// í€ë”© ê¸€ í™•ì¸
 	@RequestMapping(value = "getVoting", method = RequestMethod.GET)
 	public String getVoting(@ModelAttribute("search") Search search, @RequestParam("postNo") int postNo, Model model,
 			HttpSession session) throws Exception {
 
 		System.out.println("/funding/getVoting ");
 
-		// Á¶È¸¼ö Áõ°¡
+		// ì¡°íšŒìˆ˜ ì¦ê°€
 		Funding voteViewFunding = new Funding();
 		voteViewFunding.setPostNo(postNo);
 		voteViewFunding.setVoteViewCount(1);
 		fundingService.updateStatusCode(voteViewFunding);
 
-		// ±Û °¡Á®¿À±â
+		// ê¸€ ê°€ì ¸ì˜¤ê¸°
 		Funding funding = fundingService.getVoting(postNo);
 
-		// ÆÄÀÏ°¡Á®¿À±â
+		// íŒŒì¼ê°€ì ¸ì˜¤ê¸°
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", postNo);
 		List<FileDog> file = fileService.getFile(filePost);
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 
 		if (search.getCurrentPage() == 0) {
@@ -203,7 +203,7 @@ public class FundingController {
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
-		// ´ñ±Û
+		// ëŒ“ê¸€
 		model.addAttribute("list", map.get("list"));
 		// model.addAttribute("resultPage", resultPage);
 		// model.addAttribute("search", search);
@@ -211,7 +211,7 @@ public class FundingController {
 		return "forward:/funding/getVoting.jsp";
 	}
 
-	// Æİµù ±Û ¼öÁ¤ÀÛ¼º
+	// í€ë”© ê¸€ ìˆ˜ì •ì‘ì„±
 	@RequestMapping(value = "updateVoting", method = RequestMethod.GET)
 	public String updateVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
@@ -231,7 +231,7 @@ public class FundingController {
 		return "forward:/funding/updateVoting.jsp";
 	}
 
-	// Æİµù ±Û ¼öÁ¤µî·Ï
+	// í€ë”© ê¸€ ìˆ˜ì •ë“±ë¡
 	@RequestMapping(value = "updateVoting", method = RequestMethod.POST)
 	public String updateVoting(@ModelAttribute("funding") Funding funding,
 			@RequestParam("multiFile") ArrayList<String> multiFile,
@@ -252,7 +252,7 @@ public class FundingController {
 		if (multiFile.size() != 0) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
 
-			// ÆÄÀÏµğºñ¿¡³Ö±â
+			// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 			for (String fileName : multiFile) {
 
 				if (fileName != null && fileName.length() > 0) {
@@ -268,7 +268,7 @@ public class FundingController {
 			fileService.addFile(listFile);
 		}
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 		funding.setId(user.getId());
 		funding.setNickname(user.getNickname());
@@ -279,7 +279,7 @@ public class FundingController {
 		List<FileDog> file = fileService.getFile(filePost);
 
 		funding.setMainFile(file.get(0).getFileName());
-		// º¯°æ¿©±â±îÁö//
+		// ë³€ê²½ì—¬ê¸°ê¹Œì§€//
 
 		int voteTargetCount = (int) (funding.getFundTargetPay() * 0.0001);
 		funding.setVoteTargetCount(voteTargetCount);
@@ -289,7 +289,7 @@ public class FundingController {
 		return "redirect:/funding/getVoting?postNo=" + funding.getPostNo();
 	}
 
-	// Æİµù ±Û »èÁ¦
+	// í€ë”© ê¸€ ì‚­ì œ
 	@RequestMapping(value = "delVoting")
 	public String delVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
@@ -305,7 +305,7 @@ public class FundingController {
 		return "forward:/funding/listVoting";
 	}
 
-	// Æİµù ±Û ¸®½ºÆ®
+	// í€ë”© ê¸€ ë¦¬ìŠ¤íŠ¸
 	@RequestMapping(value = "listVoting")
 	public String listVoting(@ModelAttribute("search") Search search, Model model, HttpSession session)
 			throws Exception {
@@ -341,7 +341,7 @@ public class FundingController {
 
 		search.setSearchKeyword(originSearch);
 
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -349,9 +349,9 @@ public class FundingController {
 		return "forward:/funding/listVoting.jsp";
 	}
 
-	/////////////// FUNDING ÈÄ¿ø°Ô½Ã°Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING í›„ì›ê²Œì‹œê²Œì‹œíŒ /////////////////////
 
-	// Æİµù ±Û ¸®½ºÆ®
+	// í€ë”© ê¸€ ë¦¬ìŠ¤íŠ¸
 	@RequestMapping(value = "listFunding")
 	public String listFunding(@ModelAttribute("search") Search search, Model model, HttpSession session)
 			throws Exception {
@@ -387,7 +387,7 @@ public class FundingController {
 
 		search.setSearchKeyword(originSearch);
 
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -395,29 +395,29 @@ public class FundingController {
 		return "forward:/funding/listFunding.jsp";
 	}
 
-	// Æİµù ±Û È®ÀÎ
+	// í€ë”© ê¸€ í™•ì¸
 	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
 	public String getFunding(@RequestParam("postNo") int postNo, Model model, HttpSession session, Search search)
 			throws Exception {
 
 		System.out.println("/funding/getFunding ");
 
-		// Á¶È¸¼ö Áõ°¡
+		// ì¡°íšŒìˆ˜ ì¦ê°€
 		Funding voteViewFunding = new Funding();
 		voteViewFunding.setPostNo(postNo);
 		voteViewFunding.setFundViewCount(1);
 		fundingService.updateStatusCode(voteViewFunding);
 
-		// ±Û °¡Á®¿À±â
+		// ê¸€ ê°€ì ¸ì˜¤ê¸°
 		Funding funding = fundingService.getVoting(postNo);
 
-		// ÆÄÀÏ°¡Á®¿À±â
+		// íŒŒì¼ê°€ì ¸ì˜¤ê¸°
 		Map<String, Object> filePost = new HashMap<String, Object>();
 		filePost.put("boardCode", fundBoardCode);
 		filePost.put("postNo", postNo);
 		List<FileDog> file = fileService.getFile(filePost);
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 
 		if (search.getCurrentPage() == 0) {
@@ -430,7 +430,7 @@ public class FundingController {
 		// Page resultPage = new Page(search.getCurrentPage(), ((Integer)
 		// map.get("totalCount")).intValue(), pageUnit,pageSize);
 
-		// ¸®ºä
+		// ë¦¬ë·°
 		Map<String, Object> fileReviewPost = new HashMap<String, Object>();
 		fileReviewPost.put("boardCode", fundReviewBoardCode);
 		fileReviewPost.put("postNo", postNo);
@@ -440,16 +440,16 @@ public class FundingController {
 		model.addAttribute("fileReview", fileReview);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
-		// ´ñ±Û
+		// ëŒ“ê¸€
 		model.addAttribute("list", map.get("list"));
 		// model.addAttribute("resultPage", resultPage);
 		// model.addAttribute("search", search);
 
 		return "forward:/funding/getFunding.jsp";
 	}
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ì°¸ì—¬/////////////////////
 
-	// ÅõÇ¥Âü¿©
+	// íˆ¬í‘œì°¸ì—¬
 	@RequestMapping(value = "addVote", method = RequestMethod.GET)
 	public String addVote(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
 
@@ -457,19 +457,19 @@ public class FundingController {
 
 		Participate participate = new Participate();
 		participate.setPostNo(postNo);
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 		participate.setId(user.getId());
 		participate.setNickname(user.getNickname());
-		// participate ·¹ÄÚµå Ãß°¡ ( 1 : ÅõÇ¥ )
+		// participate ë ˆì½”ë“œ ì¶”ê°€ ( 1 : íˆ¬í‘œ )
 		participate.setStatusCode("1");
 
 		participateService.addParticipate(participate);
 
-		// fundingÅ×ÀÌºí voter_count += 1
+		// fundingí…Œì´ë¸” voter_count += 1
 		Funding funding = fundingService.getVoting(postNo);
 
-		// ÅõÇ¥¿Ï·á µÉ»óÈ²
+		// íˆ¬í‘œì™„ë£Œ ë ìƒí™©
 		if (funding.getVoterCount() + 1 == funding.getVoteTargetCount()) {
 			funding.setStatusCode("3");
 		} else {
@@ -482,7 +482,7 @@ public class FundingController {
 		return "redirect:/funding/getVoting?postNo=" + postNo;
 	}
 
-	// ÅõÇ¥¿Í ÈÄ¿øÂü¿© °áÁ¦ÇÏ´Â ÆäÀÌÁö
+	// íˆ¬í‘œì™€ í›„ì›ì°¸ì—¬ ê²°ì œí•˜ëŠ” í˜ì´ì§€
 	@RequestMapping(value = "addFund", method = RequestMethod.GET)
 	public String addFunding(@RequestParam("postNo") int postNo, Model model, HttpSession session) throws Exception {
 
@@ -495,7 +495,7 @@ public class FundingController {
 		return "forward:/funding/addFundView.jsp";
 	}
 
-	// ÈÄ¿øÂü¿©
+	// í›„ì›ì°¸ì—¬
 	@RequestMapping(value = "addFund", method = RequestMethod.POST)
 	public String addFunding(@ModelAttribute("participate") Participate participate, Model model, HttpSession session)
 			throws Exception {
@@ -505,12 +505,12 @@ public class FundingController {
 		User user = (User) session.getAttribute("user");
 		participate.setId(user.getId());
 		participate.setNickname(user.getNickname());
-		// participate ·¹ÄÚµå Ãß°¡ ( 2 : ÈÄ¿ø )
+		// participate ë ˆì½”ë“œ ì¶”ê°€ ( 2 : í›„ì› )
 		participate.setStatusCode("2");
 
 		participateService.addParticipate(participate);
 
-		// fundingÅ×ÀÌºí voter_count += 1
+		// fundingí…Œì´ë¸” voter_count += 1
 		Funding funding = new Funding();
 
 		funding.setSponsorCount(1);
@@ -527,9 +527,9 @@ public class FundingController {
 		return "forward:/funding/addFund.jsp";
 	}
 
-	//////////////////////////////// ÈÄ±â///////////////////////////////////////////////
+	//////////////////////////////// í›„ê¸°///////////////////////////////////////////////
 
-	// ÈÄ±â ±Û ÀÛ¼º
+	// í›„ê¸° ê¸€ ì‘ì„±
 	@RequestMapping(value = "addReview", method = RequestMethod.GET)
 	public String addReview(@RequestParam("postNo") int postNo, Model model, HttpSession session) throws Exception {
 
@@ -542,25 +542,25 @@ public class FundingController {
 		return "forward:/funding/addReview.jsp";
 	}
 
-	// ÈÄ±â ±Û µî·Ï
+	// í›„ê¸° ê¸€ ë“±ë¡
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
 	public String addReview(@RequestParam("multiFile") ArrayList<String> multiFile,
 			@ModelAttribute("funding") Funding funding, HttpSession session) throws Exception {
 
 		System.out.println("/funding/addReview : POST");
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 		funding.setId(user.getId());
 		funding.setNickname(user.getNickname());
 
-		// º¯°æ¿©±â±îÁö//
+		// ë³€ê²½ì—¬ê¸°ê¹Œì§€//
 
 		fundingService.addReview(funding);
 
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 		for (String fileName : multiFile) {
 
 			if (fileName != null && fileName.length() > 0) {
@@ -578,7 +578,7 @@ public class FundingController {
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
 	}
 
-	// ÈÄ±â ±Û ¼öÁ¤ÀÛ¼º
+	// í›„ê¸° ê¸€ ìˆ˜ì •ì‘ì„±
 	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
 	public String updateReview(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
@@ -598,7 +598,7 @@ public class FundingController {
 		return "forward:/funding/updateReview.jsp";
 	}
 
-	// ÈÄ±â ±Û ¼öÁ¤ µî·Ï
+	// í›„ê¸° ê¸€ ìˆ˜ì • ë“±ë¡
 	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
 	public String updateReview(@ModelAttribute("funding") Funding funding,
 			@RequestParam("multiFile") ArrayList<String> multiFile,
@@ -618,7 +618,7 @@ public class FundingController {
 		}
 		if (multiFile.size() != 0) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
-			// ÆÄÀÏµğºñ¿¡³Ö±â
+			// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
 			for (String fileName : multiFile) {
 
 				if (fileName != null && fileName.length() > 0) {
@@ -634,7 +634,7 @@ public class FundingController {
 			fileService.addFile(listFile);
 		}
 
-		// ¼¼¼Ç
+		// ì„¸ì…˜
 		User user = (User) session.getAttribute("user");
 		funding.setId(user.getId());
 		funding.setNickname(user.getNickname());
@@ -645,14 +645,14 @@ public class FundingController {
 		List<FileDog> file = fileService.getFile(filePost);
 
 		funding.setMainFile(file.get(0).getFileName());
-		// º¯°æ¿©±â±îÁö//
+		// ë³€ê²½ì—¬ê¸°ê¹Œì§€//
 
 		fundingService.updateReview(funding);
 
 		return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();
 	}
 
-	// ÈÄ±â ±Û »èÁ¦
+	// í›„ê¸° ê¸€ ì‚­ì œ
 	@RequestMapping(value = "delReview", method = RequestMethod.GET)
 	public String delReview(@RequestParam("postNo") int postNo, Model model) throws Exception {
 

@@ -135,12 +135,12 @@ public class InfomationShareController {
 			search.setCurrentPage(1);
 		}
 		
-		User user = new User();
-		user.setId("Temp1");
-		user.setNickname("시드");
-		user.setRole("admin");
-
-		session.setAttribute("user", user);
+//		User user = new User();
+//		user.setId("Temp1");
+//		user.setNickname("시드");
+//		user.setRole("admin");
+//
+//		session.setAttribute("user", user);
 		
 		// 댓글 페이지 사이즈 5로 고정
 		search.setPageSize(5);
