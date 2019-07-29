@@ -14,13 +14,13 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script -->
+<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
 
 <!-- jQuery UI toolTip 사용 CSS-->
@@ -229,20 +229,19 @@
 </head>
 <body>
 	<div class="container" >
-		<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">Animal Hospital</a></span>
-					</p>
-					<h1 class="mb-0 bread">동 물 병 원 검 색</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	<br/><p/>
+	
+		    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2"><a href="index.html">Animal</a></span> <span>Hospital</span></p>
+	            <font size="7">동물병원 검 색</font>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		<br/><p/>
+
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>

@@ -25,8 +25,7 @@
     <link rel="stylesheet" href="/resources/newTemplate/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/resources/newTemplate/css/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
-    
-	
+   
   	<style type="text/css">
  		@font-face {
     		font-family: 'YouandiModernTR';
@@ -279,6 +278,12 @@
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
+    
+    <!-- fontawesome key -->
+    <script src="https://kit.fontawesome.com/e26616618e.js"></script>
+    
+    <!-- sweetalter CDN -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
         	<script type="text/javascript">
 

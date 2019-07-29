@@ -38,7 +38,7 @@ public class NewsRestController {
 		System.out.println("searchKeyword before : " + search.getSearchKeyword());
 		
 		if(search.getSearchKeyword() == "" ) {
-			search.setSearchKeyword("π›∑¡µøπ∞");
+			search.setSearchKeyword("Î∞òÎ†§ÎèôÎ¨º");
 		}
 		System.out.println("searchKeyword before : " + search.getSearchKeyword());
 		

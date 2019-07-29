@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

@@ -1,39 +1,23 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ë³´í˜¸í• ê°œ.ê¸€ìˆ˜ì •</title>
 <!--  bootstrap CDN  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
-@font-face {
-	font-family: ng;
-	src: url(NanumGothic.eot);
-	src: local(¡Ø), url(NanumGothic.woff) format(¡®woff¡¯);
-}
-
-body {
-	font-family: '³ª´®°íµñ', 'NanumGothic', ng
-}
-
-body {
-	padding-top: 50px;
-}
-
 #preview img {
 	width: 100px;
 	height: 100px;
@@ -92,17 +76,30 @@ $(function () {
 
 	</script>
 
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
 <body>
-
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">ì •ë³´ê³µìœ </a></span>
+					</p>
+					<h1 class="mb-0 bread">ê¸€ ìˆ˜ì •</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<br/>
+	
 	<div class="container">
-		<h3 class=" text-info">±Û ¼öÁ¤</h3>
 
-		<hr>
-
-		<div style="border: 1px solid #d7dade; padding: 3px;">
+		<div style="border: 2px solid #d7dade; padding: 3px;">
 
 			<form class="form-horizontal" name="detailForm">
 
@@ -111,45 +108,17 @@ $(function () {
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
 							id="postTitle" style="height: 50px; font-size: 20px"
-							placeholder="${board.postTitle}" />
+							value="${board.postTitle}" />
 					</div>
 				</div>
 
-				<!-- 			<div class="row"> -->
-				<!-- 				<div class="col-xs-4 col-md-2"> -->
-				<!-- 					<strong>ÀÌ¹ÌÁö</strong> -->
-				<!-- 				</div> -->
-				<!-- 			</div> -->
-
-				<br />
-
-				<div class="row">
-					<div class="col-xs-12 col-md-12">
-						<div class="body">
-							<!-- Ã·ºÎ ¹öÆ° -->
-							<div id="attach">
-								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox">»çÁøÃ·ºÎ</label> <input id="uploadInputBox"
-									style="display: none" type="file" name="filedata" multiple />
-							</div>
-
-							<!-- ¹Ì¸®º¸±â ¿µ¿ª -->
-							<div id="preview" class="content" align="center"
-								style="display: inline; min-width: 600px;"></div>
-
-							<!-- multipart ¾÷·Îµå½Ã ¿µ¿ª -->
-							<div id="uploadForm" style="display: none;"></div>
-						</div>
-					</div>
-				</div>
-
-				<hr />
+				<br/>
 
 				<div id="ckEditor" align="center">
 
 					<div id="toolbar-container" align="center"
 						class="col-xs-12 col-md-12"></div>
-					<textarea class="col-xs-12 col-md-12" id="editor"
+					<textarea class="col-xs-12 col-md-12" id="editor1"
 						name="postContent" style="text-align: left;">
 						${board.postContent}
 					</textarea>
@@ -158,7 +127,7 @@ $(function () {
 					            	<div class="col-md-12">
 	            	<br/>
                 		<label><strong>
-	                		¼öÁ¤ÇÏ½Ç °æ¿ì Áöµµ¸¦ ¿ìÅ¬¸¯ÇÏ°í ¸¶Ä¿¸¦ ´Ù½Ã »ı¼ºÇØÁÖ¼¼¿ä.
+	                		ìˆ˜ì •í•˜ì‹¤ ê²½ìš° ì§€ë„ë¥¼ ìš°í´ë¦­í•˜ê³  ë§ˆì»¤ë¥¼ ë‹¤ì‹œ ìƒì„±í•´ì£¼ì„¸ìš”.
                 		</strong></label>
                		</div>
                		
@@ -176,8 +145,8 @@ $(function () {
 		<hr />
 		<div class="row">
 			<div class="col-md-12 text-center ">
-				<button type="button" class="btn btn-primary">¼öÁ¤</button>
-				<a id="reset" class="btn btn-primary btn" role="button">Ãë¼Ò</a>
+				<button type="button" class="btn btn-primary">ìˆ˜ì •</button>
+				<a id="reset" class="btn btn-primary btn" role="button">ì·¨ì†Œ</a>
 			</div>
 		</div>
 
@@ -190,168 +159,253 @@ $(function () {
 	<script>
 	
 	
-	// =============================== ±¸±Û Áöµµ ============================================
+	// =============================== êµ¬ê¸€ ì§€ë„ ============================================
 		
-  var map;
-  var marker;
-  var markers = [];
-  var loca = "${board.route}";
-  var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
-  var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
-  
-  var mapArea;
-  var markerArea;
-  var markersArea = [];
-  var adArea = "${board.route}";
-  var arrayTest = [];
-  var arrayMark = [];
-  
-  var str = "";
-  var markTest="";
-  var mmm = "";
-  
-  
-  if (adArea.indexOf("#") != -1){
-	  var areaArray = adArea.split("#");
-	  
-	  for ( i=0; i<areaArray.length-1; i++){
-		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
-		  arrayMark[i] = "markerArea"+i.toString();
-	  }   	  
-  }
-  
-  
-  
-  function initMap() {
-	     
-	  mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-		    zoom: 11,
-		    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
-		    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
-	});
-  
-  for ( i=0; i<arrayTest.length; i++){
-  	
-	    markerArea= arrayMark[i];
-	
-	    markerArea = new google.maps.Marker({
-	        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
-	    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
-	        map: mapArea
- 		});
-	    
-	    markersArea.push(markerArea);
-		}
-  
-  mapArea.addListener('click', function(event) {
-  	addMarker(event.latLng, "area");
-  });
-  
-  mapArea.addListener('rightclick', function() {
-  	if( markersArea.length > 0 ){
-	        	
-  		for (var i = markersArea.length-1; i >=0; i--) {
-	        		markersArea[i].setMap(null);
-	        		markersArea.splice(i, 1 );
-	            }
-	        	
-	        	$('#route').val('');
-  	}
-  });
-  	
-//////////////////////////////////////////////////////////////
-  
-  marker = new google.maps.Marker({
-      position: {lat: localat, lng: localng},
-      map: map
-  });
-  
-  markers.push(marker);
+          
+          var poly;
+         var map;
+         var marker;
+         var markers = [];
+         var route = $('#route').val();
+         var routeTest = [];
+         var routeMark = [];
+          var infowindowF;
+          var infowindowL;
+         
+         //ë§ˆì»¤ê°€ í•˜ë‚˜ë¼ë„ ìˆì„ë•Œ
+         if (route.indexOf("#") != -1){
+               var routeArray = route.split("#");
+               
+               for ( i=0; i<routeArray.length-1; i++){
+                routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
+                routeMark[i] = "marker"+i.toString();
+               }        
+         }
+         
+         function initMap() {
+              map = new google.maps.Map(document.getElementById('mapArea'), {
+                 zoom: 16,
+                 center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
+                      lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
+            });
    
-  }
-  
-function addMarker(location, str) {
-	  
-	if ( str == "area"){
-		  
-		 if (markersArea.length <3){
-		        var markerArea = new google.maps.Marker({
-			        position: location,
-			        map: mapArea
-		        });
-		        
-		     	markersArea.push(markerArea);
-		   		 
-	   			$("#route").val( $("#route").val()+location+"#");
-	   			
-   	    		var localat = parseFloat(  location.toString().substring( location.toString().indexOf("(")+1 ,location.toString().indexOf(",") )  );
-		 		var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
-   	    
-   	    		$.ajax({ 
-   	    	
-   	    		url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
-   	    
-   	        	success: function(data){
-   	           		markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
-   	           		if( markTest.indexOf('Æ¯º°') != -1  ){
-   	           			markTest = markTest.replace('Æ¯º°' ,   '');
-   	           		}
-   	           		if( markTest.indexOf('±¤¿ª') != -1  ){
-   	           			markTest = markTest.replace('±¤¿ª' ,   '');
-   	           		}
-   	           		if( markTest.indexOf('ÀÚÄ¡') != -1  ){
-   	           			markTest = markTest.replace('ÀÚÄ¡' ,   '');
-   	           		}
-   	          		$("#route").val($("#route").val()+markTest);
-   	         	}
-   	 			
-   	    		}); // ajax End
-		 }
-	}
-}  		
+              poly = new google.maps.Polyline({
+                 strokeColor: '#000000',
+                 strokeOpacity: 0.5,
+                 strokeWeight: 5,
+                 map: map
+              });
+              
+              var aaa = "";
+              
+              for ( i=0; i<routeTest.length; i++){
+                
+                 var path = poly.getPath();
+   
+                  path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
+                                          parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
+
+                marker= routeMark[i];
+            
+                marker = new google.maps.Marker({
+                    position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
+                     lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
+                   title: '#' + path.getLength(),
+                   map: map
+                });
+                
+                markers.push(marker);
+                
+             }
+   
+              infowindowF = new google.maps.InfoWindow();
+              infowindowL = new google.maps.InfoWindow();
+              infowindowF.setContent("ì¶œë°œ");
+               infowindowF.open(map, markers[0]);
+               infowindowL.setContent("ë„ì°©");
+               infowindowL.open(map, markers[markers.length-1]);
+   
+              map.addListener('click', addLatLng);
+              map.addListener('rightclick', function() {
+                 for (var i = markers.length-1; i >=0; i--) {
+                    markers[i].setMap(null);
+                    markers.splice(i, 1 );
+                    poly.getPath().removeAt(i);
+                    $( "#route ").val( '' );
+                  }
+                 });
+         }
+
+        
+         function addLatLng(event) {
+            
+              if (markers.length <5){
+                  
+                 var path = poly.getPath();
+                  path.push(event.latLng);
+                  
+                   var marker = new google.maps.Marker({
+                    position: event.latLng,
+                    title: '#' + path.getLength(),
+                    map: map
+                   });
+                   
+                   markers.push(marker);
+                 
+                 $( "#route ").val(  $( "#route ").val()+ event.latLng.toString()+"#"  );
+                 
+                 // pop up
+                 infowindowF.setContent("ì¶œë°œ");
+                  infowindowF.open(map, markers[0]);
+                  
+                  if(markers.length > 1){
+                    infowindowL.setContent("ë„ì°©");
+                     infowindowL.open(map, marker);
+                  }
+                  
+              }else{
+                 alert("5ê°œê¹Œì§€ ì§€ì • ê°€ëŠ¥í•¨ dialog ì¶”ê°€");
+             }
+              
+              
+              if (marker != undefined){
+                 
+                  marker.addListener('rightclick', function() {
+                     
+                  for (var i = 0; i < markers.length; i++) {
+                      if (markers[i] === marker) {
+                        markers[i].setMap(null);
+                        markers.splice(i, 1);
+            
+                        poly.getPath().removeAt(i);
+                      }
+                  }
+                  
+                  var test = "";
+                  
+                   for (var i = 0; i < markers.length; i++) {
+                      test += markers[i].position+"#";
+                      
+                      //pop up
+                       infowindowF.setContent("ì¶œë°œ");
+                        infowindowF.open(map, markers[0]);
+                        
+                        infowindowL.setContent("ë„ì°©");
+                        infowindowL.open(map, markers[markers.length-1]);
+                   }
+                   
+                   $( "#route ").val(  test  );
+                   
+                  });
+              }
+              
+         }
   	        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	        
 	  	      	
 
 	      //  ================================ CKEditor ============================================== 
-	let editor;
-	
-	ClassicEditor
-    .create( document.querySelector( '#editor' ),{
-    
-    	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-    	heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-            ]
-        }
-    	
-    })
-    .then( newEditor => {
-        editor = newEditor;
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
+			CKEDITOR.addCss('figure[class*=easyimage-gradient]::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; }' +
+		      'figure[class*=easyimage-gradient] figcaption { position: relative; z-index: 2; }' +
+		      '.easyimage-gradient-1::before { background-image: linear-gradient( 135deg, rgba( 115, 110, 254, 0 ) 0%, rgba( 66, 174, 234, .72 ) 100% ); }' +
+		      '.easyimage-gradient-2::before { background-image: linear-gradient( 135deg, rgba( 115, 110, 254, 0 ) 0%, rgba( 228, 66, 234, .72 ) 100% ); }');
+
+		    CKEDITOR.replace('editor1', {
+		    	language: 'ko',
+		      extraPlugins: 'autogrow',
+		      autoGrow_minHeight: 200,
+		      autoGrow_maxHeight: 600,
+		      autoGrow_bottomSpace: 50,
+		      removePlugins: 'resize',
+		      
+		      extraPlugins: 'easyimage',
+		      removePlugins: 'image',
+		      removeDialogTabs: 'link:advanced',
+		      toolbar: [{
+		          name: 'document',
+		          items: ['Undo', 'Redo']
+		        },
+		        {
+		          name: 'styles',
+		          items: ['Format']
+		        },
+		        {
+		          name: 'basicstyles',
+		          items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat']
+		        },
+		        {
+		          name: 'paragraph',
+		          items: ['NumberedList', 'BulletedList']
+		        },
+		        {
+		          name: 'links',
+		          items: ['Link', 'Unlink']
+		        },
+		        {
+		          name: 'insert',
+		          items: ['EasyImageUpload']
+		        }
+		      ],
+		      height: 630,
+		      cloudServices_uploadUrl: 'https://33333.cke-cs.com/easyimage/upload/',
+		      // Note: this is a token endpoint to be used for CKEditor 4 samples only. Images uploaded using this token may be deleted automatically at any moment.
+		      // To create your own token URL please visit https://ckeditor.com/ckeditor-cloud-services/.
+		      cloudServices_tokenUrl: 'https://33333.cke-cs.com/token/dev/ijrDsqFix838Gh3wGO3F77FSW94BwcLXprJ4APSp3XQ26xsUHTi0jcb1hoBt',
+		      easyimage_styles: {
+		        gradient1: {
+		          group: 'easyimage-gradients',
+		          attributes: {
+		            'class': 'easyimage-gradient-1'
+		          },
+		          label: 'Blue Gradient',
+		          icon: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/gradient1.png',
+		          iconHiDpi: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/hidpi/gradient1.png'
+		        },
+		        gradient2: {
+		          group: 'easyimage-gradients',
+		          attributes: {
+		            'class': 'easyimage-gradient-2'
+		          },
+		          label: 'Pink Gradient',
+		          icon: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/gradient2.png',
+		          iconHiDpi: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/hidpi/gradient2.png'
+		        },
+		        noGradient: {
+		          group: 'easyimage-gradients',
+		          attributes: {
+		            'class': 'easyimage-no-gradient'
+		          },
+		          label: 'No Gradient',
+		          icon: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/nogradient.png',
+		          iconHiDpi: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/hidpi/nogradient.png'
+		        }
+		      },
+		      easyimage_toolbar: [
+		        'EasyImageFull',
+		        'EasyImageSide',
+		        'EasyImageGradient1',
+		        'EasyImageGradient2',
+		        'EasyImageNoGradient',
+		        'EasyImageAlt'
+		      ]
+		    });
 	
 	 $(document).ready(function() {
 
-         //============= »çÁø¹Ì¸®º¸±â =============
+         //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
          $('#attach input[type=file]').change(function() {
-            addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+            addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
         });
 	 });
          
 	function fncUpdateInfo(){
 	         
-	      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+	      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 	    	  
 	    	  var title = $("#postTitle").val();
 	      
 	      	  if(title.length < 1 || title == null ){
-	      		  alert("Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä");
+	      		  alert("ì œëª©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”");
 	      	  }
 	          $(function() {     
 	            var form = $('#uploadForm')[0];
@@ -373,13 +427,13 @@ function addMarker(location, str) {
 	                data : formData,
 	                success : function(result) {
 	                    if (result === -1) {
-	                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-	                        // ÀÌÈÄ µ¿ÀÛ ...
+	                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+	                        // ì´í›„ ë™ì‘ ...
 	                    } else if (result === -2) {
-	                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-	                        // ÀÌÈÄ µ¿ÀÛ ...
+	                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+	                        // ì´í›„ ë™ì‘ ...
 	                    } else {
-	                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+	                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 	                    }
 	                }
 	            });
@@ -389,22 +443,22 @@ function addMarker(location, str) {
 	      $('form').attr("method","POST").attr("action","/info/updateInfo").attr("enctype","multipart/form-data").submit();
 	   }
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	   function fnAddFile(fileNameArray) {
 	         $("#multiFile").val(fileNameArray)    
 	   }   
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	       //ÀÓÀÇÀÇ file object¿µ¿ª
+	       //ì„ì˜ì˜ file objectì˜ì—­
 	     var files = {};
 	     var previewIndex = 0;
 	     var fileNameArray = new Array();
-	     // image preview ±â´É ±¸Çö
+	     // image preview ê¸°ëŠ¥ êµ¬í˜„
 	     // input = file object[]
 	     function addPreview(input) {
 	         if (input[0].files) {
-	             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
 	                 var file = input[0].files[fileIndex];
@@ -416,7 +470,7 @@ function addMarker(location, str) {
 	                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 	                
-	                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+	                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 	               var imgSelectName = "img";
 	               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 	                  imgSelectName = "iframe";
@@ -424,8 +478,8 @@ function addMarker(location, str) {
 
 	                 var reader = new FileReader();
 	                 reader.onload = function(img) {
-	                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                     
 	                     var imgNum = previewIndex++;
 	                     
@@ -435,12 +489,12 @@ function addMarker(location, str) {
 	                     }else{
 	                        previewId = "startNo";   
 	                     }
-	                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                     if(Object.keys(files).length>=8){
-	                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                        delete files[imgNum];
 	                     }else{
-	               // 8Àå ÀÌÇÏ 
+	               // 8ì¥ ì´í•˜ 
 	               
 	               			document.querySelector( '#editor' ).addEventListener( 'click', () => {
                 	    const editorData = editor.getData();     	           
@@ -454,7 +508,7 @@ function addMarker(location, str) {
 	                                             + "<a href=\"#\" value=\""
 	                                             + imgNum
 	                                             + "\" onclick=\"deletePreview(this)\">"
-	                                             + "   »èÁ¦" + "</a>" + "</div>");
+	                                             + "   ì‚­ì œ" + "</a>" + "</div>");
 
 	                     files[imgNum] = file;
 	                     fileNameArray[imgNum]=file.name;
@@ -466,10 +520,10 @@ function addMarker(location, str) {
 	                 reader.readAsDataURL(file);
 	             }
 	         } else
-	             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	     }
 
-	     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	     function deletePreview(obj) {
 	         var imgNum = obj.attributes['value'].value;
 	         delete files[imgNum];
@@ -479,14 +533,14 @@ function addMarker(location, str) {
 	         resizeHeight();
 	     }
 
-	     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	     function validation(fileName) {
 	         fileName = fileName + "";
 	         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	             return true;
 	         } else {
 	             return false;
