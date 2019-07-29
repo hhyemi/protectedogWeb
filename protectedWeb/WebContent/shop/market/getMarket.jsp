@@ -25,8 +25,13 @@
 <!-- main css -->
 <link rel="stylesheet" href="/resources/get/css/style.css" />
 <link rel="stylesheet" href="/resources/get/css/responsive.css" />
-<!-- KAKAO -->
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- Google Mdl -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
 <style>
 .form-group2 {
 	padding-left: 420px;
@@ -37,6 +42,18 @@
 	padding-left: 465px;
 	padding-right: 100px;
 }
+
+table, td{
+border: 1px 
+}
+table{
+width:60%;
+height: 100px;
+margin: auto;
+text-align: center;
+text-size: small;
+}
+</
 </style>
 
 
@@ -83,7 +100,7 @@
 								<div class="${className}">
 									<img class="d-block w-100"
 										src="../../resources/file/fileMarket/${name.fileName}"
-										height="300px;" />
+										width="450px;" height="450px;" />
 								</div>
 							</c:forEach>
 
@@ -102,15 +119,12 @@
 								원
 							</h2>
 
-							<h2>
-								<fmt:formatNumber value="" pattern="#,###" />
-								원
-							</h2>
-
 							<ul class="list">
 							</ul>
 							<p>
-								원산지 : <br /> 제조사 : <br /> 기본 적립 포인트 : <br />
+							<br>
+							${board.postContent}
+								
 							</p>
 							
 							</div>
@@ -119,22 +133,17 @@
 				</div>
 			</div>
 		</div>
-		</div>
-
-		<!--================End Single Product Area =================-->
-
-		<!--================Product Description Area =================-->
-		<section class="product_description_area">
-			<div class="container"></div>
-			<hr>
-			
-			<TextBox Name="tbSettingText">  
-			
-			</TextBox> 
-		</section>
+		<p align="right"><button class="mdl-button mdl-js-button mdl-button--primary">
+ 수정하기
+</button><!-- Accent-colored flat button -->
+<button class="mdl-button mdl-js-button mdl-button--accent">
+  삭제하기
+</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+<p>
 		<!--================End Product Description Area =================-->
-
-
+	<input type="hidden" value="${board.postNo}" name="postNo"/>	
+<jsp:include page="/common/comment.jsp"></jsp:include>
+</p>
 		<!--================ End footer Area  =================-->
 
 		<!-- Optional JavaScript -->

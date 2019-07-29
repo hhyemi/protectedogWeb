@@ -60,6 +60,7 @@ public class OrderController {
 		System.out.println("/addPurchaseView.do");
 		
 		Product product = productService.getProduct(prodNo);
+		System.out.println("구매진입했습니다 구매 GET/////////////////////////");
 		
 		model.addAttribute("product", product);
 		
@@ -68,21 +69,24 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="addOrder", method=RequestMethod.POST)
-	public String addProduct(@ModelAttribute("order") Order order, 
-			@RequestParam("prodNo") int prodNo, 
-			HttpSession session) throws Exception{
+	public String addOrder(@RequestParam("prodNo") int prodNo, 
+			@RequestParam("id") String id) throws Exception {
 		
-		System.out.println("/addorder");
 		
-		User user = (User)session.getAttribute("user");
+		System.out.println("/addOrder");
+		User user = userService.getUsers(id);
 		Product product = productService.getProduct(prodNo);
-		order.setProdNo(product);
+		Order order=new Order();
+		System.out.println(order);
 		order.setId(user);
-		
+		order.setProdNo(product);
 		orderService.addOrder(order);
 		
-		return "forward:/purchase/addPurchase.jsp";
+		
+
+		return "forward:/shop/order/addOrder.jsp";
 	}
+		
 	
 	
 
@@ -129,7 +133,7 @@ public class OrderController {
 		model.addAttribute("search", search);
 
 
-		return "forward:/purchase/listPurchase.jsp";
+		return "forward:/shop/order/listOrder.jsp";
 	}
 	
 	@RequestMapping("/updateOrderView")

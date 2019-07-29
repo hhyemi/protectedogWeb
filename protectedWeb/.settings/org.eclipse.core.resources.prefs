@@ -5,16 +5,8 @@ eclipse.preferences.version=1
 encoding//SQL(Script)/protectedog.sql=EUC-KR
 encoding//WebContent/shop/cart/reviewtest.jsp=UTF-8
 encoding//WebContent/shop/order/pointexample.jsp=UTF-8
-encoding//WebContent/shop/product/getProduct.jsp=UTF-8
 encoding//WebContent/shop/product/listProduct.jsp=UTF-8
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 encoding//WebContent/shop/product/shop.jsp=UTF-8
->>>>>>> refs/heads/master
-=======
-encoding//WebContent/shop/product/shop.jsp=UTF-8
->>>>>>> refs/remotes/origin/master
 encoding//WebContent/users/callback.jsp=UTF-8
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR
 encoding//src/main/java/org/protectedog/common/openAPI/NewsAPI.java=UTF-8

@@ -1,76 +1,35 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
 
 <html lang="ko">
-
+   
 <head>
-<meta charset="EUC-KR">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- ////////////	Bootsrap, css ///////////////////////// -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
-	rel="stylesheet">
+<title> 상품 등록</title>
+   <meta charset="EUC-KR">
+   
+   <!-- 참조 : http://getbootstrap.com/css/   참조 -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-<link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
-
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/magnific-popup.css">
-
-<link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
-
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/ionicons.min.css">
-
-<!-- <link rel="stylesheet" -->
-<!-- 	href="../../resources/prodmenu/css/bootstrap-datepicker.css"> -->
-
-
-
-<link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
-<link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
-<link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
-<!-- <script src="./../resources/prodmenu/js/jquery.min.js"></script> -->
-<!-- jQuery UI toolTip 사용 CSS-->
-<!-- <link rel="stylesheet" -->
-
-<!-- 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-body>div.container {
-	border: 3px solid #D6CDB7;
+.container {
+	width: 1000px;
+	font-size :17px;
 	margin-top: 10px;
+
 }
 
-#preview img {
-    width: 100px;
-    height: 100px;
-}
-
-#preview p {
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.preview-box {
-    border: 1px solid;
-    padding: 5px;
-    border-radius: 2px;
-    margin-bottom: 10px;
-}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -191,13 +150,14 @@ body>div.container {
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">admin</a></span> <span>page</span>
+						<span class="mr-2"><a href="#">admin</a></span> <span>page</span>
 					</p>
-					<h1 class="mb-0 bread">PROTECTED|SHOP 상품등록</h1>
+					<h1 class="mb-0 bread">PROTECTED | SHOP 상품등록</h1>
 				</div>
 			</div>
 		</div>
 	</div>
+	<br><br><br/>
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
@@ -212,12 +172,13 @@ body>div.container {
 						<!--////////////////////////// form tag Start /////////////////////////////////-->
 
 						<h3 class="mb-4 billing-heading">상품정보를 등록해주세요</h3>
+						<div class="w-100"></div>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">상품명</label> <input type="text"
 										class="form-control" name="prodName" id="prodName"
-										placeholder="상품명을 입력해주세요" value="테스트">
+										placeholder="상품명을 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -238,7 +199,7 @@ body>div.container {
 								<div class="form-group">
 									<label for="firstname">원산지</label> <input type="text"
 										class="form-control" name="country" id="country"
-										placeholder="원산지를 입력해주세요" value="한국">
+										placeholder="원산지를 입력해주세요">
 								</div>
 							</div>
 
@@ -246,7 +207,7 @@ body>div.container {
 								<div class="form-group">
 									<label for="streetaddress">제조사</label> <input type="text"
 										class="form-control" name="company" id="company"
-										placeholder="제조사를 입력해주세요" value="삼성">
+										placeholder="제조사를 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -272,17 +233,11 @@ body>div.container {
 								</div>
 							</div>
 							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="postcodezip">상세정보</label> <input type="text"
-										class="form-control" name="prodDetail" id="prodDetail"
-										value="상세정보" placeholder="상품의 상세정보를 입력해주세요">
-								</div>
-							</div>
-						</div>
+							<div class="w-100"></div>
+							
 						
             <!-- 첨부 버튼 -->
-            <div id="attach" class="form-group">
+            &nbsp;&nbsp;&nbsp;&nbsp;<div id="attach" class="form-group">
                 <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
@@ -293,6 +248,16 @@ body>div.container {
             <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
             </div>
 		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
+						
+						
+						<div class="col-md-6">
+								<div class="form-group">
+									<label for="postcodezip">상세정보</label> <input type="text"
+										class="form-control" name="prodDetail" id="prodDetail"
+										placeholder="상품의 상세정보를 입력해주세요">
+								</div>
+							</div>
+						</div>
 						<p align="center">
 							<a class="btn btn-primary py-3 px-4" id="addproduct">등록하기</a>
 							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">취소하기</a>

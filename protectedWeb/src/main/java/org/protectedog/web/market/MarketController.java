@@ -72,7 +72,8 @@ public class MarketController {
 		board.setNickName("½ºÄ±");
 		board.setBoardCode(MK);
 		board.setViewCount(0);
-		board.setProdNo(10000);
+		board.setProdNo(10001);
+		board.setPhone("011-1123-4567");
 		
 		System.out.println("////////////////////");
 		

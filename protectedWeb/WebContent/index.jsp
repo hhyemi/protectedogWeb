@@ -96,9 +96,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
               <div class="slide-1"></div>
                 <div class="hero ">
                   <hgroup class="wow fadeInUp">
-                      <h1>We Help <span ><a href="" class="typewrite" data-period="2000" data-type='[ " Business", " Startup"]'>
+                      <h1>보호할개 <span ><a href="" class="typewrite" data-period="2000" data-type='[ " 보호할개", " 보호할개"]'>
                         <span class="wrap"></span></a></span> </h1>        
-                      <h3>The next big idea is waiting for its next big changer</h3>
+                      <h3></h3>
                   </hgroup>
                   <button class="btn btn-general btn-green wow fadeInUp" role="button">Contact Now</button>
                 </div>           

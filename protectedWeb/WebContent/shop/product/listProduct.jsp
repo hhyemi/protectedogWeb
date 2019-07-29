@@ -19,7 +19,20 @@
 
 
 <!-- Global Stylesheets -->
+<title> 상품 등록</title>
+   <meta charset="EUC-KR">
+   
+   <!-- 참조 : http://getbootstrap.com/css/   참조 -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
 
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
@@ -47,7 +60,7 @@
 					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
 				});
 		
-		$("#getproduct").on("click",function() {
+		$(".detailprod").on("click",function() {
 			//alert($(this).children("input").val())
 					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
 				});
@@ -136,7 +149,7 @@
 						<div class="heading-border-light"></div>
 					</div>
 					<div class="list-group">
-						<a href="#" class="list-group-item">사료</a> <a href="#"
+						<a href="#" class="list-group-item">사료</a> <a href="http://localhost:8080/shop/order/listorder"
 							class="list-group-item">간식</a> <a href="#"
 							class="list-group-item">의류</a> <a href="#"
 							class="list-group-item">BEST PRODUCT</a> 
@@ -180,21 +193,24 @@
 								<c:set var="i" value="${i+1}" />
 								<div class="col-lg-4 col-md-6 mb-4">
 								<div class="card ">
-									<a><input type="hidden" value="${product.prodNo}" />
+									<a>
 										<img class="img-fluid"
-										src="../../resources/file/fileShop/${product.mainFile}" alt=""></a>
+										src="../../resources/file/fileShop/${product.mainFile}" alt=""> 
+										<input type="hidden" value="${product.prodNo}" /></a>
 									<div class="card-body text-center">
 										<div class="card-title">
-											<a href="#">${product.prodName} <input type="hidden"
-												value="${product.prodNo}">
+											<a href="#">${product.prodName} 
 											</a>
 										</div>
 										<del>
 											<fmt:formatNumber value="${product.price}" pattern="#,###"/>
 										</del> <strong>&nbsp;&nbsp;<fmt:formatNumber value="${product.discountPrice}" pattern="#,###"/>원</strong>
 										<div class="cart-icon text-center">
-											<a href="#"><i class="fa fa-cart-plus"></i> 구매하기</a>
+											<a class="detailprod"><i class="fa fa-cart-plus"></i> 상세보기
+											<input type="hidden" value="${product.prodNo}"/></a>
+											<a href="#"><i class="fa fa-cart-plus"></i> 장바구니로 이동</a>
 										</div>
+										
 									</div>
 								</div>
 								</div>

@@ -32,7 +32,7 @@
 
 <insert id="addOrder" parameterType="order">
 		INSERT 
-		INTO orders(order_no, prod_no, id, phone, receiver_name, receiver_phone, receiver_addr, order_request, payment_code, order_date, order_quantity, total_price, order_code, delivery_code)
+		INTO orders(order_no, prod_no, id, phone, receiver_name, receiver_phone, receiver_addr, order_request, payment_code, order_date, order_quantity, order_code, delivery_code)
 		VALUES (
 		seq_Order_order_no.NEXTVAL,
 		#{prodNo},
@@ -44,9 +44,8 @@
 		#{orderRequest},
 		#{paymentCode},
 		SYSDATE,
-		#{orderQantity},
-		#{totalPrice},
-		#{orderCode},
+		'1',
+		'1',
 		#{deliveryCode})
 	</insert>
 
