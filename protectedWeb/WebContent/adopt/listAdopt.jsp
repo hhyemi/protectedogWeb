@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page pageEncoding="utf-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,9 +12,9 @@
 <html lang="ko">
 	
 <head>
-	<title>º¸È£ÇÒ°³ ¡¤ ºĞ¾ç±Û ¸®½ºÆ®</title>
-	<meta charset="EUC-KR">
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<title>ë³´í˜¸í• ê°œ Â· ë¶„ì–‘ê¸€ ë¦¬ìŠ¤íŠ¸</title>
+	<meta charset="utf-8">
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -78,7 +78,7 @@
 <body>
 
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	
@@ -88,7 +88,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
              <p ><span class="mr-2">List</span> <span>Adopt</span></p>
-            <font size="7">ºĞ¾ç¸®½ºÆ®</font>
+            <font size="7">ë¶„ì–‘ë¦¬ìŠ¤íŠ¸</font>
           </div>
         </div>
       </div>
@@ -99,12 +99,12 @@
 <!-- 			<div class="row" style="position:relative;height:35px;"> -->
 <!-- 	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > -->
 <!-- 	        	<font size="5px" id="pagename"><strong> -->
-<%-- 					<c:if test="${param.boardCode eq 'AD' }">ºĞ¾ç±Û ¸®½ºÆ®</c:if> --%>
-<%-- 				    <c:if test="${param.boardCode eq 'MS' }">½ÇÁ¾±Û ¸®½ºÆ®</c:if> --%>
+<%-- 					<c:if test="${param.boardCode eq 'AD' }">ë¶„ì–‘ê¸€ ë¦¬ìŠ¤íŠ¸</c:if> --%>
+<%-- 				    <c:if test="${param.boardCode eq 'MS' }">ì‹¤ì¢…ê¸€ ë¦¬ìŠ¤íŠ¸</c:if> --%>
 <!-- 	        	</strong></font></div> -->
 <!-- 	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"> -->
-<%-- 		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '¹ÌÀÎÁõÈ¸¿ø' }"> --%>
-<!-- 		       		 	<button type="button" class="btn btn-primary"><font size="3px">±Û¾²±â</font></button> -->
+<%-- 		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne 'ë¯¸ì¸ì¦íšŒì›' }"> --%>
+<!-- 		       		 	<button type="button" class="btn btn-primary"><font size="3px">ê¸€ì“°ê¸°</font></button> -->
 <%-- 		        	</c:if> --%>
 <!-- 	        	</font></div> -->
 <!-- 	        </div> -->
@@ -117,7 +117,7 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		ÀüÃ¼  ${resultPage.totalCount } °Ç
+		    		ì „ì²´  ${resultPage.totalCount } ê±´
 		    	</p>
 		    </div>
 		    
@@ -125,37 +125,37 @@
 				<form class="form-inline" name="detailForm">
 					<div class="form-group">
 			    		<select name="areaCondition" >
-							<option value="all">ÀüÃ¼</option>
-							<option value="kw"  ${ ! empty search.areaCondition && search.areaCondition=="°­¿ø" ? "selected" : "" }>°­¿øµµ</option>
-							<option value="kk"  ${ ! empty search.areaCondition && search.areaCondition=="°æ±â" ? "selected" : "" }>°æ±âµµ</option>
-							<option value="ks"  ${ ! empty search.areaCondition && search.areaCondition=="°æ»ó" ? "selected" : "" }>°æ»óµµ</option>
-							<option value="kj"  ${ ! empty search.areaCondition && search.areaCondition=="±¤ÁÖ" ? "selected" : "" }>±¤ÁÖ½Ã</option>
-							<option value="dj"  ${ ! empty search.areaCondition && search.areaCondition=="´ëÀü" ? "selected" : "" }>´ëÀü½Ã</option>
-							<option value="bs"  ${ ! empty search.areaCondition && search.areaCondition=="ºÎ»ê" ? "selected" : "" }>ºÎ»ê½Ã</option>
-							<option value="su"  ${ ! empty search.areaCondition && search.areaCondition=="¼­¿ï" ? "selected" : "" }>¼­¿ï½Ã</option>
-							<option value="us"  ${ ! empty search.areaCondition && search.areaCondition=="¿ï»ê" ? "selected" : "" }>¿ï»ê½Ã</option>
-							<option value="ic"  ${ ! empty search.areaCondition && search.areaCondition=="ÀÎÃµ" ? "selected" : "" }>ÀÎÃµ½Ã</option>
-							<option value="jr"  ${ ! empty search.areaCondition && search.areaCondition=="Àü¶ó" ? "selected" : "" }>Àü¶óµµ</option>
-							<option value="cc"  ${ ! empty search.areaCondition && search.areaCondition=="ÃæÃ»" ? "selected" : "" }>ÃæÃ»µµ</option>
+							<option value="all">ì „ì²´</option>
+							<option value="kw"  ${ ! empty search.areaCondition && search.areaCondition=="ê°•ì›" ? "selected" : "" }>ê°•ì›ë„</option>
+							<option value="kk"  ${ ! empty search.areaCondition && search.areaCondition=="ê²½ê¸°" ? "selected" : "" }>ê²½ê¸°ë„</option>
+							<option value="ks"  ${ ! empty search.areaCondition && search.areaCondition=="ê²½ìƒ" ? "selected" : "" }>ê²½ìƒë„</option>
+							<option value="kj"  ${ ! empty search.areaCondition && search.areaCondition=="ê´‘ì£¼" ? "selected" : "" }>ê´‘ì£¼ì‹œ</option>
+							<option value="dj"  ${ ! empty search.areaCondition && search.areaCondition=="ëŒ€ì „" ? "selected" : "" }>ëŒ€ì „ì‹œ</option>
+							<option value="bs"  ${ ! empty search.areaCondition && search.areaCondition=="ë¶€ì‚°" ? "selected" : "" }>ë¶€ì‚°ì‹œ</option>
+							<option value="su"  ${ ! empty search.areaCondition && search.areaCondition=="ì„œìš¸" ? "selected" : "" }>ì„œìš¸ì‹œ</option>
+							<option value="us"  ${ ! empty search.areaCondition && search.areaCondition=="ìš¸ì‚°" ? "selected" : "" }>ìš¸ì‚°ì‹œ</option>
+							<option value="ic"  ${ ! empty search.areaCondition && search.areaCondition=="ì¸ì²œ" ? "selected" : "" }>ì¸ì²œì‹œ</option>
+							<option value="jr"  ${ ! empty search.areaCondition && search.areaCondition=="ì „ë¼" ? "selected" : "" }>ì „ë¼ë„</option>
+							<option value="cc"  ${ ! empty search.areaCondition && search.areaCondition=="ì¶©ì²­" ? "selected" : "" }>ì¶©ì²­ë„</option>
 						</select>
 			    	</div>&nbsp;
 
 			    	<div class="form-group">
 						<select name="searchCondition" id="searchCondition">
-							<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>Á¦¸ñ</option>
-							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>³»¿ë</option>
-							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>°ßÁ¾</option>
+							<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ì œëª©</option>
+							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ë‚´ìš©</option>
+							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ê²¬ì¢…</option>
 						</select>
 					</div>
 
 					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label>
-						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="&nbsp;°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä."
+						<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label>
+						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="&nbsp;ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”."
 						    	value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 					</div>
 
 					<div class="form-group" >
-						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">°Ë»ö</button>
+						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">ê²€ìƒ‰</button>
 					</div>
 			    
 			    </form>
@@ -174,7 +174,7 @@
       <div class="col-md-12"  style="padding-left: 0px">
       
       <c:if test="${resultPage.totalCount eq 0 }">
-     	 <br/><br/><br/><br/><br/><p align="center"><font size="4px">°Ë»ö°á°ú°¡ ¾ø½À´Ï´Ù.</font><br/><br/><br/><br/><br/><br/></p>
+     	 <br/><br/><br/><br/><br/><p align="center"><font size="4px">ê²€ìƒ‰ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</font><br/><br/><br/><br/><br/><br/></p>
       </c:if>
 	
 	  <div class="row"  id="listAdoptJSON">
@@ -185,7 +185,7 @@
 			
 			<div class="col-md-4" >
 			
-<!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
+<!-- â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
 
 			<div class="desc-comp-offer-cont">
 			<figure class="getadopt">
@@ -200,15 +200,15 @@
 				</span>
 			    <span id="textList"><h3 align="center" style="padding-right: 0px;"><b>${adopt.postTitle}</b></h3>
 				    <c:if test="${param.boardCode eq 'AD' }">
-				   	 	<p align="right" style="padding-bottom: 10px;">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'½Ã')+1 ) }</p>
+				   	 	<p align="right" style="padding-bottom: 10px;">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'ì‹œ')+1 ) }</p>
 				   	</c:if>
 				    <c:if test="${param.boardCode eq 'MS' }">
-				   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />¿ø</p>
+				   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />ì›</p>
 				   	</c:if>
 			   	</span>
 			</figure>
 			</div>
-<!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
+<!-- â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
 			
 			</div>	
 		
@@ -229,7 +229,7 @@
  	
  	
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
  	
  	<!-- PageNavigation Start... -->
@@ -257,13 +257,13 @@
 		$(function(){
 	        $(window).scroll(function(){
 	            
-	//             scrollbarÀÇ thumb°¡ ¹Ù´Ú Àü 30px±îÁö µµ´Ş ÇÏ¸é ¸®½ºÆ®¸¦ °¡Á®¿Â´Ù.
+	//             scrollbarì˜ thumbê°€ ë°”ë‹¥ ì „ 30pxê¹Œì§€ ë„ë‹¬ í•˜ë©´ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
 	//             if( $(this).scrollTop() == $(document).height() -  $(this).height() ){
 	            if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){
 	            	postSize++;
 	            	listAdopt(postSize,"");
 	            }
-	        })//½ºÅ©·Ñ 
+	        })//ìŠ¤í¬ë¡¤ 
 	//         listApply(postSize,"");
 	    })
 	
@@ -271,7 +271,7 @@
 	
 		function listAdopt(postSize, str){
 	// 		console.log("dd "+$("#listAdoptJSON").html());
-	// 		console.log(area+'µé¾î¿È'+postSize+", "+str);
+	// 		console.log(area+'ë“¤ì–´ì˜´'+postSize+", "+str);
 	// 		var sendData = jQuery("form[name=detailForm]").serialize();
 			console.log($("#searchCondition").val()+", "+$("#searchKeyword").val()+", "+area+", "+$("#boardCode").val()+", "+postSize);
 			console.log(typeof $("#searchCondition").val());
@@ -300,14 +300,14 @@
 								for( i=0; i<data.list.length; i++ ){
 									
 								
-									var bCode = data.list[i].areaKr.substring( 0, data.list[i].areaKr.indexOf('½Ã')+1 );
+									var bCode = data.list[i].areaKr.substring( 0, data.list[i].areaKr.indexOf('ì‹œ')+1 );
 									var sCode = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
 
 									if ( data.list[i].statusCode != 3 ) {
 										sCode = '<img class="listImg" style="width:100%;background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';	
 									}	
 
-// 								       <!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
+// 								       <!-- â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
 									displayValue += 
 										'<div class="col-md-4" ><div class="desc-comp-offer-cont">'
 										+'<figure class="getadopt">'
@@ -336,11 +336,11 @@
 								}
 								if(str!=""){
 									$('#listAdoptJSON').children().remove();
-									$('.text-primary').text('ÀüÃ¼ '+data.totalCount+' °Ç');
+									$('.text-primary').text('ì „ì²´ '+data.totalCount+' ê±´');
 								}
 								if( postSize == 1 && data.list.length == 0 ){
-									console.log('°á°ú¾øÀ½');
-									displayValue = '<br/><br/><br/><br/><br/><p align="center"><font size="4px">°Ë»ö°á°ú°¡ ¾ø½À´Ï´Ù.</font><br/><br/><br/><br/><br/><br/></p>';
+									console.log('ê²°ê³¼ì—†ìŒ');
+									displayValue = '<br/><br/><br/><br/><br/><p align="center"><font size="4px">ê²€ìƒ‰ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</font><br/><br/><br/><br/><br/><br/></p>';
 								}
 								$('#listAdoptJSON').append(displayValue);
 								
@@ -359,20 +359,20 @@
 		
 		
 		$(function() {
-			$( "button:contains('°Ë»ö')" ).on("click" , function() {
+			$( "button:contains('ê²€ìƒ‰')" ).on("click" , function() {
 				if ( $( '#searchKeyword').val() == '' ){
 					$("#searchKeyword").focus();
 					return;
 				}
 				fncGetList(1);
 			});
-			//¿£ÅÍ°Ë»ö
+			//ì—”í„°ê²€ìƒ‰
 			$('#searchKeyword').keydown( function(e) {
 				if(e.keyCode == 13) {
 					postSize = 1;
 					listAdopt(postSize,"dd");
 				
-// 					alert("¿£ÅÍ "+$( '#searchKeyword').val());
+// 					alert("ì—”í„° "+$( '#searchKeyword').val());
 // // 					return;
 // 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
 // 						$("#searchKeyword").focus();
@@ -382,18 +382,18 @@
 // 					}
 				}
 			});
-			// »ó¼¼Á¶È¸
+			// ìƒì„¸ì¡°íšŒ
 			$(document).on("click")
 			$( "#listAdoptJSON" ).on("click", ".getadopt" , function() {
 				self.location ="/adopt/getAdopt?postNo="+$(this).children( $('input')).val().trim();
 			});
 			
-			// ±Û µî·ÏÇÏ±â
-			$( "button:contains('±Û¾²±â')" ).on("click" , function() {
+			// ê¸€ ë“±ë¡í•˜ê¸°
+			$( "button:contains('ê¸€ì“°ê¸°')" ).on("click" , function() {
 				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
 			});
 			
-			$( "font:contains('ºĞ¾ç¸®½ºÆ®')" ).on("click" , function() {
+			$( "font:contains('ë¶„ì–‘ë¦¬ìŠ¤íŠ¸')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
 

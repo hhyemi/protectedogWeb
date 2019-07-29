@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -9,8 +9,8 @@
 <html lang="ko">
 	
 <head>
-	<title>º¸È£ÇÒ°³ ¡¤ ºĞ¾ç±Û »ó¼¼Á¶È¸</title>
-	<meta charset="EUC-KR">
+	<title>ë³´í˜¸í• ê°œ Â· ë¶„ì–‘ê¸€ ìƒì„¸ì¡°íšŒ</title>
+	<meta charset="utf-8">
 	
 	<meta
       name="viewport"
@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >    
     <style>
+    
     	.row {
 			transform: rotate(0.03deg);
 		}
@@ -124,7 +125,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
              <p ><span class="mr-2">Get</span> <span>Adopt</span></p>
-            <font size="7">ºĞ¾ç»ó¼¼Á¶È¸</font>
+            <font size="7">ë¶„ì–‘ìƒì„¸ì¡°íšŒ</font>
           </div>
         </div>
       </div>
@@ -133,7 +134,7 @@
 <!--       <div class="container"> -->
 <!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
 <!--           <div class="col-md-9 ftco-animate text-center"> -->
-<!--             <h1 class="mb-0 bread" id="h1">ºĞ¾ç -->
+<!--             <h1 class="mb-0 bread" id="h1">ë¶„ì–‘ -->
 <!--             </h1> -->
 <!--           </div> -->
 <!--         </div> -->
@@ -214,20 +215,20 @@
               	
 <!--                 <li> -->
                    	<div class="row">
-				  		<div class="col-md-2 " ><strong>°ßÁ¾</strong></div>
+				  		<div class="col-md-2 " ><strong>ê²¬ì¢…</strong></div>
 						<div class="col-md-4 ">${adopt.dogBreed}</div>
 						
-						<div class="col-md-2 " style="padding-left: 0px;"><strong>Å©±â</strong></div>
+						<div class="col-md-2 " style="padding-left: 0px;"><strong>í¬ê¸°</strong></div>
 						<div class="col-md-4 ">${adopt.dogSize}</div>
 					</div>
 <!--                 </li> -->
                 
 <!--                 <li> -->
                    	<div class="row">
-				  		<div class="col-md-2 "><strong>Ã¼Áß</strong></div>
+				  		<div class="col-md-2 "><strong>ì²´ì¤‘</strong></div>
 						<div class="col-md-4 ">${adopt.dogWeight}kg</div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>¼ºº°</strong></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>ì„±ë³„</strong></div>
 						<div class="col-md-4 ">${adopt.dogGender}</div>
 					</div>
 <!--                 </li> -->
@@ -235,71 +236,71 @@
 <!--                 <li> -->
                    	<div class="row">
 				  		<div class="col-md-2 "><strong>
-					  		<c:if test="${adopt.boardCode eq 'AD' }">Ã¥ÀÓºñ</c:if>
-<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">»ç·Êºñ</c:if> --%>
+					  		<c:if test="${adopt.boardCode eq 'AD' }">ì±…ì„ë¹„</c:if>
+<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">ì‚¬ë¡€ë¹„</c:if> --%>
 				  		</strong></div>
-						<div class="col-md-4 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />¿ø</div>
+						<div class="col-md-4 "><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />ì›</div>
 			
 				  		<div class="col-md-2 " style="padding-left: 0px;"><strong>
-				  			<c:if test="${adopt.boardCode eq 'AD' }">¹ß°ßÀÏÀÚ</c:if>
-<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">½ÇÁ¾ÀÏÀÚ</c:if> --%>
+				  			<c:if test="${adopt.boardCode eq 'AD' }">ë°œê²¬ì¼ì</c:if>
+<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">ì‹¤ì¢…ì¼ì</c:if> --%>
 				  		</strong></div>
 						<div class="col-md-4">${adopt.dogDate}</div>
 					</div>
 
                 	<div class="row">
-				  		<div class="col-md-2  "><strong>»óÅÂ</strong></div>
+				  		<div class="col-md-2  "><strong>ìƒíƒœ</strong></div>
 						<div class="col-md-10 ">${adopt.dogStatus}</div>
 					</div>
 
                 	<div class="row">
-				  		<div class="col-md-2  "><strong>¼º°İ</strong></div>
+				  		<div class="col-md-2  "><strong>ì„±ê²©</strong></div>
 						<div class="col-md-10 ">${adopt.dogPersonality}</div>
 					</div>
 					
                 	<div class="row">
-				  		<div class="col-md-2  "><strong>Æ¯Â¡</strong></div>
+				  		<div class="col-md-2  "><strong>íŠ¹ì§•</strong></div>
 						<div class="col-md-10 ">${adopt.dogChar}</div>
 					</div>
          
 	               	<div class="row">
-				  		<div class="col-md-2  "><strong>±Û³»¿ë</strong></div>
-						<div class="col-md-10 " style="padding-right: 0px;" >${adopt.postContent}</div>
+				  		<div class="col-md-2  "><strong>ê¸€ë‚´ìš©</strong></div>
+						<div class="col-md-10 " style="padding-right: 0px;" >${adopt.postContent}?${user.id},!${adopt.id }</div>
 					</div>
 					
 	               	<div class="row">
 				  		<div class="col-md-12 card-area ">
-				  			<!-- ºĞ¾ç ¸Ş´ºÀÏ¶§  -->
+				  			<!-- ë¶„ì–‘ ë©”ë‰´ì¼ë•Œ  -->
 			              	<c:if test="${adopt.boardCode eq 'AD' }">
 				              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }">
-				              			<button id="adoptApply" class="main_btn" >ÀÔ¾ç½ÅÃ»</button>
+				              			<button id="adoptApply" class="main_btn" >ì…ì–‘ì‹ ì²­</button>
 				              		</c:if>
 				              		
 				              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }">
-				              			<button class="main_btn"  id="confirmButton">½ÅÃ»¼­È®ÀÎ</button>
-				              			<button class="main_btn"  id="adoptCompleteButton">ºĞ¾ç¿Ï·á</button>
+				              			<button class="main_btn"  id="confirmButton">ì‹ ì²­ì„œí™•ì¸</button>
+				              			<button class="main_btn"  id="adoptCompleteButton">ë¶„ì–‘ì™„ë£Œ</button>
 				              		</c:if>
 				              		
 				              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-				              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">¾ÆÁ÷ ½ÅÃ»¼­°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.</button>
+				              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">ì•„ì§ ì‹ ì²­ì„œê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.</button>
 				              		</c:if>
 			              	</c:if>
 			              	
-			              	<!-- ½ÇÁ¾ ¸Ş´ºÀÏ¶§  -->
+			              	<!-- ì‹¤ì¢… ë©”ë‰´ì¼ë•Œ  -->
 			              	<c:if test="${adopt.boardCode eq 'MS' }">
 			              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-			              			<button class="main_btn"  id="missingCompleteButton">Ã£±â¿Ï·á</button>
+			              			<button class="main_btn"  id="missingCompleteButton">ì°¾ê¸°ì™„ë£Œ</button>
 			              		</c:if>
 			              	</c:if>
 			              	
-			              	<!-- °øÅë  -->
+			              	<!-- ê³µí†µ  -->
 			              	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }">
-			               		<button class="main_btn" href="#" >¹®ÀÇÇÏ±â</button>
+			               		<button class="main_btn" href="#" >ë¬¸ì˜í•˜ê¸°</button>
 			               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 			               	</c:if>
 			               	
 			              	<c:if test="${adopt.statusCode eq '3'}">
-			               		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">¿Ï·áµÈ ±ÛÀÔ´Ï´Ù.</button>
+			               		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">ì™„ë£Œëœ ê¸€ì…ë‹ˆë‹¤.</button>
 			               	</c:if>
 				  		
 				  		</div>
@@ -327,37 +328,37 @@
 <!--              <div class="row"> -->
 <!--               <div class="col-md-12 card_area" >ddddd -->
 
-<!-- 				ºĞ¾ç ¸Ş´ºÀÏ¶§  -->
+<!-- 				ë¶„ì–‘ ë©”ë‰´ì¼ë•Œ  -->
 <%--               	<c:if test="${adopt.boardCode eq 'AD' }"> --%>
 <%-- 	              		<c:if test="${adopt.statusCode ne '3' && sessionScope.user.id ne adopt.id }"> --%>
-<!-- 	              			<button id="adoptApply" class="main_btn" href="#" style="width: 189px">ÀÔ¾ç½ÅÃ»</button> -->
+<!-- 	              			<button id="adoptApply" class="main_btn" href="#" style="width: 189px">ì…ì–‘ì‹ ì²­</button> -->
 <%-- 	              		</c:if> --%>
 	              		
 <%-- 	              		<c:if test="${adopt.statusCode eq '2' && sessionScope.user.id eq adopt.id }"> --%>
-<!-- 	              			<button class="main_btn" style="width: 189px" id="confirmButton">½ÅÃ»¼­È®ÀÎ</button> -->
-<!-- 	              			<button class="main_btn" style="width: 189px" id="adoptCompleteButton">ºĞ¾ç¿Ï·á</button> -->
+<!-- 	              			<button class="main_btn" style="width: 189px" id="confirmButton">ì‹ ì²­ì„œí™•ì¸</button> -->
+<!-- 	              			<button class="main_btn" style="width: 189px" id="adoptCompleteButton">ë¶„ì–‘ì™„ë£Œ</button> -->
 <%-- 	              		</c:if> --%>
 	              		
 <%-- 	              		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }"> --%>
-<!-- 	              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">¾ÆÁ÷ ½ÅÃ»¼­°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.</button> -->
+<!-- 	              			<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">ì•„ì§ ì‹ ì²­ì„œê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.</button> -->
 <%-- 	              		</c:if> --%>
 <%--               	</c:if> --%>
               	
-<!--               	½ÇÁ¾ ¸Ş´ºÀÏ¶§  -->
+<!--               	ì‹¤ì¢… ë©”ë‰´ì¼ë•Œ  -->
 <%--               	<c:if test="${adopt.boardCode eq 'MS' }"> --%>
 <%--               		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }"> --%>
-<!--               			<button class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">Ã£±â¿Ï·á</button> -->
+<!--               			<button class="main_btn" href="#" style="width: 189px" id="missingCompleteButton">ì°¾ê¸°ì™„ë£Œ</button> -->
 <%--               		</c:if> --%>
 <%--               	</c:if> --%>
               	
-<!--               	°øÅë  -->
+<!--               	ê³µí†µ  -->
 <%--               	<c:if test="${adopt.statusCode ne '3' &&  sessionScope.user.id ne adopt.id   }"> --%>
-<!--                		<button class="main_btn" href="#" style="width: 189px">¹®ÀÇÇÏ±â</button> -->
+<!--                		<button class="main_btn" href="#" style="width: 189px">ë¬¸ì˜í•˜ê¸°</button> -->
 <!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
 <%--                	</c:if> --%>
                	
 <%--               	<c:if test="${adopt.statusCode eq '3'}"> --%>
-<!--                		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">¿Ï·áµÈ ±ÛÀÔ´Ï´Ù.</button> -->
+<!--                		<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">ì™„ë£Œëœ ê¸€ì…ë‹ˆë‹¤.</button> -->
 <%--                	</c:if> --%>
               	
 <!--               </div> -->
@@ -386,17 +387,17 @@
         <div id="mapDiv"  class="col-md-12 ">
         
         	<c:if test="${adopt.boardCode eq 'AD' }">
-				<strong>ºĞ¾ç°¡´ÉÁö¿ª</strong><br/>
+				<strong>ë¶„ì–‘ê°€ëŠ¥ì§€ì—­</strong><br/>
 		  		<div id="mapArea" style="width:wrap; height: 300px;"  align="center"></div>
 				<div>${adopt.areaKr }</div><br/>
 			</c:if>
 			
 	  		<strong>
 	  			<c:if test="${adopt.boardCode eq 'AD' }">
-		  			¹ß°ßÀ§Ä¡
+		  			ë°œê²¬ìœ„ì¹˜
 		  		</c:if>
 			    <c:if test="${adopt.boardCode eq 'MS' }">
-		  			½ÇÁ¾À§Ä¡
+		  			ì‹¤ì¢…ìœ„ì¹˜
 		  		</c:if>
 	  		</strong><br/>
 	  		<div id="map" style="width: wrap; height: 300px;"  align="center"></div>
@@ -411,21 +412,21 @@
 				<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="Æ®À§ÅÍ·Î °øÀ¯"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="ÆäÀÌ½ººÏÀ¸·Î °øÀ¯"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="³×ÀÌ¹ö·Î °øÀ¯"><img src="/resources/file/others/naver.png"></a>
-				<a href="#"  id="kakao" title="Ä«Ä«¿ÀÅåÀ¸·Î °øÀ¯"> <img src="/resources/file/others/kakao.png" ></a>
+				<a href="#"  id="twitter"  title="íŠ¸ìœ„í„°ë¡œ ê³µìœ "><img src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="í˜ì´ìŠ¤ë¶ìœ¼ë¡œ ê³µìœ "><img src="/resources/file/others/facebook.png"></a>
+				<a href="#"  id="naver" title="ë„¤ì´ë²„ë¡œ ê³µìœ "><img src="/resources/file/others/naver.png"></a>
+				<a href="#"  id="kakao" title="ì¹´ì¹´ì˜¤í†¡ìœ¼ë¡œ ê³µìœ "> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
         <div class="col-md-12"><hr/></div>
         
         <p align="right">
        		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
-				<button class="main_btn" id="modiButton">¼öÁ¤</button>
-	       		<button class="main_btn" id="delButton">»èÁ¦</button>
+				<button class="main_btn" id="modiButton">ìˆ˜ì •</button>
+	       		<button class="main_btn" id="delButton">ì‚­ì œ</button>
 			</c:if>
 			
-	        <button class="main_btn" id="listButton">¸ñ·Ï</button>
+	        <button class="main_btn" id="listButton">ëª©ë¡</button>
         </p>
         
         
@@ -441,13 +442,13 @@
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
 			<div id="dialog-delAdopt" title="">
-			  <p align="center"><br/>»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</p>
+			  <p align="center"><br/>ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>
 			</div>  
 			<div id="dialog-adoptComplete" title="">
-			  <p align="center"><br/>ºĞ¾ç¿Ï·á »óÅÂ·Î º¯°æÇÏ½Ã°Ú½À´Ï±î?</p>
+			  <p align="center"><br/>ë¶„ì–‘ì™„ë£Œ ìƒíƒœë¡œ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>
 			</div>  
 			<div id="dialog-missingComplete" title="">
-			  <p align="center"><br/>Ã£±â¿Ï·á »óÅÂ·Î º¯°æÇÏ½Ã°Ú½À´Ï±î?</p>
+			  <p align="center"><br/>ì°¾ê¸°ì™„ë£Œ ìƒíƒœë¡œ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>
 			</div>  
 			<div id="dialog-alreadyApply" title="">
 			  <p align="center"><br/></p>
@@ -561,7 +562,7 @@
 						success : function(status) {
 							$('#confirmButton, #modiButton, #delButton, #adoptCompleteButton, #missingCompleteButton').remove();
 							$( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog( "close" );
-							$('.card_area').html('<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">¿Ï·áµÈ ±ÛÀÔ´Ï´Ù.</button>');
+							$('.card_area').html('<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">ì™„ë£Œëœ ê¸€ì…ë‹ˆë‹¤.</button>');
 						},
 						error: function(request, status, error){ 
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
@@ -572,7 +573,7 @@
 	 //////////////////////////////////////////////////////////////////////////////////////////////////////      
       
 	
-	 //============= SNS°øÀ¯ Event  Ã³¸® =============	
+	 //============= SNSê³µìœ  Event  ì²˜ë¦¬ =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
 	});		
@@ -589,15 +590,15 @@
 		sendLinkKakao()
 	});	
 	
-  //============= Ä«Ä«¿À °øÀ¯ÇÏ±âEvent  Ã³¸® =============		
+  //============= ì¹´ì¹´ì˜¤ ê³µìœ í•˜ê¸°Event  ì²˜ë¦¬ =============		
 	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
   
 	 function sendLinkKakao(){
 	     Kakao.Link.sendDefault({
 	     	objectType: 'feed',
 	     	content: {
-	     		title: 'À¯±â°ßº¸È£',
-	     		description: '¸Û¸Û',
+	     		title: 'ìœ ê¸°ê²¬ë³´í˜¸',
+	     		description: 'ë©ë©',
 	     		imageUrl:document.location.href,
 	     		link: {
 			     		mobileWebUrl: document.location.href,
@@ -606,7 +607,7 @@
 	     		},
 	    	buttons: [       
 	        			{
-	        				title: '¸µÅ© ¿­±â',
+	        				title: 'ë§í¬ ì—´ê¸°',
 	        				link: {
 	       							mobileWebUrl: document.location.href,
 	        						webUrl: document.location.href
@@ -626,10 +627,10 @@
   		      height: 180,
   		      modal: true,
   		      buttons: {
-  		        	¿¹: function() {
+  		        	ì˜ˆ: function() {
   		        		self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
   		        	},
-  		        	¾Æ´Ï¿À: function() {
+  		        	ì•„ë‹ˆì˜¤: function() {
   		          		$( this ).dialog( "close" );
   		        	}
   		      }
@@ -643,10 +644,10 @@
   		      height: 180,
   		      modal: true,
   		      buttons: {
-  		        	¿¹: function() {
+  		        	ì˜ˆ: function() {
   		        		fncComplete();
   		        	},
-  		        	¾Æ´Ï¿À: function() {
+  		        	ì•„ë‹ˆì˜¤: function() {
   		          		$( this ).dialog( "close" );
   		        	}
   		      }
@@ -660,10 +661,10 @@
   		      height: 600,
   		      modal: true,
   		      buttons: {
-//   		        	¿¹: function() {
+//   		        	ì˜ˆ: function() {
 //   		        		fncComplete();
 //   		        	},
-  		        	´İ±â: function() {
+  		        	ë‹«ê¸°: function() {
   		          		$( this ).dialog( "close" );
   		        	}
   		      }
@@ -677,7 +678,7 @@
   		      height: 180,
   		      modal: true,
   		      buttons: {
-  		        	´İ±â: function() {
+  		        	ë‹«ê¸°: function() {
   		          		$( this ).dialog( "close" );
   		        	}
   		      }
@@ -691,7 +692,7 @@
   
     function listApply(str){
     	var lv = $('input[name=levels]').val();
-    	console.log("lv È®ÀÎ : "+lv);
+    	console.log("lv í™•ì¸ : "+lv);
 		var adoptNo = parseInt(  $('input[name=postNo]').val().trim()  );
 		
   		$.ajax( 
@@ -711,8 +712,8 @@
 										        +'<thead>'
 										        	+'<tr>'
 											            +'<th style="width: 15%"><strong>No</strong></th>'
-											            +'<th style="width: 55%"><strong>½ÅÃ»ÀÚ ID</strong></th>'
-											            +'<th style="width: 30%"><strong>½ÅÃ»ÀÏÀÚ</strong></th>' 
+											            +'<th style="width: 55%"><strong>ì‹ ì²­ì ID</strong></th>'
+											            +'<th style="width: 30%"><strong>ì‹ ì²­ì¼ì</strong></th>' 
 									           		+'</tr>'
 									            +'</thead>'
 									            +'<tbody>';
@@ -730,24 +731,24 @@
 							displayValue += '</tbody>'+'</table>';
 							
 							
-							if ( str == 'È®ÀÎ' ) {
+							if ( str == 'í™•ì¸' ) {
 								
 								$( "#dialog-listApply" ).html(displayValue);
 								$( '#dialog-listApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 								$( "#dialog-listApply" ).dialog( "open" );
 								
 							} else if ( str == '' ){
-								//·Î±×ÀÎ ¾ÈÇßÀ»¶§
-								if ( id == '' || lv == '¹ÌÀÎÁõÈ¸¿ø' ) {
-									$( '#dialog-alreadyApply p' ).html("<br/>ÀÎÁõÈ¸¿ø¸¸ ½ÅÃ»ÇÒ ¼ö ÀÖ½À´Ï´Ù.");
+								//ë¡œê·¸ì¸ ì•ˆí–ˆì„ë•Œ
+								if ( id == '' || lv == 'ë¯¸ì¸ì¦íšŒì›' ) {
+									$( '#dialog-alreadyApply p' ).html("<br/>ì¸ì¦íšŒì›ë§Œ ì‹ ì²­í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 									$( "#dialog-alreadyApply" ).dialog( "open" );
-								//¹Ş¾Æ¿Â µ¥ÀÌÅÍ¿¡ ¾ÆÀÌµğ°¡ ÀÖÀ»¶§	
+								//ë°›ì•„ì˜¨ ë°ì´í„°ì— ì•„ì´ë””ê°€ ìˆì„ë•Œ	
 								} else if ( displayValue.indexOf(id) != -1 ) {
-									$( '#dialog-alreadyApply p' ).html("<br/>ÀÌ¹Ì ½ÅÃ»ÇÏ¼Ì½À´Ï´Ù.");
+									$( '#dialog-alreadyApply p' ).html("<br/>ì´ë¯¸ ì‹ ì²­í•˜ì…¨ìŠµë‹ˆë‹¤.");
 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 									$( "#dialog-alreadyApply" ).dialog( "open" );
-								//·Î±×ÀÎÇÑ»óÅÂ+¾ÆÀÌµğ°¡ ¾øÀ»¶§
+								//ë¡œê·¸ì¸í•œìƒíƒœ+ì•„ì´ë””ê°€ ì—†ì„ë•Œ
 								} else {
 									self.location = "/apply/addApply?postNo=${adopt.postNo}";
 								}
@@ -756,7 +757,7 @@
 								
 							} else if ( str == 'load' && id != '' && displayValue.indexOf(id) != -1 ) {
 								
-								$( '#adoptApply' ).text("½ÅÃ»¿Ï·á");
+								$( '#adoptApply' ).text("ì‹ ì²­ì™„ë£Œ");
 								
 							}
 							
@@ -768,7 +769,7 @@
 			});
  	}
   
-  // ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+  // â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
   
 		function getApply(applyNo){
 //     		var applyNo = parseInt( $(this).children($('input')).val().trim()  );
@@ -791,53 +792,53 @@
 							
 								var displayValue;
 								
-								if( data.mate == "ÀÖÀ½" && data.raise == "ÀÖÀ½" ){
-									displayValue = 	 '<strong>[¿¬¶ôÃ³]<\/strong> : '+data.phone
-													+'<br\/><strong>[Á÷¾÷]<\/strong> : '+data.job
-													+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+data.addr
-													+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+data.mate
-													+'<br\/><strong>[µ¿ÀÇ ¿©ºÎ]<\/strong> : '+data.mateAgree
-													+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+data.raise
-													+'<br\/><strong>[ÇöÀç ¾çÀ° ¿©ºÎ]<\/strong> : '+data.currently
-													+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+data.plan
-													+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+data.pay
-													+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+data.reason
-													+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+data.situation ;
+								if( data.mate == "ìˆìŒ" && data.raise == "ìˆìŒ" ){
+									displayValue = 	 '<strong>[ì—°ë½ì²˜]<\/strong> : '+data.phone
+													+'<br\/><strong>[ì§ì—…]<\/strong> : '+data.job
+													+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+data.addr
+													+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+data.mate
+													+'<br\/><strong>[ë™ì˜ ì—¬ë¶€]<\/strong> : '+data.mateAgree
+													+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+data.raise
+													+'<br\/><strong>[í˜„ì¬ ì–‘ìœ¡ ì—¬ë¶€]<\/strong> : '+data.currently
+													+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+data.plan
+													+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+data.pay
+													+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+data.reason
+													+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+data.situation ;
 									
-								}else if( data.mate == "ÀÖÀ½" && data.raise == "¾øÀ½" ){
-									displayValue = 	 '<strong>[¿¬¶ôÃ³]<\/strong> : '+data.phone
-													+'<br\/><strong>[Á÷¾÷]<\/strong> : '+data.job
-													+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+data.addr
-													+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+data.mate
-													+'<br\/><strong>[µ¿ÀÇ ¿©ºÎ]<\/strong> : '+data.mateAgree
-													+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+data.raise
-													+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+data.plan
-													+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+data.pay
-													+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+data.reason
-													+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+data.situation ;
+								}else if( data.mate == "ìˆìŒ" && data.raise == "ì—†ìŒ" ){
+									displayValue = 	 '<strong>[ì—°ë½ì²˜]<\/strong> : '+data.phone
+													+'<br\/><strong>[ì§ì—…]<\/strong> : '+data.job
+													+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+data.addr
+													+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+data.mate
+													+'<br\/><strong>[ë™ì˜ ì—¬ë¶€]<\/strong> : '+data.mateAgree
+													+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+data.raise
+													+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+data.plan
+													+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+data.pay
+													+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+data.reason
+													+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+data.situation ;
 									
-								}else if( data.mate == "¾øÀ½" && data.raise == "ÀÖÀ½" ){
-									displayValue = 	 '<strong>[¿¬¶ôÃ³]<\/strong> : '+data.phone
-													+'<br\/><strong>[Á÷¾÷]<\/strong> : '+data.job
-													+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+data.addr
-													+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+data.mate
-													+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+data.raise
-													+'<br\/><strong>[ÇöÀç ¾çÀ° ¿©ºÎ]<\/strong> : '+data.currently
-													+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+data.plan
-													+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+data.pay
-													+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+data.reason
-													+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+data.situation;
+								}else if( data.mate == "ì—†ìŒ" && data.raise == "ìˆìŒ" ){
+									displayValue = 	 '<strong>[ì—°ë½ì²˜]<\/strong> : '+data.phone
+													+'<br\/><strong>[ì§ì—…]<\/strong> : '+data.job
+													+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+data.addr
+													+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+data.mate
+													+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+data.raise
+													+'<br\/><strong>[í˜„ì¬ ì–‘ìœ¡ ì—¬ë¶€]<\/strong> : '+data.currently
+													+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+data.plan
+													+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+data.pay
+													+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+data.reason
+													+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+data.situation;
 									
 								}else{
-									displayValue = 	 '<strong>[¿¬¶ôÃ³]<\/strong> : '+data.phone
-													+'<br\/><strong>[Á÷¾÷]<\/strong> : '+data.job
-													+'<br\/><strong>[°ÅÁÖÁö À¯Çü]<\/strong> : '+data.addr
-													+'<br\/><strong>[µ¿°ÅÀÎ ¿©ºÎ]<\/strong> : '+data.mate
-													+'<br\/><strong>[¾çÀ°°æÇè]<\/strong> : '+data.raise
-													+'<br\/><strong>[¾ÕÀ¸·ÎÀÇ °èÈ¹]<\/strong> : '+data.plan
-													+'<br\/><strong>[1³â ¿¹»óºñ¿ë]<\/strong> : '+data.pay
-													+'<br\/><strong>[ÀÔ¾ç½ÅÃ» ÀÌÀ¯]<\/strong> : '+data.reason
-													+'<br\/><strong>[»óÈ²¿¡ µû¸¥ ´ëÃ³]<\/strong> : '+data.situation ;
+									displayValue = 	 '<strong>[ì—°ë½ì²˜]<\/strong> : '+data.phone
+													+'<br\/><strong>[ì§ì—…]<\/strong> : '+data.job
+													+'<br\/><strong>[ê±°ì£¼ì§€ ìœ í˜•]<\/strong> : '+data.addr
+													+'<br\/><strong>[ë™ê±°ì¸ ì—¬ë¶€]<\/strong> : '+data.mate
+													+'<br\/><strong>[ì–‘ìœ¡ê²½í—˜]<\/strong> : '+data.raise
+													+'<br\/><strong>[ì•ìœ¼ë¡œì˜ ê³„íš]<\/strong> : '+data.plan
+													+'<br\/><strong>[1ë…„ ì˜ˆìƒë¹„ìš©]<\/strong> : '+data.pay
+													+'<br\/><strong>[ì…ì–‘ì‹ ì²­ ì´ìœ ]<\/strong> : '+data.reason
+													+'<br\/><strong>[ìƒí™©ì— ë”°ë¥¸ ëŒ€ì²˜]<\/strong> : '+data.situation ;
 								}
 								console.log("-----"+displayValue);
 				 				$('#'+data.applyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
@@ -851,42 +852,42 @@
 					
 				});
 // 	  		return displayValue;
-// 	  		console.log("return È®ÀÎ : "+displayValue);
+// 	  		console.log("return í™•ì¸ : "+displayValue);
 	 	}
 // 		);
 	    
   
 
 	    
-  // ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á  
+  // â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–   
       $(function() {
     		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
     			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
-    			console.log("È®ÀÎ111 : "+applyNo);
+    			console.log("í™•ì¸111 : "+applyNo);
     			$('#appendTr').remove();
 
     			getApply(applyNo);
     			
-//     			console.log("return È®ÀÎ : "+displayValue);
+//     			console.log("return í™•ì¸ : "+displayValue);
    		    });
          	
 		
-    	    $( "button:contains('¼öÁ¤')" ).on("click" , function() {
+    	    $( "button:contains('ìˆ˜ì •')" ).on("click" , function() {
 				self.location = "/adopt/updateAdopt?postNo=${adopt.postNo}"
 			});
 		
-			$( "button:contains('»èÁ¦')" ).on("click" , function() {
+			$( "button:contains('ì‚­ì œ')" ).on("click" , function() {
 				$('#dialog-delAdopt').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 				$('#dialog-delAdopt').dialog( "open" );
 			});
 		
-			$( "button:contains('ÀÔ¾ç½ÅÃ»')" ).on("click" , function() {
+			$( "button:contains('ì…ì–‘ì‹ ì²­')" ).on("click" , function() {
 				listApply('');
 // 				self.location = "/apply/addApply?postNo=${adopt.postNo}"
 			});
 		
-			$( "button:contains('½ÅÃ»¼­È®ÀÎ')" ).on("click" , function() {
-				listApply('È®ÀÎ');
+			$( "button:contains('ì‹ ì²­ì„œí™•ì¸')" ).on("click" , function() {
+				listApply('í™•ì¸');
 // 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 		
@@ -900,7 +901,7 @@
 				$('#dialog-missingComplete').dialog( "open" );
 			});
 		
-			$( "button:contains('¸ñ·Ï')" ).on("click" , function() {
+			$( "button:contains('ëª©ë¡')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
 
