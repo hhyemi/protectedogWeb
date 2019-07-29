@@ -26,9 +26,6 @@
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script src="https://kit.fontawesome.com/e26616618e.js"></script>
-
 <!--  CSS -->
 <style>
 
@@ -48,12 +45,17 @@
 	height : 40px;
 	border-radius : 15px 0px 0px 15px;
 }
-
+.btn-default{
+	height: 30px;
+}
+h5{
+	font-size: 15px;
+}
 
 </style>
 
 
-<title>보호할개.정보공유</title>
+<title>보호할개 · 정보공유</title>
 <jsp:include page="/layout/toolbar.jsp" />
 </head>
 
@@ -207,7 +209,7 @@
 						<c:forEach var="best" items="${listRanking}">
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
-									<td class="mdl-data-table__cell--non-numeric">${i}</td>
+									<td class="mdl-data-table__cell--non-numeric"><span class="fas fa-medal"> ${i} 등</span></td>
 									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
 										value="${best.postNo}"> ${best.postTitle}</td>
 								</tr>
@@ -392,4 +394,7 @@ function listNews(){
 		});
 	});
 </script>
+
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
+
 </html>

@@ -55,8 +55,8 @@
 	</update>
 
 	<delete id="delComment" parameterType="int">
-		DELETE
-		FROM comments
+		UPDATE comments
+		SET status_code = '0'
 		WHERE comment_no = #{value}
 	</delete>
 
