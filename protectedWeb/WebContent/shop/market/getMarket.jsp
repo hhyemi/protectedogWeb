@@ -141,7 +141,8 @@ text-size: small;
 </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 <p>
 		<!--================End Product Description Area =================-->
-	<input type="hidden" value="${board.postNo}" name="postNo"/>	
+	<input type="hidden" name="postNo" value="${board.postNo}" />
+<input type="hidden" name="boardCode" value="IS" />	
 <jsp:include page="/common/comment.jsp"></jsp:include>
 </p>
 		<!--================ End footer Area  =================-->
@@ -169,6 +170,15 @@ text-size: small;
 		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		 $(function() {
+			 
+			/// SCRIPT
+			 var commentData =  
+			 {
+			    commentContent       : $("input[name=commentContent]").val(),
+			    postNo         : $("input[name=postNo]").val(),
+			    boardCode       : $("input[name=boardCode]").val()
+			 } ;
+			 
 			
 			 //manage//====================================================
 			 $( "button:contains('확인')" ).on("click" , function() {
@@ -177,27 +187,13 @@ text-size: small;
 				/* self.location = "/product/listProduct/manage" */
 				self.location = "/product/listProduct"
 			});
-			
-			 $( "button:contains('수정')" ).on("click" , function() {
-				//Debug..
 				console.log($( "button:contains('수정')" ).html());
-				history.go(-1);
+				$("#re").bind("click", function() {
+					self.location = "/product/updateProduct?prodNo=${product.prodNo}"
+				});
 			});
 			 
-			 //==================장바구니 추가 ===============================
-				 
-				 $( ".icon-shopping_cart" ).on("click" , function() {	
-					//Debug..
-					alert(  $( "form[name='addCart']" ).html() );
-					$("form[name='addCart']").attr("method", "POST").attr("action", "/cart/addCart").submit();
-					//fncAddProduct();
-				});
 
-			//구매하기//====================================================
-			$( ".main_btn" ).on("click" , function() {
-				//Debug..
-				self.location = "/order/addOrder?prodNo=${product.prodNo}"
-			});
 			
 			 $( "button:contains('뒤로')" ).on("click" , function() {
 				//Debug..
@@ -205,9 +201,10 @@ text-size: small;
 				self.location = "/product/listProduct"
 			});
 		});
+
 		
 		 //=============장바구니 이동========================================
-			 
+
 	
 		
 		
