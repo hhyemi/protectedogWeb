@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-	
+    <title>보호할개 · 후원신청</title>	
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -28,10 +28,7 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-		.form-group2{
-		padding-left:408px;
-		padding-right:100px;
-		}	
+
        @font-face{
           font-family: NanumSquare;
           src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
@@ -44,12 +41,12 @@
        }	
 	</style> 
  
- 
-  </head>
-  <body>
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
+ 
+  </head>
+  <body>
     <!--================Header Menu Area =================--> 
 
     <!--================Single Product Area =================-->
@@ -109,18 +106,19 @@
  			 <div class="col-lg-5 offset-lg-1">
              <div class="s_product_text">			 
             <div>
-             <font size=6><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
-			<h3>${funding.voterCount}표</h3>
+            <h4>&emsp;</h4>
+            <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> </div>
+			<div style="padding-bottom:10px"><font size="5" ><strong style="color:#f04f23">${funding.voterCount}표</strong></font></div>
 			<!-- 투표종료 -->
 			 <c:if test ="${!(funding.statusCode eq 1) }">		
-			<h3><strong style="color:#8c8479">투표종료</strong></h3>
+			<font size="5"><strong style="color:#d43333">투표종료</strong></font>
 			 </c:if>
             <!-- 투표중 -->			 
 			<c:if test ="${funding.statusCode eq 1 }">				 			
-			<h4 class="media-heading">남은기간 <b>${funding.voteRemainDate }</b>일</h4> 
+			<font size="5" class="media-heading">남은기간 <b>${funding.voteRemainDate }</b>일</font> 
 			</c:if>			    
 			 <div class="progress">
-			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(30-funding.voteRemainDate)*100/30}%; background-color:#C9BFB0!important;"></div>
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${(30-funding.voteRemainDate)*100/30}%; background-color:#e8cec8!important;"></div>
 			 </div>
 			<div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >${funding.voteStartDate}</div>
@@ -128,9 +126,9 @@
 			 </div>					 
 		     <br/>
 
-			 <div><h3>투표율&ensp;<strong style="color:#4E8092">${funding.voteRate}%</strong></h3></div>
+			 <div><font size="5" >투표율&ensp;${funding.voteRate}%</font></div>
 			 <div class="progress">					 
-			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%; background-color:#4E8092!important;"></div>
+			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%; background-color:#e66447!important;"></div>
 			 </div>		
 
 			<div class="row" style="position:relative;height:35px;">
@@ -139,7 +137,7 @@
 			 </div>		 	 		 	 
                <br/>  
               <div class="card_area">
-                <a class="main_btn" href="#">투표하기</a><a class="main_btn" href="#">문의하기</a>  
+                <button  id="btnAddVote" class="btn btn-default">투표하기</button><button id="btnQuestion"  class="btn btn-default">문의하기</button>  
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
@@ -194,10 +192,10 @@
 		            aria-labelledby="home-tab">
 				 			<h2>${funding.postContent }</h2>
 				         	<hr/><br/>									
-							<div class="form-group2">
+							<div >
 							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-							<a class="main_btn" href="#">수정하기</a> 
-							<a class="main_btn" href="#">삭제하기</a> 
+							<button id = "btnUpdate" class="btn btn-default">수정하기</button> 
+							<button id = "btnDelete" class="btn btn-default">삭제하기</button> 
 							</c:if>
 						    </div>
 		          </div>
@@ -207,7 +205,7 @@
 		            role="tabpanel"
 		            aria-labelledby="voter-tab">
 		            
- 					<div><h3>현재 <font color="#8c8479">${funding.voterCount}명</font>의 참여가 이루어졌습니다.</h3></div>
+ 					<div><h3>현재 <font color="#f04f23">${funding.voterCount}명</font>의 참여가 이루어졌습니다.</h3></div>
  					<hr/>
 		 				<c:forEach var="participate" items="${list}">						
 							<div class="row" style="position:relative;height:35px;">
@@ -252,7 +250,7 @@
     $(function(){
     
 		//============= 투표하기 Event  처리 =============	
-	 	$( "a:contains('투표하기')" ).on("click" , function() {
+	 	$( "#btnAddVote" ).on("click" , function() {
 	 		if(${user==null}){
 	 			alert("로그인이 필요합니다.")
 	 		}else{
@@ -290,7 +288,7 @@
 	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	
-	 	$( "a:contains('문의하기')" ).on("click" , function() {
+	 	$( "#btnQuestion" ).on("click" , function() {
 	 		if(${user==null}){
 	 			alert("로그인이 필요합니다.")
 	 		}else{
@@ -318,7 +316,7 @@
 		});	
 	    
 		//============= 수정하기 Event  처리 =============	
-	 	$( "a:contains('수정하기')" ).on("click" , function() {
+	 	$( "#btnUpdate" ).on("click" , function() {
 	 		if(${!(funding.voterCount eq 0) || !(user.id eq 'admin')}){
 	 			alert("투표 1개이상 받을 시 수정이 불가합니다. ")
 	 		}else{
@@ -327,7 +325,7 @@
 		});   
 		
 		//============= 삭제하기 Event  처리 =============	
-	 	$( "a:contains('삭제하기')" ).on("click" , function() {
+	 	$( "#btnDelete" ).on("click" , function() {
             if(confirm('삭제시 한달간 글 작성 불가입니다.')){
                 self.location = "/funding/delVoting?postNo=${funding.postNo}"
             	alert("삭제가 완료되었습니다.")

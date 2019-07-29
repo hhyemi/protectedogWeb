@@ -31,7 +31,12 @@
 		SELECT
 		FILE_NO , BOARD_CODE , POST_NO , FILE_NAME , FILE_CODE
 		FROM FILES 
-		WHERE POST_NO IN #{postNo} AND  BOARD_CODE IN #{boardCode}
+		<where>
+		 BOARD_CODE IN #{boardCode}
+		 <if test="postNo != null">
+		 AND POST_NO IN #{postNo} 
+		 </if>
+		</where>
 		ORDER BY FILE_NO
 	 </select>
 

@@ -1,13 +1,13 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
@@ -30,9 +30,9 @@
     <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
-    <!-- jQuery UI toolTip »ç¿ë CSS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip »ç¿ë JS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© JS-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -67,11 +67,11 @@
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
       
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container ">
 		<div class="form-group">
 		<div class="page-header text-center">	
-		<font size=6>ÈÄ¿øÇÏ±â</font> ÈÄ¿ø ½Ã <strong  style="color:#225cba">È¯ºÒÀÌ ºÒ°¡</strong>ÇÏ´Ï Âü°íÇÏ½Ã±æ ¹Ù¶ø´Ï´Ù.
+		<font size=6>í›„ì›í•˜ê¸°</font> í›„ì› ì‹œ <strong  style="color:#225cba">í™˜ë¶ˆì´ ë¶ˆê°€</strong>í•˜ë‹ˆ ì°¸ê³ í•˜ì‹œê¸¸ ë°”ëë‹ˆë‹¤.
 	    </div>		
 		</div>	
 		<br/>
@@ -81,8 +81,8 @@
 			        <thead>
 			          <tr>
 			            <th ></th>
-			            <th><b>ÈÄ¿ø±Û Á¦¸ñ</b></th>
-			            <th><b>´Ğ³×ÀÓ</b></th>	
+			            <th><b>í›„ì›ê¸€ ì œëª©</b></th>
+			            <th><b>ë‹‰ë„¤ì„</b></th>	
 			          </tr>
 			        </thead>
 			       
@@ -101,36 +101,36 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 		  <div class="form-group">
-			<h3><b>ÈÄ¿ø±İ¾×</b></h3>
-			ÇØ´ç °Ô½Ã±Û¿¡ ÈÄ¿øÇÏ½Ç±İ¾×Àº ( <strong style="color:#225cba">ÃÖ´ë 300¸¸¿ø</strong> )ÀÔ´Ï´Ù. <p/>
+			<h3><b>í›„ì›ê¸ˆì•¡</b></h3>
+			í•´ë‹¹ ê²Œì‹œê¸€ì— í›„ì›í•˜ì‹¤ê¸ˆì•¡ì€ ( <strong style="color:#225cba">ìµœëŒ€ 300ë§Œì›</strong> )ì…ë‹ˆë‹¤. <p/>
 		    <div class="row form-form"  >
-		      <input type="text" class="form-control" id="fundPay" name="fundPay" placeholder="0" style="width:600px; height:35px;" >&ensp; ¿øÀ» ÈÄ¿øÇÕ´Ï´Ù.
+		      <input type="text" class="form-control" id="fundPay" name="fundPay" placeholder="0" style="width:600px; height:35px;" >&ensp; ì›ì„ í›„ì›í•©ë‹ˆë‹¤.
 		    </div>
 		  </div>
 			<br/>
 		  <div class="form-group">
-				<h3><b>ÈÄ¿ø°áÁ¦¹æ¹ı</b></h3>
-				* ºê¶ó¿ìÀú È¯°æ¿¡ µû¶ó °áÁ¦Ã¢ ½ÇÇà ½Ã°£ÀÌ ±æ¾îÁú ¼ö ÀÖ½À´Ï´Ù. (Explorer 11 ±ÇÀå)<br/>
-				* ºê¶ó¿ìÀú ¼³Á¤¿¡¼­ ÆË¾÷Ã¢ÀÌ Á¦ÇÑµÇ¾îÀÖ´ÂÁö È®ÀÎÇØ ÁÖ¼¼¿ä.<br/><br/>
+				<h3><b>í›„ì›ê²°ì œë°©ë²•</b></h3>
+				* ë¸Œë¼ìš°ì € í™˜ê²½ì— ë”°ë¼ ê²°ì œì°½ ì‹¤í–‰ ì‹œê°„ì´ ê¸¸ì–´ì§ˆ ìˆ˜ ìˆìŠµë‹ˆë‹¤. (Explorer 11 ê¶Œì¥)<br/>
+				* ë¸Œë¼ìš°ì € ì„¤ì •ì—ì„œ íŒì—…ì°½ì´ ì œí•œë˜ì–´ìˆëŠ”ì§€ í™•ì¸í•´ ì£¼ì„¸ìš”.<br/><br/>
 			    <div class="row form-form "  >
-			    <label class="btn btn-primary py-2 px-2 col-md-1" > <input type="radio" name="paymentCode" value="card">½Å¿ëÄ«µå</label>
+			    <label class="btn btn-primary py-2 px-2 col-md-1" > <input type="radio" name="paymentCode" value="card">ì‹ ìš©ì¹´ë“œ</label>
 			   &emsp;
-			     <label class="btn btn-primary py-2 px-2 col-md-1"> <input type="radio" name="paymentCode" value="trans">°èÁÂÀÌÃ¼	</label>		     
+			     <label class="btn btn-primary py-2 px-2 col-md-1"> <input type="radio" name="paymentCode" value="trans">ê³„ì¢Œì´ì²´	</label>		     
 			 
 			    </div>
 			 </div>        
         	 <input type="hidden" name="postNo" value="${funding.postNo }"  />
 		  <br/><br/>
 		  <div class="form-group2">
-	  			<button type="button"   type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-fund"> ÈÄ¿øÇÏ±â </button>
-	  			<button type="button"  type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-cancel">µÚ·Î°¡±â</button>
+	  			<button type="button"   type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-fund"> í›„ì›í•˜ê¸° </button>
+	  			<button type="button"  type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-cancel">ë’¤ë¡œê°€ê¸°</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 
     </div>
-   <!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+   <!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -140,39 +140,39 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->    
    <script type="text/javascript" >
 
-   //============= µî·Ï¹öÆ° ´­·¶À»¶§ ÇÔ¼ö =============      
+   //============= ë“±ë¡ë²„íŠ¼ ëˆŒë €ì„ë•Œ í•¨ìˆ˜ =============      
    function fncAddFunding(){
 
 
       $('form').attr("method","POST").attr("action","/funding/addFunding").attr("enctype","multipart/form-data").submit();
    }
    
-   //3ÀÚ¸® ´ÜÀ§¸¶´Ù ÄŞ¸¶ »ı¼º
+   //3ìë¦¬ ë‹¨ìœ„ë§ˆë‹¤ ì½¤ë§ˆ ìƒì„±
    function addCommas(x) {
        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
    }
     
-   //¸ğµç ÄŞ¸¶ Á¦°Å
+   //ëª¨ë“  ì½¤ë§ˆ ì œê±°
    function removeCommas(x) {
        if(!x || x.length == 0) return "";
        else return x.split(",").join("");
    }
    
-   //============= ¾ÆÀÓÆ÷Æ® °áÁ¦ Event  Ã³¸® ============        
+   //============= ì•„ì„í¬íŠ¸ ê²°ì œ Event  ì²˜ë¦¬ ============        
    function fncPayment(){
 	   
 	   
-	      //Form À¯È¿¼º °ËÁõ   
+	      //Form ìœ íš¨ì„± ê²€ì¦   
 	   var payment = null;
 	   var fundPay = $('input[name="fundPay"]').val();	
 	   
 	      if(fundPay == null || fundPay.length<1){
-	          alert("ÈÄ¿ø±İ¾×Àº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+	          alert("í›„ì›ê¸ˆì•¡ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 	          $('input[name="fundPay"]').focus();
 	          return;
 	       } 
 	      if(!($('input[name="paymentCode"]').is(':checked'))){
-	          alert("°áÁ¦¹æ¹ıÀº ¹İµå½Ã ¼±ÅÃÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+	          alert("ê²°ì œë°©ë²•ì€ ë°˜ë“œì‹œ ì„ íƒí•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 	          return;
 	       }
 	      	   
@@ -191,26 +191,26 @@
 				IMP.request_pay({
 			    pay_method : removeCommas(payment),
 				merchant_uid : 'merchant_' + new Date().getTime(),
-				name : 'º¸È£ÇÒ°³ÈÄ¿ø',
+				name : 'ë³´í˜¸í• ê°œí›„ì›',
 				amount : fundPay2,
 /*				buyer_email : 'iamport@siot.do',
-				buyer_name : '±¸¸ÅÀÚ',
+				buyer_name : 'êµ¬ë§¤ì',
 				buyer_tel : '010-1234-5678',
-				buyer_addr : '¼­¿ïÆ¯º°½Ã °­³²±¸ »ï¼ºµ¿',*/
+				buyer_addr : 'ì„œìš¸íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬ ì‚¼ì„±ë™',*/
 				buyer_postcode : '123-456'
 				
 				}, function(rsp) {
 				if ( rsp.success ) {
-/* 				var msg = '°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.';
-				msg += '°íÀ¯ID : ' + rsp.imp_uid;
-				msg += '»óÁ¡ °Å·¡ID : ' + rsp.merchant_uid;
-				msg += '°áÁ¦ ±İ¾× : ' + rsp.paid_amount;
-				msg += 'Ä«µå ½ÂÀÎ¹øÈ£ : ' + rsp.apply_num; */
+/* 				var msg = 'ê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.';
+				msg += 'ê³ ìœ ID : ' + rsp.imp_uid;
+				msg += 'ìƒì  ê±°ë˜ID : ' + rsp.merchant_uid;
+				msg += 'ê²°ì œ ê¸ˆì•¡ : ' + rsp.paid_amount;
+				msg += 'ì¹´ë“œ ìŠ¹ì¸ë²ˆí˜¸ : ' + rsp.apply_num; */
 			    $('form').attr("method","POST").attr("action","/funding/addFund").submit();	
 				
 				} else {
-				var msg = '°áÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.';
-				msg += '¿¡·¯³»¿ë : ' + rsp.error_msg;
+				var msg = 'ê²°ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.';
+				msg += 'ì—ëŸ¬ë‚´ìš© : ' + rsp.error_msg;
 				alert(msg);
 				}
 				
@@ -222,15 +222,15 @@
 	   }	      
 	     $(document).ready(function() {
 	      
-		        //============= ÈÄ¿ø±İ¾× =============
+		        //============= í›„ì›ê¸ˆì•¡ =============
 	             $('#fundPay').keyup(function(){
 	            	 
-	            	 //ÀÔ·Â½Ã ÄŞ¸¶ Àû¿ë
+	            	 //ì…ë ¥ì‹œ ì½¤ë§ˆ ì ìš©
 	            	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
 
-	                 //ÈÄ¿ø¸ñÇ¥±İ¾× ±æÀÌÃÊ°ú
+	                 //í›„ì›ëª©í‘œê¸ˆì•¡ ê¸¸ì´ì´ˆê³¼
 	                 if (removeCommas($(this).val()).length > 7 ) {
-	                     alert('300¸¸¿øÀÌÇÏ·Î ÀÔ·ÂÇØÁÖ¼¼¿ä');
+	                     alert('300ë§Œì›ì´í•˜ë¡œ ì…ë ¥í•´ì£¼ì„¸ìš”');
 	                     $(this).val(removeCommas($(this).val()).substr(0, 7));
 	                     
 	                     $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
@@ -242,13 +242,13 @@
  
    $(function() {
       
-         //============= ÈÄ¿ø Event  Ã³¸® =============   
+         //============= í›„ì› Event  ì²˜ë¦¬ =============   
          $( "#btn-fund" ).on("click" , function() {
         	 fncPayment();
         	 //fncAddFunding();
             });
          
-         //============= Ãë¼Ò Event  Ã³¸® =============
+         //============= ì·¨ì†Œ Event  ì²˜ë¦¬ =============
           $( "#btn-cancel" ).on("click" , function() {
                history.go(-1);
             });

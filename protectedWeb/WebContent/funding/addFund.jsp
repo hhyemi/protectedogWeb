@@ -1,13 +1,13 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
@@ -30,9 +30,9 @@
     <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
-    <!-- jQuery UI toolTip »ç¿ë CSS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip »ç¿ë JS-->
+    <!-- jQuery UI toolTip ì‚¬ìš© JS-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -67,11 +67,11 @@
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
       
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container ">
 		<div class="form-group2">
 		<div class="page-header text-center">	
-		<font size=6>ÈÄ¿øÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.  </font> ÈÄ¿ø ÇØÁÖ¼Å¼­ <strong  style="color:#225cba">°¨»ç</strong>¹Ù¶ø´Ï´Ù.
+		<font size=6>í›„ì›ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.  </font> í›„ì› í•´ì£¼ì…”ì„œ <strong  style="color:#225cba">ê°ì‚¬</strong>ë°”ëë‹ˆë‹¤.
 	    </div>		
 		</div>	
 		<br/>
@@ -81,8 +81,8 @@
 			        <thead>
 			          <tr>
 			            <th ></th>
-			            <th><b>ÈÄ¿ø±Û Á¦¸ñ</b></th>
-			            <th><b>´Ğ³×ÀÓ</b></th>	
+			            <th><b>í›„ì›ê¸€ ì œëª©</b></th>
+			            <th><b>ë‹‰ë„¤ì„</b></th>	
 			          </tr>
 			        </thead>
 			       
@@ -101,37 +101,37 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal center">
 		  <div class="form-group  ">
-			<font class="text-center" size="5"><b>ÈÄ¿øÀÚ&emsp;&emsp;&emsp;</b></font>
+			<font class="text-center" size="5"><b>í›„ì›ì&emsp;&emsp;&emsp;</b></font>
 			 ${participate.fundPay }
 		  </div>
 		  <div class="form-group ">
-			<font class="text-center" size="5"><b>ÈÄ¿øÁ¾·ù&emsp;&emsp;</b></font>
-			 ÀÏ½ÃÈÄ¿ø
+			<font class="text-center" size="5"><b>í›„ì›ì¢…ë¥˜&emsp;&emsp;</b></font>
+			 ì¼ì‹œí›„ì›
 		  </div>		  
 		  <div class="form-group ">
-			<font class="text-center" size="5"><b>ÈÄ¿ø±İ¾×&emsp;&emsp;</b></font>
-			 ${participate.fundPay }¿ø
+			<font class="text-center" size="5"><b>í›„ì›ê¸ˆì•¡&emsp;&emsp;</b></font>
+			 ${participate.fundPay }ì›
 		  </div>  
  		  <div class="form-group ">
-			<font class="text-center" size="5"><b>°áÁ¦¹æ¹ı&emsp;&emsp;</b></font>
+			<font class="text-center" size="5"><b>ê²°ì œë°©ë²•&emsp;&emsp;</b></font>
 			 <c:if test="${participate.paymentCode eq 'card' }">
-			 ½Å¿ëÄ«µå
+			 ì‹ ìš©ì¹´ë“œ
 			 </c:if>
 			 <c:if test="${participate.paymentCode eq 'trans' }">
-			 °èÁÂÀÌÃ¼
+			 ê³„ì¢Œì´ì²´
 			 </c:if>			 
 		  </div>
 			<br/><hr/>        
 		  <br/><br/>
 		  <div class="form-group ">
-	  			<button type="button"  class="btn btn-primary py-3 px-4 col-md-4" id="btn-ok">È®ÀÎ</button>
+	  			<button type="button"  class="btn btn-primary py-3 px-4 col-md-4" id="btn-ok">í™•ì¸</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 
     </div>
-   <!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+   <!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -145,7 +145,7 @@
    $(function() {
       
          
-         //============= È®ÀÎ Event  Ã³¸® =============
+         //============= í™•ì¸ Event  ì²˜ë¦¬ =============
           $( "#btn-ok" ).on("click" , function() {
   			$(self.location).attr("href","/funding/getFunding?postNo=${funding.postNo}");
   		
