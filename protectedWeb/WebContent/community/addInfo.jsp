@@ -88,7 +88,19 @@ $(function () {
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
 	<div class="container">
-		<h3 class=" text-info">새 글 쓰기</h3>
+		<div class="hero-wrap hero-bread" style="padding-bottom: 20px; padding-top : 10px;">
+			<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
+					</p>
+					<h1 class="mb-0 bread">견종백과</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 
 		<div style="border: 1px solid #d7dade; padding: 3px;">
 

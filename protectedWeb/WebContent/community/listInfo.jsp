@@ -26,9 +26,6 @@
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script src="https://kit.fontawesome.com/e26616618e.js"></script>
-
 <!--  CSS -->
 <style>
 
@@ -48,12 +45,15 @@
 	height : 40px;
 	border-radius : 15px 0px 0px 15px;
 }
-
+.btn-default{
+	height: 30px;
+	color : white;
+}
 
 </style>
 
 
-<title>보호할개.정보공유</title>
+<title>보호할개 · 정보공유</title>
 <jsp:include page="/layout/toolbar.jsp" />
 </head>
 
@@ -67,7 +67,7 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
 					</p>
-					<h1 class="mb-0 bread">견종백과</h1>
+					<h1 class="mb-0 bread">커뮤니티</h1>
 				</div>
 			</div>
 		</div>
@@ -86,9 +86,9 @@
 		<div class="row">
 			<div class="col-md-9" style="">
 				<div style="float: left;">
-					<button type="button" class="btn btn-default"><h5>전체보기</h5></button>
-					<button type="button" class="btn btn-default"><h5>조회수 ▼</h5></button>
-					<button type="button" class="btn btn-default"><h5>추천수 ▼</h5></button>
+					<button type="button" class="btn btn-default">전체보기</button>
+					<button type="button" class="btn btn-default">조회수 ▼</button>
+					<button type="button" class="btn btn-default">추천수 ▼</button>
 					
 					<select name="pageSize" id="selectPageSize"
 						onchange="javascript:getPageSize()">
@@ -180,7 +180,7 @@
 					<br />
 
 					<c:if test="${ ! empty sessionScope.user }">
-						<button>글 쓰기</button>
+						<button type="button" class="btn btn-default">글 쓰기</button>
 					</c:if>
 					
 					<div align="center">
@@ -207,7 +207,7 @@
 						<c:forEach var="best" items="${listRanking}">
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
-									<td class="mdl-data-table__cell--non-numeric">${i}</td>
+									<td class="mdl-data-table__cell--non-numeric"><span class="fas fa-medal"> ${i} 등</span></td>
 									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
 										value="${best.postNo}"> ${best.postTitle}</td>
 								</tr>
@@ -392,4 +392,7 @@ function listNews(){
 		});
 	});
 </script>
+
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
+
 </html>

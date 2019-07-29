@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,11 +18,6 @@
 body {
 	position: relative;
 }
-
-.container {
-	font-size: 14px;
-}
-
 .content {
 	text-align: left;
 	width: 720px;
@@ -48,16 +43,18 @@ img{
 }
 
 </style>
+
+	
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
 <body>
-	
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
 	<div class="container" style="padding-top: 30px">
 		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
+			<input type="hidden" name="boardCode" value="IS" />
 
 			<h3>
 				<b>${board.postTitle}</b>
@@ -117,9 +114,9 @@ img{
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!--     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	<script type="text/javascript">
 
 	$(function() {

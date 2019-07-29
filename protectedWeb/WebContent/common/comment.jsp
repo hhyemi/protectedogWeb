@@ -11,10 +11,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
@@ -25,6 +25,10 @@
 .btn.btn-default {
 	width : 100%;
 	height: 30px;
+}
+.commentDiv{
+	background-color: #F0F0F0;
+	min-height: 50px;
 }
 </style>
 
@@ -136,21 +140,21 @@
 
 	// 댓글 CURD function();
 	$(function() {
-		// 댓글 등록
-		
-		var postNo = $("input[name=postNo]").val();
+		// 댓글 등록		
 		$(document).on("click","#commentGo",function() {
 			
-			var data =  
+			var commentData =  
 			{
 					commentContent : $("input[name=commentContent]").val(),
-					postNo		   : postNo
+					postNo		   : $("input[name=postNo]").val(),
+					boardCode 	   : $("input[name=boardCode]").val()
 			} ;
+			
 			$.ajax({
 				url : "/comment/json/addComment/",
 				method : "POST",
 				dataType : "Json",
-				data : JSON.stringify(data),
+				data : JSON.stringify(commentData),
 				headers : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"
@@ -230,7 +234,7 @@
  							var button = "<div class='ajax col-md-2'>" 								
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
- 								+ "<button>수정완료</button>" 								
+ 								+ "<button class='btn btn-default'>수정완료</button>" 								
  								+ "</div>"
  							
 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
@@ -250,49 +254,49 @@
 			//alert();
 			
 			var commentNo = $(this).parent().parent().children("input").val();
-			var hr = $(this).parent().html();
-			alert(hr);
-			var result = confirm("정말 삭제 하시겠습니까?");
+			//var hr = $(this).parent().html();
+			//alert(hr);
+// 			var result = confirm("정말 삭제 하시겠습니까?");
+
+			console.log(commentNo);
+			
+			swal({
+			  title: "정말 삭제 하시겠습니까 ?",
+			  text: "당신의 소중한 한 마디가 사라지게 됩니다.",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+				  
+				  $.ajax({
+						url : "/comment/json/delComment/"+commentNo,
+						method : "POST",
+						dataType : "Json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData, status){
+							
+							$("#"+commentNo+""+".row").remove();
+							
+						},
+						error : function(){
+							
+							console.log("error");
+						}
+					});
+				  
+			    swal("삭제완료 !", {
+			      icon: "success",
+			    });
+			  }
+			});
+
 				
-// 				swal({
-// 				  title: "Are you sure?",
-// 				  text: "You will not be able to recover this imaginary file!",
-// 				  type: "warning",
-// 				  showCancelButton: true,
-// 				  confirmButtonClass: "btn-danger",
-// 				  confirmButtonText: "Yes, delete it!",
-// 				  cancelButtonText: "No, cancel plx!",
-// 				  closeOnConfirm: false,
-// 				  closeOnCancel: false
-// 				},
-// 				function(isConfirm) {
-// 				  if (isConfirm) {
-// 				    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-// 				  } else {
-// 				    swal("Cancelled", "Your imaginary file is safe :)", "error");
-// 				  }
-// 				});
-		
-			if (result) {
-				$.ajax({
-							url : "/comment/json/delComment/"+commentNo,
-							method : "POST",
-							dataType : "Json",
-							headers : {
-								"Accept" : "application/json",
-								"Content-Type" : "application/json"
-							},
-							success : function(JSONData, status){
-								
-								$("#"+commentNo+""+".row").remove();
-								
-							},
-											
-							error : function(request, status, error){							
-								alert("Error");														
-							}
-				});
-			}
+	
 		});
 		
 		
@@ -304,29 +308,29 @@
 		
 		});
 		
-		var flag= false;
+// 		var flag= false;
 		
-		$(document).on("click",".fa-plus", function() {
+// 		$(document).on("click",".fa-plus", function() {
 			
-			var commentNo = $(this).parents().parents().children("input").val();
+// 			var commentNo = $(this).parents().parents().children("input").val();
 			
-			$.ajax({
-				url : "/common/recomment.jsp?commentNo="+commentNo+"&postNo="+${board.postNo},
-				type:"GET",
-				dataType : "text",
-				success : function(data){
+// 			$.ajax({
+// 				url : "/common/recomment.jsp?commentNo="+commentNo+"&postNo="+${board.postNo},
+// 				type:"GET",
+// 				dataType : "text",
+// 				success : function(data){
 					
-					if(!flag){
-						$("#"+commentNo+""+".row").append(data);
-						flag = true;
-					}
-				},
-				error : function(){
-					alert(2);
-				}
+// 					if(!flag){
+// 						$("#"+commentNo+""+".row").append(data);
+// 						flag = true;
+// 					}
+// 				},
+// 				error : function(){
+// 					alert(2);
+// 				}
 				
-			})
-		});
+// 			})
+// 		});
 		
 		$(document).on("click", ".far.fa-thumbs-up", function(){
 			
@@ -431,8 +435,7 @@
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
-				비회원은 댓글을 달 수 없습니다<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> 로그인 </button>후 이용해
-				주시길 바랍니다.
+				비회원은 댓글을 달 수 없습니다<a href="#"> 로그인 </a>후 이용해주시길 바랍니다.
 			</div>
 		</div>
 		<br>
@@ -465,9 +468,9 @@
 		<c:set var="rank" value="0"></c:set>
 		<c:forEach var="comment" items="${list}">
 			<c:set var="rank" value="${ rank+1 }" />
-			<div class="row" id="${comment.commentNo}">
+			<div class="row commentDiv" id="${comment.commentNo}">
 				<div class="col-sm-1 col-md-1" align="center">
-					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
+					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px; padding-top: 5px;" />
 				</div>
 				<div class="col-sm-11 col-md-11" align="left">
 					
