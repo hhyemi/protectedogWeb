@@ -121,26 +121,24 @@ $(function () {
 
 				<br />
 
-				<div class="row">
-					<div class="col-xs-12 col-md-12">
-						<div class="body">
-							<!-- 첨부 버튼 -->
-							<div id="attach">
-								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox">사진첨부</label> <input id="uploadInputBox"
-									style="display: none" type="file" name="filedata" multiple />
-							</div>
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-xs-12 col-md-12"> -->
+<!-- 						<div class="body"> -->
+<!-- 							첨부 버튼 -->
+<!-- 							<div id="attach"> -->
+<!-- 								<label class="waves-effect waves-teal btn-flat" -->
+<!-- 									for="uploadInputBox">사진첨부</label> <input id="uploadInputBox" -->
+<!-- 									style="display: none" type="file" name="filedata" multiple /> -->
+<!-- 							</div> -->
 
-							<!-- 미리보기 영역 -->
-							<div id="preview" class="content"></div>
+<!-- 							미리보기 영역 -->
+<!-- 							<div id="preview" class="content"></div> -->
 
-							<!-- multipart 업로드시 영역 -->
- 							<div id="uploadForm" style="display: none;"></div>
-						</div>
-					</div>
-				</div>
-
-				<hr />
+<!-- 							multipart 업로드시 영역 -->
+<!--  							<div id="uploadForm" style="display: none;"></div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
 				<div class="postForm" align="center">
 

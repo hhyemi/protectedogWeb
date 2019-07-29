@@ -157,7 +157,8 @@ img{
 							
 							$(".minibox").children("div").children("span").remove();
 							
-							var result = "<span>"+JSONData.recommendCount+"</span>";
+							var result = "<span style='font-size: 15px; border: 1px solid black; padding: 3px'>"+JSONData.recommendCount+"</span>"
+										+"<span class='recommand fas fa-medal'>HOT개로</span>";
 							
 							$(".minibox").children("div").prepend(result);
 						}
