@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
-//==> ±¸¸Å°ü¸® Controller
+//==> ë¶„ì–‘í›„ê¸°ê´€ë¦¬ Controller
 @RestController
 @RequestMapping("/adoptReview/*")
 public class AdoptReviewRestController {
@@ -43,8 +43,8 @@ public class AdoptReviewRestController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	//==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
+	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
+	//==> ì•„ë˜ì˜ ë‘ê°œë¥¼ ì£¼ì„ì„ í’€ì–´ ì˜ë¯¸ë¥¼ í™•ì¸ í• ê²ƒ
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -55,7 +55,7 @@ public class AdoptReviewRestController {
 
 
 	
-	// ±Û ÃßÃµ
+	// ê¸€ ì¶”ì²œ
 	@RequestMapping( value="json/updateRecommendCount/{postNo}/{statusCode}", method=RequestMethod.GET)
 	public Board updateRecommendCount( 	@RequestParam("postNo") int postNo,
 										@RequestParam("statusCode") String statusCode ) throws Exception{
@@ -71,7 +71,7 @@ public class AdoptReviewRestController {
 	}
 	
 	
-	// ±Û ¸®½ºÆ® Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listAdoptReview" )
 	public JSONObject listAdoptReview( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
@@ -94,15 +94,15 @@ public class AdoptReviewRestController {
 		search.setVoteCondition("");
 		
 		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
-//		System.out.println(search.getAreaCondition()+"¢¸È®ÀÎ¢º"+Integer.parseInt( params.get("pazeSize").toString() ));
+//		System.out.println(search.getAreaCondition()+"â—€í™•ì¸â–¶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		
 		search.setPageSize(pageSize);
-//		System.out.println("search È®ÀÎ : "+search);
+//		System.out.println("search í™•ì¸ : "+search);
 		
 		Map<String , Object> map=boardService.listBoard(search, params.get("boardCode").toString(), 0);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
-//		System.out.println("¡á¡á¡á¡á ¸®½ºÆ® È®ÀÎ : "+map.get("list"));
+//		System.out.println("â– â– â– â–  ë¦¬ìŠ¤íŠ¸ í™•ì¸ : "+map.get("list"));
 
 		JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));

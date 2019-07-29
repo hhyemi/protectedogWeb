@@ -15,6 +15,7 @@
   function naverSignInCallback() {
     alert(naver_id_login.getProfileData('id'));
     
+    
   }
 </script>
 </body>

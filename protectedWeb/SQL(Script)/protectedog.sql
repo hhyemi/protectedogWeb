@@ -89,7 +89,6 @@ CREATE TABLE USERS (
 	BIRTH_DATE 		NUMBER(6,0), 
 	GENDER			CHAR(1) 		DEFAULT 0, 
 	LEVEL_POINT 		NUMBER(4,0), 
-	LEVELS			VARCHAR2(20)	DEFAULT '미인증 회원',
 	ACCESS_DATE 		DATE, 
 	ACCESS_IP 		VARCHAR2(100),
 	ROLE			VARCHAR2(10)	DEFAULT 'user',  
@@ -101,14 +100,14 @@ CREATE TABLE USERS (
 
 CREATE TABLE PRODUCT (
 	PROD_NO 		NUMBER(6,0) 	NOT NULL,
-	PROD_NAME 		VARCHAR2(50) 	NOT NULL, 
+	PROD_NAME 		VARCHAR2(150) 	NOT NULL, 
 	PRICE 			NUMBER(10,0) 	NOT NULL, 
 	MANU_DATE 		DATE 		NOT NULL, 
 	REG_DATE 		DATE 		NOT NULL, 
 	COUNTRY 		VARCHAR2(50), 
 	QUANTITY 		NUMBER(6,0) 	DEFAULT 0, 
 	PROD_DETAIL 		VARCHAR2(4000) 	NOT NULL, 
-	COMPANY 		VARCHAR2(15) 	NOT NULL, 
+	COMPANY 		VARCHAR2(100) 	NOT NULL, 
 	DISCOUNT_PRICE 		NUMBER(10,0) 	NOT NULL, 
 	PROD_CODE      		NUMBER(2,0),
 	MAIN_FILE 		VARCHAR2(100),
@@ -176,7 +175,7 @@ CREATE TABLE ADOPT(
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
 	POST_CONTENT 		VARCHAR2(600) 	NOT NULL ENABLE, 
-	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
+	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
 	ADOPT_AREA 		VARCHAR2(200) , 
 	AREA_KR 		VARCHAR2(200) , 
 	LOCATION 		VARCHAR2(100) 	NOT NULL ENABLE, 
@@ -206,7 +205,7 @@ CREATE TABLE CART (
 CREATE TABLE STORYFUNDING(   
 	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME),
+	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE,
 	STATUS_CODE 		CHAR(1) 		NOT NULL ENABLE, 
 	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
 	POST_TITLE 		VARCHAR2(50) 	NOT NULL ENABLE, 
@@ -246,7 +245,7 @@ CREATE TABLE ORDERS (
    	ORDER_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	PROD_NO 		NUMBER(6,0) 	REFERENCES PRODUCT(PROD_NO) NOT NULL, 
 	ID 			VARCHAR2(12) 	REFERENCES USERS(ID) NOT NULL, 
-	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE),
+	PHONE 			VARCHAR2(13),
 	RECEIVER_ADDR 		VARCHAR2(100) 	NOT NULL, 
 	RECEIVER_NAME 		VARCHAR2(50) 	NOT NULL, 
 	RECEIVER_PHONE 		VARCHAR2(13) 	NOT NULL, 
@@ -266,7 +265,7 @@ CREATE TABLE APPLY (
    	APPLY_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ADOPT_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
 	ID 				VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE REFERENCES USERS(PHONE), 
+	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
 	JOB 			VARCHAR2(10) 	NOT NULL ENABLE, 
 	ADDR 			VARCHAR2(10) 	NOT NULL ENABLE, 
 	MATE 			VARCHAR2(10) 	NOT NULL ENABLE, 
@@ -286,7 +285,7 @@ CREATE TABLE BOARD (
    	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
 	ID 				VARCHAR2(12) 	NOT NULL ENABLE  REFERENCES USERS(ID), 
-	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE  REFERENCES USERS(NICKNAME), 
+	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE, 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
 	POST_CONTENT 	CLOB	 		NOT NULL ENABLE, 
 	REG_DATE 		DATE 			NOT NULL ENABLE, 
@@ -294,12 +293,12 @@ CREATE TABLE BOARD (
 	RECOMMEND_COUNT NUMBER(5,0), 
 	MARKET_CODE 	NUMBER(2,0), 
 	PRICE 			NUMBER(10,0), 
-	CITY 			VARCHAR2(20), 
-	PHONE 			VARCHAR2(13) 	REFERENCES USERS(PHONE), 
+	CITY 			VARCHAR2(100), 
+	PHONE 			VARCHAR2(13), 
 	QNA_CODE 		CHAR(2), 
 	ROUTE 			VARCHAR2(250), 
 	PROD_NO			NUMBER(6,0)		REFERENCES PRODUCT(PROD_NO),
-	PROD_NAME 		VARCHAR2(40),
+	PROD_NAME 		VARCHAR2(15),
 	DEL_CODE		CHAR(1)			DEFAULT '1',
 	THUMNAIL		CLOB,	
 	PRIMARY KEY (POST_NO));
@@ -307,7 +306,7 @@ CREATE TABLE BOARD (
 CREATE TABLE PARTICIPATE (
 	PARTICIPATE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	NICKNAME 		VARCHAR2(14) 	NOT NULL REFERENCES USERS(NICKNAME),
+	NICKNAME 		VARCHAR2(14) 	NOT NULL,
 	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES STORYFUNDING(POST_NO), 
 	REG_DATE 		DATE 		NOT NULL ENABLE, 
 	FUND_PAY 		NUMBER(7,0), 
@@ -340,7 +339,7 @@ CREATE TABLE REVIEW (
    	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME), 
+	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE, 
 	POST_TITLE 		VARCHAR2(30) 	NOT NULL ENABLE, 
 	POST_CONTENT 		VARCHAR2(600) 	NOT NULL ENABLE, 
 	REG_DATE 		DATE 		NOT NULL ENABLE, 
@@ -355,7 +354,7 @@ CREATE TABLE RECOMMENT (
 	COMMENT_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES COMMENTS(COMMENT_NO), 
 	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
 	REG_DATE 		DATE 		NOT NULL ENABLE, 
-	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME), 
+	NICKNAME 		VARCHAR2(14) 	NOT NULL ENABLE, 
 	RECOMMENT_CONTENT 	VARCHAR2(300) 	NOT NULL ENABLE,	
 	STATUS_CODE		CHAR(1)		DEFAULT '1',
 	POST_NO 		NUMBER(6) 	REFERENCES BOARD(POST_NO),
@@ -368,97 +367,44 @@ CREATE TABLE USERS_ACCESS(
 	ACCESS_IP 		VARCHAR2(100),
 	PRIMARY KEY(ACCESS_NO));
 
-create or replace
-FUNCTION GET_FILE_NO RETURN NUMBER AS
-num NUMBER;
-BEGIN
-  SELECT SEQ_FILES_FILE_NO.NEXTVAL
-  INTO num
-  FROM dual;
-  return num;
-END GET_FILE_NO;
 
--- 프로시저
-CREATE OR REPLACE PROCEDURE UPDATE_STATUS_CODE
-IS
-
-BEGIN
-
-       UPDATE STORYFUNDING SET STATUS_CODE = '2' , FUND_START_DATE = SYSDATE , FUND_END_DATE = SYSDATE+ FUND_TARGET_DAY 
-       WHERE VOTE_END_DATE< SYSDATE AND STATUS_CODE ='1'; 
-       
-       COMMIT;  
-       
-END UPDATE_STATUS_CODE;
-/
-
-
--- 동작할 프로그램 등록
-BEGIN
-DBMS_SCHEDULER.CREATE_PROGRAM(
-program_name => 'UPDATE_STATUS_CODE_PROGRAM',
-program_action => 'UPDATE_STATUS_CODE',
-program_type => 'STORED_PROCEDURE',
-comments => 'update status code program',
-enabled => TRUE);
-END;
- 
---	스케쥴 등록
- BEGIN
-DBMS_SCHEDULER.CREATE_SCHEDULE(
-schedule_name => 'SCHEDULE_UPDATE_STATUS_CODE',
-start_date       => TRUNC(SYSDATE+1),
-end_date        => null,
-repeat_interval => 'FREQ=DAILY;INTERVAL=1',
-comments => 'Every PM 12 HOUR');
-END;
-
--- JOB 등록, 실제 수행 될 작업으로 스케쥴러와 프로그램을 명시해준다.
-BEGIN
-DBMS_SCHEDULER.CREATE_JOB (
-job_name =>'UPDATE_STATUS_CODE_JOB',
-program_name =>'UPDATE_STATUS_CODE_PROGRAM',
-schedule_name =>'SCHEDULE_UPDATE_STATUS_CODE',
-comments => 'update status code job program',
-enabled =>TRUE);
-END;
 
 
 
 INSERT INTO users 
-(user_no, id, pw, user_name, nickname, level_point, role, levels)
+(user_no, id, pw, user_name, nickname, level_point, role)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'admin', '12345678', 'admin', '운영자', 9999, 'admin', '운영자');
+(seq_users_user_no.NEXTVAL, 'admin', '12345678', 'admin', '운영자', 99999, 'admin');
 
 INSERT INTO users
-(user_no, id, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1, purpose2)
+(user_no, id, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1, purpose2)
 VALUES
-(seq_users_user_no.NEXTVAL, 'user01', '11111111', 'scott', '스캇', 'scott@tiger.com', '011-1123-4567', '서울시 성북구', '110-234-567890', '900314', '5600', 'm', 'user', '골드', '정보공유', '입양');
+(seq_users_user_no.NEXTVAL, 'user01', '11111111', 'scott', '스캇', 'scott@tiger.com', '011-1123-4567', '서울시 성북구', '110-234-567890', '900314', '5600', 'm', 'user', '정보공유', '입양');
 
 INSERT INTO users
-(user_no, id, kakao, pw, user_name, nickname, level_point, role, levels)
+(user_no, id, kakao, pw, user_name, nickname, level_point, role)
 VALUES
-(seq_users_user_no.NEXTVAL, 'user02', '29343041834', '22222222', 'tiger', '호랭이', 0, 'user', '미인증회원');
+(seq_users_user_no.NEXTVAL, 'user02', '29343041834', '22222222', 'tiger', '호랭이', 0, 'user');
 
 INSERT INTO users
-(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
+(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user03', '123124124', '33333333', 'hello', '안녕', 'hello@tiger.com', '011-2123-4567', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
+(seq_users_user_no.NEXTVAL, 'user03', '123124124', '33333333', 'hello', '안녕', 'hello@tiger.com', '011-2123-4567', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '입양');	 
 
 INSERT INTO users 
-(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
+(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user04', '132456788', '12341234', 'hello', '신청자1', 'hello@tiger.com', '011-2123-4568', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
+(seq_users_user_no.NEXTVAL, 'user04', '132456788', '12341234', 'hello', '신청자1', 'hello@tiger.com', '011-2123-4568', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '입양');	 
 
 INSERT INTO users 
-(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
+(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user05', '123456789', '12341234', 'hello', '신청자2', 'hello@tiger.com', '011-2123-4569', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
+(seq_users_user_no.NEXTVAL, 'user05', '123456789', '12341234', 'hello', '신청자2', 'hello@tiger.com', '011-2123-4569', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '입양');	 
 
 INSERT INTO users 
-(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, levels, purpose1)
+(user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user06', '123456780', '12341234', 'hello', '신청자3', 'hello@tiger.com', '011-2123-4560', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '브론즈', '입양');	 
+(seq_users_user_no.NEXTVAL, 'user06', '123456780', '12341234', 'hello', '신청자3', 'hello@tiger.com', '011-2123-4560', '서울시 성북구', '110-432-098765', 900314, 0, 'm', 'user', '입양');	 
 
 
 INSERT INTO message
@@ -791,7 +737,11 @@ INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, r
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
 		VALUES	 (	seq_apply_apply_no.nextval, 10047, 'user05', '011-2123-4569', '학생', '아파트', '있음', '동의', '없음', '계획', '예상비용', '이유', '상황', SYSDATE  );
 
-				
+UPDATE adopt SET status_code = 3 where post_no = 10047;
+UPDATE adopt SET status_code = 2 where post_no = 10046;
+UPDATE adopt SET status_code = 2 where post_no = 10048;
+UPDATE adopt SET status_code = 2 where post_no = 10049;
+		
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 

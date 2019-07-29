@@ -23,7 +23,6 @@
 		<result property="birthDate"	column="birth_date"	jdbcType="NUMERIC"/>
 		<result property="gender"		column="gender"		jdbcType="CHAR"/>
 		<result property="levelPoint"	column="level_point"	jdbcType="NUMERIC"/>
-		<result property="levels"		column="levels"		jdbcType="VARCHAR"/>
 		<result property="accessDate"	column="access_date"	jdbcType="DATE"/>
 		<result property="accessIp" 	column="access_ip" 		jdbcType="VARCHAR"/>
 		<result property="role"		column="role"		jdbcType="VARCHAR"/>
@@ -37,9 +36,9 @@
 	
 	<insert id="addUsersBase"	parameterType="users">
 		INSERT INTO users(user_no, id, kakao, naver, google, pw, user_name, nickname, 
-				level_point, levels, role, purpose1, purpose2, purpose3)
+				level_point, role, purpose1, purpose2, purpose3)
 		VALUES(seq_users_user_no.NEXTVAL, #{id}, #{kakao:VARCHAR}, #{naver:VARCHAR}, #{google:VARCHAR},
-			#{pw}, #{userName}, #{nickname}, 0, '미인증회원', 'user', #{purpose1:VARCHAR}, 
+			#{pw}, #{userName}, #{nickname}, 0, 'user', #{purpose1:VARCHAR}, 
 			#{purpose2:VARCHAR}, #{purpose3:VARCHAR})
 	</insert>
 	<update id="addUsersAdditional"	parameterType="users">
@@ -51,7 +50,6 @@
 			account=#{account:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
 			gender=#{gender:CHAR},
-			levels=#{levels},
 			level_point=#{levelPoint}
 		</set>
 		WHERE id=#{id}
@@ -69,7 +67,7 @@
 
 	<select id="getKakao" 	parameterType="map" resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, role, 
 		access_date, profile, kakao
 		FROM users
 		WHERE kakao=#{kakao}
@@ -77,7 +75,7 @@
 	
 	<select id="getGoogle" 	parameterType="map" resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, role, 
 		access_date, profile, google
 		FROM users
 		WHERE google=#{google}
@@ -85,7 +83,7 @@
 	
 	<select id="getNaver" 	parameterType="map" resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, 
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, role, 
 		access_date, profile, kakao
 		FROM users
 		WHERE naver=#{naver}
@@ -95,14 +93,14 @@
 
 	<select id="getUsersById"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile, birth_date
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, role, access_date, profile, birth_date
 		FROM users
 		WHERE id=#{id}
 	</select>
 	
 	<select id="getUsersByNick"	parameterType="string"	resultMap="usersSelectMap">
 		SELECT
-		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, levels, role, access_date, profile, birth_date
+		id, pw, user_name, nickname, email, phone, user_addr, account, level_point, role, access_date, profile, birth_date
 		FROM users
 		WHERE nickname=#{nickname}
 	</select>
@@ -120,18 +118,18 @@
 			phone=#{phone:NUMERIC},
 			user_addr=#{userAddr:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
-			profile=#{profile:VARCHAR}
+			profile=#{profile:VARCHAR},
+			level_point=#{levelPoint}
 		</set>
 		WHERE id=#{id}
 	</update>
-			
 		 
 	<!-- SQL : SELECT LIST -->
 	 	
 	<select id="getUsersList"	parameterType="search"	resultMap="usersSelectMap">
-		SELECT id, user_name, nickname, levels
+		SELECT id, user_name, nickname, level_point
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT id, user_name, nickname, levels
+			FROM( SELECT id, user_name, nickname, level_point
 				FROM users
 				<if test="searchCondition != null">
 					<where>
@@ -159,7 +157,7 @@
 
 	<select  id="getTotalCount"		parameterType="search"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT id, user_name, nickname, levels
+		FROM(	SELECT id, user_name, nickname, level_point
 			FROM users
 			<if test="searchCondition != null">
 				<where>

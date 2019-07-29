@@ -41,7 +41,7 @@ public class UserTest {
 		user.setPw("testPass");
 		user.setNickname("testNickname");
 		user.setLevelPoint(0);
-		user.setLevels("미인증회원");
+
 		user.setRole("user");
 		user.setPurpose1(null);
 		user.setPurpose2(null);
@@ -67,7 +67,7 @@ public class UserTest {
 		user.setPw("testPass");
 		user.setNickname("testNick2");
 		user.setLevelPoint(0);
-		user.setLevels("미인증회원");
+
 		user.setRole("user");
 		user.setPurpose1(null);
 		user.setPurpose2(null);

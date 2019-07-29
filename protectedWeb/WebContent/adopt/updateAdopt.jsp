@@ -1,13 +1,14 @@
- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>º¸È£ÇÒ°³ ¡¤ ºĞ¾ç±Û ¼öÁ¤</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>ë³´í˜¸í• ê°œ Â· ë¶„ì–‘ê¸€ ìˆ˜ì •</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
@@ -30,25 +31,25 @@
 		
 	</style>
 	
-	
-  </head>
-  <body class="goto-here">
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+  </head>
+  
+  
+  <body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
-            <h1 class="mb-0 bread">
-            	<c:if test="${adopt.boardCode eq 'AD' }">ºĞ¾ç±Û ¼öÁ¤</c:if>
-			    <c:if test="${adopt.boardCode eq 'MS' }">½ÇÁ¾±Û ¼öÁ¤</c:if>
-            </h1>
+            <p ><span class="mr-2">Get</span> <span>Adopt</span></p>
+            <font size="7">
+            	<c:if test="${adopt.boardCode eq 'AD' }">ë¶„ì–‘ê¸€ ìˆ˜ì •</c:if>
+			    <c:if test="${adopt.boardCode eq 'MS' }">ì‹¤ì¢…ê¸€ ìˆ˜ì •</c:if>
+            </font>
           </div>
         </div>
       </div>
     </div>
-    
     
 
     <section class="ftco-section">
@@ -71,35 +72,35 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>±ÛÁ¦¸ñ</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
-		                	<input type="text" class="form-control" name="postTitle" value="${ adopt.postTitle }" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+		                	<label for="postTitle"><strong>ê¸€ì œëª©</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<input type="text" class="form-control" name="postTitle" value="${ adopt.postTitle }" placeholder="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 		                </div>
 	                </div>
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="phone"><strong>¿¬¶ôÃ³</strong>&nbsp;&nbsp;<span name="phone">¿¬¶ôÃ³°¡ ´Ù¸¦ °æ¿ì È¸¿øÁ¤º¸¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä.</span></label>
+		                	<label for="phone"><strong>ì—°ë½ì²˜</strong>&nbsp;&nbsp;<span name="phone">ì—°ë½ì²˜ê°€ ë‹¤ë¥¼ ê²½ìš° íšŒì›ì •ë³´ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”.</span></label>
 		                	<input type="text" class="form-control" name="phone" value="${ adopt.phone }" readonly>
 		                </div>
 	                </div>
 	                
-	                <!-- Ã·ºÎ ¹öÆ° -->
+	                <!-- ì²¨ë¶€ ë²„íŠ¼ -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
-			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>»çÁøµî·Ï</strong>&nbsp;&nbsp;¸Ç¾Õ ÀÌ¹ÌÁö´Â ´ëÇ¥ÀÌ¹ÌÁöÀÔ´Ï´Ù. (ÃÖ´ë 5Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.)</label></span>
-			                <input id="uploadInputBox" style="display: none" type="file" value="µî·Ï" name="filedata"  />
+			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>ì‚¬ì§„ë“±ë¡</strong>&nbsp;&nbsp;ë§¨ì• ì´ë¯¸ì§€ëŠ” ëŒ€í‘œì´ë¯¸ì§€ì…ë‹ˆë‹¤. (ìµœëŒ€ 5ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.)</label></span>
+			                <input id="uploadInputBox" style="display: none" type="file" value="ë“±ë¡" name="filedata"  />
 			            </div>
 		            </div>
 		           	<br/>
 		            
-		            <!-- ¹Ì¸®º¸±â ¿µ¿ª -->
-		            <div class="form-group">
+		            <!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
+		            <div class="form-group col-md-12">
 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
 			
 							<c:forEach var="name" items="${file}" varStatus="status">            
 							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
 			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="120px;" height="120px;"/><br/>
-			                            <a href="#" value="${name.fileName}"  onclick="deletePreview2(this)">»èÁ¦</a></div>     
+			                            <span value="${name.fileName}"  onclick="deletePreview2(this)">ì‚­ì œ</span></div>     
 			                </c:forEach>     
 			                
 			            </div> 
@@ -111,35 +112,35 @@
 	                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-		                	<label for="dogBreed"><strong>°ßÁ¾</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
+		                	<label for="dogBreed"><strong>ê²¬ì¢…</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" value="${ adopt.dogBreed }">
 		                </div>
 	                </div>
 	                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for=""><strong>Å©±â</strong></label>
+	                		<label for=""><strong>í¬ê¸°</strong></label>
 						      	<select class="form-control" name="dogSize" id="dogSize">
-								  	<option value="¼ÒÇü°ß" >¼ÒÇü°ß</option>
-									<option value="ÁßÇü°ß" >ÁßÇü°ß</option>
-									<option value="´ëÇü°ß" >´ëÇü°ß</option>
+								  	<option value="ì†Œí˜•ê²¬" >ì†Œí˜•ê²¬</option>
+									<option value="ì¤‘í˜•ê²¬" >ì¤‘í˜•ê²¬</option>
+									<option value="ëŒ€í˜•ê²¬" >ëŒ€í˜•ê²¬</option>
 								</select>
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogWeight"><strong>Ã¼Áß</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
+	                		<label for="dogWeight"><strong>ì²´ì¤‘</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
 	                  		<input type="number" class="form-control" name="dogWeight"  value="${ adopt.dogWeight }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogGender"><strong>¼ºº°</strong></label>
+	                		<label for="dogGender"><strong>ì„±ë³„</strong></label>
 						      	<select class="form-control" name="dogGender" id="dogGender">
-								  	<option value="³²¾Æ" >³²¾Æ</option>
-									<option value="¿©¾Æ" >¿©¾Æ</option>
+								  	<option value="ë‚¨ì•„" >ë‚¨ì•„</option>
+									<option value="ì—¬ì•„" >ì—¬ì•„</option>
 								</select>
 	               		</div>
                		</div>
@@ -147,8 +148,8 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogPay"><strong>
-		                		<c:if test="${adopt.boardCode eq 'AD' }">Ã¥ÀÓºñ</c:if>
-							    <c:if test="${adopt.boardCode eq 'MS' }">»ç·Êºñ</c:if>
+		                		<c:if test="${adopt.boardCode eq 'AD' }">ì±…ì„ë¹„</c:if>
+							    <c:if test="${adopt.boardCode eq 'MS' }">ì‚¬ë¡€ë¹„</c:if>
 	                		</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
 	                  		<input type="number" class="form-control" name="dogPay" value="${ adopt.dogPay }">
 	               		</div>
@@ -156,46 +157,46 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate"><strong>
-	                			<c:if test="${adopt.boardCode eq 'AD' }">¹ß°ßÀÏÀÚ</c:if>
-							    <c:if test="${adopt.boardCode eq 'MS' }">½ÇÁ¾ÀÏÀÚ</c:if>
+	                		<label for="dogDate" id="dogDateLabel"><strong>
+	                			<c:if test="${adopt.boardCode eq 'AD' }">ë°œê²¬ì¼ì</c:if>
+							    <c:if test="${adopt.boardCode eq 'MS' }">ì‹¤ì¢…ì¼ì</c:if>
 	                		</strong></label>
-	                  		<input type="date" class="form-control" name="dogDate" value="${ adopt.dogDate }" >
+	                  		<input type="text" class="form-control" name="dogDate" value="${ adopt.dogDate }" readonly>
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogStatus"><strong>»óÅÂ</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
+	                		<label for="dogStatus"><strong>ìƒíƒœ</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
 	                  		<input type="text" class="form-control" name="dogStatus"  value="${ adopt.dogStatus }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogPersonality"><strong>¼º°İ</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
+	                		<label for="dogPersonality"><strong>ì„±ê²©</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
 	                  		<input type="text" class="form-control" name="dogPersonality"  value="${ adopt.dogPersonality }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogChar"><strong>Æ¯Â¡</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
+	                		<label for="dogChar"><strong>íŠ¹ì§•</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
 	                  		<input type="text" class="form-control" name="dogChar"  value="${ adopt.dogChar }">
 	               		</div>
                		</div>
                		
                		
                		
-	            	<div class="col-md-12">
+	            	<div class="col-md-12" id="areaFocus">
 	            	<br/>
                 		<label><strong>
 	                		<c:if test="${adopt.boardCode eq 'AD' }">
-<!-- 	                			Áöµµ¸¦ Å¬¸¯ÇÏ¸é ¸¶Ä¿°¡ »ı¼ºµÇ¸ç, ¿ìÅ¬¸¯ÇÒ °æ¿ì ¸¶Ä¿°¡ ¸ğµÎ »èÁ¦µË´Ï´Ù. <br/>Æ¯Á¤ ¸¶Ä¿¸¦ ¿ìÅ¬¸¯ÇÒ °æ¿ì ¿ìÅ¬¸¯ÇÑ ¸¶Ä¿¸¸ »èÁ¦µË´Ï´Ù.<br/> -->
-	                			ºĞ¾ç°¡´ÉÁö¿ªÀ» ¼öÁ¤ÇÏ½Ç °æ¿ì Áöµµ¸¦ ¿ìÅ¬¸¯ÇÏ°í ¸¶Ä¿¸¦ ´Ù½Ã »ı¼ºÇØÁÖ¼¼¿ä.
+<!-- 	                			ì§€ë„ë¥¼ í´ë¦­í•˜ë©´ ë§ˆì»¤ê°€ ìƒì„±ë˜ë©°, ìš°í´ë¦­í•  ê²½ìš° ë§ˆì»¤ê°€ ëª¨ë‘ ì‚­ì œë©ë‹ˆë‹¤. <br/>íŠ¹ì • ë§ˆì»¤ë¥¼ ìš°í´ë¦­í•  ê²½ìš° ìš°í´ë¦­í•œ ë§ˆì»¤ë§Œ ì‚­ì œë©ë‹ˆë‹¤.<br/> -->
+	                			ë¶„ì–‘ê°€ëŠ¥ì§€ì—­ì„ ìˆ˜ì •í•˜ì‹¤ ê²½ìš° ì§€ë„ë¥¼ ìš°í´ë¦­í•˜ê³  ë§ˆì»¤ë¥¼ ë‹¤ì‹œ ìƒì„±í•´ì£¼ì„¸ìš”.
 	                		</c:if>
 	                		<c:if test="${adopt.boardCode eq 'MS' }">
-	                			Áöµµ¸¦ Å¬¸¯ÇÏ¸é ¸¶Ä¿°¡ »ı¼ºµÇ¸ç, Áöµµ¸¦ ¿ìÅ¬¸¯ÇÏ°Å³ª ¸¶Ä¿¸¦ ¿ìÅ¬¸¯ÇÑ °æ¿ì ¸¶Ä¿°¡ »èÁ¦µË´Ï´Ù. 
+	                			ì§€ë„ë¥¼ í´ë¦­í•˜ë©´ ë§ˆì»¤ê°€ ìƒì„±ë˜ë©°, ì§€ë„ë¥¼ ìš°í´ë¦­í•˜ê±°ë‚˜ ë§ˆì»¤ë¥¼ ìš°í´ë¦­í•œ ê²½ìš° ë§ˆì»¤ê°€ ì‚­ì œë©ë‹ˆë‹¤. 
 	                		</c:if>
                 		</strong></label>
                		</div>
@@ -205,10 +206,10 @@
                		<c:if test="${adopt.boardCode eq 'AD' }">
 		            	<div class="col-md-12">
 		              		<div class="form-group">
-		                		<label for="adoptArea"><strong>ºĞ¾ç°¡´ÉÁö¿ª</strong> &nbsp;(3°÷±îÁö ¼±ÅÃ°¡´ÉÇÕ´Ï´Ù.)</label>
+		                		<label for="adoptArea"><strong>ë¶„ì–‘ê°€ëŠ¥ì§€ì—­</strong> &nbsp;(3ê³³ê¹Œì§€ ì„ íƒê°€ëŠ¥í•©ë‹ˆë‹¤.)</label>
 		                		<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
 		                  		<input type="hidden" class="form-control" id="adoptArea" name="adoptArea"  value="${ adopt.adoptArea }">
-		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" value="${ adopt.areaKr }" placeholder="¸¶Ä¿ À§Ä¡°¡ ÀÔ·ÂµË´Ï´Ù." readonly="readonly">
+		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" value="${ adopt.areaKr }" placeholder="ë§ˆì»¤ ìœ„ì¹˜ê°€ ì…ë ¥ë©ë‹ˆë‹¤." readonly="readonly">
 		               		</div>
 	               		</div>
                		</c:if>
@@ -217,24 +218,24 @@
 	              		<div class="form-group">
 	                		<label for="location"><strong>
 		                		<c:if test="${adopt.boardCode eq 'AD' }">
-						  			¹ß°ßÀ§Ä¡
+						  			ë°œê²¬ìœ„ì¹˜
 						  		</c:if>
 							    <c:if test="${adopt.boardCode eq 'MS' }">
-						  			½ÇÁ¾À§Ä¡
+						  			ì‹¤ì¢…ìœ„ì¹˜
 						  		</c:if>
 	                		</strong></label>
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location" value="${ adopt.location }" >
-	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" value="${ adopt.locationKr }" placeholder="¸¶Ä¿ À§Ä¡°¡ ÀÔ·ÂµË´Ï´Ù." readonly>
+	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" value="${ adopt.locationKr }" placeholder="ë§ˆì»¤ ìœ„ì¹˜ê°€ ì…ë ¥ë©ë‹ˆë‹¤." readonly>
 	               		</div>
                		</div>
                		
                		
                		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>±Û³»¿ë</strong>&nbsp;&nbsp;<span name="postContent"></label>
-<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä."> -->
-		                	<textarea  class="form-control"  name="postContent"  rows="5"  placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">${adopt.postContent }</textarea>
+		                	<label for="postContent"><strong>ê¸€ë‚´ìš©</strong>&nbsp;&nbsp;<span name="postContent"></label>
+<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."> -->
+		                	<textarea  class="form-control"  name="postContent"  rows="5"  placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">${adopt.postContent }</textarea>
 		                </div>
 	                </div>
                		
@@ -252,12 +253,12 @@
 
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">¼öÁ¤</button></p>
+					<p><button class="btn btn-primary py-3 px-4 col-md-12">ìˆ˜ì •</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">
 							<div class="radio" align="right">
-								<p><a href="#" ><font color="gray">Ãë¼Ò</font></a></p>
+								<p><a href="#" ><font color="gray">ì·¨ì†Œ</font></a></p>
 							</div>
 						</div>
 					</div>
@@ -270,15 +271,15 @@
  
  
 			<div id="dialog-img" title="">
-			  <p align="center"><br/>ÀÌ¹ÌÁö¸¦ µî·ÏÇØÁÖ¼¼¿ä.</p>
+			  <p align="center"><br/>ì´ë¯¸ì§€ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”.</p>
 			</div>        
 			<div id="dialog-area" title="">
-			  <p align="center"><br/>ºĞ¾ç°¡´ÉÁö¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.</p>
+			  <p align="center"><br/>ë¶„ì–‘ê°€ëŠ¥ì§€ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.</p>
 			</div>       
 			<div id="dialog-location" title="">
 			  <p align="center"><br/>
-			  		<c:if test="${adopt.boardCode eq 'AD' }">¹ß°ßÀ§Ä¡¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</c:if>
-			  		<c:if test="${adopt.boardCode eq 'MS' }">½ÇÁ¾À§Ä¡¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</c:if>
+			  		<c:if test="${adopt.boardCode eq 'AD' }">ë°œê²¬ìœ„ì¹˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</c:if>
+			  		<c:if test="${adopt.boardCode eq 'MS' }">ì‹¤ì¢…ìœ„ì¹˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</c:if>
 			  </p>
 			</div>   
 
@@ -298,27 +299,12 @@
   <!-- loader -->
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-
-  <script src="/resources/prodmenu/js/jquery.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/resources/prodmenu/js/popper.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="/resources/prodmenu/js/aos.js"></script>
-  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="/resources/prodmenu/js/main.js"></script>
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script>
 
   var map;
@@ -440,21 +426,21 @@
 	    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	    	         success: function(data){
 	    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
-	    	           			if( markTest.indexOf('Æ¯º°') != -1  ){
-	    	           				markTest = markTest.replace('Æ¯º°' ,   '');
+	    	           			if( markTest.indexOf('íŠ¹ë³„') != -1  ){
+	    	           				markTest = markTest.replace('íŠ¹ë³„' ,   '');
 	    	           			}
-	    	           			if( markTest.indexOf('±¤¿ª') != -1  ){
-	    	           				markTest = markTest.replace('±¤¿ª' ,   '');
+	    	           			if( markTest.indexOf('ê´‘ì—­') != -1  ){
+	    	           				markTest = markTest.replace('ê´‘ì—­' ,   '');
 	    	           			}
-	    	           			if( markTest.indexOf('ÀÚÄ¡') != -1  ){
-	    	           				markTest = markTest.replace('ÀÚÄ¡' ,   '');
+	    	           			if( markTest.indexOf('ìì¹˜') != -1  ){
+	    	           				markTest = markTest.replace('ìì¹˜' ,   '');
 	    	           			}
 	    	          			$("#areaKr").val($("#areaKr").val()+markTest);
 	    	         }
 	    	 	});
 
   	        }else{
-//	  	        	alert("3°³±îÁö ÁöÁ¤ °¡´ÉÇÔ dialog Ãß°¡");
+//	  	        	alert("3ê°œê¹Œì§€ ì§€ì • ê°€ëŠ¥í•¨ dialog ì¶”ê°€");
   	        }
     		 
 
@@ -482,14 +468,14 @@
   		    	            success: function(data){
 //	  		   	               		alert(JSON.stringify(data));
   		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
-  		    	                if( markTest.indexOf('Æ¯º°') != -1  ){
-	    	           				markTest = markTest.replace('Æ¯º°' ,   '');
+  		    	                if( markTest.indexOf('íŠ¹ë³„') != -1  ){
+	    	           				markTest = markTest.replace('íŠ¹ë³„' ,   '');
 	    	           			}
-	    	           			if( markTest.indexOf('±¤¿ª') != -1  ){
-	    	           				markTest = markTest.replace('±¤¿ª' ,   '');
+	    	           			if( markTest.indexOf('ê´‘ì—­') != -1  ){
+	    	           				markTest = markTest.replace('ê´‘ì—­' ,   '');
 	    	           			}
-	    	           			if( markTest.indexOf('ÀÚÄ¡') != -1  ){
-	    	           				markTest = markTest.replace('ÀÚÄ¡' ,   '');
+	    	           			if( markTest.indexOf('ìì¹˜') != -1  ){
+	    	           				markTest = markTest.replace('ìì¹˜' ,   '');
 	    	           			}
   		    	       			$("#areaKr").val(markTest);
   		    	            }
@@ -528,19 +514,19 @@
 	           });
 	        }
 	        
-	        // ¿ªÁö¿ÀÄÚµù //
+	        // ì—­ì§€ì˜¤ì½”ë”© //
 	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	            success: function(data){
 //		                $('#locationKr').val(JSON.stringify(data));
 	            	var locaKrkr = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
-	                if( locaKrkr.indexOf('Æ¯º°') != -1  ){
-	                	locaKrkr = locaKrkr.replace('Æ¯º°' ,   '');
+	                if( locaKrkr.indexOf('íŠ¹ë³„') != -1  ){
+	                	locaKrkr = locaKrkr.replace('íŠ¹ë³„' ,   '');
            			}
-           			if( locaKrkr.indexOf('±¤¿ª') != -1  ){
-           				locaKrkr = locaKrkr.replace('±¤¿ª' ,   '');
+           			if( locaKrkr.indexOf('ê´‘ì—­') != -1  ){
+           				locaKrkr = locaKrkr.replace('ê´‘ì—­' ,   '');
            			}
-           			if( locaKrkr.indexOf('ÀÚÄ¡') != -1  ){
-           				locaKrkr = locaKrkr.replace('ÀÚÄ¡' ,   '');
+           			if( locaKrkr.indexOf('ìì¹˜') != -1  ){
+           				locaKrkr = locaKrkr.replace('ìì¹˜' ,   '');
            			}
 	                $('#locationKr').val( locaKrkr );
 	            }
@@ -562,33 +548,33 @@
   
 
       
-      //////////////////////        ¡è map         /////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////        â†‘ map         /////////////////////////////////////////////////////////////////////////////////////////////////////////
        
 
-	  //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	  //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	  function fnAddFile(fileNameArray) {
 	  	   $("#multiFile").val(fileNameArray);    
 	  }   
       
-	  //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ deleteÇÒ value" =============   
+	  //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ deleteí•  value" =============   
 	  function fnDeleteFile(deletefileNameArray) {
 	       $("#deleteFile").val(deletefileNameArray);    
 	  } 
 
-	  //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	  //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	  //ÀÓÀÇÀÇ file object¿µ¿ª
+	  //ì„ì˜ì˜ file objectì˜ì—­
 	 var files = {};
 	 var previewIndex = 0;
 	 var fileNameArray = new Array();
-     //¿ø·¡ÀÖ´ø»çÁø »èÁ¦ÇÒ array
+     //ì›ë˜ìˆë˜ì‚¬ì§„ ì‚­ì œí•  array
      var deletefileNameArray = new Array();
 	 
-	 // image preview ±â´É ±¸Çö
+	 // image preview ê¸°ëŠ¥ êµ¬í˜„
 	 // input = file object[]
 	 function addPreview(input) {
 	     if (input[0].files) {
-	         //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	         //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	         for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 	
 	            var file = input[0].files[fileIndex];
@@ -600,7 +586,7 @@
 	            var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	            var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 	            
-	            //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+	            //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 	            var imgSelectName = "img";
 	            if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 	             	imgSelectName = "iframe";
@@ -608,24 +594,24 @@
 	
 	            var reader = new FileReader();
 	            reader.onload = function(img) {
-	                 //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                 //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                 //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                 //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                 
 	                 var imgNum = previewIndex++;
 	                 
-	                //5Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                //5ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                 if(Object.keys(files).length>=5){
-	            		alert("»çÁøÀº 5Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	            		alert("ì‚¬ì§„ì€ 5ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                    delete files[imgNum];
 	                 }else{
-	          		 // 5Àå ÀÌÇÏ 
+	          		 // 5ì¥ ì´í•˜ 
 	                	$("#preview").append(
 	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<a href=\"#\" value=\""
+	                                         + "<span value=\""
 	                                         + imgNum
 	                                         + "\" onclick=\"deletePreview(this)\">"
-                                             + "»èÁ¦" + "</a>" + "</div> ");
+                                             + "ì‚­ì œ" + "</span>" + "</div> ");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -658,21 +644,22 @@
                           data: JSON.stringify(request),
                           processData: false,
                           success: function(data){
-//                           	console.log("È®ÀÎ : "+data);
-//                           	console.log("¸ğµÎ È®ÀÎ : "+JSON.stringify(data));
+//                           	console.log("í™•ì¸ : "+data);
+//                           	console.log("ëª¨ë‘ í™•ì¸ : "+JSON.stringify(data));
                           	
                           	var test = data.responses[0].webDetection.bestGuessLabels[0];
-                          	console.log("°ßÁ¾ È®ÀÎ : "+test.label);
+                          	console.log("ê²¬ì¢… í™•ì¸ : "+test.label);
 //                             var faceData = data.responses[0].faceAnnotations[0];
 //                             console.log('joy: ' + faceData.joyLikelihood);
 //                             console.log('sorrow: ' + faceData.sorrowLikelihood);
 //                             console.log('anger: ' + faceData.angerLikelihood);
 //                             console.log('surprise: ' + faceData.surpriseLikelihood);
-                       		$( "#dogBreed" ).val(test.label);
+                       		fncBreed( test.label );
 //                        		$( "#test" ).html(test.label.replace(/ /gi, "") );
                           },
                           error: function (data, textStatus, errorThrown) {
                             console.log('error: ' + data);
+                            fncBreed( 'ëª¨ë¦„' );
                           }
                         })
 	                	
@@ -682,10 +669,10 @@
 	             reader.readAsDataURL(file);
 	         }
 	     } else
-	         alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	         alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	 }
 
-	 //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	 //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	 function deletePreview(obj) {
 	     var imgNum = obj.attributes['value'].value;
 	     delete files[imgNum];
@@ -695,7 +682,7 @@
 	     resizeHeight();
 	 }
 	 
-	 //=============¿ø·¡ÀÖ´ø»çÁøµé »èÁ¦¹öÆ°´©¸¦¶§ =============
+	 //=============ì›ë˜ìˆë˜ì‚¬ì§„ë“¤ ì‚­ì œë²„íŠ¼ëˆ„ë¥¼ë•Œ =============
      function deletePreview2(obj) {
          var imgName = obj.attributes['value'].value;
          deletefileNameArray.push(imgName);
@@ -705,14 +692,14 @@
      }
 
 
-	 //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	 //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	 function validation(fileName) {
 	     fileName = fileName + "";
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
 	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	         alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	         alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	         return true;
 	     } else {
 	         return false;
@@ -721,13 +708,70 @@
 	 
 
 	$(document).ready(function() {
-	      //============= »çÁø¹Ì¸®º¸±â =============
+	      //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
 		$('#attach input[type=file]').change(function() {
-			addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+			addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
 		});
 	});
 	
+	// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–    â†‘ íŒŒì¼ì—…ë¡œë“œ      â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 	
+	
+	function fncBreed(breed) {
+		if ( breed.toLowerCase().indexOf( 'bichon' ) != -1 || breed.toLowerCase().indexOf( 'ë¹„ìˆ‘' ) != -1  ) {
+			breed = 'ë¹„ìˆ‘';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'pomeranian' ) != -1 || breed.toLowerCase().indexOf( 'í¬ë©”' ) != -1 ) {
+			breed = 'í¬ë©”ë¼ë‹ˆì•ˆ';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'bull' ) != -1 || breed.toLowerCase().indexOf( 'ë¶ˆë…' ) != -1) {
+			breed = 'ë¶ˆë…';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'chihuahua' ) != -1 || breed.toLowerCase().indexOf( 'ì¹˜ì™€ì™€' ) != -1  ) {
+			breed = 'ì¹˜ì™€ì™€';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 || breed.toLowerCase().indexOf( 'ë§í‹°ì¦ˆ' ) != -1 ) {
+			breed = 'ë§í‹°ì¦ˆ';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( 'poedel' ) != -1 || breed.toLowerCase().indexOf( 'í‘¸ë“¤' ) != -1 ) {
+			breed = 'í‘¸ë“¤';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 || breed.toLowerCase().indexOf( 'ë¦¬íŠ¸ë¦¬ë²„' ) != -1 ) {
+			breed = 'ë¦¬íŠ¸ë¦¬ë²„';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'jindo' ) != -1 || breed.toLowerCase().indexOf( 'ì§„ë—ê°œ' ) != -1 ) {
+			breed = 'ì§„ë—ê°œ';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'welsh' ) != -1 || breed.toLowerCase().indexOf( 'corgi' ) != -1 || breed.toLowerCase().indexOf( 'ì›°ì‹œ' ) != -1 ) {
+			breed = 'ì›°ì‹œì½”ê¸°';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'chow' ) != -1 || breed.toLowerCase().indexOf( 'ì°¨ìš°' ) != -1 ) {
+			breed = 'ì°¨ìš°ì°¨ìš°';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'dobermann') != -1 || breed.toLowerCase().indexOf( 'ë„ë² ë¥´ë§Œ' ) != -1 ) {
+			breed = 'ë„ë² ë¥´ë§Œ';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'spaniel') != -1 || breed.toLowerCase().indexOf( 'ë‹ˆì—˜' ) != -1 || breed.toLowerCase().indexOf( 'ë‹ˆì–¼' ) != -1 ) {
+			breed = 'ìŠ¤íŒŒë‹ˆì—˜';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'spitz') != -1 || breed.toLowerCase().indexOf( 'ìŠ¤í”¼ì¸ ' ) != -1 ) {
+			breed = 'ìŠ¤í”¼ì¸ ';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'husky' ) != -1 || breed.toLowerCase().indexOf( 'í—ˆìŠ¤í‚¤' ) != -1 ) {
+			breed = 'í—ˆìŠ¤í‚¤';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'shih' ) != -1 || breed.toLowerCase().indexOf( 'ì‹œì¸„' ) != -1 ) {
+			breed = 'ì‹œì¸„';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else{
+			breed = 'ì•Œ ìˆ˜ ì—†ìŒ';
+		}
+
+	    $( "#dogBreed" ).val(breed);
+	 }
+	
+	
+	//â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–       â†‘ ê²¬ì¢…ë²ˆì—­      â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -741,7 +785,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
 		    	  }
@@ -756,7 +800,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
 		    	  }
@@ -771,7 +815,7 @@
 		      height: 180,
 		      modal: true,
 		      buttons: {
-		    	  ´İ±â: function(){
+		    	  ë‹«ê¸°: function(){
 		    		  $( this ).dialog( "close" );
 		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
 		    	  }
@@ -779,11 +823,11 @@
 	    });
 	});
 
-//////////////////////¡è  dialog        ////////////////////////////////////////////////
+//////////////////////â†‘  dialog        ////////////////////////////////////////////////
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
-		if($("input[name=postTitle]").val().length > 10 ){
-			$("span[name=postTitle]").text('10ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+		if($("input[name=postTitle]").val().length > 20 ){
+			$("span[name=postTitle]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -791,7 +835,7 @@
 
 	$( "input[name=dogBreed]" ).keyup(function( ) {
 		if($("input[name=dogBreed]").val().length > 10 ){
-			$("span[name=dogBreed]").text('10ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogBreed]").text('10ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogBreed]").text('');
 		}
@@ -799,7 +843,7 @@
 
 	$( "input[name=dogWeight]" ).keyup(function( ) {
 		if($("input[name=dogWeight]").val().length > 6 ){
-			$("span[name=dogWeight]").text('6ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogWeight]").text('6ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}
@@ -807,7 +851,7 @@
 
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		if($("input[name=dogPay]").val().length > 6 ){
-			$("span[name=dogPay]").text('100¸¸¿ø ÀÌ»óÀº ÀÔ·ÂÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.');
+			$("span[name=dogPay]").text('100ë§Œì› ì´ìƒì€ ì…ë ¥í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.');
 // 			$("span[name=dogDate]").text("  ");
 		}else{
 			$("span[name=dogPay]").text('');
@@ -817,7 +861,7 @@
 	
 	$( "input[name=dogStatus]" ).keyup(function( ) {
 		if($("input[name=dogStatus]").val().length > 20 ){
-			$("span[name=dogStatus]").text('20ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogStatus]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogStatus]").text('');
 		}
@@ -825,7 +869,7 @@
 	
 	$( "input[name=dogPersonality]" ).keyup(function( ) {
 		if($("input[name=dogPersonality]").val().length > 20 ){
-			$("span[name=dogPersonality]").text('20ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogPersonality]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogPersonality]").text('');
 		}
@@ -833,7 +877,7 @@
 
 	$( "input[name=dogChar]" ).keyup(function( ) {
 		if($("input[name=dogChar]").val().length > 20 ){
-			$("span[name=dogChar]").text('20ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogChar]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogChar]").text('');
 		}
@@ -841,7 +885,7 @@
 	
 	$( "textarea[name=postContent]" ).keyup(function( ) {
 		if($("textarea[name=postContent]").val().length > 100 ){
-			$("span[name=postContent]").text('100ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=postContent]").text('100ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
@@ -849,21 +893,34 @@
 
 
 	
-//////////////////////       ¡è  ±ÛÀÚ¼öÃ¼Å©         ////////////////////////////////////////////////
+//////////////////////       â†‘  ê¸€ììˆ˜ì²´í¬         ////////////////////////////////////////////////
 
 
 
-	// µî·Ï¹öÆ° ´©¸£°í
+	// ë“±ë¡ë²„íŠ¼ ëˆ„ë¥´ê³ 
 	function fncUpdateAdopt(){
 		
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >10){
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
-// 		  if( $(".preview-box").length == 0 ){
+		  if( $(".preview-box").length == 0 || $(".thumbnail").length == 0 ){
+			  swal({
+		           text: "ì´ë¯¸ì§€ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
 // 			  $('#dialog-img').dialog( "open" );
-// 			  return;
-// 		  }
+			  return;
+		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
 			  $("input[name=dogWeight]").focus();
 			  return;
@@ -890,14 +947,42 @@
 		  }
 		  if( boardCode == 'AD' ){
 			  if( $("input[name=adoptArea]").val().trim() == ''){
-				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				  $('#dialog-area').dialog( "open" );
+				  swal({
+			           text: "ë¶„ì–‘ê°€ëŠ¥ì§€ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "ë‹«ê¸°"
+								 }
+					   },
+					   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			        	   jQuery($("#areaFocus"))[0].scrollIntoView(true);
+			           }
+			      });
+// 				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
 		  if( $("input[name=location]").val().trim() == ''){
-			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-location').dialog( "open" );
+			  swal({
+		           text: "ë°œê²¬ìœ„ì¹˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+		           }
+		      });
+// 			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -906,7 +991,7 @@
 		  }
 		
 		  
-	    //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+	    //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 	    	
 // 	   	  var file = $("#multiFile").val(); 
 		
@@ -930,13 +1015,13 @@
 		            data : formData,
 		            success : function(result) {
 			                if (result === -1) {
-			                    alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-			                    // ÀÌÈÄ µ¿ÀÛ ...
+			                    alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+			                    // ì´í›„ ë™ì‘ ...
 			                } else if (result === -2) {
-			                    alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-			                    // ÀÌÈÄ µ¿ÀÛ ...
+			                    alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+			                    // ì´í›„ ë™ì‘ ...
 			                } else {
-			                    alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+			                    alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 			                }
 		            },
 					error: function(request, status, error){ 
@@ -956,13 +1041,33 @@
     
     
     $(function() {
-			$( "button:contains('¼öÁ¤')" ).on("click" , function() {
+			$( "button:contains('ìˆ˜ì •')" ).on("click" , function() {
 				fncUpdateAdopt();
 			});
 			
-			$( "a:contains('Ãë¼Ò')" ).on("click" , function() {
+			$( "a:contains('ì·¨ì†Œ')" ).on("click" , function() {
 				self.location = "/adopt/getAdopt?postNo=${adopt.postNo}"
 			});
+			
+			$( "input[name=dogDate]" ).datepicker({
+				showOn: "button",
+				buttonImage: "/resources/file/others/calendar.png",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				dateFormat: "yy-mm-dd",
+				maxDate: "+0d",
+				prevText: 'ì´ì „ ë‹¬',
+		        nextText: 'ë‹¤ìŒ ë‹¬',
+		        monthNames: ['1ì›”', '2ì›”', '3ì›”', '4ì›”', '5ì›”', '6ì›”', '7ì›”', '8ì›”', '9ì›”', '10ì›”', '11ì›”', '12ì›”'],
+		        monthNamesShort: ['1ì›”', '2ì›”', '3ì›”', '4ì›”', '5ì›”', '6ì›”', '7ì›”', '8ì›”', '9ì›”', '10ì›”', '11ì›”', '12ì›”'],
+		        dayNames: ['ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† '],
+		        dayNamesShort: ['ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† '],
+		        dayNamesMin: ['ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† '],
+		        showMonthAfterYear: true,
+		        yearSuffix: 'ë…„'
+			});
+			
+			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
       
       
