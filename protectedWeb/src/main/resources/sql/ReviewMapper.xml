@@ -55,16 +55,16 @@
 		GRADE				=	#{grade:NUMERIC}
 	</set>
 	WHERE POST_NO=#{postNo}
-	</update>
-	
-	<update	id="delReview"	parameterType="review" >
-	   	UPDATE REVIEW
-		<set>
-		STATUS_CODE = '0'
-		</set>
-	   	WHERE POST_NO = #{postNo}
-	 </update>
-	--> 
+	</update>-->
+		<!-- SQL :  DELETE --> 
+		<update	id="delReview"	parameterType="int" >
+		   	UPDATE REVIEW
+			<set>
+			STATUS_CODE = '0'
+			</set>
+		   	WHERE POST_NO = #{value}
+		 </update>
+
 	 <!--  SQL : SELECT LIST  -->
 	<select  id="listReview"  parameterType="map"	resultMap="reviewSelectMap">
 	  	SELECT *

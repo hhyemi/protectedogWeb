@@ -47,9 +47,7 @@
 }
 .btn-default{
 	height: 30px;
-}
-h5{
-	font-size: 15px;
+	color : white;
 }
 
 </style>
@@ -69,7 +67,7 @@ h5{
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
 					</p>
-					<h1 class="mb-0 bread">견종백과</h1>
+					<h1 class="mb-0 bread">커뮤니티</h1>
 				</div>
 			</div>
 		</div>
@@ -88,9 +86,9 @@ h5{
 		<div class="row">
 			<div class="col-md-9" style="">
 				<div style="float: left;">
-					<button type="button" class="btn btn-default"><h5>전체보기</h5></button>
-					<button type="button" class="btn btn-default"><h5>조회수 ▼</h5></button>
-					<button type="button" class="btn btn-default"><h5>추천수 ▼</h5></button>
+					<button type="button" class="btn btn-default">전체보기</button>
+					<button type="button" class="btn btn-default">조회수 ▼</button>
+					<button type="button" class="btn btn-default">추천수 ▼</button>
 					
 					<select name="pageSize" id="selectPageSize"
 						onchange="javascript:getPageSize()">
@@ -182,7 +180,7 @@ h5{
 					<br />
 
 					<c:if test="${ ! empty sessionScope.user }">
-						<button>글 쓰기</button>
+						<button type="button" class="btn btn-default">글 쓰기</button>
 					</c:if>
 					
 					<div align="center">

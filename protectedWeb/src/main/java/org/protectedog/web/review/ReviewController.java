@@ -49,7 +49,7 @@ public class ReviewController {
 		System.out.println(this.getClass());
 	}
 
-	@RequestMapping(value = "getHospitalReview", method = RequestMethod.GET)
+	@RequestMapping(value = "getHospitalReview")
 	public String getHospitalReview(@RequestParam("placeName") String placeName,
 			@RequestParam("placeAddr") String placeAddr, @RequestParam("placeJIAddr") String placeJIAddr,
 			@RequestParam("placeTel") String placeTel, @ModelAttribute("search") Search search, Model model,
@@ -106,13 +106,14 @@ public class ReviewController {
 
 		int grade=0;
 		int i=0;
+		int avgGrade=0;
 		List<Review> reviewList= (List<Review>) reviewMap.get("list");
 		for ( i = 0; i < reviewList.size(); i++) {
 			grade += reviewList.get(i).getGrade();
-			System.out.println(":::::"+reviewList.get(i).getGrade());
 		}
-		int avgGrade = grade / i ;
-		System.out.println("평균!!"+avgGrade);
+		if(i!=0) {
+		 avgGrade = grade / i ;
+		}
 		
 		// Model 과 View 연결
 		model.addAttribute("list", reviewMap.get("list"));
@@ -121,8 +122,23 @@ public class ReviewController {
 		model.addAttribute("placeList", map);
 		model.addAttribute("user", user);
 		model.addAttribute("file", file);
+		model.addAttribute("avgGrade", avgGrade);
 
 		return "forward:/hospital/getHospitalReview.jsp";
 	}
+	// 후기 글 삭제
+	@RequestMapping(value = "delHospitalReview", method = RequestMethod.GET)
+	public String delHospitalReview(@RequestParam("postNo") int postNo) throws Exception {
 
+		System.out.println("/review/delHospitalReview");
+
+		reviewService.delReivew(postNo);
+
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", hospitalCode);
+		filePost.put("postNo", postNo);
+		fileService.delAllFile(filePost);
+
+		return "forward:/hospital/getHospitalReview.jsp";
+	}
 }

@@ -13,8 +13,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
 <title>보호할개 · 후원게시</title>
 
+	<script src="https://kit.fontawesome.com/e26616618e.js"></script>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+
+
+		#searchKeyword{
+			height: 40px;
+			width: 150px;
+		}
+		#searchSubmmit{
+			width : 60px;
+			height : 40px;
+			
+			border-radius : 0px 15px 15px 0px;
+			border : 1px solid #D3D3D3;
+		}
+		
+		#searchCondition{
+			height : 40px;
+			border-radius : 15px 0px 0px 15px;
+		}
+
+	
   	   #btn-add{
 		background: #fff;
         border:2px solid #29304d;
@@ -32,13 +53,7 @@
 	      text-overflow:ellipsis;
 	      white-space:nowrap;
 	  } 			     
-       @font-face{
-          font-family: NanumSquare;
-          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
-       }
-       body{
-          font-family: NanumSquare, sans-serif !important;
-       }
+
     </style>
     
     
@@ -66,26 +81,50 @@
 		    	<div class="container" >
 		    	
 				<!--검색 부터 -->		    	
-		    		<div class="row">  
-				    	<div class="right-box">
+<!-- 		    		<div class="row">   -->
+<!-- 				    	<div class="right-box"> -->
 
-						    <select class="form-control" id="voteCondition" name="voteCondition" >
-								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option>
-								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >후원중</option>
-								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >후원완료</option>
-							</select>   
-						    &emsp;
-						    <select class="form-control" name="searchCondition" id="searchCondition" >
-								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >제목</option>
-								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
+<!-- 						    <select class="form-control" id="voteCondition" name="voteCondition" > -->
+<%-- 								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option> --%>
+<%-- 								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >후원중</option> --%>
+<%-- 								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >후원완료</option> --%>
+<!-- 							</select>    -->
+<!-- 						    &emsp; -->
+<!-- 						    <select class="form-control" name="searchCondition" id="searchCondition" > -->
+<%-- 								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >제목</option> --%>
+<%-- 								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option> --%>
+<!-- 							</select> -->
+<!-- 							&emsp; -->
+<!-- 						    <label class="sr-only" for="searchKeyword">검색어</label> -->
+<%-- 						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  > --%>
+<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
+
+<!-- 						</div> -->
+<!-- 			    	</div>     -->
+				
+						<div class="form-group">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
 							</select>
-							&emsp;
-						    <label class="sr-only" for="searchKeyword">검색어</label>
-						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-						    <button type="button" class="btn btn-default">검색</button>
 
+							<label class="sr-only" for="searchKeyword">검색어</label> <input
+								type="text" class="form-control searchKeyword" id="searchKeyword"
+								name="searchKeyword" placeholder="검색어"
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
+								<span class="fas fa-search"></span>
+							</button>
 						</div>
-			    	</div>    
+
+						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
     		    	<p/>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
