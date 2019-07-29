@@ -50,7 +50,7 @@
 	
 	<select id="getMyCoupon" parameterType="map" resultMap="couponSelectMap">
 		SELECT
-		coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, use_date, limit_date 
+		receiver_id, coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, use_date, limit_date 
 		FROM coupon
 		WHERE coupon_code=#{couponCode}
 		AND receiver_id=#{receiverId}

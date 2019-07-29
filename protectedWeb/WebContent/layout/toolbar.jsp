@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,11 +33,72 @@
     	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, p{
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
-
+		.navbar-brand{
+			font-weight: bold;
+		}
   	</style>
   </head>
   
 <body id="page-top">
+<!--====================================================
+                    LOGIN OR REGISTER
+======================================================-->
+    <section id="login">
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+              <div class="modal-content loginSection">
+                  <div class="modal-header" align="center">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span class="fa fa-times" aria-hidden="true"></span>
+                      </button>
+                  </div>
+                  <div id="div-forms">
+                      <form id="login-form">
+                          <h3 class="text-center">Login</h3>
+                          <div class="modal-body">
+                              <label for="username">Username</label> 
+                              <input id="login_username" name="id" class="form-control id" type="text" placeholder="Enter username " required>
+                              <label for="username">Password</label> 
+                              <input id="login_password" name="pw" class="form-control pw" type="password" placeholder="Enter password" required>
+<!--                               <div class="checkbox"> -->
+<!--                                   <label> -->
+<!--                                       <input type="checkbox"> Remember me -->
+<!--                                   </label> -->
+<!--                               </div> -->
+                          </div>
+                          <div class="modal-footer text-center">
+                              <div>
+                                  <button type="submit" id="submitLogin" class="btn btn-general btn-white">Login</button>
+                              </div>
+                              <div>
+                                  <button id="login_register_btn" id="regist" type="button" class="btn btn-link">Register</button>
+                              </div>
+                          </div>
+                      </form>
+                      <form id="register-form" style="display:none;">
+                          <h3 class="text-center">Register</h3>
+                          <div class="modal-body"> 
+                              <label for="username">Username</label> 
+                              <input id="register_username" class="form-control" type="text" placeholder="Enter username" required>
+                              <label for="register_email">E-mailId</label> 
+                              <input id="register_email" class="form-control" type="text" placeholder="Enter eMail" required>
+                              <label for="register_password">Password</label> 
+                              <input id="register_password" class="form-control" type="password" placeholder="Password" required>
+                          </div>
+                          <div class="modal-footer">
+                              <div>
+                                  <button type="submit" class="btn btn-general btn-white">Register</button>
+                              </div>
+                              <div>
+                                  <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>      
 
 <!--====================================================
                          HEADER
@@ -64,8 +125,14 @@
                 <ul class="list-inline top-data">
                   <li><a href="#" target="_empty"><i class="fa top-social fa-facebook"></i></a></li>
                   <li><a href="#" target="_empty"><i class="fa top-social fa-twitter"></i></a></li>
-                  <li><a href="#" target="_empty"><i class="fa top-social fa-google-plus"></i></a></li> 
-                  <li><a href="#" class="log-top" data-toggle="modal" data-target="#login-modal">Login</a></li>  
+                  <li><a href="#" target="_empty"><i class="fa top-social fa-google-plus"></i></a></li>
+                  <c:if test="${ sessionScope.user == null }">
+                  <li><a href="#" class="log-top login-modal" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                  </c:if>
+                  <c:if test="${ sessionScope.user != null }">
+                  <li><a href="#" class="log-top profile">${ sessionScope.user.nickname } ë‹˜</a></li>
+                  <li><a href="/users/logout" class="log-top logOut">LogOut</a>
+                  </c:if>
                 </ul>
               </div>
             </div>
@@ -76,71 +143,71 @@
       <!-- Navbar -->
       <div class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
-         <b> <a class="navbar-brand smooth-scroll" href="index.html">
-            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;º¸È£ÇÒ°³
+         <b><a class="navbar-brand smooth-scroll" href="/index.jsp">
+            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;ë³´í˜¸í• ê°œ
           </a></b> 
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span>
           </button>  
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html">Áı</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html">ì§‘</a></li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ºĞ¾ç ¡¤ ½ÇÁ¾
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë¶„ì–‘ Â· ì‹¤ì¢…
                  </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">ºĞ¾ç¸®½ºÆ®</a>
-	<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">½ÇÁ¾¸®½ºÆ®</a> -->
-	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">ÈÄ±â</a>
-	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">ÈÄ±â</a> -->
+	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">ë¶„ì–‘ë¦¬ìŠ¤íŠ¸</a>
+	<!--                 <a class="dropdown-item" href="/adopt/listAdopt?boardCode=MS">ì‹¤ì¢…ë¦¬ìŠ¤íŠ¸</a> -->
+	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">í›„ê¸°</a>
+	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">í›„ê¸°</a> -->
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">½ºÅä¸®Æİµù</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ìŠ¤í† ë¦¬í€ë”©</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	              	<a class="dropdown-item" href="/funding/listVoting">ÅõÇ¥°Ô½ÃÆÇ</a>
-	                <a class="dropdown-item" href="/funding/listFunding">ÈÄ¿ø°Ô½ÃÆÇ</a>
+	              	<a class="dropdown-item" href="/funding/listVoting">íˆ¬í‘œê²Œì‹œíŒ</a>
+	                <a class="dropdown-item" href="/funding/listFunding">í›„ì›ê²Œì‹œíŒ</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ä¿¹Â´ÏÆ¼</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ì»¤ë®¤ë‹ˆí‹°</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	                <a class="dropdown-item" href="/info/listInfo">Á¤º¸°øÀ¯</a>
-	                <a class="dropdown-item" href="/community/getDogSense.jsp">¾Ö°ß»ó½Ä</a>
+	                <a class="dropdown-item" href="/info/listInfo">ì •ë³´ê³µìœ </a>
+	                <a class="dropdown-item" href="/community/getDogSense.jsp">ì• ê²¬ìƒì‹</a>
                   </div>
                 </li>
               <c:if test="${ sessionScope.user != null }">
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´í˜ì´ì§€</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">³»Á¤º¸º¸±â</a>
-		              	<a class="dropdown-item" href="/message/listReceiveMessage">¹ŞÀºÂÊÁöÇÔ</a>
-		                <a class="dropdown-item" href="/message/listSendMessage">º¸³½ÂÊÁöÇÔ</a>
-		                <a class="dropdown-item" href="/message/addMessage">ÂÊÁö¾²±â</a>
+		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">ë‚´ì •ë³´ë³´ê¸°</a>
+		              	<a class="dropdown-item" href="/message/listReceiveMessage">ë°›ì€ìª½ì§€í•¨</a>
+		                <a class="dropdown-item" href="/message/listSendMessage">ë³´ë‚¸ìª½ì§€í•¨</a>
+		                <a class="dropdown-item" href="/message/addMessage">ìª½ì§€ì“°ê¸°</a>
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
-		                	<a class="dropdown-item" href="/coupon/addCoupon">ÄíÆù»ı¼º</a>
+		                	<a class="dropdown-item" href="/coupon/addCoupon">ì¿ í°ìƒì„±</a>
 		                </c:if>
-		                <a class="dropdown-item" href="/coupon/listCoupon">ÄíÆù¹Ş±â</a>
-		                <a class="dropdown-item" href="/report/addReportView.jsp">½Å°íÇÏ±â</a>
+		                <a class="dropdown-item" href="/coupon/listCoupon">ì¿ í°ë°›ê¸°</a>
+		                <a class="dropdown-item" href="/report/addReportView.jsp">ì‹ ê³ í•˜ê¸°</a>
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
-		                <a class="dropdown-item" href="/report/listReport">½Å°í±Û¸ñ·Ï</a>
+		                <a class="dropdown-item" href="/report/listReport">ì‹ ê³ ê¸€ëª©ë¡</a>
 		                </c:if>
                   </div>
                 </li>
                  </c:if>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">½ºÅä¾î</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ìŠ¤í† ì–´</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">»óÇ°Q&a</a>
-	                <a class="dropdown-item" href="/market/listMarket?order=1">º¸È£¸¶ÄÏ</a>
-	                <a class="dropdown-item" href="/product/listProduct">»óÇ°¸®½ºÆ®</a>
+	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">ìƒí’ˆQ&a</a>
+	                <a class="dropdown-item" href="/market/listMarket?order=1">ë³´í˜¸ë§ˆì¼“</a>
+	                <a class="dropdown-item" href="/product/listProduct">ìƒí’ˆë¦¬ìŠ¤íŠ¸</a>
 	                <c:if test="${ sessionScope.user.role eq 'admin' }">
-	                	<a class="dropdown-item" href="/product/listAdminProduct">°ü¸®ÀÚ»óÇ°¸®½ºÆ®</a>
+	                	<a class="dropdown-item" href="/product/listAdminProduct">ê´€ë¦¬ììƒí’ˆë¦¬ìŠ¤íŠ¸</a>
 	                </c:if>
                   </div>
                 </li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">°ßÁ¾¹é°ú</a></li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp">µ¿¹°º´¿ø</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">ê²¬ì¢…ë°±ê³¼</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp">ë™ë¬¼ë³‘ì›</a></li>
                 <li>
                   <div class="top-menubar-nav">
                     <div class="topmenu ">
@@ -181,11 +248,120 @@
     <script src="/resources/newTemplate/js/bootstrap/bootstrap.min.js"></script>
     <script src="/resources/newTemplate/js/wow/wow.min.js"></script>
     <script src="/resources/newTemplate/js/owl-carousel/owl.carousel.min.js"></script>
-
+	
     <!-- Plugin JavaScript -->
     <script src="/resources/newTemplate/js/jquery-easing/jquery.easing.min.js"></script> 
     <script src="/resources/newTemplate/js/custom.js"></script> 
     <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+    
+        	<script type="text/javascript">
+
+		//============= "ë¡œê·¸ì¸"  Event ì²˜ë¦¬ =============
+		$(".login-modal").on("click", function() {
+			
+			alert("ã…ã…‡");
+			fncLogin();
+			alert("ã…ã…‡");
+			
+		});
+		
+		function fncLogin(){
+			$(".id").focus();
+			$("#submitLogin").on("click" , function() {
+				var id=$("input:text").val();
+				var pw=$("input:password").val();
+				alert(id);
+				alert(pw);
+				if(id == null || id.length <1) {
+					alert('IDë¥¼ ì…ë ¥í•˜ì‹­ì‹œì˜¤.');
+					$("#login_username").focus();
+					return;
+				}
+				
+				if(pw == null || pw.length <1) {
+					alert('ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì‹­ì‹œì˜¤.');
+					$("#login_password").focus();
+					return;
+				}
+				
+				var chkLogin={id:id, pw:pw};
+				alert("ajax id : "+id);
+				alert("ajax pw : "+pw);
+				$.ajax({
+					
+					type : "POST",
+					contentType : "application/json",
+					url : "/users/json/login",
+					data : JSON.stringify(chkLogin),
+					datatype : "json",
+					success : function(response){
+						alert("pw : "+JSON.stringify(response))
+						if(response.pw == pw && response.id == id){
+							alert("ë¡œê·¸ì¸ ì„±ê³µ pw : "+response.pw);
+							alert(response.nickname+" ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤!");
+// 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
+							self.location="/index.jsp";
+						}
+						if(response.pw != pw || response.id != id){
+							alert(response.pw);
+							alert("ì•„ì´ë”” í˜¹ì€ ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+							$("form")[0].reset();
+							return;
+							$("#id").focus();
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				});
+
+			});
+		}
+		
+		$(document).ready(function(){
+			$("#pw").keyup(function(key){
+				if(key.keyCode==13){
+					$("#login").click();
+				}
+			})
+		})
+		
+// 		$(function(){
+// 			$(".g-signin2").on("click", function(){
+// 				onSignIn(googleUser);
+// 			})
+// 		});
+			
+// 		function onSignIn(googleUser) {
+// 			// Useful data for your client-side scripts:
+// 			var profile = googleUser.getBasicProfile();
+// 			alert("ID: " + profile.getId()); // Don't send this directly to your server!
+			
+// 			// The ID token you need to pass to your backend:
+// 			var id_token = googleUser.getAuthResponse().id_token;
+// 			alert("ID Token: " + id_token);
+			        
+// 			$(location).attr('href', '/users/google?google='+profile.getId()+"&idToken="+id_token);
+// 		}
+
+// 		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+// 	  	var state = naver_id_login.getUniqState();
+// 	  	naver_id_login.setButton("white", 2,40);
+// 	  	naver_id_login.setDomain("http://localhost:8080/");
+// 	  	naver_id_login.setState(state);
+// // 	  	naver_id_login.setPopup();
+// 	  	naver_id_login.init_naver_id_login();
+		      
+
+
+		//============= íšŒì›ê°€ì… Eventì²˜ë¦¬ =============
+		$( function() {
+			$("#regist").on("click" , function() {
+				self.location = "/users/addUsersBase"
+			});
+		});
+		
+	</script>	
   
   
 </body>

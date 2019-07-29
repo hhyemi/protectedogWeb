@@ -1,98 +1,19 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--  bootstrap CDN  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- KAKAO -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
-<script type="text/javascript">
-	$(function() {
-		
-		$("button:contains('√ﬂ√µ')").on("click", function(){
-				
-			if(${sessionScope.user == null}){
-				alert("∑Œ±◊¿Œ «œΩ ºÓ");
-				return;
-			}
-			var postNo = "${board.postNo}" ;
-			var id = '${sessionScope.user.id}';
-			$.ajax({
-				url : "/info/json/check/"+postNo+"/"+id,
-				method : "POST",
-				dataType : "Json",
-				headers : {
-					"Accept" : "application/json",
-					"Content-Type" : "application/json"
-				},
-				success : function(JSONData, status){
-					
-					if(JSONData == 1){
-						alert("¿ÃπÃ √ﬂ√µ«— ±€¿‘¥œ¥Ÿ.");
-						return;
-					}
-					
-					if(JSONData == 0){
-					$.ajax({
-						url : "/info/json/updateRecommandCnt/"+postNo,
-						method : "POST",
-						dataType : "Json",
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : function(JSONData, status){
-							
-							$(".minibox").children("div").children("span").remove();
-							
-							var result = "<span>"+JSONData.recommendCount+"</span>";
-							
-							$(".minibox").children("div").prepend(result);
-						}
-					});
-					} // JSONDATA 0 END			
-				}
-			});
-		
-		});
-		
-		$("button:contains('∫Ò√ﬂ√µ')").on("click", function(){
-			alert("∫Ò√ﬂ√µ±‚¥…√ﬂ∞°");
-		});
-		
-		$("button:contains('ºˆ¡§')").on(
-				"click",
-				function() {
-					//alert($("input[type='hidden']").val());
-					// 			$(self.location).attr("href","/community/updateInfo.jsp");
-					self.location = "/info/updateView?postNo="
-							+ $("input[name='postNo']").val();
-				});
 
-		$("button:contains('ªË¡¶')").on(
-				"click",
-				function() {
-
-					var result = confirm("¡§∏ª ªË¡¶ «œΩ√∞⁄Ω¿¥œ±Ó?");
-
-					if (result) {
-						$("form[name='info']").attr("method", "POST").attr(
-								"action", "/info/delInfo").attr("enctype",
-								"multipart/form-data").submit();
-					}
-				});
-	});
-</script>
 <style type="text/css">
 body {
 	position: relative;
@@ -121,6 +42,11 @@ body {
 img{
 	max-width: 600px;
 }
+
+.fa-medal{
+	font-size: 15px;
+}
+
 </style>
 </head>
 
@@ -128,7 +54,7 @@ img{
 	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
-	<div class="container">
+	<div class="container" style="padding-top: 30px">
 		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
@@ -142,8 +68,8 @@ img{
 					style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id})
 					| ${board.regDate}</div>
 				<div class="col-md-4" align="right"
-					style="position: absolute; right: 0px; bottom: 0px;">¡∂»∏ºˆ :
-					${board.viewCount} √ﬂ√µºˆ : ${board.recommendCount} ¥Ò±€ºˆ :
+					style="position: absolute; right: 0px; bottom: 0px;">Ï°∞ÌöåÏàò :
+					${board.viewCount} Ï∂îÏ≤úÏàò : ${board.recommendCount} ÎåìÍ∏ÄÏàò :
 					${totalCount}</div>
 			</div>
 			<p />
@@ -167,22 +93,22 @@ img{
 		  	
 		<div class="minibox" align="center">
 			<div>
-				<span>${board.recommendCount}</span>
-				<button type="button" class="recommand btn btn-primary">√ﬂ√µ</button>
+				<span style="font-size: 15px; border: 1px solid black; padding: 3px">${board.recommendCount}</span>
+				<span class="recommand fas fa-medal">HOTÍ∞úÎ°ú</span>
 				<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="∆Æ¿ß≈Õ∑Œ ∞¯¿Ø"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="∆‰¿ÃΩ∫∫œ¿∏∑Œ ∞¯¿Ø"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="≥◊¿Ãπˆ∑Œ ∞¯¿Ø"><img src="/resources/file/others/naver.png"></a>
-				<a href="#"  id="kakao" title="ƒ´ƒ´ø¿≈Â¿∏∑Œ ∞¯¿Ø"> <img src="/resources/file/others/kakao.png" ></a>
+				<a href="#"  id="twitter"  title="Ìä∏ÏúÑÌÑ∞Î°ú Í≥µÏú†"><img src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="ÌéòÏù¥Ïä§Î∂ÅÏúºÎ°ú Í≥µÏú†"><img src="/resources/file/others/facebook.png"></a>
+				<a href="#"  id="naver" title="ÎÑ§Ïù¥Î≤ÑÎ°ú Í≥µÏú†"><img src="/resources/file/others/naver.png"></a>
+				<a href="#"  id="kakao" title="Ïπ¥Ïπ¥Ïò§ÌÜ°ÏúºÎ°ú Í≥µÏú†"> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
 
 		<c:if test="${board.id == sessionScope.user.id }">
 			<div class="button" align="right">
-				<button>ºˆ¡§</button>
-				<button>ªË¡¶</button>
+				<button>ÏàòÏ†ï</button>
+				<button>ÏÇ≠Ï†ú</button>
 			</div>
 		</c:if>
 	</div>
@@ -191,68 +117,157 @@ img{
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script type="text/javascript">
+
+	$(function() {
+		
+		$(".fa-medal").on("click", function(){
+				
+			if(${sessionScope.user == null}){
+				alert("Î°úÍ∑∏Ïù∏ ÌïòÏã≠Ïáº");
+				return;
+			}
+			var postNo = "${board.postNo}" ;
+			var id = '${sessionScope.user.id}';
+			$.ajax({
+				url : "/info/json/check/"+postNo+"/"+id,
+				method : "POST",
+				dataType : "Json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success : function(JSONData, status){
+					
+					if(JSONData == 1){
+						alert("Ïù¥ÎØ∏ Ï∂îÏ≤úÌïú Í∏ÄÏûÖÎãàÎã§.");
+						return;
+					}
+					
+					if(JSONData == 0){
+					$.ajax({
+						url : "/info/json/updateRecommandCnt/"+postNo,
+						method : "POST",
+						dataType : "Json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData, status){
+							
+							$(".minibox").children("div").children("span").remove();
+							
+							var result = "<span>"+JSONData.recommendCount+"</span>";
+							
+							$(".minibox").children("div").prepend(result);
+						}
+					});
+					} // JSONDATA 0 END			
+				}
+			});
+		
+		});
+		
+		$("button:contains('ÎπÑÏ∂îÏ≤ú')").on("click", function(){
+			alert("ÎπÑÏ∂îÏ≤úÍ∏∞Îä•Ï∂îÍ∞Ä");
+		});
+		
+		$("button:contains('ÏàòÏ†ï')").on(
+				"click",
+				function() {
+					//alert($("input[type='hidden']").val());
+					// 			$(self.location).attr("href","/community/updateInfo.jsp");
+					self.location = "/info/updateView?postNo="
+							+ $("input[name='postNo']").val();
+				});
+
+		$("button:contains('ÏÇ≠Ï†ú')").on(
+				"click",
+				function() {
+
+					var result = confirm("Ï†ïÎßê ÏÇ≠Ï†ú ÌïòÏãúÍ≤†ÏäµÎãàÍπå?");
+
+					if (result) {
+						$("form[name='info']").attr("method", "POST").attr(
+								"action", "/info/delInfo").attr("enctype",
+								"multipart/form-data").submit();
+					}
+				});
+	});
 	
+    var poly;
     var map;
-    var markers = [];
-    var loca = "${board.route}";
-    var localat = parseFloat(  loca.substring( loca.indexOf("(")+1 ,loca.indexOf(",") )  );
-    var localng = parseFloat(  loca.substring( loca.indexOf(",")+1, loca.indexOf(")") )  );
-    var marker;
+   var marker;
+   var markers = [];
+   var route = "${board.route}";
+   var routeTest = [];
+   var routeMark = [];
+   var infowindowF;
+   var infowindowL;
+   
+   
+   if (route.indexOf("#") != -1){
+      var routeArray = route.split("#");
+      
+      for ( i=0; i<routeArray.length-1; i++){
+       routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
+       routeMark[i] = "marker"+i.toString();
+      }        
+   }
+   
+   
+   
+   function initMap() {
+     map = new google.maps.Map(document.getElementById('mapArea'), {
+           zoom: 16,
+           center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
+                 lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
+    });
+     
+     poly = new google.maps.Polyline({
+         strokeColor: '#000000',
+         strokeOpacity: 0.5,
+         strokeWeight: 5,
+         map: map
+      });
+     
+     infowindowF = new google.maps.InfoWindow();
+      infowindowL = new google.maps.InfoWindow();
+     
+     var aaa = "";
+     
+     for ( i=0; i<routeTest.length; i++){
+        
+         var path = poly.getPath();
+
+          path.push(new google.maps.LatLng(    parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )),
+                                  parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length ))));
+//           console.log("ÌôïÏù∏ : "+centerLocaArea);
+        marker= routeMark[i];
     
-	var mapArea;
-    var markerArea;
-    var adArea = "${board.route}";
-    var arrayTest = [];
-    var arrayMark = [];
-     
-     
-     if (adArea.indexOf("#") != -1){
-   	  var areaArray = adArea.split("#");
-   	  
-   	  for ( i=0; i<areaArray.length-1; i++){
-   		  arrayTest[i] = areaArray[i].substring( areaArray[i].indexOf("(")+1, areaArray[i].indexOf(",") )+","+ (areaArray[i].substring( areaArray[i].indexOf(",")+1, areaArray[i].indexOf(")") )).trim() ;
-   		  arrayMark[i] = "markerArea"+i.toString();
-   	  }   	  
+        marker = new google.maps.Marker({
+            position: {lat: parseFloat(routeTest[i].substring( 0, routeTest[i].indexOf(",") )), 
+             lng: parseFloat(routeTest[i].substring( routeTest[i].indexOf(",")+1, routeTest[i].length )) },
+           title: '#' + path.getLength(),
+           map: map
+        });
+        
+        markers.push(marker);
      }
      
-     
-     
-     function initMap() {
-       var centerLoca = {lat: localat, lng: localng};
+    // pop up
+     infowindowF.setContent("Ï∂úÎ∞ú");
+      infowindowF.open(map, markers[0]);
+      
+      infowindowL.setContent("ÎèÑÏ∞©");
+      infowindowL.open(map, markers[markers.length-1]);
+   }
 
-//        map = new google.maps.Map(document.getElementById('map'), {
-//        	zoom: 15,
-//        	center: {lat: localat, lng: localng}
-//        });
-       
-//        marker = new google.maps.Marker({
-//            position: {lat: localat, lng: localng},
-//            map: map
-//        });
-
-////////////////////////////////////////////
-
-	    mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-		    zoom: 12,
-		    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
-		    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
-	});
-    
-    var aaa = "";
-    for ( i=0; i<arrayTest.length; i++){
-    	
-	    markerArea= arrayMark[i];
 	
-	    markerArea = new google.maps.Marker({
-	        position: { lat: parseFloat(arrayTest[i].substring( 0, arrayTest[i].indexOf(",") ))  ,
-	    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
-	        map: mapArea
-	    });
-		 	
-    }//$('#pop').text(aaa);
-	
-	//============= SNS∞¯¿Ø Event  √≥∏Æ =============	
+	//============= SNSÍ≥µÏú† Event  Ï≤òÎ¶¨ =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
 		});		
@@ -269,14 +284,14 @@ img{
 		sendLinkKakao()
 	});	
 	
-  //============= ƒ´ƒ´ø¿ ∞¯¿Ø«œ±‚Event  √≥∏Æ =============		
+  //============= Ïπ¥Ïπ¥Ïò§ Í≥µÏú†ÌïòÍ∏∞Event  Ï≤òÎ¶¨ =============		
 	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 	 function sendLinkKakao(){
 	     Kakao.Link.sendDefault({
 	       objectType: 'feed',
 	       content: {
 	         title: '${board.postTitle}',
-	         description: '${board.nickName} ¥‘¿« ¿€º∫±€ ¿‘¥œ¥Ÿ.',
+	         description: '${board.nickName} ÎãòÏùò ÏûëÏÑ±Í∏Ä ÏûÖÎãàÎã§.',
 	         imageUrl:document.location.href,
 	         link: {
 	           mobileWebUrl: document.location.href,
@@ -285,7 +300,7 @@ img{
 	       },
 	       buttons: [       
 	         {
-	           title: '∏µ≈© ø≠±‚',
+	           title: 'ÎßÅÌÅ¨ Ïó¥Í∏∞',
 	           link: {
 	             mobileWebUrl: document.location.href,
 	             webUrl: document.location.href
@@ -294,8 +309,6 @@ img{
 	       ]
 	     }); 
 	 }    
-	 
-     }
      
 	</script>
 	

@@ -14,6 +14,7 @@ import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Comment;
 import org.protectedog.service.domain.Funding;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.recomment.ReCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -125,7 +126,7 @@ public class InfomationShareController {
 	}
 
 	@RequestMapping(value = "getInfo", method = RequestMethod.GET)
-	public String getInfo(@RequestParam("postNo") int postNo, @ModelAttribute("search") Search search, Model model) throws Exception {
+	public String getInfo(@RequestParam("postNo") int postNo, @ModelAttribute("search") Search search, Model model, HttpSession session) throws Exception {
 		
 		System.out.println(" ============================== getInfo ==================================");
 		
@@ -133,6 +134,13 @@ public class InfomationShareController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
+		
+//		User user = new User();
+//		user.setId("Temp1");
+//		user.setNickname("시드");
+//		user.setRole("admin");
+//
+//		session.setAttribute("user", user);
 		
 		// 댓글 페이지 사이즈 5로 고정
 		search.setPageSize(5);

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -9,7 +9,7 @@
 <head>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  ETC CDN -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -17,58 +17,220 @@
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 <!--  bootstrap CDN  -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <!-- jQuery CSS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
+
 <!--  CSS -->
 <style>
-h7 {
-	color: red;
+
+#searchKeyword{
+	height: 40px;
+	width: 150px;
 }
 #searchSubmmit{
 	width : 60px;
-	height : 52px;
+	height : 40px;
 	
 	border-radius : 0px 15px 15px 0px;
 	border : 1px solid #D3D3D3;
 }
 
 #searchCondition{
-	height :30px;
+	height : 40px;
 	border-radius : 15px 0px 0px 15px;
 }
 
-.glyphicon-search{
-	font-size : 15px;
-}
 
-td:hover{
-	color : #3E6B79;
-}
-
-.go{
-	color : #808080;
-}
-.go:hover{
-	color : #3E6B79;
-}
-.btn.btn-default{
-	width: 100px;
-	height :30px;
-	border-radius: 0px;
-}
 </style>
 
-<title>Á¤º¸°øÀ¯</title>
 
-<!-- JavaScript -->
+<title>ë³´í˜¸í• ê°œ.ì •ë³´ê³µìœ </title>
+<jsp:include page="/layout/toolbar.jsp" />
+</head>
+
+<body>
+
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">ì •ë³´ê³µìœ </a></span>
+					</p>
+					<h1 class="mb-0 bread">ê²¬ì¢…ë°±ê³¼</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<%-- 	<input type="hidden" id="menu" name="menu" value="${param.menu}"/> --%>
+
+	<div class="container">
+
+		<br/>
+		
+		<br/>
+		
+		
+<!-- 	â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  TABLE AREA â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	 -->
+		<div class="row">
+			<div class="col-md-9" style="">
+				<div style="float: left;">
+					<button type="button" class="btn btn-default"><h5>ì „ì²´ë³´ê¸°</h5></button>
+					<button type="button" class="btn btn-default"><h5>ì¡°íšŒìˆ˜ â–¼</h5></button>
+					<button type="button" class="btn btn-default"><h5>ì¶”ì²œìˆ˜ â–¼</h5></button>
+					
+					<select name="pageSize" id="selectPageSize"
+						onchange="javascript:getPageSize()">
+						<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8 ê°œì”©</option>
+						<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15 ê°œì”©</option>
+						<option value="30" ${ search.pageSize == 30 ? "selected" : "" }>30 ê°œì”©</option>
+						<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50 ê°œì”©</option>
+					</select>
+				</div>
+				<div style="float: right;">
+					<form class="form-inline" name="detailForm">
+						<div class="form-group">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ì œëª©</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ì‘ì„±ì</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ê¸€ë‚´ìš©</option>
+							</select>
+						</div>
+
+
+						<div class="form-group">
+							<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label> <input
+								type="text" class="form-control searchKeyword" id="searchKeyword"
+								name="searchKeyword" placeholder="ê²€ìƒ‰ì–´"
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
+								<span class="fas fa-search"></span>
+							</button>
+						</div>
+
+						<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
+				</div>
+			</div>
+		</div>
+		
+				<c:if test="${totalCount == 0}">
+				<div class="row">
+				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
+					ê²€ìƒ‰ê²°ê³¼ ì—†ìŒ<p/>
+						<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					
+					</form>
+				</div>
+				</c:if>
+		
+		<c:if test="${totalCount != 0}">
+		<div class="row">
+			<div class="col-md-9" id="listTable">
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+					<thead>
+						<tr align="center">
+							<th width="10%" class="text-center">ë²ˆí˜¸</th>
+							<th width="30%" align="center" class="text-center">ì œëª©</th>
+							<th width="10%">ê¸€ì“´ì´</th>
+							<th width="10%">ì‘ì„±ì¼</th>
+							<th width="5%">ì¡°íšŒìˆ˜</th>
+							<th width="5%">ì¶”ì²œìˆ˜</th>					
+						</tr>
+					</thead>
+					
+					<tbody>
+					<c:set var="i" value="0" />
+						<c:forEach var="board" items="${list}">
+							<c:set var="i" value="${ i+1 }" />
+							<tr>
+								<td align="center" class="text-center">${i}</td>
+								<td align="center" class="mdl-data-table__cell--non-numeric">
+									<input type="hidden" name="postNo" value="${board.postNo}">
+									${board.postTitle} [${board.commentCount}]
+								</td>
+								<td align="center">${board.nickName}</td>
+								<td align="center">${board.regDate}</td>
+								<td align="center">${board.viewCount}</td>
+								<td align="center">${board.recommendCount}</td>
+							</tr>
+						</c:forEach>	
+					</tbody>
+				</table>
+				
+				<div class="col-md-12" align="right">
+
+					<br />
+
+					<c:if test="${ ! empty sessionScope.user }">
+						<button>ê¸€ ì“°ê¸°</button>
+					</c:if>
+					
+					<div align="center">
+					<jsp:include page="/common/pageNavigator.jsp" />
+					</div>
+					
+					<div style="min-height: 40px">
+					</div>
+	
+			</div>
+			</div>
+
+			</c:if>
+<!-- 		â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  HOT AREA â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
+			<div class="col-md-3">
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+
+					<tbody class="newstbody">
+								<tr align="center">
+									<td colspan='2' class='text-center'><h4><b>HOT ê°œ</b></h4>
+									</td>
+								</tr>
+						<c:set var="i" value="0" />
+						<c:forEach var="best" items="${listRanking}">
+								<c:set var="i" value="${ i+1 }" />
+								<tr>
+									<td class="mdl-data-table__cell--non-numeric">${i}</td>
+									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
+										value="${best.postNo}"> ${best.postTitle}</td>
+								</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<br />
+			</div>
+			</div>
+		
+			<p />
+			<br/>	
+	</div>
+	
+	<div class="empty" style="min-height: 100px">
+		
+	</div>
+	<jsp:include page="/layout/footer.jsp"/>
+	
+</body>
+	
+	<!-- JavaScript -->
 <script type="text/javascript">
 	
 $(function(){
@@ -92,12 +254,12 @@ function listNews(){
 	$.ajax({
 		url : "/News/json/listNews/",
 		method : "POST",
-		data : JSON.stringify({searchKeyword : $("#searchKeyword").val()}),
+		data : JSON.stringify({searchKeyword : $(".searchKeyword").val()}),
 		dataType : "json",
-		contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 		headers : {
 			"Accept" : "application/json",
-			"Content-Type" : "application/json;charset=euc_kr"
+			"Content-Type" : "application/json;charset=UTF-8"
 		},
 		success : function(JSONData, status) {
 			
@@ -105,7 +267,7 @@ function listNews(){
 			
 			var list = JSONData.items;
 			
-			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>´º½º</b></h4></td></tr>");
+			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>ë‰´ìŠ¤</b></h4></td></tr>");
 		
 			$.each(list, function(index, items) {
 				
@@ -151,15 +313,15 @@ function listNews(){
 	
 	$(function(){
 		
-		$("button:contains('ÀüÃ¼º¸±â')").on("click", function(){
+		$("button:contains('ì „ì²´ë³´ê¸°')").on("click", function(){
 			$(self.location).attr("href","/info/listInfo?order=1&pageSize=${search.pageSize}");
 		});
 		
-		$("button:contains('Á¶È¸¼ö')").on("click", function(){
+		$("button:contains('ì¡°íšŒìˆ˜')").on("click", function(){
 			$(self.location).attr("href","/info/listInfo?order=2&pageSize=${search.pageSize}");
 		});
 		
-		$("button:contains('ÃßÃµ¼ö')").on("click", function(){
+		$("button:contains('ì¶”ì²œìˆ˜')").on("click", function(){
 			$(self.location).attr("href","/info/listInfo?order=3&pageSize=${search.pageSize}");
 		});
 		
@@ -169,11 +331,11 @@ function listNews(){
 		var pageSize = $("#selectPageSize").val();
 		var menu = $("#menu").val();
 
-		$("#searchKeyword").on("keyup", function() {
+		$(".searchKeyword").on("keyup", function() {
 
 			var search = {
-				searchKeyword : $("#searchKeyword").val(),
-				searchCondition : $("#searchCondition").val()
+				searchKeyword : $(".searchKeyword").val(),
+				searchCondition : $(".searchCondition").val()
 			};
 			var convertSearch = JSON.stringify(search);
 
@@ -182,13 +344,13 @@ function listNews(){
 				method : "POST",
 				dataType : "json",
 				data : convertSearch,
-				contentType : "application/x-www-form-urlencoded; charset=euc-kr",
+				contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 				headers : {
 					"Accept" : "application/json",
-					"Content-Type" : "application/json;charset=euc_kr"
+					"Content-Type" : "application/json;charset=UTF-8"
 				},
 				success : function(JSONData, status) {
-					$("#searchKeyword").autocomplete({
+					$(".searchKeyword").autocomplete({
 						source : JSONData
 					});
 				}
@@ -214,236 +376,20 @@ function listNews(){
 		});
 		
 		$(document).ready(function(){
-			$("#searchKeyword").keydown(function(key){
+			$(".searchKeyword").keydown(function(key){
 				if(key.keyCode == 13){
 					fncGetList(1);
 				}
 			});
 		});
 		
-		$("#searchSubmmit").on("click", function() {
+		$(".searchSubmmit").on("click", function() {
 			fncGetList(1);
 		});
 		
-		$("button:contains('±Û ¾²±â')").on("click", function(){
+		$("button:contains('ê¸€ ì“°ê¸°')").on("click", function(){
 			self.location = "/community/addInfo.jsp"
 		});
 	});
 </script>
-</head>
-
-<body>
-
-	<jsp:include page="/layout/toolbar.jsp" />
-
-	<%-- 	<input type="hidden" id="menu" name="menu" value="${param.menu}"/> --%>
-
-	<div class="container">
-
-		<br/>
-		
-		<br/>
-		
-		
-<!-- 	¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á TABLE AREA ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á	 -->
-		<div class="row">
-			<div class="col-md-9" style="">
-				<div style="float: left;">
-					<button type="button" class="btn btn-default"><h5>ÀüÃ¼º¸±â</h5></button>
-					<button type="button" class="btn btn-default"><h5>Á¶È¸¼ö ¡å</h5></button>
-					<button type="button" class="btn btn-default"><h5>ÃßÃµ¼ö ¡å</h5></button>
-				</div>
-				<div style="float: right;">
-					<select name="pageSize" id="selectPageSize"
-						onchange="javascript:getPageSize()">
-						<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8 °³¾¿</option>
-						<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15 °³¾¿</option>
-						<option value="30" ${ search.pageSize == 30 ? "selected" : "" }>30 °³¾¿</option>
-						<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50 °³¾¿</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		
-				<c:if test="${totalCount == 0}">
-				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
-					°Ë»ö°á°ú ¾øÀ½
-					<form class="form-inline" name="detailForm">
-						<div class="form-group">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>Á¦¸ñ</option>
-								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ÀÛ¼ºÀÚ</option>
-								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>±Û³»¿ë</option>
-							</select>
-						</div>
-
-
-						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label> <input
-								type="text" class="form-control" id="searchKeyword"
-								name="searchKeyword" placeholder="°Ë»ö¾î"
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</div>
-
-						<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form>
-				</div>
-				</c:if>
-		
-		<div class="row">
-			<div class="col-md-9" id="listTable">
-				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
-					<thead>
-						<tr align="center">
-							<th width="10%" class="text-center">¹øÈ£</th>
-							<th width="30%" align="center" class="text-center">Á¦¸ñ</th>
-							<th width="10%">±Û¾´ÀÌ</th>
-							<th width="10%">ÀÛ¼ºÀÏ</th>
-							<th width="5%">Á¶È¸¼ö</th>
-							<th width="5%">ÃßÃµ¼ö</th>					
-						</tr>
-					</thead>
-					
-					<tbody>
-					<c:set var="i" value="0" />
-						<c:forEach var="board" items="${list}">
-							<c:set var="i" value="${ i+1 }" />
-							<tr>
-								<td align="center" class="text-center">${i}</td>
-								<td align="center" class="mdl-data-table__cell--non-numeric">
-									<input type="hidden" name="postNo" value="${board.postNo}">
-									${board.postTitle} [${board.commentCount}]
-								</td>
-								<td align="center">${board.nickName}</td>
-								<td align="center">${board.regDate}</td>
-								<td align="center">${board.viewCount}</td>
-								<td align="center">${board.recommendCount}</td>
-							</tr>
-						</c:forEach>	
-					</tbody>
-				</table>
-				
-				<div class="col-md-12" align="right">
-
-					<br />
-
-					<c:if test="${ ! empty sessionScope.user }">
-						<button>±Û ¾²±â</button>
-					</c:if>
-					
-					<div align="center">
-					<jsp:include page="/common/pageNavigator.jsp" />
-					</div>
-					
-					<div style="min-height: 40px">
-					</div>
-					
-					<div align="center">
-					<div class="col-md-12 col-sm-12 col-xm-12" style="padding-left: 28%;">
-					<form class="form-inline" name="detailForm">
-						<div class="form-group">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>Á¦¸ñ</option>
-								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ÀÛ¼ºÀÚ</option>
-								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>±Û³»¿ë</option>
-							</select>
-						</div>
-
-
-						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label> <input
-								type="text" class="form-control" id="searchKeyword"
-								name="searchKeyword" placeholder="°Ë»ö¾î"
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</div>
-
-						<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form>
-				</div>
-				</div>
-			</div>
-			</div>
-<!-- 		¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á HOT AREA ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
-			<div class="col-md-3">
-				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
-
-					<thead>
-						<tr align="center">
-<!-- 							<th class="mdl-data-table__cell--non-numeric" width="10%">¹øÈ£</th> -->
-<!-- 							<th width="30%" class="text-center">Á¦¸ñ</th> -->
-<!-- 							<th width="10%">ÀÛ¼ºÀÚ</th> -->
-<!-- 							<th width="10%">ÀÛ¼ºÀÏ</th> -->
-<!-- 							<th width="5%">Á¶È¸¼ö</th> -->
-<!-- 							<th width="5%">ÃßÃµ¼ö</th> -->
-						</tr>
-					</thead>
-
-					<tbody class="newstbody">
-								<tr align="center">
-									<td colspan='2' class='text-center'><h4><b>HOT °³</b></h4>
-									</td>
-								</tr>
-						<c:set var="i" value="0" />
-						<c:forEach var="best" items="${listRanking}">
-								<c:set var="i" value="${ i+1 }" />
-								<tr>
-									<td class="mdl-data-table__cell--non-numeric">${i}</td>
-									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
-										value="${best.postNo}"> ${best.postTitle}</td>
-<%-- 									<td align="center">${best.nickName}</td> --%>
-<%-- 									<td align="center">${best.regDate}</td> --%>
-<%-- 									<td align="center">${best.viewCount}</td> --%>
-<%-- 									<td align="center">${best.recommendCount}</td> --%>
-								</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-			<br />
-			
-			</div>
-			<!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á NEWS AREA ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á  -->
-			
-			<div class="row">
-				
-				
-<!-- 				<div class="col-md-3"> -->
-<!-- 					<h3 align="center"> -->
-<!-- 						<b>´º½º</b> -->
-<!-- 					</h3> -->
-<!-- 					<p> -->
-<!-- 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"> -->
-<!-- 						<tbody class="newstbody"> -->
-<!-- 						</tbody> -->
-<!-- 					</table> -->
-<!-- 				</div> -->
-				
-				<br />
-				<p />
-				<br/>
-			</div>	
-	</div>
-	
-	<div class="empty" style="min-height: 100px">
-		
-	</div>
-	<jsp:include page="/layout/footer.jsp"/>\
-	
-</body>
 </html>

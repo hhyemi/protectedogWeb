@@ -77,7 +77,7 @@
 									AND HOSPITAL_NAME = #{hospitalName} 
 								</if>
 						</where>
-						ORDER BY POST_NO  ) inner_table
+						ORDER BY POST_NO DESC  ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>

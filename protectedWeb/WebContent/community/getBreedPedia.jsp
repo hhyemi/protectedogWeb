@@ -1,32 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html lang="ko">
 <head>
 
-<title>°ßÁ¾¹é°ú</title>
+<title>ê²¬ì¢…ë°±ê³¼</title>
 
 <!--  meta  -->
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- jQuery CSS -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <style type="text/css">
 body {
@@ -63,11 +58,6 @@ body {
 	height: 500px;
 }
 
-.breed_select1 {
-	COLOR: WHITE;
-	WIDTH: 50%;
-}
-
 td{
 	color : black;
 	width : 300px;
@@ -84,9 +74,9 @@ td{
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">Á¤º¸°øÀ¯</a></span>
+						<span class="mr-2"><a href="/index.jsp">ì •ë³´ê³µìœ </a></span>
 					</p>
-					<h1 class="mb-0 bread">°ßÁ¾¹é°ú</h1>
+					<h1 class="mb-0 bread">ê²¬ì¢…ë°±ê³¼</h1>
 				</div>
 			</div>
 		</div>
@@ -103,7 +93,7 @@ td{
 		</div>
 		<div id="breed_data">
 			<img id="breed_image" src="" />
-			<p><b>Ç°Á¾ Á¤º¸</b></p>
+			<p><b>í’ˆì¢… ì •ë³´</b></p>
 			<table id="breed_data_table">
 
 			</table>
@@ -122,18 +112,18 @@ td{
 			getDogByBreed(id);
 		});
 		
-		// ÃÖÃÊ ·Îµù½Ã µ¥ÀÌÅÍ ¾È¶ß´ø ¿À·ù ÇØ°á
+		// ìµœì´ˆ ë¡œë”©ì‹œ ë°ì´í„° ì•ˆëœ¨ë˜ ì˜¤ë¥˜ í•´ê²°
 		var id = 1;
 		getDogByBreed(id);
 		
-		// Select Box ÀÌº¥Æ®
+		// Select Box ì´ë²¤íŠ¸
 		var $breed_select = $('select.breed_select');
 		$breed_select.change(function() {
 			id = $(this).children(":selected").attr("id");
 			getDogByBreed(id);
 		});
 
-		// OpenAPIÀÌ¿ë µ¥ÀÌÅÍ °¡Á®¿À±â
+		// OpenAPIì´ìš© ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
 		function getBreeds() {
 			ajax_get('https://api.thedogapi.com/v1/breeds', function(data) {
 				populateBreedsSelect(data);
@@ -147,68 +137,67 @@ td{
 						$.each(breeds, function(key, value) {
 
 							if (value.name == 'Chow Chow') {
-								value.name = 'Â÷¿ìÂ÷¿ì';
+								value.name = 'ì°¨ìš°ì°¨ìš°';
 							}
 							if (value.name == 'Affenpinscher') {
-								value.name = '¾ÆÆæÇÉ¼Å';
+								value.name = 'ì•„íœí•€ì…”';
 							}
 							if (value.name == 'Afghan Hound') {
-								value.name = '¾ÆÇÁ°£ ÇÏ¿îµå';
+								value.name = 'ì•„í”„ê°„ í•˜ìš´ë“œ';
 							}
 							if (value.name == 'African Hunting Dog') {
-								value.name = '¾ÆÇÁ¸®Ä«µé°³';
+								value.name = 'ì•„í”„ë¦¬ì¹´ë“¤ê°œ';
 							}
 							if (value.name == 'Airedale Terrier') {
-								value.name = '¿¡¾îµ¥ÀÏ Å×¸®¾î';
+								value.name = 'ì—ì–´ë°ì¼ í…Œë¦¬ì–´';
 							}
 							if (value.name == 'Akbash Dog') {
-								value.name = '¾Ç¹Ù½¬ µµ±×';
+								value.name = 'ì•…ë°”ì‰¬ ë„ê·¸';
 							}
 							if (value.name == 'Akita') {
-								value.name = '¾ÆÅ°Å¸';
+								value.name = 'ì•„í‚¤íƒ€';
 							}
 							if (value.name == 'Alapaha Blue Blood Bulldog'){
-								value.name = '¾Ë¶ó ÆÄÇÏ ºí·ç ºí·¯µå ºÒµ¶';
+								value.name = 'ì•Œë¼ íŒŒí•˜ ë¸”ë£¨ ë¸”ëŸ¬ë“œ ë¶ˆë…';
 							}
 							if (value.name == 'Alaskan Husky'){
-								value.name = '¾Ë·¡½ºÄ­ Çã½ºÅ°';
+								value.name = 'ì•Œë˜ìŠ¤ì¹¸ í—ˆìŠ¤í‚¤';
 							}
 							if (value.name == 'Alaskan Malamute'){
-								value.name = '¾Ë·¡½ºÄ­ ¸»¶ó¹ÂÆ®';
+								value.name = 'ì•Œë˜ìŠ¤ì¹¸ ë§ë¼ë®¤íŠ¸';
 							}
 							if (value.name == 'American Bulldog'){
-								value.name = '¾Æ¸Ş¸®Ä­ ºÒµ¶';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ ë¶ˆë…';
 							}
 							if (value.name == 'American Bully'){
-								value.name = '¾Æ¸Ş¸®Ä­ ºÒ¸®';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ ë¶ˆë¦¬';
 							}
 							if (value.name == 'American Eskimo Dog'){
-								value.name = '¾Æ¸Ş¸®Ä­ ¿¡½ºÅ°¸ğ µµ±×';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ ì—ìŠ¤í‚¤ëª¨ ë„ê·¸';
 							}
 							if (value.name == 'American Foxhound'){
-								value.name = '¾Æ¸Ş¸®Ä­ Æø½ºÇÏ¿îµå';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ í­ìŠ¤í•˜ìš´ë“œ';
 							}
 							if (value.name == 'American Pit Bull Terrier'){
-								value.name = '¾Æ¸Ş¸®Ä­ ÇÍºÒÅ×¸®¾î';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ í•ë¶ˆí…Œë¦¬ì–´';
 							}
 							if (value.name == 'American Staffordshire Terrier'){
-								value.name = '¾Æ¸Ş¸®Ä­ ½ºÅ×ÆÛµå¼Å Å×¸®¾î';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ ìŠ¤í…Œí¼ë“œì…” í…Œë¦¬ì–´';
 							}
 							if (value.name == 'American Water Spaniel'){
-								value.name = '¾Æ¸Ş¸®Ä­ ¿öÅÍ ½ºÆä´Ï¾ó';
+								value.name = 'ì•„ë©”ë¦¬ì¹¸ ì›Œí„° ìŠ¤í˜ë‹ˆì–¼';
 							}
 							if (value.name == 'Anatolian Shepherd Dog'){
-								value.name = '¾Æ³ªÅç¸®¾Æ ¼ÎÆÛµå';
+								value.name = 'ì•„ë‚˜í†¨ë¦¬ì•„ ì…°í¼ë“œ';
 							}
 							if (value.name == 'Appenzeller Sennenhund'){
-								value.name = '¾ÆÆæÃ¿·¯ Á¦³ÙÈÆÆ®';
+								value.name = 'ì•„íœì²¼ëŸ¬ ì œë„¨í›ˆíŠ¸';
 							}
 
 							// 							output += '<span id="' + value.id + '">'
 							// 							+ value.name + '</span><br>';
 
-							output += '<option id="' + value.id + '">'
-									+ value.name + '</option>';
+							output += '<option id="' + value.id + '">' + value.name + '</option>';
 						});
 						return output;
 					});
@@ -224,7 +213,7 @@ td{
 							clearBreed();
 							$("#breed_data_table")
 									.append(
-											"<tr><td>¾ÆÁ÷ ÀÛ¼ºµÇ¾î ÀÖÁö ¾ÊÀº Ç°Á¾ Á¤º¸ ÀÔ´Ï´Ù.</td></tr>");
+											"<tr><td>ì•„ì§ ì‘ì„±ë˜ì–´ ìˆì§€ ì•Šì€ í’ˆì¢… ì •ë³´ ì…ë‹ˆë‹¤.</td></tr>");
 						} else {
 							displayBreed(data[0])
 						}
@@ -247,47 +236,47 @@ td{
 				}
 
 				if (key == 'weight') {
-					key = '¹«°Ô';
+					key = 'ë¬´ê²Œ';
 				}
 
 				if (key == 'height') {
-					key = 'Å°';
+					key = 'í‚¤';
 				}
 
 				if (key == 'id') {
-					key = '½Äº°¹øÈ£';
+					key = 'ì‹ë³„ë²ˆí˜¸';
 				}
 
 				if (key == 'name') {
-					key = 'ÀÌ¸§';
+					key = 'ì´ë¦„';
 				}
 
 				if (key == 'breed_group') {
-					key = 'Ç°Á¾±×·ì';
+					key = 'í’ˆì¢…ê·¸ë£¹';
 				}
 
 				if (key == 'life_span') {
-					key = 'Æò±Õ¼ö¸í';
+					key = 'í‰ê· ìˆ˜ëª…';
 				}
 
 				if (key == 'temperament') {
-					key = '¼º°İ';
+					key = 'ì„±ê²©';
 					//alert(value);
 					var valueArray = value.split(',');
 					//alert(valueArray);
 					for (i = 0; i < valueArray.length; i++) {
 						//alert(valueArray[i]);
 						if (valueArray[i].trim() == 'Friendly') {
-							valueArray[i] = 'Ä£±ÙÇÑ';
+							valueArray[i] = 'ì¹œê·¼í•œ';
 						}
 						if (valueArray[i].trim() == 'Loyal') {
-							valueArray[i] = 'Ãæ¼º½º·¯¿î';
+							valueArray[i] = 'ì¶©ì„±ìŠ¤ëŸ¬ìš´';
 						}
 						if (valueArray[i].trim() == 'Quiet') {
-							valueArray[i] = 'Á¶¿ëÇÑ';
+							valueArray[i] = 'ì¡°ìš©í•œ';
 						}
 						if (valueArray[i].trim() == 'Charming') {
-							valueArray[i] = '¸Å·ÂÀûÀÎ';
+							valueArray[i] = 'ë§¤ë ¥ì ì¸';
 						}
 					}
 
@@ -298,14 +287,14 @@ td{
 				}
 
 				if (key == 'country_code') {
-					key = '±¹°¡ÄÚµå';
+					key = 'êµ­ê°€ì½”ë“œ';
 				}
 
 				if (key == 'bred_for') {
-					key = 'À¯Çü';
+					key = 'ìœ í˜•';
 				}
 
-				if (!(key == '¼º°İ')) {
+				if (!(key == 'ì„±ê²©')) {
 					$("#breed_data_table").append(
 							"<tr><td>" + key + "</td><td>" + value
 									+ "</td></tr>");
@@ -357,7 +346,7 @@ td{
 	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
 	<script src="../../resources/prodmenu/js/main.js"></script>
-	<!-- ////////////////////´Ş·Â /////////////////////////////-->
+	<!-- ////////////////////ë‹¬ë ¥ /////////////////////////////-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 
