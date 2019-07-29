@@ -126,19 +126,5 @@ public class ReviewController {
 
 		return "forward:/hospital/getHospitalReview.jsp";
 	}
-	// 후기 글 삭제
-	@RequestMapping(value = "delHospitalReview", method = RequestMethod.GET)
-	public String delHospitalReview(@RequestParam("postNo") int postNo) throws Exception {
 
-		System.out.println("/review/delHospitalReview");
-
-		reviewService.delReivew(postNo);
-
-		Map<String, Object> filePost = new HashMap<String, Object>();
-		filePost.put("boardCode", hospitalCode);
-		filePost.put("postNo", postNo);
-		fileService.delAllFile(filePost);
-
-		return "forward:/hospital/getHospitalReview.jsp";
-	}
 }

@@ -44,10 +44,23 @@
 			min-height: 200px;
 			min-width: 700px;
 		}
-		.modal-content{
-			border: 0px ;
-		}
-		
+        /* modal position(center)*/
+/*         .modal { */
+/*           text-align: center; */
+/*         } */
+/*         @@media screen and (min-width: 768px) { */
+/*           .modal:before { */
+/*             display: inline-block; */
+/*             vertical-align: middle; */
+/*             content: " "; */
+/*             height: 100%; */
+/*           } */
+/*         } */
+/*         .modal-dialog { */
+/*           display: inline-block; */
+/*           text-align: left; */
+/*           vertical-align: middle; */
+/*         } */
 
 </style>
 	<!-- ToolBar Start /////////////////////////////////////-->
@@ -117,19 +130,21 @@
 				<div id="ListDiv" >
 				  <c:forEach var="review" items="${list}">
 				  
-				  <div style="background-color: #f7f7f7; padding-left:20px"  onclick="show('${review.postNo}')">
+				  <div style="background-color: #f7f7f7; padding-left:20px" id="${review.postNo }" >
 				  			<hr/>
 				  			
 				  	<c:if test="${user.id eq review.id || user.id eq 'admin'}">	
 				    <div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > <font size="5" >${review.postTitle}</font></div>
 				  	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " > 
-				  	    <button  type="button" class="btnUpdate btn btn-default" >수정</button>
-						<button type="button" class="btnDelete btn btn-default">삭제</button>
+				  	    <button  type="button" class="btnUpdate btn btn-default"  data-toggle="modal" data-target=".bs-example-modal-lg" >수정</button>
+						<button type="button" class="btnDelete btn btn-default">삭제</button>&emsp;
 						<input type="hidden" value="${review.postNo }" /></div>
 					 </div>
 					 </c:if>
-					 
+				  	<c:if test="${!(user.id eq review.id) && !(user.id eq 'admin')}">	
+				     <font size="5" >${review.postTitle}</font><br/>
+					 </c:if>					 
 							   <br/>
 							 
 							  <b>${review.nickname }</b>				
@@ -155,7 +170,7 @@
 
 						  <c:forEach var="file" items="${file}">
 						  	<c:if test="${file.postNo == review.postNo }">
-		                    <img src="/resources/file/fileHospital/${file.fileName}" height="100px;" width="100px"  >				  		
+		                    <img src="/resources/file/fileHospital/${file.fileName}" height="100px;" width="100px" onclick="show('${review.postNo}')"  >				  		
 						  	</c:if>
 						  </c:forEach>
 						  <br/>&emsp;			          
@@ -367,14 +382,29 @@
 	   		            	 
 	   		            	 var review = JSONData.review;
 	   		            	 var file = JSONData.file;
+	   		            	 var user = JSONData.user;
 	   		            	 
 		   		            	$('#myModal2').modal("hide");
-
-									   	 
-	   		            	var display = "<div style=\"background-color: #f7f7f7; padding-left:20px\">";
-	   						 display += "<hr/> <font size=\"5\" >"+review.postTitle+"</font><br/>"+
-											"<b>"+review.nickname+"</b>"+
+		   		          
+		   		            	
+	   		            	var display = "<div style=\"background-color: #f7f7f7; padding-left:20px\" id=\""+review.postNo+"\" ><hr/>";
+	
+	   		            	if(user.id==review.id){
+	   		            		display +=  "<div class=\"row\" style=\"position:relative;height:35px;\">"+
+					   						 "<div class=\"col-xs-8 col-md-8\" style=\"position:absolute; left:0px; bottom:0px;\" > <font size=\"5\" >"+
+					   						 review.postTitle+"</font></div>"+
+					 					  	"<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" >"+ 
+					 					  	"<button  type=\"button\" class=\"btnUpdate btn btn-default\" >수정</button>"+
+					 						"<button type=\"button\" class=\"btnDelete btn btn-default\">삭제</button> &emsp;"+
+					 						"<input type=\"hidden\" value=\""+review.postNo+"\" /></div> </div>";
+					 
+	   		            	}else{
+	   						 display += "<font size=\"5\" >"+review.postTitle+"</font><br/><br/>";
+	
+	   		            	}
+	   		                 display +=  "<b>"+review.nickname+"</b>"+
 											" &emsp;"+review.regDate+"&emsp;";
+	   		    
 							if(review.grade==1){
 								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>1</strong>";								
 							}else if(review.grade==2){
@@ -387,21 +417,44 @@
 								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>5</strong>";										
 							}
 							   display += "<p>"+review.postContent;
-							
+
 							$.each(file, function(index, file){   
 
 								if(file.postNo == review.postNo){
 									display += 	"<img src=\"/resources/file/fileHospital/"+file.fileName+"\" height=\"100px;\" width=\"100px\" > <br/>&emsp;</div>";  											
 								}   
 							});
-						 
+
 							$("#ListDiv").prepend(display);
-	   		            	 
+					         $( ".btnDelete" ).on("click" , function() {  
+					        	 alert("삭제");
+					        	 //alert($(this).parent().children("input").val())
+					        	 var str = $(this).parent().children("input").val();
+			                  $.ajax({
+								        	url : "/review/json/delHospitalReview/"+str,
+											method : "GET" ,
+											dataType : "json" ,
+											headers : {
+												"Accept" : "application/json",
+												"Content-Type" : "application/json"
+											},
+											error:function(request,status,error){
+					                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+					                           },
+											success : function(JSONData , status) {
+											
+												if(JSONData==1){
+													alert("삭제가 완료되었습니다.");	
+			           								$("div[id=" + str + "]").remove();
+													}
+										}
+									});		        	 
+					        	 
+					        });		   		            	 
 	   		            }  
 	   			  });                
         });
-	      
-	     // $('form').attr("method","POST").attr("action","/funding/addVoting").attr("enctype","multipart/form-data").submit();
+
 	   }	
 
 	   //============= "Editor" =============   
@@ -596,16 +649,34 @@
 		        });
 		         //============= 수정 Event  처리 =============   
 		         $( ".btnUpdate" ).on("click" , function() {   
-		        	 self.location = "/review/delHospitalReview?postNo="+$(this).parent().children("input").val()
+		        	 //self.location = "/review/delHospitalReview?postNo="+$(this).parent().children("input").val()
 			        	//alert($(this).parent().children("input").val())
 		        });
 		         //============= 삭제 Event  처리 =============   
 		         $( ".btnDelete" ).on("click" , function() {  
 		        	 alert("삭제");
-		        	 alert($(this).parent().children("input").val())
-		        	 	$(self.location).attr("href","/review/delHospitalReview?postNo="+$(this).parent().children("input").val());
-		        	// $(location).("href","/review/delHospitalReview");
-		        	//alert($(this).parent().children("input").val())
+		        	 //alert($(this).parent().children("input").val())
+		        	 var str = $(this).parent().children("input").val();
+                  $.ajax({
+					        	url : "/review/json/delHospitalReview/"+str,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								error:function(request,status,error){
+		                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		                           },
+								success : function(JSONData , status) {
+								
+									if(JSONData==1){
+										alert("삭제가 완료되었습니다.");	
+           								$("div[id=" + str + "]").remove();
+										}
+							}
+						});		        	 
+		        	 
 		        });		        
 		            
 		   });
@@ -647,9 +718,16 @@
 	
 			    //modal을 띄워준다.  
 
-			    $("#myModal").modal('show');
+// 			    $("#myModal").modal('show');
 
-	  
+			    $("#myModal").modal('show').css({
+			        'margin-top': function () { //vertical centering
+			            return +($(this).height() / 8);
+			        },
+			        'margin-left': function () { //Horizontal centering
+			            return -($(this).width() / 8);
+			        }
+			    });
 
 			}
 

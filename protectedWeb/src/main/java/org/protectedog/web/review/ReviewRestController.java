@@ -94,6 +94,7 @@ public class ReviewRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("review", review);
 		map.put("file", file);
+		map.put("user", user);
 
 		return map;
 	}
@@ -115,4 +116,18 @@ public class ReviewRestController {
 		return map;
 	}
 
+	@RequestMapping(value = "json/delHospitalReview/{postNo}", method = RequestMethod.GET)
+	public int delHospitalReview(@PathVariable("postNo") int postNo) throws Exception {
+
+		System.out.println("/review/json/delHospitalReview");
+
+		reviewService.delReivew(postNo);
+
+		Map<String, Object> filePost = new HashMap<String, Object>();
+		filePost.put("boardCode", hospitalCode);
+		filePost.put("postNo", postNo);
+		fileService.delAllFile(filePost);
+
+		return 1;
+	}
 }
