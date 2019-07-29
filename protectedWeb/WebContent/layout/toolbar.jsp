@@ -254,6 +254,9 @@
     <script src="/resources/newTemplate/js/custom.js"></script> 
     <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
     
+    <!-- sweetalter CDN -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
         	<script type="text/javascript">
 
 		//============= "로그인"  Event 처리 =============
