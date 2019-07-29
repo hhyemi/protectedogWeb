@@ -30,22 +30,11 @@
 			border : 1px solid #D3D3D3;
 		}
 		
-		#searchCondition{
+		#voteCondition{
 			height : 40px;
 			border-radius : 15px 0px 0px 15px;
 		}
 
-	
-  	   #btn-add{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		} 
-		.right-box {
-		  float: right;
-		}	
 		#checkPostTitle{
 	      width:300px;
 	      padding:0 5px;
@@ -81,51 +70,35 @@
 		    	<div class="container" >
 		    	
 				<!--검색 부터 -->		    	
-<!-- 		    		<div class="row">   -->
-<!-- 				    	<div class="right-box"> -->
-
-<!-- 						    <select class="form-control" id="voteCondition" name="voteCondition" > -->
-<%-- 								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option> --%>
-<%-- 								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >후원중</option> --%>
-<%-- 								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >후원완료</option> --%>
-<!-- 							</select>    -->
-<!-- 						    &emsp; -->
-<!-- 						    <select class="form-control" name="searchCondition" id="searchCondition" > -->
-<%-- 								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >제목</option> --%>
-<%-- 								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option> --%>
-<!-- 							</select> -->
-<!-- 							&emsp; -->
-<!-- 						    <label class="sr-only" for="searchKeyword">검색어</label> -->
-<%-- 						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  > --%>
-<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
-
-<!-- 						</div> -->
-<!-- 			    	</div>     -->
-				
-						<div class="form-group">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
-								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+		    		<div class="row">  
+				    	<div class="col-md-9" style="">
+<!-- 				    	<div class="form-group"> -->
+						    <select class="form-control" id="voteCondition" name="voteCondition" >
+								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option>
+								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >후원중</option>
+								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >후원완료</option>
+							</select>   
+						  
+						    <select class="form-control" name="searchCondition" id="searchCondition" >
+								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >제목</option>
+								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
 							</select>
-
-							<label class="sr-only" for="searchKeyword">검색어</label> <input
-								type="text" class="form-control searchKeyword" id="searchKeyword"
-								name="searchKeyword" placeholder="검색어"
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+						
+						    <label class="sr-only" for="searchKeyword">검색어</label>
+						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
 							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
 								<span class="fas fa-search"></span>
 							</button>
 						</div>
-
+			    	</div>    
+					<br/>
+    		    	
 						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form>
-    		    	<p/>
+	
+    		    	<br/>
+    		    	
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-8 col-lg-12 order-md-last">
@@ -204,9 +177,12 @@
   
 
   <!-- loader -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
-	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"> </script> 
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
@@ -220,7 +196,7 @@
     $(function(){	
     	
 		//============= "검색"  Event  처리 =============	
-		 $( "button.btn.btn-default" ).on("click" , function() {
+		 $( "#searchSubmmit" ).on("click" , function() {
 			    fncGetList(1);
 		});
 		//============= "투표중/투표완료"  Event   처리 =============

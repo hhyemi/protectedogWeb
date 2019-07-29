@@ -113,7 +113,7 @@ public class FundingRestController {
 
 	// 무한스크롤
 	@RequestMapping(value = "json/listVoting/", method = RequestMethod.POST)
-	public Object listVoting(@RequestBody Search search, HttpServletRequest request) throws Exception {
+	public Map<String, Object> listVoting(@RequestBody Search search, HttpServletRequest request) throws Exception {
 
 		System.out.println("/funding/json/listVoting");
 
@@ -145,13 +145,16 @@ public class FundingRestController {
 		System.out.println(resultPage);
 
 		search.setSearchKeyword(originSearch);
-
+		
+		Map<String, Object> map2 = new HashMap<String,Object>();
+		map2.put("list", map.get("list"));
+		
 //		// Model 과 View 연결
 //		model.addAttribute("list", map.get("list"));
 //		model.addAttribute("resultPage", resultPage);
 //		model.addAttribute("search", search);
 
-		return map.get("list");
+		return map2;
 	}
 			
 }
