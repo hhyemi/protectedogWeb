@@ -7,7 +7,7 @@ import org.protectedog.service.domain.Apply;
 
 
 
-//==> ºĞ¾ç½ÅÃ»°ü¸®¿¡¼­ CRUD Ãß»óÈ­/Ä¸½¶È­ÇÑ DAO Interface Definition
+//==> ë¶„ì–‘ì‹ ì²­ê´€ë¦¬ì—ì„œ CRUD ì¶”ìƒí™”/ìº¡ìŠí™”í•œ DAO Interface Definition
 public interface ApplyDAO {
 	
 	// INSERT
@@ -23,7 +23,7 @@ public interface ApplyDAO {
 	// DELETE
 	public void delApply(Apply apply) throws Exception ;
 	
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼Row(totalCount)  return
+	// ê²Œì‹œíŒ Page ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´Row(totalCount)  return
 	public int getTotalCount(int adoptNo) throws Exception ;
 	
 }

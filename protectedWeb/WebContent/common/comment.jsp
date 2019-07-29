@@ -15,7 +15,7 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
 <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<!-- <script src="https://kit.fontawesome.com/e26616618e.js"></script> -->
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
 .temp {
@@ -25,6 +25,10 @@
 .btn.btn-default {
 	width : 100%;
 	height: 30px;
+}
+.commentDiv{
+	background-color: #F0F0F0;
+	min-height: 50px;
 }
 </style>
 
@@ -136,8 +140,7 @@
 
 	// 댓글 CURD function();
 	$(function() {
-		// 댓글 등록
-		
+		// 댓글 등록		
 		$(document).on("click","#commentGo",function() {
 			
 			var commentData =  
@@ -231,7 +234,7 @@
  							var button = "<div class='ajax col-md-2'>" 								
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
- 								+ "<button>수정완료</button>" 								
+ 								+ "<button class='btn btn-default'>수정완료</button>" 								
  								+ "</div>"
  							
 							$("#"+commentNo+""+".h4tag").append(modifyScreen);
@@ -432,8 +435,7 @@
 		<c:if test="${sessionScope.user.role eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
-				비회원은 댓글을 달 수 없습니다<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> 로그인 </button>후 이용해
-				주시길 바랍니다.
+				비회원은 댓글을 달 수 없습니다<a href="#"> 로그인 </a>후 이용해주시길 바랍니다.
 			</div>
 		</div>
 		<br>
@@ -466,9 +468,9 @@
 		<c:set var="rank" value="0"></c:set>
 		<c:forEach var="comment" items="${list}">
 			<c:set var="rank" value="${ rank+1 }" />
-			<div class="row" id="${comment.commentNo}">
+			<div class="row commentDiv" id="${comment.commentNo}">
 				<div class="col-sm-1 col-md-1" align="center">
-					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" />
+					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px; padding-top: 5px;" />
 				</div>
 				<div class="col-sm-11 col-md-11" align="left">
 					

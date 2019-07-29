@@ -1,59 +1,62 @@
- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 
-	<title>º¸È£ÇÒ°³ ¡¤ ºĞ¾ç±Û ÀÛ¼º</title>
+	<title>ë³´í˜¸í• ê°œ Â· ë¶„ì–‘ê¸€ ì‘ì„±</title>
 	
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
 
     <style type="text/css">
     
 	    html {
-	 	 scroll-behavior: smooth;
-		}
-		
-		h1 {
-			font-family: 'NanumSquare', sans-serif !important;
-/* 			font-size: 22px !important; */
-		}
-		
-		section { 
-			font-family: 'NanumSquare', sans-serif !important;
+	 		scroll-behavior: smooth;
 		}
 		
 		.waves-effect>strong {
-			background-color: #94bfca;
+			background-color: #f04f23;
+			border-radius: 3px;
 		}
 		
+		input[name=dogDate] {
+			height: 38px;
+/* 			width: 80%; */
+/* 			margin-right: 0px !important; */
+/* 			padding-right: 0px !important; */
+		}
+		
+/* 		.swal-button { */
+/* 		  background-color: #f04f23; */
+/* 		} */
+
 		
 	</style>
-    
+   <jsp:include page="/layout/toolbar.jsp"></jsp:include> 
   </head>
   
   
   <body class="goto-here">
   
-  	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+  	
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread" id="h1">
-           		<c:if test="${param.boardCode eq 'AD' }">ºĞ¾ç±Û µî·Ï</c:if>
-<%-- 			    <c:if test="${param.boardCode eq 'MS' }">½ÇÁ¾±Û µî·Ï</c:if> --%>
-            </h1>
+          	<p ><span class="mr-2"><a href="index.html">Add</a></span> <span>Adopt</span></p>
+            <font size="7">
+            	<c:if test="${param.boardCode eq 'AD' }">ë¶„ì–‘ê¸€ ë“±ë¡</c:if>
+			    <c:if test="${param.boardCode eq 'MS' }">ì‹¤ì¢…ê¸€ ë“±ë¡</c:if>
+            </font>
           </div>
         </div>
       </div>
     </div>
+    
     
     <section class="ftco-section">
       <div class="container">
@@ -70,29 +73,29 @@
 					<input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 				
 				
-					<!-- ¾à°ü ½ÃÀÛ -->
+					<!-- ì•½ê´€ ì‹œì‘ -->
 					<div class="col-md-12">
 					
 		          		<div class="cart-detail bg-light p-3 p-md-4">
-		          			<h3 class="billing-heading mb-4"><strong>¾à°ü µ¿ÀÇ</strong></h3>
+		          			<h3 class="billing-heading mb-4"><strong>ì•½ê´€ ë™ì˜</strong></h3>
 		          			
 							<div class="form-group">
 								<div class="col-md-12"><strong>1. </strong>
-									<c:if test="${param.boardCode eq 'AD' }">ºĞ¾ç±ÛÀ» µî·ÏÇÏ°í, ÀÔ¾ç½ÅÃ»¼­°¡ µî·ÏµÇ°Å³ª ºĞ¾ç¿Ï·á »óÅÂ·Î º¯°æÇÏ½Å °æ¿ì ±ÛÀ» ¼öÁ¤ÇÏ°Å³ª »èÁ¦ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.</c:if>
-	<%-- 			 					<c:if test="${param.boardCode eq 'MS' }">½ÇÁ¾±ÛÀ» µî·ÏÇÏ°í, Ã£±â¿Ï·á »óÅÂ·Î º¯°æÇÏ½Å °æ¿ì ±ÛÀ» ¼öÁ¤ÇÏ°Å³ª »èÁ¦ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.</c:if> --%>
+									<c:if test="${param.boardCode eq 'AD' }">ë¶„ì–‘ê¸€ì„ ë“±ë¡í•˜ê³ , ì…ì–‘ì‹ ì²­ì„œê°€ ë“±ë¡ë˜ê±°ë‚˜ ë¶„ì–‘ì™„ë£Œ ìƒíƒœë¡œ ë³€ê²½í•˜ì‹  ê²½ìš° ê¸€ì„ ìˆ˜ì •í•˜ê±°ë‚˜ ì‚­ì œí•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</c:if>
+	<%-- 			 					<c:if test="${param.boardCode eq 'MS' }">ì‹¤ì¢…ê¸€ì„ ë“±ë¡í•˜ê³ , ì°¾ê¸°ì™„ë£Œ ìƒíƒœë¡œ ë³€ê²½í•˜ì‹  ê²½ìš° ê¸€ì„ ìˆ˜ì •í•˜ê±°ë‚˜ ì‚­ì œí•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</c:if> --%>
 								</div>
 								<div class="col-md-12">
 									<div class="radio" align="right">
-									   <label><input type="checkbox" name="terms" class="mr-2">µ¿ÀÇ</label>
+									   <label><input type="checkbox" name="terms" class="mr-2">ë™ì˜</label>
 									</div>
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<div class="col-md-12"><strong>2. </strong>½ÅÃ»¼­´Â »ó¼¼Á¶È¸ È­¸é¿¡¼­ È®ÀÎÇÏ½Ç ¼ö ÀÖÀ¸¸ç, ½ÅÃ»¼­¸¦ È®ÀÎÇÏ°í Á÷Á¢ ¿¬¶ôÇÏ½Ã¸é µË´Ï´Ù.</div>
+								<div class="col-md-12"><strong>2. </strong>ì‹ ì²­ì„œëŠ” ìƒì„¸ì¡°íšŒ í™”ë©´ì—ì„œ í™•ì¸í•˜ì‹¤ ìˆ˜ ìˆìœ¼ë©°, ì‹ ì²­ì„œë¥¼ í™•ì¸í•˜ê³  ì§ì ‘ ì—°ë½í•˜ì‹œë©´ ë©ë‹ˆë‹¤.</div>
 								<div class="col-md-12">
 									<div class="radio" align="right">
-									   <label><input type="checkbox" name="terms" class="mr-2">µ¿ÀÇ</label>
+									   <label><input type="checkbox" name="terms" class="mr-2">ë™ì˜</label>
 									</div>
 								</div>
 							</div>
@@ -100,47 +103,47 @@
 							<div class="form-group">
 								<div class="col-md-12">
 									<div class="radio" align="right">
-									   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>¸ğµÎ µ¿ÀÇ</strong></label>
+									   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>ëª¨ë‘ ë™ì˜</strong></label>
 									</div>
 								</div>
 							</div>
 							
 						</div>
 					</div>
-					<!-- ¾à°ü ³¡ -->
+					<!-- ì•½ê´€ ë -->
 				
 		          	
 		          	<div class="col-md-12"><br/><hr/><br/></div>
 		          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>±ÛÁ¦¸ñ</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
-		                	<input type="text" class="form-control" name="postTitle" value="" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+		                	<label for="postTitle"><strong>ê¸€ì œëª©</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<input type="text" class="form-control" name="postTitle" value="" placeholder="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 		                </div>
 	                </div>
 		          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="phone"><strong>¿¬¶ôÃ³</strong>&nbsp;&nbsp;<span name="phone">¿¬¶ôÃ³°¡ ´Ù¸¦ °æ¿ì È¸¿øÁ¤º¸¸¦ ¼öÁ¤ÇØÁÖ¼¼¿ä.</span></label>
+		                	<label for="phone"><strong>ì—°ë½ì²˜</strong>&nbsp;&nbsp;<span name="phone">ì—°ë½ì²˜ê°€ ë‹¤ë¥¼ ê²½ìš° íšŒì›ì •ë³´ë¥¼ ìˆ˜ì •í•´ì£¼ì„¸ìš”.</span></label>
 		                	<input type="text" class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly >
 		                </div>
 	                </div>
 	
 	                <div class="col-md-12"><br/></div>
 		                
-	                <!-- Ã·ºÎ ¹öÆ° -->
+	                <!-- ì²¨ë¶€ ë²„íŠ¼ -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
 			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
-			               		<strong>ÀÌ¹ÌÁö µî·Ï</strong>&nbsp;&nbsp;¸Ç¾Õ ÀÌ¹ÌÁö´Â ´ëÇ¥ÀÌ¹ÌÁöÀÔ´Ï´Ù. (ÃÖ´ë 5Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.)
+			               		<strong>ì´ë¯¸ì§€ ë“±ë¡</strong>&nbsp;&nbsp;ë§¨ì• ì´ë¯¸ì§€ëŠ” ëŒ€í‘œì´ë¯¸ì§€ì…ë‹ˆë‹¤. (ìµœëŒ€ 5ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.)
 			                </label></span>
-			                <input id="uploadInputBox" style="display: none" type="file" value="µî·Ï" name="filedata"  />
+			                <input id="uploadInputBox" style="display: none" type="file" value="ë“±ë¡" name="filedata"  />
 			            </div>
 		            </div>
 		            
 		           	<br/>
 			            
-		            <!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+		            <!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
 		            <div class="col-md-12">
 			            <div class="form-group">
 			           	 <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
@@ -151,35 +154,35 @@
 		                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-		                	<label for="dogBreed"><strong>°ßÁ¾</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
-		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="ÀÌ¹ÌÁö µî·Ï ½Ã ÀÚµ¿À¸·Î ÀÔ·ÂµË´Ï´Ù.">
+		                	<label for="dogBreed"><strong>ê²¬ì¢…</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
+		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="ì´ë¯¸ì§€ ë“±ë¡ ì‹œ ìë™ìœ¼ë¡œ ì…ë ¥ë©ë‹ˆë‹¤.">
 		                </div>
 	                </div>
 		                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for=""><strong>Å©±â</strong></label>
+	                		<label for=""><strong>í¬ê¸°</strong></label>
 						      	<select class="form-control" name="dogSize" id="dogSize">
-								  	<option value="¼ÒÇü°ß" >¼ÒÇü°ß</option>
-									<option value="ÁßÇü°ß" >ÁßÇü°ß</option>
-									<option value="´ëÇü°ß" >´ëÇü°ß</option>
+								  	<option value="ì†Œí˜•ê²¬" >ì†Œí˜•ê²¬</option>
+									<option value="ì¤‘í˜•ê²¬" >ì¤‘í˜•ê²¬</option>
+									<option value="ëŒ€í˜•ê²¬" >ëŒ€í˜•ê²¬</option>
 								</select>
 	               		</div>
 	            	</div>
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogWeight"><strong>Ã¼Áß</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
-	                  		<input type="number" min="0" class="form-control" name="dogWeight"  value="" placeholder="°­¾ÆÁö Ã¼ÁßÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+	                		<label for="dogWeight"><strong>ì²´ì¤‘</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
+	                  		<input type="number" min="0" class="form-control" name="dogWeight"  value="" placeholder="ê°•ì•„ì§€ ì²´ì¤‘ì„ ì…ë ¥í•˜ì„¸ìš”.">
 	               		</div>
 	              	</div>
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogGender"><strong>¼ºº°</strong></label>
+	                		<label for="dogGender"><strong>ì„±ë³„</strong></label>
 						      	<select class="form-control" name="dogGender" id="dogGender">
-								  	<option value="³²¾Æ" >³²¾Æ</option>
-									<option value="¿©¾Æ" >¿©¾Æ</option>
+								  	<option value="ë‚¨ì•„" >ë‚¨ì•„</option>
+									<option value="ì—¬ì•„" >ì—¬ì•„</option>
 								</select>
 	               		</div>
 	              	</div>
@@ -187,41 +190,44 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogPay"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">Ã¥ÀÓºñ</c:if>
-	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">»ç·Êºñ</c:if> --%>
-	                		</strong>&nbsp;&nbsp;<span name="dogPay">¿øÇÏÁö ¾ÊÀ» °æ¿ì 0¿øÀ» ÀÔ·ÂÇÏ¼¼¿ä.</span></label>
-	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="ºñ¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+		                		<c:if test="${param.boardCode eq 'AD' }">ì±…ì„ë¹„</c:if>
+	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">ì‚¬ë¡€ë¹„</c:if> --%>
+	                		</strong>&nbsp;<span name="dogPay">ì›í•˜ì§€ ì•Šì„ ê²½ìš° 0ì›ì„ ì…ë ¥í•˜ì„¸ìš”.</span></label>
+	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="ë¹„ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 	               		</div>
 	              	</div>
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate"><strong>
-	                			<c:if test="${param.boardCode eq 'AD' }">¹ß°ßÀÏÀÚ</c:if>
-	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">½ÇÁ¾ÀÏÀÚ</c:if> --%>
+	                		<label for="dogDate" id="dogDateLabel"><strong>
+	                			<c:if test="${param.boardCode eq 'AD' }">ë°œê²¬ì¼ì</c:if>
+	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">ì‹¤ì¢…ì¼ì</c:if> --%>
 	                		</strong></label>
-	                  		<input type="date" class="form-control" name="dogDate" value="" >
-	               		</div>
-	              	</div>
+<!-- 	                		<img src="/resources/file/others/calendar.png" alt="logo" id="calIcon" height="20px" width="20px"> -->
+<!-- 	                  		<div class="col-md-12" style="padding-right: 0px;padding-left: 0px;margin-right: 0px;"> -->
+	                  		<input type="text" class="form-control" name="dogDate" value="" readonly>
+	                  	</div>
+	               	</div>
+	              	
 	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogStatus"><strong>»óÅÂ</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
-	                  		<input type="text" class="form-control" name="dogStatus" value="" placeholder="°­¾ÆÁö »óÅÂ¸¦ ¼³¸íÇØÁÖ¼¼¿ä.">
+	                		<label for="dogStatus"><strong>ìƒíƒœ</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
+	                  		<input type="text" class="form-control" name="dogStatus" value="" placeholder="ê°•ì•„ì§€ ìƒíƒœë¥¼ ì„¤ëª…í•´ì£¼ì„¸ìš”.">
 	               		</div>
 	               	</div>
 	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogPersonality"><strong>¼º°İ</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
-	                  		<input type="text" class="form-control" name="dogPersonality" value="" placeholder="°­¾ÆÁö ¼º°İÀ» ¼³¸íÇØÁÖ¼¼¿ä.">
+	                		<label for="dogPersonality"><strong>ì„±ê²©</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
+	                  		<input type="text" class="form-control" name="dogPersonality" value="" placeholder="ê°•ì•„ì§€ ì„±ê²©ì„ ì„¤ëª…í•´ì£¼ì„¸ìš”.">
 	               		</div>
 	              	</div>
 	               		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogChar"><strong>Æ¯Â¡</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
-	                  		<input type="text" class="form-control" name="dogChar" value="" placeholder="°­¾ÆÁö Æ¯Â¡À»  ¼³¸íÇØÁÖ¼¼¿ä.">
+	                		<label for="dogChar"><strong>íŠ¹ì§•</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
+	                  		<input type="text" class="form-control" name="dogChar" value="" placeholder="ê°•ì•„ì§€ íŠ¹ì§•ì„  ì„¤ëª…í•´ì£¼ì„¸ìš”.">
 	               		</div>
 	               	</div>
 	               		
@@ -229,10 +235,10 @@
 		            <br/>
 	               		<label><strong>
 		               		<c:if test="${param.boardCode eq 'AD' }">
-		               			¡Ø Áöµµ¸¦ Å¬¸¯ÇÏ¸é ¸¶Ä¿°¡ »ı¼ºµÇ¸ç, ¿ìÅ¬¸¯ÇÒ °æ¿ì ¸¶Ä¿°¡ ¸ğµÎ »èÁ¦µË´Ï´Ù. <br/>Æ¯Á¤ ¸¶Ä¿¸¦ ¿ìÅ¬¸¯ÇÒ °æ¿ì ¿ìÅ¬¸¯ÇÑ ¸¶Ä¿¸¸ »èÁ¦µË´Ï´Ù.
+		               			â€» ì§€ë„ë¥¼ í´ë¦­í•˜ë©´ ë§ˆì»¤ê°€ ìƒì„±ë˜ë©°, ìš°í´ë¦­í•  ê²½ìš° ë§ˆì»¤ê°€ ëª¨ë‘ ì‚­ì œë©ë‹ˆë‹¤. <br/>íŠ¹ì • ë§ˆì»¤ë¥¼ ìš°í´ë¦­í•  ê²½ìš° ìš°í´ë¦­í•œ ë§ˆì»¤ë§Œ ì‚­ì œë©ë‹ˆë‹¤.
 		               		</c:if>
 	<%-- 	               		<c:if test="${param.boardCode eq 'MS' }"> --%>
-	<!-- 	               			Áöµµ¸¦ Å¬¸¯ÇÏ¸é ¸¶Ä¿°¡ »ı¼ºµÇ¸ç, Áöµµ¸¦ ¿ìÅ¬¸¯ÇÏ°Å³ª ¸¶Ä¿¸¦ ¿ìÅ¬¸¯ÇÑ °æ¿ì ¸¶Ä¿°¡ »èÁ¦µË´Ï´Ù.  -->
+	<!-- 	               			ì§€ë„ë¥¼ í´ë¦­í•˜ë©´ ë§ˆì»¤ê°€ ìƒì„±ë˜ë©°, ì§€ë„ë¥¼ ìš°í´ë¦­í•˜ê±°ë‚˜ ë§ˆì»¤ë¥¼ ìš°í´ë¦­í•œ ê²½ìš° ë§ˆì»¤ê°€ ì‚­ì œë©ë‹ˆë‹¤.  -->
 	<%-- 	               		</c:if> --%>
 	               		</strong></label>
 	               	</div>
@@ -240,10 +246,10 @@
 	              	<c:if test="${param.boardCode eq 'AD' }">
 		            	<div class="col-md-12">
 		              		<div class="form-group">
-		                		<label for="adoptArea"><strong>ºĞ¾ç°¡´ÉÁö¿ª</strong> &nbsp;(3°÷±îÁö ÁöÁ¤°¡´ÉÇÏ¸ç, Ã³À½ ÁöÁ¤ÇÑ Áö¿ªÀÌ ¸®½ºÆ®¿¡ Ç¥½ÃµË´Ï´Ù.)</label>
+		                		<label for="adoptArea"><strong>ë¶„ì–‘ê°€ëŠ¥ì§€ì—­</strong> &nbsp;(3ê³³ê¹Œì§€ ì§€ì •ê°€ëŠ¥í•˜ë©°, ì²˜ìŒ ì§€ì •í•œ ì§€ì—­ì´ ë¦¬ìŠ¤íŠ¸ì— í‘œì‹œë©ë‹ˆë‹¤.)</label>
 		                		<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
 		                  		<input type="hidden" class="form-control" id="adoptArea" name="adoptArea" >
-		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" placeholder="¸¶Ä¿ À§Ä¡°¡ ÀÔ·ÂµË´Ï´Ù." readonly="readonly">
+		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" placeholder="ë§ˆì»¤ ìœ„ì¹˜ê°€ ì…ë ¥ë©ë‹ˆë‹¤." readonly="readonly">
 		               		</div>
 	               		</div>
 	              	</c:if>
@@ -251,72 +257,72 @@
 		            <div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="location"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">¹ß°ßÀ§Ä¡</c:if>
-	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">½ÇÁ¾À§Ä¡</c:if> --%>
+		                		<c:if test="${param.boardCode eq 'AD' }">ë°œê²¬ìœ„ì¹˜</c:if>
+	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">ì‹¤ì¢…ìœ„ì¹˜</c:if> --%>
 	                		</strong></label>
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location">
-	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" placeholder="¸¶Ä¿ À§Ä¡°¡ ÀÔ·ÂµË´Ï´Ù." readonly>
+	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" placeholder="ë§ˆì»¤ ìœ„ì¹˜ê°€ ì…ë ¥ë©ë‹ˆë‹¤." readonly>
 	               		</div>
 	              	</div>
 	               		
 	               		
 	               	<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>±Û³»¿ë</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
-		                	<textarea  class="form-control"  name="postContent"  rows="5" value="dd"  placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä."></textarea>
+		                	<label for="postContent"><strong>ê¸€ë‚´ìš©</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
+		                	<textarea  class="form-control"  name="postContent"  rows="5" value="dd"  placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."></textarea>
 		                </div>
 	                </div>
 	               		
 	              	<div class="w-100"></div>
 		            <div class="w-100"></div>
 	              	<div class="w-100"></div>
-                
+                </div>
 	         	</div>
 	         </form>
 	         <!-- END -->
 
-	         <div class="row mt-5 pt-3 d-flex">
-	          	<div class="col-md-12">
+	         <div class="col-xl-8 row mt-5 pt-3 d-flex">
+	          	<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
 	          	
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">µî·Ï</button></p>
+					<p><button class="btn btn-default py-3 px-4 col-md-12">ë“±ë¡</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">
 							<div class="radio" align="right">
-								<p><a href="#" ><font color="gray">Ãë¼Ò</font></a></p>
+								<p><a href="#" ><font color="gray">ì·¨ì†Œ</font></a></p>
 							</div>
 						</div>
 					</div>
-					
+					<br/><br/>
 	          	</div>
 	         </div>
 	          
 	          
- <!-- 	¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á       dialog       ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
+ <!-- 	â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–        dialog       â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
  
  
-			<div id="dialog-terms" title="">
-			  <p align="center"><br/>¾à°ü¿¡ ¸ğµÎ µ¿ÀÇÇØ¾ß µî·ÏÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
-			</div>  
+<!-- 			<div id="dialog-terms" title=""> -->
+<!-- 			  <p align="center"><br/>ì•½ê´€ì— ëª¨ë‘ ë™ì˜í•´ì•¼ ë“±ë¡í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p> -->
+<!-- 			</div>   -->
 			
-			<div id="dialog-img" title="">
-			  <p align="center"><br/>ÀÌ¹ÌÁö¸¦ µî·ÏÇØÁÖ¼¼¿ä.</p>
-			</div>        
+<!-- 			<div id="dialog-img" title=""> -->
+<!-- 			  <p align="center"><br/>ì´ë¯¸ì§€ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”.</p> -->
+<!-- 			</div>         -->
 
-			<div id="dialog-area" title="">
-			  <p align="center"><br/>ºĞ¾ç°¡´ÉÁö¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.</p>
-			</div>       
+<!-- 			<div id="dialog-area" title=""> -->
+<!-- 			  <p align="center"><br/>ë¶„ì–‘ê°€ëŠ¥ì§€ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.</p> -->
+<!-- 			</div>        -->
 			
-			<div id="dialog-location" title="">
-			  <p align="center"><br/>
-			  		<c:if test="${param.boardCode eq 'AD' }">¹ß°ßÀ§Ä¡¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</c:if>
-			  		<c:if test="${param.boardCode eq 'MS' }">½ÇÁ¾À§Ä¡¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</c:if>
-			  </p>
-			</div>   
+<!-- 			<div id="dialog-location" title=""> -->
+<!-- 			  <p align="center"><br/> -->
+<%-- 			  		<c:if test="${param.boardCode eq 'AD' }">ë°œê²¬ìœ„ì¹˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</c:if> --%>
+<%-- 			  		<c:if test="${param.boardCode eq 'MS' }">ì‹¤ì¢…ìœ„ì¹˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</c:if> --%>
+<!-- 			  </p> -->
+<!-- 			</div>    -->
 
        
-<!-- 	¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á   dialog  ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->      
+<!-- 	â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–    dialog  â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->      
 	          
 	          
           </div> <!-- .col-md-8 -->
@@ -333,29 +339,16 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   
-  <!-- ÅÛÇÃ¸´ -->
-  <script src="/resources/prodmenu/js/jquery.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/resources/prodmenu/js/popper.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="/resources/prodmenu/js/aos.js"></script>
-  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="/resources/prodmenu/js/main.js"></script>
-  
+<!--   <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="/resources/events.js"></script>
+<!--   <script type="text/javascript" src="/resources/events.js"></script> -->
 <!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script><script type="text/javascript" src="js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script>
 
  	  var mapArea;
@@ -390,7 +383,7 @@
 			    	}
 			    });
     	  }
-	  ////////////////////        À§: ºĞ¾ç°¡´ÉÁö¿ª               //      ¾Æ·¡: ºĞ¾ç|½ÇÁ¾À§Ä¡          ////////////////////////////////////////
+	  ////////////////////        ìœ„: ë¶„ì–‘ê°€ëŠ¥ì§€ì—­               //      ì•„ë˜: ë¶„ì–‘|ì‹¤ì¢…ìœ„ì¹˜          ////////////////////////////////////////
 	  
 	      map = new google.maps.Map(document.getElementById('map'), {
 	        	zoom: 13,
@@ -436,21 +429,21 @@
 		    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 		    	         success: function(data){
 		    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
-		    	           			if( markTest.indexOf('Æ¯º°') != -1  ){
-		    	           				markTest = markTest.replace('Æ¯º°' ,   '');
+		    	           			if( markTest.indexOf('íŠ¹ë³„') != -1  ){
+		    	           				markTest = markTest.replace('íŠ¹ë³„' ,   '');
 		    	           			}
-		    	           			if( markTest.indexOf('±¤¿ª') != -1  ){
-		    	           				markTest = markTest.replace('±¤¿ª' ,   '');
+		    	           			if( markTest.indexOf('ê´‘ì—­') != -1  ){
+		    	           				markTest = markTest.replace('ê´‘ì—­' ,   '');
 		    	           			}
-		    	           			if( markTest.indexOf('ÀÚÄ¡') != -1  ){
-		    	           				markTest = markTest.replace('ÀÚÄ¡' ,   '');
+		    	           			if( markTest.indexOf('ìì¹˜') != -1  ){
+		    	           				markTest = markTest.replace('ìì¹˜' ,   '');
 		    	           			}
 		    	          			$("#areaKr").val($("#areaKr").val()+markTest);
 		    	         }
 		    	 	});
 
 	  	        }else{
-// 	  	        	alert("3°³±îÁö ÁöÁ¤ °¡´ÉÇÔ dialog Ãß°¡");
+// 	  	        	alert("3ê°œê¹Œì§€ ì§€ì • ê°€ëŠ¥í•¨ dialog ì¶”ê°€");
 	  	        }
 	    		 
 
@@ -477,14 +470,14 @@
 	  		    	            success: function(data){
 // 	  		   	               		alert(JSON.stringify(data));
 	  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
-	  		    	                if( markTest.indexOf('Æ¯º°') != -1  ){
-		    	           				markTest = markTest.replace('Æ¯º°' ,   '');
+	  		    	                if( markTest.indexOf('íŠ¹ë³„') != -1  ){
+		    	           				markTest = markTest.replace('íŠ¹ë³„' ,   '');
 		    	           			}
-		    	           			if( markTest.indexOf('±¤¿ª') != -1  ){
-		    	           				markTest = markTest.replace('±¤¿ª' ,   '');
+		    	           			if( markTest.indexOf('ê´‘ì—­') != -1  ){
+		    	           				markTest = markTest.replace('ê´‘ì—­' ,   '');
 		    	           			}
-		    	           			if( markTest.indexOf('ÀÚÄ¡') != -1  ){
-		    	           				markTest = markTest.replace('ÀÚÄ¡' ,   '');
+		    	           			if( markTest.indexOf('ìì¹˜') != -1  ){
+		    	           				markTest = markTest.replace('ìì¹˜' ,   '');
 		    	           			}
 	  		    	       			$("#areaKr").val(markTest);
 	  		    	            }
@@ -523,19 +516,19 @@
 		           });
 		        }
 		        
-		        // ¿ªÁö¿ÀÄÚµù //
+		        // ì—­ì§€ì˜¤ì½”ë”© //
 		        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 		            success: function(data){
 // 		                $('#locationKr').val(JSON.stringify(data));
 						var locaKrkr = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
-		                if( locaKrkr.indexOf('Æ¯º°') != -1  ){
-		                	locaKrkr = locaKrkr.replace('Æ¯º°' ,   '');
+		                if( locaKrkr.indexOf('íŠ¹ë³„') != -1  ){
+		                	locaKrkr = locaKrkr.replace('íŠ¹ë³„' ,   '');
 	           			}
-	           			if( locaKrkr.indexOf('±¤¿ª') != -1  ){
-	           				locaKrkr = locaKrkr.replace('±¤¿ª' ,   '');
+	           			if( locaKrkr.indexOf('ê´‘ì—­') != -1  ){
+	           				locaKrkr = locaKrkr.replace('ê´‘ì—­' ,   '');
 	           			}
-	           			if( locaKrkr.indexOf('ÀÚÄ¡') != -1  ){
-	           				locaKrkr = locaKrkr.replace('ÀÚÄ¡' ,   '');
+	           			if( locaKrkr.indexOf('ìì¹˜') != -1  ){
+	           				locaKrkr = locaKrkr.replace('ìì¹˜' ,   '');
 	           			}
 		                $('#locationKr').val( locaKrkr );
 		            }
@@ -555,28 +548,28 @@
 	        markers = [];
       }
       
-     // ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á        ¡è map         ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+     // â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–         â†‘ map         â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
      
      
        
 
-	  //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	  //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	  function fnAddFile(fileNameArray) {
 	  	   $("#multiFile").val(fileNameArray)    
 	  }   
 
-	  //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	  //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	  //ÀÓÀÇÀÇ file object¿µ¿ª
+	  //ì„ì˜ì˜ file objectì˜ì—­
 	 var files = {};
 	 var previewIndex = 0;
 	 var fileNameArray = new Array();
 	 
-	 // image preview ±â´É ±¸Çö
+	 // image preview ê¸°ëŠ¥ êµ¬í˜„
 	 // input = file object[]
 	 function addPreview(input) {
 	     if (input[0].files) {
-	         //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	         //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	         for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 	
 	            var file = input[0].files[fileIndex];
@@ -591,24 +584,24 @@
 	
 	            var reader = new FileReader();
 	            reader.onload = function(img) {
-	                 //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                 //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                 //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                 //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                 
 	                 var imgNum = previewIndex++;
 	                 
-	                //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                 if(Object.keys(files).length>=5){
-	            		alert("ÀÌ¹ÌÁö´Â 5Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	            		alert("ì´ë¯¸ì§€ëŠ” 5ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                    delete files[imgNum];
 	                 }else{
-	          		 // 8Àå ÀÌÇÏ 
+	          		 // 8ì¥ ì´í•˜ 
 	                	$("#preview").append(
 	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<a href=\"#\" value=\""
+	                                         + "<span value=\""
 	                                         + imgNum
 	                                         + "\" onclick=\"deletePreview(this)\">"
-                                             + "»èÁ¦" + "</a>" + "</div> ");
+                                             + "ì‚­ì œ" + "</span>" + "</div> ");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -646,16 +639,16 @@
                           data: JSON.stringify(request),
                           processData: false,
                           success: function(data){
-                          	console.log("¸ğµÎ È®ÀÎ : "+JSON.stringify(data));
+                          	console.log("ëª¨ë‘ í™•ì¸ : "+JSON.stringify(data));
                           	
 	                          	var test = data.responses[0].webDetection.bestGuessLabels[0];
 	                          	var breed = test.label;
-	                          	console.log("°ßÁ¾ È®ÀÎ : "+breed);
+	                          	console.log("ê²¬ì¢… í™•ì¸ : "+breed);
 	                       		fncBreed( breed );
                           },
                           error: function (data, textStatus, errorThrown) {
-	                            console.log('ºñÀü error: ' + JSON.stringify(data));
-	                            fncBreed( '¸ğ¸§' );
+	                            console.log('ë¹„ì „ error: ' + JSON.stringify(data));
+	                            fncBreed( 'ëª¨ë¦„' );
                           }
                         })
 	                	
@@ -665,13 +658,13 @@
 	             reader.readAsDataURL(file);
 	         }
 	     } else
-	         alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	         alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	 }
 	 
 
 	 
 
-	 //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	 //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	 function deletePreview(obj) {
 	     var imgNum = obj.attributes['value'].value;
 	     delete files[imgNum];
@@ -681,14 +674,14 @@
 	     resizeHeight();
 	 }
 
-	 //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	 //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	 function validation(fileName) {
 	     fileName = fileName + "";
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
 	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg') )) {
-	         alert('jpg, gif, png, jpeg È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	         alert('jpg, gif, png, jpeg í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	         return true;
 	     } else {
 	         return false;
@@ -697,70 +690,70 @@
 	 
 
 	$(document).ready(function() {
-	      //============= »çÁø¹Ì¸®º¸±â =============
+	      //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
 		$('#attach input[type=file]').change(function() {
-			addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+			addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
 		});
 	});
 	
-	// ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á   ¡è ÆÄÀÏ¾÷·Îµå      ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–    â†‘ íŒŒì¼ì—…ë¡œë“œ      â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 
 
 	function fncBreed(breed) {
-		if ( breed.toLowerCase().indexOf( 'bichon' ) != -1 || breed.toLowerCase().indexOf( 'ºñ¼õ' ) != -1  ) {
-			breed = 'ºñ¼õ';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'pomeranian' ) != -1 || breed.toLowerCase().indexOf( 'Æ÷¸Ş' ) != -1 ) {
-			breed = 'Æ÷¸Ş¶ó´Ï¾È';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'bull' ) != -1 || breed.toLowerCase().indexOf( 'ºÒµ¶' ) != -1) {
-			breed = 'ºÒµ¶';
-			$('select[name=dogSize]').val('ÁßÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'chihuahua' ) != -1 || breed.toLowerCase().indexOf( 'Ä¡¿Í¿Í' ) != -1  ) {
-			breed = 'Ä¡¿Í¿Í';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 || breed.toLowerCase().indexOf( '¸»Æ¼Áî' ) != -1 ) {
-			breed = '¸»Æ¼Áî';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( 'poedel' ) != -1 || breed.toLowerCase().indexOf( 'Çªµé' ) != -1 ) {
-			breed = 'Çªµé';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 || breed.toLowerCase().indexOf( '¸®Æ®¸®¹ö' ) != -1 ) {
-			breed = '¸®Æ®¸®¹ö';
-			$('select[name=dogSize]').val('´ëÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'jindo' ) != -1 || breed.toLowerCase().indexOf( 'Áøµ¾°³' ) != -1 ) {
-			breed = 'Áøµ¾°³';
-			$('select[name=dogSize]').val('ÁßÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'welsh' ) != -1 || breed.toLowerCase().indexOf( 'corgi' ) != -1 || breed.toLowerCase().indexOf( 'À£½Ã' ) != -1 ) {
-			breed = 'À£½ÃÄÚ±â';
-			$('select[name=dogSize]').val('ÁßÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'chow' ) != -1 || breed.toLowerCase().indexOf( 'Â÷¿ì' ) != -1 ) {
-			breed = 'Â÷¿ìÂ÷¿ì';
-			$('select[name=dogSize]').val('´ëÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'dobermann') != -1 || breed.toLowerCase().indexOf( 'µµº£¸£¸¸' ) != -1 ) {
-			breed = 'µµº£¸£¸¸';
-			$('select[name=dogSize]').val('´ëÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'spaniel') != -1 || breed.toLowerCase().indexOf( '´Ï¿¤' ) != -1 || breed.toLowerCase().indexOf( '´Ï¾ó' ) != -1 ) {
-			breed = '½ºÆÄ´Ï¿¤';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'spitz') != -1 || breed.toLowerCase().indexOf( '½ºÇÇÃ÷' ) != -1 ) {
-			breed = '½ºÇÇÃ÷';
-			$('select[name=dogSize]').val('ÁßÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'husky' ) != -1 || breed.toLowerCase().indexOf( 'Çã½ºÅ°' ) != -1 ) {
-			breed = 'Çã½ºÅ°';
-			$('select[name=dogSize]').val('´ëÇü°ß').attr("selected","selected");
-		}else if ( breed.toLowerCase().indexOf( 'shih' ) != -1 || breed.toLowerCase().indexOf( '½ÃÃò' ) != -1 ) {
-			breed = '½ÃÃò';
-			$('select[name=dogSize]').val('¼ÒÇü°ß').attr("selected","selected");
+		if ( breed.toLowerCase().indexOf( 'bichon' ) != -1 || breed.toLowerCase().indexOf( 'ë¹„ìˆ‘' ) != -1  ) {
+			breed = 'ë¹„ìˆ‘';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'pomeranian' ) != -1 || breed.toLowerCase().indexOf( 'í¬ë©”' ) != -1 ) {
+			breed = 'í¬ë©”ë¼ë‹ˆì•ˆ';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'bull' ) != -1 || breed.toLowerCase().indexOf( 'ë¶ˆë…' ) != -1) {
+			breed = 'ë¶ˆë…';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'chihuahua' ) != -1 || breed.toLowerCase().indexOf( 'ì¹˜ì™€ì™€' ) != -1  ) {
+			breed = 'ì¹˜ì™€ì™€';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 || breed.toLowerCase().indexOf( 'ë§í‹°ì¦ˆ' ) != -1 ) {
+			breed = 'ë§í‹°ì¦ˆ';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( 'poedel' ) != -1 || breed.toLowerCase().indexOf( 'í‘¸ë“¤' ) != -1 ) {
+			breed = 'í‘¸ë“¤';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 || breed.toLowerCase().indexOf( 'ë¦¬íŠ¸ë¦¬ë²„' ) != -1 ) {
+			breed = 'ë¦¬íŠ¸ë¦¬ë²„';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'jindo' ) != -1 || breed.toLowerCase().indexOf( 'ì§„ë—ê°œ' ) != -1 ) {
+			breed = 'ì§„ë—ê°œ';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'welsh' ) != -1 || breed.toLowerCase().indexOf( 'corgi' ) != -1 || breed.toLowerCase().indexOf( 'ì›°ì‹œ' ) != -1 ) {
+			breed = 'ì›°ì‹œì½”ê¸°';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'chow' ) != -1 || breed.toLowerCase().indexOf( 'ì°¨ìš°' ) != -1 ) {
+			breed = 'ì°¨ìš°ì°¨ìš°';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'dobermann') != -1 || breed.toLowerCase().indexOf( 'ë„ë² ë¥´ë§Œ' ) != -1 ) {
+			breed = 'ë„ë² ë¥´ë§Œ';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'spaniel') != -1 || breed.toLowerCase().indexOf( 'ë‹ˆì—˜' ) != -1 || breed.toLowerCase().indexOf( 'ë‹ˆì–¼' ) != -1 ) {
+			breed = 'ìŠ¤íŒŒë‹ˆì—˜';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'spitz') != -1 || breed.toLowerCase().indexOf( 'ìŠ¤í”¼ì¸ ' ) != -1 ) {
+			breed = 'ìŠ¤í”¼ì¸ ';
+			$('select[name=dogSize]').val('ì¤‘í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'husky' ) != -1 || breed.toLowerCase().indexOf( 'í—ˆìŠ¤í‚¤' ) != -1 ) {
+			breed = 'í—ˆìŠ¤í‚¤';
+			$('select[name=dogSize]').val('ëŒ€í˜•ê²¬').attr("selected","selected");
+		}else if ( breed.toLowerCase().indexOf( 'shih' ) != -1 || breed.toLowerCase().indexOf( 'ì‹œì¸„' ) != -1 ) {
+			breed = 'ì‹œì¸„';
+			$('select[name=dogSize]').val('ì†Œí˜•ê²¬').attr("selected","selected");
 		}else{
-			breed = '¾Ë ¼ö ¾øÀ½';
+			breed = 'ì•Œ ìˆ˜ ì—†ìŒ';
 		}
 
 	    $( "#dogBreed" ).val(breed);
 	 }
 	
 	
-	//¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á      ¡è °ßÁ¾¹ø¿ª      ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+	//â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–       â†‘ ê²¬ì¢…ë²ˆì—­      â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 	
 	$( 'input[name=termsAll]').on('click', function(){
 	    if (  $("input[name=termsAll]:checkbox").prop("checked")  ) {
@@ -778,78 +771,78 @@
 		}
 	});
 	
-	//¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á     ¡è      check box        ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+	//â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–      â†‘      check box        â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-	$( function() {
-	    $( "#dialog-terms" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ´İ±â: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-terms" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ë‹«ê¸°: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
-	$( function() {
-	    $( "#dialog-img" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ´İ±â: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-img" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ë‹«ê¸°: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
-	$( function() {
-	    $( "#dialog-area" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ´İ±â: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-area" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ë‹«ê¸°: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
-	$( function() {
-	    $( "#dialog-location" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ´İ±â: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-location" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ë‹«ê¸°: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
 
 	
-	//¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á     ¡è  dialog      ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á	
+	//â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–      â†‘  dialog      â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
-		if($("input[name=postTitle]").val().length > 10 ){
-			$("span[name=postTitle]").text('10ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+		if($("input[name=postTitle]").val().length > 20 ){
+			$("span[name=postTitle]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -859,7 +852,7 @@
 		$( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
 		
 		if($("input[name=phone]").val().length > 13 ){
-			$("span[name=phone]").text('¿¬¶ôÃ³¸¦ Á¤È®È÷ ÀÔ·ÂÇÏ¼¼¿ä.');
+			$("span[name=phone]").text('ì—°ë½ì²˜ë¥¼ ì •í™•íˆ ì…ë ¥í•˜ì„¸ìš”.');
 		}else{
 			$("span[name=phone]").text('');
 		}
@@ -867,7 +860,7 @@
 
 	$( "input[name=dogBreed]" ).keyup(function( ) {
 		if($("input[name=dogBreed]").val().length > 10 ){
-			$("span[name=dogBreed]").text('10ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogBreed]").text('10ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogBreed]").text('');
 		}
@@ -875,7 +868,7 @@
 
 	$( "input[name=dogWeight]" ).keyup(function( e ) {
 		if($("input[name=dogWeight]").val().length > 6 ){
-			$("span[name=dogWeight]").text('6ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogWeight]").text('6ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}
@@ -883,7 +876,7 @@
 
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		if($("input[name=dogPay]").val().length > 6 ){
-			$("span[name=dogPay]").text('100¸¸¿ø ÀÌ»óÀº ÀÔ·ÂÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.');
+			$("span[name=dogPay]").text('100ë§Œì› ì´ìƒì€ ì…ë ¥í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogPay]").text('');
 		}
@@ -891,7 +884,7 @@
 	
 	$( "input[name=dogStatus]" ).keyup(function( ) {
 		if($("input[name=dogStatus]").val().length > 20 ){
-			$("span[name=dogStatus]").text('20ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogStatus]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogStatus]").text('');
 		}
@@ -899,7 +892,7 @@
 	
 	$( "input[name=dogPersonality]" ).keyup(function( ) {
 		if($("input[name=dogPersonality]").val().length > 20 ){
-			$("span[name=dogPersonality]").text('20ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogPersonality]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogPersonality]").text('');
 		}
@@ -907,7 +900,7 @@
 
 	$( "input[name=dogChar]" ).keyup(function( ) {
 		if($("input[name=dogChar]").val().length > 20 ){
-			$("span[name=dogChar]").text('20ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=dogChar]").text('20ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=dogChar]").text('');
 		}
@@ -915,27 +908,41 @@
 	
 	$( "textarea[name=postContent]" ).keyup(function( ) {
 		if($("textarea[name=postContent]").val().length > 100 ){
-			$("span[name=postContent]").text('100ÀÚ±îÁö ÀÔ·ÂÇÒ ¼ö ÀÖ½À´Ï´Ù.');
+			$("span[name=postContent]").text('100ìê¹Œì§€ ì…ë ¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
 	});
 
-	//¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á      ¡è  ±ÛÀÚ¼öÃ¼Å©           ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+	//â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–       â†‘  ê¸€ììˆ˜ì²´í¬           â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 	
 	
-	// µî·Ï¹öÆ° ´©¸£°í
+	// ë“±ë¡ë²„íŠ¼ ëˆ„ë¥´ê³ 
 	function fncAddAdopt(){
 		
 		  $( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
 		
 		  if( $("input:checkbox:checked").length != 3){
-			  $('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-terms').dialog("open");
+			  swal({
+		           text: "ì•½ê´€ì— ëª¨ë‘ ë™ì˜í•´ì•¼ ë“±ë¡í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=terms]:checkbox").prop('checked', false).focus();
+		           }
+		      });
+// 			  $('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-terms').dialog("open");
 // 			  $("input[name=terms]:checkbox").prop('checked', false).focus();
 			  return;
 		  }
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >10){
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
@@ -948,8 +955,21 @@
 			  return;
 		  }
 		  if( $(".preview-box").length == 0 ){
-			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-img').dialog( "open" );
+			  swal({
+		           text: "ì´ë¯¸ì§€ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
+// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-img').dialog( "open" );
 			  return;
 		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 || $("input[name=dogWeight]").val() < 1 ){
@@ -978,14 +998,42 @@
 		  }
 		  if( boardCode == 'AD' ){
 			  if( $("input[name=adoptArea]").val().trim() == ''){
-				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				  $('#dialog-area').dialog( "open" );
+				  swal({
+			           text: "ë¶„ì–‘ê°€ëŠ¥ì§€ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "ë‹«ê¸°"
+								 }
+					   },
+					   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			        	   jQuery($("#areaFocus"))[0].scrollIntoView(true);
+			           }
+			      });
+// 				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
 		  if( $("input[name=location]").val().trim() == ''){
-			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-location').dialog( "open" );
+			  swal({
+		           text: "ë°œê²¬ìœ„ì¹˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ë‹«ê¸°"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
+		           }
+		      });
+// 			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -994,7 +1042,7 @@
 		  }
 
 		  
-	    //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+	    //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 	    	
 	   	  var file = $("#multiFile").val(); 
 		
@@ -1019,17 +1067,17 @@
 		            data : formData,
 		            success : function(result) {
 			                if (result === -1) {
-			                    alert('jpg, gif, png, jpeg È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-			                    // ÀÌÈÄ µ¿ÀÛ ...
+			                    alert('jpg, gif, png, jpeg í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+			                    // ì´í›„ ë™ì‘ ...
 			                } else if (result === -2) {
-			                    alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-			                    // ÀÌÈÄ µ¿ÀÛ ...
+			                    alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+			                    // ì´í›„ ë™ì‘ ...
 			                } else {
-			                    alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+			                    alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 			                }
 		            },
 					error: function(request, status, error){ 
-						console.log("ÀÌ¹ÌÁö code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+						console.log("ì´ë¯¸ì§€ code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
 			        }
 		        });
 	  	  });
@@ -1044,13 +1092,33 @@
     
     
     $(function() {
-			$( "button:contains('µî·Ï')" ).on("click" , function() {
+			$( "button:contains('ë“±ë¡')" ).on("click" , function() {
 				fncAddAdopt();
 			});
 			
-			$( "a:contains('Ãë¼Ò')" ).on("click" , function() {
+			$( "a:contains('ì·¨ì†Œ')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
+			
+			$( "input[name=dogDate]" ).datepicker({
+				showOn: "button",
+				buttonImage: "/resources/file/others/calendar.png",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				dateFormat: "yy-mm-dd",
+				maxDate: "+0d",
+				prevText: 'ì´ì „ ë‹¬',
+		        nextText: 'ë‹¤ìŒ ë‹¬',
+		        monthNames: ['1ì›”', '2ì›”', '3ì›”', '4ì›”', '5ì›”', '6ì›”', '7ì›”', '8ì›”', '9ì›”', '10ì›”', '11ì›”', '12ì›”'],
+		        monthNamesShort: ['1ì›”', '2ì›”', '3ì›”', '4ì›”', '5ì›”', '6ì›”', '7ì›”', '8ì›”', '9ì›”', '10ì›”', '11ì›”', '12ì›”'],
+		        dayNames: ['ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† '],
+		        dayNamesShort: ['ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† '],
+		        dayNamesMin: ['ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† '],
+		        showMonthAfterYear: true,
+		        yearSuffix: 'ë…„'
+			});
+			
+			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
       
       

@@ -1,6 +1,9 @@
 =\=\=\=\=\=\=
 eclipse.preferences.version=1
 encoding//SQL(Script)/protectedog.sql=EUC-KR
+encoding//WebContent/adopt/listMissing.jsp=UTF-8
+encoding//WebContent/apply/addApply.jsp=UTF-8
+encoding//WebContent/common/error.jsp=UTF-8
 encoding//WebContent/funding/addFund.jsp=UTF-8
 encoding//WebContent/funding/addFundView.jsp=UTF-8
 encoding//WebContent/funding/addReview.jsp=UTF-8

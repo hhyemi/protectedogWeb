@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 
-//==> ºÐ¾ç½ÅÃ»°ü¸® ¼­ºñ½º ±¸Çö
+//==> ë¶„ì–‘ì‹ ì²­ê´€ë¦¬ ì„œë¹„ìŠ¤ êµ¬í˜„
 @Service("applyServiceImpl")
 public class ApplyServiceImple implements ApplyService{
 	

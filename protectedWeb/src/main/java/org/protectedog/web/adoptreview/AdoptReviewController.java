@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-//==> ÆÇ¸Å°ü¸® Controller
+//==> ë¶„ì–‘ë¦¬ë·°ê´€ë¦¬ Controller
 @Controller
 @RequestMapping("/adoptReview/*")
 public class AdoptReviewController {
@@ -38,7 +38,7 @@ public class AdoptReviewController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	//setter Method ±¸Çö ¾ÊÀ½
+	//setter Method êµ¬í˜„ ì•ŠìŒ
 	
 //	@Resource(name = "uploadPath")
 //	private String uploadPath;
@@ -48,8 +48,6 @@ public class AdoptReviewController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	//==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -65,7 +63,7 @@ public class AdoptReviewController {
 
 		System.out.println("/adoptReview/addAdoptReview : GET");
 		
-		System.out.println("¼¼¼Çµé¾î¿Ô³ª "+session.getAttribute("user") );
+		System.out.println("ì„¸ì…˜ë“¤ì–´ì™”ë‚˜ "+session.getAttribute("user") );
 		if ( session.getAttribute("user") != null) {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
 			model.addAttribute("user", user);
@@ -86,7 +84,7 @@ public class AdoptReviewController {
 
 		//Business Logic
 //		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
-//		System.out.println("ÆÄÀÏÈ®ÀÎ : "+product.getFileName());
+//		System.out.println("íŒŒì¼í™•ì¸ : "+product.getFileName());
 		System.out.println("======================"+board);
 		
 		String thumnail;
@@ -95,13 +93,10 @@ public class AdoptReviewController {
 		board.setThumnail(thumnail);
 		
 
-//		String str = "¹Ù³ª³ª : 1000¿ø, »ç°ú : 2000¿ø, ¹è : 3000¿ø";
-//		String target = "»ç°ú";
-//		int target_num = str.indexOf("»ç°ú"); 
-//		String result; result = str.substring       (               str.indexOf("»ç°ú"),                    (   str.substring                 (          str.indexOf("»ç°ú")).indexOf("¿ø")+str.indexOf("»ç°ú")    )         );
-		
-		
-		
+//		String str = "ë°”ë‚˜ë‚˜ : 1000ì›, ì‚¬ê³¼ : 2000ì›, ë°° : 3000ì›";
+//		String target = "ì‚¬ê³¼";
+//		int target_num = str.indexOf("ì‚¬ê³¼"); 
+//		String result; result = str.substring       (               str.indexOf("ì‚¬ê³¼"),                    (   str.substring                 (          str.indexOf("ì‚¬ê³¼")).indexOf("ì›")+str.indexOf("ì‚¬ê³¼")    )         );
 
 		
 		boardService.addBoard(board);
@@ -113,13 +108,13 @@ public class AdoptReviewController {
 	
 	
 	
-	// board ±Û »ó¼¼Á¶È¸+Á¶È¸¼ö Áõ°¡
+	// board ê¸€ ìƒì„¸ì¡°íšŒ+ì¡°íšŒìˆ˜ ì¦ê°€
 	@RequestMapping( value="getAdoptReview", method=RequestMethod.GET)
 	public String getAdoptReview( @RequestParam("postNo") int postNo , Model model, HttpSession session ) throws Exception {
 		
 		System.out.println("/adoptReview/getAdoptReview : GET");
 		
-		System.out.println("¼¼¼Çµé¾î¿Ô³ª "+session.getAttribute("user") );
+		System.out.println("ì„¸ì…˜ë“¤ì–´ì™”ë‚˜ "+session.getAttribute("user") );
 		if ( session.getAttribute("user") != null) {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
 			model.addAttribute("user", user);
@@ -128,7 +123,7 @@ public class AdoptReviewController {
 		boardService.updateViewCount(boardService.getBoard(postNo));
 		Board board = boardService.getBoard(postNo);
 		
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("board", board);	
 	
 
@@ -144,7 +139,7 @@ public class AdoptReviewController {
 		System.out.println("/adoptReview/updateAdoptReview : GET");
 		//Business Logic
 		Board board = boardService.getBoard(postNo);
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("board", board);
 		System.out.println("============================================\n"+board);
 		
@@ -170,9 +165,9 @@ public class AdoptReviewController {
 //		}
 		
 		boardService.updateBoard(board);
-		System.out.println("¾÷µ¥ÀÌÆ®±îÁö´Â µÊ");
+		System.out.println("ì—…ë°ì´íŠ¸ê¹Œì§€ëŠ” ë¨");
 		board = boardService.getBoard(board.getPostNo());
-		System.out.println("°Ù±îÁö µÊ");
+		System.out.println("ê²Ÿê¹Œì§€ ë¨");
 		
 		model.addAttribute("board", board);
 		
@@ -182,7 +177,7 @@ public class AdoptReviewController {
 	
 	
 	
-	// ±Û »èÁ¦
+	// ê¸€ ì‚­ì œ
 	@RequestMapping( value="delAdoptReview" , method=RequestMethod.GET)
 	public String delAdoptReview(@RequestParam("postNo") int postNo ,
 									@ModelAttribute("board") Board board ) throws Exception{
@@ -209,18 +204,18 @@ public class AdoptReviewController {
 		}
 		
 		search.setPageSize(pageSize);
-		System.out.println("¡á¡á¡á¡á¡á °Ë»ö¾î È®ÀÎ : "+search.getSearchKeyword());
-		System.out.println("¡á¡á¡á¡á¡á È®ÀÎ : "+search);
+		System.out.println("â– â– â– â– â–  ê²€ìƒ‰ì–´ í™•ì¸ : "+search.getSearchKeyword());
+		System.out.println("â– â– â– â– â–  í™•ì¸ : "+search);
 		
-		// Business logic ¼öÇà
+		// Business logic ìˆ˜í–‰
 		Map<String , Object> map=boardService.listBoard(search, "AR", 0 );
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			
-		System.out.println("È®ÀÎ                                 :  "+map);
-		System.out.println("È®ÀÎ     222                            :  "+map.get("list"));
+		System.out.println("í™•ì¸                                 :  "+map);
+		System.out.println("í™•ì¸     222                            :  "+map.get("list"));
 		
-		// Model °ú View ¿¬°á
+		// Model ê³¼ View ì—°ê²°
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

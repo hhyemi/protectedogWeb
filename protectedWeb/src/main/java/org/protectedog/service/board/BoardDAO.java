@@ -7,7 +7,7 @@ import org.protectedog.common.Search;
 import org.protectedog.service.domain.Board;
 
 
-//==> °Ô½ÃÆÇ°ü¸®¿¡¼­ CRUD Ãß»óÈ­/Ä¸½¶È­ÇÑ DAO Interface Definition
+//==> ê²Œì‹œíŒê´€ë¦¬ì—ì„œ CRUD ì¶”ìƒí™”/ìº¡ìŠí™”í•œ DAO Interface Definition
 public interface BoardDAO {
 	
 	// INSERT
@@ -22,22 +22,22 @@ public interface BoardDAO {
 	// UPDATE
 	public void updateBoard(Board board) throws Exception ;
 	
-	// UPDATE Á¶È¸¼ö
+	// UPDATE ì¡°íšŒìˆ˜
 	public void updateViewCount(Board board) throws Exception ;
 	
-	// UPDATE ÃßÃµ¼ö
+	// UPDATE ì¶”ì²œìˆ˜
 	public void updateRecommendCount(Board board) throws Exception ;
 	
 	// DELETE
 	public void delBoard(Board board) throws Exception ;
 	
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼Row(totalCount)  return	
+	// ê²Œì‹œíŒ Page ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´Row(totalCount)  return	
 	public int getTotalCount(Map<String, Object> map) throws Exception ;
 	
 	// SELECT LIST RANKING TOP 5
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
 	
-	// ±Û ¸®½ºÆ® + ´ñ±Û °³¼ö Á¶È¸
+	// ê¸€ ë¦¬ìŠ¤íŠ¸ + ëŒ“ê¸€ ê°œìˆ˜ ì¡°íšŒ
 	public Map<String, Object> listBoardMoreCommentCount(Search search, String boardCode, int order) throws Exception;
 	
 }
