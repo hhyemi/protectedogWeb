@@ -32,26 +32,30 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     
     
 
-
+<jsp:include page="/layout/toolbar.jsp" />
 </head>
 
 <body> 
 
-<!--====================================================
-                         MAIN NAVBAR
-======================================================-->        
 
+
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">Regist</a></span>
+					</p>
+					<h1 class="mb-0 bread">회원가입</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 	
-    <header class="header">
-		<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-    </header>
-
-<!--====================================================
-                        PAGE CONTENT
-======================================================-->
 	<br/>
 	<br/>
-	<br/>
+	
     <div class="page-content d-flex align-items-stretch">
 
             <!--***** CONTENT *****-->     
@@ -63,13 +67,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                 <div class="col-md-6 login-card">
                     <div class="card form" id="form1">
                         <div class="card-header" align="center">
-                            <h3><i class="fa fa-user-circle"></i>회원가입</h3>
+                            <h3><i class="fa fa-user-circle"></i>추가정보</h3>
                         </div>
                         <br>
-                        <form class="addUsersForm" style="padding-left: 90px;">
+                        <form class="addUsersForm" name="formal" style="padding-left: 90px;">
 							<input type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
-							<input type="hidden" name="levels" value="브론즈">
-							<input type="hidden" name="levelPoint" value=100>                        
+							<input type="hidden" name="levelPoint" value=100>
+							<input type="hidden" id="authKeyReturn" value="">                     
                             <div class="row">
                                 <div class="col-md-10">
                                 
@@ -88,7 +92,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                     <div class="form-group">
                                         <label for="phone">휴대전화번호</label>
                                         <div>
-	                                        <div class="col-sm-4" style="float:left; padding-left:0">
+	                                        <div class="col-sm-3" style="float:left; padding-left:0">
 												<select class="form-control" name="phone1" id="phone1">
 												  	<option value="010" >010</option>
 													<option value="011" >011</option>
@@ -97,10 +101,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 													<option value="019" >019</option>
 												</select>
 	                                        </div>
-										    <div class="col-sm-4" style="float:left;">
+										    <div class="col-sm-3" style="float:left;">
 										      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="Enter Your">
 										    </div>
-										    <div class="col-sm-4" style="float:left; padding-right:0">
+										    <div class="col-sm-3" style="float:left; padding-right:0">
 										      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="Phone Number">
 										    </div>
 										    <input type="hidden" name="phone"/>
@@ -108,15 +112,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 										   		<input type="text" id="checkAuth"/>
 										    	<input type="button" id="authClick" value="전송"/>
 										    </div>
-								 		    <input type="button" id="authPhone" name="authPhone" value="인증하기">
+										    <div class="col-sm-3" style="float:left;">
+								 		    	<input type="button" id="authPhone" name="authPhone" value="인증하기">
+								 		    </div>
 									    </div>
                                     </div>
+                                    <br/>
+                                    <br/>
+                                    <br/>
 
                                     <div class="form-group">
                                         <label for="userAddr">자택주소</label>
                                         <div>
 											<div class="col-sm-6" style="float:left; padding-left: 0">
-												<input type="text" class="form-control"id="sample6_postcode" placeholder="Find Your Address" readonly="readonly">
+												<input type="text" class="form-control" id="sample6_postcode" placeholder="Find Your Address" readonly="readonly">
 											</div>
 			      
 											<div class="col-sm-6" style="float:left; padding-right: 0;">
@@ -129,10 +138,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                     <div class="form-group">
 										<label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
 										<div class="col-sm-12" style="padding: 0;">
-											<input type="text" class="form-control" id="userAddr" name="userAddr" placeholder="주소" readonly="readonly">
+											<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
 											<br>
 											<input type="text" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
 											<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+											<input type="hidden" name="userAddr" value="">
 										</div>
                                     </div>
                                     
@@ -157,7 +167,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							<br/>
 							<br/>
                             <button type="submit" id="submit" class="btn btn-general btn-blue mr-2">회원가입</button>
-                            <button type="submit" id="addition" class="btn btn-general btn-blue mr-2">추가정보입력</button>
                             <button type="reset" id="reset" class="btn btn-general btn-white">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button> 
                  	       <br/>
                  	       <br/>
@@ -198,6 +207,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 
 				$("input:hidden[name='phone']").val( value );
+				
+				if($("input:text[name='simpleAddress']").val != "" && $("input:text[name='detailAddress']").val() != "") {
+					var address=$("input[name='simpleAddress']").val() + " " + $("input[name='detailAddress']").val();
+				}
+				
+				$("input:hidden[name='userAddr']").val(address);
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersAdditional");
 				

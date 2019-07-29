@@ -30,7 +30,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="css/pages/register.css">
     
-
+		<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
 </head>
 
@@ -40,32 +40,40 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                          MAIN NAVBAR
 ======================================================-->        
 
-	
-    <header class="header">
-		<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-    </header>
 
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
+
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">Regist</a></span>
+					</p>
+					<h1 class="mb-0 bread">회원가입</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<br/>
 	<br/>
-	<br/>
+	
     <div class="page-content d-flex align-items-stretch">
-
-            <!--***** CONTENT *****-->     
-
-
                 <!--***** USER INFO *****-->
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-6 login-card">
                     <div class="card form" id="form1">
                         <div class="card-header" align="center">
-                            <h3><i class="fa fa-user-circle"></i>회원가입</h3>
+                            <h3><i class="fa fa-user-circle"></i>기본정보</h3>
                         </div>
                         <br>
-                        <form class="addUsersForm" style="padding-left: 90px;">
+                        <form class="addUsersForm" name="formal" style="padding-left: 90px;">
+                        <input type="hidden" name="kakao" value="${ kakao }">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
@@ -85,11 +93,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                     </div>  
                                     <div class="form-group">
                                         <label for="userName">회 원 명</label>
-                                        <input type="email" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter UserName">
+                                        <input type="text" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter UserName">
                                     </div>
                                     <div class="form-group">
                                         <label for="nickname">닉 네 임</label>
-                                        <input type="email" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" placeholder="Enter Nickname">
+                                        <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" placeholder="Enter Nickname">
                                         <span id="helpBlock2" class="help-block"></span>
                                     </div>
                                 </div>
@@ -134,7 +142,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
   
             </div> 
 
-    </div> 
     	<jsp:include page="/layout/footer.jsp"></jsp:include>
 
     <!--Global Javascript -->
@@ -154,11 +161,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		$(function() {
 			
 			$( "#submit" ).on("click" , function() {
-				var id=$("input[name='id']").val();
-				var pw=$("input[name='pw']").val();
-				var pw_confirm=$("input[name='pw2']").val();
-				var name=$("input[name='userName']").val();
+				var id=$("#id").val();
+				var pw=$("#pw").val();
+				var pw_confirm=$("#pw2").val();
+				var name=$("#userName").val();
+				var nickname=$("#nickname").val();
 				var check=$("input:checkbox[name='purpose[]']:checked");
+				alert(id+","+pw+","+pw_confirm+","+name+","+nickname);
+				alert()
 				
 				if(id == null || id.length <1){
 					alert("아이디는 반드시 입력하셔야 합니다.");
@@ -180,7 +190,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
 					return;
 				}
-				if(name == null || name.length <1){
+				if(userName == null || userName.length <1){
 					alert("이름은  반드시 입력하셔야 합니다.");
 					return;
 				}
@@ -258,32 +268,45 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		$(function() {
 			
 			$( "#addition" ).on("click" , function() {
-				var id=$("input[name='id']").val();
-				var pw=$("input[name='pw']").val();
-				var pw_confirm=$("input[name='pw2']").val();
-				var name=$("input[name='userName']").val();
-				
+				var id=$("#id").val();
+				var pw=$("#pw").val();
+				var pw_confirm=$("#pw2").val();
+				var name=$("#userName").val();
+				var nickname=$("#nickname").val();
+				var check=$("input:checkbox[name='purpose[]']:checked");
+// 				alert(id+","+pw+","+pw_confirm+","+name+","+nickname);
 				
 				if(id == null || id.length <1){
 					alert("아이디는 반드시 입력하셔야 합니다.");
+					return;
+				}
+				if(id.length < 8 || id.length > 12){
+					alert("아이디는 8자 이상 12자 이하로 입력하셔야 합니다.");
 					return;
 				}
 				if(pw == null || pw.length <1){
 					alert("패스워드는  반드시 입력하셔야 합니다.");
 					return;
 				}
+				if(pw.length < 8 || pw.length > 12){
+					alert("패스워드는 8자 이상 12자 이하로 입력하셔야 합니다.");
+					return;
+				}
 				if(pw_confirm == null || pw_confirm.length <1){
 					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
 					return;
 				}
-				if(name == null || name.length <1){
+				if(userName == null || userName.length <1){
 					alert("이름은  반드시 입력하셔야 합니다.");
 					return;
 				}
-				
 				if( pw != pw_confirm ) {				
 					alert("비밀번호 확인이 일치하지 않습니다.");
 					$("input:text[name='password2']").focus();
+					return;
+				}
+				if( check.length != 3 || check.length == 0){
+					alert("이용목적을 3개 체크해주세요");
 					return;
 				}
 				

@@ -21,6 +21,7 @@ public class User {
 	private String account;
 	private int birthDate;
 	private int levelPoint;
+	private int addPoint;
 	private String accessDate;
 	private String mileage;
 	private String gender;
@@ -145,7 +146,13 @@ public class User {
 		return levelPoint;
 	}
 	public void setLevelPoint(int levelPoint) {
-		this.levelPoint = levelPoint;
+		this.levelPoint = levelPoint+addPoint;
+	}
+	public int getAddPoint() {
+		return addPoint;
+	}
+	public void setAddPoint(int addPoint) {
+		this.addPoint = addPoint;
 	}
 	public String getAccessDate() {
 		return accessDate;
@@ -172,10 +179,22 @@ public class User {
 		this.role = role;
 	}
 	public String getLevels() {
+		if(levelPoint==0) {
+			levels="미인증회원";
+		}else if(levelPoint<1500) {
+			levels="브론즈";
+		}else if(levelPoint<5000) {
+			levels="실버";
+		}else if(levelPoint<10000) {
+			levels="골드";
+		}else if(levelPoint<20000) {
+			levels="플래티넘";
+		}else if(levelPoint>=20000){
+			levels="다이아몬드";
+		}else if(levelPoint<0) {
+			levels="블랙리스트";
+		}
 		return levels;
-	}
-	public void setLevels(String levels) {
-		this.levels = levels;
 	}
 	public String getPurpose1() {
 		return purpose1;
@@ -203,14 +222,15 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", kakao=" + kakao + ", naver=" + naver + ", google=" + google + ", facebook="
-				+ facebook + ", pw=" + pw + ", userName=" + userName + ", nickname=" + nickname + ", email=" + email
-				+ ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3 + ", userAddr=" + userAddr
-				+ ", account=" + account + ", birthDate=" + birthDate + ", levelPoint=" + levelPoint + ", userNo="
-				+ userNo + ", accessDate=" + accessDate + ", mileage=" + mileage + ", gender=" + gender + ", role="
-				+ role + ", levels=" + levels + ", purpose1=" + purpose1 + ", purpose2=" + purpose2 + ", purpose3="
-				+ purpose3 + ", profile=" + profile + "]";
+		return "User [userNo=" + userNo + ", id=" + id + ", kakao=" + kakao + ", naver=" + naver + ", google=" + google
+				+ ", facebook=" + facebook + ", pw=" + pw + ", userName=" + userName + ", nickname=" + nickname
+				+ ", email=" + email + ", phone=" + phone + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3="
+				+ phone3 + ", userAddr=" + userAddr + ", account=" + account + ", birthDate=" + birthDate
+				+ ", levelPoint=" + levelPoint + ", addPoint=" + addPoint + ", accessDate=" + accessDate + ", mileage="
+				+ mileage + ", gender=" + gender + ", role=" + role + ", levels=" + levels + ", purpose1=" + purpose1
+				+ ", purpose2=" + purpose2 + ", purpose3=" + purpose3 + ", profile=" + profile + "]";
 	}
+
 
 	
 }

@@ -61,7 +61,7 @@ public class UserController {
 		User user=userService.getKakao(map);
 		if(user==null) {
 			request.setAttribute("kakao", kakao);
-			return "forward:/users/addUsersBaseView.jsp";
+			return "forward:/users/addUsersBase.jsp";
 		}else {
 			session.setAttribute("user", user);
 			return "redirect:/";
@@ -81,7 +81,7 @@ public class UserController {
 		User user=userService.getGoogle(map);
 		if(user==null) {
 			request.setAttribute("google", google);
-			return "forward:/users/addUsersBaseView.jsp";
+			return "forward:/users/addUsersBase.jsp";
 		}else {
 			session.setAttribute("user", user);
 //			request.setAttribute("idToken", idToken);
@@ -101,7 +101,7 @@ public class UserController {
 		User user=userService.getNaver(map);
 		if(user==null) {
 			request.setAttribute("naver", naver);
-			return "forward:/users/addUsersBaseView.jsp";
+			return "forward:/users/addUsersBase.jsp";
 		}else {
 			session.setAttribute("user", user);
 			return "redirect:/";
@@ -118,7 +118,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="addUsersBase", method=RequestMethod.POST)
-	public String addUsersBase(@ModelAttribute("user") User user, @RequestParam("purpose[]") ArrayList<Object> purpose) throws Exception{
+	public String addUsersBase(@ModelAttribute("user") User user, @RequestParam("purpose[]") ArrayList<Object> purpose, 
+								@RequestParam("id") String id, HttpSession session) throws Exception{
 		
 		System.out.println("/users/addUsersBase : POST");
 		
@@ -132,15 +133,30 @@ public class UserController {
 			user.setPurpose3((String)purpose.get(2));
 		}
 		
+		String sessionId=((User)session.getAttribute("user")).getId();
+		if(sessionId.equals(user.getId())) {
+			session.setAttribute("user", user);
+		}
+		
 		userService.addUsersBase(user);
 		
-		return "redirect:/index.jsp";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="addUsersBase2", method=RequestMethod.POST)
-	public String addUsersBase2(@ModelAttribute("user") User user, HttpSession Session) throws Exception{
+	public String addUsersBase2(@ModelAttribute("user") User user, HttpSession Session, @RequestParam("purpose[]") ArrayList<Object> purpose) throws Exception{
 		
 		System.out.println("/users/addUsersBase2 : POST");
+		
+		System.out.println("addUsersBase purpose : "+purpose.get(0).toString());
+		System.out.println("addUsersBase purpose : "+purpose.get(1).toString());
+		System.out.println("addUsersBase purpose : "+purpose.get(2).toString());
+		
+		if(purpose.size() != 0) {
+			user.setPurpose1((String)purpose.get(0));
+			user.setPurpose2((String)purpose.get(1));
+			user.setPurpose3((String)purpose.get(2));
+		}
 		
 		userService.addUsersBase(user);
 		
@@ -169,7 +185,7 @@ public class UserController {
 		
 		userService.addUsersAdditional(user);
 		
-		return "redirect:/users/login.jsp";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
@@ -246,7 +262,7 @@ public class UserController {
 		
 		model.addAttribute("user", user);
 		
-		return "forward:/users/getUsersView.jsp";
+		return "forward:/users/getUsers.jsp";
 		
 	}
 	
@@ -292,6 +308,7 @@ public class UserController {
 		}
 	
 		user.setProfile(originalFile);
+		user.setId(((User)session.getAttribute("user")).getId());
 		
 		userService.updateUsers(user);
 		

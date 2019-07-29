@@ -124,9 +124,9 @@
 		      <input type="text" class="form-control"id="sample6_postcode" placeholder="우편번호" readonly="readonly">
 		    </div>
 		      
-		      <div class="col-sm-2">
+		    <div class="col-sm-2">
 			  <input type="button" class="form-control" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-			  </div>
+			</div>
 		  </div>
 		  
 		<div class="form-group">
