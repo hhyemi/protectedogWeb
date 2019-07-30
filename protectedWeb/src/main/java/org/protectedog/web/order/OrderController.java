@@ -2,6 +2,7 @@ package org.protectedog.web.order;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
@@ -68,42 +69,51 @@ public class OrderController {
 
 	}
 	
-	@RequestMapping(value="addOrder", method=RequestMethod.POST)
-	public String addOrder(@ModelAttribute("order")Order order, @RequestParam("prodNo") int prodNo, 
-			@RequestParam("id") String id) throws Exception {
-		
-		
-		System.out.println("/addOrder");
-		User user=new User();
-		Product product = productService.getProduct(prodNo);
-		System.out.println(order);
+	@RequestMapping(value="addOrder")
+	public String addOrder(@ModelAttribute("order")Order order, @RequestParam("prodNo") int prodNo,
+			@RequestParam("id") String id, Model model,
+			HttpServletRequest request) throws Exception {
+
+		System.out.println("/addOrder POST/////////////////////////");
+
+		User user=userService.getUsers(id);
 		order.setId(user);
+		Product product=productService.getProduct(prodNo);
 		order.setProdNo(product);
+		order.setOrderCode(1);
+
 		orderService.addOrder(order);
-		
-		
 
-		return "forward:/shop/order/addOrder.jsp";
-	}
-		
-	
-	
-
-	
-	@RequestMapping("/getOrder")
-	public String getOrder (@RequestParam("orderNo")int orderNo, Model model) throws Exception{
-		
-		System.out.println("/getPurchase");
-		
-		System.out.println(orderNo);
-
-		Order order =orderService.getOrder(orderNo);
+		System.out.println(order.getOrderNo());
+		System.out.println(order);
+		System.out.println("order Post////////////////////");
 
 		model.addAttribute("order", order);
+
+		return "forward:/shop/order/addOrder.jsp";
 		
-		return "forward:shop/order/getorder.jsp";
 	}
 	
+
+	
+		@RequestMapping(value="getOrder")
+		public String getOrder(@RequestParam("orderNo") int orderNo,  @RequestParam("prodNo") int prodNo,
+				Model model) throws Exception {
+
+			System.out.println("getOrder");
+			
+			
+			Product product = productService.getProduct(prodNo);
+			Order order = orderService.getOrder(orderNo);
+		
+			order.setProdNo(product);
+			
+			System.out.println(order);
+			model.addAttribute("order", order);
+
+			return "forward:/shop/order/getOrder.jsp";
+
+		}
 	
 	@RequestMapping("/listOrder")
 	public String listPurchaes(@ModelAttribute("search") Search search, 
@@ -121,7 +131,7 @@ public class OrderController {
 		
 		search.setPageSize(pageSize);
 		
-		// Business logic ����
+		// Business logic
 		Map<String, Object> map = orderService.listOrder(search, id);
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);

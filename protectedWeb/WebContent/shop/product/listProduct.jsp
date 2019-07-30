@@ -20,7 +20,7 @@
 
 <!-- Global Stylesheets -->
 <title> 상품 등록</title>
-   <meta charset="EUC-KR">
+   <meta charset="UTF-8">
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -208,7 +208,7 @@
 										<div class="cart-icon text-center">
 											<a class="detailprod"><i class="fa fa-cart-plus"></i> 상세보기
 											<input type="hidden" value="${product.prodNo}"/></a>
-											<a href="#"><i class="fa fa-cart-plus"></i> 장바구니로 이동</a>
+											
 										</div>
 										
 									</div>

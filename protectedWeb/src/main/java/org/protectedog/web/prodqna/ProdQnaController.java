@@ -60,9 +60,9 @@ public class ProdQnaController {
 		System.out.println("shop/prodQna/addProdQna : GET/POST");
 		
 		board.setId("user01");
-		board.setNickName("��ı");
+		board.setNickName("스캇");
 		board.setBoardCode(qna);
-		board.setProdNo(10000);
+		board.setProdNo(10001);
 		
 		System.out.println("////////////////////");
 		
@@ -72,7 +72,7 @@ public class ProdQnaController {
 		System.out.println(board);
 		System.out.println("////////////////////");
 		
-		return "forward:/shop/product/getProduct.jsp";
+		return "forward:/prodQna/listQna?order=1";
 	}
 	
 	

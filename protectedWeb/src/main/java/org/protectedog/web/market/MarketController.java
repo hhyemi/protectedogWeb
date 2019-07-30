@@ -76,6 +76,8 @@ public class MarketController {
 		board.setViewCount(0);
 		board.setProdNo(10001);
 		board.setPhone("011-1123-4567");
+		//in thumnail
+		board.setThumnail(multiFile.get(0));
 		
 		System.out.println("////////////////////");
 		
@@ -86,6 +88,7 @@ public class MarketController {
 		System.out.println(board);
 		System.out.println("////////////////////");
 		
+		///파일업로드 시작/////////////////////////////////////////
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
 		//다중파일 업로드
@@ -94,6 +97,7 @@ public class MarketController {
 			if (fileName != null && fileName.length() > 0) {
 
 				FileDog files = new FileDog();
+				//boardCode Market
 				files.setBoardCode(MK);
 				files.setFileName(fileName);
 				files.setFileCode(0);
@@ -126,27 +130,18 @@ public class MarketController {
 		
 		search.setPageSize(20);
 		
-		// Business logic ����
+		// Business logic 
 		Map<String, Object> map = boardService.listBoard(search, MK, 1);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
-		// Model �� View ����
+		// Model 연결  View 
 
 		System.out.println("/shop/Maket/listMarket ///////////////////////");
 		System.out.println("/listMarket GET / POST");
 		
-	
-		//파일 출력처리
-		Map<String, Object> filePost = new HashMap<String, Object>();
-		filePost.put("boardCode", MK);
-		List<FileDog> file = fileService.getFile(filePost);
-		
-		System.out.println(file);
-
-		model.addAttribute("file", file);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -162,7 +157,7 @@ public class MarketController {
 		// Business Logic
 		System.out.println(postNo);
 		Board board = boardService.getBoard(postNo);
-		// Model �� View ����
+		// Model 연결 View 
 		model.addAttribute("board", board);
 		
 		boardService.updateViewCount(board);
@@ -180,11 +175,13 @@ public class MarketController {
 		
 	}
 		@RequestMapping(value = "updateMarket", method = RequestMethod.GET)
-		public String updateVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
+		public String updateMarket(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
 			System.out.println("updateMaket : GET");
 			// Business Logic
-
+			
+			System.out.println(postNo);
+			
 			Board board = boardService.getBoard(postNo);
 
 			Map<String, Object> filePost = new HashMap<String, Object>();
@@ -197,8 +194,60 @@ public class MarketController {
 			
 			System.out.println("update GET 진입/////////////////////");
 
-			return "forward:/market/updateMarket.jsp";
+			return "forward:/shop/market/updateMarket.jsp";
 		}
+		
+		@RequestMapping(value = "updateMarket", method = RequestMethod.POST)
+		public String updateVoting(@ModelAttribute("board") Board board,
+				@RequestParam("multiFile") ArrayList<String> multiFile,
+				@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
+
+			System.out.println("/market/update//////////// POST");
+
+			if (deleteFile != null) {
+
+				for (String fileName : deleteFile) {
+					FileDog files = new FileDog();
+					files.setFileName(fileName);
+					files.setPostNo(board.getPostNo());
+
+					fileService.delFile(files);
+				}
+			}
+			if (multiFile.size() != 0) {
+				List<FileDog> listFile = new ArrayList<FileDog>();
+
+				// 파일디비에넣기
+				for (String fileName : multiFile) {
+
+					if (fileName != null && fileName.length() > 0) {
+
+						FileDog files = new FileDog();
+						files.setBoardCode(MK);
+						files.setFileName(fileName);
+						files.setFileCode(0);
+						files.setPostNo(board.getPostNo());
+						listFile.add(files);
+					}
+				}
+				fileService.addFile(listFile);
+			}
+
+			Map<String, Object> filePost = new HashMap<String, Object>();
+			filePost.put("boardCode", MK);
+			filePost.put("postNo", board.getPostNo());
+			List<FileDog> file = fileService.getFile(filePost);
+
+			board.setThumnail(file.get(0).getFileName());
+			// 변경여기까지//
+
+			System.out.println(board);
+			boardService.updateBoard(board);
+			
+
+			return "redirect:/market/getMarket?postNo=" + board.getPostNo();
+		}
+
 }
 
 		

@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 
@@ -10,9 +10,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -33,9 +33,9 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
-   <!-- jQuery UI toolTip »ç¿ë CSS-->
+   <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip »ç¿ë JS-->
+  <!-- jQuery UI toolTip ì‚¬ìš© JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -55,7 +55,7 @@
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
-	       <h1 align="center">°ü¸®ÀÚ <small>±¸¸Å¸ñ·Ï Á¶È¸</small></h1><br/>
+	       <h1 align="center">ê´€ë¦¬ìž <small>êµ¬ë§¤ëª©ë¡ ì¡°íšŒ</small></h1><br/>
 	
 		<!--  table Start /////////////////////////////////////-->
       <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" align="center">
@@ -63,11 +63,11 @@
       <thead>
     <tr>
       <th class ="mdl-data-table__cell--non-numeric" align="center" >No</th>
-            <th align="left">È¸¿øID</th>
-            <th align="left">È¸¿ø¸í </th>
-            <th align="left">ÀüÈ­¹øÈ£</th>
-            <th align="left">¹è¼ÛÇöÈ²</th>
-             <th align="left">Á¤º¸¼öÁ¤</th>
+            <th align="left">íšŒì›ID</th>
+            <th align="left">íšŒì›ëª… </th>
+            <th align="left">ì „í™”ë²ˆí˜¸</th>
+            <th align="left">ë°°ì†¡í˜„í™©</th>
+             <th align="left">ì •ë³´ìˆ˜ì •</th>
     </tr>
         </thead>
 			

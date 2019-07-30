@@ -8,7 +8,7 @@
 <html lang="ko">
    
 <head>
-<title> 상품 등록</title>
+<title> 상품 정보수정</title>
    <meta charset="UTF-8">
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -149,7 +149,8 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2"><a href="index.html">protected</a></span> <span>Market</span></p>
-            <font size="7">보호마켓 상품등록</font>
+            <font size="7">보호마켓 상품정보수정</font><br/>
+            <font size="3">※판매자 거주지는 수정할수 없습니다. 거주지 수정시 재작성 바랍니다.</font>
           </div>
         </div>
       </div>
@@ -190,14 +191,14 @@
 								<div class="form-group">
 									<label for="firstname">상품명</label> <input type="text"
 										class="form-control" name="prodName" id="prodName"
-										placeholder="상품명을 입력해주세요" value="테스트">
+										placeholder="상품명을 입력해주세요" value="테스트" value="${baord.prodName}">
 								</div>
 							</div>
 							<br/>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">판매가격</label> <input type="text"
-										class="form-control" name="price" id="price"
+										class="form-control" name="price" id="price" value="${board.price}"
 										placeholder="판매가격을 입력해주세요">
 								</div>
 							</div>
@@ -205,7 +206,7 @@
 								<div class="form-group">
 									<label for="firstname">판매자 거주지</label> <input type="text"
 										class="form-control" name="city" id="city"
-										placeholder="ex)서울시 강남구">
+										placeholder="ex)서울시 강남구" value="${board.city}" readonly>
 								</div>
 							</div>
 							
@@ -228,13 +229,13 @@
 								<div class="form-group">
 									<label for="firstname"></label> <input type="text"
 										class="form-control" name="postTitle" id="postTitle"
-										value="${board.postTitle}placeholder="제목을 입력해주세요">
+										value="${board.postTitle}">
 								</div>								
 								<div class="col-md-13">
 									<div class="form-group">
 										<label for="streetaddress"></label>
 										<textarea class="form-control" rows="11" name="postContent"
-											value="${board.postContent}placeholder="내용을 입력해주세요"></textarea>
+											placeholder="내용을 입력해주세요" value="${board.postContent}"></textarea>
 									</div>
 								</div>
 							</div>

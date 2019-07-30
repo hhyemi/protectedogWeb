@@ -131,27 +131,40 @@
 								<table>
 									<thead>
 										<tr>
-						
-											<th>판매가 <font size="1"> &nbsp;수량선택은 구매페이지에서 가능합니다</font></th>
+											<th>수량</th>
+											<th>판매가</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											
-											<td id="price" data-price="${product.discountPrice}"><fmt:formatNumber value="${product.discountPrice}" pattern="#,###" />원</td>
-	
+											<td><a> <select id="quantity" name="quantity" >
+														<option data-quantity="1">1</option>
+														<option data-quantity="2">2</option>
+														<option data-quantity="3">3</option>
+														<option data-quantity="4">4</option>
+														<option data-quantity="5">5</option>
+														<option data-quantity="6">6</option>
+														<option data-quantity="7">7</option>
+														<option data-quantity="8">8</option>
+														<option data-quantity="9">9</option>
+														<option data-quantity="10">10</option>
+												</select> <input type="hidden" name="quantity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											</a></td>
+											<td id="price" data-price="${product.discountPrice}">${product.discountPrice}</td>
 										</tr>
 									</tbody>
 								</table>
 								</form>
 
-										
+								<a><p>
+										Total price: <span id="total" name="totalPrice"></span>원
+									</p> <input type="hidden" name="totalPrice"></a>
 									<input type="hidden" name="prodNo" value="${product.prodNo}"/>
-									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/><br/>
+									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/>
 
 							<div class="action">
                 <div class="title-but"><button class="btn btn-general btn-white" role="button" id="addorder"> 구매하기</button>
-<!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
+                <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div>
                 </div>
               </div>
 							 

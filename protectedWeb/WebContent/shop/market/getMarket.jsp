@@ -102,7 +102,7 @@ text-size: small;
 								<div class="${className}">
 									<img class="d-block w-100"
 										src="../../resources/file/fileMarket/${name.fileName}"
-										width="450px;" height="450px;" />
+										height="450px;" />
 								</div>
 							</c:forEach>
 

@@ -77,7 +77,7 @@
 					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
 					$("form[name='addForm']").attr("method", "POST").attr(
 							"action", "/market/addMarket").attr("enctype","multipart/form-data").submit();
-					//fncAddProduct();
+					fncAddProduct();
 				});
 	});
 
@@ -100,34 +100,44 @@
 		});
 	});
 
-	function fncAddProduct() {
-		//Form 유효성 검증
+// 	function fncAddProduct() {
+// 		//Form 유효성 검증
 
-		// 		var prodName=$("input[name='prodName']").val();
-		// 	 	//var name = document.detailForm.prodName.value;
-		// 	 	var prodDetail=$("input[name='prodDetail']").val();
-		// 		//var detail = document.detailForm.prodDetail.value;
-		// 		var manuDate=$("input[name='manuDate']").val();
-		// 		//var manuDate = document.detailForm.manuDate.value;
-		// 		var price=$("input[name='price']").val();
-		// 		//var price = document.detailForm.price.value;
+// 		 		var prodName=$("input[name='prodName']").val();
+// 		 	 	//var name = document.detailForm.prodName.value;
+// 		 	 	var price=$("input[name='price']").val();
+// 		 		//var detail = document.detailForm.prodDetail.value;
+// 		 		var city=$("input[name='city']").val();
+// 		 		//var manuDate = document.detailForm.manuDate.value;
+// 		 		var postTitle=$("input[name='postTitle']").val();
+// 		 		//var price = document.detailForm.price.value;
+// 		 		var postContent=$("input[name='postContent']").val();
+// 		 		//var price = document.detailForm.price.value;
 
-		// 		if(prodName == null || prodName.length<1){
-		// 			alert("상품명은 반드시 입력하여야 합니다.");
-		// 			return;
-		// 		}
+// 		 		if(prodName == null || prodName.length<1){
+// 		 			alert("상품명은 반드시 입력하여야 합니다.");
+// 		 			return;
+// 		 		}
 
-		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("제조일자는 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-		// 		if(price == null || price.length<1){
-		// 			alert("가격은 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
+// 		 		if(price == null || price.length<1){
+// 		 			alert("판매가격은 반드시 입력하셔야 합니다..");
+// 		 			return;
+// 		 		}
+// 		 		if(city == null || price.length<1){
+// 		 			alert("판매자 거주지는 필수 입력사항입니다.");
+// 		 			return;
+// 				}
+// 		 		if(postTitle == null || manuDate.length<1){
+// 		 			alert("글 제목을 입력해주세요");
+// 		 			return;
+// 		 		}
+// 		 		if(postContent == null || manuDate.length<1){
+// 		 			alert("글 내용을 입력해주세요");
+// 		 			return;
+// 		 		}
 
-		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
-	}
+// 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
+// 	}
 
 	//============= 달력  =============
 	$(function() {
