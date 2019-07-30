@@ -11,7 +11,12 @@
     <meta charset="UTF-8">   
       
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-<title>보호할개 · 후원게시</title>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    
+	<title>보호할개 · 후원게시</title>
 
 	<script src="https://kit.fontawesome.com/e26616618e.js"></script>
     <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -94,15 +99,12 @@
 			    	</div>    
 					<br/>
     		    	
-						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-	
     		    	<br/>
     		    	
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-8 col-lg-12 order-md-last">
-		    				<div class="row">
+		    				<div class="row"  id="thumbnailRow">
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
@@ -165,10 +167,6 @@
 		 </form>
 
     </section>
-    <!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
-    
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -193,7 +191,83 @@
 	   	$("form").attr("method" , "POST").attr("action" , "/funding/listFunding").submit();
 	 
 	}
+	
+	var page = 1;
+	
     $(function(){	
+    	
+        $(window).scroll(function(){    
+           	//             scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다. 
+    					 if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){	
+            	            	//alert("zz")
+
+            	            		page++;
+            					$.ajax(
+            							{
+            								url : "/funding/json/listVoting/" ,
+            								method : "POST" ,
+            								data : JSON.stringify({
+            									searchCondition : $("#searchCondition").val(),
+            									searchKeyword : $("#searchKeyword").val(),
+            									currentPage : page,
+            									voteCondition : $("#voteCondition").val()
+            								}) ,
+            								dataType : "json" ,
+            								headers : {
+            									"Accept" : "application/json",
+            									"Content-Type" : "application/json"
+            								},
+            								error: function(request, status, error){ 
+            									console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            						        },
+            								success : function(JSONData,status) {
+            									var funding = JSONData.list;
+            									var display ="";
+            									
+            									 $.each(funding, function(index, funding){
+            										 display +="<div class=\"col-sm-6 col-md-6 col-lg-4 ftco-animate\">"+
+    												 "<div class=\"desc-comp-offer-cont\" style=\"padding-top:10px\">";	
+            								
+            										if(funding.statusCode !=3){
+             									     display += "&emsp;조회 "+funding.fundViewCount+
+             					                        		"<a href=\"#\" class=\"img-prod\"><img src=\"/resources/file/fileSF/end.png\" style=\" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/"+funding.mainFile+"') no-repeat center center;background-size:cover;\" onerror=\"this.src='http://placehold.it/400x400'\" />"+
+             					    							"<input type=\"hidden\" value=\""+funding.postNo+"\" /></a> ";	    																
+            										}
+            										
+            										 else{
+                									     display += "&emsp;조회 "+funding.fundViewCount+
+    			          					                        "<a href=\"#\" class=\"img-prod\"><img class=\"img-fluid\" src=\"/resources/file/fileSF/"+funding.mainFile+"\"  style=\"min-height:210px; max-height:210px; min-width:330px; max-width:330px;\" >"+
+    			          					    					"<input type=\"hidden\" value=\""+funding.postNo+"\" /></a> ";	    																
+             										}
+            											display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\">	<font size=\"5\"><b>"+funding.postTitle+"</b></font></div>"+
+            					    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
+    	        											       "<div class=\"col-xs-8 col-md-8\" style=\"position:absolute; left:0px; bottom:0px;\" > <font size=\"3\">"+funding.nickname+"</font></div>"+
+    	        											       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong style=\"color:#f04f23\">"+funding.voteRate+"%</strong></b></font></div></div>";										   				
+            											 
+           					    				
+             										if(funding.statusCode !=3){
+              									     	display +=  "<div class=\"progress\"> <div class=\"progress-bar\" role=\"progressbar\" style=\"width:"+funding.fundRate+"%; background-color:#e8cec8!important;\"></div>"+
+    											   					 "</div> <div align=\"right\"> <font size=\"5\"  style=\"color:#d43333\"><b>종료</b></font> </div>";	    																
+             										}
+             										 else{
+                 									     display += "<div class=\"progress\"> <div class=\"progress-bar \" role=\"progressbar\" style=\"width:"+funding.fundRate+"%; background-color:#e66447!important;\" ></div>"+
+          											   				"</div> <div align=\"right\"><font size=\"5\" >D- "+funding.fundRemainDate+"</font></div>";	    																
+              										}	        											       
+    							
+    	         										display += "</div></div></div>";	
+            									 });
+    	         										
+    	         										$("#thumbnailRow").append(display);
+    	         									 	$( ".img-prod" ).on("click" , function() {
+    	         											$(self.location).attr("href","/funding/getFunding?postNo="+$(this).children("input").val());
+    	         										});   
+    	         									
+            						}
+            							
+            					});
+            			}
+
+            });
     	
 		//============= "검색"  Event  처리 =============	
 		 $( "#searchSubmmit" ).on("click" , function() {

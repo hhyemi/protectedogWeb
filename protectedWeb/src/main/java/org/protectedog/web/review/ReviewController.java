@@ -126,5 +126,7 @@ public class ReviewController {
 
 		return "forward:/hospital/getHospitalReview.jsp";
 	}
+	
+	
 
 }

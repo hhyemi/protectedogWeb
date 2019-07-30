@@ -156,6 +156,7 @@
    <br><br><br/>
 <!--================Product Description Area =================-->
 	 <section class="product_description_area">
+	  <form class="form-inline" name="detailForm">
 	      <div class="container">
 	        <ul class="nav nav-tabs" id="myTab" role="tablist">
 		          <li class="nav-item">
@@ -214,9 +215,17 @@
 							 </div>																 		
 					    <hr/>       
 				       </c:forEach>
+				       
+				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
+				       
+				       
+				           <!-- PageNavigation Start... -->
+								<jsp:include page="../common/pageNavigator.jsp"/>
+							<!-- PageNavigation End... -->
 		          </div>		          
 		       </div>
 	      </div>
+	      </form>
 	    </section>
     <!--================End Product Description Area =================-->
 
@@ -247,8 +256,13 @@
     
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+    	function fncGetList(currentPage) {
+    	   	
+    	   	$("#currentPage").val(currentPage)
+    	   	$("form").attr("method" , "POST").attr("action" , "/funding/getVoting").submit();
+    	 
+    	}   
     $(function(){
-    
 		//============= 투표하기 Event  처리 =============	
 	 	$( "#btnAddVote" ).on("click" , function() {
 	 		if(${user==null}){
@@ -256,7 +270,7 @@
 	 		}else{
 	 			 		
 		 		if(!(${funding.statusCode eq '1'})){
-		 			alert("투표가 종료되었습니다.")
+		 			swal("투표가 종료되었습니다.", " ");   
 		 		}else{
 		 	   		 $.ajax( 
 		 					{
@@ -273,7 +287,8 @@
 		 						success : function(JSONData , status) {
 		 		
 		 			                if(JSONData ==1 ) {
-		 			                	alert("이미 투표한 글 입니다.")
+		 			                	
+		 			                	 swal("이미 투표한 글 입니다.", " ");                	
 		 			                } else {
 		 			   		 	     	self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
 
@@ -317,8 +332,8 @@
 	    
 		//============= 수정하기 Event  처리 =============	
 	 	$( "#btnUpdate" ).on("click" , function() {
-	 		if(${!(funding.voterCount eq 0) || !(user.id eq 'admin')}){
-	 			alert("투표 1개이상 받을 시 수정이 불가합니다. ")
+	 		if(${funding.voterCount != 0 || !(user.id eq 'admin')}){
+	 			swal("투표 1개이상 받을 시 수정이 불가합니다.", " ");   
 	 		}else{
 	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
 	 		}
@@ -326,11 +341,22 @@
 		
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "#btnDelete" ).on("click" , function() {
-            if(confirm('삭제시 한달간 글 작성 불가입니다.')){
-                self.location = "/funding/delVoting?postNo=${funding.postNo}"
-            	alert("삭제가 완료되었습니다.")
-            } else {
-            }
+	 		swal({
+	            title: "정말 삭제 하시겠습니까 ?",
+	            text: "삭제시 한달간 글 작성 불가입니다.",
+	            icon: "warning",
+	            buttons: true,
+	            dangerMode: true,
+	          })
+	          .then((willDelete) => {
+	            if (willDelete) {
+	              swal("삭제가 완료되었습니다!", {
+	                icon: "success",
+	              }).then((value) => {
+	            	  self.location = "/funding/delVoting?postNo=${funding.postNo}"
+	              });
+	            }
+	          });	 		
 		});  
 	
     });

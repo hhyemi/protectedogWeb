@@ -10,8 +10,12 @@
 <head>
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
-
-    <title>보호할개 · 후원신청</title>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	    <title>보호할개 · 후원신청</title>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
@@ -50,7 +54,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
+          	<p ><span class="mr-2">support</span> <span>apply</span></p>
             <font size="7">후원신청</font>
           </div>
         </div>
@@ -153,10 +157,6 @@
 		 </form>
 
     </section>
-		<!--     PageNavigation Start... -->
-		 	    <jsp:include page="../common/pageNavigator_new.jsp"/> 
-		<!--     PageNavigation End... --> 
-		    
 		<!--     ================ start footer Area  ================= -->
 		<!--     footer Start ///////////////////////////////////// -->
 		 	     <jsp:include page="/layout/footer.jsp"></jsp:include> 
@@ -183,19 +183,19 @@
 	 
 	}
 
-	var postSize = 2;
+	var page = 1;
 	
-//     $(function(){
+    $(function(){
     	
         $(window).scroll(function(){    
        	//             scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다. 
 					 if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){	
-        	            	alert("zz")
-        	            	postSize++;
-        	            	
+        	            	//alert("zz")
+
+        	            		page++;
         					$.ajax(
         							{
-        								url : "/fudding/json/listVoting" ,
+        								url : "/funding/json/listVoting/" ,
         								method : "POST" ,
         								data : JSON.stringify({
         									searchCondition : $("#searchCondition").val(),
@@ -208,19 +208,58 @@
         									"Accept" : "application/json",
         									"Content-Type" : "application/json"
         								},
-        								success : function(JSONData) {
+        								error: function(request, status, error){ 
+        									console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        						        },
+        								success : function(JSONData,status) {
+        									var funding = JSONData.list;
+        									var display ="";
         									
-        									if(JSONData.message=="ok"){
-        										alert(JSONData.list);
-        
-        								}	
+        									 $.each(funding, function(index, funding){
+        										 display +="<div class=\"col-sm-6 col-md-6 col-lg-4 ftco-animate\">"+
+												 "<div class=\"desc-comp-offer-cont\" style=\"padding-top:10px\">";	
+        								
+        										if(funding.statusCode !=1){
+         									     display += "&emsp;조회 "+funding.voteViewCount+
+         					                        		"<a href=\"#\" class=\"img-prod\"><img src=\"/resources/file/fileSF/end.png\" style=\" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/"+funding.mainFile+"') no-repeat center center;background-size:cover;\" onerror=\"this.src='http://placehold.it/400x400'\" />"+
+         					    							"<input type=\"hidden\" value=\""+funding.postNo+"\" /></a> ";	    																
+        										}
+        										
+        										 else{
+            									     display += "&emsp;조회 "+funding.voteViewCount+
+			          					                        "<a href=\"#\" class=\"img-prod\"><img class=\"img-fluid\" src=\"/resources/file/fileSF/"+funding.mainFile+"\"  style=\"min-height:210px; max-height:210px; min-width:330px; max-width:330px;\" >"+
+			          					    					"<input type=\"hidden\" value=\""+funding.postNo+"\" /></a> ";	    																
+         										}
+        											display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\">	<font size=\"5\"><b>"+funding.postTitle+"</b></font></div>"+
+        					    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
+	        											       "<div class=\"col-xs-8 col-md-8\" style=\"position:absolute; left:0px; bottom:0px;\" > <font size=\"3\">"+funding.nickname+"</font></div>"+
+	        											       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong style=\"color:#f04f23\">"+funding.voteRate+"%</strong></b></font></div></div>";										   				
+        											 
+       					    				
+         										if(funding.statusCode !=1){
+          									     	display +=  "<div class=\"progress\"> <div class=\"progress-bar\" role=\"progressbar\" style=\"width:"+funding.voteRate+"%; background-color:#e8cec8!important;\"></div>"+
+											   					 "</div> <div align=\"right\"> <font size=\"5\"  style=\"color:#d43333\"><b>종료</b></font> </div>";	    																
+         										}
+         										 else{
+             									     display += "<div class=\"progress\"> <div class=\"progress-bar \" role=\"progressbar\" style=\"width:"+funding.voteRate+"%; background-color:#e66447!important;\" ></div>"+
+      											   				"</div> <div align=\"right\"><font size=\"5\" >D- "+funding.voteRemainDate+"</font></div>";	    																
+          										}	        											       
+							
+	         										display += "</div></div></div>";	
+        									 });
+	         										
+	         										$("#thumbnailRow").append(display);
+	         									 	$( ".img-prod" ).on("click" , function() {
+	         											$(self.location).attr("href","/funding/getVoting?postNo="+$(this).children("input").val());
+	         										});   
+	         									
         						}
         							
-        					});	
+        					});
+        			}
 
-        	    }
         });
-
+    });
     	
 		//============= "검색"  Event  처리 =============	
 		 $( "#searchSubmmit" ).on("click" , function() {
@@ -239,7 +278,9 @@
         $( "#btnAdd" ).on("click" , function() {
         	if(${user == null}){
         		alert("로그인이 필요합니다.")
+        		
         		return;
+        		
         	}
         	
    		 $.ajax( 
@@ -257,7 +298,9 @@
 						success : function(JSONData , status) {
 		
 			                if(JSONData ==1 ) {
-			                	alert("한달에 한번만 글 작성 가능합니다. \n(이미 한달안에 글을 작성하였습니다.)")
+			                	 
+			                	swal("한달에 한번만 글 작성 가능합니다.", "(이미 한달안에 글을 작성하였습니다.)");
+
 			                } else {
 		        				$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
 

@@ -122,7 +122,7 @@ public class FundingRestController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(6);
 
 		if (search.getSearchKeyword() == null) {
 			search.setSearchKeyword("");
@@ -148,11 +148,7 @@ public class FundingRestController {
 		
 		Map<String, Object> map2 = new HashMap<String,Object>();
 		map2.put("list", map.get("list"));
-		
-//		// Model 과 View 연결
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
+	
 
 		return map2;
 	}

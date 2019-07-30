@@ -16,10 +16,9 @@ public interface ReviewService {
 	// ����� ����Ʈ ��ȸ
 	public Map<String, Object> listReview(Search search, String boardCode, String hospitalName) throws Exception;
 
-	// //����� ������Ʈ
-	// public void updateReivew(Review Review)throws Exception;
+	 //����� ������Ʈ
+	 public void updateReivew(Review Review)throws Exception;
 	 //����� ����
 	 public void delReivew(int postNo)throws Exception;
-	
 	
 }
