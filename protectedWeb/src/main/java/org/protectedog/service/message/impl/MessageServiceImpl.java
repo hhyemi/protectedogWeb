@@ -41,24 +41,37 @@ public class MessageServiceImpl implements MessageService{
 		return messageDAO.getMessage(messageNo);
 	}
 
-	@Override
-	public Map<String, Object> getSendMessageList(Search search, String senderId) throws Exception {
-		// TODO Auto-generated method stub
-		List<Message> list=messageDAO.getSendMessageList(search, senderId);
-		int totalCount=messageDAO.getSendTotalCount(search, senderId);
-		
-		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("list", list);
-		map.put("totalCount", new Integer(totalCount));
-		
-		return map;
-	}
+//	@Override
+//	public Map<String, Object> getSendMessageList(Search search, String senderId) throws Exception {
+//		// TODO Auto-generated method stub
+//		List<Message> list=messageDAO.getSendMessageList(search, senderId);
+//		int totalCount=messageDAO.getSendTotalCount(search, senderId);
+//		
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("list", list);
+//		map.put("totalCount", new Integer(totalCount));
+//		
+//		return map;
+//	}
+	
+//	@Override
+//	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception {
+//		// TODO Auto-generated method stub
+//		List<Message> list=messageDAO.getReceiveMessageList(search, receiverId);
+//		int totalCount=messageDAO.getReceiveTotalCount(search, receiverId);
+//		
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("list", list);
+//		map.put("totalCount", new Integer(totalCount));
+//		
+//		return map;		
+//	}
 	
 	@Override
-	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception {
+	public Map<String, Object> getMessageList(Search search, String id) throws Exception {
 		// TODO Auto-generated method stub
-		List<Message> list=messageDAO.getReceiveMessageList(search, receiverId);
-		int totalCount=messageDAO.getReceiveTotalCount(search, receiverId);
+		List<Message> list=messageDAO.getMessageList(search, id);
+		int totalCount=messageDAO.getTotalCount(search, id);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("list", list);
@@ -76,15 +89,27 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int getUnreadMessage(String receiverId) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("¿Ö ¾Èµé¾î°¡ÁöÁö?");
+		System.out.println("ï¿½ï¿½ ï¿½Èµï¿½î°¡ï¿½ï¿½ï¿½ï¿½?");
 		int result=0;
 		
 		Message message=messageDAO.getUnreadMessage(receiverId);
-		System.out.println("message ÀÖÀ½? : "+message);
+		System.out.println("message ï¿½ï¿½ï¿½ï¿½? : "+message);
 		if(message != null) {
 			result=1;
 		}
 		
+		return result;
+	}
+	
+	@Override
+	public int getReceiveTotalCount(String receiverId) throws Exception {
+		// TODO Auto-generated method stub
+		int result=0;
+		
+		int search=messageDAO.getReceiveTotalCount(receiverId);
+		if(search != 0) {
+			result=search;
+		}
 		return result;
 	}
 

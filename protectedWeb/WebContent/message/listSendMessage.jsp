@@ -145,7 +145,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 									    <td class="inbox-small-cells" width="50px">
                                             <input type="checkbox" class="mail-checkbox">
                                         </td>
-										<th width="100px">보낸사람</th>
+										<th width="100px">받은사람</th>
 										<th width="300px" class="text-center">제목</th>
 										<th width="200px" align="center" class="text-center">보낸일시</th>
 										<th width="200px" align="center" class="text-center">받은일시</th>
@@ -159,7 +159,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         <td class="inbox-small-cells" width="50px">
                                             <input type="checkbox" class="mail-checkbox">
                                         </td>
-                                        <td class="view-message dont-show" width="100px">${ message.senderId }</td>
+                                        <td class="view-message dont-show" width="100px">${ message.receiverId }</td>
                                         <td class="view-message text-center" width="300px"> ${ message.messageTitle } </td>
                                         <td class="view-message text-right" width="200px"> 
 											<fmt:formatDate value="${ message.sendDate }" pattern="yy.MM.dd hh:mm:ss"/>
