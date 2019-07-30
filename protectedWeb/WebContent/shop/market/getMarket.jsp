@@ -25,8 +25,13 @@
 <!-- main css -->
 <link rel="stylesheet" href="/resources/get/css/style.css" />
 <link rel="stylesheet" href="/resources/get/css/responsive.css" />
-<!-- KAKAO -->
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- Google Mdl -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
 <style>
 .form-group2 {
 	padding-left: 420px;
@@ -36,6 +41,20 @@
 .form-group3 {
 	padding-left: 465px;
 	padding-right: 100px;
+}
+
+table, td{
+border: 1px 
+}
+table{
+width:60%;
+height: 100px;
+margin: auto;
+text-align: center;
+text-size: small;
+}
+.pricecolor{
+	color: #f04f23;
 }
 </style>
 
@@ -83,7 +102,7 @@
 								<div class="${className}">
 									<img class="d-block w-100"
 										src="../../resources/file/fileMarket/${name.fileName}"
-										height="300px;" />
+										height="450px;" />
 								</div>
 							</c:forEach>
 
@@ -97,20 +116,17 @@
 								type="hidden" value="${board.boardCode}" />
 							<h3>${board.postTitle}</h3>${board.id}
 							<h3>${board.prodName}</h3>
-							<h2>
+							<h2 class="pricecolor">
 								<fmt:formatNumber value="${board.price}" pattern="#,###" />
-								원
-							</h2>
-
-							<h2>
-								<fmt:formatNumber value="" pattern="#,###" />
 								원
 							</h2>
 
 							<ul class="list">
 							</ul>
 							<p>
-								원산지 : <br /> 제조사 : <br /> 기본 적립 포인트 : <br />
+							<br>
+							${board.postContent}
+								
 							</p>
 							
 							</div>
@@ -119,20 +135,18 @@
 				</div>
 			</div>
 		</div>
-		</div>
-
-		<!--================End Single Product Area =================-->
-
-		<!--================Product Description Area =================-->
-		<section class="product_description_area">
-			<div class="container"></div>
-			<hr>
-			
-			물건 팝니다 사주세요
-		</section>
+		<p align="right"><button class="mdl-button mdl-js-button mdl-button--primary" id="update">
+ 수정
+</button><!-- Accent-colored flat button -->
+<button class="mdl-button mdl-js-button mdl-button--accent">
+  삭제하기
+</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+<p>
 		<!--================End Product Description Area =================-->
-
-
+	<input type="hidden" name="postNo" value="${board.postNo}" />
+<input type="hidden" name="boardCode" value="IS" />	
+<jsp:include page="/common/comment.jsp"></jsp:include>
+</p>
 		<!--================ End footer Area  =================-->
 
 		<!-- Optional JavaScript -->
@@ -153,11 +167,23 @@
 		<script src="../../resources/get/js/jquery.waypoints.min.js"></script>
 		<script src="../../resources/get/js/jquery.counterup.js"></script>
 		<script src="../../resources/get/js/theme.js"></script>
+<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 
 		<script type="text/javascript">
 		
+		
+		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		 $(function() {
+			 
+			/// SCRIPT
+			 var commentData =  
+			 {
+			    commentContent       : $("input[name=commentContent]").val(),
+			    postNo         : $("input[name=postNo]").val(),
+			    boardCode       : $("input[name=boardCode]").val()
+			 } ;
+			 
 			
 			 //manage//====================================================
 			 $( "button:contains('확인')" ).on("click" , function() {
@@ -166,27 +192,12 @@
 				/* self.location = "/product/listProduct/manage" */
 				self.location = "/product/listProduct"
 			});
-			
-			 $( "button:contains('수정')" ).on("click" , function() {
-				//Debug..
-				console.log($( "button:contains('수정')" ).html());
-				history.go(-1);
-			});
-			 
-			 //==================장바구니 추가 ===============================
-				 
-				 $( ".icon-shopping_cart" ).on("click" , function() {	
-					//Debug..
-					alert(  $( "form[name='addCart']" ).html() );
-					$("form[name='addCart']").attr("method", "POST").attr("action", "/cart/addCart").submit();
-					//fncAddProduct();
-				});
 
-			//구매하기//====================================================
-			$( ".main_btn" ).on("click" , function() {
-				//Debug..
-				self.location = "/order/addOrder?prodNo=${product.prodNo}"
-			});
+
+		 $( "#update" ).on("click" , function() {
+		 		self.location = "/market/updateMarket?postNo=${board.postNo}";
+			}); 
+
 			
 			 $( "button:contains('뒤로')" ).on("click" , function() {
 				//Debug..
@@ -194,9 +205,10 @@
 				self.location = "/product/listProduct"
 			});
 		});
+
 		
 		 //=============장바구니 이동========================================
-			 
+
 	
 		
 		

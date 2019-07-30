@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,9 +11,9 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -41,10 +41,10 @@
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 
-<!-- jQuery UI toolTip »ç¿ë CSS-->
+<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip »ç¿ë JS-->
+<!-- jQuery UI toolTip ì‚¬ìš© JS-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
@@ -71,9 +71,9 @@ body {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//=============    °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ  Event  Ã³¸® =============
+	//=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============
 
-	// °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
+	// ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘ Form ì „ì†¡ì„ ìœ„í•´ JavaScrpt ì´ìš©  
 	function fncGetList(currentPage) {
 		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
@@ -84,7 +84,7 @@ body {
 
 // 	$(function() {
 
-// 		$("td.ct_btn01:contains('°Ë»ö')").on("click", function() {
+// 		$("td.ct_btn01:contains('ê²€ìƒ‰')").on("click", function() {
 // 			fncGetList(1);
 // 		});
 
@@ -108,53 +108,35 @@ body {
 
 <body>
 
-	<!-- //////////////////////ToolBar Start ///////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!--/////////////////////// ToolBar End ////////////////////////////////-->
-
-
-	<!--/////////////////////// form start /////////////////////////////////-->
-	<form class="form-inline" name="detailForm">
-
-		<div class="container">
-			<h1 align="center">
-				»óÇ°<small>Q&nbap;&&nas;A
-					<button class="mdl-button mdl-js-button mdl-button--primary">
-						¹®ÀÇÇÏ±â</button>
-				</small>
-			</h1>
-		</div>
-		<BR />
-
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+		<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 <!-- 		<div class="row"> -->
 
 <!-- 			<div class="col-md-6 text-left"> -->
-<%-- 				<p class="text-primary">ÀüÃ¼ ${resultPage.totalCount } °Ç¼ö, ÇöÀç --%>
-<%-- 					${resultPage.currentPage} ÆäÀÌÁö</p> --%>
+<%-- 				<p class="text-primary">ì „ì²´ ${resultPage.totalCount } ê±´ìˆ˜, í˜„ì¬ --%>
+<%-- 					${resultPage.currentPage} í˜ì´ì§€</p> --%>
 <!-- 			</div> -->
 <!-- 			<div class="col-md-6 text-right"> -->
 
 <!-- 				<div class="form-group"> -->
 <!-- 					<select class="form-control" name="searchCondition"> -->
 <!-- 						<option value="0" -->
-<%-- 							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>»óÇ°¹øÈ£</option> --%>
+<%-- 							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ìƒí’ˆë²ˆí˜¸</option> --%>
 <!-- 						<option value="1" -->
-<%-- 							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>»óÇ°¸í</option> --%>
+<%-- 							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ìƒí’ˆëª…</option> --%>
 <!-- 						<option value="2" -->
-<%-- 							${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>»óÇ°°¡°İ</option> --%>
+<%-- 							${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ìƒí’ˆê°€ê²©</option> --%>
 
 <!-- 					</select> -->
 <!-- 				</div> -->
 
 <!-- 				<div class="form-group"> -->
-<!-- 					<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label> -->
-<!-- 						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="°Ë»ö¾î" > -->
-<!-- 						    <button type="button" class="btn btn-default">°Ë»ö</button> -->
+<!-- 					<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label> -->
+<!-- 						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="ê²€ìƒ‰ì–´" > -->
+<!-- 						    <button type="button" class="btn btn-default">ê²€ìƒ‰</button> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
 <!-- 			</div> -->
-<!-- 			<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////--> -->
+<!-- 			<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////--> -->
 
 
 			<!--  table Start /////////////////////////////////////-->
@@ -166,11 +148,11 @@ body {
 					<thead>
 						<tr>
 							<th class="mdl-data-table__cell--non-numeric" align="center"
-								id="no">±Û¹øÈ£</th>
-							<th align="left">Áú¹®À¯Çü</th>
-							<th align="left">Á¦¸ñ</th>
-							<th align="left" id="postTitle">³»¿ë</th>
-							<th align="left" id="id">µî·ÏÀÏ</th>
+								id="no">ê¸€ë²ˆí˜¸</th>
+							<th align="left">ì§ˆë¬¸ìœ í˜•</th>
+							<th align="left">ì œëª©</th>
+							<th align="left" id="postTitle">ë‚´ìš©</th>
+							<th align="left" id="id">ë“±ë¡ì¼</th>
 
 						</tr>
 					</thead>
@@ -191,7 +173,6 @@ body {
 				<!--  table end /////////////////////////////////////-->
 		
 			<input type="hidden" id="currentPage" name="currentPage" value="0" /> 
-			<jsp:include page="../../common/pageNavigator.jsp" />
 			
 			</div>
 	</form>

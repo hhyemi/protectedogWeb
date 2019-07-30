@@ -33,11 +33,8 @@ public class ProdQnaController {
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 
-	// setter Method ±¸Çö ¾ÊÀ½
+	// setter Method êµ¬í˜„ ì•ŠìŒ
 
-	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
 	
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
@@ -63,9 +60,9 @@ public class ProdQnaController {
 		System.out.println("shop/prodQna/addProdQna : GET/POST");
 		
 		board.setId("user01");
-		board.setNickName("½ºÄ±");
+		board.setNickName("ìŠ¤ìº‡");
 		board.setBoardCode(qna);
-		board.setProdNo(10000);
+		board.setProdNo(10001);
 		
 		System.out.println("////////////////////");
 		
@@ -75,7 +72,7 @@ public class ProdQnaController {
 		System.out.println(board);
 		System.out.println("////////////////////");
 		
-		return "forward:/shop/product/getProduct.jsp";
+		return "forward:/prodQna/listQna?order=1";
 	}
 	
 	
@@ -94,14 +91,14 @@ public class ProdQnaController {
 		
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = boardService.listBoard(search, qna, 1);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 
 		System.out.println("/shop/prodQna/listProdQna ///////////////////////");
 		System.out.println("/listProdQna GET / POST");
@@ -142,7 +139,7 @@ public class ProdQnaController {
 			System.out.println("/shop/Product Q/A update : GET");
 			//Business Logic
 			boardService.updateBoard(board);
-			// Model °ú View ¿¬°á
+			// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 			model.addAttribute(board);
 			System.out.println("/////////////////////////////////");
 			System.out.println("/shop/Product Q/A update : GET");

@@ -8,36 +8,36 @@ import org.protectedog.service.domain.Order;
 public interface OrderDAO {
 
 
-	//±¸¸Å³»¿ª Ãß°¡ 
+	//êµ¬ë§¤ë‚´ì—­ ì¶”ê°€ 
 	public void addOrder(Order order) throws Exception;
 	
-	//±¸¸Å³»¿ª »ó¼¼Á¶È¸
+	//êµ¬ë§¤ë‚´ì—­ ìƒì„¸ì¡°íšŒ
 	public Order getOrder(int orderNo) throws Exception;
 	
-	//ÁÖ¹®³»¿ª ¸®½ºÆ®
+	//ì£¼ë¬¸ë‚´ì—­ ë¦¬ìŠ¤íŠ¸
 	public List<Order> listOrder(Search search,String id) throws Exception;
 	
-	//±¸¸ÅÁ¤º¸ ¼öÁ¤ 
+	//êµ¬ë§¤ì •ë³´ ìˆ˜ì • 
 	public void updateOrder(Order order) throws Exception;
 
-	// ±¸¸Å¿Ï·á 1 ¹è¼ÛÁß 2 ¹è¼Û¿Ï·á/±¸¸ÅÈÄ±â ÀÛ¼º 3 ±¸¸ÅÈÄ±â Á¶È¸ 4 ±¸¸ÅÃë¼Ò 5 ±³È¯/¹İÇ°Áß 6 ¼öÁ¤ 
+	// êµ¬ë§¤ì™„ë£Œ 1 ë°°ì†¡ì¤‘ 2 ë°°ì†¡ì™„ë£Œ/êµ¬ë§¤í›„ê¸° ì‘ì„± 3 êµ¬ë§¤í›„ê¸° ì¡°íšŒ 4 êµ¬ë§¤ì·¨ì†Œ 5 êµí™˜/ë°˜í’ˆì¤‘ 6 ìˆ˜ì • 
 	public int updateOrderCode(Order order) throws Exception;
-	//±Û ¼ö count
+	//ê¸€ ìˆ˜ count
 	public int getTotalCount(String id) throws Exception;
 
-	//ÁÖ¹® »èÁ¦(°ü¸®ÀÚ ±ÇÇÑ)
+	//ì£¼ë¬¸ ì‚­ì œ(ê´€ë¦¬ì ê¶Œí•œ)
 	public void delOrder(Order order)throws Exception;
 	
-	//±³È¯¹İÇ° ¸®½ºÆ®
+	//êµí™˜ë°˜í’ˆ ë¦¬ìŠ¤íŠ¸
 	public List<Order> listSwapOrder(Search search, String id)throws Exception;
 	
-	//±¸¸Å°ü¸®(°ü¸®ÀÚ ±ÇÇÑ)
+	//êµ¬ë§¤ê´€ë¦¬(ê´€ë¦¬ì ê¶Œí•œ)
 	public List<Order> listAdminOrder(Search search, String id)throws Exception;
 	
-	//¹è¼Û¿Ï·áÈ¸¿ø
+	//ë°°ì†¡ì™„ë£ŒíšŒì›
 	public void addDeliveryCode(int OrderNo)throws Exception;
 	
-	//¾÷µ¥ÀÌÆ® ¸¶ÀÏ¸®Áö
+	//ì—…ë°ì´íŠ¸ ë§ˆì¼ë¦¬ì§€
 	public void updateMileage(String id)throws Exception;
 	
 }

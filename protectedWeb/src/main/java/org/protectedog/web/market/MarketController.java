@@ -13,6 +13,8 @@ import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.FileDog;
+import org.protectedog.service.domain.Funding;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,11 +41,11 @@ public class MarketController {
 	
 
 
-	// setter Method ±¸Çö ¾ÊÀ½
+	// setter Method êµ¬í˜„ ì•ŠìŒ
 
 	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
+	// classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
+	// ==> ì•„ë˜ì˜ ë‘ê°œë¥¼ ì£¼ì„ì„ í’€ì–´ ì˜ë¯¸ë¥¼ í™•ì¸ í• ê²ƒ
 	
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
@@ -61,7 +63,7 @@ public class MarketController {
 		System.out.println(this.getClass());
 	}
 	
-
+	//ìƒí’ˆê¸€ ë“±ë¡
 	@RequestMapping(value="addMarket")
 	public String addProdQna(@ModelAttribute("board")Board board, HttpSession session, 
 			HttpServletRequest request, @RequestParam("multiFile") ArrayList<String> multiFile, Model model) throws Exception {
@@ -69,10 +71,13 @@ public class MarketController {
 		System.out.println("shop/market/addMarket : GET/POST");
 		
 		board.setId("user01");
-		board.setNickName("½ºÄ±");
+		board.setNickName("ìŠ¤ìº‡");
 		board.setBoardCode(MK);
 		board.setViewCount(0);
-		board.setProdNo(10000);
+		board.setProdNo(10001);
+		board.setPhone("011-1123-4567");
+		//in thumnail
+		board.setThumnail(multiFile.get(0));
 		
 		System.out.println("////////////////////");
 		
@@ -83,14 +88,16 @@ public class MarketController {
 		System.out.println(board);
 		System.out.println("////////////////////");
 		
+		///íŒŒì¼ì—…ë¡œë“œ ì‹œì‘/////////////////////////////////////////
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		//ë‹¤ì¤‘íŒŒì¼ ì—…ë¡œë“œ
 		for (String fileName : multiFile) {
 
 			if (fileName != null && fileName.length() > 0) {
 
 				FileDog files = new FileDog();
+				//boardCode Market
 				files.setBoardCode(MK);
 				files.setFileName(fileName);
 				files.setFileCode(0);
@@ -106,8 +113,10 @@ public class MarketController {
 		return "forward:/shop/market/addMarket.jsp";
 	}
 	
+	//ìƒí’ˆë¦¬ìŠ¤íŠ¸
 	@RequestMapping( value="listMarket")
-	public String listProdQna(@ModelAttribute("search") Search search, HttpServletRequest request, 
+	public String listProdQna(@ModelAttribute("search") Search search, @ModelAttribute("board")Board board,
+			HttpServletRequest request, 
 			Model model, @RequestParam("order") int order) throws Exception {
 
 		
@@ -119,16 +128,16 @@ public class MarketController {
 		}
 		
 		
-		search.setPageSize(pageSize);
+		search.setPageSize(20);
 		
-		// Business logic ¼öÇà
+		// Business logic 
 		Map<String, Object> map = boardService.listBoard(search, MK, 1);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
-		// Model °ú View ¿¬°á
+		// Model ì—°ê²°  View 
 
 		System.out.println("/shop/Maket/listMarket ///////////////////////");
 		System.out.println("/listMarket GET / POST");
@@ -140,6 +149,7 @@ public class MarketController {
 		return "forward:/shop/market/listMarket.jsp";
 	}
 	
+	
 	@RequestMapping(value ="getMarket", method=RequestMethod.GET)
 	public String getProduct(@RequestParam("postNo") int postNo, Model model) throws Exception {
 
@@ -147,10 +157,12 @@ public class MarketController {
 		// Business Logic
 		System.out.println(postNo);
 		Board board = boardService.getBoard(postNo);
-		// Model °ú View ¿¬°á
+		// Model ì—°ê²° View 
 		model.addAttribute("board", board);
 		
-		// ÆÄÀÏ°¡Á®¿À±â
+		boardService.updateViewCount(board);
+		
+	
 		Map<String, Object> filePost = new HashMap<String, Object>();
 				filePost.put("boardCode", MK);
 				filePost.put("postNo", postNo);
@@ -162,10 +174,81 @@ public class MarketController {
 		return "forward:/shop/market/getMarket.jsp";
 		
 	}
-	
-	
-	
-	
+		@RequestMapping(value = "updateMarket", method = RequestMethod.GET)
+		public String updateMarket(@RequestParam("postNo") int postNo, Model model) throws Exception {
+
+			System.out.println("updateMaket : GET");
+			// Business Logic
+			
+			System.out.println(postNo);
+			
+			Board board = boardService.getBoard(postNo);
+
+			Map<String, Object> filePost = new HashMap<String, Object>();
+			filePost.put("boardCode", MK);
+			filePost.put("postNo", postNo);
+			List<FileDog> file = fileService.getFile(filePost);
+
+			model.addAttribute("board", board);
+			model.addAttribute("file", file);
+			
+			System.out.println("update GET ì§„ì…/////////////////////");
+
+			return "forward:/shop/market/updateMarket.jsp";
+		}
+		
+		@RequestMapping(value = "updateMarket", method = RequestMethod.POST)
+		public String updateVoting(@ModelAttribute("board") Board board,
+				@RequestParam("multiFile") ArrayList<String> multiFile,
+				@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
+
+			System.out.println("/market/update//////////// POST");
+
+			if (deleteFile != null) {
+
+				for (String fileName : deleteFile) {
+					FileDog files = new FileDog();
+					files.setFileName(fileName);
+					files.setPostNo(board.getPostNo());
+
+					fileService.delFile(files);
+				}
+			}
+			if (multiFile.size() != 0) {
+				List<FileDog> listFile = new ArrayList<FileDog>();
+
+				// íŒŒì¼ë””ë¹„ì—ë„£ê¸°
+				for (String fileName : multiFile) {
+
+					if (fileName != null && fileName.length() > 0) {
+
+						FileDog files = new FileDog();
+						files.setBoardCode(MK);
+						files.setFileName(fileName);
+						files.setFileCode(0);
+						files.setPostNo(board.getPostNo());
+						listFile.add(files);
+					}
+				}
+				fileService.addFile(listFile);
+			}
+
+			Map<String, Object> filePost = new HashMap<String, Object>();
+			filePost.put("boardCode", MK);
+			filePost.put("postNo", board.getPostNo());
+			List<FileDog> file = fileService.getFile(filePost);
+
+			board.setThumnail(file.get(0).getFileName());
+			// ë³€ê²½ì—¬ê¸°ê¹Œì§€//
+
+			System.out.println(board);
+			boardService.updateBoard(board);
+			
+
+			return "redirect:/market/getMarket?postNo=" + board.getPostNo();
+		}
+
 }
-	
+
+		
 		

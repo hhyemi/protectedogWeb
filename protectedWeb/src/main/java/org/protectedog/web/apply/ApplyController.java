@@ -15,6 +15,7 @@ import org.protectedog.service.apply.ApplyService;
 import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Apply;
 import org.protectedog.service.domain.User;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,11 +43,16 @@ public class ApplyController {
 	@Autowired
 	@Qualifier("applyServiceImpl")
 	private ApplyService applyService;
+	
 	@Autowired
 	@Qualifier("adoptServiceImpl")
 	private AdoptService adoptService;
-	
 
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
+
+	
 	public ApplyController(){
 		System.out.println(this.getClass());
 	}
@@ -98,6 +104,10 @@ public class ApplyController {
 		Adopt adopt = adoptService.getAdopt(apply.getAdoptNo());
 		adopt.setStatusCode("2");
 		adoptService.updateStatusCode(adopt);    //신청서 등록했으니 분양글 상태코드 2로 변경
+		
+		User user = userService.getUsers(apply.getId());
+		user.setLevelPoint(user.getLevelPoint()+3);
+		userService.updateUsers(user);
 		
 		model.addAttribute("adopt", adopt);
 		

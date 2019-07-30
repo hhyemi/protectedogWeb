@@ -7,22 +7,27 @@ import org.protectedog.service.domain.Message;
 
 public interface MessageService {
 	
-	//ÂÊÁöÀÛ¼º
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 	public void addMessage(Message message) throws Exception;
 	
-	//ÂÊÁöÀĞ±â
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
 	public Message getMessage(int messageNo) throws Exception;
 	
-	//º¸³½ÂÊÁö¸®½ºÆ®
-	public Map<String, Object> getSendMessageList(Search search, String senderId) throws Exception;
+//	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+//	public Map<String, Object> getSendMessageList(Search search, String senderId) throws Exception;
 	
-	//¹ŞÀºÂÊÁö¸®½ºÆ®
-	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception;
+//	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+//	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception;
 	
-	//ÂÊÁö»óÅÂ ¾÷µ¥ÀÌÆ®
+	//ë­ë¼ê³ ì¼ì§€??
+	public Map<String, Object> getMessageList(Search search, String id) throws Exception;
+	
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	public void updateMessage(Message message) throws Exception;
 
-	//¾ÈÀĞÀº ÂÊÁö Ã¼Å©
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	public int getUnreadMessage(String receiverId) throws Exception;
+
+	public int getReceiveTotalCount(String receiverId) throws Exception;
 
 }

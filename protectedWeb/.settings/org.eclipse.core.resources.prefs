@@ -1,9 +1,13 @@
 =\=\=\=\=\=\=
 eclipse.preferences.version=1
 encoding//SQL(Script)/protectedog.sql=EUC-KR
-encoding//WebContent/adopt/listMissing.jsp=UTF-8
+encoding//WebContent/adopt/calendar.jsp=UTF-8
+encoding//WebContent/adoptReview/addAdoptReview.jsp=UTF-8
+encoding//WebContent/adoptReview/getAdoptReview.jsp=UTF-8
+encoding//WebContent/adoptReview/updateAdoptReview.jsp=UTF-8
 encoding//WebContent/apply/addApply.jsp=UTF-8
 encoding//WebContent/common/error.jsp=UTF-8
+encoding//WebContent/community/Test/Temp.jsp=UTF-8
 encoding//WebContent/funding/addFund.jsp=UTF-8
 encoding//WebContent/funding/addFundView.jsp=UTF-8
 encoding//WebContent/funding/addReview.jsp=UTF-8
@@ -11,9 +15,9 @@ encoding//WebContent/funding/listFunding.jsp=UTF-8
 encoding//WebContent/funding/listVoting.jsp=UTF-8
 encoding//WebContent/funding/updateReview.jsp=UTF-8
 encoding//WebContent/funding/updateVoting.jsp=UTF-8
+encoding//WebContent/message/listReceiveMessage.jsp=UTF-8
 encoding//WebContent/shop/cart/reviewtest.jsp=UTF-8
 encoding//WebContent/shop/order/pointexample.jsp=UTF-8
-encoding//WebContent/shop/product/getProduct.jsp=UTF-8
 encoding//WebContent/shop/product/listProduct.jsp=UTF-8
 encoding//WebContent/users/callback.jsp=UTF-8
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR

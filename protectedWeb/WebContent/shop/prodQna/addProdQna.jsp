@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -35,30 +35,30 @@ body>div.container {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//============= "µî·Ï"  Event ¿¬°á =============
+	//============= "ë“±ë¡"  Event ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
 		$("#addqna").on("click", function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('µî·Ï')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('ë“±ë¡')" ).html() );
 		$("form").attr("method", "POST").attr("action","/prodQna/addProdQna").submit();
 		});
 	});
 
-	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
+	//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
 		$("a[href='#' ]").on("click", function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).html() );
 			$("form")[0].reset();
 		});
 	});
 
 	function fncAddQna() {
-		//Form À¯È¿¼º °ËÁõ
+		//Form ìœ íš¨ì„± ê²€ì¦
 
 		// 		var name=$("input[name='prodName']").val();
 		// 	 	//var name = document.detailForm.prodName.value;
@@ -70,19 +70,19 @@ body>div.container {
 		// 		//var price = document.detailForm.price.value;
 
 		// 		if(name == null || name.length<1){
-		// 			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		// 		if(detail == null || detail.length<1){
-		// 			alert("»óÇ°»ó¼¼Á¤º¸´Â ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ìƒí’ˆìƒì„¸ì •ë³´ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		// 		if(price == null || price.length<1){
-		// 			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 
@@ -101,23 +101,22 @@ body>div.container {
 
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar End /////////////////////////////////////-->
+		<!-- ToolBar End /////////////////////////////////////-->
 
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
-		<h1 class="bg-primary text-center">¹®ÀÇ µî·Ï</h1>
+		<h1 class="bg-primary text-center">ë¬¸ì˜ ë“±ë¡</h1>
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 
 			<div class="form-group">
-				<label for="userId" class="col-sm-offset-1 col-sm-2 control-label">Á¦¸ñ</label>
+				<label for="userId" class="col-sm-offset-1 col-sm-2 control-label">ì œëª©</label>
 				<div class="col-sm-7">
 					<input type="text" class="form-control" id="postTitle"
-						name="postTitle" placeholder="»óÇ°¸íÀ» ¹İµå½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä"> <span
+						name="postTitle" placeholder="ìƒí’ˆëª…ì„ ë°˜ë“œì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”"> <span
 						id="helpBlock" class="help-block"> <strong
 						class="text-danger"></strong>
 					</span>
@@ -127,10 +126,10 @@ body>div.container {
 
 			<div class="form-group">
 				<label for="prodDetail"
-					class="col-sm-offset-1 col-sm-2 control-label">¹®ÀÇ ³»¿ë</label>
+					class="col-sm-offset-1 col-sm-2 control-label">ë¬¸ì˜ ë‚´ìš©</label>
 				<div class="col-sm-7">
 					<textarea class="form-control" rows="6" name="postContent"
-						placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"></textarea>
+						placeholder="ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”"></textarea>
 				</div>
 			</div>
 
@@ -138,15 +137,15 @@ body>div.container {
 
 			<div class="form-group">
 				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary" id="addqna">µî &nbsp;·Ï</button>
-					<a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
+					<button type="button" class="btn btn-primary" id="addqna">ë“± &nbsp;ë¡</button>
+					<a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
 				</div>
 			</div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

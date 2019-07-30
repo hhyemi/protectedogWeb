@@ -1,68 +1,47 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
-
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 
 <html lang="ko">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- ////////////	Bootsrap, css ///////////////////////// -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
-	rel="stylesheet">
+   
+<head>
+<title> ìƒí’ˆ ì •ë³´ìˆ˜ì •</title>
+   <meta charset="UTF-8">
+   
+   <!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/open-iconic-bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-<link rel="stylesheet" href="../../resources/prodmenu/css/animate.css">
-
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/magnific-popup.css">
-
-<link rel="stylesheet" href="../../resources/prodmenu/css/aos.css">
-
-<link rel="stylesheet"
-	href="../../resources/prodmenu/css/ionicons.min.css">
-
-<!-- <link rel="stylesheet" -->
-<!-- 	href="../../resources/prodmenu/css/bootstrap-datepicker.css"> -->
-
-
-
-<link rel="stylesheet" href="../../resources/prodmenu/css/flaticon.css">
-<link rel="stylesheet" href="../../resources/prodmenu/css/icomoon.css">
-<link rel="stylesheet" href="../../resources/prodmenu/css/style.css">
-<!-- <script src="./../resources/prodmenu/js/jquery.min.js"></script> -->
-<!-- jQuery UI toolTip »ç¿ë CSS-->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<script src="../../resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-body>div.container {
-	border: 3px solid #D6CDB7;
+.container {
+	width: 1000px;
+	font-size :17px;
 	margin-top: 10px;
+
 }
+
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//============= "µî·Ï"  Event ¿¬°á =============
+	//============= "ë“±ë¡"  Event ì—°ê²° =============
 	$(function() {
 
 		$("#addproduct").on(
 				"click",
 				function() {
 					
-					 //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+					 //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 			          $(function() {     
 			            var form = $('#uploadForm')[0];
 			            var formData = new FormData(form);
@@ -83,19 +62,19 @@ body>div.container {
 			                data : formData,
 			                success : function(result) {
 			                    if (result === -1) {
-			                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-			                        // ÀÌÈÄ µ¿ÀÛ ...
+			                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+			                        // ì´í›„ ë™ì‘ ...
 			                    } else if (result === -2) {
-			                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-			                        // ÀÌÈÄ µ¿ÀÛ ...
+			                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+			                        // ì´í›„ ë™ì‘ ...
 			                    } else {
-			                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+			                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 			                    }
 			                }
 			            });
 			        });
 					//Debug..
-					//alert(  $( "td.ct_btn01:contains('µî·Ï')" ).html() );
+					//alert(  $( "td.ct_btn01:contains('ë“±ë¡')" ).html() );
 					$("form[name='addForm']").attr("method", "POST").attr("action", "/market/addMarket").attr("enctype","multipart/form-data").submit();
 					//fncAddProduct();
 				});
@@ -109,19 +88,19 @@ body>div.container {
 
 	// 	});
 
-	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
+	//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
 		$("a[href='#' ]").on("click", function() {
 			//Debug..
-			//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
+			//alert(  $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).html() );
 			$("form")[0].reset();
 		});
 	});
 
 	function fncAddProduct() {
-		//Form À¯È¿¼º °ËÁõ
+		//Form ìœ íš¨ì„± ê²€ì¦
 
 		// 		var prodName=$("input[name='prodName']").val();
 		// 	 	//var name = document.detailForm.prodName.value;
@@ -133,23 +112,23 @@ body>div.container {
 		// 		//var price = document.detailForm.price.value;
 
 		// 		if(prodName == null || prodName.length<1){
-		// 			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 
 		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 		// 		if(price == null || price.length<1){
-		// 			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		// 			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		// 			return;
 		// 		}
 
 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 	}
 
-	//============= ´Ş·Â  =============
+	//============= ë‹¬ë ¥  =============
 	$(function() {
 		$("input[name='manuDate']").datepicker({
 			dateFormat : 'yy-mm-dd'
@@ -164,20 +143,19 @@ body>div.container {
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_6.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Áß°í</a></span> <span>ÀåÅÍ</span>
-					</p>
-					<h1 class="mb-0 bread">DOG|SHOP º¸È£¸¶ÄÏ</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+	<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2"><a href="index.html">protected</a></span> <span>Market</span></p>
+            <font size="7">ë³´í˜¸ë§ˆì¼“ ìƒí’ˆì •ë³´ìˆ˜ì •</font><br/>
+            <font size="3">â€»íŒë§¤ì ê±°ì£¼ì§€ëŠ” ìˆ˜ì •í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ê±°ì£¼ì§€ ìˆ˜ì •ì‹œ ì¬ì‘ì„± ë°”ëë‹ˆë‹¤.</font>
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
@@ -190,74 +168,86 @@ body>div.container {
 
 					<!--////////////////////////// form tag Start /////////////////////////////////-->
 					<form class="billing-form" name="addForm">
-						<h3 class="mb-4 billing-heading">µî·ÏÁ¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä</h3>
+					<input type="hidden" value="${board.postNo}"/>
+						<h3 class="mb-4 billing-heading">
+						ë“±ë¡ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”</h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">ÆÇ¸ÅÀÚ</label> <input type="text"
+									<label for="firstname">íŒë§¤ì</label> <input type="text"
 										class="form-control" name="id" id="id"
-										placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" value="Å×½ºÆ®">
+										placeholder="" value="${sessionScope.user.id }" readonly>
 								</div>
 							</div>
 
 <!-- 							<div class="col-md-6"> -->
 <!-- 								<div class="form-group"> -->
-<!-- 									<label for="firstname">¿¬¶ôÃ³</label> <input type="text" -->
+<!-- 									<label for="firstname">ì—°ë½ì²˜</label> <input type="text" -->
 <!-- 										class="form-control" name="phone" id="phone" -->
-<!-- 										placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" value="Å×½ºÆ®"> -->
+<!-- 										placeholder="ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" value="í…ŒìŠ¤íŠ¸"> -->
 <!-- 								</div> -->
 <!-- 							</div> -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">»óÇ°¸í</label> <input type="text"
+									<label for="firstname">ìƒí’ˆëª…</label> <input type="text"
 										class="form-control" name="prodName" id="prodName"
-										placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" value="Å×½ºÆ®">
+										placeholder="ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" value="í…ŒìŠ¤íŠ¸" value="${baord.prodName}">
+								</div>
+							</div>
+							<br/>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstname">íŒë§¤ê°€ê²©</label> <input type="text"
+										class="form-control" name="price" id="price" value="${board.price}"
+										placeholder="íŒë§¤ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">ÆÇ¸Å°¡°İ</label> <input type="text"
-										class="form-control" name="price" id="price"
-										placeholder="ÆÇ¸Å°¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+									<label for="firstname">íŒë§¤ì ê±°ì£¼ì§€</label> <input type="text"
+										class="form-control" name="city" id="city"
+										placeholder="ex)ì„œìš¸ì‹œ ê°•ë‚¨êµ¬" value="${board.city}" readonly>
 								</div>
 							</div>
-							<hr />
+							
+							
+							   <!-- ì²¨ë¶€ ë²„íŠ¼ -->
+            <div id="attach" class="form-group">
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">ì‚¬ì§„ë“±ë¡</label></span>&nbsp;&nbsp;ë§¨ì• ì´ë¯¸ì§€ëŠ” ëŒ€í‘œì´ë¯¸ì§€ì…ë‹ˆë‹¤. (ìµœëŒ€ 8ì¥ê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.)
+                <input id="uploadInputBox" style="display: none" type="file" value="ë“±ë¡" name="filedata"  />
+            </div>
+           <br/>
+            
+            <!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
+            <div class="form-group">
+            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
+            </div>
+		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
+		    
+		    <hr />
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname"></label> <input type="text"
 										class="form-control" name="postTitle" id="postTitle"
-										placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
-								</div>
-								<div class="w-100"></div>
-
+										value="${board.postTitle}">
+								</div>								
 								<div class="col-md-13">
 									<div class="form-group">
 										<label for="streetaddress"></label>
-										<textarea class="form-control" rows="6" name="postContent"
-											placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"></textarea>
+										<textarea class="form-control" rows="11" name="postContent"
+											placeholder="ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" value="${board.postContent}"></textarea>
 									</div>
 								</div>
 							</div>
 							</div>
 							<div class="w-100"></div>
-							
-							   <!-- Ã·ºÎ ¹öÆ° -->
-            <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">»çÁøµî·Ï</label></span>&nbsp;&nbsp;¸Ç¾Õ ÀÌ¹ÌÁö´Â ´ëÇ¥ÀÌ¹ÌÁöÀÔ´Ï´Ù. (ÃÖ´ë 8Àå±îÁö ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.)
-                <input id="uploadInputBox" style="display: none" type="file" value="µî·Ï" name="filedata"  />
-            </div>
-           <br/>
-            
-            <!-- ¹Ì¸®º¸±â ¿µ¿ª -->
-            <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
-            </div>
-		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 						
 						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">µî·ÏÇÏ±â</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">Ãë¼ÒÇÏ±â</a>
+							<a class="btn btn-primary py-3 px-4" id="addproduct">ë“±ë¡í•˜ê¸°</a>
+							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">ì·¨ì†Œí•˜ê¸°</a>
 						</p>
+						
+						
 					</form>
 					<!-- ////////////////////////////form tag end //////////////////////////////-->
 				</div>
@@ -280,26 +270,26 @@ body>div.container {
 	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
 	<script src="../../resources/prodmenu/js/main.js"></script>
-	<!-- ////////////////////´Ş·Â /////////////////////////////-->
+	<!-- ////////////////////ë‹¬ë ¥ /////////////////////////////-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	   function fnAddFile(fileNameArray) {
 	         $("#multiFile").val(fileNameArray)    
 	   }   
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	       //ÀÓÀÇÀÇ file object¿µ¿ª
+	       //ì„ì˜ì˜ file objectì˜ì—­
 	     var files = {};
 	     var previewIndex = 0;
 	     var fileNameArray = new Array();
-	     // image preview ±â´É ±¸Çö
+	     // image preview ê¸°ëŠ¥ êµ¬í˜„
 	     // input = file object[]
 	     function addPreview(input) {
 	         if (input[0].files) {
-	             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
 	                 var file = input[0].files[fileIndex];
@@ -311,7 +301,7 @@ body>div.container {
 	                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 	                
-	                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+	                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 	               var imgSelectName = "img";
 	               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 	                  imgSelectName = "iframe";
@@ -319,24 +309,24 @@ body>div.container {
 
 	                 var reader = new FileReader();
 	                 reader.onload = function(img) {
-	                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                     
 	                     var imgNum = previewIndex++;
 	                     
-	                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                     if(Object.keys(files).length>=8){
-	                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                        delete files[imgNum];
 	                     }else{
-	               // 8Àå ÀÌÇÏ 
+	               // 8ì¥ ì´í•˜ 
 	                     $("#preview").append(
 	                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
 	                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
 	                                             + "<span href=\"#\" value=\""
 	                                             + imgNum
 	                                             + "\" onclick=\"deletePreview(this)\">"
-	                                             + "   »èÁ¦" + "</span>" + "</div>");
+	                                             + "   ì‚­ì œ" + "</span>" + "</div>");
 
 	                     files[imgNum] = file;
 	                     fileNameArray[imgNum]=file.name;
@@ -348,10 +338,10 @@ body>div.container {
 	                 reader.readAsDataURL(file);
 	             }
 	         } else
-	             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	     }
 
-	     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	     function deletePreview(obj) {
 	         var imgNum = obj.attributes['value'].value;
 	         delete files[imgNum];
@@ -361,14 +351,14 @@ body>div.container {
 	         //resizeHeight();
 	     }
 
-	     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	     function validation(fileName) {
 	         fileName = fileName + "";
 	         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	             return true;
 	         } else {
 	             return false;
@@ -379,9 +369,9 @@ body>div.container {
 	    	 
 	         $(document).ready(function() {
 
-	             //============= »çÁø¹Ì¸®º¸±â =============
+	             //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
 	             $('#attach input[type=file]').change(function() {
-	                addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+	                addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
 	            });
 	     });
 	     
