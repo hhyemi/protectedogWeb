@@ -50,7 +50,7 @@
 // 		$("#nav_view").empty();
 		
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyCVwWk8DuaQGG-80_4PNzstgcKjdTX4PH0&maxResults=9";
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=9";
 		
 		// 민희 : AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0
 		// 은우 : AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w
@@ -64,10 +64,10 @@
  		if(sGetToken){
  			
  			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyCVwWk8DuaQGG-80_4PNzstgcKjdTX4PH0&maxResults=3";
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=3";
  			sTargetUrl += "&pageToken=" + sGetToken;
  			
- 			debugger;
+ 			//debugger;
 			//sTargetUrl += "&maxResults="+ 10;
  		}
 		
@@ -81,10 +81,16 @@
 			success : function(jdata) {
 				
 				//console.log(jdata);
+				
+				if(sGetToken == jdata.nextPageToken){
+					var token = this.jdata.nextPageToken;
+				}
+				
+				console.log("jdata.nextPageToken : " + jdata.nextPageToken);
 				sGetToken = undefined;
 				
 				$(jdata.items).each(function(i){
-					
+
 					//debugger;
 					
 					var videoId = this.id.videoId;
@@ -94,40 +100,33 @@
 // 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
 					$("#get_view").append(
 							  "<div class='col-md-4' style='min-width : 350px'>"
-							+ "<iframe width='300px' height='200px' src='https://www.youtube.com/embed/"+this.id.videoId+"'></iframe>"
+							+ "<iframe width='350px' height='200px' src='https://www.youtube.com/embed/"+this.id.videoId+"?fs=1&playsinline=1'"+" allow='autoplay; encrypted-media' allowfullscreen></iframe>"
 							+ "<span class='box'>"
-							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:300px;'>"+this.snippet.title+"</span></a><br>"										
+							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:350px;'>"+this.snippet.title+"</span></a><br>"										
 							+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
 							+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
 							+ "</div>");
-									
+
 				}).promise().done(function(){					
-					
-					
-					
+
 					$(window).on("scroll", function(){
 		 				
-						if($(window).scrollTop() == ( $(document).height() - $(window).height() )){
+						// scrollTop + windowHeight + 30 > documentHeight
+						if($(document).height() < ( $(window).height() + 30 ) + $(window).scrollTop() ){
 							
-							console.log("sGetToken"+sGetToken); 
-							javascript:fnGetList(jdata.nextPageToken);
-			 				
-						
-// 						$.ajax({
+							console.log("sGetToken"+sGetToken);
+							if(flag == false){
+								javascript:fnGetList(jdata.nextPageToken);
+								flag == true;
+								return;
+							}
 							
-// 							type : "POST",
-// 							url : sTargetUrl,
-// 							dataType : "jsonp",
-// 							success : function(jdata) {
-
-// 		 						console.log(" 검색개수 : " + cnt);
-// 		 						if(flag == true){
-// 		 							fnGetList();
-// 		 							flag = false;
-// 		 							return;
-// 		 						}
-// 		 					}
-// 		 				}); // ajax End
+							if(flag == true){
+								return;
+							}
+							
+							
+			 								
 						} // If End
 						}); // window End						
 				}); // promise End
@@ -146,11 +145,6 @@
 </script>
 
 <style type="text/css">
-img {
-	width: 100px;
-	height: 100px;
-}
-
 span {
 	max-width: 900px;
 	/* 	background-color: green; */
@@ -193,17 +187,12 @@ span {
 	font-weight: bold;
 }
 
-.btn btn-default{
-	color: white;
-	background-color : #3a76d6;
-}
-
-.btn btn-default :hover{
-	background-color : #1062e6;
-}
-
 a :hover{
 	color : #1062e6;
+}
+.btn-default{
+	margin: 0px;
+	padding: 0px;
 }
 </style>
 </head>
@@ -214,12 +203,12 @@ a :hover{
 	<div class="container">
 	
 	<div class="row">
-	<button class="btn btn-default col-md-2">#애견상식</button>
-	<button class="btn btn-default col-md-2">#애견훈련</button>
-	<button class="btn btn-default col-md-2">#애견분양</button>
-	<button class="btn btn-default col-md-2">#애견음악</button>
-	<button class="btn btn-default col-md-2">#애견카페</button>
-	<button class="btn btn-default col-md-2">#애견사건</button>
+	<button class="btn-default col-md-2">#애견상식</button>
+	<button class="btn-default col-md-2">#애견훈련</button>
+	<button class="btn-default col-md-2">#애견분양</button>
+	<button class="btn-default col-md-2">#애견음악</button>
+	<button class="btn-default col-md-2">#애견카페</button>
+	<button class="btn-default col-md-2">#애견사건</button>
 	</div>
 	
 <!-- 	<form name="form1" method="post" onsubmit="return false;"> -->

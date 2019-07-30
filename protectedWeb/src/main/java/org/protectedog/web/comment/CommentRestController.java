@@ -171,8 +171,8 @@ public class CommentRestController {
 		return result;
 	}
 	
-	@RequestMapping( value="json/listComment/{postNo}", method=RequestMethod.POST)
-	public Map<String, Object> listComment(@PathVariable("postNo") int postNo, @ModelAttribute("search") Search search) throws Exception {
+	@RequestMapping( value="json/listComment/{postNo}/{currentPage}", method=RequestMethod.POST)
+	public Map<String, Object> listComment(@PathVariable("postNo") int postNo, @ModelAttribute("search") Search search, @PathVariable("currentPage") int currentPage) throws Exception {
 		
 		System.out.println(" ============================== rest listComment ==================================");
 		
@@ -180,16 +180,16 @@ public class CommentRestController {
 			search.setCurrentPage(1);
 		}
 		// pageSize Ȯ��
-		search.setPageSize(pageSize);
+		search.setPageSize(5);
 		
 		System.out.println("search.getCommentEndRowNum : " + search.getCommentEndRowNum());
 		
 		// Comment Paging Map ��ü ����
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("postNo",postNo);
-		map.put("commentEndRowNum",search.getCommentEndRowNum());
-		map.put("startRowNum", search.getStartRowNum());
-		map.put("endRowNum", search.getEndRowNum());
+//		map.put("postNo",postNo);
+//		map.put("commentEndRowNum",search.getCommentEndRowNum());
+//		map.put("startRowNum", search.getStartRowNum());
+//		map.put("endRowNum", search.getEndRowNum());
 		
 		// �����
 		System.out.println("postNo :" + postNo);
