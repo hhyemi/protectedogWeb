@@ -193,6 +193,26 @@ public class AdoptRestController {
 		return jsonObject;
 	}
 	
+	
+	// 캘린더로 실종글 불러오기
+	@SuppressWarnings("unchecked")
+	@RequestMapping( value="json/listMissing/{boardCode}" )
+	public JSONObject listMissing( @PathVariable("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
+		
+		System.out.println("\n\n/adopt/json/listMissing : GET / POST "+boardCode);
+		
+		Map<String , Object> map=adoptService.listMissing(boardCode);
+		map.put("list", map.get("list"));
+		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("list", map.get("list"));
+		
+//        System.out.println("json5========================================================\n"+jsonObject);
+		
+		return jsonObject;
+	}
+	
 	// 후기등록 권한
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listAdopt2/{id}" )

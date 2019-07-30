@@ -267,12 +267,20 @@ public class AdoptController {
 	// 글 리스트 조회
 	@RequestMapping( value="listAdopt" )
 	public String listAdopt( @ModelAttribute("search") Search search, Model model, HttpSession session, 
-							 @RequestParam(value="boardCode", required=false) String boardCode ) throws Exception{
+							 @RequestParam(value="boardCode", required=false) String boardCode,
+							 @RequestParam(value="areaCondition", required=false) String areaCondition,
+							 @RequestParam(value="searchCondition", required=false) String searchCondition,
+							 @RequestParam(value="searchKeyword", required=false) String searchKeyword
+							 
+			
+			) throws Exception{
 		
 		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
 		
 //		System.out.println("===================================="+search);
-		
+		if(boardCode == null & areaCondition != null) {
+			boardCode = "AD";
+		}
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
 		}

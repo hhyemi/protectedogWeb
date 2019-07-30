@@ -44,18 +44,18 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2" style="color: #f04f23;">List</span> <span>Adopt</span></p>
-            <font size="7">분양리스트</font>
+            <font size="7">실종</font>
           </div>
         </div>
       </div>
     </div>
 
 
-
-<!--       <div class="col-md-10" align="center"> -->
+<div class="row justify-content-center">
+      <div class="col-md-8"  >
 	  
 	  <jsp:include page="calendar.jsp"></jsp:include>
-<!-- 	  </div> -->
+	  </div></div>
 <%--       <c:set var="i" value="0" /> --%>
 
 <%-- 		  <c:forEach var="adopt" items="${list}"> --%>

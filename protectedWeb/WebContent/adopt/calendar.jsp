@@ -1445,7 +1445,7 @@ h2{
 </head>
 <body>
 <div class="p-5">
-  <h2 class="mb-4">Full Calendar</h2>
+<!--   <h2 class="mb-4">Full Calendar</h2> -->
   <div class="card">
     <div class="card-body p-0">
       <div id="calendar"></div>
@@ -1518,14 +1518,6 @@ h2{
 
 
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script> -->
-
-<!-- <script src="https://fullcalendar.io/releases/core/4.1.0/main.min.js"></script> -->
-<!-- <script src="https://fullcalendar.io/releases/daygrid/4.1.0/main.min.js"></script> -->
-<!-- <script src="https://fullcalendar.io/releases/interaction/4.1.0/main.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -1542,7 +1534,8 @@ jQuery(document).ready(function(){
 	      language: 'en',
 	      range: true,
 	      multipleDates: true,
-			  multipleDatesSeparator: " - "
+		  multipleDatesSeparator: " - ",
+
 	    });
 	  jQuery("#add-event").submit(function(){
 	      alert("Submitted");
@@ -1569,117 +1562,155 @@ jQuery(document).ready(function(){
 				businessHours: false,
 				defaultView: 'month',
 				// event dragging & resizing
-				editable: true,
+// 				editable: true,
 				// header
 				header: {
 					left: 'title',
 					right: 'today prev,next'
 				},
-				events: [
-					{
-						title: 'Barber',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-07-07',
-						end: '2019-07-07',
-						className: 'fc-bg-default',
-// 						imageurl: "/resources/file/others/calendar.png",
-						icon : "circle"
-					},
-					{
-						title: 'Flight Paris',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-08-08T14:00:00',
-						end: '2019-08-08T20:00:00',
-						className: 'fc-bg-deepskyblue',
-						icon : "cog",
-						allDay: false
-					},
-					{
-						title: 'Team Meeting',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-07-10T13:00:00',
-						end: '2019-07-10T16:00:00',
-						className: 'fc-bg-pinkred',
-						icon : "group",
-// 						imageurl: "/resources/file/others/calendar.png",
-						allDay: false
-					},
-					{
-						title: 'Meeting',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-08-12',
-						className: 'fc-bg-lightgreen',
-						icon : "suitcase"
-					},
-					{
-						title: 'Conference',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-08-13',
-						end: '2019-08-15',
-						className: 'fc-bg-blue',
-						icon : "calendar"
-					},
-					{
-						title: 'Baby Shower',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-08-13',
-						end: '2019-08-14',
-						className: 'fc-bg-default',
-						icon : "child"
-					},
-					{
-						title: 'Birthday',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-09-13',
-						end: '2019-09-14',
-						className: 'fc-bg-default',
-						icon : "birthday-cake"
-					},
-					{
-						title: 'Restaurant',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-10-15T09:30:00',
-						end: '2019-10-15T11:45:00',
-						className: 'fc-bg-default',
-						icon : "glass",
-						allDay: false
-					},
-					{
-						title: 'Dinner',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-11-15T20:00:00',
-						end: '2019-11-15T22:30:00',
-						className: 'fc-bg-default',
-						icon : "cutlery",
-						allDay: false
-					},
-					{
-						title: 'Shooting',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-08-25',
-						end: '2019-08-25',
-						className: 'fc-bg-blue',
-						icon : "camera"
-					},
-					{
-						title: 'Go Space :)',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-12-27',
-						end: '2019-12-27',
-						className: 'fc-bg-default',
-						icon : "rocket"
-					},
-					{
-						title: 'Dentist',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-						start: '2019-12-29T11:30:00',
-						end: '2019-12-29T012:30:00',
-						className: 'fc-bg-blue',
-						icon : "medkit",
-						allDay: false
-					}
-				],
+
+
+
+				events:
+					function(start, end, timezone, callback) {
+					$.ajax ({ 
+				       type: "POST", 
+				       contentType: "application/json; charset=utf-8", 
+				       url: "/adopt/json/listMissing/MS", 
+				       dataType: 'json', 
+				       success: function (data) { 
+				    	   console.log(JSON.stringify(data));
+				        var events = []; 
+				        $.each(data, function (index, value) { 
+							
+				        	for (var i=0; i<value.length; i++){
+				         events.push({ 
+				          id: value[i].id, 
+				          title: value[i].postTitle, 
+				          date: value[i].dogDate,
+				          description: value[i].postContent,
+				          imageurl: "../resources/file/fileAdopt/"+value[i].mainFile,
+				         }); 
+				        	}
+				         console.log(events) 
+// 				         console.log(value) 
+				        }); 
+				        callback(events); 
+				       }, 
+				       error: function (xhr, err) { 
+				        alert("ERROR! - readyState: " + xhr.readyState + "<br/>status: " + xhr.status + "<br/>responseText: " + xhr.responseText); 
+				       } 
+				      }); },
+					
+// 					[
+// 					{
+// 						title: 'Barber',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-07-07',
+// 						end: '2019-07-07',
+// 						className: 'fc-bg-default',
+// 						imageurl: "../resources/file/others/calendar.png",
+// // 						icon : "circle"
+// 					},
+// 					{
+// 						title: 'Flight Paris',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-08-08T14:00:00',
+// 						end: '2019-08-08T20:00:00',
+// 						className: 'fc-bg-deepskyblue',
+// 						icon : "cog",
+// 						allDay: false
+// 					},
+// 					{
+// 						title: 'Team Meeting',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-07-10T13:00:00',
+// 						end: '2019-07-10T16:00:00',
+// 						className: 'fc-bg-pinkred',
+// 						icon : "group",
+// // 						imageurl: "/resources/file/others/calendar.png",
+// 						allDay: false
+// 					},
+// 					{
+// 						title: 'Meeting',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-08-12',
+// 						className: 'fc-bg-lightgreen',
+// 						icon : "suitcase"
+// 					},
+// 					{
+// 						title: 'Conference',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-08-13',
+// 						end: '2019-08-15',
+// 						className: 'fc-bg-blue',
+// 						icon : "calendar"
+// 					},
+// 					{
+// 						title: 'Baby Shower',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-08-13',
+// 						end: '2019-08-14',
+// 						className: 'fc-bg-default',
+// 						icon : "child"
+// 					},
+// 					{
+// 						title: 'Birthday',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-09-13',
+// 						end: '2019-09-14',
+// 						className: 'fc-bg-default',
+// 						icon : "birthday-cake"
+// 					},
+// 					{
+// 						title: 'Restaurant',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-10-15T09:30:00',
+// 						end: '2019-10-15T11:45:00',
+// 						className: 'fc-bg-default',
+// 						icon : "glass",
+// 						allDay: false
+// 					},
+// 					{
+// 						title: 'Dinner',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-11-15T20:00:00',
+// 						end: '2019-11-15T22:30:00',
+// 						className: 'fc-bg-default',
+// 						icon : "cutlery",
+// 						allDay: false
+// 					},
+// 					{
+// 						title: 'Shooting',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-08-25',
+// 						end: '2019-08-25',
+// 						className: 'fc-bg-blue',
+// 						icon : "camera"
+// 					},
+// 					{
+// 						title: 'Go Space :)',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-12-27',
+// 						end: '2019-12-27',
+// 						className: 'fc-bg-default',
+// 						icon : "rocket"
+// 					},
+// 					{
+// 						title: 'Dentist',
+// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
+// 						start: '2019-12-29T11:30:00',
+// 						end: '2019-12-29T012:30:00',
+// 						className: 'fc-bg-blue',
+// 						icon : "medkit",
+// 						allDay: false
+// 					}
+// 				],
 				eventRender: function(event, element) {
+					if(event.imageurl) {
+		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='30' height='30'>");
+		            }
+
 					if(event.icon){
 						element.find(".fc-title").prepend("<i class='fa fa-"+event.icon+"'></i>");
 					}
@@ -1690,7 +1721,8 @@ jQuery(document).ready(function(){
 				eventClick: function(event, jsEvent, view) {
 				        jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 						jQuery('.event-title').html(event.title);
-						jQuery('.event-body').html(event.description);
+						jQuery('.event-body').html("<img src='" + event.imageurl + "' width='100' height='100'><br/>"+event.description);
+// 						jQuery('.event-body').html(event.description);
 						jQuery('.eventUrl').attr('href',event.url);
 						jQuery('#modal-view-event').modal();
 				},

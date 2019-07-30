@@ -71,14 +71,15 @@
 	<bean id="exceptionResolver"
 				class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		
-<!-- 		<property name="exceptionMappings"> -->
-<!-- 			<props> -->
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">/common/error.jsp</prop>
 <!-- 				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop> -->
 <!-- 				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop> -->
-<!-- 			</props> -->
-<!-- 		</property> -->
+			</props>
+		</property>
 		
-<!-- 		<property name="defaultErrorView"	value="/common/error.jsp" /> -->
+		<property name="defaultErrorView"	value="/common/error.jsp" />
 		
 	</bean>
     <!-- 브라우저가 multipart/form-data 데이터로 보내는

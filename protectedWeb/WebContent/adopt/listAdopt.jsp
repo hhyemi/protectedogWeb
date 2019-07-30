@@ -65,12 +65,23 @@
 			height: 40px;
 			width: 150px;
 			border : 1px solid #D3D3D3;
+/* 			display: none; */
 		}
 		
 		#searchSubmmit {
-			width : 60px;
+/* 			width : 40px; */
+ 			width : 60px; 
 			height : 40px;
-			border-radius : 0px 15px 15px 0px;
+/* 			border-radius : 50px; */
+ 			border-radius : 0px 15px 15px 0px; 
+			border : 1px solid #f04f23;
+		}
+		
+		#write {
+ 			width : 40px; 
+			height : 40px;
+/* 			border-radius : 50px; */
+ 			border-radius : 15px; 
 			border : 1px solid #f04f23;
 		}
 		
@@ -80,6 +91,7 @@
 			padding-left: 10px;
 			border-color: #D3D3D3;
 			border-right: 0px;
+/* 			display: none; */
 		}
 		
 		#searchCondition {
@@ -87,6 +99,7 @@
 			padding-left: 5px;
 			border-color: #D3D3D3;
 			border-right: 0px;
+/* 			display: none; */
 		}
 		
 		.col-md-6 {
@@ -125,9 +138,17 @@
 		    		전체  ${resultPage.totalCount } 건
 		    	</p>
 		    </div>
-		    
-			<div class="col-md-6" align="left">
-				<form class="form-inline" name="detailForm">
+		    <div class="col-md-6" id="justify" align="left">
+			    <c:if test="${ user.id ne null }">
+<!-- 			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button> -->
+						<button type="button" id="write" class="btn btn-default " style="padding-bottom: 6px;margin-left: 0px;">
+							<span class="fas fa-pencil-alt"></span>
+<!-- 							작성 -->
+						</button>
+			    	</c:if>
+			    </div>
+			<div class="col-md-6" align="right">
+				<form class="form-inline" name="detailForm" style="float: right;none;">
 					<div class="form-group">
 			    		<select name="areaCondition" id="areaCondition" >
 							<option value="all">전체</option>
@@ -163,6 +184,7 @@
 						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
 							<span class="fas fa-search"></span>
 						</button>
+
 <!-- 						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">검색</button> -->
 						
 <!-- 					</div> -->
@@ -170,11 +192,10 @@
 			    </form>
 		    </div>
 		    
-		    <c:if test="${ user.id ne null }">
-			    <div class="col-md-6" id="justify" align="right">
-			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button>
-			    </div>
-		    </c:if>
+		    
+		    
+			    
+		    
 		    
 		</div>
 			    
@@ -366,7 +387,25 @@
 
  		}
 	
-		
+		$(document).ready(function() {
+			//엔터검색
+			$('#searchKeyword').keydown( function(e) {
+				if(e.keyCode == 13) {
+					postSize = 1;
+					listAdopt(postSize,"dd");
+				
+// 					console.log("엔터 "+$( '#searchKeyword').val());
+//  					return;
+// 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
+// 						$("#searchKeyword").focus();
+// 						return;
+// 					}else {
+// 						fncGetList(1); 
+// 					}
+				}
+			});
+        });
+
 		
 		$(function() {
 			$( "#searchSubmmit" ).on("click" , function() {
@@ -377,22 +416,7 @@
 				}
 				fncGetList(1);
 			});
-			//엔터검색
-			$('#searchKeyword').keydown( function(e) {
-				if(e.keyCode == 13) {
-					postSize = 1;
-					listAdopt(postSize,"dd");
-				
-// 					alert("엔터 "+$( '#searchKeyword').val());
-// // 					return;
-// 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
-// 						$("#searchKeyword").focus();
-// 						return;
-// 					}else {
-// 						fncGetList(1); 
-// 					}
-				}
-			});
+			
 			// 상세조회
 			$(document).on("click")
 			$( "#listAdoptJSON" ).on("click", ".getadopt" , function() {
@@ -423,6 +447,19 @@
 			$( "font:contains('분양리스트')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
+			
+// 			$( "#searchSubmmit" ).on("click" , function() {
+				
+// 				if (   $('#searchSubmmit').css( 'border-radius'  ) == '0px 50px 50px 0px' ) {
+// 					$('#searchSubmmit').css( 'border-radius','50px' );
+// 				} else {
+// 					$('#searchSubmmit').css( 'border-radius','0px 50px 50px 0px' );
+// 				}
+				
+// 				$('#areaCondition').toggle( 'slow' );
+// 				$('#searchCondition').toggle( 'slow' );
+// 				$('#searchKeyword').toggle( 'slow' );
+// 			});
 
 		});	
 	

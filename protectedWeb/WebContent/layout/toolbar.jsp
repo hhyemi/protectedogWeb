@@ -190,7 +190,7 @@
       <div class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
          <b><a class="navbar-brand smooth-scroll" href="/index.jsp">
-            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;보호할개
+            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;<span >보호할개</span>
           </a></b> 
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span>

@@ -394,7 +394,23 @@
 			});
  		}//apply
  		
- 		
+ 		$(document).ready(function() {
+			//엔터검색
+			$('#searchKeyword').keydown( function(e) {
+				if(e.keyCode == 13) {
+					fncGetList(1);
+				
+// 					console.log("엔터 "+$( '#searchKeyword').val());
+//  					return;
+// 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
+// 						$("#searchKeyword").focus();
+// 						return;
+// 					}else {
+// 						fncGetList(1); 
+// 					}
+				}
+			});
+        });
 	
 		
 		
