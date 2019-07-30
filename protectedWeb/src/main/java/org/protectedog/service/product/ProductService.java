@@ -8,17 +8,17 @@ import org.protectedog.service.domain.Product;
 
 public interface ProductService {
 	
-	//»óÇ°µî·Ï
+	//ìƒí’ˆë“±ë¡
 	public void addProduct(Product product) throws Exception;
-	//»óÇ°»ó¼¼Á¶È¸
+	//ìƒí’ˆìƒì„¸ì¡°íšŒ
 	public Product getProduct(int prodNo) throws Exception;
-	//»óÇ°¸®½ºÆ® Á¶È¸
+	//ìƒí’ˆë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public Map<String,Object> listProduct(Search search) throws Exception;
-	//»óÇ°Á¤º¸ ¾÷µ¥ÀÌÆ®
+	//ìƒí’ˆì •ë³´ ì—…ë°ì´íŠ¸
 	public void updateProduct(Product product) throws Exception;
-	//°ü¸®ÀÚ »óÇ°Á¶È¸
+	//ê´€ë¦¬ì ìƒí’ˆì¡°íšŒ
 	public Map<String,Object> listAdminProduct(Search search) throws Exception;
-	//»óÇ° Àç°í¼ö·® Á¶Àı
+	//ìƒí’ˆ ì¬ê³ ìˆ˜ëŸ‰ ì¡°ì ˆ
 	public void updateQuantity(Product product)throws Exception;
 	
 }

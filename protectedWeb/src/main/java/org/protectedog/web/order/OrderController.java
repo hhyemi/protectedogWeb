@@ -2,6 +2,7 @@ package org.protectedog.web.order;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-//==> »∏ø¯∞¸∏Æ Controller
+//==> ÌöåÏõêÍ¥ÄÎ¶¨ Controller
 @Controller
 @RequestMapping("/order/*")
 public class OrderController {
@@ -32,7 +33,7 @@ public class OrderController {
 	@Autowired
 	@Qualifier("orderServiceImpl")
 	private OrderService orderService;
-	// setter Method ±∏«ˆ æ ¿Ω
+	// setter Method Íµ¨ÌòÑ ÏïäÏùå
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
@@ -45,8 +46,8 @@ public class OrderController {
 	}
 
 	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ¬¸¡∂ «“∞Õ
-	// ==> æ∆∑°¿« µŒ∞≥∏¶ ¡÷ºÆ¿ª «ÆæÓ ¿«πÃ∏¶ »Æ¿Œ «“∞Õ
+		// classpath:config/commonservice.xml Ï∞∏Ï°∞ Ìï†Í≤É
+		// ==> ÏïÑÎûòÏùò ÎëêÍ∞úÎ•º Ï£ºÏÑùÏùÑ ÌíÄÏñ¥ ÏùòÎØ∏Î•º ÌôïÏù∏ Ìï†Í≤É
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
@@ -60,6 +61,7 @@ public class OrderController {
 		System.out.println("/addPurchaseView.do");
 		
 		Product product = productService.getProduct(prodNo);
+		System.out.println("Order GET/////////////////////////");
 		
 		model.addAttribute("product", product);
 		
@@ -67,40 +69,51 @@ public class OrderController {
 
 	}
 	
-	@RequestMapping(value="addOrder", method=RequestMethod.POST)
-	public String addProduct(@ModelAttribute("order") Order order, 
-			@RequestParam("prodNo") int prodNo, 
-			HttpSession session) throws Exception{
-		
-		System.out.println("/addorder");
-		
-		User user = (User)session.getAttribute("user");
-		Product product = productService.getProduct(prodNo);
-		order.setProdNo(product);
+	@RequestMapping(value="addOrder")
+	public String addOrder(@ModelAttribute("order")Order order, @RequestParam("prodNo") int prodNo,
+			@RequestParam("id") String id, Model model,
+			HttpServletRequest request) throws Exception {
+
+		System.out.println("/addOrder POST/////////////////////////");
+
+		User user=userService.getUsers(id);
 		order.setId(user);
-		
+		Product product=productService.getProduct(prodNo);
+		order.setProdNo(product);
+		order.setOrderCode(1);
+
 		orderService.addOrder(order);
-		
-		return "forward:/purchase/addPurchase.jsp";
-	}
-	
-	
 
-	
-	@RequestMapping("/getOrder")
-	public String getOrder (@RequestParam("orderNo")int orderNo, Model model) throws Exception{
-		
-		System.out.println("/getPurchase");
-		
-		System.out.println(orderNo);
-
-		Order order =orderService.getOrder(orderNo);
+		System.out.println(order.getOrderNo());
+		System.out.println(order);
+		System.out.println("order Post////////////////////");
 
 		model.addAttribute("order", order);
+
+		return "forward:/shop/order/addOrder.jsp";
 		
-		return "forward:shop/order/getorder.jsp";
 	}
 	
+
+	
+		@RequestMapping(value="getOrder")
+		public String getOrder(@RequestParam("orderNo") int orderNo,  @RequestParam("prodNo") int prodNo,
+				Model model) throws Exception {
+
+			System.out.println("getOrder");
+			
+			
+			Product product = productService.getProduct(prodNo);
+			Order order = orderService.getOrder(orderNo);
+		
+			order.setProdNo(product);
+			
+			System.out.println(order);
+			model.addAttribute("order", order);
+
+			return "forward:/shop/order/getOrder.jsp";
+
+		}
 	
 	@RequestMapping("/listOrder")
 	public String listPurchaes(@ModelAttribute("search") Search search, 
@@ -118,7 +131,7 @@ public class OrderController {
 		
 		search.setPageSize(pageSize);
 		
-		// Business logic ºˆ«‡
+		// Business logic
 		Map<String, Object> map = orderService.listOrder(search, id);
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -129,7 +142,7 @@ public class OrderController {
 		model.addAttribute("search", search);
 
 
-		return "forward:/purchase/listPurchase.jsp";
+		return "forward:/shop/order/listOrder.jsp";
 	}
 	
 	@RequestMapping("/updateOrderView")
@@ -165,9 +178,6 @@ public class OrderController {
 		orderService.updateOrder(order);
 		
 		
-		
-		
-		
 		return "redirect:/shop/order/getOrder?orderNo="+order.getOrderNo();
 	}
 }
@@ -195,7 +205,7 @@ public class OrderController {
 //		Purchase purchase = purchaseService.getPurchase(tranNo);
 //		model.addAttribute("purchase", purchase);
 //		
-//		// Model ∞˙ View ø¨∞·
+//		// Model ÔøΩÔøΩ View ÔøΩÔøΩÔøΩÔøΩ
 //
 //		return "forward:/purchase/deletePurchaseView.jsp";
 //	}

@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,9 +11,9 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -41,10 +41,10 @@
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 
-<!-- jQuery UI toolTip »ç¿ë CSS-->
+<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip »ç¿ë JS-->
+<!-- jQuery UI toolTip ì‚¬ìš© JS-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
@@ -82,9 +82,9 @@ body {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//=============    °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ  Event  Ã³¸® =============
+	//=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============
 
-	// °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
+	// ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘ Form ì „ì†¡ì„ ìœ„í•´ JavaScrpt ì´ìš©  
 	function fncGetList(currentPage) {
 		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
@@ -93,17 +93,17 @@ body {
 				"/product/listAdminProduct").submit();
 	}
 
-	//============= Event Ã³¸® ¹×  ¿¬°á =============
+	//============= Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 ê³¼ 3 ë°©ë²• ì¡°í•© : $("tagName.className:filterí•¨ìˆ˜") ì‚¬ìš©í•¨.	
 		$("#button").on("click", function() {
 			self.location = "/shop/product/addProduct.jsp";
 		});
 
 		// 	$(function() {
 
-		// 		$("td.ct_btn01:contains('°Ë»ö')").on("click", function() {
+		// 		$("td.ct_btn01:contains('ê²€ìƒ‰')").on("click", function() {
 		// 			fncGetList(1);
 		// 		});
 
@@ -136,16 +136,16 @@ body {
 
 	<div class="container">
 		<h1 align="center">
-			°ü¸®ÀÚ<small>»óÇ° &nbsp;¸®&nbsp;½º&nbsp;Æ® <a href="#" id="button"><button
+			ê´€ë¦¬ì<small>ìƒí’ˆ &nbsp;ë¦¬&nbsp;ìŠ¤&nbsp;íŠ¸ <a href="#" id="button"><button
 						class="mdl-button mdl-js-button mdl-button--primary">
-						»óÇ°µî·Ï</button></a>
+						ìƒí’ˆë“±ë¡</button></a>
 			</small>
 		</h1>
 	</div>
 	<BR />
 	<!--/////////////////////// form start /////////////////////////////////-->
 	<form class="form-inline" name="detailForm">
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+		<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 		<table width="100%" border="0" cellspacing="0" cellpadding="0"
 			style="margin-top: 10px;">
 			<tr>
@@ -153,11 +153,11 @@ body {
 				<td align="right"><select name="searchCondition"
 					class="ct_input_g" style="width: 80px">
 						<option value="0"
-							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>»óÇ°¹øÈ£</option>
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ìƒí’ˆë²ˆí˜¸</option>
 						<option value="1"
-							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>»óÇ°¸í</option>
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ìƒí’ˆëª…</option>
 						<option value="2"
-							${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>»óÇ°°¡°İ</option>
+							${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ìƒí’ˆê°€ê²©</option>
 				</select> <input type="text" name="searchKeyword"
 					value="${search.searchKeyword}" class="ct_input_g"
 					style="width: 200px; height: 19px" /></td>
@@ -167,7 +167,7 @@ body {
 						<tr>
 							<td class="ct_btn01" style="padding-top: 3px;">
 								<button class="mdl-button mdl-js-button mdl-button--primary">
-									°Ë»ö</button>
+									ê²€ìƒ‰</button>
 							</td>
 						</tr>
 					</table>
@@ -178,7 +178,7 @@ body {
 		<br>
 		<br>
 
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+		<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 
 
 		<!--  table Start /////////////////////////////////////-->
@@ -188,18 +188,18 @@ body {
 				align="center">
 				<thead>
 					<tr>
-						<td colspan="11" id="countfont">±âº» ³»¿ª Á¶È¸ : ÀüÃ¼
-							${resultPage.totalCount} °Ç, ÇöÀç ${resultPage.currentPage} ÆäÀÌÁö</td>
+						<td colspan="11" id="countfont">ê¸°ë³¸ ë‚´ì—­ ì¡°íšŒ : ì „ì²´
+							${resultPage.totalCount} ê±´, í˜„ì¬ ${resultPage.currentPage} í˜ì´ì§€</td>
 					</tr>
 				<thead>
 					<tr>
 						<th class="mdl-data-table__cell--non-numeric" align="center"
-							id="no">»óÇ°¹øÈ£</th>
-						<th align="center" id="boardfont">»óÇ°¸í</th>
-						<th align="center" id="boardfont">»óÇ°°¡°İ</th>
-						<th align="center" id="boardfont">ÇÒÀÎ¾×</th>
-						<th align="center" id="boardfont">¿ø»êÁö</th>
-						<th align="center" id="boardfont">Á¦Á¶»ç</th>
+							id="no">ìƒí’ˆë²ˆí˜¸</th>
+						<th align="center" id="boardfont">ìƒí’ˆëª…</th>
+						<th align="center" id="boardfont">ìƒí’ˆê°€ê²©</th>
+						<th align="center" id="boardfont">í• ì¸ì•¡</th>
+						<th align="center" id="boardfont">ì›ì‚°ì§€</th>
+						<th align="center" id="boardfont">ì œì¡°ì‚¬</th>
 
 					</tr>
 				</thead>
@@ -234,17 +234,17 @@ body {
 					align="center">
 					<thead>
 						<tr>
-							<td colspan="11" id="countfont">»ó¼¼ ³»¿ª Á¶È¸ : ÀüÃ¼
-								${resultPage.totalCount} °Ç, ÇöÀç ${resultPage.currentPage} ÆäÀÌÁö</td>
+							<td colspan="11" id="countfont">ìƒì„¸ ë‚´ì—­ ì¡°íšŒ : ì „ì²´
+								${resultPage.totalCount} ê±´, í˜„ì¬ ${resultPage.currentPage} í˜ì´ì§€</td>
 						</tr>
 					<thead>
 						<tr>
 							<th class="mdl-data-table__cell--non-numeric" align="center"
-								id="no">»óÇ°¹øÈ£</th>
-							<th align="center" id="boardfont">»óÇ°¸í</th>
-							<th align="center" id="boardfont">Á¦Á¶ÀÏ</th>
-							<th align="center" id="boardfont">µî·ÏÀÏ</th>
-							<th align="center" id="boardfont">Àç°í¼ö·®</th>
+								id="no">ìƒí’ˆë²ˆí˜¸</th>
+							<th align="center" id="boardfont">ìƒí’ˆëª…</th>
+							<th align="center" id="boardfont">ì œì¡°ì¼</th>
+							<th align="center" id="boardfont">ë“±ë¡ì¼</th>
+							<th align="center" id="boardfont">ì¬ê³ ìˆ˜ëŸ‰</th>
 
 						</tr>
 					</thead>
