@@ -16,6 +16,17 @@
 	    html {
 	 	 scroll-behavior: smooth;
 		}
+		
+		button.ui-corner-all:nth-child(1) {
+			background-color: #f04f23 !important;
+			border-radius: 15px;
+			color: white;
+		}
+		
+		button.ui-corner-all:nth-child(2) {
+			border-radius: 15px;
+		}
+		
 	</style>
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
@@ -28,7 +39,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">Add</a></span> <span>Adopt</span></p>
+          	<p ><span class="mr-2">Add</span> <span>Apply</span></p>
             <font size="7">입양신청</font>
           </div>
         </div>
@@ -97,11 +108,7 @@
 						
 					</div>
 				</div>
-				
-				
-	   
-	          	
-	          	
+	
 	          	<div class="col-md-12"><br/><hr/><br/></div>
 	          	
 	          	
@@ -192,7 +199,7 @@
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
 	          	
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">신청</button></p>
+					<p><button class="btn btn-default py-3 px-4 col-md-12">신청</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">
@@ -271,7 +278,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!--   <script type="text/javascript" src="/resources/events.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<!--   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
   <script>
 
  	  
@@ -477,8 +484,8 @@
 			var divMateAgree = "<div class=\"col-md-12\" id=\"divMateAgree\">"
 	      		+"<div class=\"form-group\">"
 	    		+"<label for=\"\"><strong>동거인의 동의 여부를 선택하세요.<\/strong></label><br/>"
-	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"동의\">동의<\/div>"
-	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"동의하지 않음\">동의하지 않음<\/div>"
+	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"동의\">&nbsp;동의<\/div>"
+	    		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"mateAgree\" value=\"동의하지 않음\">&nbsp;동의하지 않음<\/div>"
 	    		+"<\/div><\/div>";
 			$( 'span[name=mateAgree]').append(divMateAgree).hide().show('blind','slow');
 		}
@@ -497,8 +504,8 @@
 			var divCurrently = "<div class=\"col-md-12\" id=\"divCurrently\">"
 			      			+"<div class=\"form-group\">"
 			        		+"<label for=\"\"><strong>현재 양육여부를 선택하세요.<\/strong></label><br/>"
-			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"양육 중\">양육 중<\/div>"
-			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"양육하고 있지 않음\">양육하고 있지 않음<\/div>"
+			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"양육 중\">&nbsp;양육 중<\/div>"
+			        		+"<div class=\"col-md-12\"><input type=\"radio\"  name=\"currently\" value=\"양육하고 있지 않음\">&nbsp;양육하고 있지 않음<\/div>"
 			       			+"<\/div><\/div>";
 			$( 'span[name=currently]').append(divCurrently).hide().show('blind','slow');
 		}
@@ -777,33 +784,33 @@
     		$("input[name=currently]:checked").val('X');
     	}
     	
-    	Swal.fire({
-	           html: confirmHTML,
-	           dangerMode: true,
-	           confirmButtonText:"신청",
-	           cancelButtonText: "취소",
-	           showCancelButton: true,
-	           showCloseButton: true
-// 	           buttons: {
-// 						 catch: {
-// 						 	text: "신청"
-// 						 },
-// 						 cancelButtonText: "취소",
-// 			   },
-	    }).then((result) => {
-	    	  if (result.value) {
-    		    	$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
-    		  } else if (
-    		    // Read more about handling dismissals
-    		    result.dismiss === Swal.DismissReason.cancel
-    		  ) {
-    		    swalWithBootstrapButtons.fire(
-    		      'Cancelled',
-    		      'Your imaginary file is safe :)',
-    		      'error'
-    		    )
-    		  }
-   		})
+//     	Swal.fire({
+// 	           html: confirmHTML,
+// 	           dangerMode: true,
+// 	           confirmButtonText:"신청",
+// 	           cancelButtonText: "취소",
+// 	           showCancelButton: true,
+// 	           showCloseButton: true
+// // 	           buttons: {
+// // 						 catch: {
+// // 						 	text: "신청"
+// // 						 },
+// // 						 cancelButtonText: "취소",
+// // 			   },
+// 	    }).then((result) => {
+// 	    	  if (result.value) {
+//     		    	$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
+//     		  } else if (
+//     		    // Read more about handling dismissals
+//     		    result.dismiss === Swal.DismissReason.cancel
+//     		  ) {
+//     		    swalWithBootstrapButtons.fire(
+//     		      'Cancelled',
+//     		      'Your imaginary file is safe :)',
+//     		      'error'
+//     		    )
+//     		  }
+//    		})
 	    
 	    
 // 	    then((willDelete) => {
@@ -812,11 +819,11 @@
 // 	           }
 // 	    });
     	
-// 		$('#cfHTML').remove();
-// 		$('#confirm').html( confirmHTML );
+		$('#cfHTML').remove();
+		$('#confirm').html( confirmHTML );
 		
-// 		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 		$('#dialog-confirm').dialog( "open" );
+		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+		$('#dialog-confirm').dialog( "open" );
 				
 	}
 	

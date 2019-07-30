@@ -140,7 +140,6 @@
 									</if>
 									<if test="searchCondition == 1 and searchKeyword !='' ">
 										AND nickname  LIKE '%'||#{searchKeyword}||'%'
-							 			OR id        LIKE '%'||#{searchKeyword}||'%'
 									</if>
 									<if test="searchCondition == 2 and searchKeyword !='' ">
 							 			AND post_content LIKE '%'||#{searchKeyword}||'%' 

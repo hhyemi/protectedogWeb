@@ -12,16 +12,12 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양글 리스트</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	
 	
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -36,11 +32,6 @@
  			padding-bottom: 0px; 
  			padding-top: 10px !important;
  		} 
-		#image-box{
-/* 			background-origin: content-box; */
-/* 			padding-top: 5px; */
-/* 			padding-left: 50px; */
-		}
 		
 		.getadopt {
 			padding-top: 5px;
@@ -53,26 +44,17 @@
  			min-height: 330px;  
  			min-width: wrap; 
  			max-width: wrap; 
-/*  			 */
-/*  			background-size: 95%; */
- 			
-	/* 		    transition: all 0.3s; */
  			display: block; 
-/*  			height: auto;  */
-	/* 		    transform: scale(1); */
  		} 
 
 		form {
 			text-align: left;
-/* 			padding-left: 199px; */
 		}
-		
 		
 		.form-group {
 			display: inline-block;
 			right: 0%;
 			text-align: right;
-/* 			vertical-align: ; */
 		}
 		
 		select, #searchKeyword {
@@ -82,24 +64,29 @@
 		#searchKeyword {
 			height: 40px;
 			width: 150px;
+			border : 1px solid #D3D3D3;
 		}
 		
 		#searchSubmmit {
 			width : 60px;
 			height : 40px;
-			
 			border-radius : 0px 15px 15px 0px;
-			border : 1px solid #D3D3D3;
+			border : 1px solid #f04f23;
 		}
 		
 		#areaCondition {
 			height : 40px;
 			border-radius : 15px 0px 0px 15px;
 			padding-left: 10px;
+			border-color: #D3D3D3;
+			border-right: 0px;
 		}
 		
 		#searchCondition {
 			height : 40px;
+			padding-left: 5px;
+			border-color: #D3D3D3;
+			border-right: 0px;
 		}
 		
 		.col-md-6 {
@@ -119,43 +106,22 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>post</span></p>
+          	<p ><span class="mr-2">List</span> <span>Adopt</span></p>
             <font size="7">분양리스트</font>
           </div>
         </div>
       </div>
     </div>
 
-    
 	<div class="container">
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
-	
-	
-	
-	
-<!-- 		<div class="page-header text-info"> -->
-		
-<!-- 			<div class="row" style="position:relative;height:35px;"> -->
-<!-- 	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > -->
-<!-- 	        	<font size="5px" id="pagename"><strong> -->
-<%-- 					<c:if test="${param.boardCode eq 'AD' }">분양글 리스트</c:if> --%>
-<%-- 				    <c:if test="${param.boardCode eq 'MS' }">실종글 리스트</c:if> --%>
-<!-- 	        	</strong></font></div> -->
-<!-- 	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px"> -->
-<%-- 		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '미인증회원' }"> --%>
-<!-- 		       		 	<button type="button" class="btn btn-primary"><font size="3px">글쓰기</font></button> -->
-<%-- 		        	</c:if> --%>
-<!-- 	        	</font></div> -->
-<!-- 	        </div> -->
-		
-<!-- 	    </div> -->
-
+	<input type="hidden" id="levels" value="${user.levels }">
 
 
 		<div class="row">
 	    
 		    <div class="col-md-12 text-left">
-		    	<p class="text-primary" style="padding-left: 15px;">
+		    	<p style="padding-left: 15px;font-weight: bold;">
 		    		전체  ${resultPage.totalCount } 건
 		    	</p>
 		    </div>
@@ -180,7 +146,7 @@
 			    	</div>
 
 			    	<div class="form-group">
-						<select name="searchCondition" id="searchCondition">
+						<select name="searchCondition" id="searchCondition" >
 							<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
 							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>내용</option>
 							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>견종</option>
@@ -194,7 +160,7 @@
 					</div>
 
 <!-- 					<div class="form-group" > -->
-						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-top: 0px;">
+						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
 							<span class="fas fa-search"></span>
 						</button>
 <!-- 						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">검색</button> -->
@@ -204,9 +170,11 @@
 			    </form>
 		    </div>
 		    
-		    <div class="col-md-6" id="justify" align="right">
-		    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">글쓰기</font></button>
-		    </div>
+		    <c:if test="${ user.id ne null }">
+			    <div class="col-md-6" id="justify" align="right">
+			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button>
+			    </div>
+		    </c:if>
 		    
 		</div>
 			    
@@ -269,11 +237,12 @@
        
        <div class="col-md-12"><br/><br/></div>
        
-         
+       
        
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
+ 	
  	
  	
  	
@@ -431,7 +400,23 @@
 			});
 			
 			// 글 등록하기
-			$( "button:contains('글쓰기')" ).on("click" , function() {
+			$( "button:contains('작성')" ).on("click" , function() {
+				var lv = $('#levels').val();
+				console.log(lv);
+				if ( lv == "미인증회원" ){
+					swal({
+				           text: "인증회원만 작성 가능합니다.",
+				           dangerMode: true,
+				           buttons: {
+									 catch: {
+									 	text: "닫기"
+									 }
+						   },
+						   
+				    });
+					return;
+				}
+
 				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
 			});
 			
@@ -439,7 +424,6 @@
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
 
-// 			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		});	
 	
 	
@@ -450,7 +434,6 @@
 		
 		
 		function fncGetList(currentPage) {
-// 			var ccc = $( '#boardCode' ).val();
 			$("#currentPage").val(currentPage);
 			$("form").attr("method" , "POST").attr("action" , "/adopt/listAdopt?boardCode=AD").submit();
 		}

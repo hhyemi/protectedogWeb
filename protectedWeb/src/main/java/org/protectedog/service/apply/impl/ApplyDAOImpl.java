@@ -58,9 +58,8 @@ public class ApplyDAOImpl implements ApplyDAO{
 	
 	public Map<String, Object> listApply2(String id) throws Exception {
 		Map<String , Object>  map = new HashMap<String, Object>();
-		map.put("id",  id );
 		
-		List<Apply> list = sqlSession.selectList("ApplyMapper.listApply2", map); 
+		List<Apply> list = sqlSession.selectList("ApplyMapper.listApply2", id); 
 		
 		//selectOne: 쿼리 결과가 없으면 return null 
 		map.put("list", list);

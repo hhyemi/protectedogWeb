@@ -27,18 +27,42 @@
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
    
   	<style type="text/css">
+ 		
  		@font-face {
     		font-family: 'YouandiModernTR';
    		 	font-style: normal;
     		font-weight: normal;
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, p, a, th, td{
+    	
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td{
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
+		
 		.navbar-brand{
 			font-weight: bold;
 		}
+		
+		.swal-button {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button:hover {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button--cancel {
+		    color: white;
+		    background-color: #f04f23;
+		}
+		
+		html {
+	 		scroll-behavior: smooth;
+		}
+		
+		
   	</style>
   </head>
   
@@ -180,6 +204,7 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
 	                <a class="dropdown-item" href="../adopt/listMissing.jsp">테스트</a>
+	                <a class="dropdown-item" href="../adopt/calendar.jsp">캘린더</a>
 	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
 	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
                   </div>
@@ -423,6 +448,17 @@
 				self.location = "/users/addUsersBase"
 			});
 		});
+		
+		
+		//============= 맨위로  =============
+		$( function() {
+
+			$("#back-to-top").on("click" , function() {
+				$('html').scrollTop(0);
+			});
+			
+		});
+		
 		
 	</script>	
   

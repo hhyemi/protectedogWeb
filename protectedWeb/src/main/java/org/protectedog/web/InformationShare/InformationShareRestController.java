@@ -58,7 +58,7 @@ public class InformationShareRestController {
 		Interest interest = new Interest();
 		interest.setBoardCode(boardCode);
 		interest.setInterestPost(board);
-		interest.setinterestId(user);
+		interest.setInterestId(user);
 
 		interestService.addInterest(interest);
 		

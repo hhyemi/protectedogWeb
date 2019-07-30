@@ -20,12 +20,12 @@ public interface InterestDAO {
 	public List<Interest> getInterestList(Search search) throws Exception;
 	
 	// Delete
-	public void deleteInterest(Interest interest) throws Exception;
+	public void delInterest(Map<String, Object> map) throws Exception;
 	
 	// List Paging
 	public int getTotalCount(Search search) throws Exception;
 	
-	// �ߺ�üũ
+	// �ߺ�üũ
 	public int getInterestCheck(Map<String, Object> map) throws Exception;
 	
 }

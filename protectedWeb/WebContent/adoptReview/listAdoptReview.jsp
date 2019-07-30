@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page pageEncoding="utf-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,225 +12,187 @@
 <html lang="ko">
 	
 <head>
-	<title>º¸È£ÇÒ°³ ¡¤ ºĞ¾çÈÄ±â±Û ¸®½ºÆ®</title>
-	<meta charset="EUC-KR">
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<meta charset="utf-8">
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- 	<link rel="stylesheet" href="/resources/demos/style.css">
-	<link rel="stylesheet" href="/resources/get/css/icon/font-awesome.min.css">
-	
-	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
+
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 	<style>
 		
 		
  	  	html { 
- 	 	 scroll-behavior: smooth; 
+ 	 		scroll-behavior: smooth; 
  		} 
- 		
-		p, strong, select {
-			transform: rotate(0.1deg);
-		}
-		
-		h3{
-			font-family: 'NanumSquare', sans-serif !important;
-			font-size: 20px !important;
-			padding-bottom: 0px;
-			margin-bottom: 0px !important;
-			opacity: 1  !important;
-			font-weight: bold;
-			transform: rotate(0.001deg);
-		}
-		
-		div.row { 
-			font-family: 'NanumSquare', sans-serif !important;
-			font-weight: bold;
-			transform: rotate(0.001deg);
-		}
 
-	    .getBoard {
-			position: relative;
-			max-height: 338px; 
-			min-height: 338px; 
-			min-width: 255px;
-			max-width: 255px;
-		}
-	
-		.getBoard img {
-			max-height: 300px; 
-			min-height: 300px; 
-			min-width: 255px;
-			max-width: 255px;
-	/* 		    transition: all 0.3s; */
-			display: block;
-			height: auto;
-	/* 		    transform: scale(1); */
+ 		h3{ 
+ 			padding-bottom: 0px; 
+ 			padding-top: 10px !important;
+ 		} 
+
+		.getAR {
+			padding-top: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
 		}
 		
-		.overlay {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			background-color: white;
-			overflow: hidden;
-			opacity: 1;
-			min-width: 255px;
-			max-width: 255px;
-			height: 50px;
-			transition: 1s ease;
-		}
-	
-		.getBoard:hover .overlay {
-			height: 0%;
-		}
-	
-		.textList {
-			color: #3E6B79;
-			font-size: 20px;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			-webkit-transform: translate(-50%, -50%);
-			-ms-transform: translate(-50%, -50%);
-			transform: translate(-50%, -50%);
-			transform: rotate(0.001deg);
-		}
-		
+ 		.listImg {
+ 			max-height: 330px;  
+ 			min-height: 330px;  
+ 			min-width: wrap; 
+ 			max-width: wrap; 
+ 			display: block; 
+ 		} 
+
 		form {
-			text-align: right;
- 			padding-left: 225px; 
-		}
-		
-		.justify {
-			margin-right: 0px;
+			text-align: left;
 		}
 		
 		.form-group {
 			display: inline-block;
 			right: 0%;
 			text-align: right;
-/* 			vertical-align: ; */
 		}
 		
 		select, #searchKeyword {
 			height: 33px;
 		}
 		
-
+		#searchKeyword {
+			height: 40px;
+			width: 150px;
+			border : 1px solid #D3D3D3;
+		}
 		
-/* 		select[name=areaCondition] { */
-/* 			margin-left: 200px; */
-/* 		} */
+		#searchSubmmit {
+			width : 60px;
+			height : 40px;
+			
+			border-radius : 0px 15px 15px 0px;
+			border : 1px solid #f04f23;
+		}
+		
+		#searchCondition {
+			height : 40px;
+			border-radius : 15px 0px 0px 15px;
+			padding-left: 10px;
+			border-color: #D3D3D3;
+			border-right: 0px;
+		}
+		
+		.col-md-6 {
+			padding-left: 30px !important;
+			padding-right: 45px !important;
+		}
+		
+
 
     </style>
-
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
-<body>
+<body class="goto-here">
+   	
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">List</span> <span>AdoptReview</span></p>
+            <font size="7">ë¶„ì–‘í›„ê¸°</font>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+    
 	<div class="container">
-	<input type="hidden" id="userId" value="${sessionScope.user.id}">
-	<input type="hidden" id="adoptConfirm" value="">
-	<input type="hidden" id="applyConfirm" value="">
-	<input type="hidden" id="boardCode" value="AR">
 	
-		<div class="page-header text-info">
-		
-			<div class="row" style="position:relative;height:35px;">
-	        	<div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" >
-	        		<font size="5px" id="pagename"><strong>¸®ºä ¸®½ºÆ®</strong></font>
-	        	</div>
-	        	<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " ><font size="5px">
-		        	<c:if test="${ !(empty sessionScope.user) && sessionScope.user.levels ne '¹ÌÀÎÁõÈ¸¿ø' }">
-		       		 	<button type="button" class="btn btn-primary"><font size="3px">±Û¾²±â</font></button>
-		        	</c:if>
-	        	</font></div>
-	        </div>
-		
-	    </div>
-
-
-
+		<input type="hidden" id="userId" value="${sessionScope.user.id}">
+		<input type="hidden" id="adoptConfirm" value="">
+		<input type="hidden" id="applyConfirm" value="">
+		<input type="hidden" id="boardCode" value="AR">
+	
+	
 		<div class="row">
 	    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
-		    		ÀüÃ¼  ${resultPage.totalCount } °Ç
+		    <div class="col-md-12 text-left">
+		    	<p style="padding-left: 15px;font-weight: bold;">
+		    		ì „ì²´  ${resultPage.totalCount } ê±´
 		    	</p>
 		    </div>
 		    
-			<div class="col-md-6" id="justify" align="right">
+			<div class="col-md-6" align="left">
 				<form class="form-inline" name="detailForm">
 
 			    	<div class="form-group">
 						<select name="searchCondition" id="searchCondition">
-							<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>Á¦¸ñ</option>
-							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>³»¿ë</option>
-							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ÀÛ¼ºÀÚ</option>
+							<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ì œëª©</option>
+							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ë‚´ìš©</option>
+							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ë‹‰ë„¤ì„</option>
 						</select>
 					</div>
 
 					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label>
-						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="&nbsp;°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä."
+						<label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label>
+						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="&nbsp;ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”."
 						    	value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 					</div>
 
-					<div class="form-group" >
-						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">°Ë»ö</button>
-					</div>
-			    
+					<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit"  style="padding-bottom: 6px;margin-left: 0px;">
+						<span class="fas fa-search"></span>
+					</button>
+					
 			    </form>
 		    </div>
 		    
+		    <c:if test="${sessionScope.user.id ne null}">
+			    <div class="col-md-6" id="justify" align="right">
+			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">ì‘ì„±</font></button>
+			    </div>
+		    </c:if>
 		</div>
-			    
-
 		
-		<div class="row"><div class="col-md-12"></div><br/></div>
+	  <div class="row"><div class="col-md-12"></div><br/></div>
 
-      <div class="row">
+
       <div class="col-md-12"></div>
       <div class="col-md-12" >
       
-      <div class="col-md-12" id="listAdoptJSON" style="padding-left: 0px">
+      <div class="col-md-12"  style="padding-left: 0px;">
       
       <c:if test="${resultPage.totalCount eq 0 }">
-     	 <br/><br/><br/><br/><br/><p align="center"><font size="4px">°Ë»ö°á°ú°¡ ¾ø½À´Ï´Ù.</font><br/><br/><br/><br/><br/><br/></p>
+      	<div id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">
+			<font size="4px">ê²€ìƒ‰ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</font>
+		</div>
       </c:if>
+	
+	  <div class="row"  id="listARJSON">
       <c:set var="i" value="0" />
+
 		  <c:forEach var="board" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-
-			<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">
 			
-<!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
-			<figure class="getBoard">
+			<div class="col-md-4" >
+			
+<!-- â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
+
+			<div class="desc-comp-offer-cont">
+			<figure class="getAR">
 				<input type="hidden" name="postNo" value="${board.postNo}"/>
-				<p align="right"><i class="fas fa-user"></i>${board.viewCount}</p>
+				
+				<p align="right" style="padding-bottom: 0px;margin-bottom: 5px;"><i class="fas fa-user"></i>${board.viewCount}</p>
 				<span id="image-box">
-					${board.thumnail }
+					<img class="listImg" style="width:100%;background:url('${board.thumnail }') no-repeat center center;background-size:cover; "   onerror="this.src='http://placehold.it/400x400'"/>
 				</span>
 				
-				<figcaption class="overlay">
-					<span id="textList"><h3 align="center" style="width: 255px;padding-right: 0px;" >${board.postTitle}</h3>
-						<p align="right">${board.nickName} ${board.regDate}</p>
-					</span>
-				</figcaption>
-				
+			    <span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>${board.postTitle}</b></h3>
+					<p align="right" style="padding-bottom: 10px;">${board.nickName} ${board.regDate}</p>
+			   	</span>
 			</figure>
-			
-<!-- ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á -->
+			</div>
+<!-- â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  -->
 			
 			</div>	
 		
@@ -242,10 +204,6 @@
        
        <div class="col-md-12"><br/><br/></div>
        
-		
-		<div id="dialog-cant" title="">
-			<p align="center"><br/>ÈÄ±â¸¦ µî·ÏÇÏ·Á¸é µî·ÏÇÑ ºĞ¾ç±ÛÀÌ ¿Ï·á»óÅÂÀÌ°Å³ª,<br/>ÀÔ¾ç ½ÅÃ»ÇÑ ºĞ¾ç±ÛÀÌ ¿Ï·á»óÅÂ¿©¾ß ÇÕ´Ï´Ù.</p>
-		</div> 	
          
        
 	  <!--  table End /////////////////////////////////////-->
@@ -255,46 +213,42 @@
  	
  	
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
- 	
- 	<!-- PageNavigation Start... -->
-<%-- 	<jsp:include page="../common/pageNavigator_new.jsp"/> --%>
-	<!-- PageNavigation End... -->
+
 <!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
-	
+
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script type="text/javascript" src="/resources/events.js"></script>
-<!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-
 	
-   // ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á  ¹«ÇÑ ½ºÅ©·Ñ  ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
-   
+	
+
 		var postNo;
 		var postSize = 2;
-		var area = '';
 		var str = '';
 		
 		$(function(){
 	        $(window).scroll(function(){
+	            
 	//             if( $(this).scrollTop() == $(document).height() -  $(this).height() ){
 	            if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){
 	            	postSize++;
-	            	listAdoptReview(postSize,"");
+	            	listAR(postSize,"");
 	            }
-	        })//½ºÅ©·Ñ 
+	        })//ìŠ¤í¬ë¡¤ 
 	    })
 	
-		function listAdoptReview(postSize, str){
-			
-	  		$.ajax({
+	
+	
+		function listAR(postSize, str){
+
+	  		$.ajax( 
+			 		{
 						url : "/adoptReview/json/listAdoptReview",
 						method : "POST" ,
 						data : JSON.stringify({
@@ -314,30 +268,38 @@
 								var displayValue = '';
 								
 								for( i=0; i<data.list.length; i++ ){
-									
-									displayValue += '<div class="col-sm-4 col-md-3" style="vertical-align: middle;margin-top: 10px;">'
-										      			+'<figure class="getadopt">'
-										      				+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-										      				+'<img class="listImg" onerror="this.src=\'http://placehold.it/400x400\'"/>'
-// 										      				+'<img class="listImg" src="../resources/file/fileAdopt/'+data.list[i].mainFile+'"  onerror="this.src=\'http://placehold.it/400x400\'"/>'
-										      				+'<figcaption class="overlay">'
-									      					+'<span id="text"><h3 align="center" style="width: 255px;padding-right: 0px;" >'+data.list[i].postTitle+'</h3>'
-									      					+'<p align="right">'+data.list[i].nickName+", "+data.list[i].viewCount+" "+data.list[i].regDate+'</p></span>'
-									      				+'</figcaption>'
-										      			+'</figure>'
-									      			+'</div>';	
+	
+									displayValue += '<div class="col-md-4" ><div class="desc-comp-offer-cont">'
+														+'<figure class="getAR">'
+														+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
+															+'<p align="right"><i class="fas fa-user"></i>'+data.list[i].viewCount+'</p>'
+														    +'<span id="image-box">'+data.list[i].thumnail+'</span>'
+														    +'<span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>'
+														   		+data.list[i].postTitle
+															   	+'</b></h3>'
+															   	+'<p align="right">'+data.list[i].nickName+'|'+data.list[i].regDate+'</p>'
+														   	+'</span>'
+														+'</figure>'
+													+'</div></div>'	;
+										
 						            
 								}
 								if(str!=""){
-									$('#listAdoptJSON').children().remove();
-									$('.text-primary').text('ÀüÃ¼ '+data.totalCount+' °Ç');
+									$('#listARJSON').children().remove();
+									$('.text-primary').text('ì „ì²´ '+data.totalCount+' ê±´');
 								}
 								if( postSize == 1 && data.list.length == 0 ){
-									console.log('°á°ú¾øÀ½');
-									displayValue = '<br/><br/><br/><br/><br/><p align="center"><font size="4px">°Ë»ö°á°ú°¡ ¾ø½À´Ï´Ù.</font><br/><br/><br/><br/><br/><br/></p>';
+									console.log('ê²°ê³¼ì—†ìŒ');
+									$('#searchEmpty').remove();
+									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">'
+													+'<font size="4px">ê²€ìƒ‰ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</font>'
+													+'</div>';
 								}
-								$('#listAdoptJSON').append(displayValue);
+								$('#listARJSON').append(displayValue);
 								
+								
+				
+							
 						},
 						error: function(request, status, error){ 
 							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -346,32 +308,22 @@
 			});
 
  		}
-	// ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á   ¹«ÇÑ ½ºÅ©·Ñ       ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á	
-	// ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á  ±Û¾²±â ±ÇÇÑÃ¼Å©   ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á	
-	
-		//±Û µî·Ï ºÒ°¡ ¾È³» dialog
- 		$( function() {
- 	  	    $( "#dialog-cant" ).dialog({
- 	  	    	  autoOpen: false,
- 	  		      width: 370,
- 	  		      height: 180,
- 	  		      modal: true,
- 	  		      buttons: {
- 	  		        	´İ±â: function() {
- 	  		          		$( this ).dialog( "close" );
- 	  		        	}
- 	  		      }
- 	  	    });
- 	    });
+		
+		
+		
+	// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–   ì‘ì„± ê¶Œí•œì²´í¬   â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 	
+		
+
 	
 		var adoptConfirm;
 		var applyConfirm;
 		var id = $('#userId').val().trim();
+
 		
-		// ÈÄ±â±Û µî·Ï °¡´ÉÇÑÁö È®ÀÎ
+		// í›„ê¸°ê¸€ ë“±ë¡ ê°€ëŠ¥í•œì§€ í™•ì¸
 		function confirmAdopt(){
 			console.log(id);
-			// ºĞ¾ç±Û µî·Ï+ ±× ±ÛÀÌ ¿Ï·á»óÅÂ
+			// ë¶„ì–‘ê¸€ ë“±ë¡+ ê·¸ ê¸€ì´ ì™„ë£Œìƒíƒœ
 			$.ajax( 
 			 		{
 						url : "/adopt/json/listAdopt2/"+id,
@@ -385,7 +337,7 @@
 	 							console.log("adopt "+JSON.stringify(data));
 								
 	 							if ( data.list.length > 0 ) {
-									console.log("ajax¿¡¼­ adopt °á°ú ÀÖÀ½ "+data.list.length);
+									console.log("ajaxì—ì„œ adopt ê²°ê³¼ ìˆìŒ "+data.list.length);
 									self.location = "/adoptReview/addAdoptReview";
 	 							} else {
 	 								confirmApply();
@@ -401,7 +353,7 @@
 		
 		function confirmApply(){
 			
-			// ½ÅÃ»¼­ µî·Ï+ ±× ±ÛÀÌ ¿Ï·á»óÅÂ
+			// ì‹ ì²­ì„œ ë“±ë¡+ ê·¸ ê¸€ì´ ì™„ë£Œìƒíƒœ
 	  		$.ajax( 
 			 		{
 						url : "/apply/json/listApply2/"+id,
@@ -416,11 +368,23 @@
 								console.log("apply "+JSON.stringify(data));
 								
 								if ( data.list.length > 0 ){
-									console.log("ajax¿¡¼­ apply °á°ú ÀÖÀ½ "+ data.list.length);
+									console.log("ajaxì—ì„œ apply ê²°ê³¼ ìˆìŒ "+ data.list.length);
 									self.location = "/adoptReview/addAdoptReview";
 								} else {
-									$( '#dialog-cant' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-									$( "#dialog-cant" ).dialog( "open" );
+									
+									swal({
+								           text: "í›„ê¸°ë¥¼ ë“±ë¡í•˜ë ¤ë©´ ë“±ë¡í•œ ë¶„ì–‘ê¸€ì´ ì™„ë£Œìƒíƒœì´ê±°ë‚˜, "+"ì…ì–‘ ì‹ ì²­í•œ ë¶„ì–‘ê¸€ì´ ì™„ë£Œìƒíƒœì—¬ì•¼ í•©ë‹ˆë‹¤.",
+								           dangerMode: true,
+								           buttons: {
+													 catch: {
+													 	text: "ë‹«ê¸°"
+													 }
+										   },
+										   
+								    });
+								
+// 									$( '#dialog-cant' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 									$( "#dialog-cant" ).dialog( "open" );
 								}
 								
 						},
@@ -431,25 +395,25 @@
  		}//apply
  		
  		
-
+	
 		
-	// ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á  ±Û¾²±â ±ÇÇÑÃ¼Å©   ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á	
+		
 		$(function() {
-		
-			$( "button:contains('°Ë»ö')" ).on("click" , function() {
+			$( "#searchSubmmit" ).on("click" , function() {
+// 			$( "button:contains('ê²€ìƒ‰')" ).on("click" , function() {
 				if ( $( '#searchKeyword').val() == '' ){
 					$("#searchKeyword").focus();
 					return;
 				}
 				fncGetList(1);
 			});
-			//¿£ÅÍ°Ë»ö
+			//ì—”í„°ê²€ìƒ‰
 			$('#searchKeyword').keydown( function(e) {
 				if(e.keyCode == 13) {
 					postSize = 1;
-					listApply(postSize,"dd");
+					listAR(postSize,"dd");
 				
-// 					alert("¿£ÅÍ "+$( '#searchKeyword').val());
+// 					alert("ì—”í„° "+$( '#searchKeyword').val());
 // // 					return;
 // 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
 // 						$("#searchKeyword").focus();
@@ -459,20 +423,19 @@
 // 					}
 				}
 			});
-			// »ó¼¼Á¶È¸
+			
+			// ìƒì„¸ì¡°íšŒ
 			$(document).on("click")
-			$( "#listAdoptJSON" ).on("click", ".getBoard" , function() {
+			$( "#listARJSON" ).on("click", ".getAR" , function() {
 				self.location ="/adoptReview/getAdoptReview?postNo="+$(this).children( $('input')).val().trim();
 			});
 			
-			// ±Û µî·ÏÇÏ±â
-			$( "button:contains('±Û¾²±â')" ).on("click" , function() {
+			// ê¸€ ë“±ë¡í•˜ê¸°
+			$( "button:contains('ì‘ì„±')" ).on("click" , function() {
 				confirmAdopt();
 			});
 			
-			$( "strong:contains('¸®ºä ¸®½ºÆ®')" ).on("click" , function() {
-				console.log("???");
-			
+			$( "font:contains('ë¶„ì–‘í›„ê¸°')" ).on("click" , function() {
 				self.location = "/adoptReview/listAdoptReview";
 			});
 
@@ -480,16 +443,15 @@
 		});	
 	
 	
-		$('select[name=areaCondition]').change( function(){
-			postSize = 1;
-			listApply(postSize,"dd");
-		});
+// 		$('select[name=areaCondition]').change( function(){
+// 			postSize = 1;
+// 			listAR(postSize,"dd");
+// 		});
 		
 		
 		function fncGetList(currentPage) {
-// 			var ccc = $( '#boardCode' ).val();
 			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/adopt/listAdopt?boardCode=AD").submit();
+			$("form").attr("method" , "POST").attr("action" , "/adoptReview/listAdoptReview").submit();
 		}
 		
 	
