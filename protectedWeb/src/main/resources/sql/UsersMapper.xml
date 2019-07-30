@@ -111,15 +111,15 @@
 	<update id="updateUsers"	parameterType="users">
 		UPDATE users
 		<set>
-			id=#{id},
-			pw=#{pw},
-			nickname=#{nickname},
+			id=#{id:VARCHAR},
+			pw=#{pw:VARCHAR},
+			nickname=#{nickname:VARCHAR},
 			email=#{email:VARCHAR},
 			phone=#{phone:NUMERIC},
 			user_addr=#{userAddr:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
 			profile=#{profile:VARCHAR},
-			level_point=#{levelPoint}
+			level_point=#{levelPoint:NUMERIC}
 		</set>
 		WHERE id=#{id}
 	</update>

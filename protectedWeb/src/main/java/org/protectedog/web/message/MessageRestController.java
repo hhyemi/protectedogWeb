@@ -1,11 +1,15 @@
 package org.protectedog.web.message;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.protectedog.service.domain.Message;
 import org.protectedog.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +50,44 @@ public class MessageRestController {
 		return map;
 		
 	}
+	
+	@RequestMapping(value="json/getMessage/{messageNo}", method=RequestMethod.GET)
+	public Map<String, Object> getMessage(@PathVariable int messageNo) throws Exception{
+		
+		System.out.println("/message/json/getMessage : GET");
+
+		Date date=new Date();
+		Message message=messageService.getMessage(messageNo);
+		date=message.getSendDate();
+		SimpleDateFormat dateFormat=new SimpleDateFormat("yy-MM-dd");
+		String sendDate=dateFormat.format(date);
+		
+		message.setMessageStatus("1");
+		messageService.updateMessage(message);
+		System.out.println("흠좀무 : "+message.getMessageStatus());
+		
+		Map<String , Object> map=new HashMap<String, Object>();
+		map.put("sendDate", sendDate);
+		map.put("message", messageService.getMessage(messageNo));
+		
+		return map;
+		
+	}
+	
+	@RequestMapping(value="json/getReceiveTotalCount", method=RequestMethod.POST)
+	public int getReceiveTotalCount(@RequestBody Map<String, String> rcvId) throws Exception{
+		
+		System.out.println("/message/json/getReceiveTotalCount : POST");
+		
+		String receiverId=rcvId.get("id");
+		System.out.println("getReceiveTotalCount : "+receiverId);
+		int result=messageService.getReceiveTotalCount(receiverId);
+		
+		return result;
+		
+	}
+	
+	
 	
 }
 

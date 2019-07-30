@@ -225,7 +225,9 @@ public class UserController {
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
-		
+		if(dbUser.getLevelPoint() < 0) {
+			return "redirect:/";
+		}
 		
 		if(user.getPw().equals(dbUser.getPw()) && user.getId().equals(dbUser.getId())) {
 			String check="true";

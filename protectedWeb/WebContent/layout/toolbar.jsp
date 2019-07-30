@@ -70,81 +70,8 @@
 <!--====================================================
                     LOGIN OR REGISTER
 ======================================================-->
-    <section id="login">
-      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-          <div class="modal-dialog">
-              <div class="modal-content loginSection">
-                  <div class="modal-header" align="center">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span class="fa fa-times" aria-hidden="true"></span>
-                      </button>
-                  </div>
-                  <div id="div-forms">
-                      <form id="login-form">
-                          <h3 class="text-center">로그인</h3>
-                          <div class="modal-body">
-                              <label for="username">아 이 디</label> 
-                              <input id="login_username" name="id" class="form-control id" type="text" placeholder="Enter username " required>
-                              <label for="username">비밀번호</label> 
-                              <input id="login_password" name="pw" class="form-control pw" type="password" placeholder="Enter password" required>
-<!--                               <div class="checkbox"> -->
-<!--                                   <label> -->
-<!--                                       <input type="checkbox"> Remember me -->
-<!--                                   </label> -->
-<!--                               </div> -->
-                          </div>
-                          <div class="modal-footer text-center">
-                              <div>
-                                  <button type="submit" id="submitLogin" class="btn btn-general btn-white">Login</button>
-                              </div>
-                              <div>
-                              	  <img src="/resources/file/others/kakao_account_login_btn_medium_narrow.png" class="kakaoLogin">
-                              </div>
-<!--                               <div> -->
-<!--                                   <button id="login_register_btn" id="regist" type="button" class="btn btn-link">Register</button> -->
-<!--                               </div> -->
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </section>   
-                      
-<!--     <section id="regist"> -->
-<!--       <div class="modal fade" id="regist-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"> -->
-<!--           <div class="modal-dialog"> -->
-<!--               <div class="modal-content RegistSection"> -->
-<!--                   <div class="modal-header" align="center"> -->
-<!--                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--                           <span class="fa fa-times" aria-hidden="true"></span> -->
-<!--                       </button> -->
-<!--                   </div>                       -->
-<!--                       <form id="register-form"> -->
-<!--                           <h3 class="text-center">회원가입</h3> -->
-<!--                           <div class="modal-body">  -->
-<!--                               <label for="register_id">아 이 디</label>  -->
-<!--                               <input id="register_id" name="id" class="form-control" type="text" placeholder="아이디를 입력하세요" required> -->
-<!--                               <label for="register_password">비밀번호</label>  -->
-<!--                               <input id="register_password" name="pw" class="form-control" type="text" placeholder="비밀번호를 입력하세요" required> -->
-<!--                               <label for="register_password2">비밀번호 확인</label>  -->
-<!--                               <input id="register_password2" name="pw2" class="form-control" type="password" placeholder="Password" required> -->
-<!--                               <label for="register_userName">회 원 명</label>  -->
-<!--                               <input id="register_userName" name="pw2" class="form-control" type="text" placeholder="Password" required> -->
-<!--                               <label for="register_nickname">닉 네 임</label>  -->
-<!--                               <input id="register_nickname" name="pw2" class="form-control" type="text" placeholder="Password" required> -->
 
-<!--                           </div> -->
-<!--                           <div class="modal-footer"> -->
-<!--                               <div> -->
-<!--                                   <button type="submit" class="btn btn-general btn-white">Register</button> -->
-<!--                               </div> -->
-<!--                           </div> -->
-<!--                       </form> -->
-<!--                   </div> -->
-<!--               </div> -->
-<!--           </div> -->
-<!--     </section>       -->
+                     
 
 <!--====================================================
                          HEADER
@@ -169,8 +96,6 @@
               </div> 
               <div class="col-md-5">
                 <ul class="list-inline top-data">
-<!--                   <li><div id="naver_id_login"></div></li> -->
-                  <li><img src="/resources/file/others/kakao.png" height="30px" width="30px" class="kakaoLogin"></li>
                   <c:if test="${ sessionScope.user == null }">
                   <li><a href="#" class="log-top login-modal" data-toggle="modal" data-target="#login-modal">Login</a></li>
                   <li><a href="/users/addUsersBase" class="log-top regist">Regist</a></li>
@@ -228,9 +153,9 @@
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
-		              	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
-		                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
-		                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
+		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a>
+<!-- 		                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a> -->
+<!-- 		                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a> -->
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
 		                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
 		                </c:if>
@@ -288,6 +213,8 @@
         </div>
       </div>
     </header> 
+    
+    <jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
 
     <!--Global JavaScript -->
     <script src="/resources/newTemplate/js/jquery/jquery.min.js"></script>
@@ -352,8 +279,8 @@
 					datatype : "json",
 					success : function(response){
 // 						alert("pw : "+JSON.stringify(response))
-						if(response.pw == pw && response.id == id){
-// 							alert("로그인 성공 pw : "+response.pw);
+						if(response.pw == pw && response.id == id && response.levelPoint >= 0){
+							alert("로그인 성공 pw : "+response.pw+" && "+response.levelPoint);
 							alert(response.nickname+" 님 환영합니다!");
 // 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
 							self.location="/index.jsp";
@@ -365,6 +292,12 @@
 							return;
 							$("#id").focus();
 						}
+						if(response.levelPoint < 0) {
+							alert("블랙리스트 처리된 회원입니다.");
+							return;
+							$("#id").focus();
+						}
+						
 					},
 					error : function(request,status,error){
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -403,13 +336,13 @@
 		})
 		
 
-// 		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
-// 	  	var state = naver_id_login.getUniqState();
-// 	  	naver_id_login.setButton("green", 1 , 30);
-// 	  	naver_id_login.setDomain("http://localhost:8080/");
-// 	  	naver_id_login.setState(state);
-// // 	  	naver_id_login.setPopup();
-// 	  	naver_id_login.init_naver_id_login();
+		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("green", 1 , 30);
+	  	naver_id_login.setDomain("http://localhost:8080/");
+	  	naver_id_login.setState(state);
+// 	  	naver_id_login.setPopup();
+	  	naver_id_login.init_naver_id_login();
 	  	
 	  	
 	  	
