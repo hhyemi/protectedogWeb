@@ -8,31 +8,28 @@ import org.protectedog.service.domain.Order;
 
 public interface OrderService {
 
-		//±¸¸Å³»¿ª Ãß°¡ 
-		public void addOrder(Order order) throws Exception;
-		
-		//±¸¸Å³»¿ª »ó¼¼Á¶È¸
-		public Order getOrder(int orderNo) throws Exception;
-		
-		//ÁÖ¹®³»¿ª ¸®½ºÆ®
-		public Map<String, Object> listOrder(Search search,String id) throws Exception;
-		
-		//±¸¸ÅÁ¤º¸ ¼öÁ¤ 
-		public void updateOrder(Order order) throws Exception;
-		
-		// ¹è¼ÛÁß 2 ¹è¼Û¿Ï·á/±¸¸ÅÈÄ±â ÀÛ¼º 3 ±¸¸ÅÈÄ±â Á¶È¸ 4 ±¸¸ÅÃë¼Ò 5 ±³È¯/¹İÇ°Áß 6 ¼öÁ¤ 
-		public int updateOrderCode(Order order) throws Exception;
-
-		//ÁÖ¹® »èÁ¦(°ü¸®ÀÚ ±ÇÇÑ)
-		public void delOrder(Order order)throws Exception;
-		
-		//±³È¯¹İÇ° ¸®½ºÆ®
-		public Map<String, Object> listSwapOrder(Search search, String id)throws Exception;
-		
-		//±¸¸Å°ü¸®(°ü¸®ÀÚ ±ÇÇÑ)
-		public Map<String, Object> listAdminOrder(Search search, String id)throws Exception;
-
-	}
+	//êµ¬ë§¤ë‚´ì—­ ì¶”ê°€ 
+	public void addOrder(Order order) throws Exception;
 	
+	//êµ¬ë§¤ë‚´ì—­ ìƒì„¸ì¡°íšŒ
+	public Order getOrder(int orderNo) throws Exception;
 	
-                             
+	//ì£¼ë¬¸ë‚´ì—­ ë¦¬ìŠ¤íŠ¸
+	public Map<String, Object> listOrder(Search search,String id) throws Exception;
+	
+	//êµ¬ë§¤ì •ë³´ ìˆ˜ì • 
+	public void updateOrder(Order order) throws Exception;
+	
+	// ë°°ì†¡ì¤‘ 2 ë°°ì†¡ì™„ë£Œ/êµ¬ë§¤í›„ê¸° ì‘ì„± 3 êµ¬ë§¤í›„ê¸° ì¡°íšŒ 4 êµ¬ë§¤ì·¨ì†Œ 5 êµí™˜/ë°˜í’ˆì¤‘ 6 ìˆ˜ì • 
+	public int updateOrderCode(Order order) throws Exception;
+
+	//ì£¼ë¬¸ ì‚­ì œ(ê´€ë¦¬ì ê¶Œí•œ)
+	public void delOrder(Order order)throws Exception;
+	
+	//êµí™˜ë°˜í’ˆ ë¦¬ìŠ¤íŠ¸
+	public Map<String, Object> listSwapOrder(Search search, String id)throws Exception;
+	
+	//êµ¬ë§¤ê´€ë¦¬(ê´€ë¦¬ì ê¶Œí•œ)
+	public Map<String, Object> listAdminOrder(Search search, String id)throws Exception;
+
+}

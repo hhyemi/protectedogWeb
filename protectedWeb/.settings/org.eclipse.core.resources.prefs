@@ -17,7 +17,6 @@ encoding//WebContent/funding/updateReview.jsp=UTF-8
 encoding//WebContent/funding/updateVoting.jsp=UTF-8
 encoding//WebContent/shop/cart/reviewtest.jsp=UTF-8
 encoding//WebContent/shop/order/pointexample.jsp=UTF-8
-encoding//WebContent/shop/product/getProduct.jsp=UTF-8
 encoding//WebContent/shop/product/listProduct.jsp=UTF-8
 encoding//WebContent/users/callback.jsp=UTF-8
 encoding//src/main/java/org/protectedog/common/aspect/LogAspectJ.java=EUC-KR

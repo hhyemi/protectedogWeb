@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,14 +10,14 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 			
 		
 		
-		//============= userId ø° »∏ø¯¡§∫∏∫∏±‚  Event  √≥∏Æ (double Click)=============
+		//============= userId Ïóê ÌöåÏõêÏ†ïÎ≥¥Î≥¥Í∏∞  Event  Ï≤òÎ¶¨ (double Click)=============
 		 $(function() {
 			 
-			//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(  "#viewReview" ).on("click" , function() {
 
 					var postTitle = $(this).next().val();
@@ -34,11 +34,11 @@
 								success : function(JSONData , status) {
 
 									var displayValue = "<h6>"
-																+"æ∆¿Ãµ : "+JSONData.id+"<br/>"
-																+"±€¡¶∏Ò : "+JSONData.postTitle+"<br/>"
-																+"∆„¡° : "+JSONData. grade+"<br/>"
+																+"ÏïÑÏù¥Îîî : "+JSONData.id+"<br/>"
+																+"Í∏ÄÏ†úÎ™© : "+JSONData.postTitle+"<br/>"
+																+"ÌéëÏ†ê : "+JSONData. grade+"<br/>"
 																+"ROLE : "+JSONData.postContent+"<br/>"
-																+"µÓ∑œ¿œ : "+JSONData.regDate+"<br/>"
+																+"Îì±Î°ùÏùº : "+JSONData.regDate+"<br/>"
 																+"</h6>";
 									$("h6").remove();
 									$( "#"+userId+"" ).html(displayValue);
