@@ -52,16 +52,14 @@ public class ReviewServiceImpl implements ReviewService {
 		return map;
 	}
 
-//	@Override
-//	public void updateReivew(Review Review) throws Exception {
-//		// TODO Auto-generated method stub
-//		reviewDAO.updateReivew(Review);
-//
-//	}
+	@Override
+	public void updateReivew(Review Review) throws Exception {
+		reviewDAO.updateReivew(Review);
+
+	}
 
 	@Override
 	public void delReivew(int postNo) throws Exception {
-		// TODO Auto-generated method stub
 		reviewDAO.delReivew(postNo);
 
 	}

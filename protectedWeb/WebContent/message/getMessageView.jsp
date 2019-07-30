@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -8,18 +8,38 @@
 <html lang="ko">
 <head>
 <!--  meta  -->
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- <meta charset="UTF-8"> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
 <!--  bootstrap CDN  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- <script -->
+<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <!--  bootstrap Dropdown CSS & JS  -->
 <!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>ë³´í˜¸í• ê°œ : ë©”ì‹œì§€í•¨ </title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/font-icon-style.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/apps/email.css">
+    
+    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 
 <style type="text/css">
 
@@ -48,19 +68,20 @@ body {
 
 <body>
 
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
+	
 		
 	<div class="container">
-		
+		<jsp:include page="/users/mypage/userSideBar.jsp"></jsp:include>
 		<form name="info">
 			<input type="hidden" name="messageNo" value="${message.messageNo}" />
 
 			<div class="row" style="position: relative; height: 25px;">
 				<div class="col-md-8"
-					style="position: absolute; left: 0px; bottom: 0px;">º¸³½»ç¶÷ | ${ message.senderId }</div>
+					style="position: absolute; left: 0px; bottom: 0px;">ë³´ë‚¸ì‚¬ëŒ | ${ message.senderId }</div>
 							
 				<div class="col-md-4" align="right"
-					style="position: absolute; right: 0px; bottom: 0px;">¹ŞÀº»ç¶÷ | ${ message.receiverId }</div>
+					style="position: absolute; right: 0px; bottom: 0px;">ë°›ì€ì‚¬ëŒ | ${ message.receiverId }</div>
 			</div>
 			<p />
 			
@@ -68,11 +89,11 @@ body {
 			
 			<div class="row" style="position: relative; height: 25px;">
 				<div class="col-md-8"
-					style="position: absolute; left: 0px; bottom: 0px;">Á¦¸ñ | ${ message.messageTitle }</div>
+					style="position: absolute; left: 0px; bottom: 0px;">ì œëª© | ${ message.messageTitle }</div>
 							
 				<div class="col-md-4" align="right"
 					style="position: absolute; right: 0px; bottom: 0px;">
-					º¸³½ÀÏ½Ã | <fmt:formatDate value="${ message.sendDate }" pattern="yyyy³â MM¿ù ddÀÏ"/>
+					ë³´ë‚¸ì¼ì‹œ | <fmt:formatDate value="${ message.sendDate }" pattern="yyyyë…„ MMì›” ddì¼"/>
 				</div>
 			</div>
 			<p />
@@ -86,9 +107,9 @@ body {
 		</form>
 
 		<div class="button" align="right">
-			<button>´äÀå</button>
-			<button>¸ñ·Ï</button>
-			<button>»èÁ¦</button>
+			<button>ë‹µì¥</button>
+			<button>ëª©ë¡</button>
+			<button>ì‚­ì œ</button>
 		</div>
 		<br/>
 		<br/>
@@ -101,14 +122,23 @@ body {
 		
 		<jsp:include page="/layout/footer.jsp"></jsp:include>
 		
+	<script src="/resources/newTemplate/admin/js/jquery.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/popper/popper.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/tether.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/bootstrap.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/jquery.cookie.js"></script>
+    <script src="/resources/newTemplate/admin/js/jquery.validate.min.js"></script> 
+    <script src="/resources/newTemplate/admin/js/chart.min.js"></script> 
+    <script src="/resources/newTemplate/admin/js/front.js"></script> 
+		
 <script type="text/javascript">
 	$(function() {
 
-		$("button:contains('´äÀå')").on("click", function() {
+		$("button:contains('ë‹µì¥')").on("click", function() {
 			self.location = "/message/addMessage?receiverId="+${ message.senderId }
 		});
 		
-		$("button:contains('¸ñ·Ï')").on("click", function() {
+		$("button:contains('ëª©ë¡')").on("click", function() {
 			if(${ message.receiverId == sessionScope.user.id }){
 				self.location='/message/listReceiveMessage?receiverId=${sessionScope.user.id}';
 			}
@@ -117,11 +147,11 @@ body {
 			}
 		});
 
-// 		$("button:contains('»èÁ¦')").on(
+// 		$("button:contains('ì‚­ì œ')").on(
 // 				"click",
 // 				function() {
 
-// 					var result = confirm("Á¤¸» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?");
+// 					var result = confirm("ì •ë§ ì‚­ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 
 // 					if (result) {
 // 						$("form[name='info']").attr("method", "POST").attr(

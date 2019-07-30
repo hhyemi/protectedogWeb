@@ -35,7 +35,7 @@ public class MessageController {
 		System.out.println(this.getClass());
 	}
 	
-	///PagingÀ» À§ÇÑ Value¼³Á¤
+	///Pagingï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Valueï¿½ï¿½ï¿½ï¿½
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
@@ -63,7 +63,7 @@ public class MessageController {
 		System.out.println("message : "+message);
 		System.out.println("sender? : "+senderId);
 		
-		return "/message/listSendMessage?senderId="+senderId;
+		return "/message/listMessage?searchCondition=send";
 //		return "redirect:/index.jsp";
 		
 	}
@@ -82,73 +82,43 @@ public class MessageController {
 		return "forward:/message/getMessageView.jsp";
 		
 	}
+
 	
-	@RequestMapping(value="listSendMessage")
-	public String listSendMessage(@ModelAttribute("search") Search search,
-								 HttpServletRequest request, 
-								Model model) throws Exception{
-		
-		System.out.println("/message/listSendMessage");
-		
-		//ÆäÀÌÁö °ü·Ã
-		if(search.getCurrentPage()==0) {
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
-		System.out.println("sendMessage : "+search.toString());
-		
-		//Á¶°Ç°Ë»öÀ» À§ÇÑ senderId°ª ÃßÃâ
-		User user=(User)request.getSession().getAttribute("user");
-		String senderId=user.getId();
-		System.out.println("sendMessage : "+user);
-		System.out.println("sendMessage : "+senderId);
-		
-		//DB µ¥ÀÌÅÍ ¸®½ºÆ® »Ì¾Æ¿À±â
-		Map<String, Object> map=messageService.getSendMessageList(search, senderId);
-		System.out.println("Message ¸®½ºÆ® : "+map.toString());
-		
-		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("Message ¸®½ºÆ®ÆäÀÌÁö : "+resultPage);
-		
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-		model.addAttribute("senderId", senderId);
-		
-		return "forward:/message/listSendMessageView.jsp";
-		
-	}
-	
-	@RequestMapping(value="listReceiveMessage")
-	public String listReceiveMessage(@ModelAttribute("search") Search search,
+	@RequestMapping(value="listMessage")
+	public String listMessage(@ModelAttribute("search") Search search,
 									 HttpServletRequest request,
 									 Model model) throws Exception{
-		System.out.println("/message/listReceiveMessage");
+		System.out.println("/message/listMessage");
 		
-		//ÆäÀÌÁö °ü·Ã
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if(search.getCurrentPage()==0) {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+		String searchCondition=search.getSearchCondition();
+		System.out.println("listMessage ê²€ìƒ‰ì¡°ê±´ : "+searchCondition);
+		search.setSearchCondition(searchCondition);
 		
-		//Á¶°Ç°Ë»öÀ» À§ÇÑ senderId°ª ÃßÃâ
+		//ï¿½ï¿½ï¿½Ç°Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ senderIdï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		User user=(User)request.getSession().getAttribute("user");
-		String receiveId=user.getId();
 		
-		//DB µ¥ÀÌÅÍ ¸®½ºÆ® »Ì¾Æ¿À±â
-		Map<String, Object> map=messageService.getReceiveMessageList(search, receiveId);
-		System.out.println("Message ¸®½ºÆ® : "+map.toString());
+		String id=user.getId();
+		System.out.println("listMessage ê²€ìƒ‰ì¡°ê±´ : "+id);
+		
+		//DB ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½
+		Map<String, Object> map=messageService.getMessageList(search, id);
+		System.out.println("Message ï¿½ï¿½ï¿½ï¿½Æ® : "+map.toString());
 		
 		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("Message ¸®½ºÆ®ÆäÀÌÁö : "+resultPage);
+		System.out.println("Message ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+resultPage);
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-		model.addAttribute("receiveId", receiveId);
+		model.addAttribute("id", id);
 		
 //		return "forward:/message/listReceiveMessageView.jsp";
-		return "forward:/message/listReceiveMessage.jsp";
+		return "forward:/message/listMessage.jsp";
 	}
 	
 }

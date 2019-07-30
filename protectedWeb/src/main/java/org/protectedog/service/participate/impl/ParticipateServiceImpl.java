@@ -30,7 +30,7 @@ public class ParticipateServiceImpl implements ParticipateService {
 		System.out.println(this.getClass());
 	}
 
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
 	@Override
 	public void addParticipate(Participate participate) throws Exception {
@@ -47,14 +47,17 @@ public class ParticipateServiceImpl implements ParticipateService {
 	@Override
 	public Map<String, Object> listNoticeComment(Search search, int postNo ,String statusCode) throws Exception {
 		List<Participate> list = participateDAO.listNoticeComment(search,postNo, statusCode);
-		
+		int totalCount = participateDAO.getParticipateTotalCount(postNo);
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
 
 		return map;
 	}
 
-	/////////////// È¸¿ø¿¡¼­ ¿ä±¸ÇÑ Method/////////////////////
+	/////////////// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ä±¸ï¿½ï¿½ Method/////////////////////
 
 	@Override
 	public List<Participate> listParticipateUser(int id) throws Exception {

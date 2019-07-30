@@ -1,12 +1,12 @@
- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>∫∏»£«“∞≥ °§ ∫–æÁ»ƒ±‚±€ ªÛºº¡∂»∏</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>Î≥¥Ìò∏Ìï†Í∞ú ¬∑ Î∂ÑÏñëÌõÑÍ∏∞Í∏Ä ÏÉÅÏÑ∏Ï°∞Ìöå</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -18,48 +18,19 @@
 	 		scroll-behavior: smooth;
 		}
 		
-/* 		p, strong, select { */
-/* 			transform: rotate(0.1deg); */
-/* 		} */
-		
 		.ftco-section {
 			padding-top: 0px !important;
 		}
 
-		.main_btn {
-		    display: inline-block;
-		    background: #94BFCA;
-		    padding: 0px 32px;
-		    letter-spacing: 0.25px;
-		    color: #fff;
-		    font-size: 12px;
-		    font-weight: 500;
-		    line-height: 44px;
-		    outline: none !important;
-		    box-shadow: none !important;
-		    text-align: center;
-		    border: 1px solid #94BFCA;
-		    cursor: pointer;
-		    text-transform: uppercase;
-		    transition: all 300ms linear 0s;
-		    border-radius: 5px;
-		}
-		
 		#modiButton, #delButton, #listButton {
-		    padding: 0px 5px;
-/* 		    letter-spacing: 0.25px; */
-/* 		    color: #fff; */
-/* 		    font-size: 12px; */
-/* 		    font-weight: 500; */
+		    padding: 0px ;
+		    margin-right:0px;
+		    margin-left:0px;
+		    width:40px;
+		    height:20px;
  		    line-height: 20px; 
-/* 		    outline: none !important; */
-/* 		    box-shadow: none !important; */
-/* 		    text-align: center; */
-/* 		    border: 1px solid #94BFCA; */
-/* 		    cursor: pointer; */
-/* 		    text-transform: uppercase; */
-/* 		    transition: all 300ms linear 0s; */
  		    border-radius: 3px; 
+  		    font-size: 13px; 
 		}
 
    		.main_btn:hover {
@@ -78,24 +49,24 @@
    		img {
    			max-width: 730px !important;
    		}
+
    		
     </style>
+    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
   </head>
   <body class="goto-here">
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 
-<!--     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');"> -->
-<!--       <div class="container"> -->
-<!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
-<!--           <div class="col-md-9 ftco-animate text-center"> -->
-<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
-<!--             <h1 class="mb-0 bread" id="h1"> -->
-<!--            		»ƒ±‚ ªÛºº¡∂»∏ -->
-<!--             </h1> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">Get</span> <span>AdoptReview</span></p>
+            <font size="7">Î∂ÑÏñëÌõÑÍ∏∞</font>
+          </div>
+        </div>
+      </div>
+    </div>
     
     
 
@@ -118,7 +89,7 @@
 	          	
 	          		<div class="col-md-12">
 <!-- 		                <div class="form-group"> -->
-		                	<h4 style="margin-bottom: 0px;">${board.postTitle}</h4>
+		                	<h4 style="margin-bottom: 0px;font-weight: bold;">${board.postTitle}</h4>
 <!-- 		                </div> -->
 	                </div>
 	                <div class="col-md-12"><hr/></div>
@@ -128,7 +99,9 @@
 								${board.nickName}(${board.id}) | ${board.regDate}
 							</div>
 							<div class="col-md-4" align="right"style="position: absolute; right: 0px; bottom: 0px;">
-								¡∂»∏ºˆ :${board.viewCount}  ¥Ò±€ºˆ :${totalCount}
+								Ï°∞ÌöåÏàò: ${board.viewCount}  ÎåìÍ∏ÄÏàò: 
+								<c:if test="${totalCount eq null}">0</c:if>
+								<c:if test="${totalCount ne null}">${totalCount}</c:if>
 							</div>
 						</div>
 					</div>	
@@ -140,9 +113,9 @@
 	
                		<div class="col-md-12">
 		                <div class="form-group">
-<!-- 		                	<label for="postContent"><strong>±€≥ªøÎ</strong></label>&nbsp;&nbsp;<span name="postContent"></span> -->
-<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="≥ªøÎ¿ª ¿‘∑¬«œººø‰."> -->
-<!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="≥ªøÎ¿ª ¿‘∑¬«œººø‰."></textarea> -->
+<!-- 		                	<label for="postContent"><strong>Í∏ÄÎÇ¥Ïö©</strong></label>&nbsp;&nbsp;<span name="postContent"></span> -->
+<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="ÎÇ¥Ïö©ÏùÑ ÏûÖÎ†•ÌïòÏÑ∏Ïöî."> -->
+<!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="ÎÇ¥Ïö©ÏùÑ ÏûÖÎ†•ÌïòÏÑ∏Ïöî."></textarea> -->
 		               
 		                <div class="postForm" align="left">
 						<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
@@ -157,7 +130,7 @@
                		<div class="w-100"></div>
 		            <div class="w-100"></div>
                		<div class="w-100"></div>
-                <div class="col-md-12"><hr/></div>
+                
 	            </div>
 	          </form>
 	          
@@ -167,52 +140,45 @@
 				<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="∆Æ¿ß≈Õ∑Œ ∞¯¿Ø"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="∆‰¿ÃΩ∫∫œ¿∏∑Œ ∞¯¿Ø"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="≥◊¿Ãπˆ∑Œ ∞¯¿Ø"><img src="/resources/file/others/naver.png"></a>
-				<a href="#"  id="kakao" title="ƒ´ƒ´ø¿≈Â¿∏∑Œ ∞¯¿Ø"> <img src="/resources/file/others/kakao.png" ></a>
+				<a href="#"  id="twitter"  title="Ìä∏ÏúÑÌÑ∞Î°ú Í≥µÏú†"><img src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="ÌéòÏù¥Ïä§Î∂ÅÏúºÎ°ú Í≥µÏú†"><img src="/resources/file/others/facebook.png"></a>
+				<a href="#"  id="naver" title="ÎÑ§Ïù¥Î≤ÑÎ°ú Í≥µÏú†"><img src="/resources/file/others/naver.png"></a>
+				<a href="#"  id="kakao" title="Ïπ¥Ïπ¥Ïò§ÌÜ°ÏúºÎ°ú Í≥µÏú†"> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
-		
+		<div class="col-md-12"><hr/></div>
         
 		        <p align="right">
 		       		<c:if test="${sessionScope.user.id eq board.id }">
-						<button class="main_btn" id="modiButton">ºˆ¡§</button>
+						<button class="btn btn-default" id="modiButton">ÏàòÏ†ï</button>
 						
 <%-- 						<c:if test="${board.regDate+15 }"> --%>
-			       			<button class="main_btn" id="delButton">ªË¡¶
-<%-- 			       			<c:set var="year" value="<%=new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365)%>"/></button> --%>
+			       			<button class="btn btn-default" id="delButton">ÏÇ≠Ï†ú</button>
+<%-- 			       			<c:set var="year" value="<%=new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365)%>"/> --%>
 <%-- 			       		</c:if> --%>
 					</c:if>
 					
-			        <button class="main_btn" id="listButton">∏Ò∑œ</button>
+			        <button class="btn btn-default" id="listButton">Î™©Î°ù</button>
 		        </p>
 
 	          <div class="row mt-5 pt-3 d-flex">
-<%-- 	          <jsp:include page="/common/comment.jsp"></jsp:include> --%>
+	          <jsp:include page="/common/comment.jsp"></jsp:include>
 			  <br/><br/>
 <!-- 	          	<div class="col-md-12"> -->
-<!-- 					<p><button class="btn btn-primary py-3 px-4 col-md-12">µÓ∑œ</button></p> -->
+<!-- 					<p><button class="btn btn-primary py-3 px-4 col-md-12">Îì±Î°ù</button></p> -->
 					
 <!-- 					<div class="form-group"> -->
 <!-- 						<div class="col-md-12"> -->
 <!-- 							<div class="radio" align="right"> -->
-<!-- 								<p><a href="#" ><font color="gray">√Îº“</font></a></p> -->
+<!-- 								<p><a href="#" ><font color="gray">Ï∑®ÏÜå</font></a></p> -->
 <!-- 							</div> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
 <!-- 	          	</div> -->
 	          </div>
+<%-- 	          <jsp:include page="/common/comment.jsp"></jsp:include>   --%>
 	          
-	          
- <!-- 	°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·       dialog       °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->
   
-			<div id="dialog-del" title="">
-			  <p align="center"><br/>ªË¡¶«œΩ√∞⁄Ω¿¥œ±Ó?</p>
-			</div>       
-
-<!-- 	°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·   dialog  °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°· -->      
-	          
 	          
           </div> <!-- .col-md-8 -->
         </div>
@@ -224,25 +190,6 @@
   
 
 
-  <!-- dialog -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  
-  <!-- ≈€«√∏¥ -->
-  <script src="/resources/prodmenu/js/jquery.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/resources/prodmenu/js/popper.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="/resources/prodmenu/js/aos.js"></script>
-  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="/resources/prodmenu/js/main.js"></script>
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/resources/events.js"></script>
@@ -261,28 +208,12 @@
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-	$( function() {
-	    $( "#dialog-del" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	 	 øπ: function(){
-		    		  self.location = "/adoptReview/delAdoptReview?postNo="+${board.postNo};
-		    	  	},
-		    	  	æ∆¥œø¿: function(){
-		    		  $( this ).dialog( "close" );
-		    	 	}
-		      }
-	    });
-	});
 
 	
-	//°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·     °Ë  dialog      °·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·°·	
+	//‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†     ‚Üë  dialog      ‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†‚ñ†	
 
 	
-	//============= SNS∞¯¿Ø Event  √≥∏Æ =============	
+	//============= SNSÍ≥µÏú† Event  Ï≤òÎ¶¨ =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
 	});		
@@ -299,15 +230,15 @@
 		sendLinkKakao()
 	});	
 	
-  //============= ƒ´ƒ´ø¿ ∞¯¿Ø«œ±‚Event  √≥∏Æ =============		
+  //============= Ïπ¥Ïπ¥Ïò§ Í≥µÏú†ÌïòÍ∏∞Event  Ï≤òÎ¶¨ =============		
 	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
   
 	 function sendLinkKakao(){
 	     Kakao.Link.sendDefault({
 	     	objectType: 'feed',
 	     	content: {
-	     		title: '¿Ø±‚∞ﬂ∫∏»£',
-	     		description: '∏€∏€',
+	     		title: 'Ïú†Í∏∞Í≤¨Î≥¥Ìò∏',
+	     		description: 'Î©çÎ©ç',
 	     		imageUrl:document.location.href,
 	     		link: {
 			     		mobileWebUrl: document.location.href,
@@ -316,7 +247,7 @@
 	     		},
 	    	buttons: [       
 	        			{
-	        				title: '∏µ≈© ø≠±‚',
+	        				title: 'ÎßÅÌÅ¨ Ïó¥Í∏∞',
 	        				link: {
 	       							mobileWebUrl: document.location.href,
 	        						webUrl: document.location.href
@@ -330,16 +261,30 @@
 
     $(function() {
     	
-			$( "button:contains('ºˆ¡§')" ).on("click" , function() {
+			$( "button:contains('ÏàòÏ†ï')" ).on("click" , function() {
 				self.location = "/adoptReview/updateAdoptReview?postNo="+${board.postNo};
 			});
 			
-			$( "button:contains('ªË¡¶')" ).on("click" , function() {
-				$('#dialog-del').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				$('#dialog-del').dialog('open');
+			$( "button:contains('ÏÇ≠Ï†ú')" ).on("click" , function() {
+				
+				swal({
+			           text: "ÏÇ≠Ï†úÌïòÏãúÍ≤†ÏäµÎãàÍπå?",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "Ïòà",
+								 },
+								 cancel: "ÏïÑÎãàÏò§",
+					   },
+					   
+			    }).then((willDelete) => {
+			           if (willDelete) {
+			        	   self.location = "/adoptReview/delAdoptReview?postNo="+${board.postNo};
+			           }
+			    });
 			});
 			
-			$( "button:contains('∏Ò∑œ')" ).on("click" , function() {
+			$( "button:contains('Î™©Î°ù')" ).on("click" , function() {
 				self.location = "/adoptReview/listAdoptReview";
 			});
 	 });	

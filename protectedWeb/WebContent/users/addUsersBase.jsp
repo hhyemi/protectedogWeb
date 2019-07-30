@@ -74,6 +74,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         <br>
                         <form class="addUsersForm" name="formal" style="padding-left: 90px;">
                         <input type="hidden" name="kakao" value="${ kakao }">
+                        <input type="hidden" name="naver" value="${ naver }">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">

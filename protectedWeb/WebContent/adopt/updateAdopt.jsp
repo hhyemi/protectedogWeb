@@ -11,23 +11,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
-
-    
     <style type="text/css">
 		
 	    html {
 	 	 scroll-behavior: smooth;
 		}
 		
-		h1 {
-			font-family: 'NanumSquare', sans-serif !important;
-/* 			font-size: 22px !important; */
-		}
-		
-		section { 
-			font-family: 'NanumSquare', sans-serif !important;
-		}
 		
 	</style>
 	
@@ -41,7 +30,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <p ><span class="mr-2">Get</span> <span>Adopt</span></p>
+            <p ><span class="mr-2">Update</span> <span>Adopt</span></p>
             <font size="7">
             	<c:if test="${adopt.boardCode eq 'AD' }">분양글 수정</c:if>
 			    <c:if test="${adopt.boardCode eq 'MS' }">실종글 수정</c:if>
@@ -253,7 +242,7 @@
 
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">수정</button></p>
+					<p><button class="btn btn-default py-3 px-4 col-md-12">수정</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">

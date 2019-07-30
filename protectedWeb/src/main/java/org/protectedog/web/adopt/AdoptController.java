@@ -14,6 +14,7 @@ import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
+import org.protectedog.service.interest.InterestService;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,6 +47,10 @@ public class AdoptController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("interestServiceImpl")
+	private InterestService interestService;
 	
 	//setter Method 구현 않음
 	
@@ -105,7 +110,9 @@ public class AdoptController {
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		System.out.println("=========================="+adopt);
 		
-		userService.getUsers(adopt.getId());
+		User user = userService.getUsers(adopt.getId());
+		user.setLevelPoint(user.getLevelPoint()+5);
+		userService.updateUsers(user);
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		
@@ -145,6 +152,17 @@ public class AdoptController {
 		System.out.println("세션들어왔나 "+session.getAttribute("user") );
 		if ( session.getAttribute("user") != null) {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
+			
+			Map<String,Object> map = new HashMap<>();
+			map.put("id", user.getId());
+			map.put("boardCode", "AD");
+			map.put("searchType", "post");
+			map.put("searchNo", postNo);
+			
+			if ( interestService.getInterestCheck(map) == 1 ) {
+				model.addAttribute("check", "already");
+			}
+			
 			model.addAttribute("user", user);
 		}
 		
@@ -249,12 +267,20 @@ public class AdoptController {
 	// 글 리스트 조회
 	@RequestMapping( value="listAdopt" )
 	public String listAdopt( @ModelAttribute("search") Search search, Model model, HttpSession session, 
-							 @RequestParam(value="boardCode", required=false) String boardCode ) throws Exception{
+							 @RequestParam(value="boardCode", required=false) String boardCode,
+							 @RequestParam(value="areaCondition", required=false) String areaCondition,
+							 @RequestParam(value="searchCondition", required=false) String searchCondition,
+							 @RequestParam(value="searchKeyword", required=false) String searchKeyword
+							 
+			
+			) throws Exception{
 		
 		System.out.println("/adopt/listAdopt : GET / POST"+boardCode);
 		
 //		System.out.println("===================================="+search);
-		
+		if(boardCode == null & areaCondition != null) {
+			boardCode = "AD";
+		}
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
 		}
@@ -306,6 +332,11 @@ public class AdoptController {
 //		System.out.println("■■■■ map 확인 : "+map
 //						+"\n■■■■ map.get(\"list\") 확인  : "+map.get("list"));
 		
+		if ( session.getAttribute("user") != null) {
+			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
+			model.addAttribute("user", user);
+			System.out.println("세션 확인 "+user);
+		}
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

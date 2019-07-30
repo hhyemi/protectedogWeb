@@ -9,19 +9,19 @@ import org.protectedog.service.domain.User;
 
 public interface InterestService {
 
-	// °ü½ÉÁ¤º¸ µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void addInterest(Interest interest) throws Exception;
 	
-	// °ü½ÉÁ¤º¸ »ó¼¼º¸±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	public Interest getInterest(int interestNo) throws Exception;
 	
-	// °ü½ÉÁ¤º¸ ¸ñ·Ïº¸±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ïºï¿½ï¿½ï¿½
 	public Map<String, Object> getInterestList(Search search) throws Exception;
 	
-	// °ü½Éµî·Ï »èÁ¦
-	public void deleteInterest(Interest interest) throws Exception;
+	// ï¿½ï¿½ï¿½Éµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public void delInterest(Map<String, Object> map) throws Exception;
 	
-	// Áßº¹Ã¼Å©
+	// ï¿½ßºï¿½Ã¼Å©
 	public int getInterestCheck(Map<String, Object> map ) throws Exception;
 	
 }

@@ -31,27 +31,28 @@
 
 
 <insert id="addOrder" parameterType="order">
-		INSERT 
-		INTO orders(order_no, prod_no, id, phone, receiver_name, receiver_phone, receiver_addr, order_request, payment_code, order_date, order_quantity, total_price, order_code, delivery_code)
-		VALUES (
+		INSERT INTO ORDERS (ORDER_NO, PROD_NO, ID, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, ORDER_CODE) 
+		VALUES
 		seq_Order_order_no.NEXTVAL,
 		#{prodNo},
 		#{id},
-		#{phone},
+		#{receiverAddr},
 		#{receiverName},
 		#{receiverPhone},
 		#{receiverAddr},
 		#{orderRequest},
 		#{paymentCode},
 		SYSDATE,
-		#{orderQantity},
-		#{totalPrice},
-		#{orderCode},
-		#{deliveryCode})
+		#{orderQuantity},
+		#{orderCode}
+		)
 	</insert>
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
-		SELECT o.order_no, o.prod_no, p.prod_name, o.id, o.receiver_name, o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, o.order_date, o.order_code, order_quantity, o.total_price	
+		SELECT o.order_no, o.prod_no, p.prod_name, o.id, o.receiver_name, 
+		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, 
+		o.order_date, o.order_code, o.order_quantity, p.discount_price*o.order_quantity totalprice
+
 		FROM orders o, product p
 		WHERE o.order_no = #{orderNo}
 		AND o.prod_no = p.prod_no;

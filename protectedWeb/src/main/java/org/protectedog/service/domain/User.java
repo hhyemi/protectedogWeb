@@ -180,19 +180,19 @@ public class User {
 	}
 	public String getLevels() {
 		if(levelPoint==0) {
-			levels="¹ÌÀÎÁõÈ¸¿ø";
+			levels="ë¯¸ì¸ì¦íšŒì›";
 		}else if(levelPoint<1500) {
-			levels="ºê·ĞÁî";
+			levels="ë¸Œë¡ ì¦ˆ";
 		}else if(levelPoint<5000) {
-			levels="½Ç¹ö";
+			levels="ì‹¤ë²„";
 		}else if(levelPoint<10000) {
-			levels="°ñµå";
+			levels="ê³¨ë“œ";
 		}else if(levelPoint<20000) {
-			levels="ÇÃ·¡Æ¼³Ñ";
+			levels="í”Œë˜í‹°ë„˜";
 		}else if(levelPoint>=20000){
-			levels="´ÙÀÌ¾Æ¸óµå";
+			levels="ë‹¤ì´ì•„ëª¬ë“œ";
 		}else if(levelPoint<0) {
-			levels="ºí·¢¸®½ºÆ®";
+			levels="ë¸”ë™ë¦¬ìŠ¤íŠ¸";
 		}
 		return levels;
 	}

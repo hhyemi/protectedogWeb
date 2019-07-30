@@ -15,10 +15,9 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
+	    <title>보호할개 · 후원신청</title>
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
     <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
-
 
 <!-- ckeditor 사용 CSS-->
 <script
@@ -34,7 +33,7 @@
 
 .form-group {
 	padding-left: 170px;
-	padding-right: 100px;
+	padding-right: 150px;
 }
 
 .form-group2 {
@@ -58,54 +57,62 @@
 
 
 </style>
-
-</head>
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
 
+</head>
+<body>
+
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
-		<div class="form-group">
-			<div class="page-header text-center">
-				<font size=6>후원 신청 등록</font> 후원신청은 투표 <strong style="color: #f04f23">1개</strong>이상
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
+            <font size="7">후원신청등록</font><br/> 후원신청은 투표 <strong style="color: #f04f23">1개</strong>이상
 				받을 시 <strong style="color: #f04f23">수정이 불가</strong>합니다.
-			</div>
-		</div>
-
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>	
 		<!-- form Start /////////////////////////////////////-->
+	 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+		
 		<form id="uploadForm" class="form-horizontal">
+
 			<div class="form-group">
 				<h3>
 					<b>후원목표금액</b>
 				</h3>
 				투표개수는 ( <strong style="color: #f04f23">목표금액 0.01%</strong> )표로
-				적용됩니다. ( 10만원 ~ 300만원까지 입력가능합니다. )
+				적용됩니다. ( <b>10만원 ~ 300만원</b>까지 입력가능합니다. )
 				<p />
 				<div class="row form-form">
 					<input type="text" class="form-control" id="fundTargetPay"
 						name="fundTargetPay" placeholder="0"
-						style="width: 600px; height: 35px;">&ensp; 원
+						style="width: 700px; height: 35px;">&ensp; 
 				</div>
 			</div>
 			<br />
 
 			<div class="form-group" id="voteNum">
 				<h3>
-					<b>투표수 <strong style="color: #f04f23">0</strong>표
-					</b>
+					<b>투표수 <strong style="color: #f04f23">0</strong>표</b>
 				</h3>
+			<div class="row form-form">
+			후원게시글로 이동하려면 받아야 할 투표 수입니다.
 			</div>
-			<div class="form-group">후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>
-			<br />
-
+			</div>
+			<br/>
 			<div class="form-group">
 				<h3>
 					<b>후원목표기간</b>
 				</h3>
-				후원 받을기간을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br /> 투표가 마감되었을 때 시작 날부터의
-				기간입니다. 투표 기간은 <strong style="color: #f04f23">30</strong>일로 고정됩니다.
+				<strong style="color: #f04f23">후원 받을기간</strong>을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br /> 투표가 마감되었을 때 시작 날부터의
+				기간입니다. 투표 기간은 <strong >30일</strong>로 고정됩니다.
 				<p />
 				<div>
 					<select class="form-control" name="fundTargetDay"
@@ -145,29 +152,30 @@
 			<!-- 첨부 버튼 -->
 			<div id="attach" class="form-group">
 				<span class="label label-primary "><label
-					class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞
-				이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.) <input id="uploadInputBox"
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨앞
+				이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.) <input id="uploadInputBox"
 					style="display: none" type="file" value="등록" name="filedata" />
 			</div>
-			<br />
+
 
 			<!-- 미리보기 영역 -->
 			<div class="form-group">
-				<div id="preview" class="col-md-6" align="center"
-					style='display: inline; min-width: 600px;'></div>
-			</div>
+			<div class="row">
+				<div id="preview" class="col-md-12" align="center"
+					style='display: inline; min-width: 100px;'></div>
+			</div></div>
 
-
-			<br/><br/><br/><br/><br/>
 			<div class="form-group">
-				<br />
+			<br/>
 				<h3>
 					<b>연락처</b>
 				</h3>
 				문의받을 연락처를 입력해주세요.
 				<p />
+				
 				<div class="row">
-					<select name="phone1" id="phone1">
+				<div class="col-sm-3">
+					<select class="form-control" name="phone1" id="phone1">
 						<option value="010"
 							${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  }>010</option>
 						<option value="011"
@@ -178,16 +186,19 @@
 							${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  }>018</option>
 						<option value="019"
 							${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  }>019</option>
-					</select>
+					</select></div>
 					&emsp;
-
-					<input type="text" id="phone2" name="phone2"
+					<div class="col-sm-3">
+					<input class="form-control" type="text" id="phone2" name="phone2"
 						value="${ ! empty user.phone2 ? user.phone2 : ''}"
 						placeholder="번호" maxlength="4" style="height: 35px;">
+					</div>
 					&emsp;
-					<input type="text"id="phone3" name="phone3"
+					<div class="col-sm-3">
+					<input class="form-control" type="text"id="phone3" name="phone3"
 						value="${ ! empty user.phone3 ? user.phone3 : ''}"
 						placeholder="번호" maxlength="4" style="height: 35px;">
+					</div>
 				</div>
 				<input type="hidden" name="phone" /> <input type="hidden"
 					class="form-control" id="multiFile" name="multiFile">
@@ -211,7 +222,7 @@
 			<br />
 		</form>
 		<!-- form Start /////////////////////////////////////-->
-
+  </section>
 	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 	<!--================ start footer Area  =================-->
@@ -234,40 +245,40 @@
       var phone2 = $('input[name="phone2"]').val();
       var phone3 = $('input[name="phone3"]').val();   
       var file = $("#multiFile").val();    
-      
+
       if(fundTargetPay == null || fundTargetPay.length<1){
-         alert("후원목표금액은 반드시 입력하여야 합니다.");
+    	  swal("후원목표금액을 입력해주세요.", " ");
          $('input[name="fundTargetPay"]').focus();
          return;
       }
       if(fundTargetPay < 100000 || fundTargetPay > 3000000){
-         alert("후원목표금액은 10만원이상 300만원이하로 입력하여야 합니다.")
+    	  swal("후원목표금액은  10만원이상 300만원이하로 입력해주세요.", " ");
          $('input[name="fundTargetPay"]').focus();
          return;
       }
       if(postTitle == null || postTitle.length<1){
-         alert("글제목은 반드시 입력하여야 합니다.");
+    	  swal("글제목을 입력해주세요.", " ");
          $('input[name="postTitle"]').focus();
          return;
       }
       
       if(postContent == ''){
-	         alert("글내용은 반드시 입력하여야 합니다.");
-	         $("textarea[name=postContent]").focus();
+    	  swal("글내용을 입력해주세요.", " ");
+	         $(".ck-editor__editable").focus();
 	         return;
 	      }
       
       if(file == null || file.length<1){
-         alert("파일은 반드시 입력하셔야 합니다.");
+    	  swal("사진을 1개이상 입력해주세요.", " ");
          return;
       }
       if(phone2 == null || phone2.length<1){
-         alert("휴대폰번호는 반드시 입력하셔야 합니다.");
+         swal("연락처를 입력해주세요.", " ");
          $('input[name="phone2"]').focus();
          return;
       }
       if(phone3 == null || phone3.length<1){
-         alert("휴대폰번호는 반드시 입력하셔야 합니다.");
+    	  swal("연락처를 입력해주세요.", " ");
          $('input[name="phone3"]').focus();
          return;
       }
@@ -281,7 +292,17 @@
       $("input:hidden[name='phone']").val( value );
       
       $('input[name="fundTargetPay"]').val(removeCommas($('input[name="fundTargetPay"]').val()));
-      
+
+ 	 swal({
+         title: "등록하시겠습니까?",
+         icon: "warning",
+         buttons: true,
+         dangerMode: true,
+       })
+       .then((willDelete) => {
+         if (willDelete) {
+   
+         
       //============= 다중파일업로드 AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
@@ -303,7 +324,7 @@
                 data : formData,
                 success : function(result) {
                     if (result === -1) {
-                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+                    	  swal("jpg, gif, png, bmp 확장자만 업로드 가능합니다.", " ");
                         // 이후 동작 ...
                     } else if (result === -2) {
                         alert('파일이 10MB를 초과하였습니다.');
@@ -317,7 +338,9 @@
 
 
       $('form').attr("method","POST").attr("action","/funding/addVoting").attr("enctype","multipart/form-data").submit();
-   }
+         }
+       });     
+     }
    
    //============= "Editor" =============   
 	let editor;
@@ -383,19 +406,19 @@
                      
                      var imgNum = previewIndex++;
                      
-                    //8장 이상 업로드시
-                     if(Object.keys(files).length>=8){
-                        alert("사진은 8장까지만 업로드 가능합니다.");
+                    //5장 이상 업로드시
+                     if(Object.keys(files).length>=10){
+                    	swal("사진은 10장까지만 업로드 가능합니다..", " ");
                         delete files[imgNum];
                      }else{
-               // 8장 이하 
+               // 5장 이하 
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   &ensp;삭제" + "</span>" + "</div>");
+                                             + "   <br/><font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;
@@ -427,7 +450,8 @@
          var fileNameExtension = fileName.toLowerCase().substring(
                  fileNameExtensionIndex, fileName.length);
          if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+        	 swal("jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.", " ");
+        
              return true;
          } else {
              return false;
@@ -461,18 +485,18 @@
             	 //투표수 계산
                  var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                  $("#voteNum").children().remove();
-                 $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3>");
-                
+                 $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3><div class=\"row form-form\">"+
+             							"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
                  //후원목표금액 길이초과
                  if (removeCommas($(this).val()).length > 7 ) {
-                     alert('30만원이하로 입력해주세요');
+                	 swal("300만원이하로 입력해주세요.", " ");
                      $(this).val(removeCommas($(this).val()).substr(0, 7));
                      
                      $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
                      var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                      $("#voteNum").children().remove();
-                     $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3>");                    
-                     
+                     $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3><div class=\"row form-form\">"+
+      										"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
                  }
              });
           
@@ -483,8 +507,9 @@
               	 
                   for(var i = 0; i < byteText.length ; i++) {
                      byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
-	                  if(byteNum > 50) {              	 
-	                      alert('제한길이 초과');
+	                  if(byteNum > 50) {     
+	                	  swal("제한길이를 초과하였습니다.", " ");
+	              
 	                      $(this).val($(this).val().substr(0,i));
 	                  }
                   }
@@ -505,7 +530,8 @@
       
          //============= 등록 Event  처리 =============   
          $( "#btn-add" ).on("click" , function() {
-            fncAddVoting();
+                 fncAddVoting();
+       
             });
          
          //============= 취소 Event  처리 =============

@@ -33,10 +33,10 @@ public class Interest {
 	public void setInterestPost(Board interestPost) {
 		this.interestPost = interestPost;
 	}
-	public User getinterestId() {
+	public User getInterestId() {
 		return interestId;
 	}
-	public void setinterestId(User interestId) {
+	public void setInterestId(User interestId) {
 		this.interestId = interestId;
 	}
 	public String getBoardCode() {

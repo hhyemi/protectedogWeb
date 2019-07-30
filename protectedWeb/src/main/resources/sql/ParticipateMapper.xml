@@ -56,31 +56,29 @@
 	</select>
 	
 	
-<!-- 
-	<SQL : USER에서 쓰는 SELECT LIST
-	<select id="listParticipateUser" parameterType="string" resultMap="participateSelectMap">
-		SELECT
-		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
-		FROM PARTICIPATE
-		<where>
-			<if test="postNo != null ">
-			AND ID = #{value}
-			</if>
-		</where>
-	</select>
+
+<!-- 	<SQL : USER에서 쓰는 SELECT LIST -->
+<!-- 	<select id="listParticipateUser" parameterType="string" resultMap="participateSelectMap"> -->
+<!-- 		SELECT -->
+<!-- 		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY -->
+<!-- 		FROM PARTICIPATE -->
+<!-- 		<where> -->
+<!-- 			<if test="postNo != null "> -->
+<!-- 			AND ID = #{value} -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 	</select> -->
 	
-	SQL : SELECT ROW Count 
-	<select id="getParticipateTotalCount" parameterType="participate" resultType="int">
+	<!-- SQL : SELECT ROW Count  --> 
+	<select id="getParticipateTotalCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM( SELECT
-		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
 		FROM PARTICIPATE
 		<where>
-			<if test="postNo != null ">
-			AND POST_NO = #{postNo}
-			</if>
+			AND POST_NO = #{value}
 		</where>
 		) countTable
 	</select>
--->
+
 </mapper>

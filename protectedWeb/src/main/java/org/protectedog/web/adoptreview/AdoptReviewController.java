@@ -63,7 +63,7 @@ public class AdoptReviewController {
 
 		System.out.println("/adoptReview/addAdoptReview : GET");
 		
-		System.out.println("세션들어왔나 "+session.getAttribute("user") );
+//		System.out.println("세션확인 "+session.getAttribute("user") );
 		if ( session.getAttribute("user") != null) {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
 			model.addAttribute("user", user);
@@ -88,10 +88,13 @@ public class AdoptReviewController {
 		System.out.println("======================"+board);
 		
 		String thumnail;
-		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src="),  (  board.getPostContent().substring   (  board.getPostContent().indexOf("<img src=")).indexOf(">")+board.getPostContent().indexOf("<img src="))) ;
+		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src=")+10,  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img src=")+10   ).indexOf("\"")  +  board.getPostContent().indexOf("<img src=")+10   )) ;
 		
 		board.setThumnail(thumnail);
 		
+		User user = userService.getUsers(board.getId());
+		user.setLevelPoint(user.getLevelPoint()+5);
+		userService.updateUsers(user);
 
 //		String str = "바나나 : 1000원, 사과 : 2000원, 배 : 3000원";
 //		String target = "사과";
@@ -164,6 +167,12 @@ public class AdoptReviewController {
 //			adopt.setFileName((adoptService.getAdopt(adopt.getPostNo())).getFileName());
 //		}
 		
+		String thumnail;
+		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src=")+10,  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img src=")+10   ).indexOf("\"")  +  board.getPostContent().indexOf("<img src=")+10   )) ;
+		
+		board.setThumnail(thumnail);
+		
+		
 		boardService.updateBoard(board);
 		System.out.println("업데이트까지는 됨");
 		board = boardService.getBoard(board.getPostNo());
@@ -219,7 +228,6 @@ public class AdoptReviewController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-		
 
 		return "forward:/adoptReview/listAdoptReview.jsp";
 	}

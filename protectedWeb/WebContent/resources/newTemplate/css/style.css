@@ -736,6 +736,11 @@ p {
                OTHER HOME PAGE
 ======================================================*/
 
+
+	  .mr-2 {
+	    color: #f04f23;
+	  }
+	  
       .home-p {
         z-index: 1;
         padding: 100px 0;
@@ -974,8 +979,8 @@ p {
 
         .modal-content {
             /*background-color: #ececec;*/
-            border: 3px solid #f04f23;
-            border-radius: 0px;
+            border: 1px solid #f04f23;
+            border-radius: 10px;
             outline: 0;
         }
 
@@ -1717,7 +1722,7 @@ p {
 		  text-decoration: none;
 		  cursor: pointer;
 		}
-         button:hover {opacity: 1}
+         button:hover {opacity: 1 }
 
 
 /*====================================================

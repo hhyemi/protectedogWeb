@@ -7,34 +7,16 @@
 <head>
 	<meta charset="UTF-8">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
-	<!-- i'm port -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    		
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
-	<!-- Bootstrap Dropdown Hover CSS -->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-    <!-- jQuery UI toolTip 사용 CSS-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip 사용 JS-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
-	<!--  ///////////////////////// CSS ////////////////////////// -->
+       <!-- 참조 : http://getbootstrap.com/css/   참조 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet"
+			href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			    <title>보호할개 · 후원하기</title>
+		<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+		    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
+		<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
 		.container{
@@ -61,20 +43,31 @@
        }
     </style>
 
-	</head>
-	<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
       
+	</head>
+	<body>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
-		<div class="form-group">
-		<div class="page-header text-center">	
-		<font size=6>후원하기</font> 후원 시 <strong  style="color:#225cba">환불이 불가</strong>하니 참고하시길 바랍니다.
-	    </div>		
-		</div>	
+	
+	
+		    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>fund</span></p>
+	            <font size="7">후원하기</font><br/> 후원 시 <strong  style="color:#f04f23">환불이 불가</strong>하니 참고하시길 바랍니다.	
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		
 		<br/>
+				<!-- form Start /////////////////////////////////////-->
+	 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+		
 					<!--  table Start /////////////////////////////////////-->
 			      <table class="table table-hover table-striped" >
 			      
@@ -102,7 +95,7 @@
 		<form id ="uploadForm" class="form-horizontal">
 		  <div class="form-group">
 			<h3><b>후원금액</b></h3>
-			해당 게시글에 후원하실금액은 ( <strong style="color:#225cba">최대 300만원</strong> )입니다. <p/>
+			해당 게시글에 후원하실금액은 ( <strong style="color:#f04f23">최대 300만원</strong> )입니다. <p/>
 		    <div class="row form-form"  >
 		      <input type="text" class="form-control" id="fundPay" name="fundPay" placeholder="0" style="width:600px; height:35px;" >&ensp; 원을 후원합니다.
 		    </div>
@@ -113,22 +106,21 @@
 				* 브라우저 환경에 따라 결제창 실행 시간이 길어질 수 있습니다. (Explorer 11 권장)<br/>
 				* 브라우저 설정에서 팝업창이 제한되어있는지 확인해 주세요.<br/><br/>
 			    <div class="row form-form "  >
-			    <label class="btn btn-primary py-2 px-2 col-md-1" > <input type="radio" name="paymentCode" value="card">신용카드</label>
+			    <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="card">신용카드</label>
 			   &emsp;
-			     <label class="btn btn-primary py-2 px-2 col-md-1"> <input type="radio" name="paymentCode" value="trans">계좌이체	</label>		     
+			     <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="trans">계좌이체	</label>		     
 			 
 			    </div>
 			 </div>        
         	 <input type="hidden" name="postNo" value="${funding.postNo }"  />
 		  <br/><br/>
 		  <div class="form-group2">
-	  			<button type="button"   type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-fund"> 후원하기 </button>
-	  			<button type="button"  type="button"  class="btn btn-primary py-3 px-4 col-md-3" id="btn-cancel">뒤로가기</button>
+	  			<button type="button"  class="btn btn-default" id="btn-fund"> 후원하기 </button>
+	  			<button type="button"  class="btn btn-default" id="btn-cancel">뒤로가기</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
-		<!-- form Start /////////////////////////////////////-->
-
+		</section>
     </div>
    <!--  화면구성 div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->
@@ -167,12 +159,12 @@
 	   var fundPay = $('input[name="fundPay"]').val();	
 	   
 	      if(fundPay == null || fundPay.length<1){
-	          alert("후원금액은 반드시 입력하여야 합니다.");
+	    	  swal("후원금액을 입력해주세요.", " ");
 	          $('input[name="fundPay"]').focus();
 	          return;
 	       } 
 	      if(!($('input[name="paymentCode"]').is(':checked'))){
-	          alert("결제방법은 반드시 선택하여야 합니다.");
+	    	  swal("결제방법을 선택해주세요.", " ");
 	          return;
 	       }
 	      	   
@@ -230,7 +222,7 @@
 
 	                 //후원목표금액 길이초과
 	                 if (removeCommas($(this).val()).length > 7 ) {
-	                     alert('300만원이하로 입력해주세요');
+	                	 swal("300만원이하로 입력해주세요.", " ");
 	                     $(this).val(removeCommas($(this).val()).substr(0, 7));
 	                     
 	                     $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  

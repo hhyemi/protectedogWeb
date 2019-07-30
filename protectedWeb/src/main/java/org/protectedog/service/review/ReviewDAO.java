@@ -17,7 +17,8 @@ public interface ReviewDAO {
 	public List<Review> listReview(Search search, String boardCode, String hospitalName) throws Exception;
 
 	// //UPDATE
-	// public void updateReivew(Review Review)throws Exception;
+	public void updateReivew(Review Review) throws Exception;
+
 	// DELETE
 	public void delReivew(int postNo) throws Exception;
 

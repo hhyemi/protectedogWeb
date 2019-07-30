@@ -204,8 +204,9 @@
         		if(	${termsTitle eq '후원신청글'}){
         			self.location="/funding/addVoting";
         		}else if(${termsTitle eq '투표하기'}){
-        			alert("투표하였습니다.")
-        			self.location="/funding/addVote?postNo=${postNo}";
+        			swal("투표하였습니다.", "소중한 한 표 감사합니다.").then((value) => {
+        				self.location="/funding/addVote?postNo=${postNo}";
+  	              });
         		}else if(${termsTitle eq '후원하기'}){
         			self.location="/funding/addFund?postNo=${postNo}";
         		}
@@ -234,19 +235,7 @@
 	                 $("#allCheck").prop("checked", false);
 	              }
 	           });          
-          
-/* 	  		//============= "체크박스 전체해제 전체삭제"  Event 처리 및  연결 ============= 		
-		    $("#allCheck").click(function(){
-		        //클릭되었으면
-		        if($("#allCheck").not(":disabled").prop("checked")){
-		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 true로 정의
-		            $(".termsCheck").not(":disabled").prop("checked",true);
-		            //클릭이 안되있으면
-		        }else{
-		            //input태그의 name이 termsCheck인 태그들을 찾아서 checked옵션을 false로 정의
-		            $(".termsCheck").not(":disabled").prop("checked",false);
-		        }
-		    }); */
+         
    });   
                
    
