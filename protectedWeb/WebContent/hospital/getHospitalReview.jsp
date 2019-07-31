@@ -84,16 +84,15 @@
 			<br />
 			<p />
 			<hr />
-			<font size="6">동물병원후기</font><br /> 사용자 후기 [
-			${resultPage.totalCount}건 ] &ensp;
+			<font size="6">동물병원후기</font><br /> <font id="reviewNum">사용자 후기 [
+			${resultPage.totalCount}건 ]</font> &ensp;
 
 			<!-- Button trigger modal -->
 			<c:if test="${user == null }">
 				<button type="button" class="btn btn-default" id="nonMember">후기등록</button>
 			</c:if>
 			<c:if test="${user != null }">
-				<button type="button" class="btn btn-default" data-toggle="modal"
-					data-target=".bs-example-modal-lg">후기등록</button>
+				<button type="button" class="btn btn-default" onclick="show2()">후기등록</button>
 			</c:if>
 			<br /> 후기 평균 평점 :&ensp;
 			<c:if test="${avgGrade eq 1 }">
@@ -260,6 +259,7 @@
 						<div class="modal-footer">
 							<button class="btn btn-default" data-dismiss="modal">취소</button>
 							<button type="button" class="btn btn-default" id="btn-add">등록</button>
+							<input type="hidden" id="hideenPostNo" name="hiddenPostNo" />
 						</div>
 					</div>
 
@@ -273,9 +273,10 @@
 				type="hidden" id="placeJIAddr" name="placeJIAddr"
 				value="${placeList.placeJIAddr}" /> <input type="hidden"
 				id="placeTel" name="placeTel" value="${placeList.placeTel}" /> <input
-				type="hidden" id="grade" name="grade" /> <input type="hidden"
-				class="form-control" id="multiFile" name="multiFile"> <input
+				type="hidden" id="grade" name="grade" />  <input
 				type="hidden" id="currentPage" name="currentPage" value="" />
+			<input type="hidden" id="multiFile" name="multiFile" />
+		    <input type="hidden" id="deleteFile" name="deleteFile" />		  
 		</form>
 		<p />
 	</div>
@@ -303,6 +304,121 @@
 	   	$("form").attr("method" , "POST").attr("action" , "/review/getHospitalReview").submit();
 	 
 	}
+	
+
+	   //============= "다중파일업로드 파일명만 저장해서 value" =============   
+	   function fnAddFile(fileNameArray) {
+	         $("#multiFile").val(fileNameArray)    
+	   }   
+	   //============= "다중파일업로드 파일명만 저장해서 delete할 value" =============   
+	   function fnDeleteFile(deletefileNameArray) {
+	         $("#deleteFile").val(deletefileNameArray)    
+	   }   
+	   //============= "다중파일업로드"  Event 처리 및  연결 =============      
+
+	       //임의의 file object영역
+	     var files = {};
+	     var previewIndex = 0;
+	     var fileNameArray = new Array();
+	     //원래있던사진 삭제할 array
+	     var deletefileNameArray = new Array();
+	     
+	     // image preview 기능 구현
+	     // input = file object[]
+	     function addPreview(input) {
+	         if (input[0].files) {
+	             //파일 선택이 여러개였을 시의 대응
+	             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+
+	                 var file = input[0].files[fileIndex];
+	                
+	                 if (validation(file.name))
+	                     continue;
+
+	                var fileName = file.name + "";   
+	                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+	                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
+	                
+	                //append할때 동영상 이미지 구분해주기
+	               var imgSelectName = "img";
+	               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
+	                  imgSelectName = "iframe";
+	               }                           
+
+	                 var reader = new FileReader();
+	                 reader.onload = function(img) {
+	                     //div id="preview" 내에 동적코드추가.
+	                     //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
+	                     
+	                     var imgNum = previewIndex++;
+	                     
+	                    //3장 이상 업로드시
+	                     if(Object.keys(files).length>=3){
+	                    	 swal("사진은 3장까지만 업로드 가능합니다.", " ");
+	                        delete files[imgNum];
+	                     }else{
+	               // 3장 이하 
+	                     $("#preview").append(
+	                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
+	                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
+	                                             + "<span href=\"#\" value=\""
+	                                             + imgNum
+	                                             + "\" onclick=\"deletePreview(this)\">"
+	                                             + "   &ensp;삭제" + "</span>");
+
+	                     files[imgNum] = file;
+	                     fileNameArray[imgNum]=file.name;
+	                     fnAddFile(fileNameArray);
+	                     }
+
+	                 };
+
+	                 reader.readAsDataURL(file);
+	             }
+	         } else
+	             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	     }
+
+	     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
+	     function deletePreview(obj) {
+	         var imgNum = obj.attributes['value'].value;
+	         delete files[imgNum];
+	         fileNameArray.splice(imgNum,1);
+	         fnAddFile(fileNameArray);
+	         $("#preview .preview-box[value=" + imgNum + "]").remove();
+	         //resizeHeight();
+	     }
+	     //=============원래있던사진들 삭제버튼누를때 =============
+	     function deletePreview2(obj) {
+	         var imgName = obj.attributes['value'].value;
+	         deletefileNameArray.push(imgName);
+	         fnDeleteFile(deletefileNameArray);
+	         $("#preview .preview-box2[value=\"" + imgName + "\"]").remove();
+	         resizeHeight();
+	     }  
+	     //============= 파일 확장자 validation 체크 =============
+	     function validation(fileName) {
+	         fileName = fileName + "";
+	         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+	         var fileNameExtension = fileName.toLowerCase().substring(
+	                 fileNameExtensionIndex, fileName.length);
+	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
+	             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+	             return true;
+	         } else {
+	             return false;
+	         }
+	     }	
+	     
+	       $(document).ready(function() {
+
+	           //============= 사진미리보기 =============
+	           $('#attach input[type=file]').change(function() {
+	              addPreview($(this)); //preview form 추가하기
+	          });
+	       });
+	   		   	
+	
 	   //============= 등록버튼 눌렀을때 함수 =============      
 	   function fncAddReview(){
 	      
@@ -381,6 +497,13 @@
 	   					
 	   		             success : function(JSONData) {
 	   		            	 
+		   		        		$("#multiFile").val("");
+		   						$("#uploadInputBox").val('');
+		   						for (var i = 0; i < 10; i++) {
+			   					    delete files[i];
+			   					    delete fileNameArray[i];									
+		   						}
+	   		            	 
 	   		            	 var review = JSONData.review;
                              var file = JSONData.file;
 	   		            	 
@@ -388,7 +511,6 @@
 	   		            	 var user = JSONData.user;
 	   		            	 
 		   		            	$('#myModal2').modal("hide");
-		   		          
 		   		            	
 	   		            	var display = "<div style=\"background-color: #f7f7f7; padding-left:20px\" id=\""+review.postNo+"\" ><hr/>";
 	
@@ -411,13 +533,13 @@
 							if(review.grade==1){
 								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>1</strong>";								
 							}else if(review.grade==2){
-								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>2</strong>";			
+								display += 	"<strong class=\"text-danger\">★★☆☆☆</strong> <strong>2</strong>";			
 							}else if(review.grade==3){
-								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>3</strong>";											
+								display += 	"<strong class=\"text-danger\">★★★☆☆</strong> <strong>3</strong>";											
 							}else if(review.grade==4){
-								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>4</strong>";											
+								display += 	"<strong class=\"text-danger\">★★★★★☆</strong> <strong>4</strong>";											
 							}else if(review.grade==5){
-								display += 	"<strong class=\"text-danger\">★☆☆☆☆</strong> <strong>5</strong>";										
+								display += 	"<strong class=\"text-danger\">★★★★★</strong> <strong>5</strong>";										
 							}
 							   display += "<p>"+review.postContent;
 							  
@@ -431,9 +553,129 @@
 							});
 							
 									display += "<br/>&emsp;";
-							   
+							
+									
+									
 							   
 							$("#ListDiv").prepend(display);
+							$("#reviewNum").text("사용자 후기 [ ${resultPage.totalCount+1}건 ]");
+
+	   		        		$("input[name=postTitle]").val("");
+	   		        		editor.setData("");
+	   		        		$("#deleteFile").val("");
+	   		        		$("#starText").text("0/5 평가해주세요");
+	   						$('.starRev span').parent().children('span').removeClass('on');
+	   						$("#preview").children().remove();
+							
+						
+		         //============= 수정 Event  처리 =============   
+		         $( ".btnUpdate" ).on("click" , function() {  
+		        	 
+		        		$("#multiFile").val("");
+   		        		$("#deleteFile").val("");
+			   		  $("#preview").children().remove();
+		        	 
+		        	var postNo = $(this).parent().children("input").val();
+			   		 $.ajax({
+				        	url : "/review/json/getReview/"+postNo,
+							method : "GET" ,
+							dataType : "json" ,
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							error:function(request,status,error){
+	                           alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+	                          },
+							success : function(JSONData , status) {
+								var review = JSONData.review;
+								var file = JSONData.file;
+					
+								$("#postTitle").val(review.postTitle);
+								editor.setData(review.postContent);
+								$("#hideenPostNo").val(postNo);
+							
+						    	var sText = null;
+						    	
+	  						     $('#oneStar').addClass('on');
+	  						     
+								 if(review.grade==1){
+									 
+									 sText = "1/5 별로예요"
+									 
+								  }else if (review.grade==2){
+									  
+									  $('#twoStar').addClass('on');										  
+									 sText = "2/5 조금 아쉬워요";
+									 
+								  }else if(review.grade ==3){
+									  
+									  $('#twoStar').addClass('on');
+								  	  $('#threeStar').addClass('on');
+									  sText = "3/5 보통이에요";
+									  
+								  }else if(review.grade==4){
+									  
+									  $('#twoStar').addClass('on');
+								  	  $('#threeStar').addClass('on');
+									  $('#fourStar').addClass('on');		  	  
+									  sText = "4/5 좋아요";
+									  
+								  }else{
+									  $(".starRev span").addClass('on').prevAll('span').addClass('on');									  
+									  sText = "5/5 최고예요";
+									  
+								  }
+
+								  $("#starText").text(sText);
+								  $("#grade").val(review.grade);
+
+								  for (let name of file) {
+
+									  $("#preview").append("<div class=\"preview-box2\" value=\""+name.fileName+"\"  style='display:inline;float:left;width:140px' >"+
+					                     					"<img class=\"thumbnail\" src=\"/resources/file/fileHospital/"+name.fileName+"\"  width=\"130px;\" height=\"115px;\"/>"+
+					                            			"<span href=\"#\" value=\""+name.fileName+"\"  onclick=\"deletePreview2(this)\"><br/><font color=\"#f04f23\"> 삭제</font></span></div>");     
+								}
+								   $( "#btn-add" ).html("수정");
+								   $("#myModal2").modal('show');
+							 	   
+								   
+								   $( "#btn-add" ).on("click" , function() {
+									   //alert($(this).text())
+
+									   if($(this).text()=="수정"){
+											  
+					   		        $.ajax({
+					   		        	url : "/review/json/updateHospitalReview/",
+					   		            method :  "POST" ,
+					   		            dataType : "json" ,   		 
+					   					headers : {
+					   						"Accept" : "application/json",
+					   						"Content-Type" : "application/json"
+					   					},
+					   		        	data : JSON.stringify({
+					   		        		grade : $("#grade").val(),
+					   		        		postTitle : $("input[name=postTitle]").val(),
+					   		        		postContent : editor.getData(),
+					   		        		multiFile : $("#multiFile").val(),
+					   		        		hospitalName : $("#placeName").val(),
+					   		        		deleteFile : $("#deleteFile").val(),  
+					   		        		postNo : $(this).parent().children("input").val()
+					   					}),
+					   					
+					   		             success : function(JSONData) {
+   	 
+					   		            }  
+					   			    });   	
+								   }
+					   		             $("#myModal2").modal("hide");  	
+					   		          window.location.reload(true);
+								 });
+		
+							}
+							
+					});
+		        });	
 					         $( ".btnDelete" ).on("click" , function() {  
 					 	 		swal({
 						            title: "정말 삭제 하시겠습니까 ?",
@@ -462,7 +704,6 @@
 												success : function(JSONData , status) {
 												
 													if(JSONData==1){
-														alert("삭제가 완료되었습니다.");	
 				           								$("div[id=" + str + "]").remove();
 														}
 											}
@@ -471,7 +712,8 @@
 						            }
 						          });
 					        	 
-					        });		   		            	 
+					        });		
+					         
 	   		            }  
 	   			  });                
         });
@@ -500,120 +742,7 @@
 		    .catch( error => {
 		        console.error( error );
 		    } );
-	
-		   //============= "다중파일업로드 파일명만 저장해서 value" =============   
-		   function fnAddFile(fileNameArray) {
-		         $("#multiFile").val(fileNameArray)    
-		   }   
-		   //============= "다중파일업로드 파일명만 저장해서 delete할 value" =============   
-		   function fnDeleteFile(deletefileNameArray) {
-		         $("#deleteFile").val(deletefileNameArray)    
-		   }   
-		   		   
-		   //============= "다중파일업로드"  Event 처리 및  연결 =============      
-
-		       //임의의 file object영역
-		     var files = {};
-		     var previewIndex = 0;
-		     var fileNameArray = new Array();
-		     //원래있던사진 삭제할 array
-		     var deletefileNameArray = new Array();
-		     
-		     // image preview 기능 구현
-		     // input = file object[]
-		     function addPreview(input) {
-		         if (input[0].files) {
-		             //파일 선택이 여러개였을 시의 대응
-		             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-
-		                 var file = input[0].files[fileIndex];
-		                
-		                 if (validation(file.name))
-		                     continue;
-
-		                var fileName = file.name + "";   
-		                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-		                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
-		                
-		                //append할때 동영상 이미지 구분해주기
-		               var imgSelectName = "img";
-		               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
-		                  imgSelectName = "iframe";
-		               }                           
-
-		                 var reader = new FileReader();
-		                 reader.onload = function(img) {
-		                     //div id="preview" 내에 동적코드추가.
-		                     //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
-		                     
-		                     var imgNum = previewIndex++;
-		                     
-		                    //3장 이상 업로드시
-		                     if(Object.keys(files).length>=3){
-		                    	 swal("사진은 3장까지만 업로드 가능합니다.", " ");
-		                        delete files[imgNum];
-		                     }else{
-		               // 3장 이하 
-		                     $("#preview").append(
-		                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-		                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-		                                             + "<span href=\"#\" value=\""
-		                                             + imgNum
-		                                             + "\" onclick=\"deletePreview(this)\">"
-		                                             + "   &ensp;삭제" + "</span>");
-
-		                     files[imgNum] = file;
-		                     fileNameArray[imgNum]=file.name;
-		                     fnAddFile(fileNameArray);
-		                     }
-
-		                 };
-
-		                 reader.readAsDataURL(file);
-		             }
-		         } else
-		             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-		     }
-
-		     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
-		     function deletePreview(obj) {
-		         var imgNum = obj.attributes['value'].value;
-		         delete files[imgNum];
-		         fileNameArray.splice(imgNum,1);
-		         fnAddFile(fileNameArray);
-		         $("#preview .preview-box[value=" + imgNum + "]").remove();
-		         //resizeHeight();
-		     }
-		     //=============원래있던사진들 삭제버튼누를때 =============
-		     function deletePreview2(obj) {
-		         var imgName = obj.attributes['value'].value;
-		         deletefileNameArray.push(imgName);
-		         fnDeleteFile(deletefileNameArray);
-		         $("#preview .preview-box2[value=\"" + imgName + "\"]").remove();
-		         resizeHeight();
-		     }  
-		     //============= 파일 확장자 validation 체크 =============
-		     function validation(fileName) {
-		         fileName = fileName + "";
-		         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-		         var fileNameExtension = fileName.toLowerCase().substring(
-		                 fileNameExtensionIndex, fileName.length);
-		         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-		             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
-		             return true;
-		         } else {
-		             return false;
-		         }
-		     }	
-		     
-		       $(document).ready(function() {
-
-		           //============= 사진미리보기 =============
-		           $('#attach input[type=file]').change(function() {
-		              addPreview($(this)); //preview form 추가하기
-		          });
-		       });
-		       
+	    
 		   //============= "MAP" =============     
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -650,6 +779,7 @@
 		
 		 //============= "별점" =============     
 		$('.starRev span').hover(function(){
+		
 			  $(this).parent().children('span').removeClass('on');
 			  $(this).addClass('on').prevAll('span').addClass('on');
 			  
@@ -684,12 +814,16 @@
 		        	 if($(this).text()=="등록"){
 		        		fncAddReview();
 		        	 }
+// 		        	 files = null;	
 		        });
 		         //============= 수정 Event  처리 =============   
 		         $( ".btnUpdate" ).on("click" , function() {  
-		        	// alert($(this).parent().children("input").val());
+		        		$("#multiFile").val("");
+   		        		$("#deleteFile").val("");
+			   		  $("#preview").children().remove();	        	 
+		        	var postNo = $(this).parent().children("input").val();
 			   		 $.ajax({
-				        	url : "/review/json/getReview/"+$(this).parent().children("input").val(),
+				        	url : "/review/json/getReview/"+postNo,
 							method : "GET" ,
 							dataType : "json" ,
 							headers : {
@@ -697,19 +831,20 @@
 								"Content-Type" : "application/json"
 							},
 							error:function(request,status,error){
-	                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-	                           },
+	                           alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+	                          },
 							success : function(JSONData , status) {
 								var review = JSONData.review;
 								var file = JSONData.file;
 					
 								$("#postTitle").val(review.postTitle);
 								editor.setData(review.postContent);
+								$("#hideenPostNo").val(postNo);
 							
 						    	var sText = null;
 						    	
-	   						     $('#oneStar').addClass('on');
-	   						     
+	  						     $('#oneStar').addClass('on');
+	  						     
 								 if(review.grade==1){
 									 
 									 sText = "1/5 별로예요"
@@ -740,7 +875,7 @@
 
 								  $("#starText").text(sText);
 								  $("#grade").val(review.grade);
-	
+
 								  for (let name of file) {
 
 									  $("#preview").append("<div class=\"preview-box2\" value=\""+name.fileName+"\"  style='display:inline;float:left;width:140px' >"+
@@ -748,11 +883,12 @@
 					                            			"<span href=\"#\" value=\""+name.fileName+"\"  onclick=\"deletePreview2(this)\"><br/><font color=\"#f04f23\"> 삭제</font></span></div>");     
 								}
 								   $( "#btn-add" ).html("수정");
-								   
+								   $("#myModal2").modal('show');
+							 	   
 								   
 								   $( "#btn-add" ).on("click" , function() {
 									   //alert($(this).text())
-	
+
 									   if($(this).text()=="수정"){
 											  
 					   		        $.ajax({
@@ -766,23 +902,22 @@
 					   		        	data : JSON.stringify({
 					   		        		grade : $("#grade").val(),
 					   		        		postTitle : $("input[name=postTitle]").val(),
-					   		        		postContent : $('textarea').val(),
+					   		        		postContent : editor.getData(),
 					   		        		multiFile : $("#multiFile").val(),
 					   		        		hospitalName : $("#placeName").val(),
 					   		        		deleteFile : $("#deleteFile").val(),  
-					   		        		postNo : $(".btnUpdate").parent().children("input").val()
+					   		        		postNo : $(this).parent().children("input").val()
 					   					}),
 					   					
 					   		             success : function(JSONData) {
-					   		            	 
-									        	 
-								   		            	 
+   	 
 					   		            }  
 					   			    });   	
 								   }
+					   		             $("#myModal2").modal("hide");  	
+					   		          window.location.reload(true);
 								 });
 		
-								$("#myModal2").modal('show');
 							}
 							
 					});
@@ -877,6 +1012,21 @@
 			        }
 			    });
 			}
+			
+			function show2(){
+				
+        		$("input[name=postTitle]").val("");
+        		editor.setData("");
+        		$("#multiFile").val("");
+        		$("#deleteFile").val("");
+        		$("#starText").text("0/5 평가해주세요");
+				$('.starRev span').parent().children('span').removeClass('on');
+				$("#preview").children().remove();		
+			    $("#myModal2").modal('show');
+
+			  }		
+	
+			
 
 
 
