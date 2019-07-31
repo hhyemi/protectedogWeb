@@ -47,9 +47,9 @@ public class InterestDAOImpl implements InterestDAO{
 	}
 
 	@Override
-	public void deleteInterest(Interest interest) throws Exception {
+	public void delInterest(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.delete("InterestMapper.deleteInterest", interest);
+		sqlSession.delete("InterestMapper.delInterest", map);
 	}
 
 	@Override

@@ -47,7 +47,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">Add</a></span> <span>Adopt</span></p>
+          	<p ><span class="mr-2">Add</span> <span>Adopt</span></p>
             <font size="7">
             	<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
 			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if>

@@ -11,7 +11,10 @@ import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Apply;
+import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Interest;
+import org.protectedog.service.interest.InterestService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +37,14 @@ public class AdoptRestController {
 	@Qualifier("adoptServiceImpl")
 	private AdoptService adoptService;
 	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
+	
+	@Autowired
+	@Qualifier("interestServiceImpl")
+	private InterestService interestService;
+	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
@@ -53,19 +64,40 @@ public class AdoptRestController {
 	public String addInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
 		
 		System.out.println("/adopt/json/addInterest : GET");
+		Board board = new Board();
+		board.setPostNo(postNo);
 		
 		Interest interest = new Interest();
 		interest.setBoardCode("AD");
-
-//		interestService.addInterest(interest);
+		interest.setInterestId(userService.getUsers(id));
+		interest.setInterestPost(board);
 		
+		interestService.addInterest(interest);
 		
-//		Adopt adopt = adoptService.getAdopt(postNo);	// postNo로 adopt 가져오기	
-//		adopt.setStatusCode("3");						// 완료상태(3)로 필드값 변경
-//		adoptService.updateStatusCode(adopt);			// 디비 업데이트
-		
-		return "{\"message\" : \"interest ok\" }";
+		return "{\"message\" : \"insertOK\" }";
 	}
+	
+	
+	// 관심목록삭제
+	@RequestMapping( value="json/delInterest/{postNo}/{id}", method=RequestMethod.GET)
+	public String delInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
+		
+		System.out.println("/adopt/json/delInterest : GET");
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("boardCode", "AD");
+		map.put("searchType", "post");
+		map.put("searchNo", postNo);
+		
+		interestService.delInterest(map);
+		
+		return "{\"message\" : \"delOK\" }";
+	}
+	
+	
+	
+	
 	
 	// 글상태 완료로 변경
 	@RequestMapping( value="json/updateStatusCode/{postNo}", method=RequestMethod.GET)
@@ -79,6 +111,7 @@ public class AdoptRestController {
 
 		return adopt;
 	}
+	
 	
 	// 글 리스트 조회
 	@SuppressWarnings("unchecked")
@@ -157,6 +190,26 @@ public class AdoptRestController {
       
 //        System.out.println("json5========================================================\n"+jsonObject);
       
+		return jsonObject;
+	}
+	
+	
+	// 캘린더로 실종글 불러오기
+	@SuppressWarnings("unchecked")
+	@RequestMapping( value="json/listMissing/{boardCode}" )
+	public JSONObject listMissing( @PathVariable("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
+		
+		System.out.println("\n\n/adopt/json/listMissing : GET / POST "+boardCode);
+		
+		Map<String , Object> map=adoptService.listMissing(boardCode);
+		map.put("list", map.get("list"));
+		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("list", map.get("list"));
+		
+//        System.out.println("json5========================================================\n"+jsonObject);
+		
 		return jsonObject;
 	}
 	

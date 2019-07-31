@@ -3,7 +3,7 @@ package org.protectedog.service.domain;
 import java.sql.Date;
 
 
-//==>°Ô½ÃÆÇÁ¤º¸¸¦ ¸ğµ¨¸µ(Ãß»óÈ­/Ä¸½¶È­)ÇÑ Bean
+//==>ê²Œì‹œíŒì •ë³´ë¥¼ ëª¨ë¸ë§(ì¶”ìƒí™”/ìº¡ìŠí™”)í•œ Bean
 public class Board {
 	
 	///Field
@@ -17,21 +17,19 @@ public class Board {
 	private int viewCount;
 	private int commentCount;
 	
-	// null °¡´É
+	// null ê°€ëŠ¥
 	private int recommendCount;
 	private int marketCode;
 	private int price;
 	private String city;
-	
-	private String phone;	//ÂüÁ¶
-	
+	private String phone;	
 	private String qnaCode;
 	private String route;
 	private int prodNo;
 	private char delCode;
 	private String prodName;
 	
-	//ºĞ¾ç ÈÄ±â ½æ³×ÀÏ
+	//ë¶„ì–‘ í›„ê¸° ì¸ë„¤ì¼
 	private String thumnail;
 	
 

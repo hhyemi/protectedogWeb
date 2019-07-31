@@ -53,16 +53,14 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sqlSession.selectList("ReviewMapper.listReview",map);
 	}
 
-//	@Override
-//	public void updateReivew(Review review) throws Exception {
-//		// TODO Auto-generated method stub
-//		sqlSession.update("ReviewMapper.updateReview", review);
-//
-//	}
-//
+	@Override
+	public void updateReivew(Review review) throws Exception {
+		sqlSession.update("ReviewMapper.updateReview", review);
+
+	}
+
 	@Override
 	public void delReivew(int postNo) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.delete("ReviewMapper.delReview", postNo);
 
 	}

@@ -44,7 +44,7 @@ public class InterestTest {
 		
 		User interestId=new User();
 		interestId.setId("user01");
-		interest.setinterestId(interestId);
+		interest.setInterestId(interestId);
 		
 		Date regDate=new Date();
 		regDate.setYear(2019);

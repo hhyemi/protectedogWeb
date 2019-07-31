@@ -50,7 +50,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 ======================================================--> 
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
     <section class="hero-area">
-        <div class="overlay"></div>
+<!--         <div class="overlay"></div> -->
         <div class="container">
           <div class="row">
             <div class="col-md-12">

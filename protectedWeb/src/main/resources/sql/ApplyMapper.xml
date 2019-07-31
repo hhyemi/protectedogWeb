@@ -85,10 +85,10 @@
 	 
 	 
 	 
-	 <select  id="listApply2"  parameterType="map"	resultMap="applySelectMap">
+	 <select  id="listApply2"  parameterType="string"	resultMap="applySelectMap">
 	  	SELECT ad.post_no, ap.id, ad.status_code
 		FROM  adopt ad, apply ap
-		WHERE ad.post_no(+) = ap.adopt_no AND ad.status_code = '3'
+		WHERE ad.post_no(+) = ap.adopt_no AND ad.status_code = '3'  AND ap.id = #{value}
 	 </select>
 
 	

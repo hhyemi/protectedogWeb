@@ -79,9 +79,20 @@
 	
 	<!-- SQL : DELETE -->
 
-	<delete id="deleteInterest"	parameterType="interest">
-		DELETE interest WHERE interest_no=#{interestNo}
+	<delete id="delInterest"	parameterType="map">
+		DELETE 
+		FROM ( SELECT interest_no
+			   FROM interest
+		       WHERE id = #{id} AND board_code = #{boardCode}
+			  	<if test="searchType == 'comment'">
+					AND comment_no = #{searchNo}
+		       	</if>
+				<if test="searchType == 'post'">
+					AND post_no = #{searchNo}
+				</if>) 
 	</delete>
+	
+	
 	
 	<select id="getInterestCheck" parameterType="map" resultType="int">
 		SELECT count(*)

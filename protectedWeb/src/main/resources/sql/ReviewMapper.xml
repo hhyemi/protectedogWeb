@@ -45,17 +45,18 @@
 			WHERE POST_NO IN #{value}
 	
 	</select>
-	<!-- 
-	SQL : UPDATE
-	<update id="updateReview"	parameterType="review">
-	UPDATE REVIEW
-	<set>
-		POST_TITLE			=	#{postTitle} , 
-		POST_CONTENT		=	#{postContent} , 
-		GRADE				=	#{grade:NUMERIC}
-	</set>
-	WHERE POST_NO=#{postNo}
-	</update>-->
+	
+	<!--  SQL : UPDATE -->	
+		<update id="updateReview"	parameterType="review">
+		UPDATE REVIEW
+		<set>
+			POST_TITLE			=	#{postTitle} , 
+			POST_CONTENT		=	#{postContent} , 
+			GRADE				=	#{grade:NUMERIC}
+		</set>
+		WHERE POST_NO = #{postNo}
+	 	</update> 
+	 	
 		<!-- SQL :  DELETE --> 
 		<update	id="delReview"	parameterType="int" >
 		   	UPDATE REVIEW

@@ -142,7 +142,7 @@ public class CommentRestController {
 		Interest interest = new Interest();
 		interest.setBoardCode(boardCode);
 		interest.setInterestComment(comment);
-		interest.setinterestId(user);
+		interest.setInterestId(user);
 
 		interestService.addInterest(interest);
 		

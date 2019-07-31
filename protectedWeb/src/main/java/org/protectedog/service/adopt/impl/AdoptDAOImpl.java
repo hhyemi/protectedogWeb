@@ -41,7 +41,6 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 	
 	public Map<String, Object> listAdopt(Search search, String boardCode) throws Exception {
-		System.out.println("=================디에이오");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
 		map.put("searchCondition",  search.getSearchCondition()+"" );
@@ -60,11 +59,22 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 	
 	public Map<String, Object> listAdopt2(String id) throws Exception {
-		System.out.println("=================디에이오");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("id",  id );
 		
 		List<Adopt> list = sqlSession.selectList("AdoptMapper.listAdopt2", map); 
+		
+		//selectOne: 쿼리 결과가 없으면 return null 
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	public Map<String, Object> listMissing(String boardCode) throws Exception {
+		System.out.println("=================디에이오");
+		Map<String , Object>  map = new HashMap<String, Object>();
+		
+		List<Adopt> list = sqlSession.selectList("AdoptMapper.listMissing", boardCode); 
 		
 		//selectOne: 쿼리 결과가 없으면 return null 
 		map.put("list", list);

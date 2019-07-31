@@ -145,6 +145,7 @@ public class UserRestController {
 		System.out.println("session 생성 전 user : "+user);
 		System.out.println("session 생성 전 chkLogin pw : "+chkLogin.get("pw"));
 		System.out.println("session 생성 전 user pw :"+user.getPw());
+		
 		if(chkLogin.get("pw").equals(user.getPw())) {
 			session.setAttribute("user", user);
 			System.out.println("json/login 수행 후 user : "+user);

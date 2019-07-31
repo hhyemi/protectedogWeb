@@ -29,7 +29,7 @@ public class ParticipateDAOImpl implements ParticipateDAO {
 		System.out.println(this.getClass());
 	}
 
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
 	@Override
 	public void addParticipate(Participate participate) throws Exception {
@@ -55,15 +55,15 @@ public class ParticipateDAOImpl implements ParticipateDAO {
 	}
 
 	@Override
-	public int getParticipateTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("ParticipateMapper.getParticipateTotalCount");
+	public int getParticipateTotalCount(int postNo) throws Exception {
+		return sqlSession.selectOne("ParticipateMapper.getParticipateTotalCount",postNo);
 	}
 
-	/////////////// È¸¿ø¿¡¼­ ¿ä±¸ÇÑ Method/////////////////////
+	/////////////// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ä±¸ï¿½ï¿½ Method/////////////////////
 
 	@Override
 	public List<Participate> listParticipateUser(int id) throws Exception {
-		return sqlSession.selectList("ParticipateMapper.listParticipateUser");
+		return sqlSession.selectList("ParticipateMapper.listParticipateUser",id);
 	}
 
 }
