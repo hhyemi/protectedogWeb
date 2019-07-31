@@ -20,38 +20,42 @@
 		<result property="orderCode" 		column ="order_code" 		jdbcType="NUMERIC"/>
 		<result property="deliveryCode" 	column="delivery_code" 		jdbcType="NUMERIC"/>
 		<result property="mileageNo"		column="mileage_no"			jdbcType="NUMERIC"/>
-
+		<result property="couponNo"			column="coupon_no"			jdbcType="NUMERIC"/>
 </resultMap>
-	<sql id="select-Order">
-		SELECT 
-		order_no, id, phone, receiver_addr, receiver_name, receiver_phone, order_request, payment_code, 
-		order_date, order_quantity, total_price, order_code, delivery_code
-		FROM orders;
-	</sql>
+
 
 
 <insert id="addOrder" parameterType="order">
-		INSERT INTO ORDERS (ORDER_NO, PROD_NO, ID, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, ORDER_CODE) 
+<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+		SELECT SEQ_ORDERS_ORDER_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ORDERS (ORDER_NO, PROD_NO, PHONE, ID, RECEIVER_ADDR, RECEIVER_NAME, 
+		RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, 
+		ORDER_QUANTITY, ORDER_CODE, TOTAL_PRICE, DELIVERY_CODE, COUPON_NO, MILEAGE_NO) 
 		VALUES
-		seq_Order_order_no.NEXTVAL,
+		#{orderNo},
 		#{prodNo},
+		#{phone},
 		#{id},
 		#{receiverAddr},
 		#{receiverName},
 		#{receiverPhone},
-		#{receiverAddr},
 		#{orderRequest},
 		#{paymentCode},
 		SYSDATE,
 		#{orderQuantity},
-		#{orderCode}
+		#{orderCode},
+		#{totalPrice},
+		#{deliveryCode},
+		#{couponNo},
+		#{mileageNo}
 		)
 	</insert>
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
 		SELECT o.order_no, o.prod_no, p.prod_name, o.id, o.receiver_name, 
 		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, 
-		o.order_date, o.order_code, o.order_quantity, p.discount_price*o.order_quantity totalprice
+		o.order_date, o.order_code, o.order_quantity, o.total_price
 
 		FROM orders o, product p
 		WHERE o.order_no = #{orderNo}

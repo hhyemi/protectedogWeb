@@ -70,17 +70,56 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="addOrder")
-	public String addOrder(@ModelAttribute("order")Order order, @RequestParam("prodNo") int prodNo,
+	public String addOrder(@RequestParam("prodNo") int prodNo,
 			@RequestParam("id") String id, Model model,
 			HttpServletRequest request) throws Exception {
 
 		System.out.println("/addOrder POST/////////////////////////");
-
-		User user=userService.getUsers(id);
-		order.setId(user);
-		Product product=productService.getProduct(prodNo);
-		order.setProdNo(product);
+		
+		
+		//model 안먹어서 self
+		
+		Order order=new Order();
+		
+		order.setId(request.getParameter("id"));
+		System.out.println("1번/////////////////////");
+		order.setReceiverName(request.getParameter("receiverName"));
+		System.out.println("2번/////////////////////");
+		order.setReceiverPhone(request.getParameter("receiverPhone"));
+		System.out.println("3번/////////////////////");
+		order.setReceiverAddr(request.getParameter("receiverAddr"));
+		System.out.println("4번/////////////////////");
+		order.setOrderRequest(request.getParameter("orderRequest"));
+		System.out.println("String ORDER");
+		order.setPhone(request.getParameter("phone"));
+		System.out.println("다들 들어갔나요?");
+		order.setOrderQuantity(Integer.parseInt(request.getParameter("orderQuantity")));
+		System.out.println("수량 들어갔나요?");
 		order.setOrderCode(1);
+		order.setProdNo(Integer.parseInt(request.getParameter("prodNo")));
+		order.setPaymentCode(Integer.parseInt(request.getParameter("paymentCode")));
+		System.out.println("결제수단 들어갔나요?");
+		Product product=new Product();
+		product=productService.getProduct(prodNo);
+		
+		//totalPrice IN
+		int total=(product.getDiscountPrice()*order.getOrderQuantity());
+		order.setTotalPrice(total);
+		
+		//수량조절
+		int quantity=(product.getQuantity()-order.getOrderQuantity());
+		product.setQuantity(quantity);
+		
+		//null값처리
+		if(order.getCouponNo() == 0) {
+			order.setCouponNo(10001);
+		}
+		
+		if(order.getMileageNo() ==0){
+			order.setMileageNo(10000);
+		}
+		
+		
 
 		orderService.addOrder(order);
 
@@ -103,10 +142,10 @@ public class OrderController {
 			System.out.println("getOrder");
 			
 			
-			Product product = productService.getProduct(prodNo);
+			productService.getProduct(prodNo);
 			Order order = orderService.getOrder(orderNo);
 		
-			order.setProdNo(product);
+			order.setProdNo(prodNo);
 			
 			System.out.println(order);
 			model.addAttribute("order", order);
@@ -171,8 +210,8 @@ public class OrderController {
 		System.out.println(prodNo);
 		System.out.println(id);
 		System.out.println();
-		order.setId(userService.getUsers(id));
-		order.setProdNo(productService.getProduct(prodNo));
+		order.setId(id);
+		order.setProdNo(prodNo);
 		System.out.println(order +"purchase");
 		
 		orderService.updateOrder(order);

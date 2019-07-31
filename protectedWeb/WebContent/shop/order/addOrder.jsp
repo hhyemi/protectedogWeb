@@ -39,7 +39,7 @@
 					//Debug..
 					console.log($("form[name='addForm']").html());
 					$("form[name='addForm']").attr("method", "POST").attr(
-							"action", "/order/addOrder&prodNo={product.}").submit();
+							"action", "/order/addOrder").submit();
 					//fncAddProduct();
 				});
 	});
@@ -99,7 +99,7 @@
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
+	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar Start	■■■■■■■■■■■■■■■■■■■■-->
 	<div class="hero-wrap hero-bread"
 		style="background-image: url('images/bg_6.jpg');">
 		<div class="container">
@@ -107,22 +107,35 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">중고</a></span> <span>장터</span>
+						<span class="mr-2">protected</span> <span></span>
 					</p>
-					<h1 class="mb-0 bread">DOG|SHOP 구매하기</h1>
+					<h1 class="mb-0 bread">스토어 구매하기</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 	<br>
 	<br />
-	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
+	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar end■■■■■■■■■■■■■■■■■■■■-->
 
-	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
+	<!-- ■■■■■■■■■■■■■■■■■■■■body navigation tag■■■■■■■■■■■■■■■■■■■■ -->
 	<section class="ftco-section">
 		<div class="container">
 			<form class="billing-form" name="addForm">
-				<input type="hidden" value="prodNo" />
+			
+			
+			
+			
+			
+			
+			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value 시작■■■■■■■■■■■■■■■■■■■■■ -->
+				<input type="hidden" name="prodNo" value="${product.prodNo}" /> 
+				<input type="hidden" name="id" value="${user.id}" />
+			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
+			
+			
+					<!-- ///////////////////////////////////////////////////////// -->
+					
 				<div class="row justify-content-center">
 					<div class="col-xl-8 ftco-animate">
 
@@ -156,11 +169,10 @@
 															</div>
 														</div>
 													</td>
-													<td data-th="Price">${product.discountPrice}</td>
-													<td data-th="orderQuantity" class="orderQuantity"
-														name="orderQuantity"><input type="number"
+													<td>${product.discountPrice}</td>
+													<td><input type="number" name="orderQuantity"
 														class="form-control text-center" value="1" n></td>
-													<td class="actions" data-th=""></td>
+													<td class="actions"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -183,6 +195,14 @@
 								</div>
 							</div>
 
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="phone">연락처&nbsp;&nbsp;</label> <input type="text"
+										class="form-control" name="phone"
+										value="${ sessionScope.user.phone }" readonly>
+								</div>
+							</div>
+
 							<div class="w-100"></div>
 							<div class="w-100"></div>
 							<div class="w-100"></div>
@@ -202,39 +222,29 @@
 
 							<div class="w-100"></div>
 							<div class="form-group">
-								<div class="col-sm-3">
 
-									<label for="firstname">배송연락처</label> <select
-										class="form-control" name="receiverPhone2" id="receiverPhone1">
+								<div class="row">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="receiverPhone1" id="receiverPhone1">
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-									</select>
+									</select> &nbsp;&nbsp; <input type="text" id="receiverPhone2" name="receiverPhone2"
+										placeholder="번호" maxlength="4" style="height: 35px;">
+									<input type="text" id="receiverPhone3" name="receiverPhone3"
+										placeholder="번호" maxlength="4" style="height: 35px;">
 								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="receiverPhone2"
-										name="receiverPhone2" placeholder="번호" maxlength="4"
-										style="height: 35px;">
-								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="receiverPhone3"
-										name="receiverPhone3" placeholder="번호" maxlength="4"
-										style="height: 35px;">
-								</div>
-								<input type="hidden" name="receiverPhone" />
+								<input type="hidden" name="receiverPhone" /> 
 							</div>
-
-
 
 							<div class="w-100"></div>
 							<br />
 							<div class="form-group">
 								<div class="col-sm-4">
-									<label for="firstname">주소|우편번호</label> <input type="text"
-										class="form-control" id="sample6_postcode" placeholder="번호"
-										style="height: 35px;">
+									<label for="firstname">주소&nbsp;|&nbsp;우편번호</label> <input
+										type="text" class="form-control" id="sample6_postcode"
+										placeholder="번호" style="height: 35px;">
 								</div>
 								&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"
 									onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
