@@ -35,7 +35,7 @@
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
     	
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td{
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
 		
@@ -129,9 +129,7 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
 	                <a class="dropdown-item" href="../adopt/listMissing.jsp">테스트</a>
-	                <a class="dropdown-item" href="../adopt/calendar.jsp">캘린더</a>
 	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
-	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
                   </div>
                 </li>
                 <li class="nav-item dropdown" >

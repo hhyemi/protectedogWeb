@@ -22,7 +22,9 @@
 .fc {
   direction: ltr;
   text-align: left; }
-
+.fc-time {
+	display: none;
+}
 .fc-rtl {
   text-align: right; }
 
@@ -49,7 +51,7 @@ body .fc {
 
 /* Buttons (styled <button> tags, normalized to work cross-browser)
 --------------------------------------------------------------------------------------------------*/
-.fc button {
+.fc button{
   /* force height to include the border and padding */
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -380,8 +382,8 @@ temporary rendered events).
     bottom: -2px;
     width: 50px;
     height: 100%;
-    border-left: 3px solid #5d5386;
-    border-bottom: 3px solid #5d5386;
+    border-left: 3px solid #f04f23;
+/*     border-bottom: 3px solid #f04f23; */
     -webkit-border-radius: 3px 0px 0px 3px;
     -moz-border-radius: 3px 0px 0px 3px;
     border-radius: 3px 0px 0px 3px;
@@ -618,7 +620,8 @@ a.fc-more:hover {
   width: 220px; }
 
 .fc-more-popover .fc-event-container {
-  padding: 10px; }
+  padding: 10px;
+  }
 
 /* Now Indicator
 --------------------------------------------------------------------------------------------------*/
@@ -1381,7 +1384,7 @@ be a descendant of the grid when it is being dragged.
 	z-index: 123456;
 }
 body{
-  font-family: 'Nunito', sans-serif;
+/*   font-family: 'Nunito', sans-serif; */
   background: #F3F5F9;
 }
 .card{
@@ -1398,7 +1401,7 @@ h2{
   color: #002147;
   margin-bottom: 20px;
 }
-.btn{
+.btn:not(#back-to-top){
   font-size: 15px !important;
   text-transform: uppercase;
   font-weight: 700;
@@ -1422,7 +1425,7 @@ h2{
   margin-bottom: 5px;
 }
 .modal-body{
-  background: #F3F5F9;
+  background: white;
   border-radius: 10px;
 }
 .modal-body h4{
@@ -1438,6 +1441,7 @@ h2{
   box-shadow: none;
   height: 50px;
 }
+
 
 
 
@@ -1461,55 +1465,84 @@ h2{
 					<h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
 					<div class="event-body"></div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				<div class="modal-footer" id="confirmFooter">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+<input type="hidden" id="sessionId" value="${sessionScope.user.id }">
 
 <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <form id="add-event">
         <div class="modal-body">
-        <h4>Add Event Detail</h4>        
+        <h4>실종신고</h4>        
           <div class="form-group">
-            <label>Event name</label>
-            <input type="text" class="form-control" name="ename">
+            <label>사례금</label>
+            <input type="text" class="form-control" name="dogPay">
           </div>
           <div class="form-group">
-            <label>Event Date</label>
-            <input type='text' class="datetimepicker form-control" name="edate">
+            <label>연락처</label>&nbsp;연락처가 다를 경우 회원정보를 수정해주세요.
+            <input type='text' class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly>
           </div>        
           <div class="form-group">
-            <label>Event Description</label>
-            <textarea class="form-control" name="edesc"></textarea>
+            <label>실종일자</label>
+            <input type='text' class="datetimepicker form-control" name="dogDate" value="" readonly>
+          </div>        
+          <div class="form-group">
+            <label>실종지역</label>
+            <input class="form-control" name="locationKr"></input>
+          </div>
+          
+          <!-- 첨부 버튼 -->
+
+          <div id="attach" class="form-group">
+            <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
+              	<strong>이미지 등록</strong>
+            </label></span>
+            <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
+          </div>
+
+          <!-- 미리보기 영역 -->
+          <div class="form-group">
+          	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
+          </div>
+          
+          <div class="form-group"><br/><br/><br/><br/></div>
+          
+          <div class="form-group">
+            <label>견종</label>
+            <input class="form-control" name="dogBreed"></input>
           </div>
           <div class="form-group">
-            <label>Event Color</label>
-            <select class="form-control" name="ecolor">
-              <option value="fc-bg-default">fc-bg-default</option>
-              <option value="fc-bg-blue">fc-bg-blue</option>
-              <option value="fc-bg-lightgreen">fc-bg-lightgreen</option>
-              <option value="fc-bg-pinkred">fc-bg-pinkred</option>
-              <option value="fc-bg-deepskyblue">fc-bg-deepskyblue</option>
+            <label>성별</label>
+            <select class="form-control" name="dogGender" style="height:50px; ">
+              <option value="남아">남아</option>
+              <option value="여아">여아</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Event Icon</label>
-            <select class="form-control" name="eicon">
-              <option value="circle">circle</option>
-              <option value="cog">cog</option>
-              <option value="group">group</option>
-              <option value="suitcase">suitcase</option>
-              <option value="calendar">calendar</option>
-            </select>
-          </div>        
+            <label>상태</label>
+            <input class="form-control" name="dogStatus"></input>
+          </div>
+          <div class="form-group">
+            <label>특징</label>
+            <input class="form-control" name="dogChar"></input>
+          </div>
+          <div class="form-group">
+            <label>내용</label>
+            <textarea class="form-control" name="postContent"></textarea>
+          </div>
+		  <input type="hidden" name="id" value="${sessionScope.user.id}">
+		  <input type="hidden" name="boardCode" value="MS">
+
       </div>
         <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" >Save</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>        
+        <button type="button" class="btn btn-default" >등록</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>        
       </div>
       </form>
     </div>
@@ -1524,17 +1557,35 @@ h2{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script> -->
+<!-- <script src="/static/js/fullcalendar/locale/ko.js"></script> -->
 
 
 <script>
+
+
 jQuery(document).ready(function(){
 	  jQuery('.datetimepicker').datepicker({
-	      timepicker: true,
-	      language: 'en',
-	      range: true,
-	      multipleDates: true,
-		  multipleDatesSeparator: " - ",
+// 	      timepicker: true,
+// 	      language: 'en',
+// 	      range: true,
+// 	      multipleDates: true,
+// 		  multipleDatesSeparator: " - ",
+		  showOn: "button",
+			buttonImage: "/resources/file/others/calendar.png",
+			buttonImageOnly: true,
+			buttonText: "Select date",
+			dateFormat: "yyyy-mm-dd",
+// 			maxDate: "+0d",
+			prevText: '이전 달',
+	        nextText: '다음 달',
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	        showMonthAfterYear: true,
+	        yearSuffix: '년',
 
 	    });
 	  jQuery("#add-event").submit(function(){
@@ -1568,160 +1619,108 @@ jQuery(document).ready(function(){
 					left: 'title',
 					right: 'today prev,next'
 				},
-
-
-
-				events:
-					function(start, end, timezone, callback) {
-					$.ajax ({ 
-				       type: "POST", 
-				       contentType: "application/json; charset=utf-8", 
-				       url: "/adopt/json/listMissing/MS", 
-				       dataType: 'json', 
-				       success: function (data) { 
-				    	   console.log(JSON.stringify(data));
-				        var events = []; 
-				        $.each(data, function (index, value) { 
-							
-				        	for (var i=0; i<value.length; i++){
-				         events.push({ 
-				          id: value[i].id, 
-				          title: value[i].postTitle, 
-				          date: value[i].dogDate,
-				          description: value[i].postContent,
-				          imageurl: "../resources/file/fileAdopt/"+value[i].mainFile,
-				         }); 
-				        	}
-				         console.log(events) 
-// 				         console.log(value) 
-				        }); 
-				        callback(events); 
-				       }, 
-				       error: function (xhr, err) { 
-				        alert("ERROR! - readyState: " + xhr.readyState + "<br/>status: " + xhr.status + "<br/>responseText: " + xhr.responseText); 
-				       } 
-				      }); },
+				events: function(start, end, timezone, callback) {
 					
-// 					[
-// 					{
-// 						title: 'Barber',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-07-07',
-// 						end: '2019-07-07',
-// 						className: 'fc-bg-default',
-// 						imageurl: "../resources/file/others/calendar.png",
-// // 						icon : "circle"
-// 					},
-// 					{
-// 						title: 'Flight Paris',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-08-08T14:00:00',
-// 						end: '2019-08-08T20:00:00',
-// 						className: 'fc-bg-deepskyblue',
-// 						icon : "cog",
-// 						allDay: false
-// 					},
-// 					{
-// 						title: 'Team Meeting',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-07-10T13:00:00',
-// 						end: '2019-07-10T16:00:00',
-// 						className: 'fc-bg-pinkred',
-// 						icon : "group",
-// // 						imageurl: "/resources/file/others/calendar.png",
-// 						allDay: false
-// 					},
-// 					{
-// 						title: 'Meeting',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-08-12',
-// 						className: 'fc-bg-lightgreen',
-// 						icon : "suitcase"
-// 					},
-// 					{
-// 						title: 'Conference',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-08-13',
-// 						end: '2019-08-15',
-// 						className: 'fc-bg-blue',
-// 						icon : "calendar"
-// 					},
-// 					{
-// 						title: 'Baby Shower',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-08-13',
-// 						end: '2019-08-14',
-// 						className: 'fc-bg-default',
-// 						icon : "child"
-// 					},
-// 					{
-// 						title: 'Birthday',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-09-13',
-// 						end: '2019-09-14',
-// 						className: 'fc-bg-default',
-// 						icon : "birthday-cake"
-// 					},
-// 					{
-// 						title: 'Restaurant',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-10-15T09:30:00',
-// 						end: '2019-10-15T11:45:00',
-// 						className: 'fc-bg-default',
-// 						icon : "glass",
-// 						allDay: false
-// 					},
-// 					{
-// 						title: 'Dinner',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-11-15T20:00:00',
-// 						end: '2019-11-15T22:30:00',
-// 						className: 'fc-bg-default',
-// 						icon : "cutlery",
-// 						allDay: false
-// 					},
-// 					{
-// 						title: 'Shooting',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-08-25',
-// 						end: '2019-08-25',
-// 						className: 'fc-bg-blue',
-// 						icon : "camera"
-// 					},
-// 					{
-// 						title: 'Go Space :)',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-12-27',
-// 						end: '2019-12-27',
-// 						className: 'fc-bg-default',
-// 						icon : "rocket"
-// 					},
-// 					{
-// 						title: 'Dentist',
-// 						description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 						start: '2019-12-29T11:30:00',
-// 						end: '2019-12-29T012:30:00',
-// 						className: 'fc-bg-blue',
-// 						icon : "medkit",
-// 						allDay: false
-// 					}
-// 				],
+						$.ajax ({ 
+								type: "POST", 
+								contentType: "application/json; charset=utf-8", 
+		 						url: "/adopt/json/listMissing/MS", 
+								dataType: 'json', 
+								success: function (data) { 
+									
+// 										console.log(JSON.stringify(data));
+										
+								        var events = []; 
+								        $.each(data, function (index, value) { 
+					
+								        	for (var i=0; i<value.length; i++){
+								         		events.push({ 
+						          					id: value[i].id, 
+						         					title: value[i].locationKr,
+						          					realtitle: value[i].postTitle, 
+						         					description: value[i].postContent,
+											        date: value[i].dogDate,
+											        phone: value[i].phone,
+											        location: value[i].location,
+											        dogBreed: value[i].dogBreed,
+											        dogGender: value[i].dogGender,
+											        dogPay: value[i].dogPay,
+											        dogStatus: value[i].dogStatus,
+											        dogChar: value[i].dogChar,
+											        dogPersonality: value[i].dogPersonality,
+											        imageurl: "../resources/file/fileAdopt/"+value[i].mainFile,
+								       			}); 
+								        	}
+								        	
+									        console.log(events) 
+					// 				        console.log(value) 
+							        	}); 
+							       		callback(events); 
+							    }, 
+							    error: function (xhr, err) { 
+							        	alert("ERROR! - readyState: " + xhr.readyState + "<br/>status: " + xhr.status + "<br/>responseText: " + xhr.responseText); 
+							    } 
+				    	}); 
+				},
 				eventRender: function(event, element) {
 					if(event.imageurl) {
-		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='30' height='30'>");
+		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='50' height='50'>&nbsp;");
 		            }
 
-					if(event.icon){
-						element.find(".fc-title").prepend("<i class='fa fa-"+event.icon+"'></i>");
-					}
+// 					if(event.icon){
+// 						element.find(".fc-title").prepend("<i class='fa fa-"+event.icon+"'></i>");
+// 					}
 				  },
 				dayClick: function() {
-					jQuery('#modal-view-event-add').modal();
+					
+					var id = $('#sessionId').val().trim();
+					if (  id != ""){
+// 						if ( id == event.id ){
+// 							$('#confirmFooter').prepend('<button type="button" class="btn btn-default" data-dismiss="modal">찾기완료</button>');
+// 						}
+
+						jQuery('#modal-view-event-add').modal();
+					} else {
+						swal({
+					           text: "인증회원만 작성 가능합니다.",
+					           dangerMode: true,
+					           buttons: {
+										 catch: {
+										 		text: "닫기"
+										 }
+							   },
+					    });
+					}
 				},
 				eventClick: function(event, jsEvent, view) {
-				        jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
-						jQuery('.event-title').html(event.title);
-						jQuery('.event-body').html("<img src='" + event.imageurl + "' width='100' height='100'><br/>"+event.description);
+// 				        jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
+						jQuery('.event-title').html(
+													"<div class='row'>"
+													+"<div class='col-md-6' float='left' >사례금: "+event.dogPay+"원</div>"
+													+"<div class='col-md-6' float='right' align='right'>"+event.phone+"</div></div>"
+						);
+						jQuery('.event-body').html(
+													
+													"<div class='col-md-12' style='padding:0px;'>"
+													+"<img src='" + event.imageurl + "' width='100%' height='100%'>"
+													+"<br/><br/>실종지역: "+event.title+"<br/>"
+													+"<div class='row'>"
+													+"<div class='col-md-6' style='padding-right:0px;'>실종일자: "+event.date+"</div>"
+													+"<div class='col-md-6'>작성자: "+event.id+"</div></div>"
+													+"<div class='row'>"
+													+"<div class='col-md-6' style='padding-right:0px;'>견종: "+event.dogBreed+"</div>"
+													+"<div class='col-md-6'>성별: "+event.dogGender+"</div></div>"
+													+"<div class='row'>"
+													+"<div class='col-md-6' style='padding-right:0px;'>상태: "+event.dogStatus+"</div>"
+													+"<div class='col-md-6'>특징: "+event.dogChar+"</div></div>"
+// 													+"<br/>견종: "+event.dogBreed+""
+// 													+"<br/>성별: "+event.dogGender+""
+// 													+"<br/>상태: "+event.dogStatus+""
+// 													+"<br/>특징: "+event.dogChar+""
+// 													+"<br/>성격: "+event.dogPersonality
+													+""+event.description+"</div>"
+													
+						);
 // 						jQuery('.event-body').html(event.description);
 						jQuery('.eventUrl').attr('href',event.url);
 						jQuery('#modal-view-event').modal();
@@ -1730,6 +1729,236 @@ jQuery(document).ready(function(){
 		});
 	  
 	})(jQuery);
+	
+	
+	
+	
+	
+	  //============= "다중파일업로드 파일명만 저장해서 value" =============   
+	  function fnAddFile(fileNameArray) {
+	  	   $("#multiFile").val(fileNameArray)    
+	  }   
+
+	  //============= "다중파일업로드"  Event 처리 및  연결 =============      
+
+	  //임의의 file object영역
+	 var files = {};
+	 var previewIndex = 0;
+	 var fileNameArray = new Array();
+	 
+	 // image preview 기능 구현
+	 // input = file object[]
+	 function addPreview(input) {
+	     if (input[0].files) {
+	         //파일 선택이 여러개였을 시의 대응
+	         for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+	
+	            var file = input[0].files[fileIndex];
+	            
+	            if (validation(file.name))
+	                 continue;
+	            
+	            var fileName = file.name + "";   
+	            var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+	            var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length); 
+	            var imgSelectName = "img";
+	
+	            var reader = new FileReader();
+	            reader.onload = function(img) {
+	                 //div id="preview" 내에 동적코드추가.
+	                 //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
+	                 
+	                 var imgNum = previewIndex++;
+	                 
+	                //8장 이상 업로드시
+	                 if(Object.keys(files).length>=1){
+	            		alert("이미지는 1장까지 업로드 가능합니다.");
+	                    delete files[imgNum];
+	                 }else{
+	          		 // 8장 이하 
+	                	$("#preview").append(
+	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
+	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
+	                                         + "<span value=\""
+	                                         + imgNum
+	                                         + "\" onclick=\"deletePreview(this)\">"
+                                           + "삭제" + "</span>" + "</div> ");
+	
+		                 files[imgNum] = file;
+		                 fileNameArray[imgNum]=file.name;
+		                 fnAddFile(fileNameArray);
+	                 }
+	                
+	                if( imgNum == 0){
+	                	var b64 = img.target.result;
+//	                	console.log("[b64]"+b64);
+	                	if(b64.indexOf('png') != -1){
+	                		b64 = b64.replace(  'data:image/png;base64,'   ,    ''  ); // remove content type
+	                	}else {
+	                		b64 = b64.replace(  'data:image/jpeg;base64,'   ,   ''  );
+	                	}
+	                	
+                      request = {
+                        "requests":[
+                          {
+                            "image":{ "content": b64 },
+                            "features":[
+                              {
+                                // if you want to detect more faces, or detect something else, change this
+                                "type":"WEB_DETECTION",
+                                "maxResults":1
+                              }
+                            ]
+                          }
+                        ]
+                      };
+                      
+	                }
+	             };
+	
+	             reader.readAsDataURL(file);
+	         }
+	     } else
+	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	 }
+	 
+
+	 
+
+	 //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
+	 function deletePreview(obj) {
+	     var imgNum = obj.attributes['value'].value;
+	     delete files[imgNum];
+	     fileNameArray.splice(imgNum,1);
+	     fnAddFile(fileNameArray);
+	     $("#preview .preview-box[value=" + imgNum + "]").remove();
+	     resizeHeight();
+	 }
+
+	 //============= 파일 확장자 validation 체크 =============
+	 function validation(fileName) {
+	     fileName = fileName + "";
+	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+	     var fileNameExtension = fileName.toLowerCase().substring(
+	             fileNameExtensionIndex, fileName.length);
+	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg') )) {
+	         alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
+	         return true;
+	     } else {
+	         return false;
+	     }
+	 }
+	 
+
+	$(document).ready(function() {
+	      //============= 사진미리보기 =============
+		$('#attach input[type=file]').change(function() {
+			addPreview($(this)); //preview form 추가하기
+		});
+	});
+	
+	 //============= 다중파일업로드 AJAX =============
+	
+ 	  
+ 	 function fncAddMissing(){
+ 		var boardCode = $('input[name=boardCode]').val();
+ 		var file = $("#multiFile").val(); 
+ 		
+ 		var mForm = $('#add-event')[0];
+ 		var formData = new FormData( mForm );
+ 		
+   		$(function() {     
+// 	        var form = $('#uploadForm')[0];
+// 	        var formData = new FormData(form);
+	        
+	
+	        for (var index = 0; index < 100; index++) {
+	            formData.append('files',files[index]);
+	        }
+//           console.log(formData);
+          
+
+	          $.ajax({
+		            type : 'POST',
+		            enctype : 'multipart/form-data',
+		            processData : false,
+		            contentType : false,
+		            cache : false,
+		            timeout : 600000,
+		            url : '/Images/json/imageupload/'+boardCode,
+// 		            dataType : 'JSON',
+		            data : formData,
+		            success : function(result) {
+			                if (result === -1) {
+			                    alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
+			                    // 이후 동작 ...
+			                } else if (result === -2) {
+			                    alert('파일이 10MB를 초과하였습니다.');
+			                    // 이후 동작 ...
+			                } else {
+			                    alert('이미지 업로드 성공');
+			                    
+			                    
+			                    
+			                }
+		            },
+					error: function(request, status, error){ 
+						console.log("이미지 code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+			        }
+		        });
+		  });
+   		
+   		
+   		$(function() { 
+   			console.log("ok----------------");
+   			$.ajax({
+					url : "/adopt/json/addAdopt",
+					enctype : 'multipart/form-data',
+					processData : false,
+		            contentType : false,
+		            cache : false,
+		            type : "POST" ,
+// 					dataType : "json" ,
+					data : formData,
+// 					data : JSON.stringify({
+// 						dogPay : $("input[name=dogPay]").val(),
+// 						phone : $("input[name=phone]").val(),
+// 						dogDate : $("input[name=dogDate]").val(),
+// 						locationKr : $("input[name=locationKr]").val(),
+// 						dogBreed : $("input[name=dogBreed]").val(),
+// 						dogGender : $('select[name=dogGender]').val(),
+// 						dogStatus : $("input[name=dogStatus]").val(),
+// 						dogChar : $("input[name=dogChar]").val(),
+// 						postContent : $("textarea[name=postContent]").val(),
+// 						mainFile : $("textarea[name=postContent]").val(),
+// 					}) ,
+// 					headers : {
+// 								"Accept" : "application/json",
+// 								"Content-Type" : "application/json"
+// 							  },
+					success : function(data , status) {
+							console.log("성공 "+data.message);
+							$('#modal-view-event-add').modal("hide");
+							self.location = "/adopt/listMissing.jsp";
+				},
+				error: function(request, status, error){ 
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+		        }
+				
+			});
+   	 });
+		//레스트로 보내기
+// 		$("form").attr("method" , "POST").attr("action" , "/adopt/addAdopt").attr("enctype","multipart/form-data").submit();
+		
+	}
+
+
+	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 	$( ".btn-default:contains('등록')" ).on("click" , function() {
+	$(document).on("click", ".btn-default:contains('등록')", function() {
+		fncAddMissing();
+	});
+
 
 </script>
 </body>

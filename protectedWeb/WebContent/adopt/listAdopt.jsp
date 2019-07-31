@@ -65,23 +65,23 @@
 			height: 40px;
 			width: 150px;
 			border : 1px solid #D3D3D3;
-/* 			display: none; */
+ 			display: none; 
 		}
 		
 		#searchSubmmit {
-/* 			width : 40px; */
- 			width : 60px; 
+ 			width : 40px; 
+ 			width : 40px; 
 			height : 40px;
-/* 			border-radius : 50px; */
- 			border-radius : 0px 15px 15px 0px; 
+			border-radius : 50px; 
+/*  			border-radius : 0px 15px 15px 0px;  */
 			border : 1px solid #f04f23;
 		}
 		
 		#write {
  			width : 40px; 
 			height : 40px;
-/* 			border-radius : 50px; */
- 			border-radius : 15px; 
+ 			border-radius : 50px; 
+/*  			border-radius : 15px;  */
 			border : 1px solid #f04f23;
 		}
 		
@@ -91,7 +91,7 @@
 			padding-left: 10px;
 			border-color: #D3D3D3;
 			border-right: 0px;
-/* 			display: none; */
+ 			display: none; 
 		}
 		
 		#searchCondition {
@@ -99,7 +99,7 @@
 			padding-left: 5px;
 			border-color: #D3D3D3;
 			border-right: 0px;
-/* 			display: none; */
+ 			display: none; 
 		}
 		
 		.col-md-6 {
@@ -139,13 +139,7 @@
 		    	</p>
 		    </div>
 		    <div class="col-md-6" id="justify" align="left">
-			    <c:if test="${ user.id ne null }">
-<!-- 			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button> -->
-						<button type="button" id="write" class="btn btn-default " style="padding-bottom: 6px;margin-left: 0px;">
-							<span class="fas fa-pencil-alt"></span>
-<!-- 							작성 -->
-						</button>
-			    	</c:if>
+			    
 			    </div>
 			<div class="col-md-6" align="right">
 				<form class="form-inline" name="detailForm" style="float: right;none;">
@@ -184,7 +178,13 @@
 						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
 							<span class="fas fa-search"></span>
 						</button>
-
+<c:if test="${ user.id ne null }">
+<!-- 			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button> -->
+						<button type="button" id="write" class="btn btn-default " style="padding-bottom: 6px;margin-left: 0px;">
+							<span class="fas fa-pencil-alt"></span>
+							작성
+						</button>
+			    	</c:if>
 <!-- 						<button type="button" class="btn btn-default"  id="search" style="height: 33px;width: 45px;">검색</button> -->
 						
 <!-- 					</div> -->
@@ -408,6 +408,11 @@
 
 		
 		$(function() {
+			
+			
+			if ( $('#searchSubmmit').css( 'border-radius'  ) == '0px 50px 50px 0px' ){
+			
+			
 			$( "#searchSubmmit" ).on("click" , function() {
 // 			$( "button:contains('검색')" ).on("click" , function() {
 				if ( $( '#searchKeyword').val() == '' ){
@@ -417,8 +422,11 @@
 				fncGetList(1);
 			});
 			
+			}
+			
+			
 			// 상세조회
-			$(document).on("click")
+// 			$(document).on("click")
 			$( "#listAdoptJSON" ).on("click", ".getadopt" , function() {
 				self.location ="/adopt/getAdopt?postNo="+$(this).children( $('input')).val().trim();
 			});
@@ -448,18 +456,18 @@
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
 			
-// 			$( "#searchSubmmit" ).on("click" , function() {
+			$( "#searchSubmmit" ).on("click" , function() {
 				
-// 				if (   $('#searchSubmmit').css( 'border-radius'  ) == '0px 50px 50px 0px' ) {
-// 					$('#searchSubmmit').css( 'border-radius','50px' );
-// 				} else {
-// 					$('#searchSubmmit').css( 'border-radius','0px 50px 50px 0px' );
-// 				}
+				if (   $('#searchSubmmit').css( 'border-radius'  ) == '0px 50px 50px 0px' ) {
+					$('#searchSubmmit').css( 'border-radius','50px' );
+				} else {
+					$('#searchSubmmit').css( 'border-radius','0px 50px 50px 0px' );
+				}
 				
-// 				$('#areaCondition').toggle( 'slow' );
-// 				$('#searchCondition').toggle( 'slow' );
-// 				$('#searchKeyword').toggle( 'slow' );
-// 			});
+				$('#areaCondition').toggle( 'slow' );
+				$('#searchCondition').toggle( 'slow' );
+				$('#searchKeyword').toggle( 'slow' );
+			});
 
 		});	
 	

@@ -1881,8 +1881,8 @@ p {
         bottom: 20px;
         right: 20px;
         font-size: 22px;
-        padding: 3px 15px;
-        border-radius: 0;
+        padding: 3px 15px !important;
+        border-radius: 0 !important;
         display: none;
     }
 
