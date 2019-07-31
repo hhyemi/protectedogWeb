@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
 <!DOCTYPE html>
 
@@ -20,37 +20,43 @@
 	
 	var cnt = 9;	
 	var searchKeyword = '애견상식';
-	var flag = false;
+	var flag = true;
+	//var Token = '' ; 
+	var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=9";
 	
 	$(document).ready(function(){
-		fnGetList();
-	});
+		$(".searchKeyword").keydown(function(key){
+			if(key.keyCode == 13){
+				$(".searchSubmit").click();
+			}
+		});
+	})
 	
+			
 	$(function () {
-		$("button").on("click",function(){
+		$(".col-md-2").on("click",function(){
+			$("#get_view").empty();
 			searchKeyword = $(this).text();
 			fnGetList();
-		});		
+		});	
+		
+		$(".searchSubmit").on("click",function(){
+			$("#get_view").empty();
+			searchKeyword = $(".searchKeyword").val();
+			fnGetList();
+		});
 	});
 	
 	
 	function fnGetList(sGetToken){
 		
+		//var newToken = Token;
+		
 		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+sGetToken);
-		
-// 			var $getval = $("#search_box").val();
-		
-// 			if($getval == ""){
-// 			//alert("검색어 입력 !");
-// 				$("#search_box").focus();
-// 				return;
-// 			}
-		
+				
 // 		$("#get_view").empty();
 // 		$("#nav_view").empty();
-		
-		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=9";
 		
 		// 민희 : AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0
 		// 은우 : AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w
@@ -61,18 +67,33 @@
 		
 		console.log("sGetToken : " + sGetToken);
 		
+		var result = (sGetToken='undefined')?"true":"false";
+		
+		console.log(result);
+		
  		if(sGetToken){
  			
- 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+ 			sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
 				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=3";
  			sTargetUrl += "&pageToken=" + sGetToken;
- 			
+			console.log("거쳤냐?")
  			//debugger;
 			//sTargetUrl += "&maxResults="+ 10;
  		}
 		
  		console.log("Token after : "+sTargetUrl);
  		
+ 		console.log("flag : "+flag);
+		if(flag==false){
+			return;
+		}
+		
+ 		getYoutube();
+	}
+	
+	
+	function getYoutube(callbackFunc){
+		
 		$.ajax({
 			
 			type : "POST",
@@ -80,68 +101,69 @@
 			dataType : "jsonp",
 			success : function(jdata) {
 				
+				
+				callbackFunc(jdata);
 				//console.log(jdata);
 				
-				if(sGetToken == jdata.nextPageToken){
-					var token = this.jdata.nextPageToken;
-				}
-				
 				console.log("jdata.nextPageToken : " + jdata.nextPageToken);
-				sGetToken = undefined;
-				
-				$(jdata.items).each(function(i){
+				//sGetToken = undefined;
 
-					//debugger;
-					
-					var videoId = this.id.videoId;
-// 					console.log(" 비디오 아이디 : " + videoId) ;
-// 					console.log(" sinppet.title : " + this.snippet.title) ; 
-// 					console.log(" sinppet.description : " + this.snippet.description) ; 
-// 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
-					$("#get_view").append(
-							  "<div class='col-md-4' style='min-width : 350px'>"
-							+ "<iframe width='350px' height='200px' src='https://www.youtube.com/embed/"+this.id.videoId+"?fs=1&playsinline=1'"+" allow='autoplay; encrypted-media' allowfullscreen></iframe>"
-							+ "<span class='box'>"
-							+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:350px;'>"+this.snippet.title+"</span></a><br>"										
-							+ "<span style='width:300px;'>"+this.snippet.publishedAt+"</span><br>"
-							+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
-							+ "</div>");
-
-				}).promise().done(function(){					
-
-					$(window).on("scroll", function(){
-		 				
-						// scrollTop + windowHeight + 30 > documentHeight
-						if($(document).height() < ( $(window).height() + 30 ) + $(window).scrollTop() ){
-							
-							console.log("sGetToken"+sGetToken);
-							if(flag == false){
-								javascript:fnGetList(jdata.nextPageToken);
-								flag == true;
-								return;
-							}
-							
-							if(flag == true){
-								return;
-							}
-							
-							
-			 								
-						} // If End
-						}); // window End						
-				}); // promise End
 			}
 		});
-				
-// 					if(jdata.nextPageToken){
-// 						$("#nav_view").append("<button class='paging btn btn-default' onclick='javascript:fnGetList(\""+jdata.nextPageToken+"\");'> 더 보기 </button>");
-// 					}
-// 				})
-// 			}
-// 		});
-		
 		
 	}
+	
+	getYoutube(function (jdata){
+		
+		console.log(jdata);
+		
+		$(jdata.items).each(function(i){
+
+			var videoId = this.id.videoId;
+			
+			var date = new Date(this.snippet.publishedAt);
+			var convertDate = date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " +date.getDate() +"일"  ;
+			
+			var title = this.snippet.title;
+			var convertTitle = title.substring(0,25);
+			if(title.length > 26){
+				convertTitle += "..."
+			}
+			
+			// 					console.log(" 비디오 아이디 : " + videoId) ;
+//				console.log(" sinppet.title : " + this.snippet.title) ; 
+//				console.log(" sinppet.description : " + this.snippet.description) ; 
+//				console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
+			$("#get_view").append(
+					  "<div class='col-md-4' style='min-width : 350px'>"
+					+ "<iframe width='350px' height='200px' src='https://www.youtube.com/embed/"+this.id.videoId+"?fs=1&playsinline=1'"+" allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+					+ "<span class='box'>"
+					+ "<a href=http://youtu.be/"+this.id.videoId+" "+"target='_blank'>" + "<br><span class='title' style='width:350px;'>"+convertTitle+"</span></a><br>"										
+					+ "<span style='width:300px;' class='date'>"+convertDate+"</span><br>"
+					+ "<span class='description' style='width:300px;'><br>"+this.snippet.description+"</span><br><span class='channelTitle'>"+this.snippet.channelTitle+"</span></span><br><p>"
+					+ "</div>");
+			
+			$("")
+		}).promise().done(function(){					
+
+			$(window).on("scroll", function(){
+				
+				
+				// scrollTop + windowHeight + 30 > documentHeight
+				if($(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){
+					
+					//console.log("sGetToken"+sGetToken);
+						if(flag == true){
+							flag=false;
+							javascript:fnGetList(jdata.nextPageToken);
+						}
+					
+	 								
+				} // If End
+				}); // window End						
+		}); // promise End
+		
+	});
 </script>
 
 <style type="text/css">
@@ -194,6 +216,17 @@ a :hover{
 	margin: 0px;
 	padding: 0px;
 }
+
+.searchBox{
+	padding-top: 10px;
+}
+
+#searchKeyword {
+	width : 150px;
+}
+#searchBox{
+	padding-right: 0px;
+}
 </style>
 </head>
 <body>
@@ -202,22 +235,26 @@ a :hover{
 
 	<div class="container">
 	
-	<div class="row">
-	<button class="btn-default col-md-2">#애견상식</button>
-	<button class="btn-default col-md-2">#애견훈련</button>
-	<button class="btn-default col-md-2">#애견분양</button>
-	<button class="btn-default col-md-2">#애견음악</button>
-	<button class="btn-default col-md-2">#애견카페</button>
-	<button class="btn-default col-md-2">#애견사건</button>
-	</div>
-	
-<!-- 	<form name="form1" method="post" onsubmit="return false;"> -->
-<!-- 		<input type="text" id="search_box" /> -->
-<!-- 		<button onClick="fnGetList();">가져오기</button> -->
-<!-- 	</form> -->
-	
+		<div class="row">
+			<button class="btn-default col-md-2">#애견상식</button>
+			<button class="btn-default col-md-2">#애견훈련</button>
+			<button class="btn-default col-md-2">#애견분양</button>
+			<button class="btn-default col-md-2">#애견음악</button>
+			<button class="btn-default col-md-2">#애견카페</button>
+			<button class="btn-default col-md-2">#애견사건</button>
+		</div>
+		
+		<div class="row">
+		<div class="col-md-12" align="right" id="searchBox">
+		
+			<span><input type="text" id="searchKeyword" class="form-control searchKeyword" /></span>
+			<span><button type="button" class="btn btn-default searchSubmit"><span class="fas fa-search"></span></button></span>	
+		
+		</div>
+		</div>
 	<hr>
 	<div id="get_view" class="row"></div>
+		
 <!-- 	<div id="nav_view" class="col-md-12 col-sm-12 col-lg-12"></div> -->
 	</div>
 	

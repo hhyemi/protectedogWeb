@@ -61,7 +61,6 @@ public class FileUploadRestController {
 
 		for (MultipartFile image : images) {
 			String fileName = image.getOriginalFilename();
-
 			try {
 				// 해당 경로에 맞게 저장
 				if (boardCode.equals("SF")) {

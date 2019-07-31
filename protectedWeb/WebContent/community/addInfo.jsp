@@ -58,10 +58,32 @@ label {
 
 <!--  JavaScript  -->
 <script type="text/javascript">
-function fncAddProduct(){
+function fncAddInfo(){
 	
-	var postContent = $("#editor").text();
-	$("form[name=detailForm]").attr("method","POST").attr("action","/info/addInformation").attr("enctype","multipart/form-data").submit();
+	var postTitle = $("#postTitle").val();
+	var postContent = CKEDITOR.instances.editor1.getData();
+	console.log("postTitle : " + postTitle + "\n" +
+				"postContent : " + postContent + "\n" );
+	
+	if(postTitle.length < 1 && postTitle == ""){
+		swal({
+			  title: "제목을 입력해주세요"
+		});
+		
+		$("#postTitle").focus();
+		
+		return;
+	}
+	
+	if(postContent.length < 1 && postContent == ""){
+		swal({
+			  title: "내용을 입력해주세요"
+		});
+		
+		$(CKEDITOR.instances.editor1).focus();
+	}
+	
+	//$("form[name=detailForm]").attr("method","POST").attr("action","/info/addInformation").attr("enctype","multipart/form-data").submit();
 	
 }
 
@@ -72,7 +94,7 @@ $(function () {
 	});
 	
 	$("button.btn.btn-primary").on("click", function(){
-		fncAddProduct();
+		fncAddInfo();
 	});
 	
 	
@@ -280,26 +302,6 @@ $(function () {
 	
 	let editor;
 
-// 	ClassicEditor
-// 	    .create( document.querySelector( '#editor' ),{
-	    
-//         	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'image' ],
-//         	heading: {
-//                 options: [
-//                     { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-//                     { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-//                     { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-//                 ]
-//             }
-	    	
-// 	    })
-// 	    .then( newEditor => {
-// 	        editor = newEditor;
-// 	    } )
-// 	    .catch( error => {
-// 	        console.error( error );
-// 	    } );
-
 	CKEDITOR.addCss('figure[class*=easyimage-gradient]::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; }' +
 		      'figure[class*=easyimage-gradient] figcaption { position: relative; z-index: 2; }' +
 		      '.easyimage-gradient-1::before { background-image: linear-gradient( 135deg, rgba( 115, 110, 254, 0 ) 0%, rgba( 66, 174, 234, .72 ) 100% ); }' +
@@ -400,107 +402,13 @@ $(function () {
 		        'EasyImageAlt'
 		      ]
 		    });
-    
-  //============= "다중파일업로드"  Event 처리 및  연결 =============		
-
-    //임의의 file object영역
-    var files = {};
-    var previewIndex = 0;
-    var fileNameArray = new Array();
-
-    // image preview 기능 구현
-    // input = file object[]
-    function addPreview(input) {
-        if (input[0].files) {
-            //파일 선택이 여러개였을 시의 대응
-            for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-                var file = input[0].files[fileIndex];
-
-                if (validation(file.name))
-                    continue;
-
-    	        var fileName = file.name + "";   
-    	        var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-    	        var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
-    	        
-					var imgSelectName = "img";
-
-					if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
-						imgSelectName = "iframe";
-					}	                        
-                
-
-                var reader = new FileReader();
-                reader.onload = function(img) {
-                    //div id="preview" 내에 동적코드추가.
-                    //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
-                    var imgNum = previewIndex++;
-                    
-                    var previewId = "";
-                   
-                    if(imgNum==0){
-                    	previewId = "start";
-                    }else{
-                    	previewId = "startNo";	
-                    }
-                	
-                	document.querySelector( '#editor' ).addEventListener( 'click', () => {
-                	    const editorData = editor.getData();     	           
-                	} );
-                	
-                    editor.setData(editor.getData()+"<p><"+imgSelectName+" src='" + img.target.result + "' style='min-width:100%'/></p><p/>");		
-                
-                    
-                    $("#preview").append(
-                                    "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:208px' >"
-                                            + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"200px;\" height=\"200px;\"/>"
-                                            + "<a href=\"#\" value=\""
-                                            + imgNum
-                                            + "\" onclick=\"deletePreview(this)\">"
-                                            + "삭제" + "</a>" + "</div>");
-                    files[imgNum] = file;
-                    
-                    fileNameArray[imgNum]=file.name;
-                    fnAddFile(fileNameArray);
-                };
-
-                reader.readAsDataURL(file);
-            }
-        } else
-            alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-    }
-
-    //preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
-    function deletePreview(obj) {
-        var imgNum = obj.attributes['value'].value;
-        delete files[imgNum];
-        $("#preview .preview-box[value=" + imgNum + "]").remove();
-        resizeHeight();
-    }
-
-    //client-side validation
-    //always server-side validation required
-    function validation(fileName) {
-        fileName = fileName + "";
-        var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-        var fileNameExtension = fileName.toLowerCase().substring(
-                fileNameExtensionIndex, fileName.length);
-        if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-            alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-	 
+   
     $(document).ready(function() { 
 	
     	$(".googleMap").hide();
     	
     	$(".googleMapCheck").on("click",function(){
     		
-    		alert($(this).val())
     		if( $(this).val() == 'hide' ) {
     			$(".googleMap").show('slow');
     			$(this).val("show");

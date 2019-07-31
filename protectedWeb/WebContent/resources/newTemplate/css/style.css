@@ -979,8 +979,8 @@ p {
 
         .modal-content {
             /*background-color: #ececec;*/
-            border: 3px solid #f04f23;
-            border-radius: 0px;
+            border: 1px solid #f04f23;
+            border-radius: 10px;
             outline: 0;
         }
 

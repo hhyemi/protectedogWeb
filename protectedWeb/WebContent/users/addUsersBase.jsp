@@ -80,7 +80,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                     <div class="form-group">
                                         <label for="id">아 이 디</label>
                                         <input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp" placeholder="Enter ID">
-										<span id="helpBlock1" class="help-block"></span>
+										<span id="helpBlock1" class="help-block" style="font-size: 14px;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="cont-number">비 밀 번 호</label>
@@ -89,8 +89,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
                                     <div class="form-group has-success">
                                         <label for="website">비밀번호 확인</label>
-                                        <input type="password" class="form-control" id="pw2" name="pw2" aria-describedby="emailHelp" placeholder="Confirm Password">
-
+                                        <input type="password" class="form-control" id="pw2" name="pw2" aria-describedby="emailHelp" placeholder="Confirm Password"
+                                        style="margin-bottom: 0;">
+										<span id="helpBlock3" class="help-block" style="font-size: 14px;"></span>
                                     </div>  
                                     <div class="form-group">
                                         <label for="userName">회 원 명</label>
@@ -99,7 +100,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                     <div class="form-group">
                                         <label for="nickname">닉 네 임</label>
                                         <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" placeholder="Enter Nickname">
-                                        <span id="helpBlock2" class="help-block"></span>
+                                        <span id="helpBlock2" class="help-block" style="font-size: 14px;"></span>
                                     </div>
                                 </div>
                             </div> 
@@ -161,6 +162,19 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		//============= "가입"  Event 연결 =============
 		$(function() {
 			
+			$("#pw2").on("keyup", function(){
+				if($("#pw2").val() == $("#pw").val()){
+					$("#pw2").css("background-color", "#A9F5D0");
+					$('#helpBlock3').css("color", "#A9F5D0")
+					$('#helpBlock3').text("비밀번호가 일치합니다");
+				}else{
+					$("#pw2").css("background-color", "#F5A9BC");
+					$('#helpBlock3').css("color", "#F5A9BC")
+					$('#helpBlock3').text("비밀번호가 일치하지 않습니다");
+				}				
+			})
+
+			
 			$( "#submit" ).on("click" , function() {
 				var id=$("#id").val();
 				var pw=$("#pw").val();
@@ -173,36 +187,37 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				
 				if(id == null || id.length <1){
 					alert("아이디는 반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(id.length < 8 || id.length > 12){
 					alert("아이디는 8자 이상 12자 이하로 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(pw == null || pw.length <1){
 					alert("패스워드는  반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(pw.length < 8 || pw.length > 12){
 					alert("패스워드는 8자 이상 12자 이하로 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(pw_confirm == null || pw_confirm.length <1){
 					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(userName == null || userName.length <1){
 					alert("이름은  반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if( pw != pw_confirm ) {				
 					alert("비밀번호 확인이 일치하지 않습니다.");
-					$("input:text[name='password2']").focus();
-					return;
+					$("input:password[name='pw2']").focus();
+					$("input:password[name='pw2']").val('');
+					return false;
 				}
 				if( check.length != 3 || check.length == 0){
 					alert("이용목적을 3개 체크해주세요");
-					return;
+					return false;
 				}
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersBase");
@@ -225,9 +240,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					success : function(response){
 						if($.trim(response.result)==0){
 							$('#helpBlock1').html("사용가능");
+							$("#id").css("background-color", "#A9F5D0");
+							$('#helpBlock1').css("color", "#A9F5D0");
 							$('#submit').attr('disabled', false);
 						}else{
 							$('#helpBlock1').html("사용불가");
+							$("#id").css("background-color", "#F5A9BC");
+							$('#helpBlock1').css("color", "#F5A9BC");
 							$('#submit').attr('disabled', true);
 						}
 					},
@@ -252,9 +271,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					success : function(response){
 						if($.trim(response.result)==0){
 							$('#helpBlock2').html("사용가능");
+							$("#nickname").css("background-color", "#A9F5D0");
+							$('#helpBlock2').css("color", "#A9F5D0")
 							$('#submit').attr('disabled', false);
 						}else{
 							$('#helpBlock2').html("사용불가");
+							$("#nickname").css("background-color", "#F5A9BC");
+							$('#helpBlock2').css("color", "#F5A9BC");
 							$('#submit').attr('disabled', true);
 						}
 					},
@@ -279,36 +302,36 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				
 				if(id == null || id.length <1){
 					alert("아이디는 반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(id.length < 8 || id.length > 12){
 					alert("아이디는 8자 이상 12자 이하로 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(pw == null || pw.length <1){
 					alert("패스워드는  반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(pw.length < 8 || pw.length > 12){
 					alert("패스워드는 8자 이상 12자 이하로 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(pw_confirm == null || pw_confirm.length <1){
 					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if(userName == null || userName.length <1){
 					alert("이름은  반드시 입력하셔야 합니다.");
-					return;
+					return false;
 				}
 				if( pw != pw_confirm ) {				
 					alert("비밀번호 확인이 일치하지 않습니다.");
 					$("input:text[name='password2']").focus();
-					return;
+					return false;
 				}
 				if( check.length != 3 || check.length == 0){
 					alert("이용목적을 3개 체크해주세요");
-					return;
+					return false;
 				}
 				
 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersBase2");
