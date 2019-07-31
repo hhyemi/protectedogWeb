@@ -17,11 +17,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /*
- * ¤· JUnit4 (Test Framework) °ú Spring Framework ÅëÇÕ Test( Unit Test)
- * ¤· Spring Àº JUnit 4¸¦ À§ÇÑ Áö¿ø Å¬·¡½º¸¦ ÅëÇØ ½ºÇÁ¸µ ±â¹Ý ÅëÇÕ Å×½ºÆ® ÄÚµå¸¦ ÀÛ¼º ÇÒ ¼ö ÀÖ´Ù.
- * ¤· @RunWith : Meta-data ¸¦ ÅëÇÑ wiring(»ý¼º,DI) ÇÒ °´Ã¼ ±¸ÇöÃ¼ ÁöÁ¤
- * ¤· @ContextConfiguration : Meta-data location ÁöÁ¤
- * ¤· @Test : Å×½ºÆ® ½ÇÇà ¼Ò½º ÁöÁ¤
+ * ï¿½ï¿½ JUnit4 (Test Framework) ï¿½ï¿½ Spring Framework ï¿½ï¿½ï¿½ï¿½ Test( Unit Test)
+ * ï¿½ï¿½ Spring ï¿½ï¿½ JUnit 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Úµå¸¦ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+ * ï¿½ï¿½ @RunWith : Meta-data ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ wiring(ï¿½ï¿½ï¿½ï¿½,DI) ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @ContextConfiguration : Meta-data location ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @Test : ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/context-common.xml" ,
@@ -30,32 +30,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 									"classpath:config/context-transaction.xml"})
 public class AdoptServiceTest {
 
-	//==>@RunWith,@ContextConfiguration ÀÌ¿ë Wiring, Test ÇÒ instance DI
+	//==>@RunWith,@ContextConfiguration ï¿½Ì¿ï¿½ Wiring, Test ï¿½ï¿½ instance DI
 	@Autowired
 	@Qualifier("adoptServiceImpl")
 	private AdoptService adoptService;
 
-	//@Test	// È®ÀÎ
+	//@Test	// È®ï¿½ï¿½
 	public void testAddAdopt() throws Exception {
 		
 		Adopt adopt = new Adopt();
 		
 		adopt.setBoardCode("MS");
 		adopt.setId("user03");
-		adopt.setPostTitle("Á¦ÀÌÀ¯´Ö Å×½ºÆ® Áß4");
-		adopt.setPostContent("±Û ³»¿ë Á¦ÀÌÀ¯´Ö Å×½ºÆ®Áß4 ");
+		adopt.setPostTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½ï¿½4");
+		adopt.setPostContent("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½4 ");
 		adopt.setPhone("01121234567");
 		adopt.setAdoptArea(null);
-		adopt.setLocation("½ÇÁ¾À§Ä¡ÀÎµ¥ Å×½ºÆ®Áß3");
-		adopt.setDogBreed("Çªµé");
+		adopt.setLocation("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½Îµï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½3");
+		adopt.setDogBreed("Çªï¿½ï¿½");
 		adopt.setDogWeight("5.1");
 		adopt.setDogSize("2");
 		adopt.setDogGender("1");
 		adopt.setDogPay(100000);
-		adopt.setDogStatus("°Ç°­ÇÔ");
-		adopt.setDogChar("Æ¯Â¡¾øÀ½");
-		adopt.setDogPersonality("È°¹ßÇÔ");
-		adopt.setDogDate(new Date(20190701));
+		adopt.setDogStatus("ï¿½Ç°ï¿½ï¿½ï¿½");
+		adopt.setDogChar("Æ¯Â¡ï¿½ï¿½ï¿½ï¿½");
+		adopt.setDogPersonality("È°ï¿½ï¿½ï¿½ï¿½");
+//		adopt.setDogDate(new Date(20190701));
 		adopt.setStatusCode("1");
 		
 		
@@ -63,34 +63,34 @@ public class AdoptServiceTest {
 		
 		adopt = adoptService.getAdopt(10002);
 
-		System.out.println("\n :: console È®ÀÎ :: "+adopt);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+adopt);
 		
 		Assert.assertEquals("MS", adopt.getBoardCode());
 		Assert.assertEquals("user03", adopt.getId());
-		Assert.assertEquals("Á¦ÀÌÀ¯´Ö Å×½ºÆ® Áß3", adopt.getPostTitle());
-		Assert.assertEquals("±Û ³»¿ë Á¦ÀÌÀ¯´Ö Å×½ºÆ®Áß3 ", adopt.getPostContent());
+		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½ï¿½3", adopt.getPostTitle());
+		Assert.assertEquals("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½3 ", adopt.getPostContent());
 	}
 	
 	
 	
-	//@Test	//È®ÀÎ
+	//@Test	//È®ï¿½ï¿½
 	public void testGetAdopt() throws Exception {
 		
 		Adopt adopt = new Adopt();
 		adopt = adoptService.getAdopt(10003);
 
-		System.out.println("\n :: console È®ÀÎ :: "+adopt);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+adopt);
 
 		Assert.assertEquals("MS", adopt.getBoardCode());
 		Assert.assertEquals("user03", adopt.getId());
-		Assert.assertEquals("Á¦ÀÌÀ¯´Ö Å×½ºÆ® Áß3", adopt.getPostTitle());
-		Assert.assertEquals("±Û ³»¿ë Á¦ÀÌÀ¯´Ö Å×½ºÆ®Áß3 ", adopt.getPostContent());
+		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½ï¿½3", adopt.getPostTitle());
+		Assert.assertEquals("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½3 ", adopt.getPostContent());
 	}
 	
 	
 
 	
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testUpdateAdopt() throws Exception{
 		 
 		Adopt adopt = adoptService.getAdopt(10003);
@@ -98,35 +98,35 @@ public class AdoptServiceTest {
 		
 		Assert.assertEquals("MS", adopt.getBoardCode());
 		Assert.assertEquals("user03", adopt.getId());
-		Assert.assertEquals("Á¦ÀÌÀ¯´Ö Å×½ºÆ® Áß3", adopt.getPostTitle());
+		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½ï¿½3", adopt.getPostTitle());
 
 		adopt.setPostNo(10003);
-		adopt.setPostTitle("±ÛÁ¦¸ñ ¾÷µ¥ÀÌÆ®");
-		adopt.setPostContent("±Û³»¿ë ¾÷µ¥ÀÌÆ®");
-		adopt.setLocation("À§Ä¡ ¾÷µ«");
-		adopt.setDogBreed("Çªµé¾÷µ«");
+		adopt.setPostTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
+		adopt.setPostContent("ï¿½Û³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
+		adopt.setLocation("ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½");
+		adopt.setDogBreed("Çªï¿½ï¿½ï¿½ï¿½ï¿½");
 		adopt.setDogWeight("9.9");
 		adopt.setDogSize("3");
 		adopt.setDogGender("2");
 		adopt.setDogPay(9999);
-		adopt.setDogStatus("»óÅÂ¾÷µ«");
-		adopt.setDogChar("Æ¯Â¡¾÷µ«");
-		adopt.setDogPersonality("¼º°Ý¾÷µ«");
-		adopt.setDogDate(new Date(20190707));
+		adopt.setDogStatus("ï¿½ï¿½ï¿½Â¾ï¿½ï¿½ï¿½");
+		adopt.setDogChar("Æ¯Â¡ï¿½ï¿½ï¿½ï¿½");
+		adopt.setDogPersonality("ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½");
+//		adopt.setDogDate(new Date(20190707));
 		adoptService.updateAdopt(adopt);
 		
 		adopt = adoptService.getAdopt(10003);
 		Assert.assertNotNull(adopt);
 
-		System.out.println("\n :: console È®ÀÎ :: "+adopt);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+adopt);
 
-		Assert.assertEquals("±ÛÁ¦¸ñ ¾÷µ¥ÀÌÆ®", adopt.getPostTitle());
-		Assert.assertEquals("±Û³»¿ë ¾÷µ¥ÀÌÆ®", adopt.getPostContent());
-		Assert.assertEquals("Çªµé¾÷µ«", adopt.getDogBreed());
+		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®", adopt.getPostTitle());
+		Assert.assertEquals("ï¿½Û³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®", adopt.getPostContent());
+		Assert.assertEquals("Çªï¿½ï¿½ï¿½ï¿½ï¿½", adopt.getDogBreed());
 	 }
 	 
 	 
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testUpdateStatusCode() throws Exception{
 		 
 		Adopt adopt = adoptService.getAdopt(10000);
@@ -140,13 +140,13 @@ public class AdoptServiceTest {
 		adopt = adoptService.getAdopt(10000);
 		Assert.assertNotNull(adopt);
 
-		System.out.println("\n :: console È®ÀÎ :: "+adopt);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+adopt);
 
 		Assert.assertEquals("2", adopt.getStatusCode());
 	 }
 	
 
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testGetPurchaseListById() throws Exception{
 		 
 	 	Search search = new Search();
@@ -157,7 +157,7 @@ public class AdoptServiceTest {
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(1, list.size());
 	 	
-	 	System.out.println("\n :: console È®ÀÎ :: "+list);
+	 	System.out.println("\n :: console È®ï¿½ï¿½ :: "+list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);
@@ -169,7 +169,7 @@ public class AdoptServiceTest {
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(2, list.size());
 	 	
-	 	System.out.println("\n :: console È®ÀÎ :: "+list);
+	 	System.out.println("\n :: console È®ï¿½ï¿½ :: "+list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);

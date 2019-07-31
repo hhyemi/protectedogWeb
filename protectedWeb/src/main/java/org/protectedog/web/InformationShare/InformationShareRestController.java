@@ -10,6 +10,7 @@ import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Interest;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.interest.InterestService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,10 @@ public class InformationShareRestController {
 	@Autowired
 	@Qualifier("interestServiceImpl")
 	private InterestService interestService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	@Value("#{commonProperties['info']}")
 	String boardCode;

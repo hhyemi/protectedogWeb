@@ -82,6 +82,21 @@ public class MessageController {
 		return "forward:/message/getMessageView.jsp";
 		
 	}
+	
+	@RequestMapping(value="updateMessage", method=RequestMethod.GET)
+	public String updateMessage(@RequestParam("messageNo") int messageNo, Model model) throws Exception{
+		
+		System.out.println("/message/updateMessage : POST");
+		
+		Message message=messageService.getMessage(messageNo);
+		message.setMessageStatus("2");
+		messageService.updateMessage(message);
+		
+		model.addAttribute("message", message);
+		
+		return "forward:/message/listMessage?searchCondition=delete";
+		
+	}	
 
 	
 	@RequestMapping(value="listMessage")

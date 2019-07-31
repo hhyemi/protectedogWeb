@@ -16,6 +16,7 @@ import org.protectedog.service.domain.Comment;
 import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.recomment.ReCommentService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +43,10 @@ public class InfomationShareController {
 	@Autowired
 	@Qualifier("reCommentServiceImpl")
 	private ReCommentService reCommentService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 
 	public InfomationShareController() {
 		System.out.println(this.getClass());
@@ -62,14 +67,25 @@ public class InfomationShareController {
 			throws Exception {
 
 		System.out.println(" ============================== addInfo ==================================");
-
+		
+		// User Level Point Up
+		User user = (User)session.getAttribute("user");
+		user.setLevelPoint(user.getLevelPoint() + 10 );
+		
+		userService.updateUsers(user);
+		
+		
+		// Board Set
 		board.setBoardCode(boardCode);
-		board.setId("user02");
-		board.setNickName("호랭이");
-
+		board.setId(user.getId());
+		board.setNickName(user.getNickname());
+		
 		System.out.println(" info Board : " + board);
-
+ 
 		boardService.addBoard(board);
+		
+		System.out.println(" info PostNo" + board.getPostNo());
+
 
 		return "redirect:/info/getInfo?postNo="+board.getPostNo();
 	}

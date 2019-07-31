@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!--====================================================
                       FOOTER
 ======================================================--> 
@@ -10,38 +11,38 @@
                 <div class="col-md-3 col-sm-6 ">
                   <div><img src="/resources/newTemplate/img/logo-w.png" alt="" class="img-fluid"></div>
                   <ul class="list-unstyled comp-desc-f">
-                     <li><p>Businessbox is a corporate business theme. You can customize what ever you think to make your website much better from your great ideas. </p></li> 
+                     <li><p>#Protected is a very good team. we can customize what ever you think to make your website much better from your great ideas. </p></li> 
                   </ul><br> 
                 </div>
                 <!-- End About Us -->
 
                 <!-- Recent News -->
                 <div class="col-md-3 col-sm-6 ">
-                  <div class="heading-footer"><h2>Useful Links</h2></div>
+                  <div class="heading-footer"><h2>Position</h2></div>
                   <ul class="list-unstyled link-list">
-                    <li><a href="about.html">About us</a><i class="fa fa-angle-right"></i></li> 
-                    <li><a href="project.html">Project</a><i class="fa fa-angle-right"></i></li> 
-                    <li><a href="careers.html">Career</a><i class="fa fa-angle-right"></i></li> 
-                    <li><a href="faq.html">FAQ</a><i class="fa fa-angle-right"></i></li> 
-                    <li><a href="contact.html">Contact us</a><i class="fa fa-angle-right"></i></li> 
+                  	<li><a href="project.html">분양 · 실종</a><small>나 민희 [Developer]</small></li> 
+                    <li><a href="about.html">스토리펀딩</a><small>이 혜미 [Reader]</small></li> 
+                    <li><a href="careers.html">커뮤니티</a><small>박 은우 [GIT Manager]</small></li> 
+                    <li><a href="faq.html">스토어</a><small>이 지수 [Hunter]</small></li> 
+                    <li><a href="contact.html">회원</a><small>박 진태 [SQL Manager]</small></li> 
                   </ul>
                 </div>
                 <!-- End Recent list -->
 
                 <!-- Recent Blog Entries -->
                 <div class="col-md-3 col-sm-6 ">
-                  <div class="heading-footer"><h2>Recent Post Entries</h2></div>
+                  <div class="heading-footer"><h2>Technique</h2></div>
                   <ul class="list-unstyled thumb-list">
                     <li>
                       <div class="overflow-h">
-                        <a href="#">Praesent ut consectetur diam.</a>
-                        <small>02 OCT, 2017</small>
+                        <a href="#">Java</a>
+                        <small>v1.8</small>
                       </div>
                     </li>
                     <li>
                       <div class="overflow-h">
-                        <a href="#">Maecenas pharetra tellus et fringilla.</a>
-                        <small>02 OCT, 2017</small>
+                        <a href="#">Spring</a>
+                        <small></small>
                       </div>
                     </li>
                   </ul>
@@ -50,9 +51,9 @@
 
                 <!-- Latest Tweets -->
                 <div class="col-md-3 col-sm-6">
-                  <div class="heading-footer"><h2>Get In Touch</h2></div>
+                  <div class="heading-footer"><h2>E-mail</h2></div>
                   <address class="address-details-f">
-                    25, Dist town Street, Logn <br>
+                                        은우 : p960720@naver.com <br>
                     California, US <br>
                     Phone: 800 123 3456 <br>
                     Fax: 800 123 3456 <br>
@@ -75,7 +76,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="footer-copyrights">
-                            <p>Copyrights &copy; 2017 All Rights Reserved by Businessbox. <a href="#">Privacy Policy</a> <a href="#">Terms of Services</a></p>
+                            <p>Copyrights &copy; 2017 All Rights Reserved by #Protected. <a href="#">Privacy Policy</a> <a href="#">Terms of Services</a></p>
                         </div>
                     </div> 
                 </div>

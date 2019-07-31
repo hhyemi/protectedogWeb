@@ -108,7 +108,6 @@ public class AdoptController {
 		adopt.setMainFile(multiFile.get(0));
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
-		System.out.println("=========================="+adopt);
 		
 		User user = userService.getUsers(adopt.getId());
 		user.setLevelPoint(user.getLevelPoint()+5);
@@ -130,7 +129,13 @@ public class AdoptController {
 		
 		model.addAttribute("adopt", adopt);
 		
-		return "redirect:/adopt/getAdopt?postNo="+adopt.getPostNo();
+		if(adopt.getBoardCode().equals("AD")) {
+
+			return "redirect:/adopt/getAdopt?postNo="+adopt.getPostNo();
+		}else {
+
+			return "redirect:/adopt/listMissing.jsp";
+		}
 	}
 	
 	
@@ -203,8 +208,6 @@ public class AdoptController {
 								@RequestParam("deleteFile") ArrayList<String> deleteFile  ) throws Exception{
 
 		System.out.println("/adopt/updateAdopt : POST\n"+adopt);
-		System.out.println("multiFile :::" + multiFile);
-		System.out.println("deleteFile:::" + deleteFile);
 		
 		if (deleteFile != null) {
 
@@ -220,12 +223,14 @@ public class AdoptController {
 			List<FileDog> listFile = new ArrayList<FileDog>();
 			// 파일디비에넣기
 			for (String fileName : multiFile) {
-				FileDog files = new FileDog();
-				files.setBoardCode(adopt.getBoardCode());
-				files.setFileName(fileName);
-				files.setFileCode(0);
-				files.setPostNo(adopt.getPostNo());
-				listFile.add(files);
+				if (fileName != null && fileName.length() > 0) {
+					FileDog files = new FileDog();
+					files.setBoardCode(adopt.getBoardCode());
+					files.setFileName(fileName);
+					files.setFileCode(0);
+					files.setPostNo(adopt.getPostNo());
+					listFile.add(files);
+				}
 			}
 			fileService.addFile(listFile);
 		}
@@ -234,9 +239,12 @@ public class AdoptController {
 		filePost.put("boardCode", adopt.getBoardCode());
 		filePost.put("postNo", adopt.getPostNo());
 		List<FileDog> file = fileService.getFile(filePost);
+		
+		System.out.println("파일네임확인 : "+file.get(0).getFileName());
+		adopt.setMainFile(file.get(0).getFileName());
 
 		System.out.println(adopt);
-		System.out.println(adopt.getPostNo());
+
 		adoptService.updateAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		model.addAttribute("adopt", adopt);		

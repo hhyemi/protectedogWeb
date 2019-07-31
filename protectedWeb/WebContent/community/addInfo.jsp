@@ -55,54 +55,6 @@ label {
 	border-radius: 10px;
 }
 </style>
-
-<!--  JavaScript  -->
-<script type="text/javascript">
-function fncAddInfo(){
-	
-	var postTitle = $("#postTitle").val();
-	var postContent = CKEDITOR.instances.editor1.getData();
-	console.log("postTitle : " + postTitle + "\n" +
-				"postContent : " + postContent + "\n" );
-	
-	if(postTitle.length < 1 && postTitle == ""){
-		swal({
-			  title: "제목을 입력해주세요"
-		});
-		
-		$("#postTitle").focus();
-		
-		return;
-	}
-	
-	if(postContent.length < 1 && postContent == ""){
-		swal({
-			  title: "내용을 입력해주세요"
-		});
-		
-		$(CKEDITOR.instances.editor1).focus();
-	}
-	
-	//$("form[name=detailForm]").attr("method","POST").attr("action","/info/addInformation").attr("enctype","multipart/form-data").submit();
-	
-}
-
-$(function () {
-	
-	$("#reset").on("click", function(){
-		$("form")[0].reset();
-	});
-	
-	$("button.btn.btn-primary").on("click", function(){
-		fncAddInfo();
-	});
-	
-	
-	
-});
-
-	</script>
-
 </head>
 
 <body>
@@ -203,8 +155,51 @@ $(function () {
 	
 		<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
-	<script>
-	
+	<!--  JavaScript  -->
+	<script type="text/javascript">
+	function fncAddInfo(){
+		
+		var postTitle = $("#postTitle").val();
+		var postContent = CKEDITOR.instances.editor1.getData();
+		console.log("postTitle : " + postTitle + "\n" +
+					"postContent : " + postContent + "\n" );
+		
+		if(postTitle.length < 1 && postTitle == ""){
+			swal({
+				  title: "제목을 입력해주세요"
+			});
+			
+			$("#postTitle").focus();
+			
+		}
+		
+		if(postContent.length < 1 && postContent == ""){
+			swal({
+				  title: "내용을 입력해주세요"
+			});
+			
+			$(CKEDITOR.instances.editor1).focus();
+		}
+
+		$("form[name=detailForm]").attr("method","POST").attr("action","/info/addInformation").attr("enctype","multipart/form-data").submit();
+		
+	}
+
+	$(function () {
+		
+		$("#reset").on("click", function(){
+			$("form")[0].reset();
+		});
+		
+		$("button.btn.btn-primary").on("click", function(){
+			fncAddInfo();
+		});
+		
+		
+		
+	});
+
+
 	//============= 구글 지도 =============
   var poly;
          var map;

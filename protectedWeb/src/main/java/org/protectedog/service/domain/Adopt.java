@@ -2,7 +2,6 @@ package org.protectedog.service.domain;
 
 import java.sql.Date;
 
-
 //==>회원정보를 모델링(추상화/캡슐화)한 Bean
 public class Adopt {
 	
@@ -190,6 +189,7 @@ public class Adopt {
 	}
 
 	public Date getDogDate() {
+//		dogDate = dogDate.substring(0, 11);
 		return dogDate;
 	}
 

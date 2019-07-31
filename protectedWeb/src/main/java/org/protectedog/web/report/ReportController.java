@@ -45,13 +45,13 @@ public class ReportController {
 		System.out.println(this.getClass());
 	}
 	
-	///PagingÀ» À§ÇÑ Value¼³Á¤
+	///Pagingï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Valueï¿½ï¿½ï¿½ï¿½
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	///File Upload¸¦ À§ÇÑ path, °Ô½ÃÆÇ Code ¼³Á¤
+	///File Uploadï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ path, ï¿½Ô½ï¿½ï¿½ï¿½ Code ï¿½ï¿½ï¿½ï¿½
 	@Value("#{commonProperties['flieReport']}")
 	String fileroot;
 	@Value("#{commonProperties['report']}")
@@ -81,7 +81,7 @@ public class ReportController {
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		
-		// ÆÄÀÏµðºñ¿¡³Ö±â
+		// ï¿½ï¿½ï¿½Ïµï¿½ñ¿¡³Ö±ï¿½
 		for (String fileName : multiFile) {
 		
 			if (fileName != null && fileName.length() > 0) {
@@ -116,16 +116,16 @@ public class ReportController {
 		search.setPageSize(pageSize);
 		
 		Map<String, Object> map=reportService.getReportList(search);
-		System.out.println("Coupon ¸®½ºÆ® : "+map.toString());
+		System.out.println("Coupon ï¿½ï¿½ï¿½ï¿½Æ® : "+map.toString());
 		
 		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("Coupon ¸®½ºÆ® ÆäÀÌÁö : "+resultPage);
+		System.out.println("Coupon ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+resultPage);
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/report/listReportView.jsp";
+		return "forward:/report/listReport.jsp";
 		
 	}
 	
