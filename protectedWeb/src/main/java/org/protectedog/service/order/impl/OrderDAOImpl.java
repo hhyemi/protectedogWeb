@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 	
-	// ����-���Ű���
+	// ����-���Ű���
 	@Repository("orderDAOImpl")
 	public class OrderDAOImpl implements OrderDAO{
 		
@@ -29,19 +29,22 @@ import org.springframework.stereotype.Repository;
 	///Constructor
 	public OrderDAOImpl(){
 		System.out.println(this.getClass());
+		System.out.println("여까지는 들어오긴함?");
 	}
-		
+	
 	@Override
 	public void addOrder(Order order) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert("orderMapper.addOrder", order);
-
+		System.out.println("들어오는지");
+		sqlSession.insert("OrderMapper.addOrder", order);
+		System.out.println("들어오는지2");
+		
 	}
 
 	@Override
 	public Order getOrder(int orderNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("orderMapper.getOrder", orderNo);
+		return sqlSession.selectOne("OrderMapper.getOrder", orderNo);
 	}
 
 	@Override
@@ -49,20 +52,20 @@ import org.springframework.stereotype.Repository;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("search", search);
 		map.put("id", id);
-		return sqlSession.selectList("orderMapper.listOrder",map);
+		return sqlSession.selectList("OrderMapper.listOrder",map);
 	}
 
 
 	@Override
 	public void updateOrder(Order order) throws Exception {
-		sqlSession.update("orderMapper.updateOrder", order);
+		sqlSession.update("OrderMapper.updateOrder", order);
 
 	}
 
 	@Override
 	public int updateOrderCode(Order order) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.update("orderMapper.updateOrderCode", order);
+		return sqlSession.update("OrderMapper.updateOrderCode", order);
 
 	}
 
@@ -71,7 +74,7 @@ import org.springframework.stereotype.Repository;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("search", search);
 		map.put("id", id);
-		return sqlSession.selectList("orderMapper.listSwapOrder", search);
+		return sqlSession.selectList("OrderMapper.listSwapOrder", search);
 	}
 
 	@Override
@@ -79,24 +82,24 @@ import org.springframework.stereotype.Repository;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("search", search);
 		map.put("id", id);
-		return sqlSession.selectList("orderMapper.listAdminOrder", search);
+		return sqlSession.selectList("OrderMapper.listAdminOrder", search);
 	}
 
 	@Override
 	public void delOrder(Order order) throws Exception {
-			sqlSession.update("orderMapper.delOrder", order);
+			sqlSession.update("OrderMapper.delOrder", order);
 		}
 
 	@Override
 	public int getTotalCount(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("orderMapper.getTotalCount", id);
+		return sqlSession.selectOne("OrderMapper.getTotalCount", id);
 	}
 
 	@Override
 	public void addDeliveryCode(int orderNo) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert("orderMapper.addDeliveryCode", orderNo);
+		sqlSession.insert("OrderMapper.addDeliveryCode", orderNo);
 	}
 
 	@Override

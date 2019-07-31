@@ -14,14 +14,32 @@
 		<result property="receiverPhone" 	column="receiver_phone"	 	jdbcType="VARCHAR" />
 		<result property="orderRequest" 	column="order_request" 		jdbcType="VARCHAR" />
 		<result property="paymentCode" 		column="payment_code" 		jdbcType="NUMERIC" />
-		<result property="orderDate"		column="order_date" 		jdbcType="DATE"/>
 		<result property="orderQuantity" 	column="order_quantity" 	jdbcType="NUMERIC"/>
 		<result property="totalPrice" 		column="total_price" 		jdbcType="NUMERIC" />
 		<result property="orderCode" 		column ="order_code" 		jdbcType="NUMERIC"/>
+		<!-- NULL가능  0-->
 		<result property="deliveryCode" 	column="delivery_code" 		jdbcType="NUMERIC"/>
+		<!-- NULL가능이지만 외래키■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 		<result property="mileageNo"		column="mileage_no"			jdbcType="NUMERIC"/>
 		<result property="couponNo"			column="coupon_no"			jdbcType="NUMERIC"/>
+		<result property="orderDate"		column="order_date" 		jdbcType="DATE"/>
+		<!-- product ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+ <association property="product"  javaType="org.protectedog.service.domain.Product">
+		<id property="prodNo" column="prod_no" jdbcType="NUMERIC"/>
+		<result property="prodName" 		column="prod_name" 		jdbcType="VARCHAR" />
+		<result property="price" 			column="price" 			jdbcType="NUMERIC" />
+		<result property="manuDate" 		column="manu_date" 		jdbcType="DATE" />	
+		<result property="regDate" 			column="reg_date"		jdbcType="DATE" />
+		<result property="country"			column="country" 		jdbcType="VARCHAR" />
+		<result property="quantity" 		column="quantity" 		jdbcType="NUMERIC" />
+		<result property="prodDetail" 		column="prod_detail" 	jdbcType="VARCHAR" />
+		<result property="company" 			column="company" 		jdbcType="VARCHAR" />
+		<result property="discountPrice" 	column="discount_price" jdbcType="NUMERIC"/>
+		<result property="prodCode" 		column="prod_code" 		jdbcType="NUMERIC"/>
+		<result property="mainFile"			column="main_file"		jdbcType="VARCHAR"/>
+		</association>
 </resultMap>
+
 
 
 
@@ -29,27 +47,15 @@
 <selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
 		SELECT SEQ_ORDERS_ORDER_NO.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO ORDERS (ORDER_NO, PROD_NO, PHONE, ID, RECEIVER_ADDR, RECEIVER_NAME, 
+		INSERT 
+		INTO ORDERS 
+		(ORDER_NO, PROD_NO, PHONE, ID, RECEIVER_ADDR, RECEIVER_NAME, 
 		RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, 
-		ORDER_QUANTITY, ORDER_CODE, TOTAL_PRICE, DELIVERY_CODE, COUPON_NO, MILEAGE_NO) 
-		VALUES
-		#{orderNo},
-		#{prodNo},
-		#{phone},
-		#{id},
-		#{receiverAddr},
-		#{receiverName},
-		#{receiverPhone},
-		#{orderRequest},
-		#{paymentCode},
-		SYSDATE,
-		#{orderQuantity},
-		#{orderCode},
-		#{totalPrice},
-		#{deliveryCode},
-		#{couponNo},
-		#{mileageNo}
-		)
+		ORDER_QUANTITY, ORDER_CODE, TOTAL_PRICE, COUPON_NO, MILEAGE_NO) 
+		VALUES (#{orderNo:NUMERIC}, #{prodNo:NUMERIC}, #{phone:VARCHAR}, #{id:VARCHAR}, 
+		#{receiverAddr:VARCHAR}, #{receiverName:VARCHAR},#{receiverPhone:VARCHAR}, #{orderRequest:VARCHAR}, 
+		#{paymentCode:NUMERIC}, SYSDATE, #{orderQuantity:NUMERIC}, #{orderCode:NUMERIC}, #{totalPrice:NUMERIC}, 
+		#{couponNo:NUMERIC}, #{mileageNo:NUMERIC})
 	</insert>
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
@@ -88,10 +94,11 @@
 	 <select  id="listOrder"  parameterType="search"	resultMap="orderSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT order_no , prod_no , total_price, order_code
-					FROM orders ,
-					WHERE id =#{id}					
-					ORDER BY order_no) inner_table
+	  		FROM (	SELECT o.order_no , o.prod_no , o.total_price, o.order_code, p.prod_name,p.prod_detail
+					FROM orders o, product p
+					WHERE id =#{id}	
+					AND o.prod_no=p.prod_no				
+					ORDER BY o.order_no) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	 </select>

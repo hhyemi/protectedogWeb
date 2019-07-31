@@ -26,10 +26,10 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > -->
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -41,6 +41,23 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <style>
 
+			 
+.img-fluid  { 
+			padding-top: 10%;
+			min-height: 220px; 
+			  max-height: 220px; overflow: auto;
+			  max-width: 250px;
+			  min-width: 250px; 
+			  }
+			 
+.card		{ min-height: 400px; 
+			  max-height: 400px; overflow: auto;}
+
+
+</style>
+
+
+</style>
 
 </style>
 
@@ -100,42 +117,55 @@
 	<!--====================================================
                          HOME STA
 ======================================================-->
-	<section id="home-shop">
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('https://s1.best-wallpaper.net/wallpaper/m/1812/Furry-puppy-front-view-basket-meadow_m.webp')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>Sale Box</h3>
+<!-- 	<section id="home-shop"> -->
+<!-- 		<div id="carouselExampleIndicators" class="carousel slide" -->
+<!-- 			data-ride="carousel"> -->
+<!-- 			<ol class="carousel-indicators"> -->
+<!-- 				<li data-target="#carouselExampleIndicators" data-slide-to="0" -->
+<!-- 					class="active"></li> -->
+<!-- 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
+<!-- 			</ol> -->
+<!-- 			<div class="carousel-inner" role="listbox"> -->
+<!-- 				Slide One - Set the background image for this slide in the line below -->
+<!-- 				<div class="carousel-item active" -->
+<!-- 					style="background-image: url('https://s1.best-wallpaper.net/wallpaper/m/1812/Furry-puppy-front-view-basket-meadow_m.webp')"> -->
+<!-- 					<div class="carousel-caption d-none d-md-block"> -->
+<!-- 						<h3>Sale Box</h3> -->
 
-					</div>
-				</div>
-				<!-- Slide Two - Set the background image for this slide in the line below -->
-				<div class="carousel-item"
-					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>Cool Shop</h3>
-					</div>
-				</div>
-			</div>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-				role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="sr-only">Next</span>
-			</a>
-		</div>
-	</section>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				Slide Two - Set the background image for this slide in the line below -->
+<!-- 				<div class="carousel-item" -->
+<!-- 					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')"> -->
+<!-- 					<div class="carousel-caption d-none d-md-block"> -->
+<!-- 						<h3>Cool Shop</h3> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<a class="carousel-control-prev" href="#carouselExampleIndicators" -->
+<!-- 				role="button" data-slide="prev"> <span -->
+<!-- 				class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
+<!-- 				class="sr-only">Previous</span> -->
+<!-- 			</a> <a class="carousel-control-next" href="#carouselExampleIndicators" -->
+<!-- 				role="button" data-slide="next"> <span -->
+<!-- 				class="carousel-control-next-icon" aria-hidden="true"></span> <span -->
+<!-- 				class="sr-only">Next</span> -->
+<!-- 			</a> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">protected dog</span> <span>Store</span></p>
+            <font size="7">보호할개 스토어</font>
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>
 
 	<!--====================================================
                         SHOP-P1
@@ -149,12 +179,18 @@
 						<div class="heading-border-light"></div>
 					</div>
 					<div class="list-group">
-						<a href="#" class="list-group-item">사료</a> <a href="http://localhost:8080/shop/order/listorder"
-							class="list-group-item">간식</a> <a href="#"
+						<a href="#" class="list-group-item">> 전체 </a> 
+						<a href=""
+							class="list-group-item">사료</a>
+						<a href=""
+							class="list-group-item">간식</a> <a href="/order/listOrder"
 							class="list-group-item">의류</a> <a href="#"
-							class="list-group-item">BEST PRODUCT</a> 
+							class="list-group-item">베스트상품</a> 
 							<a href="#"
-							class="list-group-item">TimeSale</a>
+							class="list-group-item">타임세일</a>
+							 <c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a href="/product/listAdminProduct"
+							class="list-group-item">관리자 페이지</a></c:if>
 					</div>
 					<div class="input-group ">
 						<input type="text" class="form-control" id="inlineFormInputGroup"
@@ -165,24 +201,24 @@
 					</div>
 
 					<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
-					<div class="shop-p1-title">
-						<h3>BEST PRODUCT</h3>
-						<div class="heading-border-light"></div>
-					</div>
-					<ul class="list-unstyled top-seller">
-						<li><img class="img-fluid"
-							src="/resources/newTemplate/img/shop/shop-item-1.jpg" alt="">
-							<h6>Tshirt sort Style</h6>
-							<p>$15.34</p></li>
-						<li><img class="img-fluid"
-							src="/resources/newTemplate/img/shop/shop-item-4.jpg" alt="">
-							<h6>Tshirt sort Style</h6>
-							<p>$23.56</p></li>
-						<li><img class="img-fluid"
-							src="/resources/newTemplate/img/shop/shop-item-2.jpg" alt="">
-							<h6>Tshirt sort Style</h6>
-							<p>$45.23</p></li>
-					</ul>
+<!-- 					<div class="shop-p1-title"> -->
+<!-- 						<h3>BEST PRODUCT</h3> -->
+<!-- 						<div class="heading-border-light"></div> -->
+<!-- 					</div> -->
+<!-- 					<ul class="list-unstyled top-seller"> -->
+<!-- 						<li><img class="img-fluid" -->
+<!-- 							src="/resources/newTemplate/img/shop/shop-item-1.jpg" alt=""> -->
+<!-- 							<h6>Tshirt sort Style</h6> -->
+<!-- 							<p>$15.34</p></li> -->
+<!-- 						<li><img class="img-fluid" -->
+<!-- 							src="/resources/newTemplate/img/shop/shop-item-4.jpg" alt=""> -->
+<!-- 							<h6>Tshirt sort Style</h6> -->
+<!-- 							<p>$23.56</p></li> -->
+<!-- 						<li><img class="img-fluid" -->
+<!-- 							src="/resources/newTemplate/img/shop/shop-item-2.jpg" alt=""> -->
+<!-- 							<h6>Tshirt sort Style</h6> -->
+<!-- 							<p>$45.23</p></li> -->
+<!-- 					</ul> -->
 				</div>
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->

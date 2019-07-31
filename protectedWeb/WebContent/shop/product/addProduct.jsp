@@ -15,10 +15,10 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > -->
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -143,21 +143,18 @@
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_6.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="#">admin</a></span> <span>page</span>
-					</p>
-					<h1 class="mb-0 bread">PROTECTED | SHOP 상품등록</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	<br><br><br/>
+<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">PRODUCT</span> <span>INSERT</span></p>
+            <font size="7">스토어 상품등록</font>
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->

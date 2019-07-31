@@ -27,18 +27,8 @@
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
 	type="text/css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 
 <!-- jQuery UI toolTip 사용 CSS-->
@@ -97,7 +87,7 @@ body {
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-		$("#button").on("click", function() {
+		$("#qna").on("click", function() {
 			self.location = "/shop/prodQna/addProdQna.jsp";
 		});
 
@@ -127,58 +117,55 @@ body {
 
 <body>
 
-	<!-- //////////////////////ToolBar Start ///////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!--/////////////////////// ToolBar End ////////////////////////////////-->
 
 
 
 
 	<div class="container">
-		<h1 align="center">
-			상품<small>&nbsp;Q&nbsp;&&nbsp;A <a href="#" id="button"><button
-						class="mdl-button mdl-js-button mdl-button--primary">
+		<h1 align="right">
+			<button
+						class="mdl-button mdl-js-button mdl-button--primary" id="qna">
 						문의하기</button></a>
 			</small>
 		</h1>
 	</div>
 	<BR />
-	<!--/////////////////////// form start /////////////////////////////////-->
-	<form class="form-inline" name="detailForm">
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
+<!-- 	<!--/////////////////////// form start /////////////////////////////////-->
+<!-- 	<form class="form-inline" name="detailForm"> -->
+<!-- 		<!-- table 위쪽 검색 Start /////////////////////////////////////--> 
+<!-- 	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;"> -->
+<!-- 	<tr> -->
 
-		<td align="right">
+<!-- 		<td align="right"> -->
 			
-			<select name="searchCondition" class="ct_input_g" style="width:80px">
-				<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
-				<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
-				<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
-			</select>
+<!-- 			<select name="searchCondition" class="ct_input_g" style="width:80px"> -->
+<%-- 				<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option> --%>
+<%-- 				<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option> --%>
+<%-- 				<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option> --%>
+<!-- 			</select> -->
 
-			<input type="text" name="searchKeyword" value="${search.searchKeyword}" class="ct_input_g" style="width:200px; height:19px" />
+<%-- 			<input type="text" name="searchKeyword" value="${search.searchKeyword}" class="ct_input_g" style="width:200px; height:19px" /> --%>
 		
-		</td>
+<!-- 		</td> -->
 		
-		<td align="right" width="70">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23">
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:fncGetList('1');">검색</a> -->
-						검색
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23">
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+<!-- 		<td align="right" width="70"> -->
+<!-- 			<table border="0" cellspacing="0" cellpadding="0"> -->
+<!-- 				<tr> -->
+<!-- 					<td width="17" height="23"> -->
+<!-- 						<img src="/images/ct_btnbg01.gif" width="17" height="23"> -->
+<!-- 					</td> -->
+<!-- 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;"> -->
+<!-- 						<a href="javascript:fncGetList('1');">검색</a> -->
+<!-- 						검색 -->
+<!-- 					</td> -->
+<!-- 					<td width="14" height="23"> -->
+<!-- 						<img src="/images/ct_btnbg03.gif" width="14" height="23"> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- </table> -->
 
 	
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -217,6 +204,7 @@ body {
 				</c:forEach>
 				
 			</table>
+			<br/>
 			<!--  table end /////////////////////////////////////-->
 
 			<input type="hidden" id="currentPage" name="currentPage" value="0" />
