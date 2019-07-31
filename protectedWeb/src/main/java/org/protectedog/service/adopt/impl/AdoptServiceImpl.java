@@ -60,7 +60,6 @@ public class AdoptServiceImpl implements AdoptService{
 		Map<String, Object> map= adoptDAO.listMissing(boardCode);
 		
 		map.put("map", map );
-		System.out.println("===================서비스");
 		return map;
 	}
 
