@@ -54,28 +54,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
             <!--***** MAILBOX *****-->     
             <div class="row" id="emails">
                 <div class="mail-box">
-                    <aside class="sm-side"> 
-                        <div class="inbox-body">
-                            <a href="#messageModal" data-toggle="modal" title="Compose" class="btn btn-compose"> 쪽지작성 </a>
-                            <!-- Modal -->
-                            
-                            <!-- /.modal -->
-                        </div>
-                        <ul class="inbox-nav inbox-divider">
-                            <li>
-                                <a href="/message/listMessage?searchCondition=all"><i class="fa fa-envelope-o"></i> 전체쪽지함</a>
-                            </li>
-                            <li>
-                                <a href="/message/listMessage?searchCondition=send"><i class="fa fa-envelope-o"></i> 보낸쪽지함</a>
-                            </li>
-                            <li>
-                                <a href="/message/listMessage?searchCondition=receive"><i class="fa fa-envelope-o"></i> 받은쪽지함 <span class="label label-danger pull-right received"></span></a>
-                            </li>
-                            <li>
-                                <a href="/message/listMessage?searchCondition=delete"><i class=" fa fa-trash-o"></i> Trash</a>
-                            </li>
-                        </ul>  
-                    </aside>
                     <aside class="lg-side"> 
                         <div class="inbox-body">
                             <div class="mail-option"> 
@@ -138,65 +116,59 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 									    <td class="inbox-small-cells" width="50px">
 <!--                                             <input type="checkbox" class="mail-checkbox" id="allCheck"> -->
                                         </td>
-                                        <c:if test="${ search.searchCondition=='all' || search.searchCondition=='delete'  }">
-											<th width="85px">보낸사람</th>
-											<th width="85px">받은사람</th>
-										</c:if>
-										<c:if test="${ search.searchCondition=='send' }">
-											<th width="170px">받은사람</th>
-										</c:if>
-										<c:if test="${ search.searchCondition=='receive' }">
-											<th width="170px">보낸사람</th>
-										</c:if>
-										<th width="300px" class="text-center">제목</th>
-										<th width="200px" align="center" class="text-center">보낸일시</th>
-										<th width="200px" align="center" class="text-center">받은일시</th>
-										<c:if test="${ search.searchCondition != 'delete' }">
+										<th width="85px">신고자</th>
+										<th width="85px">신고대상</th>
+										<th width="300px" class="text-center">신고유형</th>
+										<th width="200px" align="center" class="text-center">신고일시</th>
+										<th width="75px">처리상태</th>
 										<th width="75px">더보기</th>
-										</c:if>
-										<c:if test="${ search.searchCondition == 'delete' }">
-										<th width="75px">영구삭제</th>
-										</c:if>
 									</tr>
 								</thead>
                                 <tbody>
                                 	<c:set var="i" value="0" />
-									<c:forEach var="message" items="${list}">
-										<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="messageViewModal" class="modal fade messageViewModal" style="display: none;">
+									<c:forEach var="report" items="${list}">
+										<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="reportViewModal" class="modal fade reportViewModal" style="display: none;">
 			                                <div class="modal-dialog">
 			                                    <div class="modal-content">
 			                                        <div class="modal-body">
 			                                            <form role="form" class="form-horizontal">
 					                                        <div class="row" style="position: relative; height: 25px;">
-					                                        	<div class="modalMessageNo" style="display: none;"></div>
+					                                        	<div class="modalReportNo" style="display: none;"></div>
 																<div class="col-md-6"
-																	style="position: absolute; left: 0px; bottom: 0px;">제목 | <span class="messageTitle"></span></div>
+																	style="position: absolute; left: 0px; bottom: 0px;">신고유형 | <span class="reportContent"></span></div>
 																			
 																<div class="col-md-6" align="right"
 																	style="position: absolute; right: 0px; bottom: 0px;">
-																	보낸일시 | <span class="sendDate"> </span>
+																	신고일자 | <span class="reportDate"> </span>
 																</div>
 															</div>
-			                                                <div class="row messageId" style="position: relative; height: 25px;">
+			                                                <div class="row reportId" style="position: relative; height: 25px;">
 																<div class="col-md-6"
-																	style="position: absolute; left: 0px; bottom: 0px;">보낸사람 | <span class="senderId"></span></div>
+																	style="position: absolute; left: 0px; bottom: 0px;">신고자 | <span class="reporterId"></span></div>
 																			
 																<div class="col-md-6" align="right"
-																	style="position: absolute; right: 0px; bottom: 0px;">받은사람 | <span class="receiverId"> </span></div>
+																	style="position: absolute; right: 0px; bottom: 0px;">신고유형 | <span class="reportedId"> </span></div>
 															</div>
 															<br/>
 			                                                <div class="form-group">
 			                                                    <label class="col-lg-2 control-label">내용</label>
 			                                                    <hr/>
 																<div class="content col-lg-8" >
-																	<span class="messageContent"></span>
+																	<span class="reportContent"></span>
 																</div>
 																<hr/>
 			                                                </div>
-								
+			                                                <br/>
+			                                                <br/>
+			                                                <div class="form-group reportImgBox">
+																<c:forEach var="name" items="${ file }">
+																	<img class="reportImg" src="../resources/file/fileReport/${ name.fileName }" width="300px" height="300px" 
+																		style="cursor:pointer;" onclick="doImgPop('../resources/file/fileReport/${ name.fileName }')">
+																</c:forEach>	
+															</div>											
 			                                                <div class="row form-group">
 			                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-			                                                        <button class="btn btn-send ml-3 sendMessage" type="submit">Send</button>
+			                                                        <button class="btn btn-send ml-3 " type="submit">Send</button>
 			                                                    </div>
 			                                                </div>
 			                                            </form>
@@ -215,49 +187,29 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!-- 												</a> -->
 <!-- 			                                </div> -->
 <%-- 			                                </c:if> --%>
-                                            <input type="hidden" name="messageNo" value="${ message.messageNo }">
+                                            <input type="hidden" name="reportNo" value="${ report.reportNo }">
                                         </td>
-                                        <c:if test="${ search.searchCondition=='all' || search.searchCondition=='delete'  }">
-											<td width="85px">${ message.senderId }</td>
-											<td width="85px">${ message.receiverId }</td>
-										</c:if>
-										<c:if test="${ search.searchCondition=='send' }">
-											<td width="170px">${ message.receiverId }</td>
-										</c:if>
-										<c:if test="${ search.searchCondition=='receive' }">
-											<td width="170px">${ message.senderId }</td>
-										</c:if>
+										<td width="85px">${ report.reporterId }</td>
+										<td width="85px">${ report.reportedId }</td>
                                         <td class="view-message text-center" width="300px"> 
-                                       		${ message.messageTitle }
-                                        	<input type="hidden" name="messageContent" value="${ message.messageContent }"/>
+                                       		${ report.reportCategory }
+                                        	<input type="hidden" name="reportContent" value="${ report.reportContent }"/>
                                         </td>
                                         <td class="view-message text-right" width="200px"> 
-											<fmt:formatDate value="${ message.sendDate }" pattern="yy.MM.dd"/>
+											<fmt:formatDate value="${ report.reportDate }" pattern="yy.MM.dd"/>
 										</td>
-                                        <td class="view-message text-right" width="200px">
-                                        <c:if test="${ message.messageStatus == 0 }">
-                                        	읽지 않음
-                                        </c:if>
-                                        <c:if test="${ message.messageStatus != 0 }">
-                                        	<fmt:formatDate value="${ message.receiveDate }" pattern="yy.MM.dd"/>
-                                        </c:if>
+                                        <td class="view-message text-center" width="75px" >
+                                        	<c:if test="${ report.reportStatus == 0 }">
+                                        		<a>처리중(${ report.reportStatus })</a>
+                                        	</c:if>
+                                        	<c:if test="${ report.reportStatus == 1 }">
+                                        		<a>처리완료(${ report.reportStatus })</a>
+                                        	</c:if>
                                         </td>
                                         <td class="view-message text-center" width="75px" >
-                                        	<c:if test="${ search.searchCondition=='receive' }">
-                                        	<a href=".messageViewModal" data-toggle="modal" title="Compose" class="btn btn-compose">
+                                        	<a href=".reportViewModal" data-toggle="modal" title="Compose" class="btn btn-compose">
                                         		더보기
                                         	</a>
-                                        	</c:if>
-                                        	<c:if test="${ search.searchCondition=='send' || search.searchCondition=='all' }">
-                                        		<a>기능추가중</a>
-                                        	</c:if>
-<%--                                         	<c:if test="${ search.searchCondition=='delete' }"> --%>
-<!-- 	                                        	<div class="btn-group"> -->
-<!-- 				                                    <a data-original-title="trash" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips"> -->
-<!-- 														<i class=" fa fa-trash deleteMessage"></i> -->
-<!-- 													</a> -->
-<!-- 				                                </div> -->
-<%--                                         	</c:if> --%>
                                         </td>
                                     </tr>
 									</c:forEach>
@@ -322,10 +274,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	
 	$(function(){
 		$('td:contains("더보기")').on('click', function(){
-			var messageNo=$(this).parents().children("td").children("input[name='messageNo']").val();
-// 			alert(messageNo);
+			var reportNo=$(this).parents().children("td").children("input[name='reportNo']").val();
+			alert(reportNo);
 			$.ajax({
-				url : "/message/json/getMessage/"+messageNo,
+				url : "/report/json/getReport/"+reportNo,
 				method : "GET",
 				dataType : "json",
 				headers : {
@@ -333,14 +285,27 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					"Content-Type" : "application/json"
 				},
 				success : function(JSONData, status){
-// 					alert(JSON.stringify(JSONData))
+					alert(JSON.stringify(JSONData))
 // 					var sendDate=JSONData.sendDate;
 // 					alert(sendDate);
-					$(".messageTitle").text(JSONData.message.messageTitle);
-					$(".messageContent").text(JSONData.message.messageContent);
-					$(".sendDate").text(JSONData.sendDate);
-					$(".senderId").text(JSONData.message.senderId);
-					$(".receiverId").text(JSONData.message.receiverId);
+					$(".reportContent").text(JSONData.report.reportContent);
+					$(".reportCategory").text(JSONData.report.reportCategory);
+					$(".reportDate").text(JSONData.reportDate);
+					$(".reporterId").text(JSONData.report.reporterId);
+					$(".reportedId").text(JSONData.report.reportedId);
+					
+					$(".reportImg").remove();
+					$.each(JSONData.file, function(file, file){
+						alert(JSON.stringify(file.fileName));
+						var fileName=JSON.stringify(file.fileName);
+						var fileView=fileName.substring(1, fileName.length-1);
+						alert(fileView);
+						$(".reportImgBox").append(
+							"<img class='reportImg' src='../resources/file/fileReport/" +fileView+ "' width='300px' height='300px' style='cursor:pointer;'"
+							+"onclick='doImgPop('../resources/file/fileReport/" +fileView+ "')'>"
+						);
+					})
+					
 				},
 				error : function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -349,39 +314,39 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		});
 	})
 	
-		$(function() {
+// 		$(function() {
 
-			$(document).ready(function(){
+// 			$(document).ready(function(){
 		
-				var id=$("#myId").val();
-				var rcvId=JSON.stringify({id:id});
-// 				alert(id);
-// 				alert(msgId);
-				$.ajax({
-					type : "POST",
-					contentType : "application/json",
-					url : "/message/json/getReceiveTotalCount",
-					data : rcvId,
-					datatype : "json",
-					success : function(response){
-// 						alert(response);
-						if(id != null && response != 0){
-							$(".received").show();
-							$(".received").text(response)
-						}
-						if(id != null && response == 0){
-							$(".received").hide();
-						}
-					},
-					error : function(request,status,error){
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
+// 				var id=$("#myId").val();
+// 				var rcvId=JSON.stringify({id:id});
+// // 				alert(id);
+// // 				alert(msgId);
+// 				$.ajax({
+// 					type : "POST",
+// 					contentType : "application/json",
+// 					url : "/message/json/getReceiveTotalCount",
+// 					data : rcvId,
+// 					datatype : "json",
+// 					success : function(response){
+// // 						alert(response);
+// 						if(id != null && response != 0){
+// 							$(".received").show();
+// 							$(".received").text(response)
+// 						}
+// 						if(id != null && response == 0){
+// 							$(".received").hide();
+// 						}
+// 					},
+// 					error : function(request,status,error){
+// 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 					}
 	
-				});
+// 				});
 				
-			});
+// 			});
 
-		});
+// 		});
 		
 		$(function(){
 			$(".submit").on("click", function(){
@@ -391,26 +356,33 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			})
 		})
 		
-		$(function(){
-			$("#allCheck").on("click", function(){
-				if($("#allCheck").prop("checked")){
-					$("input[name='checkDel']").prop("checked",true);
-				}else{
-					$("input[name='checkDel']").prop("checked",false);
-				}
-			})
-		})
+	function doImgPop(img){
+		img1=new Image();
+		img1.src=(img);
+		imgControll(img);
+	}
+	
+	function imgControll(img){
+		if((img1.width!=0)&&(img1.height!=0)){
+			viewImage(img);
+		}else{
+			controller="imgControll('"+img+"')";
+			intervalId=setTimeout(controller, 20);
+		}
+	}
+	
+	function viewImage(img){
+		W=img.width;
+		H=img.height;
+		O="width="+W+", height="+H+",scrollbars=yes";
+		imgWin=window.open("","",O);
+		imgWin.document.write("<html><head><title>:*:*:*: 이미지 상세보기 :*:*:*:*:*:*:</title></head>");
+		imgWin.document.write("<body topmargin=0 leftmargin=0>");
+		imgWin.document.write("<img src="+img+" onclick='self.close()' style='cursor:pointer;' title='클릭시 창이 닫힙니다.'>");
 		
-		$(function(){
-			$(".fa-trash").on("click", function(){
-					var messageNo=$(this).parents().parents().parents(".inbox-small-cells").children("input[name='messageNo']").val();
-					var result=confirm("삭제하시겠습니까?")
-					if(result){
-						self.location=("/message/updateMessage?messageNo="+messageNo);
-					}
-			})
-		})
+	} 
 		
+
 		
 
     </script>
