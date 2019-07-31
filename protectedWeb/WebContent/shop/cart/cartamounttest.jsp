@@ -46,18 +46,18 @@ function change () {
 </script>
 
 <form name="form" method="get">
-¼ö·® : <input type=hidden name="sell_price" value="5500">
+ìˆ˜ëŸ‰ : <input type=hidden name="sell_price" value="5500">
 <input type="text" name="amount" value="1" size="3" onchange="change();">
 <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
 
-±İ¾× : <input type="text" name="sum" size="11" readonly>¿ø
+ê¸ˆì•¡ : <input type="text" name="sum" size="11" readonly>ì›
 </form>
-</body><%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+</body><%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>

@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -14,6 +18,8 @@
 
   function naverSignInCallback() {
     alert(naver_id_login.getProfileData('id'));
+    var naverId=naver_id_login.getProfileData('id');
+    $(location).attr('href', '/users/naver?naver='+naverId);
     
     
   }

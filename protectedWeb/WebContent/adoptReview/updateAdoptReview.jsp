@@ -1,10 +1,10 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>º¸È£ÇÒ°³ ¡¤ ºĞ¾çÈÄ±â±Û ¼öÁ¤</title>
+	<title>ë³´í˜¸í• ê°œ Â· ë¶„ì–‘í›„ê¸°ê¸€ ìˆ˜ì •</title>
 	<!--  meta  -->
 	<meta charset="EUC-KR">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,16 +17,7 @@
 	
 	<!--  CSS -->
 	<style>
-		@font-face {
-			font-family: ng;
-			src: url(NanumGothic.eot);
-			src: local(¡Ø), url(NanumGothic.woff) format(¡®woff¡¯);
-		}
-		
-		body {
-			font-family: '³ª´®°íµñ', 'NanumGothic', ng
-		}
-		
+	
 		body {
 			padding-top: 50px;
 		}
@@ -62,6 +53,7 @@
 			color: white;
 			border-radius: 10px;
 		}
+		
 	</style>
 
 	<!--  JavaScript  -->
@@ -76,7 +68,17 @@
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<div class="container">
-		<h3 class=" text-info">ÈÄ±â±Û ¼öÁ¤</h3>
+	
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">Update</span> <span>AdoptReview</span></p>
+            <font size="7">í›„ê¸°ìˆ˜ì •</font>
+          </div>
+        </div>
+      </div>
+    </div>
 
 		<hr>
 
@@ -89,7 +91,7 @@
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
 							id="postTitle" style="height: 50px; font-size: 20px" value="${board.postTitle}"
-							placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä." />
+							placeholder="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”." />
 					</div>
 				</div>
 
@@ -99,18 +101,18 @@
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<div class="body">
-							<!-- Ã·ºÎ ¹öÆ° -->
+							<!-- ì²¨ë¶€ ë²„íŠ¼ -->
 							<div id="attach">
 								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox">»çÁøÃ·ºÎ</label> <input id="uploadInputBox"
+									for="uploadInputBox">ì‚¬ì§„ì²¨ë¶€</label> <input id="uploadInputBox"
 									style="display: none" type="file" name="filedata" multiple />
 							</div>
 
-							<!-- ¹Ì¸®º¸±â ¿µ¿ª -->
+							<!-- ë¯¸ë¦¬ë³´ê¸° ì˜ì—­ -->
 							<div id="preview" class="content" align="center"
 								style="display: inline; min-width: 600px;"></div>
 
-							<!-- multipart ¾÷·Îµå½Ã ¿µ¿ª -->
+							<!-- multipart ì—…ë¡œë“œì‹œ ì˜ì—­ -->
 							<div id="uploadForm" style="display: none;"></div>
 						</div>
 					</div>
@@ -140,12 +142,12 @@
 		<div class="row mt-5 pt-3 d-flex">
           	<div class="col-md-12">
           	
-				<p><button class="btn btn-primary py-3 px-4 col-md-12">¼öÁ¤</button></p>
+				<p><button class="btn btn-primary py-3 px-4 col-md-12">ìˆ˜ì •</button></p>
 				
 				<div class="form-group">
 					<div class="col-md-12">
 						<div class="radio" align="right">
-							<p><a href="#" ><font color="gray">Ãë¼Ò</font></a></p>
+							<p><a href="#" ><font color="gray">ì·¨ì†Œ</font></a></p>
 						</div>
 					</div>
 				</div>
@@ -192,20 +194,20 @@
 	
 	 $(document).ready(function() {
 
-         //============= »çÁø¹Ì¸®º¸±â =============
+         //============= ì‚¬ì§„ë¯¸ë¦¬ë³´ê¸° =============
          $('#attach input[type=file]').change(function() {
-            addPreview($(this)); //preview form Ãß°¡ÇÏ±â
+            addPreview($(this)); //preview form ì¶”ê°€í•˜ê¸°
         });
 	 });
          
 	function fncUpdateAdoptReview(){
 	         
-	      //============= ´ÙÁßÆÄÀÏ¾÷·Îµå AJAX =============
+	      //============= ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ AJAX =============
 	    	  
 	    	  var title = $("#postTitle").val();
 	      
 	      	  if(title.length < 1 || title == null ){
-	      		  alert("Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä");
+	      		  alert("ì œëª©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”");
 	      	  }
 	          $(function() {     
 	            var form = $('#uploadForm')[0];
@@ -227,13 +229,13 @@
 	                data : formData,
 	                success : function(result) {
 	                    if (result === -1) {
-	                        alert('jpg, gif, png, bmp È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
-	                        // ÀÌÈÄ µ¿ÀÛ ...
+	                        alert('jpg, gif, png, bmp í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+	                        // ì´í›„ ë™ì‘ ...
 	                    } else if (result === -2) {
-	                        alert('ÆÄÀÏÀÌ 10MB¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù.');
-	                        // ÀÌÈÄ µ¿ÀÛ ...
+	                        alert('íŒŒì¼ì´ 10MBë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.');
+	                        // ì´í›„ ë™ì‘ ...
 	                    } else {
-	                        alert('ÀÌ¹ÌÁö ¾÷·Îµå ¼º°ø');
+	                        alert('ì´ë¯¸ì§€ ì—…ë¡œë“œ ì„±ê³µ');
 	                    }
 	                }
 	            });
@@ -243,22 +245,22 @@
 	      $('form').attr("method","POST").attr("action","/adoptReview/updateAdoptReview").attr("enctype","multipart/form-data").submit();
 	   }
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå ÆÄÀÏ¸í¸¸ ÀúÀåÇØ¼­ value" =============   
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ íŒŒì¼ëª…ë§Œ ì €ì¥í•´ì„œ value" =============   
 	   function fnAddFile(fileNameArray) {
 	         $("#multiFile").val(fileNameArray)    
 	   }   
 	   
-	   //============= "´ÙÁßÆÄÀÏ¾÷·Îµå"  Event Ã³¸® ¹×  ¿¬°á =============      
+	   //============= "ë‹¤ì¤‘íŒŒì¼ì—…ë¡œë“œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============      
 
-	       //ÀÓÀÇÀÇ file object¿µ¿ª
+	       //ì„ì˜ì˜ file objectì˜ì—­
 	     var files = {};
 	     var previewIndex = 0;
 	     var fileNameArray = new Array();
-	     // image preview ±â´É ±¸Çö
+	     // image preview ê¸°ëŠ¥ êµ¬í˜„
 	     // input = file object[]
 	     function addPreview(input) {
 	         if (input[0].files) {
-	             //ÆÄÀÏ ¼±ÅÃÀÌ ¿©·¯°³¿´À» ½ÃÀÇ ´ëÀÀ
+	             //íŒŒì¼ ì„ íƒì´ ì—¬ëŸ¬ê°œì˜€ì„ ì‹œì˜ ëŒ€ì‘
 	             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 
 	                 var file = input[0].files[fileIndex];
@@ -270,7 +272,7 @@
 	                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
 	                
-	                //appendÇÒ¶§ µ¿¿µ»ó ÀÌ¹ÌÁö ±¸ºĞÇØÁÖ±â
+	                //appendí• ë•Œ ë™ì˜ìƒ ì´ë¯¸ì§€ êµ¬ë¶„í•´ì£¼ê¸°
 	               var imgSelectName = "img";
 	               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
 	                  imgSelectName = "iframe";
@@ -278,8 +280,8 @@
 
 	                 var reader = new FileReader();
 	                 reader.onload = function(img) {
-	                     //div id="preview" ³»¿¡ µ¿ÀûÄÚµåÃß°¡.
-	                     //ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¼­ ÀÌ¹ÌÁö ¸µÅ© ¿Ü ÆÄÀÏ¸í, »çÀÌÁî µîÀÇ ºÎ°¡¼³¸íÀ» ÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù.
+	                     //div id="preview" ë‚´ì— ë™ì ì½”ë“œì¶”ê°€.
+	                     //ì´ ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì´ë¯¸ì§€ ë§í¬ ì™¸ íŒŒì¼ëª…, ì‚¬ì´ì¦ˆ ë“±ì˜ ë¶€ê°€ì„¤ëª…ì„ í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.
 	                     
 	                     var imgNum = previewIndex++;
 	                     
@@ -289,12 +291,12 @@
 	                     }else{
 	                        previewId = "startNo";   
 	                     }
-	                    //8Àå ÀÌ»ó ¾÷·Îµå½Ã
+	                    //8ì¥ ì´ìƒ ì—…ë¡œë“œì‹œ
 	                     if(Object.keys(files).length>=8){
-	                        alert("»çÁøÀº 8Àå±îÁö¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.");
+	                        alert("ì‚¬ì§„ì€ 8ì¥ê¹Œì§€ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 	                        delete files[imgNum];
 	                     }else{
-	               // 8Àå ÀÌÇÏ 
+	               // 8ì¥ ì´í•˜ 
 	               
 	               			document.querySelector( '#editor' ).addEventListener( 'click', () => {
                 	    const editorData = editor.getData();     	           
@@ -308,7 +310,7 @@
 	                                             + "<a href=\"#\" value=\""
 	                                             + imgNum
 	                                             + "\" onclick=\"deletePreview(this)\">"
-	                                             + "   »èÁ¦" + "</a>" + "</div>");
+	                                             + "   ì‚­ì œ" + "</a>" + "</div>");
 
 	                     files[imgNum] = file;
 	                     fileNameArray[imgNum]=file.name;
@@ -320,10 +322,10 @@
 	                 reader.readAsDataURL(file);
 	             }
 	         } else
-	             alert('invalid file input'); // Ã·ºÎÅ¬¸¯ ÈÄ Ãë¼Ò½ÃÀÇ ´ëÀÀÃ¥Àº ¼¼¿ìÁö ¾Ê¾Ò´Ù.
+	             alert('invalid file input'); // ì²¨ë¶€í´ë¦­ í›„ ì·¨ì†Œì‹œì˜ ëŒ€ì‘ì±…ì€ ì„¸ìš°ì§€ ì•Šì•˜ë‹¤.
 	     }
 
-	     //============= preview ¿µ¿ª¿¡¼­ »èÁ¦ ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¹Ì¸®º¸±âÀÌ¹ÌÁö ¿µ¿ª »èÁ¦ =============
+	     //============= preview ì˜ì—­ì—ì„œ ì‚­ì œ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë¯¸ë¦¬ë³´ê¸°ì´ë¯¸ì§€ ì˜ì—­ ì‚­ì œ =============
 	     function deletePreview(obj) {
 	         var imgNum = obj.attributes['value'].value;
 	         delete files[imgNum];
@@ -333,14 +335,14 @@
 	         resizeHeight();
 	     }
 
-	     //============= ÆÄÀÏ È®ÀåÀÚ validation Ã¼Å© =============
+	     //============= íŒŒì¼ í™•ì¥ì validation ì²´í¬ =============
 	     function validation(fileName) {
 	         fileName = fileName + "";
 	         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 È®ÀåÀÚ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù.');
+	             alert('jpg, gif, png, avi, mp4 í™•ì¥ìë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
 	             return true;
 	         } else {
 	             return false;
@@ -351,11 +353,11 @@
 	   ///////////////////////////////////////////////////////////////////////////////
 	     
 	     $(function() {
-				$( "button:contains('¼öÁ¤')" ).on("click" , function() {
+				$( "button:contains('ìˆ˜ì •')" ).on("click" , function() {
 					fncUpdateAdoptReview();
 				});
 				
-				$( "a:contains('Ãë¼Ò')" ).on("click" , function() {
+				$( "a:contains('ì·¨ì†Œ')" ).on("click" , function() {
 					self.location = "/adoptReview/getAdoptReview?postNo=${board.postNo}"
 				});
 		 });

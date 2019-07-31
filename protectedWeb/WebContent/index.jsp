@@ -14,7 +14,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	<!-- Core Stylesheets -->
+	<link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
     <title>보호할개</title>
 
 
@@ -85,76 +86,83 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                          HOME
 ======================================================-->
-    <section id="home">
-      <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel"> 
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            <div class="carousel-item active slides">
-              <div class="overlay"></div>
-              <div class="slide-1"></div>
-                <div class="hero ">
-                  <hgroup class="wow fadeInUp">
-                      <h1>We Help <span ><a href="" class="typewrite" data-period="2000" data-type='[ " Business", " Startup"]'>
+ <!-- CAROUSEL -->
+    <section id="home-shop">
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"
+					class="active">
+				</li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"
+					class="active">
+				</li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<!-- Slide One - Set the background image for this slide in the line below -->
+				<div class="carousel-item active"
+					style="background-image: url('https://images.squarespace-cdn.com/content/v1/53c5b010e4b0c3db71b3067c/1454110350784-40RPZEXV5HC5BIV6WGZU/ke17ZwdGBToddI8pDm48kB6N0s8PWtX2k_eW8krg04V7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1URWK2DJDpV27WG7FD5VZsfFVodF6E_6KI51EW1dNf095hdyjf10zfCEVHp52s13p8g/los-angeles-commercial-dog-photographer-for-pet-brands-1.jpg?format=2500w')">
+					<div class="carousel-caption d-none d-md-block">
+					<hgroup class="wow fadeInUp">
+<!--                       <h1>protectedog <span ><a href="" class="typewrite" data-period="2000" data-type='[ " 보호할개", " 분양, 실종"," 스토리펀딩"," 정보공유"," 스토어"]'> -->
                         <span class="wrap"></span></a></span> </h1>        
-                      <h3>The next big idea is waiting for its next big changer</h3>
+                      <h3></h3>
                   </hgroup>
-                  <button class="btn btn-general btn-green wow fadeInUp" role="button">Contact Now</button>
-                </div>           
-            </div> 
-        </div> 
-      </div> 
-    </section> 
+						<h3></h3>
 
+					</div>
+				</div>
+				<!-- Slide Two - Set the background image for this slide in the line below -->
+				<div class="carousel-item"
+					style="background-image: url('https://images.squarespace-cdn.com/content/v1/53c5b010e4b0c3db71b3067c/1454110459316-4PP6W716GBF23FCZT741/ke17ZwdGBToddI8pDm48kB6N0s8PWtX2k_eW8krg04V7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1URWK2DJDpV27WG7FD5VZsfFVodF6E_6KI51EW1dNf095hdyjf10zfCEVHp52s13p8g/purina-animal-photographer.jpg?format=2500w')">
+					<div class="carousel-caption d-none d-md-block">
+						<h3></h3>
+					</div>
+				</div>
+			</div>
+			<!-- Slide Two - Set the background image for this slide in the line below -->
+				<div class="carousel-item"
+					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')">
+					<div class="carousel-caption d-none d-md-block">
+						<h3></h3>
+					</div>
+				</div>
+			</div>
+			<!-- Slide Two - Set the background image for this slide in the line below -->
+				<div class="carousel-item"
+					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')">
+					<div class="carousel-caption d-none d-md-block">
+						<h3>스토어</h3>
+					</div>
+				</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+	
+<div class="hero ">
+                  <hgroup class="wow fadeInUp">
+                      <h1 style="height: 56px; margin: 0px;">보호할개<span><a href="" class="typewrite" data-period="1000" data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'><span class="wrap"></span></a></span></h1>        
+                      <h3></h3>
+                  </hgroup>
+                  
+                </div>      
 <!--====================================================
-                        ABOUT
-======================================================-->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="row title-bar">
-          <div class="col-md-12">
-            <h1 class="wow fadeInUp">We committed to helping</h1>
-            <div class="heading-border"></div>
-            <p class="wow fadeInUp" data-wow-delay="0.4s">Businessbox will deliver value to all the stakeholders and will attain excellence and leadership through such delivery of value. We will strive to support the stakeholders in all activities related to us. Businessbox provide great things.</p>
-            <div class="title-but"><button class="btn btn-general btn-green" role="button">Read More</button></div>
-          </div>
-        </div>
-      </div>  
-      <!-- About right side withBG parallax -->
-      <div class="container-fluid">
-        <div class="row"> 
-          <div class="col-md-4 bg-starship">
-            <div class="about-content-box wow fadeInUp" data-wow-delay="0.3s">
-              <i class="fa fa-snowflake-o"></i>
-              <h5>Thoughts Leadership Platform</h5>
-              <p class="desc">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            </div>
-          </div> 
-          <div class="col-md-4 bg-chathams">
-            <div class="about-content-box wow fadeInUp" data-wow-delay="0.5s">
-              <i class="fa fa-circle-o-notch"></i>
-              <h5>Corporate world Platform</h5>
-              <p class="desc">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            </div>
-          </div> 
-          <div class="col-md-4 bg-matisse">
-            <div class="about-content-box wow fadeInUp" data-wow-delay="0.7s">
-              <i class="fa fa-hourglass-o"></i>
-              <h5>End to End Testing Platform</h5>
-              <p class="desc">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            </div>
-          </div> 
-        </div> 
-      </div>       
-    </section> 
-
-<!--====================================================
-                        OFFER
+                        OFFER1
 ======================================================-->
     <section id="comp-offer">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
-            <h2>What We Offer</h2>
+            <h2>분양.실종</h2>
             <div class="heading-border-light"></div> 
             <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
             <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
@@ -201,151 +209,64 @@ License URL: https://creativecommons.org/licenses/by/4.0/
         </div>
       </div>
     </section>
-
-<!--====================================================
-                     WHAT WE DO
+    
+    <!-- ================================================================= -->
+    
+    <!--====================================================
+                        OFFER
 ======================================================-->
-    <section class="what-we-do bg-gradiant">
+    <section id="comp-offer">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
-            <h3>What we Do</h3>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+            <h2>스토리펀딩</h2>
             <div class="heading-border-light"></div> 
-            <p class="desc">We partner with clients to put recommendations into practice. </p>
+            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
+            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
           </div>
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-4  col-sm-6">
-                <div class="what-we-desc">
-                  <i class="fa fa-briefcase"></i>
-                  <h6>Workspace</h6>
-                  <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
-                </div>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
-              <div class="col-md-4  col-sm-6">
-                <div class="what-we-desc">
-                  <i class="fa fa-shopping-bag"></i>
-                  <h6>Storefront</h6>
-                  <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
-                </div>
+              <h3>Business Management</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>          
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
+              </div>              
+              <h3>Leadership Development</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.8s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
               </div>
-              <div class="col-md-4  col-sm-6">
-                <div class="what-we-desc">
-                  <i class="fa fa-building-o"></i>
-                  <h6>Apartments</h6>
-                  <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
-                </div>
-              </div>
-              <div class="col-md-4  col-sm-6">
-                <div class="what-we-desc">
-                  <i class="fa fa-bed"></i>
-                  <h6>Hotels</h6>
-                  <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
-                </div>
-              </div>
-              <div class="col-md-4  col-sm-6">
-                <div class="what-we-desc">
-                  <i class="fa fa-hourglass-2"></i>
-                  <h6>Concept</h6>
-                  <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
-                </div>
-              </div>
-              <div class="col-md-4  col-sm-6">
-                <div class="what-we-desc">
-                  <i class="fa fa-cutlery"></i>
-                  <h6>Restaurant</h6>
-                  <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
-                </div>
-              </div>
+              <h3>Social benefits and services</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
         </div>
-      </div>      
-    </section> 
-
-<!--====================================================
-                      STORY
-======================================================--> 
-    <section id="story">
-        <div class="container">
-          <div class="row title-bar">
-            <div class="col-md-12">
-              <h1 class="wow fadeInUp">Our Success Tranformation Story</h1>
-              <div class="heading-border"></div> 
-            </div>
-          </div>
-        </div>  
-        <div class="container-fluid">
-          <div class="row" >
-            <div class="col-md-6" >
-              <div class="story-himg" >
-                <img src="img/image-4.jpg" class="img-fluid" alt="">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="story-desc">
-                <h3>How to grow world with Us</h3>
-                <div class="heading-border-light"></div> 
-                <p>Everyone defines success differently â as much as there are people, there are different opinions. Number one in our priority list is the success of our students, alumni and their employers. We work hard in the name of the success of our alumni â being among the best and holding the high employment rate. Many desktop publishing packages and web page editors now use Lorem Ipsum.. </p>
-                <p>You can find some thoughts on success from our students and alumni here â every story is unique, but this is what success is. Everybody sees it differently. Many desktop publishing packages and web page editors now use Lorem Ipsum.</p>
-                <p class="text-right" style="font-style: italic; font-weight: 700;"><a href="#">Businessbox</a></p>
-                <div class="title-but"><button class="btn btn-general btn-green" role="button">Read More</button></div>
-              </div>
-            </div>
-          </div>
-        </div>  
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s"> 
-              <div class="story-descb">
-                  <img src="img/news/news-10.jpg" class="img-fluid" alt="...">
-                  <h6>Virtual training systems</h6>
-                  <p>Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                  <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Read More</a>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s"> 
-              <div class="story-descb">
-                  <img src="img/news/news-2.jpg" class="img-fluid" alt="...">
-                  <h6>Design planning</h6>
-                  <p>Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                  <a href=""><i class="fa fa-arrow-circle-o-right"></i> Read More</a>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s"> 
-              <div class="story-descb">
-                  <img src="img/news/news-8.jpg" class="img-fluid" alt="...">
-                  <h6>Remote condition monitoring</h6>
-                  <p>Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                  <a href=""><i class="fa fa-arrow-circle-o-right"></i> Read More</a>
-              </div>
-            </div>                        
-          </div>
-        </div>  
+      </div>
     </section>
-
-<!--====================================================
-                  COMPANY THOUGHT
-======================================================-->
-    <div class="overlay-thought"></div>
-    <section id="thought" class="bg-parallax thought-bg">
-      <div class="container">
-        <div id="thought-desc" class="row title-bar title-bar-thought owl-carousel owl-theme">
-          <div class="col-md-12 ">
-            <div class="heading-border bg-white"></div>
-            <p class="wow fadeInUp" data-wow-delay="0.4s">Businessbox will deliver value to all the stakeholders and will attain excellence and leadership through such delivery of value. We will strive to support the stakeholders in all activities related to us. Businessbox provide great things.</p>
-            <h6>John doe</h6>
-          </div>
-          <div class="col-md-12 thought-desc">
-            <div class="heading-border bg-white"></div>
-            <p class="wow fadeInUp" data-wow-delay="0.4s">Ensuring quality in Businessbox is an obsession and the high quality standards set by us are achieved through a rigorous quality assurance process. Quality assurance is performed by an independent team of trained experts for each project. </p>
-            <h6>Tom John</h6>
-          </div>
-        </div>
-      </div>         
-    </section> 
-    
-<!--====================================================
+    <!--====================================================
                    SERVICE-HOME
 ======================================================--> 
     <section id="service-h">
@@ -353,27 +274,27 @@ License URL: https://creativecommons.org/licenses/by/4.0/
           <div class="row" >
             <div class="col-md-6" >
               <div class="service-himg" > 
-                <iframe src="https://www.youtube.com/embed/754f1w90gQU?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/3P1YGPZp6Ik?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
               <div class="service-h-desc">
-                <h3>We are Providing great Services</h3>
+                <h2>정보공유</h2>
                 <div class="heading-border-light"></div> 
-                <p>Businessbox offer the full spectrum of services to help organizations work better. Everything from creating standards of excellence to training your people to work in more effective ways.</p>  
+                <p>비트캠프 118기 #Protected조 GIT MANAGER 박 은우 입니다.</p>  
               <div class="service-h-tab"> 
                 <nav class="nav nav-tabs" id="myTab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-expanded="true">Developing</a>
-                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile">Training</a> 
-                  <a class="nav-item nav-link" id="my-profile-tab" data-toggle="tab" href="#my-profile" role="tab" aria-controls="my-profile">Medical</a> 
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-expanded="true">HOT개</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile">사용된 기술</a> 
+          
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. </p></div>
+                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                  	<p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. </p>
+                  </div>
                   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute</p>
                   </div> 
-                  <div class="tab-pane fade" id="my-profile" role="tabpanel" aria-labelledby="my-profile-tab">
-                    <p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute</p>
                   </div> 
                 </div>
               </div>
@@ -386,83 +307,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                       CLIENT
 ======================================================-->
-    <section id="client" class="client">
-      <div class="container">
-        <div class="row title-bar">
-          <div class="col-md-12">
-            <h1 class="wow fadeInUp">Our Client Say</h1>
-            <div class="heading-border"></div>
-            <p class="wow fadeInUp" data-wow-delay="0.4s">We committed to helping you maintain your Brand Value.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="client-cont wow fadeInUp" data-wow-delay="0.1s">
-              <img src="img/client/avatar-6.jpg" class="img-fluid" alt="">
-              <h5>Leesa len</h5>
-              <h6>DSS CEO & Cofounder</h6>
-              <i class="fa fa-quote-left"></i>
-              <p>The Businessbox service - it helps fill our Business, and increase our show up rate every single time.</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="client-cont wow fadeInUp" data-wow-delay="0.3s">
-              <img src="img/client/avatar-2.jpg" class="img-fluid" alt="">
-              <h5>Dec Bol</h5>
-              <h6>TEMS founder</h6>
-              <i class="fa fa-quote-left"></i>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece.</p>
-            </div>
-          </div>
-        </div>
-      </div>        
-    </section>  
-
-<!--====================================================
-                    CONTACT HOME
-======================================================-->
-    <div class="overlay-contact-h"></div>
-    <section id="contact-h" class="bg-parallax contact-h-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="contact-h-cont">
-              <h3 class="cl-white">Continue The Conversation</h3><br>
-              <form>
-                <div class="form-group cl-white">
-                  <label for="name">Your Name</label>
-                  <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter name"> 
-                </div>  
-                <div class="form-group cl-white">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> 
-                </div>  
-                <div class="form-group cl-white">
-                  <label for="subject">Subject</label>
-                  <input type="text" class="form-control" id="subject" aria-describedby="subjectHelp" placeholder="Enter subject"> 
-                </div>  
-                <div class="form-group cl-white">
-                  <label for="message">Message</label>
-                  <textarea class="form-control" id="message" rows="3"></textarea>
-                </div>  
-                <button class="btn btn-general btn-white" role="button"><i fa fa-right-arrow></i>GET CONVERSATION</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>         
-    </section> 
-
-<!--====================================================
-                       NEWS
+    <!--====================================================
+                        OFFER 스토어
 ======================================================-->
     <section id="comp-offer">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3 col-sm-6  desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
-            <h2>Latest News</h2>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+            <h2>스토어</h2>
             <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">See More</button>
+            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
+            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
           </div>
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
             <div class="desc-comp-offer-cont">
@@ -470,23 +325,23 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-1.jpg" class="img-fluid" alt="...">
+                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
-              <h3>Pricing Strategies for Product</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from Business box. </p>
+              <h3>Business Management</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
-          </div>
+          </div>          
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
             <div class="desc-comp-offer-cont">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-9.jpg" class="img-fluid" alt="...">
-              </div>
-              <h3>Design Exhibitions of 2017</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from Business box. </p>
+                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
+              </div>              
+              <h3>Leadership Development</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
@@ -496,16 +351,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-12.jpeg" class="img-fluid" alt="...">
+                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
               </div>
-              <h3>Exciting New Technologies</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from Business box. </p>
+              <h3>Social benefits and services</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
         </div>
       </div>
     </section>
+    
 
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->

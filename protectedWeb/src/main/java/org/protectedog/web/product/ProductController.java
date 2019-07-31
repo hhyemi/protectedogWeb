@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
-
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.FileDog;
@@ -28,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//==> È¸¿ø°ü¸® Controller
+//Controller
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {
@@ -42,11 +40,11 @@ public class ProductController {
 	@Qualifier("fileServiceImpl")
 	private FileService fileService;
 
-	// setter Method ±¸Çö ¾ÊÀ½
+	// setter Method êµ¬í˜„ ì•ŠìŒ
 
 	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
+	// classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
+	// ==> ì•„ë˜ì˜ ë‘ê°œë¥¼ ì£¼ì„ì„ í’€ì–´ ì˜ë¯¸ë¥¼ í™•ì¸ í• ê²ƒ
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
@@ -104,7 +102,7 @@ public class ProductController {
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
-		// ÆÄÀÏµğºñ¿¡³Ö±â
+		//ë‹¤ì¤‘íŒŒì¼ ì—…ë¡œë“œ
 		for (String fileName : multiFile) {
 
 			if (fileName != null && fileName.length() > 0) {
@@ -134,10 +132,10 @@ public class ProductController {
 		// Business Logic
 		System.out.println(prodNo);
 		Product product = productService.getProduct(prodNo);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("product", product);
 		
-		// ÆÄÀÏ°¡Á®¿À±â
+		// ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> filePost = new HashMap<String, Object>();
 				filePost.put("boardCode", Shop);
 				filePost.put("postNo", prodNo);
@@ -185,14 +183,14 @@ public class ProductController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = productService.listProduct(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 	
 		
 		model.addAttribute("list", map.get("list"));
@@ -213,14 +211,14 @@ public class ProductController {
 		}
 		search.setPageSize(pageSize);
 	
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = productService.listAdminProduct(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
 
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);

@@ -9,7 +9,7 @@ import org.protectedog.service.domain.Participate;
 
 public interface ParticipateDAO {
 	
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
 	// SELECT ONE
 	public void addParticipate(Participate participate) throws Exception;
@@ -18,12 +18,12 @@ public interface ParticipateDAO {
 	public Participate getParticipate(Participate participate) throws Exception;
 
 	// SELECT ONE
-	public int getParticipateTotalCount(Search search) throws Exception;
+	public int getParticipateTotalCount(int postNo) throws Exception;
 
 	// SELECT LIST
 	public List<Participate> listNoticeComment(Search search, int postNo , String statusCode) throws Exception;
 
-	/////////////// È¸¿ø¿¡¼­ ¿ä±¸ÇÑ Method/////////////////////
+	/////////////// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ä±¸ï¿½ï¿½ Method/////////////////////
 	// SELECT LIST
 	public List<Participate> listParticipateUser(int id) throws Exception;
 }

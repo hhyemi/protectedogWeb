@@ -59,45 +59,29 @@
 	</update>
 		 
 	<!-- SQL : SELECT LIST -->
-	 	
-	<select id="getSendMessageList"		parameterType="map"	resultMap="messageSelectMap">
-		SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
-		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
-				FROM message
-
-				WHERE sender_id=#{senderId}
-<!-- 					<if test="searchCondition != null"> -->
-<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
-<!-- 							AND receiver_id=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
-<!-- 							AND message_title=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 					</if> -->
-
-				ORDER BY sender_id ) inner_table
-			WHERE ROWNUM &lt;=#{search.endRowNum} )
-		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
-	</select>
 	
-	<select id="getReceiverMessageList"		parameterType="map"	resultMap="messageSelectMap">
-		SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
+	<select id="getMessageList"		parameterType="map"	resultMap="messageSelectMap">
+		SELECT message_no, sender_id, receiver_id, message_title, message_content, send_date, receive_date, message_status
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
+			FROM( SELECT message_no, sender_id, receiver_id, message_title, message_content, send_date, receive_date, message_status
 				FROM message
-
-				WHERE receiver_id=#{receiverId}
-<!-- 					<if test="searchCondition != null"> -->
-<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
-<!-- 							AND sender_id=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
-<!-- 							AND message_title=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 					</if> -->
-
-				ORDER BY receiver_id ) inner_table
+					<where>
+						<if test="searchCondition == 'all'">
+							(sender_id=#{id} OR receiver_id=#{id})
+							AND message_status != '2'
+						</if>
+						<if test="searchCondition == 'send'">
+							sender_id=#{id} AND message_status != '2'
+						</if>
+						<if test="searchCondition == 'receive'">
+							receiver_id=#{id} AND message_status != '2'
+						</if>
+						<if test="searchCondition == 'delete'">
+							(sender_id=#{id} OR receiver_id=#{id})
+							AND message_status='2'
+						</if>
+					</where>
+				ORDER BY send_date ) inner_table
 			WHERE ROWNUM &lt;=#{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
 	</select>
@@ -111,32 +95,48 @@
 			FROM message
 
 				WHERE sender_id=#{senderId}
-<!-- 					<if test="searchCondition != null"> -->
-<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
-<!-- 							AND receiver_id=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
-<!-- 							AND message_title=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 					</if>  -->
+					<if test="searchCondition != null">
+						<if test="searchCondition==0 and searchKeyword !='' ">
+							AND receiver_id=#{searchKeyword}
+						</if>
+						<if test="searchCondition==1 and searchkeyword !='' ">
+							AND message_title=#{searchKeyword}
+						</if>
+					</if> 
 					) countTable						
 	</select>
 	
-	<select  id="getReceiveTotalCount"		parameterType="map"	resultType="int">
+	<select  id="getReceiveTotalCount" parameterType="string" resultType="int">
 		SELECT COUNT(*)
 		FROM(	SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
 			FROM message
 
 				WHERE receiver_id=#{receiverId}
-<!-- 					<if test="searchCondition != null"> -->
-<!-- 						<if test="searchCondition==0 and searchKeyword !='' "> -->
-<!-- 							AND sender_id=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 						<if test="searchCondition==1 and searchkeyword !='' "> -->
-<!-- 							AND message_title=#{searchKeyword} -->
-<!-- 						</if> -->
-<!-- 					</if> -->
+				AND message_status=0
 					) countTable						
+	</select>
+	
+	<select  id="getTotalCount"		parameterType="map"	resultType="int">
+		SELECT COUNT(*)
+		FROM(	SELECT message_no, sender_id, receiver_id, message_title, message_content, send_date, receive_date, message_status
+			FROM message
+					<where>
+						<if test="searchCondition == 'all'">
+							(sender_id=#{id} OR receiver_id=#{id})
+							AND message_status != '2'
+						</if>
+						<if test="searchCondition == 'send'">
+							sender_id=#{id} AND message_status != '2'
+						</if>
+						<if test="searchCondition == 'receive'">
+							receiver_id=#{id} AND message_status != '2'
+						</if>
+						<if test="searchCondition == 'delete'">
+							(sender_id=#{id} OR receiver_id=#{id})
+							AND message_status='2'
+						</if>
+					</where>
+				) countTable						
 	</select>
 	 
 </mapper>

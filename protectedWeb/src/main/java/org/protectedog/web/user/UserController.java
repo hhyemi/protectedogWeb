@@ -131,16 +131,22 @@ public class UserController {
 			user.setPurpose1((String)purpose.get(0));
 			user.setPurpose2((String)purpose.get(1));
 			user.setPurpose3((String)purpose.get(2));
+			System.out.println("가입목적 : "+purpose.toString());
 		}
 		
-		String sessionId=((User)session.getAttribute("user")).getId();
-		if(sessionId.equals(user.getId())) {
-			session.setAttribute("user", user);
-		}
+//		String sessionId=((User)session.getAttribute("user")).getId();
+//		System.out.println("세션1? : "+session.getAttribute("user"));
+//		System.out.println(sessionId);
+//		if(sessionId.equals(user.getId())) {
+//			System.out.println("세션? : "+session.getAttribute("user"));
+//			session.setAttribute("user", user);
+//		}
 		
 		userService.addUsersBase(user);
 		
-		return "redirect:/";
+		session.setAttribute("user", user);
+		
+		return "redirect:/index.jsp";
 	}
 	
 	@RequestMapping(value="addUsersBase2", method=RequestMethod.POST)
@@ -178,14 +184,23 @@ public class UserController {
 		
 		System.out.println("/users/addUsersAdditional");
 		
-		String sessionId=((User)session.getAttribute("user")).getId();
-		if(sessionId.equals(user.getId())) {
-			session.setAttribute("user", user);
-		}
+//		String sessionId=((User)session.getAttribute("user")).getId();
+//		if(sessionId.equals(user.getId())) {
+//			session.setAttribute("user", user);
+//		}
 		
 		userService.addUsersAdditional(user);
 		
-		return "redirect:/";
+		User sessionUser=(User)session.getAttribute("user");
+		sessionUser.setEmail(user.getEmail());
+		sessionUser.setPhone(user.getPhone());
+		sessionUser.setUserAddr(user.getUserAddr());
+		sessionUser.setBirthDate(user.getBirthDate());
+		sessionUser.setGender(user.getGender());
+		session.setAttribute("user", sessionUser);
+		System.out.println(session.getAttribute("user"));
+		
+		return "redirect:/index.jsp";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
@@ -225,7 +240,9 @@ public class UserController {
 		System.out.println("aaa : "+user.getPw());
 		System.out.println("bbb : "+dbUser.getPw());
 		
-		
+		if(dbUser.getLevelPoint() < 0) {
+			return "redirect:/";
+		}
 		
 		if(user.getPw().equals(dbUser.getPw()) && user.getId().equals(dbUser.getId())) {
 			String check="true";

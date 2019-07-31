@@ -48,6 +48,7 @@ public class CommentRestController {
 	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+
 	
 	public CommentRestController() {
 		System.out.println("commentRestController Defualt Constructor");
@@ -63,8 +64,10 @@ public class CommentRestController {
 		// Set User
 		comment.setId(user.getId());
 		comment.setNickName(user.getNickname());
+		comment.setProfile(user.getProfile());
+		
+		// Set Code
 		comment.setBoardCode(boardCode);
-
 		commentService.addComment(comment);
 		
 		comment = commentService.getComment(comment.getCommentNo());
@@ -142,7 +145,7 @@ public class CommentRestController {
 		Interest interest = new Interest();
 		interest.setBoardCode(boardCode);
 		interest.setInterestComment(comment);
-		interest.setinterestId(user);
+		interest.setInterestId(user);
 
 		interestService.addInterest(interest);
 		
@@ -198,7 +201,6 @@ public class CommentRestController {
 		Map<String, Object> commentMap = commentService.listComment(postNo, search);
 		int totalCount = commentService.getTotalCount(postNo);
 		//Map<String, Object> reMap = reCommentService.listReComment(map);
-		
 		
 		// return�� Map ��ü�� put
 		//map.put("reList", reMap.get("list"));

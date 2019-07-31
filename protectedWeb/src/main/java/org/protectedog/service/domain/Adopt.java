@@ -2,8 +2,7 @@ package org.protectedog.service.domain;
 
 import java.sql.Date;
 
-
-//==>È¸¿øÁ¤º¸¸¦ ¸ğµ¨¸µ(Ãß»óÈ­/Ä¸½¶È­)ÇÑ Bean
+//==>íšŒì›ì •ë³´ë¥¼ ëª¨ë¸ë§(ì¶”ìƒí™”/ìº¡ìŠí™”)í•œ Bean
 public class Adopt {
 	
 	///Field
@@ -190,6 +189,7 @@ public class Adopt {
 	}
 
 	public Date getDogDate() {
+//		dogDate = dogDate.substring(0, 11);
 		return dogDate;
 	}
 

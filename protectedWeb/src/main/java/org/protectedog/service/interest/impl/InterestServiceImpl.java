@@ -56,9 +56,9 @@ public class InterestServiceImpl implements InterestService{
 	}
 
 	@Override
-	public void deleteInterest(Interest interest) throws Exception {
+	public void delInterest(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		interestDAO.deleteInterest(interest);
+		interestDAO.delInterest(map);
 	}
 
 	@Override

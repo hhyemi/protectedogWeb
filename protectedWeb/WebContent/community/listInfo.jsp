@@ -10,7 +10,7 @@
 
 <!--  meta  -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!--  ETC CDN -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
@@ -28,7 +28,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!--  CSS -->
 <style>
-
 #searchKeyword{
 	height: 40px;
 	width: 150px;
@@ -59,19 +58,16 @@
 
 <body>
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
-					</p>
-					<h1 class="mb-0 bread">커뮤니티</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">information</span> <span>share</span></p>
+            <font size="7">정보공유</font>
+          </div>
+        </div>
+      </div>
+    </div>
 
 	<%-- 	<input type="hidden" id="menu" name="menu" value="${param.menu}"/> --%>
 
@@ -180,7 +176,7 @@
 					<br />
 
 					<c:if test="${ ! empty sessionScope.user }">
-						<button type="button" class="btn btn-default">글 쓰기</button>
+						<button type="button" class="btn btn-default">글 작성</button>
 					</c:if>
 					
 					<div align="center">
@@ -387,7 +383,7 @@ function listNews(){
 			fncGetList(1);
 		});
 		
-		$("button:contains('글 쓰기')").on("click", function(){
+		$("button:contains('글 작성')").on("click", function(){
 			self.location = "/community/addInfo.jsp"
 		});
 	});

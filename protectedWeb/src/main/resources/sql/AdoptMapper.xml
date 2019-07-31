@@ -45,10 +45,10 @@
 					adopt_area, area_kr, location, location_kr, reg_date, 
 					dog_breed, dog_weight, dog_size, dog_gender, dog_pay, 
 					dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES	   (#{boardCode}, #{postNo}, #{id}, #{postTitle}, #{postContent}, #{phone}, 
-					#{adoptArea:VARCHAR}, #{areaKr:VARCHAR}, #{location}, #{locationKr}, SYSDATE, 
-					#{dogBreed:VARCHAR}, #{dogWeight}, #{dogSize}, #{dogGender}, #{dogPay},
-					#{dogStatus}, #{dogChar}, #{dogPersonality}, #{dogDate}, #{mainFile}, #{statusCode})
+		VALUES	   (#{boardCode}, #{postNo}, #{id}, #{postTitle:VARCHAR}, #{postContent}, #{phone}, 
+					#{adoptArea:VARCHAR}, #{areaKr:VARCHAR}, #{location:VARCHAR}, #{locationKr}, SYSDATE, 
+					#{dogBreed:VARCHAR}, #{dogWeight:VARCHAR}, #{dogSize:VARCHAR}, #{dogGender}, #{dogPay},
+					#{dogStatus}, #{dogChar}, #{dogPersonality:VARCHAR}, #{dogDate}, #{mainFile}, #{statusCode})
 	 </insert>
 	 
 	 
@@ -71,21 +71,22 @@
 	 <update	id="updateAdopt"	parameterType="adopt" >
 	   	UPDATE adopt
 	   	<set>
-			post_title		= #{postTitle},
+			post_title		= #{postTitle:VARCHAR},
 			post_content	= #{postContent},
 			adopt_area		= #{adoptArea:VARCHAR},
 			area_kr			= #{areaKr:VARCHAR},
-			location		= #{location},
+			location		= #{location:VARCHAR},
 			location_kr		= #{locationKr},
 			dog_breed		= #{dogBreed:VARCHAR},
-			dog_weight		= #{dogWeight},
-			dog_size		= #{dogSize},
+			dog_weight		= #{dogWeight:VARCHAR},
+			dog_size		= #{dogSize:VARCHAR},
 			dog_gender		= #{dogGender},
 			dog_pay 		= #{dogPay},
 			dog_status	 	= #{dogStatus} ,
 			dog_char 		= #{dogChar},
-			dog_personality	= #{dogPersonality},
-			dog_date		= #{dogDate}
+			dog_personality	= #{dogPersonality:VARCHAR},
+			dog_date		= #{dogDate},
+			main_file	  	= #{mainFile}
 	   	</set>
 	   	WHERE post_no = #{postNo}
 	 </update>
@@ -127,7 +128,11 @@
 									AND area_kr LIKE '%'||#{areaCondition}||'%' 
 								</if>
 						</where>
-						ORDER BY post_no DESC ) inner_table
+						GROUP BY board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
+	  							dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code
+						ORDER BY CASE WHEN (status_code = 3) THEN 'status_code DESC' ELSE 'post_no DESC' END, post_no DESC
+<!-- 						ORDER BY post_no DESC  -->
+						) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -142,7 +147,26 @@
 	 </select>
 
 
-
+	 <select  id="listMissing"  parameterType="string"	resultMap="adoptSelectMap">
+	  	SELECT 	board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
+				dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code
+		FROM 	adopt
+		<where>
+				board_code = #{value} AND status_code != '0' 
+<!-- 				<if test="searchCondition != null"> -->
+<!-- 					<if test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 			 			AND post_title  LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 					</if> -->
+<!-- 					<if test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 			 			AND post_content LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 					</if> -->
+<!-- 					<if test="searchCondition == 2 and searchKeyword !='' "> -->
+<!-- 			 			AND dog_breed LIKE '%'||#{searchKeyword}||'%'  -->
+<!-- 					</if> -->
+<!-- 				</if> -->
+		</where>
+						
+	 </select>
 	
 	
 	<!-- SQL : SELECT ROW Count -->	 

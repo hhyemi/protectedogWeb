@@ -47,11 +47,11 @@
 	</style> 
  
  
-  </head>
-  <body>
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
+  </head>
+  <body>
     <!--================Header Menu Area =================--> 
 
     <!--================Single Product Area =================-->
@@ -140,17 +140,14 @@
 			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
-                <button id="btnFund" class="btn btn-default">후원하기</button><button id="btnQuestion" class="btn btn-default">문의하기</button>  
-                <a class="icon_btn" href="#">
-                  <i class="lnr lnr lnr-heart"></i>
-                </a>
+                <button id="btnFund" class="btn btn-default" style="width: 225px">후원하기</button><button id="btnQuestion" class="btn btn-default" style="width: 225px">문의하기</button>  
               </div>
               <br/>
-		    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-			<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-			<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
-			<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
-		 	  
+              <div align="right">
+			    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+	 		  </div>
             </div>
           </div></div>
         </div>
@@ -316,11 +313,6 @@
 		$( "#twitter" ).on("click" , function() {
 	 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
 			});		
-		
-		$( "#naver" ).on("click" , function() {
-	 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-			});		
-		
 		$( "#facebook" ).on("click" , function() {
 	 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
 			});			

@@ -1,15 +1,13 @@
- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>║╕╚г╟╥░│ бд ║╨╛ч╚─▒т▒█ └█╝║</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>ы│┤эШ╕эХаъ░Ь ┬╖ ы╢ДьЦСэЫДъ╕░</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
     
     <style type="text/css">
@@ -55,18 +53,17 @@
 		
     
     </style>
+    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
   </head>
   <body class="goto-here">
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-<!--           	<p class="breadcrumbs"><span class="mr-2"><a href="index0.html">Home</a></span> <span>Checkout</span></p> -->
-            <h1 class="mb-0 bread" id="h1">
-           		╚─▒т ╡ю╖╧
-            </h1>
+          	<p ><span class="mr-2">Add</span> <span>AdoptReview</span></p>
+            <font size="7">эЫДъ╕░ыУ▒ыбЭ</font>
           </div>
         </div>
       </div>
@@ -92,7 +89,7 @@
 <!-- 				<div class="col-md-12"> -->
 <!-- 	          		<div class="cart-detail bg-light p-3 p-md-4"> -->
 <!-- 						<div class="form-group"> -->
-<!-- 							<div class="col-md-12"><p align="center"><strong>╚─▒т▒█└╗ ╡ю╖╧╟╧╕щ 15└╧░г└║ ╗ш┴ж╟╧╜╟ ╝Ў ╛°╜└┤╧┤┘.</strong></p></div> -->
+<!-- 							<div class="col-md-12"><p align="center"><strong>эЫДъ╕░ъ╕АьЭД ыУ▒ыбЭэХШый┤ 15ьЭ╝ъ░ДьЭА ьВньаЬэХШьЛд ьИШ ьЧЖьК╡ыЛИыЛд.</strong></p></div> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
 <!-- 				</div> -->
@@ -102,8 +99,8 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>▒█┴ж╕ё</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
-		                	<input type="text" class="form-control" name="postTitle" placeholder="┴ж╕ё└╗ └╘╖┬╟╧╝╝┐ф.">
+		                	<label for="postTitle"><strong>ъ╕АьаЬыкй</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<input type="text" class="form-control" name="postTitle" placeholder="ьаЬыкйьЭД ьЮЕыаеэХШьД╕ьЪФ.">
 		                </div>
 	                </div>
 
@@ -114,17 +111,17 @@
 	                <div class="row">
 					<div class="col-xs-12 col-md-12">
 						<div class="body">
-							<!-- ├╖║╬ ╣Ў╞░ -->
+							<!-- ь▓иы╢А ы▓ДэК╝ -->
 							<div id="attach">
 								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox"><strong>╗ч┴°├╖║╬</strong></label> <input id="uploadInputBox"
+									for="uploadInputBox"><strong>ьВмьзДь▓иы╢А</strong></label> <input id="uploadInputBox"
 									style="display: none" type="file" name="filedata" multiple />
 							</div>
 
-							<!-- ╣╠╕о║╕▒т ┐╡┐к -->
+							<!-- ып╕ыжмы│┤ъ╕░ ьШБьЧн -->
 							<div id="preview" class="content"></div>
 
-							<!-- multipart ╛ў╖╬╡х╜├ ┐╡┐к -->
+							<!-- multipart ьЧЕыбЬыУЬьЛЬ ьШБьЧн -->
  							<div id="uploadForm" style="display: none;"></div>
 						</div>
 					</div>
@@ -136,9 +133,9 @@
 	
                		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>▒█│╗┐ы</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
-<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="│╗┐ы└╗ └╘╖┬╟╧╝╝┐ф."> -->
-<!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="│╗┐ы└╗ └╘╖┬╟╧╝╝┐ф."></textarea> -->
+		                	<label for="postContent"><strong>ъ╕АыВ┤ьЪй</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
+<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="ыВ┤ьЪйьЭД ьЮЕыаеэХШьД╕ьЪФ."> -->
+<!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="ыВ┤ьЪйьЭД ьЮЕыаеэХШьД╕ьЪФ."></textarea> -->
 		               
 		                 <div class="postForm" align="center">
 						<div id="toolbar-container" class="col-xs-12 col-md-12"></div>
@@ -152,7 +149,6 @@
                		
                		<div class="w-100"></div>
 		            <div class="w-100"></div>
-               		<div class="w-100"></div>
                 
 	            </div>
 	          </form>
@@ -162,12 +158,12 @@
 
 	          <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12">
-					<p><button class="btn btn-primary py-3 px-4 col-md-12">╡ю╖╧</button></p>
+					<p><button class="btn btn-default py-3 px-4 col-md-12">ыУ▒ыбЭ</button></p>
 					
 					<div class="form-group">
 						<div class="col-md-12">
 							<div class="radio" align="right">
-								<p><a href="#" ><font color="gray">├ы╝╥</font></a></p>
+								<p><a href="#" ><font color="gray">ь╖иьЖМ</font></a></p>
 							</div>
 						</div>
 					</div>
@@ -175,25 +171,25 @@
 	          </div>
 	          
 	          
- <!-- 	бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс       dialog       бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->
+ <!-- 	тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа       dialog       тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->
   
-			<div id="dialog-postTitle" title="">
-			  <p align="center"><br/>┴ж╕ё└╗ └╘╖┬╟╪┴╓╝╝┐ф.</p>
-			</div>       
-<!-- 			<div id="dialog-postTitleLength" title=""> -->
-<!-- 			  <p align="center"><br/>┴ж╕ё└║ 10└┌▒ю┴Ў └╘╖┬╟╥ ╝Ў └╓╜└┤╧┤┘.</p> -->
+<!-- 			<div id="dialog-postTitle" title=""> -->
+<!-- 			  <p align="center"><br/>ьаЬыкйьЭД ьЮЕыаеэХ┤ьг╝ьД╕ьЪФ.</p> -->
 <!-- 			</div>        -->
-			<div id="dialog-img" title="">
-			  <p align="center"><br/>└╠╣╠┴Ў╕ж ╡ю╖╧╟╪┴╓╝╝┐ф.</p>
-			</div>   
-			<div id="dialog-postContent" title="">
-			  <p align="center"><br/>│╗┐ы└╗ └╘╖┬╟╪┴╓╝╝┐ф.</p>
-			</div>      
+<!-- 			<div id="dialog-postTitleLength" title=""> -->
+<!-- 			  <p align="center"><br/>ьаЬыкйьЭА 10ьЮРъ╣МьзА ьЮЕыаеэХа ьИШ ьЮИьК╡ыЛИыЛд.</p> -->
+<!-- 			</div>        -->
+<!-- 			<div id="dialog-img" title=""> -->
+<!-- 			  <p align="center"><br/>ьЭ┤ып╕ьзАые╝ ыУ▒ыбЭэХ┤ьг╝ьД╕ьЪФ.</p> -->
+<!-- 			</div>    -->
+<!-- 			<div id="dialog-postContent" title=""> -->
+<!-- 			  <p align="center"><br/>ыВ┤ьЪйьЭД ьЮЕыаеэХ┤ьг╝ьД╕ьЪФ.</p> -->
+<!-- 			</div>       -->
 <!-- 			<div id="dialog-postContentLength" title=""> -->
-<!-- 			  <p align="center"><br/>│╗┐ы┤┬ 100└┌▒ю┴Ў └╘╖┬╟╥ ╝Ў └╓╜└┤╧┤┘.</p> -->
+<!-- 			  <p align="center"><br/>ыВ┤ьЪйыКФ 100ьЮРъ╣МьзА ьЮЕыаеэХа ьИШ ьЮИьК╡ыЛИыЛд.</p> -->
 <!-- 			</div>       -->
        
-<!-- 	бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс   dialog  бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс -->      
+<!-- 	тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа   dialog  тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа -->      
 	          
 	          
           </div> <!-- .col-md-8 -->
@@ -210,28 +206,14 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   
-  <!-- ┼█╟├╕┤ -->
-  <script src="/resources/prodmenu/js/jquery.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/resources/prodmenu/js/popper.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-  <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-  <script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-  <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-  <script src="/resources/prodmenu/js/aos.js"></script>
-  <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-  <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script>
-  <script src="/resources/prodmenu/js/scrollax.min.js"></script>
-  <script src="/resources/prodmenu/js/main.js"></script>
-  
+
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="/resources/events.js"></script>
-  
+<!--   <script type="text/javascript" src="/resources/events.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script>
   
  	 let editor;
@@ -257,18 +239,18 @@
 	    } );
 
 
-	  //============= "┤┘┴▀╞─└╧╛ў╖╬╡х"  Event ├│╕о ╣╫  ┐м░с =============      
+	  //============= "ыЛдьдСэММьЭ╝ьЧЕыбЬыУЬ"  Event ь▓Шыжм ы░П  ьЧ░ъ▓░ =============      
 
-	  //└╙└╟└╟ file object┐╡┐к
+	  //ьЮДьЭШьЭШ file objectьШБьЧн
 	 var files = {};
 	 var previewIndex = 0;
 	 var fileNameArray = new Array();
 	 
-	 // image preview ▒т┤╔ ▒╕╟Ў
+	 // image preview ъ╕░ыКе ъ╡мэШД
 	 // input = file object[]
 	 function addPreview(input) {
         if (input[0].files) {
-            //╞─└╧ ╝▒┼├└╠ ┐й╖п░│┐┤└╗ ╜├└╟ ┤ы└└
+            //эММьЭ╝ ьДаэГЭьЭ┤ ьЧмыЯмъ░ЬьШАьЭД ьЛЬьЭШ ыМАьЭС
             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
                 var file = input[0].files[fileIndex];
 
@@ -288,8 +270,8 @@
 
                 var reader = new FileReader();
                 reader.onload = function(img) {
-                    //div id="preview" │╗┐б ╡┐└√─┌╡х├▀░б.
-                    //└╠ ║╬║╨└╗ ╝Ў┴д╟╪╝н └╠╣╠┴Ў ╕╡┼й ┐▄ ╞─└╧╕э, ╗ч└╠┴ю ╡ю└╟ ║╬░б╝│╕э└╗ ╟╥ ╝Ў └╓└╗ ░═└╠┤┘.
+                    //div id="preview" ыВ┤ьЧР ыПЩьаБь╜ФыУЬь╢Фъ░А.
+                    //ьЭ┤ ы╢Аы╢ДьЭД ьИШьаХэХ┤ьДЬ ьЭ┤ып╕ьзА ызБэБм ьЩ╕ эММьЭ╝ыкЕ, ьВмьЭ┤ьжИ ыУ▒ьЭШ ы╢Аъ░АьДдыкЕьЭД эХа ьИШ ьЮИьЭД ъ▓ГьЭ┤ыЛд.
                     var imgNum = previewIndex++;
                     
                     var previewId = "";
@@ -314,7 +296,7 @@
                                             + "<a href=\"#\" value=\""
                                             + imgNum
                                             + "\" onclick=\"deletePreview(this)\">"
-                                            + "╗ш┴ж" + "</a>" + "</div>");
+                                            + "ьВньаЬ" + "</a>" + "</div>");
                     files[imgNum] = file;
                     
                     fileNameArray[imgNum]=file.name;
@@ -324,13 +306,13 @@
                 reader.readAsDataURL(file);
             }
         } else
-            alert('invalid file input'); // ├╖║╬┼м╕п ╚─ ├ы╝╥╜├└╟ ┤ы└└├е└║ ╝╝┐ь┴Ў ╛╩╛╥┤┘.
+            alert('invalid file input'); // ь▓иы╢АэБ┤ыжн эЫД ь╖иьЖМьЛЬьЭШ ыМАьЭСь▒ЕьЭА ьД╕ьЪ░ьзА ьХКьХШыЛд.
     }
 	 
 
 	 
 
-	 //============= preview ┐╡┐к┐б╝н ╗ш┴ж ╣Ў╞░ ┼м╕п╜├ ╟╪┤ч ╣╠╕о║╕▒т└╠╣╠┴Ў ┐╡┐к ╗ш┴ж =============
+	 //============= preview ьШБьЧньЧРьДЬ ьВньаЬ ы▓ДэК╝ эБ┤ыжньЛЬ эХ┤ыЛ╣ ып╕ыжмы│┤ъ╕░ьЭ┤ып╕ьзА ьШБьЧн ьВньаЬ =============
 	 function deletePreview(obj) {
         var imgNum = obj.attributes['value'].value;
         delete files[imgNum];
@@ -338,14 +320,14 @@
         resizeHeight();
     }
 
-	 //============= ╞─└╧ ╚о└х└┌ validation ├╝┼й =============
+	 //============= эММьЭ╝ эЩХьЮеьЮР validation ь▓┤эБм =============
 	 function validation(fileName) {
         fileName = fileName + "";
         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
         var fileNameExtension = fileName.toLowerCase().substring(
                 fileNameExtensionIndex, fileName.length);
         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-            alert('jpg, gif, png, avi, mp4 ╚о└х└┌╕╕ ╛ў╖╬╡х ░б┤╔╟╒┤╧┤┘.');
+            alert('jpg, gif, png, avi, mp4 эЩХьЮеьЮРызМ ьЧЕыбЬыУЬ ъ░АыКеэХйыЛИыЛд.');
             return true;
         } else {
             return false;
@@ -354,71 +336,71 @@
 	 
 
 	$(document).ready(function() {
-	      //============= ╗ч┴°╣╠╕о║╕▒т =============
+	      //============= ьВмьзДып╕ыжмы│┤ъ╕░ =============
 		$('#attach input[type=file]').change(function() {
-			addPreview($(this)); //preview form ├▀░б╟╧▒т
+			addPreview($(this)); //preview form ь╢Фъ░АэХШъ╕░
 		});
 	});
 	
-	// бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс   бш ╞─└╧╛ў╖╬╡х      бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс
+	// тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа   тЖС эММьЭ╝ьЧЕыбЬыУЬ      тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа
 
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-	$( function() {
-	    $( "#dialog-postTitle" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ┤▌▒т: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=postTitle]").focus();
+// 	$( function() {
+// 	    $( "#dialog-postTitle" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ыЛлъ╕░: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  $("input[name=postTitle]").focus();
+// // 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
+	
+	
+// 	$( function() {
+// 	    $( "#dialog-postContent, #dialog-postContentLength" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ыЛлъ╕░: function(){
+// 		    		  $( this ).dialog( "close" );
+// 		    		  jQuery($("textarea[name=postContent]"))[0].scrollIntoView(true);
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
+	
+	
+// 	$( function() {
+// 	    $( "#dialog-img" ).dialog({
+// 	    	autoOpen: false,
+// 		      width: 350,
+// 		      height: 180,
+// 		      modal: true,
+// 		      buttons: {
+// 		    	  ыЛлъ╕░: function(){
+// 		    		  $( this ).dialog( "close" );
 // 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+// 		    	  }
+// 		      }
+// 	    });
+// 	});
 	
 	
-	$( function() {
-	    $( "#dialog-postContent, #dialog-postContentLength" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ┤▌▒т: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("textarea[name=postContent]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
-	
-	
-	$( function() {
-	    $( "#dialog-img" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  ┤▌▒т: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
-	
-	
-	//бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс     бш  dialog      бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс	
+	//тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа     тЖС  dialog      тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
-		if($("input[name=postTitle]").val().length > 10 ){
-			$("span[name=postTitle]").text('10└┌▒ю┴Ў └╘╖┬╟╥ ╝Ў └╓╜└┤╧┤┘.');
+		if($("input[name=postTitle]").val().length > 15 ){
+			$("span[name=postTitle]").text('15ьЮРъ╣МьзА ьЮЕыаеэХа ьИШ ьЮИьК╡ыЛИыЛд.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -427,29 +409,42 @@
 	
 	$( "textarea[name=postContent]" ).keyup(function( ) {
 		if($("textarea[name=postContent]").text().length > 100 ){
-			$("span[name=postContent]").text('100└┌▒ю┴Ў └╘╖┬╟╥ ╝Ў └╓╜└┤╧┤┘.');
+			$("span[name=postContent]").text('100ьЮРъ╣МьзА ьЮЕыаеэХа ьИШ ьЮИьК╡ыЛИыЛд.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
 	});
 
-	//бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс      бш  ▒█└┌╝Ў├╝┼й           бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс
+	//тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа      тЖС  ъ╕АьЮРьИШь▓┤эБм           тЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦатЦа
 	
 	
-	// ╡ю╖╧╣Ў╞░ ┤й╕г░э
+	// ыУ▒ыбЭы▓ДэК╝ ыИДые┤ъ│а
 	function fncAddAdoptReview(){
 
-		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >10 ){
+		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >15 ){
 			  $("input[name=postTitle]").focus();
 			  $('#dialog-postTitle').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 			  $('#dialog-postTitle').dialog( "open" );
 			  return;
 		  }
-// 		  if( $(".preview-box").length == 0 ){
+		  if( $(".preview-box").length == 0 ){
+			  swal({
+		           text: "ьЭ┤ып╕ьзАые╝ ыУ▒ыбЭэХ┤ьг╝ьД╕ьЪФ.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "ыЛлъ╕░"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+		           }
+		      });
 // 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 // 			  $('#dialog-img').dialog( "open" );
-// 			  return;
-// 	  	  }
+			  return;
+	  	  }
 // 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
 // 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 // 			  $('#dialog-postContent').dialog( "open" );
@@ -464,14 +459,14 @@
 	
 
     $(function() {
-			$( "button:contains('╡ю╖╧')" ).on("click" , function() {
+			$( "button:contains('ыУ▒ыбЭ')" ).on("click" , function() {
 // 				$('textarea').val(editor.getData());
 // 				console.log($('textarea').val());
 				
 				fncAddAdoptReview();
 			});
 			
-			$( "a:contains('├ы╝╥')" ).on("click" , function() {
+			$( "a:contains('ь╖иьЖМ')" ).on("click" , function() {
 				self.location = "/adoptReview/listAdoptReview"
 			});
 	 });	

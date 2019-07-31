@@ -197,16 +197,16 @@ public class FundingController {
 
 		Map<String, Object> map = participateService.listNoticeComment(search, postNo, "1");
 
-		// Page resultPage = new Page(search.getCurrentPage(), ((Integer)
-		// map.get("totalCount")).intValue(), pageUnit,pageSize);
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
 
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
 		// 댓글
 		model.addAttribute("list", map.get("list"));
-		// model.addAttribute("resultPage", resultPage);
-		// model.addAttribute("search", search);
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
 
 		return "forward:/funding/getVoting.jsp";
 	}
@@ -427,8 +427,9 @@ public class FundingController {
 
 		Map<String, Object> map = participateService.listNoticeComment(search, postNo, "2");
 
-		// Page resultPage = new Page(search.getCurrentPage(), ((Integer)
-		// map.get("totalCount")).intValue(), pageUnit,pageSize);
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(":::::::::" + resultPage);
 
 		// 리뷰
 		Map<String, Object> fileReviewPost = new HashMap<String, Object>();
@@ -442,8 +443,8 @@ public class FundingController {
 		model.addAttribute("user", user);
 		// 댓글
 		model.addAttribute("list", map.get("list"));
-		// model.addAttribute("resultPage", resultPage);
-		// model.addAttribute("search", search);
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
 
 		return "forward:/funding/getFunding.jsp";
 	}
@@ -490,7 +491,9 @@ public class FundingController {
 
 		Funding funding = fundingService.getVoting(postNo);
 
+		User user = (User) session.getAttribute("user");
 		model.addAttribute("funding", funding);
+		model.addAttribute("user", user);
 
 		return "forward:/funding/addFundView.jsp";
 	}

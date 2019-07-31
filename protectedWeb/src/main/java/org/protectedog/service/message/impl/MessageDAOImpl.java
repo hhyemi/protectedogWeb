@@ -41,22 +41,37 @@ public class MessageDAOImpl implements MessageDAO{
 		return sqlSession.selectOne("MessageMapper.getMessage", messageNo);
 	}
 
-	@Override
-	public List<Message> getSendMessageList(Search search, String senderId) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("search", search);
-		map.put("senderId", senderId);
-		return sqlSession.selectList("MessageMapper.getSendMessageList", map);
-	}
+//	@Override
+//	public List<Message> getSendMessageList(Search search, String senderId) throws Exception {
+//		// TODO Auto-generated method stub
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("search", search);
+//		map.put("senderId", senderId);
+//		return sqlSession.selectList("MessageMapper.getSendMessageList", map);
+//	}
+	
+//	@Override
+//	public List<Message> getReceiveMessageList(Search search, String receiverId) throws Exception {
+//		// TODO Auto-generated method stub
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("search", search);
+//		map.put("receiverId", receiverId);
+//		return sqlSession.selectList("MessageMapper.getReceiverMessageList", map);
+//	}
 	
 	@Override
-	public List<Message> getReceiveMessageList(Search search, String receiverId) throws Exception {
+	public List<Message> getMessageList(Search search, String id) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("(before)messageDAO searchCondition : "+search.getSearchCondition());
+		System.out.println("(before)messageDAO id : "+id);
 		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("searchCondition", search.getSearchCondition());
 		map.put("search", search);
-		map.put("receiverId", receiverId);
-		return sqlSession.selectList("MessageMapper.getReceiverMessageList", map);
+		map.put("id", id);
+		System.out.println("(before)message DAO map : "+map.toString());
+		List<Message> listMessage=sqlSession.selectList("MessageMapper.getMessageList", map);
+		System.out.println("(after)messageDAO ì¶œë ¥ list : "+listMessage);
+		return listMessage;
 	}
 
 	@Override
@@ -65,30 +80,37 @@ public class MessageDAOImpl implements MessageDAO{
 		sqlSession.update("MessageMapper.updateMessage", message);
 	}
 
+//	@Override
+//	public int getSendTotalCount(Search search, String senderId) throws Exception {
+//		// TODO Auto-generated method stub
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("search", search);
+//		map.put("senderId", senderId);
+//		return sqlSession.selectOne("MessageMapper.getSendTotalCount", map);
+//	}
+	
 	@Override
-	public int getSendTotalCount(Search search, String senderId) throws Exception {
+	public int getReceiveTotalCount(String receiverId) throws Exception {
 		// TODO Auto-generated method stub
-		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("search", search);
-		map.put("senderId", senderId);
-		return sqlSession.selectOne("MessageMapper.getSendTotalCount", map);
+		return sqlSession.selectOne("MessageMapper.getReceiveTotalCount", receiverId);
 	}
 	
 	@Override
-	public int getReceiveTotalCount(Search search, String receiverId) throws Exception {
+	public int getTotalCount(Search search, String id) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("searchCondition", search.getSearchCondition());
 		map.put("search", search);
-		map.put("receiverId", receiverId);
-		return sqlSession.selectOne("MessageMapper.getReceiveTotalCount", map);
+		map.put("id", id);
+		return sqlSession.selectOne("MessageMapper.getTotalCount", map);
 	}
 	
 	@Override
 	public Message getUnreadMessage(String receiverId) {
 		// TODO Auto-generated method stub
-		System.out.println("³Í ½ÇÇàÀÌ µÇ³Ä");
+		System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½");
 		Message message=sqlSession.selectOne("MessageMapper.getUnreadMessage", receiverId);
-		System.out.println("³ª¿ÍºÁ¶ó : "+message);
+		System.out.println("ï¿½ï¿½ï¿½Íºï¿½ï¿½ï¿½ : "+message);
 		return message;
 
 	}

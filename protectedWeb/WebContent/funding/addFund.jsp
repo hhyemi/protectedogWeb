@@ -7,33 +7,16 @@
 <head>
 	<meta charset="UTF-8">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
-	<!-- i'm port -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    		
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+		<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet"
+			href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			    <title>보호할개 · 후원하기</title>
+		<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+		    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
-	<!-- Bootstrap Dropdown Hover CSS -->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-    <!-- jQuery UI toolTip 사용 CSS-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip 사용 JS-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
@@ -52,30 +35,32 @@
 		.form-form{
 	    padding-left:15px;	
 		}
-       @font-face{
-          font-family: NanumSquare;
-          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
-       }
-       body{
-          font-family: NanumSquare, sans-serif !important;
-       }		
+		
     </style>
 
-	</head>
-	<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
       
+	</head>
+	<body>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
-		<div class="form-group2">
-		<div class="page-header text-center">	
-		<font size=6>후원이 완료되었습니다.  </font> 후원 해주셔서 <strong  style="color:#225cba">감사</strong>바랍니다.
-	    </div>		
-		</div>	
+	
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
+            <font size="7">후원이 완료되었습니다.</font><br/> 후원 해주셔서 <strong  style="color:#f04f23">감사</strong>합니다.
+          </div>
+        </div>
+      </div>
+    </div>
 		<br/>
 					<!--  table Start /////////////////////////////////////-->
+	 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+		
 			      <table class="table table-hover table-striped" >
 			      
 			        <thead>
@@ -124,12 +109,12 @@
 			<br/><hr/>        
 		  <br/><br/>
 		  <div class="form-group ">
-	  			<button type="button"  class="btn btn-primary py-3 px-4 col-md-4" id="btn-ok">확인</button>
+	  			<button type="button"  class="btn btn-default py-3 px-4 col-md-4" id="btn-ok">확인</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
-
+</section>
     </div>
    <!--  화면구성 div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->

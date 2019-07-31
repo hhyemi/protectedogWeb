@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,9 +10,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
     
-    <!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+    <!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -61,21 +61,21 @@ tr:nth-child(even) {
 <script>
 
 $(document).ready(function(){
-	var myKey = "fFfidhEbTIMF1Dqav4Zfaw"; // sweet tracker¿¡¼­ ¹ß±Ş¹ŞÀº ÀÚ½ÅÀÇ Å° ³Ö´Â´Ù.
+	var myKey = "fFfidhEbTIMF1Dqav4Zfaw"; // sweet trackerì—ì„œ ë°œê¸‰ë°›ì€ ìì‹ ì˜ í‚¤ ë„£ëŠ”ë‹¤.
 	
-		// ÅÃ¹è»ç ¸ñ·Ï Á¶È¸ company-api
+		// íƒë°°ì‚¬ ëª©ë¡ ì¡°íšŒ company-api
         $.ajax({
             type:"GET",
             dataType : "json",
             url:"http://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey,
             success:function(data){
             		
-            		// ¹æ¹ı 1. JSON.parse ÀÌ¿ëÇÏ±â
+            		// ë°©ë²• 1. JSON.parse ì´ìš©í•˜ê¸°
             		var parseData = JSON.parse(JSON.stringify(data));
-             		console.log(parseData.Company); // ±×Áß Json Array¿¡ Á¢±ÙÇÏ±â À§ÇØ Array¸í Company ÀÔ·Â
+             		console.log(parseData.Company); // ê·¸ì¤‘ Json Arrayì— ì ‘ê·¼í•˜ê¸° ìœ„í•´ Arrayëª… Company ì…ë ¥
             		
-            		// ¹æ¹ı 2. JsonÀ¸·Î °¡Á®¿Â µ¥ÀÌÅÍ¿¡ Array·Î ¹Ù·Î Á¢±ÙÇÏ±â
-            		var CompanyArray = data.Company; // Json Array¿¡ Á¢±ÙÇÏ±â À§ÇØ Array¸í Company ÀÔ·Â
+            		// ë°©ë²• 2. Jsonìœ¼ë¡œ ê°€ì ¸ì˜¨ ë°ì´í„°ì— Arrayë¡œ ë°”ë¡œ ì ‘ê·¼í•˜ê¸°
+            		var CompanyArray = data.Company; // Json Arrayì— ì ‘ê·¼í•˜ê¸° ìœ„í•´ Arrayëª… Company ì…ë ¥
             		console.log(CompanyArray); 
             		
             		var myData="";
@@ -86,7 +86,7 @@ $(document).ready(function(){
             }
         });
 
-		// ¹è¼ÛÁ¤º¸¿Í ¹è¼ÛÃßÀû tracking-api
+		// ë°°ì†¡ì •ë³´ì™€ ë°°ì†¡ì¶”ì  tracking-api
         $("#Button").click(function() {
         	var t_code = $('#tekbeCompnayList option:selected').attr('value');
         	var t_invoice = $('#invoiceNumberText').val();
@@ -101,19 +101,19 @@ $(document).ready(function(){
                 		myInvoiceData += ('<p>'+data.msg+'<p>');
                 	}else{
 	            		myInvoiceData += ('<tr>');            	
-	            		myInvoiceData += ('<th>'+"º¸³»´Â»ç¶÷"+'</td>');     				
+	            		myInvoiceData += ('<th>'+"ë³´ë‚´ëŠ”ì‚¬ëŒ"+'</td>');     				
 	            		myInvoiceData += ('<th>'+data.senderName+'</td>');     				
 	            		myInvoiceData += ('</tr>');     
 	            		myInvoiceData += ('<tr>');            	
-	            		myInvoiceData += ('<th>'+"Á¦Ç°Á¤º¸"+'</td>');     				
+	            		myInvoiceData += ('<th>'+"ì œí’ˆì •ë³´"+'</td>');     				
 	            		myInvoiceData += ('<th>'+data.itemName+'</td>');     				
 	            		myInvoiceData += ('</tr>');     
 	            		myInvoiceData += ('<tr>');            	
-	            		myInvoiceData += ('<th>'+"¼ÛÀå¹øÈ£"+'</td>');     				
+	            		myInvoiceData += ('<th>'+"ì†¡ì¥ë²ˆí˜¸"+'</td>');     				
 	            		myInvoiceData += ('<th>'+data.invoiceNo+'</td>');     				
 	            		myInvoiceData += ('</tr>');     
 	            		myInvoiceData += ('<tr>');            	
-	            		myInvoiceData += ('<th>'+"¼ÛÀå¹øÈ£"+'</td>');     				
+	            		myInvoiceData += ('<th>'+"ì†¡ì¥ë²ˆí˜¸"+'</td>');     				
 	            		myInvoiceData += ('<th>'+data.receiverAddr+'</td>');     				
 	            		myInvoiceData += ('</tr>');           	                		
                 	}
@@ -127,10 +127,10 @@ $(document).ready(function(){
             		var myTracking="";
             		var header ="";
             		header += ('<tr>');            	
-            		header += ('<th>'+"½Ã°£"+'</th>');
-            		header += ('<th>'+"Àå¼Ò"+'</th>');
-            		header += ('<th>'+"À¯Çü"+'</th>');
-            		header += ('<th>'+"ÀüÈ­¹øÈ£"+'</th>');     				
+            		header += ('<th>'+"ì‹œê°„"+'</th>');
+            		header += ('<th>'+"ì¥ì†Œ"+'</th>');
+            		header += ('<th>'+"ìœ í˜•"+'</th>');
+            		header += ('<th>'+"ì „í™”ë²ˆí˜¸"+'</th>');     				
         			header += ('</tr>');     
             		
             		$.each(trackingDetails,function(key,value) {
@@ -153,15 +153,15 @@ $(document).ready(function(){
 
 </script>
 <body>
-<span id="tekbeCompnayName">ÅÃ¹èÈ¸»ç¸í: </span>
+<span id="tekbeCompnayName">íƒë°°íšŒì‚¬ëª…: </span>
 <select size="1" class="form-control" id="tekbeCompnayList" name="tekbeCompnayList"></select></br>
 
 		   <form class="form-inline">
   <div class="form-group">
-    <label for="exampleInputEmail2">¿î¼ÛÀå¹øÈ£</label>
-    <input type="text" class="form-control" id="invoiceNumberText" name="invoiceNumberText" placeholder="¿î¼ÛÀå¹øÈ£ ÀÔ·Â ¿ä¸Á">
+    <label for="exampleInputEmail2">ìš´ì†¡ì¥ë²ˆí˜¸</label>
+    <input type="text" class="form-control" id="invoiceNumberText" name="invoiceNumberText" placeholder="ìš´ì†¡ì¥ë²ˆí˜¸ ì…ë ¥ ìš”ë§">
   </div>
-  <button type="button" class="btn btn-default" id="Button">ÅÃ¹èÁ¶È¸ÇÏ±â</button>
+  <button type="button" class="btn btn-default" id="Button">íƒë°°ì¡°íšŒí•˜ê¸°</button>
 </form>
 <br/>
 <br/>

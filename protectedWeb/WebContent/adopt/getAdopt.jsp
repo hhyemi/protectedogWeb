@@ -18,8 +18,6 @@
     />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >    
     <style>
     
     	.row {
@@ -35,8 +33,6 @@
         }
         
         #mapDiv{
-/*         	padding-left: 0px; */
-/*         	padding-right: 0px; */
         	padding: 0px;
         }
         .offset-lg-1{
@@ -49,6 +45,8 @@
         	position: absolute;
         	left: 0px;
         	bottom: 0px !important;
+        	width: wrap !important;
+        	padding-right: 0px !important;
         }
         
         #appendTr>td{
@@ -59,9 +57,7 @@
         @media screen and (min-width: 768px) { 
 	        .modal:before {
 	                display: inline-block;
-/* 	                vertical-align: middle; */
 	                content: " ";
-/* 	                height: 100%; */
 	        }
 		}
 		
@@ -69,31 +65,6 @@
       	  display: inline-block;
         	vertical-align: middle;
         }
-        
-/*         #modiButton, #delButton, #listButton { */
-/* 		    padding: 0px 10px; */
-/*  		    line-height: 20px;  */
-/*  		    border-radius: 3px;  */
-/* 		} */
-		
-/* 		button { */
-/* /* 		    display: inline-block; */ */
-/* 		    background: #94BFCA; */
-/* 		    padding: 0px 10px; */
-/* 		    letter-spacing: 0.25px; */
-/* 		    color: #fff; */
-/* 		    font-size: 30px; */
-/* 		    font-weight: 500; */
-/* 		    line-height: 44px; */
-/* 		    outline: none !important; */
-/* 		    box-shadow: none !important; */
-/* 		    text-align: center; */
-/* 		    border: 1px solid #94BFCA; */
-/* 		    cursor: pointer; */
-/* 		    text-transform: uppercase; */
-/* 		    transition: all 300ms linear 0s; */
-/* 		    border-radius: 5px; */
-/* 		} */
 		
 		.col-md-2 {
 			padding-right: 0px !important;
@@ -103,9 +74,9 @@
 			padding-right: 15px !important;
 		}
  		
-        .glyphicon-heart-empty {
+        .fa-heart {
          	color: #f04f23;
-         	padding-top: 5px;
+/*          	padding-top: 5px; */
         }
          
         ol.carousel-indicators {
@@ -123,6 +94,9 @@
          	flex: 1;
         }
          
+         #face{
+/*          	display: none; */
+         }
          
 	
         
@@ -212,6 +186,7 @@
 <!--               <ul class="list" > -->
               	
               	<input type="hidden" name="postNo" value="${adopt.postNo}">
+              	<input type="hidden" name="id" value="${adopt.id}">
               	<input type="hidden" name="userId" value="${user.id}">
               	<input type="hidden" name="levels" value="${user.levels}">
               	
@@ -222,10 +197,18 @@
 <%-- 			        	&nbsp;&nbsp;${adopt.id} --%>
 			        	</div>
 			        	
-			        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-left: 0;" >
-							<font size="5px" id="heartIcon"><span class="glyphicon glyphicon-heart-empty"></span></font>
-			        	</div>
-			        	
+			        	<c:if test="${ user.id ne adopt.id }">
+				        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-left: 0;" >
+								<font size="5px" id="heartIcon">
+									<c:if test="${ check eq 'already' }">
+										<span class="fas fa-heart"></span>
+									</c:if>
+									<c:if test="${ check ne 'already' }">
+										<span class="far fa-heart"></span>
+									</c:if>
+								</font>
+				        	</div>
+			        	</c:if>
 <!-- 			        	<div class="col-xs-2 col-md-2" align="right" style="position:absolute; right:0px; bottom:0px; " > -->
 <%-- 			        	<font size="5px"></font>${adopt.id} --%>
 <%-- 			        	${adopt.regDate} --%>
@@ -357,17 +340,17 @@
              
     <!-- 글내용 밑에 버튼  --> 
              <div class="row" style="flex: 1;bottom: 0px;position: absolute;" >
-              <div class="col-md-12 card_area" >
+              <div class="col-md-12 card_area">
 
 				<!-- 분양 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'AD' }">
 	              		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }">
-	              			<button id="adoptApply" class="btn btn-default" style="width: 250px">입양신청</button>
+	              			<button id="adoptApply" class="btn btn-default" style="width: 260px">입양신청</button>
 	              		</c:if>
 	              		
 	              		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
-	              			<button class="btn btn-default" style="width: 250px" id="confirmButton">신청서확인</button>
-	              			<button class="btn btn-default" style="width: 250px" id="adoptCompleteButton">분양완료</button>
+	              			<button class="btn btn-default" style="width: 260px" id="confirmButton">신청서확인</button>
+	              			<button class="btn btn-default" style="width: 260px" id="adoptCompleteButton">분양완료</button>
 	              		</c:if>
 	              		
 	              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
@@ -378,13 +361,13 @@
 				<!-- 실종 메뉴일때  -->
               	<c:if test="${adopt.boardCode eq 'MS' }">
               		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-              			<button class="btn btn-default"style="width: 250px" id="missingCompleteButton">찾기완료</button>
+              			<button class="btn btn-default"style="width: 260px" id="missingCompleteButton">찾기완료</button>
               		</c:if>
               	</c:if>
               	
 				<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
-               		<button class="btn btn-default" style="width: 250px">문의하기</button>
+               		<button class="btn btn-default" style="width: 260px">문의하기</button>
 <!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
                	</c:if>
                	
@@ -439,9 +422,10 @@
 				<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
+				
+				
+				<a href="#"  id="twitter"  title="트위터로 공유"><img id="twit" src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="페이스북으로 공유"><img id="face" src="/resources/file/others/facebook.png"></a>
 				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
@@ -513,6 +497,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!--     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
 <!--     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script>
       $(document).ready(function() { 
@@ -601,7 +586,7 @@
 						success : function(status) {
 							$('#confirmButton, #modiButton, #delButton, #adoptCompleteButton, #missingCompleteButton').remove();
 							$( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog( "close" );
-							$('.card_area').html('<button class="main_btn" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button>');
+							$('.card_area').html('<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">완료된 글입니다.</button>');
 						},
 						error: function(request, status, error){ 
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
@@ -610,8 +595,110 @@
 	 };
 
 	 //////////////////////////////////////////////////////////////////////////////////////////////////////      
-      
-	
+     var boardCode = "${adopt.boardCode}";
+	 var postNo =  $('input[name=postNo]').val() ;
+     var id = $('input[name=userId]').val();
+	 
+	 
+	//관심목록에 추가
+	 function addInterest(){
+	 		console.log(boardCode+","+postNo+","+id);
+	  
+	  		if ( id == "" ){
+	  			
+	  			swal({
+			           text: "회원만 이용할 수 있는 기능입니다.",
+			           dangerMode: true,
+			           buttons: {
+								 cancel: "닫기",
+					   }
+	  			});
+	  			return;
+	  			
+	  		}else{
+	  			
+	  			$.ajax( 
+	  			 		{
+	  						url : "/interest/json/addInterest/"+boardCode+"/"+postNo+"/"+id,
+	  						method : "GET" ,
+	  						dataType : "json" ,
+	  						headers : {
+	  									"Accept" : "application/json",
+	  									"Content-Type" : "application/json"
+	  								  },
+	  						success : function(data , status) {
+// 	  								console.log(JSON.stringify(data));
+	  								console.log(data.message);
+	  								
+	  								if ( data.message == "insertOK" ) {
+	  									$('#heartIcon').html('<i class="fas fa-heart" ></i>');
+	  									swal({
+	  							           text: "관심목록에 추가되었습니다.",
+	  							           dangerMode: true,
+	  							           buttons: {
+	  												 catch: {
+	  												 	text: "닫기"
+	  												 }
+	  									   },
+	  							        });
+	  								}
+	  							
+	  					},
+	  						error: function(request, status, error){ 
+	  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	  			        }
+	  					
+	  				});
+	  		}
+  		
+  	 }
+  
+  	//관심목록에서 삭제
+	 function delInterest(){
+	 		console.log(postNo+","+id);
+	  
+	  			
+  			$.ajax( 
+  			 		{
+  						url : "/interest/json/delInterest/"+boardCode+"/"+postNo+"/"+id,
+  						method : "GET" ,
+  						dataType : "json" ,
+  						headers : {
+  									"Accept" : "application/json",
+  									"Content-Type" : "application/json"
+  								  },
+  						success : function(data , status) {
+  								console.log(JSON.stringify(data));
+  								console.log(data.message);
+  								
+  								if ( data.message == "delOK" ) {
+  									$('#heartIcon').html('<i class="far fa-heart"></i>');
+  									swal({
+	  							           text: "관심목록에서 삭제되었습니다.",
+	  							           dangerMode: true,
+	  							           buttons: {
+	  												 catch: {
+	  												 	text: "닫기"
+	  												 }
+	  									   },
+	  							        });
+  									
+  								}
+  							
+  					},
+  						error: function(request, status, error){ 
+  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+  			        }
+  					
+  			 });
+
+  		
+  	 }
+  
+  
+  
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+	 
 	 //============= SNS공유 Event  처리 =============	
 	$( "#twitter" ).on("click" , function() {
  		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
@@ -923,46 +1010,7 @@
 	    
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
   
-  	 function addInterest(postNo, id){
-	 		console.log(postNo+","+id);
-	  
-	  		if ( id == "" ){
-	  			
-	  			swal({
-			           text: "회원만 이용할 수 있는 기능입니다.",
-			           dangerMode: true,
-			           buttons: {
-								 cancel: "닫기",
-					   }
-	  			});
-	  			
-	  		}else{
-	  			
-	  			$.ajax( 
-	  			 		{
-	  						url : "/adopt/json/addInterest/"+postNo+"/"+id,
-	  						method : "GET" ,
-	  						dataType : "json" ,
-	  						headers : {
-	  									"Accept" : "application/json",
-	  									"Content-Type" : "application/json"
-	  								  },
-	  						success : function(data , status) {
-	  								console.log(JSON.stringify(data));
-	  							
-	  					},
-	  						error: function(request, status, error){ 
-	  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-	  			        }
-	  					
-	  				});
-	  		}
-  		
-  	 }
-  
-  
-  
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+  	 
       $(function() {
     		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
     			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
@@ -1022,13 +1070,10 @@
 		
 			$( "#adoptCompleteButton" ).on("click" , function() {
 				swal({
-// 			           title: "분양완료 상태로 변경하시겠습니까?",
 			           text: "분양완료 상태로 변경하시겠습니까?",
-// 			           icon: "success",
 			           buttons: {
 								 catch: {
 								 	text: "예",
-// 								 	value: "catch",
 								 },
 								 cancel: "아니오",
 					   },
@@ -1047,11 +1092,9 @@
 			$( "#missingCompleteButton" ).on("click" , function() {
 				swal({
 			           text: "찾기완료 상태로 변경하시겠습니까?",
-//			           icon: "success",
 			           buttons: {
 								 catch: {
 								 	text: "예",
-//								 	value: "catch",
 								 },
 								 cancel: "아니오",
 					   },
@@ -1073,9 +1116,24 @@
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
 		
-			$( ".glyphicon-heart-empty" ).on("click" , function() {
-// 				alert("sdas");
-				addInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+			$( "button:contains('신청완료')" ).on("click" , function() {
+				swal({
+			           text: "이미 신청하셨습니다.",
+			           buttons: "닫기",
+			    });
+			});
+			
+			//관심목록에 추가
+			$(document).on("click", ".far", function() {
+// 			$( ".far" ).on("click" , function() {
+				addInterest(  );
+			});
+			
+			//관심목록에서 삭제
+			$(document).on("click", ".fas", function() {
+// 			$( ".fas" ).on("click" , function() {
+				console.log("dd");
+				delInterest(   );
 			});
 			
 
@@ -1089,6 +1147,28 @@
 
 
 	  });
+			
+// 	  $( "#twit" ).hover(
+// 			  function() {
+// 				  $('#twit').toggle( 'slow' );
+// 					$('#face').toggle( 'slow' );
+// 			  }
+// 			  , function() {
+// 				  $('#twit').toggle( 'slow' );
+// 					$('#face').toggle( 'slow' );
+// 			  }
+// 	);
+	  
+// 	  $( "#twit" ).mouseover( function() {
+
+// 			$('#twit').toggle( 'slow' );
+// 			$('#face').toggle( 'slow' );
+// 		});
+// 	  $( "#face" ).mouseout( function() {
+
+// 			$('#twit').toggle( 'slow' );
+// 			$('#face').toggle( 'slow' );
+// 		});
   
 
 

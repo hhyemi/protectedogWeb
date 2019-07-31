@@ -27,18 +27,42 @@
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
    
   	<style type="text/css">
+ 		
  		@font-face {
     		font-family: 'YouandiModernTR';
    		 	font-style: normal;
     		font-weight: normal;
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, p, a, th, td{
+    	
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
+		
 		.navbar-brand{
 			font-weight: bold;
 		}
+		
+		.swal-button {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button:hover {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button--cancel {
+		    color: white;
+		    background-color: #f04f23;
+		}
+		
+		html {
+	 		scroll-behavior: smooth;
+		}
+		
+		
   	</style>
   </head>
   
@@ -46,81 +70,78 @@
 <!--====================================================
                     LOGIN OR REGISTER
 ======================================================-->
-    <section id="login">
-      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-          <div class="modal-dialog">
-              <div class="modal-content loginSection">
-                  <div class="modal-header" align="center">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span class="fa fa-times" aria-hidden="true"></span>
-                      </button>
-                  </div>
-                  <div id="div-forms">
-                      <form id="login-form">
-                          <h3 class="text-center">로그인</h3>
-                          <div class="modal-body">
-                              <label for="username">아 이 디</label> 
-                              <input id="login_username" name="id" class="form-control id" type="text" placeholder="Enter username " required>
-                              <label for="username">비밀번호</label> 
-                              <input id="login_password" name="pw" class="form-control pw" type="password" placeholder="Enter password" required>
-<!--                               <div class="checkbox"> -->
-<!--                                   <label> -->
-<!--                                       <input type="checkbox"> Remember me -->
-<!--                                   </label> -->
-<!--                               </div> -->
-                          </div>
-                          <div class="modal-footer text-center">
-                              <div>
-                                  <button type="submit" id="submitLogin" class="btn btn-general btn-white">Login</button>
-                              </div>
-                              <div>
-                              	  <img src="/resources/file/others/kakao_account_login_btn_medium_narrow.png" class="kakaoLogin">
-                              </div>
-<!--                               <div> -->
-<!--                                   <button id="login_register_btn" id="regist" type="button" class="btn btn-link">Register</button> -->
-<!--                               </div> -->
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </section>   
-                      
-<!--     <section id="regist"> -->
-<!--       <div class="modal fade" id="regist-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"> -->
-<!--           <div class="modal-dialog"> -->
-<!--               <div class="modal-content RegistSection"> -->
-<!--                   <div class="modal-header" align="center"> -->
-<!--                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--                           <span class="fa fa-times" aria-hidden="true"></span> -->
-<!--                       </button> -->
-<!--                   </div>                       -->
-<!--                       <form id="register-form"> -->
-<!--                           <h3 class="text-center">회원가입</h3> -->
-<!--                           <div class="modal-body">  -->
-<!--                               <label for="register_id">아 이 디</label>  -->
-<!--                               <input id="register_id" name="id" class="form-control" type="text" placeholder="아이디를 입력하세요" required> -->
-<!--                               <label for="register_password">비밀번호</label>  -->
-<!--                               <input id="register_password" name="pw" class="form-control" type="text" placeholder="비밀번호를 입력하세요" required> -->
-<!--                               <label for="register_password2">비밀번호 확인</label>  -->
-<!--                               <input id="register_password2" name="pw2" class="form-control" type="password" placeholder="Password" required> -->
-<!--                               <label for="register_userName">회 원 명</label>  -->
-<!--                               <input id="register_userName" name="pw2" class="form-control" type="text" placeholder="Password" required> -->
-<!--                               <label for="register_nickname">닉 네 임</label>  -->
-<!--                               <input id="register_nickname" name="pw2" class="form-control" type="text" placeholder="Password" required> -->
 
-<!--                           </div> -->
-<!--                           <div class="modal-footer"> -->
-<!--                               <div> -->
-<!--                                   <button type="submit" class="btn btn-general btn-white">Register</button> -->
-<!--                               </div> -->
-<!--                           </div> -->
-<!--                       </form> -->
-<!--                   </div> -->
-<!--               </div> -->
-<!--           </div> -->
-<!--     </section>       -->
+<section id="reportModal">
+
+							<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="report-modal" class="modal fade" style="display: none;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                       		<h4 class="modal-title">신고하기</h4>
+                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form role="form" class="form-horizontal sendReport" id="reportForm">
+                                            <input type="hidden" name="reporterId" id="reporterId" value="${ sessionScope.user.id }">
+                                                <div class="row form-group">
+                                                    <label class="col-lg-4 control-label">신고대상</label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" placeholder="" id="reportedId" name="reportedId" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-lg-4 control-label">신고유형</label>
+                                                    <div class="col-lg-8">
+                                                        <select name="reportCategory" id="reportCategory" class="form-control" style="width: 150px; height: 35px" maxLength="20">
+															<option value="비속어">비속어사용</option>
+															<option value="사기">사기행위</option>
+															<option value="음란행위">음란행위</option>
+															<option value="혐오표현">혐오표현</option>
+															<option value="기타">기타</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-lg-4 control-label">신고내용</label>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-lg-12">
+                                                        <textarea rows="10" cols="30" class="form-control" id="reportContent" name="reportContent" placeholder="1000자 이내로 입력해주세요"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <br/>
+                                                <br/>
+                                                <br/>
+									            <div id="attach" class="form-group">
+									                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadReportInputBox">사진등록</label></span>&nbsp;(최대 3장까지 업로드 가능합니다.)
+									                <input id="uploadReportInputBox" style="display: none" type="file" value="등록" name="filedata"  />
+									            </div>                                              	
+<!--                                            미리보기 영역 -->
+                                                <div class="form-group">
+									            	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
+									            </div>
+                                               <br/>
+                                               <br/>
+                                               <br/>
+                                                
+                                                <div class="row form-group">
+                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
+                                                        <button class="btn btn-send ml-3 submit" type="submit" id="submit">Send</button>
+                                                        <button class="btn btn-reset ml-3 reset" name="reset">Reset</button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" class="form-control" id="reportMultiFile" name="reportMultiFile" >	
+                                            </form>
+                                        </div>
+                                    </div>
+                                    /.modal-content
+                                </div>
+                                /.modal-dialog
+                            </div>
+
+</section>
+                     
 
 <!--====================================================
                          HEADER
@@ -145,8 +166,6 @@
               </div> 
               <div class="col-md-5">
                 <ul class="list-inline top-data">
-<!--                   <li><div id="naver_id_login"></div></li> -->
-                  <li><img src="/resources/file/others/kakao.png" height="30px" width="30px" class="kakaoLogin"></li>
                   <c:if test="${ sessionScope.user == null }">
                   <li><a href="#" class="log-top login-modal" data-toggle="modal" data-target="#login-modal">Login</a></li>
                   <li><a href="/users/addUsersBase" class="log-top regist">Regist</a></li>
@@ -166,7 +185,7 @@
       <div class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
          <b><a class="navbar-brand smooth-scroll" href="/index.jsp">
-            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;보호할개
+            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;<span >보호할개</span>
           </a></b> 
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span>
@@ -181,7 +200,6 @@
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
 	                <a class="dropdown-item" href="../adopt/listMissing.jsp">테스트</a>
 	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
-	<!--                 <a class="dropdown-item" href="/adoptReview/REALaddAdoptReview.jsp">후기</a> -->
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
@@ -203,14 +221,14 @@
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
-		              	<a class="dropdown-item" href="/message/listReceiveMessage">받은쪽지함</a>
-		                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a>
-		                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a>
+		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a>
+<!-- 		                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a> -->
+<!-- 		                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a> -->
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
 		                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
 		                </c:if>
 		                <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
-		                <a class="dropdown-item" href="/report/addReportView.jsp">신고하기</a>
+		                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#report-modal">신고하기</a>
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
 		                <a class="dropdown-item" href="/report/listReport">신고글목록</a>
 		                </c:if>
@@ -263,6 +281,8 @@
         </div>
       </div>
     </header> 
+    
+    <jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
 
     <!--Global JavaScript -->
     <script src="/resources/newTemplate/js/jquery/jquery.min.js"></script>
@@ -292,6 +312,7 @@
 			
 // 			alert("ㅎㅇ");
 			fncLogin();
+
 // 			alert("ㅎㅇ");
 			
 		});
@@ -299,8 +320,8 @@
 		function fncLogin(){
 			$(".id").focus();
 			$("#submitLogin").on("click" , function() {
-				var id=$("input:text").val();
-				var pw=$("input:password").val();
+				var id=$("input:text[name='id']").val();
+				var pw=$("input:password[name='pw']").val();
 // 				alert(id);
 // 				alert(pw);
 				if(id == null || id.length <1) {
@@ -327,19 +348,30 @@
 					datatype : "json",
 					success : function(response){
 // 						alert("pw : "+JSON.stringify(response))
-						if(response.pw == pw && response.id == id){
-// 							alert("로그인 성공 pw : "+response.pw);
+						if(response.pw == pw && response.id == id && response.levelPoint >= 0){
+// 							alert("로그인 성공 pw : "+response.pw+" && "+response.levelPoint);
 							alert(response.nickname+" 님 환영합니다!");
-// 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
 							self.location="/index.jsp";
+// 							swal({
+// 								title : "로그인 성공",
+// 								text : response.nickname+" 님 환영합니다!"
+// 								buttons: true
+// 							});
+// 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
 						}
 						if(response.pw != pw || response.id != id){
 // 							alert(response.pw);
 							alert("아이디 혹은 비밀번호가 맞지 않습니다.");
-							$("form")[0].reset();
+							$("#login_password").val('');
 							return;
 							$("#id").focus();
 						}
+						if(response.levelPoint < 0) {
+							alert("블랙리스트 처리된 회원입니다.");
+							return;
+							$("#id").focus();
+						}
+						
 					},
 					error : function(request,status,error){
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -357,7 +389,7 @@
 			})
 		})
 		
-		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54')
+		Kakao.init('153d14a106a978cdc7a42f3f236934a6')
 		$(".kakaoLogin").on("click", function(){
 			Kakao.Auth.login({
 				success : function(authObj){
@@ -378,13 +410,13 @@
 		})
 		
 
-// 		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
-// 	  	var state = naver_id_login.getUniqState();
-// 	  	naver_id_login.setButton("green", 1 , 30);
-// 	  	naver_id_login.setDomain("http://localhost:8080/");
-// 	  	naver_id_login.setState(state);
-// // 	  	naver_id_login.setPopup();
-// 	  	naver_id_login.init_naver_id_login();
+		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("green", 1 , 30);
+	  	naver_id_login.setDomain("http://localhost:8080/");
+	  	naver_id_login.setState(state);
+// 	  	naver_id_login.setPopup();
+	  	naver_id_login.init_naver_id_login();
 	  	
 	  	
 	  	
@@ -423,6 +455,217 @@
 				self.location = "/users/addUsersBase"
 			});
 		});
+		
+		
+		//============= 맨위로  =============
+		$( function() {
+
+			$("#back-to-top").on("click" , function() {
+				$('html').scrollTop(0);
+			});
+			
+		});
+		
+		
+		//========== AddReport 처리==========
+		function fncAddReport(){
+			//Form 유효성 검증
+			var content = $("input[name='reportContent']").val();
+// 			alert("1");
+
+			
+// 			if(reportContent == null || reportContent.length<1){
+// 				alert("내용을 입력해 주세요.");
+// 				return;
+// 			}
+			
+// 			if(reportContent.length>1000){
+// 				alert("내용은 1천자 미만으로 작성해 주세요.")
+// 				return;
+// 			}
+		   
+          $(function() {     
+            var form = $('#reportForm')[0];
+            var formData = new FormData(form);
+//             alert("2")
+
+            for (var index = 0; index < 100; index++) {
+                formData.append('files',files[index]);
+            }
+                
+                $.ajax({
+	                type : 'POST',
+	                enctype : 'multipart/form-data',
+	                processData : false,
+	                contentType : false,
+	                cache : false,
+	                timeout : 600000,
+	                url : '/Images/json/imageupload/RP',
+	                dataType : 'JSON',
+	                data : formData,
+	                success : function(result) {
+// 	                	alert("3")
+// 	                	alert(result);
+	                    if (result === -1) {
+	                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+	                        // 이후 동작 ...
+	                    } else if (result === -2) {
+	                        alert('파일이 10MB를 초과하였습니다.');
+	                        // 이후 동작 ...
+	                    } else {
+	                        alert('이미지 업로드 성공');
+	                    }
+	                },
+					error : function(request,status,error){
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+           		});
+                
+                $.ajax({
+                	method : 'POST',
+                	enctype : 'multipart/form-data',
+                	headers : {
+                		"Accept" : "application/json",
+                		"Content-Type" : "application/json"
+                	},
+                	url : '/report/json/addReport',
+                	dataType : 'JSON',
+                	data : JSON.stringify({
+                		reportedId : $('#reportedId').val(),
+                		reporterId : $('#reporterId').val(),
+                		reportCategory : $('#reportCategory').val(),
+                		reportContent : $('#reportContent').val(),
+                		file : $('#reportMultiFile').val(),
+                	}),
+                	success : function(JSONData){
+                		console.log(JSON.stringify(JSONData));
+                		$('#report-modal').modal("hide");
+                	}
+                });
+        });
+			
+// 			$(".sendReport").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
+// 			alert("4")
+			alert("신고가 완료되었습니다.");
+		}
+		
+		   //============= "다중파일업로드 파일명만 저장해서 value" =============   
+		   function fnAddFile(fileNameArray) {
+		         $("#reportMultiFile").val(fileNameArray)    
+		   }   
+		   
+		   //============= "다중파일업로드"  Event 처리 및  연결 =============      
+
+		       //임의의 file object영역
+		     var files = {};
+		     var previewIndex = 0;
+		     var fileNameArray = new Array();
+		     // image preview 기능 구현
+		     // input = file object[]
+		     function addPreview(input) {
+		         if (input[0].files) {
+		             //파일 선택이 여러개였을 시의 대응
+		             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+
+		                 var file = input[0].files[fileIndex];
+		                
+		                 if (validation(file.name))
+		                     continue;
+
+		                var fileName = file.name + "";   
+		                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+		                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
+		                
+		                //append할때 동영상 이미지 구분해주기
+		               var imgSelectName = "img";
+		               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
+		                  imgSelectName = "iframe";
+		               }                           
+
+		                 var reader = new FileReader();
+		                 reader.onload = function(img) {
+		                     //div id="preview" 내에 동적코드추가.
+		                     //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
+		                     
+		                     var imgNum = previewIndex++;
+		                     
+		                    //3장 이상 업로드시
+		                     if(Object.keys(files).length>=3){
+		                        alert("사진은 3장까지만 업로드 가능합니다.");
+		                        delete files[imgNum];
+		                     }else{
+		               // 3장 이하 
+		                     $("#preview").append(
+		                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:100px' >"
+		                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"80px;\" height=\"80px;\"/>"
+		                                             + "<br/>"
+		                                             + "<a href=\"#\" value=\""
+		                                             + imgNum
+		                                             + "\" onclick=\"deletePreview(this)\">"
+		                                             + "   삭제" + "</a>" + "</div>");
+
+		                     files[imgNum] = file;
+		                     fileNameArray[imgNum]=file.name;
+		                     fnAddFile(fileNameArray);
+		                     }
+
+		                 };
+
+		                 reader.readAsDataURL(file);
+		             }
+		         } else
+		             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+		     }
+
+		     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
+		     function deletePreview(obj) {
+		         var imgNum = obj.attributes['value'].value;
+		         delete files[imgNum];
+		         fileNameArray.splice(imgNum,1);
+		         fnAddFile(fileNameArray);
+		         $("#preview .preview-box[value=" + imgNum + "]").remove();
+		         resizeHeight();
+		     }
+
+		     //============= 파일 확장자 validation 체크 =============
+		     function validation(fileName) {
+		         fileName = fileName + "";
+		         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+		         var fileNameExtension = fileName.toLowerCase().substring(
+		                 fileNameExtensionIndex, fileName.length);
+		         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
+		             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+		             return true;
+		         } else {
+		             return false;
+		         }
+		     }
+		     
+
+		       $(document).ready(function() {
+
+		          //============= 사진미리보기 =============
+		          $('#attach input[type=file]').change(function() {
+		             addPreview($(this)); //preview form 추가하기
+		         });
+		       });
+		
+			$(function(){
+				$('#submit').on('click',function(){
+// 					alert("ssss");
+					fncAddReport();
+				});
+			});
+			
+			
+			$(function(){
+				$('a[href="#"]').on('click',function(){
+					$("form")[0].reset;
+				});
+			});
+
+
+		
 		
 	</script>	
   
