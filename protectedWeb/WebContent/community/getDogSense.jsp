@@ -27,24 +27,22 @@
 	});
 	
 	$(function () {
-		$("button").on("click",function(){
+		$(".col-md-2").on("click",function(){
 			searchKeyword = $(this).text();
+			$("#get_view").empty();
 			fnGetList();
-		});		
+		});
+		$(".search").on("click",function(){
+			searchKeyword = $("#search_box").val();
+			$("#get_view").empty();
+			fnGetList();
+		});
 	});
 	
 	
 	function fnGetList(sGetToken){
 		
 		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+sGetToken);
-		
-// 			var $getval = $("#search_box").val();
-		
-// 			if($getval == ""){
-// 			//alert("검색어 입력 !");
-// 				$("#search_box").focus();
-// 				return;
-// 			}
 		
 // 		$("#get_view").empty();
 // 		$("#nav_view").empty();
@@ -211,10 +209,10 @@ a :hover{
 	<button class="btn-default col-md-2">#애견사건</button>
 	</div>
 	
-<!-- 	<form name="form1" method="post" onsubmit="return false;"> -->
-<!-- 		<input type="text" id="search_box" /> -->
-<!-- 		<button onClick="fnGetList();">가져오기</button> -->
-<!-- 	</form> -->
+
+		<input type="text" id="search_box" />
+		<button class="search">가져오기</button>
+
 	
 	<hr>
 	<div id="get_view" class="row"></div>
