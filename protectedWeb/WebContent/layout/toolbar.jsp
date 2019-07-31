@@ -315,7 +315,7 @@
 			})
 		})
 		
-		Kakao.init('3eef0ec25dbea51f4703e0c90c3ebb54')
+		Kakao.init('153d14a106a978cdc7a42f3f236934a6')
 		$(".kakaoLogin").on("click", function(){
 			Kakao.Auth.login({
 				success : function(authObj){

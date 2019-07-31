@@ -68,7 +68,8 @@ public class ReviewRestController {
 		String[] fileList = mapReview.get("file").toString().split(",");
 		System.out.println("fileList:::"+fileList.length);
 		
-		if(fileList.length>1) {
+		if (fileList.length > 0 && fileList[0] != "") {
+
 
 			for (String fileName : fileList) {
 	
@@ -138,12 +139,12 @@ public class ReviewRestController {
 	public void updateVoting(@RequestBody Map<String, Object> mapReview , HttpSession session) throws Exception {
 
 		System.out.println("/review/json/updateHospitalReview : POST");
-		
-		
-		String[] deleteFile = mapReview.get("deleteFile").toString().split(",");
-		int postNo = (int) mapReview.get("postNo");
 
-		if (deleteFile.length > 1) {
+		String[] deleteFile = mapReview.get("deleteFile").toString().split(",");
+		int postNo =  Integer.parseInt((String)mapReview.get("postNo"));
+
+		if (deleteFile.length > 0 && deleteFile[0] != "") {
+
 
 			for (String fileName : deleteFile) {
 				FileDog files = new FileDog();
@@ -157,7 +158,7 @@ public class ReviewRestController {
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		String[] fileList = mapReview.get("multiFile").toString().split(",");
 		
-		if (fileList.length > 1) {
+		if (fileList.length > 0 && fileList[0] != "") {
 
 			// 파일디비에넣기
 			for (String fileName : fileList) {
@@ -181,6 +182,7 @@ public class ReviewRestController {
 
 		// 리뷰 디비에 넣기
 		Review review = new Review();
+		review.setPostNo(postNo);
 		review.setId(user.getId());
 		review.setNickname(user.getNickname());
 		review.setBoardCode(hospitalCode);
