@@ -39,6 +39,7 @@
        b, sup, sub, u{
  			color : #000000 !important;      
        }	
+   
 	</style> 
  
  	<!-- ToolBar Start /////////////////////////////////////-->
@@ -137,17 +138,16 @@
 			 </div>		 	 		 	 
                <br/>  
               <div class="card_area">
-                <button  id="btnAddVote" class="btn btn-default">투표하기</button><button id="btnQuestion"  class="btn btn-default">문의하기</button>  
-                <a class="icon_btn" href="#">
-                  <i class="lnr lnr lnr-heart"></i>
-                </a>
+                <button  id="btnAddVote" class="btn btn-default" style="width: 225px">투표하기</button><button id="btnQuestion"  class="btn btn-default" style="width: 225px">문의하기</button>  
               </div>
               <br/>
-		    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-			<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-			<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
-			<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
-		 	  
+              
+              <div align="right">
+			    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+	 		  </div>
+ 		 	  
             </div>
           </div></div>
         </div>
@@ -262,7 +262,10 @@
     	   	$("form").attr("method" , "POST").attr("action" , "/funding/getVoting").submit();
     	 
     	}   
+
+    	
     $(function(){
+    	
 		//============= 투표하기 Event  처리 =============	
 	 	$( "#btnAddVote" ).on("click" , function() {
 	 		if(${user==null}){
@@ -316,11 +319,7 @@
 		//============= SNS공유 Event  처리 =============	
 		$( "#twitter" ).on("click" , function() {
 	 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-			});		
-		
-		$( "#naver" ).on("click" , function() {
-	 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-			});		
+			});			
 		
 		$( "#facebook" ).on("click" , function() {
 	 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
@@ -363,13 +362,13 @@
 
     
 		//============= 카카오 공유하기Event  처리 =============		
-		 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+		// Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 		 function sendLinkKakao(){
 		     Kakao.Link.sendDefault({
 		       objectType: 'feed',
 		       content: {
-		         title: '유기견보호',
-		         description: '멍멍',
+		         title: '보호할개',
+		         description: '스토리펀딩',
 		         imageUrl:document.location.href,
 		         link: {
 		           mobileWebUrl: document.location.href,
