@@ -73,7 +73,6 @@ td{color : black;width : 300px;}
 	        	<input type="hidden" class="goog-trans-control"></input>
 	    	</div>
 	    <div id="google_translate_element_area">
-	    	
 		<div id="banner-message">
 
 			<select class="breed_select">

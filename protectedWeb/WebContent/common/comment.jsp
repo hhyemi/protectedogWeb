@@ -42,7 +42,7 @@
 		<hr />
 	
 		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 비회원 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-		<c:if test="${sessionScope.user.role eq null}">
+		<c:if test="${sessionScope.user eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
 				비회원은 댓글을 달 수 없습니다<a href="#"> 로그인 </a>후 이용해주시길 바랍니다.
@@ -52,15 +52,15 @@
 		</c:if>
 		
 		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 회원 처리  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-		<c:if test="${sessionScope.user.role != null}">
+		<c:if test="${sessionScope.user != null}">
 		<form name="commentGo">
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
-				<input type="text" name="commentContent" class="form-control"
+				<input type="text" name="commentContent" class="form-control commentContent"
 					style="width: 100%; height: 50px" placeholder="댓글입력" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
-				<button type="button" id="commentGo"
+				<button type="button" id="commentGo" class="commentSubmit"
 					style="background-color: #6190ed; color: white; width: 100%; height: 40px; border: 1px solid #1449b3">
 					<h6>
 						<b>댓글등록</b>
@@ -79,7 +79,12 @@
 			<c:set var="rank" value="${ rank+1 }" />
 			<div class="row" id="${comment.commentNo}">
 				<div class="col-sm-1 col-md-1" align="center">
-					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px; padding-top: 5px;" />
+					<c:if test="${comment.profile != null }">
+					<img src="/resources/file/fileUser/${comment.profile}" style="border-radius: 10px; min-height: 88px; min-width: 82px; max-height: 88px; max-width: 82px;" />
+					</c:if>
+					<c:if test="${comment.profile == null }">
+					<img src="https://via.placeholder.com/80" style="border-radius: 10px; min-height: 88px; min-width: 82px; max-height: 88px; max-width: 82px;" />
+					</c:if>
 				</div>
 				<div class="col-sm-11 col-md-11" align="left">
 					
@@ -90,11 +95,15 @@
 					
 					<div id="${comment.commentNo}" class="area">
 					<h5  id="${comment.commentNo}" class="cmCont">${comment.commentContent}</h5>
-					<c:if test="${comment.id == sessionScope.user.id }">
-					<span class="fas fa-pen"></span> &nbsp; 
-					<span class="fas fa-trash-alt"></span> &nbsp; 
+					
+					<c:if test="${user.role == 'admin' }">
+					<span class="fas fa-trash-alt"></span>
 					</c:if>
-					<span class="fas fa-exclamation-triangle"></span> &nbsp;
+					<c:if test="${comment.id == sessionScope.user.id }">
+					<span class="fas fa-pen"></span> 
+					<span class="fas fa-trash-alt"></span>
+					</c:if>
+					<span class="fas fa-exclamation-triangle"></span>
 <!-- 					<span class="fas fa-plus"></span> &nbsp;  -->
 					<span id="${comment.commentNo}" class="far fa-thumbs-up"></span>
 					<font id="${comment.commentNo}" class="font">
@@ -137,11 +146,12 @@
 		</div>
 		
 		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 더보기 버튼 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+		<c:if test="${totalCount > rank}">
 		<div class="col-md-12">
 <!-- 			<input type="hidden" id="currentPage" name="currentPage" value="" /> -->
 			<button type="button" class="btn btn-default moreView" value="1"> 더보기 </button>
 		</div>
-		
+		</c:if>
 		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 하단 공백 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<div style="min-height: 50px;">
 			
@@ -177,6 +187,14 @@
 	
  	var currentPage = 2;
 	
+ 	$(document).ready(function(){
+		$(".commentContent").keydown(function(key){
+			if(key.keyCode == 13){
+				$(".commentSubmit").click();
+			}
+		});
+	});
+ 	
 	$(function(){
 		
 		// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 댓글 리스트  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -210,9 +228,16 @@
 						
 						display +=
 							"<div class='row' id='"+comment.commentNo+"'>" +
-								"<div class='col-sm-1 col-md-1' align='center'>" +
-									"<img src='https://via.placeholder.com/80' style='border-radius:5px; min-height: 80px; min-width: 60px; padding-top:5px;'/>" +
-								"</div>" +
+								"<div class='col-sm-1 col-md-1' align='center'>";	
+								if(comment.profile != null){
+									display += "<img src='https://via.placeholder.com/'"+comment.profile+" style='border-radius:10px; min-height: 80px; min-width: 60px; max-height: 80px; max-width: 80px; padding-top:5px;'/>";
+								} else {
+									display += "<img src='https://via.placeholder.com/80' style='border-radius:10px; min-height: 80px; min-width: 60px; max-height: 80px; max-width: 80px; padding-top:5px;'/>";
+								}
+								
+								
+						display +=
+							"</div>" +
 								"<div class='col-sm-11 col-md-11' align='left'>" + 
 									"<h4 id="+comment.commentNo+" class='h4tag'>" +	
 										"<b>"+comment.nickName+"</b>&nbsp; <small>"+comment.regDate+"</small>&nbsp;" + 
@@ -222,8 +247,8 @@
 										"<h5  id="+comment.commentNo+" class='cmCont'>"+comment.commentContent+"</h5>";
 					    	
 							if(comment.id == '${sessionScope.user.id}'){
-			 					display += "<span class='fas fa-pen'></span> &nbsp;" + 
-			 					           "<span class='fas fa-trash-alt'></span> &nbsp;";
+			 					display += "<span class='fas fa-pen'></span>&nbsp;" + 
+			 					           "<span class='fas fa-trash-alt'></span>&nbsp;";
 							}
 							
 							display += 
