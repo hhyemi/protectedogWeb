@@ -2,6 +2,8 @@
 <%@ page pageEncoding="UTF-8"%>
 <!-- /////// JSTL/////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- //////////////////////  DAY FORMAT ///////////////////////// -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -21,14 +23,6 @@
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
 
-<script type="text/javascript">
-	function fncGetList(currentPage) {
-		$('#currentPage').val(currentPage);
-		$('form').attr('method', 'post').attr('action',
-				'/order/listOrder').submit();
-		//원래 list는 get으로 해줘야겠지만.. controller에서 param받아서 다시 model로 돌려주는게 귀찮으니 post로 하는중
-	}
-	</script>
 </head>
 
 <body id="page-top">
@@ -54,6 +48,7 @@
 		<section id="cart" class="cart">
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
 			<div class="container">
+			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
 					<thead>
 						<tr>
@@ -61,8 +56,8 @@
 							<th style="width: 30%">상품정보</th>
 							<th style="width: 10%">구매가격</th>
 							<th style="width: 20%" class="text-center">결제수단</th>
-							<th style="width: 20%">상태</th>
-							<th style="width: 20%">주문일</th>
+							<th style="width: 10%">상태</th>
+							<th style="width: 40%">주문일</th>
 						</tr>
 					</thead>
 
@@ -77,22 +72,41 @@
 									<div class="row">
 
 										<div class="col-sm-2 hidden-xs">
-											<img src="http://placehold.it/100x100" alt="..."
+											<img src="../../resources/file/fileShop/${order.orderProd.mainFile}" width="70px" alt="..."
 												class="img-responsive" />
 										</div>
 										<div class="col-sm-10 prod-desc">
 											<h6 class="nomargin">
 												주문번호:${order.orderNo}  
-												<input type="hidden" name="prodNo" value="${order.prodNo}" /> 
+												<a class="detailOrder"><br/><b>상품명 : ${order.orderProd.prodName}</b><br/>
+												<input type="hidden" value="${order.orderNo}" /> </a>
+												${order.orderProd.prodDetail}
 											</h6>
 										</div>
 									</div>
 								</td>
-								<td>${order.totalPrice}</td>
+								<td><fmt:formatNumber value="${order.totalPrice}" pattern="#,###"/>원</td>
 
-								<td class="text-center">${order.paymentCode}</td>
-								<td class="actions">${order.orderCode}</td>
-								<td class="actions">${order.orderDate}</td>
+								<td class="text-center">
+								<c:if test="${order.paymentCode =='1'}">
+								무통장결제</c:if>
+								<c:if test="${order.paymentCode =='2'}">
+								카드결제</c:if>
+								
+								</td>
+								<td class="actions">
+								<c:if test="${order.orderCode =='1'}">
+								결제완료</c:if>
+								<c:if test="${order.orderCode =='2'}">
+								배송중</c:if>
+								<c:if test="${order.orderCode =='3'}">
+								배송완료</c:if>
+								<c:if test="${order.orderCode =='4'}">
+								취소</c:if>
+								<c:if test="${order.orderCode =='5'}">
+								구매후기 수정</c:if></td>
+								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
+								
 							</tr>
 						</c:forEach>
 
@@ -104,8 +118,7 @@
 									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
-							<td><a href="#" class="btn btn-general btn-green">HOME <i
-									class="fa fa-angle-right"></i></a></td>
+							<td></td>
 						</tr>
 					</tfoot>
 				</table>
@@ -116,6 +129,21 @@
 	<!-- Footer Start /////////////////////////////////////-->
 	<jsp:include page="/layout/footer.jsp" />
 	<!-- Footer End /////////////////////////////////////-->
+	
+	
+	<script type="text/javascript">
+//=============    상품상세조회(썸네일)  Event  처리 		=============
+//============= 썸네일 사진 클릭 Event  처리 =============	
+ 	$(function() {
+	$(".detailOrder").on("click",function() {
+		//alert($(this).children("input").val())
+				$(self.location).attr("href","/order/getOrder?orderNo="+ $(this).children("input").val());
+			});
+	
+ 	});	 
+
+
+	</script>
 </body>
 
 </html>

@@ -187,8 +187,6 @@
 							<a href="/order/listOrder"
 							class="list-group-item">의류;임시오더</a> <a href="#"
 							class="list-group-item">베스트상품</a> 
-							<a href="#"
-							class="list-group-item">타임세일</a>
 							 <c:if test="${ sessionScope.user.role eq 'admin' }">
 							<a href="/product/listAdminProduct"
 							class="list-group-item">관리자 페이지</a></c:if>

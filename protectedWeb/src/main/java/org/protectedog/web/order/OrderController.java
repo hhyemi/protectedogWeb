@@ -184,6 +184,7 @@ public class OrderController {
 		// 회원 아이디를 GET하기 위한 Session 불러오기
 		User user = (User)session.getAttribute("user");
 		
+		
 		System.out.println(user);
 		System.out.println("session value 확인");
 		
@@ -204,24 +205,19 @@ public class OrderController {
 		return "forward:/shop/order/listOrder.jsp";
 	}
 	
-		@RequestMapping(value="getOrder")
-		public String getOrder(@RequestParam("orderNo") int orderNo,  @RequestParam("prodNo") int prodNo,
-				Model model) throws Exception {
-
-			System.out.println("getOrder");
-			
-			
-			productService.getProduct(prodNo);
-			Order order = orderService.getOrder(orderNo);
+	@RequestMapping(value="getOrder")
+	public String getOrder (@RequestParam("orderNo")int orderNo, Model model) throws Exception{
 		
-			order.setProdNo(prodNo);
-			
-			System.out.println(order);
-			model.addAttribute("order", order);
+		System.out.println("/getOrder GET / POST");
+		
+		System.out.println(orderNo);
 
-			return "forward:/shop/order/getOrder.jsp";
+		Order order =orderService.getOrder(orderNo);
 
-		}
+		model.addAttribute("order", order);
+		
+		return "forward:/shop/order/getOrder.jsp";
+	}
 	
 
 	

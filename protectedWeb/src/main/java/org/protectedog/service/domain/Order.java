@@ -20,10 +20,10 @@ public class Order {
 	private int orderCode;
 	private int deliveryCode;
 	private int mileageNo;
-	private Product orderprod;
+	private Product orderProd;
 
-	
-	
+
+
 	public Order() {
 		
 	}
@@ -219,17 +219,16 @@ public class Order {
 	public void setMileageNo(int mileageNo) {
 		this.mileageNo = mileageNo;
 	}
-
-
-
-	public Product getOrderprod() {
-		return orderprod;
+	
+	
+	public Product getOrderProd() {
+		return orderProd;
 	}
 
 
 
-	public void setOrderprod(Product orderprod) {
-		this.orderprod = orderprod;
+	public void setOrderProd(Product orderProd) {
+		this.orderProd = orderProd;
 	}
 
 
@@ -240,8 +239,14 @@ public class Order {
 				+ couponNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
 				+ receiverPhone + ", orderRequest=" + orderRequest + ", paymentCode=" + paymentCode + ", orderDate="
 				+ orderDate + ", orderQuantity=" + orderQuantity + ", totalPrice=" + totalPrice + ", orderCode="
-				+ orderCode + ", deliveryCode=" + deliveryCode + ", mileageNo=" + mileageNo + ", orderprod=" + orderprod
+				+ orderCode + ", deliveryCode=" + deliveryCode + ", mileageNo=" + mileageNo + ", orderProd=" + orderProd
 				+ "]";
 	}
 
+
+
+
+
+	
+	
 }

@@ -9,7 +9,7 @@
 		<result property="prodNo" 			column="prod_no" 			jdbcType="NUMERIC" />
 		<result property="id" 				column="id" 				jdbcType="VARCHAR"/>
 		<result property="phone" 			column="phone" 				jdbcType="VARCHAR" />
-		<result property="receiverAdder" 	column="receiver_addr" 		jdbcType="VARCHAR" />
+		<result property="receiverAddr" 	column="receiver_addr" 		jdbcType="VARCHAR" />
 		<result property="receiverName" 	column="receiver_name" 		jdbcType="VARCHAR" />
 		<result property="receiverPhone" 	column="receiver_phone"	 	jdbcType="VARCHAR" />
 		<result property="orderRequest" 	column="order_request" 		jdbcType="VARCHAR" />
@@ -23,7 +23,22 @@
 		<result property="mileageNo"		column="mileage_no"			jdbcType="NUMERIC"/>
 		<result property="couponNo"			column="coupon_no"			jdbcType="NUMERIC"/>
 		<result property="orderDate"		column="order_date" 		jdbcType="DATE"/>
- 
+		<!-- HAS A관계 JOIN ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+	<association property="orderProd"  javaType="org.protectedog.service.domain.Product">
+		<id property="prodNo" column="prod_no" jdbcType="NUMERIC"/>
+		<result property="prodNo" 			column="prod_no" 		jdbcType="NUMERIC" />
+		<result property="prodName" 		column="prod_name" 		jdbcType="VARCHAR" />
+		<result property="price" 			column="price" 			jdbcType="NUMERIC" />
+		<result property="manuDate" 		column="manu_date" 		jdbcType="DATE" />	
+		<result property="regDate" 			column="reg_date"		jdbcType="DATE" />
+		<result property="country"			column="country" 		jdbcType="VARCHAR" />
+		<result property="quantity" 		column="quantity" 		jdbcType="NUMERIC" />
+		<result property="prodDetail" 		column="prod_detail" 	jdbcType="VARCHAR" />
+		<result property="company" 			column="company" 		jdbcType="VARCHAR" />
+		<result property="discountPrice" 	column="discount_price" jdbcType="NUMERIC"/>
+		<result property="prodCode" 		column="prod_code" 		jdbcType="NUMERIC"/>
+		<result property="mainFile"			column="main_file"		jdbcType="VARCHAR"/>
+		</association>
  </resultMap>
 
 
@@ -45,13 +60,12 @@
 	</insert>
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
-		SELECT o.order_no, o.prod_no, p.prod_name, o.id, o.receiver_name, 
-		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, 
-		o.order_date, o.order_code, o.order_quantity, o.total_price
+		SELECT o.order_no, p.prod_name, o.order_code, o.total_price, o.id, o.phone, o.order_date, o.receiver_name,
+		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code
 
 		FROM orders o, product p
 		WHERE o.order_no = #{orderNo}
-		AND o.prod_no = p.prod_no;
+		AND o.prod_no = p.prod_no
 	</select>
 
 
@@ -80,9 +94,11 @@
 	 <select  id="listOrder"  parameterType="map"	resultMap="orderSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT order_no, prod_no, payment_code, order_date, total_price, order_code ,id
-			from orders
-					WHERE id =#{id}				
+	  		FROM (	SELECT o.order_no, o.prod_no, o.payment_code, o.order_date, o.total_price, o.order_code ,o.id,
+	  		p.prod_name, p.prod_detail, p.main_file
+			from orders o, product p
+					WHERE id =#{id}		
+					AND o.prod_no=p.prod_no		
 					ORDER BY order_no) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}

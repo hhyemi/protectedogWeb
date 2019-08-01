@@ -126,6 +126,8 @@ body {
 			<button
 						class="mdl-button mdl-js-button mdl-button--primary" id="qna">
 						문의하기</button></a>
+						
+						 <a href="#messageModal" data-toggle="modal" title="Compose" class="btn btn-compose"> 쪽지작성 </a>
 			</small>
 		</h1>
 	</div>
@@ -176,14 +178,14 @@ body {
 		<div class="container" align="center">
 			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 				<thead>
-					<tr><td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
+					<tr align="center">
+					<td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
 				<thead>
-					<tr>
-						<th class="mdl-data-table__cell--non-numeric" text-align="center"
-							id="no">글번호</th>
-						<th align="center" id="boardfont">제목</th>
-						<th align="center" id="boardfont">질문유형</th>
-						<th align="center" id="boardfont">등록일</th>
+					<tr class="text-center">
+						<th>글번호</th>
+						<th width="10%" id="boardfont">제목</th>
+						<th width="10%" id="boardfont">질문유형</th>
+						<th width="10%" id="boardfont">등록일</th>
 
 					</tr>
 				</thead>
@@ -194,11 +196,11 @@ body {
 					<tbody>
 					<tr>
 					<td class="mdl-data-table__cell--non-numeric" align="center">${ i }</td>
-					<td align="center">${board.postTitle}
+					<td	>${board.postTitle}
 					<input type="hidden" name="postNo" value="${board.postNo}" /> 
 					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
-					<td align="center">${board.qnaCode}</td>
-					<td align="center">${board.regDate}</td>
+					<td>${board.qnaCode}</td>
+					<td>${board.regDate}</td>
 					</tr>
 					</tbody>
 				</c:forEach>

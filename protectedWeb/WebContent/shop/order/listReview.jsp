@@ -13,84 +13,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- Bootstrap CSS -->
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
-<link rel="stylesheet" href="/resources/get/css/icon/style.css" />
-<link rel="stylesheet" href="/resources/get/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/resources/get/css/themify-icons.css" />
-<link rel="stylesheet" href="/resources/get/css/owl.carousel.min.css" />
-<link rel="stylesheet" href="/resources/get/css/simpleLightbox.css" />
-<link rel="stylesheet" href="/resources/get/css/nice-select.css" />
-<link rel="stylesheet" href="/resources/get/css/animate.css" />
-<link rel="stylesheet" href="/resources/get/css/jquery-ui.css" />
-<!-- main css -->
-<link rel="stylesheet" href="/resources/get/css/style.css" />
-<link rel="stylesheet" href="/resources/get/css/responsive.css" />
-<!-- KAKAO -->
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 
-<style>
-
-/* normal formating */
-#table {
-	margin: 0 auto;
-	width: 680px;
-	font-family: arial;
-	font-size: 12px;
-	color: #333;
-}
-
-#table .row {
-	margin: 15px 0 5px 0;
-	border-bottom: 1px dotted #c4c4c4;
-}
-
-#table .img {
-	width: 160px;
-	height: 100px;
-	float: left;
-}
-
-#table .img img {
-	width: 160px;
-	height: 100px;
-	border: 2px solid #333;
-}
-
-#table .desc {
-	width: 500px;
-	height: 120px;
-	float: right;
-}
-
-#table .desc a {
-	color: #2a8cba;
-	text-decoration: none;
-}
-
-#table .desc span {
-	width: 50px;
-}
-
-#table h2 {
-	font-size: 20px;
-	margin: 0 0 5px 0;
-	padding: 0;
-}
-
-#table h2 a {
-	text-decoration: none;
-}
-
-.clear {
-	clear: both
-}
-</style>
 </head>
 <body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!-- ToolBar End /////////////////////////////////////-->
+
 	<!--================Header Menu Area =================-->
 
 	<!--================Single Product Area =================-->
@@ -104,7 +31,7 @@
 							<img src="img/product/single-product/review-1.png" alt="" />
 						</div>
 						<div class="media-body">
-							<h4>Blake Ruiz</h4>
+							<h4>김길동씨</h4>
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i>
@@ -113,18 +40,20 @@
 					<table>
 						<tbody>
 							<tr>
-							<td>
-								<p class="excerpt">Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip ex ea commodoClass
-									aptent taciti sociosqu ad litora torquent per conubia nostra,
-									per inceptos himenaeos. Sed molestie augue sit amet leo
-									consequat posuere. Vestibulum ante ipsum primis in faucibus
-									orci luctus et ultrices posuere cubilia Curae; Proin vel ante a
-									orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit. Vivamus luctus urna sed urna.</p>
-					</td></tr></tbody></table>
+								<td>
+									<p class="excerpt">
+										강장공장 공장장은 강공장장은가 안깐? 글자수 테스트 리뷰 더보기를 위한 글자수 테스트중입니다. 퐁당폳앙 글자수
+										테스트 중입니다 글자수 테스트 중입니다. 글자수 테스트 중입니다 글자수 테스트중입니다 글자수 테스트중입니다
+										글자수 테스트중입니다. 글자수 테스트 중입니다. 글자수 글자수 말이요강장공장 공장장은 강공장장은가 안깐? 글자수
+										테스트 리뷰 더보기를 위한 글자수 테스트중입니다. 퐁당폳앙 글자수 테스트 중입니다 글자수 테스트 중입니다.
+										글자수 테스트 중입니다 글자수 테스트중입니다 글자수 테스트중입니다 글자수 테스트중입니다. 글자수 테스트
+										중입니다. 글자수 글자수 말이요 <img
+											src="/resources/file/fileMarket/d28c5848607433aa91bc6b3d02eac6b3b509e0b7889d0dcdffff156d08c032d5.jpg">
+									</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<div class="clear"></div>
 				</div>

@@ -13,10 +13,13 @@
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
+   <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <title>보호할개 · 후원신청</title>
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->

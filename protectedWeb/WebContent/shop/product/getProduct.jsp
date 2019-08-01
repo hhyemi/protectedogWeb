@@ -39,6 +39,7 @@
 
 table {
 	color: black;
+	align: center;
 }
 </style>
 
@@ -116,10 +117,15 @@ table {
 								</h2>
 
 								<ul class="list">
-									<li><a class="active" href="#"> <span>카테고리</span>
-											:<c:if test="${product.prodCode == 10}">
-										전체</c:if>
-									</a></li>
+									<li><a class="active" href="#"> <span>카테고리
+											:<c:if test="${product.prodCode == '10'}">
+										사료</c:if></span>
+										<c:if test="${product.prodCode == '20'}">
+										간식</c:if>
+										<c:if test="${product.prodCode == '30'}">
+										의류</c:if>
+										<c:if test="${product.prodCode == '40'}">
+										타임세일</c:if></a>
 									<li><a href="#"> 
 									</a></li>
 								</ul>

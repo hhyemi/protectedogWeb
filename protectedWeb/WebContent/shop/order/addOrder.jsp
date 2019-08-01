@@ -235,7 +235,7 @@
 										placeholder="번호" style="height: 35px;" readonly name="receiverAddr1">
 								</div>
 								
-								<button class="btn btn-default" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 								<div class="w-100"></div>
 								&nbsp;<div class="col-sm-4">
 								<input type="text" class="form-control" id="sample6_address" placeholder="주소" style="height: 35px;" readonly
