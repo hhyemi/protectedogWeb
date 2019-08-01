@@ -86,8 +86,8 @@ img{max-width: 600px;}
 
 		<c:if test="${board.id == sessionScope.user.id }">
 			<div class="button" align="right">
-				<button>수정</button>
-				<button>삭제</button>
+				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">수정</button>
+				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">삭제</button>
 			</div>
 		</c:if>
 	</div>
