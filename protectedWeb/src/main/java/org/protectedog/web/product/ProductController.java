@@ -181,6 +181,7 @@ public class ProductController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
+		
 		search.setPageSize(pageSize);
 		
 		// Business logic ����

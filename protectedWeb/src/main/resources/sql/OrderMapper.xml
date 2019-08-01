@@ -23,22 +23,8 @@
 		<result property="mileageNo"		column="mileage_no"			jdbcType="NUMERIC"/>
 		<result property="couponNo"			column="coupon_no"			jdbcType="NUMERIC"/>
 		<result property="orderDate"		column="order_date" 		jdbcType="DATE"/>
-		<!-- product ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
- <association property="product"  javaType="org.protectedog.service.domain.Product">
-		<id property="prodNo" column="prod_no" jdbcType="NUMERIC"/>
-		<result property="prodName" 		column="prod_name" 		jdbcType="VARCHAR" />
-		<result property="price" 			column="price" 			jdbcType="NUMERIC" />
-		<result property="manuDate" 		column="manu_date" 		jdbcType="DATE" />	
-		<result property="regDate" 			column="reg_date"		jdbcType="DATE" />
-		<result property="country"			column="country" 		jdbcType="VARCHAR" />
-		<result property="quantity" 		column="quantity" 		jdbcType="NUMERIC" />
-		<result property="prodDetail" 		column="prod_detail" 	jdbcType="VARCHAR" />
-		<result property="company" 			column="company" 		jdbcType="VARCHAR" />
-		<result property="discountPrice" 	column="discount_price" jdbcType="NUMERIC"/>
-		<result property="prodCode" 		column="prod_code" 		jdbcType="NUMERIC"/>
-		<result property="mainFile"			column="main_file"		jdbcType="VARCHAR"/>
-		</association>
-</resultMap>
+ 
+ </resultMap>
 
 
 
@@ -91,35 +77,12 @@
 	WHERE tran_no = #{tranNo}
 	</delete>
 
-	 <select  id="listOrder"  parameterType="search"	resultMap="orderSelectMap">
+	 <select  id="listOrder"  parameterType="map"	resultMap="orderSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT o.order_no , o.prod_no , o.total_price, o.order_code, p.prod_name,p.prod_detail
-					FROM orders o, product p
-					WHERE id =#{id}	
-					AND o.prod_no=p.prod_no				
-					ORDER BY o.order_no) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
-	 </select>
-	 
-	 <select  id="listAdminOrder"  parameterType="search"	resultMap="orderSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT order_no, reg_date, id, order_quantity, payment_code, total_price, order_code, delivery_code
-					FROM orders
-					WHERE id =#{id}					
-					ORDER BY order_no) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
-	 </select>
-	 
-	 <select  id="listSwapOrder"  parameterType="search"	resultMap="orderSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT order_no , prod_no , total_price, order_code
-					FROM orders
-					WHERE id =#{id}					
+	  		FROM (	SELECT order_no, prod_no, payment_code, order_date, total_price, order_code ,id
+			from orders
+					WHERE id =#{id}				
 					ORDER BY order_no) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
@@ -127,7 +90,7 @@
 	 
 
 
-	<select id="getTotalCount" parameterType="search" resultType="int">
+	<select id="getTotalCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM(SELECT * FROM orders) countTable
 		</select>

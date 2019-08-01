@@ -169,9 +169,6 @@ public class MarketController {
 		//조회수
 		boardService.updateViewCount(board);
 		
-		//댓글추가
-		Map<String, Object> map = commentService.listComment(postNo, search);
-		
 	
 		Map<String, Object> filePost = new HashMap<String, Object>();
 				filePost.put("boardCode", MK);
@@ -180,8 +177,6 @@ public class MarketController {
 
 		model.addAttribute("file", file);
 		model.addAttribute("board", board);
-		model.addAttribute("totalCount", map.get("totalCount"));
-		model.addAttribute("list", map.get("list"));
 
 		return "forward:/shop/market/getMarket.jsp";
 		

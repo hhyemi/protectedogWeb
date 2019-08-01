@@ -71,13 +71,13 @@
 	<bean id="exceptionResolver"
 				class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		
-		<property name="exceptionMappings">
-			<props>
-				<prop key="java.lang.Exception">/common/error.jsp</prop>
+<!-- 		<property name="exceptionMappings">  -->
+<!-- 			<props> -->
+<!-- 				<prop key="java.lang.Exception">/common/error.jsp</prop>  -->
 <!-- 				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop> -->
 <!-- 				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop> -->
-			</props>
-		</property>
+<!-- 			</props> -->
+<!--  		</property> -->
 		
 		<property name="defaultErrorView"	value="/common/olderror.jsp" />
 		

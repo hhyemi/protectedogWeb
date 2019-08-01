@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
+import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Order;
 import org.protectedog.service.domain.Product;
 import org.protectedog.service.domain.User;
@@ -171,33 +172,35 @@ public class OrderController {
 	
 	//주문내역 리스트 출력
 	@RequestMapping(value="listOrder")
-	public String listPurchaes(@ModelAttribute("search") Search search, 
-			@ModelAttribute("user") User user, 
-			Model model , HttpSession session, @RequestParam("orderNo")int orderNo) throws Exception {
-
+	public String listOrder( @ModelAttribute("search") Search search, HttpSession session, Model model) throws Exception{
+		
 		System.out.println("/listOrder");
-
-		String id = ((User)session.getAttribute("user")).getId();
 		
-		System.out.println(id);
-		
-		if (search.getCurrentPage() == 0) {
+		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		
 		search.setPageSize(pageSize);
 		
-		// Business logic
-		Map<String, Object> map = orderService.listOrder(search, id);
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
+		// 회원 아이디를 GET하기 위한 Session 불러오기
+		User user = (User)session.getAttribute("user");
+		
+		System.out.println(user);
+		System.out.println("session value 확인");
+		
+		// Business logic 수행
+		Map<String , Object> map=orderService.listOrder(search, user.getId());
+		
+		System.out.println(user.getId());
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
-
+		
+		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 
-
+		
 		return "forward:/shop/order/listOrder.jsp";
 	}
 	
@@ -259,40 +262,3 @@ public class OrderController {
 	}
 }
 	
-//	//@RequestMapping("updateTranCode.do")
-//	@RequestMapping(value="updateTranCode")
-//	public String updateTranCode(@ModelAttribute("order") Order order, @RequestParam("tranCode") String tranCode,
-//			@RequestParam("buyerId") String buyerId) throws Exception{
-//		
-//		purchase.setTranCode(tranCode);
-//		
-//		ModelAndView modelAndView=new ModelAndView();
-//		purchaseService.updateTranCode(purchase);
-//		modelAndView.setViewName("redirect:/purchase/listPurchase?buyerId="+buyerId);
-//		
-//		return modelAndView;
-//	}
-//	
-//	@RequestMapping(value="deletePurchase",method=RequestMethod.GET)
-//	public String deletePurchaseView( @RequestParam("tranNo") int tranNo , Model model, HttpSession session ) throws Exception{
-//
-//		System.out.println("/deletePurchaseView.do");
-//		//Business Logic
-//		
-//		Purchase purchase = purchaseService.getPurchase(tranNo);
-//		model.addAttribute("purchase", purchase);
-//		
-//		// Model �� View ����
-//
-//		return "forward:/purchase/deletePurchaseView.jsp";
-//	}
-//	
-//	@RequestMapping(value="deletePurchase", method=RequestMethod.POST)
-//	public String deletePurchase (@RequestParam("tranNo") int tranNo, Model model) throws Exception{
-//		System.out.println("/deletePurchase.do");
-//		
-//		purchaseService.deletePurchase(tranNo);
-//		
-//		return "forward:/purchase/deletePurchase.jsp";
-//	}
-//}

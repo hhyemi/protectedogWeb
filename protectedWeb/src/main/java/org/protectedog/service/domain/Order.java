@@ -20,6 +20,7 @@ public class Order {
 	private int orderCode;
 	private int deliveryCode;
 	private int mileageNo;
+	private Product orderprod;
 
 	
 	
@@ -221,14 +222,26 @@ public class Order {
 
 
 
+	public Product getOrderprod() {
+		return orderprod;
+	}
+
+
+
+	public void setOrderprod(Product orderprod) {
+		this.orderprod = orderprod;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", prodNo=" + prodNo + ", id=" + id + ", phone=" + phone + ", couponNo="
 				+ couponNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
 				+ receiverPhone + ", orderRequest=" + orderRequest + ", paymentCode=" + paymentCode + ", orderDate="
 				+ orderDate + ", orderQuantity=" + orderQuantity + ", totalPrice=" + totalPrice + ", orderCode="
-				+ orderCode + ", deliveryCode=" + deliveryCode + ", mileageNo=" + mileageNo + "]";
+				+ orderCode + ", deliveryCode=" + deliveryCode + ", mileageNo=" + mileageNo + ", orderprod=" + orderprod
+				+ "]";
 	}
-
 
 }
