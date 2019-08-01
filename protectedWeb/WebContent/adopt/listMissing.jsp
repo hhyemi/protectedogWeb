@@ -12,6 +12,7 @@
 <html lang="ko">
 	
 <head>
+<title>보호할개 · 실종</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,10 +29,12 @@
  		} 
 
 
-
     </style>
-<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+    
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 </head>
+
 
 <body class="goto-here">
    	
@@ -39,31 +42,24 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2" style="color: #f04f23;">List</span> <span>Adopt</span></p>
+          	<p ><span class="mr-2" style="color: #f04f23;">List</span> <span>Missing</span></p>
             <font size="7">실종</font>
           </div>
         </div>
       </div>
     </div>
 
+	
 
-<div class="row justify-content-center">
-      <div class="col-md-10"  >
-	  
-	  <jsp:include page="calendar.jsp"></jsp:include>
-	  </div></div>
+	<div class="row justify-content-center">
+      <div class="col-md-9"  >
+      	<div  class="col-md-9" style="padding-left: 0px;">날짜 칸을 클릭하시면 실종글을 작성할 수 있습니다.</div>
+	  	<jsp:include page="calendar.jsp"></jsp:include>
+	  </div>
+	</div>
 
-       </div>
-       
-       </div>
-       </div>
-       
-       <div class="col-md-12"><br/><br/></div>
-       
-       
-
- 	
- 	
+    <div class="col-md-12"><br/><br/></div>
+    
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	
 

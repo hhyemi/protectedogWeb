@@ -83,11 +83,7 @@
          	width: 70% !important;
         }
         
-/*         .offset-lg-1 { */
-         	
-/*         } */
         .s_product_inner {
-        
         	padding-right: 0px !important;
         }
         .s_product_text {
@@ -97,7 +93,16 @@
          #face{
 /*          	display: none; */
          }
-         
+         .ui-dialog-buttonset button {
+         	min-height: 40px;
+         	max-height: 40px;
+         	margin-top: 0px !important;
+         	margin-bottom: 0px !important;
+         	border-radius: 5px;
+          	padding-top: 5px  !important; 
+          	padding-bottom: 5px  !important; 
+         }
+
 	
         
 
@@ -209,10 +214,7 @@
 								</font>
 				        	</div>
 			        	</c:if>
-<!-- 			        	<div class="col-xs-2 col-md-2" align="right" style="position:absolute; right:0px; bottom:0px; " > -->
-<%-- 			        	<font size="5px"></font>${adopt.id} --%>
-<%-- 			        	${adopt.regDate} --%>
-<!-- 			        	</div> -->
+
 			        </div>
 <!--                 </li> -->
                 
@@ -253,10 +255,7 @@
 				  		</font></strong></div>
 						<div class="col-md-4 "><font size="4px"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>
-				  			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
-<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if> --%>
-				  		</font></strong></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일자</font></strong></div>
 						<div class="col-md-4"><font size="4px">${adopt.dogDate}</font></div>
 					</div>
 
@@ -280,63 +279,6 @@
 						<div class="col-md-10 " style="padding-right: 0px;" ><font size="4px">${adopt.postContent}</font></div>
 					</div>
 					
-<!-- 	               	<div class="row"> -->
-<!-- 				  		<div class="col-md-12 card-area "> -->
-<!-- 				  			분양 메뉴일때  -->
-<%-- 			              	<c:if test="${adopt.boardCode eq 'AD' }"> --%>
-<%-- 				              		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }"> --%>
-<!-- 				              			<button id="adoptApply" class="btn btn-default" >입양신청</button> -->
-<%-- 				              		</c:if> --%>
-				              		
-<%-- 				              		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }"> --%>
-<!-- 				              			<button class="btn btn-default"  id="confirmButton">신청서확인</button> -->
-<!-- 				              			<button class="btn btn-default"  id="adoptCompleteButton">분양완료</button> -->
-<%-- 				              		</c:if> --%>
-				              		
-<%-- 				              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }"> --%>
-<!-- 				              			<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button> -->
-<%-- 				              		</c:if> --%>
-<%-- 			              	</c:if> --%>
-			              	
-<!-- 			              	실종 메뉴일때  -->
-<%-- 			              	<c:if test="${adopt.boardCode eq 'MS' }"> --%>
-<%-- 			              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }"> --%>
-<!-- 			              			<button class="btn btn-default"  id="missingCompleteButton">찾기완료</button> -->
-<%-- 			              		</c:if> --%>
-<%-- 			              	</c:if> --%>
-			              	
-<!-- 			              	공통  -->
-<%-- 			              	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }"> --%>
-<!-- 			               		<button class="btn btn-default" href="#" >문의하기</button> -->
-<!-- 			               		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
-<%-- 			               	</c:if> --%>
-			               	
-<%-- 			              	<c:if test="${adopt.statusCode eq '3'}"> --%>
-<!-- 			               		<button class="btn btn-default" id="noApply" style="width: 475px;" id="confirmButton">완료된 글입니다.</button> -->
-<%-- 			               	</c:if> --%>
-				  		
-<!-- 				  		</div> -->
-<!-- 					</div> -->
-
-				
-              
-              
-              
-<!--               <div class="product_count"> -->
-<!--                 <button -->
-<!--                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" -->
-<!--                   class="increase items-count" -->
-<!--                   type="button" -->
-<!--                 > -->
-<!--                 </button> -->
-<!--                 <button -->
-<!--                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" -->
-<!--                   class="reduced items-count" -->
-<!--                   type="button" -->
-<!--                 > -->
-<!--                 </button> -->
-<!--               </div> -->
-             
              
     <!-- 글내용 밑에 버튼  --> 
              <div class="row" style="flex: 1;bottom: 0px;position: absolute;" >
@@ -417,18 +359,13 @@
         
         </div>
 
-		<div class="minibox" align="center">
-			<div>
-				<br/>
-				<p/>
-				<br/>
-				
-				
-				<a href="#"  id="twitter"  title="트위터로 공유"><img id="twit" src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img id="face" src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
-			</div>
-		</div>
+		<div align="center">
+            <a href="javascript:void(0);" id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+            <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+            <a href="javascript:void(0);" id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+        </div>
+		
+		
         <div class="col-md-12"><hr/></div>
         
         <p align="right" style="padding-right: 15px;">
@@ -450,15 +387,7 @@
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
    
-<!-- 			<div id="dialog-delAdopt" title=""> -->
-<!-- 			  <p align="center"><br/>삭제하시겠습니까?</p> -->
-<!-- 			</div>    -->
-<!-- 			<div id="dialog-missingComplete" title=""> -->
-<!-- 			  <p align="center"><br/>찾기완료 상태로 변경하시겠습니까?</p> -->
-<!-- 			</div>   -->
-			<div id="dialog-alreadyApply" title="">
-			  <p align="center"><br/></p>
-			</div>  
+
 			
 			<div id="dialog-message" title="">
 			  <p align="center"><br/>
@@ -585,7 +514,6 @@
 								  },
 						success : function(status) {
 							$('#confirmButton, #modiButton, #delButton, #adoptCompleteButton, #missingCompleteButton').remove();
-							$( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog( "close" );
 							$('.card_area').html('<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">완료된 글입니다.</button>');
 						},
 						error: function(request, status, error){ 
@@ -762,23 +690,7 @@
   		      }
   	    });
       });
-      
-//       $( function() {
-//   	    $( "#dialog-adoptComplete, #dialog-missingComplete" ).dialog({
-//   	    	  autoOpen: false,
-//   		      width: 350,
-//   		      height: 180,
-//   		      modal: true,
-//   		      buttons: {
-//   		        	예: function() {
-//   		        		fncComplete();
-//   		        	},
-//   		        	아니오: function() {
-//   		          		$( this ).dialog( "close" );
-//   		        	}
-//   		      }
-//   	    });
-//       });
+     
       
       $( function() {
   	    $( "#dialog-listApply" ).dialog({
@@ -790,20 +702,6 @@
 //   		        	예: function() {
 //   		        		fncComplete();
 //   		        	},
-  		        	닫기: function() {
-  		          		$( this ).dialog( "close" );
-  		        	}
-  		      }
-  	    });
-      });
-      
-      $( function() {
-  	    $( "#dialog-alreadyApply" ).dialog({
-  	    	  autoOpen: false,
-  		      width: 350,
-  		      height: 180,
-  		      modal: true,
-  		      buttons: {
   		        	닫기: function() {
   		          		$( this ).dialog( "close" );
   		        	}
@@ -885,18 +783,14 @@
 								           text: "인증회원만 신청할 수 있습니다.",
 								           buttons: "닫기",
 								    });
-// 									$( '#dialog-alreadyApply p' ).html("<br/>인증회원만 신청할 수 있습니다.");
-// 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 									$( "#dialog-alreadyApply" ).dialog( "open" );
+
 								//받아온 데이터에 아이디가 있을때	
 								} else if ( displayValue.indexOf(id) != -1 ) {
 									swal({
 								           text: "이미 신청하셨습니다.",
 								           buttons: "닫기",
 								    });
-// 									$( '#dialog-alreadyApply p' ).html("<br/>이미 신청하셨습니다.");
-// 									$( '#dialog-alreadyApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 									$( "#dialog-alreadyApply" ).dialog( "open" );
+
 								//로그인한상태+아이디가 없을때
 								} else {
 									self.location = "/apply/addApply?postNo=${adopt.postNo}";
@@ -938,75 +832,35 @@
 						success : function(data , status) {
 								console.log(JSON.stringify(data));
 								console.log(data.raise);
-							
-								var displayValue;
 								
-								if( data.mate == "있음" && data.raise == "있음" ){
-									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
+								var mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree;
+								var curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently;
+								
+								var displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
 													+'<br\/><strong>[직업]<\/strong> : '+data.job
 													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
 													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
-													+'<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree
+													+mateTag
 													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
-													+'<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently
+													+curTag
 													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
 													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
 													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
 													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
-									
-								}else if( data.mate == "있음" && data.raise == "없음" ){
-									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
-													+'<br\/><strong>[직업]<\/strong> : '+data.job
-													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
-													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
-													+'<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree
-													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
-													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
-													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
-													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
-									
-								}else if( data.mate == "없음" && data.raise == "있음" ){
-									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
-													+'<br\/><strong>[직업]<\/strong> : '+data.job
-													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
-													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
-													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
-													+'<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently
-													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
-													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
-													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
-									
-								}else{
-									displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
-													+'<br\/><strong>[직업]<\/strong> : '+data.job
-													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
-													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
-													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
-													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
-													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
-													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
-								}
+								
 								console.log("-----"+displayValue);
+								
 				 				$('#'+data.applyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
 				 				$('#appendTr').focus();
 							
 					},
 					error: function(request, status, error){ 
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
-	//						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
 			        }
 					
 				});
-// 	  		return displayValue;
-// 	  		console.log("return 확인 : "+displayValue);
 	 	}
-// 		);
 	    
-  
-
 	    
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
   
@@ -1108,8 +962,6 @@
 			           		});
 			           }
 			    });
-// 				$('#dialog-missingComplete').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 				$('#dialog-missingComplete').dialog( "open" );
 			});
 		
 			$( "button:contains('목록')" ).on("click" , function() {
@@ -1125,51 +977,16 @@
 			
 			//관심목록에 추가
 			$(document).on("click", ".far", function() {
-// 			$( ".far" ).on("click" , function() {
 				addInterest(  );
 			});
 			
 			//관심목록에서 삭제
 			$(document).on("click", ".fas", function() {
-// 			$( ".fas" ).on("click" , function() {
-				console.log("dd");
 				delInterest(   );
 			});
-			
-
-// 			$( "#heartIcon" ).hover(
-// 				function() {
-// 					$( this ).html( "<span class=\"glyphicon glyphicon-heart\"></span>" );
-// 				}, function() {
-// 					$( this ).html( "<span class=\"glyphicon glyphicon-heart-empty\" color=\"#f04f23\"></span>" );
-// 				}
-// 			);
-
 
 	  });
-			
-// 	  $( "#twit" ).hover(
-// 			  function() {
-// 				  $('#twit').toggle( 'slow' );
-// 					$('#face').toggle( 'slow' );
-// 			  }
-// 			  , function() {
-// 				  $('#twit').toggle( 'slow' );
-// 					$('#face').toggle( 'slow' );
-// 			  }
-// 	);
-	  
-// 	  $( "#twit" ).mouseover( function() {
 
-// 			$('#twit').toggle( 'slow' );
-// 			$('#face').toggle( 'slow' );
-// 		});
-// 	  $( "#face" ).mouseout( function() {
-
-// 			$('#twit').toggle( 'slow' );
-// 			$('#face').toggle( 'slow' );
-// 		});
-  
 
 
       

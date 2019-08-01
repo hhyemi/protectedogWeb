@@ -5,7 +5,6 @@
 <html>
 
 <head>
-
 	<title>보호할개 · 입양신청서</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,12 +27,12 @@
 		}
 		
 	</style>
+	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
   
   
 <body class="goto-here">
-	
 
     <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
@@ -52,7 +51,6 @@
           <div class="col-xl-8 ftco-animate">
 			<form  action="#" class="billing-form">
 	          	<div class="row align-items-end">
-	          	
 	          	
 				<input type="hidden" name="id" value="${ apply.id }" >
 				<input type="hidden" name="statusCode" value="1" >
@@ -215,37 +213,10 @@
 	          
  <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
 
-			<div id="dialog-terms" title="">
-			  <p align="center"><br/>약관에 모두 동의해야 신청할 수 있습니다.</p>
-			</div>       
-			<div id="dialog-job" title="">
-			  <p align="center"><br/>직업을 선택하세요.</p>
-			</div>       
-			<div id="dialog-addr" title="">
-			  <p align="center"><br/>거주지 유형을 선택하세요.</p>
-			</div>       
-			<div id="dialog-mate" title="">
-			  <p align="center"><br/>동거인 여부를 선택하세요.</p>
-			</div>       
-			<div id="dialog-mateAgree" title="">
-			  <p align="center"><br/>동거인 동의 여부를 선택하세요.</p>
-			</div>       
-			<div id="dialog-afterMateAgree" title="">
-			  <p align="center"><br/>동거인 여부를 먼저 선택하세요.</p>
-			</div>       
-			<div id="dialog-raise" title="">
-			  <p align="center"><br/>양육경험 여부를 선택하세요.</p>
-			</div>       
-			<div id="dialog-currently" title="">
-			  <p align="center"><br/>현재 양육 여부를 선택하세요.</p>
-			</div>      
-			<div id="dialog-afterCurrently" title="">
-			  <p align="center"><br/>양육경험 여부를 먼저 선택하세요.</p>
-			</div>   
 			<div id="dialog-confirm" title="">
 			  <p align="left" id="confirm" ></p>
-			</div>     
-       
+			</div>   
+			
 <!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
 	          
 	          
@@ -259,21 +230,6 @@
     
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-<!--   <script src="/resources/prodmenu/js/jquery.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/jquery-migrate-3.0.1.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/popper.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/bootstrap.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/jquery.stellar.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/owl.carousel.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/aos.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/scrollax.min.js"></script> -->
-<!--   <script src="/resources/prodmenu/js/main.js"></script> -->
   
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!--   <script type="text/javascript" src="/resources/events.js"></script> -->
@@ -281,144 +237,7 @@
 <!--   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
   <script>
 
- 	  
-
-	
-	$( function() {
-	    $( "#dialog-terms" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-job" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=job]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-addr" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=addr]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-mate" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=mate]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-mateAgree" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=mateAgree]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-afterMateAgree" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=afterMateAgree]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-raise" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=raise]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-currently" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=currently]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
-	$( function() {
-	    $( "#dialog-afterCurrently" ).dialog({
-	    	  autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  $("input[name=afterCurrently]:radio").prop('checked', false).focus();
-		    	  }
-		      }
-	    });
-	});
-	
+ 
 	
 	$( function() {
 	    $( "#dialog-confirm" ).dialog({
@@ -452,22 +271,6 @@
 			$("input[name=termsAll]:checkbox").prop("checked", "checked");
 		}else{
 			$("input[name=termsAll]:checkbox").prop("checked", false);
-		}
-	});
-	
-	$( "input[name=mateAgree]" ).on('click', function(){
-		if( $('input[name=mate]').length != 1 ){
-			$('#dialog-afterMateAgree').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-afterMateAgree').dialog( "open" );
-			$( "input[name=mateAgree]").prop('checked', false);
-		}
-	});
-	
-	$( "input[name=currently]" ).on('click', function(){
-		if( $('input[name=raise]').length != 1 ){
-			$('#dialog-afterCurrently').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			$('#dialog-afterCurrently').dialog( "open" );
-			$( "input[name=currently]").prop('checked', false);
 		}
 	});
 	
@@ -568,8 +371,6 @@
 		        	   $("input[name=terms]:checkbox").prop('checked', false).focus();
 		           }
 		    });
-// 			$('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-terms').dialog( "open" );
 			return;
 		}
 		// 직업체크
@@ -587,8 +388,6 @@
 		        	   $("input[name=job]:radio").prop('checked', false).focus();
 		           }
 		    });
-// 			$('#dialog-job').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-job').dialog( "open" );
 			return;
 		}
 		// 거주지체크
@@ -606,8 +405,6 @@
 		        	   $("input[name=addr]:radio").prop('checked', false).focus();
 		           }
 		    });
-// 			$('#dialog-addr').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-addr').dialog( "open" );
 			return;
 		}
 		
@@ -626,16 +423,12 @@
 		        	   $("input[name=mate]:radio").prop('checked', false).focus();
 		           }
 		    });
-// 			$('#dialog-mate').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-mate').dialog( "open" );
 			return;
 		}else{
 			
 			// 동거인있음에 체크했는데 동의여부체크 안했을 경우
 			if( $( "input[name=mate]:checked" ).val() == '있음' ){
-// 				alert("들어옴");
 				if( $("input[name=mateAgree]:checked").length != 1){
-// 					alert("들어옴2222");
 					swal({
 				           text: "동거인 동의 여부를 선택하세요.",
 				           dangerMode: true,
@@ -649,15 +442,12 @@
 				        	   $("input[name=mateAgree]:radio").prop('checked', false).focus();
 				           }
 				    });
-// 					$('#dialog-mateAgree').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 					$('#dialog-mateAgree').dialog( "open" );
 					return;
 				}
 			}
 		}
 		// 양육여부체크
 		if( $("input[name=raise]:checked").length != 1){
-// 			alert("들어옴333"+ $( "input[name=mate]:checked" ).val() + $("input[name=mateAgree]:checked").length);
 			swal({
 		           text: "양육경험 여부를 선택하세요.",
 		           dangerMode: true,
@@ -671,8 +461,6 @@
 		        	   $("input[name=raise]:radio").prop('checked', false).focus();
 		           }
 		    });
-// 			$('#dialog-raise').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			$('#dialog-raise').dialog( "open" );
 			return;
 			  
 		}else{
@@ -692,8 +480,6 @@
 				        	   $("input[name=currently]:radio").prop('checked', false).focus();
 				           }
 				    });
-// 					$('#dialog-currently').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 					$('#dialog-currently').dialog( "open" );
 					return;
 				}
 			}
@@ -727,55 +513,22 @@
     	var pay = $("input[name=pay]").val();
     	var reason = $("input[name=reason]").val();
     	var situation = $("input[name=situation]").val();
-    	var confirmHTML;
+
+    	var mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+mateAgree;
+    	var curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+currently;
     	
-    	
-    	if( $("input[name=mate]:checked").val() == "없음" && $("input[name=raise]:checked").val() == "있음" ){
-    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
+    	var confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
 						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
 						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
+						+mateTag
 						+'<br\/><strong>[양육경험]<\/strong> : '+raise
-						+'<br\/><strong>[현재 양육 여부]<\/strong> : '+currently
+						+curTag
 						+'<br\/><strong>[앞으로의 계획]<\/strong> : '+plan
 						+'<br\/><strong>[1년 예상비용]<\/strong> : '+pay
 						+'<br\/><strong>[입양신청 이유]<\/strong> : '+reason
 						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
 						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong></p>';
-    		
-    	}else if($("input[name=mate]:checked").val() == "없음" &&  $("input[name=raise]:checked").val() == "없음"  ) {
-    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
-						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
-						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
-						+'<br\/><strong>[양육경험]<\/strong> : '+raise
-						+'<br\/><strong>[앞으로의 계획]<\/strong> : '+plan
-						+'<br\/><strong>[1년 예상비용]<\/strong> : '+pay
-						+'<br\/><strong>[입양신청 이유]<\/strong> : '+reason
-						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong></p>';
-    	}else if($("input[name=mate]:checked").val() == "있음" &&  $("input[name=raise]:checked").val() == "없음"  ) {
-    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
-						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
-						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
-						+'<br\/><strong>[동의 여부]<\/strong> : '+mateAgree
-						+'<br\/><strong>[양육경험]<\/strong> : '+raise
-						+'<br\/><strong>[앞으로의 계획]<\/strong> : '+plan
-						+'<br\/><strong>[1년 예상비용]<\/strong> : '+pay
-						+'<br\/><strong>[입양신청 이유]<\/strong> : '+reason
-						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong></p>';
-    	}else{
-    		confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
-						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
-						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
-						+'<br\/><strong>[동의 여부]<\/strong> : '+mateAgree
-						+'<br\/><strong>[양육경험]<\/strong> : '+raise
-						+'<br\/><strong>[현재 양육 여부]<\/strong> : '+currently
-						+'<br\/><strong>[앞으로의 계획]<\/strong> : '+plan
-						+'<br\/><strong>[1년 예상비용]<\/strong> : '+pay
-						+'<br\/><strong>[입양신청 이유]<\/strong> : '+reason
-						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong></p>';
-    	}
+
     	
     	if( mateAgree == '' ){
     		$("input[name=mateAgree]:checked").val('X');
@@ -783,42 +536,7 @@
     	if( currently == '' ){
     		$("input[name=currently]:checked").val('X');
     	}
-    	
-//     	Swal.fire({
-// 	           html: confirmHTML,
-// 	           dangerMode: true,
-// 	           confirmButtonText:"신청",
-// 	           cancelButtonText: "취소",
-// 	           showCancelButton: true,
-// 	           showCloseButton: true
-// // 	           buttons: {
-// // 						 catch: {
-// // 						 	text: "신청"
-// // 						 },
-// // 						 cancelButtonText: "취소",
-// // 			   },
-// 	    }).then((result) => {
-// 	    	  if (result.value) {
-//     		    	$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
-//     		  } else if (
-//     		    // Read more about handling dismissals
-//     		    result.dismiss === Swal.DismissReason.cancel
-//     		  ) {
-//     		    swalWithBootstrapButtons.fire(
-//     		      'Cancelled',
-//     		      'Your imaginary file is safe :)',
-//     		      'error'
-//     		    )
-//     		  }
-//    		})
-	    
-	    
-// 	    then((willDelete) => {
-// 	           if (willDelete) {
-// 	        	   $("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
-// 	           }
-// 	    });
-    	
+ 	
 		$('#cfHTML').remove();
 		$('#confirm').html( confirmHTML );
 		
