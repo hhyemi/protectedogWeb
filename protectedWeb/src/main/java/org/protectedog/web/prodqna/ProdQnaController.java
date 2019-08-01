@@ -72,7 +72,7 @@ public class ProdQnaController {
 		System.out.println(board);
 		System.out.println("////////////////////");
 		
-		return "forward:/prodQna/listQna?order=1";
+		return "forward:/shop/prodQna/addProdQna.jsp";
 	}
 	
 	

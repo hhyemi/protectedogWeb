@@ -12,6 +12,7 @@
 <html lang="ko">
 	
 <head>
+	<title>보호할개 · 분양</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -123,8 +124,18 @@
 		    	</p>
 		    </div>
 		    
-			<div class="col-md-6" align="left">
-				<form class="form-inline" name="detailForm">
+		    
+		    <div class="col-md-6" id="justify" align="left">
+			    <c:if test="${sessionScope.user.id ne null}">
+			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button>
+			    </c:if>
+		    </div>
+		    
+		    
+		    
+		    
+			<div class="col-md-6" align="right">
+				<form class="form-inline" name="detailForm" style="float: right;">
 
 			    	<div class="form-group">
 						<select name="searchCondition" id="searchCondition">
@@ -147,11 +158,7 @@
 			    </form>
 		    </div>
 		    
-		    <c:if test="${sessionScope.user.id ne null}">
-			    <div class="col-md-6" id="justify" align="right">
-			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button>
-			    </div>
-		    </c:if>
+		    
 		</div>
 		
 	  <div class="row"><div class="col-md-12"></div><br/></div>

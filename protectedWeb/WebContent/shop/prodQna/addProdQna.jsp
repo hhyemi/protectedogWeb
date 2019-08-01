@@ -42,7 +42,7 @@ body>div.container {
 		$("#addqna").on("click", function() {
 			//Debug..
 			//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-		$("form").attr("method", "POST").attr("action","/prodQna/addProdQna").submit();
+		$("form").attr("method", "POST").attr("action","/prodQna/addProdQna?order={order.param}").submit();
 		});
 	});
 

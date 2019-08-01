@@ -17,6 +17,12 @@
 	 	 scroll-behavior: smooth;
 		}
 		
+		.waves-effect>span {
+			background-color: #f04f23;
+			border-radius: 3px;
+			padding: 3px;
+			color: white;
+		}
 		
 	</style>
 	
@@ -31,10 +37,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <p ><span class="mr-2">Update</span> <span>Adopt</span></p>
-            <font size="7">
-            	<c:if test="${adopt.boardCode eq 'AD' }">분양글 수정</c:if>
-			    <c:if test="${adopt.boardCode eq 'MS' }">실종글 수정</c:if>
-            </font>
+            <font size="7">분양글 수정</font>
           </div>
         </div>
       </div>
@@ -47,15 +50,12 @@
           <div class="col-xl-8 ftco-animate">
 			<form  id ="uploadForm"  action="#" class="billing-form">
 	          	<div class="row align-items-end">
-	          	
-	          	
+       	
 				<input type="hidden" name="boardCode" value=" ${ adopt.boardCode.trim() }" >
 				<input type="hidden" name="postNo" value=" ${ adopt.postNo }" >
 				<input type="hidden" id="multiFile" name="multiFile" >
 				<input type="hidden" id="deleteFile" name="deleteFile" />
-				
-				
-				
+	
 	          	
 	          	<div class="col-md-12"></div>
 	          	
@@ -76,7 +76,7 @@
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
-			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><strong>사진등록</strong>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)</label></span>
+			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><span><strong>사진등록</strong></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)</label></span>
 			                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 			            </div>
 		            </div>
@@ -893,23 +893,23 @@
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
-		  if( $(".preview-box").length == 0 || $(".thumbnail").length == 0 ){
-			  swal({
-		           text: "이미지를 등록해주세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "닫기"
-							 }
-				   },
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-		           }
-		      });
+// 		  if( $("img.thumbnail").length == 0 || $(".preview-box").length == 0  ){
+// 			  swal({
+// 		           text: "이미지를 등록해주세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "닫기"
+// 							 }
+// 				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+// 		           }
+// 		      });
 // 			  $('#dialog-img').dialog( "open" );
-			  return;
-		  }
+// 			  return;
+// 		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
 			  $("input[name=dogWeight]").focus();
 			  return;

@@ -3,6 +3,8 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- //////////////////////  DAY FORMAT ///////////////////////// -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 
@@ -27,25 +29,15 @@
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
 	type="text/css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 
 <!-- jQuery UI toolTip 사용 CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip 사용 JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 <style>
 body {
@@ -133,16 +125,20 @@ body {
 
 
 
-
-	<div class="container">
-		<h1 align="center">
-			관리자<small>상품 &nbsp;리&nbsp;스&nbsp;트 <a href="#" id="button"><button
+<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">protected dog</span> <span>Store</span></p>
+            <font size="7">관리자 상품 관리</font><a href="#" id="button"><button
 						class="mdl-button mdl-js-button mdl-button--primary">
 						상품등록</button></a>
-			</small>
-		</h1>
-	</div>
-	<BR />
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>
 	<!--/////////////////////// form start /////////////////////////////////-->
 	<form class="form-inline" name="detailForm">
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -258,8 +254,8 @@ body {
 								<td align="center">${product.prodName}<input type="hidden"
 									name="prodNo" value="${product.prodNo}" />
 								</td>
-								<td align="center">${product.manuDate}</td>
-								<td align="center">${product.regDate}</td>
+								<td align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${product.manuDate}" /></td>
+								<td align="center"><fmt:formatDate pattern="yyyy-MM-dd" value="${product.regDate}" /></td>
 								<td align="center">${product.quantity}</td>
 
 							</tr>

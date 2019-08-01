@@ -52,8 +52,11 @@
 		SELECT
 		receiver_id, coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, use_date, limit_date 
 		FROM coupon
-		WHERE coupon_code=#{couponCode}
-		AND receiver_id=#{receiverId}
+
+				WHERE receiver_id=#{receiverId}
+				AND coupon_code=#{couponCode}
+
+		ORDER BY make_date DESC
 	</select>
 	 
 
@@ -78,7 +81,7 @@
 				FROM coupon
 				WHERE coupon_status='0'
 				AND receiver_id IS NULL
-				ORDER BY coupon_no ) inner_table
+				ORDER BY make_date DESC ) inner_table
 			WHERE ROWNUM &lt;=#{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

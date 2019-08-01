@@ -43,7 +43,12 @@
        }
        body{
           font-family: NanumSquare, sans-serif !important;
-       }			
+       }
+         .fa-heart {
+         	color: #f04f23;
+/*          	padding-top: 5px; */
+        }
+               			
 	</style> 
  
  
@@ -111,8 +116,26 @@
              <div class="s_product_text">			 
             <div>
              <h4>&emsp;</h4>
-             <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> </div>
-			<div style="padding-bottom:10px"><font size="5" >${funding.fundPay}원</font></div>
+             <div style="padding-bottom:10px">
+           		 <div class="row">
+           		 <div class="col-xs-11 col-md-11" style="height:35px; left:0px; bottom:0px;" >             
+             <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
+             </div>				  
+			        	<c:if test="${ user.id ne funding.id }">
+				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left: 0;" >
+								
+								<font size="5px" id="heartIcon">
+									<c:if test="${ check eq 'already' }">
+										<span class="fas fa-heart"></span>
+									</c:if>
+									<c:if test="${ check ne 'already' }">
+										<span class="far fa-heart"></span>
+									</c:if>
+								</font>
+				 			</div>
+			        	</c:if>
+				</div>
+			<div style="padding-bottom:10px; padding-top:30px"><font size="5" >${funding.fundPay}원</font></div>
 			<!-- 후원종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
 			<font size="5"><strong style="color:#d43333">후원종료</strong></font>		 			
@@ -152,7 +175,7 @@
           </div></div>
         </div>
       </div>
-    </div>
+    </div></div>
    <br><br><br/>
 <!--================Product Description Area =================-->
 	 <section class="product_description_area">
@@ -216,7 +239,7 @@
 					<h4>등록된 후기가 없습니다.</h4>
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
 					<div class="form-group3">
-					<a class="main_btn" href="#">후기작성</a> 								
+					<button type="button" id="reviewAdd" class="btn btn-default">후기작성</button> 								
 		            </div>					
 					</c:if>						
 					</c:if>
@@ -230,13 +253,13 @@
 					<c:forEach var="name" items="${fileReview}" varStatus="status">      
 	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
 	                  </c:forEach>	
-	                <p/>  
+	                <br/>   <br/><p/>   
 					${funding.reviewContent }
 					<hr/><br/>	
 					<div class="form-group2">
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-					<button href="#">후기수정</button> 			
-					<button href="#">후기삭제</button> 
+					<button type="button" id="reviewUpdate" class="btn btn-default">후기수정</button> 			
+					<button type="button" id="reviewDelete" class="btn btn-default">후기삭제</button> 
 					</c:if>									
 		            </div>
 					</c:if>	
@@ -289,7 +312,8 @@
     
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-    $(function(){
+	
+
     
 		//============= 후원하기 Event  처리 =============	
 	 	$( "#btnFund" ).on("click" , function() {
@@ -322,33 +346,42 @@
 		});	
 	    
 		//============= 후기작성 Event  처리 =============	
-	 	$( "a:contains('후기작성')" ).on("click" , function() {
+	 	$( "#reviewAdd" ).on("click" , function() {
 	 		self.location = "/funding/addReview?postNo=${funding.postNo}";
 		});   
 		
 		//============= 후기수정 Event  처리 =============	
-	 	$( "a:contains('후기수정')" ).on("click" , function() {
+	 	$( "#reviewUpdate" ).on("click" , function() {
 	 		self.location = "/funding/updateReview?postNo=${funding.postNo}";
 		});   
 		
 		//============= 후기삭제 Event  처리 =============	
-	 	$( "a:contains('후기삭제')" ).on("click" , function() {
-            if(confirm('정말 삭제하시겠습니까?')){
-            	self.location = "/funding/delReview?postNo=${funding.postNo}"
-            	alert("삭제가 완료되었습니다.")
-            } else {
-            }
-		});   
-		
-    });
+	 	$( "#reviewDelete" ).on("click" , function() {
+	 		swal({
+	            title: "정말 삭제 하시겠습니까 ?",
+	            text: "삭제시 한달간 글 작성 불가입니다.",
+	            icon: "warning",
+	            buttons: true,
+	            dangerMode: true,
+	          })
+	          .then((willDelete) => {
+	            if (willDelete) {
+	              swal("삭제가 완료되었습니다!", {
+	                icon: "success",
+	              }).then((value) => {
+	            	  self.location = "/funding/delReview?postNo=${funding.postNo}"
+	              });
+	            }
+	          });	 	 				
+       });
 		//============= 카카오 공유하기Event  처리 =============		
-		 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+		 //Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 		 function sendLinkKakao(){
 		     Kakao.Link.sendDefault({
 		       objectType: 'feed',
 		       content: {
-		         title: '유기견보호',
-		         description: '멍멍',
+		         title: '보호할개',
+		         description: '스토리펀딩',
 		         imageUrl:document.location.href,
 		         link: {
 		           mobileWebUrl: document.location.href,

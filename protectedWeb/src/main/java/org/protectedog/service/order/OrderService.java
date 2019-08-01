@@ -15,7 +15,7 @@ public interface OrderService {
 	public Order getOrder(int orderNo) throws Exception;
 	
 	//주문내역 리스트
-	public Map<String, Object> listOrder(Search search,String id) throws Exception;
+	public Map<String,Object> listOrder(Search search,String id) throws Exception;
 	
 	//구매정보 수정 
 	public void updateOrder(Order order) throws Exception;
@@ -26,10 +26,5 @@ public interface OrderService {
 	//주문 삭제(관리자 권한)
 	public void delOrder(Order order)throws Exception;
 	
-	//교환반품 리스트
-	public Map<String, Object> listSwapOrder(Search search, String id)throws Exception;
-	
-	//구매관리(관리자 권한)
-	public Map<String, Object> listAdminOrder(Search search, String id)throws Exception;
 
 }

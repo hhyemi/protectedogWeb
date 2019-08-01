@@ -12,7 +12,7 @@ public class Report {
 	private String reportContent;
 	private int reportStatus;
 	private Date reportDate;
-	private char delCode;
+	private String delCode;
 	
 	///Constructor
 	
@@ -59,10 +59,10 @@ public class Report {
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
 	}
-	public char getDelCode() {
+	public String getDelCode() {
 		return delCode;
 	}
-	public void setDelCode(char delCode) {
+	public void setDelCode(String delCode) {
 		this.delCode = delCode;
 	}
 

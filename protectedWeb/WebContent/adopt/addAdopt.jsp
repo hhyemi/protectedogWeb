@@ -10,30 +10,26 @@
 	
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
     <style type="text/css">
     
 	    html {
 	 		scroll-behavior: smooth;
 		}
 		
-		.waves-effect>strong {
+		.waves-effect>span {
 			background-color: #f04f23;
 			border-radius: 3px;
+			padding: 3px;
+			color: white;
 		}
 		
 		input[name=dogDate] {
 			height: 38px;
-/* 			width: 80%; */
-/* 			margin-right: 0px !important; */
-/* 			padding-right: 0px !important; */
-		}
-		
-/* 		.swal-button { */
-/* 		  background-color: #f04f23; */
-/* 		} */
 
-		
+		}
+
 	</style>
    <jsp:include page="/layout/toolbar.jsp"></jsp:include> 
   </head>
@@ -41,7 +37,6 @@
   
   <body class="goto-here">
   
-  	
 
 	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
@@ -49,14 +44,12 @@
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">Add</span> <span>Adopt</span></p>
             <font size="7">
-            	<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
-			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if>
+            	분양글 등록
             </font>
           </div>
         </div>
       </div>
     </div>
-    
     
     <section class="ftco-section">
       <div class="container">
@@ -82,7 +75,6 @@
 							<div class="form-group">
 								<div class="col-md-12"><strong>1. </strong>
 									<c:if test="${param.boardCode eq 'AD' }">분양글을 등록하고, 입양신청서가 등록되거나 분양완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if>
-	<%-- 			 					<c:if test="${param.boardCode eq 'MS' }">실종글을 등록하고, 찾기완료 상태로 변경하신 경우 글을 수정하거나 삭제하실 수 없습니다.</c:if> --%>
 								</div>
 								<div class="col-md-12">
 									<div class="radio" align="right">
@@ -135,7 +127,7 @@
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
 			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
-			               		<strong>이미지 등록</strong>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)
+			               		<span><strong>사진첨부</strong></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)
 			                </label></span>
 			                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 			            </div>
@@ -189,22 +181,14 @@
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogPay"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
-	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if> --%>
-	                		</strong>&nbsp;<span name="dogPay">원하지 않을 경우 0원을 입력하세요.</span></label>
+	                		<label for="dogPay"><strong>책임비</strong>&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span></label>
 	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="비용을 입력하세요.">
 	               		</div>
 	              	</div>
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate" id="dogDateLabel"><strong>
-	                			<c:if test="${param.boardCode eq 'AD' }">발견일자</c:if>
-	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">실종일자</c:if> --%>
-	                		</strong></label>
-<!-- 	                		<img src="/resources/file/others/calendar.png" alt="logo" id="calIcon" height="20px" width="20px"> -->
-<!-- 	                  		<div class="col-md-12" style="padding-right: 0px;padding-left: 0px;margin-right: 0px;"> -->
+	                		<label for="dogDate" id="dogDateLabel"><strong>발견일자</strong></label>
 	                  		<input type="text" class="form-control" name="dogDate" value="" readonly>
 	                  	</div>
 	               	</div>
@@ -231,16 +215,8 @@
 	               		</div>
 	               	</div>
 	               		
-		            <div class="col-md-12" id="areaFocus">
-		            <br/>
-	               		<label><strong>
-		               		<c:if test="${param.boardCode eq 'AD' }">
-		               			※ 지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.
-		               		</c:if>
-	<%-- 	               		<c:if test="${param.boardCode eq 'MS' }"> --%>
-	<!-- 	               			지도를 클릭하면 마커가 생성되며, 지도를 우클릭하거나 마커를 우클릭한 경우 마커가 삭제됩니다.  -->
-	<%-- 	               		</c:if> --%>
-	               		</strong></label>
+		            <div class="col-md-12" id="areaFocus"><br/>
+	               		<label><strong>※ 지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.</strong></label>
 	               	</div>
 	               		
 	              	<c:if test="${param.boardCode eq 'AD' }">
@@ -256,16 +232,12 @@
 	               		
 		            <div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="location"><strong>
-		                		<c:if test="${param.boardCode eq 'AD' }">발견위치</c:if>
-	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">실종위치</c:if> --%>
-	                		</strong></label>
+	                		<label for="location"><strong>발견위치</strong></label>
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location">
 	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" placeholder="마커 위치가 입력됩니다." readonly>
 	               		</div>
 	              	</div>
-	               		
 	               		
 	               	<div class="col-md-12">
 		                <div class="form-group">
@@ -274,9 +246,6 @@
 		                </div>
 	                </div>
 	               		
-	              	<div class="w-100"></div>
-		            <div class="w-100"></div>
-	              	<div class="w-100"></div>
                 </div>
 	         	</div>
 	         </form>
@@ -293,37 +262,10 @@
 								<p><a href="#" ><font color="gray">취소</font></a></p>
 							</div>
 						</div>
-					</div>
-					<br/><br/>
+					</div><br/><br/>
 	          	</div>
 	         </div>
-	          
-	          
- <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
- 
- 
-<!-- 			<div id="dialog-terms" title=""> -->
-<!-- 			  <p align="center"><br/>약관에 모두 동의해야 등록할 수 있습니다.</p> -->
-<!-- 			</div>   -->
-			
-<!-- 			<div id="dialog-img" title=""> -->
-<!-- 			  <p align="center"><br/>이미지를 등록해주세요.</p> -->
-<!-- 			</div>         -->
-
-<!-- 			<div id="dialog-area" title=""> -->
-<!-- 			  <p align="center"><br/>분양가능지역을 선택해주세요.</p> -->
-<!-- 			</div>        -->
-			
-<!-- 			<div id="dialog-location" title=""> -->
-<!-- 			  <p align="center"><br/> -->
-<%-- 			  		<c:if test="${param.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if> --%>
-<%-- 			  		<c:if test="${param.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if> --%>
-<!-- 			  </p> -->
-<!-- 			</div>    -->
-
-       
-<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
-	          
+	                    
 	          
           </div> <!-- .col-md-8 -->
         </div>
@@ -334,10 +276,6 @@
     <jsp:include page="/layout/footer.jsp"></jsp:include>
   
 
-
-  <!-- dialog -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   
 <!--   <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -573,10 +511,9 @@
 	         for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 	
 	            var file = input[0].files[fileIndex];
-	            
 	            if (validation(file.name))
 	                 continue;
-	            
+
 	            var fileName = file.name + "";   
 	            var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	            var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length); 
@@ -608,28 +545,24 @@
 		                 fnAddFile(fileNameArray);
 	                 }
 	                
+	                //비전
 	                if( imgNum == 0){
 	                	var b64 = img.target.result;
-// 	                	console.log("[b64]"+b64);
+	                	
 	                	if(b64.indexOf('png') != -1){
 	                		b64 = b64.replace(  'data:image/png;base64,'   ,    ''  ); // remove content type
 	                	}else {
 	                		b64 = b64.replace(  'data:image/jpeg;base64,'   ,   ''  );
 	                	}
 	                	
-                        request = {
-                          "requests":[
-                            {
-                              "image":{ "content": b64 },
-                              "features":[
-                                {
-                                  // if you want to detect more faces, or detect something else, change this
-                                  "type":"WEB_DETECTION",
-                                  "maxResults":1
-                                }
-                              ]
-                            }
-                          ]
+                        request = {"requests":[{
+                              				"image":{ "content": b64 },
+                             				"features":[{
+						                                // if you want to detect more faces, or detect something else, change this
+						                                "type":"WEB_DETECTION",
+						                                "maxResults":1
+                                			}]
+                            		}]
                         };
                         
                         $.ajax({
@@ -639,8 +572,7 @@
                           data: JSON.stringify(request),
                           processData: false,
                           success: function(data){
-                          	console.log("모두 확인 : "+JSON.stringify(data));
-                          	
+//                           console.log("모두 확인 : "+JSON.stringify(data));
 	                          	var test = data.responses[0].webDetection.bestGuessLabels[0];
 	                          	var breed = test.label;
 	                          	console.log("견종 확인 : "+breed);
@@ -662,8 +594,6 @@
 	 }
 	 
 
-	 
-
 	 //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
 	 function deletePreview(obj) {
 	     var imgNum = obj.attributes['value'].value;
@@ -678,10 +608,9 @@
 	 function validation(fileName) {
 	     fileName = fileName + "";
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-	     var fileNameExtension = fileName.toLowerCase().substring(
-	             fileNameExtensionIndex, fileName.length);
+	     var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);
 	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg') )) {
-	         alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
+	    	 alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
 	         return true;
 	     } else {
 	         return false;
@@ -773,72 +702,8 @@
 	
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑      check box        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
-	
-// 	$( function() {
-// 	    $( "#dialog-terms" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  $("input[name=terms]:checkbox").prop('checked', false).focus();
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-// 	$( function() {
-// 	    $( "#dialog-img" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-// 	$( function() {
-// 	    $( "#dialog-area" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-// 	$( function() {
-// 	    $( "#dialog-location" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
 
-	
-	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
 		if($("input[name=postTitle]").val().length > 20 ){
@@ -937,9 +802,7 @@
 		        	   $("input[name=terms]:checkbox").prop('checked', false).focus();
 		           }
 		      });
-// 			  $('#dialog-terms').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-terms').dialog("open");
-// 			  $("input[name=terms]:checkbox").prop('checked', false).focus();
+
 			  return;
 		  }
 		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
@@ -968,8 +831,6 @@
 		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
 		           }
 		      });
-// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-img').dialog( "open" );
 			  return;
 		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 || $("input[name=dogWeight]").val() < 1 ){
@@ -1012,8 +873,6 @@
 			        	   jQuery($("#areaFocus"))[0].scrollIntoView(true);
 			           }
 			      });
-// 				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
@@ -1032,8 +891,7 @@
 		        	   jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
 		           }
 		      });
-// 			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-location').dialog( "open" );
+
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -1049,7 +907,6 @@
 	      $(function() {     
 		        var form = $('#uploadForm')[0];
 		        var formData = new FormData(form);
-// 		        alert(boardCode);
 		
 		        for (var index = 0; index < 100; index++) {
 		            formData.append('files',files[index]);
@@ -1082,15 +939,12 @@
 		        });
 	  	  });
 
-
-		
 		$("form").attr("method" , "POST").attr("action" , "/adopt/addAdopt").attr("enctype","multipart/form-data").submit();
 		
 	}
 	
 	
-    
-    
+
     $(function() {
 			$( "button:contains('등록')" ).on("click" , function() {
 				fncAddAdopt();
@@ -1126,8 +980,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&callback=initMap"
     async defer></script>
   
-  
-  
+
   
   </body>
 </html>

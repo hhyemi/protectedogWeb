@@ -49,13 +49,13 @@ public class CouponDAOImpl implements CouponDAO{
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("couponCode", couponCode+"");
 		map.put("receiverId", receiverId+"");
-		System.out.println("couponDAO °Ë»ö¾î: "+map.toString());
+		System.out.println("couponDAO ìž…ìž¥: "+map.toString());
 		
 //		Map<String, Object> cMap=sqlSession.selectOne("CouponMapper.getMyCoupon", map);
 //		System.out.println("couponDAO : "+cMap.get("couponCode"));
 //		System.out.println("couponDAO : "+cMap.get("receiverId"));
 		Coupon coupon=sqlSession.selectOne("CouponMapper.getMyCoupon", map);
-		System.out.println("couponDAO ³¡(°Ë»ö°ª): "+coupon);
+		System.out.println("couponDAO í‡´ìž¥: "+coupon);
 		
 		return coupon; 
 	}

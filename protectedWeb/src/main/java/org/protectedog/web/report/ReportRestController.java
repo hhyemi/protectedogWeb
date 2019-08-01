@@ -16,8 +16,10 @@ import org.protectedog.common.Search;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Message;
 import org.protectedog.service.domain.Report;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
 import org.protectedog.service.report.ReportService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +45,10 @@ public class ReportRestController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	private FileService fileService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	
 	///Constructor
@@ -122,7 +128,7 @@ public class ReportRestController {
 	@RequestMapping(value="json/getReport/{reportNo}", method=RequestMethod.GET)
 	public Map<String, Object> getReport(@PathVariable int reportNo) throws Exception{
 		
-		System.out.println("/message/json/getMessage : GET");
+		System.out.println("/report/json/getReport : GET");
 
 		Date date=new Date();
 		Report report=reportService.getReport(reportNo);
@@ -142,6 +148,51 @@ public class ReportRestController {
 		
 		return map;
 		
+	}
+	
+	@RequestMapping(value="json/updateReport/{methodPath}/{addPoint}/{targetId}", method=RequestMethod.POST)
+	public Map<String, Object> updateReport(@RequestBody Map<String, Object> reportBody, 
+											@PathVariable("methodPath") String methodPath, 
+											@PathVariable("targetId") String targetId, 
+											@PathVariable("addPoint") int addPoint) throws Exception{
+		
+		System.out.println("/report/json/updateReport");
+		System.out.println("updateReport reportBody : "+reportBody.toString());
+		
+		Report report=reportService.getReport(Integer.parseInt((String)reportBody.get("reportNo")));
+		System.out.println("updateReport report? : "+report);
+		report.setDelCode((String)reportBody.get("delCode"));
+		report.setReportStatus(Integer.parseInt((String)reportBody.get("reportStatus")));
+		System.out.println("updateReport update 전 report? : "+report);
+		
+		reportService.updateReportStatus(report);
+		
+		System.out.println("updateReport update 후 report? : "+report);
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("report", report);
+		
+		System.out.println("updateReport update 후 map? : "+map.toString());
+		
+
+		if(addPoint==-1) {
+			System.out.println("updateReport 블랙처리 입장: "+report);	
+			User user=userService.getUsers(targetId);
+			user.setLevelPoint(-1);
+			userService.updateUsers(user);
+			map.put("user", user);
+			System.out.println("updateReport 블랙처리 퇴장 : "+map.toString());	
+		} else {
+			System.out.println("updateReport 점수깎기 입장 : "+report);
+			User user=userService.getUsers(targetId);
+			int levelPoint=user.getLevelPoint();
+			user.setLevelPoint(levelPoint-addPoint);
+			userService.updateUsers(user);
+			map.put("user", user);
+			System.out.println("updateReport 점수깎기 퇴장 : "+map.toString());	
+		}
+		
+		return map;
 	}
 	
 }

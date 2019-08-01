@@ -21,6 +21,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	 <jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
 </head><body>
 <!--====================================================
@@ -88,6 +89,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 ======================================================-->
  <!-- CAROUSEL -->
     <section id="home-shop">
+    	<input type="hidden" id="userId" value="${ sessionScope.user.id }">
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -362,12 +364,63 @@ License URL: https://creativecommons.org/licenses/by/4.0/
       </div>
     </section>
     
+    
 
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
    	<!-- footer End /////////////////////////////////////-->  
     <!--================ End footer Area  =================-->
+    <script src="/resources/newTemplate/admin/js/jquery.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/popper/popper.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/tether.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/bootstrap.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/jquery.cookie.js"></script>
+    <script src="/resources/newTemplate/admin/js/jquery.validate.min.js"></script> 
+    <script src="/resources/newTemplate/admin/js/chart.min.js"></script> 
+    <script src="/resources/newTemplate/admin/js/front.js"></script> 
+    <script type="text/javascript">
+    
+	
+// 	$(function (){
+// 			$(document).ready(function(){
+// 				if(${sessionScope.user != null}){
+// 					debugger;
+// 					var receiverId=$("#userId").val();
+// 					var checkCoupon = { "receiverId":receiverId };
+// 						alert("ajax통신 받는사람 : "+receiverId);
+// 						alert("ajax통신 체크쿠폰 : "+JSON.stringify(checkCoupon));
+// 					$.ajax({
+// 						type : "POST",
+// 						contentType : "application/json",
+// 						url : "/coupon/json/checkCoupon",
+// 						data : JSON.stringify(checkCoupon),
+// 						datatype : "json",
+// 						success : function(response){
+// 							if($.trim(response.result)==1){
+// 								alert("ajax통신 왔습니까?");
+// // 								window.open("/coupon/getCoupon","","width=500,height=400,left=600,resizable=no");
+// 							}else{
+// 								return;
+// 							}
+// 						},
+// 						error : function(request, status, error){
+// 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 						}
+// 					})
+// 				}
+// 			});
+// 	});
+		
+// 		$(document).ready(function(){
+// 			if(${ sessionScope.user != null}){
+// 				var url="/coupon/getCoupon"
+// 				window.open(url,"","width=500,height=400,left=600,resizable=no");
+// 			}
+// 		})
+    
+    </script>
+    
   </body>
 
 </html>

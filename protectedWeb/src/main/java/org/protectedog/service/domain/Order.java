@@ -5,10 +5,10 @@ import java.util.Date;
 public class Order {
 	//Field
 	private int orderNo;
-	private Product prodNo;
-	private User id;
-	private User phone;
-	private Coupon couponNo;
+	private int prodNo;
+	private String id;
+	private String phone;
+	private int couponNo;
 	private String receiverAddr;
 	private String receiverName;
 	private String receiverPhone;
@@ -19,11 +19,15 @@ public class Order {
 	private int totalPrice;
 	private int orderCode;
 	private int deliveryCode;
-	
-	
+	private int mileageNo;
+	private Product orderProd;
+
+
+
 	public Order() {
 		
 	}
+
 
 
 	public int getOrderNo() {
@@ -31,49 +35,59 @@ public class Order {
 	}
 
 
+
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
 
 
-	public Product getProdNo() {
+
+	public int getProdNo() {
 		return prodNo;
 	}
 
 
-	public void setProdNo(Product prodNo) {
+
+	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
 	}
 
 
-	public User getId() {
+
+	public String getId() {
 		return id;
 	}
 
 
-	public void setId(User id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
 
 
-	public User getPhone() {
+
+	public String getPhone() {
 		return phone;
 	}
 
 
-	public void setPhone(User phone) {
+
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 
-	public Coupon getCouponNo() {
+
+	public int getCouponNo() {
 		return couponNo;
 	}
 
 
-	public void setCouponNo(Coupon couponNo) {
+
+	public void setCouponNo(int couponNo) {
 		this.couponNo = couponNo;
 	}
+
 
 
 	public String getReceiverAddr() {
@@ -81,9 +95,11 @@ public class Order {
 	}
 
 
+
 	public void setReceiverAddr(String receiverAddr) {
 		this.receiverAddr = receiverAddr;
 	}
+
 
 
 	public String getReceiverName() {
@@ -91,9 +107,11 @@ public class Order {
 	}
 
 
+
 	public void setReceiverName(String receiverName) {
 		this.receiverName = receiverName;
 	}
+
 
 
 	public String getReceiverPhone() {
@@ -101,9 +119,11 @@ public class Order {
 	}
 
 
+
 	public void setReceiverPhone(String receiverPhone) {
 		this.receiverPhone = receiverPhone;
 	}
+
 
 
 	public String getOrderRequest() {
@@ -111,9 +131,11 @@ public class Order {
 	}
 
 
+
 	public void setOrderRequest(String orderRequest) {
 		this.orderRequest = orderRequest;
 	}
+
 
 
 	public int getPaymentCode() {
@@ -121,9 +143,11 @@ public class Order {
 	}
 
 
+
 	public void setPaymentCode(int paymentCode) {
 		this.paymentCode = paymentCode;
 	}
+
 
 
 	public Date getOrderDate() {
@@ -131,9 +155,11 @@ public class Order {
 	}
 
 
+
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
+
 
 
 	public int getOrderQuantity() {
@@ -141,9 +167,11 @@ public class Order {
 	}
 
 
+
 	public void setOrderQuantity(int orderQuantity) {
 		this.orderQuantity = orderQuantity;
 	}
+
 
 
 	public int getTotalPrice() {
@@ -151,9 +179,11 @@ public class Order {
 	}
 
 
+
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
 
 
 	public int getOrderCode() {
@@ -161,9 +191,11 @@ public class Order {
 	}
 
 
+
 	public void setOrderCode(int orderCode) {
 		this.orderCode = orderCode;
 	}
+
 
 
 	public int getDeliveryCode() {
@@ -171,9 +203,34 @@ public class Order {
 	}
 
 
+
 	public void setDeliveryCode(int deliveryCode) {
 		this.deliveryCode = deliveryCode;
 	}
+
+
+
+	public int getMileageNo() {
+		return mileageNo;
+	}
+
+
+
+	public void setMileageNo(int mileageNo) {
+		this.mileageNo = mileageNo;
+	}
+	
+	
+	public Product getOrderProd() {
+		return orderProd;
+	}
+
+
+
+	public void setOrderProd(Product orderProd) {
+		this.orderProd = orderProd;
+	}
+
 
 
 	@Override
@@ -182,15 +239,14 @@ public class Order {
 				+ couponNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
 				+ receiverPhone + ", orderRequest=" + orderRequest + ", paymentCode=" + paymentCode + ", orderDate="
 				+ orderDate + ", orderQuantity=" + orderQuantity + ", totalPrice=" + totalPrice + ", orderCode="
-				+ orderCode + ", deliveryCode=" + deliveryCode + "]";
+				+ orderCode + ", deliveryCode=" + deliveryCode + ", mileageNo=" + mileageNo + ", orderProd=" + orderProd
+				+ "]";
 	}
+
+
+
+
+
+	
+	
 }
-
-
-	
-	
-	
-	
-
-	
-	

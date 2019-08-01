@@ -67,51 +67,11 @@ public class AdoptRestController {
 		System.out.println(this.getClass());
 	}
 	
-
 	
-	
-	// 관심목록 추가
-//	@RequestMapping( value="json/addInterest/{postNo}/{id}", method=RequestMethod.GET)
-//	public String addInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
-//		
-//		System.out.println("/adopt/json/addInterest : GET");
-//		Board board = new Board();
-//		board.setPostNo(postNo);
-//		
-//		Interest interest = new Interest();
-//		interest.setBoardCode("AD");
-//		interest.setInterestId(userService.getUsers(id));
-//		interest.setInterestPost(board);
-//		
-//		interestService.addInterest(interest);
-//		
-//		return "{\"message\" : \"insertOK\" }";
-//	}
-	
-	
-	// 관심목록삭제
-//	@RequestMapping( value="json/delInterest/{postNo}/{id}", method=RequestMethod.GET)
-//	public String delInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
-//		
-//		System.out.println("/adopt/json/delInterest : GET");
-//		
-//		Map<String,Object> map = new HashMap<>();
-//		map.put("id", id);
-//		map.put("boardCode", "AD");
-//		map.put("searchType", "post");
-//		map.put("searchNo", postNo);
-//		
-//		interestService.delInterest(map);
-//		
-//		return "{\"message\" : \"delOK\" }";
-//	}
-	
-	
-	@RequestMapping( value="json/addAdopt", method=RequestMethod.POST )
-	public String addAdopt( 
-//			public void addAdopt(
-					@RequestParam("files") List<MultipartFile> images,
-					@RequestParam Map<String, Object> param
+	@RequestMapping( value="json/addMissing", method=RequestMethod.POST )
+	public String addMissing( 
+									@RequestParam("files") List<MultipartFile> images
+									,@RequestParam Map<String, Object> param
 																										) throws Exception {
 
 		System.out.println("/adopt/json/addAdopt : POST \n");
@@ -133,9 +93,8 @@ public class AdoptRestController {
 		adopt.setDogStatus(param.get("dogStatus").toString());
 		adopt.setDogChar(param.get("dogChar").toString());
 		adopt.setStatusCode("1");
-//		adopt.setDogDate(    param.get("dogDate").toString()    );
-//		adopt.setDogDate(  new Date( Integer.parseInt(  param.get("dogDate").toString().replace("-", "")  ) )  );
-		
+		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
+	
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
@@ -158,6 +117,16 @@ public class AdoptRestController {
 		System.out.println("파일 확인 "+ files);
 		
 		return "{\"message\" : \"OK\" }";
+	}
+	
+	
+	// 실종글 가져와서 모달에 띄우기(update하려고)
+	@RequestMapping( value="json/getMissing/{postNo}", method=RequestMethod.GET)
+	public Adopt  getMissing( @PathVariable("postNo") int postNo ) throws Exception{
+		
+		System.out.println("/adopt/json/getMissing : GET");
+
+		return adoptService.getAdopt(postNo);
 	}
 	
 	

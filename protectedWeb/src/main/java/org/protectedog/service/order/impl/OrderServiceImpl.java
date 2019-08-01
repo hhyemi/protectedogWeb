@@ -51,55 +51,14 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public Map<String, Object> listSwapOrder(Search search, String id) throws Exception {
-		List<Order> list = orderDAO.listSwapOrder(search,id);
-		int totalCount = orderDAO.getTotalCount(id);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(search.getCurrentPage());
-		System.out.println(search.getPageSize());
-		System.out.println("service "+list.size());  
-		map.put("list", list);
-		map.put("totalCount", new Integer(totalCount));
-		
-		
-		return map;
-	}
-		
-	@Override
-	public Map<String, Object> listAdminOrder(Search search, String id) throws Exception {
-		// TODO Auto-generated method stub
-		List<Order> list= orderDAO.listAdminOrder(search, id);
-		int totalCount = orderDAO.getTotalCount(id);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(search.getCurrentPage());
-		System.out.println(search.getPageSize());
-		System.out.println("service "+list.size()); 
-		map.put("list", list );
-		map.put("totalCount", new Integer(totalCount));
-		
-		return map;
-		
-	}
-
-
-	@Override
 	public Map<String, Object> listOrder(Search search, String id) throws Exception {
-		// TODO Auto-generated method stub
-		List<Order> list= orderDAO.listOrder(search, id);
-		int totalCount = orderDAO.getTotalCount(id);
-				
+		System.out.println("serviceImpl listorder");
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(search.getCurrentPage());
-		System.out.println(search.getPageSize());
-		System.out.println("service "+list.size()); 
-		map.put("list", list );
-		map.put("totalCount", new Integer(totalCount));
-				
+		map.put("list", orderDAO.listOrder(search, id));
+		map.put("totalCount", orderDAO.getTotalCount(id));
+		System.out.println("listorder 다시확인");
 		return map;
-				
-			}
+	}
 
 
 

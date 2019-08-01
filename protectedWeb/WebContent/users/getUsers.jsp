@@ -100,8 +100,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         </div>
                         <nav class="nav text-center prof-nav">
                             <ul  class="list-unstyled ">
-                                <li><a href="#profile">Profile</a></li> 
-                                <li><a href="#references">Setting</a></li> 
+<!--                                 <li><a href="#profile">Profile</a></li>  -->
+<!--                                 <li><a href="#references">Setting</a></li>  -->
                                 <li><a href="/users/logout">Logout</a></li> 
                             </ul>
                         </nav>
@@ -204,12 +204,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                                 <label for="example-url-input" style="width: 85px;" class=" col-form-label">비밀번호확인</label>
                                                 <div class="col-9">
                                                     <input class="form-control" type="password" value="${ user.pw }" id="pw2" name="pw2">
+                                                    <span id="helpBlock1" class="help-block" style="font-size: 14px;"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-text-input" style="width: 85px;" class=" col-form-label">닉네임</label>
                                                 <div class="col-9">
                                                     <input class="form-control" type="text" value="${ user.nickname }" id="nickname" name="nickname">
+                                                    <span id="helpBlock2" class="help-block" style="font-size: 14px;"></span>
                                                 </div>
                                             </div>
 	                                        <div class="form-group row">
@@ -314,8 +316,48 @@ License URL: https://creativecommons.org/licenses/by/4.0/
         
 		$(function() {
 			
+			$("#pw2").on("keyup", function(){
+				if($("#pw2").val() == $("#pw").val()){
+					$("#pw2").css("background-color", "#A9F5D0");
+					$('#helpBlock1').css("color", "#A9F5D0")
+					$('#helpBlock1').text("비밀번호가 일치합니다");
+				}else{
+					$("#pw2").css("background-color", "#F5A9BC");
+					$('#helpBlock1').css("color", "#F5A9BC")
+					$('#helpBlock1').text("비밀번호가 일치하지 않습니다");
+				}				
+			})
+			
 			$( "#submit" ).on("click" , function() {
+				
+				
 				var value = "";	
+				var pw=$("#pw").val();
+				var pw_confirm=$("#pw2").val();
+				var name=$("#userName").val();
+				var nickname=$("#nickname").val();
+				if(pw == null || pw.length <1){
+					alert("패스워드는  반드시 입력하셔야 합니다.");
+					return false;
+				}
+				if(pw.length < 8 || pw.length > 12){
+					alert("패스워드는 8자 이상 12자 이하로 입력하셔야 합니다.");
+					return false;
+				}
+				if(pw_confirm == null || pw_confirm.length <1){
+					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+					return false;
+				}
+				if(userName == null || userName.length <1){
+					alert("이름은  반드시 입력하셔야 합니다.");
+					return false;
+				}
+				if( pw != pw_confirm ) {				
+					alert("비밀번호 확인이 일치하지 않습니다.");
+					$("input:password[name='pw2']").focus();
+					$("input:password[name='pw2']").val('');
+					return false;
+				}
 				
 				if($("input:text[name='phone2']").val() == "" && $("input:text[name='phone3']").val() != "" ){
 					$("input:hidden[name='phone']").val(${user.phone});
@@ -494,7 +536,41 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			            document.getElementById("sample6_detailAddress").focus();
 			        }
 			    }).open();
-			    }
+			 }
+			
+			
+			$(function(){
+				
+				$("#nickname").keyup(function(){
+					var nickname=$("#nickname").val();
+					var checkNick=JSON.stringify({nickname:nickname});
+					$.ajax({
+						type : "POST",
+						contentType : "application/json",
+						url : "/users/json/checkNick",
+						data : checkNick,
+						datatype : "json" ,
+						success : function(response){
+							if($.trim(response.result)==0){
+								$('#helpBlock2').html("사용가능");
+								$("#nickname").css("background-color", "#A9F5D0");
+								$('#helpBlock2').css("color", "#A9F5D0")
+								$('#submit').attr('disabled', false);
+							}else{
+								$('#helpBlock2').html("사용불가");
+								$("#nickname").css("background-color", "#F5A9BC");
+								$('#helpBlock2').css("color", "#F5A9BC");
+								$('#submit').attr('disabled', true);
+							}
+						},
+						error : function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+					})
+				});
+			});
+			
+			
 		
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
