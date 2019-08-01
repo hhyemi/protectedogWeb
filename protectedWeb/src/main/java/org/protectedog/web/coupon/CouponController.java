@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,13 +41,13 @@ public class CouponController {
 		System.out.println(this.getClass());
 	}
 	
-	///PagingÀ» À§ÇÑ Value¼³Á¤
+	///Pagingï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Valueï¿½ï¿½ï¿½ï¿½
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	///File Upload¸¦ À§ÇÑ °æ·Î¼³Á¤
+	///File Uploadï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¼ï¿½ï¿½ï¿½
 	@Value("#{commonProperties['fileCoupon']}")
 	String fileCouponRoot;
 	
@@ -79,12 +80,12 @@ public class CouponController {
 				BufferedOutputStream stream=new BufferedOutputStream(new FileOutputStream(new File(savePath, originalFile)));
 				stream.write(bytes);
 				stream.close();
-				model.addAttribute("resultMSG", "ÆÄÀÏ ¾÷·Îµå ¼º°ø");
+				model.addAttribute("resultMSG", "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 			} catch(Exception e) {
-				model.addAttribute("resultMSG", "¾÷·Îµå ½ÇÆÐ");
+				model.addAttribute("resultMSG", "ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 			} 
 		} else {
-			model.addAttribute("resultMSG", "ÆÄÀÏ ¼±ÅÃ ¿ä¸Á");
+			model.addAttribute("resultMSG", "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
 		}
 	
 		coupon.setCouponImage(originalFile);
@@ -115,6 +116,40 @@ public class CouponController {
 		
 	}
 	
+	@RequestMapping(value="getCoupon")
+	public String getCoupon(@ModelAttribute("search") Search search, Model model, HttpSession session) throws Exception{
+		
+		System.out.println("/coupon/getCoupon");
+		
+		if(search.getCurrentPage()==0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		User user=(User)session.getAttribute("user");
+		
+		Map<String, Object> sMap=new HashMap<String, Object>();
+		
+		sMap.put("user", user);
+		sMap.put("search", search);
+		
+		Map<String, Object> map=couponService.getCouponList(sMap);
+		System.out.println("Coupon ï¿½ï¿½ï¿½ï¿½Æ® : "+map.toString());
+		
+		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println("Coupon ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+resultPage);
+		
+		List<Coupon> list=(List<Coupon>) map.get("list");
+		Coupon coupon=list.get(0);
+		
+		model.addAttribute("coupon", coupon);
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		
+		return "forward:/coupon/getCouponView.jsp";
+		
+	}
+	
 	@RequestMapping(value="listCoupon")
 	public String listCoupon(@ModelAttribute("search") Search search, Model model, HttpSession session) throws Exception{
 		
@@ -133,10 +168,10 @@ public class CouponController {
 		sMap.put("search", search);
 		
 		Map<String, Object> map=couponService.getCouponList(sMap);
-		System.out.println("Coupon ¸®½ºÆ® : "+map.toString());
+		System.out.println("Coupon ï¿½ï¿½ï¿½ï¿½Æ® : "+map.toString());
 		
 		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("Coupon ¸®½ºÆ® ÆäÀÌÁö : "+resultPage);
+		System.out.println("Coupon ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+resultPage);
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("sList", map.get("sList"));
