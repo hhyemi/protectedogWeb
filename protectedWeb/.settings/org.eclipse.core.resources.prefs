@@ -1,4 +1,6 @@
 =\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
 encoding//SQL(Script)/protectedog.sql=EUC-KR
 encoding//WebContent/adopt/calendar.jsp=UTF-8
@@ -15,6 +17,7 @@ encoding//WebContent/funding/listFunding.jsp=UTF-8
 encoding//WebContent/funding/listVoting.jsp=UTF-8
 encoding//WebContent/funding/updateReview.jsp=UTF-8
 encoding//WebContent/funding/updateVoting.jsp=UTF-8
+encoding//WebContent/layout/footer.jsp=UTF-8
 encoding//WebContent/message/OldMessage/listReceiveMessage.jsp=UTF-8
 encoding//WebContent/shop/cart/reviewtest.jsp=UTF-8
 encoding//WebContent/shop/order/pointexample.jsp=UTF-8

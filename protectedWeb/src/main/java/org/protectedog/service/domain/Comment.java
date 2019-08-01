@@ -1,7 +1,5 @@
 package org.protectedog.service.domain;
 
-import java.sql.Date;
-
 public class Comment {
 
 	/// Field
@@ -14,7 +12,9 @@ public class Comment {
 	private int likeCount;
 	private String nickName;
 	private char delCode;
-
+	private String profile;
+	
+	
 	/// Constructor
 
 	/// Method
@@ -89,16 +89,21 @@ public class Comment {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 
 	@Override
 	public String toString() {
 		return "Comment [commentNo=" + commentNo + ", postNo=" + postNo + ", id=" + id + ", boardCode=" + boardCode
 				+ ", commentContent=" + commentContent + ", regDate=" + regDate + ", likeCount=" + likeCount
-				+ ", nickName=" + nickName + ", delCode=" + delCode + ", getCommentNo()=" + getCommentNo()
-				+ ", getPostNo()=" + getPostNo() + ", getId()=" + getId() + ", getBoardCode()=" + getBoardCode()
-				+ ", getCommentContent()=" + getCommentContent() + ", getRegDate()=" + getRegDate()
-				+ ", getLikeCount()=" + getLikeCount() + ", getNickName()=" + getNickName() + ", getDelCode()="
-				+ getDelCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ ", nickName=" + nickName + ", delCode=" + delCode + ", profile=" + profile + "]";
 	}
+	
+	
 }
