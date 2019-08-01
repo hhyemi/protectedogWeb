@@ -145,7 +145,7 @@
 						<tr align="center">
 							<th width="10%" class="text-center">번호</th>
 							<th width="30%" align="center" class="text-center">제목</th>
-							<th width="10%">글쓴이</th>
+							<th width="10%">작성자</th>
 							<th width="10%">작성일</th>
 							<th width="5%">조회수</th>
 							<th width="5%">추천수</th>					

@@ -20,18 +20,10 @@
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
-.temp {
-	height: 300px;
-}
-
-.btn.btn-default {
-	width : 100%;
-	height: 30px;
-}
-.commentDiv{
-	background-color: #F0F0F0;
-	min-height: 50px;
-}
+.temp { height: 300px; }
+.btn.btn-default { width : 100%; height: 50px;}
+.commentDiv{ background-color: #F0F0F0; min-height: 50px; }
+.reportModal{ color: #f73325; }
 </style>
 </head>
 <body>
@@ -58,8 +50,8 @@
 					style="width: 100%; height: 50px" placeholder="댓글입력" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
-				<button type="button" id="commentGo" class="commentSubmit"
-					style="background-color: #6190ed; color: white; width: 100%; height: 40px; border: 1px solid #1449b3">
+				<button type="button" id="commentGo" class="commentSubmit btn btn-default"
+					style="width: 100%; height: 48px;">
 					<h6>
 						<b>댓글등록</b>
 					</h6>
@@ -101,7 +93,7 @@
 					<span class="fas fa-pen"></span> 
 					<span class="fas fa-trash-alt"></span>
 					</c:if>
-					<span class="fas fa-exclamation-triangle"></span>
+					<span><a class="reportModal" href="#" data-toggle="modal" data-target="#report-modal"><span class="fas fa-exclamation-triangle"></span></a></span>					
 <!-- 					<span class="fas fa-plus"></span> &nbsp;  -->
 					<span id="${comment.commentNo}" class="far fa-thumbs-up"></span>
 					<font id="${comment.commentNo}" class="font">
@@ -110,7 +102,7 @@
 					</div>
 				</div>
 			</div>
-			<br/>
+			<br id="${comment.commentNo}" class="line"/>
 			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 대댓글 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <%-- 			<c:forEach var="recomment" items="${relist}"> --%>
 <%-- 			<c:if test="${comment.commentNo == recomment.commentNo}"> --%>
@@ -174,9 +166,11 @@
  	$(document).ready(function(){
  		
  		$(".loading-container").hide();
-		$(".commentContent").keydown(function(key){
+ 		
+ 		
+		$("#commentGo").keydown(function(key){
 			if(key.keyCode == 13){
-				$(".commentSubmit").click();
+				$("#commentGo").click();
 			}
 		});
 	});
@@ -249,7 +243,7 @@
 								}
 								
 								display += 
-											"<span class='fas fa-exclamation-triangle'></span>&nbsp;" + 
+											"<span><a class='reportModal' href='#' data-toggle='modal' data-target='#report-modal'><span class='fas fa-exclamation-triangle'></span></a></span>&nbsp;" + 
 //	  										"<span class='glyphicon glyphicon-plus'></span>" +
 	 	 									"<span id='"+comment.commentNo+"' class='far fa-thumbs-up'></span>&nbsp;"+
 	 	 									"<font id='"+comment.commentNo+"' class='font'>" +
@@ -258,7 +252,7 @@
 	 	 								"</div>" +
 	 	 							"</div>" +
 	 							"</div>" +
-	 	 						"<br/>";
+	 	 						"<br class="+JSONData.commentNo+" class='line'/>";
 						}); // each END
 						
 						//display +="</div>";
@@ -327,7 +321,7 @@
 		 												+"<span class='fas fa-trash-alt'></span>  &nbsp;" ;
 	 											}
 	 												
-	 											display += "<span class='fas fa-exclamation-triangle'></span>  &nbsp;"
+	 											display += "<span><a class='reportModal' href='#' data-toggle='modal' data-target='#report-modal'><span class='fas fa-exclamation-triangle'></span></a></span>  &nbsp;"
 // 	 													+"<span class='fas fa-plus'></span> &nbsp;" 
 			 											+"<span id='"+JSONData.commentNo+"' class='far fa-thumbs-up'></span>  &nbsp;"
 	 													+"<font id='"+JSONData.commentNo+"' class='font'>"
@@ -336,7 +330,7 @@
 	 									+"</div>"
 	 								+"</div>"
 	 							+"</div>"
-	 							+"<br/>"
+	 							+"<br class="+JSONData.commentNo+" class='line'/>"
 	 								
 	 							
 								$(".commentList").prepend(display);
@@ -372,21 +366,22 @@
 							$("#"+commentNo+""+".cmCont").remove();
 							$("#"+commentNo+""+".area").hide();
 							
- 							var modifyScreen = 
- 								"<div class='ajax col-md-10'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 50px' placeholder='"+JSONData.commentContent+"'/></div>";
-							
- 							var button = "<div class='ajax col-md-2'>" 								
+ 							var display = 
+ 								  "<div class='row'><div class='ajax col-md-10'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 50px; margin-top : 5px; ' placeholder='"+JSONData.commentContent+"'/></div>"
+ 								+ "<div class='ajax col-md-2'>" 								
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
  								+ "<button class='btn btn-default'>수정완료</button>" 								
- 								+ "</div>"
+ 								+ "</div></div>"
  							
-							$("#"+commentNo+""+".h4tag").append(modifyScreen);
- 							$("#"+commentNo+""+".h4tag").append(button);
+							$("#"+commentNo+""+".h4tag").append(display);
 						},
 										
 						error : function(request, status, error){							
-							alert("Error");							
+
+							swal({
+								text : "에러 발생"							
+							});
 						}
 				
 					}
@@ -418,7 +413,13 @@
 						},
 						success : function(JSONData, status){
 							
+							console.log(commentNo);
+							
+							//debugger;
 							$("#"+commentNo+""+".row").remove();
+							$("#"+commentNo+""+".line").remove();
+							
+							
 							
 						},
 					});
@@ -432,10 +433,8 @@
 		
 		// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 신고하기  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 		$(document).on("click",".fa-exclamation-triangle",function() {
-
-			popWin = window.open("/common/report.jsp",
-								"popWin",
-								"left=500, top=300, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+			
+			$("#report-modal2").modal("show");
 		
 		});
 		
@@ -520,7 +519,9 @@
 	function update(){
 		
 		if( $("#commentContent").val() == ''){
-			alert("내용을 입력해주세요.");
+			swal({
+				text : "내용을 입력해주세요"							
+			});
 			return;
 		}
 		
