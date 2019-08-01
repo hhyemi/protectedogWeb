@@ -48,6 +48,7 @@ public class CommentRestController {
 	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+
 	
 	public CommentRestController() {
 		System.out.println("commentRestController Defualt Constructor");
@@ -200,7 +201,6 @@ public class CommentRestController {
 		Map<String, Object> commentMap = commentService.listComment(postNo, search);
 		int totalCount = commentService.getTotalCount(postNo);
 		//Map<String, Object> reMap = reCommentService.listReComment(map);
-		
 		
 		// return�� Map ��ü�� put
 		//map.put("reList", reMap.get("list"));

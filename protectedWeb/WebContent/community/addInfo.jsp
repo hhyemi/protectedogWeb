@@ -7,53 +7,21 @@
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <!--  bootstrap CDN  -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- CKEditor CDN -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script> -->
 <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
+
 <!--  CSS -->
 <style>
-#editor {
-	min-height: 600px;
-	max-width: 1130px;
-	margin-left: 15px;
-	text-align: left;
-}
+.ck.ck-editor {	min-width: 95%;}
+.ck-editor__editable {text-align: left;min-height: 300px;min-width: 95%;}
 
-#preview img {
-	width: 100px;
-	height: 100px;
-}
-
-#preview p {
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.preview-box {
-	padding: 5px;
-	border-radius: 2px;
-	margin-bottom: 10px;
-}
-
-.ck.ck-editor {
-	min-width: 95%;
-}
-
-.ck-editor__editable {
-	text-align: left;
-	min-height: 300px;
-	min-width: 95%;
-}
-
-label {
-	background-color: #3e6dad;
-	color: white;
-	border-radius: 10px;
-}
+label {background-color: #3e6dad;color: white;border-radius: 10px;}
 </style>
 </head>
 
@@ -61,20 +29,22 @@ label {
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<div class="container">
-		<div class="hero-wrap hero-bread" style="padding-bottom: 20px; padding-top : 10px;">
+		<div class="hero-wrap hero-bread"
+			style="padding-bottom: 30px; padding-top: 60px;">
 			<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
-					</p>
-					<h1 class="mb-0 bread">견종백과</h1>
+				<div
+					class="row no-gutters slider-text align-items-center justify-content-center">
+					<div class="col-md-9 ftco-animate text-center">
+						<p>
+							<span class="mr-2">information</span> <span>share</span>
+						</p>
+						<font size="7">정보공유 글 작성</font>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 		<div style="border: 1px solid #d7dade; padding: 3px;">
 
@@ -87,32 +57,7 @@ label {
 					</div>
 				</div>
 
-				<!-- 			<div class="row"> -->
-				<!-- 				<div class="col-xs-4 col-md-2"> -->
-				<!-- 					<strong>이미지</strong> -->
-				<!-- 				</div> -->
-				<!-- 			</div> -->
-
 				<br />
-
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-xs-12 col-md-12"> -->
-<!-- 						<div class="body"> -->
-<!-- 							첨부 버튼 -->
-<!-- 							<div id="attach"> -->
-<!-- 								<label class="waves-effect waves-teal btn-flat" -->
-<!-- 									for="uploadInputBox">사진첨부</label> <input id="uploadInputBox" -->
-<!-- 									style="display: none" type="file" name="filedata" multiple /> -->
-<!-- 							</div> -->
-
-<!-- 							미리보기 영역 -->
-<!-- 							<div id="preview" class="content"></div> -->
-
-<!-- 							multipart 업로드시 영역 -->
-<!--  							<div id="uploadForm" style="display: none;"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
 
 				<div class="postForm" align="center">
 
@@ -126,15 +71,15 @@ label {
 				
 				<p>
 				
-				<input type="checkbox" class="googleMapCheck" value="hide">지도공유
+				<input type="checkbox" class="googleMapCheck" value="hide"/>지도공유
 		  
 		  		<div class="form-group googleMap">
+		  			<p> 경로 <span class="text-danger">수정</span>을 원하시면 마커 위에서 <span class="text-danger">마우스 우클릭</span>을 해주시길 바랍니다.</p>
 		   			<div class="col-sm-4">
-		    				<div id="map" style="width: 1100px; height: 600px;"></div>
+		    				<div id="map" style="width: 1050px; height: 600px;"></div>
 		     					<input type="hidden" class="form-control" id="route" name="route" style="width: 1100px;">
 		      					<span id="pop"></span>
 		    		</div>
-		    		<p> 경로 수정을 원하시면 마커 위에서 마우스 우클릭을 해주시길 바랍니다.</p>
 		  		</div>
 			</form>
 		</div>
@@ -142,8 +87,8 @@ label {
 		<hr />
 		<div class="row">
 			<div class="col-md-12 text-center ">
-				<button type="button" class="btn btn-primary">등록</button>
-				<a id="reset" class="btn btn-primary btn" role="button">취소</a>
+				<button type="button" class="btn btn-default">등록</button>
+				<button id="back" class="btn btn-default">취소</button>
 			</div>
 		</div>	
 		
@@ -187,11 +132,11 @@ label {
 
 	$(function () {
 		
-		$("#reset").on("click", function(){
-			$("form")[0].reset();
+		$("#back").on("click", function(){
+			history.go(-1);
 		});
 		
-		$("button.btn.btn-primary").on("click", function(){
+		$("button.btn.btn-default").on("click", function(){
 			fncAddInfo();
 		});
 		

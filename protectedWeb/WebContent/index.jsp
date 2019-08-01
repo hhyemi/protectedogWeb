@@ -21,6 +21,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	 <jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
 </head><body>
 <!--====================================================
@@ -150,8 +151,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	
 <div class="hero ">
                   <hgroup class="wow fadeInUp">
-                      <h1>보호할개 <span ><a href="" class="typewrite" data-period="1000" data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'>
-                        <span class="wrap"></span></a></span> </h1>        
+                      <h1 style="height: 56px; margin: 0px;">보호할개<span><a href="" class="typewrite" data-period="1000" data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'><span class="wrap"></span></a></span></h1>        
                       <h3></h3>
                   </hgroup>
                   

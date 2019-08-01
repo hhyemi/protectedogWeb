@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
 <!DOCTYPE html>
 
@@ -16,65 +15,28 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!-- CSS -->
 <style type="text/css">
-span {
-	max-width: 900px;
-	/* 	background-color: green; */
-	display: inline-block;
-}
 
-.paging btn btn-default {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	color: white;
-}
+.title {font-size: 18px;}
+.description {font-size: 14px;}
+.channelTitle {font-size: 14px;font-weight: bold;}
+.paging{width: 100%;height: 40px;}
+.btn-default{margin: 0px;padding: 0px;}
 
-.title {
-	font-size: 18px;
-}
+#searchKeyword {width : 200px;border-radius: 15px 0px 0px 15px;}
+#searchSubmit{border-radius: 0px 15px 15px 0px;}
+#searchBox{padding-right: 0px;}
 
-.description {
-	font-size: 14px;
-}
+a :hover{color : #1062e6;}
 
-.channelTitle {
-	font-size: 14px;
-	font-weight: bold;
-}
-
-a :hover{
-	color : #1062e6;
-}
-.btn-default{
-	margin: 0px;
-	padding: 0px;
-}
-
-#searchKeyword {
-	width : 200px;
-	border-radius: 15px 0px 0px 15px;
-}
-
-#searchSubmit{
-	border-radius: 0px 15px 15px 0px;
-}
-
-
-
-#searchBox{
-	padding-right: 0px;
-}
-.paging{
-	width: 100%;
-	height: 40px;
-}
 </style>
 </head>
 <body>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ --> 
 	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -86,21 +48,24 @@ a :hover{
       </div>
     </div>
     
+    <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 검색 영역 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ --> 
 	<div class="container">
-		
 		<div class="row">
 			<div class="col-md-12" align="center">
-					<div class="form-group" align="center" id="searchBox" style="padding-top : 10px; padding-bottom : 50px;">	
-						<span><input type="text" id="searchKeyword" class="form-control searchKeyword" /></span><!--  
-					 --><span>
+				<div class="form-group" align="center" id="searchBox" style="padding-top : 10px; padding-bottom : 50px;">	
+					<span>
+						<input type="text" id="searchKeyword" class="form-control searchKeyword" />
+					</span><!--  
+				 --><span>
 						<button type="button" id="searchSubmit" class="btn btn-default searchSubmit">
 						<span class="fas fa-search"></span>
 						</button>
-						</span>	
-					</div>
+					</span>	
+				</div>
 			</div>
 		</div>
 		
+		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 버튼 영역 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ --> 
 		<div class="row">
 			<button class="btn-default col-md-2 col-xs-2 col-sm-2">#애견상식</button>
 			<button class="btn-default col-md-2 col-xs-2 col-sm-2">#애견훈련</button>
@@ -127,12 +92,7 @@ a :hover{
 
 <script type="text/javascript">
 	
-	var cnt = 9;	
 	var searchKeyword = '애견상식';
-	var flag = true;
-	//var Token = '' ; 
-	var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=9";
 	
 	$(document).ready(function(){
 		
@@ -163,19 +123,6 @@ a :hover{
 	
 	function fnGetList(sGetToken){
 		
-		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+sGetToken);
-		
-// 			var $getval = $("#search_box").val();
-		
-// 			if($getval == ""){
-// 			//alert("검색어 입력 !");
-// 				$("#search_box").focus();
-// 				return;
-// 			}
-		
-// 		$("#get_view").empty();
-// 		$("#nav_view").empty();
-		
 		// 민희 : AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0
 		// 은우 : AIzaSyDp2Rg4rgoTVN4mB33-zyPZgl1GjIpYt1w
 		// 혜미 : AIzaSyDaxq2wYvYelkT22k9ZLzBVM4xDqT2Jai8
@@ -185,14 +132,11 @@ a :hover{
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
 				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDCu5B3VdrbNG54M5ZmpC7jECdE8bBXtR4&maxResults=9";
 		
-		console.log(sTargetUrl);
-		
 		if(sGetToken){
 			
 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
 				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDCu5B3VdrbNG54M5ZmpC7jECdE8bBXtR4&maxResults=6";
  			sTargetUrl += "&pageToken=" + sGetToken;
-			cnt += 3 ;
 
 		}
 		
@@ -202,8 +146,6 @@ a :hover{
 			url : sTargetUrl,
 			dataType : "jsonp",
 			success : function(jdata) {
-				
-				//console.log(jdata);
 				
 				$(jdata.items).each(function(i){
 					
@@ -218,9 +160,6 @@ a :hover{
 						convertTitle += "..."
 					}
 					
-// 					console.log(" 비디오 아이디 : " + videoId) ;
-// 					console.log(" sinppet.title : " + this.snippet.title) ; 
-// 					console.log(" sinppet.description : " + this.snippet.description) ; 
 					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
 					$("#get_view").append(
 							  "<div class='col-md-4' style='min-width : 350px'>"
@@ -245,6 +184,5 @@ a :hover{
 		
 	}//fnGetList END
 </script>
-
 
 </html>

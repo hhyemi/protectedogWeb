@@ -11,41 +11,26 @@
 
 <!-- KAKAO -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
+
+<!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
-<!-- <link href="/resources/css/others/animate.css" rel="stylesheet"> -->
 
+<!-- CSS -->
 <style type="text/css">
-body {
-	position: relative;
-}
-.content {
-	text-align: left;
-	width: 720px;
-	min-height: 400px;
-}
 
-.button {
-	position: relative;
-}
+body {position: relative;}
+img{max-width: 600px;}
 
-.goto-here {
-	padding: 0px;
-}
-.minibox{
-	padding : 1px solid black;
-}
-img{
-	max-width: 600px;
-}
-
-.fa-medal{
-	font-size: 15px;
-}
+.content {text-align: left;width: 720px;min-height: 400px;}
+.button {position: relative;}
+.goto-here {padding: 0px;}
+.minibox{padding : 1px solid black;}
+.fa-medal{font-size: 15px;}
 
 </style>
 
-	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 </head>
 
 <body>
@@ -61,13 +46,8 @@ img{
 			</h3>
 
 			<div class="row" style="position: relative; height: 25px;">
-				<div class="col-md-8"
-					style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id})
-					| ${board.regDate}</div>
-				<div class="col-md-4" align="right"
-					style="position: absolute; right: 0px; bottom: 0px;">조회수 :
-					${board.viewCount} 추천수 : ${board.recommendCount} 댓글수 :
-					${totalCount}</div>
+				<div class="col-md-8"style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id})| ${board.regDate}</div>
+				<div class="col-md-4" align="right" style="position: absolute; right: 0px; bottom: 0px;">조회수 :${board.viewCount} 추천수 : ${board.recommendCount} 댓글수 :${totalCount}</div>
 			</div>
 			<p />
 
@@ -92,13 +72,15 @@ img{
 			<div>
 				<span style="font-size: 15px; border: 1px solid black; padding: 3px">${board.recommendCount}</span>
 				<span class="recommand fas fa-medal">HOT개로</span>
-				<br/>
+				<p/>
+				<div align="center">
+		        	<a href="javascript:void(0);"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+		            <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+		            <a href="javascript:void(0);"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+            	</div>
+            	<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
-				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
 
@@ -114,9 +96,6 @@ img{
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
-<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
-<!--     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	<script type="text/javascript">
 
 	$(function() {
