@@ -67,51 +67,11 @@ public class AdoptRestController {
 		System.out.println(this.getClass());
 	}
 	
-
-	
-	
-	// 관심목록 추가
-//	@RequestMapping( value="json/addInterest/{postNo}/{id}", method=RequestMethod.GET)
-//	public String addInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
-//		
-//		System.out.println("/adopt/json/addInterest : GET");
-//		Board board = new Board();
-//		board.setPostNo(postNo);
-//		
-//		Interest interest = new Interest();
-//		interest.setBoardCode("AD");
-//		interest.setInterestId(userService.getUsers(id));
-//		interest.setInterestPost(board);
-//		
-//		interestService.addInterest(interest);
-//		
-//		return "{\"message\" : \"insertOK\" }";
-//	}
-	
-	
-	// 관심목록삭제
-//	@RequestMapping( value="json/delInterest/{postNo}/{id}", method=RequestMethod.GET)
-//	public String delInterest( @PathVariable("postNo") int postNo , @PathVariable("id") String id ) throws Exception{
-//		
-//		System.out.println("/adopt/json/delInterest : GET");
-//		
-//		Map<String,Object> map = new HashMap<>();
-//		map.put("id", id);
-//		map.put("boardCode", "AD");
-//		map.put("searchType", "post");
-//		map.put("searchNo", postNo);
-//		
-//		interestService.delInterest(map);
-//		
-//		return "{\"message\" : \"delOK\" }";
-//	}
-	
 	
 	@RequestMapping( value="json/addMissing", method=RequestMethod.POST )
 	public String addMissing( 
-//			public void addAdopt(
-					@RequestParam("files") List<MultipartFile> images,
-					@RequestParam Map<String, Object> param
+									@RequestParam("files") List<MultipartFile> images
+									,@RequestParam Map<String, Object> param
 																										) throws Exception {
 
 		System.out.println("/adopt/json/addAdopt : POST \n");

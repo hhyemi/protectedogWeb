@@ -18,7 +18,12 @@
 			background-color: #f04f23;
 			border-radius: 3px;
 }
- 
+ .waves-effect>span {
+			background-color: #f04f23;
+			border-radius: 3px;
+			padding: 3px;
+			color: white;
+}
 /*!
  * FullCalendar v3.9.0
  * Docs & License: https://fullcalendar.io/
@@ -1479,20 +1484,21 @@ h2{
 
 <!-- calendar modal -->
 <div id="modal-view-event" class="modal modal-top fade calendar-modal">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body">
-					<h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
-					<div class="event-body"></div>
-				</div>
-				<div class="modal-footer" id="confirmFooter">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				</div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
+				<div class="event-body"></div>
+			</div>
+			<div class="modal-footer" id="confirmFooter">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>
+</div>
 
 <input type="hidden" id="sessionId" value="${sessionScope.user.id }">
+<input type="hidden" id="sessionLv" value="${sessionScope.user.levels }">
 
 <div id="modal-view-event-add" class="modal modal-top fade calendar-modal" >
 
@@ -1515,7 +1521,7 @@ h2{
         <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;">
 <!--         <h4>실종신고</h4>         -->
           <div class="form-group">
-            <label>사례금</label>&nbsp;원하지 않을 경우 0을 입력하세요.
+            <label>사례금</label>&nbsp;&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span>
             <input type="number" class="form-control" name="dogPay" min="0" >
           </div>
           <div class="form-group">
@@ -1527,7 +1533,7 @@ h2{
             <input type='text' class="datetimepicker form-control" name="dogDate" value="" readonly>
           </div>        
           <div class="form-group">
-            <label>실종지역</label>
+            <label>실종지역</label>&nbsp;&nbsp;<span name="locationKr"></span>
             <input class="form-control" name="locationKr"></input>
           </div>
           
@@ -1548,7 +1554,7 @@ h2{
           <div class="form-group"><br/><br/><br/><br/></div>
           
           <div class="form-group">
-            <label>견종</label>
+            <label>견종</label>&nbsp;&nbsp;<span name="dogBreed"></span>
             <input class="form-control" name="dogBreed"></input>
           </div>
           <div class="form-group">
@@ -1559,15 +1565,15 @@ h2{
             </select>
           </div>
           <div class="form-group">
-            <label>상태</label>
+            <label>상태</label>&nbsp;&nbsp;<span name="dogStatus"></span>
             <input class="form-control" name="dogStatus"></input>
           </div>
           <div class="form-group">
-            <label>특징</label>
+            <label>특징</label>&nbsp;&nbsp;<span name="dogChar"></span>
             <input class="form-control" name="dogChar"></input>
           </div>
           <div class="form-group">
-            <label>내용</label>
+            <label>내용</label>&nbsp;&nbsp;<span name="postContent"></span>
             <textarea class="form-control" name="postContent"></textarea>
           </div>
 		  <input type="hidden" name="id" value="${sessionScope.user.id}">
@@ -1703,7 +1709,8 @@ h2{
 				dayClick: function(date) {
 					
 					var id = $('#sessionId').val().trim();
-					if (  id != ""){
+					var lv = $('#sessionLv').val().trim();
+					if (  id != "" && lv != '미인증회원'){
 						var yyyy=date.format("YYYY");
 					    var mm=date.format("MM");
 					    var dd=date.format("DD");
@@ -1978,8 +1985,100 @@ h2{
 	
 
 	
-// 	$( ".btn-default:contains('등록')" ).on("click" , function() {
+	$( "input[name=dogPay]" ).keyup(function( ) {
+		if($("input[name=dogPay]").val().length > 6 ){
+			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
+		}else{
+			$("span[name=dogPay]").text('');
+		}
+	});
+	
+	$( "input[name=locationKr]" ).keyup(function( ) {
+		if($("input[name=locationKr]").val().length > 30 ){
+			$("span[name=locationKr]").text('30자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=locationKr]").text('');
+		}
+	});
+	
+	$( "input[name=dogBreed]" ).keyup(function( ) {
+		if($("input[name=dogBreed]").val().length > 10 ){
+			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogBreed]").text('');
+		}
+	});
+
+	$( "input[name=dogStatus]" ).keyup(function( ) {
+		if($("input[name=dogStatus]").val().length > 20 ){
+			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogStatus]").text('');
+		}
+	});
+
+	$( "input[name=dogChar]" ).keyup(function( ) {
+		if($("input[name=dogChar]").val().length > 20 ){
+			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=dogChar]").text('');
+		}
+	});
+	
+	$( "textarea[name=postContent]" ).keyup(function( ) {
+		if($("textarea[name=postContent]").val().length > 100 ){
+			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+		}else{
+			$("span[name=postContent]").text('');
+		}
+	});
+	
+	
+	
+	
 	$(document).on("click", ".btn-default:contains('등록')", function() {
+		
+		if ( $('input[name=dogPay]').val().trim() == "" || $('input[name=dogPay]').val().length > 6 || $("input[name=dogPay]").val() < 0 ) {
+			$("input[name=dogPay]").focus();
+			return;
+		}
+		if ( $('input[name=locationKr]').val().trim() == "" || $('input[name=locationKr]').val().length > 30 ) {
+			$("input[name=locationKr]").focus();
+			return;
+		}
+		if( $(".preview-box").length == 0 ){
+			swal({
+		           text: "이미지를 등록해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		    });
+			return;
+		}
+		if( $("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length >10){
+			$("input[name=dogBreed]").focus();
+			return;
+		}
+		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
+			$("input[name=dogStatus]").focus();
+			return;
+		}
+		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
+			$("input[name=dogChar]").focus();
+			return;
+		}
+		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+			$("textarea[name=postContent]").focus();
+			return;
+		}
+	
 		fncAddMissing();
 	});
 	

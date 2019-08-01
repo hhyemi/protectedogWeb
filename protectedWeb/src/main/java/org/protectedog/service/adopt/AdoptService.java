@@ -18,6 +18,7 @@ public interface AdoptService {
 	
 	// 글 리스트 조회
 	public Map<String , Object> listAdopt(Search search, String boardCode) throws Exception;
+	public Map<String , Object> listAdoptById(Search search, String id) throws Exception;
 	public Map<String , Object> listAdopt2(String id) throws Exception;
 	public Map<String , Object> listMissing(String boardCode) throws Exception;
 	

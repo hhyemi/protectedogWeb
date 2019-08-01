@@ -45,12 +45,13 @@
 			border-radius: 2px;
 			margin-bottom: 10px;
 		}
-/* 		.waves-effect waves-teal btn-flat { */
-/* 			background-color: #3e6dad; */
-/* 			color: white; */
-/* 			border-radius: 10px; */
-/* 		} */
 		
+		.waves-effect>span {
+			background-color: #f04f23;
+			border-radius: 3px;
+			padding: 3px;
+			color: white;
+		}
     
     </style>
     <jsp:include page="/layout/toolbar.jsp"></jsp:include>
@@ -114,7 +115,7 @@
 							<!-- 첨부 버튼 -->
 							<div id="attach">
 								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox"><strong>사진첨부</strong></label> <input id="uploadInputBox"
+									for="uploadInputBox"><span><strong>사진첨부</strong></span></label> <input id="uploadInputBox"
 									style="display: none" type="file" name="filedata" multiple />
 							</div>
 
@@ -291,12 +292,12 @@
                 
                     
                     $("#preview").append(
-                                    "<div class=\"preview-box\" id="+previewId+"  value=\"" + imgNum +"\"  style='display:inline;float:left;width:208px' >"
-                                            + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"200px;\" height=\"200px;\"/>"
-                                            + "<a href=\"#\" value=\""
-                                            + imgNum
-                                            + "\" onclick=\"deletePreview(this)\">"
-                                            + "삭제" + "</a>" + "</div>");
+                    		"<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
+                            + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
+                            + "<span value=\""
+                            + imgNum
+                            + "\" onclick=\"deletePreview(this)\">"
+                            + "삭제" + "</span>" + "</div> ");
                     files[imgNum] = file;
                     
                     fileNameArray[imgNum]=file.name;

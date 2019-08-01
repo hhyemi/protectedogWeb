@@ -112,7 +112,7 @@ public class AdoptReviewController {
 	
 	
 	// board 글 상세조회+조회수 증가
-	@RequestMapping( value="getAdoptReview", method=RequestMethod.GET)
+	@RequestMapping( value="getAdoptReview")
 	public String getAdoptReview( @RequestParam("postNo") int postNo , Model model, HttpSession session ) throws Exception {
 		
 		System.out.println("/adoptReview/getAdoptReview : GET");
@@ -122,13 +122,16 @@ public class AdoptReviewController {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
 			model.addAttribute("user", user);
 		}
+		System.out.println("------------1---------------"+postNo);
+		System.out.println("-------------2--------------"+boardService.getBoard(postNo));
 		//Business Logic
 		boardService.updateViewCount(boardService.getBoard(postNo));
+		System.out.println("==============================");
 		Board board = boardService.getBoard(postNo);
-		
+		System.out.println("++++++++++++++++++++++++++++++");
 		// Model 과 View 연결
 		model.addAttribute("board", board);	
-	
+		System.out.println("###############################");
 
 		return "forward:/adoptReview/getAdoptReview.jsp";
 	}
@@ -159,6 +162,7 @@ public class AdoptReviewController {
 												) throws Exception{
 
 		System.out.println("/adoptReview/updateAdoptReview : POST");
+		System.out.println("=============================="+board.getBoardCode()+","+board.getId()+","+board.getPostTitle());
 		//Business Logic
 //		adopt.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 //		boolean fileName = adopt.getFileName().endsWith("_");
@@ -174,14 +178,11 @@ public class AdoptReviewController {
 		
 		
 		boardService.updateBoard(board);
-		System.out.println("업데이트까지는 됨");
-		board = boardService.getBoard(board.getPostNo());
-		System.out.println("겟까지 됨");
-		
-		model.addAttribute("board", board);
+		System.out.println("업데이트까지는 됨"+board.getPostNo());
+//		board = boardService.getBoard(board.getPostNo());
 		
 
-		return "forward:/adoptReview/getAdoptReview.jsp?postNo="+board.getPostNo();
+		return "forward:/adoptReview/getAdoptReview?postNo="+board.getPostNo();
 	}
 	
 	

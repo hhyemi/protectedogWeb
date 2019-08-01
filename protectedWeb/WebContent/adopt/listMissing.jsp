@@ -29,7 +29,6 @@
  		} 
 
 
-
     </style>
     
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
