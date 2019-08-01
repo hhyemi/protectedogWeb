@@ -62,18 +62,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                             <!-- /.modal -->
                         </div>
                         <ul class="inbox-nav inbox-divider">
-                            <li>
-                                <a href="/message/listMessage?searchCondition=all"><i class="fa fa-envelope-o"></i> 전체쪽지함</a>
-                            </li>
+<!--                             <li> -->
+<!--                                 <a href="/message/listMessage?searchCondition=all"><i class="fa fa-envelope-o"></i> 전체쪽지함</a> -->
+<!--                             </li> -->
                             <li>
                                 <a href="/message/listMessage?searchCondition=send"><i class="fa fa-envelope-o"></i> 보낸쪽지함</a>
                             </li>
                             <li>
                                 <a href="/message/listMessage?searchCondition=receive"><i class="fa fa-envelope-o"></i> 받은쪽지함 <span class="label label-danger pull-right received"></span></a>
                             </li>
-                            <li>
-                                <a href="/message/listMessage?searchCondition=delete"><i class=" fa fa-trash-o"></i> Trash</a>
-                            </li>
+<!--                             <li> -->
+<!--                                 <a href="/message/listMessage?searchCondition=delete"><i class=" fa fa-trash-o"></i> Trash</a> -->
+<!--                             </li> -->
                         </ul>  
                     </aside>
                     <aside class="lg-side"> 

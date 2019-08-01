@@ -100,8 +100,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         </div>
                         <nav class="nav text-center prof-nav">
                             <ul  class="list-unstyled ">
-                                <li><a href="#profile">Profile</a></li> 
-                                <li><a href="#references">Setting</a></li> 
+<!--                                 <li><a href="#profile">Profile</a></li>  -->
+<!--                                 <li><a href="#references">Setting</a></li>  -->
                                 <li><a href="/users/logout">Logout</a></li> 
                             </ul>
                         </nav>

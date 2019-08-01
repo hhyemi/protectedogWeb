@@ -15,6 +15,7 @@ import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.Participate;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
+import org.protectedog.service.interest.InterestService;
 import org.protectedog.service.participate.ParticipateService;
 import org.protectedog.service.storyfunding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class FundingController {
 	@Autowired
 	@Qualifier("participateServiceImpl")
 	private ParticipateService participateService;
+
+	@Autowired
+	@Qualifier("interestServiceImpl")
+	private InterestService interestService;
 
 	public FundingController() {
 		System.out.println(this.getClass());
@@ -199,6 +204,17 @@ public class FundingController {
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
+		if (user != null) {
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("id", user.getId());
+			map2.put("boardCode", "SF");
+			map2.put("searchType", "post");
+			map2.put("searchNo", postNo);
+
+			if (interestService.getInterestCheck(map2) == 1) {
+				model.addAttribute("check", "already");
+			}
+		}
 
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);

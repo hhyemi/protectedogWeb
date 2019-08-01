@@ -15,7 +15,7 @@
 		<result property="reportContent"	column="report_content"	jdbcType="VARCHAR"/>
 		<result property="reportStatus"	column="report_status"	jdbcType="NUMERIC"/>
 		<result property="reportDate"	column="report_date"	jdbcType="DATE"/>
-		<result property="delCode"		column="del_code"	jdbcType="CHAR"/>
+		<result property="delCode"		column="del_code"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
@@ -28,7 +28,7 @@
 		(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
 		VALUES
 		(#{reportNo}, #{reporterId}, #{reportedId}, #{reportCategory}, #{reportContent}, #{reportStatus}, SYSDATE, 
-		#{delCode:CHAR})
+		#{delCode:VARCHAR})
 	</insert>
 	 
 	 <!-- SQL : SELECT ONE -->
@@ -47,7 +47,7 @@
 		UPDATE report
 		<set>
 			report_status=#{reportStatus},
-			del_code=#{delCode:CHAR}
+			del_code=#{delCode:VARCHAR}
 		</set>
 		WHERE report_no=#{reportNo}
 	</update>
