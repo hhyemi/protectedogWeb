@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
+import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Funding;
@@ -38,6 +39,10 @@ public class MarketController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	private FileService fileService;
+	
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
 	
 
 
@@ -70,12 +75,13 @@ public class MarketController {
 		
 		System.out.println("shop/market/addMarket : GET/POST");
 		
-		board.setId("user01");
-		board.setNickName("스캇");
+		//board.setId("user01");
+		//board.setNickName("스캇");
+		//board.setProdNo(10001);
+		//board.setPhone("011-1123-4567");
+		
 		board.setBoardCode(MK);
 		board.setViewCount(0);
-		board.setProdNo(10001);
-		board.setPhone("011-1123-4567");
 		//in thumnail
 		board.setThumnail(multiFile.get(0));
 		
@@ -151,7 +157,7 @@ public class MarketController {
 	
 	
 	@RequestMapping(value ="getMarket", method=RequestMethod.GET)
-	public String getProduct(@RequestParam("postNo") int postNo, Model model) throws Exception {
+	public String getProduct(@RequestParam("postNo") int postNo, @ModelAttribute("search") Search search, Model model) throws Exception {
 
 		System.out.println("/product/getProduct : get");
 		// Business Logic
@@ -160,6 +166,7 @@ public class MarketController {
 		// Model 연결 View 
 		model.addAttribute("board", board);
 		
+		//조회수
 		boardService.updateViewCount(board);
 		
 	
@@ -247,6 +254,23 @@ public class MarketController {
 
 			return "redirect:/market/getMarket?postNo=" + board.getPostNo();
 		}
+		
+		
+		@RequestMapping(value = "delMarket", method = RequestMethod.GET)
+		public String delMarket(@ModelAttribute("board") Board board, @RequestParam("postNo") int postNo, Model model) throws Exception {
+
+			System.out.println("marketdelete");
+
+			boardService.delBoard(board);
+
+			Map<String, Object> filePost = new HashMap<String, Object>();
+			filePost.put("boardCode", MK);
+			filePost.put("postNo", postNo);
+			fileService.delAllFile(filePost);
+
+			return "redirect:/market/getMarket?postNo=" + postNo;
+		}
+
 
 }
 

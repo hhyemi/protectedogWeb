@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
+import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Order;
 import org.protectedog.service.domain.Product;
 import org.protectedog.service.domain.User;
@@ -70,18 +71,93 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="addOrder")
-	public String addOrder(@ModelAttribute("order")Order order, @RequestParam("prodNo") int prodNo,
+	public String addOrder(@RequestParam("prodNo") int prodNo,
 			@RequestParam("id") String id, Model model,
 			HttpServletRequest request) throws Exception {
 
 		System.out.println("/addOrder POST/////////////////////////");
+		
+		
+	
+		//폰번호 병합 String
+		String receiverPhone1="";
+		String receiverPhone2="";
+		String receiverPhone3="";
+		String receiverPhone="";
+		
+		//주소 병합 String
+		String receiverAddr1="";
+		String receiverAddr2="";
+		String receiverAddr3="";
+		String receiverAddr4="";
+		String receiverAddr="";
+				
+		
+		//model 안먹어서 self
+		Order order=new Order();
+		
+		order.setId(request.getParameter("id"));
+		System.out.println("1번 아이디/////////////////////");
+		order.setReceiverName(request.getParameter("receiverName"));
+		System.out.println("2번 받는이/////////////////////");
+		//폰 병합
+		receiverPhone1=request.getParameter("receiverPhone1");
+		receiverPhone2=request.getParameter("receiverPhone2");
+		receiverPhone3=request.getParameter("receiverPhone3");
+		receiverPhone=(receiverPhone1+"-"+receiverPhone2+"-"+receiverPhone3);
+		
+		//주소병합
+		receiverAddr1=request.getParameter("receiverAddr1");
+		receiverAddr2=request.getParameter("receiverAddr2");
+		receiverAddr3=request.getParameter("receiverAddr3");
+		receiverAddr4=request.getParameter("receiverAddr4");
+		receiverAddr=(receiverAddr1+receiverAddr2+receiverAddr3+receiverAddr4);
+		
+		
 
-		User user=userService.getUsers(id);
-		order.setId(user);
-		Product product=productService.getProduct(prodNo);
-		order.setProdNo(product);
+		order.setReceiverPhone(receiverPhone);
+		System.out.println("3번 받는이 연락처/////////////////////");
+		order.setReceiverAddr(receiverAddr);
+		System.out.println("4번 받는이 주소/////////////////////");
+		order.setOrderRequest(request.getParameter("orderRequest"));
+		System.out.println("5번 배송요청사항/////////////////////");
+		order.setPhone(request.getParameter("phone"));
+		System.out.println("다들 들어갔나요?");
+		order.setOrderQuantity(Integer.parseInt(request.getParameter("orderQuantity")));
+		System.out.println("수량 들어갔나요?");
 		order.setOrderCode(1);
-
+		order.setProdNo(Integer.parseInt(request.getParameter("prodNo")));
+		order.setPaymentCode(Integer.parseInt(request.getParameter("paymentCode")));
+		System.out.println("결제수단 들어갔나요?");
+		
+		Product product=new Product();
+		product=productService.getProduct(prodNo);
+		
+		//totalPrice IN
+		int total=(product.getDiscountPrice()*order.getOrderQuantity());
+		order.setTotalPrice(total);
+		System.out.println(total);
+		System.out.println("총액 들어갔나요");
+		System.out.println(order.getTotalPrice());
+		
+		//수량조절
+		int quantity=(product.getQuantity()-order.getOrderQuantity());
+		product.setQuantity(quantity);
+		System.out.println(quantity);
+		System.out.println(product.getQuantity());
+		System.out.println("수량조절 되고 있나요");
+		
+		//null값처리
+		if(order.getCouponNo() == 0) {
+			order.setCouponNo(10001);
+		}
+		
+		if(order.getMileageNo() ==0){
+			order.setMileageNo(10000);
+		}
+		
+		
+		
 		orderService.addOrder(order);
 
 		System.out.println(order.getOrderNo());
@@ -94,56 +170,56 @@ public class OrderController {
 		
 	}
 	
-
-	
-		@RequestMapping(value="getOrder")
-		public String getOrder(@RequestParam("orderNo") int orderNo,  @RequestParam("prodNo") int prodNo,
-				Model model) throws Exception {
-
-			System.out.println("getOrder");
-			
-			
-			Product product = productService.getProduct(prodNo);
-			Order order = orderService.getOrder(orderNo);
+	//주문내역 리스트 출력
+	@RequestMapping(value="listOrder")
+	public String listOrder( @ModelAttribute("search") Search search, HttpSession session, Model model) throws Exception{
 		
-			order.setProdNo(product);
-			
-			System.out.println(order);
-			model.addAttribute("order", order);
-
-			return "forward:/shop/order/getOrder.jsp";
-
-		}
-	
-	@RequestMapping("/listOrder")
-	public String listPurchaes(@ModelAttribute("search") Search search, 
-			@ModelAttribute("user") User user, 
-			Model model , HttpSession session) throws Exception {
-
 		System.out.println("/listOrder");
-
-		String id = ((User)session.getAttribute("user")).getId();
 		
-		System.out.println(id);
-		if (search.getCurrentPage() == 0) {
+		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		
 		search.setPageSize(pageSize);
 		
-		// Business logic
-		Map<String, Object> map = orderService.listOrder(search, id);
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
+		// 회원 아이디를 GET하기 위한 Session 불러오기
+		User user = (User)session.getAttribute("user");
+		
+		
+		System.out.println(user);
+		System.out.println("session value 확인");
+		
+		// Business logic 수행
+		Map<String , Object> map=orderService.listOrder(search, user.getId());
+		
+		System.out.println(user.getId());
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
-
+		
+		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 
-
+		
 		return "forward:/shop/order/listOrder.jsp";
 	}
+	
+	@RequestMapping(value="getOrder")
+	public String getOrder (@RequestParam("orderNo")int orderNo, Model model) throws Exception{
+		
+		System.out.println("/getOrder GET / POST");
+		
+		System.out.println(orderNo);
+
+		Order order =orderService.getOrder(orderNo);
+
+		model.addAttribute("order", order);
+		
+		return "forward:/shop/order/getOrder.jsp";
+	}
+	
+
 	
 	@RequestMapping("/updateOrderView")
 	public String updatePurchaseView(@ModelAttribute("purchase") Order order, Model model) throws Exception{
@@ -171,8 +247,8 @@ public class OrderController {
 		System.out.println(prodNo);
 		System.out.println(id);
 		System.out.println();
-		order.setId(userService.getUsers(id));
-		order.setProdNo(productService.getProduct(prodNo));
+		order.setId(id);
+		order.setProdNo(prodNo);
 		System.out.println(order +"purchase");
 		
 		orderService.updateOrder(order);
@@ -182,40 +258,3 @@ public class OrderController {
 	}
 }
 	
-//	//@RequestMapping("updateTranCode.do")
-//	@RequestMapping(value="updateTranCode")
-//	public String updateTranCode(@ModelAttribute("order") Order order, @RequestParam("tranCode") String tranCode,
-//			@RequestParam("buyerId") String buyerId) throws Exception{
-//		
-//		purchase.setTranCode(tranCode);
-//		
-//		ModelAndView modelAndView=new ModelAndView();
-//		purchaseService.updateTranCode(purchase);
-//		modelAndView.setViewName("redirect:/purchase/listPurchase?buyerId="+buyerId);
-//		
-//		return modelAndView;
-//	}
-//	
-//	@RequestMapping(value="deletePurchase",method=RequestMethod.GET)
-//	public String deletePurchaseView( @RequestParam("tranNo") int tranNo , Model model, HttpSession session ) throws Exception{
-//
-//		System.out.println("/deletePurchaseView.do");
-//		//Business Logic
-//		
-//		Purchase purchase = purchaseService.getPurchase(tranNo);
-//		model.addAttribute("purchase", purchase);
-//		
-//		// Model �� View ����
-//
-//		return "forward:/purchase/deletePurchaseView.jsp";
-//	}
-//	
-//	@RequestMapping(value="deletePurchase", method=RequestMethod.POST)
-//	public String deletePurchase (@RequestParam("tranNo") int tranNo, Model model) throws Exception{
-//		System.out.println("/deletePurchase.do");
-//		
-//		purchaseService.deletePurchase(tranNo);
-//		
-//		return "forward:/purchase/deletePurchase.jsp";
-//	}
-//}

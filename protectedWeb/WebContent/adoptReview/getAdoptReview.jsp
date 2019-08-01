@@ -9,7 +9,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
     
     <style type="text/css">
@@ -135,17 +134,14 @@
 	          </form>
 	          
 	          <!-- END -->
-		<div class="minibox" align="center">
-			<div>
-				<br/>
-				<p/>
-				<br/>
-				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
-				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
-			</div>
-		</div>
+	          
+	          
+		<div align="center">
+                 <a href="javascript:void(0);"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+                  <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+                  <a href="javascript:void(0);"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+        </div>
+        
 		<div class="col-md-12"><hr/></div>
         
 		        <p align="right">
@@ -162,7 +158,7 @@
 		        </p>
 
 	          <div class="row mt-5 pt-3 d-flex">
-	          <jsp:include page="/common/comment.jsp"></jsp:include>
+<%-- 	          <jsp:include page="/common/comment.jsp"></jsp:include> --%>
 			  <br/><br/>
 <!-- 	          	<div class="col-md-12"> -->
 <!-- 					<p><button class="btn btn-primary py-3 px-4 col-md-12">등록</button></p> -->

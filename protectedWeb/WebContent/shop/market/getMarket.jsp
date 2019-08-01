@@ -174,16 +174,6 @@ text-size: small;
 		
 		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
-		 $(function() {
-			 
-			/// SCRIPT
-			 var commentData =  
-			 {
-			    commentContent       : $("input[name=commentContent]").val(),
-			    postNo         : $("input[name=postNo]").val(),
-			    boardCode       : $("input[name=boardCode]").val()
-			 } ;
-			 
 			
 			 //manage//====================================================
 			 $( "button:contains('확인')" ).on("click" , function() {

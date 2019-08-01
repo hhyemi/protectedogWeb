@@ -68,9 +68,13 @@ public class ReviewController {
 
 		// 후기정보
 		String originSearch = null;
+		
+		boolean pageCheck = false;
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
+		}else {
+			pageCheck = true;
 		}
 		search.setPageSize(pageSize);
 
@@ -123,6 +127,7 @@ public class ReviewController {
 		model.addAttribute("user", user);
 		model.addAttribute("file", file);
 		model.addAttribute("avgGrade", avgGrade);
+		model.addAttribute("pageCheck", pageCheck);
 
 		return "forward:/hospital/getHospitalReview.jsp";
 	}

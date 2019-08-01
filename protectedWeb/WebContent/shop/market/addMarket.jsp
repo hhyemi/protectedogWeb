@@ -13,12 +13,13 @@
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+   <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <title>보호할개 · 후원신청</title>
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -100,41 +101,42 @@
 		});
 	});
 
-// 	function fncAddProduct() {
-// 		//Form 유효성 검증
+	function fncAddProduct() {
+		//Form 유효성 검증
 
-// 		 		var prodName=$("input[name='prodName']").val();
-// 		 	 	//var name = document.detailForm.prodName.value;
-// 		 	 	var price=$("input[name='price']").val();
-// 		 		//var detail = document.detailForm.prodDetail.value;
-// 		 		var city=$("input[name='city']").val();
-// 		 		//var manuDate = document.detailForm.manuDate.value;
-// 		 		var postTitle=$("input[name='postTitle']").val();
-// 		 		//var price = document.detailForm.price.value;
-// 		 		var postContent=$("input[name='postContent']").val();
-// 		 		//var price = document.detailForm.price.value;
+		 		var prodName=$("input[name='prodName']").val();
+		 	 	//var name = document.detailForm.prodName.value;
+		 	 	var price=$("input[name='price']").val();
+		 		//var detail = document.detailForm.prodDetail.value;
+		 		var city=$("input[name='city']").val();
+		 		//var manuDate = document.detailForm.manuDate.value;
+		 		var postTitle=$("input[name='postTitle']").val();
+		 		//var price = document.detailForm.price.value;
+		 		var postContent=$("input[name='postContent']").val();
+		 		//var price = document.detailForm.price.value;
 
-// 		 		if(prodName == null || prodName.length<1){
-// 		 			alert("상품명은 반드시 입력하여야 합니다.");
-// 		 			return;
-// 		 		}
+		 		if(prodName == null || prodName.length<1){
+		 			alert("상품명은 반드시 입력하여야 합니다.");
+		 			return;
+		 		}
 
-// 		 		if(price == null || price.length<1){
-// 		 			alert("판매가격은 반드시 입력하셔야 합니다..");
-// 		 			return;
-// 		 		}
-// 		 		if(city == null || price.length<1){
-// 		 			alert("판매자 거주지는 필수 입력사항입니다.");
-// 		 			return;
-// 				}
-// 		 		if(postTitle == null || manuDate.length<1){
-// 		 			alert("글 제목을 입력해주세요");
-// 		 			return;
-// 		 		}
-// 		 		if(postContent == null || manuDate.length<1){
-// 		 			alert("글 내용을 입력해주세요");
-// 		 			return;
-// 		 		}
+		 		if(price == null || price.length<1){
+		 			alert("판매가격은 반드시 입력하셔야 합니다..");
+		 			return;
+		 		}
+		 		if(city == null || price.length<1){
+		 			alert("판매자 거주지는 필수 입력사항입니다.");
+		 			return;
+				}
+		 		if(postTitle == null || manuDate.length<1){
+		 			alert("글 제목을 입력해주세요");
+		 			return;
+		 		}
+		 		if(postContent == null || manuDate.length<1){
+		 			alert("글 내용을 입력해주세요");
+		 			return;
+		 		}
+	}
 
 // 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 // 	}
@@ -252,8 +254,8 @@
 							<div class="w-100"></div>
 						
 						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">등록하기</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">취소하기</a>
+							<button class="btn btn-default" id="addproduct">등록하기</button>
+							&nbsp;<button class="btn btn-default" id="addproduct">취소하기</button>
 						</p>
 						
 						

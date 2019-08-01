@@ -49,6 +49,15 @@ public class AdoptServiceImpl implements AdoptService{
 		return map;
 	}
 	
+	public Map<String , Object> listAdoptById(Search search, String id) throws Exception {
+		Map<String, Object> map= adoptDAO.listAdoptById(search, id);
+		int totalCount = adoptDAO.getTotalCountById(search, id);
+		
+		map.put("map", map );
+		map.put("totalCount", new Integer(totalCount));
+		return map;
+	}
+	
 	public Map<String , Object> listAdopt2(String id) throws Exception {
 		Map<String, Object> map= adoptDAO.listAdopt2(id);
 		

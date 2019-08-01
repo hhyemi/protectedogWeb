@@ -11,46 +11,21 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
+		    <title>보호할개 · 후원신청</title>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
+	
+	<!-- ckeditor 사용 CSS-->
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
 
-	<!-- Bootstrap Dropdown Hover CSS -->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-    <!-- jQuery UI toolTip 사용 CSS-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip 사용 JS-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
-    <!-- ckeditor 사용 CSS-->   
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
-    	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	   #btn-update{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
-		#btn-cancel{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
+
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -80,19 +55,28 @@
        } 
     </style>
 
-	</head>
-	<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
       
+	</head>
+	<body>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container ">
-		<div class="form-group">
-		<div class="page-header text-center">	
-		<font size=6>후원 후기 수정 </font>  후기를 <strong style="color:#225cba">상세하게</strong> 작성해주세요.
-	    </div>		
-		</div>	
+	
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2">support</span> <span>review</span></p>
+	            <font size="7">후원후기수정</font><br/> 후기를 <strong style="color: #f04f23">상세하게</strong>작성해주세요.
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		<br/><p/>		
+	
+
 					<!--  table Start /////////////////////////////////////-->
 			      <table class="table table-hover table-striped" >
 			      
@@ -137,30 +121,31 @@
 			<br/>
             <!-- 첨부 버튼 -->
             <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.)
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
            <br/>
             
             <!-- 미리보기 영역 -->
             <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
+       		<div class="row">
+            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
 
 				<c:forEach var="name" items="${file}" varStatus="status">            
 				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
                      <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
-                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)">삭제</span></div>     
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
                 </c:forEach>           
-       
-            </div> 
-            </div>
+       		</div>
+            </div></div>
+            
 		    <input type="hidden" name="postNo" value="${funding.postNo }" />		    	
 		    <input type="hidden" id="multiFile" name="multiFile" />
 		    <input type="hidden" id="deleteFile" name="deleteFile" />		
 		  <br/><br/>
 		  <div class="form-group text-center">
-	  			<button type="button" id="btn-update">수정</button>
-	  			<button type="button" id="btn-cancel">취소</button>
+	  			<button type="button" id="btn-update" class="btn btn-default">수정</button>
+	  			<button type="button" id="btn-cancel" class="btn btn-default">취소</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
@@ -181,22 +166,32 @@
    function fncUpdateReview(){
       
       //Form 유효성 검증
-
+ 	  $('textarea').val(editor.getData());
       var reviewTitle = $('input[name="reviewTitle"]').val();
-      var reviewContent = $('input[name="reviewContent"]').val();
+      var reviewContent = $('textarea').val()
       
       if(reviewTitle == null || reviewTitle.length<1){
          alert("글제목은 반드시 입력하여야 합니다.");
          $('input[name="reviewTitle"]').focus();
          return;
       }
-/*       if(reviewContent == null || reviewContent.length<1){
-         alert("글내용은 반드시 입력하셔야 합니다.");
-         $('input[name="reviewContent"]').focus();
-         return;
-      } */
-
+      if(reviewContent == ''){
+    	  swal("글내용을 입력해주세요.", " ");
+	         $(".ck-editor__editable").focus();
+	         return;
+	      }
       
+      swal({
+          title: "수정하시겠습니까?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {   
+              swal("수정이 완료되었습니다!", {
+	                icon: "success",
+	              }).then((value) => {     
       //============= 다중파일업로드 AJAX =============
           $(function() {     
             var form = $('#uploadForm')[0];
@@ -232,7 +227,11 @@
 
 
       $('form').attr("method","POST").attr("action","/funding/updateReview").attr("enctype","multipart/form-data").submit();
-   }
+	              });
+          }
+       
+     });
+}
 
    //============= "Editor" =============   
 	let editor;

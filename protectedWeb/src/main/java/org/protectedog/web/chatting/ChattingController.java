@@ -36,12 +36,12 @@ public class ChattingController {
 
 		System.out.println("/chatting/addChattingUser : GET");
 
-		String userId = ((User) session.getAttribute("user")).getId();
+		String userId = ((User) session.getAttribute("user")).getNickname();
 
 		MongoClient mongoClient = null;
 		try {
 			mongoClient = new MongoClient("localhost", 27017);
-			System.out.println("Á¢¼Ó ¼º°ø");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 			WriteConcern wc = new WriteConcern(1, 2000);
 
@@ -54,14 +54,14 @@ public class ChattingController {
 //			// insert
 //			DBObject doc = new BasicDBObject();
 //			doc.put("userId", postId);
-//			doc.put("chattingTitle", userId+"¿¡°Ô ¹®ÀÇ¹Þ±â");
+//			doc.put("chattingTitle", userId+"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¹Þ±ï¿½");
 //			col.insert(doc);
 //			
 //			DBObject doc2 = new BasicDBObject();
 //			doc2.put("userId", userId);
-//			doc2.put("chattingTitle", postId+"¿¡°Ô ¹®ÀÇÇÏ±â");
+//			doc2.put("chattingTitle", postId+"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½");
 //			col.insert(doc2);
-//			System.out.println("»ðÀÔ¿Ï·á");
+//			System.out.println("ï¿½ï¿½ï¿½Ô¿Ï·ï¿½");
 			
 			model.addAttribute("postId", postId);
 			model.addAttribute("userId", userId);

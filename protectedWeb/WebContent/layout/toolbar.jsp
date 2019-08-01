@@ -390,6 +390,13 @@
 		});
 		
 
+		
+
+// 			$(document).ready(function(){
+// 				var url="/index.jsp"
+// 				window.open(url,"","width=400,height=400,left=600");
+// 			})
+
 
 		
 		

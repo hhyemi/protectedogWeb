@@ -19,17 +19,17 @@
 
 
 <!-- Global Stylesheets -->
-<title> 상품 등록</title>
-   <meta charset="UTF-8">
-   
-   <!-- 참조 : http://getbootstrap.com/css/   참조 -->
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<title>상품 등록</title>
+<meta charset="UTF-8">
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -40,7 +40,24 @@
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <style>
+.img-fluid {
+	padding-top: 10%;
+	min-height: 220px;
+	max-height: 220px;
+	overflow: auto;
+	max-width: 250px;
+	min-width: 250px;
+}
 
+.card {
+	min-height: 400px;
+	max-height: 400px;
+	overflow: auto;
+}
+</style>
+
+
+</style>
 
 </style>
 
@@ -48,38 +65,43 @@
 	//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
-		$("form").attr("method", "POST").attr("action",
-				"/product/listProduct").submit();
+		$("form").attr("method", "POST").attr("action", "/product/listProduct")
+				.submit();
 	}
 
 	//=============    상품상세조회(썸네일)  Event  처리 		=============
 	//============= 썸네일 사진 클릭 Event  처리 =============	
-	 	$(function() {
-		$(".img-prod").on("click",function() {
-			//alert($(this).children("input").val())
-					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
+	$(function() {
+		$(".img-prod").on(
+				"click",
+				function() {
+					//alert($(this).children("input").val())
+					$(self.location).attr(
+							"href",
+							"/product/getProduct?prodNo="
+									+ $(this).children("input").val());
 				});
-		
-		$(".detailprod").on("click",function() {
-			//alert($(this).children("input").val())
-					$(self.location).attr("href","/product/getProduct?prodNo="+ $(this).children("input").val());
-				});
-	 	});	 
-	
-	 	 $(function() {
-				
-			 
-			 $( "td.ct_btn01:contains('장바구니로 이동')" ).on("click" , function() {
-				 //alert("");
-				 self.location ="/shop/addCart?prodNo=${param.prodNo}"
-		
-					
-			 });
-			 
-		
-		});
-	
 
+		$(".detailprod").on(
+				"click",
+				function() {
+					//alert($(this).children("input").val())
+					$(self.location).attr(
+							"href",
+							"/product/getProduct?prodNo="
+									+ $(this).children("input").val());
+				});
+	});
+
+	$(function() {
+
+		$("td.ct_btn01:contains('장바구니로 이동')").on("click", function() {
+			//alert("");
+			self.location = "/shop/addCart?prodNo=${param.prodNo}"
+
+		});
+
+	});
 </script>
 
 </head>
@@ -100,42 +122,60 @@
 	<!--====================================================
                          HOME STA
 ======================================================-->
-	<section id="home-shop">
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('https://s1.best-wallpaper.net/wallpaper/m/1812/Furry-puppy-front-view-basket-meadow_m.webp')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>Sale Box</h3>
+	<!-- 	<section id="home-shop"> -->
+	<!-- 		<div id="carouselExampleIndicators" class="carousel slide" -->
+	<!-- 			data-ride="carousel"> -->
+	<!-- 			<ol class="carousel-indicators"> -->
+	<!-- 				<li data-target="#carouselExampleIndicators" data-slide-to="0" -->
+	<!-- 					class="active"></li> -->
+	<!-- 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
+	<!-- 			</ol> -->
+	<!-- 			<div class="carousel-inner" role="listbox"> -->
+	<!-- 				Slide One - Set the background image for this slide in the line below -->
+	<!-- 				<div class="carousel-item active" -->
+	<!-- 					style="background-image: url('https://s1.best-wallpaper.net/wallpaper/m/1812/Furry-puppy-front-view-basket-meadow_m.webp')"> -->
+	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
+	<!-- 						<h3>Sale Box</h3> -->
 
-					</div>
-				</div>
-				<!-- Slide Two - Set the background image for this slide in the line below -->
-				<div class="carousel-item"
-					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>Cool Shop</h3>
-					</div>
+	<!-- 					</div> -->
+	<!-- 				</div> -->
+	<!-- 				Slide Two - Set the background image for this slide in the line below -->
+	<!-- 				<div class="carousel-item" -->
+	<!-- 					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')"> -->
+	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
+	<!-- 						<h3>Cool Shop</h3> -->
+	<!-- 					</div> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 			<a class="carousel-control-prev" href="#carouselExampleIndicators" -->
+	<!-- 				role="button" data-slide="prev"> <span -->
+	<!-- 				class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
+	<!-- 				class="sr-only">Previous</span> -->
+	<!-- 			</a> <a class="carousel-control-next" href="#carouselExampleIndicators" -->
+	<!-- 				role="button" data-slide="next"> <span -->
+	<!-- 				class="carousel-control-next-icon" aria-hidden="true"></span> <span -->
+	<!-- 				class="sr-only">Next</span> -->
+	<!-- 			</a> -->
+	<!-- 		</div> -->
+	<!-- 	</section> -->
+	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+<body class="goto-here">
+	<div class="hero-wrap hero-bread"
+		style="padding-bottom: 30px; padding-top: 60px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p>
+						<span class="mr-2">protected dog</span> <span>Store</span>
+					</p>
+					<font size="7">보호할개 스토어</font>
 				</div>
 			</div>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-				role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="sr-only">Next</span>
-			</a>
 		</div>
-	</section>
+	</div>
+	<br />
+	<p />
 
 	<!--====================================================
                         SHOP-P1
@@ -149,12 +189,14 @@
 						<div class="heading-border-light"></div>
 					</div>
 					<div class="list-group">
-						<a href="#" class="list-group-item">사료</a> <a href="http://localhost:8080/shop/order/listorder"
-							class="list-group-item">간식</a> <a href="#"
-							class="list-group-item">의류</a> <a href="#"
-							class="list-group-item">BEST PRODUCT</a> 
-							<a href="#"
-							class="list-group-item">TimeSale</a>
+						<a href="#" class="list-group-item">> 전체 </a> <a href=""
+							class="list-group-item">사료</a> <a href="" class="list-group-item">간식</a>
+						<a href="/order/listOrder" class="list-group-item">의류;임시오더</a> <a
+							href="#" class="list-group-item">베스트상품</a>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a href="/product/listAdminProduct" class="list-group-item">관리자
+								페이지</a>
+						</c:if>
 					</div>
 					<div class="input-group ">
 						<input type="text" class="form-control" id="inlineFormInputGroup"
@@ -163,59 +205,62 @@
 							<i class="fa fa-search"></i>
 						</div>
 					</div>
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> 주문상품 조회&nbsp;&nbsp;<img src="/resources/file/fileShop/order.png" width="20px"></a> 
 
-					<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
-					<div class="shop-p1-title">
-						<h3>BEST PRODUCT</h3>
-						<div class="heading-border-light"></div>
-					</div>
-					<ul class="list-unstyled top-seller">
-						<li><img class="img-fluid"
-							src="/resources/newTemplate/img/shop/shop-item-1.jpg" alt="">
-							<h6>Tshirt sort Style</h6>
-							<p>$15.34</p></li>
-						<li><img class="img-fluid"
-							src="/resources/newTemplate/img/shop/shop-item-4.jpg" alt="">
-							<h6>Tshirt sort Style</h6>
-							<p>$23.56</p></li>
-						<li><img class="img-fluid"
-							src="/resources/newTemplate/img/shop/shop-item-2.jpg" alt="">
-							<h6>Tshirt sort Style</h6>
-							<p>$45.23</p></li>
-					</ul>
+						<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
+						<!-- 					<div class="shop-p1-title"> -->
+						<!-- 						<h3>BEST PRODUCT</h3> -->
+						<!-- 						<div class="heading-border-light"></div> -->
+						<!-- 					</div> -->
+						<!-- 					<ul class="list-unstyled top-seller"> -->
+						<!-- 						<li><img class="img-fluid" -->
+						<!-- 							src="/resources/newTemplate/img/shop/shop-item-1.jpg" alt=""> -->
+						<!-- 							<h6>Tshirt sort Style</h6> -->
+						<!-- 							<p>$15.34</p></li> -->
+						<!-- 						<li><img class="img-fluid" -->
+						<!-- 							src="/resources/newTemplate/img/shop/shop-item-4.jpg" alt=""> -->
+						<!-- 							<h6>Tshirt sort Style</h6> -->
+						<!-- 							<p>$23.56</p></li> -->
+						<!-- 						<li><img class="img-fluid" -->
+						<!-- 							src="/resources/newTemplate/img/shop/shop-item-2.jpg" alt=""> -->
+						<!-- 							<h6>Tshirt sort Style</h6> -->
+						<!-- 							<p>$45.23</p></li> -->
+						<!-- 					</ul> -->
 				</div>
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
 					<div class="row">
-							<c:set var="i" value="0" />
-							<c:forEach var="product" items="${list}">
-								<c:set var="i" value="${i+1}" />
-								<div class="col-lg-4 col-md-6 mb-4">
+						<c:set var="i" value="0" />
+						<c:forEach var="product" items="${list}">
+							<c:set var="i" value="${i+1}" />
+							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="card ">
-									<a>
-										<img class="img-fluid"
-										src="../../resources/file/fileShop/${product.mainFile}" alt=""> 
+									<a> <img class="img-fluid"
+										src="../../resources/file/fileShop/${product.mainFile}" alt="">
 										<input type="hidden" value="${product.prodNo}" /></a>
 									<div class="card-body text-center">
 										<div class="card-title">
-											<a href="#">${product.prodName} 
-											</a>
+											<a href="#">${product.prodName} </a>
 										</div>
 										<del>
-											<fmt:formatNumber value="${product.price}" pattern="#,###"/>
-										</del> <strong>&nbsp;&nbsp;<fmt:formatNumber value="${product.discountPrice}" pattern="#,###"/>원</strong>
+											<fmt:formatNumber value="${product.price}" pattern="#,###" />
+										</del>
+										<strong>&nbsp;&nbsp;<fmt:formatNumber
+												value="${product.discountPrice}" pattern="#,###" />원
+										</strong>
 										<div class="cart-icon text-center">
-											<a class="detailprod"><i class="fa fa-cart-plus"></i> 상세보기
-											<input type="hidden" value="${product.prodNo}"/></a>
-											
+											<a class="detailprod"><i class="fa fa-cart-plus"></i>
+												상세보기 <input type="hidden" value="${product.prodNo}" /></a>
+
 										</div>
-										
+
 									</div>
 								</div>
-								</div>
-							</c:forEach>
-						</div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
