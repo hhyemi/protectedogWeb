@@ -17,6 +17,7 @@ import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,11 +76,11 @@ public class MarketController {
 		
 		System.out.println("shop/market/addMarket : GET/POST");
 		
-		//board.setId("user01");
-		//board.setNickName("스캇");
-		//board.setProdNo(10001);
-		//board.setPhone("011-1123-4567");
+		//세션 불러오기
+		User user = (User)session.getAttribute("user");
 		
+		board.setId(user.getId());
+		board.setNickName(user.getNickname());
 		board.setBoardCode(MK);
 		board.setViewCount(0);
 		//in thumnail
@@ -144,7 +145,30 @@ public class MarketController {
 		System.out.println(resultPage);
 
 		// Model 연결  View 
-
+		
+		//sorting
+		if(search.getProdCondition()== "1") {
+			search.setProdCondition("서울");
+		}
+		if(search.getProdCondition()== "2") {
+			search.setProdCondition("경기도");
+		}
+		if(search.getProdCondition()== "3") {
+			search.setProdCondition("강원도");
+		}
+		if(search.getProdCondition()== "4") {
+			search.setProdCondition("경상도");
+		}
+		if(search.getProdCondition()== "5") {
+			search.setProdCondition("전라도");
+		}
+		if(search.getProdCondition()== "6") {
+			search.setProdCondition("충청도");
+		}
+		if(search.getProdCondition()== "7") {
+			search.setProdCondition("제주도");
+		}
+		
 		System.out.println("/shop/Maket/listMarket ///////////////////////");
 		System.out.println("/listMarket GET / POST");
 		

@@ -78,7 +78,7 @@
 										<div class="col-sm-10 prod-desc">
 											<h6 class="nomargin">
 												<a class="number">  </a>
-												<a class="detailOrder"><br/><b>${order.orderProd.prodName}(${order.orderQuantity})</b><br/>
+												<a class="detailOrder"><br/><b>${order.orderProd.prodName}</b><br/>
 												<input type="hidden" value="${order.orderNo}" /> </a>
 												
 											</h6>

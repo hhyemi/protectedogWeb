@@ -188,7 +188,7 @@ body {
 			<tbody>
 				<tr align="center">
 					<th scope="row">${order.orderNo}</th>
-					<td>${order.orderProd.prodName}</td>
+					<td>${order.orderProd.prodName}&nbsp;${order.orderQuantity}개 구매</td>
 					<td>${order.totalPrice}</td>
 					<td>
 					<c:if test="${order.orderCode =='1'}">
