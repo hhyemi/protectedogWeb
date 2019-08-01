@@ -131,13 +131,15 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                                <div class="modal-dialog">
 			                                    <div class="modal-content">
 			                                        <div class="modal-body">
-			                                            <form role="form" class="form-horizontal">
+			                                            <form role="form" class="form-horizontal reportViewSection">
 					                                        <div class="row" style="position: relative; height: 25px;">
 					                                        	<div class="modalReportNo" style="display: none;"></div>
-																<div class="col-md-6"
-																	style="position: absolute; left: 0px; bottom: 0px;">신고유형 | <span class="reportContent"></span></div>
+					                                        	<input type="hidden" class="reportStatus" name="reportStatus" value="1">
+					                                        	<input type="hidden" class="delCode" name="delCode" value="n">
+																<div class="col-md-6 reportCategory"
+																	style="position: absolute; left: 0px; bottom: 0px;">신고유형 | <span class="reportCategory"></span></div>
 																			
-																<div class="col-md-6" align="right"
+																<div class="col-md-6 reportDate" align="right"
 																	style="position: absolute; right: 0px; bottom: 0px;">
 																	신고일자 | <span class="reportDate"> </span>
 																</div>
@@ -147,10 +149,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 																	style="position: absolute; left: 0px; bottom: 0px;">신고자 | <span class="reporterId"></span></div>
 																			
 																<div class="col-md-6" align="right"
-																	style="position: absolute; right: 0px; bottom: 0px;">신고유형 | <span class="reportedId"> </span></div>
+																	style="position: absolute; right: 0px; bottom: 0px;">신고대상 | <span class="reportedId"> </span></div>
 															</div>
 															<br/>
-			                                                <div class="form-group">
+			                                                <div class="form-group reportContent">
 			                                                    <label class="col-lg-2 control-label">내용</label>
 			                                                    <hr/>
 																<div class="content col-lg-8" >
@@ -168,7 +170,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 															</div>											
 			                                                <div class="row form-group">
 			                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-			                                                        <button class="btn btn-send ml-3 " type="submit">Send</button>
+			                                                        <button class="btn btn-send ml-3 blackOp" type="submit">블랙처리</button>
+			                                                        <button class="btn btn-send ml-3 normalOp" type="submit">일반처리</button>
+			                                                        <button class="btn btn-send ml-3 noneOp" type="submit">비처리</button>
 			                                                    </div>
 			                                                </div>
 			                                            </form>
@@ -207,9 +211,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         	</c:if>
                                         </td>
                                         <td class="view-message text-center" width="75px" >
+                                        	<c:if test="${ report.reportStatus == 0 }">
                                         	<a href=".reportViewModal" data-toggle="modal" title="Compose" class="btn btn-compose">
                                         		더보기
                                         	</a>
+                                        	</c:if>
                                         </td>
                                     </tr>
 									</c:forEach>
@@ -242,7 +248,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
 
-		$("form").attr("method", "POST").attr("action","/message/listMessage").submit();
+		$("form").attr("method", "POST").attr("action","/report/listReport").submit();
 	}
 	
 // 	$(function(){
@@ -275,7 +281,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	$(function(){
 		$('td:contains("더보기")').on('click', function(){
 			var reportNo=$(this).parents().children("td").children("input[name='reportNo']").val();
-			alert(reportNo);
+// 			alert(reportNo);
 			$.ajax({
 				url : "/report/json/getReport/"+reportNo,
 				method : "GET",
@@ -285,9 +291,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					"Content-Type" : "application/json"
 				},
 				success : function(JSONData, status){
-					alert(JSON.stringify(JSONData))
+// 					alert(JSON.stringify(JSONData))
 // 					var sendDate=JSONData.sendDate;
 // 					alert(sendDate);
+					$(".modalReportNo").text(JSONData.report.reportNo);
 					$(".reportContent").text(JSONData.report.reportContent);
 					$(".reportCategory").text(JSONData.report.reportCategory);
 					$(".reportDate").text(JSONData.reportDate);
@@ -296,10 +303,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					
 					$(".reportImg").remove();
 					$.each(JSONData.file, function(file, file){
-						alert(JSON.stringify(file.fileName));
+// 						alert(JSON.stringify(file.fileName));
 						var fileName=JSON.stringify(file.fileName);
 						var fileView=fileName.substring(1, fileName.length-1);
-						alert(fileView);
+// 						alert(fileView);
 						$(".reportImgBox").append(
 							"<img class='reportImg' src='../resources/file/fileReport/" +fileView+ "' width='300px' height='300px' style='cursor:pointer;'"
 							+"onclick='doImgPop('../resources/file/fileReport/" +fileView+ "')'>"
@@ -313,6 +320,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			});
 		});
 	})
+	
+// 	$(function(){
+// 		$(".blackOp").on("click", function(){
+// 			var reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
+// 			alert(reportedId);
+// 			$(".reportViewSection").attr("method", "POST").attr("action", "/report/updateReport?reportedId="+reportedId+"&addPoint=-1");
+// 		})
+// 	})
 	
 // 		$(function() {
 
@@ -348,13 +363,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 // 		});
 		
-		$(function(){
-			$(".submit").on("click", function(){
-				$(".sendMessage").attr("method", "POST").attr("action", "/message/addMessage");
-				alert("쪽지전송 성공");
-				$("#messageModal").modal('hide');
-			})
-		})
+// 		$(function(){
+// 			$(".submit").on("click", function(){
+// 				$(".sendMessage").attr("method", "POST").attr("action", "/message/addMessage");
+// 				alert("쪽지전송 성공");
+// 				$("#messageModal").modal('hide');
+// 			})
+// 		})
+		
 		
 	function doImgPop(img){
 		img1=new Image();
@@ -382,7 +398,198 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		
 	} 
 		
+	
+	$(function(){
+	
+		var reportNo;
+		var delCode;
+		var reportCategory;
+		var reportContent;
+		var reportDate;
+		var reportedId;
+		var reporterId;
+		var reportStatus;
+	
+		$(function(){
+			$(".blackOp").on("click", function(){
+				var methodPath="black";
+				var addPoint=-1;
+				var targetId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
+				
+				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
+				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
+				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
+				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
+				reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
+				reporterId=$(this).parent().parent().parent().children(".reportId").find(".reporterId").text();
+				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
+				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
+				
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedId+", "+reporterId+", "+reportDate+", "+reportStatus);
+				
+				var reportBody={
+						"reportNo" : reportNo,
+						"delCode" : delCode,
+						"reportCategory" : reportCategory,
+						"reportContent" : reportContent,
+						"reportDate" : reportDate,
+						"reportedId" : reportedId,
+						"reporterId" : reporterId,
+						"reportStatus" : reportStatus
+				}
+				
+				$.ajax({
+					url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+					dataType : "json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					method : "POST",
+					data : JSON.stringify(reportBody),
+					success : function(response){
+						alert(JSON.stringify(response));
+						$('#reportViewModal').modal("hide");
+					},
+					error : function(request,status,error){
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+			});
+		})
+		
+		$(function(){
+			$(".normalOp").on("click", function(){
+				var methodPath="normal";
+				var addPoint=300;
+				var targetId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
 
+				debugger;
+				
+				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
+				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
+				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
+				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
+				reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
+				reporterId=$(this).parent().parent().parent().children(".reportId").find(".reporterId").text();
+				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
+				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
+				
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedId+", "+reporterId+", "+reportDate+", "+reportStatus);
+				
+				
+				var reportBody={
+						"reportNo" : reportNo,
+						"delCode" : delCode,
+						"reportCategory" : reportCategory,
+						"reportContent" : reportContent,
+						"reportDate" : reportDate,
+						"reportedId" : reportedId,
+						"reporterId" : reporterId,
+						"reportStatus" : reportStatus
+				}
+				
+				$.ajax({
+					url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+					dataType : "json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					method : "POST",
+					data : JSON.stringify(reportBody),
+					success : function(response){
+						alert(JSON.stringify(response));
+						$('#reportViewModal').modal("hide");
+					},
+					error : function(request,status,error){
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+
+			});
+		})
+		
+		$(function(){
+			$(".noneOp").on("click", function(){
+				var methodPath="none";
+				var addPoint=0;
+				var targetId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();;
+				
+				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
+				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
+				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
+				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
+				reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
+				reporterId=$(this).parent().parent().parent().children(".reportId").find(".reporterId").text();
+				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
+				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
+				
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedId+", "+reporterId+", "+reportDate+", "+reportStatus);
+				
+				debugger;
+				
+				var reportBody={
+						"reportNo" : reportNo,
+						"delCode" : delCode,
+						"reportCategory" : reportCategory,
+						"reportContent" : reportContent,
+						"reportDate" : reportDate,
+						"reportedId" : reportedId,
+						"reporterId" : reporterId,
+						"reportStatus" : reportStatus
+				}
+				
+				$.ajax({
+					url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+					dataType : "json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					method : "POST",
+					data : JSON.stringify(reportBody),
+					success : function(response){
+						alert(JSON.stringify(response));
+						$('#reportViewModal').modal("hide");
+					},
+					error : function(request,status,error){
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				})
+			});
+		})
+	
+// 		function reportAjax(){
+			
+// 			alert("들어옴?");
+			
+// 			alert(reportNo);
+			
+// 			$.ajax({
+// 				url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+// 				dataType : "json",
+// 				method : "POST",
+// 				data : JSON.stringify({
+// 					"reportNo" : reportNo,
+// 					"delCode" : delCode,
+// 					"reportCategory" : reportCategory,
+// 					"reportContent" : reportContent,
+// 					"reportDate" : reportDate,
+// 					"reportedId" : reportedId,
+// 					"reporterId" : reporterId,
+// 					"reportStatus" : reportStatus
+// 				}),
+// 				success : function(response){
+// 					alert(JSON.stringify(response));
+// 					$('#reportViewModal').modal("hide");
+// 				},
+// 				error : function(request,status,error){
+// 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 				}
+// 			})
+// 		}
+	})
 		
 
     </script>

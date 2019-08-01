@@ -13,8 +13,10 @@ import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Report;
+import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
 import org.protectedog.service.report.ReportService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +39,10 @@ public class ReportController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	private FileService fileService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	
 	///Constructor
@@ -116,10 +122,10 @@ public class ReportController {
 		search.setPageSize(pageSize);
 		
 		Map<String, Object> map=reportService.getReportList(search);
-		System.out.println("Coupon ����Ʈ : "+map.toString());
+//		System.out.println("Coupon ����Ʈ : "+map.toString());
 		
 		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("Coupon ����Ʈ ������ : "+resultPage);
+//		System.out.println("Coupon ����Ʈ ������ : "+resultPage);
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
@@ -148,21 +154,39 @@ public class ReportController {
 		
 	}
 	
-	@RequestMapping(value="updateReport")
+	@RequestMapping(value="updateReport", method=RequestMethod.POST)
 	public String updateReport(@ModelAttribute("report") Report report, 
-								@RequestParam("reportStatus") int reportStatus, 
-								@RequestParam("delCode") char delCode, 
-								@RequestParam("reportNo") int reportNo, 
+								@RequestParam("reportedId") String reportedId,
+								@RequestParam("addPoint") int addPoint,
 								Model model) throws Exception{
 		
 		System.out.println("/report/updateReport");
+		System.out.println("updateReport report값 : "+report);
 		
-		report=reportService.getReport(reportNo);
-		report.setReportStatus(reportStatus);
-		report.setDelCode(delCode);
-		
+		report=reportService.getReport(report.getReportNo());
+
 		reportService.updateReportStatus(report);
+		System.out.println("updateReport report값1 : "+report);
 		
+		if(reportedId == null) {
+			System.out.println("updateReport 비처리 입장 : "+report);
+			return "forward:/report/listReport";
+		}else {
+			if(addPoint == -1) {
+				System.out.println("updateReport 블랙처리 입장 : "+report);
+				User user=userService.getUsers(reportedId);
+				user.setLevelPoint(-1);
+				userService.updateUsers(user);
+				System.out.println("updateReport 블랙처리 퇴장 : "+user);
+			} else {
+				System.out.println("updateReport 점수깎기 입장 : "+report);
+				User user=userService.getUsers(reportedId);
+				int levelPoint=user.getLevelPoint();
+				user.setLevelPoint(levelPoint-addPoint);
+				userService.updateUsers(user);
+				System.out.println("updateReport 점수깎기 입장 : "+user);
+			}
+		}
 		return "forward:/report/listReport";
 		
 	}

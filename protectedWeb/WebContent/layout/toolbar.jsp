@@ -67,81 +67,6 @@
   </head>
   
 <body id="page-top">
-<!--====================================================
-                    LOGIN OR REGISTER
-======================================================-->
-
-<section id="reportModal">
-
-							<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="report-modal" class="modal fade" style="display: none;">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                       		<h4 class="modal-title">신고하기</h4>
-                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form role="form" class="form-horizontal sendReport" id="reportForm">
-                                            <input type="hidden" name="reporterId" id="reporterId" value="${ sessionScope.user.id }">
-                                                <div class="row form-group">
-                                                    <label class="col-lg-4 control-label">신고대상</label>
-                                                    <div class="col-lg-8">
-                                                        <input type="text" placeholder="" id="reportedId" name="reportedId" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <label class="col-lg-4 control-label">신고유형</label>
-                                                    <div class="col-lg-8">
-                                                        <select name="reportCategory" id="reportCategory" class="form-control" style="width: 150px; height: 35px" maxLength="20">
-															<option value="비속어">비속어사용</option>
-															<option value="사기">사기행위</option>
-															<option value="음란행위">음란행위</option>
-															<option value="혐오표현">혐오표현</option>
-															<option value="기타">기타</option>
-														</select>
-                                                    </div>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <label class="col-lg-4 control-label">신고내용</label>
-                                                </div>
-                                                <div class="row form-group">
-                                                    <div class="col-lg-12">
-                                                        <textarea rows="10" cols="30" class="form-control" id="reportContent" name="reportContent" placeholder="1000자 이내로 입력해주세요"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <br/>
-                                                <br/>
-                                                <br/>
-									            <div id="attach" class="form-group">
-									                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadReportInputBox">사진등록</label></span>&nbsp;(최대 3장까지 업로드 가능합니다.)
-									                <input id="uploadReportInputBox" style="display: none" type="file" value="등록" name="filedata"  />
-									            </div>                                              	
-<!--                                            미리보기 영역 -->
-                                                <div class="form-group">
-									            	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
-									            </div>
-                                               <br/>
-                                               <br/>
-                                               <br/>
-                                                
-                                                <div class="row form-group">
-                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-                                                        <button class="btn btn-send ml-3 submit" type="submit" id="submit">Send</button>
-                                                        <button class="btn btn-reset ml-3 reset" name="reset">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" class="form-control" id="reportMultiFile" name="reportMultiFile" >	
-                                            </form>
-                                        </div>
-                                    </div>
-                                    /.modal-content
-                                </div>
-                                /.modal-dialog
-                            </div>
-
-</section>
-                     
 
 <!--====================================================
                          HEADER
@@ -171,7 +96,7 @@
                   <li><a href="/users/addUsersBase" class="log-top regist">Regist</a></li>
                   </c:if>
                   <c:if test="${ sessionScope.user != null }">
-                  <li><a href="#" class="log-top profile">${ sessionScope.user.nickname } 님</a></li>
+                  <li><a href="/users/getUsers?id=${ sessionScope.user.id }" class="log-top profile">${ sessionScope.user.nickname } 님</a></li>
                   <li><a href="/users/logout" class="log-top logOut">LogOut</a>
                   </c:if>
                 </ul>
@@ -222,8 +147,6 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
 		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a>
-<!-- 		                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a> -->
-<!-- 		                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a> -->
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
 		                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
 		                </c:if>
@@ -467,202 +390,11 @@
 		});
 		
 		
-		//========== AddReport 처리==========
-		function fncAddReport(){
-			//Form 유효성 검증
-			var content = $("input[name='reportContent']").val();
-// 			alert("1");
-
 			
-// 			if(reportContent == null || reportContent.length<1){
-// 				alert("내용을 입력해 주세요.");
-// 				return;
-// 			}
-			
-// 			if(reportContent.length>1000){
-// 				alert("내용은 1천자 미만으로 작성해 주세요.")
-// 				return;
-// 			}
-		   
-          $(function() {     
-            var form = $('#reportForm')[0];
-            var formData = new FormData(form);
-//             alert("2")
-
-            for (var index = 0; index < 100; index++) {
-                formData.append('files',files[index]);
-            }
-                
-                $.ajax({
-	                type : 'POST',
-	                enctype : 'multipart/form-data',
-	                processData : false,
-	                contentType : false,
-	                cache : false,
-	                timeout : 600000,
-	                url : '/Images/json/imageupload/RP',
-	                dataType : 'JSON',
-	                data : formData,
-	                success : function(result) {
-// 	                	alert("3")
-// 	                	alert(result);
-	                    if (result === -1) {
-	                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-	                        // 이후 동작 ...
-	                    } else if (result === -2) {
-	                        alert('파일이 10MB를 초과하였습니다.');
-	                        // 이후 동작 ...
-	                    } else {
-	                        alert('이미지 업로드 성공');
-	                    }
-	                },
-					error : function(request,status,error){
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
-           		});
-                
-                $.ajax({
-                	method : 'POST',
-                	enctype : 'multipart/form-data',
-                	headers : {
-                		"Accept" : "application/json",
-                		"Content-Type" : "application/json"
-                	},
-                	url : '/report/json/addReport',
-                	dataType : 'JSON',
-                	data : JSON.stringify({
-                		reportedId : $('#reportedId').val(),
-                		reporterId : $('#reporterId').val(),
-                		reportCategory : $('#reportCategory').val(),
-                		reportContent : $('#reportContent').val(),
-                		file : $('#reportMultiFile').val(),
-                	}),
-                	success : function(JSONData){
-                		console.log(JSON.stringify(JSONData));
-                		$('#report-modal').modal("hide");
-                	}
-                });
-        });
-			
-// 			$(".sendReport").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
-// 			alert("4")
-			alert("신고가 완료되었습니다.");
-		}
-		
-		   //============= "다중파일업로드 파일명만 저장해서 value" =============   
-		   function fnAddFile(fileNameArray) {
-		         $("#reportMultiFile").val(fileNameArray)    
-		   }   
-		   
-		   //============= "다중파일업로드"  Event 처리 및  연결 =============      
-
-		       //임의의 file object영역
-		     var files = {};
-		     var previewIndex = 0;
-		     var fileNameArray = new Array();
-		     // image preview 기능 구현
-		     // input = file object[]
-		     function addPreview(input) {
-		         if (input[0].files) {
-		             //파일 선택이 여러개였을 시의 대응
-		             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-
-		                 var file = input[0].files[fileIndex];
-		                
-		                 if (validation(file.name))
-		                     continue;
-
-		                var fileName = file.name + "";   
-		                var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-		                var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);       
-		                
-		                //append할때 동영상 이미지 구분해주기
-		               var imgSelectName = "img";
-		               if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
-		                  imgSelectName = "iframe";
-		               }                           
-
-		                 var reader = new FileReader();
-		                 reader.onload = function(img) {
-		                     //div id="preview" 내에 동적코드추가.
-		                     //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
-		                     
-		                     var imgNum = previewIndex++;
-		                     
-		                    //3장 이상 업로드시
-		                     if(Object.keys(files).length>=3){
-		                        alert("사진은 3장까지만 업로드 가능합니다.");
-		                        delete files[imgNum];
-		                     }else{
-		               // 3장 이하 
-		                     $("#preview").append(
-		                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:100px' >"
-		                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"80px;\" height=\"80px;\"/>"
-		                                             + "<br/>"
-		                                             + "<a href=\"#\" value=\""
-		                                             + imgNum
-		                                             + "\" onclick=\"deletePreview(this)\">"
-		                                             + "   삭제" + "</a>" + "</div>");
-
-		                     files[imgNum] = file;
-		                     fileNameArray[imgNum]=file.name;
-		                     fnAddFile(fileNameArray);
-		                     }
-
-		                 };
-
-		                 reader.readAsDataURL(file);
-		             }
-		         } else
-		             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-		     }
-
-		     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
-		     function deletePreview(obj) {
-		         var imgNum = obj.attributes['value'].value;
-		         delete files[imgNum];
-		         fileNameArray.splice(imgNum,1);
-		         fnAddFile(fileNameArray);
-		         $("#preview .preview-box[value=" + imgNum + "]").remove();
-		         resizeHeight();
-		     }
-
-		     //============= 파일 확장자 validation 체크 =============
-		     function validation(fileName) {
-		         fileName = fileName + "";
-		         var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-		         var fileNameExtension = fileName.toLowerCase().substring(
-		                 fileNameExtensionIndex, fileName.length);
-		         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-		             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
-		             return true;
-		         } else {
-		             return false;
-		         }
-		     }
-		     
-
-		       $(document).ready(function() {
-
-		          //============= 사진미리보기 =============
-		          $('#attach input[type=file]').change(function() {
-		             addPreview($(this)); //preview form 추가하기
-		         });
-		       });
-		
-			$(function(){
-				$('#submit').on('click',function(){
-// 					alert("ssss");
-					fncAddReport();
-				});
-			});
-			
-			
-			$(function(){
-				$('a[href="#"]').on('click',function(){
-					$("form")[0].reset;
-				});
-			});
+// 			$(document).ready(function(){
+// 				var url="/index.jsp"
+// 				window.open(url,"","width=400,height=400,left=600");
+// 			})
 
 
 		
