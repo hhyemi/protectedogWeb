@@ -8,7 +8,6 @@
 <meta charset="utf-8">
 <title>보호할개 · 동물병원</title>
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
-<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -80,11 +79,11 @@
 			<hr />
 			<font size="6">도로명주소</font><br /> ${placeList.placeAddr } <br /> <br />
 			<font size="6">지번주소</font><br /> ${placeList.placeJIAddr } <br /> <br />
-			<font size="6">연락처</font><br /> <font size="4" color="#d65a5a">${placeList.placeTel}</font>
+			<font size="6"  id="scroll">연락처</font><br /> <font size="4" color="#d65a5a">${placeList.placeTel}</font>
 			<br />
 			<p />
 			<hr />
-			<font size="6">동물병원후기</font><br /> <font id="reviewNum">사용자 후기 [
+			<font size="6" >동물병원후기</font><br /> <font id="reviewNum">사용자 후기 [
 			${resultPage.totalCount}건 ]</font> &ensp;
 
 			<!-- Button trigger modal -->
@@ -276,16 +275,20 @@
 				type="hidden" id="grade" name="grade" />  <input
 				type="hidden" id="currentPage" name="currentPage" value="" />
 			<input type="hidden" id="multiFile" name="multiFile" />
-		    <input type="hidden" id="deleteFile" name="deleteFile" />		  
+		    <input type="hidden" id="deleteFile" name="deleteFile" />
+ 			<input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>		
+ 				    		  
 		</form>
 		<p />
+		<center>
+	<!-- PageNavigation Start... -->
+	<jsp:include page="../common/pageNavigator.jsp" />
+	<!-- PageNavigation End... -->
+	</center>
 	</div>
 
 	<br />
 	<br />
-	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator.jsp" />
-	<!-- PageNavigation End... -->
 	<!--================ start footer Area  =================-->
 	<!-- footer Start /////////////////////////////////////-->
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -301,10 +304,8 @@
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/review/getHospitalReview").submit();
-	 
+	  	$("form").attr("method" , "POST").attr("action" , "/review/getHospitalReview").submit();
 	}
-	
 
 	   //============= "다중파일업로드 파일명만 저장해서 value" =============   
 	   function fnAddFile(fileNameArray) {
@@ -411,7 +412,16 @@
 	     }	
 	     
 	       $(document).ready(function() {
-
+	    	   var pageCheck = false;
+	    	  //alert($("#pageCheck").val())
+	    	   pageCheck = $("#pageCheck").val();
+	           //============= 페이징 스크롤이동 =============	    	   
+	    	   if(${pageCheck} ){
+	    		 //  alert("??")
+	    		var offset = $('#scroll').offset(); 
+	    		 $('html').animate({scrollTop : offset.top}, 1);
+	    	   }
+	    	   
 	           //============= 사진미리보기 =============
 	           $('#attach input[type=file]').change(function() {
 	              addPreview($(this)); //preview form 추가하기
@@ -668,14 +678,18 @@
 					   		            }  
 					   			    });   	
 								   }
-					   		             $("#myModal2").modal("hide");  	
-					   		          window.location.reload(true);
+					   		             $("#myModal2").modal("hide"); 
+					   		         
+					   		             window.location.reload(true);
+					   		          
 								 });
 		
 							}
 							
 					});
 		        });	
+		         
+
 					         $( ".btnDelete" ).on("click" , function() {  
 					 	 		swal({
 						            title: "정말 삭제 하시겠습니까 ?",
@@ -922,6 +936,7 @@
 							
 					});
 		        });
+					   		          
 		         //============= 삭제 Event  처리 =============   
 		         $( ".btnDelete" ).on("click" , function() {  
 			 	 		swal({

@@ -26,21 +26,43 @@
 	      text-overflow:ellipsis;
 	      white-space:nowrap;
 	  } 
-		#searchKeyword{
+		select, #searchKeyword {
+			height: 33px;
+		}
+		
+		#searchKeyword {
 			height: 40px;
 			width: 150px;
-		}
-		#searchSubmmit{
-			width : 60px;
-			height : 40px;
-			
-			border-radius : 0px 15px 15px 0px;
 			border : 1px solid #D3D3D3;
 		}
 		
-		#voteCondition{
+		#searchSubmmit {
+ 			width : 60px; 
+			height : 40px;
+ 			border-radius : 0px 15px 15px 0px; 
+			border : 1px solid #f04f23;
+		}
+		
+		#write {
+ 			width : 40px; 
+			height : 40px;
+ 			border-radius : 15px; 
+			border : 1px solid #f04f23;
+		}
+		
+		#voteCondition {
 			height : 40px;
 			border-radius : 15px 0px 0px 15px;
+			padding-left: 10px;
+			border-color: #D3D3D3;
+			border-right: 0px;
+		}
+		
+		#searchCondition {
+			height : 40px;
+			padding-left: 5px;
+			border-color: #D3D3D3;
+			border-right: 0px;
 		}
     </style>
     
@@ -67,29 +89,43 @@
 		    	<div class="container" >
 		    	
 				<!--검색 부터 -->		    	
-		    		<div class="row">  
-			 		 	<div class="col-md-11" style="">
-
-						    <select class="form-control" id="voteCondition" name="voteCondition" >
-								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option>
+		    		<div class="row" > 
+					    <div class="col-md-12 text-left">
+					    	<p style="font-weight: bold;">
+					    		전체  ${resultPage.totalCount } 건
+					    	</p>
+					    </div>
+					<div class="col-md-6" id="justify" align="left">
+		    		<button type="button" id="btnAdd" class="btn btn-default" style="float: left" >작성</button>
+			 		</div>
+			 		 	<div class="col-md-6" align="right">
+						<div class="form-group" style="padding-left: 160px">
+						    <select  id="voteCondition" name="voteCondition" >
+								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체</option>
 								<option value="1" ${ ! empty search.voteCondition && search.voteCondition==1 ? "selected" : "" } >투표중</option>
 								<option value="2" ${ ! empty search.voteCondition && search.voteCondition==2 ? "selected" : "" } >투표완료</option>
 							</select>   
 
-						    <select class="form-control" name="searchCondition" id="searchCondition" >
+						    <select  name="searchCondition" id="searchCondition" >
 								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >제목</option>
 								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
 							</select>
 	
-						    <label class="sr-only" for="searchKeyword">검색어</label>
-						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
-								<span class="fas fa-search"></span>
-							</button>
+						    <label class="sr-only" for="searchKeyword"> 검색어</label>
+						    <input type="text"  id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+								<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
+							<span class="fas fa-search"></span>
+						</button>
 						</div>
-						<button type="button" id="btnAdd" class="btn btn-default" style="float: right">작성</button>
+				</div>
 			    	</div>    
     		    	<br/>
+    		    	
+		     <c:if test="${resultPage.totalCount eq 0 }">
+		      	<div  align="center" style="height: 300px; padding-top: 100px;">
+					<font size="4px">검색결과가 없습니다.</font>
+				</div>
+		      </c:if>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-10 col-lg-12 order-md-last">
@@ -183,10 +219,19 @@
 	 
 	}
 
+	$(document).ready(function(){
+		$('#searchKeyword').keydown( function(e) {
+			if(e.keyCode == 13) {
+				fncGetList(1);
+			}
+		});
+	});
+	
 	var page = 1;
 	
     $(function(){
     	
+
         $(window).scroll(function(){    
        	//             scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다. 
 					 if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){	

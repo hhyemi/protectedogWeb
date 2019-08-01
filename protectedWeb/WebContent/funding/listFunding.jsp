@@ -22,31 +22,51 @@
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
-
-		#searchKeyword{
-			height: 40px;
-			width: 150px;
-		}
-		#searchSubmmit{
-			width : 60px;
-			height : 40px;
-			
-			border-radius : 0px 15px 15px 0px;
-			border : 1px solid #D3D3D3;
-		}
-		
-		#voteCondition{
-			height : 40px;
-			border-radius : 15px 0px 0px 15px;
-		}
-
 		#checkPostTitle{
 	      width:300px;
 	      padding:0 5px;
 	      overflow:hidden;
 	      text-overflow:ellipsis;
 	      white-space:nowrap;
-	  } 			     
+	  } 
+		select, #searchKeyword {
+			height: 33px;
+		}
+		
+		#searchKeyword {
+			height: 40px;
+			width: 150px;
+			border : 1px solid #D3D3D3;
+		}
+		
+		#searchSubmmit {
+ 			width : 60px; 
+			height : 40px;
+ 			border-radius : 0px 15px 15px 0px; 
+			border : 1px solid #f04f23;
+		}
+		
+		#write {
+ 			width : 40px; 
+			height : 40px;
+ 			border-radius : 15px; 
+			border : 1px solid #f04f23;
+		}
+		
+		#voteCondition {
+			height : 40px;
+			border-radius : 15px 0px 0px 15px;
+			padding-left: 10px;
+			border-color: #D3D3D3;
+			border-right: 0px;
+		}
+		
+		#searchCondition {
+			height : 40px;
+			padding-left: 5px;
+			border-color: #D3D3D3;
+			border-right: 0px;
+		}		     
 
     </style>
     
@@ -75,32 +95,41 @@
 		    	<div class="container" >
 		    	
 				<!--검색 부터 -->		    	
-		    		<div class="row">  
-				    	<div class="col-md-9" style="">
-<!-- 				    	<div class="form-group"> -->
-						    <select class="form-control" id="voteCondition" name="voteCondition" >
-								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체보기</option>
+		    		<div class="row" > 
+	 		           <div class="col-md-6" align="left">
+					    	<p style="font-weight: bold;">
+					    		전체  ${resultPage.totalCount } 건
+					    	</p>
+					    </div>
+
+			 		 	<div class="form-group" style="padding-left: 160px">
+						    <select  id="voteCondition" name="voteCondition" >
+								<option value="0" ${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체</option>
 								<option value="3" ${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" } >후원중</option>
 								<option value="4" ${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" } >후원완료</option>
 							</select>   
 						  
-						    <select class="form-control" name="searchCondition" id="searchCondition" >
+						    <select  name="searchCondition" id="searchCondition" >
 								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } >제목</option>
 								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
 							</select>
 						
 						    <label class="sr-only" for="searchKeyword">검색어</label>
-						    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+						    <input type="text"  id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 <!-- 						    <button type="button" class="btn btn-default">검색</button> -->
-							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
+							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
 								<span class="fas fa-search"></span>
 							</button>
 						</div>
-			    	</div>    
+					</div>
 					<br/>
     		    	
     		    	<br/>
-    		    	
+  		     <c:if test="${resultPage.totalCount eq 0 }">
+		      	<div  align="center" style="height: 300px; padding-top: 100px;">
+					<font size="4px">검색결과가 없습니다.</font>
+				</div>
+		      </c:if>  		    	
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-8 col-lg-12 order-md-last">
@@ -191,6 +220,13 @@
 	   	$("form").attr("method" , "POST").attr("action" , "/funding/listFunding").submit();
 	 
 	}
+	$(document).ready(function(){
+		$('#searchKeyword').keydown( function(e) {
+			if(e.keyCode == 13) {
+				fncGetList(1);
+			}
+		});
+	});
 	
 	var page = 1;
 	
