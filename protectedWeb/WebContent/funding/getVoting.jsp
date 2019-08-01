@@ -13,6 +13,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
     <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
     <link rel="stylesheet" href="/resources/get/css/font-awesome.min.css" />
@@ -114,8 +115,14 @@
             <h4>&emsp;</h4>
             
             
-            <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
-<!-- 				        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-left: 0;" > -->
+            <div style="padding-bottom:10px">
+           		 <div class="row">
+           		 <div class="col-xs-11 col-md-11" style="height:35px; left:0px; bottom:0px;" >
+            <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b>
+				  </div> 	
+			        	<c:if test="${ user.id ne funding.id }">
+				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left: 0;" >
+								
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' }">
 										<span class="fas fa-heart"></span>
@@ -124,10 +131,10 @@
 										<span class="far fa-heart"></span>
 									</c:if>
 								</font>
-				        	</div>		
-				        	
-				        		
-			<div style="padding-bottom:10px"><font size="5" ><strong style="color:#f04f23">${funding.voterCount}표</strong></font></div>
+				 			</div>
+			        	</c:if>
+				</div>
+			<div style="padding-bottom:10px; padding-top:30px"><font size="5" ><strong style="color:#f04f23">${funding.voterCount}표</strong></font></div>
 			<!-- 투표종료 -->
 			 <c:if test ="${!(funding.statusCode eq 1) }">		
 			<font size="5"><strong style="color:#d43333">투표종료</strong></font>
@@ -166,7 +173,7 @@
 				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
 	 		  </div>
  		 	  
-            </div>
+            </div></div>
           </div></div>
         </div>
       </div>
@@ -283,10 +290,12 @@
     	   	$("form").attr("method" , "POST").attr("action" , "/funding/getVoting").submit();
     	 
     	}   
-
     	//관심목록에 추가
-   	 function addInterest(postNo, id){
-   	 		console.log(postNo+","+id);
+    	var postNo = ${funding.postNo};
+    	  var id = $('input[name=userId]').val();
+    		 
+    	
+   	 function addInterest(){
    	  
    	  		if ( id == "" ){
    	  			
@@ -303,7 +312,7 @@
    	  			
    	  			$.ajax( 
    	  			 		{
-   	  						url : "/adopt/json/addInterest/"+postNo+"/"+id,
+   	  						url : "/interest/json/addInterest/SF/"+postNo+"/"+id,
    	  						method : "GET" ,
    	  						dataType : "json" ,
    	  						headers : {
@@ -338,13 +347,13 @@
      	 }
      
      	//관심목록에서 삭제
-   	 function delInterest(postNo, id){
+   	 function delInterest(){
    	 		console.log(postNo+","+id);
    	  
    	  			
      			$.ajax( 
      			 		{
-     						url : "/adopt/json/delInterest/"+postNo+"/"+id,
+     						url : "/interest/json/delInterest/SF/"+postNo+"/"+id,
      						method : "GET" ,
      						dataType : "json" ,
      						headers : {
@@ -377,19 +386,19 @@
      			 });
 
      		
-     	 }   	
+     	 }
     $(function(){
 		//관심목록에 추가
 		$(document).on("click", ".far", function() {
 //			$( ".far" ).on("click" , function() {
-			addInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+			addInterest(  );
 		});
 		
 		//관심목록에서 삭제
 		$(document).on("click", ".fas", function() {
 //			$( ".fas" ).on("click" , function() {
 			console.log("dd");
-			delInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+			delInterest(   );
 		});
     	
 		//============= 투표하기 Event  처리 =============	

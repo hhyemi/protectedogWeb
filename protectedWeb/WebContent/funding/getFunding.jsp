@@ -43,7 +43,12 @@
        }
        body{
           font-family: NanumSquare, sans-serif !important;
-       }			
+       }
+         .fa-heart {
+         	color: #f04f23;
+/*          	padding-top: 5px; */
+        }
+               			
 	</style> 
  
  
@@ -111,8 +116,26 @@
              <div class="s_product_text">			 
             <div>
              <h4>&emsp;</h4>
-             <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> </div>
-			<div style="padding-bottom:10px"><font size="5" >${funding.fundPay}원</font></div>
+             <div style="padding-bottom:10px">
+           		 <div class="row">
+           		 <div class="col-xs-11 col-md-11" style="height:35px; left:0px; bottom:0px;" >             
+             <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
+             </div>				  
+			        	<c:if test="${ user.id ne funding.id }">
+				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left: 0;" >
+								
+								<font size="5px" id="heartIcon">
+									<c:if test="${ check eq 'already' }">
+										<span class="fas fa-heart"></span>
+									</c:if>
+									<c:if test="${ check ne 'already' }">
+										<span class="far fa-heart"></span>
+									</c:if>
+								</font>
+				 			</div>
+			        	</c:if>
+				</div>
+			<div style="padding-bottom:10px; padding-top:30px"><font size="5" >${funding.fundPay}원</font></div>
 			<!-- 후원종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
 			<font size="5"><strong style="color:#d43333">후원종료</strong></font>		 			
@@ -152,7 +175,7 @@
           </div></div>
         </div>
       </div>
-    </div>
+    </div></div>
    <br><br><br/>
 <!--================Product Description Area =================-->
 	 <section class="product_description_area">

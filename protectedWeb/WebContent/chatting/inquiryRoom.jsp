@@ -121,7 +121,7 @@
      <input type="hidden" id="userId" value="${userId }"> 
      <input type="hidden" id="postId" value="${postId }">     
 </div> 	
-    <script src="http://127.0.0.1:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.0.33:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -138,7 +138,7 @@
             
             		var userName = $("#userId").val();
 
-            		var socket = io("http://127.0.0.1:82/");
+            		var socket = io("http://192.168.0.33:82/");
 
             		socket.emit("updateUser", userName);
             		
@@ -158,14 +158,14 @@
             	            }
             	        });
             	        
+
+
+            	        socket.on('receive_message', function(re , msg){ //3
             	        var Now = new Date();
 
             	        var NowTime =  Now.getHours();
 
             	        NowTime += ':' + Now.getMinutes();
-
-
-            	        socket.on('receive_message', function(re , msg){ //3
             	      	  if(re==userName){
             	    		 $('#chat_box').append("<div class='text-right'><div class='msgLine'>"+NowTime+"&nbsp;<button style='pointer-events: none;' class='msgBox' >"+msg+"</button></div></div><br/>");
             	    	  
