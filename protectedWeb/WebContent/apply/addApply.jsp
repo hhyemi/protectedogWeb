@@ -159,28 +159,28 @@
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="plan"><strong>반려견을 입양하게될 경우, 앞으로의 계획을 입력하세요.</strong>&nbsp;&nbsp;<span name="plan"></span></label>
-	                  		<input type="text" class="form-control" name="plan" value="" placeholder="내용을 입력하세요.">
+	                  		<textarea type="text" class="form-control" name="plan" value="" placeholder="내용을 입력하세요."></textarea>
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="pay"><strong>반려견을 입양하게될 경우, 1년간의 예상 비용과 그 이유를 입력하세요.</strong>&nbsp;&nbsp;<span name="pay"></span></label>
-	                  		<input type="text" class="form-control" name="pay" value="" placeholder="내용을 입력하세요.">
+	                  		<textarea type="text" class="form-control" name="pay" value="" placeholder="내용을 입력하세요."></textarea>
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="reason"><strong>반려견을 입양하고 싶은 이유를 입력하세요.</strong>&nbsp;&nbsp;<span name="reason"></span></label>
-	                  		<input type="text" class="form-control" name="reason" value="" placeholder="내용을 입력하세요.">
+	                  		<textarea type="text" class="form-control" name="reason" value="" placeholder="내용을 입력하세요."></textarea>
 	               		</div>
                		</div>
                		
                		<div class="col-md-12">
 	              		<div class="form-group">
 	                		<label for="situation"><strong>반려견을 입양하고 상황이 바뀔 경우, 어떻게 대처할 지 입력하세요.</strong>&nbsp;&nbsp;<span name="situation"></span></label>
-	                  		<input type="text" class="form-control" name="situation" value="" placeholder="내용을 입력하세요.">
+	                  		<textarea type="text" class="form-control" name="situation" value="" placeholder="내용을 입력하세요."></textarea>
 	               		</div>
                		</div>
                		
@@ -318,32 +318,32 @@
 
 
 
-	$( "input[name=plan]" ).keyup(function( ) {
-		if($("input[name=plan]").val().length > 300 ){
+	$( "textarea[name=plan]" ).keyup(function( ) {
+		if($("textarea[name=plan]").val().length > 300 ){
 			$("span[name=plan]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=plan]").text('');
 		}
 	});
 
-	$( "input[name=pay]" ).keyup(function( ) {
-		if($("input[name=pay]").val().length > 300 ){
+	$( "textarea[name=pay]" ).keyup(function( ) {
+		if($("textarea[name=pay]").val().length > 300 ){
 			$("span[name=pay]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=pay]").text('');
 		}
 	});
 
-	$( "input[name=reason]" ).keyup(function( ) {
-		if($("input[name=reason]").val().length > 300 ){
+	$( "textarea[name=reason]" ).keyup(function( ) {
+		if($("textarea[name=reason]").val().length > 300 ){
 			$("span[name=reason]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=reason]").text('');
 		}
 	});
 
-	$( "input[name=situation]" ).keyup(function( ) {
-		if($("input[name=situation]").val().length > 300 ){
+	$( "textarea[name=situation]" ).keyup(function( ) {
+		if($("textarea[name=situation]").val().length > 300 ){
 			$("span[name=situation]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=situation]").text('');
@@ -485,20 +485,20 @@
 			}
 		}
 		// 입력 안했을 경우 || 길이제한 넘었을 경우
-		if( $("input[name=plan]").val() == '' || $("input[name=plan]").val().length > 300 ){
-			$("input[name=plan]").focus();
+		if( $("textarea[name=plan]").val().trim() == '' || $("textarea[name=plan]").val().length > 300 ){
+			$("textarea[name=plan]").focus();
 			return;
 		}
-		if( $("input[name=pay]").val() == '' || $("input[name=pay]").val().length > 300 ){
-			$("input[name=pay]").focus();
+		if( $("textarea[name=pay]").val().trim() == '' || $("textarea[name=pay]").val().length > 300 ){
+			$("textarea[name=pay]").focus();
 			 return;
 		}
-		if( $("input[name=reason]").val() == '' || $("input[name=reason]").val().length > 300 ){
-			$("input[name=reason]").focus();
+		if( $("textarea[name=reason]").val().trim() == '' || $("textarea[name=reason]").val().length > 300 ){
+			$("textarea[name=reason]").focus();
 			return;
 		}
-		if( $("input[name=situation]").val() == '' || $("input[name=situation]").val().length > 300 ){
-			$("input[name=situation]").focus();
+		if( $("textarea[name=situation]").val().trim() == '' || $("textarea[name=situation]").val().length > 300 ){
+			$("textarea[name=situation]").focus();
 			return;
 		}
 
@@ -509,13 +509,20 @@
     	var mateAgree = $("input[name=mateAgree]:checked").val();
     	var raise = $("input[name=raise]:checked").val();
     	var currently = $("input[name=currently]:checked").val();
-    	var plan = $("input[name=plan]").val();
-    	var pay = $("input[name=pay]").val();
-    	var reason = $("input[name=reason]").val();
-    	var situation = $("input[name=situation]").val();
-
-    	var mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+mateAgree;
-    	var curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+currently;
+    	var plan = $("textarea[name=plan]").val();
+    	var pay = $("textarea[name=pay]").val();
+    	var reason = $("textarea[name=reason]").val();
+    	var situation = $("textarea[name=situation]").val();
+    	var mateTag = '';
+    	var curTag = '';
+    	
+    	if ( mate == '있음' ){
+    		mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+mateAgree;
+    	}
+    	if ( raise == '있음' ) {
+    		curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+currently;
+    	}
+	
     	
     	var confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
 						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr

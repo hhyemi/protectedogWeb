@@ -15,10 +15,10 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
+<!-- <<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >  -->
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> 
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  -->
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -140,7 +140,7 @@
 
 <body>
 	<!-- ToolBar Start /////////////////////////////////////-->
-<%-- 	<jsp:include page="/layout/toolbar.jsp" /> --%>
+	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
 <body class="goto-here">
@@ -238,7 +238,7 @@
                 <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
-           <br/>
+           <br/><br/>
             
             <!-- 미리보기 영역 -->
             <div class="form-group">

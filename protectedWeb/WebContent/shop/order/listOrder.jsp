@@ -77,10 +77,10 @@
 										</div>
 										<div class="col-sm-10 prod-desc">
 											<h6 class="nomargin">
-												주문번호:<a class="number">${order.orderNo}  </a>
-												<a class="detailOrder"><br/><b>상품명 : ${order.orderProd.prodName}</b><br/>
+												<a class="number">  </a>
+												<a class="detailOrder"><br/><b>${order.orderProd.prodName}(${order.orderQuantity})</b><br/>
 												<input type="hidden" value="${order.orderNo}" /> </a>
-												${order.orderProd.prodDetail}
+												
 											</h6>
 										</div>
 									</div>

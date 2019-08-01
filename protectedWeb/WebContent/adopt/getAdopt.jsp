@@ -833,8 +833,16 @@
 								console.log(JSON.stringify(data));
 								console.log(data.raise);
 								
-								var mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree;
-								var curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently;
+								var mateTag = '';
+								var curTag = '';
+								
+								if ( data.mate == '있음') {
+									mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree;
+								}
+								if ( data.raise == '있음') {
+									curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently;
+								}
+								
 								
 								var displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
 													+'<br\/><strong>[직업]<\/strong> : '+data.job
