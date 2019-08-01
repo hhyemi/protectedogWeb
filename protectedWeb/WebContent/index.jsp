@@ -150,8 +150,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	
 <div class="hero ">
                   <hgroup class="wow fadeInUp">
-                      <h1>보호할개 <span ><a href="" class="typewrite" data-period="1000" data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'>
-                        <span class="wrap"></span></a></span> </h1>        
+                      <h1 style="height: 56px; margin: 0px;">보호할개<span><a href="" class="typewrite" data-period="1000" data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'><span class="wrap"></span></a></span></h1>        
                       <h3></h3>
                   </hgroup>
                   
@@ -275,22 +274,24 @@ License URL: https://creativecommons.org/licenses/by/4.0/
           <div class="row" >
             <div class="col-md-6" >
               <div class="service-himg" > 
-                <iframe src="https://www.youtube.com/embed/754f1w90gQU?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/3P1YGPZp6Ik?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
               <div class="service-h-desc">
                 <h2>정보공유</h2>
                 <div class="heading-border-light"></div> 
-                <p>글쓸라면 쓰고</p>  
+                <p>비트캠프 118기 #Protected조 GIT MANAGER 박 은우 입니다.</p>  
               <div class="service-h-tab"> 
                 <nav class="nav nav-tabs" id="myTab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-expanded="true">HOT게</a>
-                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile">견종백과</a> 
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-expanded="true">HOT개</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile">사용된 기술</a> 
           
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. </p></div>
+                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                  	<p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute. </p>
+                  </div>
                   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute</p>
                   </div> 

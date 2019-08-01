@@ -16,6 +16,7 @@
 		<result property="regDate" 			column="reg_date" 			jdbcType="DATE" />
 		<result property="likeCount" 		column="like_count"			jdbcType="NUMERIC" />
 		<result property="nickName" 		column="nickname"			jdbcType="VARCHAR" />
+		<result property="profile" 			column="profile"			jdbcType="VARCHAR" />		
 	</resultMap>
 
 	<!-- SQL : INSERT -->
@@ -23,14 +24,14 @@
 		<selectKey keyProperty="commentNo" resultType="int" order="BEFORE">
 			SELECT seq_COMMENTS_COMMENT_NO.nextval FROM DUAL
 		</selectKey>
-		INSERT INTO comments( comment_no, post_no, board_code, id, COMMENT_CONTENT, reg_date, like_count, nickName)
-		VALUES (#{commentNo}, #{postNo}, #{boardCode}, #{id}, #{commentContent}, SYSDATE, #{likeCount}, #{nickName})
+		INSERT INTO comments( comment_no, post_no, board_code, id, COMMENT_CONTENT, reg_date, like_count, nickName, profile)
+		VALUES (#{commentNo}, #{postNo}, #{boardCode}, #{id}, #{commentContent}, SYSDATE, #{likeCount}, #{nickName}, #{profile:VARCHAR})
 	</insert>
 
 	<select id="getComment" parameterType="int"
 		resultMap="commentSelectMap">
 		SELECT comment_no, post_no, board_code, id, comment_content,
-		reg_date, like_count, nickName
+		reg_date, like_count, nickName, profile
 		FROM comments
 		WHERE comment_no = #{value}
 	</select>
@@ -39,8 +40,7 @@
 		UPDATE
 		comments
 		SET comment_content = #{commentContent}
-		WHERE comment_no =
-		#{commentNo}
+		WHERE comment_no = #{commentNo}
 	</update>
 
 	<update id="updateLikeCnt" parameterType="map">
@@ -63,36 +63,31 @@
 	<select id="listComment" parameterType="map"
 		resultMap="commentSelectMap">
 		SELECT *
-		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
-		FROM ( SELECT comment_no, post_no, board_code, id, comment_content,
-		reg_date, like_count, nickName
-		FROM comments
-		WHERE post_no = #{postNo} AND status_code != '0'
-		ORDER BY  LIKE_COUNT DESC, reg_date DESC ) inner_table
-		WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND
-		#{endRowNum}
+		FROM (  SELECT inner_table.* , ROWNUM AS row_seq
+				FROM (  SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName, profile
+						FROM comments
+						WHERE post_no = #{postNo} AND status_code != '0'
+						ORDER BY  LIKE_COUNT DESC, reg_date DESC ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 
 	<select id="listCommentMoreView" parameterType="map" resultMap="commentSelectMap">		
 		SELECT *
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
-		FROM ( SELECT comment_no, post_no, board_code, id, comment_content,
-		reg_date, like_count, nickName
-		FROM comments
-		WHERE post_no = #{postNo} AND status_code != '0'
-		ORDER BY reg_date DESC ) inner_table
-		WHERE ROWNUM &lt;= #{commentEndRowNum} )
-		WHERE row_seq BETWEEN 1 AND
-		#{commentEndRowNum}	
+				FROM ( SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName, profile
+						FROM comments
+						WHERE post_no = #{postNo} AND status_code != '0'
+						ORDER BY reg_date DESC ) inner_table
+				WHERE ROWNUM &lt;= #{commentEndRowNum} )
+		WHERE row_seq BETWEEN 1 AND #{commentEndRowNum}	
 	</select>
 	
 	<select id="getTotalCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)
-		FROM( SELECT comment_no, post_no, board_code, id, comment_content,
-		reg_date, like_count, nickName
-		FROM comments
-		WHERE post_no = #{value} AND status_code != '0' ) countTable
+		FROM( SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName, profile
+				FROM comments
+				WHERE post_no = #{value} AND status_code != '0' ) countTable
 	</select>
 
 </mapper>

@@ -71,7 +71,6 @@ public class AdoptDAOImpl implements AdoptDAO{
 	}
 	
 	public Map<String, Object> listMissing(String boardCode) throws Exception {
-		System.out.println("=================디에이오");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		
 		List<Adopt> list = sqlSession.selectList("AdoptMapper.listMissing", boardCode); 
@@ -92,7 +91,6 @@ public class AdoptDAOImpl implements AdoptDAO{
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
 	public int getTotalCount(Search search, String boardCode) throws Exception {
-		System.out.println("=================디에이오 겟토탈카운트");
 		Map<String , Object>  map = new HashMap<String, Object>();
 		map.put("boardCode",  boardCode );
 		map.put("searchCondition",  search.getSearchCondition()+"" );

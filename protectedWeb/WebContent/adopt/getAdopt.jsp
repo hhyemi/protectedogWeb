@@ -94,6 +94,9 @@
          	flex: 1;
         }
          
+         #face{
+/*          	display: none; */
+         }
          
 	
         
@@ -419,9 +422,10 @@
 				<br/>
 				<p/>
 				<br/>
-				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="naver" title="네이버로 공유"><img src="/resources/file/others/naver.png"></a>
+				
+				
+				<a href="#"  id="twitter"  title="트위터로 공유"><img id="twit" src="/resources/file/others/twitter.png"></a>
+				<a href="#" id="facebook" title="페이스북으로 공유"><img id="face" src="/resources/file/others/facebook.png"></a>
 				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
 			</div>
 		</div>
@@ -591,10 +595,14 @@
 	 };
 
 	 //////////////////////////////////////////////////////////////////////////////////////////////////////      
-      
+     var boardCode = "${adopt.boardCode}";
+	 var postNo =  $('input[name=postNo]').val() ;
+     var id = $('input[name=userId]').val();
+	 
+	 
 	//관심목록에 추가
-	 function addInterest(postNo, id){
-	 		console.log(postNo+","+id);
+	 function addInterest(){
+	 		console.log(boardCode+","+postNo+","+id);
 	  
 	  		if ( id == "" ){
 	  			
@@ -611,7 +619,7 @@
 	  			
 	  			$.ajax( 
 	  			 		{
-	  						url : "/adopt/json/addInterest/"+postNo+"/"+id,
+	  						url : "/interest/json/addInterest/"+boardCode+"/"+postNo+"/"+id,
 	  						method : "GET" ,
 	  						dataType : "json" ,
 	  						headers : {
@@ -646,13 +654,13 @@
   	 }
   
   	//관심목록에서 삭제
-	 function delInterest(postNo, id){
+	 function delInterest(){
 	 		console.log(postNo+","+id);
 	  
 	  			
   			$.ajax( 
   			 		{
-  						url : "/adopt/json/delInterest/"+postNo+"/"+id,
+  						url : "/interest/json/delInterest/"+boardCode+"/"+postNo+"/"+id,
   						method : "GET" ,
   						dataType : "json" ,
   						headers : {
@@ -1118,14 +1126,14 @@
 			//관심목록에 추가
 			$(document).on("click", ".far", function() {
 // 			$( ".far" ).on("click" , function() {
-				addInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+				addInterest(  );
 			});
 			
 			//관심목록에서 삭제
 			$(document).on("click", ".fas", function() {
 // 			$( ".fas" ).on("click" , function() {
 				console.log("dd");
-				delInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+				delInterest(   );
 			});
 			
 
@@ -1139,6 +1147,28 @@
 
 
 	  });
+			
+// 	  $( "#twit" ).hover(
+// 			  function() {
+// 				  $('#twit').toggle( 'slow' );
+// 					$('#face').toggle( 'slow' );
+// 			  }
+// 			  , function() {
+// 				  $('#twit').toggle( 'slow' );
+// 					$('#face').toggle( 'slow' );
+// 			  }
+// 	);
+	  
+// 	  $( "#twit" ).mouseover( function() {
+
+// 			$('#twit').toggle( 'slow' );
+// 			$('#face').toggle( 'slow' );
+// 		});
+// 	  $( "#face" ).mouseout( function() {
+
+// 			$('#twit').toggle( 'slow' );
+// 			$('#face').toggle( 'slow' );
+// 		});
   
 
 

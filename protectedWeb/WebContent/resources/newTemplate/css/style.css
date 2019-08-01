@@ -9,7 +9,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                 DEFAULT VALUES:
 
                 Font Family                 : Roboto Condensed
-                
                 Greenish Blue               : #f04f23       (Buttons, Icons, Links, Lines & Backgrounds)
                 Steel Gray                  : #41464b       (Headings)
                 light Gray                  : #61666b       (Heading Second)
@@ -1881,8 +1880,8 @@ p {
         bottom: 20px;
         right: 20px;
         font-size: 22px;
-        padding: 3px 15px;
-        border-radius: 0;
+        padding: 3px 15px !important;
+        border-radius: 0 !important;
         display: none;
     }
 
