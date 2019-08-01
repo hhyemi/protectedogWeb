@@ -97,7 +97,7 @@
          #face{
 /*          	display: none; */
          }
-         
+
 	
         
 
@@ -417,18 +417,13 @@
         
         </div>
 
-		<div class="minibox" align="center">
-			<div>
-				<br/>
-				<p/>
-				<br/>
-				
-				
-				<a href="#"  id="twitter"  title="트위터로 공유"><img id="twit" src="/resources/file/others/twitter.png"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img id="face" src="/resources/file/others/facebook.png"></a>
-				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>
-			</div>
-		</div>
+		<div align="center">
+            <a href="javascript:void(0);" id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+            <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+            <a href="javascript:void(0);" id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+        </div>
+		
+		
         <div class="col-md-12"><hr/></div>
         
         <p align="right" style="padding-right: 15px;">
@@ -1147,29 +1142,7 @@
 
 
 	  });
-			
-// 	  $( "#twit" ).hover(
-// 			  function() {
-// 				  $('#twit').toggle( 'slow' );
-// 					$('#face').toggle( 'slow' );
-// 			  }
-// 			  , function() {
-// 				  $('#twit').toggle( 'slow' );
-// 					$('#face').toggle( 'slow' );
-// 			  }
-// 	);
-	  
-// 	  $( "#twit" ).mouseover( function() {
 
-// 			$('#twit').toggle( 'slow' );
-// 			$('#face').toggle( 'slow' );
-// 		});
-// 	  $( "#face" ).mouseout( function() {
-
-// 			$('#twit').toggle( 'slow' );
-// 			$('#face').toggle( 'slow' );
-// 		});
-  
 
 
       

@@ -107,8 +107,8 @@ public class AdoptRestController {
 //	}
 	
 	
-	@RequestMapping( value="json/addAdopt", method=RequestMethod.POST )
-	public String addAdopt( 
+	@RequestMapping( value="json/addMissing", method=RequestMethod.POST )
+	public String addMissing( 
 //			public void addAdopt(
 					@RequestParam("files") List<MultipartFile> images,
 					@RequestParam Map<String, Object> param
@@ -133,9 +133,8 @@ public class AdoptRestController {
 		adopt.setDogStatus(param.get("dogStatus").toString());
 		adopt.setDogChar(param.get("dogChar").toString());
 		adopt.setStatusCode("1");
-//		adopt.setDogDate(    param.get("dogDate").toString()    );
-//		adopt.setDogDate(  new Date( Integer.parseInt(  param.get("dogDate").toString().replace("-", "")  ) )  );
-		
+		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
+	
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
@@ -158,6 +157,16 @@ public class AdoptRestController {
 		System.out.println("파일 확인 "+ files);
 		
 		return "{\"message\" : \"OK\" }";
+	}
+	
+	
+	// 실종글 가져와서 모달에 띄우기(update하려고)
+	@RequestMapping( value="json/getMissing/{postNo}", method=RequestMethod.GET)
+	public Adopt  getMissing( @PathVariable("postNo") int postNo ) throws Exception{
+		
+		System.out.println("/adopt/json/getMissing : GET");
+
+		return adoptService.getAdopt(postNo);
 	}
 	
 	

@@ -84,6 +84,7 @@ public class AdoptController {
 
 		System.out.println("/adopt/addAdopt : GET \n"+boardCode);
 		
+		
 		if( ((User)session.getAttribute("user")) == null  ) {
 			return "redirect:/adopt/listAdopt?boardCode="+boardCode;
 		}else if(   !((User)session.getAttribute("user")).getLevels().equals("미인증회원") ||  !((User)session.getAttribute("user")).getLevels().equals("운영자")  ) {
@@ -265,8 +266,12 @@ public class AdoptController {
 		adopt.setStatusCode("0");
 		adoptService.updateStatusCode(adopt);
 		
-		// 파라미터값으로 보드코드? 
-		return "forward:/adopt/listAdopt?boardCode="+adopt.getBoardCode();
+		if( adopt.getBoardCode().equals("AD") ) {
+			return "forward:/adopt/listAdopt?boardCode="+adopt.getBoardCode();
+		} else {
+			return "redirect:/adopt/listMissing";
+		}
+		
 	}
 	
 	
@@ -350,6 +355,12 @@ public class AdoptController {
 		model.addAttribute("search", search);
 		
 		return "forward:/adopt/listAdopt.jsp?boardCode="+boardCode;
+	}
+	
+	
+	@RequestMapping( value="listMissing" )
+	public String listMissing( ) throws Exception{
+		return "forward:/adopt/listMissing.jsp";
 	}
 	
 	

@@ -49,8 +49,7 @@
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">Add</span> <span>Adopt</span></p>
             <font size="7">
-            	<c:if test="${param.boardCode eq 'AD' }">분양글 등록</c:if>
-			    <c:if test="${param.boardCode eq 'MS' }">실종글 등록</c:if>
+            	분양글 등록
             </font>
           </div>
         </div>
@@ -192,7 +191,7 @@
 	                		<label for="dogPay"><strong>
 		                		<c:if test="${param.boardCode eq 'AD' }">책임비</c:if>
 	<%-- 						    <c:if test="${param.boardCode eq 'MS' }">사례비</c:if> --%>
-	                		</strong>&nbsp;<span name="dogPay">원하지 않을 경우 0원을 입력하세요.</span></label>
+	                		</strong>&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span></label>
 	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="비용을 입력하세요.">
 	               		</div>
 	              	</div>
@@ -679,7 +678,6 @@
 	     fileName = fileName + "";
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	     var fileNameExtension = fileName.toLowerCase().substring(
-	             fileNameExtensionIndex, fileName.length);
 	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg') )) {
 	         alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
 	         return true;

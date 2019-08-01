@@ -119,7 +119,7 @@
 									            </div>                                              	
 <!--                                            미리보기 영역 -->
                                                 <div class="form-group">
-									            	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
+									            	<div id="reportPreview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
 									            </div>
                                                <br/>
                                                <br/>
@@ -197,8 +197,8 @@
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양 · 실종
                  </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
-	                <a class="dropdown-item" href="../adopt/listMissing.jsp">테스트</a>
+	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양</a>
+	                <a class="dropdown-item" href="/adopt/listMissing">실종</a>
 	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
                   </div>
                 </li>
@@ -558,11 +558,11 @@
 
 		       //임의의 file object영역
 		     var files = {};
-		     var previewIndex = 0;
+		     var reportPreviewIndex = 0;
 		     var fileNameArray = new Array();
 		     // image preview 기능 구현
 		     // input = file object[]
-		     function addPreview(input) {
+		     function addReportPreview(input) {
 		         if (input[0].files) {
 		             //파일 선택이 여러개였을 시의 대응
 		             for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
@@ -587,7 +587,7 @@
 		                     //div id="preview" 내에 동적코드추가.
 		                     //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
 		                     
-		                     var imgNum = previewIndex++;
+		                     var imgNum = reportPreviewIndex++;
 		                     
 		                    //3장 이상 업로드시
 		                     if(Object.keys(files).length>=3){
@@ -595,13 +595,13 @@
 		                        delete files[imgNum];
 		                     }else{
 		               // 3장 이하 
-		                     $("#preview").append(
-		                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:100px' >"
+		                     $("#reportPreview").append(
+		                                     "<div class=\"reportPreview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:100px' >"
 		                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"80px;\" height=\"80px;\"/>"
 		                                             + "<br/>"
 		                                             + "<a href=\"#\" value=\""
 		                                             + imgNum
-		                                             + "\" onclick=\"deletePreview(this)\">"
+		                                             + "\" onclick=\"deleteReportPreview(this)\">"
 		                                             + "   삭제" + "</a>" + "</div>");
 
 		                     files[imgNum] = file;
@@ -618,12 +618,12 @@
 		     }
 
 		     //============= preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제 =============
-		     function deletePreview(obj) {
+		     function deleteReportPreview(obj) {
 		         var imgNum = obj.attributes['value'].value;
 		         delete files[imgNum];
 		         fileNameArray.splice(imgNum,1);
 		         fnAddFile(fileNameArray);
-		         $("#preview .preview-box[value=" + imgNum + "]").remove();
+		         $("#reportPreview .reportPreview-box[value=" + imgNum + "]").remove();
 		         resizeHeight();
 		     }
 
@@ -646,7 +646,7 @@
 
 		          //============= 사진미리보기 =============
 		          $('#attach input[type=file]').change(function() {
-		             addPreview($(this)); //preview form 추가하기
+		             addReportPreview($(this)); //preview form 추가하기
 		         });
 		       });
 		

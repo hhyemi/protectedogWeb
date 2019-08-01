@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>캘린더 테스트</title>
+
 <!-- <link href="https://fullcalendar.io/releases/core/4.1.0/main.min.css" rel="stylesheet"/> -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet"> 
@@ -13,6 +13,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css" rel="stylesheet"/>
 
 <style type="text/css">
+
+.waves-effect>strong {
+			background-color: #f04f23;
+			border-radius: 3px;
+}
  
 /*!
  * FullCalendar v3.9.0
@@ -160,6 +165,17 @@ previous button's border...
 
 /* Popover
 --------------------------------------------------------------------------------------------------*/
+
+
+.fc-title{
+	width: wrap !important;
+	white-space: pre-line;
+	font-weight: 1000 !important;
+	font-size: 15px !important;
+/* 	word-wrap: break-word; */
+/* 	display: block; */
+}
+
 .fc-popover {
   position: absolute;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
@@ -684,7 +700,7 @@ TODO: more distinction between this file and common.css
   font-size: 1em;
   text-align: center;
   overflow: hidden;
-  font-family: "Courier New", Courier, monospace;
+/*   font-family: "Courier New", Courier, monospace; */
   /* don't allow browser text-selection */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -1221,7 +1237,7 @@ be a descendant of the grid when it is being dragged.
   overflow: hidden;
   line-height: 8px;
   font-size: 11px;
-  font-family: monospace;
+/*   font-family: monospace; */
   text-align: center;
   cursor: s-resize; }
 
@@ -1383,7 +1399,7 @@ be a descendant of the grid when it is being dragged.
 .datepicker{
 	z-index: 123456;
 }
-body{
+div.p-5{
 /*   font-family: 'Nunito', sans-serif; */
   background: #F3F5F9;
 }
@@ -1397,7 +1413,7 @@ h2{
   font-size: 22px;
   text-align: center;
   letter-spacing: 1px;
-  font-family: 'Montserrat', sans-serif;
+/*   font-family: 'Montserrat', sans-serif; */
   color: #002147;
   margin-bottom: 20px;
 }
@@ -1406,7 +1422,7 @@ h2{
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 2.5px;
-  font-family: 'Nunito', sans-serif;
+/*   font-family: 'Nunito', sans-serif; */
   box-shadow: none !important;
   border: 0;
   padding: 10px 20px !important;
@@ -1415,9 +1431,13 @@ h2{
   box-shadow: none;
 }
 .btn.btn-primary{
-  background: #002147;
+  background: #f04f23;
   color: #ffffff;
 }
+/* .btn.btn-primary{ */
+/*   background: #002147; */
+/*   color: #ffffff; */
+/* } */
 .form-group label{
   font-weight: 600;
   letter-spacing: 0.010em;
@@ -1433,7 +1453,7 @@ h2{
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 1px;
-  font-family: 'Montserrat', sans-serif;
+/*   font-family: 'Montserrat', sans-serif; */
   color: #002147;
   margin-bottom: 20px;
 }
@@ -1474,15 +1494,29 @@ h2{
 
 <input type="hidden" id="sessionId" value="${sessionScope.user.id }">
 
-<div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+<div id="modal-view-event-add" class="modal modal-top fade calendar-modal" >
+
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 30px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2">Add</span> <span>Missing</span></p>
+	            <font size="7">
+	            	실종신고
+	            </font>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
       <form id="add-event">
-        <div class="modal-body">
-        <h4>실종신고</h4>        
+        <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;">
+<!--         <h4>실종신고</h4>         -->
           <div class="form-group">
-            <label>사례금</label>
-            <input type="text" class="form-control" name="dogPay">
+            <label>사례금</label>&nbsp;원하지 않을 경우 0을 입력하세요.
+            <input type="number" class="form-control" name="dogPay" min="0" >
           </div>
           <div class="form-group">
             <label>연락처</label>&nbsp;연락처가 다를 경우 회원정보를 수정해주세요.
@@ -1502,7 +1536,7 @@ h2{
           <div id="attach" class="form-group">
             <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
               	<strong>이미지 등록</strong>
-            </label></span>
+            </label></span>&nbsp; 하나만 등록 가능합니다.
             <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
           </div>
 
@@ -1540,7 +1574,7 @@ h2{
 		  <input type="hidden" name="boardCode" value="MS">
 
       </div>
-        <div class="modal-footer">
+      <div class="modal-footer">
         <button type="button" class="btn btn-default" >등록</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>        
       </div>
@@ -1548,6 +1582,7 @@ h2{
     </div>
   </div>
 </div>
+
 
 
 
@@ -1564,40 +1599,18 @@ h2{
 <script>
 
 
-jQuery(document).ready(function(){
-	  jQuery('.datetimepicker').datepicker({
-// 	      timepicker: true,
-// 	      language: 'en',
-// 	      range: true,
-// 	      multipleDates: true,
-// 		  multipleDatesSeparator: " - ",
-		  showOn: "button",
-			buttonImage: "/resources/file/others/calendar.png",
-			buttonImageOnly: true,
-			buttonText: "Select date",
-			dateFormat: "yyyy-mm-dd",
-// 			maxDate: "+0d",
-			prevText: '이전 달',
-	        nextText: '다음 달',
-	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	        showMonthAfterYear: true,
-	        yearSuffix: '년',
-
-	    });
-	  jQuery("#add-event").submit(function(){
-	      alert("Submitted");
-	      var values = {};
-	      $.each($('#add-event').serializeArray(), function(i, field) {
-	          values[field.name] = field.value;
-	      });
-	      console.log(
-	        values
-	      );
-	  });
+	jQuery(document).ready(function(){
+	
+		  jQuery("#add-event").submit(function(){
+// 		      alert("Submitted");
+		      var values = {};
+		      $.each($('#add-event').serializeArray(), function(i, field) {
+		          values[field.name] = field.value;
+		      });
+		      console.log(
+		        values
+		      );
+		  });
 	});
 
 	(function () {    
@@ -1607,7 +1620,13 @@ jQuery(document).ready(function(){
 	    // ------------------------------------------------------ //
 		jQuery(function() {
 			// page is ready
+			var date = new Date();
+ var d = date.getDate();
+ var m = date.getMonth();
+ var y = date.getFullYear();
+
 			jQuery('#calendar').fullCalendar({
+
 				themeSystem: 'bootstrap4',
 				// emphasizes business hours
 				businessHours: false,
@@ -1619,6 +1638,15 @@ jQuery(document).ready(function(){
 					left: 'title',
 					right: 'today prev,next'
 				},
+				monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+				monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+				dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+				dayNamesShort: ["일","월","화","수","목","금","토"],
+				buttonText: {
+					   today : "오늘"
+				},
+
+
 				events: function(start, end, timezone, callback) {
 					
 						$.ajax ({ 
@@ -1634,10 +1662,12 @@ jQuery(document).ready(function(){
 								        $.each(data, function (index, value) { 
 					
 								        	for (var i=0; i<value.length; i++){
+								        		var loca = ( value[i].locationKr ).split(" ");
+						
 								         		events.push({ 
 						          					id: value[i].id, 
-						         					title: value[i].locationKr,
-						          					realtitle: value[i].postTitle, 
+						         					title: loca[0],
+						          					realTitle: value[i].locationKr, 
 						         					description: value[i].postContent,
 											        date: value[i].dogDate,
 											        phone: value[i].phone,
@@ -1649,37 +1679,39 @@ jQuery(document).ready(function(){
 											        dogChar: value[i].dogChar,
 											        dogPersonality: value[i].dogPersonality,
 											        imageurl: "../resources/file/fileAdopt/"+value[i].mainFile,
+											        postNo: value[i].postNo,
 								       			}); 
 								        	}
 								        	
-									        console.log(events) 
-					// 				        console.log(value) 
+// 									        console.log(events) 
 							        	}); 
 							       		callback(events); 
 							    }, 
 							    error: function (xhr, err) { 
-							        	alert("ERROR! - readyState: " + xhr.readyState + "<br/>status: " + xhr.status + "<br/>responseText: " + xhr.responseText); 
+// 							        	alert("ERROR! - readyState: " + xhr.readyState + "<br/>status: " + xhr.status + "<br/>responseText: " + xhr.responseText); 
 							    } 
 				    	}); 
 				},
 				eventRender: function(event, element) {
+					
 					if(event.imageurl) {
-		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='50' height='50'>&nbsp;");
+		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='50' height='50'>&nbsp;&nbsp;");
 		            }
+					
 
-// 					if(event.icon){
-// 						element.find(".fc-title").prepend("<i class='fa fa-"+event.icon+"'></i>");
-// 					}
 				  },
-				dayClick: function() {
+				dayClick: function(date) {
 					
 					var id = $('#sessionId').val().trim();
 					if (  id != ""){
-// 						if ( id == event.id ){
-// 							$('#confirmFooter').prepend('<button type="button" class="btn btn-default" data-dismiss="modal">찾기완료</button>');
-// 						}
-
+						var yyyy=date.format("YYYY");
+					    var mm=date.format("MM");
+					    var dd=date.format("DD");
+						
+					    
+						$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
 						jQuery('#modal-view-event-add').modal();
+						
 					} else {
 						swal({
 					           text: "인증회원만 작성 가능합니다.",
@@ -1693,7 +1725,7 @@ jQuery(document).ready(function(){
 					}
 				},
 				eventClick: function(event, jsEvent, view) {
-// 				        jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
+					
 						jQuery('.event-title').html(
 													"<div class='row'>"
 													+"<div class='col-md-6' float='left' >사례금: "+event.dogPay+"원</div>"
@@ -1703,27 +1735,34 @@ jQuery(document).ready(function(){
 													
 													"<div class='col-md-12' style='padding:0px;'>"
 													+"<img src='" + event.imageurl + "' width='100%' height='100%'>"
-													+"<br/><br/>실종지역: "+event.title+"<br/>"
+													+"<br/><br/>실종지역: "+event.realTitle+"<br/>"
 													+"<div class='row'>"
 													+"<div class='col-md-6' style='padding-right:0px;'>실종일자: "+event.date+"</div>"
 													+"<div class='col-md-6'>작성자: "+event.id+"</div></div>"
 													+"<div class='row'>"
 													+"<div class='col-md-6' style='padding-right:0px;'>견종: "+event.dogBreed+"</div>"
 													+"<div class='col-md-6'>성별: "+event.dogGender+"</div></div>"
-													+"<div class='row'>"
-													+"<div class='col-md-6' style='padding-right:0px;'>상태: "+event.dogStatus+"</div>"
-													+"<div class='col-md-6'>특징: "+event.dogChar+"</div></div>"
-// 													+"<br/>견종: "+event.dogBreed+""
-// 													+"<br/>성별: "+event.dogGender+""
-// 													+"<br/>상태: "+event.dogStatus+""
-// 													+"<br/>특징: "+event.dogChar+""
-// 													+"<br/>성격: "+event.dogPersonality
-													+""+event.description+"</div>"
+													+"상태: "+event.dogStatus+""
+													+"<br/>특징: "+event.dogChar+""
+													+"<br/>"+event.description+"</div>"
+													+"<input type='hidden' name='postNo' value='"+event.postNo+"'>"
 													
 						);
+						
+						 if ( event.id == $('#sessionId').val() ){
+							 if ( $('#delMissing').length > 0  ) {
+// 								 $('#updateMissing').remove();
+								 $('#delMissing').remove();
+							 }
+// 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
+// 													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
+							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
+						 }
+						
 // 						jQuery('.event-body').html(event.description);
 						jQuery('.eventUrl').attr('href',event.url);
 						jQuery('#modal-view-event').modal();
+						
 				},
 			})
 		});
@@ -1771,8 +1810,8 @@ jQuery(document).ready(function(){
 	                 var imgNum = previewIndex++;
 	                 
 	                //8장 이상 업로드시
-	                 if(Object.keys(files).length>=1){
-	            		alert("이미지는 1장까지 업로드 가능합니다.");
+	                 if(Object.keys(files).length>1){
+// 	            		alert("이미지는 1장까지 업로드 가능합니다.");
 	                    delete files[imgNum];
 	                 }else{
 	          		 // 8장 이하 
@@ -1896,7 +1935,7 @@ jQuery(document).ready(function(){
 			                    alert('파일이 10MB를 초과하였습니다.');
 			                    // 이후 동작 ...
 			                } else {
-			                    alert('이미지 업로드 성공');
+// 			                    alert('이미지 업로드 성공');
 			                    
 			                    
 			                    
@@ -1910,53 +1949,92 @@ jQuery(document).ready(function(){
    		
    		
    		$(function() { 
-   			console.log("ok----------------");
+//    			console.log("ok----------------");
    			$.ajax({
-					url : "/adopt/json/addAdopt",
+					url : "/adopt/json/addMissing",
 					enctype : 'multipart/form-data',
 					processData : false,
 		            contentType : false,
 		            cache : false,
 		            type : "POST" ,
-// 					dataType : "json" ,
 					data : formData,
-// 					data : JSON.stringify({
-// 						dogPay : $("input[name=dogPay]").val(),
-// 						phone : $("input[name=phone]").val(),
-// 						dogDate : $("input[name=dogDate]").val(),
-// 						locationKr : $("input[name=locationKr]").val(),
-// 						dogBreed : $("input[name=dogBreed]").val(),
-// 						dogGender : $('select[name=dogGender]').val(),
-// 						dogStatus : $("input[name=dogStatus]").val(),
-// 						dogChar : $("input[name=dogChar]").val(),
-// 						postContent : $("textarea[name=postContent]").val(),
-// 						mainFile : $("textarea[name=postContent]").val(),
-// 					}) ,
-// 					headers : {
-// 								"Accept" : "application/json",
-// 								"Content-Type" : "application/json"
-// 							  },
 					success : function(data , status) {
-							console.log("성공 "+data.message);
 							$('#modal-view-event-add').modal("hide");
-							self.location = "/adopt/listMissing.jsp";
+							self.location = "/adopt/listMissing";
 				},
-				error: function(request, status, error){ 
-					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+					error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
 		        }
 				
 			});
    	 });
-		//레스트로 보내기
-// 		$("form").attr("method" , "POST").attr("action" , "/adopt/addAdopt").attr("enctype","multipart/form-data").submit();
-		
+	
 	}
+	
+	
 
 
 	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	
+
+	
 // 	$( ".btn-default:contains('등록')" ).on("click" , function() {
 	$(document).on("click", ".btn-default:contains('등록')", function() {
 		fncAddMissing();
+	});
+	
+	// 수정버튼
+	$(document).on("click", "#updateMissing", function() {
+		var postNo = $('input[name=postNo]').val(); 
+		
+		$.ajax( 
+		 		{
+					url : "/adopt/json/getMissing/"+postNo ,
+					method : "GET" ,
+					dataType : "json" ,
+					headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							  },
+					success : function(data , status) {
+							console.log(JSON.stringify(data));
+
+				},
+					error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+		        }
+				
+		});	
+	});
+	
+	// 삭제버튼
+	$(document).on("click", "#delMissing", function() {
+		var postNo = $('input[name=postNo]').val(); 
+		
+		swal({
+	           text: "삭제하시겠습니까?",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "예",
+//						 	value: "catch",
+						 },
+						 cancel: "아니오",
+			   },
+			   
+	    }).then((willDelete) => {
+	           if (willDelete) { 
+	        	    self.location = "/adopt/updateStatusCode?postNo="+postNo;
+	           }
+	    });
+	});
+	
+	
+	
+	$('#modal-view-event-add .modal-body').css('max-height', $(window).height() * 0.6);
+	
+	$( "font:contains('실종')" ).on("click" , function() {
+		self.location = "/adopt/listMissing"
 	});
 
 

@@ -893,7 +893,7 @@
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
-		  if( $(".preview-box").length == 0 || $(".thumbnail").length == 0 ){
+		  if( $("img.thumbnail").length == 0 || $(".preview-box").length == 0  ){
 			  swal({
 		           text: "이미지를 등록해주세요.",
 		           dangerMode: true,
