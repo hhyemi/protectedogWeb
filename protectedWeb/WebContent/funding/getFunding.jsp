@@ -216,7 +216,7 @@
 					<h4>등록된 후기가 없습니다.</h4>
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
 					<div class="form-group3">
-					<a class="main_btn" href="#">후기작성</a> 								
+					<button type="button" id="reviewAdd" class="btn btn-default">후기작성</button> 								
 		            </div>					
 					</c:if>						
 					</c:if>
@@ -230,13 +230,13 @@
 					<c:forEach var="name" items="${fileReview}" varStatus="status">      
 	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
 	                  </c:forEach>	
-	                <p/>  
+	                <br/>   <br/><p/>   
 					${funding.reviewContent }
 					<hr/><br/>	
 					<div class="form-group2">
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-					<button href="#">후기수정</button> 			
-					<button href="#">후기삭제</button> 
+					<button type="button" id="reviewUpdate" class="btn btn-default">후기수정</button> 			
+					<button type="button" id="reviewDelete" class="btn btn-default">후기삭제</button> 
 					</c:if>									
 		            </div>
 					</c:if>	
@@ -289,7 +289,8 @@
     
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-    $(function(){
+	
+
     
 		//============= 후원하기 Event  처리 =============	
 	 	$( "#btnFund" ).on("click" , function() {
@@ -322,33 +323,42 @@
 		});	
 	    
 		//============= 후기작성 Event  처리 =============	
-	 	$( "a:contains('후기작성')" ).on("click" , function() {
+	 	$( "#reviewAdd" ).on("click" , function() {
 	 		self.location = "/funding/addReview?postNo=${funding.postNo}";
 		});   
 		
 		//============= 후기수정 Event  처리 =============	
-	 	$( "a:contains('후기수정')" ).on("click" , function() {
+	 	$( "#reviewUpdate" ).on("click" , function() {
 	 		self.location = "/funding/updateReview?postNo=${funding.postNo}";
 		});   
 		
 		//============= 후기삭제 Event  처리 =============	
-	 	$( "a:contains('후기삭제')" ).on("click" , function() {
-            if(confirm('정말 삭제하시겠습니까?')){
-            	self.location = "/funding/delReview?postNo=${funding.postNo}"
-            	alert("삭제가 완료되었습니다.")
-            } else {
-            }
-		});   
-		
-    });
+	 	$( "#reviewDelete" ).on("click" , function() {
+	 		swal({
+	            title: "정말 삭제 하시겠습니까 ?",
+	            text: "삭제시 한달간 글 작성 불가입니다.",
+	            icon: "warning",
+	            buttons: true,
+	            dangerMode: true,
+	          })
+	          .then((willDelete) => {
+	            if (willDelete) {
+	              swal("삭제가 완료되었습니다!", {
+	                icon: "success",
+	              }).then((value) => {
+	            	  self.location = "/funding/delReview?postNo=${funding.postNo}"
+	              });
+	            }
+	          });	 	 				
+       });
 		//============= 카카오 공유하기Event  처리 =============		
-		 Kakao.init('153d14a106a978cdc7a42f3f236934a6');
+		 //Kakao.init('153d14a106a978cdc7a42f3f236934a6');
 		 function sendLinkKakao(){
 		     Kakao.Link.sendDefault({
 		       objectType: 'feed',
 		       content: {
-		         title: '유기견보호',
-		         description: '멍멍',
+		         title: '보호할개',
+		         description: '스토리펀딩',
 		         imageUrl:document.location.href,
 		         link: {
 		           mobileWebUrl: document.location.href,

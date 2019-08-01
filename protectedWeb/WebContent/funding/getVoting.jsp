@@ -39,7 +39,11 @@
        b, sup, sub, u{
  			color : #000000 !important;      
        }	
-   
+        .fa-heart {
+         	color: #f04f23;
+/*          	padding-top: 5px; */
+        }
+            
 	</style> 
  
  	<!-- ToolBar Start /////////////////////////////////////-->
@@ -108,7 +112,21 @@
              <div class="s_product_text">			 
             <div>
             <h4>&emsp;</h4>
-            <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> </div>
+            
+            
+            <div style="padding-bottom:10px"><font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
+<!-- 				        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-left: 0;" > -->
+								<font size="5px" id="heartIcon">
+									<c:if test="${ check eq 'already' }">
+										<span class="fas fa-heart"></span>
+									</c:if>
+									<c:if test="${ check ne 'already' }">
+										<span class="far fa-heart"></span>
+									</c:if>
+								</font>
+				        	</div>		
+				        	
+				        		
 			<div style="padding-bottom:10px"><font size="5" ><strong style="color:#f04f23">${funding.voterCount}표</strong></font></div>
 			<!-- 투표종료 -->
 			 <c:if test ="${!(funding.statusCode eq 1) }">		
@@ -195,8 +213,10 @@
 				         	<hr/><br/>									
 							<div >
 							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-							<button id = "btnUpdate" class="btn btn-default">수정하기</button> 
-							<button id = "btnDelete" class="btn btn-default">삭제하기</button> 
+							<center>
+							<button type="button" id = "btnUpdate" class="btn btn-default">수정하기</button> 
+							<button type="button" id = "btnDelete" class="btn btn-default">삭제하기</button> 
+							</center>
 							</c:if>
 						    </div>
 		          </div>
@@ -217,7 +237,8 @@
 				       </c:forEach>
 				       
 				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
-				       
+	              	   <input type="hidden" name="userId" value="${user.id}">
+              	       <input type="hidden" name="levels" value="${user.levels}">			       
 				       
 				           <!-- PageNavigation Start... -->
 								<jsp:include page="../common/pageNavigator.jsp"/>
@@ -263,8 +284,113 @@
     	 
     	}   
 
-    	
+    	//관심목록에 추가
+   	 function addInterest(postNo, id){
+   	 		console.log(postNo+","+id);
+   	  
+   	  		if ( id == "" ){
+   	  			
+   	  			swal({
+   			           text: "회원만 이용할 수 있는 기능입니다.",
+   			           dangerMode: true,
+   			           buttons: {
+   								 cancel: "닫기",
+   					   }
+   	  			});
+   	  			return;
+   	  			
+   	  		}else{
+   	  			
+   	  			$.ajax( 
+   	  			 		{
+   	  						url : "/adopt/json/addInterest/"+postNo+"/"+id,
+   	  						method : "GET" ,
+   	  						dataType : "json" ,
+   	  						headers : {
+   	  									"Accept" : "application/json",
+   	  									"Content-Type" : "application/json"
+   	  								  },
+   	  						success : function(data , status) {
+//    	  								console.log(JSON.stringify(data));
+   	  								console.log(data.message);
+   	  								
+   	  								if ( data.message == "insertOK" ) {
+   	  									$('#heartIcon').html('<i class="fas fa-heart" ></i>');
+   	  									swal({
+   	  							           text: "관심목록에 추가되었습니다.",
+   	  							           dangerMode: true,
+   	  							           buttons: {
+   	  												 catch: {
+   	  												 	text: "닫기"
+   	  												 }
+   	  									   },
+   	  							        });
+   	  								}
+   	  							
+   	  					},
+   	  						error: function(request, status, error){ 
+   	  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+   	  			        }
+   	  					
+   	  				});
+   	  		}
+     		
+     	 }
+     
+     	//관심목록에서 삭제
+   	 function delInterest(postNo, id){
+   	 		console.log(postNo+","+id);
+   	  
+   	  			
+     			$.ajax( 
+     			 		{
+     						url : "/adopt/json/delInterest/"+postNo+"/"+id,
+     						method : "GET" ,
+     						dataType : "json" ,
+     						headers : {
+     									"Accept" : "application/json",
+     									"Content-Type" : "application/json"
+     								  },
+     						success : function(data , status) {
+     								console.log(JSON.stringify(data));
+     								console.log(data.message);
+     								
+     								if ( data.message == "delOK" ) {
+     									$('#heartIcon').html('<i class="far fa-heart"></i>');
+     									swal({
+   	  							           text: "관심목록에서 삭제되었습니다.",
+   	  							           dangerMode: true,
+   	  							           buttons: {
+   	  												 catch: {
+   	  												 	text: "닫기"
+   	  												 }
+   	  									   },
+   	  							        });
+     									
+     								}
+     							
+     					},
+     						error: function(request, status, error){ 
+     								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+     			        }
+     					
+     			 });
+
+     		
+     	 }   	
     $(function(){
+		//관심목록에 추가
+		$(document).on("click", ".far", function() {
+//			$( ".far" ).on("click" , function() {
+			addInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+		});
+		
+		//관심목록에서 삭제
+		$(document).on("click", ".fas", function() {
+//			$( ".fas" ).on("click" , function() {
+			console.log("dd");
+			delInterest(  $('input[name=postNo]').val() ,  $('input[name=userId]').val() );
+		});
     	
 		//============= 투표하기 Event  처리 =============	
 	 	$( "#btnAddVote" ).on("click" , function() {
@@ -312,7 +438,7 @@
 	 		}else{
 		 		 window.open("/chatting/addChattingUser?postId=${funding.id}",
 							"_blank",
-							"left=500, top=100, width=500, height=700, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+							"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 	 		}
 		});   
 	
@@ -331,7 +457,8 @@
 	    
 		//============= 수정하기 Event  처리 =============	
 	 	$( "#btnUpdate" ).on("click" , function() {
-	 		if(${funding.voterCount != 0 || !(user.id eq 'admin')}){
+
+	 		if(${!(funding.voterCount ==0) || user.id == 'admin'}){
 	 			swal("투표 1개이상 받을 시 수정이 불가합니다.", " ");   
 	 		}else{
 	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
