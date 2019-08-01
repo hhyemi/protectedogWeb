@@ -413,11 +413,11 @@
 	     
 	       $(document).ready(function() {
 	    	   var pageCheck = false;
-	    	  alert($("#pageCheck").val())
+	    	  //alert($("#pageCheck").val())
 	    	   pageCheck = $("#pageCheck").val();
 	           //============= 페이징 스크롤이동 =============	    	   
 	    	   if(${pageCheck} ){
-	    		   alert("??")
+	    		 //  alert("??")
 	    		var offset = $('#scroll').offset(); 
 	    		 $('html').animate({scrollTop : offset.top}, 1);
 	    	   }
