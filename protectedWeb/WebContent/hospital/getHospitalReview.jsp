@@ -46,7 +46,7 @@
 }
 </style>
 <!-- ToolBar Start /////////////////////////////////////-->
-<%-- <jsp:include page="/layout/toolbar.jsp"></jsp:include> --%>
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 <!-- ToolBar End /////////////////////////////////////-->
 
 </head>

@@ -118,13 +118,13 @@ table {
 
 								<ul class="list">
 									<li><a class="active" href="#"> <span>카테고리
-											:<c:if test="${product.prodCode == '10'}">
+											:<c:if test="${product.prodCode == 10}">
 										사료</c:if></span>
-										<c:if test="${product.prodCode == '20'}">
+										<c:if test="${product.prodCode == 20}">
 										간식</c:if>
-										<c:if test="${product.prodCode == '30'}">
+										<c:if test="${product.prodCode == 30}">
 										의류</c:if>
-										<c:if test="${product.prodCode == '40'}">
+										<c:if test="${product.prodCode == 40}">
 										타임세일</c:if></a>
 									<li><a href="#"> 
 									</a></li>

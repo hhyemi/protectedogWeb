@@ -3,6 +3,8 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- //////////////////////  DAY FORMAT ///////////////////////// -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
@@ -122,14 +124,14 @@ body {
 
 
 	<div class="container">
-		<h1 align="right">
-			<button class="mdl-button mdl-js-button mdl-button--primary" id="qna">
-				문의하기</button>
-			</a>
+		
 
 		</h1>
 	</div>
 	<BR />
+	<br/>
+	<br/>
+	<br/>
 	<!-- 	<!--/////////////////////// form start /////////////////////////////////-->
 	<!-- 	<form class="form-inline" name="detailForm"> -->
 	<!-- 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -174,7 +176,7 @@ body {
 	<!--  table Start /////////////////////////////////////-->
 
 	<div class="container" align="center">
-		<table class="table table-hover">
+		<table class="table table-sm">
 			<thead>
 				<tr>
 					<th width="10%">주문번호</th>
@@ -188,12 +190,24 @@ body {
 					<th scope="row">${order.orderNo}</th>
 					<td>${order.orderProd.prodName}</td>
 					<td>${order.totalPrice}</td>
-					<td>${order.orderCode}</td>
+					<td>
+					<c:if test="${order.orderCode =='1'}">
+								결제완료</c:if>
+								<c:if test="${order.orderCode =='2'}">
+								배송중</c:if>
+								<c:if test="${order.orderCode =='3'}">
+								배송완료</c:if>
+								<c:if test="${order.orderCode =='4'}">
+								취소</c:if>
+								<c:if test="${order.orderCode =='5'}">
+								구매후기 수정</c:if>
+					
+					</td>
 				</tr>
 			</tbody>
 		</table>
-		<br />
-		<br />
+		<hr>
+		<br /> <br />
 		<table>
 			<tbody>
 				<tr>
@@ -207,8 +221,8 @@ body {
 				</tr>
 			</tbody>
 		</table>
-		<br />
-		<br />
+		<hr>
+		<br /> <br />
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -220,13 +234,15 @@ body {
 			</thead>
 			<tbody>
 				<tr align="center">
-					<th scope="row">${order.id}김길동</th>
+					<th scope="row">${order.id}</th>
 					<td>${order.phone}</td>
-					<td>${order.orderDate}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd"
+							value="${order.orderDate}" /></td>
 
 				</tr>
 			</tbody>
 		</table>
+		<hr>
 		<div class="container" align="center">
 			<table class="table table-hover">
 				<thead>
@@ -244,9 +260,9 @@ body {
 						<td>${order.receiverPhone}</td>
 						<td>${order.receiverAddr}</td>
 						<td>${order.orderRequest}</td>
-						<td><c:if test="${order.paymentCode =='1' }">
-     	 무통장</c:if> <c:if test="${order.paymentCode =='2'}">
-     	 신용카드</c:if></td>
+						<td><c:if test="${order.paymentCode == 1 }">
+	무통장</c:if> <c:if test="${order.paymentCode == 2}"> 
+ 신용카드</c:if></td>
 					</tr>
 				</tbody>
 			</table>

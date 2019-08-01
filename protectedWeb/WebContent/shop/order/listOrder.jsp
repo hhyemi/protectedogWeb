@@ -77,7 +77,7 @@
 										</div>
 										<div class="col-sm-10 prod-desc">
 											<h6 class="nomargin">
-												주문번호:${order.orderNo}  
+												주문번호:<a class="number">${order.orderNo}  </a>
 												<a class="detailOrder"><br/><b>상품명 : ${order.orderProd.prodName}</b><br/>
 												<input type="hidden" value="${order.orderNo}" /> </a>
 												${order.orderProd.prodDetail}
@@ -134,7 +134,11 @@
 	<script type="text/javascript">
 //=============    상품상세조회(썸네일)  Event  처리 		=============
 //============= 썸네일 사진 클릭 Event  처리 =============	
- 	$(function() {
+ 		$( ".number" ).on("click" , function() {
+				 self.location ="/order/getOrder?orderNo="+$(this).text().trim();
+			});
+	
+	$(function() {
 	$(".detailOrder").on("click",function() {
 		//alert($(this).children("input").val())
 				$(self.location).attr("href","/order/getOrder?orderNo="+ $(this).children("input").val());
