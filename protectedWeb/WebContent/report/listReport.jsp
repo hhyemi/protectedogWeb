@@ -52,49 +52,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		<jsp:include page="/users/mypage/userSideBar.jsp"></jsp:include>
 
             <!--***** MAILBOX *****-->     
+
             <div class="row" id="emails">
+            	<form name="pageForm">
+            		<input type="hidden" id="currentPage" name="currentPage" value="" />
+            	</form>
                 <div class="mail-box">
                     <aside class="lg-side"> 
                         <div class="inbox-body">
-                            <div class="mail-option"> 
-<!--                                 <div class="btn-group hidden-phone"> -->
-<!--                                     <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false"> -->
-<!--                                          <input type="checkbox" class="mail-checkbox mail-group-checkbox"> All  -->
-<!--                                          <i class="fa fa-angle-down "></i> -->
-<!--                                      </a> -->
-<!--                                     <ul class="dropdown-menu drop-inbox"> -->
-<!--                                         <li><a href="#"><i class="fa fa-pencil"></i> All</a></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-ban"></i> None</a></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-book"></i> Read</a></li> -->
-<!--                                         <li class="divider"></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-trash-o"></i> Unread</a></li> -->
-<!--                                     </ul> -->
-<!--                                 </div> -->
-
-<!--                                 <div class="btn-group hidden-phone"> -->
-<!--                                     <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false"> -->
-<!--                                      More -->
-<!--                                      <i class="fa fa-angle-down "></i> -->
-<!--                                  </a> -->
-<!--                                     <ul class="dropdown-menu drop-inbox"> -->
-<!--                                         <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li> -->
-<!--                                         <li class="divider"></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li> -->
-<!--                                     </ul> -->
-<!--                                 </div> -->
-<!--                                 <div class="btn-group"> -->
-<!--                                     <a data-toggle="dropdown" href="#" class="btn mini blue"> -->
-<!--                                      Move to -->
-<!--                                          <i class="fa fa-angle-down "></i> -->
-<!--                                     </a> -->
-<!--                                     <ul class="dropdown-menu drop-inbox"> -->
-<!--                                         <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li> -->
-<!--                                         <li class="divider"></li> -->
-<!--                                         <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li> -->
-<!--                                     </ul> -->
-<!--                                 </div> -->
+                            <div class="mail-option">
+                            <input type="hidden" id="currentPage" name="currentPage" value=""/>	 
                                 <ul class="unstyled inbox-pagination">
                                     <li><span> 총 ${ resultPage.totalCount } 건 || ${ resultPage.currentPage } 페이지</span></li>
                                     
@@ -132,6 +99,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                                    <div class="modal-content">
 			                                        <div class="modal-body">
 			                                            <form role="form" class="form-horizontal reportViewSection">
+			                                            	
 					                                        <div class="row" style="position: relative; height: 25px;">
 					                                        	<div class="modalReportNo" style="display: none;"></div>
 					                                        	<input type="hidden" class="reportStatus" name="reportStatus" value="1">
@@ -218,15 +186,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         	</c:if>
                                         </td>
                                     </tr>
+                                    
 									</c:forEach>
+									
                                 </tbody>
+                                
                             </table>
                             <jsp:include page="/common/pageNavigator.jsp" />
                             </c:if>
                         </div>
                     </aside>
                 </div>
-            </div> 
+            </div>
         </div>
    
     
@@ -248,7 +219,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
 
-		$("form").attr("method", "POST").attr("action","/report/listReport").submit();
+		$("form[name='pageForm']").attr("method", "POST").attr("action","/report/listReport").submit();
 	}
 	
 // 	$(function(){
