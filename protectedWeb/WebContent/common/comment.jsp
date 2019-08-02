@@ -156,7 +156,7 @@
  		
  		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 모달 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 		<jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
-				
+		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
 	</div> <!--  END of Container -->
 	
 	<script type="text/javascript">	
@@ -331,9 +331,10 @@
 	 								+"</div>"
 	 							+"</div>"
 	 							+"<br class="+JSONData.commentNo+" class='line'/>"
-	 								
-	 							
+	 									 							
 								$(".commentList").prepend(display);
+	 							
+	 							$("commentContent").val("");
 							},
 											
 							error : function(request, status, error){							
