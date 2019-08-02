@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양글 상세조회</title>
+	<title>보호할개 · 분양</title>
 	<meta charset="utf-8">
 	
 	<meta
@@ -116,7 +116,7 @@
 
     
     
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -249,10 +249,7 @@
                 
 <!--                 <li> -->
                    	<div class="row">
-				  		<div class="col-md-2 "><font size="4px"><strong>
-					  		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
-<%-- 						    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if> --%>
-				  		</font></strong></div>
+				  		<div class="col-md-2 "><font size="4px"><strong>책임비</font></strong></div>
 						<div class="col-md-4 "><font size="4px"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</font></div>
 			
 				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일자</font></strong></div>
@@ -285,28 +282,21 @@
               <div class="col-md-12 card_area">
 
 				<!-- 분양 메뉴일때  -->
-              	<c:if test="${adopt.boardCode eq 'AD' }">
-	              		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }">
-	              			<button id="adoptApply" class="btn btn-default" style="width: 260px">입양신청</button>
-	              		</c:if>
-	              		
-	              		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
-	              			<button class="btn btn-default" style="width: 260px" id="confirmButton">신청서확인</button>
-	              			<button class="btn btn-default" style="width: 260px" id="adoptCompleteButton">분양완료</button>
-	              		</c:if>
-	              		
-	              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-	              			<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
-	              		</c:if>
-              	</c:if>
               	
-				<!-- 실종 메뉴일때  -->
-              	<c:if test="${adopt.boardCode eq 'MS' }">
-              		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-              			<button class="btn btn-default"style="width: 260px" id="missingCompleteButton">찾기완료</button>
-              		</c:if>
-              	</c:if>
-              	
+           		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }">
+           			<button id="adoptApply" class="btn btn-default" style="width: 260px">입양신청</button>
+           		</c:if>
+           		
+           		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
+           			<button class="btn btn-default" style="width: 260px" id="confirmButton">신청서확인</button>
+           			<button class="btn btn-default" style="width: 260px" id="adoptCompleteButton">분양완료</button>
+           		</c:if>
+           		
+           		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
+           			<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+           		</c:if>
+
+             	
 				<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
                		<button class="btn btn-default" style="width: 260px">문의하기</button>
@@ -341,20 +331,15 @@
         	<c:if test="${adopt.boardCode eq 'AD' }">
 				<font size="4px"><strong>분양가능지역</strong></font><br/>
 		  		<div id="mapArea" style="width:wrap; height: 300px;"  align="center"></div>
-				<div><font size="4px">${adopt.areaKr }</font></div><br/>
+		  		<input type="hidden" class="form-control" id="areaKr" name="areaKr" value="${adopt.areaKr}">
+<%-- 				<div><font size="4px" id="areaKr">${adopt.areaKr }</font></div><br/> --%>
 			</c:if>
 			
-	  		<font size="4px"><strong>
-	  			<c:if test="${adopt.boardCode eq 'AD' }">
-		  			발견위치
-		  		</c:if>
-			    <c:if test="${adopt.boardCode eq 'MS' }">
-		  			실종위치
-		  		</c:if>
-	  		</strong></font><br/>
+	  		<font size="4px"><strong>발견위치</strong></font><br/>
 	  		<div id="map" style="width: wrap; height: 300px;"  align="center"></div>
 	  		<input type="hidden" class="form-control" id="location" name="location" value="${adopt.location}">
-			<div><font size="4px">${adopt.locationKr }</font></div>
+	  		<input type="hidden" class="form-control" id="locaKr" name="locaKr" value="${adopt.locationKr}">
+<%-- 			<div><font size="4px" id="locaKr">${adopt.locationKr }</font></div> --%>
 			<br/><br/><br/>
         
         </div>
@@ -432,7 +417,7 @@
       $(document).ready(function() { 
     	  listApply('load');
       });
-
+	  
       var map;
       var markers = [];
       var loca = "${adopt.location}";
@@ -445,6 +430,14 @@
       var adArea = "${adopt.adoptArea}";
       var arrayTest = [];
       var arrayMark = [];
+      
+      var infowindowLoca;
+      var infowindowArea1;
+      var infowindowArea2;
+      var infowindowArea3;
+      
+      var locaKr = $('#locaKr').val().trim();
+      var areaKr = $('#areaKr').val().trim();
       
       var id = $('input[name=userId]').val().trim();
       
@@ -471,7 +464,13 @@
             position: {lat: localat, lng: localng},
             map: map
         });
-
+        
+        infowindowLoca = new google.maps.InfoWindow();
+    	// pop up
+        infowindowLoca.setContent(locaKr);
+        infowindowLoca.open(map, marker);
+         
+        
  ////////////////////////////////////////////
  
 	    mapArea = new google.maps.Map(document.getElementById('mapArea'), {
@@ -492,6 +491,10 @@
 		    });
   		 	
 	    }//$('#pop').text(aaa);
+		
+	    infowindowArea1 = new google.maps.InfoWindow();
+	    infowindowArea2 = new google.maps.InfoWindow();
+	    infowindowArea3 = new google.maps.InfoWindow();
 	    
       }
       
@@ -673,23 +676,6 @@
 	 
   //==================================================
 
-	 
-      $( function() {
-  	    $( "#dialog-delAdopt" ).dialog({
-  	    	autoOpen: false,
-  		      width: 350,
-  		      height: 180,
-  		      modal: true,
-  		      buttons: {
-  		        	예: function() {
-  		        		self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
-  		        	},
-  		        	아니오: function() {
-  		          		$( this ).dialog( "close" );
-  		        	}
-  		      }
-  	    });
-      });
      
       
       $( function() {
@@ -710,21 +696,6 @@
       });
       
       
-      $( function() {
-  	    $( "#dialog-message" ).dialog({
-  	    	  autoOpen: false,
-  		      width: 350,
-  		      height: 300,
-  		      modal: true,
-  		      buttons: {
-  		        	닫기: function() {
-  		          		$( this ).dialog( "close" );
-  		        	}
-  		      }
-  	    });
-      });
-      
-
       
   //////////////////////////////////////////////////////////////////////////////////////////////////////
 	var str = '';
@@ -911,8 +882,6 @@
 			           }
 			    });
 				
-// 				$('#dialog-delAdopt').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 				$('#dialog-delAdopt').dialog( "open" );
 			});
 		
 			$( "button:contains('입양신청')" ).on("click" , function() {
@@ -926,8 +895,8 @@
 			});
 		
 			$( "button:contains('문의')" ).on("click" , function() {
-				$('#dialog-message').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-				$('#dialog-message').dialog( "open" );
+// 				$('#dialog-message').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 				$('#dialog-message').dialog( "open" );
 			});
 		
 			$( "#adoptCompleteButton" ).on("click" , function() {

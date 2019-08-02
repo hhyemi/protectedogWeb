@@ -12,7 +12,7 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양</title>
+	<title>보호할개 · 후기</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,9 +34,9 @@
  		} 
 
 		.getAR {
-			padding-top: 5px;
-			padding-left: 5px;
-			padding-right: 5px;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
 		}
 		
  		.listImg {
@@ -65,6 +65,7 @@
 			height: 40px;
 			width: 150px;
 			border : 1px solid #D3D3D3;
+			padding-left: 5px;
 		}
 		
 		#searchSubmmit {
@@ -85,7 +86,7 @@
 		
 		.col-md-6 {
 			padding-left: 30px !important;
-			padding-right: 45px !important;
+			padding-right: 30px !important;
 		}
 		
 
@@ -96,12 +97,12 @@
 
 <body class="goto-here">
    	
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">List</span> <span>AdoptReview</span></p>
-            <font size="7">분양후기</font>
+            <font size="7">후기게시판</font>
           </div>
         </div>
       </div>
@@ -114,7 +115,7 @@
 		<input type="hidden" id="adoptConfirm" value="">
 		<input type="hidden" id="applyConfirm" value="">
 		<input type="hidden" id="boardCode" value="AR">
-	
+		<input type="hidden" id="totalCount" value="${resultPage.totalCount }">
 	
 		<div class="row">
 	    
@@ -126,9 +127,9 @@
 		    
 		    
 		    <div class="col-md-6" id="justify" align="left">
-			    <c:if test="${sessionScope.user.id ne null}">
+<%-- 			    <c:if test="${sessionScope.user.id ne null}"> --%>
 			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button>
-			    </c:if>
+<%-- 			    </c:if> --%>
 		    </div>
 		    
 		    
@@ -170,8 +171,8 @@
       <div class="col-md-12"  style="padding-left: 0px;">
       
       <c:if test="${resultPage.totalCount eq 0 }">
-      	<div id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">
-			<font size="4px">검색결과가 없습니다.</font>
+      	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
+<!-- 			<font size="4px">검색결과가 없습니다.</font> -->
 		</div>
       </c:if>
 	
@@ -189,13 +190,13 @@
 			<figure class="getAR">
 				<input type="hidden" name="postNo" value="${board.postNo}"/>
 				
-				<p align="right" style="padding-bottom: 0px;margin-bottom: 5px;"><i class="fas fa-user"></i>${board.viewCount}</p>
+				<p align="left" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 5px;">조회수 ${board.viewCount}</p>
 				<span id="image-box">
 					<img class="listImg" style="width:100%;background:url('${board.thumnail }') no-repeat center center;background-size:cover; "   onerror="this.src='http://placehold.it/400x400'"/>
 				</span>
 				
 			    <span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>${board.postTitle}</b></h3>
-					<p align="right" style="padding-bottom: 10px;">${board.nickName} ${board.regDate}</p>
+					<p align="right" style="padding-bottom: 10px;padding-right: 0px;">${board.nickName} ${board.regDate}</p>
 			   	</span>
 			</figure>
 			</div>
@@ -298,9 +299,9 @@
 								if( postSize == 1 && data.list.length == 0 ){
 									console.log('결과없음');
 									$('#searchEmpty').remove();
-									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">'
-													+'<font size="4px">검색결과가 없습니다.</font>'
-													+'</div>';
+									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+													+'<b><font size="5px">검색결과가 없습니다.</font></b>'
+						                    		+'</div>';
 								}
 								$('#listARJSON').append(displayValue);
 								
@@ -330,6 +331,19 @@
 		// 후기글 등록 가능한지 확인
 		function confirmAdopt(){
 			console.log(id);
+			if (id == ''){
+				swal({
+			           text: "로그인 먼저 해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "닫기"
+								 }
+					   },
+					   
+			    });
+				return;
+			}
 			// 분양글 등록+ 그 글이 완료상태
 			$.ajax( 
 			 		{
@@ -458,7 +472,7 @@
 				confirmAdopt();
 			});
 			
-			$( "font:contains('분양후기')" ).on("click" , function() {
+			$( "font:contains('후기게시판')" ).on("click" , function() {
 				self.location = "/adoptReview/listAdoptReview";
 			});
 
@@ -475,6 +489,17 @@
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
 			$("form").attr("method" , "POST").attr("action" , "/adoptReview/listAdoptReview").submit();
+		}
+		
+		if ( $('#totalCount').val() == 0){
+			$('#searchEmpty').html( 
+// 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+            		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+            		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+            		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+			);
 		}
 		
 	

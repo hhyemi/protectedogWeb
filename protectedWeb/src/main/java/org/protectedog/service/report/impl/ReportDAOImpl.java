@@ -32,6 +32,7 @@ public class ReportDAOImpl implements ReportDAO{
 	@Override
 	public void addReport(Report report) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("addreport DAO 입장 : "+report);
 		sqlSession.insert("ReportMapper.addReport", report);
 	}
 
