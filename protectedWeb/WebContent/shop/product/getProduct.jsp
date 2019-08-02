@@ -201,30 +201,30 @@ table {
               >상품 문의</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="contact-tab"
-              data-toggle="tab"
-              href="#contact"
-              role="tab"
-              aria-controls="contact"
-              aria-selected="false"
-              >배송/교환/반품</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="review-tab"
-              data-toggle="tab"
-              href="#review"
-              role="tab"
-              aria-controls="review"
-              aria-selected="false"
-              >구매후기</a
-            >
-          </li>
+<!--           <li class="nav-item"> -->
+<!--             <a -->
+<!--               class="nav-link" -->
+<!--               id="contact-tab" -->
+<!--               data-toggle="tab" -->
+<!--               href="#contact" -->
+<!--               role="tab" -->
+<!--               aria-controls="contact" -->
+<!--               aria-selected="false" -->
+<!--               >배송/교환/반품</a -->
+<!--             > -->
+<!--           </li> -->
+<!--           <li class="nav-item"> -->
+<!--             <a -->
+<!--               class="nav-link" -->
+<!--               id="review-tab" -->
+<!--               data-toggle="tab" -->
+<!--               href="#review" -->
+<!--               role="tab" -->
+<!--               aria-controls="review" -->
+<!--               aria-selected="false" -->
+<!--               >구매후기</a -->
+<!--             > -->
+<!--           </li> -->
         </ul>
         <div class="tab-content" id="myTabContent">
           <div
