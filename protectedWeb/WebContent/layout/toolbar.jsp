@@ -122,15 +122,9 @@
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양 · 실종
                  </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-<<<<<<< HEAD
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양게시판</a>
 	                <a class="dropdown-item" href="/adopt/listMissing">실종캘린더</a>
 	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기게시판</a>
-=======
-	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
-	                <a class="dropdown-item" href="../adopt/listMissing.jsp">테스트</a>
-	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
->>>>>>> refs/remotes/origin/master
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
