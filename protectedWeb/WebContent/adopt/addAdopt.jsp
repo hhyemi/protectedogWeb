@@ -6,7 +6,7 @@
 
 <head>
 
-	<title>보호할개 · 분양글 작성</title>
+	<title>보호할개 · 분양</title>
 	
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,7 +38,7 @@
   <body class="goto-here">
   
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -70,7 +70,7 @@
 					<div class="col-md-12">
 					
 		          		<div class="cart-detail bg-light p-3 p-md-4">
-		          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
+		          			<h3 class="billing-heading mb-4"><strong>작성 안내</strong></h3>
 		          			
 							<div class="form-group">
 								<div class="col-md-12"><strong>1. </strong>
@@ -78,7 +78,7 @@
 								</div>
 								<div class="col-md-12">
 									<div class="radio" align="right">
-									   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+									   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 									</div>
 								</div>
 							</div>
@@ -87,7 +87,7 @@
 								<div class="col-md-12"><strong>2. </strong>신청서는 상세조회 화면에서 확인하실 수 있으며, 신청서를 확인하고 직접 연락하시면 됩니다.</div>
 								<div class="col-md-12">
 									<div class="radio" align="right">
-									   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+									   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 									</div>
 								</div>
 							</div>
@@ -95,7 +95,7 @@
 							<div class="form-group">
 								<div class="col-md-12">
 									<div class="radio" align="right">
-									   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 동의</strong></label>
+									   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 확인</strong></label>
 									</div>
 								</div>
 							</div>
@@ -181,15 +181,15 @@
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogPay"><strong>책임비</strong>&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span></label>
-	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="비용을 입력하세요.">
+	                		<label for="dogPay"><strong>책임비</strong>&nbsp;<span name="dogPay"></span></label>
+	                  		<input type="text" min="0" class="form-control" name="dogPay" value="" placeholder="원하지 않을 경우 0을 입력하세요.">
 	               		</div>
 	              	</div>
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 	                		<label for="dogDate" id="dogDateLabel"><strong>발견일자</strong></label>
-	                  		<input type="text" class="form-control" name="dogDate" value="" readonly>
+	                  		<input type="text" class="form-control" name="dogDate" value="" placeholder="캘린더 아이콘을 클릭하세요." readonly>
 	                  	</div>
 	               	</div>
 	              	
@@ -366,7 +366,7 @@
 				 	var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
 		    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 		    	         success: function(data){
-		    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+		    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+" ";
 		    	           			if( markTest.indexOf('특별') != -1  ){
 		    	           				markTest = markTest.replace('특별' ,   '');
 		    	           			}
@@ -377,6 +377,7 @@
 		    	           				markTest = markTest.replace('자치' ,   '');
 		    	           			}
 		    	          			$("#areaKr").val($("#areaKr").val()+markTest);
+		    	          			
 		    	         }
 		    	 	});
 
@@ -407,7 +408,7 @@
 	  		    	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	  		    	            success: function(data){
 // 	  		   	               		alert(JSON.stringify(data));
-	  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+	  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+",";
 	  		    	                if( markTest.indexOf('특별') != -1  ){
 		    	           				markTest = markTest.replace('특별' ,   '');
 		    	           			}
@@ -703,7 +704,16 @@
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑      check box        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
-
+	//3자리 단위마다 콤마 생성
+   function addCommas(x) {
+       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   }
+    
+   //모든 콤마 제거
+   function removeCommas(x) {
+       if(!x || x.length == 0) return "";
+       else return x.split(",").join("");
+   }
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
 		if($("input[name=postTitle]").val().length > 20 ){
@@ -713,15 +723,6 @@
 		}
 	});
 	
-	$( "input[name=phone2], input[name=phone3]" ).keyup(function( ) {
-		$( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
-		
-		if($("input[name=phone]").val().length > 13 ){
-			$("span[name=phone]").text('연락처를 정확히 입력하세요.');
-		}else{
-			$("span[name=phone]").text('');
-		}
-	});
 
 	$( "input[name=dogBreed]" ).keyup(function( ) {
 		if($("input[name=dogBreed]").val().length > 10 ){
@@ -740,8 +741,12 @@
 	});
 
 	$( "input[name=dogPay]" ).keyup(function( ) {
-		if($("input[name=dogPay]").val().length > 6 ){
+		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+		if(removeCommas($(this).val()).length > 6 ){
 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
+			$(this).val('1000000');
+			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
 		}
@@ -785,11 +790,9 @@
 	// 등록버튼 누르고
 	function fncAddAdopt(){
 		
-		  $( '#phone' ).val( $('#phone1').val()+'-'+$('#phone2').val()+'-'+$('#phone3').val() );
-		
 		  if( $("input:checkbox:checked").length != 3){
 			  swal({
-		           text: "약관에 모두 동의해야 등록하실 수 있습니다.",
+		           text: "안내를 모두 확인해야 등록하실 수 있습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -807,10 +810,6 @@
 		  }
 		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
 			  $("input[name=postTitle]").focus();
-			  return;
-		  }
-		  if( $("input[name=phone]").val().length > 13 || $("input[name=phone]").val().length < 12 ){
-			  $("input[name=phone]").focus();
 			  return;
 		  }
 		  if( $("input[name=dogBreed]").val().length >10){
@@ -971,7 +970,7 @@
 		        showMonthAfterYear: true,
 		        yearSuffix: '년'
 			});
-			
+			$('.ui-datepicker-trigger').attr('title','클릭')
 			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
       

@@ -38,12 +38,12 @@
 
 <body class="goto-here">
    	
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2" style="color: #f04f23;">List</span> <span>Missing</span></p>
-            <font size="7">실종</font>
+          	<p ><span class="mr-2" style="color: #f04f23;">Missing</span> <span>Calendar</span></p>
+            <font size="7">실종캘린더</font>
           </div>
         </div>
       </div>
