@@ -96,7 +96,7 @@
                   <li><a href="/users/addUsersBase" class="log-top regist">Regist</a></li>
                   </c:if>
                   <c:if test="${ sessionScope.user != null }">
-                  <li><a href="#" class="log-top profile">${ sessionScope.user.nickname } 님</a></li>
+                  <li><a href="/users/getUsers?id=${ sessionScope.user.id }" class="log-top profile">${ sessionScope.user.nickname } 님</a></li>
                   <li><a href="/users/logout" class="log-top logOut">LogOut</a>
                   </c:if>
                 </ul>
@@ -122,9 +122,15 @@
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양 · 실종
                  </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
+<<<<<<< HEAD
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양게시판</a>
 	                <a class="dropdown-item" href="/adopt/listMissing">실종캘린더</a>
 	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기게시판</a>
+=======
+	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양리스트</a>
+	                <a class="dropdown-item" href="../adopt/listMissing.jsp">테스트</a>
+	                <a class="dropdown-item" href="/adoptReview/listAdoptReview">후기</a>
+>>>>>>> refs/remotes/origin/master
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
@@ -139,6 +145,8 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
 	                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
+	                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a>
+	                
                   </div>
                 </li>
               <c:if test="${ sessionScope.user != null }">
@@ -147,8 +155,6 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
 		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a>
-<!-- 		                <a class="dropdown-item" href="/message/listSendMessage">보낸쪽지함</a> -->
-<!-- 		                <a class="dropdown-item" href="/message/addMessage">쪽지쓰기</a> -->
 		                <c:if test="${ sessionScope.user.role eq 'admin' }">
 		                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
 		                </c:if>
@@ -230,7 +236,10 @@
     <!-- sweetalter CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-        	<script type="text/javascript">
+    <!--  Chat Bot -->
+<%-- 	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include> --%>
+	
+  	<script type="text/javascript">
 
 		//============= "로그인"  Event 처리 =============
 		$(".login-modal").on("click", function() {
@@ -391,6 +400,7 @@
 			
 		});
 		
+
 		
 
 // 			$(document).ready(function(){
@@ -401,8 +411,7 @@
 
 		
 		
-	</script>	
-  
-  
+	</script>	  
+
 </body>
 </html>

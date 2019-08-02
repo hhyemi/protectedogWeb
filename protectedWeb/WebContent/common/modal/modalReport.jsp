@@ -187,7 +187,7 @@
           $(function() {     
             var form = $('#reportForm')[0];
             var formData = new FormData(form);
-//             alert("2")
+            alert("2")
 
             for (var index = 0; index < 100; index++) {
                 formData.append('files',files[index]);
@@ -204,8 +204,8 @@
 	                dataType : 'JSON',
 	                data : formData,
 	                success : function(result) {
-// 	                	alert("3")
-// 	                	alert(result);
+	                	alert("3")
+	                	alert(result);
 	                    if (result === -1) {
 	                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
 	                        // 이후 동작 ...
@@ -238,6 +238,7 @@
                 		file : $('#reportMultiFile').val(),
                 	}),
                 	success : function(JSONData){
+                		alert("5");
                 		console.log(JSON.stringify(JSONData));
                 		$('#report-modal').modal("hide");
                 	}
@@ -245,7 +246,7 @@
         });
 			
 // 			$(".sendReport").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
-// 			alert("4")
+			alert("4")
 			alert("신고가 완료되었습니다.");
 		}
 		

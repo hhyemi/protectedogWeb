@@ -50,7 +50,7 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <style>
 
-.view { font-size: x-small; }
+.view { font-size: small; }
 .img-fluid  { min-height: 200px; 
 			  max-height: 200px; overflow: auto;
 			  max-width: 250px;
@@ -129,7 +129,7 @@
 										${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${board.price}" pattern="#,###" />원
 										</strong>
-										<hr><p class="view">${board.id}(&nbsp;${board.city}&nbsp;) &nbsp;&nbsp;&nbsp;조회수 : ${board.viewCount}<br/></p>
+										<hr><p class="view">${board.id}(&nbsp;${board.city}&nbsp;) &nbsp;&nbsp;&nbsp;<br/>조회수 : ${board.viewCount}<br/></p>
 
 									</div>
 								</div>
