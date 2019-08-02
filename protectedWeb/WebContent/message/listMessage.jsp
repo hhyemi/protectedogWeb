@@ -53,6 +53,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
             <!--***** MAILBOX *****-->     
             <div class="row" id="emails">
+                <form name="pageForm">
+            		<input type="hidden" id="currentPage" name="currentPage" value="" />
+            	</form>
                 <div class="mail-box">
                     <aside class="sm-side"> 
                         <div class="inbox-body">
@@ -290,7 +293,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
 
-		$("form").attr("method", "POST").attr("action","/message/listMessage").submit();
+		$("form[name='pageForm']").attr("method", "POST").attr("action","/message/listMessage").submit();
 	}
 	
 // 	$(function(){
