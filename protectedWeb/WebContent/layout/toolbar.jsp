@@ -139,7 +139,7 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
 	                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-	                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a>
+	                <a class="dropdown-item" id="chatbot" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a>
 	                
                   </div>
                 </li>
@@ -231,7 +231,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!--  Chat Bot -->
-	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include>
+<%-- 	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include> --%>
 	
   	<script type="text/javascript">
 
