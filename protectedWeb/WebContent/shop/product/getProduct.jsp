@@ -36,6 +36,11 @@
 	padding-left: 465px;
 	padding-right: 100px;
 }
+
+table {
+	color: black;
+	align: center;
+}
 </style>
 
 
@@ -112,10 +117,15 @@
 								</h2>
 
 								<ul class="list">
-									<li><a class="active" href="#"> <span>카테고리</span>
+									<li><a class="active" href="#"> <span>카테고리
 											:<c:if test="${product.prodCode == 10}">
-										전체</c:if>
-									</a></li>
+										사료</c:if></span>
+										<c:if test="${product.prodCode == 20}">
+										간식</c:if>
+										<c:if test="${product.prodCode == 30}">
+										의류</c:if>
+										<c:if test="${product.prodCode == 40}">
+										타임세일</c:if></a>
 									<li><a href="#"> 
 									</a></li>
 								</ul>
@@ -247,7 +257,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <h5>상품 Q&A</h5>
+<%--                       <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include> --%>
                     </td>
                   </tr>
                 </tbody>
@@ -496,59 +506,10 @@
                       ullamco laboris nisi ut aliquip ex ea commodo
                     </p>
                   </div>
-                  <div class="review_item">
-                    <div class="media">
-                      <div class="d-flex">
-                        <img
-                          src="img/product/single-product/review-2.png"
-                          alt=""
-                        />
-                      </div>
-                      <div class="media-body">
-                        <h4>Blake Ruiz</h4>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo
-                    </p>
-                  </div>
-                  <div class="review_item">
-                    <div class="media">
-                      <div class="d-flex">
-                        <img
-                          src="img/product/single-product/review-3.png"
-                          alt=""
-                        />
-                      </div>
-                      <div class="media-body">
-                        <h4>Blake Ruiz</h4>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo
-                    </p>
-                  </div>
-                </div>
-              </div>
+
               <div class="col-lg-6">
                 <div class="review_box">
-                  <h4>Add a Review</h4>
+                  <h4>구매후기</h4>
                   <p>Your Rating:</p>
                   <ul class="list">
                     <li>

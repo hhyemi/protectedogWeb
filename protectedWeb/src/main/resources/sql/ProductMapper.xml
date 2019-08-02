@@ -71,17 +71,35 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  		FROM (	SELECT prod_no, prod_name, price, discount_price, main_file
-	  						 FROM product 	  					 
+	  						 FROM product 
+	  						 	<where>  					 
 									<if test="searchCondition != null">
-												<where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 											 			prod_name = #{searchKeyword}
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 											 			price = #{searchKeyword}
 													</if>
+												</if>
+												<if test="prodCondition !=null">
+													<if test="prodCondition == 1 and prodCondition !='' ">
+													and prod_code = 10
+													</if>
+													<if test="prodCondition == 2 and prodCondition !='' ">
+													and prod_code = 20
+													</if>
+													<if test="prodCondition == 3 and prodCondition !='' ">
+													and prod_code = 30
+													</if>
+													<if test="prodCondition == 4 and prodCondition !='' ">
+													and prod_code = 40
+													</if>
+													<if test="prodCondition == 5 and prodCondition !='' ">
+													and prod_code = 50
+													</if>
+												</if>
 												</where>
-											</if>) inner_table
+											) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>

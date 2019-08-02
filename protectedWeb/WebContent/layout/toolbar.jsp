@@ -139,6 +139,8 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
 	                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
+	                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a>
+	                
                   </div>
                 </li>
               <c:if test="${ sessionScope.user != null }">
@@ -228,7 +230,10 @@
     <!-- sweetalter CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-        	<script type="text/javascript">
+    <!--  Chat Bot -->
+<%-- 	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include> --%>
+	
+  	<script type="text/javascript">
 
 		//============= "로그인"  Event 처리 =============
 		$(".login-modal").on("click", function() {
@@ -389,8 +394,9 @@
 			
 		});
 		
+
 		
-			
+
 // 			$(document).ready(function(){
 // 				var url="/index.jsp"
 // 				window.open(url,"","width=400,height=400,left=600");
@@ -399,8 +405,7 @@
 
 		
 		
-	</script>	
-  
-  
+	</script>	  
+
 </body>
 </html>

@@ -181,7 +181,8 @@ public class ProductController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		
+		search.setPageSize(20);
 		
 		// Business logic ����
 		Map<String, Object> map = productService.listProduct(search);

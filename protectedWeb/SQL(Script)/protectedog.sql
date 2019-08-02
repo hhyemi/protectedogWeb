@@ -166,30 +166,31 @@ CREATE TABLE MILEAGE (
 	REG_DATE 		DATE, 
 	PRIMARY KEY (MILEAGE_NO));
 	
+   
 CREATE TABLE ADOPT(
-   	BOARD_CODE 		CHAR(2) 		NOT NULL ENABLE, 
-	POST_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	ID 			VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	POST_TITLE 		VARCHAR2(60) 	NOT NULL ENABLE, 
-	POST_CONTENT 		VARCHAR2(600) 	NOT NULL ENABLE, 
-	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
-	ADOPT_AREA 		VARCHAR2(200) , 
-	AREA_KR 		VARCHAR2(200) , 
-	LOCATION 		VARCHAR2(100) 	NOT NULL ENABLE, 
-	LOCATION_KR 		VARCHAR2(100) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 		NOT NULL ENABLE, 
-	DOG_BREED 		VARCHAR2(30), 
-	DOG_WEIGHT 		VARCHAR2(6) 	NOT NULL ENABLE, 
-	DOG_SIZE 		VARCHAR2(10) 	NOT NULL ENABLE, 
-	DOG_GENDER 		VARCHAR2(10) 	NOT NULL ENABLE, 
-	DOG_PAY 		NUMBER(6,0)	NOT NULL ENABLE, 
-	DOG_STATUS 		VARCHAR2(60) 	NOT NULL ENABLE, 
-	DOG_CHAR 		VARCHAR2(60) 	NOT NULL ENABLE, 
-	DOG_PERSONALITY 	VARCHAR2(60) 	NOT NULL ENABLE, 
-	DOG_DATE 		DATE 		NOT NULL ENABLE, 
-	MAIN_FILE     		VARCHAR2(100)    NOT NULL,
-	STATUS_CODE 		CHAR(1) 		NOT NULL ENABLE, 
-	PRIMARY KEY (POST_NO));
+   BOARD_CODE       CHAR(2)       NOT NULL ENABLE, 
+   POST_NO       NUMBER(6,0)    NOT NULL ENABLE, 
+   ID          VARCHAR2(12)    NOT NULL ENABLE REFERENCES USERS(ID), 
+   POST_TITLE       VARCHAR2(60) , 
+   POST_CONTENT       VARCHAR2(600)    NOT NULL ENABLE, 
+   PHONE          VARCHAR2(13)    NOT NULL ENABLE, 
+   ADOPT_AREA       VARCHAR2(200) , 
+   AREA_KR       VARCHAR2(200) , 
+   LOCATION       VARCHAR2(100) , 
+   LOCATION_KR       VARCHAR2(100)    NOT NULL ENABLE, 
+   REG_DATE       DATE       NOT NULL ENABLE, 
+   DOG_BREED       VARCHAR2(30), 
+   DOG_WEIGHT       VARCHAR2(6) , 
+   DOG_SIZE       VARCHAR2(10) , 
+   DOG_GENDER       VARCHAR2(10)    NOT NULL ENABLE, 
+   DOG_PAY       NUMBER(6,0)   NOT NULL ENABLE, 
+   DOG_STATUS       VARCHAR2(60)    NOT NULL ENABLE, 
+   DOG_CHAR       VARCHAR2(60)    NOT NULL ENABLE, 
+   DOG_PERSONALITY    VARCHAR2(60) , 
+   DOG_DATE       DATE       NOT NULL ENABLE, 
+   MAIN_FILE           VARCHAR2(100)    NOT NULL,
+   STATUS_CODE       CHAR(1)       NOT NULL ENABLE, 
+   PRIMARY KEY (POST_NO));
 	
 CREATE TABLE CART (
    	CART_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
@@ -295,7 +296,7 @@ CREATE TABLE BOARD (
 	QNA_CODE 		CHAR(2), 
 	ROUTE 			VARCHAR2(250), 
 	PROD_NO			NUMBER(6,0),
-	PROD_NAME 		VARCHAR2(15),
+	PROD_NAME 		VARCHAR2(150),
 	DEL_CODE		CHAR(1)			DEFAULT '1',
 	THUMNAIL		CLOB,	
 	PRIMARY KEY (POST_NO));	
@@ -420,6 +421,43 @@ INSERT INTO message
 (message_no, message_title, message_content, sender_id, receiver_id, send_date, receive_date, message_status, del_code)
 VALUES
 (seq_message_message_no.NEXTVAL, '테스트3', '이거슨 테스트인 거시여3', 'user03', 'user01', SYSDATE, null, '0', '0');
+
+INSERT INTO report
+(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
+VALUES
+(seq_report_report_no.NEXTVAL, 'user01', 'user02', '비속어', '이사람이 욕을 심각하게 합니다.', 0, '2019-06-01', 'n');
+
+INSERT INTO report
+(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
+VALUES
+(seq_report_report_no.NEXTVAL, 'user02', 'user03', '사기', '이사람은 거의 쿠로사기급입니다.', 0, '2019-07-01', 'n');
+
+INSERT INTO report
+(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
+VALUES
+(seq_report_report_no.NEXTVAL, 'user03', 'user04', '음란행위', '으흐흐 너무 야해요 으흐흐.', 0, '2019-08-01', 'n');
+
+INSERT INTO report
+(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
+VALUES
+(seq_report_report_no.NEXTVAL, 'user04', 'user05', '혐오표현', '진심 벌레가 따로없네 제제좀 제발', 0, '2019-06-25', 'n');
+
+INSERT INTO report
+(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
+VALUES
+(seq_report_report_no.NEXTVAL, 'user05', 'user06', '기타', '어우 이건 좀 사탄도 울고 가겠네 어휴', 0, '2019-07-25', 'n');
+
+
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10000, 'abc.jpg' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10000, 'anonymous-250.jpg' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'BitCamppng.png' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'def.png' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'DSC_2849.JPG' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10002, 'DSC_2913.JPG' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10003, 'DSC_2919.JPG' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10004, 'DSC_8016.JPG' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10005, 'DSC_8020.JPG' , '0');
+INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10005, 'naver.png' , '0');
 
 
 INSERT 
@@ -903,3 +941,9 @@ INSERT INTO ORDERS
 (ORDER_NO, PROD_NO, ID, PHONE, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
 VALUES 
 ('10002', '10003', 'user01', '011-1123-4567', '대전 광역시', '대광', '011-4555-2222', '배송전연락', '1', TO_DATE('2017-03-06 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '40000', '1');
+
+
+
+
+	
+		
