@@ -41,7 +41,19 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                          MAIN NAVBAR
 ======================================================-->        
-
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/index.jsp">ReportList</a></span>
+					</p>
+					<h1 class="mb-0 bread">신고글목록</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->

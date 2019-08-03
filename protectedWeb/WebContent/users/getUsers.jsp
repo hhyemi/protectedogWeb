@@ -31,9 +31,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <link rel="stylesheet" href="/resources/newTemplate/admin/css/style.default.css" id="theme-stylesheet">
 
     <!-- Core stylesheets -->
-    <link rel="stylesheet" href="/resources/newTemplate/admin/css/profile.css">
+    <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
     
-    
+
     
     <jsp:include page="/layout/toolbar.jsp" />
     
@@ -80,58 +80,15 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
             <!--***** CONTENT *****-->     
             <div class="row mt-2" id="card-prof">
-                <div class="col-md-3">
-                    <div class="card hovercard">
-                        <div class="cardheader"></div>
-                        <div class="avatar">
-                        	<c:if test="${ user.profile != null }">
-                            	<img src="/resources/file/fileUser/${ user.profile }" id="profileImage" data-toggle="modal" data-target="#profile-modal" class="img-fluid">
-                            </c:if>
-                            <c:if test="${ user.profile == null }">
-                            	<img src="/resources/file/others/anonymous-250.jpg" class="img-fluid">
-                            </c:if>
-                        </div>
-                        <div class="info">
-                            <div class="title">
-                                <a target="_blank" href="#">${ user.nickname }</a>
-                            </div>
-                            <div class="desc">${ user.email }</div> 
-                            <hr>
-                        </div>
-                        <nav class="nav text-center prof-nav">
-                            <ul  class="list-unstyled ">
-<!--                                 <li><a href="#profile">Profile</a></li>  -->
-<!--                                 <li><a href="#references">Setting</a></li>  -->
-                                <li><a href="/users/logout">Logout</a></li> 
-                            </ul>
-                        </nav>
-<!--                         <div class="bottom"> -->
-<!--                             <a class="btn btn-info btn-twitter btn-sm" href="#"> -->
-<!--                                 <i class="fa fa-twitter"></i> -->
-<!--                             </a> -->
-<!--                             <a class="btn btn-danger btn-sm" rel="publisher" -->
-<!--                                href="#"> -->
-<!--                                 <i class="fa fa-google-plus"></i> -->
-<!--                             </a> -->
-<!--                             <a class="btn btn-primary btn-sm" rel="publisher" -->
-<!--                                href="#"> -->
-<!--                                 <i class="fa fa-facebook"></i> -->
-<!--                             </a>  -->
-<!--                         </div> -->
-                    </div>
-                </div>
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="card hovercard">
                         <div class="tab" role="tabpanel"> 
                             <ul class="nav nav-tabs" role="tablist">
-                              <li class="nav-item ">
-                                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><span><i class="fa fa-user"></i></span> Profile</a>
+                              <li class="nav-item" >
+                                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><span><i class="fa fa-user"></i></span>내 프로필</a>
                               </li>
-<!--                               <li class="nav-item"> -->
-<!--                                 <a class="nav-link" href="#buzz" role="tab" data-toggle="tab"><span><i class="fa fa-inbox"></i></span> Inbox</a> -->
-<!--                               </li> -->
                               <li class="nav-item">
-                                <a class="nav-link" href="#references" role="tab" data-toggle="tab"><span><i class="fa fa-cog"></i></span> Setting</a>
+                                <a class="nav-link" href="#references" role="tab" data-toggle="tab"><span><i class="fa fa-cog"></i></span> 회원정보수정</a>
                               </li>
                             </ul>
 
@@ -182,114 +139,130 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                               </div>
 
                               <div role="tabpanel" class="tab-pane fade" id="references">
-                             	  <form enctype="multipart/form-data">
-                                    <div class="row mx-2">
-                                        <div class="col-md-12 panel-heading">
-                                            <h3 class="panel-title"><i class="fa fa-comment"></i>내 정보 수정</h3><br>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="form-group row">
-                                                <label for="example-text-input" style="width: 85px;" class=" col-form-label">회원명</label>
-                                                <div class="col-9">
-                                                    <input class="form-control" type="text" value="${ user.userName }" id="userName" name="userName">
-                                                </div>
-                                            </div> 
-                                            <div class="form-group row">
-                                                <label for="example-email-input" style="width: 85px;" class=" col-form-label">비밀번호</label>
-                                                <div class="col-9">
-                                                    <input class="form-control" type="password" value="${ user.pw }" id="pw" name="pw">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-url-input" style="width: 85px;" class=" col-form-label">비밀번호확인</label>
-                                                <div class="col-9">
-                                                    <input class="form-control" type="password" value="${ user.pw }" id="pw2" name="pw2">
-                                                    <span id="helpBlock1" class="help-block" style="font-size: 14px;"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-text-input" style="width: 85px;" class=" col-form-label">닉네임</label>
-                                                <div class="col-9">
-                                                    <input class="form-control" type="text" value="${ user.nickname }" id="nickname" name="nickname">
-                                                    <span id="helpBlock2" class="help-block" style="font-size: 14px;"></span>
-                                                </div>
-                                            </div>
-	                                        <div class="form-group row">
-	                                               <label for="example-text-input" style="width: 85px;" class=" col-form-label">프로필사진</label>
-												   <div class="col-9">
-													  <input type="file" class="form-control" id="profile" name="file" style="width: 300px; 
-															height: 40px" maxLength="13" value="${ user.profile }"/>
-												   </div>
-	                                        </div>
-						                   <nav class="nav text-center prof-nav">
-					                            <ul  class="list-unstyled ">
-					                                <li><a id="submit">정보수정</a></li> 
-					                                <li><a id="reset">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a></li>
-					                            </ul>
-					                        </nav>
-                                       </div>
-                                        
-                                        <div class="col-md-6">
-
-                                            <div class="form-group row">
-                                            	<input type="hidden" id="authKeyReturn" value="">
-                                                <label for="example-date-input" style="width: 85px;" class=" col-form-label">이메일</label>
-                                                <div class="col-9">
-                                                    <input class="form-control" type="email" id="email" name="email">
-                                                </div>
-                                                <div id="mailAuth" style="display:none">
-											      <input type="text" id="checkMail"/>
-											      <input type="button" id="mailClick" value="전송"/>
-											    </div>
-											    <input type="button" id="authMail" name="authMail" value="인증하기">
-                                            </div>
-                                            <div class="form-group row">
-											    <label for="example-date-input" style="width: 85px;" class=" col-form-label">휴대전화번호</label>
-											    <div class="col-sm-3">
-											        <select class="form-control" name="phone1" id="phone1">
-													  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
-														<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
-														<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
-														<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
-														<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
-													</select>
-											    </div>
-											    <div class="col-sm-3">
-													<input type="text" class="form-control" id="phone2" name="phone2">
-											    </div>
-											    <div class="col-sm-3">
-													<input type="text" class="form-control" id="phone3" name="phone3">
-											    </div>
-												<input type="hidden" value="${ user.phone }" name="phone"/>
-											    <div id="authButton" style="display:none">
-													<input type="text" id="checkAuth"/>
-													<input type="button" id="authClick" value="전송"/>
-											    </div>
-									 		    <input type="button" id="authPhone" name="authPhone" value="인증하기">
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-url-input" style="width: 85px;" class=" col-form-label">자택주소</label>
-											    <div class="col-sm-5">
-											      <input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly="readonly">
-											    </div>
-											      
-											    <div class="col-sm-4">
-												  <input type="button" class="form-control" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				                <div class="col-md-3">
+				                </div>
+				                <div class="col-md-6 login-card">
+				                    <div class="card form" id="form1">
+				                        <div class="card-header" align="center">
+				                            <h3><i class="fa fa-user-circle"></i>추가정보</h3>
+				                        </div>
+				                        <br>
+				                        <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px">
+											<input type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
+											<input type="hidden" name="levelPoint" value=100>
+											<input type="hidden" id="authKeyReturn" value="">                     
+				                            <div class="row">
+				                                <div class="col-md-10">
+				                                
+				                                    <div class="form-group">
+				                                        <label for="email">이 메 일</label>
+													    <div>
+														    <div class="col-sm-9" style="float:left; padding-left:0; padding-right:0;">
+														      <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="이메일주소를 입력하세요">
+															</div>
+														    <div id="mailAuth" style="display:none">
+														      		<input type="text" id="checkMail"/>
+														      		<button type="button" class="btn btn-default" id="mailClick">전송</button>
+														    </div>
+														    <div class="col-sm-3 authMail" style="float:left; padding-top:0;">
+																<button type="button" class="btn btn-default" id="authMail" name="authMail" style="margin:0;">인증하기</button>
+															</div>
+													    </div>
+				                                    </div>
+				                                    
+				                                    <br/>
+				                                    <br/>
+				                                    <br/>
+				                                    
+				                                    <div class="form-group">
+				                                        <label for="phone">휴대전화번호</label>
+				                                        <div>
+					                                        <div class="col-sm-3" style="float:left; padding-left:0">
+																<select class="form-control" name="phone1" id="phone1">
+																  	<option value="010" >010</option>
+																	<option value="011" >011</option>
+																	<option value="016" >016</option>
+																	<option value="018" >018</option>
+																	<option value="019" >019</option>
+																</select>
+					                                        </div>
+														    <div class="col-sm-3" style="float:left;">
+														      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="">
+														    </div>
+														    <div class="col-sm-3" style="float:left; padding-right:0">
+														      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="">
+														    </div>
+														    <input type="hidden" name="phone"/>
+														    <div id="authButton" style="display:none">
+														   		<input type="text" id="checkAuth"/>
+														    	<button type="button" class="btn btn-default" id="phoneClick">전송</button>
+														    </div>
+														    <div class="col-sm-3 authPhone" style="float:left;">
+												 		    	<button type="button" class="btn btn-default" id="authPhone" name="authPhone" style="margin:0;">인증하기</button>
+												 		    </div>
+													    </div>
+				                                    </div>
+				                                    <br/>
+				                                    <br/>
+				                                    <br/>
+				
+				                                    <div class="form-group">
+				                                        <label for="userAddr">자택주소</label>
+				                                        <div>
+															<div class="col-sm-6" style="float:left; padding-left: 0">
+																<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly="readonly">
+															</div>
+							      
+															<div class="col-sm-6" style="float:left; padding-right: 0;">
+																<button type="button" class="btn btn-default" 
+																style="margin:0; width:100%; height:40px;" onclick="execDaumPostcode()">검색</button><br>
+															</div>
+														</div>
+				                                    </div> 
+				                                    
+				                                    <div class="form-group">
+														<label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
+														<div class="col-sm-12" style="padding: 0;">
+															<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
+															<br>
+															<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
+															<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+															<input type="hidden" name="userAddr" value="">
+														</div>
+				                                    </div>
+				                                    
+				                                    <div class="form-group">
+				                                    	<div class="col-sm-6" style="float: left; padding-left: 0;">
+															<label for="birthDate">생 년 월 일</label>                                        
+															<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" placeholder="생년월일 6자리를 입력하세요">
+				                                        </div>
+				                                        <div class="col-sm-6" style="float: left; padding-right: 0;">
+				                                        	<label for="gender">성 별</label> 
+															<select class="form-control" name="gender" id="gender">
+																<option value="m">남자</option>
+																<option value="f">여자</option>
+															</select>
+														</div>
+				                                    </div>
+				                                </div>
+				                            </div> 
+											<br/>
+											<br/>
+											<br/>
+				<!--                             <button type="submit" id="submit" class="btn btn-default">회원가입</button> -->
+				<!--                             <button type="reset" id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button>  -->
+				                        </form>
+											<div class="col-sd-12" style="display: inline-block; padding-left:430px; padding-bottom:50px;">
+												<div class="col-sd-6" style="float:left;">
+													<button id="submit" class="btn btn-default">회원가입</button>
 												</div>
-                                            </div>  
-                                            <div class="form-group row">
-                                                <label for="example-url-input" style="width: 85px;" class=" col-form-label"></label>
-												  <div class="col-sm-9">
-												      <input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" value="${ user.userAddr }" readonly="readonly">
-												      <br>
-													  <input type="text" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
-													  <input type="text" class="form-control" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소">
-													  <input type="hidden" name="userAddr" value="">
-												  </div>
-                                            </div>  
-                                        </div>
-                                    </div> 
-                                 </form>
+												<div class="col-sd-6" style="float:left;">
+													<button id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button> 
+												</div>
+											</div>
+				                    </div>
+				            </div>                           
+
                               </div>
                             </div>
                         </div>
@@ -337,23 +310,67 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				var name=$("#userName").val();
 				var nickname=$("#nickname").val();
 				if(pw == null || pw.length <1){
-					alert("패스워드는  반드시 입력하셔야 합니다.");
+					swal({
+						text : "비밀번호는 반드시 입력하셔야 합니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					$("input:password[name='pw']").focus();
 					return false;
 				}
 				if(pw.length < 8 || pw.length > 12){
-					alert("패스워드는 8자 이상 12자 이하로 입력하셔야 합니다.");
+					swal({
+						text : "비밀번호는 8자 이상 12자 이하로 입력하셔야 합니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					$("input:password[name='pw']").focus();
 					return false;
 				}
 				if(pw_confirm == null || pw_confirm.length <1){
-					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+					swal({
+						text : "비밀번호는 반드시 확인하셔야 합니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					$("input:password[name='pw2']").focus();
 					return false;
 				}
-				if(userName == null || userName.length <1){
-					alert("이름은  반드시 입력하셔야 합니다.");
+				if(name == null || name.length <1){
+					swal({
+						text : "이름은 반드시 입력하셔야 합니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					$("input:password[name='userName']").focus();
 					return false;
 				}
 				if( pw != pw_confirm ) {				
-					alert("비밀번호 확인이 일치하지 않습니다.");
+					swal({
+						text : "비밀번호가 일치하지 않습니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
 					$("input:password[name='pw2']").focus();
 					$("input:password[name='pw2']").val('');
 					return false;
@@ -379,9 +396,21 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 				
 				$("input:hidden[name='userAddr']").val(address);
-
 				
-				$("form").attr("method" , "POST").attr("action" , "/users/updateUsers").submit();
+				swal({
+					text : "회원정보가 수정되었습니다.",
+					buttons : {
+						catch : {
+							text : "확인"
+						}
+					}
+				})
+				.then((A) => {
+					if(A) {
+						$("form").attr("method" , "POST").attr("action" , "/users/updateUsers").submit();
+					}
+				})
+
 			});
 		});	
 		
