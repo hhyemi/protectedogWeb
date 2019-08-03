@@ -18,7 +18,6 @@
 	    <title>보호할개 · 후원신청</title>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-
 		#checkPostTitle{
 	      width:300px;
 	      padding:0 5px;
@@ -34,6 +33,7 @@
 			height: 40px;
 			width: 150px;
 			border : 1px solid #D3D3D3;
+			padding-left: 5px;
 		}
 		
 		#searchSubmmit {
@@ -83,6 +83,7 @@
       </div>
     </div>
 	<br/><p/>
+	<div class="sectionContainer ">
     <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
 
 		 <form class="form-inline" name="detailForm">
@@ -112,7 +113,7 @@
 							</select>
 	
 						    <label class="sr-only" for="searchKeyword"> 검색어</label>
-						    <input type="text"  id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+						    <input type="text"  id="searchKeyword" name="searchKeyword"  placeholder="검색어를 입력하세요." value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 								<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
 							<span class="fas fa-search"></span>
 						</button>
@@ -122,9 +123,8 @@
     		    	<br/>
     		    	
 		     <c:if test="${resultPage.totalCount eq 0 }">
-		      	<div  align="center" style="height: 300px; padding-top: 100px;">
-					<font size="4px">검색결과가 없습니다.</font>
-				</div>
+      			<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
+		     	</div>
 		      </c:if>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
@@ -134,12 +134,12 @@
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 				    				<div class="desc-comp-offer-cont" style="padding-top:10px">
+				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    				
 				    					 <!-- 투표종료 -->
 										 <c:if test ="${!(funding.statusCode eq 1) }">
 										 &emsp;조회 ${funding.voteViewCount }
 				                        <a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
-				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>
 				    					</c:if>
 				    					
@@ -192,7 +192,7 @@
 		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
 
-    </section>
+    </section></div>
 		<!--     ================ start footer Area  ================= -->
 		<!--     footer Start ///////////////////////////////////// -->
 		 	     <jsp:include page="/layout/footer.jsp"></jsp:include> 
@@ -315,7 +315,7 @@
 				fncGetList('1');
 		});    
 		//============= 썸네일 사진 클릭 Event  처리 =============	
-	 	$( ".img-prod" ).on("click" , function() {
+	 	$( ".desc-comp-offer-cont" ).on("click" , function() {
 			$(self.location).attr("href","/funding/getVoting?postNo="+$(this).children("input").val());
 		});   
 	
@@ -326,33 +326,57 @@
         		
         		return;
         		
-        	}
+        	}else if(${user.levelPoint eq 0}){
+    	 		swal({
+    	            title: "인증회원만 작성 가능합니다.",
+    	            text: "인증하기를 누르면 인증페이지로 이동합니다.",
+    	            icon: "warning",
+    	            buttons: ["닫기", "인증하기"],
+    	            dangerMode: true  	
+    	          })
+    	          .then((willDelete) => {
+    	            if (willDelete) {
+    	            	  self.location = "/users/addUsersAddition.jsp"
+    	                 }
+    	          });	
         	
-   		 $.ajax( 
-					{
-			        	url : "/funding/json/addVoting",
-						method : "GET" ,
-						dataType : "json" ,
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						error:function(request,status,error){
-                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-                           },
-						success : function(JSONData , status) {
-		
-			                if(JSONData ==1 ) {
-			                	 
-			                	swal("한달에 한번만 글 작성 가능합니다.", "(이미 한달안에 글을 작성하였습니다.)");
+        	}else{
+        	
+			   		 $.ajax( 
+								{
+						        	url : "/funding/json/addVoting",
+									method : "GET" ,
+									dataType : "json" ,
+									headers : {
+										"Accept" : "application/json",
+										"Content-Type" : "application/json"
+									},
+									error:function(request,status,error){
+			                            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			                           },
+									success : function(JSONData , status) {
+					
+						                if(JSONData ==1 ) {
+						      			  swal({
+						      			   title : "한달에 한번만 글 작성 가능합니다.",
+						   		           text: "이미 한달안에 글을 작성하였습니다.",
+						   		           dangerMode: true,
+						   		           buttons: {
+						   							 catch: {
+						   							 	text: "확인"
+						   							 }
+						   				   },			   
+						   		      });            	 
 
-			                } else {
-		        				$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
-
-			                } 
-						}
-						
-				});
+						                } else {
+					        				$(self.location).attr("href","/funding/getTerms?termsTitle=SFPost&postNo=0");
+			
+						                } 
+									}
+									
+							});
+			   		 
+			        }
            });
         
 		//============= autocomplete Event  처리 =============			
@@ -379,6 +403,17 @@
 	             }
 	          });		
 	      });	
+		
+			if ( ${resultPage.totalCount eq 0 }){
+				$('#searchEmpty').html( 
+//	 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+						'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+						+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+	            		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+	            		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+	            		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+				);
+			}
 </script>
   </body>
   </html>

@@ -68,9 +68,9 @@
 						class="row no-gutters slider-text align-items-center justify-content-center">
 						<div class="col-md-9 ftco-animate text-center">
 							<p>
-								<span class="mr-2"><a href="index.html">Animal</a></span> <span>Hospital</span>
+								<span class="mr-2">Animal</span> <span>Hospital</span>
 							</p>
-							<font size="7">동물병원 검 색</font>
+							<font size="7">동물병원 검색</font>
 						</div>
 					</div>
 				</div>

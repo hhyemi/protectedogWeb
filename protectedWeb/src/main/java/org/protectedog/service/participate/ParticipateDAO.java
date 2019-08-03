@@ -15,10 +15,13 @@ public interface ParticipateDAO {
 	public void addParticipate(Participate participate) throws Exception;
 	
 	//SELECT ONE
-	public Participate getParticipate(Participate participate) throws Exception;
+	public Participate getParticipate(int participateNo) throws Exception;
 
 	// SELECT ONE
 	public int getParticipateTotalCount(int postNo) throws Exception;
+	
+	//SELECT ONE
+	public Participate getPostParticipate(Participate participate) throws Exception;
 
 	// SELECT LIST
 	public List<Participate> listNoticeComment(Search search, int postNo , String statusCode) throws Exception;
