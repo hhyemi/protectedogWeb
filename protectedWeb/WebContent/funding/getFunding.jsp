@@ -318,8 +318,10 @@
 		//============= 후원하기 Event  처리 =============	
 	 	$( "#btnFund" ).on("click" , function() {
 	 		if(${user == null}){
-	 			alert("로그인이 필요합니다.");
-	 		}else{
+	 			
+	 			//$("#login-modal").modal('show');
+				alert("로그인")
+	 		}else{	
 		 		if(!(${funding.statusCode eq '3'})){
 		 			alert("후원이 종료되었습니다.")
 		 		}else{
