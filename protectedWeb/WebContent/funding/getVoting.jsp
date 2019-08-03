@@ -44,6 +44,7 @@
          	color: #f04f23;
 /*          	padding-top: 5px; */
         }
+
             
 	</style> 
  
@@ -163,15 +164,24 @@
 			 </div>		 	 		 	 
                <br/>  
               <div class="card_area">
-                <button  id="btnAddVote" class="btn btn-default" style="width: 225px">투표하기</button><button id="btnQuestion"  class="btn btn-default" style="width: 225px">문의하기</button>  
+              
+			<!-- 투표종료 -->
+			 <c:if test ="${!(funding.statusCode eq 1) }">		
+               		<button class="btn btn-default" id="noApply" style="width: 460px;" id="confirmButton">완료된 글입니다.</button>
+			 </c:if>
+            <!-- 투표중 -->			 
+			<c:if test ="${funding.statusCode eq 1 }">				 			
+                <button  id="btnAddVote" class="btn btn-default" style="width: 225px">투표하기</button><button id="btnQuestion"  class="btn btn-default" style="width: 225px">문의하기</button>             
+			</c:if>		              
+       
               </div>
               <br/>
               
-              <div align="right">
-			    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-	 		  </div>
+			  <div align="right">
+                 <a href="javascript:void(0);"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+                  <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+                  <a href="javascript:void(0);"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+               </div>
  		 	  
             </div></div>
           </div></div>
@@ -186,7 +196,7 @@
 	        <ul class="nav nav-tabs" id="myTab" role="tablist">
 		          <li class="nav-item">
 		            <a
-		              class="nav-link show active"
+		              class="${ !(search.searchKeyword eq '1') ? 'nav-link show active' : 'nav-link' }"
 		              id="home-tab"
 		              data-toggle="tab"
 		              href="#home"
@@ -198,7 +208,7 @@
 		          </li>
 		          <li class="nav-item">
 		            <a
-		              class="nav-link"
+		             class="${ (search.searchKeyword eq '1') ? 'nav-link show active' : 'nav-link' }"
 		              id="voter-tab"
 		              data-toggle="tab"
 		              href="#voter"
@@ -212,23 +222,16 @@
 		        </ul>
 		        <div class="tab-content" id="myTabContent">
 		          <div
-		            class="tab-pane fade active show"
+       				class="${ !(search.searchKeyword eq '1') ? 'tab-pane fade active show' : 'tab-pane fade' }"
 		            id="home"
 		            role="tabpanel"
 		            aria-labelledby="home-tab">
-				 			<h2>${funding.postContent }</h2>
-				         	<hr/><br/>									
-							<div >
-							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-							<center>
-							<button type="button" id = "btnUpdate" class="btn btn-default">수정하기</button> 
-							<button type="button" id = "btnDelete" class="btn btn-default">삭제하기</button> 
-							</center>
-							</c:if>
-						    </div>
+				 			<h2>${funding.postContent }</h2>									
+		
 		          </div>
 		          <div
-		            class="tab-pane fade"
+		            
+		            class="${ (search.searchKeyword eq '1') ? 'tab-pane fade active show' : 'tab-pane fade' }"
 		            id="voter"
 		            role="tabpanel"
 		            aria-labelledby="voter-tab">
@@ -246,7 +249,9 @@
 				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
 	              	   <input type="hidden" name="userId" value="${user.id}">
               	       <input type="hidden" name="levels" value="${user.levels}">			       
-				       
+			 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			 		   <input type="hidden" id="searchKeyword" name="searchKeyword" value=""/>	  
+ 					   <input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>			 		   		  			       
 				           <!-- PageNavigation Start... -->
 				           <div style="padding-left:460px">
 				           <jsp:include page="../common/pageNavigator_new.jsp" />
@@ -256,6 +261,14 @@
 		       </div>
 	      </div>
 	      </form>
+	      <p/>
+				<div align="right"  style="padding-right:205px">					
+							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
+							<button type="button" id = "btnUpdate" class="btn btn-default">수정</button> 
+							<button type="button" id = "btnDelete" class="btn btn-default">삭제</button>
+							</c:if>
+							<button type="button" id = "btnList" class="btn btn-default">목록</button>  
+			    </div>	        
 	    </section>
     <!--================End Product Description Area =================-->
 
@@ -286,8 +299,21 @@
     
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	
+		    $(document).ready(function() {
+		 	   var pageCheck = false;
+		 	  //alert($("#pageCheck").val())
+		 	   pageCheck = $("#pageCheck").val();
+		       // ============= 페이징 스크롤이동 =============	    	   
+		 	   if(${pageCheck} ){
+		 		var offset = $('#myTab').offset(); 
+		 		 $('html').animate({scrollTop : offset.top}, 1);
+		 	   }
+
+		    });
+				   	
     	function fncGetList(currentPage) {
-    	   	
+    	   	$("#searchKeyword").val("1");
     	   	$("#currentPage").val(currentPage)
     	   	$("form").attr("method" , "POST").attr("action" , "/funding/getVoting").submit();
     	 
@@ -305,7 +331,7 @@
    			           text: "회원만 이용할 수 있는 기능입니다.",
    			           dangerMode: true,
    			           buttons: {
-   								 cancel: "닫기",
+   								 cancel: "확인",
    					   }
    	  			});
    	  			return;
@@ -332,7 +358,7 @@
    	  							           dangerMode: true,
    	  							           buttons: {
    	  												 catch: {
-   	  												 	text: "닫기"
+   	  												 	text: "확인"
    	  												 }
    	  									   },
    	  							        });
@@ -373,7 +399,7 @@
    	  							           dangerMode: true,
    	  							           buttons: {
    	  												 catch: {
-   	  												 	text: "닫기"
+   	  												 	text: "확인"
    	  												 }
    	  									   },
    	  							        });
@@ -407,10 +433,10 @@
 	 	$( "#btnAddVote" ).on("click" , function() {
 	 		if(${user==null}){
 	 			alert("로그인이 필요합니다.")
-	 		}else{
+// 	 		}else{
 	 			 		
-		 		if(!(${funding.statusCode eq '1'})){
-		 			swal("투표가 종료되었습니다.", " ");   
+// 		 		if(!(${funding.statusCode eq '1'})){
+// 		 			swal("투표가 종료되었습니다.", " ");   
 		 		}else{
 		 	   		 $.ajax( 
 		 					{
@@ -428,7 +454,16 @@
 		 		
 		 			                if(JSONData ==1 ) {
 		 			                	
-		 			                	 swal("이미 투표한 글 입니다.", " ");                	
+		 			     			  swal({
+		 			  		           text: "이미 투표한 글 입니다.",
+		 			  		           dangerMode: true,
+		 			  		           buttons: {
+		 			  							 catch: {
+		 			  							 	text: "확인"
+		 			  							 }
+		 			  				   },			   
+		 			  		      });
+              	
 		 			                } else {
 		 			   		 	     	self.location = "/funding/getTerms?termsTitle=SFVote&postNo=${funding.postNo}"
 
@@ -437,8 +472,6 @@
 		 						
 		 				});		 			
 		 		
-		 				
-		 		}
 	 		}
 	 	});   
 	    
@@ -470,7 +503,17 @@
 	 	$( "#btnUpdate" ).on("click" , function() {
 
 	 		if(${!(funding.voterCount ==0) || user.id == 'admin'}){
-	 			swal("투표 1개이상 받을 시 수정이 불가합니다.", " ");   
+	
+				  swal({
+			           text: "투표 1개이상 받을 시 수정이 불가합니다.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      });	 			
+
 	 		}else{
 	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
 	 		}
@@ -482,7 +525,7 @@
 	            title: "정말 삭제 하시겠습니까 ?",
 	            text: "삭제시 한달간 글 작성 불가입니다.",
 	            icon: "warning",
-	            buttons: true,
+                buttons: ["취소", "확인"],
 	            dangerMode: true,
 	          })
 	          .then((willDelete) => {
@@ -497,7 +540,10 @@
 		});  
 	
     });
-
+	//============= 목록버튼 Event  처리 =============	
+ 	$( "#btnList" ).on("click" , function() {
+		self.location = "/funding/listVoting" 	
+ 	});
     
 		//============= 카카오 공유하기Event  처리 =============		
 		// Kakao.init('153d14a106a978cdc7a42f3f236934a6');

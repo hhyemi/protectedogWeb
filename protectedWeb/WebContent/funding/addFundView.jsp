@@ -21,7 +21,11 @@
 		    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 		<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-
+		.container2{
+		width: 950px;
+		padding-left:170px;
+		font-size :15px;
+		}	
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -60,7 +64,7 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>fund</span></p>
+	          	<p ><span class="mr-2">support</span> <span>fund</span></p>
 	            <font size="7">후원하기</font><br/> 후원 시 <strong  style="color:#f04f23">환불이 불가</strong>하니 참고하시길 바랍니다.	
 	          </div>
 	        </div>
@@ -72,6 +76,7 @@
 	 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
 		
 					<!--  table Start /////////////////////////////////////-->
+			   <div class="container2">  
 			      <table class="table table-hover table-striped" >
 			      
 			        <thead>
@@ -89,8 +94,8 @@
 						  <td width="150px;">${funding.nickname}</td> 
 						</tr>
 			        </tbody> 
-			      
 			      </table>
+			   </div>
              	  <!--  table End /////////////////////////////////////--> 
 				<br/>
 				
@@ -109,18 +114,34 @@
 				* 브라우저 환경에 따라 결제창 실행 시간이 길어질 수 있습니다. (Explorer 11 권장)<br/>
 				* 브라우저 설정에서 팝업창이 제한되어있는지 확인해 주세요.<br/><br/>
 			    <div class="row form-form "  >
-			    <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="card">신용카드</label>
-			   &emsp;
-			     <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="trans">계좌이체	</label>		     
-			 
+			    <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="card">&nbsp;신용카드</label>
+			     &emsp;
+			     <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="trans">&nbsp;계좌이체</label>		     
+			     &emsp;
+			     <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="samsung">&nbsp;삼성페이</label>		     
+		         &emsp;
+			     <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="vbank">&nbsp;가상계좌</label>		     
+		         &emsp;
+			     <label class="btn btn-default " style="background-color: #f56740; padding: 3px; border-radius: 3px; color: #ffffff" > <input type="radio" name="paymentCode" value="phone">&nbsp;휴대폰결제</label>		     
+			 			 			 		 
 			    </div>
 			 </div>        
         	 <input type="hidden" name="postNo" value="${funding.postNo }"  />
 		  <br/><br/>
-		  <div class="form-group2">
-	  			<button type="button"  class="btn btn-default" id="btn-fund"> 후원하기 </button>
-	  			<button type="button"  class="btn btn-default" id="btn-cancel">뒤로가기</button>
-		  </div>
+		  
+	          	<div class="col-md-12" style="padding-left:170px;padding-right: 170px">
+	          	
+					<p><button  type="button" class="btn btn-default py-3 px-4 col-md-12" id="btn-fund">후원</button></p>
+					<div>
+						<div class="col-md-12">
+							<div  align="right">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+						</div>
+					</div>
+					
+	          </div>
+
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		</section>
@@ -160,22 +181,59 @@
 	      //Form 유효성 검증   
 	   var payment = null;
 	   var fundPay = $('input[name="fundPay"]').val();	
-	   
+       $('input[name="fundPay"]').val(removeCommas($('input[name="fundPay"]').val()));
+       var fundPay2 = removeCommas($('input[name="fundPay"]').val());
+       
 	      if(fundPay == null || fundPay.length<1){
-	    	  swal("후원금액을 입력해주세요.", " ");
-	          $('input[name="fundPay"]').focus();
+			  swal({
+		           text: "후원금액을 입력해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },			   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		 	          $('input[name="fundPay"]').focus();
+		           }
+		      });
+
 	          return;
 	       } 
+
+	      if(fundPay > 3000000){
+			  swal({
+		           text: "후원금액은 300만원이하로 입력해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },			   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		 	          $('input[name="fundPay"]').focus();
+		           }
+		      });	    	  
+
+	         return;
+	      }	      
+	      
 	      if(!($('input[name="paymentCode"]').is(':checked'))){
-	    	  swal("결제방법을 선택해주세요.", " ");
+			  swal({
+		           text: "결제방법을 선택해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },			   
+		      });
 	          return;
 	       }
 	      	   
 	     $(function() {
-	    	 
-	         
-	         $('input[name="fundPay"]').val(removeCommas($('input[name="fundPay"]').val()));
-	         var fundPay2 = removeCommas($('input[name="fundPay"]').val());
 	    	 
 		      $("input[name='paymentCode']:checked").each(function() {
 		    	   payment = $(this).val(); 
@@ -188,10 +246,10 @@
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : '보호할개후원',
 				amount : fundPay2,
-/*				buyer_email : 'iamport@siot.do',
-				buyer_name : '구매자',
-				buyer_tel : '010-1234-5678',
-				buyer_addr : '서울특별시 강남구 삼성동',*/
+				buyer_email : '${user.email}',
+				buyer_name : '${user.userName}',
+				buyer_tel : '${user.phone}',
+				buyer_addr : '${user.userAddr}',
 				buyer_postcode : '123-456'
 				
 				}, function(rsp) {
@@ -204,12 +262,13 @@
 			    $('form').attr("method","POST").attr("action","/funding/addFund").submit();	
 				
 				} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
-				alert(msg);
-				}
-				
-				});
+					var msg = '';
+					msg += rsp.error_msg;
+					 swal(msg, " ");
+					}
+					
+					});
+
 				
 				
     	});
@@ -225,7 +284,16 @@
 
 	                 //후원목표금액 길이초과
 	                 if (removeCommas($(this).val()).length > 7 ) {
-	                	 swal("300만원이하로 입력해주세요.", " ");
+
+	       			  swal({
+	       		           text: "300만원이하로 입력해주세요.",
+	       		           dangerMode: true,
+	       		           buttons: {
+	       							 catch: {
+	       							 	text: "확인"
+	       							 }
+	       				   },			   
+	       		      });	                	 
 	                     $(this).val(removeCommas($(this).val()).substr(0, 7));
 	                     
 	                     $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
@@ -240,7 +308,6 @@
          //============= 후원 Event  처리 =============   
          $( "#btn-fund" ).on("click" , function() {
         	 fncPayment();
-        	 //fncAddFunding();
             });
          
          //============= 취소 Event  처리 =============

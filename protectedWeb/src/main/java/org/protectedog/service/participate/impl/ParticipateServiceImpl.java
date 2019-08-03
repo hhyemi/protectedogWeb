@@ -39,8 +39,8 @@ public class ParticipateServiceImpl implements ParticipateService {
 	}
 
 	@Override
-	public Participate getParticipate(Participate participate) throws Exception {
-		return participateDAO.getParticipate(participate);
+	public Participate getParticipate(int participateNo) throws Exception {
+		return participateDAO.getParticipate(participateNo);
 
 	}
 
@@ -55,6 +55,12 @@ public class ParticipateServiceImpl implements ParticipateService {
 		
 
 		return map;
+	}
+	
+	@Override
+	public Participate getPostParticipate(Participate participate) throws Exception {
+		return participateDAO.getPostParticipate(participate);
+
 	}
 
 	/////////////// ȸ������ �䱸�� Method/////////////////////

@@ -20,8 +20,30 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 ======================================================*/
 
 @import url('https://fonts.googleapis.com/css?family=Hind:400,600');
-
+.sectionContainer {
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 5px;
+	padding-left: 5px;
+	width: 1300px;
+}
 /* General CSS */
+.swal-text{
+    font-size : 25px
+ }
+ 
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 6px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
 
 html,
 body {
@@ -1270,6 +1292,8 @@ p {
         box-shadow: 3px 3px 10px 1px rgba(158, 158, 158, 0.68);
         -webkit-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;
+        width :350px;
+        height: 400px;
     }
 
     .desc-comp-offer-cont:hover {

@@ -18,6 +18,7 @@
 		    <title>보호할개 · 후원신청</title>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
+
 	
 	<!-- ckeditor 사용 CSS-->
 	<script
@@ -25,11 +26,15 @@
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-
 		.container{
 		width: 1000px;
 		font-size :15px;
-		}		
+		}	
+		.container2{
+		width: 950px;
+		padding-left:170px;
+		font-size :15px;
+		}					
 		.form-group{
 		padding-left:170px;
 		padding-right:100px;
@@ -38,13 +43,13 @@
 	    padding-left:15px;	
 		}
 		.ck.ck-editor {
-			max-width: 700px;
+			max-width: 780px;
 		}
 		
 		.ck-editor__editable {
 			text-align: left;
 			min-height: 300px;
-			max-width: 700px;
+			max-width: 780px;
 		}			
        @font-face{
           font-family: NanumSquare;
@@ -78,13 +83,14 @@
 	
 
 					<!--  table Start /////////////////////////////////////-->
+				<div class="container2">
 			      <table class="table table-hover table-striped" >
 			      
 			        <thead>
 			          <tr>
-			            <th ></th>
-			            <th><b>후원글 제목</b></th>
-			            <th><b>닉네임</b></th>	
+			            <th width="150px;"></th>
+			            <th width="150px;"><b>후원글 제목</b></th>
+			            <th width="150px;"><b>닉네임</b></th>	
 			          </tr>
 			        </thead>
 			       
@@ -97,20 +103,21 @@
 			        </tbody> 
 			  
 			      </table>
+			      </div>
 			      <br/>
              	  <!--  table End /////////////////////////////////////--> 			
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 		
 		  <div class="form-group">
-			<h4 class=>후기제목</h4><p/>		
+			<h6><b>글 제목</b></h6><p/>			
 		    <div class=>
-		      <input type="text" class="form-control" value="${funding.reviewTitle}" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" value="${funding.reviewTitle}" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:780px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h4 class=>후기내용</h4><p/>		
+			<h6><b>글 내용</b></h6><p/>		
 			    <div>
 			    	<textarea id="editor" name="reviewContent" style="text-align: left;" placeholder="내용을 입력해주세요." >
 					  ${funding.reviewContent}
@@ -121,7 +128,7 @@
 			<br/>
             <!-- 첨부 버튼 -->
             <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.)
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞 이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.)
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
            <br/>
@@ -132,9 +139,9 @@
             <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
 
 				<c:forEach var="name" items="${file}" varStatus="status">            
-				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
-                     <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="120px;" height="120px;"/>
-                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
+				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:155px;padding-top:7px;' >
+                     <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="145px" height="130px"/>
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><font color="#f04f23"> 삭제</font></span></div>     
                 </c:forEach>           
        		</div>
             </div></div>
@@ -143,10 +150,18 @@
 		    <input type="hidden" id="multiFile" name="multiFile" />
 		    <input type="hidden" id="deleteFile" name="deleteFile" />		
 		  <br/><br/>
-		  <div class="form-group text-center">
-	  			<button type="button" id="btn-update" class="btn btn-default">수정</button>
-	  			<button type="button" id="btn-cancel" class="btn btn-default">취소</button>
-		  </div>
+	          	<div class="col-md-12" style="padding-left:170px;padding-right: 170px">
+	          	
+					<p><button  type="button" class="btn btn-default py-3 px-4 col-md-12" id="btn-update">수정</button></p>
+					<div>
+						<div class="col-md-12">
+							<div  align="right">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+						</div>
+					</div>
+					
+	          </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
@@ -171,20 +186,45 @@
       var reviewContent = $('textarea').val()
       
       if(reviewTitle == null || reviewTitle.length<1){
-         alert("글제목은 반드시 입력하여야 합니다.");
-         $('input[name="reviewTitle"]').focus();
+    	  
+		  swal({
+	           text: "글제목을 입력해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	               $('input[name="reviewTitle"]').focus();
+	           }
+	      });
+    	  
          return;
       }
       if(reviewContent == ''){
-    	  swal("글내용을 입력해주세요.", " ");
-	         $(".ck-editor__editable").focus();
+		  swal({
+	           text: "글내용을 입력해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	        	   $(".ck-editor__editable").focus();
+	           }
+	      });    	  
+
 	         return;
 	      }
       
       swal({
           title: "수정하시겠습니까?",
           icon: "warning",
-          buttons: true,
+          buttons: ["취소", "확인"],
           dangerMode: true,
         })
         .then((willDelete) => {
@@ -305,19 +345,19 @@
                      
                      var imgNum = previewIndex++;
                      
-                    //8장 이상 업로드시
-                     if(Object.keys(files).length>=8){
-                        alert("사진은 8장까지만 업로드 가능합니다.");
+                    //10장 이상 업로드시
+                     if(Object.keys(files).length>=10){
+                        alert("사진은 10장까지만 업로드 가능합니다.");
                         delete files[imgNum];
                      }else{
-               // 8장 이하 
-                     $("#preview").append(
-                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
+               // 10장 이하 
+        		    $("#preview").append(
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:155px;padding-top:7px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"145px;\" height=\"130px;\"/>"
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   삭제" + "</span>" + "</div>");
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;
