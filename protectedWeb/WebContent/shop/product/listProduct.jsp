@@ -60,6 +60,26 @@
 	max-height: 80px;
 }
 
+#searchKeyword{
+	height: 40px;
+	width: 150px;
+}
+#searchSubmmit{
+	width : 60px;
+	height : 40px;
+	
+	border-radius : 0px 15px 15px 0px;
+	border : 1px solid #D3D3D3;
+}
+
+#searchCondition{
+	height : 40px;
+	border-radius : 15px 0px 0px 15px;
+}
+.btn-default{
+	height: 30px;
+	color : white;
+}
 
 </style>
 
@@ -106,15 +126,15 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="shop-p1-title">
-						<h3>Categories</h3>
+						<h3>카테고리</h3>
 						<div class="heading-border-light"></div>
 					</div>
 					<div class="list-group">
 						<a class="list-group-item" id="total">> 전체 </a> <a
+							class="list-group-item" id="four">베스트상품</a> <a
 							class="list-group-item" id="one">사료</a> <a
 							class="list-group-item" id="two">간식</a> <a
-							class="list-group-item" id="three">의류</a> <a
-							class="list-group-item" id="four">베스트상품</a>
+							class="list-group-item" id="three">의류</a>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
 							<a class="list-group-item" id="admin">관리자 페이지</a>
 						</c:if>
@@ -131,30 +151,71 @@
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
-		
-					<form class="form-inline" name="detailForm">
-						<div class="form-group">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
-								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>가격</option>
-							</select>
+
+					<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
+					<div class="row">
+						<div class="col-md-9" style="">
+							<div style="float: left;">
+
+								<select name="pageSize" id="selectPageSize"
+									onchange="javascript:getPageSize()">
+									<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8
+										개씩</option>
+									<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15
+										개씩</option>
+									<option value="30" ${ search.pageSize == 30 ? "selected" : "" }>30
+										개씩</option>
+									<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50
+										개씩</option>
+								</select>
+							</div>
+							<div style="float: right;">
+								<form class="form-inline" name="detailForm">
+									<div class="form-group">
+										<select class="form-control" id="searchCondition"
+											name="searchCondition">
+											<option value="0"
+												${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+											<option value="1"
+												${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+											<option value="2"
+												${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+										</select>
+									</div>
+
+
+									<div class="form-group" aling="right">>
+										<label class="sr-only" for="searchKeyword">검색어</label> <input
+											type="text" class="form-control searchKeyword"
+											id="searchKeyword" name="searchKeyword" placeholder="검색어"
+											value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+										<button type="button" id="searchSubmmit"
+											class="btn btn-default searchSubmmit">
+											<span class="fas fa-search"></span>
+										</button>
+									</div>
+
+									<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+									<input type="hidden" id="currentPage" name="currentPage"
+										value="" />
+								</form>
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">검색어</label> <input
-								type="text" class="form-control searchKeyword"
-								id="searchKeyword" name="searchKeyword" placeholder="검색어"
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit"
-								class="btn btn-default searchSubmmit">
-								<span class="fas fa-search"></span>
-							</button>
+					</div>
+
+					<c:if test="${totalCount == 0}">
+						<div class="row">
+							<div class="col-md-9" align="center"
+								style="height: 500px; padding-top: 250px;">
+								검색결과 없음
+								<p />
+								<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+								<input type="hidden" id="currentPage" name="currentPage"
+									value="" />
+
+							</div>
 						</div>
-						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form>
+					</c:if>
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
@@ -188,11 +249,11 @@
 							</div>
 						</c:forEach>
 
-						
-						</div>
-						
-						<div align="center">
-							<jsp:include page="/common/pageNavigator.jsp" />
+
+					</div>
+
+					<div align="center">
+						<jsp:include page="/common/pageNavigator.jsp" />
 					</div>
 				</div>
 			</div>
