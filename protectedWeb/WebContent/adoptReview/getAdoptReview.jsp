@@ -5,7 +5,7 @@
 <html>
 
 <head>
-	<title>보호할개 · 분양후기글 상세조회</title>
+	<title>보호할개 · 후기</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -56,7 +56,7 @@
   <body class="goto-here">
 	
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">

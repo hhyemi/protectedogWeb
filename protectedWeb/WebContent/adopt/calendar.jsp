@@ -14,15 +14,11 @@
 
 <style type="text/css">
 
-.waves-effect>strong {
-			background-color: #f04f23;
-			border-radius: 3px;
-}
- .waves-effect>span {
-			background-color: #f04f23;
-			border-radius: 3px;
-			padding: 3px;
-			color: white;
+.waves-effect>span {
+	background-color: #f04f23;
+	border-radius: 3px;
+	padding: 3px;
+	color: white;
 }
 /*!
  * FullCalendar v3.9.0
@@ -174,13 +170,28 @@ previous button's border...
 
 .fc-title{
 	width: wrap !important;
-	white-space: pre-line;
+	white-space:nowrap;
+	display:block;
+/* 	white-space: pre-line; */
 	font-weight: 1000 !important;
-	font-size: 15px !important;
+	font-size: 12px !important;
+	text-overflow: ellipsis !important;
 /* 	word-wrap: break-word; */
 /* 	display: block; */
 }
+.fc-event-container {
+	padding-top: 0px !important;
+	padding-bottom: 3px !important;
+	background-color: white;
+}
+.card-header {
+	background-color: #eee;
+}
 
+
+.fc-content {
+	margin-right: 8px;
+}
 .fc-popover {
   position: absolute;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
@@ -1541,7 +1552,7 @@ h2{
 
           <div id="attach" class="form-group">
             <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
-              	<strong>이미지 등록</strong>
+              	<span><strong>사진등록</strong></span>
             </label></span>&nbsp; 하나만 등록 가능합니다.
             <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
           </div>
@@ -1651,6 +1662,14 @@ h2{
 				buttonText: {
 					   today : "오늘"
 				},
+				eventLimit: 2, // for all non-TimeGrid views
+// 				eventLimit: true, // for all non-TimeGrid views
+				  views: {
+				    timeGrid: {
+				      eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+				    }
+				},
+				eventLimitText: '개',
 
 
 				events: function(start, end, timezone, callback) {
@@ -1672,7 +1691,8 @@ h2{
 						
 								         		events.push({ 
 						          					id: value[i].id, 
-						         					title: loca[0],
+						         					title: value[i].locationKr,
+// 						         					title: loca[0],
 						          					realTitle: value[i].locationKr, 
 						         					description: value[i].postContent,
 											        date: value[i].dogDate,
@@ -1700,9 +1720,9 @@ h2{
 				},
 				eventRender: function(event, element) {
 					
-					if(event.imageurl) {
-		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='50' height='50'>&nbsp;&nbsp;");
-		            }
+// 					if(event.imageurl) {
+// 		                element.find(".fc-title").prepend("<img src='" + event.imageurl + "' width='50' height='50'>&nbsp;&nbsp;");
+// 		            }
 					
 
 				  },
@@ -1944,8 +1964,6 @@ h2{
 			                } else {
 // 			                    alert('이미지 업로드 성공');
 			                    
-			                    
-			                    
 			                }
 		            },
 					error: function(request, status, error){ 
@@ -2132,7 +2150,7 @@ h2{
 	
 	$('#modal-view-event-add .modal-body').css('max-height', $(window).height() * 0.6);
 	
-	$( "font:contains('실종')" ).on("click" , function() {
+	$( "font:contains('실종캘린더')" ).on("click" , function() {
 		self.location = "/adopt/listMissing"
 	});
 
