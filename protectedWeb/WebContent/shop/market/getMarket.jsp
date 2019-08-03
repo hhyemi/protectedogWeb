@@ -33,10 +33,7 @@
 
 
 <style>
-.form-group2 {
-	padding-left: 420px;
-	padding-right: 100px;
-}
+
 
 .form-group3 {
 	padding-left: 465px;
@@ -67,12 +64,14 @@ text-size: small;
 	<!--================Header Menu Area =================-->
 
 	<!--================Single Product Area =================-->
+	
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 
 					<p />
+					조회수 ${board.viewCount }
 					<div id="carouselExampleIndicators" class="carousel slide"
 						data-ride="carousel">
 						<ol class="carousel-indicators">
@@ -90,7 +89,6 @@ text-size: small;
 
 						</ol>
 						<div class="carousel-inner">
-
 
 							<c:forEach var="name" items="${file}" varStatus="status">
 								<c:if test="${status.first}">
@@ -114,8 +112,8 @@ text-size: small;
 						<div>
 							<input type="hidden" value="${board.postNo}" /> <input
 								type="hidden" value="${board.boardCode}" />
-							<h3>${board.postTitle}</h3>${board.id}
-							<h3>${board.prodName}</h3>
+							<font size="6">${board.postTitle}</font>&nbsp;&nbsp;&nbsp;<font size="3">${board.nickName}</font>
+							<br/><br/><h3>상품명 : ${board.prodName}</h3>
 							<h2 class="pricecolor">
 								<fmt:formatNumber value="${board.price}" pattern="#,###" />
 								원
@@ -123,25 +121,38 @@ text-size: small;
 
 							<ul class="list">
 							</ul>
-							<p>
-							<br>
-							${board.postContent}
-								
-							</p>
 							
+							
+							
+							거래지역 : ${board.city}<br/>
+							판매자 연락처 : <c:if test="${user.role eq 'user'}">
+							${board.phone}
+							</c:if><br/>
+							<c:if test="${! user.role eq 'user'}">
+							인증회원만 열람가능합니다.</c:if>
+							<hr>
+							<br/>
+							
+						
+							${board.postContent}<br/>
+								
+							
+						
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<p align="right"><button class="mdl-button mdl-js-button mdl-button--primary" id="update">
- 수정
-</button><!-- Accent-colored flat button -->
-<button class="mdl-button mdl-js-button mdl-button--accent">
-  삭제하기
-</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-<p>
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12" align="right">
+				<button class="btn btn-default">수정</button>	
+				<button class="btn btn-default">삭제</button>		
+			</div>		
+		</div>
+		
+		</div>
 		<!--================End Product Description Area =================-->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
 <input type="hidden" name="boardCode" value="IS" />	

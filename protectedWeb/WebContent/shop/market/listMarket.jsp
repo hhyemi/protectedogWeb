@@ -55,23 +55,33 @@
 	font-size: small;
 }
 
+#get {
+	padding-left: 10px;
+	padding-right: 10px;
+	max-width: 350px;
+	min-width: 350px;
+	min-height: 550px;
+	max-height: 550px;
+}
+
 .img-fluid {
-	min-height: 300px;
-	max-height: 300px;
-	overflow: auto;
-	max-width: 300px;
-	min-width: 300px;
+	min-height: 350px;
+	max-height: 350px;
+	max-width: 320px;
+	min-width: 320px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
-
 .card {
-	min-height: 500px;
-	max-height: 500px;
-	overflow: auto;
-	max-width: 400px;
-	min-width: 400px;
+	min-height: 550px;
+	max-height: 550px;
+	max-width: 350px;
+	min-width: 350px;
 }
 
-<
+
 style>#checkPostTitle {
 	width: 300px;
 	padding: 0 5px;
@@ -97,13 +107,6 @@ select, #searchKeyword {
 	border: 1px solid #f04f23;
 }
 
-#write {
-	width: 40px;
-	height: 40px;
-	border-radius: 15px;
-	border: 1px solid #f04f23;
-}
-
 #voteCondition {
 	height: 40px;
 	border-radius: 15px 0px 0px 15px;
@@ -122,96 +125,107 @@ select, #searchKeyword {
 
 </head>
 
-<body id="page-top">
-
-	<!--====================================================
+<!--====================================================
                          HEADER
 ======================================================-->
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!-- ToolBar End /////////////////////////////////////-->
+<!-- ToolBar Start /////////////////////////////////////-->
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--====================================================
+<!--====================================================
                     LOGIN OR REGISTER
 ======================================================-->
-	<!--====================================================
+<!--====================================================
                          HOME STA
 ======================================================-->
-
+<body class="goto-here">
+	<div class="hero-wrap hero-bread"
+		style="padding-bottom: 30px; padding-top: 60px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p>
+						<span class="mr-2">protected dog</span> <span>Market</span>
+					</p>
+					<font size="7">보호 마켓</font>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<p />
 
 	<!--====================================================
                         SHOP-P1
 ======================================================-->
 
 
-	<div class="heading-border-light"></div>
+	<div class="container"></div>
 	<input type="hidden" value="${board.postNo}" />
 	<input type="hidden" value="${board.boardCode}" />
 
 
 
+	<form class="form-inline" name="detailForm">
+		<div class="container">
 
-	<section class="ftco-section bg-light"
-		style="padding-bottom: 0px; padding-top: 30px;">
+			<!--검색 부터 -->
+			<div class="row">
+				<div class="col-md-6" align="left">
 
-		<form class="form-inline" name="detailForm">
-			<div class="container">
-
-				<!--검색 부터 -->
-				<div class="row">
-					<div class="col-md-6" align="left">
-
-						<p style="font-weight: bold;">전체 ${resultPage.totalCount } 건</p>
-					</div>
-
-					<div class="form-group" style="padding-left: 160px">
-						<select id="voteCondition" name="voteCondition">
-							<option value="0"
-								${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체</option>
-							<option value="3"
-								${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" }>후원중</option>
-							<option value="4"
-								${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" }>후원완료</option>
-						</select> <select name="searchCondition" id="searchCondition">
-							<option value="0"
-								${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-							<option value="1"
-								${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
-						</select> <label class="sr-only" for="searchKeyword">검색어</label> <input
-							type="text" id="searchKeyword" name="searchKeyword"
-							placeholder="검색어"
-							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-						<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
-						<button type="button" id="searchSubmmit"
-							class="btn btn-default searchSubmmit"
-							style="padding-bottom: 6px; margin-left: 0px;">
-							<span class="fas fa-search"></span>
-						</button>
-					</div>
+					<p style="font-weight: bold;">전체 ${resultPage.totalCount } 건</p>
 				</div>
-				<br /> <br />
-				<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
-				<c:if test="${resultPage.totalCount eq 0 }">
-					<div align="center" style="height: 300px; padding-top: 100px;">
-						<font size="4px">검색결과가 없습니다.</font>
-					</div>
-				</c:if>
 
-				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
-				<div class="col-lg-9">
+				<div class="form-group" style="padding-left: 160px">
+					<select id="voteCondition" name="voteCondition">
+						<option value="0"
+							${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체</option>
+						<option value="3"
+							${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" }>후원중</option>
+						<option value="4"
+							${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" }>후원완료</option>
+					</select> <select name="searchCondition" id="searchCondition">
+						<option value="0"
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+						<option value="1"
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
+					</select> <label class="sr-only" for="searchKeyword">검색어</label> <input
+						type="text" id="searchKeyword" name="searchKeyword"
+						placeholder="검색어"
+						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+					<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
+					<button type="button" id="searchSubmmit"
+						class="btn btn-default searchSubmmit"
+						style="padding-bottom: 6px; margin-left: 0px;">
+						<span class="fas fa-search"></span>
+					</button>
+				</div>
+			</div>
+			<br /> <br />
+			<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
+			<c:if test="${resultPage.totalCount eq 0 }">
+				<div align="center" style="height: 300px; padding-top: 100px;">
+					<font size="4px">검색결과가 없습니다.</font>
+				</div>
+			</c:if>
+
+			<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
+
+			<div class="row">
+				<div class="col-md-10 col-lg-12 order-md-last">
+					<input type="hidden" id="currentPageList" name="currentPageList"
+						value="${resultPage.currentPage}" />
 					<div class="row">
-						<input type="hidden" id="currentPageList" name="currentPageList"
-							value="${resultPage.currentPage}" />
 						<c:set var="i" value="0" />
 						<c:forEach var="board" items="${list}">
 							<c:set var="i" value="${i+1}" />
-							<div class="col-lg-4 col-md-6 mb-4">
+							<figure id="get">
 								<div class="card">
 									<img class="img-fluid" id="clickplease"
-										src="../../resources/file/fileMarket/${board.thumnail}"
-										height="500px;"> <input type="hidden"
-										value="${board.postNo}" />
+										src="../../resources/file/fileMarket/${board.thumnail}">
+									<input type="hidden" value="${board.postNo}" />
 									<div class="card-body text-center">
 										<div class="card-title">
 											<a><b>${board.postTitle}</b> </a> <input type="hidden"
@@ -226,14 +240,13 @@ select, #searchKeyword {
 										</p>
 									</div>
 								</div>
-							</div>
+							</figure>
 						</c:forEach>
 					</div>
 				</div>
 			</div>
-		</form>
-	</section>
-	
+		</div>
+	</form>
 
 
 	<!--====================================================
@@ -285,6 +298,5 @@ select, #searchKeyword {
 
 		});
 	</script>
-
 </body>
 </html>

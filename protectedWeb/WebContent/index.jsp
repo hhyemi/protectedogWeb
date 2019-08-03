@@ -122,24 +122,24 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				<div class="carousel-item active"
 					style="background-image: url('/resources/img/bg-img/los-angeles-commercial-dog-photographer-for-pet-brands-23.jpg')">
 					<div class="carousel-caption d-none d-md-block">
-						<h2 class="display-4">First Slide</h2>
-						<p class="lead">This is a description for the first slide.</p>
+						<h2 class="display-4"></h2>
+						<p class="lead"></p>
 					</div>
 				</div>
 				<!-- Slide Two - Set the background image for this slide in the line below -->
 				<div class="carousel-item"
 					style="background-image: url('/resources/img/bg-img/image-asset.jpeg')">
 					<div class="carousel-caption d-none d-md-block">
-						<h2 class="display-4">Second Slide</h2>
-						<p class="lead">This is a description for the second slide.</p>
+						<h2 class="display-4"></h2>
+						<p class="lead"></p>
 					</div>
 				</div>
 				<!-- Slide Three - Set the background image for this slide in the line below -->
 				<div class="carousel-item"
 					style="background-image: url('/resources/img/bg-img/bg.jpeg')">
 					<div class="carousel-caption d-none d-md-block">
-						<h2 class="display-4">Third Slide</h2>
-						<p class="lead">This is a description for the third slide.</p>
+						<h2 class="display-4"></h2>
+						<p class="lead"></p>
 					</div>
 				</div>
 			</div>
@@ -162,119 +162,40 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	</section>
 <!-- ==============================================================
 						typewrite 배너
-=================================================================-->
-<!-- 			<div class="hero"> -->
-<!-- 				<hgroup class="wow fadeInUp"> -->
-<!-- 					<h1 style="height: 56px; margin: 0px;"> -->
-<!-- 						보호할개<span><a href="" class="typewrite" data-period="1000" -->
-<!-- 							data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'><span -->
-<!-- 								class="wrap"></span></a></span> -->
-<!-- 					</h1> -->
-<!-- 					<h3></h3> -->
-<!-- 				</hgroup> -->
+================================================================= -->
+			<div class="hero"> 
+ 				<hgroup class="wow fadeInUp"> 
+					<h1 style="height: 56px; margin: 0px;"> 
+						보호할개<span><a href="" class="typewrite" data-period="1000" 
+ 							data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'><span 
+ 								class="wrap"></span></a></span> 
+					</h1> 
+					<h3></h3> 
+ 				</hgroup> 
 
-<!-- 			</div> -->
-	<!--====================================================
+ 			</div> 
+	<!--===================================================
                         OFFER1
 ======================================================-->
 
 	
 
 	<section id="comp-offer">
-	<font size="5">&nbsp;&nbsp;&nbsp;&nbsp;분양-실종</font><br/>
-	<font size="4" color="#d0d3d9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보호할개가 제공하는 유기견 정보들을 만나보세요</font><br/>
-		<div class="adopt">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.4s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-11.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Business Management</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.4s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-11.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Business Management</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.6s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-13.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Leadership Development</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.8s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-14.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Social benefits and services</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ================================================================= -->
-
-	<!--====================================================
-=======
-    <section id="comp-offer">
+	<div class="adopt">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
             <h2>분양.실종</h2>
             <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button" style="width:300px;">분양게시판</button>
-            <button class="btn btn-general btn-white" role="button" style="width:300px;">실종게시판</button>
+            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
+            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
           </div>
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
             <div class="desc-comp-offer-cont">
               <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
                   <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Business Management</h3>
@@ -310,111 +231,75 @@ License URL: https://creativecommons.org/licenses/by/4.0/
           </div>
         </div>
       </div>
+      </div>
     </section>
     
-    <!-- ================================================================= -->
+
+	<!-- ================================================================= -->
     
     <!--====================================================
                         OFFER
 ======================================================-->
-	<section id="comp-offer">
-	<font size="5">&nbsp;&nbsp;&nbsp;&nbsp;스토리 펀딩</font><br/>
-	<font size="4" color="#d0d3d9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보호할개가 제공하는 유기견 정보들을 만나보세요</font><br/>
-		<div class="funding">
-		<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.4s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-11.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Business Management</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.4s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-11.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Business Management</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.6s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-13.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Leadership Development</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.8s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-14.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Social benefits and services</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	 <section id="comp-offer">
+	 <div class="funding">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+            <h2>스토리펀딩</h2>
+            <div class="heading-border-light"></div> 
+            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
+            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
+          </div>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
+              </div>
+              <h3>Business Management</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>          
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
+              </div>              
+              <h3>Leadership Development</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.8s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
+              </div>
+              <h3>Social benefits and services</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
 	
 	
 <!--=====================================================
 						중간배너
 ========================================================-->
 
- <section id="about" class="about">
- <div class="middle">
-      <div class="container">
-        <div class="row title-bar">
-          <div class="col-md-12">
-            <h1 class="wow fadeInUp">보호할개</h1>
-            <div class="heading-border"></div>
-            <p class="wow fadeInUp" data-wow-delay="0.4s">사이트 분양현황</p>
-            <div class="title-but"><canvas id="myChart"></canvas></div>
-          </div>
-        </div>
-      </div>  
-      </div>
-      </section>
+
 <!--====================================================
                    정보공유
 ======================================================-->
@@ -481,85 +366,60 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<!--====================================================
                         OFFER 스토어
 ======================================================-->
-	<section id="comp-offer">
-	<font size="5">&nbsp;&nbsp;&nbsp;&nbsp;스토어</font><br/>
-	<font size="4" color="#d0d3d9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보호할개가 제공하는 유기견 정보들을 만나보세요</font><br/>
-		<div class="store">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.4s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-11.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Business Management</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.4s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-11.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Business Management</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.6s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-13.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Leadership Development</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"
-						data-wow-delay="0.8s">
-						<div class="desc-comp-offer-cont">
-							<div class="thumbnail-blogs">
-								<div class="caption">
-									<i class="fa fa-chain"></i>
-								</div>
-								<img src="img/news/news-14.jpg" class="img-fluid" alt="...">
-							</div>
-							<h3>Social benefits and services</h3>
-							<p class="desc">Contrary to popular belief, Lorem Ipsum is
-								not simply random text. It has roots in a piece of classical
-								Latin literature from 45 BC.</p>
-							<a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn
-								More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
+	 <section id="comp-offer">
+	 <div class="store">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+            <h2>스토어</h2>
+            <div class="heading-border-light"></div> 
+            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
+            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
+          </div>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
+              </div>
+              <h3>Business Management</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>          
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
+              </div>              
+              <h3>Leadership Development</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.8s">
+            <div class="desc-comp-offer-cont">
+              <div class="thumbnail-blogs">
+                  <div class="caption">
+                    <i class="fa fa-chain"></i>
+                  </div>
+                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
+              </div>
+              <h3>Social benefits and services</h3>
+              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
+              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    
 
 	<!--================ start footer Area  =================-->
 	<!-- footer Start /////////////////////////////////////-->
