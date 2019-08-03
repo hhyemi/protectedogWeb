@@ -230,8 +230,8 @@
     <!-- sweetalter CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-    <!--  Chat Bot -->
-	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include>
+<!--      Chat Bot -->
+<%-- 	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include> --%>
 	
   	<script type="text/javascript">
 

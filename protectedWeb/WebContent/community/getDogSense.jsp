@@ -24,7 +24,7 @@
 .paging{width: 100%;height: 40px;}
 .btn-default{margin: 0px;padding: 0px;}
 
-#searchKeyword {width : 200px;border-radius: 15px 0px 0px 15px;}
+#searchKeyword {width : 200px;border-radius: 15px 0px 0px 15px;height:38px;}
 #searchSubmit{border-radius: 0px 15px 15px 0px;}
 #searchBox{padding-right: 0px;}
 
@@ -52,15 +52,8 @@ a :hover{color : #1062e6;}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" align="center">
-				<div class="form-group" align="center" id="searchBox" style="padding-top : 10px; padding-bottom : 50px;">	
-					<span>
-						<input type="text" id="searchKeyword" class="form-control searchKeyword" />
-					</span><!--  
-				 --><span>
-						<button type="button" id="searchSubmit" class="btn btn-default searchSubmit">
-						<span class="fas fa-search"></span>
-						</button>
-					</span>	
+				<div align="center" id="searchBox" style="padding-top : 10px; padding-bottom : 50px;">	
+					<span><input type="text" id="searchKeyword" class="searchKeyword"><button type="button" id="searchSubmit" class="btn btn-default searchSubmit"><span class="fas fa-search"></span></button></span>
 				</div>
 			</div>
 		</div>
@@ -160,7 +153,7 @@ a :hover{color : #1062e6;}
 						convertTitle += "..."
 					}
 					
-					console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
+					//console.log(" sinppet.thumbnail : " + this.snippet.thumbnails.default.url);
 					$("#get_view").append(
 							  "<div class='col-md-4' style='min-width : 350px'>"
 							+ "<iframe width='350' height='200' src='https://www.youtube.com/embed/"+this.id.videoId+"' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
