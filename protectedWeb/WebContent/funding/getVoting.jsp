@@ -248,7 +248,9 @@
               	       <input type="hidden" name="levels" value="${user.levels}">			       
 				       
 				           <!-- PageNavigation Start... -->
-								<jsp:include page="../common/pageNavigator.jsp"/>
+				           <div style="padding-left:460px">
+				           <jsp:include page="../common/pageNavigator_new.jsp" />
+						   </div>
 							<!-- PageNavigation End... -->
 		          </div>		          
 		       </div>
