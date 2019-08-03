@@ -1,100 +1,166 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
-
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
-
+<!-- /////// JSTL/////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- //////////////////////  DAY FORMAT ///////////////////////// -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
 
 <html lang="ko">
-	
-<head>
-	<meta charset="UTF-8">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-   <!-- jQuery UI toolTip 사용 CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body{
-             border:0px; border-spacing:0px;
-        }
-    </style>
- <script type="text/javascript">
 
-	
-</script> 
+<head>
+<title>구매내역</title>
+<meta charset="UTF-8">
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<!-- Core Stylesheets -->
+<link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
+
 </head>
 
-<body>
+<body id="page-top">
+
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
-	       <h1 align="center">관리자 <small>구매목록 조회</small></h1><br/>
-	
-		<!--  table Start /////////////////////////////////////-->
-      <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" align="center">
-   
-      <thead>
-    <tr>
-      <th class ="mdl-data-table__cell--non-numeric" align="center" >No</th>
-            <th align="left">회원ID</th>
-            <th align="left">회원명 </th>
-            <th align="left">전화번호</th>
-            <th align="left">배송현황</th>
-             <th align="left">정보수정</th>
-    </tr>
-        </thead>
-			
-	<!-- 	<c:set var="i" value="0"/>
-		<c:forEach var = "purchase" items="${list}">
-		<c:set var="i" value="${i+1}" />-->
-	
-	<tbody>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-      <td>25</td>
-      <td>$2.90</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-      <td>50</td>
-      <td>$1.25</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-      <td>10</td>
-      <td>$2.35</td>
-    </tr>
-  </tbody>
+	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--</c:forEach>-->
-	</table>
+	<!--====================================================
+                       HOME-P
+======================================================-->
+<body class="goto-here">
+   	
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">List</span> <span>Admin Order</span></p>
+            <font size="7">관리자 상품관리</font>
+          </div>
+        </div>
+      </div>
+    </div>
+
+	<!--====================================================
+                        CART
+======================================================-->
+	<form name="listOrder">
+		<section id="cart" class="cart">
+			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
+			<input type="hidden" value="${user.id}"/>
+			<div class="container">
+			※ 상세정보는 상품명을 조회해 주세요
+				<table id="cart" class="table table-hover table-condensed">
+					<thead>
+						<tr>
+							<th style="width: 10%">No | 회원아이디</th>
+							<th style="width: 30%">상품정보</th>
+							<th style="width: 10%">구매가격</th>
+							<th style="width: 20%" class="text-center">결제수단</th>
+							<th style="width: 10%">상태</th>
+							<th style="width: 40%">주문일</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<c:set var="i" value="0" />
+						<c:forEach var="order" items="${list}">
+							<c:set var="i" value="${i+1}" />
+							<tr class="ordernum">
+							<td>&nbsp;${i}&nbsp;|&nbsp;${user.id}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
+							<input type="hidden" name="id" name="id" value="${sessionScope.user.id }"/></td>
+								<td align="center">
+									<div class="row">
+
+										<div class="col-sm-2 hidden-xs">
+											<img src="../../resources/file/fileShop/${order.orderProd.mainFile}" width="70px" alt="..."
+												class="img-responsive" />
+										</div>
+										<div class="col-sm-10 prod-desc">
+											<h6 class="nomargin">
+												<a class="number">  </a>
+												<a class="detailOrder"><br/><b>${order.orderProd.prodName}</b><br/>
+												<input type="hidden" value="${order.orderNo}" /> </a>
+												
+											</h6>
+										</div>
+									</div>
+								</td>
+								<td><fmt:formatNumber value="${order.totalPrice}" pattern="#,###"/>원</td>
+
+								<td class="text-center">
+								<c:if test="${order.paymentCode =='1'}">
+								무통장결제</c:if>
+								<c:if test="${order.paymentCode =='2'}">
+								카드결제</c:if>
+								
+								</td>
+								<td class="actions">
+								<c:if test="${order.orderCode =='1'}">
+								결제완료</c:if>
+								<c:if test="${order.orderCode =='2'}">
+								배송중</c:if>
+								<c:if test="${order.orderCode =='3'}">
+								배송완료</c:if>
+								<c:if test="${order.orderCode =='4'}">
+								취소</c:if>
+								<c:if test="${order.orderCode =='5'}">
+								구매후기 수정</c:if></td>
+								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
+								
+							</tr>
+						</c:forEach>
+
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<td><a href="#" class="btn btn-general btn-white"><i
+									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td>
+							<td colspan="2" class="hidden-xs"></td>
+							<td class="hidden-xs text-center"><strong></strong></td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</section>
+	</form>
 	
+		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	<!-- PageNavigation End... -->
+
+	<!-- Footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp" />
+	<!-- Footer End /////////////////////////////////////-->
+	
+	
+	<script type="text/javascript">
+//=============    상품상세조회(썸네일)  Event  처리 		=============
+//============= 썸네일 사진 클릭 Event  처리 =============	
+ 		$( ".number" ).on("click" , function() {
+				 self.location ="/order/getOrder?orderNo="+$(this).text().trim();
+			});
+	
+	$(function() {
+	$(".detailOrder").on("click",function() {
+		//alert($(this).children("input").val())
+				$(self.location).attr("href","/order/getOrder?orderNo="+ $(this).children("input").val());
+			});
+	
+ 	});	 
+
+
+	</script>
 </body>
+
 </html>
+
+
+

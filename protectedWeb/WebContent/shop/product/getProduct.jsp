@@ -123,7 +123,9 @@ table {
 										<c:if test="${product.prodCode == 30}">
 										의류</c:if>
 										<c:if test="${product.prodCode == 40}">
-										타임세일</c:if></a>
+										타임세일</c:if>
+										<input type="hidden" value="prodNo" name="prodNo"/>
+										</a>
 									<li><a href="#"> 
 									</a></li>
 								</ul>

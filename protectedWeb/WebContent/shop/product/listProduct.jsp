@@ -156,18 +156,6 @@
 					<div class="row">
 						<div class="col-md-9" style="">
 							<div style="float: left;">
-
-								<select name="pageSize" id="selectPageSize"
-									onchange="javascript:getPageSize()">
-									<option value="8" ${ search.pageSize == 8 ? "selected" : "" }>8
-										개씩</option>
-									<option value="15" ${ search.pageSize == 15 ? "selected" : "" }>15
-										개씩</option>
-									<option value="30" ${ search.pageSize == 30 ? "selected" : "" }>30
-										개씩</option>
-									<option value="50" ${ search.pageSize == 50 ? "selected" : "" }>50
-										개씩</option>
-								</select>
 							</div>
 							<div style="float: right;">
 								<form class="form-inline" name="detailForm">
@@ -184,7 +172,7 @@
 									</div>
 
 
-									<div class="form-group" aling="right">>
+									<div class="form-group" align="right">>
 										<label class="sr-only" for="searchKeyword">검색어</label> <input
 											type="text" class="form-control searchKeyword"
 											id="searchKeyword" name="searchKeyword" placeholder="검색어"
@@ -253,7 +241,7 @@
 					</div>
 
 					<div align="center">
-						<jsp:include page="/common/pageNavigator.jsp" />
+						<jsp:include page="../../common/pageNavigator_new.jsp"/>
 					</div>
 				</div>
 			</div>
@@ -277,8 +265,7 @@
 		//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("form").attr("method", "POST").attr("action",
-					"/product/listProduct").submit();
+			$("form").attr("method", "POST").attr("action","/product/listProduct").submit();
 		}
 
 		//=============    상품상세조회(썸네일)  Event  처리 		=============

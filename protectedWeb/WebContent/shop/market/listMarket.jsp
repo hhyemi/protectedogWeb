@@ -20,21 +20,11 @@
 
 <!-- Global Stylesheets -->
 <title>상품 등록</title>
-<meta charset="EUC-KR">
+
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
-<!-- <script -->
-<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-
-<!-- Google Mdl -->
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -42,6 +32,12 @@
 	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 
@@ -74,13 +70,13 @@
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
+
 .card {
 	min-height: 550px;
 	max-height: 550px;
 	max-width: 350px;
 	min-width: 350px;
 }
-
 
 style>#checkPostTitle {
 	width: 300px;
@@ -168,85 +164,95 @@ select, #searchKeyword {
 
 
 
-	<form class="form-inline" name="detailForm">
-		<div class="container">
 
-			<!--검색 부터 -->
-			<div class="row">
-				<div class="col-md-6" align="left">
 
-					<p style="font-weight: bold;">전체 ${resultPage.totalCount } 건</p>
+	<section class="ftco-section bg-light"
+		style="padding-bottom: 0px; padding-top: 30px;">
+
+		<form class="form-inline" name="detailForm">
+			<div class="container">
+
+				<!--검색 부터 -->
+				<div class="row">
+					<div class="col-md-6" align="left">
+						<p style="font-weight: bold;">전체 ${resultPage.totalCount } 건</p>
+					</div>
+
+					<div class="form-group" style="padding-left: 160px">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+							</select> </div>
+
+
+						<div class="form-group">
+						<label class="sr-only" for="searchKeyword">검색어</label> <input
+							type="text" id="searchKeyword" name="searchKeyword"
+							placeholder="검색어"
+							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+						<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
+						<button type="button" id="searchSubmmit"
+							class="btn btn-default searchSubmmit"
+							style="padding-bottom: 6px; margin-left: 0px;">
+							<span class="fas fa-search"></span>
+						</button>
+					</div>
 				</div>
+				<br /> <br />
+				<c:if test="${resultPage.totalCount eq 0 }">
+					<div align="center" style="height: 300px; padding-top: 100px;">
+						<font size="4px">검색결과가 없습니다.</font>
+					</div>
+				</c:if>
 
-				<div class="form-group" style="padding-left: 160px">
-					<select id="voteCondition" name="voteCondition">
-						<option value="0"
-							${ ! empty search.voteCondition && search.voteCondition==0 ? "selected" : "" }>전체</option>
-						<option value="3"
-							${ ! empty search.voteCondition && search.voteCondition==3 ? "selected" : "" }>후원중</option>
-						<option value="4"
-							${ ! empty search.voteCondition && search.voteCondition==4 ? "selected" : "" }>후원완료</option>
-					</select> <select name="searchCondition" id="searchCondition">
-						<option value="0"
-							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-						<option value="1"
-							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>닉네임</option>
-					</select> <label class="sr-only" for="searchKeyword">검색어</label> <input
-						type="text" id="searchKeyword" name="searchKeyword"
-						placeholder="검색어"
-						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-					<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
-					<button type="button" id="searchSubmmit"
-						class="btn btn-default searchSubmmit"
-						style="padding-bottom: 6px; margin-left: 0px;">
-						<span class="fas fa-search"></span>
-					</button>
-				</div>
-			</div>
-			<br /> <br />
-			<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
-			<c:if test="${resultPage.totalCount eq 0 }">
-				<div align="center" style="height: 300px; padding-top: 100px;">
-					<font size="4px">검색결과가 없습니다.</font>
-				</div>
-			</c:if>
+				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 
-			<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
-
-			<div class="row">
-				<div class="col-md-10 col-lg-12 order-md-last">
-					<input type="hidden" id="currentPageList" name="currentPageList"
-						value="${resultPage.currentPage}" />
-					<div class="row">
-						<c:set var="i" value="0" />
-						<c:forEach var="board" items="${list}">
-							<c:set var="i" value="${i+1}" />
-							<figure id="get">
-								<div class="card">
-									<img class="img-fluid" id="clickplease"
-										src="../../resources/file/fileMarket/${board.thumnail}">
-									<input type="hidden" value="${board.postNo}" />
-									<div class="card-body text-center">
-										<div class="card-title">
-											<a><b>${board.postTitle}</b> </a> <input type="hidden"
-												value="${board.postNo}" />
+				<div class="row">
+					<div class="col-md-10 col-lg-12 order-md-last">
+						<input type="hidden" id="currentPageList" name="currentPageList"
+							value="${resultPage.currentPage}" />
+						<div class="row">
+							<c:set var="i" value="0" />
+							<c:forEach var="board" items="${list}">
+								<c:set var="i" value="${i+1}" />
+								<figure id="get">
+									<div class="card">
+										<img class="img-fluid" id="clickplease"
+											src="../../resources/file/fileMarket/${board.thumnail}">
+										<input type="hidden" value="${board.postNo}" />
+										<div class="card-body text-center">
+											<div class="card-title">
+												<a><b>${board.postTitle}</b> </a> <input type="hidden"
+													value="${board.postNo}" />
+											</div>
+											${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
+													value="${board.price}" pattern="#,###" />원
+											</strong>
+											<hr>
+											<p class="view">${board.id}(&nbsp;${board.city}&nbsp;)
+												&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
+											</p>
 										</div>
-										${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
-												value="${board.price}" pattern="#,###" />원
-										</strong>
-										<hr>
-										<p class="view">${board.id}(&nbsp;${board.city}&nbsp;)
-											&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
-										</p>
 									</div>
-								</div>
-							</figure>
-						</c:forEach>
+								</figure>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</form>
+
+			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+			<input type="hidden" id="currentPage" name="currentPage" value="" />
+			<input type="hidden" id="boardCode" name="boardCode"
+				value="${board.boardCode}" /> <input type="hidden" id="postNo"
+				name="postNo" value="${board.postNo}" />
+		</form>
+	</section>
 
 
 	<!--====================================================
