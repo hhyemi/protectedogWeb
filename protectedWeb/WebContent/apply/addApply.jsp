@@ -59,7 +59,7 @@
 				<div class="col-md-12">
 				
 	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
+	          			<h3 class="billing-heading mb-4"><strong>신청 안내</strong></h3>
 	          			
 						<div class="form-group">
 							<div class="col-md-12"><strong>1. </strong>
@@ -67,7 +67,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 								</div>
 							</div>
 						</div>
@@ -80,7 +80,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 								</div>
 							</div>
 						</div>
@@ -91,7 +91,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 								</div>
 							</div>
 						</div>
@@ -99,7 +99,7 @@
 						<div class="form-group">
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 동의</strong></label>
+								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 확인</strong></label>
 								</div>
 							</div>
 						</div>
@@ -359,7 +359,7 @@
 		// 약관 동의
 		if( $("input:checkbox:checked").length != 4){
 			swal({
-		           text: "약관에 모두 동의해야 신청하실 수 있습니다.",
+		           text: "안내를  모두 확인해야 신청하실 수 있습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {

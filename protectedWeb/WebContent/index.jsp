@@ -166,15 +166,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
             <h2>분양.실종</h2>
             <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
-            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
+            <button class="btn btn-general btn-green" role="button" style="width:300px;">분양게시판</button>
+            <button class="btn btn-general btn-white" role="button" style="width:300px;">실종게시판</button>
           </div>
           <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
             <div class="desc-comp-offer-cont">
               <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
                   <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Business Management</h3>
