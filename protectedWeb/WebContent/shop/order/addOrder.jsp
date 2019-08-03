@@ -5,21 +5,37 @@
 
 <html lang="ko">
 <head>
- meta 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN  -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- IM PORT 추가 -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
 <style>
 .container {
-	width: 1000px; 
+	width: 800px;
 	font-size: 17px;
 	margin-top: 10px;
-} 
+}
+
+#prodInfo {
+	width: 800px;
+	align: center;
+}
+
+table {
+	width: 60%;
+	height: 100px;
+	margin: auto;
+	text-align: center;
+}
+
+#orderinformation {
+	width: "400px";
+}
 </style>
 
 <script type="text/javascript">
@@ -92,168 +108,208 @@
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar Start	■■■■■■■■■■■■■■■■■■■■-->
-	<body class="goto-here">
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">protected</span> <span>Store</span></p>
-            <font size="7">스토어 상품구매</font>
-          </div>
-        </div>
-      </div>
-    </div>
-	<br/><p/>
+<body class="goto-here">
+	<div class="hero-wrap hero-bread"
+		style="padding-bottom: 30px; padding-top: 60px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p>
+						<span class="mr-2">protected</span> <span>Store</span>
+					</p>
+					<font size="7">스토어 상품구매</font>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<p />
 	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar end■■■■■■■■■■■■■■■■■■■■-->
 
 	<!-- ■■■■■■■■■■■■■■■■■■■■body navigation tag / FORM START■■■■■■■■■■■■■■■■■■■■ -->
 	<section class="ftco-section">
 		<div class="container">
 			<form class="billing-form" name="addForm">
-			
-			
-			
-			
-			
-			
-			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value 시작■■■■■■■■■■■■■■■■■■■■■ -->
-				<input type="hidden" name="prodNo" value="${product.prodNo}" /> 
-				<input type="hidden" name="id" value="${user.id}" />
-			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
-			
-			
-					<!-- ///////////////////////////////////////////////////////// -->
-					
-				<div class="row justify-content-center">
-					<div class="col-xl-8 ftco-animate">
 
-						<!-- ///////////////////////////body navigation tag/////////////////////////// -->
-						<div class="container" id="orderinfo">
-							<input type="hidden" value="${product.prodNo}" />
-							<div class="container">
-								<section id="cart" class="cart">
-									<div class="container">
-										<table id="cart" class="table table-hover table-condensed">
-											<thead>
-												<tr>
-													<th style="width: 50%">상품명</th>
-													<th style="width: 20%">상품가격</th>
-													<th style="width: 15%">&nbsp;수량</th>
-													<th style="width: 10%"></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td data-th="Product">
-														<div class="row">
-															<div class="col-sm-2 hidden-xs">
-																<img
-																	src="../../resources/file/fileShop/${product.mainFile}"
-																	alt="..." class="img-responsive" width="60px"/>
-															</div>
-															<div class="col-sm-10 prod-desc">
-																<h6 class="nomargin">${product.company}</h6>
-																<p>${product.prodName}</p>
-															</div>
+
+
+
+
+
+				<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value 시작■■■■■■■■■■■■■■■■■■■■■ -->
+				<input type="hidden" name="prodNo" value="${product.prodNo}" /> <input
+					type="hidden" name="id" value="${user.id}" />
+				<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
+
+
+				<!-- ///////////////////////////////////////////////////////// -->
+
+
+
+				<!-- ///////////////////////////body navigation tag/////////////////////////// -->
+				<div class="container" id="orderinfo">
+					<input type="hidden" value="${product.prodNo}" />
+					<div class="container">
+						<div class="row" id="orderinformation">
+							<section id="cart" class="cart">
+								<div class="container">
+									<table id="prodInfo" class="table table-hover table-condensed">
+										<thead>
+											<tr>
+												<th>상품명</th>
+												<th>상품가격</th>
+												<th style="width: %">수량</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td data-th="Product">
+													<div class="row">
+														<div class="col-sm-2 hidden-xs">
+															<img
+																src="../../resources/file/fileShop/${product.mainFile}"
+																alt="..." class="img-responsive" width="60px" />
 														</div>
-													</td>
-													<td>${product.discountPrice}</td>
-													<td><input type="number" size="1"name="orderQuantity"
-														class="form-control text-center" value="1" n></td>
-													<td class="actions"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</section>
-							</div>
+														<div class="col-sm-10 prod-desc">
+															<h6 class="nomargin">${product.company}</h6>
+															<p>${product.prodName}</p>
+														</div>
+													</div>
+												</td>
+												<td>${product.discountPrice}</td>
+												<td><input type="number" size="1" name="orderQuantity"
+													class="form-control text-center" value="1" n></td>
+												<td class="actions"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
 						</div>
-						<br />
-						<!--////////////////////////// form tag Start /////////////////////////////////-->
-						<h3 class="mb-4 billing-heading">구매정보를 입력해주세요</h3>
-						<div class="row align-items-end">
-							<br />
+					</div>
+				</div>
+
+
+				<br />
+
+				<!--////////////////////////// form tag Start /////////////////////////////////-->
+				<h3 class="mb-4 billing-heading">구매정보를 입력해주세요</h3>
+				<div class="row align-items-end">
+					<br />
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="firstname">구매회원</label> <input type="text"
+								class="form-control" name="id" id="id" placeholder="상품명을 입력해주세요"
+								value="${sessionScope.user.id }" readonly>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="phone">연락처&nbsp;&nbsp;</label> <input type="text"
+								class="form-control" name="phone"
+								value="${ sessionScope.user.phone }" readonly>
+						</div>
+					</div>
+
+
+
+					<h3 class="mb-4 billing-heading">&nbsp;&nbsp;배송지정보를 입력해주세요</h3>
+					<div class="w-100"></div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="firstname">받는이</label> <input type="text"
+								class="form-control" name="receiverName" id="receiverName"
+								placeholder="배송받는분 이름을 입력해주세요" value="${sessionScope.user.id }"
+								readonly>
+						</div>
+					</div>
+
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="firstname">받는이 연락처</label> <select
+								name="receiverPhone1" id="receiverPhone1">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select> - <input type="text" class="form-control" name="receiverName"
+								id="receiverName" placeholder="배송받는분 이름을 입력해주세요"
+								value="${sessionScope.user.id }" readonly>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="firstname">받는이</label> <select name="receiverPhone1"
+								id="receiverPhone1">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select> - <input type="text" id="receiverPhone2" name="receiverPhone2"
+								placeholder="번호" maxlength="4" style="height: 35px;">
+						</div>
+					</div>
+
+
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<select name="receiverPhone1" id="receiverPhone1">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select> &nbsp;&nbsp; <input type="text" id="receiverPhone2"
+								name="receiverPhone2" placeholder="번호" maxlength="4"
+								style="height: 35px;"> <input type="text"
+								id="receiverPhone3" name="receiverPhone3" placeholder="번호"
+								maxlength="4" style="height: 35px;">
+						</div>
+					</div>
+
+					<div class="w-100"></div>
+					<br />
+					<div class="form-group">
+						<div class="row">
 
 							<div class="col-md-6">
-								<div class="form-group">
-									<label for="firstname">구매회원</label> <input type="text"
-										class="form-control" name="id" id="id"
-										placeholder="상품명을 입력해주세요" value="${sessionScope.user.id }"
-										readonly>
-								</div>
+								<label for="firstname">주소&nbsp;|&nbsp;우편번호</label> <input
+									type="text" class="form-control" id="sample6_postcode"
+									placeholder="번호" style="height: 35px;" readonly
+									name="receiverAddr1">
 							</div>
 
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="phone">연락처&nbsp;&nbsp;</label> <input type="text"
-										class="form-control" name="phone"
-										value="${ sessionScope.user.phone }" readonly>
-								</div>
+							<input type="button" onclick="sample6_execDaumPostcode()"
+								value="우편번호 찾기">
+							<div class="w-100"></div>
+
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="sample6_address"
+									placeholder="주소" readonly name="receiverAddr2">
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"
+									id="sample6_extraAddress" placeholder="참고항목" readonly
+									name="receiverAddr3">
 							</div>
 
-							<div class="w-100"></div>
-							<div class="w-100"></div>
-							<div class="w-100"></div>
-							<br />
 
-							<h3 class="mb-4 billing-heading">&nbsp;&nbsp;배송지정보를 입력해주세요</h3>
-							<div class="w-100"></div>
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="firstname">받는이</label> <input type="text"
-										class="form-control" name="receiverName" id="receiverName"
-										placeholder="배송받는분 이름을 입력해주세요">
-								</div>
-							</div>
-							<br />
-
-							<div class="w-100"></div>
-							<div class="form-group">
-
-								<div class="row">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="receiverPhone1" id="receiverPhone1">
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="016">016</option>
-										<option value="018">018</option>
-										<option value="019">019</option>
-									</select> &nbsp;&nbsp; <input type="text" id="receiverPhone2" name="receiverPhone2"
-										placeholder="번호" maxlength="4" style="height: 35px;">
-									<input type="text" id="receiverPhone3" name="receiverPhone3"
-										placeholder="번호" maxlength="4" style="height: 35px;">
-								</div> 
-							</div>
-
-							<div class="w-100"></div>
-							<br />
-							<div class="form-group">
-							<div class="row">
-								&nbsp;<div class="col-md-8">
-									<label for="firstname">주소&nbsp;|&nbsp;우편번호</label> 
-									<input type="text" class="form-control" id="sample6_postcode"
-										placeholder="번호" style="height: 35px;" readonly name="receiverAddr1">
-								</div>
-								
-								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-								<div class="w-100"></div>
-								&nbsp;<div class="col-sm-4">
-								<input type="text" class="form-control" id="sample6_address" placeholder="주소" style="height: 35px;" readonly
-								name="receiverAddr2">
-								</div>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목"
-										style="height: 35px;" readonly
-										name="receiverAddr3">
-								</div>
-								 <div class="col-sm-8">
-									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" style="height: 35px;"
+							<div class="col-sm-12">
+								<input type="text" class="form-control"
+									id="sample6_detailAddress" placeholder="상세주소"
 									name="receiverAddr4">
-								</div>
-							</div>
 							</div>
 
-							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="firstname">배송요청사항</label> <input type="text"
@@ -276,8 +332,9 @@
 							</div>
 						</div>
 						<p align="center">
-						<button class="btn btn-default" id="addproduct">등록하기</button>
-							&nbsp;<button class="btn btn-default" id="#">취소하기</button>
+							<button class="btn btn-default" id="addproduct">등록하기</button>
+							&nbsp;
+							<button class="btn btn-default" id="#">취소하기</button>
 						</p>
 
 						<!-- ////////////////////////////form tag end //////////////////////////////-->
@@ -354,40 +411,37 @@
 				$("#total").text(total);
 			});
 		});
-		
-		
+
 		//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ IM PORT START ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
-		
-// 		IMP.init('imp32437611'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		
-// 		IMP.request_pay({
-// 		    pg : 'inicis', // version 1.1.0부터 지원.
-// 		    pay_method : 'card',
-// 		    merchant_uid : 'merchant_' + new Date().getTime(),
-// 		    name : ':결제테스트',
-// 		    amount : 14000,
-// /*		    buyer_email : 'iamport@siot.do',
-// 		    buyer_name : '구매자이름',
-// 		    buyer_tel : '010-1234-5678',
-// 		    buyer_addr : '서울특별시 강남구 삼성동',*/
-// 		    buyer_postcode : '123-456',
-// 		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-// 		}, function(rsp) {
-// 		    if ( rsp.success ) {
-// /*		        var msg = '결제가 완료되었습니다.';
-// 		        msg += '고유ID : ' + rsp.imp_uid;
-// 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-// 		        msg += '결제 금액 : ' + rsp.paid_amount;
-// 		        msg += '카드 승인번호 : ' + rsp.apply_num; */
-// 		    } else {
-// 		        var msg = '결제에 실패하였습니다.';
-// 		        msg += '에러내용 : ' + rsp.error_msg;
-// 		    }
-// 		    alert(msg);
-// 		});
+
+		// 		IMP.init('imp32437611'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+		// 		IMP.request_pay({
+		// 		    pg : 'inicis', // version 1.1.0부터 지원.
+		// 		    pay_method : 'card',
+		// 		    merchant_uid : 'merchant_' + new Date().getTime(),
+		// 		    name : ':결제테스트',
+		// 		    amount : 14000,
+		// /*		    buyer_email : 'iamport@siot.do',
+		// 		    buyer_name : '구매자이름',
+		// 		    buyer_tel : '010-1234-5678',
+		// 		    buyer_addr : '서울특별시 강남구 삼성동',*/
+		// 		    buyer_postcode : '123-456',
+		// 		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		// 		}, function(rsp) {
+		// 		    if ( rsp.success ) {
+		// /*		        var msg = '결제가 완료되었습니다.';
+		// 		        msg += '고유ID : ' + rsp.imp_uid;
+		// 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		// 		        msg += '결제 금액 : ' + rsp.paid_amount;
+		// 		        msg += '카드 승인번호 : ' + rsp.apply_num; */
+		// 		    } else {
+		// 		        var msg = '결제에 실패하였습니다.';
+		// 		        msg += '에러내용 : ' + rsp.error_msg;
+		// 		    }
+		// 		    alert(msg);
+		// 		});
 	</script>
-
-
 </body>
 </html>
 

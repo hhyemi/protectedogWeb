@@ -42,18 +42,25 @@
 <style>
 .img-fluid {
 	padding-top: 10%;
-	min-height: 220px;
-	max-height: 220px;
+	min-height: 240px;
+	max-height: 240px;
 	overflow: auto;
 	max-width: 250px;
 	min-width: 250px;
 }
 
 .card {
-	min-height: 400px;
-	max-height: 400px;
+	min-height: 450px;
+	max-height: 450px;
 	overflow: auto;
 }
+
+.detailtext {
+	min-height: 80px;
+	max-height: 80px;
+}
+
+
 </style>
 
 
@@ -113,28 +120,8 @@
 						</c:if>
 					</div>
 
-					<form class="form-inline" name="detailForm">
-						<div class="form-group">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
-								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>가격</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">검색어</label> <input
-								type="text" class="form-control searchKeyword" id="searchKeyword"
-								name="searchKeyword" placeholder="검색어"
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
-								<span class="fas fa-search"></span>
-							</button>
-						</div>
-						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form><br/>
 
-					&nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> 주문상품
+					<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> 주문상품
 						조회&nbsp;&nbsp;<img src="/resources/file/fileShop/order.png"
 						width="20px">
 					</a>
@@ -144,6 +131,30 @@
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
+		
+					<form class="form-inline" name="detailForm">
+						<div class="form-group">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>가격</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="searchKeyword">검색어</label> <input
+								type="text" class="form-control searchKeyword"
+								id="searchKeyword" name="searchKeyword" placeholder="검색어"
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit"
+								class="btn btn-default searchSubmmit">
+								<span class="fas fa-search"></span>
+							</button>
+						</div>
+						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
@@ -154,8 +165,10 @@
 										src="../../resources/file/fileShop/${product.mainFile}" alt="">
 										<input type="hidden" value="${product.prodNo}" /></a>
 									<div class="card-body text-center">
-										<div class="card-title">
-											<a href="#">${product.prodName} </a>
+										<div class="detailtext">
+											<div class="card-title">
+												<a href="#">${product.prodName} </a>
+											</div>
 										</div>
 										<del>
 											<fmt:formatNumber value="${product.price}" pattern="#,###" />
@@ -163,6 +176,7 @@
 										<strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${product.discountPrice}" pattern="#,###" />원
 										</strong>
+
 										<div class="cart-icon text-center">
 											<a class="detailprod"><i class="fa fa-cart-plus"></i>
 												상세보기 <input type="hidden" value="${product.prodNo}" /></a>
@@ -173,17 +187,19 @@
 								</div>
 							</div>
 						</c:forEach>
+
+						
+						</div>
+						
+						<div align="center">
+							<jsp:include page="/common/pageNavigator.jsp" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- <div class="row my-4">-->
-	<!-- PageNavigation Start... -->
-	
-	<jsp:include page="../../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
+
 
 	<!--====================================================
                       FOOTER
@@ -193,7 +209,7 @@
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<!-- footer End /////////////////////////////////////-->
 	<!--================ End footer Area  =================-->
-	
+
 
 
 	<script type="text/javascript">
@@ -226,16 +242,6 @@
 								"/product/getProduct?prodNo="
 										+ $(this).children("input").val());
 					});
-		});
-
-		$(function() {
-
-			$("td.ct_btn01:contains('장바구니로 이동')").on("click", function() {
-				//alert("");
-				self.location = "/shop/addCart?prodNo=${param.prodNo}"
-
-			});
-
 		});
 
 		// 카테고리 bind
@@ -285,16 +291,15 @@
 			});
 
 		});
-		
-		//■■■■■■■■■■■■■■■■■■■■SEARCH■■■■■■■■■■■■■■■■■■■■
-		
-		
-	function fncGetList(currentPage) {
-		$("#currentPage").val(currentPage)
 
-		$("form").attr("method", "POST").attr("action","/product/listProduct").submit();
-	}
-		
+		//■■■■■■■■■■■■■■■■■■■■SEARCH■■■■■■■■■■■■■■■■■■■■
+
+		function fncGetList(currentPage) {
+			$("#currentPage").val(currentPage)
+
+			$("form").attr("method", "POST").attr("action",
+					"/product/listProduct").submit();
+		}
 	</script>
 </body>
 

@@ -17,6 +17,7 @@ import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
+import org.protectedog.service.recomment.ReCommentService;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,6 +45,11 @@ public class MarketController {
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
+	
+	
+	@Autowired
+	@Qualifier("reCommentServiceImpl")
+	private ReCommentService reCommentService;
 	
 
 
@@ -193,14 +199,44 @@ public class MarketController {
 		//조회수
 		boardService.updateViewCount(board);
 		
+		//코멘트 페이지 사이즈
+		search.setPageSize(5);
+		// Search 디버깅
+		System.out.println(" listInfo search : " + search);
+				
+		
 	
 		Map<String, Object> filePost = new HashMap<String, Object>();
 				filePost.put("boardCode", MK);
 				filePost.put("postNo", postNo);
 				List<FileDog> file = fileService.getFile(filePost);
+				
+		// 댓글 불러오기
+		Map<String, Object> map = commentService.listComment(postNo, search);
+		// 대댓글 불러오기
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("postNo",postNo);
+		searchMap.put("startRowNum",search.getStartRowNum());
+		searchMap.put("endRowNum",search.getEndRowNum());
+		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap);
 
+		// 페이징 
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
+				
+		// 페이지 디버깅
+		System.out.println(resultPage);
+		
+		
+		// 댓글 디버깅
+		System.out.println(" getInfo listComment : " +map.get("list"));
+		System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
+		System.out.println(" getInfo totalCount : " +map.get("totalCount"));
+			
 		model.addAttribute("file", file);
 		model.addAttribute("board", board);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("relist", reCommmetMap.get("list"));
+		model.addAttribute("totalCount", map.get("totalCount"));
 
 		return "forward:/shop/market/getMarket.jsp";
 		
@@ -222,6 +258,9 @@ public class MarketController {
 
 			model.addAttribute("board", board);
 			model.addAttribute("file", file);
+			
+			//댓글
+			
 			
 			System.out.println("update GET 진입/////////////////////");
 

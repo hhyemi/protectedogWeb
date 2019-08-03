@@ -13,6 +13,9 @@
 			href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+
 			    <title>보호할개 · 후원하기</title>
 		<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 		    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
