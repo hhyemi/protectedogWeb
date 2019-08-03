@@ -35,15 +35,11 @@
 					//fncAddProduct();
 				});
 	});
-
 	//  	$(function() {
-
 	// 		$("#addproduct").on("click", function() {
 	// 			self.location = "/shop/product/addProduct"
 	// 		});
-
 	// 	});
-
 	//============= "취소"  Event 처리 및  연결 =============
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -54,10 +50,8 @@
 			$("form")[0].reset();
 		});
 	});
-
 	function fncAddProduct() {
 		//Form 유효성 검증
-
 		// 		var prodName=$("input[name='prodName']").val();
 		// 	 	//var name = document.detailForm.prodName.value;
 		// 	 	var prodDetail=$("input[name='prodDetail']").val();
@@ -66,12 +60,10 @@
 		// 		//var manuDate = document.detailForm.manuDate.value;
 		// 		var price=$("input[name='price']").val();
 		// 		//var price = document.detailForm.price.value;
-
 		// 		if(prodName == null || prodName.length<1){
 		// 			alert("상품명은 반드시 입력하여야 합니다.");
 		// 			return;
 		// 		}
-
 		// 		if(manuDate == null || manuDate.length<1){
 		// 			alert("제조일자는 반드시 입력하셔야 합니다.");
 		// 			return;
@@ -80,7 +72,6 @@
 		// 			alert("가격은 반드시 입력하셔야 합니다.");
 		// 			return;
 		// 		}
-
 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 	}
 </script>
@@ -218,7 +209,7 @@
 										<option value="016">016</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-									</select> &nbsp;&nbsp; <input type="text" id="receiverPhone2" name="receiverPhone2"
+									</select> &nbsp;&nbsp; <div class="col-md-8"><input type="text" id="receiverPhone2" name="receiverPhone2"
 										placeholder="번호" maxlength="4" style="height: 35px;">
 									<input type="text" id="receiverPhone3" name="receiverPhone3"
 										placeholder="번호" maxlength="4" style="height: 35px;">
@@ -295,19 +286,16 @@
 					{
 						oncomplete : function(data) {
 							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 							var addr = ''; // 주소 변수
 							var extraAddr = ''; // 참고항목 변수
-
 							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 								addr = data.roadAddress;
 							} else { // 사용자가 지번 주소를 선택했을 경우(J)
 								addr = data.jibunAddress;
 							}
-
 							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
 							if (data.userSelectedType === 'R') {
 								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -329,11 +317,9 @@
 								}
 								// 조합된 참고항목을 해당 필드에 넣는다.
 								document.getElementById("sample6_extraAddress").value = extraAddr;
-
 							} else {
 								document.getElementById("sample6_extraAddress").value = '';
 							}
-
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('sample6_postcode').value = data.zonecode;
 							document.getElementById("sample6_address").value = addr;
@@ -343,11 +329,9 @@
 						}
 					}).open();
 		}
-
 		//총액 계산 jqury 
 		$(document).ready(function() {
 			const p = $("#price").data('price');
-
 			$("#orderQuantity").change(function() {
 				const q = $(this).find(':selected').data('quantity');
 				const total = p * q;
@@ -390,5 +374,3 @@
 
 </body>
 </html>
-
-
