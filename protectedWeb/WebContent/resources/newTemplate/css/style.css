@@ -1276,7 +1276,9 @@ p {
 ======================================================*/
 
     #comp-offer {
-        padding: 100px 0;
+        padding-top: 70px;
+        padding-left: 50px;
+        padding-right: 50px;
     }
 
     .desc-comp-offer h2,
@@ -1505,7 +1507,7 @@ p {
     }
 
     .service-h-desc {
-        padding: 50px 10px 90px 60px;
+        padding: 80px 30px 50px 40px;
     }
 
     .service-h-desc>h6 {

@@ -269,7 +269,7 @@
 
          return;
       }
-      if(postContent == ''){
+      if(postContent == '' || postContent == null){
 		  swal({
 	           text: "글 내용을 입력해주세요.",
 	           dangerMode: true,
