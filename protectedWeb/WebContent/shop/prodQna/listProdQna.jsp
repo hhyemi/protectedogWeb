@@ -43,31 +43,31 @@ body {
 	border-spacing: 0px;
 }
 
-#postTitle {
-	padding-left: 120px;
-	padding-right: 120px;
-}
+/* #postTitle { */
+/* 	padding-left: 120px; */
+/* 	padding-right: 120px; */
+/* } */
 
-#id {
-	padding-left: 80px;
-	padding-right: 80px;
-}
+/* #id { */
+/* 	padding-left: 80px; */
+/* 	padding-right: 80px; */
+/* } */
 
-#no {
-	padding-left: 50px;
-	padding-right: 50px;
-	font-size: x-small;
+/* #no { */
+/* 	padding-left: 50px; */
+/* 	padding-right: 50px; */
+/* 	font-size: x-small; */
 	
-}
+/* } */
 
-#countfont{
-	font-size: x-small;
-	}
-#boardfont{
-	font-size: x-small;
-	padding-left: 50px;
-	padding-right: 50px;
-	}
+/* #countfont{ */
+/* 	font-size: x-small; */
+/* 	} */
+/* #boardfont{ */
+/* 	font-size: x-small; */
+/* 	padding-left: 50px; */
+/* 	padding-right: 50px; */
+/* 	} */
 
 </style>
 
@@ -125,10 +125,9 @@ body {
 		<h1 align="right">
 			<button
 						class="mdl-button mdl-js-button mdl-button--primary" id="qna">
-						문의하기</button></a>
+						문의하기</button>
 						
-						 <a href="#messageModal" data-toggle="modal" title="Compose" class="btn btn-compose"> 쪽지작성 </a>
-			</small>
+
 		</h1>
 	</div>
 	<BR />
@@ -176,16 +175,16 @@ body {
 		<!--  table Start /////////////////////////////////////-->
 
 		<div class="container" align="center">
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+			<table class="table table-hover table-striped">
 				<thead>
 					<tr align="center">
 					<td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
 				<thead>
 					<tr class="text-center">
 						<th>글번호</th>
-						<th width="10%" id="boardfont">제목</th>
-						<th width="10%" id="boardfont">질문유형</th>
-						<th width="10%" id="boardfont">등록일</th>
+						<th id="boardfont">제목</th>
+						<th id="boardfont">질문유형</th>
+						<th width="20%" id="boardfont">등록일</th>
 
 					</tr>
 				</thead>
@@ -195,8 +194,8 @@ body {
 					<c:set var="i" value="${i+1}" />
 					<tbody>
 					<tr>
-					<td class="mdl-data-table__cell--non-numeric" align="center">${ i }</td>
-					<td	>${board.postTitle}
+					<td class="mdl-data-table__cell--non-numeric">${ i }</td>
+					<td>${board.postTitle}
 					<input type="hidden" name="postNo" value="${board.postNo}" /> 
 					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
 					<td>${board.qnaCode}</td>
@@ -210,7 +209,7 @@ body {
 			<!--  table end /////////////////////////////////////-->
 
 			<input type="hidden" id="currentPage" name="currentPage" value="0" />
-			<jsp:include page="../../common/pageNavigator.jsp" />
+			<jsp:include page="../../common/pageNavigator_new.jsp"/>
 
 		</div>
 	</form>

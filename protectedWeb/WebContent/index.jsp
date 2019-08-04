@@ -31,10 +31,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	-o-background-size: cover;
 	background-size: cover;
 }
-
+/*
 .adopt {
-	height: 20vh;
-	min-height: 100px;
+	height: 10vh;
+	min-height: 300px;
 }
 
 .funding {
@@ -52,8 +52,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 }
 .store
  {height: 20vh;
-  min-height: 300px;}
-  
+  min-height: 300px;}*/
  /* fade in 효과
 .carousel-item{
     animation: fadein 2s;

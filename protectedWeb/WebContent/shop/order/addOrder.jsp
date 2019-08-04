@@ -289,7 +289,7 @@
 							</div>
 						</div>
 						<p align="center">
-						<button class="btn btn-default" id="addproduct">등록하기</button>
+						<button class="btn btn-default" id="addproduct">결제하기</button>
 							&nbsp;<button class="btn btn-default" id="#">취소하기</button>
 						</p>
 
@@ -299,9 +299,91 @@
 			</form>
 		</div>
 	</section>
+	
+	<script type="text/javascript">
+	  $(function() {
+      
+         //============= 후원 Event  처리 =============   
+         $( "#addproduct" ).on("click" , function() {
+        	 AddPayment();
+            });
+         
+         //============= 취소 Event  처리 =============
+          $( "#btn-cancel" ).on("click" , function() {
+               history.go(-1);
+            });
+
+            
+   });   
+	  
+</script>
 
 
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	
+	 
+	 
+	 <script>
+	 function AddPayment(){
+		 
+		 var payment = null;
+		   var fundPay = $('input[name="fundPay"]').val();	
+	       $('input[name="fundPay"]').val(removeCommas($('input[name="fundPay"]').val()));
+	       var fundPay2 = removeCommas($('input[name="fundPay"]').val());
+	       
+		      if(fundPay == null || fundPay.length<1){
+				  swal({
+			           text: "후원금액을 입력해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			 	          $('input[name="fundPay"]').focus();
+			           }
+			      });
+
+		          return;
+		       } 
+
+		      if(fundPay > 3000000){
+				  swal({
+			           text: "후원금액은 300만원이하로 입력해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			 	          $('input[name="fundPay"]').focus();
+			           }
+			      });	    	  
+
+		         return;
+		      }	      
+		      
+		      if(!($('input[name="paymentCode"]').is(':checked'))){
+				  swal({
+			           text: "결제방법을 선택해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      });
+		          return;
+		       }
+	 }
+	
+	</script>
+	
+	
 	<script>
 		function sample6_execDaumPostcode() {
 			new daum.Postcode(

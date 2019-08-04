@@ -165,7 +165,7 @@ select, #searchKeyword {
 
 
 
-
+<div class="container">
 	<section class="ftco-section bg-light"
 		style="padding-bottom: 0px; padding-top: 30px;">
 
@@ -251,8 +251,7 @@ select, #searchKeyword {
 			<input type="hidden" id="boardCode" name="boardCode"
 				value="${board.boardCode}" /> <input type="hidden" id="postNo"
 				name="postNo" value="${board.postNo}" />
-		</form>
-	</section>
+</form></section></div>
 
 
 	<!--====================================================
