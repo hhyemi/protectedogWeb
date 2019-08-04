@@ -36,7 +36,7 @@
 ======================================================-->
 	<div id="home-p" class="home-p pages-head3 text-center">
 		<div class="container">
-			<h1 class="wow fadeInUp" data-wow-delay="0.1s">보호스토어 주문내역</h1>
+			<h1 class="wow fadeInUp" data-wow-delay="0.1s">스토어 주문내역</h1>
 		</div>
 		<!--/end container-->
 	</div>
@@ -78,7 +78,7 @@
 										<div class="col-sm-10 prod-desc">
 											<h6 class="nomargin">
 												<a class="number">  </a>
-												<a class="detailOrder"><br/><b>${order.orderProd.prodName}(${order.orderQuantity})</b><br/>
+												<a class="detailOrder"><br/><b>${order.orderProd.prodName}</b><br/>
 												<input type="hidden" value="${order.orderNo}" /> </a>
 												
 											</h6>
@@ -125,6 +125,9 @@
 			</div>
 		</section>
 	</form>
+	
+		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->
 	<jsp:include page="/layout/footer.jsp" />

@@ -19,7 +19,11 @@
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-
+		.container2{
+		width: 950px;
+		padding-left:170px;
+		font-size :15px;
+		}	
 		.container{
 		width: 1000px;
 		font-size :15px;
@@ -51,16 +55,17 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
+          	<p ><span class="mr-2">support</span> <span>apply</span></p>
             <font size="7">후원이 완료되었습니다.</font><br/> 후원 해주셔서 <strong  style="color:#f04f23">감사</strong>합니다.
           </div>
         </div>
       </div>
     </div>
 		<br/>
-					<!--  table Start /////////////////////////////////////-->
 	 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
 		
+					<!--  table Start /////////////////////////////////////-->
+	<div class="container2">	 
 			      <table class="table table-hover table-striped" >
 			      
 			        <thead>
@@ -80,6 +85,7 @@
 			        </tbody> 
 			      
 			      </table>
+			</div>      
              	  <!--  table End /////////////////////////////////////--> 
 				<br/>
 				
@@ -87,7 +93,7 @@
 		<form id ="uploadForm" class="form-horizontal center">
 		  <div class="form-group  ">
 			<font class="text-center" size="5"><b>후원자&emsp;&emsp;&emsp;</b></font>
-			 ${participate.fundPay }
+			 ${user.userName }
 		  </div>
 		  <div class="form-group ">
 			<font class="text-center" size="5"><b>후원종류&emsp;&emsp;</b></font>
@@ -106,10 +112,15 @@
 			 계좌이체
 			 </c:if>			 
 		  </div>
+		  <div class="form-group ">
+			<font class="text-center" size="5"><b>후원날짜&emsp;&emsp;</b></font>
+			 ${participate.regDate }
+		  </div>		  
 			<br/><hr/>        
 		  <br/><br/>
-		  <div class="form-group ">
-	  			<button type="button"  class="btn btn-default py-3 px-4 col-md-4" id="btn-ok">확인</button>
+		  
+		  <div class="col-md-12 " style=" padding-left: 170px;" >
+	  			<button type="button"  class="btn btn-default py-3 px-4 col-md-12" style="width: 770px;" id="btn-ok">확인</button>
 		  </div>
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>

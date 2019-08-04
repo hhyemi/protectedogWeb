@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
     <style type="text/css">
 	    html {
 	 	 scroll-behavior: smooth;
@@ -34,7 +33,7 @@
   
 <body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -52,7 +51,7 @@
 			<form  action="#" class="billing-form">
 	          	<div class="row align-items-end">
 	          	
-				<input type="hidden" name="id" value="${ apply.id }" >
+<%-- 				<input type="hidden" name="id" value="${ apply.id }" > --%>
 				<input type="hidden" name="statusCode" value="1" >
 				<input type="hidden" name="adoptNo" value="${ apply.adoptNo }" >
 				
@@ -226,8 +225,9 @@
     </section> <!-- .section -->
 
     <jsp:include page="/layout/footer.jsp"></jsp:include>
-    
-    
+   
+
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
   
@@ -524,7 +524,18 @@
     	}
 	
     	
-    	var confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
+    	var confirmHTML =
+//     					'<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">'
+// 					      +'<div class="container">'
+// 					        +'<div class="row no-gutters slider-text align-items-center justify-content-center">'
+// 					          +'<div class="col-md-9 ftco-animate text-center">'
+// 					          	+'<p ><span class="mr-2">Add</span> <span>Adopt</span></p>'
+// 					            +'<font size="7">신청서 확인\</font>'
+// 					          +'</div>'
+// 					        +'</div>'
+// 					      +'</div>'
+// 					    +'</div>'+	 
+    					'<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
 						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
 						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
 						+mateTag

@@ -132,7 +132,11 @@
 														AND STATUS_CODE != 0
 												</if>											 										
 										    </where>
-											ORDER BY POST_NO DESC) inner_table
+										    GROUP BY
+												POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+												VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE 														
+											ORDER BY CASE WHEN (STATUS_CODE != 1) THEN 'STATUS_CODE DESC' ELSE 'POST_NO DESC' END, POST_NO DESC				
+										) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -212,7 +216,11 @@
 												</if>		
 												AND  STATUS_CODE IN (3,4)										
 										    </where>
-											ORDER BY POST_NO DESC ) inner_table
+										    GROUP BY
+												POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+												VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE 														
+											ORDER BY CASE WHEN (STATUS_CODE != 3) THEN 'STATUS_CODE DESC' ELSE 'POST_NO DESC' END, POST_NO DESC				
+											) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>	  

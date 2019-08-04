@@ -170,11 +170,11 @@
       
       <div class="col-md-12"  style="padding-left: 0px;">
       
-      <c:if test="${resultPage.totalCount eq 0 }">
-      	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
+<%--       <c:if test="${resultPage.totalCount eq 0 }"> --%>
+<!--       	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;"> -->
 <!-- 			<font size="4px">검색결과가 없습니다.</font> -->
-		</div>
-      </c:if>
+<!-- 		</div> -->
+<%--       </c:if> --%>
 	
 	  <div class="row"  id="listARJSON">
       <c:set var="i" value="0" />
@@ -219,7 +219,7 @@
  	</div>
  	
  	
- 	
+ 	<jsp:include page="/common/searchResult.jsp"></jsp:include>
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
@@ -394,7 +394,7 @@
 								} else {
 									
 									swal({
-								           text: "후기를 등록하려면 등록한 분양글이 완료상태이거나, "+"입양 신청한 분양글이 완료상태여야 합니다.",
+								           text: "후기를 등록하려면 등록한 분양글이 완료상태이거나, \n입양 신청한 분양글이 완료상태여야 합니다.",
 								           dangerMode: true,
 								           buttons: {
 													 catch: {
@@ -491,16 +491,16 @@
 			$("form").attr("method" , "POST").attr("action" , "/adoptReview/listAdoptReview").submit();
 		}
 		
-		if ( $('#totalCount').val() == 0){
-			$('#searchEmpty').html( 
-// 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
-					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
-					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
-            		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
-            		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
-            		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
-			);
-		}
+// 		if ( $('#totalCount').val() == 0){
+// 			$('#searchEmpty').html( 
+// // 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+// 					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+// 					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+//             		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+//             		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+//             		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+// 			);
+// 		}
 		
 	
 	</script>

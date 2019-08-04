@@ -96,10 +96,13 @@ public class ApplyController {
 	
 	// 신청 등록하고 다시 분양글 상세조회로
 	@RequestMapping( value="addApply", method=RequestMethod.POST )
-	public String addApply( @ModelAttribute("apply") Apply apply, Model model ) throws Exception {
+	public String addApply( @ModelAttribute("apply") Apply apply, HttpSession session, Model model ) throws Exception {
 
 		System.out.println("/apply/addApply : POST");
-
+		
+		apply.setId(((User)session.getAttribute("user")).getId());
+		apply.setNickname(((User)session.getAttribute("user")).getNickname());
+		
 		applyService.addApply(apply);
 		Adopt adopt = adoptService.getAdopt(apply.getAdoptNo());
 		adopt.setStatusCode("2");

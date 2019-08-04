@@ -10,51 +10,29 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
+		    <title>보호할개 · 후원신청</title>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
+	
+	<!-- ckeditor 사용 CSS-->
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
 
-	<!-- Bootstrap Dropdown Hover CSS -->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-    <!-- jQuery UI toolTip 사용 CSS-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- jQuery UI toolTip 사용 JS-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
-    <!-- ckeditor 사용 CSS-->   
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
-    
-    	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	   #btn-add{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
-		#btn-cancel{
-		background: #fff;
-        border:2px solid #29304d;
-		color:#29304d;
-		height:40px;
-		width:150px;
-		}
 		.container{
 		width: 1000px;
 		font-size :15px;
 		}		
+		.container2{
+		width: 950px;
+		padding-left:170px;
+		font-size :15px;
+		}			
 		.form-group{
 		padding-left:170px;
 		padding-right:100px;
@@ -63,13 +41,13 @@
 	    padding-left:15px;	
 		}
 		.ck.ck-editor {
-			max-width: 700px;
+			max-width: 780px;
 		}
 		
 		.ck-editor__editable {
 			text-align: left;
 			min-height: 300px;
-			max-width: 700px;
+			max-width: 780px;
 		}			
 		@font-face{
           font-family: NanumSquare;
@@ -80,27 +58,35 @@
        }
     </style>
 
-	</head>
-	<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
+	</head>
+	<body>
       
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container ">
-		<div class="form-group">
-		<div class="page-header text-center">	
-		<font size=6>후원 후기 등록 </font>  후기를 <strong style="color:#225cba">상세하게</strong> 작성해주세요.
-	    </div>		
-		</div>	
+	<div class="container " >
+
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2">support</span> <span>review</span></p>
+	            <font size="7">후원후기등록</font><br/> 후기를 <strong style="color: #f04f23">상세하게</strong>작성해주세요.
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		<br/><p/>	
 					<!--  table Start /////////////////////////////////////-->
+					<div class="container2">
 			      <table class="table table-hover table-striped" >
 			      
 			        <thead>
 			          <tr>
-			            <th ></th>
-			            <th><b>후원글 제목</b></th>
-			            <th><b>닉네임</b></th>	
+			            <th width="150px;"></th>
+			            <th width="150px;"><b>후원글 제목</b></th>
+			            <th width="150px;"><b>닉네임</b></th>	
 			          </tr>
 			        </thead>
 			       
@@ -113,21 +99,22 @@
 			        </tbody> 
 			  
 			      </table>
+			      </div>
              	  <!--  table End /////////////////////////////////////--> 	
              	  <br/>	
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 
 		  <div class="form-group">
-			<h3><b>후기제목</b></h3><p/>		
+			<h6><b>글 제목</b></h6><p/>		
 		    <div class=>
-		      <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:780px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h3><b>후기내용</b></h3><p/>			
-			    <div class=>
+			<h6><b>글 내용</b></h6><p/>			
+			    <div >
 			   <textarea id="editor" name="reviewContent" style="text-align: left;" placeholder="내용을 입력해주세요." >
 					
 					</textarea>
@@ -136,22 +123,34 @@
 			<br/>
             <!-- 첨부 버튼 -->
             <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
+                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞 이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.)
                 <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
             </div>
            <br/>
             
+            
             <!-- 미리보기 영역 -->
             <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
-            </div>
+       		<div class="row">
+            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
+
+            </div></div></div>
 
         
 		  <br/><br/>
-		  <div class="form-group text-center">
-	  			<button type="button" id="btn-add">등록</button>
-	  			<button type="button" id="btn-cancel">취소</button>
-		  </div>
+		  
+	          	<div class="col-md-12" style="padding-left:170px;padding-right: 160px">
+	          	
+					<p><button  type="button" class="btn btn-default py-3 px-4 col-md-12" id="btn-add">등록</button></p>
+					<div>
+						<div class="col-md-12">
+							<div  align="right">
+								<p><a href="#" ><font color="gray" id="btn-cancel">뒤로</font></a></p>
+							</div>
+						</div>
+					</div>
+					
+	          </div>
           <input type="hidden" class="form-control" id="postNo" name="postNo" value="${funding.postNo }" >		  
 		  <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -173,22 +172,23 @@
    function fncAddReview(){
       
       //Form 유효성 검증
+      $('textarea').val(editor.getData());
       var reviewTitle = $('input[name="reviewTitle"]').val();
-      var postContent = $('input[name="reviewContent"]').val();
+      var reviewContent = $('textarea').val()
       var file = $("#multiFile").val();    
       
       if(reviewTitle == null || reviewTitle.length<1){
-         alert("글제목은 반드시 입력하여야 합니다.");
+    	  swal("글제목을 입력해주세요.");
          $('input[name="reviewTitle"]').focus();
          return;
       }
-/*       if(postContent == null || postContent.length<1){
-         alert("글내용은 반드시 입력하셔야 합니다.");
-         $('input[name="postContent"]').focus();
-         return;
-      } */
+      if(reviewContent == ''){
+    	  swal("글내용을 입력해주세요.");
+	         $(".ck-editor__editable").focus();
+	         return;
+	      }
       if(file == null || file.length<1){
-         alert("파일은 반드시 입력하셔야 합니다.");
+    	  swal("사진을 1개이상 입력해주세요.");
          return;
       }
 
@@ -292,19 +292,19 @@
                      
                      var imgNum = previewIndex++;
                      
-                    //8장 이상 업로드시
-                     if(Object.keys(files).length>=8){
-                        alert("사진은 8장까지만 업로드 가능합니다.");
+                    //10장 이상 업로드시
+                     if(Object.keys(files).length>=10){
+                        alert("사진은 10장까지만 업로드 가능합니다.");
                         delete files[imgNum];
                      }else{
-               // 8장 이하 
+               // 10장 이하 
                      $("#preview").append(
-                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:155px;padding-top:7px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"145px;\" height=\"130px;\"/>"
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   삭제" + "</span>" + "</div>");
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;

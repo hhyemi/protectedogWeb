@@ -39,6 +39,7 @@
         	position: relative;
         	height: 450px;
         	display: flex;
+        	padding-left: 30px !important;
          	padding-right: 0px !important;
         }
         .card_area{
@@ -48,7 +49,9 @@
         	width: wrap !important;
         	padding-right: 0px !important;
         }
-        
+        p {
+        	margin-bottom: 0px !important;
+        }
         #appendTr>td{
         	align: letf;
         	word-break: break-all;	
@@ -66,7 +69,7 @@
         	vertical-align: middle;
         }
 		
-		.col-md-2 {
+		.col-md-4, .col-md-8 {
 			padding-right: 0px !important;
 		}
  		
@@ -103,7 +106,17 @@
           	padding-bottom: 5px  !important; 
          }
 
-	
+		.fc-title{
+			width: wrap !important;
+			white-space:nowrap;
+			display:block;
+		/* 	white-space: pre-line; */
+			font-weight: 1000 !important;
+			font-size: 12px !important;
+			text-overflow: ellipsis !important;
+		/* 	word-wrap: break-word; */
+		/* 	display: block; */
+		}
         
 
     </style>
@@ -116,23 +129,23 @@
 
     
     
-    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-             <p ><span class="mr-2">Get</span> <span>Adopt</span></p>
-            <font size="7">분양상세조회</font>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--     <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;"> -->
+<!--       <div class="container"> -->
+<!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!--           <div class="col-md-9 ftco-animate text-center"> -->
+<!--              <p ><span class="mr-2">Get</span> <span>Adopt</span></p> -->
+<!--             <font size="7">분양상세조회</font> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
 
 
     <!--================Single Product Area =================-->
     
     <div class="product_image_area">
       <div class="container">
-      <div class="col-md-12"><hr/><br/></div>
+      <div class="col-md-12"><hr/><br/>작성일 ${adopt.regDate }</div>
         <div class="row s_product_inner col-md-12">
         
           <div class="col-lg-6">
@@ -182,7 +195,7 @@
               </div>
 <!--             </div> -->
           </div>
-          <div class="col-lg-6 offset-lg-1">
+          <div class="col-lg-6 offset-lg-1" >
             <div class="s_product_text">
             
 <%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
@@ -197,13 +210,14 @@
               	
 <!--                 <li> -->
                    	<div class="row" style="position:relative;height:35px;">
-			        	<div class="col-xs-11 col-md-11" style="position:absolute;height:35px; left:0px; bottom:0px;" >
+			        	<div class="col-xs-10 col-md-10" style="position:absolute;height:35px; left:0px; bottom:0px;" >
 			        		<font id="title" size="5px"><strong>${adopt.postTitle}</strong></font>
-<%-- 			        	&nbsp;&nbsp;${adopt.id} --%>
+			        	&nbsp;&nbsp;${adopt.id}
 			        	</div>
 			        	
 			        	<c:if test="${ user.id ne adopt.id }">
-				        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-left: 0;" >
+				        	<div class="col-xs-2 col-md-2" style="position:absolute;height:35px; right:0px; bottom:0px;padding-right:15px;padding-left: 0;" >
+								<p align="right">
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' }">
 										<span class="fas fa-heart"></span>
@@ -211,7 +225,7 @@
 									<c:if test="${ check ne 'already' }">
 										<span class="far fa-heart"></span>
 									</c:if>
-								</font>
+								</font></p>
 				        	</div>
 			        	</c:if>
 
@@ -221,13 +235,13 @@
                 <hr/>
               	
 <!--                 <li> -->
-                   	<div class="row">
-				  		<div class="col-md-2 " ><font size="4px"><strong>작성자</strong></font></div>
-						<div class="col-md-4 "><font size="4px">${adopt.id}</font></div>
+<!--                    	<div class="row"> -->
+<!-- 				  		<div class="col-md-2 " ><font size="4px"><strong>작성자</strong></font></div> -->
+<%-- 						<div class="col-md-4 "><font size="4px">${adopt.nickname}</font></div> --%>
 						
-						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>작성일자</strong></font></div>
-						<div class="col-md-4 "><font size="4px">${adopt.regDate}</font></div>
-					</div>
+<!-- 						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>작성일자</strong></font></div> -->
+<%-- 						<div class="col-md-4 "><font size="4px">${adopt.regDate}</font></div> --%>
+<!-- 					</div> -->
                    	<div class="row">
 				  		<div class="col-md-2 " ><font size="4px"><strong>견종</strong></font></div>
 						<div class="col-md-4 "><font size="4px">${adopt.dogBreed}</font></div>
@@ -252,7 +266,7 @@
 				  		<div class="col-md-2 "><font size="4px"><strong>책임비</font></strong></div>
 						<div class="col-md-4 "><font size="4px"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일자</font></strong></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일</font></strong></div>
 						<div class="col-md-4"><font size="4px">${adopt.dogDate}</font></div>
 					</div>
 
@@ -288,26 +302,34 @@
            		</c:if>
            		
            		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
-           			<button class="btn btn-default" style="width: 260px" id="confirmButton">신청서확인</button>
+           			<button class="btn btn-default" style="width: 260px" id="confirmButton" data-toggle="modal" data-target="#applyModal">신청서확인</button>
            			<button class="btn btn-default" style="width: 260px" id="adoptCompleteButton">분양완료</button>
            		</c:if>
            		
            		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-           			<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+           			<button class="btn btn-default" id="noApply" style="width: 517px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
            		</c:if>
 
              	
 				<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
-               		<button class="btn btn-default" style="width: 260px">문의하기</button>
+<!--                		<button class="btn btn-default" style="width: 260px">문의하기</button> -->
+               		<button class="btn btn-default" style="width: 260px" data-toggle="modal" data-target="#messageModal">문의하기</button>
 <!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
                	</c:if>
                	
               	<c:if test="${adopt.statusCode eq '3'}">
-               		<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">완료된 글입니다.</button>
+               		<button class="btn btn-default" id="noApply" style="width: 517px;" id="confirmButton">완료된 글입니다.</button>
                	</c:if>
               	
               </div>
+              <div class="col-md-12" style="padding-top: 10px;">
+	              <div align="right">
+			            <a href="javascript:void(0);" id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+			            <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+			            <a href="javascript:void(0);" id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+			      </div>
+		      </div>
  			</div>
  			
  			
@@ -334,7 +356,7 @@
 		  		<input type="hidden" class="form-control" id="areaKr" name="areaKr" value="${adopt.areaKr}">
 <%-- 				<div><font size="4px" id="areaKr">${adopt.areaKr }</font></div><br/> --%>
 			</c:if>
-			
+			<br/>
 	  		<font size="4px"><strong>발견위치</strong></font><br/>
 	  		<div id="map" style="width: wrap; height: 300px;"  align="center"></div>
 	  		<input type="hidden" class="form-control" id="location" name="location" value="${adopt.location}">
@@ -344,11 +366,7 @@
         
         </div>
 
-		<div align="center">
-            <a href="javascript:void(0);" id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-            <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-            <a href="javascript:void(0);" id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-        </div>
+		
 		
 		
         <div class="col-md-12"><hr/></div>
@@ -371,30 +389,46 @@
     <!--================End Single Product Area =================-->
     
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
-   
-
-			
-			<div id="dialog-message" title="">
-			  <p align="center"><br/>
-			  	<form name="message">
-				  	<input type="hidden" name="senderId" value="${ sessionScope.user.id }"/>
-					<input type="hidden" name="messageStatus" value="0"/>
-					<input type="hidden" name="delCode" value="0"/>
-					
-					<div class="col-md-12">
-						받는이 <input type="text"/>
-					</div>
-					
-				</form>
-			  </p>
-			</div>  
+  
 			
 			<div id="dialog-listApply" title="">
 <!-- 			  <p id="listJSON"></p> -->
 			</div> 
 			
+			
+			
+			
+	<div id="applyModal" class="modal modal-top fade calendar-modal" >
 
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 30px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2">Add</span> <span>Missing</span></p>
+	            <font size="7">
+	            	신청서 확인
+	            </font>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 
+        <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;"></div>
+        
+        <div class="modal-footer">
+<!--           <button type="button" class="btn btn-default" ></button> -->
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>        
+        </div>
+        
+    </div>
+  </div>
+</div>
+			
+			
+
+	<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
   
     <!--================End Product Description Area =================-->
@@ -435,6 +469,7 @@
       var infowindowArea1;
       var infowindowArea2;
       var infowindowArea3;
+      var infowindowArea = [];
       
       var locaKr = $('#locaKr').val().trim();
       var areaKr = $('#areaKr').val().trim();
@@ -480,6 +515,13 @@
 		});
 	    
 	    var aaa = "";
+	    infowindowArea1 = new google.maps.InfoWindow();
+	    infowindowArea2 = new google.maps.InfoWindow();
+	    infowindowArea3 = new google.maps.InfoWindow();
+	    infowindowArea.push(infowindowArea1);
+	    infowindowArea.push(infowindowArea2);
+	    infowindowArea.push(infowindowArea3);
+	    
 	    for ( i=0; i<arrayTest.length; i++){
 	    	
 		    markerArea= arrayMark[i];
@@ -489,12 +531,18 @@
 		    			lng: parseFloat(arrayTest[i].substring( arrayTest[i].indexOf(",")+1, arrayTest[i].length )) },
 		        map: mapArea
 		    });
-  		 	
-	    }//$('#pop').text(aaa);
+		    
+		    if (  arrayTest.length == 1   ){
+		    	infowindowArea1.setContent(areaKr);
+	    		infowindowArea1.open(map, markerArea);
+		    } else {
+	    		infowindowArea[i].setContent(areaKr.split(",")[i]);
+	    		infowindowArea[i].open(map, markerArea);
+		    }
+		 
+	    }
 		
-	    infowindowArea1 = new google.maps.InfoWindow();
-	    infowindowArea2 = new google.maps.InfoWindow();
-	    infowindowArea3 = new google.maps.InfoWindow();
+  
 	    
       }
       
@@ -537,13 +585,27 @@
 	  
 	  		if ( id == "" ){
 	  			
-	  			swal({
-			           text: "회원만 이용할 수 있는 기능입니다.",
-			           dangerMode: true,
-			           buttons: {
-								 cancel: "닫기",
-					   }
-	  			});
+// 	  			swal({
+// 			           text: "회원만 이용할 수 있는 기능입니다.",
+// 			           dangerMode: true,
+// 			           buttons: {
+// 								 cancel: "닫기",
+// 					   }
+// 	  			});
+	  			
+		              swal({
+		                   title: "회원만 이용할 수 있는 기능입니다.",
+// 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+		                   icon: "warning",
+		                   buttons: ["닫기", "로그인"],
+		                   dangerMode: true     
+		                 })
+		               .then((willDelete) => {
+		                   if (willDelete) {
+// 		                        self.location = "/users/addUsersAddition.jsp"
+		                        }
+		      		  });
+	  			
 	  			return;
 	  			
 	  		}else{
@@ -722,7 +784,7 @@
 										        +'<thead>'
 										        	+'<tr>'
 											            +'<th style="width: 15%"><p align="center" text-weight="bold"><b>No</b></p></th>'
-											            +'<th style="width: 55%"><p align="center"><b>신청자 ID</b></p></th>'
+											            +'<th style="width: 55%"><p align="center"><b>신청자</b></p></th>'
 											            +'<th style="width: 30%"><p align="center"><b>신청일자</b></p></th>' 
 									           		+'</tr>'
 									            +'</thead>'
@@ -730,10 +792,10 @@
 					            
 							for( i=0; i<data.list.length; i++ ){
 		 						displayValue += 
-							            		'<tr class="trApplyNo" id="'+data.list[i].applyNo+'">'
+							            		'<tr class="trApplyNo" id="'+data.list[i].applyNo+'" name="'+data.list[i].applyNo+'">'
 							            			+'<input type="hidden" name="inputApplyNo" value="'+data.list[i].applyNo+'">'
 								            		+'<td align="center"><p>'+(i+1)+'</p></td>'
-								            		+'<td align="center"><p>'+data.list[i].id+'</p></td>'
+								            		+'<td align="center"><p>'+data.list[i].nickname+"("+data.list[i].id+')</p></td>'
 								            		+'<td align="center"><p>'+data.list[i].regDate+'</p></td>'
 							            		+'</tr>';	
 							            		
@@ -743,17 +805,31 @@
 							
 							if ( str == '확인' ) {
 								
-								$( "#dialog-listApply" ).html(displayValue);
-								$( '#dialog-listApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-								$( "#dialog-listApply" ).dialog( "open" );
+								$( ".modal-body" ).html(displayValue);
+// 								$( "#dialog-listApply" ).html(displayValue);
+// 								$( '#dialog-listApply' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 								$( "#dialog-listApply" ).dialog( "open" );
 								
 							} else if ( str == '' ){
 								//로그인 안했을때
-								if ( id == '' || lv == '미인증회원' ) {
-									swal({
-								           text: "인증회원만 신청할 수 있습니다.",
-								           buttons: "닫기",
-								    });
+								if(id == '' || lv == '미인증회원'){
+						              swal({
+						                   title: "인증회원만 작성 가능합니다.",
+						                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+						                   icon: "warning",
+						                   buttons: ["닫기", "인증하기"],
+						                   dangerMode: true     
+						                 })
+						               .then((willDelete) => {
+						                   if (willDelete) {
+						                        self.location = "/users/addUsersAddition.jsp"
+						                        }
+						      		  });   
+// 								if ( id == '' || lv == '미인증회원' ) {
+// 									swal({
+// 								           text: "인증회원만 신청할 수 있습니다.",
+// 								           buttons: "닫기",
+// 								    });
 
 								//받아온 데이터에 아이디가 있을때	
 								} else if ( displayValue.indexOf(id) != -1 ) {
@@ -801,36 +877,89 @@
 									"Content-Type" : "application/json"
 								  },
 						success : function(data , status) {
-								console.log(JSON.stringify(data));
-								console.log(data.raise);
+// 								console.log(JSON.stringify(data));
+// 								console.log(data.raise);
 								
 								var mateTag = '';
 								var curTag = '';
 								
 								if ( data.mate == '있음') {
-									mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree;
+									mateTag = '<div class="row">'
+											  		+'<div class="col-md-4  "><strong>동의 여부</strong></div>'
+													+'<div class="col-md-8 ">'+data.mateAgree+'</div>'
+											 +'</div>';
+// 										'<br\/><strong>[동의 여부]<\/strong> : '+data.mateAgree;
 								}
 								if ( data.raise == '있음') {
-									curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently;
+									curTag =  '<div class="row">'
+											  		+'<div class="col-md-4  "><strong>현재 양육 여부</strong></div>'
+													+'<div class="col-md-8 ">'+data.currently+'</div>'
+											 +'</div>';
+										
+// 										'<br\/><strong>[현재 양육 여부]<\/strong> : '+data.currently;
 								}
 								
 								
-								var displayValue = 	 '<p><strong>[연락처]<\/strong> : '+data.phone
-													+'<br\/><strong>[직업]<\/strong> : '+data.job
-													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
-													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
-													+mateTag
-													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
-													+curTag
-													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
-													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
-													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
-													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
+								var displayValue = 	 
+									
+									'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>연락처</strong></div>'
+										+'<div class="col-md-8 ">'+data.phone+'</div>'
+									+'</div>'
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>직업</strong></div>'
+										+'<div class="col-md-8 ">'+data.job+'</div>'
+									+'</div>'
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>거주지 유형</strong></div>'
+										+'<div class="col-md-8 ">'+data.addr+'</div>'
+									+'</div>'
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>동거인 여부</strong></div>'
+										+'<div class="col-md-8 ">'+data.mate+'</div>'
+									+'</div>'
+									+mateTag
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>양육경험</strong></div>'
+										+'<div class="col-md-8 ">'+data.raise+'</div>'
+									+'</div>'
+									+curTag
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>앞으로의 계획</strong></div>'
+										+'<div class="col-md-8 ">'+data.plan+'</div>'
+									+'</div>'
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>1년 예상비용</strong></div>'
+										+'<div class="col-md-8 ">'+data.pay+'</div>'
+									+'</div>'
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>입양신청 이유</strong></div>'
+										+'<div class="col-md-8 ">'+data.reason+'</div>'
+									+'</div>'
+									+'<div class="row">'
+								  		+'<div class="col-md-4  "><strong>상황에 따른 대처</strong></div>'
+										+'<div class="col-md-8 ">'+data.situation+'\</div>'
+									+'</div>';
+// 													'<p><strong>[연락처]<\/strong> : '+data.phone
+// 													+'<br\/><strong>[직업]<\/strong> : '+data.job
+// 													+'<br\/><strong>[거주지 유형]<\/strong> : '+data.addr
+// 													+'<br\/><strong>[동거인 여부]<\/strong> : '+data.mate
+// 													+mateTag
+// 													+'<br\/><strong>[양육경험]<\/strong> : '+data.raise
+// 													+curTag
+// 													+'<br\/><strong>[앞으로의 계획]<\/strong> : '+data.plan
+// 													+'<br\/><strong>[1년 예상비용]<\/strong> : '+data.pay
+// 													+'<br\/><strong>[입양신청 이유]<\/strong> : '+data.reason
+// 													+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+data.situation +"</p>";
 								
-								console.log("-----"+displayValue);
-								
-				 				$('#'+data.applyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
-				 				$('#appendTr').focus();
+// 								console.log("-----"+displayValue);
+// 								console.log("어플라이넘버 : "+data.applyNo);
+// 								console.log("에프터 확인 : "+$('#'+data.applyNo+'').html());
+// 				 				$('.trApplyNo').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
+				 				$('tr[name='+data.applyNo+']').after('<tr name="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
+// 				 				$('#'+data.ssapplyNo+'').after('<tr id="appendTr"><td colspan="3" align="left">'+displayValue+'</td></tr>');
+// 				 				console.log("에프터 확인2 : "+$('#'+data.applyNo+'').html());
+// 				 				$('#appendTr').focus();
 							
 					},
 					error: function(request, status, error){ 
@@ -845,10 +974,13 @@
   
   	 
       $(function() {
-    		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
+//     	    $(document).on("click" ,'.trApplyNo' ,function() {
+    		$( ".modal-body" ).on("click" ,'.trApplyNo' ,function() {
+//     		$( "#dialog-listApply" ).on("click" ,'.trApplyNo' ,function() {
     			var applyNo = parseInt( $(this).children($('input')).val().trim()  );
-    			console.log("확인111 : "+applyNo);
-    			$('#appendTr').remove();
+//     			console.log("확인111 : "+applyNo);
+//     			console.log("어펜드 tr확인: "+$('#appendTr').html());
+    			$('tr[name=appendTr]').remove();
 
     			getApply(applyNo);
     			
@@ -961,6 +1093,8 @@
 			$(document).on("click", ".fas", function() {
 				delInterest(   );
 			});
+			
+			$('.modal-body').css('max-height', $(window).height() * 0.6);
 
 	  });
 
