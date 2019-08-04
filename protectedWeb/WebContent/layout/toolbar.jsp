@@ -35,12 +35,13 @@
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
     	
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, h5, h6, p, b, a, th, td {
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
 		
 		.navbar-brand{
 			font-weight: bold;
+			font-size: 20px;
 		}
 		
 		.swal-button {
