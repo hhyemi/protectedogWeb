@@ -19,7 +19,7 @@ public interface MessageDAO {
 //	public List<Message> getReceiveMessageList(Search search, String receiverId) throws Exception;
 	
 	// Select List(ALL)
-	public List<Message> getMessageList(Search search, String id) throws Exception;
+	public List<Message> getMessageList(Search search, String nickname) throws Exception;
 	
 	// Update
 	public void updateMessage(Message message) throws Exception;
@@ -28,12 +28,12 @@ public interface MessageDAO {
 //	public int getSendTotalCount(Search	search, String senderId) throws Exception;
 //	
 	// List Paging(RECEIVE)
-	public int getReceiveTotalCount(String receiverId) throws Exception;
+	public int getReceiveTotalCount(String receiverNick) throws Exception;
 	
 	// List Paging(ALL)
-	public int getTotalCount(Search search, String id) throws Exception;
+	public int getTotalCount(Search search, String nickname) throws Exception;
 	
 
-	public Message getUnreadMessage(String receiverId) throws Exception;
+	public Message getUnreadMessage(String receiverNick) throws Exception;
 	
 }

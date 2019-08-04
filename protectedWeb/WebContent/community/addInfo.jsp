@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+<title>보호할개 · 정보공유 글 등록</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,27 +22,27 @@
 <style>
 .ck.ck-editor {	min-width: 95%;}
 .ck-editor__editable {text-align: left;min-height: 300px;min-width: 95%;}
-
-label {background-color: #3e6dad;color: white;border-radius: 10px;}
+.fa-exclamation-circle{color:#f04f23}
+/* label {background-color: #3e6dad;color: white;border-radius: 10px;} */
 </style>
+
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>	
+	
 </head>
 
 <body>
-
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<div class="container">
 		<div class="hero-wrap hero-bread"
 			style="padding-bottom: 30px; padding-top: 60px;">
 			<div class="container">
-				<div
-					class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="row no-gutters slider-text align-items-center justify-content-center">
 					<div class="col-md-9 ftco-animate text-center">
 						<p>
 							<span class="mr-2">information</span> <span>share</span>
 						</p>
-						<font size="7">정보공유 글 작성</font>
+						<font size="7">정보공유 글 등록</font>
 					</div>
 				</div>
 			</div>
@@ -53,7 +55,7 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
-							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." />
+							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." maxlength="20"/>
 					</div>
 				</div>
 
@@ -74,6 +76,8 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 				<input type="checkbox" class="googleMapCheck" value="hide"/>지도공유
 		  
 		  		<div class="form-group googleMap">
+		  		<label><strong><span class="fas fa-exclamation-circle"></span>
+	               		지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.</strong></label><br/>
 		  			<p> 경로 <span class="text-danger">수정</span>을 원하시면 마커 위에서 <span class="text-danger">마우스 우클릭</span>을 해주시길 바랍니다.</p>
 		   			<div class="col-sm-4">
 		    				<div id="map" style="width: 1050px; height: 600px;"></div>
@@ -204,7 +208,15 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
                   }
                  
               }else{
-                 alert("5개까지 지정 가능함 dialog 추가");
+                 swal({ 
+                	 text : "마커는 5개 까지 지정 가능합니다.", 
+                	 button : { 
+                		 catch : { 
+                			 text : "확인"
+                			 } 
+                	 }
+                });
+                
              }
               
              

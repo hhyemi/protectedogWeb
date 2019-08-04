@@ -33,6 +33,44 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="/resources/newTemplate/admin/css/apps/email.css">
     
+      	<style type="text/css">
+ 		
+ 		@font-face {
+    		font-family: 'YouandiModernTR';
+   		 	font-style: normal;
+    		font-weight: normal;
+    		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
+		}
+    	
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+    		font-family: 'YouandiModernTR', sans-serif !important;
+    	} 	
+		
+		.navbar-brand{
+			font-weight: bold;
+		}
+		
+		.swal-button {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button:hover {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button--cancel {
+		    color: white;
+		    background-color: #f04f23;
+		}
+		
+		html {
+	 		scroll-behavior: smooth;
+		}
+	
+  	</style>
+    
     <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
@@ -41,12 +79,24 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                          MAIN NAVBAR
 ======================================================-->        
-
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="/message/listMessage">MessageList</a></span>
+					</p>
+					<font size="7">쪽지함</font>
+				</div>
+			</div>
+		</div>
+	</div>
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
     <div class="page-content d-flex align-items-stretch">
-    <input type="hidden" id="myId" name="senderId" value="${ sessionScope.user.id }"/>
+    <input type="hidden" id="myId" name="senderNick" value="${ sessionScope.user.nickname }"/>
 
         <!--***** SIDE NAVBAR *****-->
 		<jsp:include page="/users/mypage/userSideBar.jsp"></jsp:include>
@@ -54,7 +104,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
             <!--***** MAILBOX *****-->     
             <div class="row" id="emails">
                 <form name="pageForm">
-            		<input type="hidden" id="currentPage" name="currentPage" value="" />
             	</form>
                 <div class="mail-box">
                     <aside class="sm-side"> 
@@ -120,15 +169,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--                                         <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li> -->
 <!--                                     </ul> -->
 <!--                                 </div> -->
-                                <ul class="unstyled inbox-pagination">
-                                    <li><span> 총 ${ resultPage.totalCount } 건 || ${ resultPage.currentPage } 페이지</span></li>
-                                    
-                                </ul>
+ 		           
+                                    	<div class="col-md-6" align="left">
+					    					<p style="font-weight: bold;">
+					    						전체  ${resultPage.totalCount } 건
+					    					</p>
+					   					</div>
                             </div>
                             <c:if test="${resultPage.totalCount == 0}">
 								<div class="row">
 									<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
-										검색결과 없음<p/>
+										<p>쪽지함에 쪽지가 없습니다<p/>
 									<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 									<input type="hidden" id="currentPage" name="currentPage" value="" />					
 									</div>
@@ -154,22 +205,23 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 										<th width="300px" class="text-center">제목</th>
 										<th width="200px" align="center" class="text-center">보낸일시</th>
 										<th width="200px" align="center" class="text-center">받은일시</th>
-										<c:if test="${ search.searchCondition != 'delete' }">
+										<c:if test="${ search.searchCondition == 'receive' }">
 										<th width="75px">더보기</th>
 										</c:if>
-										<c:if test="${ search.searchCondition == 'delete' }">
-										<th width="75px">영구삭제</th>
+										<c:if test="${ search.searchCondition != 'receive' }">
+										<th width="75px"></th>
 										</c:if>
 									</tr>
 								</thead>
                                 <tbody>
                                 	<c:set var="i" value="0" />
+                                	<form role="form" class="form-horizontal" name="mailSearchForm">
+                                	<input type="hidden" name="searchCondition" value="${ search.searchCondition }">
 									<c:forEach var="message" items="${list}">
 										<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="messageViewModal" class="modal fade messageViewModal" style="display: none;">
 			                                <div class="modal-dialog">
 			                                    <div class="modal-content">
 			                                        <div class="modal-body">
-			                                            <form role="form" class="form-horizontal">
 					                                        <div class="row" style="position: relative; height: 25px;">
 					                                        	<div class="modalMessageNo" style="display: none;"></div>
 																<div class="col-md-6"
@@ -182,10 +234,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 															</div>
 			                                                <div class="row messageId" style="position: relative; height: 25px;">
 																<div class="col-md-6"
-																	style="position: absolute; left: 0px; bottom: 0px;">보낸사람 | <span class="senderId"></span></div>
+																	style="position: absolute; left: 0px; bottom: 0px;">보낸사람 | <span class="senderNick"></span></div>
 																			
 																<div class="col-md-6" align="right"
-																	style="position: absolute; right: 0px; bottom: 0px;">받은사람 | <span class="receiverId"> </span></div>
+																	style="position: absolute; right: 0px; bottom: 0px;">받은사람 | <span class="receiverNick"> </span></div>
 															</div>
 															<br/>
 			                                                <div class="form-group">
@@ -199,17 +251,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 								
 			                                                <div class="row form-group">
 			                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-			                                                        <button class="btn btn-send ml-3 sendMessage" type="submit">Send</button>
+			                                                        <button class="btn btn-send ml-3 sendMessage" style="background-color:red;">답장하기</button>
 			                                                    </div>
 			                                                </div>
-			                                            </form>
 			                                        </div>
 			                                    </div>
 			                                    <!-- /.modal-content -->
 			                                </div>
 			                                <!-- /.modal-dialog -->
 			                            </div>
-                                    <tr class="">
+                                    <tr style="height:46px;">
                                         <td class="inbox-small-cells" width="50px">
 <%--                                         	<c:if test="${ search.searchCondition != 'delete' }"> --%>
 <!-- 			                                <div class="btn-group"> -->
@@ -221,28 +272,28 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                             <input type="hidden" name="messageNo" value="${ message.messageNo }">
                                         </td>
                                         <c:if test="${ search.searchCondition=='all' || search.searchCondition=='delete'  }">
-											<td width="85px">${ message.senderId }</td>
-											<td width="85px">${ message.receiverId }</td>
+											<td width="85px">${ message.senderNick }</td>
+											<td width="85px">${ message.receiverNick }</td>
 										</c:if>
 										<c:if test="${ search.searchCondition=='send' }">
-											<td width="170px">${ message.receiverId }</td>
+											<td width="170px">${ message.receiverNick }</td>
 										</c:if>
 										<c:if test="${ search.searchCondition=='receive' }">
-											<td width="170px">${ message.senderId }</td>
+											<td width="170px">${ message.senderNick }</td>
 										</c:if>
                                         <td class="view-message text-center" width="300px"> 
                                        		${ message.messageTitle }
                                         	<input type="hidden" name="messageContent" value="${ message.messageContent }"/>
                                         </td>
-                                        <td class="view-message text-right" width="200px"> 
-											<fmt:formatDate value="${ message.sendDate }" pattern="yy.MM.dd"/>
+                                        <td class="view-message text-center" width="200px"> 
+											<fmt:formatDate value="${ message.sendDate }" pattern="yyyy-MM-dd"/>
 										</td>
-                                        <td class="view-message text-right" width="200px">
+                                        <td class="view-message text-center" width="200px">
                                         <c:if test="${ message.messageStatus == 0 }">
                                         	읽지 않음
                                         </c:if>
                                         <c:if test="${ message.messageStatus != 0 }">
-                                        	<fmt:formatDate value="${ message.receiveDate }" pattern="yy.MM.dd"/>
+                                        	<fmt:formatDate value="${ message.receiveDate }" pattern="yyyy-MM-dd"/>
                                         </c:if>
                                         </td>
                                         <td class="view-message text-center" width="75px" >
@@ -250,9 +301,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         	<a href=".messageViewModal" data-toggle="modal" title="Compose" class="btn btn-compose">
                                         		더보기
                                         	</a>
-                                        	</c:if>
-                                        	<c:if test="${ search.searchCondition=='send' || search.searchCondition=='all' }">
-                                        		<a>기능추가중</a>
+                                        	</c:if>                                        	
+                                        	<c:if test="${ search.searchCondition=='receive' }">
+                                        	<a></a>
                                         	</c:if>
 <%--                                         	<c:if test="${ search.searchCondition=='delete' }"> --%>
 <!-- 	                                        	<div class="btn-group"> -->
@@ -264,9 +315,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         </td>
                                     </tr>
 									</c:forEach>
+									</form>
                                 </tbody>
                             </table>
+                            <div align="center">
                             <jsp:include page="/common/pageNavigator.jsp" />
+                            </div>
                             </c:if>
                         </div>
                     </aside>
@@ -292,8 +346,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <script>
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
-
-		$("form[name='pageForm']").attr("method", "POST").attr("action","/message/listMessage").submit();
+		$("input[name='searchCondition']").val('${search.searchCondition}')
+		$("form[name='mailSearchForm']").attr("method", "POST").attr("action","/message/listMessage").submit();
 	}
 	
 // 	$(function(){
@@ -342,8 +396,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$(".messageTitle").text(JSONData.message.messageTitle);
 					$(".messageContent").text(JSONData.message.messageContent);
 					$(".sendDate").text(JSONData.sendDate);
-					$(".senderId").text(JSONData.message.senderId);
-					$(".receiverId").text(JSONData.message.receiverId);
+					$(".senderNick").text(JSONData.message.senderNick);
+					$(".receiverNick").text(JSONData.message.receiverNIck);
 				},
 				error : function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -356,23 +410,21 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 			$(document).ready(function(){
 		
-				var id=$("#myId").val();
-				var rcvId=JSON.stringify({id:id});
-// 				alert(id);
-// 				alert(msgId);
+				var nickname=$("#myId").val();
+				var rcvNick=JSON.stringify({nickname:nickname});
 				$.ajax({
 					type : "POST",
 					contentType : "application/json",
 					url : "/message/json/getReceiveTotalCount",
-					data : rcvId,
+					data : rcvNick,
 					datatype : "json",
 					success : function(response){
 // 						alert(response);
-						if(id != null && response != 0){
+						if(nickname != null && response != 0){
 							$(".received").show();
 							$(".received").text(response)
 						}
-						if(id != null && response == 0){
+						if(nickname != null && response == 0){
 							$(".received").hide();
 						}
 					},
@@ -386,13 +438,24 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 		});
 		
-		$(function(){
-			$(".submit").on("click", function(){
-				$(".sendMessage").attr("method", "POST").attr("action", "/message/addMessage");
-				alert("쪽지전송 성공");
-				$("#messageModal").modal('hide');
-			})
-		})
+// 		$(function(){
+// 			$(".submit").on("click", function(){
+// 				swal({
+// 					text : "쪽지를 전송하였습니다.",
+// 					buttons : {
+// 						catch : {
+// 							text : "확인"
+// 						}
+// 					}
+// 				})
+// 				.then((A) => {
+// 					if(A) {
+// 						$(".sendMessage").attr("method", "POST").attr("action", "/message/addMessage").submit();
+// 						$("#messageModal").modal('hide');
+// 					}
+// 				})
+// 			})
+// 		})
 		
 		$(function(){
 			$("#allCheck").on("click", function(){

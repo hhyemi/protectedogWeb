@@ -27,6 +27,9 @@
  	  	html { 
  	 		scroll-behavior: smooth; 
  		} 
+ 		div.navbar {
+ 			padding-top: 0px !important;
+ 		}
 
 
     </style>
@@ -42,8 +45,9 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2" style="color: #f04f23;">Missing</span> <span>Calendar</span></p>
+          	<p ><span class="mr-2">Adopt</span> <span>Missing</span></p>
             <font size="7">실종캘린더</font>
+            <p >날짜 칸을 클릭하면 실종글을 작성할 수 있습니다.</p>
           </div>
         </div>
       </div>
@@ -53,7 +57,7 @@
 
 	<div class="row justify-content-center">
       <div class="col-md-9"  >
-      	<div  class="col-md-9" style="padding-left: 0px;">날짜 칸을 클릭하시면 실종글을 작성할 수 있습니다.</div>
+<!--       	<div  class="col-md-9" style="padding-left: 0px;">날짜 칸을 클릭하시면 실종글을 작성할 수 있습니다.</div> -->
 	  	<jsp:include page="calendar.jsp"></jsp:include>
 	  </div>
 	</div>

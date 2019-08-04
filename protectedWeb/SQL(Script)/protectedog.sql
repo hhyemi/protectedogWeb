@@ -81,7 +81,7 @@ CREATE TABLE USERS (
 	FACEBOOK		VARCHAR2(100)	UNIQUE,
 	PW 			VARCHAR2(15) 		NOT NULL,
 	USER_NAME 		VARCHAR2(10) 	NOT NULL,
-	NICKNAME 		VARCHAR2(14)	NOT NULL UNIQUE,
+	NICKNAME 		VARCHAR2(100)	NOT NULL UNIQUE,
 	EMAIL 			VARCHAR2(100),
 	PHONE 			VARCHAR2(13) 	UNIQUE,
 	USER_ADDR 		VARCHAR2(1000),
@@ -148,13 +148,13 @@ CREATE TABLE COUPON (
 
 CREATE TABLE REPORT (
  	REPORT_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	REPORTER_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID),
-	REPORTED_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID),
+	REPORTER_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME),
+	REPORTED_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME),
 	REPORT_CATEGORY 	VARCHAR2(20) 	NOT NULL ENABLE, 
 	REPORT_CONTENT 	VARCHAR2(2000) 	NOT NULL ENABLE, 
 	REPORT_STATUS 		NUMBER(1,0) 	NOT NULL ENABLE,
 	REPORT_DATE		DATE,
-	DEL_CODE 		VARCHAR2(1),
+	DEL_CODE 		CHAR(1),
 	PRIMARY KEY (REPORT_NO));
 
 CREATE TABLE MILEAGE (
@@ -166,11 +166,11 @@ CREATE TABLE MILEAGE (
 	REG_DATE 		DATE, 
 	PRIMARY KEY (MILEAGE_NO));
 	
-   
 CREATE TABLE ADOPT(
    BOARD_CODE       CHAR(2)       NOT NULL ENABLE, 
    POST_NO       NUMBER(6,0)    NOT NULL ENABLE, 
    ID          VARCHAR2(12)    NOT NULL ENABLE REFERENCES USERS(ID), 
+   NICKNAME       VARCHAR2(14) NOT NULL ENABLE,
    POST_TITLE       VARCHAR2(60) , 
    POST_CONTENT       VARCHAR2(600)    NOT NULL ENABLE, 
    PHONE          VARCHAR2(13)    NOT NULL ENABLE, 
@@ -207,7 +207,7 @@ CREATE TABLE STORYFUNDING(
 	STATUS_CODE 		CHAR(1) 		NOT NULL ENABLE, 
 	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
 	POST_TITLE 		VARCHAR2(50) 	NOT NULL ENABLE, 
-	POST_CONTENT 		VARCHAR2(600)    NOT NULL ENABLE, 
+	POST_CONTENT 		CLOB, 
 	VOTE_VIEW_COUNT 	NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
 	VOTER_COUNT 		NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
 	VOTE_START_DATE 	DATE 		NOT NULL ENABLE, 
@@ -230,8 +230,8 @@ CREATE TABLE MESSAGE (
    	MESSAGE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	MESSAGE_TITLE 		VARCHAR2(200) 	NOT NULL ENABLE, 
 	MESSAGE_CONTENT 	VARCHAR2(2000) 	NOT NULL ENABLE, 
-	SENDER_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVER_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
+	SENDER_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME), 
+	RECEIVER_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME), 
 	SEND_DATE 		DATE, 
 	RECEIVE_DATE 		DATE, 
 	MESSAGE_STATUS 		CHAR(1) 		NOT NULL ENABLE, 
@@ -260,23 +260,24 @@ CREATE TABLE ORDERS (
 	 
 
 CREATE TABLE APPLY (
-   	APPLY_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	ADOPT_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
-	ID 				VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
-	JOB 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	ADDR 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	MATE 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	MATE_AGREE 		VARCHAR2(30), 
-	RAISE 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	CURRENTLY 		VARCHAR2(30), 
-	PLAN 			VARCHAR2(900) 	NOT NULL ENABLE, 
-	PAY 			VARCHAR2(900) 	NOT NULL ENABLE, 
-	REASON 			VARCHAR2(900) 	NOT NULL ENABLE, 
-	SITUATION 		VARCHAR2(900) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 		NOT NULL ENABLE, 
-	STATUS_CODE 	CHAR(1) 		DEFAULT '1' NOT NULL ENABLE,
-	PRIMARY KEY (APPLY_NO));
+   APPLY_NO       NUMBER(6,0)    NOT NULL ENABLE, 
+   ADOPT_NO       NUMBER(6,0)    NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
+   ID             VARCHAR2(12)    NOT NULL ENABLE REFERENCES USERS(ID), 
+   NICKNAME       VARCHAR2(14)    NOT NULL ENABLE,
+   PHONE          VARCHAR2(13)    NOT NULL ENABLE, 
+   JOB          VARCHAR2(10)    NOT NULL ENABLE, 
+   ADDR          VARCHAR2(10)    NOT NULL ENABLE, 
+   MATE          VARCHAR2(10)    NOT NULL ENABLE, 
+   MATE_AGREE       VARCHAR2(30), 
+   RAISE          VARCHAR2(10)    NOT NULL ENABLE, 
+   CURRENTLY       VARCHAR2(30), 
+   PLAN          VARCHAR2(900)    NOT NULL ENABLE, 
+   PAY          VARCHAR2(900)    NOT NULL ENABLE, 
+   REASON          VARCHAR2(900)    NOT NULL ENABLE, 
+   SITUATION       VARCHAR2(900)    NOT NULL ENABLE, 
+   REG_DATE       DATE       NOT NULL ENABLE, 
+   STATUS_CODE    CHAR(1)       DEFAULT '1' NOT NULL ENABLE,
+   PRIMARY KEY (APPLY_NO));
 	 
 
 CREATE TABLE BOARD (
@@ -373,91 +374,54 @@ CREATE TABLE USERS_ACCESS(
 INSERT INTO users 
 (user_no, id, pw, user_name, nickname, level_point, role)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'admin', '12345678', 'admin', '¿î¿µÀÚ', 99999, 'admin');
+(seq_users_user_no.NEXTVAL, 'admin', '12345678', 'admin', 'ìš´ì˜ì', 99999, 'admin');
 
 INSERT INTO users
 (user_no, id, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1, purpose2)
 VALUES
-(seq_users_user_no.NEXTVAL, 'user01', '11111111', 'scott', '½ºÄ±', 'scott@tiger.com', '011-1123-4567', '¼­¿ï½Ã ¼ººÏ±¸', '110-234-567890', '900314', '5600', 'm', 'user', 'Á¤º¸°øÀ¯', 'ÀÔ¾ç');
+(seq_users_user_no.NEXTVAL, 'user01', '11111111', 'scott', 'ìŠ¤ìº‡', 'scott@tiger.com', '011-1123-4567', 'ì„œìš¸ì‹œ ì„±ë¶êµ¬', '110-234-567890', '900314', '5600', 'm', 'user', 'ì •ë³´ê³µìœ ', 'ì…ì–‘');
 
 INSERT INTO users
 (user_no, id, kakao, pw, user_name, nickname, level_point, role)
 VALUES
-(seq_users_user_no.NEXTVAL, 'user02', '29343041834', '22222222', 'tiger', 'È£·©ÀÌ', 0, 'user');
+(seq_users_user_no.NEXTVAL, 'user02', '29343041834', '22222222', 'tiger', 'í˜¸ë­ì´', 0, 'user');
 
 INSERT INTO users
 (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user03', '123124124', '33333333', 'hello', '¾È³ç', 'hello@tiger.com', '011-2123-4567', '¼­¿ï½Ã ¼ººÏ±¸', '110-432-098765', 900314, 0, 'm', 'user', 'ÀÔ¾ç');	 
+(seq_users_user_no.NEXTVAL, 'user03', '123124124', '33333333', 'hello', 'ì•ˆë…•', 'hello@tiger.com', '011-2123-4567', 'ì„œìš¸ì‹œ ì„±ë¶êµ¬', '110-432-098765', 900314, 0, 'm', 'user', 'ì…ì–‘');	 
 
 INSERT INTO users 
 (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user04', '132456788', '12341234', 'hello', '½ÅÃ»ÀÚ1', 'hello@tiger.com', '011-2123-4568', '¼­¿ï½Ã ¼ººÏ±¸', '110-432-098765', 900314, 0, 'm', 'user', 'ÀÔ¾ç');	 
+(seq_users_user_no.NEXTVAL, 'user04', '132456788', '12341234', 'hello', 'ì‹ ì²­ì1', 'hello@tiger.com', '011-2123-4568', 'ì„œìš¸ì‹œ ì„±ë¶êµ¬', '110-432-098765', 900314, 0, 'm', 'user', 'ì…ì–‘');	 
 
 INSERT INTO users 
 (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user05', '123456789', '12341234', 'hello', '½ÅÃ»ÀÚ2', 'hello@tiger.com', '011-2123-4569', '¼­¿ï½Ã ¼ººÏ±¸', '110-432-098765', 900314, 0, 'm', 'user', 'ÀÔ¾ç');	 
+(seq_users_user_no.NEXTVAL, 'user05', '123456789', '12341234', 'hello', 'ì‹ ì²­ì2', 'hello@tiger.com', '011-2123-4569', 'ì„œìš¸ì‹œ ì„±ë¶êµ¬', '110-432-098765', 900314, 0, 'm', 'user', 'ì…ì–‘');	 
 
 INSERT INTO users 
 (user_no, id, naver, pw, user_name, nickname, email, phone, user_addr, account, birth_date, level_point, gender, role, purpose1)
 VALUES 
-(seq_users_user_no.NEXTVAL, 'user06', '123456780', '12341234', 'hello', '½ÅÃ»ÀÚ3', 'hello@tiger.com', '011-2123-4560', '¼­¿ï½Ã ¼ººÏ±¸', '110-432-098765', 900314, 0, 'm', 'user', 'ÀÔ¾ç');	 
+(seq_users_user_no.NEXTVAL, 'user06', '123456780', '12341234', 'hello', 'ì‹ ì²­ì3', 'hello@tiger.com', '011-2123-4560', 'ì„œìš¸ì‹œ ì„±ë¶êµ¬', '110-432-098765', 900314, 0, 'm', 'user', 'ì…ì–‘');	 
 
 
 INSERT INTO message
-(message_no, message_title, message_content, sender_id, receiver_id, send_date, 
+(message_no, message_title, message_content, sender_nick, receiver_nick, send_date, 
 receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, 'Å×½ºÆ®1', 'ÀÌ°Å½¼ Å×½ºÆ®ÀÎ °Å½Ã¿©1', 'user01', 'user02', SYSDATE, null, '0', '0');
+(seq_message_message_no.NEXTVAL, 'í…ŒìŠ¤íŠ¸1', 'ì´ê±°ìŠ¨ í…ŒìŠ¤íŠ¸ì¸ ê±°ì‹œì—¬1', 'ìŠ¤ìº‡', 'í˜¸ë­ì´', SYSDATE, null, '0', '0');
 
 INSERT INTO message
-(message_no, message_title, message_content, sender_id, receiver_id, send_date, receive_date, message_status, del_code)
+(message_no, message_title, message_content, sender_nick, receiver_nick, send_date, receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, 'Å×½ºÆ®2', 'ÀÌ°Å½¼ Å×½ºÆ®ÀÎ °Å½Ã¿©2', 'user02', 'user01', SYSDATE, null, '0', '0');
+(seq_message_message_no.NEXTVAL, 'í…ŒìŠ¤íŠ¸2', 'ì´ê±°ìŠ¨ í…ŒìŠ¤íŠ¸ì¸ ê±°ì‹œì—¬2', 'í˜¸ë­ì´', 'ì‹ ì²­ì1', SYSDATE, null, '0', '0');
 
 INSERT INTO message
-(message_no, message_title, message_content, sender_id, receiver_id, send_date, receive_date, message_status, del_code)
+(message_no, message_title, message_content, sender_nick, receiver_nick, send_date, receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, 'Å×½ºÆ®3', 'ÀÌ°Å½¼ Å×½ºÆ®ÀÎ °Å½Ã¿©3', 'user03', 'user01', SYSDATE, null, '0', '0');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user01', 'user02', 'ºñ¼Ó¾î', 'ÀÌ»ç¶÷ÀÌ ¿åÀ» ½É°¢ÇÏ°Ô ÇÕ´Ï´Ù.', 0, '2019-06-01', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user02', 'user03', '»ç±â', 'ÀÌ»ç¶÷Àº °ÅÀÇ Äí·Î»ç±â±ŞÀÔ´Ï´Ù.', 0, '2019-07-01', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user03', 'user04', 'À½¶õÇàÀ§', 'À¸ÈåÈå ³Ê¹« ¾ßÇØ¿ä À¸ÈåÈå.', 0, '2019-08-01', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user04', 'user05', 'Çø¿ÀÇ¥Çö', 'Áø½É ¹ú·¹°¡ µû·Î¾ø³× Á¦Á¦Á» Á¦¹ß', 0, '2019-06-25', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user05', 'user06', '±âÅ¸', '¾î¿ì ÀÌ°Ç Á» »çÅºµµ ¿ï°í °¡°Ú³× ¾îÈŞ', 0, '2019-07-25', 'n');
-
-
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10000, 'abc.jpg' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10000, 'anonymous-250.jpg' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'BitCamppng.png' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'def.png' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'DSC_2849.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10002, 'DSC_2913.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10003, 'DSC_2919.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10004, 'DSC_8016.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10005, 'DSC_8020.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10005, 'naver.png' , '0');
+(seq_message_message_no.NEXTVAL, 'í…ŒìŠ¤íŠ¸3', 'ì´ê±°ìŠ¨ í…ŒìŠ¤íŠ¸ì¸ ê±°ì‹œì—¬3', 'ì‹ ì²­ì2', 'ì•ˆë…•', SYSDATE, null, '0', '0');
 
 
 INSERT 
@@ -465,7 +429,7 @@ INTO STORYFUNDING(
 POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT  ,VOTER_COUNT , VOTE_TARGET_COUNT,
 VOTE_START_DATE,VOTE_END_DATE ,FUND_TARGET_PAY ,FUND_TARGET_DAY   ,MAIN_FILE)
 VALUES ( 
-SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user01' ,'½ºÄ±' ,1 ,'011-1123-4567' ,'°­¾ÆÁö¸¦µµ¿ÍÁÖ¼¼¿ä' ,'³»¿ë³»¿ë µµ¿ÍÁÖ¼¼¿ë',0,10
+SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user01' ,'ìŠ¤ìº‡' ,1 ,'011-1123-4567' ,'ê°•ì•„ì§€ë¥¼ë„ì™€ì£¼ì„¸ìš”' ,'ë‚´ìš©ë‚´ìš© ë„ì™€ì£¼ì„¸ìš©',0,10
 , SYSDATE ,SYSDATE+29 ,100000,10, '05.jpg' );
 
 INSERT INTO FILES(FILE_NO , BOARD_CODE  ,  POST_NO , FILE_NAME , FILE_CODE) VALUES(GET_FILE_NO() , 'SF' , 10000 , '05.jpg' , 0);
@@ -476,7 +440,7 @@ INTO STORYFUNDING(
 POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT  ,VOTER_COUNT , VOTE_TARGET_COUNT,VOTE_VIEW_COUNT,
 VOTE_START_DATE,VOTE_END_DATE ,FUND_TARGET_PAY ,FUND_TARGET_DAY   ,MAIN_FILE)
 VALUES ( 
-SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user03' ,'¾È³ç' ,2 ,'011-1123-4567' ,'¸¹ÀÌ ¾ÆÆÄÇØ¿ä ¤Ğ¤Ğ' ,'³»¿ë³»¿ë µµ¿ÍÁÖ¼¼¿ë',2,20,10
+SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,2 ,'011-1123-4567' ,'ë§ì´ ì•„íŒŒí•´ìš” ã… ã… ' ,'ë‚´ìš©ë‚´ìš© ë„ì™€ì£¼ì„¸ìš©',2,20,10
 , '20190620' ,'20190721' ,200000,7, '14727754977_7469eea5fd_b.jpg' );
 
 INSERT INTO FILES(FILE_NO , BOARD_CODE  ,  POST_NO , FILE_NAME , FILE_CODE) VALUES(GET_FILE_NO() , 'SF' , 10001 , '14727754977_7469eea5fd_b.jpg' , 0);
@@ -487,7 +451,7 @@ INTO STORYFUNDING(
 POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT  ,VOTER_COUNT , VOTE_TARGET_COUNT,VOTE_VIEW_COUNT,
 VOTE_START_DATE,VOTE_END_DATE ,FUND_TARGET_PAY ,FUND_TARGET_DAY   ,MAIN_FILE ,FUND_START_DATE, FUND_END_DATE)
 VALUES ( 
-SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user03' ,'¾È³ç' ,3 ,'011-1123-4567' ,'ÈÄ¿øÇÊ¿äÇÕ´Ï´Ù....' ,'³»¿ë³»¿ë µµ¿ÍÁÖ¼¼¿ë',20,20,50
+SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,3 ,'011-1123-4567' ,'í›„ì›í•„ìš”í•©ë‹ˆë‹¤....' ,'ë‚´ìš©ë‚´ìš© ë„ì™€ì£¼ì„¸ìš©',20,20,50
 , '20190620' ,'20190720' ,200000,20, '14727754977_7469eea5fd_b.jpg' , SYSDATE,  SYSDATE+20);
 
 INSERT INTO FILES(FILE_NO , BOARD_CODE  ,  POST_NO , FILE_NAME , FILE_CODE) VALUES(GET_FILE_NO() , 'SF' , 10002 , '14727754977_7469eea5fd_b.jpg' , 0);
@@ -499,8 +463,8 @@ POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT  ,VO
 VOTE_START_DATE,VOTE_END_DATE ,FUND_TARGET_PAY ,FUND_TARGET_DAY   ,MAIN_FILE ,FUND_START_DATE, FUND_END_DATE,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_REG_DATE,
 FUND_VIEW_COUNT,SPONSOR_COUNT,FUND_PAY)
 VALUES ( 
-SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user01' ,'½ºÄ±' ,4 ,'011-1123-4567' ,'ÇÏÆÛ¸¦ÈÄ¿øÇØÁÖ¼¼¿ä..' ,'³»¿ë³»¿ë µµ¿ÍÁÖ¼¼¿ë',200,200,50
-, '20190520' ,'20190620' ,2000000,25, 'we.jpg' ,'20190621',  '20190715','´öºĞ¿¡ ÇÏÆÛ°¡ ÈûÀÌ³µ³×¿ä','°¨»çÇÕ´Ï´Ù Á¤¸»·Î,,,¤Ğ¤Ğ',SYSDATE
+SEQ_STORYFUNDING_POST_NO.NEXTVAL ,'user01' ,'ìŠ¤ìº‡' ,4 ,'011-1123-4567' ,'í•˜í¼ë¥¼í›„ì›í•´ì£¼ì„¸ìš”..' ,'ë‚´ìš©ë‚´ìš© ë„ì™€ì£¼ì„¸ìš©',200,200,50
+, '20190520' ,'20190620' ,2000000,25, 'we.jpg' ,'20190621',  '20190715','ë•ë¶„ì— í•˜í¼ê°€ í˜ì´ë‚¬ë„¤ìš”','ê°ì‚¬í•©ë‹ˆë‹¤ ì •ë§ë¡œ,,,ã… ã… ',SYSDATE
 ,200,150,2000000);
 
 INSERT INTO FILES(FILE_NO , BOARD_CODE  ,  POST_NO , FILE_NAME , FILE_CODE) VALUES(GET_FILE_NO() , 'SF' , 10003 , 'we.jpg' , 0);
@@ -511,189 +475,189 @@ INSERT INTO FILES(FILE_NO , BOARD_CODE  ,  POST_NO , FILE_NAME , FILE_CODE) VALU
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10001 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10001 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10001 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10001 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10002 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10002 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10002 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10002 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10002 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10002 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10002 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10002 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10002 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10002 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10002 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10002 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10003 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10003 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10003 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10003 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10003 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10003 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10003 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10003 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10003 , '20190629' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10003 , '20190629' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10003 , '20190701' ,'1');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10003 , '20190701' ,'1');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10003 , '20190629' ,'1',10000,'card');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10003 , '20190629' ,'1',10000,'card');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10003 , '20190701' ,'1',20000,'trans');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10003 , '20190701' ,'1',20000,'trans');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10003 , '20190629' ,'1',100000,'card');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10003 , '20190629' ,'1',100000,'card');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10003 , '20190701' ,'1',100000,'card');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10003 , '20190701' ,'1',100000,'card');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'È£·©ÀÌ' ,10003 , '20190629' ,'1',200000,'card');
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user02' ,'í˜¸ë­ì´' ,10003 , '20190629' ,'1',200000,'card');
 
 INSERT
 INTO PARTICIPATE( PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE  , STATUS_CODE,FUND_PAY,PAYMENT_CODE)
-VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'¾È³ç' ,10003 , '20190701' ,'1',200000,'card'); 
+VALUES (SEQ_PARTICIPATE_PARTICIPATE_NO.NEXTVAL ,'user03' ,'ì•ˆë…•' ,10003 , '20190701' ,'1',200000,'card'); 
 
 
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä1', '³»¿ë', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','°­¿øµµ ÃáÃµ½Ã »çºÏ¸é  ', '(37.87554821220492, 127.72001389255138)', '°­¿øµµ ÃáÃµ½Ã Áß¾Ó·Î', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '1.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”1', 'ë‚´ìš©', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','ê°•ì›ë„ ì¶˜ì²œì‹œ ì‚¬ë¶ë©´  ', '(37.87554821220492, 127.72001389255138)', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ì¤‘ì•™ë¡œ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '1.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä2', '³»¿ë', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ÀÎÃµ½Ã ³²µ¿±¸ ³²ÃÌµ¿   ', '(37.5694426536982, 127.00127084655765)', '¼­¿ï½Ã Áß±¸ Ã»°èÃµ·Î ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '2.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”2', 'ë‚´ìš©', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ì¸ì²œì‹œ ë‚¨ë™êµ¬ ë‚¨ì´Œë™   ', '(37.5694426536982, 127.00127084655765)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ ì²­ê³„ì²œë¡œ ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '2.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä3', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿  ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '3.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”3', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™  ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '3.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä4', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '4.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”4', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '4.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä5', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿   ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '5.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”5', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™   ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '5.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä6', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '6.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”6', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '6.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä7', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '7.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”7', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '7.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä8', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '8.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”8', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '8.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä9', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '9.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”9', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '9.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä10', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '10.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”10', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '10.jpg', '1');
 
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä11', '³»¿ë', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','°­¿øµµ ÃáÃµ½Ã »çºÏ¸é  ', '(37.87554821220492, 127.72001389255138)', '°­¿øµµ ÃáÃµ½Ã Áß¾Ó·Î', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '1.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”11', 'ë‚´ìš©', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','ê°•ì›ë„ ì¶˜ì²œì‹œ ì‚¬ë¶ë©´  ', '(37.87554821220492, 127.72001389255138)', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ì¤‘ì•™ë¡œ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '1.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä12', '³»¿ë', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ÀÎÃµ½Ã ³²µ¿±¸ ³²ÃÌµ¿   ', '(37.5694426536982, 127.00127084655765)', '¼­¿ï½Ã Áß±¸ Ã»°èÃµ·Î ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '2.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”12', 'ë‚´ìš©', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ì¸ì²œì‹œ ë‚¨ë™êµ¬ ë‚¨ì´Œë™   ', '(37.5694426536982, 127.00127084655765)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ ì²­ê³„ì²œë¡œ ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '2.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä13', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿  ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '3.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”13', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™  ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '3.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä14', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '4.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”14', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '4.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä15', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿   ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '5.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”15', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™   ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '5.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä16', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '6.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”16', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '6.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä17', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '7.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”17', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '7.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä18', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '8.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”18', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '8.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä19', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '9.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”19', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '9.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä20', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '10.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”20', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '10.jpg', '1');
 
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä21', '³»¿ë', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','°­¿øµµ ÃáÃµ½Ã »çºÏ¸é  ', '(37.87554821220492, 127.72001389255138)', '°­¿øµµ ÃáÃµ½Ã Áß¾Ó·Î', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '1.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”21', 'ë‚´ìš©', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','ê°•ì›ë„ ì¶˜ì²œì‹œ ì‚¬ë¶ë©´  ', '(37.87554821220492, 127.72001389255138)', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ì¤‘ì•™ë¡œ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '1.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä22', '³»¿ë', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ÀÎÃµ½Ã ³²µ¿±¸ ³²ÃÌµ¿   ', '(37.5694426536982, 127.00127084655765)', '¼­¿ï½Ã Áß±¸ Ã»°èÃµ·Î ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '2.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”22', 'ë‚´ìš©', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ì¸ì²œì‹œ ë‚¨ë™êµ¬ ë‚¨ì´Œë™   ', '(37.5694426536982, 127.00127084655765)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ ì²­ê³„ì²œë¡œ ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '2.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä23', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿  ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '3.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”23', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™  ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '3.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä24', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '4.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”24', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '4.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä25', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿   ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '5.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”25', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™   ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '5.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä26', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '6.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”26', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '6.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä27', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '7.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”27', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '7.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä28', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '8.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”28', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '8.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä29', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '9.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”29', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '9.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä30', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '10.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”30', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '10.jpg', '1');
 
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä31', '³»¿ë', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','°­¿øµµ ÃáÃµ½Ã »çºÏ¸é  ', '(37.87554821220492, 127.72001389255138)', '°­¿øµµ ÃáÃµ½Ã Áß¾Ó·Î', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '1.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”31', 'ë‚´ìš©', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','ê°•ì›ë„ ì¶˜ì²œì‹œ ì‚¬ë¶ë©´  ', '(37.87554821220492, 127.72001389255138)', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ì¤‘ì•™ë¡œ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '1.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä32', '³»¿ë', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ÀÎÃµ½Ã ³²µ¿±¸ ³²ÃÌµ¿   ', '(37.5694426536982, 127.00127084655765)', '¼­¿ï½Ã Áß±¸ Ã»°èÃµ·Î ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '2.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”32', 'ë‚´ìš©', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ì¸ì²œì‹œ ë‚¨ë™êµ¬ ë‚¨ì´Œë™   ', '(37.5694426536982, 127.00127084655765)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ ì²­ê³„ì²œë¡œ ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '2.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä33', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿  ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '3.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”33', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™  ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '3.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä34', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '4.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”34', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '4.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä35', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿   ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '5.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”35', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™   ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '5.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä36', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '6.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”36', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '6.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä37', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '7.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”37', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '7.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä38', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '8.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”38', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '8.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä39', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '9.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”39', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '9.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä40', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '10.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”40', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '10.jpg', '1');
 
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä41', '³»¿ë', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','°­¿øµµ ÃáÃµ½Ã »çºÏ¸é  ', '(37.87554821220492, 127.72001389255138)', '°­¿øµµ ÃáÃµ½Ã Áß¾Ó·Î', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '1.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”41', 'ë‚´ìš©', '011-2123-4567', '(38.073057724772966, 127.60071237487796)#','ê°•ì›ë„ ì¶˜ì²œì‹œ ì‚¬ë¶ë©´  ', '(37.87554821220492, 127.72001389255138)', 'ê°•ì›ë„ ì¶˜ì²œì‹œ ì¤‘ì•™ë¡œ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '1.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä42', '³»¿ë', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ÀÎÃµ½Ã ³²µ¿±¸ ³²ÃÌµ¿   ', '(37.5694426536982, 127.00127084655765)', '¼­¿ï½Ã Áß±¸ Ã»°èÃµ·Î ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '2.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”42', 'ë‚´ìš©', '011-2123-4567', '(37.43093975683735, 126.70944650573733)#','ì¸ì²œì‹œ ë‚¨ë™êµ¬ ë‚¨ì´Œë™   ', '(37.5694426536982, 127.00127084655765)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ ì²­ê³„ì²œë¡œ ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '2.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä43', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿  ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '3.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”43', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™  ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '3.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä44', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '4.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”44', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '4.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä45', '³»¿ë', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿   ', '(37.67087525369506, 126.85793359680179)', '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸ ¿ø´çµ¿', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '5.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”45', 'ë‚´ìš©', '011-2123-4567', '(37.66897296720348, 126.85707528991702)#','ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™   ', '(37.67087525369506, 126.85793359680179)', 'ê²½ê¸°ë„ ê³ ì–‘ì‹œ ë•ì–‘êµ¬ ì›ë‹¹ë™', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '5.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä46', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '6.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”46', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '6.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä47', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '7.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”47', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '7.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä48', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '8.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”48', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '8.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä49', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '9.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”49', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '9.jpg', '1');
 INSERT INTO adopt (board_code, post_no, id, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code) 
-		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', '°­¾ÆÁöÀÔ¾çÇÏ¼¼¿ä50', '³»¿ë', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '(37.566449243376184, 127.00109918518069)', '¼­¿ï½Ã Áß±¸ ÇÊµ¿3°¡  ', '2019-07-23', '½ÃÃò', '3', '¼ÒÇü°ß', '³²¾Æ', '1000','»óÅÂ', 'Æ¯Â¡', '¼º°İ', '2019-07-23', '10.jpg', '1');
+		VALUES ('AD', seq_adopt_post_no.nextval, 'user03', 'ê°•ì•„ì§€ì…ì–‘í•˜ì„¸ìš”50', 'ë‚´ìš©', '011-2123-4567', '(37.55991774875896, 126.99715097351077)#','ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '(37.566449243376184, 127.00109918518069)', 'ì„œìš¸ì‹œ ì¤‘êµ¬ í•„ë™3ê°€  ', '2019-07-23', 'ì‹œì¸„', '3', 'ì†Œí˜•ê²¬', 'ë‚¨ì•„', '1000','ìƒíƒœ', 'íŠ¹ì§•', 'ì„±ê²©', '2019-07-23', '10.jpg', '1');
 
 
 		
@@ -755,23 +719,23 @@ INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (se
 
 		
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10046, 'user04', '011-2123-4568', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10046, 'user04', '011-2123-4568', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10046, 'user05', '011-2123-4569', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10046, 'user05', '011-2123-4569', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10046, 'user06', '011-2123-4560', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10046, 'user06', '011-2123-4560', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10049, 'user04', '011-2123-4568', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10049, 'user04', '011-2123-4568', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10049, 'user05', '011-2123-4569', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10049, 'user05', '011-2123-4569', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10049, 'user06', '011-2123-4560', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10049, 'user06', '011-2123-4560', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10048, 'user04', '011-2123-4568', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10048, 'user04', '011-2123-4568', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10048, 'user05', '011-2123-4569', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10048, 'user05', '011-2123-4569', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 INSERT INTO apply (apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, 10047, 'user05', '011-2123-4569', 'ÇĞ»ı', '¾ÆÆÄÆ®', 'ÀÖÀ½', 'µ¿ÀÇ', '¾øÀ½', '°èÈ¹', '¿¹»óºñ¿ë', 'ÀÌÀ¯', '»óÈ²', SYSDATE  );
+		VALUES	 (	seq_apply_apply_no.nextval, 10047, 'user05', '011-2123-4569', 'í•™ìƒ', 'ì•„íŒŒíŠ¸', 'ìˆìŒ', 'ë™ì˜', 'ì—†ìŒ', 'ê³„íš', 'ì˜ˆìƒë¹„ìš©', 'ì´ìœ ', 'ìƒí™©', SYSDATE  );
 
 UPDATE adopt SET status_code = 3 where post_no = 10047;
 UPDATE adopt SET status_code = 2 where post_no = 10046;
@@ -781,77 +745,77 @@ UPDATE adopt SET status_code = 2 where post_no = 10049;
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
-(15555, 'IS', 'user01', '½ºÄ±', 'InfoShareTestTitle' ,  'InfoShareTestContent' , SYSDATE , 1000, 1000, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
+(15555, 'IS', 'user01', 'ìŠ¤ìº‡', 'InfoShareTestTitle' ,  'InfoShareTestContent' , SYSDATE , 1000, 1000, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
 
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
-(15556, 'IS', 'user02', 'È£·©ÀÌ', 'InfoShareTestTitle1' ,  'InfoShareTestContent1' , SYSDATE , 1001, 1001, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
+(15556, 'IS', 'user02', 'í˜¸ë­ì´', 'InfoShareTestTitle1' ,  'InfoShareTestContent1' , SYSDATE , 1001, 1001, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
 
 INSERT INTO BOARD 
 (post_no, board_code, id, nickname, post_title, post_content, reg_date, view_count, recommend_count, route)
 VALUES 
-(15557, 'IS', 'user03' , '¾È³ç', 'InfoShareTestTitle2' ,  'InfoShareTestContent2' , SYSDATE , 1002, 1002, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
+(15557, 'IS', 'user03' , 'ì•ˆë…•', 'InfoShareTestTitle2' ,  'InfoShareTestContent2' , SYSDATE , 1002, 1002, '(37.56504944256021, 127.00464828401823)#(37.564573198150306, 126.99909074693937)#(37.56566175232779, 127.00385435014982)#');
 
 INSERT INTO BOARD 
 (POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 
 VALUES 
-(10099, 'MK', 'user01', '½ºÄ±', '¸¶ÄÏ Á¦¸ñ1', '¸¶ÄÏ ±Û³»¿ë1', '2015-07-21', '3000', 'Áß°íÀåÅÍ»óÇ°1');
+(10099, 'MK', 'user01', 'ìŠ¤ìº‡', 'ë§ˆì¼“ ì œëª©1', 'ë§ˆì¼“ ê¸€ë‚´ìš©1', '2015-07-21', '3000', 'ì¤‘ê³ ì¥í„°ìƒí’ˆ1');
 
 INSERT INTO BOARD 
 (POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 
 VALUES 
-(10098, 'MK', 'user01', '½ºÄ±', '¸¶ÄÏ Á¦¸ñ2', '¸¶ÄÏ ±Û³»¿ë2', '2015-07-11', '4000', 'Áß°íÀåÅÍ»óÇ°2');
+(10098, 'MK', 'user01', 'ìŠ¤ìº‡', 'ë§ˆì¼“ ì œëª©2', 'ë§ˆì¼“ ê¸€ë‚´ìš©2', '2015-07-11', '4000', 'ì¤‘ê³ ì¥í„°ìƒí’ˆ2');
 
 INSERT INTO BOARD 
 (POST_NO, BOARD_CODE, ID, NICKNAME, POST_TITLE, POST_CONTENT, REG_DATE, PRICE, PROD_NAME) 
 VALUES 
-(10097, 'MK', 'user01', '½ºÄ±', '¸¶ÄÏ Á¦¸ñ3', '¸¶ÄÏ ±Û³»¿ë3', '2015-07-10', '4500', 'Áß°íÀåÅÍ»óÇ°3');
+(10097, 'MK', 'user01', 'ìŠ¤ìº‡', 'ë§ˆì¼“ ì œëª©3', 'ë§ˆì¼“ ê¸€ë‚´ìš©3', '2015-07-10', '4500', 'ì¤‘ê³ ì¥í„°ìƒí’ˆ3');
 
 
 INSERT INTO BREED_PEDIA( breed_no , weight , height , avg_life, add_Info, types, characters, files, name) 
-VALUES( seq_BREED_PEDIA_BREED_NO.NEXTVAL, 15.0 , 35.0 , 11 , '»ç³ÉÀ» À§ÇØ ÅÂ¾î³­ °³·Î ¾Ë·ÁÁø Ç°Á¾ÀÌ´Ù', '»ç³É','Ãæ¼º½ÉÀÌ °­ÇÔ, ¾Ö±³°¡¾øÀ½', 'abcde.jpg', 'µµº£¸£¸¸');
+VALUES( seq_BREED_PEDIA_BREED_NO.NEXTVAL, 15.0 , 35.0 , 11 , 'ì‚¬ëƒ¥ì„ ìœ„í•´ íƒœì–´ë‚œ ê°œë¡œ ì•Œë ¤ì§„ í’ˆì¢…ì´ë‹¤', 'ì‚¬ëƒ¥','ì¶©ì„±ì‹¬ì´ ê°•í•¨, ì• êµê°€ì—†ìŒ', 'abcde.jpg', 'ë„ë² ë¥´ë§Œ');
 
 INSERT INTO BREED_PEDIA( breed_no , weight , height , avg_life, add_Info, types, characters, files, name) 
-VALUES( seq_BREED_PEDIA_BREED_NO.NEXTVAL, 13.0 , 20.0 , 14 , '¸Ó¸® ÁÁ±â·Î ¼Ò¹®³­ ¹İ·Á°ß', '¹İ·Á', 'ÁÖÀÎÀ» Àß µû¸§, ¾Ö±³°¡¸¹À½, ¶È¶ÈÇÔ', 'fome.jpg', 'Æ÷¸Ş¶ó´Ï¾È');
+VALUES( seq_BREED_PEDIA_BREED_NO.NEXTVAL, 13.0 , 20.0 , 14 , 'ë¨¸ë¦¬ ì¢‹ê¸°ë¡œ ì†Œë¬¸ë‚œ ë°˜ë ¤ê²¬', 'ë°˜ë ¤', 'ì£¼ì¸ì„ ì˜ ë”°ë¦„, ì• êµê°€ë§ìŒ, ë˜‘ë˜‘í•¨', 'fome.jpg', 'í¬ë©”ë¼ë‹ˆì•ˆ');
 
 INSERT INTO BREED_PEDIA( breed_no , weight , height , avg_life, add_Info, types, characters, files, name)
-VALUES( seq_BREED_PEDIA_BREED_NO.NEXTVAL, 22.0 , 20.0 , 14 , '¸Ó¸®´Â Å©°í ³×¸ğÁ³À¸¸ç ÄÚ´Â ¹¶¶ÒÇÏ´Ù.', '¹İ·Á', '°íÁıÀÌ ½Ü, Ãæ¼¶½ÉÀÌ °­ÇÔ', 'bulldog.jpg', 'ºÒµ¶'); 
+VALUES( seq_BREED_PEDIA_BREED_NO.NEXTVAL, 22.0 , 20.0 , 14 , 'ë¨¸ë¦¬ëŠ” í¬ê³  ë„¤ëª¨ì¡Œìœ¼ë©° ì½”ëŠ” ë­‰ëší•˜ë‹¤.', 'ë°˜ë ¤', 'ê³ ì§‘ì´ ìŒ¤, ì¶©ì„¬ì‹¬ì´ ê°•í•¨', 'bulldog.jpg', 'ë¶ˆë…'); 
 
 
 INSERT INTO comments( comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName) 
-VALUES (seq_COMMENTS_COMMENT_NO.nextval, 15555, 'IS', 'user01', '1¹ø ´ñ±Û¼±¼ö Àß´Ş¸³´Ï´Ù!!', sysdate, 0, '½ºÄ±');
+VALUES (seq_COMMENTS_COMMENT_NO.nextval, 15555, 'IS', 'user01', '1ë²ˆ ëŒ“ê¸€ì„ ìˆ˜ ì˜ë‹¬ë¦½ë‹ˆë‹¤!!', sysdate, 0, 'ìŠ¤ìº‡');
 
 INSERT INTO comments( comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName) 
-VALUES (seq_COMMENTS_COMMENT_NO.nextval, 15556, 'IS', 'user02', '±×µÚ¸¦ ÀÕ´Â 2¹ø ´ñ±Û¼±¼ö!!', sysdate, 1, 'È£·©ÀÌ');
+VALUES (seq_COMMENTS_COMMENT_NO.nextval, 15556, 'IS', 'user02', 'ê·¸ë’¤ë¥¼ ì‡ëŠ” 2ë²ˆ ëŒ“ê¸€ì„ ìˆ˜!!', sysdate, 1, 'í˜¸ë­ì´');
 
 INSERT INTO comments( comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName) 
-VALUES (seq_COMMENTS_COMMENT_NO.nextval, 15557, 'IS', 'user03', '¸ÍÃß°İÇÕ´Ï´Ù 3¹ø ´ñ±Û¼±¼ö!!', sysdate, 2, '¾È³ç');
+VALUES (seq_COMMENTS_COMMENT_NO.nextval, 15557, 'IS', 'user03', 'ë§¹ì¶”ê²©í•©ë‹ˆë‹¤ 3ë²ˆ ëŒ“ê¸€ì„ ìˆ˜!!', sysdate, 2, 'ì•ˆë…•');
 
 INSERT INTO recomment( comment_no, recomment_no, id, recomment_content, reg_date, nickName) 
-VALUES (10000, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user01', '1¹ø ´ë´ñ±Û¼±¼ö Àß ´Ş¸®³ª¿ä?!', sysdate, '½ºÄ±');
+VALUES (10000, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user01', '1ë²ˆ ëŒ€ëŒ“ê¸€ì„ ìˆ˜ ì˜ ë‹¬ë¦¬ë‚˜ìš”?!', sysdate, 'ìŠ¤ìº‡');
 
 INSERT INTO recomment( comment_no, recomment_no, id, recomment_content, reg_date, nickName) 
-VALUES (10001, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user02', '2¹ø ´ë´ñ±Û¼±¼ö Àß ´Ş¸®³ª¿ä?!', sysdate, 'È£·©ÀÌ');
+VALUES (10001, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user02', '2ë²ˆ ëŒ€ëŒ“ê¸€ì„ ìˆ˜ ì˜ ë‹¬ë¦¬ë‚˜ìš”?!', sysdate, 'í˜¸ë­ì´');
 
 INSERT INTO recomment( comment_no, recomment_no, id, recomment_content, reg_date, nickName) 
-VALUES (10002, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user03', '3¹ø ´ë´ñ±Û¼±¼ö Àß ´Ş¸®³ª¿ä?!', sysdate, '¾È³ç');
+VALUES (10002, seq_RECOMMENT_RECOMMENT_NO.NEXTVAL, 'user03', '3ë²ˆ ëŒ€ëŒ“ê¸€ì„ ìˆ˜ ì˜ ë‹¬ë¦¬ë‚˜ìš”?!', sysdate, 'ì•ˆë…•');
 
 
 INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', 'ÇÑ°èµ¹ÆÄ5Ãµ¿ø±Ç', 5000, 'coupon5000.jpg', '0', '2019/07/11', '2019/09/11');
+(seq_coupon_coupon_no.NEXTVAL, 'LT93F22LX', 'í•œê³„ëŒíŒŒ5ì²œì›ê¶Œ', 5000, 'coupon5000.jpg', '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'SS23F11XT', 'ÇÑ°èµ¹ÆÄ1¸¸¿ø±Ç', 10000, 'coupon10000.jpg', '0', '2019/07/11', '2019/09/11');
+(seq_coupon_coupon_no.NEXTVAL, 'SS23F11XT', 'í•œê³„ëŒíŒŒ1ë§Œì›ê¶Œ', 10000, 'coupon10000.jpg', '0', '2019/07/11', '2019/09/11');
 
 INSERT INTO coupon
 (coupon_no, coupon_code, coupon_name, discount, image, coupon_status, make_date, limit_date)
 VALUES
-(seq_coupon_coupon_no.NEXTVAL, 'P29FSF33CE', 'ÇÑ°èµ¹ÆÄ2¸¸¿ø±Ç', 20000, 'coupon20000.jpg', '0', '2019/07/11', '2019/09/11');
+(seq_coupon_coupon_no.NEXTVAL, 'P29FSF33CE', 'í•œê³„ëŒíŒŒ2ë§Œì›ê¶Œ', 20000, 'coupon20000.jpg', '0', '2019/07/11', '2019/09/11');
 
 
 INSERT INTO interest
@@ -873,42 +837,42 @@ VALUES
 INSERT INTO MILEAGE 
 (MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
 VALUES 
-('10000', '1', '20000', 'user01', '»óÇ° ±¸¸Å', TO_DATE('2019-07-18 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+('10000', '1', '20000', 'user01', 'ìƒí’ˆ êµ¬ë§¤', TO_DATE('2019-07-18 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO MILEAGE 
 (MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
 VALUES 
-('10002', '1', '500', 'user01', 'ÀÌº¥Æ® Àû¸³', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+('10002', '1', '500', 'user01', 'ì´ë²¤íŠ¸ ì ë¦½', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO MILEAGE 
 (MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
 VALUES 
-('10003', '1', '1000', 'user02', '»óÇ° ±¸¸Å', TO_DATE('2018-03-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+('10003', '1', '1000', 'user02', 'ìƒí’ˆ êµ¬ë§¤', TO_DATE('2018-03-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO MILEAGE 
 (MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
 VALUES 
-('10001', '2', '-500', 'user01', '»óÇ° ±¸¸Å', TO_DATE('2019-01-10 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+('10001', '2', '-500', 'user01', 'ìƒí’ˆ êµ¬ë§¤', TO_DATE('2019-01-10 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO MILEAGE 
 (MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
 VALUES 
-('10004', '2', '-100', 'user02', '»óÇ° ±¸¸Å', TO_DATE('2019-01-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+('10004', '2', '-100', 'user02', 'ìƒí’ˆ êµ¬ë§¤', TO_DATE('2019-01-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO MILEAGE 
 (MILEAGE_NO, MILEAGE_CODE, MILEAGE, ID, MILEAGE_REASON, REG_DATE) 
 VALUES 
-('10005', '1', '5000', 'user02', 'ÀÌº¥Æ® Àû¸³', TO_DATE('2019-01-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+('10005', '1', '5000', 'user02', 'ì´ë²¤íŠ¸ ì ë¦½', TO_DATE('2019-01-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 
 INSERT INTO PRODUCT 
-(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10001', '»ç·á1', '20000', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'ÇÁ¶û½º', '1', '»ó¼¼Á¤º¸3', 'Çö´ë', '19000', '10', 'A031426.jpg');
+(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10001', 'ì‚¬ë£Œ1', '20000', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'í”„ë‘ìŠ¤', '1', 'ìƒì„¸ì •ë³´3', 'í˜„ëŒ€', '19000', '10', 'A031426.jpg');
 
 INSERT INTO PRODUCT 
-(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10002', '»ç·á11', '2000', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'ÇÁ¶û½º', '1', '»ó¼¼Á¤º¸4', 'Çö´ë', '19000', '10', 'A031426.jpg');
+(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10002', 'ì‚¬ë£Œ11', '2000', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'í”„ë‘ìŠ¤', '1', 'ìƒì„¸ì •ë³´4', 'í˜„ëŒ€', '19000', '10', 'A031426.jpg');
 
 INSERT INTO PRODUCT 
-(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10003', '»ç·á4', '20004', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'ÀÌÅ»¸®¾Æ', '1', '»ó¼¼Á¤º¸6', 'Çö´ë', '19000', '10', 'A031426.jpg');
+(PROD_NO, PROD_NAME, PRICE, MANU_DATE, REG_DATE, COUNTRY, QUANTITY, PROD_DETAIL, COMPANY, DISCOUNT_PRICE, PROD_CODE, MAIN_FILE) VALUES ('10003', 'ì‚¬ë£Œ4', '20004', TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2019-05-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'ì´íƒˆë¦¬ì•„', '1', 'ìƒì„¸ì •ë³´6', 'í˜„ëŒ€', '19000', '10', 'A031426.jpg');
 
 
 INSERT INTO files
@@ -930,20 +894,14 @@ VALUES
 INSERT INTO ORDERS 
 (ORDER_NO, PROD_NO, ID, PHONE, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
 VALUES 
-('10000', '10001', 'user01', '011-1123-4567', '¼­¿ï½Ã °­³²±¸', '°­³¶±¸', '010-2222-3333', '»¡¸®¿ä¸Á', '2', TO_DATE('2019-02-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '30000', '1');
+('10000', '10001', 'user01', '011-1123-4567', 'ì„œìš¸ì‹œ ê°•ë‚¨êµ¬', 'ê°•ë‚­êµ¬', '010-2222-3333', 'ë¹¨ë¦¬ìš”ë§', '2', TO_DATE('2019-02-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '30000', '1');
 
 INSERT INTO ORDERS
 (ORDER_NO, PROD_NO, ID, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
 VALUES 
-('10001', '10002', 'user02', 'ÃæºÏ Á¦Ãµ½Ã', 'ÃæÀç', '010-2223-8888', '±â´Ù¸³´Ï´Ù', '1', TO_DATE('2018-03-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '10000', '1');
+('10001', '10002', 'user02', 'ì¶©ë¶ ì œì²œì‹œ', 'ì¶©ì¬', '010-2223-8888', 'ê¸°ë‹¤ë¦½ë‹ˆë‹¤', '1', TO_DATE('2018-03-22 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '10000', '1');
 
 INSERT INTO ORDERS 
 (ORDER_NO, PROD_NO, ID, PHONE, RECEIVER_ADDR, RECEIVER_NAME, RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, ORDER_QUANTITY, TOTAL_PRICE, ORDER_CODE) 
 VALUES 
-('10002', '10003', 'user01', '011-1123-4567', '´ëÀü ±¤¿ª½Ã', '´ë±¤', '011-4555-2222', '¹è¼ÛÀü¿¬¶ô', '1', TO_DATE('2017-03-06 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '40000', '1');
-
-
-
-
-	
-		
+('10002', '10003', 'user01', '011-1123-4567', 'ëŒ€ì „ ê´‘ì—­ì‹œ', 'ëŒ€ê´‘', '011-4555-2222', 'ë°°ì†¡ì „ì—°ë½', '1', TO_DATE('2017-03-06 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '40000', '1');

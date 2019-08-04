@@ -109,13 +109,13 @@ public class AdoptController {
 		adopt.setMainFile(multiFile.get(0));
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
-		
+		System.out.println("--------------1--------------------");
 		User user = userService.getUsers(adopt.getId());
 		user.setLevelPoint(user.getLevelPoint()+5);
 		userService.updateUsers(user);
-		
+		System.out.println("---------------2-------------------");
 		List<FileDog> listFile = new ArrayList<FileDog>();
-		
+		System.out.println("----------------3------------------");
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
 
@@ -127,7 +127,7 @@ public class AdoptController {
 			listFile.add(files);
 		}
 		fileService.addFile(listFile);
-		
+		System.out.println("----------------4------------------");
 		model.addAttribute("adopt", adopt);
 		
 		if(adopt.getBoardCode().equals("AD")) {

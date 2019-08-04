@@ -31,6 +31,7 @@ img{max-width: 600px;}
 
 #recommand:hover{
 	color: #f04f23;
+	cursor : pointer;
 }
 </style>
 
@@ -51,8 +52,8 @@ img{max-width: 600px;}
 			</h3>
 
 			<div class="row" style="position: relative; height: 25px;">
-				<div class="col-md-8"style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id})| ${board.regDate}</div>
-				<div class="col-md-4" align="right" style="position: absolute; right: 0px; bottom: 0px;">조회수 :${board.viewCount} 추천수 : ${board.recommendCount} 댓글수 :${totalCount}</div>
+				<div class="col-md-8"style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id}) | ${board.regDate}</div>
+				<div class="col-md-4" align="right" style="position: absolute; right: 0px; bottom: 0px;">조회수 ${board.viewCount} | 추천수 ${board.recommendCount} | 댓글수 ${totalCount} </div>
 			</div>
 			<p />
 
@@ -109,8 +110,8 @@ img{max-width: 600px;}
 		
 		$("#recommand").on("click", function(){
 				
-			if(${sessionScope.user == null}){
-				alert("로그인 하십쇼");
+			if(${ empty sessionScope.user}){				
+				$("#login-modal").modal("show");
 				return;
 			}
 			
@@ -222,7 +223,13 @@ img{max-width: 600px;}
    }
    
    function initMap() {
-     map = new google.maps.Map(document.getElementById('mapArea'), {
+	   
+	   //console.log(routeTest[0]);
+	   if(routeTest[0] == undefined){
+		   return;
+	   }
+	   
+     	map = new google.maps.Map(document.getElementById('mapArea'), {
            zoom: 16,
            center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
                  lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
