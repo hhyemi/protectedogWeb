@@ -216,6 +216,39 @@
 			  <p align="left" id="confirm" ></p>
 			</div>   
 			
+			
+			
+			
+			<div id="applyModal" role="dialog" class="modal modal-top fade calendar-modal" >
+
+				  <div class="modal-dialog modal-dialog-centered">
+				    <div class="modal-content">
+				    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 30px;">
+				      <div class="container">
+				        <div class="row no-gutters slider-text align-items-center justify-content-center">
+				          <div class="col-md-9 ftco-animate text-center">
+				          	<p ><span class="mr-2">Add</span> <span>Apply</span></p>
+				            <font size="7">
+				            	신청서 확인
+				            </font>
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+			
+			        <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;"></div>
+			        
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" id="addApply">신청</button>
+			          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>        
+			        </div>
+			        
+			    </div>
+			  </div>
+			</div>
+			
+			
+			
 <!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
 	          
 	          
@@ -231,7 +264,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
   
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 <!--   <script type="text/javascript" src="/resources/events.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!--   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
@@ -239,22 +272,22 @@
 
  
 	
-	$( function() {
-	    $( "#dialog-confirm" ).dialog({
-	    	  autoOpen: false,
-		      width: 470,
-		      height: 500,
-		      modal: true,
-		      buttons: {
-		        	신청: function() {
-		        		$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
-		        	},
-		        	취소: function() {
-		          		$( this ).dialog( "close" );
-		        	}
-		      }
-	    });
-	});
+// 	$( function() {
+// 	    $( "#dialog-confirm" ).dialog({
+// 	    	  autoOpen: false,
+// 		      width: 470,
+// 		      height: 500,
+// 		      modal: true,
+// 		      buttons: {
+// 		        	신청: function() {
+// 		        		$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
+// 		        	},
+// 		        	취소: function() {
+// 		          		$( this ).dialog( "close" );
+// 		        	}
+// 		      }
+// 	    });
+// 	});
 
 //////////////////////    ↑  dialog        ////////////////////////////////////////////////	
 	
@@ -320,7 +353,17 @@
 
 	$( "textarea[name=plan]" ).keyup(function( ) {
 		if($("textarea[name=plan]").val().length > 300 ){
-			$("span[name=plan]").text('300자까지 입력할 수 있습니다.');
+			swal({
+		           text: "300자까지 입력할 수 있습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    });
+			$("textarea[name=plan]").val($("textarea[name=plan]").val().toString().substring(0,300));
+// 			$("span[name=plan]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=plan]").text('');
 		}
@@ -328,7 +371,17 @@
 
 	$( "textarea[name=pay]" ).keyup(function( ) {
 		if($("textarea[name=pay]").val().length > 300 ){
-			$("span[name=pay]").text('300자까지 입력할 수 있습니다.');
+			swal({
+		           text: "300자까지 입력할 수 있습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    });
+			$("textarea[name=pay]").val($("textarea[name=pay]").val().toString().substring(0,300));
+// 			$("span[name=pay]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=pay]").text('');
 		}
@@ -336,7 +389,17 @@
 
 	$( "textarea[name=reason]" ).keyup(function( ) {
 		if($("textarea[name=reason]").val().length > 300 ){
-			$("span[name=reason]").text('300자까지 입력할 수 있습니다.');
+			swal({
+		           text: "300자까지 입력할 수 있습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    });
+			$("textarea[name=reason]").val($("textarea[name=reason]").val().toString().substring(0,300));
+// 			$("span[name=reason]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=reason]").text('');
 		}
@@ -344,7 +407,17 @@
 
 	$( "textarea[name=situation]" ).keyup(function( ) {
 		if($("textarea[name=situation]").val().length > 300 ){
-			$("span[name=situation]").text('300자까지 입력할 수 있습니다.');
+			swal({
+		           text: "300자까지 입력할 수 있습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    });
+			$("textarea[name=situation]").val($("textarea[name=situation]").val().toString().substring(0,300));
+// 			$("span[name=situation]").text('300자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=situation]").text('');
 		}
@@ -486,19 +559,71 @@
 		}
 		// 입력 안했을 경우 || 길이제한 넘었을 경우
 		if( $("textarea[name=plan]").val().trim() == '' || $("textarea[name=plan]").val().length > 300 ){
-			$("textarea[name=plan]").focus();
+			swal({
+		           text: "앞으로의 계획을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("textarea[name=plan]").focus();
+		           }
+		    });
+// 			$("textarea[name=plan]").focus();
 			return;
 		}
 		if( $("textarea[name=pay]").val().trim() == '' || $("textarea[name=pay]").val().length > 300 ){
-			$("textarea[name=pay]").focus();
+			swal({
+		           text: "예상 비용을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("textarea[name=pay]").focus();
+		           }
+		    });
+// 			$("textarea[name=pay]").focus();
 			 return;
 		}
 		if( $("textarea[name=reason]").val().trim() == '' || $("textarea[name=reason]").val().length > 300 ){
-			$("textarea[name=reason]").focus();
+			swal({
+		           text: "입양 이유를 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("textarea[name=reason]").focus();
+		           }
+		    });
+// 			$("textarea[name=reason]").focus();
 			return;
 		}
 		if( $("textarea[name=situation]").val().trim() == '' || $("textarea[name=situation]").val().length > 300 ){
-			$("textarea[name=situation]").focus();
+			swal({
+		           text: "상황에 따른 대처를 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("textarea[name=situation]").focus();
+		           }
+		    });
+// 			$("textarea[name=situation]").focus();
 			return;
 		}
 
@@ -517,14 +642,59 @@
     	var curTag = '';
     	
     	if ( mate == '있음' ){
-    		mateTag = '<br\/><strong>[동의 여부]<\/strong> : '+mateAgree;
+    		mateTag = '<div class="row">'
+				  		+'<div class="col-md-4  "><strong>동의 여부</strong></div>'
+						+'<div class="col-md-8 ">'+mateAgree+'</div>'
+					+'</div>';
     	}
     	if ( raise == '있음' ) {
-    		curTag = '<br\/><strong>[현재 양육 여부]<\/strong> : '+currently;
+    		curTag = '<div class="row">'
+				  		+'<div class="col-md-4  "><strong>동의 여부</strong></div>'
+						+'<div class="col-md-8 ">'+currently+'</div>'
+					+'</div>';
     	}
 	
     	
     	var confirmHTML =
+
+						'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>직업</strong></div>'
+							+'<div class="col-md-8 ">'+job+'</div>'
+						+'</div>'
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>거주지 유형</strong></div>'
+							+'<div class="col-md-8 ">'+addr+'</div>'
+						+'</div>'
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>동거인 여부</strong></div>'
+							+'<div class="col-md-8 ">'+mate+'</div>'
+						+'</div>'
+						+mateTag
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>양육경험</strong></div>'
+							+'<div class="col-md-8 ">'+raise+'</div>'
+						+'</div>'
+						+curTag
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>앞으로의 계획</strong></div>'
+							+'<div class="col-md-8 ">'+plan+'</div>'
+						+'</div>'
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>1년 예상비용</strong></div>'
+							+'<div class="col-md-8 ">'+pay+'</div>'
+						+'</div>'
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>입양신청 이유</strong></div>'
+							+'<div class="col-md-8 ">'+reason+'</div>'
+						+'</div>'
+						+'<div class="row">'
+					  		+'<div class="col-md-4  "><strong>상황에 따른 대처</strong></div>'
+							+'<div class="col-md-8 ">'+situation+'\</div>'
+						+'</div>'
+						+'<div class="row">'
+							+'<div class="col-md-12"><br/><br/></div>'
+					  		+'<div class="col-md-12  "><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?</strong></div>'
+						+'</div>';
 //     					'<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">'
 // 					      +'<div class="container">'
 // 					        +'<div class="row no-gutters slider-text align-items-center justify-content-center">'
@@ -535,17 +705,18 @@
 // 					        +'</div>'
 // 					      +'</div>'
 // 					    +'</div>'+	 
-    					'<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
-						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
-						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
-						+mateTag
-						+'<br\/><strong>[양육경험]<\/strong> : '+raise
-						+curTag
-						+'<br\/><strong>[앞으로의 계획]<\/strong> : '+plan
-						+'<br\/><strong>[1년 예상비용]<\/strong> : '+pay
-						+'<br\/><strong>[입양신청 이유]<\/strong> : '+reason
-						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
-						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong></p>';
+							
+//     					'<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
+// 						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
+// 						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
+// 						+mateTag
+// 						+'<br\/><strong>[양육경험]<\/strong> : '+raise
+// 						+curTag
+// 						+'<br\/><strong>[앞으로의 계획]<\/strong> : '+plan
+// 						+'<br\/><strong>[1년 예상비용]<\/strong> : '+pay
+// 						+'<br\/><strong>[입양신청 이유]<\/strong> : '+reason
+// 						+'<br\/><strong>[상황에 따른 대처]<\/strong> : '+situation 
+// 						+'<br\/><br\/><br\/><strong>신청 후 <u>조회, 수정, 삭제<\/u>는 불가능합니다. 신청하시겠습니까?<\/strong></p>';
 
     	
     	if( mateAgree == '' ){
@@ -556,24 +727,34 @@
     	}
  	
 		$('#cfHTML').remove();
-		$('#confirm').html( confirmHTML );
+		$('.modal-body').html( confirmHTML );
+		$('#applyModal').modal("show");
+
+// 		$('#confirm').html( confirmHTML );
 		
-		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-		$('#dialog-confirm').dialog( "open" );
+// 		$('#dialog-confirm').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 		$('#dialog-confirm').dialog( "open" );
 				
 	}
 	
     
     $(function() {
-		$( "button:contains('신청')" ).on("click" , function() {
+		$( "button.py-3:contains('신청')" ).on("click" , function() {
+// 			$('#applyModal').modal("show");
 			fncAddApply();
 		});
+		
 		
 		$( "a:contains('취소')" ).on("click" , function() {
 			self.location = "/adopt/getAdopt?postNo=${apply.adoptNo}"
 		});
 	 });	
-      
+  	  $( document ).on("click" ,'#addApply' ,function() {
+//  		$( "#addApply" ).on("click" , function() {
+			$("form.billing-form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();
+		});
+		
+		$('.modal-body').css('max-height', $(window).height() * 0.6);
       
     </script>
   

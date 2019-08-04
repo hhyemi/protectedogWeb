@@ -402,24 +402,22 @@
 			  $('#dialog-postTitle').dialog( "open" );
 			  return;
 		  }
-		  if( $(".preview-box").length == 0 ){
-			  swal({
-		           text: "이미지를 등록해주세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "닫기"
-							 }
-				   },
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-		           }
-		      });
-// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-img').dialog( "open" );
-			  return;
-	  	  }
+// 		  if( $(".preview-box").length == 0 ){
+// 			  swal({
+// 		           text: "이미지를 등록해주세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "닫기"
+// 							 }
+// 				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+// 		           }
+// 		      });
+// 			  return;
+// 	  	  }
 // 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
 // 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 // 			  $('#dialog-postContent').dialog( "open" );

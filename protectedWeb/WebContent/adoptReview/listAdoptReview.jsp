@@ -41,7 +41,7 @@
 		
  		.listImg {
  			max-height: 330px;  
- 			min-height: 330px;  
+ 			min-height: 300px;  
  			min-width: wrap; 
  			max-width: wrap; 
  			display: block; 

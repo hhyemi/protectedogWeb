@@ -74,7 +74,7 @@ public class AdoptRestController {
 									,@RequestParam Map<String, Object> param
 																										) throws Exception {
 
-		System.out.println("/adopt/json/addMissing : POST \n"+param.get("file").toString());
+		System.out.println("/adopt/json/addMissing : POST \n");
 		MultipartFile image = images.get(0);
 		String mainF = image.getOriginalFilename();
 		Adopt adopt = new Adopt();
@@ -134,14 +134,11 @@ public class AdoptRestController {
 	}
 	
 	
-	// 실종신고 수정
 	@RequestMapping( value="json/updateMissing", method=RequestMethod.POST )
 	public String updateMissing( 
 									@RequestParam("files") List<MultipartFile> images
 									,@RequestParam Map<String, Object> param
-//									,@RequestParam("multiFile") ArrayList<String> multiFile,
-//									@RequestParam("deleteFile") ArrayList<String> deleteFile
-																							) throws Exception {
+																										) throws Exception {
 
 		System.out.println("/adopt/json/updateMissing : POST \n");
 		MultipartFile image = images.get(0);
@@ -149,16 +146,15 @@ public class AdoptRestController {
 		Adopt adopt = new Adopt();
 		
 		adopt.setMainFile(mainF);
-		
-		adopt.setPostContent(param.get("postContentU").toString());
-		adopt.setPhone(param.get("phoneU").toString());
-		adopt.setLocationKr(param.get("locationKrU").toString());
-		adopt.setDogBreed(param.get("dogBreedU").toString());
-		adopt.setDogGender(param.get("dogGenderU").toString());
-		adopt.setDogPay(  Integer.parseInt(param.get("dogPayU").toString())  );
-		adopt.setDogStatus(param.get("dogStatusU").toString());
-		adopt.setDogChar(param.get("dogCharU").toString());
-		adopt.setPostNo(  Integer.parseInt(param.get("postNoU").toString())  );
+		adopt.setPostContent(param.get("postContent").toString());
+		adopt.setPhone(param.get("phone").toString());
+		adopt.setLocationKr(param.get("locationKr").toString());
+		adopt.setDogBreed(param.get("dogBreed").toString());
+		adopt.setDogGender(param.get("dogGender").toString());
+		adopt.setDogPay( Integer.parseInt(param.get("dogPay").toString()));
+		adopt.setDogStatus(param.get("dogStatus").toString());
+		adopt.setDogChar(param.get("dogChar").toString());
+		adopt.setPostNo( Integer.parseInt(param.get("postNo").toString()));
 		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
 		
 		System.out.println("--------5--------");
@@ -167,9 +163,13 @@ public class AdoptRestController {
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
 		System.out.println("--------6--------");
+//		User user = userService.getUsers(adopt.getId());
+//		user.setLevelPoint(user.getLevelPoint()+5);
+//		userService.updateUsers(user);
+		
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
-		
+		System.out.println("--------7--------");
 		// 파일디비에넣기
 		FileDog files = new FileDog();
 		files.setBoardCode(adopt.getBoardCode());
@@ -182,6 +182,7 @@ public class AdoptRestController {
 		
 		return "{\"message\" : \"OK\" }";
 	}
+	
 	
 	
 	// 글상태 완료로 변경
