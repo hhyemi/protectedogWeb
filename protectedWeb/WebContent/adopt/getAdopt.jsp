@@ -125,23 +125,6 @@
   
   <body>
     
-    <!--================Header Menu Area =================-->
-
-    
-    
-<!--     <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;"> -->
-<!--       <div class="container"> -->
-<!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
-<!--           <div class="col-md-9 ftco-animate text-center"> -->
-<!--              <p ><span class="mr-2">Get</span> <span>Adopt</span></p> -->
-<!--             <font size="7">분양상세조회</font> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
-
-
-    <!--================Single Product Area =================-->
     
     <div class="product_image_area">
       <div class="container">
@@ -246,8 +229,8 @@
 				  		<div class="col-md-2 " ><font size="4px"><strong>견종</strong></font></div>
 						<div class="col-md-4 "><font size="4px">${adopt.dogBreed}</font></div>
 						
-						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>크기</strong></font></div>
-						<div class="col-md-4 "><font size="4px">${adopt.dogSize}</font></div>
+						<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>크기</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;"><font size="4px">${adopt.dogSize}</font></div>
 					</div>
 <!--                 </li> -->
                 
@@ -256,8 +239,8 @@
 				  		<div class="col-md-2 "><font size="4px"><strong>체중</strong></font></div>
 						<div class="col-md-4 "><font size="4px">${adopt.dogWeight}kg</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>성별</strong></font></div>
-						<div class="col-md-4 "><font size="4px">${adopt.dogGender}</font></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>성별</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${adopt.dogGender}</font></div>
 					</div>
 <!--                 </li> -->
                 
@@ -266,8 +249,8 @@
 				  		<div class="col-md-2 "><font size="4px"><strong>책임비</font></strong></div>
 						<div class="col-md-4 "><font size="4px"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일</font></strong></div>
-						<div class="col-md-4"><font size="4px">${adopt.dogDate}</font></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>발견일</font></strong></div>
+						<div class="col-md-4" style="padding-left: 0px;"><font size="4px">${adopt.dogDate}</font></div>
 					</div>
 
                 	<div class="row">
@@ -372,8 +355,11 @@
         <div class="col-md-12"><hr/></div>
         
         <p align="right" style="padding-right: 15px;">
-       		<c:if test="${adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
+       		<c:if test="${ adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
 				<button class="btn btn-default" id="modiButton">수정</button>
+	       		<button class="btn btn-default" id="delButton">삭제</button>
+			</c:if>
+       		<c:if test="${ sessionScope.user.role eq 'admin'}">
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
 			
@@ -419,7 +405,7 @@
         
         <div class="modal-footer">
 <!--           <button type="button" class="btn btn-default" ></button> -->
-          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>        
+          <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>        
         </div>
         
     </div>
@@ -630,7 +616,7 @@
 	  							           dangerMode: true,
 	  							           buttons: {
 	  												 catch: {
-	  												 	text: "닫기"
+	  												 	text: "확인"
 	  												 }
 	  									   },
 	  							        });
@@ -671,7 +657,7 @@
 	  							           dangerMode: true,
 	  							           buttons: {
 	  												 catch: {
-	  												 	text: "닫기"
+	  												 	text: "확인"
 	  												 }
 	  									   },
 	  							        });
@@ -835,7 +821,7 @@
 								} else if ( displayValue.indexOf(id) != -1 ) {
 									swal({
 								           text: "이미 신청하셨습니다.",
-								           buttons: "닫기",
+								           buttons: "확인",
 								    });
 
 								//로그인한상태+아이디가 없을때
@@ -993,26 +979,44 @@
 			});
 		
 			$( "button:contains('삭제')" ).on("click" , function() {
-				swal({
-			           text: "삭제하시겠습니까?",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "예",
-//								 	value: "catch",
-								 },
-								 cancel: "아니오",
-					   },
+				  swal({
+		               text: "삭제하시겠습니까?",
+		               icon: "warning",
+		               buttons: ["취소", "확인"],
+		               dangerMode: true,
+		             })
+		             .then((willDelete) => {
+		               if (willDelete) {
+		                 swal("삭제가 완료되었습니다!", {
+		                   icon: "success",
+		                 }).then((value) => {
+		                	 self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
+		                 });
+		               }
+		             });
+				
+// 				swal({
+// 			           text: "삭제하시겠습니까?",
+// 			           dangerMode: true,
+// 			           buttons: {
+// 			        	  		 cancel: "취소",
+// 								 catch: {
+// 								 	text: "확인",
+// //								 	value: "catch",
+// 								 },
+								 
+// 					   },
 					   
-			    }).then((willDelete) => {
-			           if (willDelete) {
-			        	    self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
+// 			    }).then((willDelete) => {
+// 			           if (willDelete) {
+			        	    
 // 			           		swal("삭제되었습니다.", {
 // 				           		icon: "success",
-// 				           		buttons: "닫기"
+// 				           		buttons: "확인"
 // 			           		});
-			           }
-			    });
+// 			           		self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
+// 			           }
+// 			    });
 				
 			});
 		
@@ -1035,10 +1039,10 @@
 				swal({
 			           text: "분양완료 상태로 변경하시겠습니까?",
 			           buttons: {
+								 cancel: "취소",
 								 catch: {
-								 	text: "예",
+								 	text: "변경",
 								 },
-								 cancel: "아니오",
 					   },
 					   
 			    }).then((willDelete) => {
@@ -1046,32 +1050,32 @@
 			        	    fncComplete();
 			           		swal("변경되었습니다.", {
 				           		icon: "success",
-				           		buttons: "닫기"
+				           		buttons: "확인"
 			           		});
 			           }
 			    });
 			});
 		
-			$( "#missingCompleteButton" ).on("click" , function() {
-				swal({
-			           text: "찾기완료 상태로 변경하시겠습니까?",
-			           buttons: {
-								 catch: {
-								 	text: "예",
-								 },
-								 cancel: "아니오",
-					   },
+// 			$( "#missingCompleteButton" ).on("click" , function() {
+// 				swal({
+// 			           text: "찾기완료 상태로 변경하시겠습니까?",
+// 			           buttons: {
+// 								 catch: {
+// 								 	text: "예",
+// 								 },
+// 								 cancel: "아니오",
+// 					   },
 					   
-			    }).then((willDelete) => {
-			           if (willDelete) {
-			        	    fncComplete();
-			           		swal("변경되었습니다.", {
-				           		icon: "success",
-				           		buttons: "닫기"
-			           		});
-			           }
-			    });
-			});
+// 			    }).then((willDelete) => {
+// 			           if (willDelete) {
+// 			        	    fncComplete();
+// 			           		swal("변경되었습니다.", {
+// 				           		icon: "success",
+// 				           		buttons: "확인"
+// 			           		});
+// 			           }
+// 			    });
+// 			});
 		
 			$( "button:contains('목록')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
@@ -1080,7 +1084,7 @@
 			$( "button:contains('신청완료')" ).on("click" , function() {
 				swal({
 			           text: "이미 신청하셨습니다.",
-			           buttons: "닫기",
+			           buttons: "확인",
 			    });
 			});
 			

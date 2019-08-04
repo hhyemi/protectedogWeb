@@ -37,6 +37,7 @@
 			padding-top: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
+			background-color: white;
 		}
 		
  		.listImg {
@@ -63,7 +64,7 @@
 		
 		#searchKeyword {
 			height: 40px;
-			width: 150px;
+			width: 160px;
 			border : 1px solid #D3D3D3;
 			padding-left: 5px;
 		}
@@ -101,13 +102,16 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">List</span> <span>AdoptReview</span></p>
+          	<p ><span class="mr-2">Adopt · Missing</span> <span>Review</span></p>
             <font size="7">후기게시판</font>
           </div>
         </div>
       </div>
     </div>
 
+	<div class="sectionContainer ">	
+    <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+	
     
 	<div class="container">
 	
@@ -217,9 +221,13 @@
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
+ 	</section></div>
  	
  	
- 	<jsp:include page="/common/searchResult.jsp"></jsp:include>
+ 	
+ 	<c:if test="${resultPage.totalCount eq 0 }">
+ 		<jsp:include page="/common/searchResult.jsp"></jsp:include>
+ 	</c:if>
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
@@ -298,10 +306,12 @@
 								}
 								if( postSize == 1 && data.list.length == 0 ){
 									console.log('결과없음');
-									$('#searchEmpty').remove();
-									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
-													+'<b><font size="5px">검색결과가 없습니다.</font></b>'
-						                    		+'</div>';
+									if ( $('#searchKeyword').val()==''){
+										$('#searchEmpty').remove();
+										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
+								                    	+'</div>';
+									}
 								}
 								$('#listARJSON').append(displayValue);
 								
@@ -333,15 +343,17 @@
 			console.log(id);
 			if (id == ''){
 				swal({
-			           text: "로그인 먼저 해주세요.",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "닫기"
-								 }
-					   },
-					   
-			    });
+	                   text: "로그인 먼저 해주세요.",
+	                   icon: "warning",
+	                   buttons: ["닫기", "로그인"],
+	                   dangerMode: true     
+	                 })
+	                 .then((willDelete) => {
+	                   if (willDelete) {
+// 	                	   self.location = "/users/addUsersAddition.jsp"
+	                        }
+	        	 });  
+			
 				return;
 			}
 			// 분양글 등록+ 그 글이 완료상태
@@ -398,16 +410,12 @@
 								           dangerMode: true,
 								           buttons: {
 													 catch: {
-													 	text: "닫기"
+													 	text: "확인"
 													 }
 										   },
 										   
 								    });
-								
-// 									$( '#dialog-cant' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 									$( "#dialog-cant" ).dialog( "open" );
 								}
-								
 						},
 						error: function(request, status, error){ 
 							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

@@ -14,6 +14,7 @@
 
 <style type="text/css">
 
+
 .waves-effect>span {
 	background-color: #f04f23;
 	border-radius: 3px;
@@ -1573,7 +1574,7 @@ h2{
           <div id="attach" class="form-group">
             <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
               	<span><strong>사진등록</strong></span>
-            </label></span>&nbsp; 하나만 등록 가능합니다.
+            </label></span>&nbsp; 한장만 등록 가능합니다.
             <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
           </div>
 
@@ -1779,11 +1780,11 @@ h2{
 				    
 					if( date > today ){
 						swal({
-					           text: "선택한 날짜는 실종일로 지정되어 \n오늘 날짜까지만 선택할 수 있습니다.",
+					           text: "오늘 날짜까지 선택 가능합니다.",
 					           dangerMode: true,
 					           buttons: {
 										 catch: {
-										 		text: "닫기"
+										 		text: "확인"
 										 }
 							   },
 					    });
@@ -1801,15 +1802,28 @@ h2{
 							jQuery('#modal-view-event-add').modal();
 							
 						} else {
+// 							swal({
+// 						           text: "인증회원만 작성 가능합니다.",
+// 						           dangerMode: true,
+// 						           buttons: {
+// 											 catch: {
+// 											 		text: "확인"
+// 											 }
+// 								   },
+// 						    });
 							swal({
-						           text: "인증회원만 작성 가능합니다.",
-						           dangerMode: true,
-						           buttons: {
-											 catch: {
-											 		text: "닫기"
-											 }
-								   },
-						    });
+				                   title: "인증회원만 이용할 수 있는 기능입니다.",
+		 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+				                   icon: "warning",
+				                   buttons: ["닫기", "인증하기"],
+				                   dangerMode: true     
+				                 })
+				               .then((willDelete) => {
+				                   if (willDelete) {
+		 		                        self.location = "/users/addUsersAddition.jsp"
+				                        }
+				      		  });
+							
 						}
 					}
 				},
@@ -1842,7 +1856,7 @@ h2{
 													+"</div>"
 													+"<div class='row'>"
 												  		+"<div class='col-md-2 '><strong>견종</strong></div>"
-														+"<div class='col-md-4 '>"+event.nickname+"</div>"
+														+"<div class='col-md-4 '>"+event.dogBreed+"</div>"
 												  		+"<div class='col-md-2 ' style='padding-left:0px;'><strong>성별</strong></div>"
 														+"<div class='col-md-4 '>"+event.dogGender+"</div>"
 													+"</div>"
@@ -1923,7 +1937,16 @@ h2{
 	                 var imgNum = previewIndex++;
 	                 
 	                //8장 이상 업로드시
-	                 if(Object.keys(files).length>1){
+	                 if(Object.keys(files).length>=1){
+	                	 swal({
+	      		           text: "한장만 등록 가능합니다",
+	      		           dangerMode: true,
+	      		           buttons: {
+	      							 catch: {
+	      							 	text: "확인"
+	      							 }
+	      				   },
+	      		     });
 // 	            		alert("이미지는 1장까지 업로드 가능합니다.");
 	                    delete files[imgNum];
 	                 }else{
@@ -1970,8 +1993,9 @@ h2{
 	
 	             reader.readAsDataURL(file);
 	         }
-	     } else
-	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	     }
+// 	     else
+// 	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
 	 }
 	 
 
@@ -1994,7 +2018,15 @@ h2{
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
 	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg') )) {
-	         alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
+	    	 swal({
+		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
 	         return true;
 	     } else {
 	         return false;
@@ -2044,9 +2076,27 @@ h2{
 		            success : function(result) {
 		            	console.log("이미지 갔다옴");
 			                if (result === -1) {
+			                	swal({
+			     		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
+			     		           dangerMode: true,
+			     		           buttons: {
+			     							 catch: {
+			     							 	text: "확인"
+			     							 }
+			     				   },
+			     		     });
 // 			                    alert('jpg, gif, png, jpeg 확장자만 업로드 가능합니다.');
 			                    // 이후 동작 ...
 			                } else if (result === -2) {
+			                	swal({
+			     		           text: "파일이 10MB를 초과하였습니다.",
+			     		           dangerMode: true,
+			     		           buttons: {
+			     							 catch: {
+			     							 	text: "확인"
+			     							 }
+			     				   },
+			     		     });
 // 			                    alert('파일이 10MB를 초과하였습니다.');
 			                    // 이후 동작 ...
 			                } else {
@@ -2072,7 +2122,7 @@ h2{
 			            type : "POST" ,
 						data : formData,
 						success : function(data , status) {
-							console.log("add ok+++++++");
+								console.log("add ok+++++++");
 								$('#modal-view-event-add').modal("hide");
 								self.location = "/adopt/listMissing";
 					},
@@ -2094,7 +2144,7 @@ h2{
 			            type : "POST" ,
 						data : formData,
 						success : function(data , status) {
-							console.log("update ok+++++++");
+								console.log("update ok+++++++");
 								$('#modal-view-event-add').modal("hide");
 // 								self.location = "/adopt/listMissing";
 					},
@@ -2126,18 +2176,18 @@ h2{
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
 
-		if(removeCommas($(this).val()).length > 6 ){
+		if(parseInt(removeCommas($(this).val())) > 1000000 ){
 			swal({
-		           text: "100만원 이상은 입력하실 수 없습니다.",
+		           text: "제한금액을 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		     });
 // 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
-			$(this).val('999999');
+			$(this).val('1000000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 // 		}else{
 // 			$("span[name=dogPay]").text('');
@@ -2147,11 +2197,11 @@ h2{
 	$( "input[name=locationKr]" ).keyup(function( ) {
 		if($("input[name=locationKr]").val().length > 30 ){
 			swal({
-		           text: "30자까지 입력할 수 있습니다.",
+		           text: "제한길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		     });
@@ -2165,11 +2215,11 @@ h2{
 	$( "input[name=dogBreed]" ).keyup(function( ) {
 		if($("input[name=dogBreed]").val().length > 10 ){
 			swal({
-		           text: "10자까지 입력할 수 있습니다.",
+		           text: "제한길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		     });
@@ -2183,11 +2233,11 @@ h2{
 	$( "input[name=dogStatus]" ).keyup(function( ) {
 		if($("input[name=dogStatus]").val().length > 20 ){
 			swal({
-		           text: "20자까지 입력할 수 있습니다.",
+		           text: "제한길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		     });
@@ -2201,11 +2251,11 @@ h2{
 	$( "input[name=dogChar]" ).keyup(function( ) {
 		if($("input[name=dogChar]").val().length > 20 ){
 			swal({
-		           text: "20자까지 입력할 수 있습니다.",
+		           text: "제한길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		     });
@@ -2219,11 +2269,11 @@ h2{
 	$( "textarea[name=postContent]" ).keyup(function( ) {
 		if($("textarea[name=postContent]").val().length > 100 ){
 			swal({
-		           text: "100자까지 입력할 수 있습니다.",
+		           text: "제한길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		     });
@@ -2243,7 +2293,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 				   
@@ -2263,7 +2313,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 				   
@@ -2281,7 +2331,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -2297,7 +2347,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 				   
@@ -2315,7 +2365,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 				   
@@ -2333,7 +2383,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 				   
@@ -2351,7 +2401,7 @@ h2{
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 				   
@@ -2431,22 +2481,27 @@ h2{
 	// 삭제버튼
 	$(document).on("click", "#delMissing", function() {
 		var postNo = $('input[name=postNo]').val(); 
-		
-		
+
 		swal({
 	           text: "삭제하시겠습니까?",
 	           dangerMode: true,
+	           icon: "warning",
 	           buttons: {
+						 cancel: "취소",
 						 catch: {
-						 	text: "예",
+						 	text: "확인",
 //						 	value: "catch",
 						 },
-						 cancel: "아니오",
 			   },
 			   
 	    }).then((willDelete) => {
 	           if (willDelete) { 
-	        	    self.location = "/adopt/updateStatusCode?postNo="+postNo;
+	        	   swal("삭제가 완료되었습니다!", {
+	                   icon: "success",
+	                 }).then((value) => {
+	                	 self.location = "/adopt/updateStatusCode?postNo="+postNo;
+	                 });
+	        	    
 	           }
 	    });
 	});

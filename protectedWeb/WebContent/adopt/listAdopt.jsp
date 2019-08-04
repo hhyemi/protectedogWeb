@@ -122,7 +122,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">List</span> <span>Adopt</span></p>
+          	<p ><span class="mr-2">Adopt</span> <span>Missing</span></p>
             <font size="7">분양게시판</font>
           </div>
         </div>
@@ -272,10 +272,14 @@
 	  
  	</div>
  	
+ 	
+ 	<c:if test="${resultPage.totalCount eq 0 }">
+ 		<jsp:include page="/common/searchResult.jsp"></jsp:include>
+ 	</c:if>
+ 	
  	</section></div>
  	
  	
- 	<jsp:include page="/common/searchResult.jsp"></jsp:include>
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
@@ -377,10 +381,13 @@
 								}
 								if( postSize == 1 && data.list.length == 0 ){
 									console.log('결과없음');
-									$('#searchEmpty').remove();
-									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
-													+'<b><font size="5px">검색결과가 없습니다.</font></b>'
-							                    	+'</div>';
+									if ( $('#searchKeyword').val()==''){
+										$('#searchEmpty').remove();
+										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
+								                    	+'</div>';
+									}
+									
 								}
 								$('#listAdoptJSON').append(displayValue);
 								
@@ -444,8 +451,9 @@
 			$( "button:contains('작성')" ).on("click" , function() {
 				var lv = $('#levels').val();
 				var id = $('#sessionId').val();
+				var role = '${sessionScope.user.role}';
 				console.log(lv);
-				if(id == '' || lv == '미인증회원'){
+				if(id == '' || lv == '미인증회원' ){
 		              swal({
 		                   title: "인증회원만 작성 가능합니다.",
 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
@@ -457,18 +465,15 @@
 		                   if (willDelete) {
 		                        self.location = "/users/addUsersAddition.jsp"
 		                        }
-		        });   
-// 				if ( id == '' || lv == "미인증회원"  ){
-// 					swal({
-// 				           text: "인증회원만 작성 가능합니다.",
-// 				           dangerMode: true,
-// 				           buttons: {
-// 									 catch: {
-// 									 	text: "닫기"
-// 									 }
-// 						   },
-						   
-// 				    });
+		        	 });   
+					return;
+				} else if (role == 'admin') {
+					swal({
+		                   text: "운영자는 작성할 수 없습니다.",
+		                   icon: "warning",
+		                   buttons: { cancel:"닫기"},
+		                   dangerMode: true     
+		             });
 					return;
 				}
 
