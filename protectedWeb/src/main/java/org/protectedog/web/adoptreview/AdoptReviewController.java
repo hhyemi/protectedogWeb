@@ -77,6 +77,7 @@ public class AdoptReviewController {
 	
 	@RequestMapping( value="addAdoptReview", method=RequestMethod.POST )
 	public String addAdoptReview(  @ModelAttribute("board") Board board
+											,HttpSession session
 //											,MultipartHttpServletRequest mtfRequest
 											) throws Exception {
 
@@ -91,6 +92,9 @@ public class AdoptReviewController {
 		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src=")+10,  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img src=")+10   ).indexOf("\"")  +  board.getPostContent().indexOf("<img src=")+10   )) ;
 		
 		board.setThumnail(thumnail);
+		
+		board.setId(((User)session.getAttribute("user")).getId());
+		board.setNickName(((User)session.getAttribute("user")).getNickname());
 		
 		User user = userService.getUsers(board.getId());
 		user.setLevelPoint(user.getLevelPoint()+5);

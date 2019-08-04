@@ -40,7 +40,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		
     
     </style>
-
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 
 <body> 
@@ -48,7 +48,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                         PAGE CONTENT
 ======================================================--> 
-<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+
     <section class="hero-area">
 <!--         <div class="overlay"></div> -->
         <div class="container">

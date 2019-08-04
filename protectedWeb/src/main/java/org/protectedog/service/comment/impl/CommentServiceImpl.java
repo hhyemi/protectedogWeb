@@ -35,23 +35,23 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Map<String, Object> listComment(int postNo, Search search) throws Exception {
+	public Map<String, Object> listComment(int postNo, Search search, String boardCode) throws Exception {
 		
-		// Àü´ÞÇÒ Map »ý¼º 
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Map ï¿½ï¿½ï¿½ï¿½ 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		System.out.println(" listCommentServiceImpl postNo : " + postNo);
 		System.out.println(" listCommentServiceImpl search : " + search);
 		
-		// µ¥ÀÌÅÍ °¡Á®¿À±â
-		List<Comment> list = commentDAO.listComment(postNo, search);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		List<Comment> list = commentDAO.listComment(postNo, search, boardCode);
 		int totalCount = commentDAO.getTotalCount(postNo);
 		
-		// µð¹ö±ë
+		// ï¿½ï¿½ï¿½ï¿½ï¿½
 		System.out.println(" listCommentServiceImpl list : " + list);
 		System.out.println(" listCommentServiceImpl totalCount : " + totalCount);
 		
-		// Àü´ÞÇÒ µ¥ÀÌÅÍ ³Ö±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
 		map.put("list", list);
 		map.put("totalCount", totalCount);
 		

@@ -20,6 +20,23 @@
 	padding: 3px;
 	color: white;
 }
+.col-md-2, .col-md-10 {
+	padding-right: 0px;
+}
+
+.col-md-6 .col-md-2 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.col-md-6 .col-md-9 {
+	padding-left: 0px;
+/* 	padding-right: 0px; */
+}
+.fc-day-top{
+	padding-bottom: 0px !important;
+}
+
+
 /*!
  * FullCalendar v3.9.0
  * Docs & License: https://fullcalendar.io/
@@ -1467,7 +1484,7 @@ h2{
 .modal-body h4{
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 25px;
   letter-spacing: 1px;
 /*   font-family: 'Montserrat', sans-serif; */
   color: #002147;
@@ -1477,7 +1494,9 @@ h2{
   box-shadow: none;
   height: 50px;
 }
-
+.swal-text{
+  font-size : 25px;
+}
 
 
 
@@ -1533,10 +1552,10 @@ h2{
 <!--         <h4>실종신고</h4>         -->
           <div class="form-group">
             <label>사례금</label>&nbsp;&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span>
-            <input type="number" class="form-control" name="dogPay" min="0" >
+            <input type="text" class="form-control" name="dogPay" min="0" >
           </div>
           <div class="form-group">
-            <label>연락처</label>&nbsp;연락처가 다를 경우 회원정보를 수정해주세요.
+            <label>연락처</label>&nbsp;연락처가 다를 경우 회원정보를 수정해 주세요.
             <input type='text' class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly>
           </div>        
           <div class="form-group">
@@ -1588,17 +1607,109 @@ h2{
             <textarea class="form-control" name="postContent"></textarea>
           </div>
 		  <input type="hidden" name="id" value="${sessionScope.user.id}">
+		  <input type="hidden" name="nickname" value="${sessionScope.user.nickname}">
 		  <input type="hidden" name="boardCode" value="MS">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" >등록</button>
+        <button type="button" class="btn btn-default">등록</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>        
       </div>
       </form>
     </div>
   </div>
 </div>
+
+
+
+<div id="modal-view-event-update" class="modal modal-top fade calendar-modal" >
+
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 30px;">
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-center justify-content-center">
+	          <div class="col-md-9 ftco-animate text-center">
+	          	<p ><span class="mr-2">Update</span> <span>Missing</span></p>
+	            <font size="7">
+	            	실종신고 수정
+	            </font>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+      <form id="add-event">
+        <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;">
+<!--         <h4>실종신고</h4>         -->
+          <div class="form-group">
+            <label>사례금</label>&nbsp;&nbsp;<span name="dogPayU">원하지 않을 경우 0을 입력하세요.</span>
+            <input type="text" class="form-control" name="dogPayU" min="0" >
+          </div>
+          <div class="form-group">
+            <label>연락처</label>&nbsp;연락처가 다를 경우 회원정보를 수정해 주세요.
+            <input type='text' class="form-control" name="phoneU" value="${ sessionScope.user.phone }" readonly>
+          </div>        
+          <div class="form-group">
+            <label>실종일자</label>
+            <input type='text' class="datetimepicker form-control" name="dogDateU" value="" readonly>
+          </div>        
+          <div class="form-group">
+            <label>실종지역</label>&nbsp;&nbsp;<span name="locationKrU"></span>
+            <input class="form-control" name="locationKrU"></input>
+          </div>
+          
+          <!-- 첨부 버튼 -->
+
+          <div id="attach" class="form-group">
+            <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
+              	<span><strong>사진등록</strong></span>
+            </label></span>&nbsp; 하나만 등록 가능합니다.
+            <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
+          </div>
+
+          <!-- 미리보기 영역 -->
+          <div class="form-group">
+          	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
+          </div>
+          
+          <div class="form-group"><br/><br/><br/><br/></div>
+          
+          <div class="form-group">
+            <label>견종</label>&nbsp;&nbsp;<span name="dogBreedU"></span>
+            <input class="form-control" name="dogBreedU"></input>
+          </div>
+          <div class="form-group">
+            <label>성별</label>
+            <select class="form-control" name="dogGenderU" style="height:50px; ">
+              <option value="남아">남아</option>
+              <option value="여아">여아</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>상태</label>&nbsp;&nbsp;<span name="dogStatusU"></span>
+            <input class="form-control" name="dogStatusU"></input>
+          </div>
+          <div class="form-group">
+            <label>특징</label>&nbsp;&nbsp;<span name="dogCharU"></span>
+            <input class="form-control" name="dogCharU"></input>
+          </div>
+          <div class="form-group">
+            <label>내용</label>&nbsp;&nbsp;<span name="postContentU"></span>
+            <textarea class="form-control" name="postContentU"></textarea>
+          </div>
+		  <input type="hidden" name="postNoU" value="">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="updateConfirm">수정</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>        
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -1615,6 +1726,23 @@ h2{
 
 <script>
 
+// $( "input[name=dogDate]" ).datepicker({
+// 	showOn: "button",
+// 	buttonImage: "/resources/file/others/calendar.png",
+// 	buttonImageOnly: true,
+// 	buttonText: "Select date",
+// 	dateFormat: "yy-mm-dd",
+// 	maxDate: "+0d",
+// 	prevText: '이전 달',
+//     nextText: '다음 달',
+//     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+//     monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+//     dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+//     dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+//     dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+//     showMonthAfterYear: true,
+//     yearSuffix: '년'
+// });
 
 	jQuery(document).ready(function(){
 	
@@ -1637,10 +1765,6 @@ h2{
 	    // ------------------------------------------------------ //
 		jQuery(function() {
 			// page is ready
-			var date = new Date();
- var d = date.getDate();
- var m = date.getMonth();
- var y = date.getFullYear();
 
 			jQuery('#calendar').fullCalendar({
 
@@ -1669,7 +1793,7 @@ h2{
 				      eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
 				    }
 				},
-				eventLimitText: '개',
+				eventLimitText: '개 더보기',
 
 
 				events: function(start, end, timezone, callback) {
@@ -1691,6 +1815,7 @@ h2{
 						
 								         		events.push({ 
 						          					id: value[i].id, 
+						          					nickname: value[i].nickname, 
 						         					title: value[i].locationKr,
 // 						         					title: loca[0],
 						          					realTitle: value[i].locationKr, 
@@ -1729,19 +1854,18 @@ h2{
 				dayClick: function(date) {
 					
 					var id = $('#sessionId').val().trim();
+					
 					var lv = $('#sessionLv').val().trim();
-					if (  id != "" && lv != '미인증회원'){
-						var yyyy=date.format("YYYY");
-					    var mm=date.format("MM");
-					    var dd=date.format("DD");
-						
-					    
-						$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
-						jQuery('#modal-view-event-add').modal();
-						
-					} else {
+					
+					var yyyy=date.format("YYYY");
+				    var mm=date.format("MM");
+				    var dd=date.format("DD");
+					
+				    var today = new Date();
+				    
+					if( date > today ){
 						swal({
-					           text: "인증회원만 작성 가능합니다.",
+					           text: "선택한 날짜는 실종일자로 지정되어 \n오늘 날짜까지만 선택할 수 있습니다.",
 					           dangerMode: true,
 					           buttons: {
 										 catch: {
@@ -1749,41 +1873,85 @@ h2{
 										 }
 							   },
 					    });
+						
+					}else {
+						
+						if (  id != "" && lv != '미인증회원'){
+							
+							$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
+							
+							jQuery('#modal-view-event-add').modal();
+							
+						} else {
+							swal({
+						           text: "인증회원만 작성 가능합니다.",
+						           dangerMode: true,
+						           buttons: {
+											 catch: {
+											 		text: "닫기"
+											 }
+								   },
+						    });
+						}
 					}
 				},
 				eventClick: function(event, jsEvent, view) {
 					
 						jQuery('.event-title').html(
 													"<div class='row'>"
-													+"<div class='col-md-6' float='left' >사례금: "+event.dogPay+"원</div>"
+													+"<div class='col-md-6' float='left' >사례금: "+(event.dogPay).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원</div>"
 													+"<div class='col-md-6' float='right' align='right'>"+event.phone+"</div></div>"
 						);
 						jQuery('.event-body').html(
 													
 													"<div class='col-md-12' style='padding:0px;'>"
 													+"<img src='" + event.imageurl + "' width='100%' height='100%'>"
-													+"<br/><br/>실종지역: "+event.realTitle+"<br/>"
+// 													+"<br/><br/>실종지역: "+event.realTitle+"<br/>"
+													+"<input type='hidden' name='id' value='"+event.id+"'>"
+													
+													
+													+"<div class='row'><div class='col-md-12'><br/></div></div>"
 													+"<div class='row'>"
-													+"<div class='col-md-6' style='padding-right:0px;'>실종일자: "+event.date+"</div>"
-													+"<div class='col-md-6'>작성자: "+event.id+"</div></div>"
+												  		+"<div class='col-md-2 '><strong>실종지역</strong></div>"
+														+"<div class='col-md-10 '>"+event.realTitle+"</div>"
+													+"</div>"
+													
 													+"<div class='row'>"
-													+"<div class='col-md-6' style='padding-right:0px;'>견종: "+event.dogBreed+"</div>"
-													+"<div class='col-md-6'>성별: "+event.dogGender+"</div></div>"
-													+"상태: "+event.dogStatus+""
-													+"<br/>특징: "+event.dogChar+""
-													+"<br/>"+event.description+"</div>"
+												  		+"<div class='col-md-2 '><strong>실종일자</strong></div>"
+														+"<div class='col-md-4 '>"+event.date+"</div>"
+												  		+"<div class='col-md-2 ' style='padding-left:0px;'><strong>작성자</strong></div>"
+														+"<div class='col-md-4 '>"+event.nickname+"</div>"
+													+"</div>"
+													+"<div class='row'>"
+												  		+"<div class='col-md-2 '><strong>견종</strong></div>"
+														+"<div class='col-md-4 '>"+event.nickname+"</div>"
+												  		+"<div class='col-md-2 ' style='padding-left:0px;'><strong>성별</strong></div>"
+														+"<div class='col-md-4 '>"+event.dogGender+"</div>"
+													+"</div>"
+													+"<div class='row'>"
+												  		+"<div class='col-md-2 '><strong>상태</strong></div>"
+														+"<div class='col-md-10 '>"+event.dogStatus+"</div>"
+													+"</div>"
+													+"<div class='row'>"
+												  		+"<div class='col-md-2 '><strong>특징</strong></div>"
+														+"<div class='col-md-10 '>"+event.dogChar+"</div>"
+													+"</div>"
+													+"<div class='row'><div class='col-md-12'><br/></div></div>"
+													+"<div class='row'>"
+														+"<div class='col-md-12 '>"+event.description+"</div>"
+													+"</div>"
 													+"<input type='hidden' name='postNo' value='"+event.postNo+"'>"
 													
 						);
 						
 						 if ( event.id == $('#sessionId').val() ){
 							 if ( $('#delMissing').length > 0  ) {
-// 								 $('#updateMissing').remove();
+								 $('#updateMissing').remove();
 								 $('#delMissing').remove();
 							 }
-// 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
-// 													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
-							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
+							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
+													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
+// 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 }
 						
 // 						jQuery('.event-body').html(event.description);
@@ -1929,7 +2097,7 @@ h2{
  	 function fncAddMissing(){
  		var boardCode = $('input[name=boardCode]').val();
  		var file = $("#multiFile").val(); 
- 		
+ 		console.log(boardCode);
  		var mForm = $('#add-event')[0];
  		var formData = new FormData( mForm );
  		
@@ -1985,7 +2153,7 @@ h2{
 					data : formData,
 					success : function(data , status) {
 							$('#modal-view-event-add').modal("hide");
-							self.location = "/adopt/listMissing";
+// 							self.location = "/adopt/listMissing";
 				},
 					error: function(request, status, error){ 
 							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
@@ -2001,11 +2169,23 @@ h2{
 
 	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	
-
+	function addCommas(x) {
+       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+    
+	//모든 콤마 제거
+	function removeCommas(x) {
+    	if(!x || x.length == 0) return "";
+    	else return x.split(",").join("");
+	}
 	
 	$( "input[name=dogPay]" ).keyup(function( ) {
-		if($("input[name=dogPay]").val().length > 6 ){
+		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+		if(removeCommas($(this).val()).length > 6 ){
 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
+			$(this).val('999999');
+			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
 		}
@@ -2055,10 +2235,13 @@ h2{
 	
 	
 	$(document).on("click", ".btn-default:contains('등록')", function() {
+		alert("버튼눌러진다");
 		
-		if ( $('input[name=dogPay]').val().trim() == "" || $('input[name=dogPay]').val().length > 6 || $("input[name=dogPay]").val() < 0 ) {
+		if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length > 6 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
 			$("input[name=dogPay]").focus();
 			return;
+		} else {
+			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		}
 		if ( $('input[name=locationKr]').val().trim() == "" || $('input[name=locationKr]').val().length > 30 ) {
 			$("input[name=locationKr]").focus();
@@ -2100,9 +2283,14 @@ h2{
 		fncAddMissing();
 	});
 	
+	
 	// 수정버튼
 	$(document).on("click", "#updateMissing", function() {
 		var postNo = $('input[name=postNo]').val(); 
+		console.log("포스트넘버 확인 "+postNo);
+		$('#modal-view-event-add').modal('hide');
+		$('#modal-view-event-update').modal();
+
 		
 		$.ajax( 
 		 		{
@@ -2115,6 +2303,16 @@ h2{
 							  },
 					success : function(data , status) {
 							console.log(JSON.stringify(data));
+							
+							$('input[name=dogPayU]').val( data.dogPay );
+							$('input[name=dogDateU]').val( data.dogDate );
+							$('input[name=locationKrU]').val( data.locationKr );
+							$('input[name=dogBreedU]').val( data.dogBreed );
+							$('select[name=dogGenderU]').val( data.dogGender );
+							$('input[name=dogStatusU]').val( data.dogStatus );
+							$('input[name=dogCharU]').val( data.dogChar );
+							$('textarea[name=postContentU]').val( data.postContent );
+							$('input[name=postNoU]').val( date.postNo );
 
 				},
 					error: function(request, status, error){ 
@@ -2122,11 +2320,19 @@ h2{
 		        }
 				
 		});	
+		
 	});
+	
+	$(document).on("click", "#updateConfirm", function() {
+		var postNo = $('input[name=postNoU]').val();
+		
+	});
+	
 	
 	// 삭제버튼
 	$(document).on("click", "#delMissing", function() {
 		var postNo = $('input[name=postNo]').val(); 
+		
 		
 		swal({
 	           text: "삭제하시겠습니까?",
