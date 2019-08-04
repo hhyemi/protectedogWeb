@@ -100,7 +100,7 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>글 제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<h5><strong>글 제목</strong></h5>&nbsp;&nbsp;<span name="postTitle"></span>
 		                	<input type="text" class="form-control" name="postTitle" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>

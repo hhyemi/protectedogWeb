@@ -39,6 +39,7 @@
         	position: relative;
         	height: 450px;
         	display: flex;
+        	padding-left: 30px !important;
          	padding-right: 0px !important;
         }
         .card_area{
@@ -144,7 +145,7 @@
     
     <div class="product_image_area">
       <div class="container">
-      <div class="col-md-12"><hr/><br/></div>
+      <div class="col-md-12"><hr/><br/>작성일 ${adopt.regDate }</div>
         <div class="row s_product_inner col-md-12">
         
           <div class="col-lg-6">
@@ -194,7 +195,7 @@
               </div>
 <!--             </div> -->
           </div>
-          <div class="col-lg-6 offset-lg-1">
+          <div class="col-lg-6 offset-lg-1" >
             <div class="s_product_text">
             
 <%--              <span style="text-align: justify;"> <font size="5px">${adopt.postTitle}</font> &nbsp;&nbsp;${adopt.id}&nbsp;&nbsp; ${ adopt.regDate }</span><hr/> --%>
@@ -211,7 +212,7 @@
                    	<div class="row" style="position:relative;height:35px;">
 			        	<div class="col-xs-10 col-md-10" style="position:absolute;height:35px; left:0px; bottom:0px;" >
 			        		<font id="title" size="5px"><strong>${adopt.postTitle}</strong></font>
-<%-- 			        	&nbsp;&nbsp;${adopt.id} --%>
+			        	&nbsp;&nbsp;${adopt.id}
 			        	</div>
 			        	
 			        	<c:if test="${ user.id ne adopt.id }">
@@ -234,13 +235,13 @@
                 <hr/>
               	
 <!--                 <li> -->
-                   	<div class="row">
-				  		<div class="col-md-2 " ><font size="4px"><strong>작성자</strong></font></div>
-						<div class="col-md-4 "><font size="4px">${adopt.nickname}</font></div>
+<!--                    	<div class="row"> -->
+<!-- 				  		<div class="col-md-2 " ><font size="4px"><strong>작성자</strong></font></div> -->
+<%-- 						<div class="col-md-4 "><font size="4px">${adopt.nickname}</font></div> --%>
 						
-						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>작성일자</strong></font></div>
-						<div class="col-md-4 "><font size="4px">${adopt.regDate}</font></div>
-					</div>
+<!-- 						<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>작성일자</strong></font></div> -->
+<%-- 						<div class="col-md-4 "><font size="4px">${adopt.regDate}</font></div> --%>
+<!-- 					</div> -->
                    	<div class="row">
 				  		<div class="col-md-2 " ><font size="4px"><strong>견종</strong></font></div>
 						<div class="col-md-4 "><font size="4px">${adopt.dogBreed}</font></div>
@@ -265,7 +266,7 @@
 				  		<div class="col-md-2 "><font size="4px"><strong>책임비</font></strong></div>
 						<div class="col-md-4 "><font size="4px"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일자</font></strong></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;"><font size="4px"><strong>발견일</font></strong></div>
 						<div class="col-md-4"><font size="4px">${adopt.dogDate}</font></div>
 					</div>
 
@@ -306,7 +307,7 @@
            		</c:if>
            		
            		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
-           			<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
+           			<button class="btn btn-default" id="noApply" style="width: 517px;" id="confirmButton">아직 신청서가 등록되지 않았습니다.</button>
            		</c:if>
 
              	
@@ -318,11 +319,11 @@
                	</c:if>
                	
               	<c:if test="${adopt.statusCode eq '3'}">
-               		<button class="btn btn-default" id="noApply" style="width: 532px;" id="confirmButton">완료된 글입니다.</button>
+               		<button class="btn btn-default" id="noApply" style="width: 517px;" id="confirmButton">완료된 글입니다.</button>
                	</c:if>
               	
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12" style="padding-top: 10px;">
 	              <div align="right">
 			            <a href="javascript:void(0);" id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
 			            <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
