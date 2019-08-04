@@ -37,7 +37,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Add</span> <span>Apply</span></p>
+          	<p ><span class="mr-2">Adopt</span> <span>Apply</span></p>
             <font size="7">입양신청</font>
           </div>
         </div>
@@ -183,9 +183,6 @@
 	               		</div>
                		</div>
                		
-               		<div class="w-100"></div>
-		            <div class="w-100"></div>
-               		<div class="w-100"></div>
                 
 	            </div>
 	          </form>
@@ -227,7 +224,7 @@
 				      <div class="container">
 				        <div class="row no-gutters slider-text align-items-center justify-content-center">
 				          <div class="col-md-9 ftco-animate text-center">
-				          	<p ><span class="mr-2">Add</span> <span>Apply</span></p>
+				          	<p ><span class="mr-2">Adopt</span> <span>Apply</span></p>
 				            <font size="7">
 				            	신청서 확인
 				            </font>
@@ -354,11 +351,11 @@
 	$( "textarea[name=plan]" ).keyup(function( ) {
 		if($("textarea[name=plan]").val().length > 300 ){
 			swal({
-		           text: "300자까지 입력할 수 있습니다.",
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    });
@@ -372,11 +369,11 @@
 	$( "textarea[name=pay]" ).keyup(function( ) {
 		if($("textarea[name=pay]").val().length > 300 ){
 			swal({
-		           text: "300자까지 입력할 수 있습니다.",
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    });
@@ -390,11 +387,11 @@
 	$( "textarea[name=reason]" ).keyup(function( ) {
 		if($("textarea[name=reason]").val().length > 300 ){
 			swal({
-		           text: "300자까지 입력할 수 있습니다.",
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    });
@@ -408,11 +405,11 @@
 	$( "textarea[name=situation]" ).keyup(function( ) {
 		if($("textarea[name=situation]").val().length > 300 ){
 			swal({
-		           text: "300자까지 입력할 수 있습니다.",
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    });
@@ -436,7 +433,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -449,11 +446,11 @@
 		// 직업체크
 		if( $("input[name=job]:radio:checked").length != 1){
 			swal({
-		           text: "직업을 선택하세요",
+		           text: "직업을 선택하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -470,7 +467,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -488,7 +485,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -507,7 +504,7 @@
 				           dangerMode: true,
 				           buttons: {
 									 catch: {
-									 	text: "닫기"
+									 	text: "확인"
 									 }
 						   },
 				    }).then((willDelete) => {
@@ -526,7 +523,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -545,7 +542,7 @@
 				           dangerMode: true,
 				           buttons: {
 									 catch: {
-									 	text: "닫기"
+									 	text: "확인"
 									 }
 						   },
 				    }).then((willDelete) => {
@@ -564,7 +561,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -581,7 +578,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -598,7 +595,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {
@@ -615,7 +612,7 @@
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
 		    }).then((willDelete) => {

@@ -37,7 +37,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <p ><span class="mr-2">Update</span> <span>Adopt</span></p>
+            <p ><span class="mr-2">Adopt</span> <span>Missing</span></p>
             <font size="7">분양글 수정</font>
           </div>
         </div>
@@ -62,14 +62,18 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+<!-- 		                	<label for="postTitle"> -->
+		                	<h5><strong>글제목</strong></h5>
+<!-- 		                	&nbsp;&nbsp;<span name="postTitle"></span></label> -->
 		                	<input type="text" class="form-control" name="postTitle" value="${ adopt.postTitle }" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
+<!-- 		                	<label for="phone"> -->
+		                	<h5><strong>연락처</strong></h5>
+<!-- 		                	&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label> -->
 		                	<input type="text" class="form-control" name="phone" value="${ adopt.phone }" readonly>
 		                </div>
 	                </div>
@@ -102,14 +106,18 @@
 	                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-		                	<label for="dogBreed"><strong>견종</strong>&nbsp;&nbsp;<span name="dogBreed"></span></label>
+<!-- 		                	<label for="dogBreed"> -->
+		                	<h5><strong>견종</strong></h5>
+<!-- 		                	&nbsp;&nbsp;<span name="dogBreed"></span></label> -->
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" value="${ adopt.dogBreed }">
 		                </div>
 	                </div>
 	                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for=""><strong>크기</strong></label>
+<!-- 	                		<label for=""> -->
+	                		<h5><strong>크기</strong></h5>
+<!-- 	                		</label> -->
 						      	<select class="form-control" name="dogSize" id="dogSize">
 								  	<option value="소형견" >소형견</option>
 									<option value="중형견" >중형견</option>
@@ -120,14 +128,18 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogWeight"><strong>체중</strong>&nbsp;&nbsp;<span name="dogWeight"></span></label>
+<!-- 	                		<label for="dogWeight"> -->
+	                		<h5><strong>체중</strong></h5>
+<!-- 	                		&nbsp;&nbsp;<span name="dogWeight"></span></label> -->
 	                  		<input type="number" class="form-control" name="dogWeight"  value="${ adopt.dogWeight }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogGender"><strong>성별</strong></label>
+<!-- 	                		<label for="dogGender"> -->
+	                		<h5><strong>성별</strong></h5>
+<!-- 	                		</label> -->
 						      	<select class="form-control" name="dogGender" id="dogGender">
 								  	<option value="남아" >남아</option>
 									<option value="여아" >여아</option>
@@ -137,35 +149,45 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogPay"><strong>책임비</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
+<!-- 	                		<label for="dogPay"> -->
+	                		<h5><strong>책임비</strong></h5>
+<!-- 	                		&nbsp;&nbsp;<span name="dogPay"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogPay" value="${ adopt.dogPay }" placeholder="원하지 않을 경우 0을 입력하세요.">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate" id="dogDateLabel"><strong>발견일자</strong></label>
+<!-- 	                		<label for="dogDate" id="dogDateLabel"> -->
+	                		<h5 id="dogDateLabel"><strong>발견일자</strong></h5>
+<!-- 	                		</label> -->
 	                  		<input type="text" class="form-control" name="dogDate" value="${ adopt.dogDate }" readonly>
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogStatus"><strong>상태</strong>&nbsp;&nbsp;<span name="dogStatus"></span></label>
+<!-- 	                		<label for="dogStatus"> -->
+	                		<h5><strong>상태</strong></h5>
+<!-- 	                		&nbsp;&nbsp;<span name="dogStatus"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogStatus"  value="${ adopt.dogStatus }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogPersonality"><strong>성격</strong>&nbsp;&nbsp;<span name="dogPersonality"></span></label>
+<!-- 	                		<label for="dogPersonality"> -->
+	                		<h5><strong>성격</strong></h5>
+<!-- 	                		&nbsp;&nbsp;<span name="dogPersonality"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogPersonality"  value="${ adopt.dogPersonality }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="dogChar"><strong>특징</strong>&nbsp;&nbsp;<span name="dogChar"></span></label>
+<!-- 	                		<label for="dogChar"> -->
+	                		<h5><strong>특징</strong></h5>
+<!-- 	                		&nbsp;&nbsp;<span name="dogChar"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogChar"  value="${ adopt.dogChar }">
 	               		</div>
                		</div>
@@ -174,15 +196,10 @@
                		
 	            	<div class="col-md-12" id="areaFocus">
 	            	<br/>
-                		<label><strong>
-	                		<c:if test="${adopt.boardCode eq 'AD' }">
-<!-- 	                			지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.<br/> -->
-	                			분양가능지역을 수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.
-	                		</c:if>
-	                		<c:if test="${adopt.boardCode eq 'MS' }">
-	                			지도를 클릭하면 마커가 생성되며, 지도를 우클릭하거나 마커를 우클릭한 경우 마커가 삭제됩니다. 
-	                		</c:if>
-                		</strong></label>
+<!--                 		<label> -->
+                		<strong><span class="fas fa-exclamation-circle"></span>
+                		분양가능지역을 수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.</strong>
+<!--                 		</label> -->
                		</div>
                		
                		
@@ -190,7 +207,9 @@
                		<c:if test="${adopt.boardCode eq 'AD' }">
 		            	<div class="col-md-12">
 		              		<div class="form-group">
-		                		<label for="adoptArea"><strong>분양가능지역</strong> &nbsp;(3곳까지 선택가능합니다.)</label>
+<!-- 		                		<label for="adoptArea"> -->
+		                		<h5><strong>분양가능지역</strong></h5>
+<!-- 		                		 &nbsp;(3곳까지 선택가능합니다.)</label> -->
 		                		<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
 		                  		<input type="hidden" class="form-control" id="adoptArea" name="adoptArea"  value="${ adopt.adoptArea }">
 		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" value="${ adopt.areaKr }" placeholder="마커 위치가 입력됩니다." readonly="readonly">
@@ -200,7 +219,9 @@
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="location"><strong>발견위치</strong></label>
+<!-- 	                		<label for="location"> -->
+	                		<h5><strong>발견위치</strong></h5>
+<!-- 	                		</label> -->
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location" value="${ adopt.location }" >
 	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" value="${ adopt.locationKr }" placeholder="마커 위치가 입력됩니다." readonly>
@@ -210,18 +231,14 @@
                		
                		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>글내용</strong>&nbsp;&nbsp;<span name="postContent"></label>
+<!-- 		                	<label for="postContent"> -->
+		                	<h5><strong>글내용</strong></h5>
+<!-- 		                	&nbsp;&nbsp;<span name="postContent"></label> -->
 <!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
 		                	<textarea  class="form-control"  name="postContent"  rows="5"  placeholder="내용을 입력하세요.">${adopt.postContent }</textarea>
 		                </div>
 	                </div>
                		
-
-               		
-               		<div class="w-100"></div>
-		            <div class="w-100"></div>
-               		<div class="w-100"></div>
-                
 	            </div>
 	          </form>
 	          
@@ -568,7 +585,16 @@
 	                 
 	                //5장 이상 업로드시
 	                 if(Object.keys(files).length>=5){
-	            		alert("사진은 5장까지만 업로드 가능합니다.");
+	                	 swal({
+	  	 		           text: "5장까지 등록 가능합니다.",
+	  	 		           dangerMode: true,
+	  	 		           buttons: {
+	  	 							 catch: {
+	  	 							 	text: "확인"
+	  	 							 }
+	  	 				   },
+	  	 		      });
+// 	            		alert("사진은 5장까지만 업로드 가능합니다.");
 	                    delete files[imgNum];
 	                 }else{
 	          		 // 5장 이하 
@@ -666,7 +692,16 @@
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
 	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	         alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+	    	 swal({
+		           text: "jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		      });
+// 	    	 alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
 	         return true;
 	     } else {
 	         return false;
@@ -758,8 +793,18 @@
    }
 	
 	$( "input[name=postTitle]" ).keyup(function( ) {
-		if($("input[name=postTitle]").val().length > 20 ){
-			$("span[name=postTitle]").text('20자까지 입력할 수 있습니다.');
+		if($("input[name=postTitle]").val().length > 15 ){
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=postTitle]").val($("input[name=postTitle]").val().toString().substring(0,15));
+// 			$("span[name=postTitle]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -767,7 +812,17 @@
 
 	$( "input[name=dogBreed]" ).keyup(function( ) {
 		if($("input[name=dogBreed]").val().length > 10 ){
-			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogBreed]").val($("input[name=dogBreed]").val().toString().substring(0,10));
+// 			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogBreed]").text('');
 		}
@@ -775,7 +830,17 @@
 
 	$( "input[name=dogWeight]" ).keyup(function( ) {
 		if($("input[name=dogWeight]").val().length > 6 ){
-			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 체중을 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
+// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}
@@ -791,9 +856,17 @@
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
 
-		if(removeCommas($(this).val()).length > 6 ){
-			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
-			$(this).val('999999');
+		if( parseInt(removeCommas($(this).val()))> 1000000 ){
+			swal({
+		           text: "제한 금액을 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$(this).val('1000000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
@@ -802,7 +875,17 @@
 	
 	$( "input[name=dogStatus]" ).keyup(function( ) {
 		if($("input[name=dogStatus]").val().length > 20 ){
-			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogStatus]").val($("input[name=dogStatus]").val().toString().substring(0,20));
+// 			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogStatus]").text('');
 		}
@@ -810,7 +893,17 @@
 	
 	$( "input[name=dogPersonality]" ).keyup(function( ) {
 		if($("input[name=dogPersonality]").val().length > 20 ){
-			$("span[name=dogPersonality]").text('20자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogPersonality]").val($("input[name=dogPersonality]").val().toString().substring(0,20));
+// 			$("span[name=dogPersonality]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogPersonality]").text('');
 		}
@@ -818,7 +911,17 @@
 
 	$( "input[name=dogChar]" ).keyup(function( ) {
 		if($("input[name=dogChar]").val().length > 20 ){
-			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogChar]").val($("input[name=dogChar]").val().toString().substring(0,20));
+// 			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogChar]").text('');
 		}
@@ -826,7 +929,17 @@
 	
 	$( "textarea[name=postContent]" ).keyup(function( ) {
 		if($("textarea[name=postContent]").val().length > 100 ){
-			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=postContent]").val($("input[name=postContent]").val().toString().substring(0,100));
+// 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
@@ -841,7 +954,21 @@
 	// 등록버튼 누르고
 	function fncUpdateAdopt(){
 		
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >20){
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >15){
+			  swal({
+		           text: "글 제목을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=postTitle]").focus();
+		           }
+		      });
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
@@ -863,35 +990,119 @@
 // 			  return;
 // 		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
-			  $("input[name=dogWeight]").focus();
+			  swal({
+		           text: "체중을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogWeight]").focus();
+		           }
+		      });
+// 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length > 6 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
-			  $("input[name=dogPay]").focus();
+		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 1000000 || removeCommas( $("input[name=dogPay]").val() ) < 0  ){
+			  swal({
+		           text: "책임비를 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogPay]").focus();
+		           }
+		      });
+// 			  $("input[name=dogPay]").focus();
 			  return;
 		  } else {
 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		  }
 		  if( $("input[name=dogDate]").val().trim() == '' ){
-			  $("input[name=dogDate]").focus();
+			  swal({
+		           text: "발견일을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogDate]").focus();
+		           }
+		      });
+// 			  $("input[name=dogDate]").focus();
 			  return;
 		  }
 		  if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
-			  $("input[name=dogStatus]").focus();
+			  swal({
+		           text: "상태를 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogStatus]").focus();
+		           }
+		      });
+// 			  $("input[name=dogStatus]").focus();
 			  return;
 		  }
 		  if( $("input[name=dogPersonality]").val().trim() == '' || $("input[name=dogPersonality]").val().length > 20 ){
-			  $("input[name=dogPersonality]").focus();
+			  swal({
+		           text: "성격을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogPersonality]").focus();
+		           }
+		      });
+// 			  $("input[name=dogPersonality]").focus();
 			  return;
 		  }
 		  if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
-			  $("input[name=dogChar]").focus();
+			  swal({
+		           text: "특징을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogChar]").focus();
+		           }
+		      });
+// 			  $("input[name=dogChar]").focus();
 			  return;
 		  }
 		  if( boardCode == 'AD' ){
 			  if( $("input[name=adoptArea]").val().trim() == ''){
 				  swal({
-			           text: "분양가능지역을 선택해주세요.",
+			           text: "분양가능지역을 선택하세요.",
 			           dangerMode: true,
 			           buttons: {
 								 catch: {
@@ -909,7 +1120,7 @@
 		  }
 		  if( $("input[name=location]").val().trim() == ''){
 			  swal({
-		           text: "발견위치를 선택해주세요.",
+		           text: "발견위치를 선택하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -925,7 +1136,22 @@
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
-			  $("textarea[name=postContent]").focus();
+			  swal({
+		           text: "내용을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("textarea[name=postContent]").focus();
+		           }
+		      });
+			  
+// 			  $("textarea[name=postContent]").focus();
 			  return;
 		  }
 		
@@ -954,13 +1180,31 @@
 		            data : formData,
 		            success : function(result) {
 			                if (result === -1) {
-			                    alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+			                	swal({
+				     		           text: "jpg, gif, png, jpeg 확장자만 업로드 가능합니다.",
+				     		           dangerMode: true,
+				     		           buttons: {
+				     							 catch: {
+				     							 	text: "확인"
+				     							 }
+				     				   },
+				     		    	 });
+// 			                    alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
 			                    // 이후 동작 ...
 			                } else if (result === -2) {
-			                    alert('파일이 10MB를 초과하였습니다.');
+			                	swal({
+				     		           text: "파일이 10MB를 초과하였습니다.",
+				     		           dangerMode: true,
+				     		           buttons: {
+				     							 catch: {
+				     							 	text: "확인"
+				     							 }
+				     				   },
+				     		    	 });
+// 			                    alert('파일이 10MB를 초과하였습니다.');
 			                    // 이후 동작 ...
 			                } else {
-			                    alert('이미지 업로드 성공');
+// 			                    alert('이미지 업로드 성공');
 			                }
 		            },
 					error: function(request, status, error){ 

@@ -55,6 +55,7 @@
                   <address class="address-details-f">
                   	은우 : p960720@naver.com <br>
                   	혜미 : dlgpal9508@gmail.com<br>
+                  	민희 : 000ppp0@hanmail.net<br>
                                      
                     California, US <br>
                     Phone: 800 123 3456 <br>
