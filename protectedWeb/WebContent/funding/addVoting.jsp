@@ -149,7 +149,7 @@
 			<div id="attach" class="form-group">
 				<span class="label label-primary "><label
 					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞
-				이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.) <input id="uploadInputBox"
+				이미지는 대표이미지입니다. (최대 <b>10장</b>까지 등록 가능합니다.) <input id="uploadInputBox"
 					style="display: none" type="file" value="등록" name="filedata" />
 			</div>
 
@@ -212,10 +212,10 @@
    function fncAddVoting(){
       
       //Form 유효성 검증
-	//  $('textarea').val(CKEDITOR.getData());
+
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
-     // var postContent =  CKEDITOR.getData();  
+      var postContent =  CKEDITOR.instances.postContent.getData();  
       var file = $("#multiFile").val();    
 
       if(fundTargetPay == null || fundTargetPay.length<1){
@@ -280,7 +280,7 @@
 			   },			   
 	      }).then((willDelete) => {
 	           if (willDelete) {
-	  	         $(".ck-editor__editable").focus();
+	  	         $(CKEDITOR.instances.postContent).focus();
 	           }
 	      });      	  
 	         return;
@@ -289,7 +289,7 @@
       
       if(file == null || file.length<1){
 		  swal({
-	           text: "사진을 1개이상 입력해주세요.",
+	           text: "사진을 1개이상 등록해주세요.",
 	           dangerMode: true,
 	           buttons: {
 						 catch: {
@@ -340,7 +340,7 @@
                 data : formData,
                 success : function(result) {
                     if (result === -1) {
-                    	  swal("jpg, gif, png, bmp 확장자만 업로드 가능합니다.", " ");
+                    	  swal("jpg, gif, png, bmp 확장자만 등록 가능합니다.", " ");
                         // 이후 동작 ...
                     } else if (result === -2) {
                         alert('파일이 10MB를 초과하였습니다.');
@@ -503,7 +503,7 @@
                     //5장 이상 업로드시
                      if(Object.keys(files).length>=10){
               			  swal({
-              		           text: "사진은 10장까지만 업로드 가능합니다",
+              		           text: "사진은 10장까지만 등록 가능합니다",
               		           dangerMode: true,
               		           buttons: {
               							 catch: {
@@ -560,7 +560,7 @@
                  fileNameExtensionIndex, fileName.length);
          if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
 			  swal({
-		           text: "jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.",
+		           text: "jpg, gif, png, avi, mp4 확장자만 등록 가능합니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {

@@ -44,6 +44,9 @@
          	color: #f04f23;
 /*          	padding-top: 5px; */
         }
+        img {
+       	    max-width: 600px;
+        }
 
             
 	</style> 
@@ -57,10 +60,10 @@
     <!--================Header Menu Area =================--> 
 
     <!--================Single Product Area =================-->
-    <div class="product_image_area">
+    <div class="product_image_area" style="padding-left: 40px">
       <div class="container">
         <div class="row s_product_inner">
-          <div class="col-lg-6">
+          <div style="width: 600px">
 
             조회수 ${funding.voteViewCount } / 작성일 ${funding.voteStartDate}
             <p/>
@@ -110,7 +113,7 @@
 
             </div>
           </div>
- 			 <div class="col-lg-5 offset-lg-1">
+ 			 <div style="padding-left: 50px;" >
              <div class="s_product_text">			 
             <div>
             <h4>&emsp;</h4>
@@ -165,13 +168,14 @@
                <br/>  
               <div class="card_area">
               
+			 		<br/>	
 			<!-- 투표종료 -->
-			 <c:if test ="${!(funding.statusCode eq 1) }">		
+			 <c:if test ="${!(funding.statusCode eq 1) }">	
                		<button class="btn btn-default" id="noApply" style="width: 460px;" id="confirmButton">완료된 글입니다.</button>
 			 </c:if>
             <!-- 투표중 -->			 
 			<c:if test ="${funding.statusCode eq 1 }">				 			
-                <button  id="btnAddVote" class="btn btn-default" style="width: 225px">투표하기</button><button id="btnQuestion"  class="btn btn-default" style="width: 225px">문의하기</button>             
+                <button  id="btnAddVote" class="btn btn-default" style="width: 225px">투표</button><button id="btnQuestion"  class="btn btn-default" style="width: 225px">문의</button>             
 			</c:if>		              
        
               </div>
@@ -432,11 +436,8 @@
 		//============= 투표하기 Event  처리 =============	
 	 	$( "#btnAddVote" ).on("click" , function() {
 	 		if(${user==null}){
-	 			alert("로그인이 필요합니다.")
-// 	 		}else{
-	 			 		
-// 		 		if(!(${funding.statusCode eq '1'})){
-// 		 			swal("투표가 종료되었습니다.", " ");   
+	 			$("#login-modal").modal('show');  
+ 
 		 		}else{
 		 	   		 $.ajax( 
 		 					{
@@ -451,7 +452,7 @@
 		                             alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 		                            },
 		 						success : function(JSONData , status) {
-		 		
+		 		                                                    
 		 			                if(JSONData ==1 ) {
 		 			                	
 		 			     			  swal({
@@ -478,7 +479,7 @@
 		//============= 문의하기 Event  처리 =============	
 	 	$( "#btnQuestion" ).on("click" , function() {
 	 		if(${user==null}){
-	 			alert("로그인이 필요합니다.")
+	 			$("#login-modal").modal('show');  
 	 		}else{
 		 		 window.open("/chatting/addChattingUser?postId=${funding.id}",
 							"_blank",

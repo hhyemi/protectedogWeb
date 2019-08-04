@@ -204,7 +204,7 @@
   <!-- loader -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 	
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -320,12 +320,9 @@
 		});   
 	
         //============= 작성 Event  처리 =============   
-        $( "#btnAdd" ).on("click" , function() {
-        	if(${user == null}){
-        		alert("로그인이 필요합니다.")
-        		
-        		return;
-        		
+        $( document).on("click",'#btnAdd' , function() {
+        	if(${user == null}){       		
+        		$("#login-modal").modal('show');  		
         	}else if(${user.levelPoint eq 0}){
     	 		swal({
     	            title: "인증회원만 작성 가능합니다.",

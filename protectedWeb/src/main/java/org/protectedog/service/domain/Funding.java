@@ -250,6 +250,7 @@ public class Funding {
 		this.fundViewCount = fundViewCount;
 	}
 
+
 	public String getPhone() {
 		return phone;
 	}
@@ -270,6 +271,7 @@ public class Funding {
 				+ reviewRegDate + ", voteRemainDate=" + voteRemainDate + ", fundRemainDate=" + fundRemainDate
 				+ ", VoteRate=" + VoteRate + ", FundRate=" + FundRate + ", mainFile=" + mainFile + "]";
 	}
+
 
 
 }

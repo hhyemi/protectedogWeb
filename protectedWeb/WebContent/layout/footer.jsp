@@ -83,6 +83,7 @@
                 </div>
             </div>
         </div>
+        
         <a href="#home" id="back-to-top" class="btn btn-sm btn-green btn-back-to-top smooth-scrolls hidden-sm hidden-xs" title="home" role="button">
             <i class="fa fa-angle-up"></i>
         </a>

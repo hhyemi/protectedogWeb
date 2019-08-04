@@ -142,7 +142,7 @@
 				</h5>
 				<p/>	
 			    <div >
-			    <textarea id="editor" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
+			    <textarea id="postContent" name="postContent" style="text-align: left;" placeholder="내용을 입력해주세요.">
 				${funding.postContent}				
 				</textarea>			    
 			    </div>
@@ -178,10 +178,8 @@
 				</h5>
 				연락처가 다를 경우 회원정보를 수정해주세요.
 				<input type="text" class="form-control" name="phone" value="${ user.phone }" readonly style="margin-top: 15px">
-				
-				<input type="hidden" class="form-control" id="multiFile" name="multiFile">
+			
 			</div>
-		    <input type="hidden" name="phone"  />
 		    <input type="hidden" name="postNo" value="${funding.postNo }" />		    	
 		    <input type="hidden" id="multiFile" name="multiFile" />
 		    <input type="hidden" id="deleteFile" name="deleteFile" />		    
@@ -218,10 +216,9 @@
    function fncUpdateVoting(){
       
       //Form 유효성 검증
- 	  $('textarea').val(editor.getData());
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
-      var postContent = $('textarea').val()
+      var postContent =  CKEDITOR.instances.postContent.getData(); 
  
       
       if(fundTargetPay == null || fundTargetPay.length<1){

@@ -81,7 +81,6 @@
 	 <update	id="updateVoting"	parameterType="funding" >
 	   	UPDATE STORYFUNDING
 	   	<set>
-	   		PHONE       	   = #{phone} ,
 			POST_TITLE	       = #{postTitle},
 			POST_CONTENT 	   = #{postContent} ,
 			FUND_TARGET_PAY	   = #{fundTargetPay},
