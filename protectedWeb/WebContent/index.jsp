@@ -170,66 +170,24 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
  			</div> 
 	<!--===================================================
-                        OFFER1
+				         분양 실종
 ======================================================-->
 
 	
 
 	<section id="comp-offer">
-	<div class="adopt">
-      <div class="container-fluid">
-        <div class="row">
-           <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
-            <h2>분양.실종</h2>
-            <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">분양게시판 바로가기</button>
-            <button class="btn btn-general btn-white" role="button">실종캘린더 바로가기</button>
-          </div>
-          
-         <div class="col-md-3 col-sm-6 wow fadeInUp" style="margin-right: 35px" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont" style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Business Management</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>   
-          
-                 
-          <div class="col-md-3 col-sm-6  wow fadeInUp"  style="margin-right: 35px;" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>              
-              <h3>Leadership Development</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"  style="margin-right: 35px" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Social benefits and services</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      </div>
+		<div class="adopt">
+	      <div class="container-fluid">
+	        <div class="row" id="rowAdopt">
+	           <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
+	            <h2>분양 · 실종</h2>
+	            <div class="heading-border-light"></div> 
+	            <button class="btn btn-general btn-green" role="button" id="AD">분양게시판 바로가기</button>
+	            <button class="btn btn-general btn-white" role="button" id="MS">실종캘린더 바로가기</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
     </section>
     
 
@@ -436,7 +394,69 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 
 		$(document).ready(function(){
+			
+			// 분양실종
+			$.ajax(
+					{
+						url : "/adopt/json/listAdopt",
+						method : "POST" ,
+						data : JSON.stringify({
+// 							searchCondition : $("#searchCondition").val(),
+// 							searchKeyword : $("#searchKeyword").val(),
+// 							areaCondition : $('select[name=areaCondition]').val(),
+// 							boardCode : $("#boardCode").val(),
+							pazeSize : 1,
+						}) ,
+						dataType : "json" ,
+						headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								  },
+						success : function(data , status) {
+							console.log('성공'+JSON.stringify(data));
+							var adopt = data.list;
+							var display = "";
+							var bCode = '';
+							 $.each(adopt, function(index, adopt){
+								 if(index<3){
+								bCode = adopt.areaKr.substring( 0, adopt.areaKr.indexOf('시')+1 );
+								
+								 display +="<div class=\"col-md-3 col-sm-6  wow fadeInUp\"  style=\"margin-right: 35px;\" data-wow-delay=\"0.6s\">"+
+											 "<div class=\"desc-comp-offer-cont\"  style=\"margin-right: 35px;padding-top:10px;\">";	
+						
+								 
+								 display += 
 
+			                        "<a href=\"#\" class=\"img-prod\"><img class=\"img-fluid\" style=\"width:100%;background:url(\'..\/resources\/file\/fileAdopt\/"+adopt.mainFile+
+			                        		"\') no-repeat center center;background-size:cover;min-height:300px; max-height:300px; min-width:330px; max-width:330px;\" >"+
+			    					"<input type=\"hidden\" value=\""+adopt.postNo+"\" /></a> ";	    																
+					
+									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
+			    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
+										       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
+
+									display += "</div></div></div>";	
+								 }
+							 });
+										
+										$("#rowAdopt").append(display);
+									 	$( ".img-prod" ).on("click" , function() {
+											$(self.location).attr("href","/adopt/getAdopt?postNo="+$(this).children("input").val());
+										});   
+									
+						},
+						error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				        }
+					
+			});
+		
+			
+			
+			
+			
+			
+			// 스토리펀딩
 			$.ajax(
 					{
 						url : "/funding/json/listVoting/" ,
@@ -489,6 +509,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			
 			
 		});
+		
+	
+		
+		////////분양실종 이벤트///////////
+		$("#AD").on("click",function(){
+			self.location ="/adopt/listAdopt";	
+		});
+		$("#MS").on("click",function(){
+			self.location ="/adopt/listMissing";	
+		});		
 		
 		////////스토리펀딩 이벤트///////////
 		$("#vote").on("click",function(){

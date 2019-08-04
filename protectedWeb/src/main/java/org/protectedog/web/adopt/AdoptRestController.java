@@ -205,27 +205,25 @@ public class AdoptRestController {
 	public JSONObject listAdopt( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
 																			Model model, HttpSession session ) throws Exception{
 		
-		System.out.println("\n\n/adopt/json/listAdopt : GET / POST "+params.get("boardCode").toString());
+		System.out.println("\n\n/adopt/json/listAdopt : GET / POST ");
 		System.out.println(params);
 		
-		search.setSearchCondition( params.get("searchCondition").toString() );
+//		search.setSearchCondition( params.get("searchCondition").toString() );
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
+		} else {
+			search.setSearchCondition( params.get("searchCondition").toString() );
 		}
-//		System.out.println("확인@@@@ : "+searchCondition+", "+searchKeyword);
-		
-		search.setSearchKeyword( params.get("searchKeyword").toString() );
-		System.out.println("검색어 확인1 : "+search.getSearchKeyword());
-		
+		System.out.println("----------------1-------------------");
+//		search.setSearchKeyword( params.get("searchKeyword").toString() );
 		if(search.getSearchKeyword() == null ) {
 			search.setSearchKeyword("");
-//			if(searchKeyword != null) {
-//				search.setSearchKeyword(searchKeyword);
-//			}
+		} else {
+			search.setSearchKeyword( params.get("searchKeyword").toString() );
 		}
-		System.out.println("검색어 확인2 : "+search.getSearchKeyword());
-		search.setAreaCondition( params.get("areaCondition").toString() );
-		if(search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
+		System.out.println("-----------------2------------------");
+//		search.setAreaCondition( params.get("areaCondition").toString() );
+		if( search.getAreaCondition() == null || search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
 			search.setAreaCondition("");
 //		}else if(search.getAreaCondition().equals("kw")) {
 //			search.setAreaCondition("강원");
@@ -249,19 +247,22 @@ public class AdoptRestController {
 //			search.setAreaCondition("전라");
 //		}else if(search.getAreaCondition().equals("cc")) {
 //			search.setAreaCondition("충청");
+		} else {
+			search.setAreaCondition( params.get("areaCondition").toString() );
 		}
 		search.setVoteCondition("");
-		
+		System.out.println("----------------3-------------------");
 		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
 		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		
 		search.setPageSize(pageSize);
 		System.out.println("search 확인 : "+search);
 		
-		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
+		Map<String , Object> map=adoptService.listAdopt(search, "AD");
+//		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
-//		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
 
 		JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));
@@ -274,7 +275,7 @@ public class AdoptRestController {
         jsonObject.put("totalCount", map.get("totalCount"));
 
       
-//        System.out.println("json5========================================================\n"+jsonObject);
+        System.out.println("json5========================================================\n"+jsonObject);
       
 		return jsonObject;
 	}

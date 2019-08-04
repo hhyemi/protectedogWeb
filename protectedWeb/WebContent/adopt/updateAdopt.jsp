@@ -938,7 +938,7 @@
 							 }
 				   },
 		     });
-			$("input[name=postContent]").val($("input[name=postContent]").val().toString().substring(0,100);
+			$("input[name=postContent]").val($("input[name=postContent]").val().toString().substring(0,100));
 // 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');
