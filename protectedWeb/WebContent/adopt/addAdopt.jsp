@@ -29,6 +29,10 @@
 			height: 38px;
 
 		}
+		
+		.fa-exclamation-circle {
+			color: #f04f23;
+		}
 
 	</style>
    <jsp:include page="/layout/toolbar.jsp"></jsp:include> 
@@ -61,7 +65,6 @@
 	          	
 					<!-- hidden -->
 					<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
-					<input type="hidden" name="id" value="${ sessionScope.user.id }" >
 					<input type="hidden" name="statusCode" value="1" >
 					<input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 				
@@ -216,7 +219,8 @@
 	               	</div>
 	               		
 		            <div class="col-md-12" id="areaFocus"><br/>
-	               		<label><strong>※ 지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.</strong></label>
+	               		<label><strong><span class="fas fa-exclamation-circle"></span>
+	               		지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.</strong></label>
 	               	</div>
 	               		
 	              	<c:if test="${param.boardCode eq 'AD' }">
@@ -366,7 +370,7 @@
 				 	var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
 		    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 		    	         success: function(data){
-		    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+" ";
+		    	           			markTest = ","+data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
 		    	           			if( markTest.indexOf('특별') != -1  ){
 		    	           				markTest = markTest.replace('특별' ,   '');
 		    	           			}
@@ -377,6 +381,11 @@
 		    	           				markTest = markTest.replace('자치' ,   '');
 		    	           			}
 		    	          			$("#areaKr").val($("#areaKr").val()+markTest);
+		    	          			
+		    	          			if ( $("#areaKr").val().toString().indexOf(',') == 0 ){
+		    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  1  ,   ($("#areaKr").val().toString().length)  ) ) ;
+		    	          			}
+// 		    	          			
 		    	          			
 		    	         }
 		    	 	});
@@ -408,7 +417,7 @@
 	  		    	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	  		    	            success: function(data){
 // 	  		   	               		alert(JSON.stringify(data));
-	  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+",";
+	  		    	              	markTest += ","+data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
 	  		    	                if( markTest.indexOf('특별') != -1  ){
 		    	           				markTest = markTest.replace('특별' ,   '');
 		    	           			}
@@ -419,6 +428,13 @@
 		    	           				markTest = markTest.replace('자치' ,   '');
 		    	           			}
 	  		    	       			$("#areaKr").val(markTest);
+	  		    	       			
+		  		    	       		if ( $("#areaKr").val().toString().indexOf(',') == 0 ){
+		    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  1  ,   ($("#areaKr").val().toString().length)  ) ) ;
+		    	          			}
+		    	          			if (   $("#areaKr").val().toString().charAt(($("#areaKr").val().toString().length)-1) == ','   ){
+		    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  0  ,   ($("#areaKr").val().toString().length)-1 ) ) ;
+		    	          			}
 	  		    	            }
 	  		    	 		});
 	  					}
@@ -745,7 +761,7 @@
 
 		if(removeCommas($(this).val()).length > 6 ){
 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
-			$(this).val('1000000');
+			$(this).val('999999');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
@@ -836,9 +852,12 @@
 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPay]").val().trim() == '' || $("input[name=dogPay]").val().length > 6 || $("input[name=dogPay]").val() < 0 ){
+		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length > 6 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
 			  $("input[name=dogPay]").focus();
+// 			  removeCommas($(this).val())
 			  return;
+		  } else {
+			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		  }
 		  if( $("input[name=dogDate]").val().trim() == '' ){
 			  $("input[name=dogDate]").focus();

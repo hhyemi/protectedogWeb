@@ -10,6 +10,7 @@ public class Apply {
 	private int applyNo;
 	private int adoptNo;
 	private String id;
+	private String nickname;
 	private String phone;
 	private String job;
 	private String addr;
@@ -42,6 +43,12 @@ public class Apply {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getPhone() {
 		return phone;
