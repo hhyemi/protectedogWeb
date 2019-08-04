@@ -15,7 +15,7 @@
 		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		    <title>보호할개 · 후원신청</title>
+		    <title>보호할개 · 후원</title>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
@@ -231,6 +231,7 @@
           if (willDelete) {   
               swal("수정이 완료되었습니다!", {
 	                icon: "success",
+	                button : "확인"
 	              }).then((value) => {     
       //============= 다중파일업로드 AJAX =============
           $(function() {     
@@ -347,8 +348,19 @@
                      
                     //10장 이상 업로드시
                      if(Object.keys(files).length>=10){
-                        alert("사진은 10장까지만 업로드 가능합니다.");
-                        delete files[imgNum];
+             			  swal({
+             		           text: "사진은 10장까지만 등록 가능합니다",
+             		           dangerMode: true,
+             		           buttons: {
+             							 catch: {
+             							 	text: "확인"
+             							 }
+             				   },			   
+             		      }).then((willDelete) => {
+             		           if (willDelete) {
+             	                   delete files[imgNum];
+             		           }
+             		      });
                      }else{
                // 10장 이하 
         		    $("#preview").append(
@@ -397,7 +409,15 @@
          var fileNameExtension = fileName.toLowerCase().substring(
                  fileNameExtensionIndex, fileName.length);
          if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+			  swal({
+		           text: "jpg, gif, png, avi, mp4 확장자만 등록 가능합니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },			   
+		      }); 
              return true;
          } else {
              return false;
@@ -413,19 +433,31 @@
          });
 
           
-           //============= 글제목 길이 입력 검증 =============
-             $('#postTitle').keyup(function(){
-            	 var byteText = $(this).val();
-              	 var byteNum = 0;
-            	 
-                  for(var i = 0; i < byteText.length ; i++) {
-                     byteNum += ( byteText.charCodeAt(i) > 127 ) ? 2 : 1;
-                  }
-                  if(byteNum > 30) {              	 
-                      alert('제한길이 초과');
-                      $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
-                  }
-             });
+          //============= 글제목 길이 입력 검증 =============
+          $('#postTitle').keyup(function(){
+         	 var byteText = $(this).val();
+           	 var byteNum = 0;
+           	 
+               for(var i = 0; i < byteText.length ; i++) {
+                  byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+	                  if(byteNum > 30) {     
+	        			  swal({
+		       		           text: "제한길이를 초과하였습니다.",
+		       		           dangerMode: true,
+		       		           buttons: {
+		       							 catch: {
+		       							 	text: "확인"
+		       							 }
+		       				   },			   
+		       		      }).then((willDelete) => {
+		       		           if (willDelete) {
+		                           $(this).val($(this).val().substr(0,i));
+		       		           }
+		       		      });
+	                  }
+               }
+
+          });
 
              
      }); 

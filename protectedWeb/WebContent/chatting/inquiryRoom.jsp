@@ -50,7 +50,7 @@
             text-align: center;
         }
         #msg {
-            width: 73%;
+            width: 81%;
             height: 32px;
             border-radius: 8px;
         }
@@ -96,13 +96,14 @@
 
 </style>
 </head>
-<body>
+<body onload="window.resizeTo(480,650)" onresize="window.resizeTo(480,650)">
+
 <div class="container">
     <div>
     
     <div class="col-md-7">
 	    <br/>
-	    <div ><h4 class="text-center" id="roomName"><b>보호할개 채팅</b></h4></div>
+	    <div ><h4 class="text-center" id="roomName"><b><img src="/resources/file/others/favicon.png" height="30px" width="30px"> 보호할개 </b></h4></div>
 	    <div id="chat_box" style="overflow:auto">
 
 	    </div>
@@ -120,8 +121,9 @@
      </div> 
      <input type="hidden" id="userId" value="${userId }"> 
      <input type="hidden" id="postId" value="${postId }">     
+     <input type="hidden" id="profile" value="${profile}">  
 </div> 	
-    <script src="http://192.168.0.49:82/socket.io/socket.io.js"></script>
+    <script src="http://127.0.0.1:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -137,8 +139,14 @@
             $(document).ready(function(){
             
             		var userName = $("#userId").val();
+            		var profile = $("#profile").val();
+            		//alert(profile)
 
-            		var socket = io("http://192.168.0.49:82/");
+            		if(profile==""){
+            			profile = "kakaoDefaultImg.jfif";
+            		}
+
+            		var socket = io("http://127.0.0.1:82/");
 
             		socket.emit("updateUser", userName);
             		
@@ -164,6 +172,9 @@
             	        var Now = new Date();
 
             	        var NowTime =  Now.getHours();
+            	        if(NowTime==0){
+            	        	NowTime = '12';
+            	        }
             	        var NowMinutes = Now.getMinutes()
             	        if(NowMinutes.length=1){
             	        	NowTime += ':0'+ NowMinutes;
@@ -178,7 +189,7 @@
                   	       
             	    	  
             	    	  }else{
-            	    		  $('#chat_box').append("&emsp;"+re+"<div class='text-right'><div class='msgLine2' ><button style='pointer-events: none;' class='msgBox2'>"+msg+"</button>&nbsp;<small>"+NowTime+"</small></div></div><br/>");
+            	    		  $('#chat_box').append("<div clas=\"row\"> &emsp;&nbsp;<img src=\"/resources/file/fileUser/"+profile+"\" style=\"border-radius:50px\" height=\"40px\" width=\"40px\">&nbsp;"+re+"<div class='msgLine2' >&emsp;&emsp;&emsp;<button style='pointer-events: none;' class='msgBox2'>"+msg+"</button>&nbsp;<small>"+NowTime+"</small></div><br/></div>");
             	    
             	    	  }
             	        $('#chat_box').scrollTop($('#chat_box')[0].scrollHeight);

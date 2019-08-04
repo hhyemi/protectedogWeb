@@ -15,7 +15,7 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <title>보호할개 · 후원신청</title>
+	    <title>보호할개 · 투표</title>
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
     <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
@@ -303,6 +303,7 @@
           if (willDelete) {   
               swal("수정이 완료되었습니다!", {
 	                icon: "success",
+	                button : "확인"
 	              }).then((value) => {
       //============= 다중파일업로드 AJAX =============
           $(function() {     
@@ -626,7 +627,7 @@
                   $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
                   var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                   $("#voteNum").children().remove();
-                  $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3><div class=\"row form-form\">"+
+                  $("#voteNum").append("<h5><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h5><div class=\"row form-form\">"+
    										"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
     		           }
     		      });

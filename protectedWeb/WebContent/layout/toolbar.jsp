@@ -249,10 +249,14 @@
 		
 		$("#fixedbtn").on("click",function(){
 			
+        	if(${user == null}){       		
+        		$("#login-modal").modal('show');  		
+        	}else{
+			
 			 window.open("/chatting/addChattingUser?postId=${funding.id}",
 						"_blank",
 						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
-		
+        	}
 		});
 		
 		function fncLogin(){
