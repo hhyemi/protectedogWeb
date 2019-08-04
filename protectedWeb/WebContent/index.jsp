@@ -19,6 +19,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
 <!-- chartjs -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<!-- google MDL -->
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<!-- <link rel="stylesheet" href="/resources/newTemplate/css/neon.css"> -->
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
 <title>보호할개</title>
 
 <style>
@@ -32,6 +39,25 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	background-size: cover;
 }
 
+.arrow {position:fixed;right:50%;bottom:23px;z-index:1000}
+.arrow span{display: block;width: 20px;height: 20px;border-bottom: 5px solid #F04F23;border-right: 5px solid #F04F23;transform: rotate(45deg);margin: -10px;animation: animate 2s infinite;}
+.arrow span:nth-child(2){animation-delay: -0.2s;}
+.arrow span:nth-child(3){animation-delay: -0.4s;}
+@keyframes animate {
+    0%{
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px,-20px);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: rotate(45deg) translate(15px,15px);
+    }
+}
+/* <!-- 정보공유 스타일 --> */
+.postTitle:hover{cursor:pointer;color:#F04F23}
 /*
 .adopt {
 	height: 10vh;
@@ -153,6 +179,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				class="sr-only">Next</span>
 			</a>
 		</div>
+		
+		<div class="arrow">
+                <span></span>
+                <span></span>
+		</div>
 	</header>
 
 <!-- ==============================================================
@@ -228,14 +259,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				<div class="row">
 					<div class="col-md-6" style="padding-left:50px">
 						<div class="service-himg">
-							<iframe src="https://www.youtube.com/embed/3P1YGPZp6Ik?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+							<iframe src="https://www.youtube.com/embed/L_XlRaGSiY4?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 						</div>
 					</div>
 					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
 						<div class="service-h-desc">
 							<h2>정보공유</h2>
 							<div class="heading-border-light"></div>
-							<p>비트캠프 118기 타이피스트 매력없는 박 은우 입니다.</p>
+							<p>비트캠프 118기 타이피스트 매력없는 이 혜미 입니다.</p>
 							<div class="service-h-tab">
 								<nav class="nav nav-tabs" id="myTab" role="tablist">
 									<a class="nav-item nav-link active" id="nav-home-tab"
@@ -249,24 +280,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 								<div class="tab-content" id="nav-tabContent">
 									<div class="tab-pane fade show active" id="nav-home"
 										role="tabpanel" aria-labelledby="nav-home-tab">
-										<p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem
-											minim irure officia enim reprehenderit. Magna duis labore
-											cillum sint adipisicing exercitation ipsum. Nostrud ut anim
-											non exercitation velit laboris fugiat cupidatat. Commodo esse
-											dolore fugiat sint velit ullamco magna consequat voluptate
-											minim amet aliquip ipsum aute. exercitation ipsum. Nostrud ut
-											anim non exercitation velit laboris fugiat cupidatat. Commodo
-											esse dolore fugiat sint velit ullamco magna consequat
-											voluptate minim amet aliquip ipsum aute.</p>
+										
 									</div>
 									<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 										aria-labelledby="nav-profile-tab">
-										<p>Nulla est ullamco ut irure incididunt nulla Lorem Lorem
-											minim irure officia enim reprehenderit. Magna duis labore
-											cillum sint adipisicing exercitation ipsum. Nostrud ut anim
-											non exercitation velit laboris fugiat cupidatat. Commodo esse
-											dolore fugiat sint velit ullamco magna consequat voluptate
-											minim amet aliquip ipsum aute</p>
 									</div>
 								</div>
 							</div>
@@ -355,6 +372,19 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<script src="/resources/newTemplate/admin/js/chart.min.js"></script>
 	<script src="/resources/newTemplate/admin/js/front.js"></script>
 	<script type="text/javascript">
+	
+	$(function(){
+		
+		$(window).scroll(function(){
+			
+			if($(window).scrollTop() > 264){
+				$(".arrow").hide("slow");
+			}
+			if($(window).scrollTop() < 1){
+				$(".arrow").show("slow");
+			}
+		});
+	});
 		// 	$(function (){
 		// 			$(document).ready(function(){
 		// 				if(${sessionScope.user != null}){
@@ -395,6 +425,77 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 		$(document).ready(function(){
 			
+			
+			// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 정보공유 이벤트 시작 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+			$.ajax({
+						url : "/info/json/listMainInfo/" ,
+						method : "POST" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				        },
+						success : function(JSONData,status) {
+							
+							//console.log(JSON.stringify(JSONData));
+							var info  = JSONData;
+							var display ="";
+							
+							display += "<table class=\"mdl-data-table mdl-js-data-table mdl-shadow--4dp\">"
+							        +  "<thead>"
+							        +  		"<tr>"
+							        +			"<td>랭킹</td>"
+							        +			"<td class=\"text-center\">제목</td>"
+							        +			"<td>작성자</td>"
+							        +			"<td>등록일자</td>"
+							        +			"<td>조회수</td>"
+							        +			"<td>추천수</td>"
+							        +  		"<tr>"
+							        +  "</thead>"
+								    +  "<tbody>"
+							 $.each(info, function(index, info){
+								 	 
+									display +=  "<tr>"
+											+  "<td class=\"mdl-data-table__cell--non-numeric\">";
+										
+											if(index == 0 ){
+												display += "<img src=\"/resources/file/others/gold-medal.png\"> "+ ( index+1 )+" 등</img>"
+											}
+											if(index == 1 ){
+												display += "<img src=\"/resources/file/others/silver-medal.png\"> "+ ( index+1 ) +" 등</img>"
+											}
+											if(index >= 2 ){
+												display += "<img src=\"/resources/file/others/bronze-medal.png\"> "+ ( index+1 ) +" 등</img>"
+											}
+									
+									display += "</td>"
+											+  "<td align=\"center\" class=\"postTitle mdl-data-table__cell--non-numeric\" width=\"200px\"><input type=\"hidden\" name=\"postNo\"" 
+											+  "value=\""+ info.postNo +"\"> "+ info.postTitle +"</td>"
+											+  "<td>"+info.nickName+"</td>"
+											+  "<td>"+info.regDate+"</td>"
+											+  "<td>"+info.viewCount+"</td>"
+											+  "<td>"+info.recommendCount+"</td>"
+											+  "</tr>";
+							
+							 });
+							 
+							 display += "</tbody>"
+							 		+ "</table>";
+							 
+							 $("#nav-home").append(display);
+							 
+							 $( ".postTitle" ).on("click" , function() {
+									$(self.location).attr("href","/info/getInfo?postNo="+$(this).children("input").val());
+							});   
+						}
+					});
+// 			■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 정보공유 이벤트 끝 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+			
+		
+		
 			// 분양실종
 			$.ajax(
 					{
@@ -452,7 +553,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			});
 		
 			
-			
+		
 			
 			
 			
