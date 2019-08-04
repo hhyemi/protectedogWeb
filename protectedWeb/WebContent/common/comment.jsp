@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -25,6 +27,10 @@
 .reportModal{ color: #f73325; }
 
 .profileImg { border-radius: 50px; min-height: 88px; min-width: 82px; max-height: 88px; max-width: 82px; }
+.fa-thumbs-up:hover{cursor:pointer;color:#F04F23;}
+.fa-trash-alt:hover{cursor:pointer;color:#F04F23;}
+.fa-pen:hover{cursor:pointer;color:#F04F23;}
+#commentGo{color:white;}
 </style>
 </head>
 <body>
@@ -52,7 +58,7 @@
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
 				<button type="button" id="commentGo" class="commentSubmit btn btn-default"
-					style="width: 100%; height: 48px;">
+					style="width: 100%; height: 48px; color: white;">
 					<h6>
 						<b>댓글등록</b>
 					</h6>
@@ -69,7 +75,7 @@
 		<c:forEach var="comment" items="${list}">
 			<c:set var="rank" value="${ rank+1 }" />
 			<div class="row" id="${comment.commentNo}">
-				<div class="col-sm-1 col-md-1" align="center">
+				<div class="col-sm-2 col-md-1" align="center">
 					<c:if test="${comment.profile != null }">
 					<img src="/resources/file/fileUser/${comment.profile}" class="profileImg" />
 					</c:if>
@@ -77,10 +83,21 @@
 					<img src="/resources/file/others/kakaoDefaultImg.jfif" class="profileImg" />
 					</c:if>
 				</div>
-				<div class="col-sm-11 col-md-11" align="left">
+				<div class="col-sm-10 col-md-11" align="left">
 					
 					<h4 id="${comment.commentNo}" class="h4tag">
-						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp; <small><c:if test="${rank <= 3 and comment.likeCount != 0}"><span class="fas fa-medal"> ${ rank } 등</span></c:if></small>
+						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp;
+						<small>
+							<c:if test="${rank == 1 and comment.likeCount != 0}">
+								<img src="/resources/file/others/gold-medal.png"></img> ${ rank } 등
+							</c:if>
+							<c:if test="${rank == 2 and comment.likeCount != 0}">
+								<img src="/resources/file/others/silver-medal.png"></img> ${ rank } 등
+							</c:if>
+							<c:if test="${rank == 3 and comment.likeCount != 0}">
+								<img src="/resources/file/others/bronze-medal.png"></img> ${ rank } 등
+							</c:if>
+						</small>
 					</h4>
 					<input type="hidden" name="commentNo" value="${comment.commentNo}">
 					
@@ -133,7 +150,7 @@
 <!-- 					</div> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
-<!-- 			<br/> -->
+<!-- 			<br/ > -->
 <%-- 			</c:if> --%>
 <%-- 			</c:forEach> --%>
 				<!--// Link Attribution -->
@@ -382,7 +399,7 @@
 							$("#"+commentNo+""+".area").hide();
 							
  							var display = 
- 								  "<div class='row'><div class='ajax col-md-10'><input type='text' class='form-control' id='commentUpdateContent' name='commentContent' style='width: 100%; height: 50px; margin-top : 5px; ' placeholder='"+JSONData.commentContent+"'/></div>"
+ 								  "<div class='row'><div class='ajax col-md-10'><input type='text' class='form-control' id='commentUpdateContent' name='commentContent' style='width: 100%; height: 50px; margin-top : 5px; ' value='"+JSONData.commentContent+"'/></div>"
  								+ "<div class='ajax col-md-2'>" 								
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
@@ -434,6 +451,7 @@
 				  
 			    swal("삭제완료 !", {
 			      	icon: "success",
+			      	button : "확인"
 			    });
 			  }
 			});
@@ -553,7 +571,7 @@
  						$("#"+JSONData.commentNo+""+".area").show();
  						
  						var modifyScreen = 	
- 							"<div id="+JSONData.commentNo+" class='area'>"
+ 							"<div id="+JSONData.commentNo+" class='area' style='padding-top : 5px;'>"
  							+ "<h5 id="+JSONData.commentNo+" class='cmCont'>"+JSONData.commentContent+"</h5><div>";
 						
  						$("#"+JSONData.commentNo+""+".h4tag").append(modifyScreen);

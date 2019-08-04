@@ -1,6 +1,8 @@
 package org.protectedog.web.InformationShare;
 
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -91,5 +93,15 @@ public class InformationShareRestController {
 		int result = interestService.getInterestCheck(map);
 		
 		return result;
+	}
+	
+	@RequestMapping( value="json/listMainInfo", method=RequestMethod.POST)
+	public List<Board> listMainInfo() throws Exception {
+
+		System.out.println(" ============================== rest listMainInfo ==================================");
+		
+		List<Board> list = boardService.listBoardRankingSearch(boardCode);
+		
+		return list;
 	}
 }

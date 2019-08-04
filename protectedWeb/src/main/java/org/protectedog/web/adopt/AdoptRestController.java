@@ -136,16 +136,25 @@ public class AdoptRestController {
 	
 	@RequestMapping( value="json/updateMissing", method=RequestMethod.POST )
 	public String updateMissing( 
-									@RequestParam("files") List<MultipartFile> images
+									@RequestParam(value="files", required = false ) List<MultipartFile> images
 									,@RequestParam Map<String, Object> param
 																										) throws Exception {
 
 		System.out.println("/adopt/json/updateMissing : POST \n");
-		MultipartFile image = images.get(0);
-		String mainF = image.getOriginalFilename();
+		
+		String mainF = "";
 		Adopt adopt = new Adopt();
 		
-		adopt.setMainFile(mainF);
+		// 이미지 수정 했을 때
+		if (   !(images.isEmpty())  ) {
+			MultipartFile image = images.get(0);
+			mainF = image.getOriginalFilename();
+			adopt.setMainFile(mainF);		
+		} else {
+			adopt.setMainFile( adoptService.getAdopt(Integer.parseInt(param.get("postNo").toString())).getMainFile()  );
+		}
+		
+		
 		adopt.setPostContent(param.get("postContent").toString());
 		adopt.setPhone(param.get("phone").toString());
 		adopt.setLocationKr(param.get("locationKr").toString());
@@ -156,29 +165,26 @@ public class AdoptRestController {
 		adopt.setDogChar(param.get("dogChar").toString());
 		adopt.setPostNo( Integer.parseInt(param.get("postNo").toString()));
 		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
-		
-		System.out.println("--------5--------");
-		
+	
 		adoptService.updateAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
-		System.out.println("--------6--------");
-//		User user = userService.getUsers(adopt.getId());
-//		user.setLevelPoint(user.getLevelPoint()+5);
-//		userService.updateUsers(user);
+		User user = userService.getUsers(adopt.getId());
+		user.setLevelPoint(user.getLevelPoint()+5);
+		userService.updateUsers(user);
 		
-		
-		List<FileDog> listFile = new ArrayList<FileDog>();
-		System.out.println("--------7--------");
-		// 파일디비에넣기
-		FileDog files = new FileDog();
-		files.setBoardCode(adopt.getBoardCode());
-		files.setFileName(mainF);
-		files.setFileCode(0);
-		files.setPostNo(adopt.getPostNo());
-		listFile.add(files);
-		fileService.addFile(listFile);
-		System.out.println("파일 확인 "+ files);
+		if (   !(images.isEmpty())  ) {
+			List<FileDog> listFile = new ArrayList<FileDog>();
+			// 파일디비에넣기
+			FileDog files = new FileDog();
+			files.setBoardCode("MS");
+			files.setFileName(mainF);
+			files.setFileCode(0);
+			files.setPostNo( adopt.getPostNo());
+			listFile.add(files);
+			fileService.addFile(listFile);
+			System.out.println("파일 확인 "+ files);
+		}
 		
 		return "{\"message\" : \"OK\" }";
 	}
@@ -205,27 +211,25 @@ public class AdoptRestController {
 	public JSONObject listAdopt( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
 																			Model model, HttpSession session ) throws Exception{
 		
-		System.out.println("\n\n/adopt/json/listAdopt : GET / POST "+params.get("boardCode").toString());
+		System.out.println("\n\n/adopt/json/listAdopt : GET / POST ");
 		System.out.println(params);
 		
-		search.setSearchCondition( params.get("searchCondition").toString() );
+//		search.setSearchCondition( params.get("searchCondition").toString() );
 		if(search.getSearchCondition() == null ) {
 			search.setSearchCondition("");
+		} else {
+			search.setSearchCondition( params.get("searchCondition").toString() );
 		}
-//		System.out.println("확인@@@@ : "+searchCondition+", "+searchKeyword);
-		
-		search.setSearchKeyword( params.get("searchKeyword").toString() );
-		System.out.println("검색어 확인1 : "+search.getSearchKeyword());
-		
+		System.out.println("----------------1-------------------");
+//		search.setSearchKeyword( params.get("searchKeyword").toString() );
 		if(search.getSearchKeyword() == null ) {
 			search.setSearchKeyword("");
-//			if(searchKeyword != null) {
-//				search.setSearchKeyword(searchKeyword);
-//			}
+		} else {
+			search.setSearchKeyword( params.get("searchKeyword").toString() );
 		}
-		System.out.println("검색어 확인2 : "+search.getSearchKeyword());
-		search.setAreaCondition( params.get("areaCondition").toString() );
-		if(search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
+		System.out.println("-----------------2------------------");
+//		search.setAreaCondition( params.get("areaCondition").toString() );
+		if( search.getAreaCondition() == null || search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
 			search.setAreaCondition("");
 //		}else if(search.getAreaCondition().equals("kw")) {
 //			search.setAreaCondition("강원");
@@ -249,19 +253,22 @@ public class AdoptRestController {
 //			search.setAreaCondition("전라");
 //		}else if(search.getAreaCondition().equals("cc")) {
 //			search.setAreaCondition("충청");
+		} else {
+			search.setAreaCondition( params.get("areaCondition").toString() );
 		}
 		search.setVoteCondition("");
-		
+		System.out.println("----------------3-------------------");
 		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
 		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		
 		search.setPageSize(pageSize);
 		System.out.println("search 확인 : "+search);
 		
-		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
+		Map<String , Object> map=adoptService.listAdopt(search, "AD");
+//		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
-//		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
 
 		JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));
@@ -274,7 +281,7 @@ public class AdoptRestController {
         jsonObject.put("totalCount", map.get("totalCount"));
 
       
-//        System.out.println("json5========================================================\n"+jsonObject);
+        System.out.println("json5========================================================\n"+jsonObject);
       
 		return jsonObject;
 	}
