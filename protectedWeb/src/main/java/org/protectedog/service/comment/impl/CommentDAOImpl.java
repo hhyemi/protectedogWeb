@@ -39,13 +39,13 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public List<Comment> listComment(int postNo, Search search) throws Exception {
+	public List<Comment> listComment(int postNo, Search search, String boardCode) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("postNo", postNo);
 		map.put("startRowNum", search.getStartRowNum());
 		map.put("endRowNum",search.getEndRowNum());
-		
+		map.put("boardCode",boardCode);
 		List<Comment> list = sqlSession.selectList("CommentMapper.listComment", map);
 		
 		return list;

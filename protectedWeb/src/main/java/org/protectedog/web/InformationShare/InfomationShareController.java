@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
@@ -73,8 +74,7 @@ public class InfomationShareController {
 		user.setLevelPoint(user.getLevelPoint() + 10 );
 		
 		userService.updateUsers(user);
-		
-		
+
 		// Board Set
 		board.setBoardCode(boardCode);
 		board.setId(user.getId());
@@ -170,7 +170,7 @@ public class InfomationShareController {
 		boardService.updateViewCount(board);
 		
 		// 댓글 불러오기
-		Map<String, Object> map = commentService.listComment(postNo, search);
+		Map<String, Object> map = commentService.listComment(postNo, search, boardCode);
 		// 대댓글 불러오기
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("postNo",postNo);
@@ -228,11 +228,14 @@ public class InfomationShareController {
 	}
 	
 	@RequestMapping(value = "delInfo")
-	public String delInfo(@ModelAttribute("board") Board board, HttpSession session) throws Exception {
+	public String delInfo(@RequestParam("postNo") int postNo, HttpSession session) throws Exception {
 		
 		System.out.println(" ============================== delInfo ==================================");
 	
-		System.out.println(" delInfo : " + board );
+		System.out.println(" delInfo : " + postNo );
+		
+		Board board = new Board();
+		board.setPostNo(postNo);
 		
 		boardService.delBoard(board);
 		

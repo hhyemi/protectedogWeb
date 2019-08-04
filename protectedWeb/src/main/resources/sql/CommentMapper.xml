@@ -66,7 +66,7 @@
 		FROM (  SELECT inner_table.* , ROWNUM AS row_seq
 				FROM (  SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName, profile
 						FROM comments
-						WHERE post_no = #{postNo} AND status_code != '0'
+						WHERE post_no = #{postNo} AND board_code = #{boardCode} AND status_code != '0'
 						ORDER BY  LIKE_COUNT DESC, reg_date DESC ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
@@ -77,7 +77,7 @@
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
 				FROM ( SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName, profile
 						FROM comments
-						WHERE post_no = #{postNo} AND status_code != '0'
+						WHERE post_no = #{postNo} AND board_code = #{boardCode} AND status_code != '0'
 						ORDER BY reg_date DESC ) inner_table
 				WHERE ROWNUM &lt;= #{commentEndRowNum} )
 		WHERE row_seq BETWEEN 1 AND #{commentEndRowNum}	

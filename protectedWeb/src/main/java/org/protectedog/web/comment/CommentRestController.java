@@ -182,7 +182,7 @@ public class CommentRestController {
 		if ( search.getCurrentPage() == 0 ) {
 			search.setCurrentPage(1);
 		}
-		// pageSize Ȯ��
+		// pageSize 5 고정
 		search.setPageSize(5);
 		
 		System.out.println("search.getCommentEndRowNum : " + search.getCommentEndRowNum());
@@ -198,7 +198,7 @@ public class CommentRestController {
 		System.out.println("postNo :" + postNo);
 		
 		// ������ �������� BL ����
-		Map<String, Object> commentMap = commentService.listComment(postNo, search);
+		Map<String, Object> commentMap = commentService.listComment(postNo, search, boardCode);
 		int totalCount = commentService.getTotalCount(postNo);
 		//Map<String, Object> reMap = reCommentService.listReComment(map);
 		
