@@ -20,3 +20,4 @@
 <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 		<a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" style="font-size: 20px"> ¢º</a>
 </c:if>
+

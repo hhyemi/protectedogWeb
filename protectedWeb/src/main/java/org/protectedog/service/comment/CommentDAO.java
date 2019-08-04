@@ -8,31 +8,31 @@ import org.protectedog.service.domain.Comment;
 
 public interface CommentDAO {
 
-	// ´ñ±Û µî·Ï
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void addComment(Comment comment) throws Exception;
 
-	// ´ñ±Û Á¶È¸ ?
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ?
 	public Comment getComment(int commentNo) throws Exception;
 
-	// ´ñ±Û ¼öÁ¤
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateComment(Comment comment) throws Exception;
 
-	// ´ñ±Û ¸®½ºÆ®
-	public List<Comment> listComment(int postNo, Search search) throws Exception;
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+	public List<Comment> listComment(int postNo, Search search,String boardCode) throws Exception;
 
-	// ´ñ±Û »èÁ¦
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void delComment(int commentNo) throws Exception;
 
-	// ´ñ±Û ½Å°í
+	// ï¿½ï¿½ï¿½ ï¿½Å°ï¿½
 	public void reportComment(int commentNo) throws Exception;
 	
-	// ´ñ±Û ÁÁ¾Æ¿ä
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½
 	public void updateLikeCnt(Map<String, Object> map) throws Exception;
 	
-	// ´ñ±Û °³¼ö
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int getTotalCount(int postNo) throws Exception;
 	
-	// ´ñ±Û ÆäÀÌÂ¡
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡
 	public List<Comment> listCommentMoreView(Map<String, Object> map) throws Exception;
 
 }

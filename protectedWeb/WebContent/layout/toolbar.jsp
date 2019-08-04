@@ -61,7 +61,12 @@
 		html {
 	 		scroll-behavior: smooth;
 		}
-	
+		#fixedbtn{position:fixed;right:10px;bottom:70px;z-index:1000}		
+		i:hover{
+			opacity: 0.5;
+			cursor:pointer
+		}
+		
   	</style>
   </head>
   

@@ -20,26 +20,24 @@
 
 <!-- Global Stylesheets -->
 <title>상품 등록</title>
-<meta charset="EUC-KR">
+
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
-<!-- <script -->
-<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-	
-	<!-- Google Mdl -->
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 
@@ -49,101 +47,211 @@
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <style>
+.view {
+	font-size: small;
+}
 
-.view { font-size: small; }
-.img-fluid  { min-height: 200px; 
-			  max-height: 200px; overflow: auto;
-			  max-width: 250px;
-			  min-width: 250px; 
-			  }
-			 
-.card			  { min-height: 400px; 
-			  max-height: 400px; overflow: auto;}
+#get {
+	padding-left: 10px;
+	padding-right: 10px;
+	max-width: 350px;
+	min-width: 350px;
+	min-height: 550px;
+	max-height: 550px;
+}
 
+.img-fluid {
+	min-height: 350px;
+	max-height: 350px;
+	max-width: 320px;
+	min-width: 320px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
 
+.card {
+	min-height: 550px;
+	max-height: 550px;
+	max-width: 350px;
+	min-width: 350px;
+}
+
+style>#checkPostTitle {
+	width: 300px;
+	padding: 0 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+select, #searchKeyword {
+	height: 33px;
+}
+
+#searchKeyword {
+	height: 40px;
+	width: 150px;
+	border: 1px solid #D3D3D3;
+}
+
+#searchSubmmit {
+	width: 60px;
+	height: 40px;
+	border-radius: 0px 15px 15px 0px;
+	border: 1px solid #f04f23;
+}
+
+#voteCondition {
+	height: 40px;
+	border-radius: 15px 0px 0px 15px;
+	padding-left: 10px;
+	border-color: #D3D3D3;
+	border-right: 0px;
+}
+
+#searchCondition {
+	height: 40px;
+	padding-left: 5px;
+	border-color: #D3D3D3;
+	border-right: 0px;
+}
 </style>
 
 </head>
 
-<body id="page-top">
-
-	<!--====================================================
+<!--====================================================
                          HEADER
 ======================================================-->
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!-- ToolBar End /////////////////////////////////////-->
+<!-- ToolBar Start /////////////////////////////////////-->
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--====================================================
+<!--====================================================
                     LOGIN OR REGISTER
 ======================================================-->
-	<!--====================================================
+<!--====================================================
                          HOME STA
 ======================================================-->
-
+<body class="goto-here">
+	<div class="hero-wrap hero-bread"
+		style="padding-bottom: 30px; padding-top: 60px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p>
+						<span class="mr-2">protected dog</span> <span>Market</span>
+					</p>
+					<font size="7">보호 마켓</font>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<p />
 
 	<!--====================================================
                         SHOP-P1
 ======================================================-->
-	<section id="shop-p1" class="shop-p1">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="shop-p1-title">
-						<h3>보호마켓</h3><a href="#" id="button">
-						<button id="btnFund" class="btn btn-default">작성</button>
-							
-						</a>
-						<div class="heading-border-light"></div>
-						<input type="hidden" value="${board.postNo}" /> <input
-							type="hidden" value="${board.boardCode}" />
+
+
+	<div class="container"></div>
+	<input type="hidden" value="${board.postNo}" />
+	<input type="hidden" value="${board.boardCode}" />
+
+
+
+
+<div class="container">
+	<section class="ftco-section bg-light"
+		style="padding-bottom: 0px; padding-top: 30px;">
+
+		<form class="form-inline" name="detailForm">
+			<div class="container">
+
+				<!--검색 부터 -->
+				<div class="row">
+					<div class="col-md-6" align="left">
+						<p style="font-weight: bold;">전체 ${resultPage.totalCount } 건</p>
 					</div>
 
+					<div class="form-group" style="padding-left: 160px">
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+								<option value="2"
+									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+							</select> </div>
 
 
-					<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
-
-
+						<div class="form-group">
+						<label class="sr-only" for="searchKeyword">검색어</label> <input
+							type="text" id="searchKeyword" name="searchKeyword"
+							placeholder="검색어"
+							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+						<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
+						<button type="button" id="searchSubmmit"
+							class="btn btn-default searchSubmmit"
+							style="padding-bottom: 6px; margin-left: 0px;">
+							<span class="fas fa-search"></span>
+						</button>
+					</div>
 				</div>
+				<br /> <br />
+				<c:if test="${resultPage.totalCount eq 0 }">
+					<div align="center" style="height: 300px; padding-top: 100px;">
+						<font size="4px">검색결과가 없습니다.</font>
+					</div>
+				</c:if>
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
-				<div class="col-lg-9">
-					<div class="row">
+
+				<div class="row">
+					<div class="col-md-10 col-lg-12 order-md-last">
 						<input type="hidden" id="currentPageList" name="currentPageList"
 							value="${resultPage.currentPage}" />
-						<c:set var="i" value="0" />
-						<c:forEach var="board" items="${list}">
-							<c:set var="i" value="${i+1}" />
-							<div class="col-lg-4 col-md-6 mb-4">
-								<div class="card">
-									<img class="img-fluid" id="clickplease"
-										src="../../resources/file/fileMarket/${board.thumnail}"
-										height="500px;" > 
-										<input type="hidden" value="${board.postNo}"/>
-									<div class="card-body text-center">
-										<div class="card-title">
-											<a><b>${board.postTitle}</b> </a> <input type="hidden"
-												value="${board.postNo}" />
+						<div class="row">
+							<c:set var="i" value="0" />
+							<c:forEach var="board" items="${list}">
+								<c:set var="i" value="${i+1}" />
+								<figure id="get">
+									<div class="card">
+										<img class="img-fluid" id="clickplease"
+											src="../../resources/file/fileMarket/${board.thumnail}">
+										<input type="hidden" value="${board.postNo}" />
+										<div class="card-body text-center">
+											<div class="card-title">
+												<a><b>${board.postTitle}</b> </a> <input type="hidden"
+													value="${board.postNo}" />
+											</div>
+											${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
+													value="${board.price}" pattern="#,###" />원
+											</strong>
+											<hr>
+											<p class="view">${board.id}(&nbsp;${board.city}&nbsp;)
+												&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
+											</p>
 										</div>
-										${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
-												value="${board.price}" pattern="#,###" />원
-										</strong>
-										<hr><p class="view">${board.id}(&nbsp;${board.city}&nbsp;) &nbsp;&nbsp;&nbsp;<br/>조회수 : ${board.viewCount}<br/></p>
-
 									</div>
-								</div>
-							</div>
-						</c:forEach>
-
-						
+								</figure>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
 
-	<!-- <div class="row my-4">-->
+			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+			<input type="hidden" id="currentPage" name="currentPage" value="" />
+			<input type="hidden" id="boardCode" name="boardCode"
+				value="${board.boardCode}" /> <input type="hidden" id="postNo"
+				name="postNo" value="${board.postNo}" />
+</form></section></div>
 
 
 	<!--====================================================
@@ -195,7 +303,5 @@
 
 		});
 	</script>
-
 </body>
-
 </html>

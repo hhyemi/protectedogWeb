@@ -30,20 +30,14 @@
 				function() {
 					//Debug..
 					console.log($("form[name='addForm']").html());
-					$("form[name='addForm']").attr("method", "POST").attr(
-							"action", "/order/addOrder").submit();
-					//fncAddProduct();
+					fncAddProduct();
 				});
 	});
-
 	//  	$(function() {
-
 	// 		$("#addproduct").on("click", function() {
 	// 			self.location = "/shop/product/addProduct"
 	// 		});
-
 	// 	});
-
 	//============= "취소"  Event 처리 및  연결 =============
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -54,34 +48,53 @@
 			$("form")[0].reset();
 		});
 	});
-
 	function fncAddProduct() {
 		//Form 유효성 검증
-
-		// 		var prodName=$("input[name='prodName']").val();
-		// 	 	//var name = document.detailForm.prodName.value;
-		// 	 	var prodDetail=$("input[name='prodDetail']").val();
-		// 		//var detail = document.detailForm.prodDetail.value;
-		// 		var manuDate=$("input[name='manuDate']").val();
-		// 		//var manuDate = document.detailForm.manuDate.value;
-		// 		var price=$("input[name='price']").val();
-		// 		//var price = document.detailForm.price.value;
-
-		// 		if(prodName == null || prodName.length<1){
-		// 			alert("상품명은 반드시 입력하여야 합니다.");
-		// 			return;
-		// 		}
-
-		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("제조일자는 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-		// 		if(price == null || price.length<1){
-		// 			alert("가격은 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-
-		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
+				var receiverName=$("input[name='receiverName']").val();
+				var receiverPhone2=$("input[name='receiverPhone2']").val();
+				var receiverPhone3=$("input[name='receiverPhone3']").val();
+				var receiverAddr1=$("input[name='receiverAddr1']").val();
+				var receiverAddr2=$("input[name='receiverAddr2']").val();
+				var receiverAddr3=$("input[name='receiverAddr3']").val();
+				var receiverAddr4=$("input[name='receiverAddr4']").val();
+				var orderRequest=$("input[name='orderRequest']").val();
+				//var price = document.detailForm.price.value;
+				if(receiverName == null || receiverName.length<1){
+					alert("상품수령인을 반드시 입려해주세요");
+					return;
+				}
+				if(receiverPhone2 == null || receiverPhone2.length<1){
+					alert("수령인 연락처를 입력해주세요");
+					return;
+				}
+				if(receiverPhone3 == null || receiverPhone3.length<1){
+					alert("수령인 연락처를 입력해주세요");
+					return;
+				}
+				//주소 유효성 검증
+				if(receiverAddr1 == null || receiverAddr1.length<1){
+					alert("수령인 주소를 입력해주세요");
+					return;
+				}
+				if(receiverAddr2 == null || receiverAddr2.length<1){
+					alert("수령인 주소를 입력해주세요");
+					return;
+				}
+				if(receiverAddr3 == null || receiverAddr3.length<1){
+					alert("수령인 주소를 입력해주세요");
+					return;
+				}
+				if(receiverAddr4 == null || receiverAddr4.length<1){
+					alert("상세주소를 입력해주세요");
+					return;
+				}
+				if(orderRequest == null || orderRequest.length<1){
+					alert("배송요청사항을 입력해주세요");
+					return;
+				}
+				
+				$("form[name='addForm']").attr("method", "POST").attr(
+						"action", "/order/addOrder").submit();
 	}
 </script>
 </head>
@@ -218,7 +231,7 @@
 										<option value="016">016</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-									</select> &nbsp;&nbsp; <input type="text" id="receiverPhone2" name="receiverPhone2"
+									</select> &nbsp;&nbsp; <div class="col-md-8"><input type="text" id="receiverPhone2" name="receiverPhone2"
 										placeholder="번호" maxlength="4" style="height: 35px;">
 									<input type="text" id="receiverPhone3" name="receiverPhone3"
 										placeholder="번호" maxlength="4" style="height: 35px;">
@@ -268,7 +281,7 @@
 							<div class="col-md-13">
 								<div class="form-group">
 									<label for="streetaddress">결제수단</label> <select
-										class="form-control" name="paymentCode" id="paymentCode">
+										class="form-control" name=" " id="paymentCode">
 										<option value="1">무통장결제</option>
 										<option value="2">카드결제</option>
 									</select>
@@ -276,7 +289,7 @@
 							</div>
 						</div>
 						<p align="center">
-						<button class="btn btn-default" id="addproduct">등록하기</button>
+						<button class="btn btn-default" id="addproduct">결제하기</button>
 							&nbsp;<button class="btn btn-default" id="#">취소하기</button>
 						</p>
 
@@ -286,28 +299,107 @@
 			</form>
 		</div>
 	</section>
+	
+	<script type="text/javascript">
+	  $(function() {
+      
+         //============= 후원 Event  처리 =============   
+         $( "#addproduct" ).on("click" , function() {
+        	 AddPayment();
+            });
+         
+         //============= 취소 Event  처리 =============
+          $( "#btn-cancel" ).on("click" , function() {
+               history.go(-1);
+            });
+
+            
+   });   
+	  
+</script>
 
 
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	
+	 
+	 
+	 <script>
+	 function AddPayment(){
+		 
+		 var payment = null;
+		   var fundPay = $('input[name="fundPay"]').val();	
+	       $('input[name="fundPay"]').val(removeCommas($('input[name="fundPay"]').val()));
+	       var fundPay2 = removeCommas($('input[name="fundPay"]').val());
+	       
+		      if(fundPay == null || fundPay.length<1){
+				  swal({
+			           text: "후원금액을 입력해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			 	          $('input[name="fundPay"]').focus();
+			           }
+			      });
+
+		          return;
+		       } 
+
+		      if(fundPay > 3000000){
+				  swal({
+			           text: "후원금액은 300만원이하로 입력해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			 	          $('input[name="fundPay"]').focus();
+			           }
+			      });	    	  
+
+		         return;
+		      }	      
+		      
+		      if(!($('input[name="paymentCode"]').is(':checked'))){
+				  swal({
+			           text: "결제방법을 선택해주세요.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      });
+		          return;
+		       }
+	 }
+	
+	</script>
+	
+	
 	<script>
 		function sample6_execDaumPostcode() {
 			new daum.Postcode(
 					{
 						oncomplete : function(data) {
 							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 							var addr = ''; // 주소 변수
 							var extraAddr = ''; // 참고항목 변수
-
 							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 								addr = data.roadAddress;
 							} else { // 사용자가 지번 주소를 선택했을 경우(J)
 								addr = data.jibunAddress;
 							}
-
 							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
 							if (data.userSelectedType === 'R') {
 								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -329,11 +421,9 @@
 								}
 								// 조합된 참고항목을 해당 필드에 넣는다.
 								document.getElementById("sample6_extraAddress").value = extraAddr;
-
 							} else {
 								document.getElementById("sample6_extraAddress").value = '';
 							}
-
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('sample6_postcode').value = data.zonecode;
 							document.getElementById("sample6_address").value = addr;
@@ -343,11 +433,9 @@
 						}
 					}).open();
 		}
-
 		//총액 계산 jqury 
 		$(document).ready(function() {
 			const p = $("#price").data('price');
-
 			$("#orderQuantity").change(function() {
 				const q = $(this).find(':selected').data('quantity');
 				const total = p * q;
@@ -358,37 +446,35 @@
 		
 		//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ IM PORT START ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
 		
-// 		IMP.init('imp32437611'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		IMP.init('imp32437611'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		
-// 		IMP.request_pay({
-// 		    pg : 'inicis', // version 1.1.0부터 지원.
-// 		    pay_method : 'card',
-// 		    merchant_uid : 'merchant_' + new Date().getTime(),
-// 		    name : ':결제테스트',
-// 		    amount : 14000,
-// /*		    buyer_email : 'iamport@siot.do',
-// 		    buyer_name : '구매자이름',
-// 		    buyer_tel : '010-1234-5678',
-// 		    buyer_addr : '서울특별시 강남구 삼성동',*/
-// 		    buyer_postcode : '123-456',
-// 		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-// 		}, function(rsp) {
-// 		    if ( rsp.success ) {
-// /*		        var msg = '결제가 완료되었습니다.';
-// 		        msg += '고유ID : ' + rsp.imp_uid;
-// 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-// 		        msg += '결제 금액 : ' + rsp.paid_amount;
-// 		        msg += '카드 승인번호 : ' + rsp.apply_num; */
-// 		    } else {
-// 		        var msg = '결제에 실패하였습니다.';
-// 		        msg += '에러내용 : ' + rsp.error_msg;
-// 		    }
-// 		    alert(msg);
-// 		});
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : ':결제테스트',
+		    amount : 14000,
+/*		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',*/
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+/*		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num; */
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
 	</script>
 
 
 </body>
 </html>
-
-

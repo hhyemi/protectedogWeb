@@ -78,8 +78,8 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2"><a href="index.html">protected</a></span> <span>terms</span></p>
-	            <font size="7">${termsTitle}</font>정책을<strong style="color:#f04f23"> 꼼꼼히 </strong> 확인해주세요.
+	          	<p ><span class="mr-2">protected</span> <span>terms</span></p>
+	            <font size="7">${termsTitle}&nbsp;</font>정책을<strong style="color:#f04f23"> 꼼꼼히 </strong> 확인해주세요.
 	          </div>
 	        </div>
 	      </div>
@@ -154,20 +154,24 @@
 		</div>	
 		<br/><br/><br/><br/>
 	
-		  <div class="form-group2">
-	  			<button type="button" class="btn btn-default" id="btn-add">
+	          	<div class="col-md-12" style="padding-left:160px;padding-right: 100px">
+	  			<button  type="button" class="btn btn-default py-3 px-4 col-md-12"  id="btn-add">
 	  			<c:if test="${termsTitle eq '후원신청글'}">
-	  			작성하기
+	  			작성
 	  			</c:if>
 	  			<c:if test="${termsTitle eq '투표하기'}">
-	  			투표하기
+	  			투표
 	  			</c:if>
 	  			<c:if test="${termsTitle eq '후원하기'}">
-	  			후원하기
+	  			후원
 	  			</c:if>	  			
 	  			</button>
-	  			&nbsp;
-	  			<button type="button" class="btn btn-default" id="btn-cancel">취소</button>
+	  			<p/>
+						<div class="col-md-12">
+							<div  align="right">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+						</div>
 		  </div>
 		  
 		<br/><br/><br/><br/>	  		  
@@ -204,9 +208,22 @@
         		if(	${termsTitle eq '후원신청글'}){
         			self.location="/funding/addVoting";
         		}else if(${termsTitle eq '투표하기'}){
-        			swal("투표하였습니다.", "소중한 한 표 감사합니다.").then((value) => {
-        				self.location="/funding/addVote?postNo=${postNo}";
-  	              });
+
+      			  swal({
+      				   title: "투표하였습니다.",
+      		           text:"소중한 한 표 감사합니다.",
+      		           dangerMode: true,
+      		           buttons: {
+      							 catch: {
+      							 	text: "확인"
+      							 }
+      				   },			      
+		  		      }).then((willDelete) => {
+				           if (willDelete) {
+				        	   self.location="/funding/addVote?postNo=${postNo}";
+				           }
+				      });
+
         		}else if(${termsTitle eq '후원하기'}){
         			self.location="/funding/addFund?postNo=${postNo}";
         		}

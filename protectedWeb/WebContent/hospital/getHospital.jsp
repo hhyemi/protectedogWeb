@@ -234,8 +234,8 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2"><a href="index.html">Animal</a></span> <span>Hospital</span></p>
-	            <font size="7">동물병원 검 색</font>
+	          	<p ><span class="mr-2">Animal</span> <span>Hospital</span></p>
+	            <font size="7">동물병원 검색</font>
 	          </div>
 	        </div>
 	      </div>
@@ -251,7 +251,7 @@
 				<div>
 					<form>
 
-						<select id="z1">
+						<select id="z1" style="width: 200px; text-align: center;">
 							<option value="동물병원">시를 선택해주세요</option>
 							<option value="서울특별시 동물병원" data-lat="37.5668260055"
 								data-lng="126.978656786">서울특별시</option>

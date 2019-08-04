@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
     <style type="text/css">
 	    html {
 	 	 scroll-behavior: smooth;
@@ -34,7 +33,7 @@
   
 <body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -52,14 +51,14 @@
 			<form  action="#" class="billing-form">
 	          	<div class="row align-items-end">
 	          	
-				<input type="hidden" name="id" value="${ apply.id }" >
+<%-- 				<input type="hidden" name="id" value="${ apply.id }" > --%>
 				<input type="hidden" name="statusCode" value="1" >
 				<input type="hidden" name="adoptNo" value="${ apply.adoptNo }" >
 				
 				<div class="col-md-12">
 				
 	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4"><strong>약관 동의</strong></h3>
+	          			<h3 class="billing-heading mb-4"><strong>신청 안내</strong></h3>
 	          			
 						<div class="form-group">
 							<div class="col-md-12"><strong>1. </strong>
@@ -67,7 +66,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 								</div>
 							</div>
 						</div>
@@ -80,7 +79,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 								</div>
 							</div>
 						</div>
@@ -91,7 +90,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="terms" class="mr-2">동의</label>
+								   <label><input type="checkbox" name="terms" class="mr-2">확인</label>
 								</div>
 							</div>
 						</div>
@@ -99,7 +98,7 @@
 						<div class="form-group">
 							<div class="col-md-12">
 								<div class="radio" align="right">
-								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 동의</strong></label>
+								   <label><input type="checkbox" name="termsAll" class="mr-2"><strong>모두 확인</strong></label>
 								</div>
 							</div>
 						</div>
@@ -226,8 +225,9 @@
     </section> <!-- .section -->
 
     <jsp:include page="/layout/footer.jsp"></jsp:include>
-    
-    
+   
+
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
   
@@ -359,7 +359,7 @@
 		// 약관 동의
 		if( $("input:checkbox:checked").length != 4){
 			swal({
-		           text: "약관에 모두 동의해야 신청하실 수 있습니다.",
+		           text: "안내를  모두 확인해야 신청하실 수 있습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -524,7 +524,18 @@
     	}
 	
     	
-    	var confirmHTML = '<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
+    	var confirmHTML =
+//     					'<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">'
+// 					      +'<div class="container">'
+// 					        +'<div class="row no-gutters slider-text align-items-center justify-content-center">'
+// 					          +'<div class="col-md-9 ftco-animate text-center">'
+// 					          	+'<p ><span class="mr-2">Add</span> <span>Adopt</span></p>'
+// 					            +'<font size="7">신청서 확인\</font>'
+// 					          +'</div>'
+// 					        +'</div>'
+// 					      +'</div>'
+// 					    +'</div>'+	 
+    					'<p align="left" style="line-height: 30px;"><strong>[직업]<\/strong> : '+job
 						+'<br\/><strong>[거주지 유형]<\/strong> : '+addr
 						+'<br\/><strong>[동거인 여부]<\/strong> : '+mate
 						+mateTag

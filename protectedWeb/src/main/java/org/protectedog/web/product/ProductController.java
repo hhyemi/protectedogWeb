@@ -55,6 +55,19 @@ public class ProductController {
 	
 	@Value("#{commonProperties['product']}")
 	String Shop;
+	//terms one~six
+	@Value("#{commonProperties['one']}")
+	String one;
+	@Value("#{commonProperties['two']}")
+	String two;
+	@Value("#{commonProperties['three']}")
+	String three;
+	@Value("#{commonProperties['four']}")
+	String four;
+	@Value("#{commonProperties['five']}")
+	String five;
+	@Value("#{commonProperties['six']}")
+	String six;
 
 	
 	public ProductController() {
@@ -140,7 +153,12 @@ public class ProductController {
 				filePost.put("boardCode", Shop);
 				filePost.put("postNo", prodNo);
 				List<FileDog> file = fileService.getFile(filePost);
-
+				
+		String terms="";
+		terms=one+two+three+four+five+six;
+		product.setTerms(terms);
+		
+		
 		model.addAttribute("file", file);
 		model.addAttribute("product", product);
 
@@ -188,7 +206,7 @@ public class ProductController {
 		Map<String, Object> map = productService.listProduct(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
+				20);
 		System.out.println(resultPage);
 
 		// Model �� View ����

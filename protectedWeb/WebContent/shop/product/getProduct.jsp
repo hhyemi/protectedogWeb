@@ -31,12 +31,10 @@
 	padding-left: 420px;
 	padding-right: 100px;
 }
-
 .form-group3 {
 	padding-left: 465px;
 	padding-right: 100px;
 }
-
 table {
 	color: black;
 	align: center;
@@ -104,10 +102,10 @@ table {
 								<input type="hidden" value="${product.prodNo}" />
 								<h3>${product.prodName}</h3>
 								<del>
-									<h2>
+									<h6>
 										<fmt:formatNumber value="${product.price}" pattern="#,###" />
 										원
-									</h2>
+									</h6>
 								</del>
 
 								<h2>
@@ -125,7 +123,9 @@ table {
 										<c:if test="${product.prodCode == 30}">
 										의류</c:if>
 										<c:if test="${product.prodCode == 40}">
-										타임세일</c:if></a>
+										타임세일</c:if>
+										<input type="hidden" value="prodNo" name="prodNo"/>
+										</a>
 									<li><a href="#"> 
 									</a></li>
 								</ul>
@@ -160,7 +160,7 @@ table {
 									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/><br/>
 
 							<div class="action">
-                <div class="title-but"><button class="btn btn-general btn-white" role="button" id="addorder"> 구매하기</button>
+                <div class="title-but"><button class="btn btn-default" id="addorder">구매하기</button>
 <!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
                 </div>
               </div>
@@ -213,18 +213,18 @@ table {
               >배송/교환/반품</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="review-tab"
-              data-toggle="tab"
-              href="#review"
-              role="tab"
-              aria-controls="review"
-              aria-selected="false"
-              >구매후기</a
-            >
-          </li>
+<!--           <li class="nav-item"> -->
+<!--             <a -->
+<!--               class="nav-link" -->
+<!--               id="review-tab" -->
+<!--               data-toggle="tab" -->
+<!--               href="#review" -->
+<!--               role="tab" -->
+<!--               aria-controls="review" -->
+<!--               aria-selected="false" -->
+<!--               >구매후기</a -->
+<!--             > -->
+<!--           </li> -->
         </ul>
         <div class="tab-content" id="myTabContent">
           <div
@@ -257,7 +257,7 @@ table {
                 <tbody>
                   <tr>
                     <td>
-<%--                       <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include> --%>
+<%--                     <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>  --%>
                     </td>
                   </tr>
                 </tbody>
@@ -646,7 +646,6 @@ table {
 		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		$(function() {
-
 			//manage//====================================================
 			$("button:contains('확인')").on("click", function() {
 				//Debug..
@@ -654,33 +653,26 @@ table {
 				/* self.location = "/product/listProduct/manage" */
 				self.location = "/product/listProduct"
 			});
-
 			$("button:contains('수정')").on("click", function() {
 				//Debug..
 				console.log($("button:contains('수정')").html());
 				history.go(-1);
 			});
-
 			
-
 			//구매하기//====================================================
 			$("#addorder").on("click", function() {
 				//Debug..
 				self.location = "/order/addOrder?prodNo=${product.prodNo}"
 			});
-
 			$("button:contains('뒤로')").on("click", function() {
 				//Debug..
 				console.log($("button:contains('뒤로')").html());
 				self.location = "/product/listProduct"
 			});
 		});
-
 // 		//=============장바구니 이동========================================
-
 		$(document).ready(function() {
  			const p = $("#price").data('price');
-
  			$("#quantity").change(function() {
  				const q = $(this).find(':selected').data('quantity');
  				const total = p * q;

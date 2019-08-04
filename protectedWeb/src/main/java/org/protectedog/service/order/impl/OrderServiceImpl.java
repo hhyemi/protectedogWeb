@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", orderDAO.listOrder(search, id));
 		map.put("totalCount", orderDAO.getTotalCount(id));
-		System.out.println("listorder 다시확인");
+		System.out.println("listorder");
 		return map;
 	}
 
@@ -74,5 +74,18 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderDAO.updateOrderCode(order);
 	}
+
+
+	@Override
+	public Map<String, Object> listAdminOrder(Search search, String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("serviceImpl listorder");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", orderDAO.listAdminOrder(search, id));
+		map.put("totalCount", orderDAO.getTotalCount(id));
+		System.out.println("listorder");
+		return map;
+	}
+
 
 }

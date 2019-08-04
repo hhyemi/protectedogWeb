@@ -108,7 +108,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                 <div class="mail-box">
                     <aside class="sm-side"> 
                         <div class="inbox-body">
-                            <a href="#messageModal" data-toggle="modal" title="Compose" class="btn btn-compose"> 쪽지작성 </a>
+                            <a href="#messageModal" data-toggle="modal" title="Compose" class="btn btn-compose">쪽지작성 </a>
                             <!-- Modal -->
                             
                             <!-- /.modal -->

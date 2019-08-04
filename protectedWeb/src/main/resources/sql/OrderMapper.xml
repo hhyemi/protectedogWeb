@@ -95,10 +95,22 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  		FROM (	SELECT o.order_no, o.prod_no, o.payment_code, o.order_date, o.total_price, o.order_code ,o.id,
-	  		p.prod_name, p.prod_detail, p.main_file
+	  		p.prod_name, p.prod_detail, p.main_file, o.order_quantity
 			from orders o, product p
 					WHERE id =#{id}		
 					AND o.prod_no=p.prod_no		
+					ORDER BY order_no) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
+	 
+	 	 <select  id="listAdminOrder"  parameterType="map"	resultMap="orderSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  		FROM (	SELECT o.order_no, o.prod_no, o.payment_code, o.order_date, o.total_price, o.order_code ,o.id,
+	  		p.prod_name, p.prod_detail, p.main_file, o.order_quantity
+			from orders o, product p
+					WHERE o.prod_no=p.prod_no		
 					ORDER BY order_no) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}

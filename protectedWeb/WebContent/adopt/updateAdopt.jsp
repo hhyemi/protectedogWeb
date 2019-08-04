@@ -1,13 +1,14 @@
  <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>보호할개 · 분양글 수정</title>
+	<title>보호할개 · 분양</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -32,7 +33,7 @@
   
   <body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -136,20 +137,14 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogPay"><strong>
-		                		<c:if test="${adopt.boardCode eq 'AD' }">책임비</c:if>
-							    <c:if test="${adopt.boardCode eq 'MS' }">사례비</c:if>
-	                		</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
-	                  		<input type="number" class="form-control" name="dogPay" value="${ adopt.dogPay }">
+	                		<label for="dogPay"><strong>책임비</strong>&nbsp;&nbsp;<span name="dogPay"></span></label>
+	                  		<input type="text" class="form-control" name="dogPay" value="${ adopt.dogPay }" placeholder="원하지 않을 경우 0을 입력하세요.">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<label for="dogDate" id="dogDateLabel"><strong>
-	                			<c:if test="${adopt.boardCode eq 'AD' }">발견일자</c:if>
-							    <c:if test="${adopt.boardCode eq 'MS' }">실종일자</c:if>
-	                		</strong></label>
+	                		<label for="dogDate" id="dogDateLabel"><strong>발견일자</strong></label>
 	                  		<input type="text" class="form-control" name="dogDate" value="${ adopt.dogDate }" readonly>
 	               		</div>
                		</div>
@@ -205,14 +200,7 @@
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-	                		<label for="location"><strong>
-		                		<c:if test="${adopt.boardCode eq 'AD' }">
-						  			발견위치
-						  		</c:if>
-							    <c:if test="${adopt.boardCode eq 'MS' }">
-						  			실종위치
-						  		</c:if>
-	                		</strong></label>
+	                		<label for="location"><strong>발견위치</strong></label>
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location" value="${ adopt.location }" >
 	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" value="${ adopt.locationKr }" placeholder="마커 위치가 입력됩니다." readonly>
@@ -254,27 +242,7 @@
 	          	</div>
 	          </div>
 	          
-	          
- <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
-   
- 
- 
-			<div id="dialog-img" title="">
-			  <p align="center"><br/>이미지를 등록해주세요.</p>
-			</div>        
-			<div id="dialog-area" title="">
-			  <p align="center"><br/>분양가능지역을 선택해주세요.</p>
-			</div>       
-			<div id="dialog-location" title="">
-			  <p align="center"><br/>
-			  		<c:if test="${adopt.boardCode eq 'AD' }">발견위치를 선택해주세요.</c:if>
-			  		<c:if test="${adopt.boardCode eq 'MS' }">실종위치를 선택해주세요.</c:if>
-			  </p>
-			</div>   
-
-       
-<!-- 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->      
-	          
+	                   
 	          
           </div> <!-- .col-md-8 -->
         </div>
@@ -414,7 +382,7 @@
 			 	var localng = parseFloat(  location.toString().substring( location.toString().indexOf(",")+1, location.toString().indexOf(")") )  );
 	    	    $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
 	    	         success: function(data){
-	    	           			markTest = data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+	    	           			markTest = ","+data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
 	    	           			if( markTest.indexOf('특별') != -1  ){
 	    	           				markTest = markTest.replace('특별' ,   '');
 	    	           			}
@@ -425,6 +393,9 @@
 	    	           				markTest = markTest.replace('자치' ,   '');
 	    	           			}
 	    	          			$("#areaKr").val($("#areaKr").val()+markTest);
+	    	          			if ( $("#areaKr").val().toString().indexOf(',') == 0 ){
+	    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  1  ,   ($("#areaKr").val().toString().length)  ) ) ;
+	    	          			}
 	    	         }
 	    	 	});
 
@@ -436,7 +407,7 @@
   	        if (markerArea != undefined){
   	        	
   	        	markerArea.addListener('rightclick', function() {
-  	        		alert(markerArea.position);
+//   	        		alert(markerArea.position);
   	        		
   					for (var i = 0; i < markersArea.length; i++) {
   				      	if (markersArea[i] === markerArea) {
@@ -456,7 +427,7 @@
   		    	        $.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+localat+","+localng+'&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&sensor=true',
   		    	            success: function(data){
 //	  		   	               		alert(JSON.stringify(data));
-  		    	              	markTest += data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length)+"  ";
+  		    	              	markTest += ","+data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length);
   		    	                if( markTest.indexOf('특별') != -1  ){
 	    	           				markTest = markTest.replace('특별' ,   '');
 	    	           			}
@@ -467,6 +438,13 @@
 	    	           				markTest = markTest.replace('자치' ,   '');
 	    	           			}
   		    	       			$("#areaKr").val(markTest);
+  		    	       			
+	  		    	       		if ( $("#areaKr").val().toString().indexOf(',') == 0 ){
+	    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  1  ,   ($("#areaKr").val().toString().length)  ) ) ;
+	    	          			}
+	    	          			if (   $("#areaKr").val().toString().charAt(($("#areaKr").val().toString().length)-1) == ','   ){
+	    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  0  ,   ($("#areaKr").val().toString().length)-1 ) ) ;
+	    	          			}
   		    	            }
   		    	 		});
   					}
@@ -767,53 +745,18 @@
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-	$( function() {
-	    $( "#dialog-img" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
 	
-	$( function() {
-	    $( "#dialog-area" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("#areaFocus"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
+	//3자리 단위마다 콤마 생성
+   function addCommas(x) {
+       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   }
+    
+   //모든 콤마 제거
+   function removeCommas(x) {
+       if(!x || x.length == 0) return "";
+       else return x.split(",").join("");
+   }
 	
-	$( function() {
-	    $( "#dialog-location" ).dialog({
-	    	autoOpen: false,
-		      width: 350,
-		      height: 180,
-		      modal: true,
-		      buttons: {
-		    	  닫기: function(){
-		    		  $( this ).dialog( "close" );
-		    		  jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
-		    	  }
-		      }
-	    });
-	});
-
-//////////////////////↑  dialog        ////////////////////////////////////////////////
-
 	$( "input[name=postTitle]" ).keyup(function( ) {
 		if($("input[name=postTitle]").val().length > 20 ){
 			$("span[name=postTitle]").text('20자까지 입력할 수 있습니다.');
@@ -837,14 +780,23 @@
 			$("span[name=dogWeight]").text('');
 		}
 	});
-
+	
+	$(document).ready( function(){
+		if ($( "input[name=dogPay]" ).val().toString().indexOf(",") == -1){
+			$( "input[name=dogPay]").val(   addCommas(    $( "input[name=dogPay]").val()   )  ); 
+		} 
+	});
+	
+	
 	$( "input[name=dogPay]" ).keyup(function( ) {
-		if($("input[name=dogPay]").val().length > 6 ){
+		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+		if(removeCommas($(this).val()).length > 6 ){
 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
-// 			$("span[name=dogDate]").text("  ");
+			$(this).val('999999');
+			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
-// 			$("span[name=dogDate]").text('');
 		}
 	});
 	
@@ -914,9 +866,11 @@
 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPay]").val().trim() == '' || $("input[name=dogPay]").val().length > 6 ){
+		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length > 6 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
 			  $("input[name=dogPay]").focus();
 			  return;
+		  } else {
+			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		  }
 		  if( $("input[name=dogDate]").val().trim() == '' ){
 			  $("input[name=dogDate]").focus();
@@ -950,8 +904,6 @@
 			        	   jQuery($("#areaFocus"))[0].scrollIntoView(true);
 			           }
 			      });
-// 				  $('#dialog-area').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 				  $('#dialog-area').dialog( "open" );
 				  return;
 			  }
 		  }
@@ -970,8 +922,6 @@
 		        	   jQuery($("input[name=areaKr]"))[0].scrollIntoView(true);
 		           }
 		      });
-// 			  $('#dialog-location').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-location').dialog( "open" );
 			  return;
 		  }
 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){

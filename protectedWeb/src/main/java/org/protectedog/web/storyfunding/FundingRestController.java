@@ -102,7 +102,7 @@ public class FundingRestController {
 		participate.setId(user.getId());
 		participate.setStatusCode("1");
 		
-		Participate participate2 = participateService.getParticipate(participate);
+		Participate participate2 = participateService.getPostParticipate(participate);
 		
 		if(participate2 != null) {
 			return 1;

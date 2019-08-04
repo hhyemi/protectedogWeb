@@ -1,80 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>보호할개.글수정</title>
-<!--  bootstrap CDN  -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<title>보호할개 · 글수정</title>
+
+<!-- jqeury CDN -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- ckEditor CDN -->
 <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
 
 <!--  CSS -->
 <style>
-#preview img {
-	width: 100px;
-	height: 100px;
-}
+#preview img {width: 100px;height: 100px;}
+#preview p {text-overflow: ellipsis;overflow: hidden;}
 
-#preview p {
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
+.preview-box {padding: 5px;border-radius: 2px;margin-bottom: 10px;}
+.ck.ck-editor {min-width: 95%;}
+.ck-editor__editable {text-align: left;min-height: 300px;min-width: 95%;}
 
-.preview-box {
-	padding: 5px;
-	border-radius: 2px;
-	margin-bottom: 10px;
-}
-
-.ck.ck-editor {
-	min-width: 95%;
-}
-
-.ck-editor__editable {
-	text-align: left;
-	min-height: 300px;
-	min-width: 95%;
-}
-
-label {
-	background-color: #3e6dad;
-	color: white;
-	border-radius: 10px;
-}
+label {background-color: #3e6dad;color: white;border-radius: 10px;}
 </style>
-
-<!--  JavaScript  -->
-<script type="text/javascript">
-function fncUpdateBoard(){
-	
-	var postContent = $("#editor").text();
-	$("form[name=detailForm]").attr("method","POST").attr("action","/info/updateInfo").attr("enctype","multipart/form-data").submit();
-	
-}
-
-$(function () {
-	
-	$("#reset").on("click", function(){
-		$("form")[0].reset();
-	});
-	
-	$("button.btn.btn-primary").on("click", function(){
-		fncUpdateBoard();
-	});
-	
-	
-	
-});
-
-	</script>
 
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
@@ -124,11 +77,12 @@ $(function () {
 					</textarea>
 				</div>
 				
+				<c:if test="${ board.route != null }">
 					            	<div class="col-md-12">
 	            	<br/>
-                		<label><strong>
+                		<strong>
 	                		수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.
-                		</strong></label>
+                		</strong>
                		</div>
                		
                		
@@ -136,9 +90,10 @@ $(function () {
 		            <div class="col-md-12">
 		              	<div class="form-group">
 		                	<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
-		                  	<input type="text" class="form-control" id="route" name="route"  value="${ board.route }">
+		                  	<input type="hidden" class="form-control" id="route" name="route"  value="${ board.route }">
 		               	</div>
 	               </div>
+	               </c:if>
 			</form>
 		</div>
 
@@ -155,10 +110,29 @@ $(function () {
 	</div>
 	
 			<jsp:include page="/layout/footer.jsp"></jsp:include>
-			
-	<script>
-	
-	
+	<!--  JavaScript  -->
+	<script type="text/javascript">
+	function fncUpdateBoard(){
+		
+		var postContent = $("#editor").text();
+		$("form[name=detailForm]").attr("method","POST").attr("action","/info/updateInfo").attr("enctype","multipart/form-data").submit();
+		
+	}
+
+	$(function () {
+		
+		$("#reset").on("click", function(){
+			$("form")[0].reset();
+		});
+		
+		$("button.btn.btn-primary").on("click", function(){
+			fncUpdateBoard();
+		});
+		
+		
+		
+	});
+
 	// =============================== 구글 지도 ============================================
 		
           
@@ -172,16 +146,21 @@ $(function () {
           var infowindowF;
           var infowindowL;
          
-         //마커가 하나라도 있을때
+         
+//          if (route == ''){
+//         	 return false;
+//          }
+         
+       	//마커가 하나라도 있을때
          if (route.indexOf("#") != -1){
                var routeArray = route.split("#");
                
                for ( i=0; i<routeArray.length-1; i++){
-                routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
-                routeMark[i] = "marker"+i.toString();
+                	routeTest[i] = routeArray[i].substring( routeArray[i].indexOf("(")+1, routeArray[i].indexOf(",") )+","+ (routeArray[i].substring( routeArray[i].indexOf(",")+1, routeArray[i].indexOf(")") )).trim() ;
+                	routeMark[i] = "marker"+i.toString();
                }        
          }
-         
+
          function initMap() {
               map = new google.maps.Map(document.getElementById('mapArea'), {
                  zoom: 16,

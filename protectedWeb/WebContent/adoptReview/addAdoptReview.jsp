@@ -5,7 +5,7 @@
 <html>
 
 <head>
-	<title>보호할개 · 분양후기</title>
+	<title>보호할개 · 후기</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -59,7 +59,7 @@
   <body class="goto-here">
 	
 
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -81,10 +81,10 @@
 	          	
 	          	
 				<input type="hidden" name="boardCode" value="AR" >
-				<input type="hidden" name="id" value="${user.id }" >
+<%-- 				<input type="hidden" name="id" value="${user.id }" > --%>
 				<input type="hidden" name="delCode" value="1" >
-				<input type="hidden" name="nickName" value="${user.nickname}" >
-				<input type="hidden" name="phone" value="${user.phone }" >
+<%-- 				<input type="hidden" name="nickName" value="${user.nickname}" > --%>
+<%-- 				<input type="hidden" name="phone" value="${user.phone }" > --%>
 <!-- 				<input type="hidden" class="form-control" id="multiFile" name="multiFile" > -->
 				
 <!-- 				<div class="col-md-12"> -->
@@ -100,7 +100,7 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<h5><strong>글 제목</strong></h5>&nbsp;&nbsp;<span name="postTitle"></span>
 		                	<input type="text" class="form-control" name="postTitle" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
@@ -134,7 +134,7 @@
 	
                		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
+<!-- 		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span> -->
 <!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
 <!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="내용을 입력하세요."></textarea> -->
 		               
@@ -171,28 +171,7 @@
 	          	</div>
 	          </div>
 	          
-	          
- <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-  
-<!-- 			<div id="dialog-postTitle" title=""> -->
-<!-- 			  <p align="center"><br/>제목을 입력해주세요.</p> -->
-<!-- 			</div>        -->
-<!-- 			<div id="dialog-postTitleLength" title=""> -->
-<!-- 			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p> -->
-<!-- 			</div>        -->
-<!-- 			<div id="dialog-img" title=""> -->
-<!-- 			  <p align="center"><br/>이미지를 등록해주세요.</p> -->
-<!-- 			</div>    -->
-<!-- 			<div id="dialog-postContent" title=""> -->
-<!-- 			  <p align="center"><br/>내용을 입력해주세요.</p> -->
-<!-- 			</div>       -->
-<!-- 			<div id="dialog-postContentLength" title=""> -->
-<!-- 			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p> -->
-<!-- 			</div>       -->
-       
-<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
-	          
-	          
+	               
           </div> <!-- .col-md-8 -->
         </div>
       </div>
@@ -201,12 +180,7 @@
     
     
   
-
-
-  <!-- dialog -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  스크립트 시작  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!--   <script type="text/javascript" src="/resources/events.js"></script> -->
@@ -461,8 +435,23 @@
 
     $(function() {
 			$( "button:contains('등록')" ).on("click" , function() {
-// 				$('textarea').val(editor.getData());
-// 				console.log($('textarea').val());
+				$('textarea').val(editor.getData());
+				
+				if ( $('textarea').val().toString().indexOf('<img') != -1 ){
+					swal({
+				           text: "이미지를 등록해주세요.",
+				           dangerMode: true,
+				           buttons: {
+									 catch: {
+									 	text: "닫기"
+									 }
+						   },
+				      }).then((willDelete) => {
+				           if (willDelete) {
+				        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+				           }
+				      });
+				}
 				
 				fncAddAdoptReview();
 			});

@@ -35,9 +35,9 @@
  		} 
 		
 		.getadopt {
-			padding-top: 5px;
-			padding-left: 5px;
-			padding-right: 5px;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
 		}
 		
  		.listImg {
@@ -66,6 +66,7 @@
 			height: 40px;
 			width: 150px;
 			border : 1px solid #D3D3D3;
+			padding-left: 5px;
 /*  			display: none;  */
 		}
 		
@@ -103,9 +104,11 @@
 		
 		.col-md-6 {
 			padding-left: 30px !important;
-			padding-right: 45px !important;
+			padding-right: 30px !important;
 		}
-		
+/* 		.swal-text{ */
+/*         font-size : 25px */
+/*         } */
 
 
     </style>
@@ -114,12 +117,12 @@
 
 <body class="goto-here">
    	
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">List</span> <span>Adopt</span></p>
-            <font size="7">분양리스트</font>
+            <font size="7">분양게시판</font>
           </div>
         </div>
       </div>
@@ -128,6 +131,8 @@
 	<div class="container">
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	<input type="hidden" id="levels" value="${user.levels }">
+	<input type="hidden" id="sessionId" value="${user.id }">
+<%-- 	<input type="hidden" id="totalCount" value="${resultPage.totalCount}"> --%>
 
 
 		<div class="row">
@@ -138,13 +143,13 @@
 		    	</p>
 		    </div>
 		    <div class="col-md-6" id="justify" align="left">
-			    <c:if test="${ user.id ne null }">
+<%-- 			    <c:if test="${ user.id ne null }"> --%>
 <!-- 			    	<button type="button" class="btn btn-default" style="height: 40px;"><font size="3px">작성</font></button> -->
 						<button type="button" id="write" class="btn btn-default " style="padding-bottom: 6px;margin-left: 0px;">
 <!-- 							<span class="fas fa-pencil-alt"></span> -->
 							작성
 						</button>
-			    	</c:if>
+<%-- 			    	</c:if> --%>
 			    </div>
 			<div class="col-md-6" align="right">
 				<form class="form-inline" name="detailForm" style="float: right;">
@@ -176,7 +181,7 @@
 
 					<div class="form-group">
 						<label class="sr-only" for="searchKeyword">검색어</label>
-						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="&nbsp;검색어를 입력하세요."
+						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="검색어를 입력하세요."
 						    	value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 					</div>
 
@@ -207,13 +212,11 @@
       <div class="col-md-12"></div>
       <div class="col-md-12" >
       
-      <div class="col-md-12"  style="padding-left: 0px;">
+      <div class="col-md-12"  style="padding-left: 0px;padding-right: 0px;">
       
-      <c:if test="${resultPage.totalCount eq 0 }">
-      	<div id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">
-			<font size="4px">검색결과가 없습니다.</font>
-		</div>
-      </c:if>
+<%--       <c:if test="${resultPage.totalCount eq 0 }"> --%>
+<!--       	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;"></div> -->
+<%--       </c:if> --%>
 	
 	  <div class="row"  id="listAdoptJSON">
       <c:set var="i" value="0" />
@@ -267,6 +270,7 @@
  	
  	
  	
+ 	<jsp:include page="/common/searchResult.jsp"></jsp:include>
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
@@ -287,7 +291,7 @@
 		console.log($(window).scroll() );
 		console.log($(document).height());
 		var postNo;
-		var postSize = 2;
+		var postSize = 3;
 		var area = '';
 		var str = '';
 		
@@ -369,9 +373,9 @@
 								if( postSize == 1 && data.list.length == 0 ){
 									console.log('결과없음');
 									$('#searchEmpty').remove();
-									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 500px; padding-top: 250px;">'
-													+'<font size="4px">검색결과가 없습니다.</font>'
-													+'</div>';
+									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+													+'<b><font size="5px">검색결과가 없습니다.</font></b>'
+							                    	+'</div>';
 								}
 								$('#listAdoptJSON').append(displayValue);
 								
@@ -434,25 +438,39 @@
 			// 글 등록하기
 			$( "button:contains('작성')" ).on("click" , function() {
 				var lv = $('#levels').val();
+				var id = $('#sessionId').val();
 				console.log(lv);
-				if ( lv == "미인증회원" ){
-					swal({
-				           text: "인증회원만 작성 가능합니다.",
-				           dangerMode: true,
-				           buttons: {
-									 catch: {
-									 	text: "닫기"
-									 }
-						   },
+				if(id == '' || lv == '미인증회원'){
+		              swal({
+		                   title: "인증회원만 작성 가능합니다.",
+		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+		                   icon: "warning",
+		                   buttons: ["닫기", "인증하기"],
+		                   dangerMode: true     
+		                 })
+		                 .then((willDelete) => {
+		                   if (willDelete) {
+		                        self.location = "/users/addUsersAddition.jsp"
+		                        }
+		        });   
+// 				if ( id == '' || lv == "미인증회원"  ){
+// 					swal({
+// 				           text: "인증회원만 작성 가능합니다.",
+// 				           dangerMode: true,
+// 				           buttons: {
+// 									 catch: {
+// 									 	text: "닫기"
+// 									 }
+// 						   },
 						   
-				    });
+// 				    });
 					return;
 				}
 
 				self.location = "/adopt/addAdopt?boardCode=${param.boardCode}"
 			});
 			
-			$( "font:contains('분양리스트')" ).on("click" , function() {
+			$( "font:contains('분양게시판')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${param.boardCode}"
 			});
 			
@@ -482,6 +500,17 @@
 			$("#currentPage").val(currentPage);
 			$("form").attr("method" , "POST").attr("action" , "/adopt/listAdopt?boardCode=AD").submit();
 		}
+		
+// 		if ( $('#totalCount').val() == 0){
+// 			$('#searchEmpty').html( 
+// // 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+// 					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+// 					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+//             		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+//             		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+//             		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+// 			);
+// 		}
 		
 	
 	</script>

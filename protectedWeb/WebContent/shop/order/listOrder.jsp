@@ -34,12 +34,18 @@
 	<!--====================================================
                        HOME-P
 ======================================================-->
-	<div id="home-p" class="home-p pages-head3 text-center">
-		<div class="container">
-			<h1 class="wow fadeInUp" data-wow-delay="0.1s">보호스토어 주문내역</h1>
-		</div>
-		<!--/end container-->
-	</div>
+<body class="goto-here">
+   	
+    <div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">List</span> <span>Order</span></p>
+            <font size="7">스토어 주문내역</font>
+          </div>
+        </div>
+      </div>
+    </div>
 
 	<!--====================================================
                         CART
@@ -47,6 +53,7 @@
 	<form name="listOrder">
 		<section id="cart" class="cart">
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
+			<input type="hidden" value="${user.id}"/>
 			<div class="container">
 			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
@@ -78,7 +85,7 @@
 										<div class="col-sm-10 prod-desc">
 											<h6 class="nomargin">
 												<a class="number">  </a>
-												<a class="detailOrder"><br/><b>${order.orderProd.prodName}(${order.orderQuantity})</b><br/>
+												<a class="detailOrder"><br/><b>${order.orderProd.prodName}</b><br/>
 												<input type="hidden" value="${order.orderNo}" /> </a>
 												
 											</h6>
@@ -125,6 +132,9 @@
 			</div>
 		</section>
 	</form>
+	
+		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->
 	<jsp:include page="/layout/footer.jsp" />

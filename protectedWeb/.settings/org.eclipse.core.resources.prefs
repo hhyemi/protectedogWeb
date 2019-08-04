@@ -2,7 +2,6 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-encoding//SQL(Script)/protectedog.sql=EUC-KR
 encoding//WebContent/adopt/calendar.jsp=UTF-8
 encoding//WebContent/adoptReview/addAdoptReview.jsp=UTF-8
 encoding//WebContent/adoptReview/getAdoptReview.jsp=UTF-8

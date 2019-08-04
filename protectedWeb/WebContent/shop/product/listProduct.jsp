@@ -42,67 +42,49 @@
 <style>
 .img-fluid {
 	padding-top: 10%;
-	min-height: 220px;
-	max-height: 220px;
+	min-height: 240px;
+	max-height: 240px;
 	overflow: auto;
 	max-width: 250px;
 	min-width: 250px;
 }
 
 .card {
-	min-height: 400px;
-	max-height: 400px;
+	min-height: 450px;
+	max-height: 450px;
 	overflow: auto;
+}
+
+.detailtext {
+	min-height: 80px;
+	max-height: 80px;
+}
+
+#searchKeyword {
+	height: 40px;
+	width: 150px;
+}
+
+#searchSubmmit {
+	width: 60px;
+	height: 40px;
+	border-radius: 0px 15px 15px 0px;
+	border: 1px solid #D3D3D3;
+}
+
+#searchCondition {
+	height: 40px;
+	border-radius: 15px 0px 0px 15px;
+}
+
+.btn-default {
+	height: 30px;
+	color: white;
 }
 </style>
 
 
-</style>
 
-</style>
-
-<script type="text/javascript">
-	//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
-	function fncGetList(currentPage) {
-		$("#currentPage").val(currentPage)
-		$("form").attr("method", "POST").attr("action", "/product/listProduct")
-				.submit();
-	}
-
-	//=============    상품상세조회(썸네일)  Event  처리 		=============
-	//============= 썸네일 사진 클릭 Event  처리 =============	
-	$(function() {
-		$(".img-prod").on(
-				"click",
-				function() {
-					//alert($(this).children("input").val())
-					$(self.location).attr(
-							"href",
-							"/product/getProduct?prodNo="
-									+ $(this).children("input").val());
-				});
-
-		$(".detailprod").on(
-				"click",
-				function() {
-					//alert($(this).children("input").val())
-					$(self.location).attr(
-							"href",
-							"/product/getProduct?prodNo="
-									+ $(this).children("input").val());
-				});
-	});
-
-	$(function() {
-
-		$("td.ct_btn01:contains('장바구니로 이동')").on("click", function() {
-			//alert("");
-			self.location = "/shop/addCart?prodNo=${param.prodNo}"
-
-		});
-
-	});
-</script>
 
 </head>
 
@@ -116,48 +98,7 @@
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--====================================================
-                    LOGIN OR REGISTER
-======================================================-->
-	<!--====================================================
-                         HOME STA
-======================================================-->
-	<!-- 	<section id="home-shop"> -->
-	<!-- 		<div id="carouselExampleIndicators" class="carousel slide" -->
-	<!-- 			data-ride="carousel"> -->
-	<!-- 			<ol class="carousel-indicators"> -->
-	<!-- 				<li data-target="#carouselExampleIndicators" data-slide-to="0" -->
-	<!-- 					class="active"></li> -->
-	<!-- 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
-	<!-- 			</ol> -->
-	<!-- 			<div class="carousel-inner" role="listbox"> -->
-	<!-- 				Slide One - Set the background image for this slide in the line below -->
-	<!-- 				<div class="carousel-item active" -->
-	<!-- 					style="background-image: url('https://s1.best-wallpaper.net/wallpaper/m/1812/Furry-puppy-front-view-basket-meadow_m.webp')"> -->
-	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
-	<!-- 						<h3>Sale Box</h3> -->
 
-	<!-- 					</div> -->
-	<!-- 				</div> -->
-	<!-- 				Slide Two - Set the background image for this slide in the line below -->
-	<!-- 				<div class="carousel-item" -->
-	<!-- 					style="background-image: url('/resources/newTemplate/img/shop/shop-banner-2.jpg')"> -->
-	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
-	<!-- 						<h3>Cool Shop</h3> -->
-	<!-- 					</div> -->
-	<!-- 				</div> -->
-	<!-- 			</div> -->
-	<!-- 			<a class="carousel-control-prev" href="#carouselExampleIndicators" -->
-	<!-- 				role="button" data-slide="prev"> <span -->
-	<!-- 				class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
-	<!-- 				class="sr-only">Previous</span> -->
-	<!-- 			</a> <a class="carousel-control-next" href="#carouselExampleIndicators" -->
-	<!-- 				role="button" data-slide="next"> <span -->
-	<!-- 				class="carousel-control-next-icon" aria-hidden="true"></span> <span -->
-	<!-- 				class="sr-only">Next</span> -->
-	<!-- 			</a> -->
-	<!-- 		</div> -->
-	<!-- 	</section> -->
 	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
 <body class="goto-here">
 	<div class="hero-wrap hero-bread"
@@ -185,52 +126,89 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="shop-p1-title">
-						<h3>Categories</h3>
+						<h3>카테고리</h3>
 						<div class="heading-border-light"></div>
 					</div>
 					<div class="list-group">
-						<a href="#" class="list-group-item">> 전체 </a> <a href=""
-							class="list-group-item">사료</a> <a href="" class="list-group-item">간식</a>
-						<a href="/order/listOrder" class="list-group-item">의류;임시오더</a> <a
-							href="#" class="list-group-item">베스트상품</a>
+						<a class="list-group-item" id="total">> 전체 </a> <a
+							class="list-group-item" id="four">베스트상품</a> <a
+							class="list-group-item" id="one">사료</a> <a
+							class="list-group-item" id="two">간식</a> <a
+							class="list-group-item" id="three">의류</a>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
-							<a href="/product/listAdminProduct" class="list-group-item">관리자
-								페이지</a>
+							<a class="list-group-item" id="admin">관리자 상품관리</a>
+						</c:if>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a class="list-group-item" id="adminOrder">관리자 구매관리</a>
 						</c:if>
 					</div>
-					<div class="input-group ">
-						<input type="text" class="form-control" id="inlineFormInputGroup"
-							placeholder="Search Product">
-						<div class="input-group-addon">
-							<i class="fa fa-search"></i>
-						</div>
-					</div>
-					
-					&nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> 주문상품 조회&nbsp;&nbsp;<img src="/resources/file/fileShop/order.png" width="20px"></a> 
 
-						<!-- 베스트 상품 //////////////////////////////////////////////////////////-->
-						<!-- 					<div class="shop-p1-title"> -->
-						<!-- 						<h3>BEST PRODUCT</h3> -->
-						<!-- 						<div class="heading-border-light"></div> -->
-						<!-- 					</div> -->
-						<!-- 					<ul class="list-unstyled top-seller"> -->
-						<!-- 						<li><img class="img-fluid" -->
-						<!-- 							src="/resources/newTemplate/img/shop/shop-item-1.jpg" alt=""> -->
-						<!-- 							<h6>Tshirt sort Style</h6> -->
-						<!-- 							<p>$15.34</p></li> -->
-						<!-- 						<li><img class="img-fluid" -->
-						<!-- 							src="/resources/newTemplate/img/shop/shop-item-4.jpg" alt=""> -->
-						<!-- 							<h6>Tshirt sort Style</h6> -->
-						<!-- 							<p>$23.56</p></li> -->
-						<!-- 						<li><img class="img-fluid" -->
-						<!-- 							src="/resources/newTemplate/img/shop/shop-item-2.jpg" alt=""> -->
-						<!-- 							<h6>Tshirt sort Style</h6> -->
-						<!-- 							<p>$45.23</p></li> -->
-						<!-- 					</ul> -->
+
+					<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> <c:if
+							test="${ sessionScope.user.role eq 'user' }">
+					주문상품
+						조회&nbsp;&nbsp;
+					<img src="/resources/file/fileShop/order.png" width="20px">
+						</c:if>
+					</a>
+
+
 				</div>
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
+
+					<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
+					<div class="row">
+						<div class="col-md-9" style="">
+							<div style="float: left;"></div>
+							<div style="float: right;">
+								<form class="form-inline" name="detailForm">
+									<div class="form-group">
+										<select class="form-control" id="searchCondition"
+											name="searchCondition">
+											<option value="0"
+												${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+											<option value="1"
+												${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+											<option value="2"
+												${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+										</select>
+									</div>
+
+
+									<div class="form-group" align="right">
+										> <label class="sr-only" for="searchKeyword">검색어</label> <input
+											type="text" class="form-control searchKeyword"
+											id="searchKeyword" name="searchKeyword" placeholder="검색어"
+											value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+										<button type="button" id="searchSubmmit"
+											class="btn btn-default searchSubmmit">
+											<span class="fas fa-search"></span>
+										</button>
+									</div>
+
+									<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+									<input type="hidden" id="currentPage" name="currentPage"
+										value="" />
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<c:if test="${totalCount == 0}">
+						<div class="row">
+							<div class="col-md-9" align="center"
+								style="height: 500px; padding-top: 250px;">
+								검색결과 없음
+								<p />
+								<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+								<input type="hidden" id="currentPage" name="currentPage"
+									value="" />
+
+							</div>
+						</div>
+					</c:if>
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
@@ -241,32 +219,36 @@
 										src="../../resources/file/fileShop/${product.mainFile}" alt="">
 										<input type="hidden" value="${product.prodNo}" /></a>
 									<div class="card-body text-center">
-										<div class="card-title">
-											<a href="#">${product.prodName} </a>
+										<div class="detailtext">
+											<div class="card-title">
+												<a href="#">${product.prodName} </a>
+											</div>
 										</div>
 										<del>
-											<fmt:formatNumber value="${product.price}" pattern="#,###" />
+											<font size="2"><fmt:formatNumber
+													value="${product.price}" pattern="#,###" /></font>
 										</del>
 										<strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${product.discountPrice}" pattern="#,###" />원
-										</strong>
-										<div class="cart-icon text-center">
-											<a class="detailprod"><i class="fa fa-cart-plus"></i>
-												상세보기 <input type="hidden" value="${product.prodNo}" /></a>
+										</strong>&nbsp;
 
-										</div>
+										<a class="detailprod"><button class="btn btn-default" id="detailprod">상세보기</button>
+										<input type="hidden" value="${product.prodNo}" /></a>
 
 									</div>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
+
+					<div align="center">
+						<jsp:include page="../../common/pageNavigator_new.jsp" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- <div class="row my-4">-->
 
 
 	<!--====================================================
@@ -277,6 +259,104 @@
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<!-- footer End /////////////////////////////////////-->
 	<!--================ End footer Area  =================-->
+
+
+
+	<script type="text/javascript">
+		//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
+		function fncGetList(currentPage) {
+			$("#currentPage").val(currentPage)
+			$("form").attr("method", "POST").attr("action",
+					"/product/listProduct").submit();
+		}
+
+		//=============    상품상세조회(썸네일)  Event  처리 		=============
+		//============= 썸네일 사진 클릭 Event  처리 =============	
+		$(function() {
+			$(".img-prod").on(
+					"click",
+					function() {
+						//alert($(this).children("input").val())
+						$(self.location).attr(
+								"href",
+								"/product/getProduct?prodNo="
+										+ $(this).children("input").val());
+					});
+
+			$(".detailprod").on(
+					"click",
+					function() {
+						//alert($(this).children("input").val())
+						$(self.location).attr(
+								"href",
+								"/product/getProduct?prodNo="
+										+ $(this).children("input").val());
+					});
+		});
+
+		// 카테고리 bind
+
+		$(function() {
+			//>전체 PROD_NO DESC
+			$("#total").on("click", function() {
+				//alert("");
+				self.location = "/product/listProduct?prodCondition=0"
+
+			});
+			//사료
+			$("#one").on("click", function() {
+				//alert("");
+				self.location = "/product/listProduct?prodCondition=1"
+
+			});
+			//간식
+			$("#two").on("click", function() {
+				//alert("");
+				self.location = "/product/listProduct?prodCondition=2"
+
+			});
+			//의류
+			$("#three").on("click", function() {
+				//alert("");
+				self.location = "/product/listProduct?prodCondition=3"
+
+			});
+			//베스트상품
+			$("#four").on("click", function() {
+				//alert("");
+				self.location = "/product/listProduct?prodCondition=4"
+
+			});
+			//관리자 상품조회
+			$("#admin").on("click", function() {
+				//alert("");
+				self.location = "/product/listAdminProduct"
+
+			});
+			//관리자 구매관리
+			$("#adminOrder").on("click", function() {
+				//alert("");
+				self.location = "/order/listAdminOrder"
+
+			});
+			$(".orderhistory").on("click", function() {
+				//alert("");
+
+				self.location = "/order/listOrder"
+
+			});
+
+		});
+
+		//■■■■■■■■■■■■■■■■■■■■SEARCH■■■■■■■■■■■■■■■■■■■■
+
+		function fncGetList(currentPage) {
+			$("#currentPage").val(currentPage)
+
+			$("form").attr("method", "POST").attr("action",
+					"/product/listProduct").submit();
+		}
+	</script>
 </body>
 
 </html>

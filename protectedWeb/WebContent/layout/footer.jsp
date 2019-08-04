@@ -53,7 +53,8 @@
                 <div class="col-md-3 col-sm-6">
                   <div class="heading-footer"><h2>E-mail</h2></div>
                   <address class="address-details-f">
-                                        은우 : p960720@naver.com <br>
+                  	혜미 : dlgpal9508@gmail.com<br>
+                    은우 : p960720@naver.com <br>
                     California, US <br>
                     Phone: 800 123 3456 <br>
                     Fax: 800 123 3456 <br>
@@ -82,6 +83,7 @@
                 </div>
             </div>
         </div>
+        
         <a href="#home" id="back-to-top" class="btn btn-sm btn-green btn-back-to-top smooth-scrolls hidden-sm hidden-xs" title="home" role="button">
             <i class="fa fa-angle-up"></i>
         </a>

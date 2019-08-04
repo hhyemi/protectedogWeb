@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.Order;
 import org.protectedog.service.domain.Product;
 import org.protectedog.service.domain.User;
@@ -256,5 +255,55 @@ public class OrderController {
 		
 		return "redirect:/shop/order/getOrder?orderNo="+order.getOrderNo();
 	}
+	
+	//주문내역 리스트 출력
+	//주문내역 리스트 출력
+		@RequestMapping(value="listAdminOrder")
+		public String listAdminOrder( @ModelAttribute("search") Search search, HttpSession session, Model model) throws Exception{
+			
+			System.out.println("/listAdminOrder");
+			
+			if(search.getCurrentPage() ==0 ){
+				search.setCurrentPage(1);
+			}
+			search.setPageSize(pageSize);
+			
+			// 회원 아이디를 GET하기 위한 Session 불러오기
+			User user = (User)session.getAttribute("user");
+			
+			
+			System.out.println(user);
+			System.out.println("session value 확인");
+			
+			// Business logic 수행
+			Map<String , Object> map=orderService.listAdminOrder(search, user.getId());
+			
+			System.out.println(user.getId());
+			
+			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+			System.out.println(resultPage);
+			
+			// Model 과 View 연결
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("resultPage", resultPage);
+			model.addAttribute("search", search);
+
+			
+			return "forward:/shop/order/listAdminOrder.jsp";
+		}
+		
+		@RequestMapping(value="updateOrderCode")
+		public String updateOrderCode(@ModelAttribute("order") Order order, @RequestParam("orderCode")String orderCode,
+				@RequestParam("id") String id) throws Exception{
+			
+			
+			
+			order.setOrderCode(Integer.parseInt(orderCode));
+			
+			orderService.updateOrderCode(order);
+			
+			return "redirect:/order/listOrder?id="+id;
+		}
 }
+
 	

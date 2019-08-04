@@ -11,6 +11,7 @@
 		<result property="applyNo" 		column="apply_no" 		jdbcType="NUMERIC"/>
 		<result property="adoptNo" 		column="adopt_no" 		jdbcType="NUMERIC"/>
 		<result property="id" 			column="id" 			jdbcType="VARCHAR"/>
+		<result property="nickname" 	column="nickname" 		jdbcType="VARCHAR"/>
 		<result property="phone" 		column="phone" 			jdbcType="VARCHAR"/>
 		<result property="job" 			column="job" 			jdbcType="VARCHAR"/>
 		<result property="addr" 		column="addr" 			jdbcType="VARCHAR"/>
@@ -32,10 +33,10 @@
 	 <!-- SQL : INSERT -->
 	 <insert 	id="addApply"		parameterType="apply" >
 	 	INSERT
-		INTO apply (apply_no, adopt_no, id, phone, 
+		INTO apply (apply_no, adopt_no, id, nickname, phone, 
 					job, addr, mate, mate_agree, raise, 
 					currently, plan, pay, reason, situation, reg_date) 
-		VALUES	 (	seq_apply_apply_no.nextval, #{adoptNo}, #{id}, #{phone}, 
+		VALUES	 (	seq_apply_apply_no.nextval, #{adoptNo}, #{id}, #{nickname}, #{phone}, 
 					#{job}, #{addr}, #{mate}, #{mateAgree:VARCHAR}, #{raise}, 
 					#{currently:VARCHAR}, #{plan}, #{pay}, #{reason}, #{situation}, SYSDATE  )
 	 </insert>
@@ -46,7 +47,7 @@
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getApply"	parameterType="int"		resultMap="applySelectMap">
 		SELECT
-				apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
+				apply_no, adopt_no, id, nickname, phone, job, addr, mate, mate_agree, raise, 
 				currently, plan, pay, reason, situation, reg_date, status_code
 		FROM apply 
 		WHERE apply_no = #{value}
@@ -72,13 +73,13 @@
 	<select  id="listApply"  parameterType="map"	resultMap="applySelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-  				FROM ( SELECT apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
+  				FROM ( SELECT apply_no, adopt_no, id, nickname, phone, job, addr, mate, mate_agree, raise, 
 								currently, plan, pay, reason, situation, reg_date, status_code
 						FROM apply
 						<where>
 								adopt_no = #{adoptNo} AND status_code != '0' 
 						</where>
-						ORDER BY apply_no DESC ) inner_table
+						ORDER BY apply_no ) inner_table
 				)
 		
 	 </select>
@@ -98,7 +99,7 @@
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT apply_no, adopt_no, id, phone, job, addr, mate, mate_agree, raise, 
+	  	FROM(	SELECT apply_no, adopt_no, id, nickname, phone, job, addr, mate, mate_agree, raise, 
 						currently, plan, pay, reason, situation, reg_date, status_code
 				FROM apply
 				<where>
