@@ -9,18 +9,20 @@ import org.protectedog.service.domain.Participate;
 
 public interface ParticipateService {
 
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
-	// ÅõÇ¥¿Í ÈÄ¿øÂü¿©
+	// ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void addParticipate(Participate participate) throws Exception;
 
-	// ÅõÇ¥ 1±Û 1¹ø È®ÀÎ
-	public Participate getParticipate(Participate participate) throws Exception;
+	// ï¿½ï¿½Ç¥ 1ï¿½ï¿½ 1ï¿½ï¿½ È®ï¿½ï¿½
+	public Participate getParticipate(int participateNo) throws Exception;
 
-	// Âü¿©¾Ë¸²´ñ±Û
+	public Participate getPostParticipate(Participate participate) throws Exception;
+	
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½ï¿½
 	public Map<String, Object> listNoticeComment(Search search, int postNo , String statusCode) throws Exception;
 
-	/////////////// È¸¿ø¿¡¼­ ¿ä±¸ÇÑ Method/////////////////////
-	// Âü¿©ÀÌ·Â ¸®½ºÆ®
+	/////////////// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ä±¸ï¿½ï¿½ Method/////////////////////
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<Participate> listParticipateUser(int id) throws Exception;
 }

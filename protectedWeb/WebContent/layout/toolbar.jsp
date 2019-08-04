@@ -163,12 +163,8 @@
                 <li class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
 	                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
-	                <a class="dropdown-item" href="/product/listProduct">상품리스트</a>
-	                <c:if test="${ sessionScope.user.role eq 'admin' }">
-	                	<a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
-	                </c:if>
+	                <a class="dropdown-item" href="/product/listProduct">스토어</a>
                   </div>
                 </li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">견종백과</a></li>

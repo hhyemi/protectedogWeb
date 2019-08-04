@@ -27,33 +27,34 @@
 <link rel="stylesheet" href="/resources/get/css/responsive.css" />
 <!-- Google Mdl -->
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
-.form-group2 {
-	padding-left: 420px;
-	padding-right: 100px;
-}
-
 .form-group3 {
 	padding-left: 465px;
 	padding-right: 100px;
 }
 
-table, td{
-border: 1px 
+table, td {
+	border: 1px
 }
-table{
-width:60%;
-height: 100px;
-margin: auto;
-text-align: center;
-text-size: small;
+
+table {
+	width: 60%;
+	height: 100px;
+	margin: auto;
+	text-align: center;
+	text-size: small;
 }
-.pricecolor{
+
+.pricecolor {
 	color: #f04f23;
 }
 </style>
@@ -67,12 +68,14 @@ text-size: small;
 	<!--================Header Menu Area =================-->
 
 	<!--================Single Product Area =================-->
+
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 
 					<p />
+					조회수 ${board.viewCount }
 					<div id="carouselExampleIndicators" class="carousel slide"
 						data-ride="carousel">
 						<ol class="carousel-indicators">
@@ -90,7 +93,6 @@ text-size: small;
 
 						</ol>
 						<div class="carousel-inner">
-
 
 							<c:forEach var="name" items="${file}" varStatus="status">
 								<c:if test="${status.first}">
@@ -113,9 +115,10 @@ text-size: small;
 					<div class="s_product_text">
 						<div>
 							<input type="hidden" value="${board.postNo}" /> <input
-								type="hidden" value="${board.boardCode}" />
-							<h3>${board.postTitle}</h3>${board.id}
-							<h3>${board.prodName}</h3>
+								type="hidden" value="${board.boardCode}" /> <font size="6">${board.postTitle}</font>&nbsp;&nbsp;&nbsp;<font
+								size="3">${board.nickName}</font> <br />
+							<br />
+							<h3>상품명 : ${board.prodName}</h3>
 							<h2 class="pricecolor">
 								<fmt:formatNumber value="${board.price}" pattern="#,###" />
 								원
@@ -123,53 +126,64 @@ text-size: small;
 
 							<ul class="list">
 							</ul>
-							<p>
-							<br>
-							${board.postContent}
-								
-							</p>
-							
-							</div>
+
+
+
+							거래지역 : ${board.city}<br /> 판매자 연락처 :
+							<c:if test="${user.role eq 'user'}">
+							${board.phone}
+							</c:if>
+							<br />
+							<c:if test="${! user.role eq 'user'}">
+							인증회원만 열람가능합니다.</c:if>
+							<hr>
+							<br /> ${board.postContent}<br />
+
+
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<p align="right"><button class="mdl-button mdl-js-button mdl-button--primary" id="update">
- 수정
-</button><!-- Accent-colored flat button -->
-<button class="mdl-button mdl-js-button mdl-button--accent">
-  삭제하기
-</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-<p>
-		<!--================End Product Description Area =================-->
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" align="right">
+				<button class="btn btn-default" id="re">수정</button>
+				<button class="btn btn-default" id="delete">삭제</button>
+			</div>
+		</div>
+
+	</div>
+	<!--================End Product Description Area =================-->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
-<input type="hidden" name="boardCode" value="IS" />	
-<jsp:include page="/common/comment.jsp"></jsp:include>
-</p>
-		<!--================ End footer Area  =================-->
+	<input type="hidden" name="boardCode" value="IS" />
+	<jsp:include page="/common/comment.jsp"></jsp:include>
+	</p>
+	<!--================ End footer Area  =================-->
 
-		<!-- Optional JavaScript -->
-		<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="../../resources/get/js/jquery-3.2.1.min.js"></script>
-		<script src="../../resources/get/js/popper.js"></script>
-		<script src="../../resources/get/js/bootstrap.min.js"></script>
-		<script src="../../resources/get/js/stellar.js"></script>
-		<script src="../../resources/get/js/simpleLightbox.min.js"></script>
-		<script src="../../resources/get/js/jquery.nice-select.min.js"></script>
-		<script src="../../resources/get/js/imagesloaded.pkgd.min.js"></script>
-		<script src="../../resources/get/js/isotope-min.js"></script>
-		<script src="../../resources/get/js/owl.carousel.min.js"></script>
-		<script src="../../resources/get/js/jquery.ajaxchimp.min.js"></script>
-		<script src="../../resources/get/js/mail-script.js"></script>
-		<script src="../../resources/get/js/jquery-ui.js"></script>
-		<script src="../../resources/get/js/jquery.waypoints.min.js"></script>
-		<script src="../../resources/get/js/jquery.counterup.js"></script>
-		<script src="../../resources/get/js/theme.js"></script>
-<script src="https://kit.fontawesome.com/e26616618e.js"></script>
+	<!-- Optional JavaScript -->
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="../../resources/get/js/jquery-3.2.1.min.js"></script>
+	<script src="../../resources/get/js/popper.js"></script>
+	<script src="../../resources/get/js/bootstrap.min.js"></script>
+	<script src="../../resources/get/js/stellar.js"></script>
+	<script src="../../resources/get/js/simpleLightbox.min.js"></script>
+	<script src="../../resources/get/js/jquery.nice-select.min.js"></script>
+	<script src="../../resources/get/js/imagesloaded.pkgd.min.js"></script>
+	<script src="../../resources/get/js/isotope-min.js"></script>
+	<script src="../../resources/get/js/owl.carousel.min.js"></script>
+	<script src="../../resources/get/js/jquery.ajaxchimp.min.js"></script>
+	<script src="../../resources/get/js/mail-script.js"></script>
+	<script src="../../resources/get/js/jquery-ui.js"></script>
+	<script src="../../resources/get/js/jquery.waypoints.min.js"></script>
+	<script src="../../resources/get/js/jquery.counterup.js"></script>
+	<script src="../../resources/get/js/theme.js"></script>
+	<script src="https://kit.fontawesome.com/e26616618e.js"></script>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 		
 		
@@ -184,7 +198,7 @@ text-size: small;
 			});
 
 
-		 $( "#update" ).on("click" , function() {
+		 $( "#re" ).on("click" , function() {
 		 		self.location = "/market/updateMarket?postNo=${board.postNo}";
 			}); 
 

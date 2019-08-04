@@ -202,7 +202,7 @@
 								<div class="form-group">
 									<label for="firstname">상품명</label> <input type="text"
 										class="form-control" name="prodName" id="prodName"
-										placeholder="상품명을 입력해주세요" value="테스트">
+										placeholder="상품명을 입력해주세요">
 								</div>
 							</div>
 							<br/>

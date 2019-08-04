@@ -92,10 +92,7 @@
 													and prod_code = 30
 													</if>
 													<if test="prodCondition == 4 and prodCondition !='' ">
-													and prod_code = 40
-													</if>
-													<if test="prodCondition == 5 and prodCondition !='' ">
-													and prod_code = 50
+													<![CDATA[ quantity < 20 ]]>
 													</if>
 												</if>
 												</where>

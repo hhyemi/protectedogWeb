@@ -37,6 +37,7 @@
 			height: 40px;
 			width: 150px;
 			border : 1px solid #D3D3D3;
+			padding-left: 5px;
 		}
 		
 		#searchSubmmit {
@@ -81,14 +82,14 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>post</span></p>
+          	<p ><span class="mr-2">support</span> <span>post</span></p>
             <font size="7">후원게시</font>
           </div>
         </div>
       </div>
     </div>
 	<br/><p/>
-	
+	<div class="sectionContainer ">	
     <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 30px;">      
     
 		 <form class="form-inline" name="detailForm">
@@ -115,7 +116,7 @@
 							</select>
 						
 						    <label class="sr-only" for="searchKeyword">검색어</label>
-						    <input type="text"  id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+						    <input type="text"  id="searchKeyword" name="searchKeyword"  placeholder="검색어를 입력하세요." value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 <!-- 						    <button type="button" class="btn btn-default">검색</button> -->
 							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="padding-bottom: 6px;margin-left: 0px;">
 								<span class="fas fa-search"></span>
@@ -138,12 +139,12 @@
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 				    				<div class="desc-comp-offer-cont"  style="padding-top:10px">
+					    					<input type="hidden" value="${funding.postNo }" />		    					
 				    				
 										 <!-- 후원종료 -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">		
 										  &emsp;조회 ${funding.fundViewCount }										 		    											 				    		
 					    					<a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
-					    					<input type="hidden" value="${funding.postNo }" />		    					
 					    					</a>
 										 </c:if>
 										 
@@ -195,7 +196,7 @@
 		    <input type="hidden" id="statusConde" name="statusConde" value="${funding.statusConde}"/>	  
 		 </form>
 
-    </section>
+    </section></div>
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -314,7 +315,7 @@
 				fncGetList('1');
 		});    
 		//============= 썸네일 사진 클릭 Event  처리 =============	
-	 	$( ".img-prod" ).on("click" , function() {
+	 	$( ".desc-comp-offer-cont" ).on("click" , function() {
 			$(self.location).attr("href","/funding/getFunding?postNo="+$(this).children("input").val());
 		});   
 	

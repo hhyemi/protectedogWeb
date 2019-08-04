@@ -31,12 +31,10 @@
 	padding-left: 420px;
 	padding-right: 100px;
 }
-
 .form-group3 {
 	padding-left: 465px;
 	padding-right: 100px;
 }
-
 table {
 	color: black;
 	align: center;
@@ -646,7 +644,6 @@ table {
 		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		$(function() {
-
 			//manage//====================================================
 			$("button:contains('확인')").on("click", function() {
 				//Debug..
@@ -654,33 +651,26 @@ table {
 				/* self.location = "/product/listProduct/manage" */
 				self.location = "/product/listProduct"
 			});
-
 			$("button:contains('수정')").on("click", function() {
 				//Debug..
 				console.log($("button:contains('수정')").html());
 				history.go(-1);
 			});
-
 			
-
 			//구매하기//====================================================
 			$("#addorder").on("click", function() {
 				//Debug..
 				self.location = "/order/addOrder?prodNo=${product.prodNo}"
 			});
-
 			$("button:contains('뒤로')").on("click", function() {
 				//Debug..
 				console.log($("button:contains('뒤로')").html());
 				self.location = "/product/listProduct"
 			});
 		});
-
 // 		//=============장바구니 이동========================================
-
 		$(document).ready(function() {
  			const p = $("#price").data('price');
-
  			$("#quantity").change(function() {
  				const q = $(this).find(':selected').data('quantity');
  				const total = p * q;

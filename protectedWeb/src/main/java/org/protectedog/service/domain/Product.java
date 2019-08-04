@@ -16,8 +16,11 @@ public class Product {
 	private int discountPrice;
 	private int prodCode;
 	private String mainFile;
+	private String terms;
 	
 	
+
+
 	public String getMainFile() {
 		return mainFile;
 	}
@@ -140,6 +143,15 @@ public class Product {
 	public void setProdCode(int prodCode) {
 		this.prodCode = prodCode;
 	}
+	
+	public String getTerms() {
+		return terms;
+	}
+
+
+	public void setTerms(String terms) {
+		this.terms = terms;
+	}
 
 
 	@Override
@@ -147,10 +159,8 @@ public class Product {
 		return "Product [prodNo=" + prodNo + ", prodName=" + prodName + ", price=" + price + ", manuDate=" + manuDate
 				+ ", regDate=" + regDate + ", country=" + country + ", quantity=" + quantity + ", prodDetail="
 				+ prodDetail + ", company=" + company + ", discountPrice=" + discountPrice + ", prodCode=" + prodCode
-				+ ", mainFile=" + mainFile + "]";
+				+ ", mainFile=" + mainFile + ", terms=" + terms + "]";
 	}
-
-
 	
 	
 }
