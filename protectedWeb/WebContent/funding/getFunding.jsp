@@ -61,7 +61,7 @@
       <div class="container">
         <div class="row s_product_inner">
           <div class="col-lg-6">
-            조회 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
+            조회수 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
             <p/>            
               <div
                 id="carouselExampleIndicators"

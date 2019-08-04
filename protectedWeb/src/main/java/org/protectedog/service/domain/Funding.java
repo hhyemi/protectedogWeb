@@ -27,20 +27,16 @@ public class Funding {
 	private String reviewContent;
 	private Date reviewRegDate;
 
-	// DB¿¡´Â ¾ø°í ÀÖ´Â ÇÊµå
-	// ÀüÈ­¹øÈ£ 3Ä­
-	private String phone1;
-	private String phone2;
-	private String phone3;
-	// ÅõÇ¥ ³²Àº ³¯Â¥
+	// DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Êµï¿½
+	// ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
 	private int voteRemainDate;
-	// ÈÄ¿ø ³²Àº ³¯Â¥
+	// ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
 	private int fundRemainDate;
-	// ÅõÇ¥À²
+	// ï¿½ï¿½Ç¥ï¿½ï¿½
 	private int VoteRate;
-	// ÈÄ¿øÀ²
+	// ï¿½Ä¿ï¿½ï¿½ï¿½
 	private int FundRate;
-	// ´ëÇ¥ÀÌ¹ÌÁö
+	// ï¿½ï¿½Ç¥ï¿½Ì¹ï¿½ï¿½ï¿½
 	private String mainFile;
 
 	public Funding() {
@@ -70,20 +66,6 @@ public class Funding {
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-		/////////////// EL Àû¿ë À§ÇØ Ãß°¡ ///////////
-		if (phone != null && phone.length() != 0) {
-			phone1 = phone.split("-")[0];
-			phone2 = phone.split("-")[1];
-			phone3 = phone.split("-")[2];
-		}
-	}
-
 	public String getPostTitle() {
 		return postTitle;
 	}
@@ -99,7 +81,6 @@ public class Funding {
 	public void setPostContent(String postContent) {
 		this.postContent = postContent;
 	}
-
 
 	public int getVoteTargetCount() {
 		return voteTargetCount;
@@ -179,30 +160,6 @@ public class Funding {
 
 	public void setFundEndDate(Date fundEndDate) {
 		this.fundEndDate = fundEndDate;
-	}
-
-	public String getPhone1() {
-		return phone1;
-	}
-
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-
-	public String getPhone2() {
-		return phone2;
-	}
-
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
-
-	public String getPhone3() {
-		return phone3;
-	}
-
-	public void setPhone3(String phone3) {
-		this.phone3 = phone3;
 	}
 
 	public int getVoteRemainDate() {
@@ -293,6 +250,14 @@ public class Funding {
 		this.fundViewCount = fundViewCount;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "Funding [postNo=" + postNo + ", id=" + id + ", nickname=" + nickname + ", statusCode=" + statusCode
@@ -302,12 +267,9 @@ public class Funding {
 				+ ", fundTargetDay=" + fundTargetDay + ", fundViewCount=" + fundViewCount + ", sponsorCount="
 				+ sponsorCount + ", fundPay=" + fundPay + ", fundStartDate=" + fundStartDate + ", fundEndDate="
 				+ fundEndDate + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", reviewRegDate="
-				+ reviewRegDate + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
-				+ ", voteRemainDate=" + voteRemainDate + ", fundRemainDate=" + fundRemainDate + ", VoteRate=" + VoteRate
-				+ ", FundRate=" + FundRate + ", mainFile=" + mainFile + "]";
+				+ reviewRegDate + ", voteRemainDate=" + voteRemainDate + ", fundRemainDate=" + fundRemainDate
+				+ ", VoteRate=" + VoteRate + ", FundRate=" + FundRate + ", mainFile=" + mainFile + "]";
 	}
 
-
-	
 
 }

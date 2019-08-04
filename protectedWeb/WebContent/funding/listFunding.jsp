@@ -143,14 +143,14 @@
 				    				
 										 <!-- 후원종료 -->
 										 <c:if test ="${!(funding.statusCode eq 3) }">		
-										  &emsp;조회 ${funding.fundViewCount }										 		    											 				    		
+										  &emsp;조회수 ${funding.fundViewCount }										 		    											 				    		
 					    					<a href="#" class="img-prod"><img src="/resources/file/fileSF/end.png" style=" min-height:210px; max-height:210px; max-width:330px; min-width:330px; width:100%;background:url('/resources/file/fileSF/${funding.mainFile}') no-repeat center center;background-size:cover;" onerror="this.src='http://placehold.it/400x400'" />
 					    					</a>
 										 </c:if>
 										 
 										 <!-- 후원중 -->
 										 <c:if test ="${funding.statusCode eq 3 }">		
-										  &emsp;조회 ${funding.fundViewCount }													 											 				    		
+										  &emsp;조회수 ${funding.fundViewCount }													 											 				    		
 				    					<a href="#" class="img-prod"><img class="img-fluid" src="/resources/file/fileSF/${funding.mainFile}" alt="Colorlib Template" style="min-height:210px; max-height:210px; min-width:330px; max-width:330px;" >
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    					</a>

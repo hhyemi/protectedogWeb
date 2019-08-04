@@ -83,9 +83,7 @@
 		<form id="uploadForm" class="form-horizontal">
 
 			<div class="form-group">
-				<h4>
-					<b>후원 목표금액</b>
-				</h4>
+					<h5><b>후원 목표금액</b></h5>
 				투표개수는 ( <strong style="color: #f04f23">목표금액 0.01%</strong> )표로
 				적용됩니다. ( <b>10만원 ~ 300만원</b>까지 입력가능합니다. )
 				<p />
@@ -97,19 +95,18 @@
 			</div>
 			<br />
 
-			<div class="form-group" id="voteNum">
-				<h4>
-					<b>투표수 <strong style="color: #f04f23">0</strong>표</b>
-				</h4>
+			<div class="form-group" id="voteNum"> 
+				<h5><b>투표수 <strong style="color: #f04f23"> 0 </strong>표</b></h5>
+
 			<div class="row form-form">
 			후원게시글로 이동하려면 받아야 할 투표 수입니다.
 			</div>
 			</div>
 			<br/>
 			<div class="form-group">
-				<h4>
+				<h5>
 					<b>후원 목표기간</b>
-				</h4>
+				</h5>
 				<strong style="color: #f04f23">후원 받을기간</strong>을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br /> 투표가 마감되었을 때 시작 날부터의
 				기간입니다. 투표 기간은 <strong >30일</strong>로 고정됩니다.
 				<p />
@@ -124,9 +121,9 @@
 			</div>
 			<br />
 			<div class="form-group">
-				<h4>
+				<h5>
 					<b>글 제목</b>
-				</h4>
+				</h5>
 				<p />
 				<div class=>
 					<input type="text" class="form-control" id="postTitle"
@@ -137,9 +134,9 @@
 			<br />
 
 			<div class="form-group">
-				<h4>
+				<h5>
 					<b>글 내용</b>
-				</h4>
+				</h5>
 				<p />
 				<div>
 					<textarea id="postContent" name="postContent"
@@ -166,41 +163,13 @@
 
 			<div class="form-group">
 			<br/>
-				<h4>
+				<h5>
 					<b>연락처</b>
-				</h4>
-				문의받을 연락처를 입력해주세요.
-				<p />
+				</h5>
+				연락처가 다를 경우 회원정보를 수정해주세요.
+				<input type="text" class="form-control" name="phone" value="${ user.phone }" readonly style="margin-top: 15px">
 				
-				<div class="row">
-				<div class="col-sm-3">
-					<select class="form-control" name="phone1" id="phone1">
-						<option value="010"
-							${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  }>010</option>
-						<option value="011"
-							${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  }>011</option>
-						<option value="016"
-							${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  }>016</option>
-						<option value="018"
-							${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  }>018</option>
-						<option value="019"
-							${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  }>019</option>
-					</select></div>
-					&emsp;
-					<div class="col-sm-3">
-					<input class="form-control" type="text" id="phone2" name="phone2"
-						value="${ ! empty user.phone2 ? user.phone2 : ''}"
-						placeholder="번호" maxlength="4" style="height: 35px;">
-					</div>
-					&emsp;
-					<div class="col-sm-3">
-					<input class="form-control" type="text"id="phone3" name="phone3"
-						value="${ ! empty user.phone3 ? user.phone3 : ''}"
-						placeholder="번호" maxlength="4" style="height: 35px;">
-					</div>
-				</div>
-				<input type="hidden" name="phone" /> <input type="hidden"
-					class="form-control" id="multiFile" name="multiFile">
+				<input type="hidden" class="form-control" id="multiFile" name="multiFile">
 			</div>
 
 			<br />
@@ -246,9 +215,7 @@
 	//  $('textarea').val(CKEDITOR.getData());
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
-     // var postContent =  CKEDITOR.getData();
-      var phone2 = $('input[name="phone2"]').val();
-      var phone3 = $('input[name="phone3"]').val();   
+     // var postContent =  CKEDITOR.getData();  
       var file = $("#multiFile").val();    
 
       if(fundTargetPay == null || fundTargetPay.length<1){
@@ -337,49 +304,9 @@
 
          return;
       }      
-      
-      if(phone2 == null || phone2.length<1){
-		  swal({
-	           text: "연락처를 입력해주세요.",
-	           dangerMode: true,
-	           buttons: {
-						 catch: {
-						 	text: "확인"
-						 }
-			   },			   
-	      }).then((willDelete) => {
-	           if (willDelete) {
-	               $('input[name="phone2"]').focus();
-	           }
-	      });      	  
-         return;
-      }
-      if(phone3 == null || phone3.length<1){
-		  swal({
-	           text: "연락처를 입력해주세요.",
-	           dangerMode: true,
-	           buttons: {
-						 catch: {
-						 	text: "확인"
-						 }
-			   },			   
-	      }).then((willDelete) => {
-	           if (willDelete) {
-	               $('input[name="phone3"]').focus();
-	           }
-	      });    
-         return;
-      }
-      
 
       var value = "";   
-      if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
-         var value = $("#phone1 option:selected").val() + "-" 
-                        + $("input[name='phone2']").val() + "-" 
-                        + $("input[name='phone3']").val();
-      }
-      $("input:hidden[name='phone']").val( value );
-      
+ 
       $('input[name="fundTargetPay"]').val(removeCommas($('input[name="fundTargetPay"]').val()));
 
  	 swal({
@@ -674,7 +601,7 @@
             	 //투표수 계산
                  var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                  $("#voteNum").children().remove();
-                 $("#voteNum").append("<h4><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h4><div class=\"row form-form\">"+
+                 $("#voteNum").append("<h5><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h5><div class=\"row form-form\">"+
              							"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
                  //후원목표금액 길이초과
                  if (removeCommas($(this).val()).length > 7 ) {
@@ -695,7 +622,7 @@
                      $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
                      var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                      $("#voteNum").children().remove();
-                     $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3><div class=\"row form-form\">"+
+                     $("#voteNum").append("<h5><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h5><div class=\"row form-form\">"+
       										"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
        		           }
        		      });
@@ -727,14 +654,7 @@
                   }
 
              });
-           //============= 연락처 문자 입력 검증 (JavaScript 함수사용)=============
-             $('#phone2').keyup(function(){
-                $(this).val($(this).val().replace(/[^0-9]/g,""));          
-             });
-           
-             $('#phone3').keyup(function(){
-                 $(this).val($(this).val().replace(/[^0-9]/g,""));              
-             });
+
              
      }); 
    
