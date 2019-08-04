@@ -760,6 +760,7 @@
 							 }
 				   },
 		     });
+			$("input[name=postTitle]").val($("input[name=postTitle]").val().toString().substring(0,20));
 // 			$("span[name=postTitle]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
@@ -778,6 +779,7 @@
 							 }
 				   },
 		     });
+			$("input[name=dogBreed]").val($("input[name=dogBreed]").val().toString().substring(0,10));
 // 			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogBreed]").text('');
@@ -795,6 +797,7 @@
 							 }
 				   },
 		     });
+			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
 // 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogWeight]").text('');
@@ -833,6 +836,7 @@
 							 }
 				   },
 		     });
+			$("input[name=dogStatus]").val($("input[name=dogStatus]").val().toString().substring(0,20));
 // 			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogStatus]").text('');
@@ -850,6 +854,7 @@
 							 }
 				   },
 		     });
+			$("input[name=dogPersonality]").val($("input[name=dogPersonality]").val().toString().substring(0,20));
 // 			$("span[name=dogPersonality]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogPersonality]").text('');
@@ -867,6 +872,7 @@
 							 }
 				   },
 		     });
+			$("input[name=dogChar]").val($("input[name=dogChar]").val().toString().substring(0,20));
 // 			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogChar]").text('');
@@ -884,6 +890,7 @@
 							 }
 				   },
 		     });
+			$("textarea[name=postContent]").val($("textarea[name=postContent]").val().toString().substring(0,100));
 // 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');

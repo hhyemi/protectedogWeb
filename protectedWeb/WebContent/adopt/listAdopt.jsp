@@ -38,6 +38,7 @@
 			padding-top: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
+			background-color: white;
 		}
 		
  		.listImg {
@@ -128,7 +129,11 @@
       </div>
     </div>
 
-	<div class="container">
+	<div class="sectionContainer ">	
+    <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+
+
+	<div class="container"  style="padding-left: 0px; padding-right : 0px;">
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	<input type="hidden" id="levels" value="${user.levels }">
 	<input type="hidden" id="sessionId" value="${user.id }">
@@ -267,7 +272,7 @@
 	  
  	</div>
  	
- 	
+ 	</section></div>
  	
  	
  	<jsp:include page="/common/searchResult.jsp"></jsp:include>

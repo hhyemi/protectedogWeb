@@ -298,12 +298,12 @@
 				<!-- 분양 메뉴일때  -->
               	
            		<c:if test="${adopt.statusCode ne '3' && user.id ne adopt.id }">
-           			<button id="adoptApply" class="btn btn-default" style="width: 260px">입양신청</button>
+           			<button id="adoptApply" class="btn btn-default" style="width: 255px">입양신청</button>
            		</c:if>
            		
            		<c:if test="${adopt.statusCode eq '2' && user.id eq adopt.id }">
-           			<button class="btn btn-default" style="width: 260px" id="confirmButton" data-toggle="modal" data-target="#applyModal">신청서확인</button>
-           			<button class="btn btn-default" style="width: 260px" id="adoptCompleteButton">분양완료</button>
+           			<button class="btn btn-default" style="width: 255px" id="confirmButton" data-toggle="modal" data-target="#applyModal">신청서확인</button>
+           			<button class="btn btn-default" style="width: 255px" id="adoptCompleteButton">분양완료</button>
            		</c:if>
            		
            		<c:if test="${adopt.statusCode eq '1' && user.id eq adopt.id }">
@@ -314,7 +314,7 @@
 				<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
 <!--                		<button class="btn btn-default" style="width: 260px">문의하기</button> -->
-               		<button class="btn btn-default" style="width: 260px" data-toggle="modal" data-target="#messageModal">문의하기</button>
+               		<button class="btn btn-default" style="width: 255px" data-toggle="modal" data-target="#messageModal">문의하기</button>
 <!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
                	</c:if>
                	
@@ -406,7 +406,7 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2">Add</span> <span>Missing</span></p>
+	          	<p ><span class="mr-2">List</span> <span>Apply</span></p>
 	            <font size="7">
 	            	신청서 확인
 	            </font>
@@ -785,7 +785,7 @@
 										        	+'<tr>'
 											            +'<th style="width: 15%"><p align="center" text-weight="bold"><b>No</b></p></th>'
 											            +'<th style="width: 55%"><p align="center"><b>신청자</b></p></th>'
-											            +'<th style="width: 30%"><p align="center"><b>신청일자</b></p></th>' 
+											            +'<th style="width: 30%"><p align="center"><b>신청일</b></p></th>' 
 									           		+'</tr>'
 									            +'</thead>'
 									            +'<tbody>';

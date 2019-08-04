@@ -9,9 +9,9 @@
               <div class="row">
                 <!-- About Us -->
                 <div class="col-md-3 col-sm-6 ">
-                  <div><img src="/resources/newTemplate/img/logo-w.png" alt="" class="img-fluid"></div>
+                  <div><font size="6" color="white">#protected</font></div>
                   <ul class="list-unstyled comp-desc-f">
-                     <li><p>#Protected is a very good team. we can customize what ever you think to make your website much better from your great ideas. </p></li> 
+                     <li><p>#protected is a good team. It is the strongest of 118 bitcamp. The theme of the project is the protection of organic dogs.</p></li> 
                   </ul><br> 
                 </div>
                 <!-- End About Us -->
@@ -21,7 +21,7 @@
                   <div class="heading-footer"><h2>Position</h2></div>
                   <ul class="list-unstyled link-list">
                   	<li><a href="project.html">분양 · 실종</a><small>나 민희 [Developer]</small></li> 
-                    <li><a href="about.html">스토리펀딩</a><small>이 혜미 [Reader]</small></li> 
+                    <li><a href="about.html">스토리펀딩 · 동물병원 · 채팅</a><small>이 혜미 [Reader]</small></li> 
                     <li><a href="careers.html">커뮤니티</a><small>박 은우 [GIT Manager]</small></li> 
                     <li><a href="faq.html">스토어</a><small>이 지수 [Hunter]</small></li> 
                     <li><a href="contact.html">회원</a><small>박 진태 [SQL Manager]</small></li> 

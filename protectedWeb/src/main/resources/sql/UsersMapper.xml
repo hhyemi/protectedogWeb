@@ -120,7 +120,7 @@
 			birth_date=#{birthDate:NUMERIC},
 			profile=#{profile:VARCHAR},
 			level_point=#{levelPoint:NUMERIC},
-			gender=#{gender}
+			gender=#{gender:VARCHAR}
 		</set>
 		WHERE id=#{id}
 	</update>
