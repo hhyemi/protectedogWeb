@@ -249,6 +249,8 @@
 			
 		});
 		
+		
+		
 		function fncLogin(){
 			$(".id").focus();
 			$("#submitLogin").on("click" , function() {
