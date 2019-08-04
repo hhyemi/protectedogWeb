@@ -34,13 +34,14 @@
     		font-weight: normal;
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
-    	
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, h5, h6, p, b, a, th, td {
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
 		
 		.navbar-brand{
 			font-weight: bold;
+			font-size: 20px;
 		}
 		
 		.swal-button {
@@ -77,6 +78,7 @@
 ======================================================--> 
 
     <header>
+		<i style="background-image: url('/resources/file/others/chatting.png'); height: 64px;width: 64px; overflow: hidden;" id="fixedbtn"></i>
 
       <!-- Top Navbar  -->
       <div class="top-menubar">
@@ -120,10 +122,10 @@
                 <span class="navbar-toggler-icon"></span>
           </button>  
           <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto" >
-<!--                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html" style="padding-top:0;">집</a></li> -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="index.html">집</a></li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">분양 · 실종
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분양 · 실종
                  </a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	              	<a class="dropdown-item" href="/adopt/listAdopt?boardCode=AD">분양게시판</a>
@@ -132,14 +134,14 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">스토리펀딩</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토리펀딩</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	              	<a class="dropdown-item" href="/funding/listVoting">투표게시판</a>
 	                <a class="dropdown-item" href="/funding/listFunding">후원게시판</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">커뮤니티</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
 	                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
@@ -149,7 +151,7 @@
                 </li>
               <c:if test="${ sessionScope.user != null }">
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">마이페이지</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
 		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a>
@@ -165,18 +167,14 @@
                 </li>
                  </c:if>
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">스토어</a> 
+                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
 	                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
-	                <a class="dropdown-item" href="/product/listProduct">상품리스트</a>
-	                <c:if test="${ sessionScope.user.role eq 'admin' }">
-	                	<a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
-	                </c:if>
+	                <a class="dropdown-item" href="/product/listProduct">스토어</a>
                   </div>
                 </li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp" style="padding-top:0;">견종백과</a></li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp" style="padding-top:0;">동물병원</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">견종백과</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp">동물병원</a></li>
                 <li>
                   <div class="top-menubar-nav">
                     <div class="topmenu ">
@@ -234,19 +232,27 @@
     <!-- sweetalter CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-    <!--  Chat Bot -->
+<!--      Chat Bot -->
 <%-- 	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include> --%>
 	
   	<script type="text/javascript">
 
 		//============= "로그인"  Event 처리 =============
-		$(".login-modal").on("click", function() {
+		$("#submitLogin").on("click", function() {
 			
 // 			alert("ㅎㅇ");
 			fncLogin();
 
 // 			alert("ㅎㅇ");
 			
+		});
+		
+		$("#fixedbtn").on("click",function(){
+			
+			 window.open("/chatting/addChattingUser?postId=${funding.id}",
+						"_blank",
+						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		
 		});
 		
 		function fncLogin(){
@@ -282,20 +288,13 @@
 // 						alert("pw : "+JSON.stringify(response))
 						if(response.pw == pw && response.id == id && response.levelPoint >= 0){
 // 							alert("로그인 성공 pw : "+response.pw+" && "+response.levelPoint);
-							swal({
-								title : response.nickname+"님 환영합니다!",
-								buttons :{
-									catch : {
-										text : "확인"
-									}
-								}
-							})
-							.then((A) => {
-								if(A){
-									self.location="/index.jsp";	
-								}
-							});
-// 							self.location="/index.jsp";
+							alert(response.nickname+" 님 환영합니다!");
+							self.location="/index.jsp";
+// 							swal({
+// 								title : "로그인 성공",
+// 								text : response.nickname+" 님 환영합니다!"
+// 								buttons: true
+// 							});
 // 							$('#login-form').attr('method', 'POST').attr('action', '/users/login').submit();
 						}
 						if(response.pw != pw || response.id != id){

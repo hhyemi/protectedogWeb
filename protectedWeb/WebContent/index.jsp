@@ -31,6 +31,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	-o-background-size: cover;
 	background-size: cover;
 }
+
 /*
 .adopt {
 	height: 10vh;
@@ -153,12 +154,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			</a>
 		</div>
 	</header>
-	<section class="py-5">
-	  <div class="container">
-	    <h1 class="display-4">주석처리예정</h1>
-	    <p class="lead">내용내용내용</p>
-	  </div>
-	</section>
+
 <!-- ==============================================================
 						typewrite 배너
 ================================================================= -->
@@ -166,7 +162,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
  				<hgroup class="wow fadeInUp"> 
 					<h1 style="height: 56px; margin: 0px;"> 
 						보호할개<span><a href="" class="typewrite" data-period="1000" 
- 							data-type='[ " 분양실종", " 스토리펀딩", "정보공유", "스토어"]'><span 
+ 							data-type='[ " 분양실종", " 스토리펀딩", " 정보공유", " 스토어"]'><span 
  								class="wrap"></span></a></span> 
 					</h1> 
 					<h3></h3> 
@@ -183,27 +179,29 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<div class="adopt">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+           <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
             <h2>분양.실종</h2>
             <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
-            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
+            <button class="btn btn-general btn-green" role="button">분양게시판 바로가기</button>
+            <button class="btn btn-general btn-white" role="button">실종캘린더 바로가기</button>
           </div>
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont">
+          
+         <div class="col-md-3 col-sm-6 wow fadeInUp" style="margin-right: 35px" data-wow-delay="0.4s">
+            <div class="desc-comp-offer-cont" style="margin-right: 35px">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Business Management</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
-          </div>          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont">
+          </div>   
+          
+                 
+          <div class="col-md-3 col-sm-6  wow fadeInUp"  style="margin-right: 35px;" data-wow-delay="0.6s">
+            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
@@ -214,8 +212,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont">
+          
+          
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"  style="margin-right: 35px" data-wow-delay="0.8s">
+            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
@@ -226,6 +226,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
+          
         </div>
       </div>
       </div>
@@ -240,49 +241,15 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	 <section id="comp-offer">
 	 <div class="funding">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+        <div class="row" id="rowFunding">
+          <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
             <h2>스토리펀딩</h2>
             <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
-            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
+            <button class="btn btn-general btn-green" role="button" id="vote">투표게시판 바로가기</button>
+            <button class="btn btn-general btn-white" role="button" id="fund">후원게시판 바로가기</button>
           </div>
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Business Management</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>              
-              <h3>Leadership Development</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Social benefits and services</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
+          
+          
         </div>
       </div>
       </div>
@@ -301,7 +268,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		<div class="info">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-6" style="padding-left:50px">
 						<div class="service-himg">
 							<iframe src="https://www.youtube.com/embed/3P1YGPZp6Ik?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 						</div>
@@ -310,7 +277,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						<div class="service-h-desc">
 							<h2>정보공유</h2>
 							<div class="heading-border-light"></div>
-							<p>비트캠프 118기 #Protected조 GIT MANAGER 박 은우 입니다.</p>
+							<p>비트캠프 118기 타이피스트 매력없는 박 은우 입니다.</p>
 							<div class="service-h-tab">
 								<nav class="nav nav-tabs" id="myTab" role="tablist">
 									<a class="nav-item nav-link active" id="nav-home-tab"
@@ -362,14 +329,15 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	 <div class="store">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.2s">
+      <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
             <h2>스토어</h2>
             <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">See Curren Offers</button>
-            <button class="btn btn-general btn-white" role="button">Contact Us Today</button>
+            <button class="btn btn-general btn-green" role="button">보호마켓 바로가기</button>
+            <button class="btn btn-general btn-white" role="button">스토어 바로가기&emsp;  </button>
           </div>
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont">
+          
+         <div class="col-md-3 col-sm-6 wow fadeInUp" style="margin-right: 35px" data-wow-delay="0.4s">
+            <div class="desc-comp-offer-cont" style="margin-right: 35px">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
@@ -379,9 +347,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
-          </div>          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont">
+          </div>   
+          
+                 
+          <div class="col-md-3 col-sm-6  wow fadeInUp"  style="margin-right: 35px;" data-wow-delay="0.6s">
+            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
@@ -392,8 +362,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont">
+          
+          
+          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"  style="margin-right: 35px" data-wow-delay="0.8s">
+            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
               <div class="thumbnail-blogs">
                   <div class="caption">
                     <i class="fa fa-chain"></i>
@@ -404,9 +376,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
               <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
             </div>
           </div>
+          
         </div>
       </div>
-      </div>
+      </div><br/><br/><br/><br/><br/>
     </section>
     
 
@@ -460,26 +433,71 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		// 				window.open(url,"","width=500,height=400,left=600,resizable=no");
 		// 			}
 		// 		})
+
+
+		$(document).ready(function(){
+
+			$.ajax(
+					{
+						url : "/funding/json/listVoting/" ,
+						method : "POST" ,
+						data : JSON.stringify({
+							currentPage : 1,
+						}) ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				        },
+						success : function(JSONData,status) {
+						
+							var funding = JSONData.list;
+							var display ="";
+							
+							 $.each(funding, function(index, funding){
+								 if(index<3){
+								 display +="<div class=\"col-md-3 col-sm-6  wow fadeInUp\"  style=\"margin-right: 35px;\" data-wow-delay=\"0.6s\">"+
+								 "<div class=\"desc-comp-offer-cont\"  style=\"margin-right: 35px\">";	
+						
+								 display += "&emsp;조회 "+funding.voteViewCount+
+			                        "<a href=\"#\" class=\"img-prod\"><img class=\"img-fluid\" src=\"/resources/file/fileSF/"+funding.mainFile+"\"  style=\"min-height:210px; max-height:210px; min-width:330px; max-width:330px;\" >"+
+			    					"<input type=\"hidden\" value=\""+funding.postNo+"\" /></a> ";	    																
+					
+									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\">	<font size=\"5\"><b>"+funding.postTitle+"</b></font></div>"+
+			    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
+										       "<div class=\"col-xs-8 col-md-8\" style=\"position:absolute; left:0px; bottom:0px;\" > <font size=\"3\">"+funding.nickname+"</font></div>"+
+										       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong style=\"color:#f04f23\">"+funding.voteRate+"%</strong></b></font></div></div>";										   				
+									 
+								     display += "<div class=\"progress\"> <div class=\"progress-bar \" role=\"progressbar\" style=\"width:"+funding.voteRate+"%; background-color:#e66447!important;\" ></div>"+
+						   				"</div> <div align=\"right\"><font size=\"5\" >D- "+funding.voteRemainDate+"</font></div>";	    																
+						
+										display += "</div></div></div>";	
+								 }
+							 });
+										
+										$("#rowFunding").append(display);
+									 	$( ".img-prod" ).on("click" , function() {
+											$(self.location).attr("href","/funding/getVoting?postNo="+$(this).children("input").val());
+										});   
+									
+				}
+					
+			});
+			
+			
+		});
 		
-		var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+		////////스토리펀딩 이벤트///////////
+		$("#vote").on("click",function(){
+			self.location ="/funding/listVoting";	
+		});
+		$("#fund").on("click",function(){
+			self.location ="/funding/listFunding";	
+		});		
 
-    // The data for our dataset
-    data: {
-        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
-        datasets: [{
-            label: ['분양 성공률'],
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 10, 10, 20, 10, 20, 10,5,10]
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
 	</script>
 
 </body>
