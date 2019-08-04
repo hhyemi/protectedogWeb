@@ -32,6 +32,24 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	background-size: cover;
 }
 
+.arrow {position:fixed;right:50%;bottom:23px;z-index:1000}
+.arrow span{display: block;width: 20px;height: 20px;border-bottom: 5px solid #F04F23;border-right: 5px solid #F04F23;transform: rotate(45deg);margin: -10px;animation: animate 2s infinite;}
+.arrow span:nth-child(2){animation-delay: -0.2s;}
+.arrow span:nth-child(3){animation-delay: -0.4s;}
+@keyframes animate {
+    0%{
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px,-20px);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: rotate(45deg) translate(15px,15px);
+    }
+}
+
 /*
 .adopt {
 	height: 10vh;
@@ -152,6 +170,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				class="carousel-control-next-icon" aria-hidden="true"></span> <span
 				class="sr-only">Next</span>
 			</a>
+		</div>
+		
+		<div class="arrow">
+                <span></span>
+                <span></span>
 		</div>
 	</header>
 
@@ -397,6 +420,22 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<script src="/resources/newTemplate/admin/js/chart.min.js"></script>
 	<script src="/resources/newTemplate/admin/js/front.js"></script>
 	<script type="text/javascript">
+	
+	
+	$(function(){
+		$(window).scroll(function(){
+			
+// 			console.log($(window).scrollTop())
+			if($(window).scrollTop() > 264){
+				$(".arrow").hide("slow");	
+			}
+			if($(window).scrollTop() < 1){
+				$(".arrow").show("slow");	
+			}
+			
+		});
+	})
+	
 		// 	$(function (){
 		// 			$(document).ready(function(){
 		// 				if(${sessionScope.user != null}){
@@ -436,7 +475,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 
 		$(document).ready(function(){
-
+			
+// 			■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 스토리 펀딩 이벤트 시작 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 			$.ajax(
 					{
 						url : "/funding/json/listVoting/" ,
@@ -486,7 +526,48 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 					
 			});
-			
+// 			■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 스토리 펀딩 이벤트 끝 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 			■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 정보공유 이벤트 시작 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+			$.ajax({
+						url : "/info/json/listMainInfo/" ,
+						method : "POST" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						error: function(request, status, error){ 
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				        },
+						success : function(JSONData,status) {
+							
+							var funding = JSONData.list;
+							var display ="";
+							
+							 $.each(funding, function(index, funding){
+								 if(index<3){
+								 display +="<div class=\"col-md-3 col-sm-6  wow fadeInUp\"  style=\"margin-right: 35px;\" data-wow-delay=\"0.6s\">"+
+								 "<div class=\"desc-comp-offer-cont\"  style=\"margin-right: 35px\">";	
+						
+								 display += "&emsp;조회 "+funding.voteViewCount+
+			                        "<a href=\"#\" class=\"img-prod\"><img class=\"img-fluid\" src=\"/resources/file/fileSF/"+funding.mainFile+"\"  style=\"min-height:210px; max-height:210px; min-width:330px; max-width:330px;\" >"+
+			    					"<input type=\"hidden\" value=\""+funding.postNo+"\" /></a> ";	    																
+					
+									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\">	<font size=\"5\"><b>"+funding.postTitle+"</b></font></div>"+
+			    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
+										       "<div class=\"col-xs-8 col-md-8\" style=\"position:absolute; left:0px; bottom:0px;\" > <font size=\"3\">"+funding.nickname+"</font></div>"+
+										       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong style=\"color:#f04f23\">"+funding.voteRate+"%</strong></b></font></div></div>";										   				
+									 
+								     display += "<div class=\"progress\"> <div class=\"progress-bar \" role=\"progressbar\" style=\"width:"+funding.voteRate+"%; background-color:#e66447!important;\" ></div>"+
+						   				"</div> <div align=\"right\"><font size=\"5\" >D- "+funding.voteRemainDate+"</font></div>";	    																
+						
+										display += "</div></div></div>";	
+								 }
+							 });
+							 
+						}
+					});
+// 			■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 정보공유 이벤트 끝 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 			
 		});
 		
