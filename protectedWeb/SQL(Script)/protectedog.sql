@@ -81,7 +81,7 @@ CREATE TABLE USERS (
 	FACEBOOK		VARCHAR2(100)	UNIQUE,
 	PW 			VARCHAR2(15) 		NOT NULL,
 	USER_NAME 		VARCHAR2(10) 	NOT NULL,
-	NICKNAME 		VARCHAR2(14)	NOT NULL UNIQUE,
+	NICKNAME 		VARCHAR2(100)	NOT NULL UNIQUE,
 	EMAIL 			VARCHAR2(100),
 	PHONE 			VARCHAR2(13) 	UNIQUE,
 	USER_ADDR 		VARCHAR2(1000),
@@ -148,13 +148,13 @@ CREATE TABLE COUPON (
 
 CREATE TABLE REPORT (
  	REPORT_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	REPORTER_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID),
-	REPORTED_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID),
+	REPORTER_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME),
+	REPORTED_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME),
 	REPORT_CATEGORY 	VARCHAR2(20) 	NOT NULL ENABLE, 
 	REPORT_CONTENT 	VARCHAR2(2000) 	NOT NULL ENABLE, 
 	REPORT_STATUS 		NUMBER(1,0) 	NOT NULL ENABLE,
 	REPORT_DATE		DATE,
-	DEL_CODE 		VARCHAR2(1),
+	DEL_CODE 		CHAR(1),
 	PRIMARY KEY (REPORT_NO));
 
 CREATE TABLE MILEAGE (
@@ -166,11 +166,11 @@ CREATE TABLE MILEAGE (
 	REG_DATE 		DATE, 
 	PRIMARY KEY (MILEAGE_NO));
 	
-   
 CREATE TABLE ADOPT(
    BOARD_CODE       CHAR(2)       NOT NULL ENABLE, 
    POST_NO       NUMBER(6,0)    NOT NULL ENABLE, 
    ID          VARCHAR2(12)    NOT NULL ENABLE REFERENCES USERS(ID), 
+   NICKNAME       VARCHAR2(14) NOT NULL ENABLE,
    POST_TITLE       VARCHAR2(60) , 
    POST_CONTENT       VARCHAR2(600)    NOT NULL ENABLE, 
    PHONE          VARCHAR2(13)    NOT NULL ENABLE, 
@@ -207,7 +207,7 @@ CREATE TABLE STORYFUNDING(
 	STATUS_CODE 		CHAR(1) 		NOT NULL ENABLE, 
 	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
 	POST_TITLE 		VARCHAR2(50) 	NOT NULL ENABLE, 
-	POST_CONTENT 		VARCHAR2(600)    NOT NULL ENABLE, 
+	POST_CONTENT 		CLOB, 
 	VOTE_VIEW_COUNT 	NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
 	VOTER_COUNT 		NUMBER(5,0) 	DEFAULT 0 NOT NULL ENABLE, 
 	VOTE_START_DATE 	DATE 		NOT NULL ENABLE, 
@@ -230,8 +230,8 @@ CREATE TABLE MESSAGE (
    	MESSAGE_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
 	MESSAGE_TITLE 		VARCHAR2(200) 	NOT NULL ENABLE, 
 	MESSAGE_CONTENT 	VARCHAR2(2000) 	NOT NULL ENABLE, 
-	SENDER_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	RECEIVER_ID 		VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
+	SENDER_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME), 
+	RECEIVER_NICK 		VARCHAR2(100) 	NOT NULL ENABLE REFERENCES USERS(NICKNAME), 
 	SEND_DATE 		DATE, 
 	RECEIVE_DATE 		DATE, 
 	MESSAGE_STATUS 		CHAR(1) 		NOT NULL ENABLE, 
@@ -260,23 +260,24 @@ CREATE TABLE ORDERS (
 	 
 
 CREATE TABLE APPLY (
-   	APPLY_NO 		NUMBER(6,0) 	NOT NULL ENABLE, 
-	ADOPT_NO 		NUMBER(6,0) 	NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
-	ID 				VARCHAR2(12) 	NOT NULL ENABLE REFERENCES USERS(ID), 
-	PHONE 			VARCHAR2(13) 	NOT NULL ENABLE, 
-	JOB 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	ADDR 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	MATE 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	MATE_AGREE 		VARCHAR2(30), 
-	RAISE 			VARCHAR2(10) 	NOT NULL ENABLE, 
-	CURRENTLY 		VARCHAR2(30), 
-	PLAN 			VARCHAR2(900) 	NOT NULL ENABLE, 
-	PAY 			VARCHAR2(900) 	NOT NULL ENABLE, 
-	REASON 			VARCHAR2(900) 	NOT NULL ENABLE, 
-	SITUATION 		VARCHAR2(900) 	NOT NULL ENABLE, 
-	REG_DATE 		DATE 		NOT NULL ENABLE, 
-	STATUS_CODE 	CHAR(1) 		DEFAULT '1' NOT NULL ENABLE,
-	PRIMARY KEY (APPLY_NO));
+   APPLY_NO       NUMBER(6,0)    NOT NULL ENABLE, 
+   ADOPT_NO       NUMBER(6,0)    NOT NULL ENABLE REFERENCES ADOPT(POST_NO), 
+   ID             VARCHAR2(12)    NOT NULL ENABLE REFERENCES USERS(ID), 
+   NICKNAME       VARCHAR2(14)    NOT NULL ENABLE,
+   PHONE          VARCHAR2(13)    NOT NULL ENABLE, 
+   JOB          VARCHAR2(10)    NOT NULL ENABLE, 
+   ADDR          VARCHAR2(10)    NOT NULL ENABLE, 
+   MATE          VARCHAR2(10)    NOT NULL ENABLE, 
+   MATE_AGREE       VARCHAR2(30), 
+   RAISE          VARCHAR2(10)    NOT NULL ENABLE, 
+   CURRENTLY       VARCHAR2(30), 
+   PLAN          VARCHAR2(900)    NOT NULL ENABLE, 
+   PAY          VARCHAR2(900)    NOT NULL ENABLE, 
+   REASON          VARCHAR2(900)    NOT NULL ENABLE, 
+   SITUATION       VARCHAR2(900)    NOT NULL ENABLE, 
+   REG_DATE       DATE       NOT NULL ENABLE, 
+   STATUS_CODE    CHAR(1)       DEFAULT '1' NOT NULL ENABLE,
+   PRIMARY KEY (APPLY_NO));
 	 
 
 CREATE TABLE BOARD (
@@ -407,57 +408,20 @@ VALUES
 
 
 INSERT INTO message
-(message_no, message_title, message_content, sender_id, receiver_id, send_date, 
+(message_no, message_title, message_content, sender_nick, receiver_nick, send_date, 
 receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, '테스트1', '이거슨 테스트인 거시여1', 'user01', 'user02', SYSDATE, null, '0', '0');
+(seq_message_message_no.NEXTVAL, '테스트1', '이거슨 테스트인 거시여1', '스캇', '호랭이', SYSDATE, null, '0', '0');
 
 INSERT INTO message
-(message_no, message_title, message_content, sender_id, receiver_id, send_date, receive_date, message_status, del_code)
+(message_no, message_title, message_content, sender_nick, receiver_nick, send_date, receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, '테스트2', '이거슨 테스트인 거시여2', 'user02', 'user01', SYSDATE, null, '0', '0');
+(seq_message_message_no.NEXTVAL, '테스트2', '이거슨 테스트인 거시여2', '호랭이', '신청자1', SYSDATE, null, '0', '0');
 
 INSERT INTO message
-(message_no, message_title, message_content, sender_id, receiver_id, send_date, receive_date, message_status, del_code)
+(message_no, message_title, message_content, sender_nick, receiver_nick, send_date, receive_date, message_status, del_code)
 VALUES
-(seq_message_message_no.NEXTVAL, '테스트3', '이거슨 테스트인 거시여3', 'user03', 'user01', SYSDATE, null, '0', '0');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user01', 'user02', '비속어', '이사람이 욕을 심각하게 합니다.', 0, '2019-06-01', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user02', 'user03', '사기', '이사람은 거의 쿠로사기급입니다.', 0, '2019-07-01', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user03', 'user04', '음란행위', '으흐흐 너무 야해요 으흐흐.', 0, '2019-08-01', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user04', 'user05', '혐오표현', '진심 벌레가 따로없네 제제좀 제발', 0, '2019-06-25', 'n');
-
-INSERT INTO report
-(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
-VALUES
-(seq_report_report_no.NEXTVAL, 'user05', 'user06', '기타', '어우 이건 좀 사탄도 울고 가겠네 어휴', 0, '2019-07-25', 'n');
-
-
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10000, 'abc.jpg' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10000, 'anonymous-250.jpg' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'BitCamppng.png' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'def.png' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10001, 'DSC_2849.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10002, 'DSC_2913.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10003, 'DSC_2919.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10004, 'DSC_8016.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10005, 'DSC_8020.JPG' , '0');
-INSERT INTO files (file_no, board_code, post_no,file_name,file_code ) VALUES (seq_files_file_no.nextval, 'RP', 10005, 'naver.png' , '0');
+(seq_message_message_no.NEXTVAL, '테스트3', '이거슨 테스트인 거시여3', '신청자2', '안녕', SYSDATE, null, '0', '0');
 
 
 INSERT 
@@ -942,8 +906,3 @@ INSERT INTO ORDERS
 VALUES 
 ('10002', '10003', 'user01', '011-1123-4567', '대전 광역시', '대광', '011-4555-2222', '배송전연락', '1', TO_DATE('2017-03-06 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '40000', '1');
 
-
-
-
-	
-		

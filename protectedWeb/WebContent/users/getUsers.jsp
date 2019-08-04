@@ -33,6 +33,43 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
     
+      	<style type="text/css">
+ 		
+ 		@font-face {
+    		font-family: 'YouandiModernTR';
+   		 	font-style: normal;
+    		font-weight: normal;
+    		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
+		}
+    	
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+    		font-family: 'YouandiModernTR', sans-serif !important;
+    	} 	
+		
+		.navbar-brand{
+			font-weight: bold;
+		}
+		
+		.swal-button {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button:hover {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button--cancel {
+		    color: white;
+		    background-color: #f04f23;
+		}
+		
+		html {
+	 		scroll-behavior: smooth;
+		}
+	
+  	</style>
 
     
     <jsp:include page="/layout/toolbar.jsp" />
@@ -50,7 +87,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		</div>
 	</div>
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -58,7 +95,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="/index.jsp">My Info</a></span>
 					</p>
-					<h1 class="mb-0 bread">내정보보기</h1>
+					<font size="7">내정보보기</font>
 				</div>
 			</div>
 		</div>
@@ -84,10 +121,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                     <div class="card hovercard">
                         <div class="tab" role="tabpanel"> 
                             <ul class="nav nav-tabs" role="tablist">
-                              <li class="nav-item" >
-                                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><span><i class="fa fa-user"></i></span>내 프로필</a>
+                              <li class="nav-item col-md-6" >
+                                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab" ><span><i class="fa fa-user"></i></span>내 프로필</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item col-md-6">
                                 <a class="nav-link" href="#references" role="tab" data-toggle="tab"><span><i class="fa fa-cog"></i></span> 회원정보수정</a>
                               </li>
                             </ul>
@@ -141,15 +178,48 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                               <div role="tabpanel" class="tab-pane fade" id="references">
 				                <div class="col-md-3">
 				                </div>
-				                <div class="col-md-6 login-card">
+				                <div class="col-md-12 login-card" style="display:inline">
 				                    <div class="card form" id="form1">
 				                        <div class="card-header" align="center">
-				                            <h3><i class="fa fa-user-circle"></i>추가정보</h3>
+				                            <h3><i class="fa fa-user-circle"></i>내정보수정</h3>
 				                        </div>
 				                        <br>
-				                        <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px">
-											<input type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
-											<input type="hidden" name="levelPoint" value=100>
+				                        <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px" enctype="multipart/form-data">
+				                        	<div class="col-md-6" style="display:inline; float:left;">
+				                        	<div class="row">
+				                                <div class="col-md-10">
+				                                    <div class="form-group">
+				                                        <label for="id">아 이 디</label>
+				                                        <input type="text" class="form-control" readonly="readonly" id="id" name="id" aria-describedby="emailHelp" value="${ user.id }">
+				                                    </div>
+				                                    <div class="form-group">
+				                                        <label for="cont-number">비 밀 번 호</label>
+				                                        <input type="password" class="form-control" id="pw" name="pw" aria-describedby="emailHelp" value="${ user.pw }">
+				                                    </div> 
+				
+				                                    <div class="form-group has-success">
+				                                        <label for="website">비밀번호 확인</label>
+				                                        <input type="password" class="form-control" id="pw2" name="pw2" aria-describedby="emailHelp" value="${ user.pw }"
+				                                        style="margin-bottom: 0;">
+														<span id="helpBlock1" class="help-block" style="font-size: 14px; display: none;"></span>
+				                                    </div>  
+				                                    <div class="form-group">
+				                                        <label for="userName">회 원 명</label>
+				                                        <input type="text" class="form-control" readonly="readonly" id="userName" name="userName" aria-describedby="emailHelp" value="${ user.userName }">
+				                                    </div>
+				                                    <div class="form-group">
+				                                        <label for="nickname">닉 네 임</label>
+				                                        <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" value="${ user.nickname }">
+				                                        <span id="helpBlock2" class="help-block" style="font-size: 14px; display: none;"></span>
+				                                    </div>
+				                                    <div class="form-group">
+				                                        <label for="nickname">프로필사진</label>
+				                                        <input type="file" class="form-control" id="file" name="file" aria-describedby="emailHelp">
+				                                    </div>
+				                                </div>
+				                            </div> 
+				                        </div>
+				                        <div class="col-md-6" style="display:inline; float:left;">
 											<input type="hidden" id="authKeyReturn" value="">                     
 				                            <div class="row">
 				                                <div class="col-md-10">
@@ -158,7 +228,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				                                        <label for="email">이 메 일</label>
 													    <div>
 														    <div class="col-sm-9" style="float:left; padding-left:0; padding-right:0;">
-														      <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="이메일주소를 입력하세요">
+														      <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="${ user.email }">
 															</div>
 														    <div id="mailAuth" style="display:none">
 														      		<input type="text" id="checkMail"/>
@@ -179,20 +249,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				                                        <div>
 					                                        <div class="col-sm-3" style="float:left; padding-left:0">
 																<select class="form-control" name="phone1" id="phone1">
-																  	<option value="010" >010</option>
-																	<option value="011" >011</option>
-																	<option value="016" >016</option>
-																	<option value="018" >018</option>
-																	<option value="019" >019</option>
+																  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
+																	<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
+																	<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
+																	<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
+																	<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
 																</select>
 					                                        </div>
 														    <div class="col-sm-3" style="float:left;">
-														      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="">
+														      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}">
 														    </div>
 														    <div class="col-sm-3" style="float:left; padding-right:0">
-														      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="">
+														      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}">
 														    </div>
-														    <input type="hidden" name="phone"/>
+														    <input type="hidden" name="phone" value="${ user.phone }"/>
 														    <div id="authButton" style="display:none">
 														   		<input type="text" id="checkAuth"/>
 														    	<button type="button" class="btn btn-default" id="phoneClick">전송</button>
@@ -227,36 +297,35 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 															<br>
 															<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
 															<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
-															<input type="hidden" name="userAddr" value="">
+															<input type="hidden" name="userAddr" value="${ user.userAddr }">
 														</div>
 				                                    </div>
 				                                    
 				                                    <div class="form-group">
 				                                    	<div class="col-sm-6" style="float: left; padding-left: 0;">
 															<label for="birthDate">생 년 월 일</label>                                        
-															<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" placeholder="생년월일 6자리를 입력하세요">
+															<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" ${ user.birthDate }>
 				                                        </div>
 				                                        <div class="col-sm-6" style="float: left; padding-right: 0;">
 				                                        	<label for="gender">성 별</label> 
 															<select class="form-control" name="gender" id="gender">
-																<option value="m">남자</option>
-																<option value="f">여자</option>
+																<option value="m" ${ ! empty user.gender && user.gender == "m" ? "selected" : ""  } >남자</option>
+																<option value="f" ${ ! empty user.gender && user.gender == "f" ? "selected" : ""  } >여자</option>
 															</select>
 														</div>
 				                                    </div>
 				                                </div>
-				                            </div> 
+				                            </div>
+				                         </div>
 											<br/>
 											<br/>
 											<br/>
-				<!--                             <button type="submit" id="submit" class="btn btn-default">회원가입</button> -->
-				<!--                             <button type="reset" id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button>  -->
 				                        </form>
-											<div class="col-sd-12" style="display: inline-block; padding-left:430px; padding-bottom:50px;">
-												<div class="col-sd-6" style="float:left;">
-													<button id="submit" class="btn btn-default">회원가입</button>
+											<div class="col-sd-12" style="display: inline-block; float: center;">
+												<div class="col-sd-6" style="float:right;">
+													<button id="submit" class="btn btn-default">정보수정</button>
 												</div>
-												<div class="col-sd-6" style="float:left;">
+												<div class="col-sd-6" style="float:right;">
 													<button id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button> 
 												</div>
 											</div>
@@ -407,7 +476,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				})
 				.then((A) => {
 					if(A) {
-						$("form").attr("method" , "POST").attr("action" , "/users/updateUsers").submit();
+						$("form[name='formal']").attr("method" , "POST").attr("action" , "/users/updateUsers").submit();
 					}
 				})
 
@@ -415,7 +484,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		});	
 		
 		$(function(){
-		
+			
 			$("#authPhone").on("click", function(){
 				var value = "";	
 				if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
@@ -427,6 +496,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				$("input:hidden[name='phone']").val( value );
 				
 				var check=$("input:hidden[name='phone']").val();
+				swal({
+					text : "인증문자가 전송되었습니다. 문자 확인 후 인증번호를 입력해주세요.",
+					icon : "error",
+					buttons : false,
+					timer : 3000,
+				})
 				
 				$.ajax({
 					
@@ -443,6 +518,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 // 						alert(status);
 // 						alert(authPhone.authKey);
 						$("#authKeyReturn").val(authPhone.authKey);
+						$('.authPhone').hide();
 						$("#authButton").show();
 					}
 					
@@ -453,22 +529,50 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		});
 		
 		$(function() {
-			$("#authClick").on("click", function(){
+			$("#phoneClick").on("click", function(){
 				if($("#checkAuth").val()==$("#authKeyReturn").val()){
 					$("#authButton").hide();
-					$("#authPhone").hide();
-					alert("인증되었습니다.");
+					$(".authPhone").show();
+					$("#authPhone").remove();
+					$(".authPhone").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
+					$("input[name='phone2']").attr("readonly", true);
+					$("input[name='phone3']").attr("readonly", true);
+					$("select[name='phone1']").attr("disabled", true);
+					swal({
+						text : "인증되었습니다.",
+						icon : "success",
+						buttons :{
+							catch : {
+								text : "닫기"
+							}
+						}
+					})
 				}else{
-					alert("인증번호가 맞지 않습니다.");
+					swal({
+						text : "인증에 실패했습니다. 다시 시도해 주십시오.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "닫기"
+							}
+						}
+					})
 				}
 			})
 		});
+		
 		
 		$(function(){
 			
 			$("#authMail").on("click", function(){
 
 				var check=$("input[name='email']").val();
+				swal({
+					text : "인증메일이 전송되었습니다. 메일 확인 후 인증번호를 입력해주세요.",
+					icon : "error",
+					buttons : false,
+					timer : 3000,
+				})
 
 					$.ajax({
 						
@@ -483,7 +587,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 // 							alert(status);
 // 							alert(authMail.authKey);
 							$("#authKeyReturn").val(authMail.authKey);
+							$(".authMail").hide();
 							$("#mailAuth").show();
+
 						}
 									
 					})
@@ -492,14 +598,36 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					
 			});
 
+		
+		
 			$(function() {
 				$("#mailClick").on("click", function(){
 					if($("#checkMail").val()==$("#authKeyReturn").val()){
-						$("#authMail").hide();
 						$("#mailAuth").hide();
-						alert("인증되었습니다.");
+						$(".authMail").show();
+						$("#authMail").remove();
+						$(".authMail").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
+						$("input[name='email']").attr("readonly", true);
+					swal({
+						text : "인증되었습니다.",
+						icon : "success",
+						buttons :{
+							catch : {
+								text : "닫기"
+							}
+						}
+					})
 					}else{
-						alert("인증번호가 맞지 않습니다.");
+// 						alert("인증번호가 맞지 않습니다.");
+						swal({
+							text : "인증에 실패했습니다. 다시 시도해 주십시오.",
+							icon : "error",
+							buttons :{
+								catch : {
+									text : "닫기"
+								}
+							}
+						})						
 					}
 				})
 			});
@@ -581,11 +709,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						datatype : "json" ,
 						success : function(response){
 							if($.trim(response.result)==0){
+								$('#helpBlock2').show();
 								$('#helpBlock2').html("사용가능");
 								$("#nickname").css("background-color", "#A9F5D0");
 								$('#helpBlock2').css("color", "#A9F5D0")
 								$('#submit').attr('disabled', false);
 							}else{
+								$('#helpBlock2').show();
 								$('#helpBlock2').html("사용불가");
 								$("#nickname").css("background-color", "#F5A9BC");
 								$('#helpBlock2').css("color", "#F5A9BC");
@@ -593,7 +723,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						},
 						error : function(request,status,error){
-							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}
 					})
 				});

@@ -20,7 +20,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
-    <title>보호할개 : 메시지함 </title>
+    <title>보호할개 : 신고글목록 </title>
     <link rel="shortcut icon" href="img/favicon.ico">
     
     <!-- global stylesheets -->
@@ -41,15 +41,15 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                          MAIN NAVBAR
 ======================================================-->        
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">ReportList</a></span>
+						<span class="mr-2"><a href="/report/listReport">ReportList</a></span>
 					</p>
-					<h1 class="mb-0 bread">신고글목록</h1>
+					<font size="7">신고글목록</font>
 				</div>
 			</div>
 		</div>
@@ -58,7 +58,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         PAGE CONTENT
 ======================================================-->
     <div class="page-content d-flex align-items-stretch">
-    <input type="hidden" id="myId" name="senderId" value="${ sessionScope.user.id }"/>
 
         <!--***** SIDE NAVBAR *****-->
 		<jsp:include page="/users/mypage/userSideBar.jsp"></jsp:include>
@@ -74,15 +73,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         <div class="inbox-body">
                             <div class="mail-option">
                             <input type="hidden" id="currentPage" name="currentPage" value=""/>	 
-                                <ul class="unstyled inbox-pagination">
-                                    <li><span> 총 ${ resultPage.totalCount } 건 || ${ resultPage.currentPage } 페이지</span></li>
-                                    
-                                </ul>
+                                    	<div class="col-md-6" align="left">
+					    					<p style="font-weight: bold;">
+					    						전체  ${resultPage.totalCount } 건
+					    					</p>
+					   					</div>
                             </div>
                             <c:if test="${resultPage.totalCount == 0}">
 								<div class="row">
 									<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
-										검색결과 없음<p/>
+										<p>신고함이 비어있습니다<p/>
 									<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 									<input type="hidden" id="currentPage" name="currentPage" value="" />					
 									</div>
@@ -124,12 +124,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 																	신고일자 | <span class="reportDate"> </span>
 																</div>
 															</div>
-			                                                <div class="row reportId" style="position: relative; height: 25px;">
+			                                                <div class="row reportNick" style="position: relative; height: 25px;">
 																<div class="col-md-6"
-																	style="position: absolute; left: 0px; bottom: 0px;">신고자 | <span class="reporterId"></span></div>
+																	style="position: absolute; left: 0px; bottom: 0px;">신고자 | <span class="reporterNick"></span></div>
 																			
 																<div class="col-md-6" align="right"
-																	style="position: absolute; right: 0px; bottom: 0px;">신고대상 | <span class="reportedId"> </span></div>
+																	style="position: absolute; right: 0px; bottom: 0px;">신고대상 | <span class="reportedNick"> </span></div>
 															</div>
 															<br/>
 			                                                <div class="form-group reportContent">
@@ -173,8 +173,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <%-- 			                                </c:if> --%>
                                             <input type="hidden" name="reportNo" value="${ report.reportNo }">
                                         </td>
-										<td width="85px">${ report.reporterId }</td>
-										<td width="85px">${ report.reportedId }</td>
+										<td width="85px">${ report.reporterNick }</td>
+										<td width="85px">${ report.reportedNick }</td>
                                         <td class="view-message text-center" width="300px"> 
                                        		${ report.reportCategory }
                                         	<input type="hidden" name="reportContent" value="${ report.reportContent }"/>
@@ -281,8 +281,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$(".reportContent").text(JSONData.report.reportContent);
 					$(".reportCategory").text(JSONData.report.reportCategory);
 					$(".reportDate").text(JSONData.reportDate);
-					$(".reporterId").text(JSONData.report.reporterId);
-					$(".reportedId").text(JSONData.report.reportedId);
+					$(".reporterNick").text(JSONData.report.reporterNick);
+					$(".reportedNick").text(JSONData.report.reportedNick);
 					
 					$(".reportImg").remove();
 					$.each(JSONData.file, function(file, file){
@@ -303,56 +303,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			});
 		});
 	})
-	
-// 	$(function(){
-// 		$(".blackOp").on("click", function(){
-// 			var reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
-// 			alert(reportedId);
-// 			$(".reportViewSection").attr("method", "POST").attr("action", "/report/updateReport?reportedId="+reportedId+"&addPoint=-1");
-// 		})
-// 	})
-	
-// 		$(function() {
 
-// 			$(document).ready(function(){
-		
-// 				var id=$("#myId").val();
-// 				var rcvId=JSON.stringify({id:id});
-// // 				alert(id);
-// // 				alert(msgId);
-// 				$.ajax({
-// 					type : "POST",
-// 					contentType : "application/json",
-// 					url : "/message/json/getReceiveTotalCount",
-// 					data : rcvId,
-// 					datatype : "json",
-// 					success : function(response){
-// // 						alert(response);
-// 						if(id != null && response != 0){
-// 							$(".received").show();
-// 							$(".received").text(response)
-// 						}
-// 						if(id != null && response == 0){
-// 							$(".received").hide();
-// 						}
-// 					},
-// 					error : function(request,status,error){
-// 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 					}
-	
-// 				});
-				
-// 			});
-
-// 		});
-		
-// 		$(function(){
-// 			$(".submit").on("click", function(){
-// 				$(".sendMessage").attr("method", "POST").attr("action", "/message/addMessage");
-// 				alert("쪽지전송 성공");
-// 				$("#messageModal").modal('hide');
-// 			})
-// 		})
 		
 		
 	function doImgPop(img){
@@ -397,18 +348,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			$(".blackOp").on("click", function(){
 				var methodPath="black";
 				var addPoint=-1;
-				var targetId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
+				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
 				
 				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
 				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
 				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
 				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
-				reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
-				reporterId=$(this).parent().parent().parent().children(".reportId").find(".reporterId").text();
+				reportedId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+				reporterId=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedId+", "+reporterId+", "+reportDate+", "+reportStatus);
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -416,8 +367,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						"reportCategory" : reportCategory,
 						"reportContent" : reportContent,
 						"reportDate" : reportDate,
-						"reportedId" : reportedId,
-						"reporterId" : reporterId,
+						"reportedNick" : reportedNick,
+						"reporterNick" : reporterNick,
 						"reportStatus" : reportStatus
 				}
 				
@@ -431,8 +382,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-						alert(JSON.stringify(response));
-						$('#reportViewModal').modal("hide");
+// 						alert(JSON.stringify(response));
+						swal({
+							text : "신고처리가 완료되었습니다.",
+							buttons : {
+								catch : {
+									text : "확인"
+								}
+							}
+						})
+						.then((A) => {
+							if(A) {
+								$('#reportViewModal').modal("hide");
+							}
+						})
 					},
 					error : function(request,status,error){
 						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -445,20 +408,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			$(".normalOp").on("click", function(){
 				var methodPath="normal";
 				var addPoint=300;
-				var targetId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
-
-				debugger;
+				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
 				
 				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
 				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
 				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
 				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
-				reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
-				reporterId=$(this).parent().parent().parent().children(".reportId").find(".reporterId").text();
+				reportedId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+				reporterId=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedId+", "+reporterId+", "+reportDate+", "+reportStatus);
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				
 				var reportBody={
@@ -467,8 +428,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						"reportCategory" : reportCategory,
 						"reportContent" : reportContent,
 						"reportDate" : reportDate,
-						"reportedId" : reportedId,
-						"reporterId" : reporterId,
+						"reportedNick" : reportedNick,
+						"reporterNick" : reporterNick,
 						"reportStatus" : reportStatus
 				}
 				
@@ -482,8 +443,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-						alert(JSON.stringify(response));
-						$('#reportViewModal').modal("hide");
+// 						alert(JSON.stringify(response));
+						swal({
+							text : "신고처리가 완료되었습니다.",
+							buttons : {
+								catch : {
+									text : "확인"
+								}
+							}
+						})
+						.then((A) => {
+							if(A) {
+								$('#reportViewModal').modal("hide");
+							}
+						})
 					},
 					error : function(request,status,error){
 						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -497,18 +470,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			$(".noneOp").on("click", function(){
 				var methodPath="none";
 				var addPoint=0;
-				var targetId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();;
+				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
 				
 				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
 				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
 				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
 				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
-				reportedId=$(this).parent().parent().parent().children(".reportId").find(".reportedId").text();
-				reporterId=$(this).parent().parent().parent().children(".reportId").find(".reporterId").text();
+				reportedId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+				reporterId=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedId+", "+reporterId+", "+reportDate+", "+reportStatus);
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				debugger;
 				
@@ -518,8 +491,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						"reportCategory" : reportCategory,
 						"reportContent" : reportContent,
 						"reportDate" : reportDate,
-						"reportedId" : reportedId,
-						"reporterId" : reporterId,
+						"reportedNick" : reportedNick,
+						"reporterNick" : reporterNick,
 						"reportStatus" : reportStatus
 				}
 				
@@ -533,8 +506,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-						alert(JSON.stringify(response));
-						$('#reportViewModal').modal("hide");
+// 						alert(JSON.stringify(response));
+						swal({
+							text : "신고처리가 완료되었습니다.",
+							buttons : {
+								catch : {
+									text : "확인"
+								}
+							}
+						})
+						.then((A) => {
+							if(A) {
+								$('#reportViewModal').modal("hide");
+							}
+						})
 					},
 					error : function(request,status,error){
 						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

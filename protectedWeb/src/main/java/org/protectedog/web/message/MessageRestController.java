@@ -75,13 +75,13 @@ public class MessageRestController {
 	}
 	
 	@RequestMapping(value="json/getReceiveTotalCount", method=RequestMethod.POST)
-	public int getReceiveTotalCount(@RequestBody Map<String, String> rcvId) throws Exception{
+	public int getReceiveTotalCount(@RequestBody Map<String, String> rcvNick) throws Exception{
 		
 		System.out.println("/message/json/getReceiveTotalCount : POST");
 		
-		String receiverId=rcvId.get("id");
-		System.out.println("getReceiveTotalCount : "+receiverId);
-		int result=messageService.getReceiveTotalCount(receiverId);
+		String receiverNick=rcvNick.get("nickname");
+		System.out.println("getReceiveTotalCount : "+receiverNick);
+		int result=messageService.getReceiveTotalCount(receiverNick);
 		
 		return result;
 		
