@@ -242,6 +242,10 @@
 							   			"<div id="+comment.commentNo+" class='area'>" +
 											"<h5  id="+comment.commentNo+" class='cmCont'>"+comment.commentContent+"</h5>";
 						    	
+								if('${sessionScope.user.role == "admin"}'){
+									display +=  "<span class='fas fa-trash-alt'></span>&nbsp;";
+								}
+								
 								if(comment.id == '${sessionScope.user.id}'){
 				 					display += "<span class='fas fa-pen'></span>&nbsp;" + 
 				 					           "<span class='fas fa-trash-alt'></span>&nbsp;";
@@ -386,13 +390,6 @@
  								+ "</div></div>"
  							
 							$("#"+commentNo+""+".h4tag").append(display);
-						},
-										
-						error : function(request, status, error){							
-
-							swal({
-								text : "에러 발생"							
-							});
 						}
 				
 					}
@@ -408,7 +405,7 @@
 			  title: "정말 삭제 하시겠습니까 ?",
 			  text: "당신의 소중한 한 마디가 사라지게 됩니다.",
 			  icon: "warning",
-			  buttons: true,
+			  buttons: ["취소","확인"],
 			  dangerMode: true,
 			})
 			.then((A) => {
@@ -478,7 +475,7 @@
 		$(document).on("click", ".far.fa-thumbs-up", function(){
 			
 			if(${sessionScope.user == null}){
-				alert("로그인 합십쇼");
+				$("#login-modal").modal("show");
 				return;
 			}
 				
@@ -495,7 +492,7 @@
 					success : function(JSONData, status){
 						
 						if(JSONData == 1){
-							alert("이미 추천한 댓글입니다.");
+							swal({text:"이미 추천한 댓글입니다."});
 							return;
 						}
 						
@@ -562,11 +559,6 @@
  						$("#"+JSONData.commentNo+""+".h4tag").append(modifyScreen);
  	
 					},
- 					error : function(request, status, error){
-						
- 						alert("error");
-						
- 					}
  				});
 	} // end of update function()
 </script>

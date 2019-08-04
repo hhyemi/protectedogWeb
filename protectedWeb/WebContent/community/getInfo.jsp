@@ -109,8 +109,8 @@ img{max-width: 600px;}
 		
 		$("#recommand").on("click", function(){
 				
-			if(${sessionScope.user == null}){
-				alert("로그인 하십쇼");
+			if(${ empty sessionScope.user}){				
+				$("#login-modal").modal("show");
 				return;
 			}
 			

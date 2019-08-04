@@ -167,7 +167,7 @@ th{background-color: #F5F5DC;}
 						<button type="button" class="btn btn-default">작성</button>
 					</c:if>
 					
-					<div align="center">
+					<div align="center" style="padding-left: 45%">
 					<jsp:include page="/common/pageNavigator_new.jsp" />
 					</div>
 					
