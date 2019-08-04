@@ -89,7 +89,21 @@ body {
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 		$("#qna").on("click", function() {
 			self.location = "/shop/prodQna/addProdQna.jsp";
+			
 		});
+		
+		$(function() {
+			$(".getgetget").on(
+					"click",
+					function() {
+						//alert($(this).children("input").val())
+						$(self.location).attr(
+								"href",
+								"/prodQna/getProdQna?postNo="
+										+ $(this).children("input").val());
+					});
+		
+		
 
 		// 	$(function() {
 
@@ -123,9 +137,8 @@ body {
 
 	<div class="container">
 		<h1 align="right">
-			<button
-						class="mdl-button mdl-js-button mdl-button--primary" id="qna">
-						문의하기</button>
+						<button class="btn btn-default" id="qna">문의하기</button>
+
 						
 
 		</h1>
@@ -180,11 +193,11 @@ body {
 					<tr align="center">
 					<td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
 				<thead>
-					<tr class="text-center">
+					<tr>
 						<th>글번호</th>
 						<th id="boardfont">제목</th>
 						<th id="boardfont">질문유형</th>
-						<th width="20%" id="boardfont">등록일</th>
+						<th id="boardfont">등록일</th>
 
 					</tr>
 				</thead>
@@ -195,7 +208,7 @@ body {
 					<tbody>
 					<tr>
 					<td class="mdl-data-table__cell--non-numeric">${ i }</td>
-					<td>${board.postTitle}
+					<td id="getgetget">${board.postTitle}
 					<input type="hidden" name="postNo" value="${board.postNo}" /> 
 					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
 					<td>${board.qnaCode}</td>
@@ -207,9 +220,9 @@ body {
 			</table>
 			<br/>
 			<!--  table end /////////////////////////////////////-->
-
+<p align="center">
 			<input type="hidden" id="currentPage" name="currentPage" value="0" />
-			<jsp:include page="../../common/pageNavigator_new.jsp"/>
+			<jsp:include page="../../common/pageNavigator_new.jsp"/></p>
 
 		</div>
 	</form>

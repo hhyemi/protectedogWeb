@@ -117,6 +117,8 @@ select, #searchKeyword {
 	border-color: #D3D3D3;
 	border-right: 0px;
 }
+
+
 </style>
 
 </head>
@@ -166,6 +168,8 @@ select, #searchKeyword {
 
 
 <div class="container">
+	<button type="button" class="btn btn-default" id="createtext">작성</button>
+
 	<section class="ftco-section bg-light"
 		style="padding-bottom: 0px; padding-top: 30px;">
 
@@ -297,7 +301,7 @@ select, #searchKeyword {
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-			$("#button").on("click", function() {
+			$("#createtext").on("click", function() {
 				self.location = "/shop/market/addMarket.jsp";
 			});
 

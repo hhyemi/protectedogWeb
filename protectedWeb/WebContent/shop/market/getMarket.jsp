@@ -13,18 +13,18 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
-<link rel="stylesheet" href="/resources/get/css/icon/style.css" />
-<link rel="stylesheet" href="/resources/get/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/resources/get/css/themify-icons.css" />
-<link rel="stylesheet" href="/resources/get/css/owl.carousel.min.css" />
-<link rel="stylesheet" href="/resources/get/css/simpleLightbox.css" />
-<link rel="stylesheet" href="/resources/get/css/nice-select.css" />
-<link rel="stylesheet" href="/resources/get/css/animate.css" />
-<link rel="stylesheet" href="/resources/get/css/jquery-ui.css" />
-<!-- main css -->
-<link rel="stylesheet" href="/resources/get/css/style.css" />
-<link rel="stylesheet" href="/resources/get/css/responsive.css" />
+    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
+    <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
+    <link rel="stylesheet" href="/resources/get/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/resources/get/css/themify-icons.css" />
+    <link rel="stylesheet" href="/resources/get/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/resources/get/css/simpleLightbox.css" />
+    <link rel="stylesheet" href="/resources/get/css/nice-select.css" />
+    <link rel="stylesheet" href="/resources/get/css/animate.css" />
+    <link rel="stylesheet" href="/resources/get/css/jquery-ui.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="/resources/get/css/style.css" />
+    <link rel="stylesheet" href="/resources/get/css/responsive.css" />
 <!-- Google Mdl -->
 
 <link rel="stylesheet"
@@ -32,11 +32,16 @@
 <link rel="stylesheet"
 	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
+
+ @font-face{
+          font-family: NanumSquare;
+          src : url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2) format("woff2");
+       }
+       body{
+          font-family: NanumSquare, sans-serif !important;
+       }
 .form-group3 {
 	padding-left: 465px;
 	padding-right: 100px;
@@ -56,6 +61,10 @@ table {
 
 .pricecolor {
 	color: #f04f23;
+}
+
+.s_product_text{
+	margin-top:30px;
 }
 </style>
 

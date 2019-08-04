@@ -101,33 +101,33 @@
 		});
 	});
 
-	function fncAddProduct() {
-		//Form 유효성 검증
+// 	function fncAddProduct() {
+// 		//Form 유효성 검증
 
-		// 		var prodName=$("input[name='prodName']").val();
-		// 	 	//var name = document.detailForm.prodName.value;
-		// 	 	var prodDetail=$("input[name='prodDetail']").val();
-		// 		//var detail = document.detailForm.prodDetail.value;
-		// 		var manuDate=$("input[name='manuDate']").val();
-		// 		//var manuDate = document.detailForm.manuDate.value;
-		// 		var price=$("input[name='price']").val();
-		// 		//var price = document.detailForm.price.value;
+// 				var prodName=$("input[name='prodName']").val();
+// 			 	//var name = document.detailForm.prodName.value;
+// 			 	var prodDetail=$("input[name='prodDetail']").val();
+// 				//var detail = document.detailForm.prodDetail.value;
+// 				var manuDate=$("input[name='manuDate']").val();
+// 				//var manuDate = document.detailForm.manuDate.value;
+// 				var price=$("input[name='price']").val();
+// 				//var price = document.detailForm.price.value;
 
-		// 		if(prodName == null || prodName.length<1){
-		// 			alert("상품명은 반드시 입력하여야 합니다.");
-		// 			return;
-		// 		}
+// 				if(prodName == null || prodName.length<1){
+// 					alert("상품명은 반드시 입력하여야 합니다.");
+// 					return;
+// 				}
 
-		// 		if(manuDate == null || manuDate.length<1){
-		// 			alert("제조일자는 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-		// 		if(price == null || price.length<1){
-		// 			alert("가격은 반드시 입력하셔야 합니다.");
-		// 			return;
-		// 		}
-		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
-	}
+// 				if(manuDate == null || manuDate.length<1){
+// 					alert("제조일자는 반드시 입력하셔야 합니다.");
+// 					return;
+// 				}
+// 				if(price == null || price.length<1){
+// 					alert("가격은 반드시 입력하셔야 합니다.");
+// 					return;
+// 				}
+// 		$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
+// 	}
 
 	//============= 달력  =============
 	$(function() {
@@ -250,7 +250,7 @@
 			</div></div>
 
 
-						
+						<br/><br/><div class="w-100"></div>
 						
 						<div class="col-md-6">
 								<div class="form-group">

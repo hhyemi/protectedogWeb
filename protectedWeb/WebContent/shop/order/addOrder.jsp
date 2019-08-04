@@ -5,33 +5,32 @@
 
 <html lang="ko">
 <head>
- meta 
+meta
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--  bootstrap CDN  -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- IM PORT 추가 -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
 <style>
 .container {
-	width: 1000px; 
+	width: 1000px;
 	font-size: 17px;
 	margin-top: 10px;
-} 
+}
 </style>
 
 <script type="text/javascript">
 	//============= "등록"  Event 연결 =============
 	$(function() {
-		$("#addproduct").on(
-				"click",
-				function() {
-					//Debug..
-					console.log($("form[name='addForm']").html());
-					fncAddProduct();
-				});
+		$("#addproduct").on("click", function() {
+			//Debug..
+			console.log($("form[name='addForm']").html());
+			fncAddProduct();
+		});
 	});
 	//  	$(function() {
 	// 		$("#addproduct").on("click", function() {
@@ -50,51 +49,51 @@
 	});
 	function fncAddProduct() {
 		//Form 유효성 검증
-				var receiverName=$("input[name='receiverName']").val();
-				var receiverPhone2=$("input[name='receiverPhone2']").val();
-				var receiverPhone3=$("input[name='receiverPhone3']").val();
-				var receiverAddr1=$("input[name='receiverAddr1']").val();
-				var receiverAddr2=$("input[name='receiverAddr2']").val();
-				var receiverAddr3=$("input[name='receiverAddr3']").val();
-				var receiverAddr4=$("input[name='receiverAddr4']").val();
-				var orderRequest=$("input[name='orderRequest']").val();
-				//var price = document.detailForm.price.value;
-				if(receiverName == null || receiverName.length<1){
-					alert("상품수령인을 반드시 입려해주세요");
-					return;
-				}
-				if(receiverPhone2 == null || receiverPhone2.length<1){
-					alert("수령인 연락처를 입력해주세요");
-					return;
-				}
-				if(receiverPhone3 == null || receiverPhone3.length<1){
-					alert("수령인 연락처를 입력해주세요");
-					return;
-				}
-				//주소 유효성 검증
-				if(receiverAddr1 == null || receiverAddr1.length<1){
-					alert("수령인 주소를 입력해주세요");
-					return;
-				}
-				if(receiverAddr2 == null || receiverAddr2.length<1){
-					alert("수령인 주소를 입력해주세요");
-					return;
-				}
-				if(receiverAddr3 == null || receiverAddr3.length<1){
-					alert("수령인 주소를 입력해주세요");
-					return;
-				}
-				if(receiverAddr4 == null || receiverAddr4.length<1){
-					alert("상세주소를 입력해주세요");
-					return;
-				}
-				if(orderRequest == null || orderRequest.length<1){
-					alert("배송요청사항을 입력해주세요");
-					return;
-				}
-				
-				$("form[name='addForm']").attr("method", "POST").attr(
-						"action", "/order/addOrder").submit();
+		var receiverName = $("input[name='receiverName']").val();
+		var receiverPhone2 = $("input[name='receiverPhone2']").val();
+		var receiverPhone3 = $("input[name='receiverPhone3']").val();
+		var receiverAddr1 = $("input[name='receiverAddr1']").val();
+		var receiverAddr2 = $("input[name='receiverAddr2']").val();
+		var receiverAddr3 = $("input[name='receiverAddr3']").val();
+		var receiverAddr4 = $("input[name='receiverAddr4']").val();
+		var orderRequest = $("input[name='orderRequest']").val();
+		//var price = document.detailForm.price.value;
+		if (receiverName == null || receiverName.length < 1) {
+			alert("상품수령인을 반드시 입려해주세요");
+			return;
+		}
+		if (receiverPhone2 == null || receiverPhone2.length < 1) {
+			alert("수령인 연락처를 입력해주세요");
+			return;
+		}
+		if (receiverPhone3 == null || receiverPhone3.length < 1) {
+			alert("수령인 연락처를 입력해주세요");
+			return;
+		}
+		//주소 유효성 검증
+		if (receiverAddr1 == null || receiverAddr1.length < 1) {
+			alert("수령인 주소를 입력해주세요");
+			return;
+		}
+		if (receiverAddr2 == null || receiverAddr2.length < 1) {
+			alert("수령인 주소를 입력해주세요");
+			return;
+		}
+		if (receiverAddr3 == null || receiverAddr3.length < 1) {
+			alert("수령인 주소를 입력해주세요");
+			return;
+		}
+		if (receiverAddr4 == null || receiverAddr4.length < 1) {
+			alert("상세주소를 입력해주세요");
+			return;
+		}
+		if (orderRequest == null || orderRequest.length < 1) {
+			alert("배송요청사항을 입력해주세요");
+			return;
+		}
+
+		$("form[name='addForm']").attr("method", "POST").attr("action",
+				"/order/addOrder").submit();
 	}
 </script>
 </head>
@@ -105,38 +104,43 @@
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar Start	■■■■■■■■■■■■■■■■■■■■-->
-	<body class="goto-here">
-    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">protected</span> <span>Store</span></p>
-            <font size="7">스토어 상품구매</font>
-          </div>
-        </div>
-      </div>
-    </div>
-	<br/><p/>
+<body class="goto-here">
+	<div class="hero-wrap hero-bread"
+		style="padding-bottom: 30px; padding-top: 60px;">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p>
+						<span class="mr-2">protected</span> <span>Store</span>
+					</p>
+					<font size="7">스토어 상품구매</font>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<p />
 	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar end■■■■■■■■■■■■■■■■■■■■-->
 
 	<!-- ■■■■■■■■■■■■■■■■■■■■body navigation tag / FORM START■■■■■■■■■■■■■■■■■■■■ -->
 	<section class="ftco-section">
 		<div class="container">
 			<form class="billing-form" name="addForm">
-			
-			
-			
-			
-			
-			
-			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value 시작■■■■■■■■■■■■■■■■■■■■■ -->
-				<input type="hidden" name="prodNo" value="${product.prodNo}" /> 
-				<input type="hidden" name="id" value="${user.id}" />
-			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
-			
-			
-					<!-- ///////////////////////////////////////////////////////// -->
-					
+
+
+
+
+
+
+				<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value 시작■■■■■■■■■■■■■■■■■■■■■ -->
+				<input type="hidden" name="prodNo" value="${product.prodNo}" /> <input
+					type="hidden" name="id" value="${user.id}" />
+				<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
+
+
+				<!-- ///////////////////////////////////////////////////////// -->
+
 				<div class="row justify-content-center">
 					<div class="col-xl-8 ftco-animate">
 
@@ -162,7 +166,7 @@
 															<div class="col-sm-2 hidden-xs">
 																<img
 																	src="../../resources/file/fileShop/${product.mainFile}"
-																	alt="..." class="img-responsive" width="60px"/>
+																	alt="..." class="img-responsive" width="60px" />
 															</div>
 															<div class="col-sm-10 prod-desc">
 																<h6 class="nomargin">${product.company}</h6>
@@ -171,7 +175,7 @@
 														</div>
 													</td>
 													<td>${product.discountPrice}</td>
-													<td><input type="number" size="1"name="orderQuantity"
+													<td><input type="number" min="1" max="20" size="1" name="orderQuantity"
 														class="form-control text-center" value="1" n></td>
 													<td class="actions"></td>
 												</tr>
@@ -225,166 +229,112 @@
 							<div class="form-group">
 
 								<div class="row">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="receiverPhone1" id="receiverPhone1">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select
+										name="receiverPhone1" id="receiverPhone1">
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-									</select> &nbsp;&nbsp; <div class="col-md-8"><input type="text" id="receiverPhone2" name="receiverPhone2"
-										placeholder="번호" maxlength="4" style="height: 35px;">
-									<input type="text" id="receiverPhone3" name="receiverPhone3"
-										placeholder="번호" maxlength="4" style="height: 35px;">
-								</div> 
-							</div>
-
-							<div class="w-100"></div>
-							<br />
-							<div class="form-group">
-							<div class="row">
-								&nbsp;<div class="col-md-8">
-									<label for="firstname">주소&nbsp;|&nbsp;우편번호</label> 
-									<input type="text" class="form-control" id="sample6_postcode"
-										placeholder="번호" style="height: 35px;" readonly name="receiverAddr1">
+									</select> &nbsp;&nbsp;
+									<div class="col-md-8">
+										<input type="text" id="receiverPhone2" name="receiverPhone2"
+											placeholder="번호" maxlength="4" style="height: 35px;">
+										&nbsp;-&nbsp;<input type="text" id="receiverPhone3"
+											name="receiverPhone3" placeholder="번호" maxlength="4"
+											style="height: 35px;">
+									</div>
 								</div>
-								
-								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+
 								<div class="w-100"></div>
-								&nbsp;<div class="col-sm-4">
-								<input type="text" class="form-control" id="sample6_address" placeholder="주소" style="height: 35px;" readonly
-								name="receiverAddr2">
-								</div>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목"
-										style="height: 35px;" readonly
-										name="receiverAddr3">
-								</div>
-								 <div class="col-sm-8">
-									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" style="height: 35px;"
-									name="receiverAddr4">
-								</div>
-							</div>
-							</div>
-
-							<div class="w-100"></div>
-							<div class="col-md-6">
+								<br />
 								<div class="form-group">
-									<label for="firstname">배송요청사항</label> <input type="text"
-										class="form-control" name="orderRequest" id="orderRequest"
-										placeholder="배송요청사항을 입력해주세요">
-								</div>
-							</div>
-							<hr />
-							<div class="w-100"></div>
+									<div class="row">
+										&nbsp;
+										<div class="col-md-6">
+											<label for="firstname">주소&nbsp;|&nbsp;우편번호</label> <input
+												type="text" class="form-control" id="sample6_postcode"
+												placeholder="번호" style="height: 35px;" readonly
+												name="receiverAddr1">
+										</div>
 
-							&nbsp;&nbsp;&nbsp;
-							<div class="col-md-13">
-								<div class="form-group">
-									<label for="streetaddress">결제수단</label> <select
-										class="form-control" name=" " id="paymentCode">
-										<option value="1">무통장결제</option>
-										<option value="2">카드결제</option>
-									</select>
+										<input type="button" onclick="sample6_execDaumPostcode()"
+											value="우편번호 찾기">
+										<button class="btn btn-default" id="addproduct"
+											onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+										<div class="w-100"></div>
+										&nbsp;
+										<div class="col-sm-6">
+											<input type="text" class="form-control" id="sample6_address"
+												placeholder="주소" style="height: 35px;" readonly
+												name="receiverAddr2">
+										</div>
+										<div class="col-sm-6">
+											<input type="text" class="form-control"
+												id="sample6_extraAddress" placeholder="참고항목"
+												style="height: 35px;" readonly name="receiverAddr3">
+										</div>
+										<div class="col-sm-6">
+											<input type="text" class="form-control"
+												id="sample6_detailAddress" placeholder="상세주소"
+												style="height: 35px;" name="receiverAddr4">
+										</div>
+									</div>
+								</div>
+
+								<div class="w-100"></div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="firstname">배송요청사항</label> <input type="text"
+											class="form-control" name="orderRequest" id="orderRequest"
+											placeholder="배송요청사항을 입력해주세요">
+									</div>
+								</div>
+								<hr />
+								<div class="w-100"></div>
+
+								&nbsp;&nbsp;&nbsp;
+								<div class="col-md-13">
+									<div class="form-group">
+										<label for="streetaddress">결제수단</label> <select
+											class="form-control" name=" " id="paymentCode">
+											<option value="1">무통장결제</option>
+											<option value="2">카드결제</option>
+										</select>
+									</div>
 								</div>
 							</div>
+							<p align="center">
+								<button class="btn btn-default" id="addproduct">결제하기</button>
+								&nbsp;
+								<button class="btn btn-default" id="#">취소하기</button>
+							</p>
+
+							<!-- ////////////////////////////form tag end //////////////////////////////-->
 						</div>
-						<p align="center">
-						<button class="btn btn-default" id="addproduct">결제하기</button>
-							&nbsp;<button class="btn btn-default" id="#">취소하기</button>
-						</p>
-
-						<!-- ////////////////////////////form tag end //////////////////////////////-->
 					</div>
 				</div>
 			</form>
 		</div>
 	</section>
-	
-	<script type="text/javascript">
-	  $(function() {
-      
-         //============= 후원 Event  처리 =============   
-         $( "#addproduct" ).on("click" , function() {
-        	 AddPayment();
-            });
-         
-         //============= 취소 Event  처리 =============
-          $( "#btn-cancel" ).on("click" , function() {
-               history.go(-1);
-            });
 
-            
-   });   
-	  
-</script>
+	<script type="text/javascript">
+		$(function() {
+
+			//============= 취소 Event  처리 =============
+			$("#btn-cancel").on("click", function() {
+				history.go(-1);
+			});
+
+		});
+	</script>
 
 
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	
-	 
-	 
-	 <script>
-	 function AddPayment(){
-		 
-		 var payment = null;
-		   var fundPay = $('input[name="fundPay"]').val();	
-	       $('input[name="fundPay"]').val(removeCommas($('input[name="fundPay"]').val()));
-	       var fundPay2 = removeCommas($('input[name="fundPay"]').val());
-	       
-		      if(fundPay == null || fundPay.length<1){
-				  swal({
-			           text: "후원금액을 입력해주세요.",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "확인"
-								 }
-					   },			   
-			      }).then((willDelete) => {
-			           if (willDelete) {
-			 	          $('input[name="fundPay"]').focus();
-			           }
-			      });
 
-		          return;
-		       } 
 
-		      if(fundPay > 3000000){
-				  swal({
-			           text: "후원금액은 300만원이하로 입력해주세요.",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "확인"
-								 }
-					   },			   
-			      }).then((willDelete) => {
-			           if (willDelete) {
-			 	          $('input[name="fundPay"]').focus();
-			           }
-			      });	    	  
-
-		         return;
-		      }	      
-		      
-		      if(!($('input[name="paymentCode"]').is(':checked'))){
-				  swal({
-			           text: "결제방법을 선택해주세요.",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "확인"
-								 }
-					   },			   
-			      });
-		          return;
-		       }
-	 }
-	
-	</script>
-	
-	
 	<script>
+		//우편번호
 		function sample6_execDaumPostcode() {
 			new daum.Postcode(
 					{
@@ -433,48 +383,6 @@
 						}
 					}).open();
 		}
-		//총액 계산 jqury 
-		$(document).ready(function() {
-			const p = $("#price").data('price');
-			$("#orderQuantity").change(function() {
-				const q = $(this).find(':selected').data('quantity');
-				const total = p * q;
-				$("#total").text(total);
-			});
-		});
-		
-		
-		//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ IM PORT START ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
-		
-		IMP.init('imp32437611'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		
-		IMP.request_pay({
-		    pg : 'inicis', // version 1.1.0부터 지원.
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : ':결제테스트',
-		    amount : 14000,
-/*		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',*/
-		    buyer_postcode : '123-456',
-		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-/*		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num; */
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});
 	</script>
-
-
 </body>
 </html>

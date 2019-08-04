@@ -53,6 +53,7 @@
 	<form name="listOrder">
 		<section id="cart" class="cart">
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
+			<input type="hidden" name="id" id="id" value="${ sessionScope.user.phone }"/>
 			<div class="container">
 			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
@@ -101,14 +102,14 @@
 								
 								</td>
 								<td class="actions">
+								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
+								
 								<c:if test="${order.orderCode =='1'}">
-								결제완료</c:if>
+								<span style="cursor:pointer">배송하기</span></c:if>
 								<c:if test="${order.orderCode =='2'}">
-								배송중</c:if>
+								<span style="cursor:pointer">배송중</span></c:if>
 								<c:if test="${order.orderCode =='3'}">
-								배송완료</c:if>
-								<c:if test="${order.orderCode =='4'}">
-								취소</c:if>
+								<span style="cursor:pointer">배송완료</span></c:if>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
@@ -118,8 +119,8 @@
 
 					<tfoot>
 						<tr>
-							<td><a href="#" class="btn btn-general btn-white"><i
-									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td>
+							<td><a href="/product/listProduct" class="btn btn-general btn-white"><i
+									class="fa fa-angle-left"></i>상품리스트로</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
 							<td></td>
@@ -152,6 +153,35 @@
 			});
 	
  	});	 
+	
+	// 배송상태 CHANGE
+	$( function(){
+		$("select[name='searchCode']").on("change", function(){
+			fncGetList(1);
+		});
+		
+		$("td:nth-child(1)").on("click", function(){
+			self.location = "/purchase/getPurchase?tranNo="+$("input:hidden[name='tranNo']").val();
+		});
+		
+		
+		$("#orderRemove").on("click", function(){
+			fncGetList(1);
+		});
+		
+		$("td:nth-child(5) span:contains('배송하기')").on("click", function(){
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=2";
+		});
+		
+		$("td:nth-child(5) span:contains('배송중')").on("click", function(){
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='tranNo']")).val()+"&orderCode=3";
+		});
+		
+		$("td:nth-child(5) span:contains('배송완료')").on("click", function(){
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='tranNo']")).val()+"&&orderCode=4";
+		});
+		
+	});
 
 
 	</script>
