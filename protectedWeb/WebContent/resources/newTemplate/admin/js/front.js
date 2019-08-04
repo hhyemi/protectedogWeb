@@ -30,6 +30,29 @@ $(document).ready(function () {
 
         return false;
     });
+    
+    // ------------------------------------------------------- //
+    // Send Message
+    // ------------------------------------------------------ //
+    
+//	$(function(){
+//		$(".submit").on("click", function(){
+//			swal({
+//				text : "쪽지를 전송하였습니다.",
+//				buttons : {
+//					catch : {
+//						text : "확인"
+//					}
+//				}
+//			})
+//			.then((A) => {
+//				if(A) {
+//					$(".sendMessage").attr("method", "POST").attr("action", "/message/addMessage").submit();
+//					$("#messageModal").modal('hide');
+//				}
+//			})
+//		})
+//	})
 
     // ------------------------------------------------------- //
     // Search Box

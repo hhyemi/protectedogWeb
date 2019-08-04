@@ -12,8 +12,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!--  ETC CDN -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<!-- <link rel="stylesheet" href="/resources/newTemplate/css/neon.css"> -->
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 <!--  bootstrap CDN  -->
@@ -24,30 +25,20 @@
 <!-- jQuery CSS -->
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <!-- jQuery JS -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
 <!--  CSS -->
 <style>
-#searchKeyword{
-	height: 40px;
-	width: 150px;
-}
-#searchSubmmit{
-	width : 60px;
-	height : 40px;
-	
-	border-radius : 0px 15px 15px 0px;
-	border : 1px solid #D3D3D3;
-}
+#searchKeyword{height: 40px;width: 150px;}
+#searchSubmmit{width : 60px;height : 40px;border-radius : 0px 15px 15px 0px;border : 1px solid #D3D3D3;}
+#searchCondition{height : 40px;border-radius : 15px 0px 0px 15px;}
+#selectPageSize{height: 30px;}
+#newstd{min-width: 251px;max-width : 251px;}	
 
-#searchCondition{
-	height : 40px;
-	border-radius : 15px 0px 0px 15px;
-}
-.btn-default{
-	height: 30px;
-	color : white;
-}
+.btn-default{height: 30px;color : white;}
+
+th{background-color: #F5F5DC;}
 
 </style>
 
@@ -128,12 +119,9 @@
 		
 				<c:if test="${totalCount == 0}">
 				<div class="row">
-				<div class="col-md-9" align="center" style="height: 500px; padding-top: 250px;">
-					검색결과 없음<p/>
-						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
+				<div class="col-md-9" align="center" style="height: 500px; padding-top: 150px;">
 					
-					</form>
+					<jsp:include page="/common/searchResult.jsp"></jsp:include>
 				</div>
 				</c:if>
 		
@@ -176,11 +164,11 @@
 					<br />
 
 					<c:if test="${ ! empty sessionScope.user }">
-						<button type="button" class="btn btn-default">글 작성</button>
+						<button type="button" class="btn btn-default">작성</button>
 					</c:if>
 					
-					<div align="center">
-					<jsp:include page="/common/pageNavigator.jsp" />
+					<div align="center" style="padding-left: 45%">
+					<jsp:include page="/common/pageNavigator_new.jsp" />
 					</div>
 					
 					<div style="min-height: 40px">
@@ -194,20 +182,30 @@
 			<div class="col-md-3">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 
+				<tbody>
+					<tr align="center">
+						<td colspan='2' class='text-center'style="background-color: #F5F5DC">
+							<h4><b>HOT 개</b></h4>
+						</td>
+					</tr>
+					<c:set var="i" value="0" />
+					<c:forEach var="best" items="${listRanking}">
+						<c:set var="i" value="${ i+1 }" />
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric"><span class="fas fa-medal"> ${i} 등</span></td>
+							<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
+								value="${best.postNo}"> ${best.postTitle}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+				
+				<br/>
+				
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+
 					<tbody class="newstbody">
-								<tr align="center">
-									<td colspan='2' class='text-center'><h4><b>HOT 개</b></h4>
-									</td>
-								</tr>
-						<c:set var="i" value="0" />
-						<c:forEach var="best" items="${listRanking}">
-								<c:set var="i" value="${ i+1 }" />
-								<tr>
-									<td class="mdl-data-table__cell--non-numeric"><span class="fas fa-medal"> ${i} 등</span></td>
-									<td align="center" class="mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
-										value="${best.postNo}"> ${best.postTitle}</td>
-								</tr>
-						</c:forEach>
+							
 					</tbody>
 				</table>
 			</div>
@@ -263,7 +261,7 @@ function listNews(){
 			
 			var list = JSONData.items;
 			
-			$(".newstbody").append("<tr><td colspan='2' class='text-center'><h4><b>뉴스</b></h4></td></tr>");
+			$(".newstbody").append("<tr><td class='text-center' style='background-color : #F5F5DC'><h4><b>뉴스</b></h4></td></tr>");
 		
 			$.each(list, function(index, items) {
 				
@@ -273,7 +271,7 @@ function listNews(){
 				
 				$(".newstbody").append(
 						  "<tr>"
-						+	 "<td colspan='2'  class='mdl-data-table__cell--non-numeric' style='max-width:200px;'>"
+						+	 "<td id='newstd' class='mdl-data-table__cell--non-numeric'>"
 								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,20)
 								+ "<input type='hidden' name='link' value='"+items.link+"'>"
 								+ "</a>"
@@ -383,7 +381,7 @@ function listNews(){
 			fncGetList(1);
 		});
 		
-		$("button:contains('글 작성')").on("click", function(){
+		$("button:contains('작성')").on("click", function(){
 			self.location = "/community/addInfo.jsp"
 		});
 	});

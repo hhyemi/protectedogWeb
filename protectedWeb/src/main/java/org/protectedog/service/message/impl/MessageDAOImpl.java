@@ -60,14 +60,14 @@ public class MessageDAOImpl implements MessageDAO{
 //	}
 	
 	@Override
-	public List<Message> getMessageList(Search search, String id) throws Exception {
+	public List<Message> getMessageList(Search search, String nickname) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("(before)messageDAO searchCondition : "+search.getSearchCondition());
-		System.out.println("(before)messageDAO id : "+id);
+		System.out.println("(before)messageDAO nickname : "+nickname);
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("searchCondition", search.getSearchCondition());
 		map.put("search", search);
-		map.put("id", id);
+		map.put("nickname", nickname);
 		System.out.println("(before)message DAO map : "+map.toString());
 		List<Message> listMessage=sqlSession.selectList("MessageMapper.getMessageList", map);
 		System.out.println("(after)messageDAO 출력 list : "+listMessage);
@@ -90,26 +90,26 @@ public class MessageDAOImpl implements MessageDAO{
 //	}
 	
 	@Override
-	public int getReceiveTotalCount(String receiverId) throws Exception {
+	public int getReceiveTotalCount(String receiverNick) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("MessageMapper.getReceiveTotalCount", receiverId);
+		return sqlSession.selectOne("MessageMapper.getReceiveTotalCount", receiverNick);
 	}
 	
 	@Override
-	public int getTotalCount(Search search, String id) throws Exception {
+	public int getTotalCount(Search search, String nickname) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("searchCondition", search.getSearchCondition());
 		map.put("search", search);
-		map.put("id", id);
+		map.put("nickname", nickname);
 		return sqlSession.selectOne("MessageMapper.getTotalCount", map);
 	}
 	
 	@Override
-	public Message getUnreadMessage(String receiverId) {
+	public Message getUnreadMessage(String receiverNick) {
 		// TODO Auto-generated method stub
 		System.out.println("�� ������ �ǳ�");
-		Message message=sqlSession.selectOne("MessageMapper.getUnreadMessage", receiverId);
+		Message message=sqlSession.selectOne("MessageMapper.getUnreadMessage", receiverNick);
 		System.out.println("���ͺ��� : "+message);
 		return message;
 

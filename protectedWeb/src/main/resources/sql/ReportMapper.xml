@@ -9,8 +9,8 @@
  	
 	<resultMap id="reportSelectMap" type="report">
 		<result property="reportNo"		column="report_no"	jdbcType="NUMERIC"/>
-		<result property="reporterId"	column="reporter_id"	jdbcType="VARCHAR"/>
-		<result property="reportedId"	column="reported_id"	jdbcType="VARCHAR"/>
+		<result property="reporterNick"	column="reporter_nick"	jdbcType="VARCHAR"/>
+		<result property="reportedNick"	column="reported_nick"	jdbcType="VARCHAR"/>
 		<result property="reportCategory"	column="report_category"	jdbcType="VARCHAR"/>
 		<result property="reportContent"	column="report_content"	jdbcType="VARCHAR"/>
 		<result property="reportStatus"	column="report_status"	jdbcType="NUMERIC"/>
@@ -25,9 +25,9 @@
 	    SELECT seq_report_report_no.nextval FROM DUAL
 	    </selectKey>
 		INSERT INTO report
-		(report_no, reporter_id, reported_id, report_category, report_content, report_status, report_date, del_code)
+		(report_no, reporter_nick, reported_nick, report_category, report_content, report_status, report_date, del_code)
 		VALUES
-		(#{reportNo}, #{reporterId}, #{reportedId}, #{reportCategory}, #{reportContent}, #{reportStatus}, SYSDATE, 
+		(#{reportNo}, #{reporterNick}, #{reportedNick}, #{reportCategory}, #{reportContent}, #{reportStatus}, SYSDATE, 
 		#{delCode:VARCHAR})
 	</insert>
 	 
@@ -35,7 +35,7 @@
 
 	<select id="getReport"	parameterType="string"	resultMap="reportSelectMap">
 		SELECT
-		r.report_no, r.reporter_id, r.reported_id, r.report_category, r.report_content, r.report_status, r.report_date, r.del_code
+		r.report_no, r.reporter_nick, r.reported_nick, r.report_category, r.report_content, r.report_status, r.report_date, r.del_code
 		FROM report r
 		WHERE r.report_no=#{reportNo}
 	</select>
@@ -55,17 +55,17 @@
 	<!-- SQL : SELECT LIST -->
 	 	
 	<select id="getReportList" 	parameterType="search" 	resultMap="reportSelectMap">
-		SELECT report_no, reporter_id, reported_id, report_category, report_date, report_status, del_code
+		SELECT report_no, reporter_nick, reported_nick, report_category, report_date, report_status, del_code
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT report_no, reporter_id, reported_id, report_category, report_date, report_status, del_code
+			FROM( SELECT report_no, reporter_nick, reported_nick, report_category, report_date, report_status, del_code
 				FROM report
 				<if test="searchCondition != null">
 					<where>
 						<if test="searchCondition==0 and searchKeyword !='' ">
-							reporter_id=#{searchKeyword}
+							reporter_nick=#{searchKeyword}
 						</if>
 						<if test="searchCondition==1 and searchkeyword !='' ">
-							reported_id=#{searchKeyword}
+							reported_nick=#{searchKeyword}
 						</if>
 						<if test="searchCondition==2 and searchkeyword !='' ">
 							report_category=#{searchKeyword}
@@ -85,15 +85,15 @@
 
 	<select  id="getTotalCount"		parameterType="search"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT report_no, reporter_id, reported_id, report_category, report_date, report_status, del_code
+		FROM(	SELECT report_no, reporter_nick, reported_nick, report_category, report_date, report_status, del_code
 			FROM report
 			<if test="searchCondition != null">
 				<where>
 						<if test="searchCondition==0 and searchKeyword !='' ">
-							reporter_id=#{searchKeyword}
+							reporter_nick=#{searchKeyword}
 						</if>
 						<if test="searchCondition==1 and searchkeyword !='' ">
-							reported_id=#{searchKeyword}
+							reported_nick=#{searchKeyword}
 						</if>
 						<if test="searchCondition==2 and searchkeyword !='' ">
 							report_category=#{searchKeyword}

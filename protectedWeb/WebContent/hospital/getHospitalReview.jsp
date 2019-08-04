@@ -220,7 +220,17 @@
 					<div class="modal-content ">
 						<div class="modal-header">
 							<font size="6" class="modal-title" id="myModal2Label"
-								style="padding-left: 20px">&ensp;&ensp;동물병원 후기</font>
+								style="padding-left: 20px">
+								</font>
+								
+			          <div class="col-md-9 ftco-animate text-center">
+			          	<p ><span class="mr-2">Hospital</span> <span>Review</span></p>
+			            <font size="7">
+			            	동물병원후기
+			            </font>
+			          </div>							
+								
+								
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>

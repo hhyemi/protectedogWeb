@@ -106,14 +106,14 @@
 		<form id ="uploadForm" class="form-horizontal">
 
 		  <div class="form-group">
-			<h6><b>글 제목</b></h6><p/>		
+			<h5><b>글 제목</b></h5><p/>		
 		    <div class=>
 		      <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:780px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h6><b>글 내용</b></h6><p/>			
+			<h5><b>글 내용</b></h5><p/>			
 			    <div >
 			   <textarea id="editor" name="reviewContent" style="text-align: left;" placeholder="내용을 입력해주세요." >
 					
@@ -188,7 +188,7 @@
 	         return;
 	      }
       if(file == null || file.length<1){
-    	  swal("사진을 1개이상 입력해주세요.");
+    	  swal("사진을 1개이상 등록해주세요.");
          return;
       }
 
@@ -294,7 +294,7 @@
                      
                     //10장 이상 업로드시
                      if(Object.keys(files).length>=10){
-                        alert("사진은 10장까지만 업로드 가능합니다.");
+                        alert("사진은 10장까지만 등록 가능합니다.");
                         delete files[imgNum];
                      }else{
                // 10장 이하 

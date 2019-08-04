@@ -31,10 +31,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	-o-background-size: cover;
 	background-size: cover;
 }
-
+/*
 .adopt {
-	height: 20vh;
-	min-height: 100px;
+	height: 10vh;
+	min-height: 300px;
 }
 
 .funding {
@@ -52,8 +52,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 }
 .store
  {height: 20vh;
-  min-height: 300px;}
-  
+  min-height: 300px;}*/
  /* fade in 효과
 .carousel-item{
     animation: fadein 2s;
@@ -209,7 +208,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
               </div>              
               <h3>Leadership Development</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -222,7 +220,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Social benefits and services</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -256,7 +253,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Business Management</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -269,7 +265,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
               </div>              
               <h3>Leadership Development</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -282,7 +277,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Social benefits and services</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -309,9 +303,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				<div class="row">
 					<div class="col-md-6">
 						<div class="service-himg">
-							<iframe
-								src="https://www.youtube.com/embed/3P1YGPZp6Ik?rel=0&amp;controls=0&amp;showinfo=0"
-								frameborder="0" allowfullscreen></iframe>
+							<iframe src="https://www.youtube.com/embed/3P1YGPZp6Ik?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 						</div>
 					</div>
 					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -382,7 +374,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-11.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Business Management</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -395,7 +386,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-13.jpg" class="img-fluid" alt="...">
               </div>              
               <h3>Leadership Development</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
@@ -408,7 +398,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                   <div class="caption">
                     <i class="fa fa-chain"></i>
                   </div>
-                  <img src="img/news/news-14.jpg" class="img-fluid" alt="...">
               </div>
               <h3>Social benefits and services</h3>
               <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>

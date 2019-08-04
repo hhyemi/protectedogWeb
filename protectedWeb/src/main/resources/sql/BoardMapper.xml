@@ -202,7 +202,7 @@
 			        		  b.recommend_count, b.market_code, b.price, b.city, b.phone, b.qna_code, b.route, b.prod_no, b.prod_name, b.del_code, count(t.COMMENT_CONTENT) commentCount 
 	    	           FROM board b, comments t 
 		      		   	<where> 
-					   	b.post_no = t.post_no(+) AND b.board_code = #{boardCode} AND b.del_code = t.status_code(+)
+					   	b.post_no = t.post_no(+) AND b.board_code = #{boardCode} AND b.del_code = t.status_code(+) AND b.del_code != '0'
 						<if test="searchCondition != null">
 							<if test="searchCondition == 0 and searchKeyword !='' ">
 								AND b.post_title  LIKE '%'||#{searchKeyword}||'%' 

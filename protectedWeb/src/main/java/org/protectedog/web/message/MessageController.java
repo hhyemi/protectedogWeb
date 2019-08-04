@@ -54,14 +54,14 @@ public class MessageController {
 	
 	@RequestMapping(value="addMessage", method=RequestMethod.POST)
 	public String addMessage(@ModelAttribute("message") Message message,
-							 @RequestParam("senderId") String senderId) throws Exception{
+							 @RequestParam("senderNick") String senderNick) throws Exception{
 		
 		System.out.println("/message/addMessage : POST");
 		
 		messageService.addMessage(message);
 		
 		System.out.println("message : "+message);
-		System.out.println("sender? : "+senderId);
+		System.out.println("sender? : "+senderNick);
 		
 		return "/message/listMessage?searchCondition=send";
 //		return "redirect:/index.jsp";
@@ -117,20 +117,21 @@ public class MessageController {
 		//���ǰ˻��� ���� senderId�� ����
 		User user=(User)request.getSession().getAttribute("user");
 		
-		String id=user.getId();
-		System.out.println("listMessage 검색조건 : "+id);
+		String nickname=user.getNickname();
+		System.out.println("listMessage 검색조건 : "+nickname);
 		
 		//DB ������ ����Ʈ �̾ƿ���
-		Map<String, Object> map=messageService.getMessageList(search, id);
+		Map<String, Object> map=messageService.getMessageList(search, nickname);
 		System.out.println("Message ����Ʈ : "+map.toString());
 		
 		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println("Message ����Ʈ������ : "+resultPage);
 		
 		model.addAttribute("list", map.get("list"));
+		model.addAttribute("searchCondition", searchCondition);
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-		model.addAttribute("id", id);
+		model.addAttribute("nickname", nickname);
 		
 //		return "forward:/message/listReceiveMessageView.jsp";
 		return "forward:/message/listMessage.jsp";

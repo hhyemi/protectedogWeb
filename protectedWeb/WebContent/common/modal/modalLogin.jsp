@@ -18,18 +18,22 @@
                   </div>
                   <div id="div-forms">
                       <form id="login-form">
-                          <h3 class="text-center">로그인</h3>
+                      		<div class="row no-gutters slider-text align-items-center justify-content-center">
+                                   <a class="navbar-brand smooth-scroll" href="/index.jsp">
+							            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;<span >보호할개</span>
+							       </a>
+							</div>
                           <div class="modal-body">
                               <label for="username">아 이 디</label> 
-                              <input id="login_username" name="id" class="form-control id" type="text" placeholder="Enter username " required>
+                              <input id="login_username" name="id" class="form-control id" type="text" placeholder="아이디를 입력하세요" required>
                               <label for="username">비밀번호</label> 
-                              <input id="login_password" name="pw" class="form-control pw" type="password" placeholder="Enter password" required>
+                              <input id="login_password" name="pw" class="form-control pw" type="password" placeholder="비밀번호를 입력하세요" required>
 
 
                           </div>
                           <div class="modal-footer text-center">
                               <div>
-                                  <button type="submit" id="submitLogin" class="btn btn-general btn-white">Login</button>
+                                  <button type="submit" id="submitLogin" class="btn btn-default">로그인</button>
                               </div>
                               <div>
                               	  <img src="/resources/file/others/kakao.png" height="30px" width="30px" class="kakaoLogin">

@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+<title>보호할개 · 정보공유 조회</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,6 +29,9 @@ img{max-width: 600px;}
 .minibox{padding : 1px solid black;}
 .fa-medal{font-size: 15px;}
 
+#recommand:hover{
+	color: #f04f23;
+}
 </style>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
@@ -70,8 +75,10 @@ img{max-width: 600px;}
 		  	
 		<div class="minibox" align="center">
 			<div>
-				<span style="font-size: 15px; border: 1px solid black; padding: 3px">${board.recommendCount}</span>
-				<span class="recommand fas fa-medal">HOT개로</span>
+				<span style="border: 1px solid black; padding: 3px">
+					<span id="recommand" class="recommand fas fa-medal">추천</span>
+					<span style="font-size: 15px;">${board.recommendCount}</span>
+				</span>
 				<p/>
 				<div align="center">
 		        	<a href="javascript:void(0);"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
@@ -84,7 +91,7 @@ img{max-width: 600px;}
 			</div>
 		</div>
 
-		<c:if test="${board.id == sessionScope.user.id }">
+		<c:if test="${board.id == sessionScope.user.id || sessionScope.user.role == 'admin'}">
 			<div class="button" align="right">
 				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">수정</button>
 				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">삭제</button>
@@ -100,12 +107,13 @@ img{max-width: 600px;}
 
 	$(function() {
 		
-		$(".fa-medal").on("click", function(){
+		$("#recommand").on("click", function(){
 				
-			if(${sessionScope.user == null}){
-				alert("로그인 하십쇼");
+			if(${ empty sessionScope.user}){				
+				$("#login-modal").modal("show");
 				return;
 			}
+			
 			var postNo = "${board.postNo}" ;
 			var id = '${sessionScope.user.id}';
 			$.ajax({
@@ -157,22 +165,40 @@ img{max-width: 600px;}
 				function() {
 					//alert($("input[type='hidden']").val());
 					// 			$(self.location).attr("href","/community/updateInfo.jsp");
-					self.location = "/info/updateView?postNo="
-							+ $("input[name='postNo']").val();
+					self.location = "/info/updateView?postNo="+ $("input[name='postNo']").val();
 				});
 
-		$("button:contains('삭제')").on(
-				"click",
-				function() {
-
-					var result = confirm("정말 삭제 하시겠습니까?");
-
-					if (result) {
-						$("form[name='info']").attr("method", "POST").attr(
-								"action", "/info/delInfo").attr("enctype",
-								"multipart/form-data").submit();
-					}
+		$("button:contains('삭제')").on("click",function() {
+					
+			swal({
+				  title: "정말 삭제 하시겠습니까 ?",
+				  text: "더 이상 이 글을 다른 회원이 볼 수 없습니다.",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true
+				})
+				.then((result) => {
+				  if (result) {
+					  
+				    swal("삭제완료 !", {
+				      	icon: "success",
+				    }).then((value)=>{
+				    	
+				    	 self.location = "/info/delInfo?postNo="+ $("input[name='postNo']").val();
+				    	 
+						 //$("form[name=info]").attr("method", "POST").attr("action", "/info/delInfo").submit();
+						 
+				    });
+				  }
 				});
+// 					var result = confirm("정말 삭제 하시겠습니까?");
+				
+// 					if (result) {
+// 						$("form[name='info']").attr("method", "POST").attr(
+// 								"action", "/info/delInfo").attr("enctype",
+// 								"multipart/form-data").submit();
+// 					}
+		});
 	});
 	
     var poly;
@@ -194,8 +220,6 @@ img{max-width: 600px;}
        routeMark[i] = "marker"+i.toString();
       }        
    }
-   
-   
    
    function initMap() {
      map = new google.maps.Map(document.getElementById('mapArea'), {

@@ -53,7 +53,7 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
-							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." />
+							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." maxlength="20"/>
 					</div>
 				</div>
 
