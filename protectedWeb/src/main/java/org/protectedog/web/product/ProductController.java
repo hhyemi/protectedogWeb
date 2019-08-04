@@ -206,7 +206,7 @@ public class ProductController {
 		Map<String, Object> map = productService.listProduct(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
+				20);
 		System.out.println(resultPage);
 
 		// Model �� View ����

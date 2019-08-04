@@ -11,8 +11,8 @@
 		<result property="messageNo"	column="message_no"		jdbcType="NUMERIC"/>
 		<result property="messageTitle"	column="message_title"		jdbcType="VARCHAR"/>
 		<result property="messageContent"	column="message_content"	jdbcType="VARCHAR"/>
-		<result property="senderId"			column="sender_id"		jdbcType="VARCHAR"/>
-		<result property="receiverId"		column="receiver_id"	jdbcType="VARCHAR"/>
+		<result property="senderNick"			column="sender_nick"		jdbcType="VARCHAR"/>
+		<result property="receiverNick"		column="receiver_nick"	jdbcType="VARCHAR"/>
 		<result property="sendDate"			column="send_date"	jdbcType="DATE"/>
 		<result property="receiveDate"		column="receive_date"	jdbcType="DATE"/>
 		<result property="messageStatus"		column="message_status"	jdbcType="CHAR"/>
@@ -22,10 +22,10 @@
 	<!-- SQL : INSERT -->
 	
 	<insert id="addMessage"	parameterType="message">
-		INSERT INTO message(message_no, message_title, message_content, sender_id,
-		receiver_id, send_date, message_status, del_code)
-		VALUES(seq_message_message_no.NEXTVAL, #{messageTitle}, #{messageContent}, #{senderId}, 
-		#{receiverId}, SYSDATE, #{messageStatus}, #{delCode})
+		INSERT INTO message(message_no, message_title, message_content, sender_nick,
+		receiver_nick, send_date, message_status, del_code)
+		VALUES(seq_message_message_no.NEXTVAL, #{messageTitle}, #{messageContent}, #{senderNick}, 
+		#{receiverNick}, SYSDATE, #{messageStatus}, #{delCode})
 	</insert>
 
 	 
@@ -33,7 +33,7 @@
 
 	<select id="getMessage"	parameterType="string"	resultMap="messageSelectMap">
 		SELECT
-		message_no, message_title, message_content, sender_id, receiver_id, send_date
+		message_no, message_title, message_content, sender_nick, receiver_nick, send_date
 		FROM message
 		WHERE message_no=#{messageNo}
 	</select>
@@ -42,7 +42,7 @@
 	
 	<select id="getUnreadMessage" parameterType="string" resultMap="messageSelectMap">
 		SELECT * FROM message
-		WHERE receiver_id=#{receiverId}
+		WHERE receiver_nick=#{receiverNick}
 		AND message_status=0
 	</select>
 	
@@ -61,27 +61,27 @@
 	<!-- SQL : SELECT LIST -->
 	
 	<select id="getMessageList"		parameterType="map"	resultMap="messageSelectMap">
-		SELECT message_no, sender_id, receiver_id, message_title, message_content, send_date, receive_date, message_status
+		SELECT message_no, sender_nick, receiver_nick, message_title, message_content, send_date, receive_date, message_status
 		FROM( SELECT inner_table.*, ROWNUM AS row_seq
-			FROM( SELECT message_no, sender_id, receiver_id, message_title, message_content, send_date, receive_date, message_status
+			FROM( SELECT message_no, sender_nick, receiver_nick, message_title, message_content, send_date, receive_date, message_status
 				FROM message
 					<where>
 						<if test="searchCondition == 'all'">
-							(sender_id=#{id} OR receiver_id=#{id})
+							(sender_nick=#{nickname} OR receiver_nick=#{nickname})
 							AND message_status != '2'
 						</if>
 						<if test="searchCondition == 'send'">
-							sender_id=#{id} AND message_status != '2'
+							sender_nick=#{nickname} AND message_status != '2'
 						</if>
 						<if test="searchCondition == 'receive'">
-							receiver_id=#{id} AND message_status != '2'
+							receiver_nick=#{nickname} AND message_status != '2'
 						</if>
 						<if test="searchCondition == 'delete'">
-							(sender_id=#{id} OR receiver_id=#{id})
+							(sender_nick=#{nickname} OR receiver_nick=#{nickname})
 							AND message_status='2'
 						</if>
 					</where>
-				ORDER BY send_date ) inner_table
+				ORDER BY send_date DESC) inner_table
 			WHERE ROWNUM &lt;=#{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
 	</select>
@@ -91,13 +91,13 @@
 
 	<select  id="getSendTotalCount"		parameterType="map"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
+		FROM(	SELECT message_no, sender_nick, receiver_nick, message_title, send_date, receive_date, message_status
 			FROM message
 
-				WHERE sender_id=#{senderId}
+				WHERE sender_nick=#{senderNick}
 					<if test="searchCondition != null">
 						<if test="searchCondition==0 and searchKeyword !='' ">
-							AND receiver_id=#{searchKeyword}
+							AND receiver_nick=#{receiverNick}
 						</if>
 						<if test="searchCondition==1 and searchkeyword !='' ">
 							AND message_title=#{searchKeyword}
@@ -108,31 +108,31 @@
 	
 	<select  id="getReceiveTotalCount" parameterType="string" resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT message_no, sender_id, receiver_id, message_title, send_date, receive_date, message_status
+		FROM(	SELECT message_no, sender_nick, receiver_nick, message_title, send_date, receive_date, message_status
 			FROM message
 
-				WHERE receiver_id=#{receiverId}
+				WHERE receiver_nick=#{receiverNick}
 				AND message_status=0
 					) countTable						
 	</select>
 	
 	<select  id="getTotalCount"		parameterType="map"	resultType="int">
 		SELECT COUNT(*)
-		FROM(	SELECT message_no, sender_id, receiver_id, message_title, message_content, send_date, receive_date, message_status
+		FROM(	SELECT message_no, sender_nick, receiver_nick, message_title, message_content, send_date, receive_date, message_status
 			FROM message
 					<where>
 						<if test="searchCondition == 'all'">
-							(sender_id=#{id} OR receiver_id=#{id})
+							(sender_nick=#{nickname} OR receiver_nick=#{nickname})
 							AND message_status != '2'
 						</if>
 						<if test="searchCondition == 'send'">
-							sender_id=#{id} AND message_status != '2'
+							sender_nick=#{nickname} AND message_status != '2'
 						</if>
 						<if test="searchCondition == 'receive'">
-							receiver_id=#{id} AND message_status != '2'
+							receiver_nick=#{nickname} AND message_status != '2'
 						</if>
 						<if test="searchCondition == 'delete'">
-							(sender_id=#{id} OR receiver_id=#{id})
+							(sender_nick=#{nickname} OR receiver_nick=#{nickname})
 							AND message_status='2'
 						</if>
 					</where>

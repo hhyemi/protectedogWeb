@@ -212,7 +212,7 @@ public class MarketController {
 				List<FileDog> file = fileService.getFile(filePost);
 				
 		// 댓글 불러오기
-		Map<String, Object> map = commentService.listComment(postNo, search);
+		Map<String, Object> map = commentService.listComment(postNo, search, MK);
 		// 대댓글 불러오기
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("postNo",postNo);

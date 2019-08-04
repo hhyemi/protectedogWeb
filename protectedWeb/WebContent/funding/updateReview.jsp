@@ -110,14 +110,14 @@
 		<form id ="uploadForm" class="form-horizontal">
 		
 		  <div class="form-group">
-			<h6><b>글 제목</b></h6><p/>			
+			<h5><b>글 제목</b></h5><p/>			
 		    <div class=>
 		      <input type="text" class="form-control" value="${funding.reviewTitle}" id="reviewTitle" name="reviewTitle" placeholder="제목을 입력해주세요." style="width:780px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
 		  <div class="form-group">
-			<h6><b>글 내용</b></h6><p/>		
+			<h5><b>글 내용</b></h5><p/>		
 			    <div>
 			    	<textarea id="editor" name="reviewContent" style="text-align: left;" placeholder="내용을 입력해주세요." >
 					  ${funding.reviewContent}

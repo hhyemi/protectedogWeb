@@ -119,7 +119,8 @@
 			user_addr=#{userAddr:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
 			profile=#{profile:VARCHAR},
-			level_point=#{levelPoint:NUMERIC}
+			level_point=#{levelPoint:NUMERIC},
+			gender=#{gender}
 		</set>
 		WHERE id=#{id}
 	</update>

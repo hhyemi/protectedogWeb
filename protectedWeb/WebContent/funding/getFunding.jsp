@@ -45,7 +45,9 @@
          	color: #f04f23;
 /*          	padding-top: 5px; */
         }
-               			
+        img {
+       	    max-width: 600px;
+        }               			
 	</style> 
  
  
@@ -57,11 +59,11 @@
     <!--================Header Menu Area =================--> 
 
     <!--================Single Product Area =================-->
-    <div class="product_image_area">
+    <div class="product_image_area" style="padding-left: 40px">
       <div class="container">
         <div class="row s_product_inner">
-          <div class="col-lg-6">
-            조회 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
+          <div  style="width: 600px">
+            조회수 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
             <p/>            
               <div
                 id="carouselExampleIndicators"
@@ -109,7 +111,7 @@
               </div>
             </div>
           </div>
- 			 <div class="col-lg-5 offset-lg-1">
+ 			 <div style="padding-left: 50px;" >
              <div class="s_product_text">			 
             <div>
              <h4>&emsp;</h4>
@@ -160,14 +162,14 @@
 			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
-             
+             <br/>
 			<!-- 투표종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
                		<button class="btn btn-default" id="noApply" style="width: 460px;" id="confirmButton">완료된 글입니다.</button>
 			 </c:if>
             <!-- 투표중 -->			 
 			<c:if test ="${funding.statusCode eq 3 }">				 			
-                 <button id="btnFund" class="btn btn-default" style="width: 225px">후원하기</button><button id="btnQuestion" class="btn btn-default" style="width: 225px">문의하기</button>               
+                 <button id="btnFund" class="btn btn-default" style="width: 225px">후원</button><button id="btnQuestion" class="btn btn-default" style="width: 225px">문의</button>               
 			</c:if>		              
                     
               </div>
@@ -358,7 +360,115 @@
 	   	$("form").attr("method" , "POST").attr("action" , "/funding/getFunding").submit();
 	 
 	}   	
-
+   	//관심목록에 추가
+	var postNo = ${funding.postNo};
+	  var id = $('input[name=userId]').val();
+		 
+	
+	 function addInterest(){
+	  
+	  		if ( id == "" ){
+	  			
+	  			swal({
+			           text: "회원만 이용할 수 있는 기능입니다.",
+			           dangerMode: true,
+			           buttons: {
+								 cancel: "확인",
+					   }
+	  			});
+	  			return;
+	  			
+	  		}else{
+	  			
+	  			$.ajax( 
+	  			 		{
+	  						url : "/interest/json/addInterest/SF/"+postNo+"/"+id,
+	  						method : "GET" ,
+	  						dataType : "json" ,
+	  						headers : {
+	  									"Accept" : "application/json",
+	  									"Content-Type" : "application/json"
+	  								  },
+	  						success : function(data , status) {
+//	  								console.log(JSON.stringify(data));
+	  								console.log(data.message);
+	  								
+	  								if ( data.message == "insertOK" ) {
+	  									$('#heartIcon').html('<i class="fas fa-heart" ></i>');
+	  									swal({
+	  							           text: "관심목록에 추가되었습니다.",
+	  							           dangerMode: true,
+	  							           buttons: {
+	  												 catch: {
+	  												 	text: "확인"
+	  												 }
+	  									   },
+	  							        });
+	  								}
+	  							
+	  					},
+	  						error: function(request, status, error){ 
+	  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	  			        }
+	  					
+	  				});
+	  		}
+ 		
+ 	 }
+ 
+	 	//관심목록에서 삭제
+		 function delInterest(){
+		 		console.log(postNo+","+id);
+		  
+		  			
+	 			$.ajax( 
+	 			 		{
+	 						url : "/interest/json/delInterest/SF/"+postNo+"/"+id,
+	 						method : "GET" ,
+	 						dataType : "json" ,
+	 						headers : {
+	 									"Accept" : "application/json",
+	 									"Content-Type" : "application/json"
+	 								  },
+	 						success : function(data , status) {
+	 								console.log(JSON.stringify(data));
+	 								console.log(data.message);
+	 								
+	 								if ( data.message == "delOK" ) {
+	 									$('#heartIcon').html('<i class="far fa-heart"></i>');
+	 									swal({
+		  							           text: "관심목록에서 삭제되었습니다.",
+		  							           dangerMode: true,
+		  							           buttons: {
+		  												 catch: {
+		  												 	text: "확인"
+		  												 }
+		  									   },
+		  							        });
+	 									
+	 								}
+	 							
+	 					},
+	 						error: function(request, status, error){ 
+	 								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	 			        }
+	 					
+	 			 });
+	
+	 		
+	 	 }
+	$(function(){
+		//관심목록에 추가
+			$(document).on("click", ".far", function() {
+				addInterest();
+			});
+			
+			//관심목록에서 삭제
+			$(document).on("click", ".fas", function() {
+				delInterest();
+			});
+		});
+	
 	//============= 목록버튼 Event  처리 =============	
  	$( "#btnList" ).on("click" , function() {
 		self.location = "/funding/listFunding" 	
@@ -367,21 +477,8 @@
 		//============= 후원하기 Event  처리 =============	
 	 	$( "#btnFund" ).on("click" , function() {
 	 		if(${user == null}){
-	 			
-	 			//$("#login-modal").modal('show');
-				alert("로그인")
+	 			$("#login-modal").modal('show');  
 	 		}else{	
-// 		 		if(!(${funding.statusCode eq '3'})){
-// 					  swal({
-// 				           text: "후원이 종료되었습니다.",
-// 				           dangerMode: true,
-// 				           buttons: {
-// 									 catch: {
-// 									 	text: "확인"
-// 									 }
-// 						   },			   
-// 				      });		 			
-// 		 		}else{
 		 		self.location = "/funding/getTerms?termsTitle=SFFund&postNo=${funding.postNo}";
 		 		}
 	 	

@@ -309,7 +309,7 @@ style>#searchKeyword {
 				<br />
 
 				<div align="center">
-					<jsp:include page="/common/pageNavigator.jsp" />
+					<jsp:include page="../../common/pageNavigator_new.jsp" />
 				</div>
 
 				<div style="min-height: 40px"></div>

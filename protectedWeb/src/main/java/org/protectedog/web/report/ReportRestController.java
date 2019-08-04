@@ -78,8 +78,8 @@ public class ReportRestController {
 		System.out.println("/report/json/addReport : POST");
 		
 		Report report = new Report();
-		report.setReportedId((String)jsonReport.get("reportedId"));
-		report.setReporterId((String)jsonReport.get("reporterId"));
+		report.setReportedNick((String)jsonReport.get("reportedNick"));
+		report.setReporterNick((String)jsonReport.get("reporterNick"));
 		report.setReportCategory((String)jsonReport.get("reportCategory"));
 		report.setReportContent((String)jsonReport.get("reportContent"));
 		
