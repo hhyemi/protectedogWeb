@@ -257,10 +257,11 @@ public class OrderController {
 	}
 	
 	//주문내역 리스트 출력
+	//주문내역 리스트 출력
 		@RequestMapping(value="listAdminOrder")
 		public String listAdminOrder( @ModelAttribute("search") Search search, HttpSession session, Model model) throws Exception{
 			
-			System.out.println("/listOrder");
+			System.out.println("/listAdminOrder");
 			
 			if(search.getCurrentPage() ==0 ){
 				search.setCurrentPage(1);
@@ -275,7 +276,7 @@ public class OrderController {
 			System.out.println("session value 확인");
 			
 			// Business logic 수행
-			Map<String , Object> map=orderService.listOrder(search, user.getId());
+			Map<String , Object> map=orderService.listAdminOrder(search, user.getId());
 			
 			System.out.println(user.getId());
 			

@@ -160,7 +160,7 @@ table {
 
 	<!--================End Product Description Area =================-->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
-	<input type="hidden" name="boardCode" value="IS" />
+	<input type="hidden" name="boardCode" value="MK" />
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 
 	<!--================ End footer Area  =================-->
@@ -202,19 +202,11 @@ table {
 		
 		
 		//============= 상품정보 GET/UPDATE Event  처리 =============
-			
-			 //manage//====================================================
-			 $( "button:contains('확인')" ).on("click" , function() {
-				//Debug..
-				console.log($( "td.ct_btn01:contains('확인')" ).html());
-				/* self.location = "/product/listProduct/manage" */
-				self.location = "/product/listProduct"
-			});
 		
 			//============= 수정하기 Event  처리 =============	
 			 	$( "#btnUpdate" ).on("click" , function() {
 			 			swal("거래중인 게시글은 수정을 추천하지 않습니다.");   
-			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";"
+			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";
 			 		}
 				});   
 

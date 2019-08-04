@@ -41,7 +41,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">List</span> <span>Admin Order</span></p>
-            <font size="7">관리자 상품관리</font>
+            <font size="7">관리자 구매관리</font>
           </div>
         </div>
       </div>
@@ -53,7 +53,6 @@
 	<form name="listOrder">
 		<section id="cart" class="cart">
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
-			<input type="hidden" value="${user.id}"/>
 			<div class="container">
 			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
@@ -73,8 +72,8 @@
 						<c:forEach var="order" items="${list}">
 							<c:set var="i" value="${i+1}" />
 							<tr class="ordernum">
-							<td>&nbsp;${i}&nbsp;|&nbsp;${user.id}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
-							<input type="hidden" name="id" name="id" value="${sessionScope.user.id }"/></td>
+							<td>&nbsp;${i}&nbsp;|&nbsp;${order.id}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
+							<input type="hidden" name="id" name="id" value="${user.id }"/></td>
 								<td align="center">
 									<div class="row">
 
@@ -110,8 +109,6 @@
 								배송완료</c:if>
 								<c:if test="${order.orderCode =='4'}">
 								취소</c:if>
-								<c:if test="${order.orderCode =='5'}">
-								구매후기 수정</c:if></td>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>

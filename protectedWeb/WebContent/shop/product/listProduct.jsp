@@ -60,27 +60,27 @@
 	max-height: 80px;
 }
 
-#searchKeyword{
+#searchKeyword {
 	height: 40px;
 	width: 150px;
 }
-#searchSubmmit{
-	width : 60px;
-	height : 40px;
-	
-	border-radius : 0px 15px 15px 0px;
-	border : 1px solid #D3D3D3;
+
+#searchSubmmit {
+	width: 60px;
+	height: 40px;
+	border-radius: 0px 15px 15px 0px;
+	border: 1px solid #D3D3D3;
 }
 
-#searchCondition{
-	height : 40px;
-	border-radius : 15px 0px 0px 15px;
+#searchCondition {
+	height: 40px;
+	border-radius: 15px 0px 0px 15px;
 }
-.btn-default{
+
+.btn-default {
 	height: 30px;
-	color : white;
+	color: white;
 }
-
 </style>
 
 
@@ -136,14 +136,20 @@
 							class="list-group-item" id="two">간식</a> <a
 							class="list-group-item" id="three">의류</a>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
-							<a class="list-group-item" id="admin">관리자 페이지</a>
+							<a class="list-group-item" id="admin">관리자 상품관리</a>
+						</c:if>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a class="list-group-item" id="adminOrder">관리자 구매관리</a>
 						</c:if>
 					</div>
 
 
-					<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> 주문상품
-						조회&nbsp;&nbsp;<img src="/resources/file/fileShop/order.png"
-						width="20px">
+					<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a class="orderhistory"> <c:if
+							test="${ sessionScope.user.role eq 'user' }">
+					주문상품
+						조회&nbsp;&nbsp;
+					<img src="/resources/file/fileShop/order.png" width="20px">
+						</c:if>
 					</a>
 
 
@@ -155,8 +161,7 @@
 					<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
 					<div class="row">
 						<div class="col-md-9" style="">
-							<div style="float: left;">
-							</div>
+							<div style="float: left;"></div>
 							<div style="float: right;">
 								<form class="form-inline" name="detailForm">
 									<div class="form-group">
@@ -172,8 +177,8 @@
 									</div>
 
 
-									<div class="form-group" align="right">>
-										<label class="sr-only" for="searchKeyword">검색어</label> <input
+									<div class="form-group" align="right">
+										> <label class="sr-only" for="searchKeyword">검색어</label> <input
 											type="text" class="form-control searchKeyword"
 											id="searchKeyword" name="searchKeyword" placeholder="검색어"
 											value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
@@ -220,28 +225,24 @@
 											</div>
 										</div>
 										<del>
-											<fmt:formatNumber value="${product.price}" pattern="#,###" />
+											<font size="2"><fmt:formatNumber
+													value="${product.price}" pattern="#,###" /></font>
 										</del>
 										<strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${product.discountPrice}" pattern="#,###" />원
-										</strong>
+										</strong>&nbsp;
 
-										<div class="cart-icon text-center">
-											<a class="detailprod"><i class="fa fa-cart-plus"></i>
-												상세보기 <input type="hidden" value="${product.prodNo}" /></a>
-
-										</div>
+										<a class="detailprod"><button class="btn btn-default" id="detailprod">상세보기</button>
+										<input type="hidden" value="${product.prodNo}" /></a>
 
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-
-
 					</div>
 
 					<div align="center">
-						<jsp:include page="../../common/pageNavigator_new.jsp"/>
+						<jsp:include page="../../common/pageNavigator_new.jsp" />
 					</div>
 				</div>
 			</div>
@@ -265,7 +266,8 @@
 		//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("form").attr("method", "POST").attr("action","/product/listProduct").submit();
+			$("form").attr("method", "POST").attr("action",
+					"/product/listProduct").submit();
 		}
 
 		//=============    상품상세조회(썸네일)  Event  처리 		=============
@@ -331,9 +333,15 @@
 				self.location = "/product/listAdminProduct"
 
 			});
+			//관리자 구매관리
+			$("#adminOrder").on("click", function() {
+				//alert("");
+				self.location = "/order/listAdminOrder"
 
+			});
 			$(".orderhistory").on("click", function() {
 				//alert("");
+
 				self.location = "/order/listOrder"
 
 			});

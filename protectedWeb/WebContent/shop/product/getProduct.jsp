@@ -102,10 +102,10 @@ table {
 								<input type="hidden" value="${product.prodNo}" />
 								<h3>${product.prodName}</h3>
 								<del>
-									<h2>
+									<h6>
 										<fmt:formatNumber value="${product.price}" pattern="#,###" />
 										원
-									</h2>
+									</h6>
 								</del>
 
 								<h2>
@@ -160,7 +160,7 @@ table {
 									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/><br/>
 
 							<div class="action">
-                <div class="title-but"><button class="btn btn-general btn-white" role="button" id="addorder"> 구매하기</button>
+                <div class="title-but"><button class="btn btn-default" id="addorder">구매하기</button>
 <!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
                 </div>
               </div>
@@ -213,18 +213,18 @@ table {
               >배송/교환/반품</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="review-tab"
-              data-toggle="tab"
-              href="#review"
-              role="tab"
-              aria-controls="review"
-              aria-selected="false"
-              >구매후기</a
-            >
-          </li>
+<!--           <li class="nav-item"> -->
+<!--             <a -->
+<!--               class="nav-link" -->
+<!--               id="review-tab" -->
+<!--               data-toggle="tab" -->
+<!--               href="#review" -->
+<!--               role="tab" -->
+<!--               aria-controls="review" -->
+<!--               aria-selected="false" -->
+<!--               >구매후기</a -->
+<!--             > -->
+<!--           </li> -->
         </ul>
         <div class="tab-content" id="myTabContent">
           <div
@@ -257,7 +257,7 @@ table {
                 <tbody>
                   <tr>
                     <td>
-<%--                       <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include> --%>
+<%--                     <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>  --%>
                     </td>
                   </tr>
                 </tbody>
