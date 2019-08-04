@@ -102,7 +102,7 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="uploadForm" class="form-horizontal">
 		  <div class="form-group">
-			<h3><b>후원금액</b></h3>
+			<h5><b>후원금액</b></h5>
 			해당 게시글에 후원하실금액은 ( <strong style="color:#f04f23">최대 300만원</strong> )입니다. <p/>
 		    <div class="row form-form"  >
 		      <input type="text" class="form-control" id="fundPay" name="fundPay" placeholder="0" style="width:600px; height:35px;" >&ensp; 원을 후원합니다.
@@ -110,7 +110,7 @@
 		  </div>
 			<br/>
 		  <div class="form-group">
-				<h3><b>후원결제방법</b></h3>
+				<h5><b>후원결제방법</b></h5>
 				* 브라우저 환경에 따라 결제창 실행 시간이 길어질 수 있습니다. (Explorer 11 권장)<br/>
 				* 브라우저 설정에서 팝업창이 제한되어있는지 확인해 주세요.<br/><br/>
 			    <div class="row form-form "  >

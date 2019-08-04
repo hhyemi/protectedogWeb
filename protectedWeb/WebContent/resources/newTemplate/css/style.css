@@ -29,7 +29,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 }
 /* General CSS */
 .swal-text{
-    font-size : 25px
+    font-size : 20px
  }
  
 .thumbnail {
@@ -44,6 +44,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
 }
+h1,h2,h3,h4,h5,h6{
+	color: #000000;
+}
 
 html,
 body {
@@ -53,12 +56,6 @@ body {
 body {
     font-family: 'Hind', sans-serif;
 }  
-
-h1, h2, h3, h4, h5 {
-    font-family: 'Roboto', sans-serif;
-    color:#41464b;
-    text-transform: uppercase;
-} 
 
 a {
     font-family: 'Hind', sans-serif;

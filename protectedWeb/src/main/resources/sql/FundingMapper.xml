@@ -14,7 +14,7 @@
 		<result property="statusCode" column="STATUS_CODE" jdbcType="CHAR" />
 		<result property="phone" column="PHONE" jdbcType="VARCHAR" />
 		<result property="postTitle" column="POST_TITLE" jdbcType="VARCHAR" />		
-		<result property="postContent" column="POST_CONTENT" jdbcType="VARCHAR" />
+		<result property="postContent" column="POST_CONTENT" jdbcType="CLOB" javaType="string"/>
 		<!-- default 0 -->
 		<result property="voteViewCount" column="VOTE_VIEW_COUNT" jdbcType="NUMERIC" />
 		<!-- default 0 -->
@@ -63,7 +63,7 @@
 	 	INSERT
 		INTO STORYFUNDING( POST_NO , ID , NICKNAME , STATUS_CODE , PHONE , POST_TITLE , POST_CONTENT , 
 		VOTE_START_DATE , VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , MAIN_FILE ) 
-		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickname:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent:VARCHAR} ,
+		VALUES	 ( #{postNo}, #{id:VARCHAR} , #{nickname:VARCHAR} , 1 , #{phone:VARCHAR} , #{postTitle:VARCHAR} , #{postContent} ,
 		SYSDATE , SYSDATE+29 , #{fundTargetPay:NUMERIC} , #{voteTargetCount:NUMERIC} , #{fundTargetDay:NUMERIC} ,  #{mainFile} )
 	 </insert>
 	 
@@ -81,7 +81,6 @@
 	 <update	id="updateVoting"	parameterType="funding" >
 	   	UPDATE STORYFUNDING
 	   	<set>
-	   		PHONE       	   = #{phone} ,
 			POST_TITLE	       = #{postTitle},
 			POST_CONTENT 	   = #{postContent} ,
 			FUND_TARGET_PAY	   = #{fundTargetPay},
@@ -107,7 +106,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT
-													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE  , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
 											        TRUNC((VOTE_END_DATE)-(SYSDATE))+1 AS VOTE_REMAIN_DATE , (VOTER_COUNT / VOTE_TARGET_COUNT)*100 AS VOTE_RATE
 											FROM STORYFUNDING 
@@ -133,7 +132,7 @@
 												</if>											 										
 										    </where>
 										    GROUP BY
-												POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+												POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 												VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE 														
 											ORDER BY CASE WHEN (STATUS_CODE != 1) THEN 'STATUS_CODE DESC' ELSE 'POST_NO DESC' END, POST_NO DESC				
 										) inner_table
@@ -190,7 +189,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT
-													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+													POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE  , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 													VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE ,				
 											        TRUNC((FUND_END_DATE)-(SYSDATE))+1 AS FUND_REMAIN_DATE , (FUND_PAY / FUND_TARGET_PAY)*100 AS FUND_RATE
 														FROM STORYFUNDING 
@@ -217,7 +216,7 @@
 												AND  STATUS_CODE IN (3,4)										
 										    </where>
 										    GROUP BY
-												POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE , POST_CONTENT , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
+												POST_NO , ID , NICKNAME , STATUS_CODE ,  PHONE ,  POST_TITLE  , VOTE_VIEW_COUNT , VOTER_COUNT , VOTE_START_DATE ,
 												VOTE_END_DATE , FUND_TARGET_PAY , VOTE_TARGET_COUNT , FUND_TARGET_DAY , FUND_VIEW_COUNT , SPONSOR_COUNT , FUND_PAY , FUND_START_DATE , FUND_END_DATE , MAIN_FILE , REVIEW_TITLE , REVIEW_CONTENT , REVIEW_REG_DATE 														
 											ORDER BY CASE WHEN (STATUS_CODE != 3) THEN 'STATUS_CODE DESC' ELSE 'POST_NO DESC' END, POST_NO DESC				
 											) inner_table

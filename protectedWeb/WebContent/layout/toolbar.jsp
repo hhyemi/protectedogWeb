@@ -62,7 +62,11 @@
 		html {
 	 		scroll-behavior: smooth;
 		}
-		
+		#fixedbtn{position:fixed;right:10px;bottom:70px;z-index:1000}		
+		i:hover{
+			opacity: 0.5;
+			cursor:pointer
+		}
 		
   	</style>
   </head>
@@ -74,6 +78,7 @@
 ======================================================--> 
 
     <header>
+		<i style="background-image: url('/resources/file/others/chatting.png'); height: 64px;width: 64px; overflow: hidden;" id="fixedbtn"></i>
 
       <!-- Top Navbar  -->
       <div class="top-menubar">
@@ -233,13 +238,21 @@
   	<script type="text/javascript">
 
 		//============= "로그인"  Event 처리 =============
-		$(".login-modal").on("click", function() {
+		$("#submitLogin").on("click", function() {
 			
 // 			alert("ㅎㅇ");
 			fncLogin();
 
 // 			alert("ㅎㅇ");
 			
+		});
+		
+		$("#fixedbtn").on("click",function(){
+			
+			 window.open("/chatting/addChattingUser?postId=${funding.id}",
+						"_blank",
+						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		
 		});
 		
 		function fncLogin(){

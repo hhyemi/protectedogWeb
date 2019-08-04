@@ -220,6 +220,7 @@ public class FundingController {
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
+		
 		if (user != null) {
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("id", user.getId());
@@ -282,6 +283,7 @@ public class FundingController {
 				fileService.delFile(files);
 			}
 		}
+		System.out.println("multiFile.size():::::::::"+multiFile.size());
 		if (multiFile.size() != 0) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
 
@@ -468,6 +470,18 @@ public class FundingController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
+		if (user != null) {
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("id", user.getId());
+			map2.put("boardCode", "SF");
+			map2.put("searchType", "post");
+			map2.put("searchNo", postNo);
+
+			if (interestService.getInterestCheck(map2) == 1) {
+				model.addAttribute("check", "already");
+			}
+		}
+		
 		// 리뷰
 		Map<String, Object> fileReviewPost = new HashMap<String, Object>();
 		fileReviewPost.put("boardCode", fundReviewBoardCode);
