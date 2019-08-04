@@ -9,6 +9,7 @@ public class Adopt {
 	private String boardCode;
 	private int postNo;
 	private String id;			// user
+	private String nickname;			// user
 	private String postTitle;
 	private String postContent;
 	private String phone;		// user
@@ -58,6 +59,14 @@ public class Adopt {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getPostTitle() {

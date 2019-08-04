@@ -74,16 +74,16 @@ public class AdoptRestController {
 									,@RequestParam Map<String, Object> param
 																										) throws Exception {
 
-		System.out.println("/adopt/json/addAdopt : POST \n");
+		System.out.println("/adopt/json/addMissing : POST \n"+param.get("file").toString());
 		MultipartFile image = images.get(0);
 		String mainF = image.getOriginalFilename();
 		Adopt adopt = new Adopt();
-
 		
 		adopt.setMainFile(mainF);
 		
 		adopt.setBoardCode(param.get("boardCode").toString());
 		adopt.setId(param.get("id").toString());
+		adopt.setNickname(param.get("nickname").toString());
 		adopt.setPostContent(param.get("postContent").toString());
 		adopt.setPhone(param.get("phone").toString());
 		adopt.setLocationKr(param.get("locationKr").toString());
@@ -93,16 +93,20 @@ public class AdoptRestController {
 		adopt.setDogStatus(param.get("dogStatus").toString());
 		adopt.setDogChar(param.get("dogChar").toString());
 		adopt.setStatusCode("1");
+		
+		
 		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
-	
+		
+		System.out.println("--------5--------");
+		
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
-		
+		System.out.println("--------6--------");
 		User user = userService.getUsers(adopt.getId());
 		user.setLevelPoint(user.getLevelPoint()+5);
 		userService.updateUsers(user);
-		
+		System.out.println("--------7--------");
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		
@@ -127,6 +131,56 @@ public class AdoptRestController {
 		System.out.println("/adopt/json/getMissing : GET");
 
 		return adoptService.getAdopt(postNo);
+	}
+	
+	
+	// 실종신고 수정
+	@RequestMapping( value="json/updateMissing", method=RequestMethod.POST )
+	public String updateMissing( 
+									@RequestParam("files") List<MultipartFile> images
+									,@RequestParam Map<String, Object> param
+//									,@RequestParam("multiFile") ArrayList<String> multiFile,
+//									@RequestParam("deleteFile") ArrayList<String> deleteFile
+																							) throws Exception {
+
+		System.out.println("/adopt/json/updateMissing : POST \n");
+		MultipartFile image = images.get(0);
+		String mainF = image.getOriginalFilename();
+		Adopt adopt = new Adopt();
+		
+		adopt.setMainFile(mainF);
+		
+		adopt.setPostContent(param.get("postContentU").toString());
+		adopt.setPhone(param.get("phoneU").toString());
+		adopt.setLocationKr(param.get("locationKrU").toString());
+		adopt.setDogBreed(param.get("dogBreedU").toString());
+		adopt.setDogGender(param.get("dogGenderU").toString());
+		adopt.setDogPay(  Integer.parseInt(param.get("dogPayU").toString())  );
+		adopt.setDogStatus(param.get("dogStatusU").toString());
+		adopt.setDogChar(param.get("dogCharU").toString());
+		adopt.setPostNo(  Integer.parseInt(param.get("postNoU").toString())  );
+		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
+		
+		System.out.println("--------5--------");
+		
+		adoptService.updateAdopt(adopt);
+		adopt = adoptService.getAdopt(adopt.getPostNo());
+		
+		System.out.println("--------6--------");
+		
+		List<FileDog> listFile = new ArrayList<FileDog>();
+		
+		// 파일디비에넣기
+		FileDog files = new FileDog();
+		files.setBoardCode(adopt.getBoardCode());
+		files.setFileName(mainF);
+		files.setFileCode(0);
+		files.setPostNo(adopt.getPostNo());
+		listFile.add(files);
+		fileService.addFile(listFile);
+		System.out.println("파일 확인 "+ files);
+		
+		return "{\"message\" : \"OK\" }";
 	}
 	
 	
@@ -172,28 +226,28 @@ public class AdoptRestController {
 		search.setAreaCondition( params.get("areaCondition").toString() );
 		if(search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
 			search.setAreaCondition("");
-		}else if(search.getAreaCondition().equals("kw")) {
-			search.setAreaCondition("강원");
-		}else if(search.getAreaCondition().equals("kk")) {
-			search.setAreaCondition("경기");
-		}else if(search.getAreaCondition().equals("ks")) {
-			search.setAreaCondition("경상");
-		}else if(search.getAreaCondition().equals("kj")) {
-			search.setAreaCondition("광주");
-		}else if(search.getAreaCondition().equals("dj")) {
-			search.setAreaCondition("대전");
-		}else if(search.getAreaCondition().equals("bs")) {
-			search.setAreaCondition("부산");
-		}else if(search.getAreaCondition().equals("su")) {
-			search.setAreaCondition("서울");
-		}else if(search.getAreaCondition().equals("us")) {
-			search.setAreaCondition("울산");
-		}else if(search.getAreaCondition().equals("ic")) {
-			search.setAreaCondition("인천");
-		}else if(search.getAreaCondition().equals("jr")) {
-			search.setAreaCondition("전라");
-		}else if(search.getAreaCondition().equals("cc")) {
-			search.setAreaCondition("충청");
+//		}else if(search.getAreaCondition().equals("kw")) {
+//			search.setAreaCondition("강원");
+//		}else if(search.getAreaCondition().equals("kk")) {
+//			search.setAreaCondition("경기");
+//		}else if(search.getAreaCondition().equals("ks")) {
+//			search.setAreaCondition("경상");
+//		}else if(search.getAreaCondition().equals("kj")) {
+//			search.setAreaCondition("광주");
+//		}else if(search.getAreaCondition().equals("dj")) {
+//			search.setAreaCondition("대전");
+//		}else if(search.getAreaCondition().equals("bs")) {
+//			search.setAreaCondition("부산");
+//		}else if(search.getAreaCondition().equals("su")) {
+//			search.setAreaCondition("서울");
+//		}else if(search.getAreaCondition().equals("us")) {
+//			search.setAreaCondition("울산");
+//		}else if(search.getAreaCondition().equals("ic")) {
+//			search.setAreaCondition("인천");
+//		}else if(search.getAreaCondition().equals("jr")) {
+//			search.setAreaCondition("전라");
+//		}else if(search.getAreaCondition().equals("cc")) {
+//			search.setAreaCondition("충청");
 		}
 		search.setVoteCondition("");
 		

@@ -106,7 +106,9 @@
 			padding-left: 30px !important;
 			padding-right: 30px !important;
 		}
-		
+/* 		.swal-text{ */
+/*         font-size : 25px */
+/*         } */
 
 
     </style>
@@ -130,7 +132,7 @@
 	<input type="hidden" id="boardCode" value="${param.boardCode }">
 	<input type="hidden" id="levels" value="${user.levels }">
 	<input type="hidden" id="sessionId" value="${user.id }">
-	<input type="hidden" id="totalCount" value="${resultPage.totalCount }">
+<%-- 	<input type="hidden" id="totalCount" value="${resultPage.totalCount}"> --%>
 
 
 		<div class="row">
@@ -212,11 +214,9 @@
       
       <div class="col-md-12"  style="padding-left: 0px;padding-right: 0px;">
       
-      <c:if test="${resultPage.totalCount eq 0 }">
-      	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
-<!-- 			<font size="4px">검색결과가 없습니다.</font> -->
-		</div>
-      </c:if>
+<%--       <c:if test="${resultPage.totalCount eq 0 }"> --%>
+<!--       	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;"></div> -->
+<%--       </c:if> --%>
 	
 	  <div class="row"  id="listAdoptJSON">
       <c:set var="i" value="0" />
@@ -270,6 +270,7 @@
  	
  	
  	
+ 	<jsp:include page="/common/searchResult.jsp"></jsp:include>
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
@@ -290,7 +291,7 @@
 		console.log($(window).scroll() );
 		console.log($(document).height());
 		var postNo;
-		var postSize = 2;
+		var postSize = 3;
 		var area = '';
 		var str = '';
 		
@@ -439,17 +440,30 @@
 				var lv = $('#levels').val();
 				var id = $('#sessionId').val();
 				console.log(lv);
-				if ( id == '' || lv == "미인증회원"  ){
-					swal({
-				           text: "인증회원만 작성 가능합니다.",
-				           dangerMode: true,
-				           buttons: {
-									 catch: {
-									 	text: "닫기"
-									 }
-						   },
+				if(id == '' || lv == '미인증회원'){
+		              swal({
+		                   title: "인증회원만 작성 가능합니다.",
+		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+		                   icon: "warning",
+		                   buttons: ["닫기", "인증하기"],
+		                   dangerMode: true     
+		                 })
+		                 .then((willDelete) => {
+		                   if (willDelete) {
+		                        self.location = "/users/addUsersAddition.jsp"
+		                        }
+		        });   
+// 				if ( id == '' || lv == "미인증회원"  ){
+// 					swal({
+// 				           text: "인증회원만 작성 가능합니다.",
+// 				           dangerMode: true,
+// 				           buttons: {
+// 									 catch: {
+// 									 	text: "닫기"
+// 									 }
+// 						   },
 						   
-				    });
+// 				    });
 					return;
 				}
 
@@ -487,16 +501,16 @@
 			$("form").attr("method" , "POST").attr("action" , "/adopt/listAdopt?boardCode=AD").submit();
 		}
 		
-		if ( $('#totalCount').val() == 0){
-			$('#searchEmpty').html( 
-// 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
-					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
-					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
-            		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
-            		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
-            		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
-			);
-		}
+// 		if ( $('#totalCount').val() == 0){
+// 			$('#searchEmpty').html( 
+// // 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+// 					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+// 					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+//             		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+//             		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+//             		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+// 			);
+// 		}
 		
 	
 	</script>
