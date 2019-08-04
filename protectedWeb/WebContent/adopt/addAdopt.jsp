@@ -570,8 +570,9 @@
 	                 
 	                 var imgNum = previewIndex++;
 	                 
-	                //8장 이상 업로드시
-	                 if(Object.keys(files).length>=5){
+	                //5장 이상 업로드시
+	                 
+	                 if( Object.keys(files).length>=5 ){
 	                	 
 	                	 swal({
 	  	 		           text: "5장까지 등록 가능합니다.",
@@ -660,7 +661,7 @@
 	     fileNameArray.splice(imgNum,1);
 	     fnAddFile(fileNameArray);
 	     $("#preview .preview-box[value=" + imgNum + "]").remove();
-	     resizeHeight();
+// 	     resizeHeight();
 	 }
 
 	 //============= 파일 확장자 validation 체크 =============

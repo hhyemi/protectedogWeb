@@ -582,9 +582,9 @@
 	                 //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
 	                 
 	                 var imgNum = previewIndex++;
-	                 
 	                //5장 이상 업로드시
-	                 if(Object.keys(files).length>=5){
+	                if( $('.preview-box2').length + Object.keys(files).length >= 5 ){
+// 	                 if(Object.keys(files).length>=5){
 	                	 swal({
 	  	 		           text: "5장까지 등록 가능합니다.",
 	  	 		           dangerMode: true,
@@ -647,7 +647,10 @@
 //                             console.log('sorrow: ' + faceData.sorrowLikelihood);
 //                             console.log('anger: ' + faceData.angerLikelihood);
 //                             console.log('surprise: ' + faceData.surpriseLikelihood);
-                       		fncBreed( test.label );
+							if ($('.preview-box2').length == 0){
+								fncBreed( test.label );
+							}
+                       		
 //                        		$( "#test" ).html(test.label.replace(/ /gi, "") );
                           },
                           error: function (data, textStatus, errorThrown) {
@@ -672,7 +675,7 @@
 	     fileNameArray.splice(imgNum,1);
 	     fnAddFile(fileNameArray);
 	     $("#preview .preview-box[value=" + imgNum + "]").remove();
-	     resizeHeight();
+// 	     resizeHeight();
 	 }
 	 
 	 //=============원래있던사진들 삭제버튼누를때 =============
@@ -681,7 +684,7 @@
          deletefileNameArray.push(imgName);
          fnDeleteFile(deletefileNameArray);
          $("#preview .preview-box2[value=\"" + imgName + "\"]").remove();
-         resizeHeight();
+//          resizeHeight();
      }
 
 

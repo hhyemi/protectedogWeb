@@ -1561,7 +1561,8 @@ h2{
             <input type='text' class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly>
           </div>        
           <div class="form-group">
-            <label>실종일</label>
+            <label id="dogDateLabel">실종일</label>
+<!--             <input type='text' class="form-control" name="dogDate" value="" readonly> -->
             <input type='text' class="datetimepicker form-control" name="dogDate" value="" readonly>
           </div>        
           <div class="form-group">
@@ -1641,25 +1642,9 @@ h2{
 
 <script>
 
-// $( "input[name=dogDate]" ).datepicker({
-// 	showOn: "button",
-// 	buttonImage: "/resources/file/others/calendar.png",
-// 	buttonImageOnly: true,
-// 	buttonText: "Select date",
-// 	dateFormat: "yy-mm-dd",
-// 	maxDate: "+0d",
-// 	prevText: '이전 달',
-//     nextText: '다음 달',
-//     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-//     monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-//     dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-//     dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-//     dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-//     showMonthAfterYear: true,
-//     yearSuffix: '년'
-// });
 
 	jQuery(document).ready(function(){
+
 	
 		  jQuery("#add-event").submit(function(){
 // 		      alert("Submitted");
@@ -1937,7 +1922,7 @@ h2{
 	                 var imgNum = previewIndex++;
 	                 
 	                //8장 이상 업로드시
-	                 if(Object.keys(files).length>=1){
+	                 if(Object.keys(files).length>=1 || $('.preview-box').length != 0){
 	                	 swal({
 	      		           text: "한장만 등록 가능합니다",
 	      		           dangerMode: true,
@@ -2008,7 +1993,7 @@ h2{
 	     fileNameArray.splice(imgNum,1);
 	     fnAddFile(fileNameArray);
 	     $("#preview .preview-box[value=" + imgNum + "]").remove();
-	     resizeHeight();
+// 	     resizeHeight();
 	 }
 
 	 //============= 파일 확장자 validation 체크 =============
@@ -2146,7 +2131,7 @@ h2{
 						success : function(data , status) {
 								console.log("update ok+++++++");
 								$('#modal-view-event-add').modal("hide");
-// 								self.location = "/adopt/listMissing";
+								self.location = "/adopt/listMissing";
 					},
 						error: function(request, status, error){ 
 								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
@@ -2456,7 +2441,7 @@ h2{
 							$('input[name=dogChar]').val( data.dogChar );
 							$('textarea[name=postContent]').val( data.postContent );
 							$('input[name=postNo]').val( data.postNo );
-// 							$("#preview").children().remove();
+							$("#preview").children().remove();
 							$("#preview").append(
 	                                 "<div class=\"preview-box\" value=\"1\"  style='display:inline;float:left;width:140px' >"
 	                                         + "<img class=\"thumbnail\" src=\"../resources/file/fileAdopt/" + data.mainFile + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
@@ -2475,8 +2460,19 @@ h2{
 		
 	});
 	
-
-	
+	$(document).on("click", ".waves-effect", function() {
+// 		alert($(this).parent().html());
+// 		if ( $('#modal-view-event-add .preview-box').length != 0 ){
+// 			$("#preview").children().remove();
+// 		}
+	});
+// 	$('#modal-view-event-add').on('shown.bs.modal', function (e) {
+// 		  // do something...
+// 		  $('.waves-effect').on("click", function(){
+// 			 alert('성공!'); 
+// 			 return;
+// 		  });
+// 	});
 	
 	// 삭제버튼
 	$(document).on("click", "#delMissing", function() {
@@ -2513,6 +2509,7 @@ h2{
 	$( "font:contains('실종캘린더')" ).on("click" , function() {
 		self.location = "/adopt/listMissing"
 	});
+
 
 
 </script>
