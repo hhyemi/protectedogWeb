@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
+import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.Participate;
@@ -54,7 +55,11 @@ public class FundingController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-
+	
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
+	
 	public FundingController() {
 		System.out.println(this.getClass());
 	}
@@ -235,11 +240,16 @@ public class FundingController {
 				model.addAttribute("check", "already");
 			}
 		}
+		
+	      // 댓글 불러오기
+	      Map<String, Object> map2 = commentService.listComment(postNo, search, fundBoardCode);
+	      model.addAttribute("list", map2.get("list"));
+		
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
 		// 댓글
-		model.addAttribute("list", map.get("list"));
+		model.addAttribute("list2", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("pageCheck", pageCheck);
@@ -489,13 +499,16 @@ public class FundingController {
 		fileReviewPost.put("boardCode", fundReviewBoardCode);
 		fileReviewPost.put("postNo", postNo);
 		List<FileDog> fileReview = fileService.getFile(fileReviewPost);
-
+		
+		Map<String, Object> map2 = commentService.listComment(postNo, search, fundBoardCode);
+		
+		model.addAttribute("list", map2.get("list"));
 		model.addAttribute("file", file);
 		model.addAttribute("fileReview", fileReview);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
 		// 댓글
-		model.addAttribute("list", map.get("list"));
+		model.addAttribute("list2", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("pageCheck", pageCheck);
