@@ -171,7 +171,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			
 			
 			$("input[name=id]").keyup(function(){
-				if($("input:text[name=id]").val().length > 12) {
+				if($("input[name=id]").val().length > 12) {
 					swal({
 						text : "아이디가 제한길이를 초과하였습니다.",
 						icon : "error",
