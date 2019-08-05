@@ -2,6 +2,8 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <html lang="ko">
 <head>
@@ -156,8 +158,9 @@
 															</div>
 														</div>
 													</td>
-													<td>${product.discountPrice}</td>
-													<td><input type="number" size="1"name="orderQuantity"
+													<td><fmt:formatNumber
+												value="${product.discountPrice}" pattern="#,###" />원</td>
+													<td><input type="number" min="1" size="1"name="orderQuantity"
 														class="form-control text-center" value="1" n></td>
 													<td class="actions"></td>
 												</tr>

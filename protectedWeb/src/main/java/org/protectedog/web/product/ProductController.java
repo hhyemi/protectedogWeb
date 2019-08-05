@@ -202,6 +202,8 @@ public class ProductController {
 		
 		search.setPageSize(20);
 		
+		System.out.println(search);
+		System.out.println("search/////////////////////////////////////////////");
 		// Business logic ����
 		Map<String, Object> map = productService.listProduct(search);
 
@@ -215,6 +217,8 @@ public class ProductController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
+		
+		
 		
 		return "forward:/shop/product/listProduct.jsp";
 	}

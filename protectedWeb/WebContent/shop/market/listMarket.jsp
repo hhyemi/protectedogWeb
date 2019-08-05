@@ -15,11 +15,11 @@
 ">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Business Bootstrap Responsive Template</title>
+<title>보호마켓</title>
 
 
 <!-- Global Stylesheets -->
-<title>상품 등록</title>
+
 
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->

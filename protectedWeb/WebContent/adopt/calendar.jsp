@@ -1495,9 +1495,6 @@ h2{
   box-shadow: none;
   height: 50px;
 }
-.swal-text{
-  font-size : 25px;
-}
 
 
 
@@ -1517,8 +1514,9 @@ h2{
 <div id="modal-view-event" class="modal modal-top fade calendar-modal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<div class="modal-body">
-				<h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
+		<div class="col-md-12" style="padding-top: 10px;"><h4 class="modal-title"><strong><span class="event-icon"></span><span class="event-title"></span></strong></h4></div>
+			<div class="modal-body" style="overflow-y:auto;overflow-x:hidden;">
+				
 				<div class="event-body"></div>
 			</div>
 			<div class="modal-footer" id="confirmFooter">
@@ -1776,26 +1774,18 @@ h2{
 						
 					}else {
 						
-						if (  id != "" && lv != '미인증회원'){
+						if (  id != "" && lv != '미인증회원' && ${sessionScope.user.role != 'admin'}){
 							$("#add-event")[0].reset();
 							$("#preview").children().remove();
 							$('#confirmBtn').text('등록');
+							
 							
 							$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
 
 
 							jQuery('#modal-view-event-add').modal();
 							
-						} else {
-// 							swal({
-// 						           text: "인증회원만 작성 가능합니다.",
-// 						           dangerMode: true,
-// 						           buttons: {
-// 											 catch: {
-// 											 		text: "확인"
-// 											 }
-// 								   },
-// 						    });
+						} else if (lv == '미인증회원'){
 							swal({
 				                   title: "인증회원만 이용할 수 있는 기능입니다.",
 		 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
@@ -1808,7 +1798,21 @@ h2{
 		 		                        self.location = "/users/addUsersAddition.jsp"
 				                        }
 				      		  });
+						} else if ( id == "" ) {
 							
+							$("#login-modal").modal('show'); 
+							
+						} else if ( ${sessionScope.user.role == 'admin'}){
+							swal({
+				                   text: "운영자는 작성할 수 없습니다.",
+				                   icon: "warning",
+				                   buttons: {
+			 							 catch: {
+			 							 	text: "확인"
+			 							 }
+			 				 		},
+				                   dangerMode: true     
+				      		  });
 						}
 					}
 				},
@@ -1869,6 +1873,8 @@ h2{
 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
 													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 // 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
+						 } else if ( ${sessionScope.user.role == 'admin'}) {
+							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 }
 						
 // 						jQuery('.event-body').html(event.description);
@@ -1935,14 +1941,14 @@ h2{
 // 	            		alert("이미지는 1장까지 업로드 가능합니다.");
 	                    delete files[imgNum];
 	                 }else{
-	          		 // 8장 이하 
-	                	$("#preview").append(
-	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<span value=\""
-	                                         + imgNum
-	                                         + "\" onclick=\"deletePreview(this)\">"
-                                           + "삭제" + "</span>" + "</div> ");
+	          		 // 1장 이하 
+	                	 $("#preview").append(
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
+                                             + "<span href=\"#\" value=\""
+                                             + imgNum
+                                             + "\" onclick=\"deletePreview(this)\">"
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -2161,7 +2167,7 @@ h2{
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
 
-		if(parseInt(removeCommas($(this).val())) > 1000000 ){
+		if(parseInt(removeCommas($(this).val())) > 300000 ){
 			swal({
 		           text: "제한금액을 초과하였습니다.",
 		           dangerMode: true,
@@ -2172,7 +2178,7 @@ h2{
 				   },
 		     });
 // 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
-			$(this).val('1000000');
+			$(this).val('300000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 // 		}else{
 // 			$("span[name=dogPay]").text('');
@@ -2272,7 +2278,7 @@ h2{
 	
 	
 	function fncConfirm(){
-		if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length > 6 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
+		if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 300000 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
 			swal({
 		           text: "사례금을 다시 확인하세요.",
 		           dangerMode: true,
@@ -2443,10 +2449,10 @@ h2{
 							$('input[name=postNo]').val( data.postNo );
 							$("#preview").children().remove();
 							$("#preview").append(
-	                                 "<div class=\"preview-box\" value=\"1\"  style='display:inline;float:left;width:140px' >"
-	                                         + "<img class=\"thumbnail\" src=\"../resources/file/fileAdopt/" + data.mainFile + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<span value=\"1\" onclick=\"deletePreview(this)\">"
-                                          + "삭제" + "</span>" + "</div> ");
+                                     "<div class=\"preview-box\" value=\"1\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
+                                             + "<img class=\"thumbnail\" src=\"../resources/file/fileAdopt/" + data.mainFile + "\"\/ width=\"130px;\" height=\"115px;\"/>"
+                                             + "<span href=\"#\" value=\"1\" onclick=\"deletePreview(this)\">"
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 							
 							$('#confirmBtn').text('수정');
 							$('#modal-view-event-add').modal();
@@ -2505,6 +2511,7 @@ h2{
 	
 	
 	$('#modal-view-event-add .modal-body').css('max-height', $(window).height() * 0.6);
+	$('#modal-view-event .modal-body').css('max-height', $(window).height() * 0.8);
 	
 	$( "font:contains('실종캘린더')" ).on("click" , function() {
 		self.location = "/adopt/listMissing"

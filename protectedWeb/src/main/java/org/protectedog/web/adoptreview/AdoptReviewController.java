@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
-import org.protectedog.service.domain.Adopt;
+import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
@@ -38,10 +38,10 @@ public class AdoptReviewController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	//setter Method 구현 않음
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
 	
-//	@Resource(name = "uploadPath")
-//	private String uploadPath;
 
 	
 	public AdoptReviewController(){
@@ -54,6 +54,8 @@ public class AdoptReviewController {
 	@Value("#{commonProperties['fundingPageSize']}")
 	int pageSize;
 	
+	@Value("#{commonProperties['adoptReview']}")
+	String boardCode;
 
 	
 	
@@ -84,21 +86,21 @@ public class AdoptReviewController {
 		System.out.println("/adoptReview/addAdoptReview : POST");
 
 		//Business Logic
-//		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
-//		System.out.println("파일확인 : "+product.getFileName());
-		System.out.println("======================"+board);
 		
 		String thumnail;
-		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src=")+10,  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img src=")+10   ).indexOf("\"")  +  board.getPostContent().indexOf("<img src=")+10   )) ;
+		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img alt="),  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img alt=")+10   ).indexOf("/>")  +  board.getPostContent().indexOf("<img alt=")+10   )) ;
 		
 		board.setThumnail(thumnail);
 		
 		board.setId(((User)session.getAttribute("user")).getId());
 		board.setNickName(((User)session.getAttribute("user")).getNickname());
+		board.setBoardCode(boardCode);
 		
 		User user = userService.getUsers(board.getId());
-		user.setLevelPoint(user.getLevelPoint()+5);
-		userService.updateUsers(user);
+		if ( ! user.getLevels().equals("미인증회원")) {
+			user.setLevelPoint(user.getLevelPoint()+5);
+			userService.updateUsers(user);
+		}
 
 //		String str = "바나나 : 1000원, 사과 : 2000원, 배 : 3000원";
 //		String target = "사과";
@@ -107,8 +109,6 @@ public class AdoptReviewController {
 
 		
 		boardService.addBoard(board);
-//		boardService.getBoard(board.getPostNo());
-//		System.out.println("=============="+board);
 		
 		return "redirect:/adoptReview/getAdoptReview?postNo="+board.getPostNo();
 	}
@@ -117,25 +117,32 @@ public class AdoptReviewController {
 	
 	// board 글 상세조회+조회수 증가
 	@RequestMapping( value="getAdoptReview")
-	public String getAdoptReview( @RequestParam("postNo") int postNo , Model model, HttpSession session ) throws Exception {
+	public String getAdoptReview( @RequestParam("postNo") int postNo , @ModelAttribute("search") Search search, Model model, HttpSession session ) throws Exception {
 		
 		System.out.println("/adoptReview/getAdoptReview : GET");
 		
-		System.out.println("세션들어왔나 "+session.getAttribute("user") );
 		if ( session.getAttribute("user") != null) {
 			User user = userService.getUsers(((User)session.getAttribute("user")).getId()); 
 			model.addAttribute("user", user);
 		}
-		System.out.println("------------1---------------"+postNo);
-		System.out.println("-------------2--------------"+boardService.getBoard(postNo));
+		
+		// 첫 페이지 1로 고정
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		// 댓글 페이지 사이즈 5로 고정
+		search.setPageSize(5);
+		// 댓글 불러오기
+		Map<String, Object> map = commentService.listComment(postNo, search, boardCode);
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
+		
 		//Business Logic
 		boardService.updateViewCount(boardService.getBoard(postNo));
-		System.out.println("==============================");
 		Board board = boardService.getBoard(postNo);
-		System.out.println("++++++++++++++++++++++++++++++");
 		// Model 과 View 연결
-		model.addAttribute("board", board);	
-		System.out.println("###############################");
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("totalCount", map.get("totalCount"));
+		model.addAttribute("board", board);
 
 		return "forward:/adoptReview/getAdoptReview.jsp";
 	}
@@ -176,7 +183,7 @@ public class AdoptReviewController {
 //		}
 		
 		String thumnail;
-		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img src=")+10,  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img src=")+10   ).indexOf("\"")  +  board.getPostContent().indexOf("<img src=")+10   )) ;
+		thumnail = board.getPostContent().substring(    board.getPostContent().indexOf("<img alt="),  (  board.getPostContent().substring   (   board.getPostContent().indexOf("<img alt=")+10   ).indexOf("/>")  +  board.getPostContent().indexOf("<img alt=")+10   )) ;
 		
 		board.setThumnail(thumnail);
 		
@@ -208,7 +215,6 @@ public class AdoptReviewController {
 	@RequestMapping( value="listAdoptReview" )
 	public String listAdoptReview(
 						@ModelAttribute("search") Search search,
-//														@RequestParam("boardCode") String boardCode  ,
 														Model model ) throws Exception{
 		
 		System.out.println("/adoptReview/listAdoptReview : GET / POST");
@@ -217,12 +223,10 @@ public class AdoptReviewController {
 			search.setCurrentPage(1);
 		}
 		
-		search.setPageSize(pageSize);
-		System.out.println("■■■■■ 검색어 확인 : "+search.getSearchKeyword());
-		System.out.println("■■■■■ 확인 : "+search);
+		search.setPageSize(18);
 		
 		// Business logic 수행
-		Map<String , Object> map=boardService.listBoard(search, "AR", 0 );
+		Map<String , Object> map=boardService.listBoard(search, boardCode, 0 );
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 			

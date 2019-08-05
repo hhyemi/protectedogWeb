@@ -229,7 +229,7 @@
 								<div class="form-group">
 									<label for="firstname"></label> <input type="text"
 										class="form-control" name="postTitle" id="postTitle"
-										value="${board.postTitle}">
+										="${board.postTitle}">
 								</div>								
 								<div class="col-md-13">
 									<div class="form-group">

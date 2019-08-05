@@ -58,20 +58,6 @@ public class AdoptDAOImpl implements AdoptDAO{
 		return map;
 	}
 	
-	public Map<String, Object> listAdoptById(Search search, String id) throws Exception {
-		Map<String , Object>  map = new HashMap<String, Object>();
-		map.put("id",  id );
-		map.put("endRowNum",  search.getEndRowNum()+"" );
-		map.put("startRowNum",  search.getStartRowNum()+"" );
-		
-		List<Adopt> list = sqlSession.selectList("AdoptMapper.listAdoptById", map); 
-		
-		//selectOne: 쿼리 결과가 없으면 return null 
-		map.put("totalCount", sqlSession.selectOne("AdoptMapper.getTotalCountById", map));
-		map.put("list", list);
-		
-		return map;
-	}
 	
 	public Map<String, Object> listAdopt2(String id) throws Exception {
 		Map<String , Object>  map = new HashMap<String, Object>();

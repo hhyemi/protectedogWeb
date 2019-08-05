@@ -91,14 +91,14 @@ img{max-width: 600px;}
 				<br/>
 			</div>
 		</div>
-
+		
+		<div class="button" align="right">
 		<c:if test="${board.id == sessionScope.user.id || sessionScope.user.role == 'admin'}">
-			<div class="button" align="right">
-				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">수정</button>
-				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">삭제</button>
-				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">목록</button>
-			</div>
+			<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">수정</button>
+			<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">삭제</button>
 		</c:if>
+			<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">목록</button>
+		</div>
 	</div>
 
 	<jsp:include page="/common/comment.jsp"></jsp:include>

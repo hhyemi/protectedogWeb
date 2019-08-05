@@ -40,8 +40,8 @@ public class CommentRestController {
 	@Qualifier("interestServiceImpl")
 	private InterestService interestService;
 	
-	@Value("#{commonProperties['info']}")
-	String boardCode;
+//	@Value("#{commonProperties['info']}")
+//	String boardCode;
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
@@ -67,20 +67,21 @@ public class CommentRestController {
 		comment.setProfile(user.getProfile());
 		
 		// Set Code
-		comment.setBoardCode(boardCode);
+
+		//comment.setBoardCode(boardCode);
 		commentService.addComment(comment);
 		
-		comment = commentService.getComment(comment.getCommentNo());
+		comment = commentService.getComment(comment.getCommentNo(), comment.getBoardCode());
 		
 		return comment;
 	}
 	
-	@RequestMapping("json/getComment/{commentNo}")
-	public Comment getCommentView(@PathVariable("commentNo") int commentNo) throws Exception {
+	@RequestMapping("json/getComment/{commentNo}/{boardCode}")
+	public Comment getCommentView(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode) throws Exception {
 
 		System.out.println(" ============================== rest getComment ==================================");
 
-		Comment comment = commentService.getComment(commentNo);
+		Comment comment = commentService.getComment(commentNo, boardCode);
 
 		return comment;
 	}
@@ -94,31 +95,33 @@ public class CommentRestController {
 		
 		comment.setId(user.getId());
 		comment.setNickName(user.getNickname());
-		comment.setBoardCode(boardCode);
+		//comment.setBoardCode(boardCode);
 		
 		System.out.println(" comment : " + comment );
 		
 		commentService.updateComment(comment);
 		
-		comment = commentService.getComment(comment.getCommentNo());
+		comment = commentService.getComment(comment.getCommentNo(), comment.getBoardCode());
 		
 		return comment;
 	}
 	
-	@RequestMapping( value="json/delComment/{commentNo}", method=RequestMethod.POST)
-	public int updateComment(@PathVariable int commentNo) throws Exception {
+	@RequestMapping( value="json/delComment/{commentNo}/{boardCode}", method=RequestMethod.POST)
+	public int updateComment(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode) throws Exception {
 
 		System.out.println(" ============================== rest delComment ==================================");
 		
 		System.out.println(" commentNo : " + commentNo );
-		commentService.delComment(commentNo);
+		System.out.println(" boardCode : " + boardCode );
+		
+		commentService.delComment(commentNo, boardCode);
 		
 		return commentNo;
 	}
 	
 	
-	@RequestMapping( value="json/updateLikeCnt/{commentNo}/{check}", method=RequestMethod.POST)
-	public Comment updateLikeCnt(@PathVariable("commentNo") int commentNo, @PathVariable("check") String check, HttpSession session) throws Exception {
+	@RequestMapping( value="json/updateLikeCnt/{commentNo}/{check}/{boardCode}", method=RequestMethod.POST)
+	public Comment updateLikeCnt(@PathVariable("commentNo") int commentNo,@PathVariable("boardCode") String boardCode, @PathVariable("check") String check, HttpSession session) throws Exception {
 
 		System.out.println(" ============================== rest updateLikeCnt ==================================");
 		
@@ -130,6 +133,7 @@ public class CommentRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("commentNo", commentNo);
+		map.put("boardCode", boardCode);
 		
 		if(check.equals("plus")) {
 			map.put("check", check);
@@ -143,19 +147,19 @@ public class CommentRestController {
 		comment.setCommentNo(commentNo);
 		
 		Interest interest = new Interest();
-		interest.setBoardCode(boardCode);
+		interest.setBoardCode("IS");
 		interest.setInterestComment(comment);
 		interest.setInterestId(user);
 
 		interestService.addInterest(interest);
 		
-		comment = commentService.getComment(commentNo);
+		comment = commentService.getComment(commentNo, boardCode);
 		
 		return comment;
 	}
 	
-	@RequestMapping( value="json/check/{commentNo}/{id}", method=RequestMethod.POST)
-	public int check(@PathVariable("commentNo") int commentNo, @PathVariable("id") String checkId) throws Exception {
+	@RequestMapping( value="json/check/{commentNo}/{id}/{boardCode}", method=RequestMethod.POST)
+	public int check(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode,@PathVariable("id") String checkId) throws Exception {
 
 		System.out.println(" ============================== rest updateLikeCnt ==================================");
 		
@@ -174,8 +178,8 @@ public class CommentRestController {
 		return result;
 	}
 	
-	@RequestMapping( value="json/listComment/{postNo}/{currentPage}", method=RequestMethod.POST)
-	public Map<String, Object> listComment(@PathVariable("postNo") int postNo, @ModelAttribute("search") Search search, @PathVariable("currentPage") int currentPage) throws Exception {
+	@RequestMapping( value="json/listComment/{postNo}/{currentPage}/{boardCode}", method=RequestMethod.POST)
+	public Map<String, Object> listComment(@PathVariable("postNo") int postNo, @ModelAttribute("search") Search search, @PathVariable("currentPage") int currentPage, @PathVariable("boardCode") String boardCode) throws Exception {
 		
 		System.out.println(" ============================== rest listComment ==================================");
 		
@@ -199,7 +203,7 @@ public class CommentRestController {
 		
 		// ������ �������� BL ����
 		Map<String, Object> commentMap = commentService.listComment(postNo, search, boardCode);
-		int totalCount = commentService.getTotalCount(postNo);
+		int totalCount = commentService.getTotalCount(postNo,boardCode);
 		//Map<String, Object> reMap = reCommentService.listReComment(map);
 		
 		// return�� Map ��ü�� put

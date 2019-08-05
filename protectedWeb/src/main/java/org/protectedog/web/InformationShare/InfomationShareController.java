@@ -69,13 +69,8 @@ public class InfomationShareController {
 
 		System.out.println(" ============================== addInfo ==================================");
 		
-		// User Level Point Up
-		User user = (User)session.getAttribute("user");
-		user.setLevelPoint(user.getLevelPoint() + 10 );
-		
-		userService.updateUsers(user);
-
 		// Board Set
+		User user = (User)session.getAttribute("user");
 		board.setBoardCode(boardCode);
 		board.setId(user.getId());
 		board.setNickName(user.getNickname());
@@ -85,7 +80,11 @@ public class InfomationShareController {
 		boardService.addBoard(board);
 		
 		System.out.println(" info PostNo" + board.getPostNo());
-
+		
+		// User Level Point Up
+		user.setLevelPoint(user.getLevelPoint() + 10 );
+		
+		// userService.updateUsers(user);
 
 		return "redirect:/info/getInfo?postNo="+board.getPostNo();
 	}
