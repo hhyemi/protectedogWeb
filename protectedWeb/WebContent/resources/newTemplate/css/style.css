@@ -31,6 +31,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 .swal-text{
     font-size : 20px
  }
+ #report, .fa-heart {
+ 	cursor:pointer
+ }
  
 .thumbnail {
     display: block;

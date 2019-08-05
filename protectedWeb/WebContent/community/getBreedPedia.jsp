@@ -25,14 +25,15 @@
 
 <style type="text/css">
 
-#banner-message {BACKGROUND: #FFF;BORDER-RADIUS: 4PX;PADDING: 20PX;FONT-SIZE: 25PX;TEXT-ALIGN: CENTER;TRANSITION: ALL 0.2S;MARGIN: 0 AUTO;WIDTH: 500PX;}
+#banner-message {BACKGROUND: #FFF;BORDER-RADIUS: 4PX;PADDING: 20PX; PADDING-LEFT: 0px; FONT-SIZE: 25PX;TEXT-ALIGN: CENTER;TRANSITION: ALL 0.2S;MARGIN: 0 AUTO;WIDTH: 500PX;}
 
-#breed_data {background: #fff;border-radius: 4px;padding: 20px;font-size: 16px;text-align: left;transition: all 0.2s;margin: 0 auto;width: 500px;color: black;}
+#breed_data {background: #fff;border-radius: 4px;padding: 20px; PADDING-LEFT: 0px; font-size: 16px;text-align: left;transition: all 0.2s;margin: 0 auto;width: 500px;color: black;}
 
 #breed_image {background: #fff;margin: 0 auto;width: 500px;height: 500px;}
 
 td{color : black;width : 300px;}
 
+.breed_select{width : 500px;}
 .goog-trans{background:#f0f0f0}
 
 .goog-trans-control{float:left;height:40px}
@@ -42,26 +43,24 @@ td{color : black;width : 300px;}
 .goog-trans-info{float:left;margin:0 0 0 10px;height:40px;line-height:40px;color:#686868}
 
 .goog-trans:after{display:block;visibility:hidden;clear:both;content:''}
-
+/* .td2{min-width : 300px} */
 </style>
 </head>
 <body>
 
 	<jsp:include page="/layout/toolbar.jsp" />
 	
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
-					</p>
-					<h1 class="mb-0 bread">견종백과</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ --> 
+	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">Information</span> <span>pedia</span></p>
+            <font size="7">견종백과</font>
+          </div>
+        </div>
+      </div>
+    </div>
 	
 	<br/>
 	
@@ -105,6 +104,8 @@ td{color : black;width : 300px;}
 		var $breed_select = $('select.breed_select');
 		$breed_select.change(function() {
 			id = $(this).children(":selected").attr("id");
+			//td = $(this).parents().find("td:nth-child(2)")[1];
+			//debugger;
 			getDogByBreed(id);
 		});
 
@@ -352,11 +353,15 @@ td{color : black;width : 300px;}
 							valueArray[i] = '매력적인';
 						}
 					}
-
+					
+					
 					$("#breed_data_table").append(
 							"<tr><td>" + key + "</td><td>" + valueArray
 									+ "</td></tr>");
-
+					$("td:nth-child(1)").css("font-weight","bold");
+					$("td:nth-child(2)")[0].append(" KG");
+					$("td:nth-child(2)")[1].append(" CM");
+// 					$("td:nth-child(2)").addClass('td2');
 				}
 
 				if (key == 'country_code') {
@@ -435,13 +440,13 @@ td{color : black;width : 300px;}
 				
 	         }else if( jQuery('a.goog-te-gadget-link').length ){
 	        	 
-	             console.log('has button');
+// 	             console.log('has button');
 	             google_initialized = true;
 	             setTimeout(google_auto_translate, 500);
 				
 	         }else{
 	 			 
-	             console.log('no button');
+// 	             console.log('no button');
 	             setTimeout(google_auto_translate, 100);
 	 
 	         }
@@ -469,17 +474,17 @@ td{color : black;width : 300px;}
 	</script>
 	<script src="//translate.google.com/translate_a/element.js?cb=googleSectionalElementInit&ug=section&hl=ko"></script>
 	
-	<script src="/resources/prodmenu/js/popper.min.js"></script>
-	<script src="/resources/prodmenu/js/bootstrap.min.js"></script>
-	<script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script>
-	<script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script>
-	<script src="/resources/prodmenu/js/jquery.stellar.min.js"></script>
-	<script src="/resources/prodmenu/js/owl.carousel.min.js"></script>
-	<script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-	<script src="/resources/prodmenu/js/aos.js"></script>
-	<script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-	<script src="/resources/prodmenu/js/scrollax.min.js"></script>
-	<script src="/resources/prodmenu/js/main.js"></script>
+<!-- 	<script src="/resources/prodmenu/js/popper.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/bootstrap.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/jquery.easing.1.3.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/jquery.waypoints.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/jquery.stellar.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/owl.carousel.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/jquery.magnific-popup.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/aos.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/jquery.animateNumber.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/scrollax.min.js"></script> -->
+<!-- 	<script src="/resources/prodmenu/js/main.js"></script> -->
 	
 </body>
 
