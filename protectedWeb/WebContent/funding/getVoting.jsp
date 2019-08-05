@@ -42,9 +42,9 @@
        }	
         .fa-heart {
          	color: #f04f23;
-/*          	padding-top: 5px; */
+          	padding-top: 10px; 
         }
-        img {
+        #home > img {
        	    max-width: 600px;
         }
 
@@ -54,7 +54,8 @@
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
- 
+ 		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
+		<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include> 		
   </head>
   <body>
     <!--================Header Menu Area =================--> 
@@ -65,7 +66,8 @@
         <div class="row s_product_inner">
           <div style="width: 600px">
 
-            조회수 ${funding.voteViewCount } | 작성일 ${funding.voteStartDate}
+         조회수 ${funding.voteViewCount } | 작성일 ${funding.voteStartDate}
+           
             <p/>
               <div
                 id="carouselExampleIndicators"
@@ -121,12 +123,15 @@
             
             <div style="padding-bottom:10px">
            		 <div class="row">
-           		 <div class="col-xs-11 col-md-11" style="height:35px; left:0px; bottom:0px;" >
-            <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b>
+           		 <div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px; margin-right:30px" >
+            <font size=5 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b>
 				  </div> 	
 			        	<c:if test="${ user.id ne funding.id }">
-				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left: 0;" >
-								
+			        	
+				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-top:10px" >
+									<img src="/resources/file/others/siren.png"  id ="report"  width="22px" height="22px" >
+							</div>
+							<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left:9px "  >
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' }">
 										<span class="fas fa-heart"></span>
@@ -155,12 +160,21 @@
 					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.voteEndDate}</div>
 			 </div>					 
 		     <br/>
-
+		     
+			 <c:if test="${fuding.voterCount eq 1 }">
+			 <div><font size="5" >투표율&ensp;1%</font></div>
+			 <div class="progress">					 
+			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: 1%; background-color:#e66447!important;"></div>
+			 </div>				 
+			 </c:if>
+			 
+			 <c:if test="${fuding.voterCount ne 1 }">			 
 			 <div><font size="5" >투표율&ensp;${funding.voteRate}%</font></div>
 			 <div class="progress">					 
 			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%; background-color:#e66447!important;"></div>
 			 </div>		
-
+			 </c:if>
+			 
 			<div class="row" style="position:relative;height:35px;">
 					 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" > 0표</div>
 					<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${funding.voteTargetCount}표</div>
@@ -252,6 +266,7 @@
 				       
 				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
 	              	   <input type="hidden" name="userId" value="${user.id}">
+	              	   <input type="hidden" name="nickname" value="${funding.nickname}">	              	   
               	       <input type="hidden" name="levels" value="${user.levels}">			       
 			 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 			 		   <input type="hidden" id="searchKeyword" name="searchKeyword" value=""/>	  
@@ -471,15 +486,26 @@
 	    
 		//============= 문의하기 Event  처리 =============	
 	 	$( "#btnQuestion" ).on("click" , function() {
+	 		
+	 		if(${user==null}){
+	 			$("#login-modal").modal('show');  
+	 		}else{	 	    
+			 	$('#receiverNick').prop('readonly', true);
+			 	$("#receiverNick").val($('input[name=nickname]').val());
+	 			$("#messageModal").modal('show');  
+	 		}
+		});  
+		
+		//============= 신고하기 Event  처리 =============	
+	 	$( "#report" ).on("click" , function() {
 	 		if(${user==null}){
 	 			$("#login-modal").modal('show');  
 	 		}else{
-		 		 window.open("/chatting/addChattingUser?postId=${funding.id}",
-							"_blank",
-							"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		 	   $('#reportedNick').prop('readonly', true);
+		 	    $("#reportedNick").val($('input[name=nickname]').val());
+		 		$("#report-modal").modal("show");
 	 		}
-		});   
-	
+		});	
 		//============= SNS공유 Event  처리 =============	
 		$( "#twitter" ).on("click" , function() {
 	 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600,top=160, left=450');

@@ -209,7 +209,6 @@
     </header> 
     
     <jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
-
     <!--Global JavaScript -->
     <script src="/resources/newTemplate/js/jquery/jquery.min.js"></script>
     <script src="/resources/newTemplate/js/popper/popper.min.js"></script>
