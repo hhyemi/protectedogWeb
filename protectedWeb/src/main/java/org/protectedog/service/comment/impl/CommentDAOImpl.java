@@ -29,8 +29,12 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public Comment getComment(int commentNo) throws Exception {		
-		return sqlSession.selectOne("CommentMapper.getComment", commentNo);
+	public Comment getComment(int commentNo, String boardCode) throws Exception {	
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("commentNo",commentNo);
+		map.put("boardCode",boardCode);
+		return sqlSession.selectOne("CommentMapper.getComment", map);
 	}
 
 	@Override
@@ -52,19 +56,24 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public void delComment(int commentNo) throws Exception {
-		sqlSession.update("CommentMapper.delComment", commentNo);		
+	public void delComment(int commentNo, String boardCode) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("commentNo",commentNo);
+		map.put("boardCode",boardCode);
+		
+		sqlSession.update("CommentMapper.delComment", map);		
 	}
 
 	@Override
-	public int getTotalCount(int postNo) throws Exception {
+	public int getTotalCount(int postNo, String boardCode) throws Exception {
 		System.out.println(" CommentDAOImpl getTotlaCount postNo : " + postNo);
-		return sqlSession.selectOne("CommentMapper.getTotalCount", postNo);
-	}
-
-	@Override
-	public void reportComment(int commentNo) throws Exception {
-		sqlSession.insert("CommentMapper.addReport", commentNo);
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("postNo",postNo);
+		map.put("boardCode",boardCode);
+		
+		return sqlSession.selectOne("CommentMapper.getTotalCount", map);
 	}
 
 	@Override
