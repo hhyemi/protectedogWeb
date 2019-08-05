@@ -304,6 +304,7 @@ th {
 						<th align="center" id="boardfont">제조일</th>
 						<th align="center" id="boardfont">등록일</th>
 						<th align="center" id="boardfont">재고수량</th>
+						<th align="center" id="boardfont">상품유형</th>
 
 					</tr>
 				</thead>
@@ -322,6 +323,12 @@ th {
 							<td align="center"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${product.regDate}" /></td>
 							<td align="center">${product.quantity}</td>
+							<td align="center"><c:if test="${product.prodCode == 10 }">
+							사료</c:if>
+							<c:if test="${product.prodCode == 20 }">
+							간식</c:if>
+							<c:if test="${product.prodCode == 30 }">
+							의류</c:if></td>
 
 						</tr>
 					</tbody>

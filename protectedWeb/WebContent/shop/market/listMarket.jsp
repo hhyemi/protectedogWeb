@@ -78,47 +78,36 @@
 	min-width: 350px;
 }
 
-style>#checkPostTitle {
-	width: 300px;
-	padding: 0 5px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-select, #searchKeyword {
-	height: 33px;
-}
-
 #searchKeyword {
 	height: 40px;
 	width: 150px;
-	border: 1px solid #D3D3D3;
 }
 
 #searchSubmmit {
 	width: 60px;
 	height: 40px;
 	border-radius: 0px 15px 15px 0px;
-	border: 1px solid #f04f23;
-}
-
-#voteCondition {
-	height: 40px;
-	border-radius: 15px 0px 0px 15px;
-	padding-left: 10px;
-	border-color: #D3D3D3;
-	border-right: 0px;
+	border: 1px solid #D3D3D3;
 }
 
 #searchCondition {
 	height: 40px;
-	padding-left: 5px;
-	border-color: #D3D3D3;
-	border-right: 0px;
+	border-radius: 15px 0px 0px 15px;
 }
 
+#selectPageSize {
+	height: 30px;
+}
 
+#newstd {
+	min-width: 251px;
+	max-width: 251px;
+}
+
+.btn-default {
+	height: 30px;
+	color: white;
+}
 </style>
 
 </head>
@@ -167,95 +156,107 @@ select, #searchKeyword {
 
 
 
-<div class="container">
-	<button type="button" class="btn btn-default" id="createtext">작성</button>
+	<div class="container">
+		<button type="button" class="btn btn-default" id="createtext">작성</button>
 
-	<section class="ftco-section bg-light"
-		style="padding-bottom: 0px; padding-top: 30px;">
+		<section class="ftco-section bg-light"
+			style="padding-bottom: 0px; padding-top: 30px;">
 
-		<form class="form-inline" name="detailForm">
-			<div class="container">
+			<br />
+			<p />
+			<!--/////////////////////// form start /////////////////////////////////-->
 
-				<!--검색 부터 -->
-				<div class="row">
-					<div class="col-md-6" align="left">
-						<p style="font-weight: bold;">전체 ${resultPage.totalCount } 건</p>
+			<div style="float: right;">
+				<form class="form-inline" name="detailForm">
+					<div class="form-group">
+						<select class="form-control" id="searchCondition"
+							name="searchCondition">
+							<option value="0"
+								${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
+							<option value="1"
+								${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
+							<option value="2"
+								${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
+						</select>
 					</div>
 
-					<div class="form-group" style="padding-left: 160px">
-							<select class="form-control" id="searchCondition"
-								name="searchCondition">
-								<option value="0"
-									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-								<option value="1"
-									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
-								<option value="2"
-									${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
-							</select> </div>
 
-
-						<div class="form-group">
+					<div class="form-group">
 						<label class="sr-only" for="searchKeyword">검색어</label> <input
-							type="text" id="searchKeyword" name="searchKeyword"
-							placeholder="검색어"
+							type="text" class="form-control searchKeyword" id="searchKeyword"
+							name="searchKeyword" placeholder="검색어"
 							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-						<!-- 						    <button type="button" class="btn btn-default">검색</button> -->
 						<button type="button" id="searchSubmmit"
-							class="btn btn-default searchSubmmit"
-							style="padding-bottom: 6px; margin-left: 0px;">
+							class="btn btn-default searchSubmmit">
 							<span class="fas fa-search"></span>
 						</button>
 					</div>
-				</div>
-				<br /> <br />
-				<c:if test="${resultPage.totalCount eq 0 }">
-					<div align="center" style="height: 300px; padding-top: 100px;">
-						<font size="4px">검색결과가 없습니다.</font>
-					</div>
-				</c:if>
 
-				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
-
-				<div class="row">
-					<div class="col-md-10 col-lg-12 order-md-last">
-						<input type="hidden" id="currentPageList" name="currentPageList"
-							value="${resultPage.currentPage}" />
-						<div class="row">
-							<c:set var="i" value="0" />
-							<c:forEach var="board" items="${list}">
-								<c:set var="i" value="${i+1}" />
-								<figure id="get">
-									<div class="card">
-										<img class="img-fluid" id="clickplease"
-											src="../../resources/file/fileMarket/${board.thumnail}">
-										<input type="hidden" value="${board.postNo}" />
-										<div class="card-body text-center">
-											<div class="card-title">
-												<a><b>${board.postTitle}</b> </a> <input type="hidden"
-													value="${board.postNo}" />
-											</div>
-											${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
-													value="${board.price}" pattern="#,###" />원
-											</strong>
-											<hr>
-											<p class="view">${board.id}(&nbsp;${board.city}&nbsp;)
-												&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
-											</p>
-										</div>
-									</div>
-								</figure>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
+					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+					<input type="hidden" id="currentPage" name="currentPage" value="" />
+				</form>
 			</div>
 
-			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-			<input type="hidden" id="currentPage" name="currentPage" value="" />
-			<input type="hidden" id="boardCode" name="boardCode"
-				value="${board.boardCode}" /> <input type="hidden" id="postNo"
-				name="postNo" value="${board.postNo}" />
-</form></section></div>
+			<c:if test="${totalCount == 0}">
+				<div class="row">
+					<div class="col-md-9" align="center"
+						style="height: 500px; padding-top: 150px;">
+
+						<jsp:include page="/common/searchResult.jsp"></jsp:include>
+					</div>
+				</div>
+
+
+			</c:if>
+		</section>
+		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
+
+		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
+
+		<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
+
+		<div class="row">
+			<div class="col-md-10 col-lg-12 order-md-last">
+				<input type="hidden" id="currentPageList" name="currentPageList"
+					value="${resultPage.currentPage}" />
+				<div class="row">
+					<c:set var="i" value="0" />
+					<c:forEach var="board" items="${list}">
+						<c:set var="i" value="${i+1}" />
+						<figure id="get">
+							<div class="card">
+								<img class="img-fluid" id="clickplease"
+									src="../../resources/file/fileMarket/${board.thumnail}">
+								<input type="hidden" value="${board.postNo}" />
+								<div class="card-body text-center">
+									<div class="card-title">
+										<a><b>${board.postTitle}</b> </a> <input type="hidden"
+											value="${board.postNo}" />
+									</div>
+									${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
+											value="${board.price}" pattern="#,###" />원
+									</strong>
+									<hr>
+									<p class="view">${board.id}(&nbsp;${board.city}&nbsp;)
+										&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
+									</p>
+								</div>
+							</div>
+						</figure>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div align="center" style="padding-left: 45%">
+		<jsp:include page="/common/pageNavigator_new.jsp" />
+	</div>
+
+	<div style="min-height: 40px"></div>
+
 
 
 	<!--====================================================
@@ -272,7 +273,7 @@ select, #searchKeyword {
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage)
 			$("form").attr("method", "POST").attr("action",
-					"/market/listProduct").submit();
+					"/market/listMarket?order=1").submit();
 		}
 		//=============    상품상세조회(썸네일)  Event  처리 		=============
 		//============= 썸네일 사진 클릭 Event  처리 =============	
@@ -303,6 +304,15 @@ select, #searchKeyword {
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 			$("#createtext").on("click", function() {
 				self.location = "/shop/market/addMarket.jsp";
+			});
+
+		});
+
+		//============= Event 처리 및  연결 =============
+		$(function() {
+
+			$("#searchSubmmit").on("click", function() {
+				fncGetList(1);
 			});
 
 		});

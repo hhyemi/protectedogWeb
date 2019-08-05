@@ -140,7 +140,6 @@ table {
 
 
 								거래지역 : ${board.city}<br /> 판매자 연락처 :
-								<c:choose>
 									<c:if test="${user.role eq 'admin'||user.role eq 'user'}">
 								${board.phone}
 </c:if>
@@ -148,7 +147,6 @@ table {
 								회원 연락처는 가입한 회원에게만 제공됩니다
 </c:if>
 
-								</c:choose>
 								<hr>
 								<br /> ${board.postContent}<br /> <br /> <br />
 								<br />

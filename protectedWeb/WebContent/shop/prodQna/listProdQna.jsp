@@ -102,6 +102,7 @@ body {
 								"/prodQna/getProdQna?postNo="
 										+ $(this).children("input").val());
 					});
+		});
 		
 		
 
@@ -217,6 +218,7 @@ body {
 					</tbody>
 				</c:forEach>
 				
+				
 			</table>
 			<br/>
 			<!--  table end /////////////////////////////////////-->
@@ -225,7 +227,18 @@ body {
 			<jsp:include page="../../common/pageNavigator_new.jsp"/></p>
 
 		</div>
-	</form>
+		
+	<script type="text/javascript">
+	
+	$(function(){
+		
+		$("#getgetget").on("click",".go",function(){
+			
+			window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+		});
+	});
+	
+	</script>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
 </body>
 </html>

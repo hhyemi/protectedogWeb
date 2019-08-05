@@ -28,6 +28,8 @@
 	font-size: 17px;
 	margin-top: 10px;
 }
+
+.form-group7{margin-top:10px;}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -252,7 +254,7 @@
 
 
 							<!-- 미리보기 영역 -->
-							<div class="form-group">
+							<div class="form-group7">
 								<div class="row">
 									<div id="preview" class="col-md-12" align="center"
 										style='display: inline; min-width: 100px;'></div>
