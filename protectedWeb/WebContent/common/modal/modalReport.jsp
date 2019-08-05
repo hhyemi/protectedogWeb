@@ -77,8 +77,19 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                       		<h4 class="modal-title">신고하기</h4>
-                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+											<div class="hero-wrap hero-bread" 
+											style="padding-bottom: 10px; padding-top : 20px; display: inline-block;">
+												<div class="container">
+													<div class="row no-gutters slider-text align-items-center justify-content-center">
+														<div class="col-md-12 ftco-animate text-center" style="padding-left: 125px;">
+															<p class="breadcrumbs">
+																<span class="mr-6"><a href="#">SendReport</a></span>
+															</p>
+															<font size="7">신고작성</font>
+														</div>
+													</div>
+												</div>
+											</div>
                                         </div>
                                         <div class="modal-body">
                                             <form role="form" class="form-horizontal sendReport" id="reportForm">
@@ -187,7 +198,7 @@
           $(function() {     
             var form = $('#reportForm')[0];
             var formData = new FormData(form);
-            alert("2")
+//             alert("2")
 
             for (var index = 0; index < 100; index++) {
                 formData.append('files',files[index]);
@@ -204,8 +215,8 @@
 	                dataType : 'JSON',
 	                data : formData,
 	                success : function(result) {
-	                	alert("3")
-	                	alert(result);
+// 	                	alert("3")
+// 	                	alert(result);
 	                    if (result === -1) {
 	                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
 	                        // 이후 동작 ...
@@ -238,7 +249,7 @@
                 		file : $('#reportMultiFile').val(),
                 	}),
                 	success : function(JSONData){
-                		alert("5");
+//                 		alert("5");
                 		console.log(JSON.stringify(JSONData));
                 		$('#report-modal').modal("hide");
                 	}
@@ -246,7 +257,7 @@
         });
 			
 // 			$(".sendReport").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
-			alert("4")
+// 			alert("4")
 			alert("신고가 완료되었습니다.");
 		}
 		
@@ -363,7 +374,32 @@
 				$('a[href="#"]').on('click',function(){
 					$("form")[0].reset;
 				});
-			});		
+			});	
+			
+			$("textarea[name=reportContent]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 3000) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=id]").focus();
+                            }
+                       });
+                   }
+                }
+			})
 		
 	</script>	
   

@@ -112,7 +112,7 @@
 	          		<div class="col-md-12">
 		                <div class="form-group">
 		                	<label for="phone"><strong>연락처</strong>&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label>
-		                	<input type="text" class="form-control" name="phone" value="${ apply.phone }" readonly>
+		                	<input type="text" class="form-control" name="phone" value="${ user.phone }" readonly>
 		                </div>
 	                </div>
     

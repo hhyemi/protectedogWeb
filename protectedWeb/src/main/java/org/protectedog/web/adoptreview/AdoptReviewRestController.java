@@ -55,39 +55,24 @@ public class AdoptReviewRestController {
 
 
 	
-	// 글 추천
-	@RequestMapping( value="json/updateRecommendCount/{postNo}/{statusCode}", method=RequestMethod.GET)
-	public Board updateRecommendCount( 	@RequestParam("postNo") int postNo,
-										@RequestParam("statusCode") String statusCode ) throws Exception{
-		
-		System.out.println("/adoptReview/json/updateRecommendCount : GET");
-		
-		Board board = boardService.getBoard(postNo);
-		
-		//Business Logic
-		boardService.updateRecommendCount(board);
-		
-		return board;
-	}
-	
-	
 	// 글 리스트 조회
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value="json/listAdoptReview" )
 	public JSONObject listAdoptReview( @ModelAttribute("search") Search search, @RequestBody Map<String,Object> params,
 																			Model model, HttpSession session ) throws Exception{
 		
-		System.out.println("\n\n/adoptReview/json/listAdoptReview : GET / POST "+params.get("boardCode").toString());
-		System.out.println(params);
+		System.out.println("\n\n/adoptReview/json/listAdoptReview : GET / POST "+params.get("searchKeyword").toString());
 		
-		search.setSearchCondition( params.get("searchCondition").toString() );
-		if(search.getSearchCondition() == null ) {
+		if(params.get("searchCondition") == null || params.get("searchCondition").toString().equals("") ) {
 			search.setSearchCondition("");
+		} else {
+			search.setSearchCondition( params.get("searchCondition").toString() );
 		}
-		
-		search.setSearchKeyword( params.get("searchKeyword").toString() );
-		if(search.getSearchKeyword() == null ) {
+
+		if(params.get("searchKeyword") == null || params.get("searchKeyword").toString().equals("") ) {
 			search.setSearchKeyword("");
+		} else {
+			search.setSearchKeyword( params.get("searchKeyword").toString() );
 		}
 		
 		search.setAreaCondition("");

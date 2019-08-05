@@ -1,5 +1,6 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,153 +8,264 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- ¬¸¡∂ : http://getbootstrap.com/css/   ¬¸¡∂ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
-            padding-top : 50px;
-        }
-     </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>Î≥¥Ìò∏Ìï†Í∞ú : ÎßàÏù¥ÌéòÏù¥ÏßÄ</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
     
-    	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/font-icon-style.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
+    
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   		<link rel="stylesheet" href="/resources/demos/style.css">
   		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+      	<style type="text/css">
+ 		
+ 		@font-face {
+    		font-family: 'YouandiModernTR';
+   		 	font-style: normal;
+    		font-weight: normal;
+    		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
+		}
+    	
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+    		font-family: 'YouandiModernTR', sans-serif !important;
+    	} 	
+		
+		.navbar-brand{
+			font-weight: bold;
+		}
+		
+		.swal-button {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button:hover {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button--cancel {
+		    color: white;
+		    background-color: #f04f23;
+		}
+		
+		html {
+	 		scroll-behavior: smooth;
+		}
+	
+  	</style>
+	
+	    <jsp:include page="/layout/toolbar.jsp" />
 	
 </head>
 
 <body>
-
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
+	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="page-header">
-	       <h3 class=" text-info">ƒÌ∆˘πﬁæ∆∞°º¿</h3>
-	       	<c:if test="${ sessionScope.user.role == admin }">
-	       		<input type="button" id="couponManage" value="ƒÌ∆˘µÓ∑œ/ºˆ¡§">
-	       	</c:if>
-	    </div>
-		
-		<form class="form-horizontal" name="formal" enctype="multipart/form-data">
-			
-		<div class="row">
-		    <div style="float:left" class="col-md-4">
-			   <div style="float:left" class="col-sm-4">
-				  <input type="file" class="form-control" id="couponImage" 
-				  name="couponImg" style="width: 300px; height: 40px" maxLength="13"/>
-			   </div>
-		  	</div>	
-				
-				<div style="float:right; min-width:65%" class="col-md-8"> 
-			
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>ƒÌ∆˘ƒ⁄µÂ</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<input type="text" id="couponCode" name="couponCode" placeholder="ƒÌ∆˘ƒ⁄µÂ¿‘∑¬">
-						</div>
+		<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }">
+			<div class="container">
+				<div class="row no-gutters slider-text align-items-center justify-content-center">
+					<div class="col-md-9 ftco-animate text-center">
+						<p class="breadcrumbs">
+							<span class="mr-2"><a href="/index.jsp">CouponList</a></span>
+						</p>
+						<h1 class="mb-0 bread">Ïù¥Îã¨Ïùò Ïø†Ìè∞</h1>
 					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>ƒÌ∆˘¿Ã∏ß</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<input type="text" id="couponName" name="couponName" placeholder="ƒÌ∆˘¿Ã∏ß¿‘∑¬">
-						</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>«“¿Œ±›æ◊</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<input type="text" id="discount" name="discount" placeholder="«“¿Œ∞°∞›¿‘∑¬">
-						</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>µÓ∑œ¿œ¿⁄</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<input type="text" readonly="readonly" id="datepicker1" name="makeDate" placeholder="µÓ∑œ¿œ¿⁄¿‘∑¬">
-						</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>ªÁøÎ±‚«—</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<input type="text" readonly="readonly" id="datepicker2" name="limitDate" placeholder="ªÁøÎ±‚«—¿‘∑¬">
-						</div>
-					</div>
-					
-					<hr/>
-					
-					<input type="hidden" id="couponStatus" name="couponStatus" value="0">
-					
-					<div class="row" align="right">
-				  		<input type="submit" id="submit" value="ƒÌ∆˘µÓ∑œ">
-					</div>
-				
 				</div>
-		
+			</div>
 		</div>
 		
-		<hr/>
+		<div class="page-content d-flex align-items-stretch col-md-12" style="padding-top: 60px; ">
+			<jsp:include page="/users/mypage/userSideBar.jsp"></jsp:include>
+			<div class="col-md-12">
 
-	</form>
+				<div class="row">
+					
+					<div style="padding-left:50px;" class="col-md-12"> 
+						<form class="form-horizontal" name="formal" enctype="multipart/form-data">		
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>Ïø†Ìè∞Ïù¥ÎØ∏ÏßÄ</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="file" class="form-control" id="couponImg" name="couponImg" style="width: 300px; height: 40px" maxLength="13"/>
+							</div>
+						</div>
+
+						<br/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>Ïø†Ìè∞ÏΩîÎìú</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="text" id="couponCode" style="width: 300px; height: 40px" name="couponCode" placeholder="Ïø†Ìè∞ÏΩîÎìúÏûÖÎ†•">
+							</div>
+						</div>
+						
+						<br/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>Ïø†Ìè∞Ïù¥Î¶Ñ</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="text" id="couponName" style="width: 300px; height: 40px" name="couponName" placeholder="Ïø†Ìè∞Ïù¥Î¶ÑÏûÖÎ†•">
+							</div>
+						</div>
+						
+						<br/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>Ìï†Ïù∏Í∏àÏï°</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="text" id="discount" style="width: 300px; height: 40px" name="discount" placeholder="Ìï†Ïù∏Í∞ÄÍ≤©ÏûÖÎ†•">
+							</div>
+						</div>
+						
+						<br/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>Îì±Î°ùÏùºÏûê</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="text" readonly="readonly" style="width: 300px; height: 40px" id="datepicker1" name="makeDate" placeholder="Îì±Î°ùÏùºÏûêÏûÖÎ†•">
+							</div>
+						</div>
+						
+						<br/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>ÏÇ¨Ïö©Í∏∞Ìïú</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="text" readonly="readonly" style="width: 300px; height: 40px" id="datepicker2" name="limitDate" placeholder="ÏÇ¨Ïö©Í∏∞ÌïúÏûÖÎ†•">
+							</div>
+						</div>
+						
+						<br/>
+						
+						<input type="hidden" id="couponStatus" name="couponStatus" value="0">
+						</form>					
+					</div>
+					<div class="col-md-12" style="display:inline-block;">
+						<div class="col-md-3" style="float:right;">
+							<button type="button" class="btn btn-default" id="submit">Îì±Î°ù</button>
+						</div>
+					</div>
+				</div>
+			
+				<br/>
+
+		</div>
+		</div>
 	</div>
 	
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
- 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+	<!--Global Javascript -->
+<!--     <script src="/resources/newTemplate/admin/js/jquery.min.js"></script> -->
+<!--     <script src="/resources/newTemplate/admin/js/popper/popper.min.js"></script> -->
+<!--     <script src="/resources/newTemplate/admin/js/tether.min.js"></script> -->
+<!--     <script src="/resources/newTemplate/admin/js/bootstrap.min.js"></script> -->
+<!--     <script src="/resources/newTemplate/admin/js/jquery.cookie.js"></script> -->
+<!--     <script src="/resources/newTemplate/admin/js/jquery.validate.min.js"></script>  -->
+<!--     <script src="/resources/newTemplate/admin/js/chart.min.js"></script>  -->
+<!--     <script src="/resources/newTemplate/admin/js/front.js"></script> -->
+    
+    <!--   <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--   <script type="text/javascript" src="/resources/events.js"></script> -->
+<!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script>
+
 	
-		$(function(){
-			$("#datepicker1").datepicker({
-				dateFormat: "yy-mm-dd",
-				minDate: '-100y',
-				yearRange: 'c-100:c+10',
-				changeMonth: true,
-				changeYear: true
-			});
+// 		$(function(){
+// 			$("#datepicker1").datepicker({
+// 				dateFormat: "yy-mm-dd",
+// 				minDate: '-100y',
+// 				yearRange: 'c-100:c+10',
+// 				changeMonth: true,
+// 				changeYear: true
+// 			});
+// 		});
+		
+// 		$(function(){
+// 			$("#datepicker2").datepicker({
+// 				dateFormat: "yy-mm-dd",
+// 				minDate: '-100y',
+// 				yearRange: 'c-100:c+10',
+// 				changeMonth: true,
+// 				changeYear: true
+// 			});
+// 		});
+		
+		$( "input[id=datepicker1]" ).datepicker({
+			showOn: "button",
+			buttonImage: "/resources/file/others/calendar.png",
+			buttonImageOnly: true,
+			buttonText: "Select date",
+			dateFormat: "yy-mm-dd",
+			prevText: 'Ïù¥Ï†Ñ Îã¨',
+	        nextText: 'Îã§Ïùå Îã¨',
+	        monthNames: ['1Ïõî', '2Ïõî', '3Ïõî', '4Ïõî', '5Ïõî', '6Ïõî', '7Ïõî', '8Ïõî', '9Ïõî', '10Ïõî', '11Ïõî', '12Ïõî'],
+	        monthNamesShort: ['1Ïõî', '2Ïõî', '3Ïõî', '4Ïõî', '5Ïõî', '6Ïõî', '7Ïõî', '8Ïõî', '9Ïõî', '10Ïõî', '11Ïõî', '12Ïõî'],
+	        dayNames: ['Ïùº', 'Ïõî', 'Ìôî', 'Ïàò', 'Î™©', 'Í∏à', 'ÌÜ†'],
+	        dayNamesShort: ['Ïùº', 'Ïõî', 'Ìôî', 'Ïàò', 'Î™©', 'Í∏à', 'ÌÜ†'],
+	        dayNamesMin: ['Ïùº', 'Ïõî', 'Ìôî', 'Ïàò', 'Î™©', 'Í∏à', 'ÌÜ†'],
+	        showMonthAfterYear: true,
+	        yearSuffix: 'ÎÖÑ'
 		});
 		
-		$(function(){
-			$("#datepicker2").datepicker({
-				dateFormat: "yy-mm-dd",
-				minDate: '-100y',
-				yearRange: 'c-100:c+10',
-				changeMonth: true,
-				changeYear: true
-			});
+		$( "input[id=datepicker2]" ).datepicker({
+			showOn: "button",
+			buttonImage: "/resources/file/others/calendar.png",
+			buttonImageOnly: true,
+			buttonText: "Select date",
+			dateFormat: "yy-mm-dd",
+			prevText: 'Ïù¥Ï†Ñ Îã¨',
+	        nextText: 'Îã§Ïùå Îã¨',
+	        monthNames: ['1Ïõî', '2Ïõî', '3Ïõî', '4Ïõî', '5Ïõî', '6Ïõî', '7Ïõî', '8Ïõî', '9Ïõî', '10Ïõî', '11Ïõî', '12Ïõî'],
+	        monthNamesShort: ['1Ïõî', '2Ïõî', '3Ïõî', '4Ïõî', '5Ïõî', '6Ïõî', '7Ïõî', '8Ïõî', '9Ïõî', '10Ïõî', '11Ïõî', '12Ïõî'],
+	        dayNames: ['Ïùº', 'Ïõî', 'Ìôî', 'Ïàò', 'Î™©', 'Í∏à', 'ÌÜ†'],
+	        dayNamesShort: ['Ïùº', 'Ïõî', 'Ìôî', 'Ïàò', 'Î™©', 'Í∏à', 'ÌÜ†'],
+	        dayNamesMin: ['Ïùº', 'Ïõî', 'Ìôî', 'Ïàò', 'Î™©', 'Í∏à', 'ÌÜ†'],
+	        showMonthAfterYear: true,
+	        yearSuffix: 'ÎÖÑ'
 		});
 		
 		 $(function() {
 			 $( "#submit" ).on("click" , function() {
-				 $("form[name=formal]").attr("method" , "POST").attr("action" , "/coupon/addCouponManage");
+// 				 debugger;
+					swal({
+						text : "Ïø†Ìè∞Ïù¥ Îì±Î°ùÎêòÏóàÏäµÎãàÎã§!",
+						buttons : {
+							catch : {
+								text : "ÌôïÏù∏"
+							}
+						}
+					})
+					.then((A) => {
+						if(A) {
+							$("form[name=formal]").attr("method" , "POST").attr("action" , "/coupon/addCouponManage").submit();
+						}
+					})
 				});
 		});
 		
