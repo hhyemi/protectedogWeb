@@ -1639,7 +1639,9 @@ h2{
 
 
 <script>
-
+var files = {};
+var previewIndex = 0;
+var fileNameArray = new Array();
 
 	jQuery(document).ready(function(){
 
@@ -1778,7 +1780,7 @@ h2{
 							$("#add-event")[0].reset();
 							$("#preview").children().remove();
 							$('#confirmBtn').text('등록');
-							
+							files = {};
 							
 							$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
 
@@ -1899,9 +1901,9 @@ h2{
 	  //============= "다중파일업로드"  Event 처리 및  연결 =============      
 
 	  //임의의 file object영역
-	 var files = {};
-	 var previewIndex = 0;
-	 var fileNameArray = new Array();
+// 	 var files = {};
+// 	 var previewIndex = 0;
+// 	 var fileNameArray = new Array();
 	 
 	 // image preview 기능 구현
 	 // input = file object[]
@@ -2169,7 +2171,7 @@ h2{
 
 		if(parseInt(removeCommas($(this).val())) > 300000 ){
 			swal({
-		           text: "제한금액을 초과하였습니다.",
+		           text: "제한금액(30만원)을 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -2499,7 +2501,9 @@ h2{
 	    }).then((willDelete) => {
 	           if (willDelete) { 
 	        	   swal("삭제가 완료되었습니다!", {
+	        		   buttons: "확인",
 	                   icon: "success",
+	                   button: "확인",
 	                 }).then((value) => {
 	                	 self.location = "/adopt/updateStatusCode?postNo="+postNo;
 	                 });

@@ -152,5 +152,46 @@ public class FundingRestController {
 
 		return map2;
 	}
-			
+	// 무한스크롤
+	@RequestMapping(value = "json/listFunding/", method = RequestMethod.POST)
+	public Map<String, Object> listFunding(@RequestBody Search search, HttpServletRequest request) throws Exception {
+
+		System.out.println("/funding/json/listFunding");
+
+		String originSearch = null;
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(6);
+
+		if (search.getSearchKeyword() == null) {
+			search.setSearchKeyword("");
+		} else {
+			if (!search.getSearchKeyword().equals("")) {
+				originSearch = search.getSearchKeyword();
+				String likeSearch = "%" + search.getSearchKeyword() + "%";
+				search.setSearchKeyword(likeSearch);
+			}
+		}
+
+		if (search.getSearchCondition() == null) {
+			search.setSearchCondition("");
+		}
+
+		Map<String, Object> map = fundingService.listFunding(search);
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+
+		search.setSearchKeyword(originSearch);
+		
+		Map<String, Object> map2 = new HashMap<String,Object>();
+		map2.put("list", map.get("list"));
+	
+
+		return map2;
+	}
+						
 }

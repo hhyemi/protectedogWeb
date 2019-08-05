@@ -125,7 +125,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 <!-- ToolBar Start /////////////////////////////////////-->
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
 <!-- ToolBar End /////////////////////////////////////-->
 </head>
 <body>
@@ -297,65 +296,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<!--====================================================
                       CLIENT
 ======================================================-->
-	<!--====================================================
-                        OFFER 스토어
-======================================================-->
-	 <section id="comp-offer">
-	 <div class="store">
-      <div class="container-fluid">
-        <div class="row">
-      <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
-            <h2>스토어</h2>
-            <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">보호마켓 바로가기</button>
-            <button class="btn btn-general btn-white" role="button">스토어 바로가기&emsp;  </button>
-          </div>
-          
-         <div class="col-md-3 col-sm-6 wow fadeInUp" style="margin-right: 35px" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont" style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Business Management</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>   
-          
-                 
-          <div class="col-md-3 col-sm-6  wow fadeInUp"  style="margin-right: 35px;" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>              
-              <h3>Leadership Development</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"  style="margin-right: 35px" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Social benefits and services</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      </div><br/><br/><br/><br/><br/>
-    </section>
+	
+      <br/><br/><br/><br/><br/>
+
     
 
 	<!--================ start footer Area  =================-->
@@ -535,9 +478,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                        		"\') no-repeat center center;background-size:cover;min-height:300px; max-height:300px; min-width:330px; max-width:330px;\" >"+
 			    					"<input type=\"hidden\" value=\""+adopt.postNo+"\" /></a> ";	    																
 					
-									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
+									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\" align=\"center\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
 			    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
-										       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
+										       "<div class=\"col-xs-5 col-md-5\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"3\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
 
 									display += "</div></div></div>";	
 								 }

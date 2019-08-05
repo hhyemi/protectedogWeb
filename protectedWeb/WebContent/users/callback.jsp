@@ -12,12 +12,12 @@
 <script type="text/javascript">
   var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
 
-  alert(naver_id_login.oauthParams.access_token);
+//   alert(naver_id_login.oauthParams.access_token);
 
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
 
   function naverSignInCallback() {
-    alert(naver_id_login.getProfileData('id'));
+//     alert(naver_id_login.getProfileData('id'));
     var naverId=naver_id_login.getProfileData('id');
     $(location).attr('href', '/users/naver?naver='+naverId);
     
