@@ -72,7 +72,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                             <h3><i class="fa fa-user-circle"></i>기본정보</h3>
                         </div>
                         <br>
-                        <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 750px;">
+                        <form class="addUsersForm" name="formal" style="padding-left: 90px;">
                         <input type="hidden" name="kakao" value="${ kakao }">
                         <input type="hidden" name="naver" value="${ naver }">
                             <div class="row">
@@ -136,14 +136,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                        		<br/>
                         	<br/>
 							</form>
-							<div class="col-sd-12" style="display: inline-block; padding-left:320px; padding-bottom:50px;">
-								<div class="col-sd-4" style="float:left;">
+							<div class="col-sd-12" style="display: inline-block;">
+								<div class="col-sd-4" style="float:right;">
 									<button id="submit" class="btn btn-default">회원가입</button>
 								</div>
-								<div class="col-sd-4" style="float:left;">
+								<div class="col-sd-4" style="float:right;">
 									<button id="addition" class="btn btn-default">추가정보입력</button>
 								</div>
-								<div class="col-sd-4" style="float:left;">
+								<div class="col-sd-4" style="float:right;">
 									<button id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button> 
 								</div>
 							</div>
@@ -168,6 +168,54 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<script type="text/javascript">
 	
 		//============= "가입"  Event 연결 =============
+			
+			
+			$("input[name=id]").keyup(function(){
+				if($("input[name=id]").val().length > 12) {
+					swal({
+						text : "아이디가 제한길이를 초과하였습니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					});
+					$("input[name='pw']").focus();
+				}
+			});
+			
+			$("#pw").on("keyup", function(){
+				if(limitPw.length > 12) {
+					swal({
+						text : "비밀번호가 제한길이를 초과하였습니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					});
+					$("input[name='id']").focus();
+				}	
+			});
+		
+			$("#nickname").on("keyup", function(){
+				if(limitNick.length > 10) {
+					swal({
+						text : "닉네임이 제한길이를 초과하였습니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					$("input[name='nickname']").focus();
+				}
+			})
+
+		
 		$(function() {
 			
 			$("#pw2").on("keyup", function(){
@@ -195,7 +243,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 // 				alert(id+","+pw+","+pw_confirm+","+name+","+nickname);
 // 				alert()
 
-				debugger;
+// 				debugger;
 				
 				if(id == null || id.length <1){
 					swal({

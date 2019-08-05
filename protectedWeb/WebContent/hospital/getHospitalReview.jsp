@@ -298,7 +298,7 @@
 		</form>
 		<p />
 		<br/>
-	<div style="padding-left: 440px">
+	<div style="padding-left: 480px">
 			<!-- PageNavigation Start... -->
 			<jsp:include page="../common/pageNavigator_new.jsp" />
 			<!-- PageNavigation End... -->

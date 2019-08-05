@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>보호할개 · 후원게시</title>		
+    <title>보호할개 · 후원</title>		
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -63,7 +63,7 @@
       <div class="container">
         <div class="row s_product_inner">
           <div  style="width: 600px">
-            조회수 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
+            조회수 ${funding.fundViewCount }  | 작성일 ${funding.fundStartDate}
             <p/>            
               <div
                 id="carouselExampleIndicators"
@@ -369,14 +369,7 @@
 	  
 	  		if ( id == "" ){
 	  			
-	  			swal({
-			           text: "회원만 이용할 수 있는 기능입니다.",
-			           dangerMode: true,
-			           buttons: {
-								 cancel: "확인",
-					   }
-	  			});
-	  			return;
+	 			$("#login-modal").modal('show'); 
 	  			
 	  		}else{
 	  			
@@ -491,10 +484,10 @@
 	
 		//============= SNS공유 Event  처리 =============	
 		$( "#twitter" ).on("click" , function() {
-	 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+	 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600,top=160, left=450');
 			});		
 		$( "#facebook" ).on("click" , function() {
-	 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+	 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600,top=160, left=450');
 			});			
 		
 		$( "#kakao" ).on("click" , function() {
@@ -524,6 +517,7 @@
 	            if (willDelete) {
 	              swal("삭제가 완료되었습니다!", {
 	                icon: "success",
+	                button : "확인"
 	              }).then((value) => {
 	            	  self.location = "/funding/delReview?postNo=${funding.postNo}"
 	              });

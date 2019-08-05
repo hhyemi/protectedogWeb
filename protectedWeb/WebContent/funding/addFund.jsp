@@ -13,7 +13,7 @@
 			href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-			    <title>보호할개 · 후원하기</title>
+			    <title>보호할개 · 후원</title>
 		<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 		    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
@@ -94,10 +94,6 @@
 		  <div class="form-group  ">
 			<font class="text-center" size="5"><b>후원자&emsp;&emsp;&emsp;</b></font>
 			 ${user.userName }
-		  </div>
-		  <div class="form-group ">
-			<font class="text-center" size="5"><b>후원종류&emsp;&emsp;</b></font>
-			 일시후원
 		  </div>		  
 		  <div class="form-group ">
 			<font class="text-center" size="5"><b>후원금액&emsp;&emsp;</b></font>

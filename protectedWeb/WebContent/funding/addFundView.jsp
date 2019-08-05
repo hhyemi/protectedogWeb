@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
-			    <title>보호할개 · 후원하기</title>
+			    <title>보호할개 · 후원</title>
 		<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 		    <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 		<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -264,7 +264,16 @@
 				} else {
 					var msg = '';
 					msg += rsp.error_msg;
-					 swal(msg, " ");
+					  swal({
+				           text: msg,
+				           dangerMode: true,
+				           buttons: {
+									 catch: {
+									 	text: "확인"
+									 }
+						   },			   
+				      }); 
+					 
 					}
 					
 					});
