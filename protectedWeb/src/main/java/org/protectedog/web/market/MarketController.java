@@ -319,10 +319,12 @@ public class MarketController {
 		
 		
 		@RequestMapping(value = "delMarket", method = RequestMethod.GET)
-		public String delMarket(@ModelAttribute("board") Board board, @RequestParam("postNo") int postNo, Model model) throws Exception {
+		public String delMarket(@RequestParam("postNo") int postNo) throws Exception {
 
 			System.out.println("marketdelete");
 
+			Board board = new Board();
+			board.setPostNo(postNo);
 			boardService.delBoard(board);
 
 			Map<String, Object> filePost = new HashMap<String, Object>();
@@ -330,7 +332,7 @@ public class MarketController {
 			filePost.put("postNo", postNo);
 			fileService.delAllFile(filePost);
 
-			return "redirect:/market/getMarket?postNo=" + postNo;
+			return "redirect:/market/listMarket?order=1";
 		}
 
 

@@ -245,22 +245,25 @@ table {
 
 		
 		//============= 삭제하기 Event  처리 =============	
-// 		 	$( "#btnDelete" ).on("click" , function() {
-// 		 		swal({
-// 		            title: "정말 삭제 하시겠습니까 ?",
-// 		            icon: "warning",
-// 		            buttons: true,
-// 		            dangerMode: true,
-// 		          })
-// 		          .then((willDelete) => {
-// 		            if (willDelete) {
-// 		              swal("삭제가 완료되었습니다!", {
-// 		                icon: "success",
-// 		              }).then((value) => {
-// 		            	  self.location = "/market/delMaket?postNo=${board.postNo}"
-// 		              });
-// 		            }
-// 		          });	 		  
+		 	$( "#btnDelete" ).on("click" , function() {
+		 		alert(${board.postNo})
+		 		swal({
+		            title: "정말 삭제 하시겠습니까 ?",
+		            icon: "warning",
+		            buttons: true,
+		            dangerMode: true,
+		          })
+		          .then((willDelete) => {
+		            if (willDelete) {
+		              swal("삭제가 완료되었습니다!", {
+		                icon: "success",
+		              }).then((value) => {
+		            	  self.location = "/market/delMarket?postNo=${board.postNo}"
+		              });
+		            
+		          }
+		       });	 
+		 	});
 		
 
 	
