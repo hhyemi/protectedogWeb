@@ -93,12 +93,24 @@
         padding-right: 10px;
         border-radius: 10px;
     }  
+.scroll {
+  width: 20px;
+  height: 200px;
+  overflow: auto;
+  float: left;
+  margin: 0 10px;
+}
+
+.content {
+  height: 500px;
+}
 
 </style>
 </head>
 <body onload="window.resizeTo(480,650)" onresize="window.resizeTo(480,650)">
 
 <div class="container">
+
     <div>
     
     <div class="col-md-7">

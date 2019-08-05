@@ -68,7 +68,6 @@
 					
 					</textarea>
 				
-
 				</div>
 				
 				<p>
@@ -77,8 +76,7 @@
 		  
 		  		<div class="form-group googleMap">
 		  		<label><strong><span class="fas fa-exclamation-circle"></span>
-	               		지도를 클릭하면 마커가 생성되며, 우클릭할 경우 마커가 모두 삭제됩니다. <br/>특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.</strong></label><br/>
-		  			<p> 경로 <span class="text-danger">수정</span>을 원하시면 마커 위에서 <span class="text-danger">마우스 우클릭</span>을 해주시길 바랍니다.</p>
+	               		지도를 클릭하면 마커가 생성되며, 특정 마커를 우클릭할 경우 우클릭한 마커만 삭제됩니다.</strong></label><br/>
 		   			<div class="col-sm-4">
 		    				<div id="map" style="width: 1050px; height: 600px;"></div>
 		     					<input type="hidden" class="form-control" id="route" name="route" style="width: 1100px;">

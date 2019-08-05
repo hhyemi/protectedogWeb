@@ -84,7 +84,7 @@ public class InfomationShareController {
 		// User Level Point Up
 		user.setLevelPoint(user.getLevelPoint() + 10 );
 		
-		// userService.updateUsers(user);
+		userService.updateUsers(user);
 
 		return "redirect:/info/getInfo?postNo="+board.getPostNo();
 	}
@@ -150,13 +150,6 @@ public class InfomationShareController {
 			search.setCurrentPage(1);
 		}
 		
-//		User user = new User();
-//		user.setId("Temp1");
-//		user.setNickname("시드");
-//		user.setRole("admin");
-//
-//		session.setAttribute("user", user);
-		
 		// 댓글 페이지 사이즈 5로 고정
 		search.setPageSize(5);
 		// Search 디버깅
@@ -170,12 +163,13 @@ public class InfomationShareController {
 		
 		// 댓글 불러오기
 		Map<String, Object> map = commentService.listComment(postNo, search, boardCode);
-		// 대댓글 불러오기
+		
+		/* 대댓글 불러오기
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("postNo",postNo);
 		searchMap.put("startRowNum",search.getStartRowNum());
 		searchMap.put("endRowNum",search.getEndRowNum());
-		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap);
+		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap); */
 
 		// 페이징 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -188,11 +182,11 @@ public class InfomationShareController {
 		
 		// 댓글 디버깅
 		System.out.println(" getInfo listComment : " +map.get("list"));
-		System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
+		// System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
 		System.out.println(" getInfo totalCount : " +map.get("totalCount"));
 		
 		model.addAttribute("list", map.get("list"));
-		model.addAttribute("relist", reCommmetMap.get("list"));
+		// model.addAttribute("relist", reCommmetMap.get("list"));
 		model.addAttribute("totalCount", map.get("totalCount"));
 		model.addAttribute("board", board);
 		

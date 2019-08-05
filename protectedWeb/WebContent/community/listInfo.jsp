@@ -266,7 +266,7 @@ function listNews(){
 		},
 		success : function(JSONData, status) {
 			
-			console.log(JSON.stringify(JSONData));
+			//console.log(JSON.stringify(JSONData));
 			
 			var list = JSONData.items;
 			
@@ -274,8 +274,8 @@ function listNews(){
 		
 			$.each(list, function(index, items) {
 				
-				console.log("index : " + index );
-				console.log("items : " + JSON.stringify(items) );
+				//console.log("index : " + index );
+				//console.log("items : " + JSON.stringify(items) );
 				var title = items.title;
 				
 				$(".newstbody").append(
@@ -290,15 +290,6 @@ function listNews(){
 				
 				
 			});
-				
-			//alert("success");
-			
-		},
-		error : function(request, status, error){	
-		
-			alert("error");
-
-			
 		}
 	});
 }
