@@ -63,7 +63,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Update</span> <span>AdoptReview</span></p>
+          	<p ><span class="mr-2">Adopt · Missing</span> <span>Review</span></p>
             <font size="7">후기수정</font>
           </div>
         </div>

@@ -63,7 +63,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Add</span> <span>AdoptReview</span></p>
+          	<p ><span class="mr-2">Adopt · Missing</span> <span>Review</span></p>
             <font size="7">후기등록</font>
           </div>
         </div>
@@ -147,9 +147,6 @@
 	                </div>
 	                
 	                
-               		
-               		<div class="w-100"></div>
-		            <div class="w-100"></div>
                 
 	            </div>
 	          </form>
@@ -275,13 +272,13 @@
                     files[imgNum] = file;
                     
                     fileNameArray[imgNum]=file.name;
-                    fnAddFile(fileNameArray);
+//                     fnAddFile(fileNameArray);
                 };
 
                 reader.readAsDataURL(file);
             }
         } else
-            alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+//             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
     }
 	 
 
@@ -322,60 +319,22 @@
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-// 	$( function() {
-// 	    $( "#dialog-postTitle" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  $("input[name=postTitle]").focus();
-// // 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-	
-// 	$( function() {
-// 	    $( "#dialog-postContent, #dialog-postContentLength" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("textarea[name=postContent]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-	
-// 	$( function() {
-// 	    $( "#dialog-img" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
 	
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
 		if($("input[name=postTitle]").val().length > 15 ){
-			$("span[name=postTitle]").text('15자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=postTitle]").val($("input[name=postTitle]").val().toString().substring(0,15));
+// 			$("span[name=postTitle]").text('15자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -383,8 +342,18 @@
 	
 	
 	$( "textarea[name=postContent]" ).keyup(function( ) {
-		if($("textarea[name=postContent]").text().length > 100 ){
-			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+		if($("textarea[name=postContent]").text().length > 300 ){
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("textarea[name=postContent]").val($("textarea[name=postContent]").val().toString().substring(0,300));
+// 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
@@ -397,9 +366,23 @@
 	function fncAddAdoptReview(){
 
 		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >15 ){
-			  $("input[name=postTitle]").focus();
-			  $('#dialog-postTitle').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-postTitle').dialog( "open" );
+			  swal({
+		           text: "글 제목을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=postTitle]").focus();
+		           }
+		      });
+// 			  $("input[name=postTitle]").focus();
+// 			  $('#dialog-postTitle').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-postTitle').dialog( "open" );
 			  return;
 		  }
 // 		  if( $(".preview-box").length == 0 ){
@@ -435,13 +418,14 @@
 			$( "button:contains('등록')" ).on("click" , function() {
 				$('textarea').val(editor.getData());
 				
-				if ( $('textarea').val().toString().indexOf('<img') != -1 ){
+				if ( editor.getData().toString().indexOf('<img') != -1 ){
+// 				if ( $('textarea').val().toString().indexOf('<img') != -1 ){
 					swal({
-				           text: "이미지를 등록해주세요.",
+				           text: "사진을 등록해주세요.",
 				           dangerMode: true,
 				           buttons: {
 									 catch: {
-									 	text: "닫기"
+									 	text: "확인"
 									 }
 						   },
 				      }).then((willDelete) => {
@@ -449,6 +433,7 @@
 				        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
 				           }
 				      });
+					return;
 				}
 				
 				fncAddAdoptReview();
