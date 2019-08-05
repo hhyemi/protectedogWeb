@@ -113,7 +113,7 @@ h6>b{color: white !important;}
 					<span class="fas fa-pen"></span> 
 					<span class="fas fa-trash-alt"></span>
 					</c:if>
-					<span class="report"><a class="reportModal" href="#" data-toggle="modal" data-target="#report-modal">
+					<span class="report"><a class="reportModal" href="#" >
 <!-- 					<span class="fas report"></span> -->
 						<img src="/resources/file/others/siren.png"/>
 					</a>

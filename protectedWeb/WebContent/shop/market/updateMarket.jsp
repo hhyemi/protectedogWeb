@@ -8,7 +8,7 @@
 <html lang="ko">
    
 <head>
-<title> 상품 정보수정</title>
+<title>보호할개 · 글 수정</title>
    <meta charset="UTF-8">
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -254,6 +254,15 @@
 			</div>
 		</div>
 	</section>
+	<!--====================================================
+                      FOOTER
+======================================================-->
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
+	<!--================ End footer Area  =================-->
+	
 
 
 

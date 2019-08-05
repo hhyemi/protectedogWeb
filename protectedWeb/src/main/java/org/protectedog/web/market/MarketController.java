@@ -77,7 +77,7 @@ public class MarketController {
 	
 	//상품글 등록
 	@RequestMapping(value="addMarket")
-	public String addProdQna(@ModelAttribute("board")Board board, HttpSession session, 
+	public String addMarket(@ModelAttribute("board")Board board, HttpSession session, 
 			HttpServletRequest request, @RequestParam("multiFile") ArrayList<String> multiFile, Model model) throws Exception {
 		
 		System.out.println("shop/market/addMarket : GET/POST");
@@ -125,7 +125,7 @@ public class MarketController {
 		model.addAttribute("board", board);
 		
 		
-		return "forward:/shop/market/addMarket.jsp";
+		return "redirect:/market/getMarket?postNo="+board.getPostNo();
 	}
 	
 	//상품리스트
@@ -201,6 +201,10 @@ public class MarketController {
 		//조회수
 		boardService.updateViewCount(board);
 		
+		if(search.getCurrentPage() ==0) {
+			search.setCurrentPage(1);
+		}
+		
 		//코멘트 페이지 사이즈
 		search.setPageSize(5);
 		// Search 디버깅
@@ -215,12 +219,7 @@ public class MarketController {
 				
 		// 댓글 불러오기
 		Map<String, Object> map = commentService.listComment(postNo, search, MK);
-		// 대댓글 불러오기
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("postNo",postNo);
-		searchMap.put("startRowNum",search.getStartRowNum());
-		searchMap.put("endRowNum",search.getEndRowNum());
-		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap);
+		
 
 		// 페이징 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -231,13 +230,11 @@ public class MarketController {
 		
 		// 댓글 디버깅
 		System.out.println(" getInfo listComment : " +map.get("list"));
-		System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
 		System.out.println(" getInfo totalCount : " +map.get("totalCount"));
 			
 		model.addAttribute("file", file);
 		model.addAttribute("board", board);
 		model.addAttribute("list", map.get("list"));
-		model.addAttribute("relist", reCommmetMap.get("list"));
 		model.addAttribute("totalCount", map.get("totalCount"));
 
 		return "forward:/shop/market/getMarket.jsp";
@@ -322,10 +319,12 @@ public class MarketController {
 		
 		
 		@RequestMapping(value = "delMarket", method = RequestMethod.GET)
-		public String delMarket(@ModelAttribute("board") Board board, @RequestParam("postNo") int postNo, Model model) throws Exception {
+		public String delMarket(@RequestParam("postNo") int postNo) throws Exception {
 
 			System.out.println("marketdelete");
 
+			Board board = new Board();
+			board.setPostNo(postNo);
 			boardService.delBoard(board);
 
 			Map<String, Object> filePost = new HashMap<String, Object>();
@@ -333,7 +332,7 @@ public class MarketController {
 			filePost.put("postNo", postNo);
 			fileService.delAllFile(filePost);
 
-			return "redirect:/market/getMarket?postNo=" + postNo;
+			return "redirect:/market/listMarket?order=1";
 		}
 
 

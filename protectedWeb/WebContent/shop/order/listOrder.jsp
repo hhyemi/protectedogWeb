@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>구매내역</title>
+<title><title>보호할개 · 주문내역 조회</title></title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -121,8 +121,8 @@
 
 					<tfoot>
 						<tr>
-							<td><a href="#" class="btn btn-general btn-white"><i
-									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td>
+<!-- 							<td><a class="btn btn-general btn-white"><i -->
+<!-- 									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td> -->
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
 							<td></td>
@@ -153,6 +153,12 @@
 		//alert($(this).children("input").val())
 				$(self.location).attr("href","/order/getOrder?orderNo="+ $(this).children("input").val());
 			});
+	
+	$(function() {
+		$(".fa fa-angle-leftr").on("click",function() {
+			//alert($(this).children("input").val())
+					$(self.location).attr("href","/product/listProduct";
+				});
 	
  	});	 
 	

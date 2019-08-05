@@ -2503,7 +2503,6 @@ var fileNameArray = new Array();
 	        	   swal("삭제가 완료되었습니다!", {
 	        		   buttons: "확인",
 	                   icon: "success",
-	                   button: "확인",
 	                 }).then((value) => {
 	                	 self.location = "/adopt/updateStatusCode?postNo="+postNo;
 	                 });
