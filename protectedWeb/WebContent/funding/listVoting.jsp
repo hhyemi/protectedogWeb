@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	    <title>보호할개 · 후원신청</title>
+	    <title>보호할개 · 투표</title>
     <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 		#checkPostTitle{
@@ -77,7 +77,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">support</span> <span>apply</span></p>
-            <font size="7">후원신청</font>
+            <font size="7">투표게시판</font>
           </div>
         </div>
       </div>
@@ -132,8 +132,8 @@
 		    				<div class="row" id="thumbnailRow">
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
-				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
-				    				<div class="desc-comp-offer-cont" style="padding-top:10px">
+				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate" >
+				    				<div class="desc-comp-offer-cont" style="padding-top:10px; background-color: white">
 				    					<input type="hidden" value="${funding.postNo }" />		    					
 				    				
 				    					 <!-- 투표종료 -->

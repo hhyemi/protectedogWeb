@@ -15,7 +15,7 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <title>보호할개 · 후원신청</title>
+	    <title>보호할개 · 투표</title>
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
     <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
@@ -71,7 +71,7 @@
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">support</span> <span>apply</span></p>
             <font size="7">후원신청등록</font><br/> 후원신청은 투표 <strong style="color: #f04f23">1개</strong>이상
-				받을 시 <strong style="color: #f04f23">수정이 불가</strong>합니다.
+				받을 시 <strong style="color: #f04f23">수정이 불가</strong>합니다.<br/>후원신청글은 <b>한달에 한번</b> 작성 가능합니다. 신중하게 작성해주세요.
           </div>
         </div>
       </div>
@@ -296,11 +296,7 @@
 						 	text: "확인"
 						 }
 			   },			   
-	      }).then((willDelete) => {
-	           if (willDelete) {
-	  	         $(".ck-editor__editable").focus();
-	           }
-	      });      	  
+	      });   	  
 
          return;
       }      
@@ -500,7 +496,7 @@
                      
                      var imgNum = previewIndex++;
                      
-                    //5장 이상 업로드시
+                    //10장 이상 업로드시
                      if(Object.keys(files).length>=10){
               			  swal({
               		           text: "사진은 10장까지만 등록 가능합니다",
@@ -520,7 +516,7 @@
 //                                alert("사진은 10장까지만 업로드 가능합니다.");
 //                                delete files[imgNum];
                      }else{
-               // 5장 이하 
+               // 10장 이하 
                      $("#preview").append(
                                      "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"

@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	    
-	<title>보호할개 · 후원게시</title>
+	<title>보호할개 · 후원</title>
 
 	<script src="https://kit.fontawesome.com/e26616618e.js"></script>
     <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -83,7 +83,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">support</span> <span>post</span></p>
-            <font size="7">후원게시</font>
+            <font size="7">후원게시판</font>
           </div>
         </div>
       </div>
@@ -126,11 +126,10 @@
 					<br/>
     		    	
     		    	<br/>
-  		     <c:if test="${resultPage.totalCount eq 0 }">
-		      	<div  align="center" style="height: 300px; padding-top: 100px;">
-					<font size="4px">검색결과가 없습니다.</font>
-				</div>
-		      </c:if>  		    	
+		     <c:if test="${resultPage.totalCount eq 0 }">
+      			<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
+		     	</div>
+		      </c:if>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-8 col-lg-12 order-md-last">
@@ -138,7 +137,7 @@
 			    			<c:set var="i" value="0" />
 							  <c:forEach var="funding" items="${list}">
 				    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
-				    				<div class="desc-comp-offer-cont"  style="padding-top:10px">
+				    				<div class="desc-comp-offer-cont"  style="padding-top:10px; background-color: white">
 					    					<input type="hidden" value="${funding.postNo }" />		    					
 				    				
 										 <!-- 후원종료 -->
@@ -345,7 +344,16 @@
 	          });		
 	      });	 
   	});	        
-        
+	if ( ${resultPage.totalCount eq 0 }){
+		$('#searchEmpty').html( 
+//					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+				'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+				+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+        		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+        		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+        		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+		);
+	}     
     </script>
   </body>
   </html>
