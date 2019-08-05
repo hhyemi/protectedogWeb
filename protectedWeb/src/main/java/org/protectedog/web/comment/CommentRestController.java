@@ -67,7 +67,7 @@ public class CommentRestController {
 		comment.setProfile(user.getProfile());
 		
 		// Set Code
-		comment.setBoardCode(boardCode);
+		//comment.setBoardCode(boardCode);
 		commentService.addComment(comment);
 		
 		comment = commentService.getComment(comment.getCommentNo());

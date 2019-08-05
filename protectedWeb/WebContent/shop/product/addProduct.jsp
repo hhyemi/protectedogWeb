@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<title>상품 등록</title>
+<title>보호할개·스토어 상품등록</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
