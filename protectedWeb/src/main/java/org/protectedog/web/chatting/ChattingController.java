@@ -35,9 +35,13 @@ public class ChattingController {
 	public String addChattingUser(@RequestParam("postId") String postId,HttpSession session,Model model) throws Exception {
 
 		System.out.println("/chatting/addChattingUser : GET");
+		
+		User user = (User) session.getAttribute("user");
 
-		String userId = ((User) session.getAttribute("user")).getNickname();
+		String userId = user.getNickname();
+		String profile = user.getProfile();
 
+		System.out.println("pro::::::::::;"+profile);
 		MongoClient mongoClient = null;
 		try {
 			mongoClient = new MongoClient("localhost", 27017);
@@ -65,6 +69,7 @@ public class ChattingController {
 			
 			model.addAttribute("postId", postId);
 			model.addAttribute("userId", userId);
+			model.addAttribute("profile", profile);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

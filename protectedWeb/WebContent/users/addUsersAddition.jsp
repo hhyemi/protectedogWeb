@@ -70,6 +70,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                             <h3><i class="fa fa-user-circle"></i>추가정보</h3>
                         </div>
                         <br>
+                        <input type="hidden" id="authPhoneCheck" value=""/>
+                        <input type="hidden" id="authMailCheck" value=""/>
                         <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px">
 							<input type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
 							<input type="hidden" name="levelPoint" value=100>
@@ -175,11 +177,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--                             <button type="submit" id="submit" class="btn btn-default">회원가입</button> -->
 <!--                             <button type="reset" id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button>  -->
                         </form>
-							<div class="col-sd-12" style="display: inline-block; padding-left:430px; padding-bottom:50px;">
-								<div class="col-sd-6" style="float:left;">
+							<div class="col-sd-12" style="display: inline-block;">
+								<div class="col-sd-6" style="float:right;">
 									<button id="submit" class="btn btn-default">회원가입</button>
 								</div>
-								<div class="col-sd-6" style="float:left;">
+								<div class="col-sd-6" style="float:right;">
 									<button id="reset" class="btn btn-default">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button> 
 								</div>
 							</div>
@@ -225,19 +227,34 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 // 				$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersAdditional");
 				
 // 				alert("인증회원으로 가입되셨습니다!");
-				swal({
-					text : "인증회원으로 가입되셨습니다!",
-					buttons : {
-						catch : {
-							text : "확인"
+				if($("input[id='authPhoneCheck']").val() == 'auth' && $("input[id='authMailCheck']").val() == 'auth'){
+					
+					swal({
+						text : "인증회원으로 가입되셨습니다!",
+						buttons : {
+							catch : {
+								text : "확인"
+							}
 						}
-					}
-				})
-				.then((A) => {
-					if(A) {
-						$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersAdditional").submit();
-					}
-				})
+					})
+					.then((A) => {
+						if(A) {
+							$("form[name=formal]").attr("method" , "POST").attr("action" , "/users/addUsersAdditional").submit();
+						}
+					})
+					
+				} else {
+				
+					swal({
+						text : "핸드폰과 이메일을 인증해주세요.",
+						buttons : {
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					
+				}
 			});
 		});	
 		
@@ -254,7 +271,32 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				$("input:hidden[name='phone']").val( value );
 				
 				var check=$("input:hidden[name='phone']").val();
-				
+			
+				if($("input[name='phone2']").val() == '' || $("input[name='phone3']").val() == ''){
+					swal({
+						text : "핸드폰 번호를 확인해주세요.",
+						icon : "error",
+						buttons : {
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					.then((A) => {
+						if(A){
+							$('.authPhone').show();
+							$("#authButton").hide();
+						}
+					})
+				} else {
+					swal({
+						text : "인증문자가 전송되었습니다. 문자 확인 후 인증번호를 입력해주세요.",
+						icon : "success",
+						buttons : false,
+						timer : 3500,
+					})
+				}
+								
 				$.ajax({
 					
 					url:"/users/json/sendSMS",
@@ -285,19 +327,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if($("#checkAuth").val()==$("#authKeyReturn").val()){
 					$("#authButton").hide();
 					$(".authPhone").show();
-					$(".authMail").remove();
 					$("#authPhone").remove();
 					$(".authPhone").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
-					$("input[name='email']").attr("readonly", true);
 					$("input[name='phone2']").attr("readonly", true);
 					$("input[name='phone3']").attr("readonly", true);
 					$("select[name='phone1']").attr("disabled", true);
+					$("input[id='authPhoneCheck']").val("auth");
 					swal({
 						text : "인증되었습니다.",
 						icon : "success",
 						buttons :{
 							catch : {
-								text : "닫기"
+								text : "확인"
 							}
 						}
 					})
@@ -307,7 +348,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						icon : "error",
 						buttons :{
 							catch : {
-								text : "닫기"
+								text : "확인"
 							}
 						}
 					})
@@ -321,6 +362,31 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			$("#authMail").on("click", function(){
 
 				var check=$("input[name='email']").val();
+				
+				if($("input[name='email']").val() == ''){
+					swal({
+						text : "이메일을 확인하세요.",
+						icon : "error",
+						buttons : {
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					.then((A) => {
+						if(A){
+							$(".authMail").show();
+							$("#mailAuth").hide();
+						}
+					})
+				} else {
+					swal({
+						text : "인증메일이 전송되었습니다. 메일 확인 후 인증번호를 입력해주세요.",
+						icon : "success",
+						buttons : false,
+						timer : 3500,
+					})
+				}
 
 					$.ajax({
 						
@@ -351,20 +417,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				$("#mailClick").on("click", function(){
 					if($("#checkMail").val()==$("#authKeyReturn").val()){
 						$("#mailAuth").hide();
-						$(".authPhone").hide();
 						$(".authMail").show();
 						$("#authMail").remove();
 						$(".authMail").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
 						$("input[name='email']").attr("readonly", true);
-						$("input[name='phone2']").attr("readonly", true);
-						$("input[name='phone3']").attr("readonly", true);
-						$("select[name='phone1']").attr("disabled", true);
+						$("input[id='authMailCheck']").val("auth");
 					swal({
 						text : "인증되었습니다.",
 						icon : "success",
 						buttons :{
 							catch : {
-								text : "닫기"
+								text : "확인"
 							}
 						}
 					})
@@ -375,7 +438,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							icon : "error",
 							buttons :{
 								catch : {
-									text : "닫기"
+									text : "확인"
 								}
 							}
 						})						
@@ -393,11 +456,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
 // 						alert("이메일 형식이 아닙니다.");
 						swal({
-							text : "인증에 실패했습니다. 다시 시도해 주십시오.",
+							text : "올바른 이메일 형식이 아닙니다.",
 							icon : "error",
 							buttons :{
 								catch : {
-									text : "닫기"
+									text : "확인"
 								}
 							}
 						})
