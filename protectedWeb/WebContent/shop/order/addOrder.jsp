@@ -108,8 +108,8 @@
 	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar end■■■■■■■■■■■■■■■■■■■■-->
 
 	<!-- ■■■■■■■■■■■■■■■■■■■■body navigation tag / FORM START■■■■■■■■■■■■■■■■■■■■ -->
+	<div class="container">
 	<section class="ftco-section">
-		<div class="container">
 			<form class="billing-form" name="addForm">
 			
 			
@@ -129,12 +129,10 @@
 					<div class="col-xl-8 ftco-animate">
 
 						<!-- ///////////////////////////body navigation tag/////////////////////////// -->
-						<div class="container" id="orderinfo">
+
 							<input type="hidden" value="${product.prodNo}" />
-							<div class="container">
-								<section id="cart" class="cart">
-									<div class="container">
-										<table id="cart" class="table table-hover table-condensed">
+								<div id="cart" class="cart col-md-12">
+										<table id="cartTable" class="table table-hover table-condensed">
 											<thead>
 												<tr>
 													<th style="width: 50%">상품명</th>
@@ -166,10 +164,7 @@
 												</tr>
 											</tbody>
 										</table>
-									</div>
-								</section>
-							</div>
-						</div>
+								</div>
 						<br />
 						<!--////////////////////////// form tag Start /////////////////////////////////-->
 						<h3 class="mb-4 billing-heading">구매정보를 입력해주세요</h3>
@@ -286,9 +281,9 @@
 					</div>
 				</div>
 			</form>
-		</div>
-	</section>
 
+	</section>
+		</div>
 
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
