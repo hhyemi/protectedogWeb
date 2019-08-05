@@ -87,4 +87,16 @@
 	<bean id="multipartResolver"
             class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean> 
 	
+	
+	<mvc:interceptors>
+		
+   		<mvc:interceptor>
+			<mvc:mapping path="/users/**"/>
+			<bean class="org.protectedog.common.web.LogonCheckInterceptor" />
+   		</mvc:interceptor>
+
+   	</mvc:interceptors>
+	
+
+	
 </beans>

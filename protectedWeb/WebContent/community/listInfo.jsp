@@ -181,7 +181,7 @@ th{background-color: #F0F0F0;}
 
 				<tbody>
 					<tr align="center">
-						<td colspan='2' class='text-center'style="background-color: #F0F0F0;">
+						<td colspan='2' class='text-center'style="background-color: #F0F0F0;min-width : 305px;" >
 							<h4><b>HOT 개</b></h4>
 						</td>
 					</tr>
