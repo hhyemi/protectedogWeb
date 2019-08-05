@@ -69,8 +69,8 @@
 	        	var messageTitle=$("input[name=messageTitle]").val();
 	        	var messageContent=$("textarea[name=messageContent]").val();
 	        	var checkNick=JSON.stringify({"nickname" : $("input[name=receiverNick]").val()});
-	        	debugger;
-				alert(receiverNick+", "+messageTitle+", "+messageContent+", "+checkNick);
+// 	        	debugger;
+// 				alert(receiverNick+", "+messageTitle+", "+messageContent+", "+checkNick);
 				if($("input[name=receiverNick]").val() == null || $("input[name=receiverNick]").val() == ''){
 					swal({
 						text : "받는 사람의 닉네임을 입력해주세요.",
