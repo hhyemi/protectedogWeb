@@ -34,7 +34,6 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 														Object handler) throws Exception {
 		
 		System.out.println("\n[ LogonCheckInterceptor start........]");
-		
 		//==> 로그인 유무확인
 		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("user");
@@ -58,6 +57,17 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 		}else{ //==> 미 로그인한 화원이라면...
 			//==> 로그인 시도 중.....
 			String uri = request.getRequestURI();
+			
+			System.out.println(" request.getHeader('referer') : " + request.getHeader("referer"));
+			
+//			String prevURI = request.getHeader("referer");
+//			
+//			String convertURI = prevURI.substring(21);
+//			
+//			
+//			System.out.println(" convertURI " + convertURI);
+			
+			System.out.println(" request.getRequestURI() : " + uri);
 			
 			if(		uri.indexOf("addUser") != -1 ||	uri.indexOf("login") != -1 		|| 
 					uri.indexOf("checkDuplication") != -1 ){

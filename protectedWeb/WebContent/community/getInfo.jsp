@@ -96,6 +96,7 @@ img{max-width: 600px;}
 			<div class="button" align="right">
 				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">수정</button>
 				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">삭제</button>
+				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">목록</button>
 			</div>
 		</c:if>
 	</div>
@@ -108,7 +109,7 @@ img{max-width: 600px;}
 
 	$(function() {
 		
-		$("#recommand").on("click", function(){
+		$(document).on("click","#recommand", function(){
 				
 			if(${ empty sessionScope.user}){				
 				$("#login-modal").modal("show");
@@ -128,7 +129,7 @@ img{max-width: 600px;}
 				success : function(JSONData, status){
 					
 					if(JSONData == 1){
-						alert("이미 추천한 글입니다.");
+						swal({"text":"이미 추천한 글입니다.",button : "확인"});
 						return;
 					}
 					
@@ -144,9 +145,9 @@ img{max-width: 600px;}
 						success : function(JSONData, status){
 							
 							$(".minibox").children("div").children("span").remove();
-							
-							var result = "<span style='font-size: 15px; border: 1px solid black; padding: 3px'>"+JSONData.recommendCount+"</span>"
-										+"<span class='recommand fas fa-medal'>HOT개로</span>";
+						
+							var result = "<span style='border: 1px solid black; padding: 3px'><span id='recommand' class='recommand fas fa-medal'>추천</span>"
+							+"<span style='font-size: 15px;'> "+JSONData.recommendCount+"</span></span>";
 							
 							$(".minibox").children("div").prepend(result);
 						}
@@ -168,14 +169,17 @@ img{max-width: 600px;}
 					// 			$(self.location).attr("href","/community/updateInfo.jsp");
 					self.location = "/info/updateView?postNo="+ $("input[name='postNo']").val();
 				});
-
+		
+		$("button:contains('목록')").on("click",function() {
+				self.location ="/info/listInfo";
+		});
 		$("button:contains('삭제')").on("click",function() {
 					
 			swal({
 				  title: "정말 삭제 하시겠습니까 ?",
 				  text: "더 이상 이 글을 다른 회원이 볼 수 없습니다.",
 				  icon: "warning",
-				  buttons: true,
+				  buttons: ["취소", "확인"],
 				  dangerMode: true
 				})
 				.then((result) => {
@@ -276,21 +280,16 @@ img{max-width: 600px;}
 
 	
 	//============= SNS공유 Event  처리 =============	
-	$( "#twitter" ).on("click" , function() {
- 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-		});		
-	
-	$( "#naver" ).on("click" , function() {
- 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-		});		
-	
-	$( "#facebook" ).on("click" , function() {
- 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-		});			
-	
-	$( "#kakao" ).on("click" , function() {
-		sendLinkKakao()
-	});	
+    $( "#twitter" ).on("click" , function() {
+           window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600,top=160, left=450');
+	});      
+    $( "#facebook" ).on("click" , function() {
+           window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600,top=160, left=450');
+	});         
+      
+    $( "#kakao" ).on("click" , function() {
+         sendLinkKakao()
+	});   			
 	
   //============= 카카오 공유하기Event  처리 =============		
 	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');

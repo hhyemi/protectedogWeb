@@ -126,10 +126,9 @@
 					<br/>
     		    	
     		    	<br/>
-		     <c:if test="${resultPage.totalCount eq 0 }">
-      			<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
-		     	</div>
-		      </c:if>
+			 	<c:if test="${resultPage.totalCount eq 0 }">
+			 		<jsp:include page="/common/searchResult.jsp"></jsp:include>
+			 	</c:if>
 				<!-- 썸네일 부터 -->
 		    		<div class="row">
 		    			<div class="col-md-8 col-lg-12 order-md-last">

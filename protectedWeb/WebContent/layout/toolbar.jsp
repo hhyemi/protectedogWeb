@@ -144,7 +144,7 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
 	                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-	                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a>
+<!-- 	                <a class="dropdown-item" id="chatbot" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a> -->
 	                
                   </div>
                 </li>
@@ -209,7 +209,6 @@
     </header> 
     
     <jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
-
     <!--Global JavaScript -->
     <script src="/resources/newTemplate/js/jquery/jquery.min.js"></script>
     <script src="/resources/newTemplate/js/popper/popper.min.js"></script>
@@ -297,8 +296,15 @@
 					datatype : "json",
 					success : function(response){
 // 						alert("pw : "+JSON.stringify(response))
+
+						
+						var URI = response.returnURI;
+																										
+						var response = response.user;
+						
 						if(response.pw == pw && response.id == id && response.levelPoint >= 0){
 // 							alert("로그인 성공 pw : "+response.pw+" && "+response.levelPoint);
+
 							swal({
 								title : response.nickname+"님 환영합니다!",
 								buttons :{
@@ -309,7 +315,7 @@
 							})
 							.then((A) => {
 								if(A){
-									self.location="/index.jsp";	
+									self.location=URI;	
 								}
 							});
 // 							self.location="/index.jsp";
