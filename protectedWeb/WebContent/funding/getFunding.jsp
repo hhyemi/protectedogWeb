@@ -287,7 +287,7 @@
 		            aria-labelledby="voter-tab">
  					<div><h3>현재 <font color="#f04f23">${funding.sponsorCount}명</font>의 참여가 이루어졌습니다.</h3></div>		            
 	 					<hr/>
-		 				<c:forEach var="participate" items="${list}">						
+		 				<c:forEach var="participate" items="${list2}">						
 							<div class="row" style="position:relative;height:35px;">
 									 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><h4 ><b>${participate.nickname}</b>&nbsp; <small>님이 ${participate.fundPay }원을 후원하셨습니다.</small>&nbsp;</h4></div>
 									<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${participate.regDate}</div>
@@ -326,7 +326,7 @@
 	    
     <!--================End Product Description Area =================-->
 
-
+	<jsp:include page="/common/comment.jsp"></jsp:include>
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>

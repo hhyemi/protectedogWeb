@@ -159,7 +159,7 @@ public class UserRestController {
 		/**/
 		String prevURI = request.getHeader("referer");
 		
-		String convertURI = prevURI.substring(21);
+		String convertURI = prevURI.substring(24);
 		
 		System.out.println(" convertURI " + convertURI);
 		

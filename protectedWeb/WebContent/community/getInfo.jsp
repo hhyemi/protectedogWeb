@@ -104,7 +104,7 @@ img{max-width: 600px;}
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
-	
+	<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>	
 	<script type="text/javascript">
 
 	$(function() {
