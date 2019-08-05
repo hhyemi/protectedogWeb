@@ -383,7 +383,7 @@
 									console.log('결과없음');
 									if ( $('#searchKeyword').val()==''){
 										$('#searchEmpty').remove();
-										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
 														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
 								                    	+'</div>';
 									}

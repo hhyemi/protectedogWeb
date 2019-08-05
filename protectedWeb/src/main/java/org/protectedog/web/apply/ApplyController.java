@@ -78,10 +78,10 @@ public class ApplyController {
 		
 		apply.setAdoptNo(postNo);
 		apply.setId(  ((User)session.getAttribute("user")).getId() );
-		apply.setPhone(  ((User)session.getAttribute("user")).getPhone() );
-		System.out.println("확인  = "+apply.getPhone());
+		User user = userService.getUsers(apply.getId());
 		
 		model.addAttribute("apply", apply);//adoptNo 넘기기
+		model.addAttribute("user", user);
 		
 		//세션조건도 추가
 		if ( adoptService.getAdopt(postNo).getStatusCode().equals("3") ) {

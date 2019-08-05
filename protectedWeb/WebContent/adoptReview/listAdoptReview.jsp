@@ -221,13 +221,17 @@
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	</section></div>
- 	
  	
  	
  	<c:if test="${resultPage.totalCount eq 0 }">
  		<jsp:include page="/common/searchResult.jsp"></jsp:include>
  	</c:if>
+ 	
+ 	</section></div>
+ 	
+ 	
+ 	
+ 	
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	

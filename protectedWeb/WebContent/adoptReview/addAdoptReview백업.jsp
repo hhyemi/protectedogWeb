@@ -277,7 +277,7 @@
 
                 reader.readAsDataURL(file);
             }
-//         } else
+        } else
 //             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
     }
 	 
@@ -416,10 +416,9 @@
 
     $(function() {
 			$( "button:contains('등록')" ).on("click" , function() {
+				$('textarea').val(editor.getData());
 				
-				$('textarea').val( editor.getData() );
-				
-				if ( editor.getData().toString().indexOf('<img') != -1 ) {
+				if ( editor.getData().toString().indexOf('<img') != -1 ){
 // 				if ( $('textarea').val().toString().indexOf('<img') != -1 ){
 					swal({
 				           text: "사진을 등록해주세요.",
@@ -444,7 +443,6 @@
 				self.location = "/adoptReview/listAdoptReview"
 			});
 	 });	
-});
       
       
     </script>

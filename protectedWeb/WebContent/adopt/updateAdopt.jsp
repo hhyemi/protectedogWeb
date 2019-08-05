@@ -975,23 +975,23 @@
 			  $("input[name=postTitle]").focus();
 			  return;
 		  }
-// 		  if( $("img.thumbnail").length == 0 || $(".preview-box").length == 0  ){
-// 			  swal({
-// 		           text: "이미지를 등록해주세요.",
-// 		           dangerMode: true,
-// 		           buttons: {
-// 							 catch: {
-// 							 	text: "닫기"
-// 							 }
-// 				   },
-// 		      }).then((willDelete) => {
-// 		           if (willDelete) {
-// 		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-// 		           }
-// 		      });
-// 			  $('#dialog-img').dialog( "open" );
-// 			  return;
-// 		  }
+		  if( $(".preview-box2").length == 0 && $(".preview-box").length == 0  ){
+			  swal({
+		           text: "이미지를 등록해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
+			  $('#dialog-img').dialog( "open" );
+			  return;
+		  }
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
 			  swal({
 		           text: "체중을 다시 확인하세요.",

@@ -1869,6 +1869,8 @@ h2{
 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
 													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 // 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
+						 } else if ( ${sessionScope.user.role == 'admin'}) {
+							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 }
 						
 // 						jQuery('.event-body').html(event.description);

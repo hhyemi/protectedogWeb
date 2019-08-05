@@ -8,7 +8,7 @@ BEGIN
   return num;
 END GET_FILE_NO;
 
--- ÇÁ·Î½ÃÀú
+-- ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½
 CREATE OR REPLACE PROCEDURE UPDATE_STATUS_CODE
 IS
 
@@ -23,7 +23,7 @@ END UPDATE_STATUS_CODE;
 /
 
 
--- µ¿ÀÛÇÒ ÇÁ·Î±×·¥ µî·Ï
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½
 BEGIN
 DBMS_SCHEDULER.CREATE_PROGRAM(
 program_name => 'UPDATE_STATUS_CODE_PROGRAM',
@@ -33,7 +33,7 @@ comments => 'update status code program',
 enabled => TRUE);
 END;
  
---	½ºÄÉÁì µî·Ï
+--	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
  BEGIN
 DBMS_SCHEDULER.CREATE_SCHEDULE(
 schedule_name => 'SCHEDULE_UPDATE_STATUS_CODE',
@@ -43,7 +43,7 @@ repeat_interval => 'FREQ=DAILY;INTERVAL=1',
 comments => 'Every PM 12 HOUR');
 END;
 
--- JOB µî·Ï, ½ÇÁ¦ ¼öÇà µÉ ÀÛ¾÷À¸·Î ½ºÄÉÁì·¯¿Í ÇÁ·Î±×·¥À» ¸í½ÃÇØÁØ´Ù.
+-- JOB ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ì·¯ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 BEGIN
 DBMS_SCHEDULER.CREATE_JOB (
 job_name =>'UPDATE_STATUS_CODE_JOB',
@@ -53,7 +53,7 @@ comments => 'update status code job program',
 enabled =>TRUE);
 END;
 
--- ÈÄ¿øÁ¾·á
+-- ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE OR REPLACE PROCEDURE UPDATE_STATUS_CODE_FUND
 IS
 

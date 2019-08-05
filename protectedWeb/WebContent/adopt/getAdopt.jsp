@@ -195,7 +195,7 @@
                    	<div class="row" style="position:relative;height:35px;">
 			        	<div class="col-xs-10 col-md-10" style="position:absolute;height:35px; left:0px; bottom:0px;" >
 			        		<font id="title" size="5px"><strong>${adopt.postTitle}</strong></font>
-			        	&nbsp;&nbsp;${adopt.id}
+			        	&nbsp;&nbsp;${adopt.nickname}
 			        	</div>
 			        	
 			        	<c:if test="${ user.id ne adopt.id }">
