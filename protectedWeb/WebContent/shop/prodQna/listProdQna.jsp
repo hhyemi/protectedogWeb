@@ -88,7 +88,7 @@ body {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 		$("#qna").on("click", function() {
-			window.open("/shop/prodQna/addProdQna.jsp", "new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+			window.open("/shop/prodQna/addProdQna.jsp", "new","width=800, height=400, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
 			
 			
 			

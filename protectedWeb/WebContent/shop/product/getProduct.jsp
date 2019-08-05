@@ -245,7 +245,7 @@ table {
                 <tbody>
                   <tr>
                     <td>
-<%-- <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>   --%>
+<jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>  
                     </td>
                   </tr>
                 </tbody>
