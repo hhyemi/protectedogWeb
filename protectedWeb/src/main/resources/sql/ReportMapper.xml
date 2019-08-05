@@ -75,7 +75,7 @@
 						</if>
 					</where>
 				</if>
-				ORDER BY report_no ) inner_table
+				ORDER BY report_date DESC ) inner_table
 			WHERE ROWNUM &lt;=#{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>

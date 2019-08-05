@@ -165,7 +165,7 @@ public class OrderController {
 
 		model.addAttribute("order", order);
 
-		return "forward:/order/listOrder";
+		return "redirect:/order/getOrder?orderNo="+order.getOrderNo();
 		
 	}
 	

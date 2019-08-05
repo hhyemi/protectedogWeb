@@ -100,6 +100,10 @@ th {
 		$("#qna").on("click", function() {
 			self.location = "/shop/prodQna/addProdQna.jsp";
 		});
+		
+		$("#list").on("click", function() {
+			self.location = "/order/listOrder";
+		});
 
 		// 	$(function() {
 

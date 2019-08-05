@@ -41,46 +41,36 @@
 	max-width: 200px;
 	min-width: 200px;
 }
-
 .card {
 	min-height: 470px;
 	max-height: 470px;
 	
 }
-
 .detailtext {
 	min-height: 80px;
 	max-height: 80px;
 }
-
 #searchKeyword {
 	height: 40px;
 	width: 150px;
 }
-
 #searchSubmmit {
 	width: 60px;
 	height: 40px;
 	border-radius: 0px 15px 15px 0px;
 	border: 1px solid #D3D3D3;
 }
-
 #searchCondition {
 	height: 40px;
 	border-radius: 15px 0px 0px 15px;
 }
-
 #selectPageSize {
 	height: 30px;
 }
-
-
 .btn-default {
 	height: 30px;
 	color: white;
 }
-
-
 </style>
 
 
@@ -161,50 +151,54 @@
 				</div>
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
-				<div class="col-lg-9">
-<!-- 				서치 -->
-<%-- 				${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td> --%>
-<!-- 				<div style="float: right;"> -->
-<!-- 			<form class="form-inline" name="detailForm"> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<select class="form-control" id="searchCondition" -->
-<!-- 						name="searchCondition"> -->
-<!-- 						<option value="0" -->
-<%-- 							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option> --%>
-<!-- 						<option value="1" -->
-<%-- 							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option> --%>
-<!-- 					</select> -->
-<!-- 				</div> -->
+ 				<div class="col-lg-9">
+				
 
+	<c:if test="${totalCount == 0}">
+		<div class="row">
+			<div class="col-md-9" align="center"
+				style="height: 500px; padding-top: 150px;">
 
-<!-- 				<div class="form-group"> -->
-<!-- 					<label class="sr-only" for="searchKeyword">검색어</label> <input -->
-<!-- 						type="text" class="form-control searchKeyword" id="searchKeyword" -->
-<!-- 						name="searchKeyword" placeholder="검색어" -->
-<%-- 						value="${! empty search.searchKeyword ? search.searchKeyword : '' }"> --%>
-<!-- 					<button type="button" id="searchSubmmit" -->
-<!-- 						class="btn btn-default searchSubmmit"> -->
-<!-- 						<span class="fas fa-search"></span> -->
-<!-- 					</button> -->
-<!-- 				</div> -->
-
-<!-- 				PageNavigation 선택 페이지 값을 보내는 부분 -->
-<!-- 				<input type="hidden" id="currentPage" name="currentPage" value="" /> -->
-<!-- 			</form> -->
-<!-- 		</div> -->
-
-<%-- 	<c:if test="${totalCount == 0}"> --%>
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-9" align="center" -->
-<!-- 				style="height: 500px; padding-top: 150px;"> -->
-
-<%-- 				<jsp:include page="/common/searchResult.jsp"></jsp:include> --%>
-<!-- 			</div> -->
-<!-- 			</div> -->
+				<jsp:include page="/common/searchResult.jsp"></jsp:include>
+			</div>
+			</div>
 			
-<%-- 	</c:if> --%>
-					<div class="row">
-						<c:set var="i" value="0" />
+	</c:if>
+					<div class="row" style="padding-top: 0px;">
+					
+					<div class="col-md-12">
+						<!--서치 -->
+						${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지
+						<div style="float: right;">
+							<form class="form-inline" name="detailForm">
+								<div class="form-group">
+									<select class="form-control" id="searchCondition"
+										name="searchCondition">
+										<option value="0"
+											${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
+										<option value="1"
+											${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
+									</select>
+								</div>
+
+
+								<div class="form-group">
+									<label class="sr-only" for="searchKeyword">검색어</label> 
+									<input type="text" class="form-control searchKeyword"id="searchKeyword" name="searchKeyword" placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+<%-- 									<input type="text" class="form-control searchCondition"id="searchCondition" name="searchCondition" placeholder="검색어" value="${! empty search.searchCondition ? search.searchCondition : '' }"> --%>
+									<button type="button" id="searchSubmmit"
+										class="btn btn-default searchSubmmit">
+										<span class="fas fa-search"></span>
+									</button>
+								</div>
+
+<!-- 								PageNavigation 선택 페이지 값을 보내는 부분  -->
+								<input type="hidden" id="currentPage" name="currentPage" value="" />
+<%-- 								<input type="hidden" name="searchCondition" value="${searchCondition}"/> --%>
+							</form>
+						</div>
+					</div>
+					<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
 							<c:set var="i" value="${i+1}" />
 							<div class="col-lg-4 col-md-6 mb-4">
@@ -241,6 +235,7 @@
 					</div>
 				</div>
 			</div>
+			</div>
 	</section>
 
 
@@ -258,8 +253,6 @@
 
 	<script type="text/javascript">
 	
-
-
 		//=============    상품상세조회(썸네일)  Event  처리 		=============
 		//============= 썸네일 사진 클릭 Event  처리 =============	
 		$(function() {
@@ -272,7 +265,6 @@
 								"/product/getProduct?prodNo="
 										+ $(this).children("input").val());
 					});
-
 			$(".detailprod").on(
 					"click",
 					function() {
@@ -283,83 +275,65 @@
 										+ $(this).children("input").val());
 					});
 		});
-
 		// 카테고리 bind
-
 		$(function() {
 			//>전체 PROD_NO DESC
 			$("#total").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=0"
-
 			});
 			//사료
 			$("#one").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=1"
-
 			});
 			//간식
 			$("#two").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=2"
-
 			});
 			//의류
 			$("#three").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=3"
-
 			});
 			//베스트상품
 			$("#four").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=4"
-
 			});
 			//관리자 상품조회
 			$("#admin").on("click", function() {
 				//alert("");
 				self.location = "/product/listAdminProduct"
-
 			});
 			//관리자 구매관리
 			$("#adminOrder").on("click", function() {
 				//alert("");
 				self.location = "/order/listAdminOrder"
-
 			});
 			$(".orderhistory").on("click", function() {
 				//alert("");
-
 				self.location = "/order/listOrder"
-
 			});
-
 		});
-
 	</script>
 	<script>
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============
-
 	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
 	function fncGetList(currentPage) {
 		//document.getElementById("currentPage").value = currentPage;
 		$("#currentPage").val(currentPage)
 		//document.detailForm.submit();	
-		$("form").attr("method", "POST").attr("action",
-				"/product/listProduct").submit();
+		
+		$("form").attr("method", "POST").attr("action","/product/listProduct").submit();
 	}
-
 	//============= Event 처리 및  연결 =============
 	$(function() {
-
 		$("#searchSubmmit").on("click", function() {
 			fncGetList(1);
 		});
-
 		
-
 	});
 </script>
 </body>

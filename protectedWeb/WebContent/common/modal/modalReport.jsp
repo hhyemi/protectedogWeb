@@ -251,14 +251,26 @@
                 	success : function(JSONData){
 //                 		alert("5");
                 		console.log(JSON.stringify(JSONData));
-                		$('#report-modal').modal("hide");
                 	}
                 });
         });
 			
 // 			$(".sendReport").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
 // 			alert("4")
-			alert("신고가 완료되었습니다.");
+// 			alert("신고가 완료되었습니다.");
+	          swal({
+	              text: "제한길이를 초과하였습니다.",
+	              dangerMode: true,
+	              buttons: {
+	                   catch: {
+	                      text: "확인"
+	                   }
+	            },            
+	         }).then((A) => {
+	              if (A) {
+	              	$('#report-modal').modal("hide");
+	              }
+	         });
 		}
 		
 		   //============= "다중파일업로드 파일명만 저장해서 value" =============   
