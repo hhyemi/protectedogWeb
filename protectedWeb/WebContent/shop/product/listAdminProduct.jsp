@@ -17,7 +17,7 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>보호할개·관리자 상품관리</title>
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -127,49 +127,7 @@ th {
 	margin-right:190px;}
 </style>
 
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
-<script type="text/javascript">
-	//=============    검색 / page 두가지 경우 모두  Event  처리 =============
 
-	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
-	function fncGetList(currentPage) {
-		//document.getElementById("currentPage").value = currentPage;
-		$("#currentPage").val(currentPage)
-		//document.detailForm.submit();	
-		$("form").attr("method", "POST").attr("action",
-				"/product/listAdminProduct").submit();
-	}
-
-	//============= Event 처리 및  연결 =============
-	$(function() {
-		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-		$("#button").on("click", function() {
-			self.location = "/shop/product/addProduct.jsp";
-		});
-
-		// 	$(function() {
-
-		$("#searchSubmmit").on("click", function() {
-			fncGetList(1);
-		});
-
-		// 		$("#change2").on(
-		// 				"click",
-		// 				function() {
-		// 					var prodNo = $(this).data('param1');
-		// 					self.location = "/purchase/updateTranCodeByProd?prodNo="
-		// 							+ prodNo + "&tranCode=2";
-		// 				})
-		// 		$("#prod").on(
-		// 				"click",
-		// 				function() {
-		// 					self.location = "/product/getProduct?prodNo="
-		// 							+ $(this).text().trim();
-		// 				});
-
-	});
-</script>
 </head>
 
 <body>
@@ -350,5 +308,49 @@ th {
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<!-- footer End /////////////////////////////////////-->
 	<!--================ End footer Area  =================-->
+	
+	<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+	//=============    검색 / page 두가지 경우 모두  Event  처리 =============
+
+	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
+	function fncGetList(currentPage) {
+		//document.getElementById("currentPage").value = currentPage;
+		$("#currentPage").val(currentPage)
+		//document.detailForm.submit();	
+		$("form").attr("method", "POST").attr("action",
+				"/product/listAdminProduct").submit();
+	}
+
+	//============= Event 처리 및  연결 =============
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+		$("#button").on("click", function() {
+			self.location = "/shop/product/addProduct.jsp";
+		});
+
+		// 	$(function() {
+
+		$("#searchSubmmit").on("click", function() {
+			fncGetList(1);
+		});
+
+		// 		$("#change2").on(
+		// 				"click",
+		// 				function() {
+		// 					var prodNo = $(this).data('param1');
+		// 					self.location = "/purchase/updateTranCodeByProd?prodNo="
+		// 							+ prodNo + "&tranCode=2";
+		// 				})
+		// 		$("#prod").on(
+		// 				"click",
+		// 				function() {
+		// 					self.location = "/product/getProduct?prodNo="
+		// 							+ $(this).text().trim();
+		// 				});
+
+	});
+</script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>보호할개·스토어 상품조회</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
@@ -244,7 +245,7 @@ table {
                 <tbody>
                   <tr>
                     <td>
-<%--                     <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>  --%>
+<%-- <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>   --%>
                     </td>
                   </tr>
                 </tbody>

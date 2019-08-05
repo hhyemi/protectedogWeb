@@ -25,8 +25,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment getComment(int commentNo) throws Exception {
-		return commentDAO.getComment(commentNo);
+	public Comment getComment(int commentNo, String boardCode) throws Exception {
+		return commentDAO.getComment(commentNo, boardCode);
 	}
 
 	@Override
@@ -42,10 +42,11 @@ public class CommentServiceImpl implements CommentService{
 		
 		System.out.println(" listCommentServiceImpl postNo : " + postNo);
 		System.out.println(" listCommentServiceImpl search : " + search);
+		System.out.println(" listCommentServiceImpl boardCode : " + boardCode);
 		
 		// ������ ��������
 		List<Comment> list = commentDAO.listComment(postNo, search, boardCode);
-		int totalCount = commentDAO.getTotalCount(postNo);
+		int totalCount = commentDAO.getTotalCount(postNo, boardCode);
 		
 		// �����
 		System.out.println(" listCommentServiceImpl list : " + list);
@@ -59,13 +60,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public void delComment(int commentNo) throws Exception {
-		commentDAO.delComment(commentNo);
-	}
-
-	@Override
-	public void reportComment(int commentNo) throws Exception {
-		commentDAO.reportComment(commentNo);
+	public void delComment(int commentNo, String boardCode) throws Exception {
+		commentDAO.delComment(commentNo, boardCode);
 	}
 
 	@Override
@@ -79,8 +75,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int getTotalCount(int postNo) throws Exception {
-		return commentDAO.getTotalCount(postNo);
+	public int getTotalCount(int postNo, String boardCode) throws Exception {
+		return commentDAO.getTotalCount(postNo, boardCode);
 	}
 	
 }

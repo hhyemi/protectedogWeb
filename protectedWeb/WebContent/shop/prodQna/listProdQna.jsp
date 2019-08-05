@@ -88,12 +88,14 @@ body {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 		$("#qna").on("click", function() {
-			self.location = "/shop/prodQna/addProdQna.jsp";
+			window.open("/shop/prodQna/addProdQna.jsp", "new","width=800, height=400, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+			
+			
 			
 		});
 		
 		$(function() {
-			$(".getgetget").on(
+			$("#getgetget").on(
 					"click",
 					function() {
 						//alert($(this).children("input").val())
@@ -212,7 +214,11 @@ body {
 					<td id="getgetget">${board.postTitle}
 					<input type="hidden" name="postNo" value="${board.postNo}" /> 
 					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
-					<td>${board.qnaCode}</td>
+					<td><c:if test="${board.qnaCode == '1'}">배송</c:if>
+					<c:if test="${board.qnaCode == '2'}">상품</c:if>
+					<c:if test="${board.qnaCode == '3'}">교환</c:if>
+					<c:if test="${board.qnaCode == '4'}">반품</c:if>
+					<c:if test="${board.qnaCode == '5'}">기타</c:if></td>
 					<td>${board.regDate}</td>
 					</tr>
 					</tbody>
@@ -230,13 +236,13 @@ body {
 		
 	<script type="text/javascript">
 	
-	$(function(){
+// 	$(function(){
 		
-		$("#getgetget").on("click",".go",function(){
+// 		$("#getgetget").on("click",".go",function(){
 			
-			window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
-		});
-	});
+// 			window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+// 		});
+// 	});
 	
 	</script>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->

@@ -68,6 +68,11 @@ table {
 .s_product_text {
 	margin-top: 30px;
 }
+
+#listm{
+	margin-left:110px;
+	margin-top:10px;
+}
 </style>
 
 
@@ -157,8 +162,8 @@ table {
 									<div class="col-md-5">
 										<c:if test="${user.id eq board.id || user.id eq 'admin'}">
 
-											<button type="button" id="change" class="btn btn-default">수정하기</button>
-											<button type="button" id="btnDelete" class="btn btn-default">삭제하기</button>
+											<button type="button" id="change" class="btn btn-default">수정</button>
+											<button type="button" id="btnDelete" class="btn btn-default">삭제</button>
 										</c:if>
 
 									</div>
@@ -170,12 +175,13 @@ table {
 			</div>
 		</form>
 	</div>
-
+<button type="button" id="listm" class="btn btn-default">목록</button>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■Comment■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
 	<input type="hidden" name="boardCode" value="MK" />
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+	
 
 	<!--================ End footer Area  =================-->
 
@@ -206,11 +212,10 @@ table {
 
 
 <!--  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■script■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-	<script type="text/javascript">
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/funding/getMarket").submit();
+	   	$("form").attr("method" , "POST").attr("action" , "/market/getMarket").submit();
 	 
 	}   
 		
@@ -221,33 +226,33 @@ table {
 			 	$( "#change" ).on("click" , function() {
 			 			swal("거래중인 게시글은 수정을 추천하지 않습니다.");   
 			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";
-			 		}
-				});   
+			 		
+				});  
+		
+			 	$( "#listm" ).on("click" , function() {
+		 		 self.location = "/market/listMarket?order=1";
+		 		
+			});  
 
 		
 		//============= 삭제하기 Event  처리 =============	
-		 	$( "#btnDelete" ).on("click" , function() {
-		 		swal({
-		            title: "정말 삭제 하시겠습니까 ?",
-		            icon: "warning",
-		            buttons: true,
-		            dangerMode: true,
-		          })
-		          .then((willDelete) => {
-		            if (willDelete) {
-		              swal("삭제가 완료되었습니다!", {
-		                icon: "success",
-		              }).then((value) => {
-		            	  self.location = "/market/delMaket?postNo=${board.postNo}"
-		              });
-		            }
-		          });	 		
-			});  
+// 		 	$( "#btnDelete" ).on("click" , function() {
+// 		 		swal({
+// 		            title: "정말 삭제 하시겠습니까 ?",
+// 		            icon: "warning",
+// 		            buttons: true,
+// 		            dangerMode: true,
+// 		          })
+// 		          .then((willDelete) => {
+// 		            if (willDelete) {
+// 		              swal("삭제가 완료되었습니다!", {
+// 		                icon: "success",
+// 		              }).then((value) => {
+// 		            	  self.location = "/market/delMaket?postNo=${board.postNo}"
+// 		              });
+// 		            }
+// 		          });	 		  
 		
-	    });
-
-		
-		 //=============장바구니 이동========================================
 
 	
 		
