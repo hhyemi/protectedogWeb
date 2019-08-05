@@ -120,7 +120,10 @@
         
 
     </style>
+    
   <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+  <jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
+	<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
   </head>
   
   <body>
@@ -193,7 +196,7 @@
               	<input type="hidden" name="sessionNickname" value="${user.nickname}">  
 <!--                 <li> -->
                    	<div class="row" style="position:relative;height:35px;">
-			        	<div class="col-xs-10 col-md-10" style="position:absolute;height:35px; left:0px; bottom:0px;" >
+			        	<div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px;" >
 			        		<font id="title" size="5px"><strong>${adopt.postTitle}</strong></font>
 			        	&nbsp;&nbsp;${adopt.nickname}
 			        	</div>
@@ -201,12 +204,12 @@
 			        	<c:if test="${ user.id ne adopt.id }">
 			        	
 			        	
-			        		<div class="col-xs-1 col-md-1" style="position:absolute;height:35px;  right:0px; bottom:0px;padding-left: 0;" >
-								<p align="right" >
+			        		<div class="col-xs-2 col-md-2" style="height:35px;  right:0px; bottom:0px;padding-left: 0;padding-right: 0;" >
+								<p align="right" style="padding-top: 10px;">
 								<img src="/resources/file/others/siren.png"  id ="report"  width="22px" height="22px" >
 								</p>
 							</div>
-				        	<div class="col-xs-1 col-md-1" style="position:absolute;height:35px; right:0px; bottom:0px;padding-right:15px;padding-left: 0;" >
+				        	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-right:15px;padding-left: 0;" >
 								<p align="right">
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' && sessionScope.user.role ne 'admin'}">
@@ -422,8 +425,7 @@
 </div>
 			
 			
-	<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
-	<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
+	
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
   
     <!--================End Product Description Area =================-->
@@ -1072,7 +1074,7 @@
 			
 			//============= 신고하기 Event  처리 =============	
 		 	$( "#report" ).on("click" , function() {
-		 		if(${sessionScope.user==null}){
+		 		if(${user==null}){
 		 			$("#login-modal").modal('show');  
 		 		}else{
 			 	    var nickname = $('input[name=sessionNickname]').val();
@@ -1084,13 +1086,12 @@
 			
 			//============= 문의 Event  처리 =============	
 		 	$( "#messageRq" ).on("click" , function() {
-		 		if(${sessionScope.user==null}){
+		 		if(${user==null}){
 		 			$("#login-modal").modal('show');  
 		 		}else{
 			 	    var nickname = '${adopt.nickname}';
 			 	   $('#receiverNick').prop('readonly', true);
 			 	    $("#receiverNick").val(nickname);
-// 			 	    $("#senderNick").val('${sessionScope.user.nickname}');
 			 		$("#messageModal").modal("show");
 		 		}
 			});

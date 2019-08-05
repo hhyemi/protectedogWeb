@@ -246,7 +246,22 @@
 				</span>
 			    <span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>${adopt.postTitle}</b></h3>
 				    <c:if test="${param.boardCode eq 'AD' }">
-				   	 	<p align="right" style="padding-bottom: 10px;">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
+				   	 	<p align="right" style="padding-bottom: 10px;">
+				   	 		<c:if test="${    fn:indexOf(adopt.areaKr,'군') != -1 &&  fn:indexOf(adopt.areaKr,'시') != -1}">
+						   	 	<c:if test="${    fn:indexOf(adopt.areaKr,'시') <  fn:indexOf(adopt.areaKr,'군') }">
+						   	 		${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }
+						   	 	</c:if>
+						   	 	<c:if test="${    fn:indexOf(adopt.areaKr,'시') >  fn:indexOf(adopt.areaKr,'군') }">
+						   	 		${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'군')+1 ) }
+						   	 	</c:if>
+						   	 </c:if>
+						   	 <c:if test="${    fn:indexOf(adopt.areaKr,'군') != -1 &&  fn:indexOf(adopt.areaKr,'시') == -1}">
+						   	 	${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'군')+1 ) }
+						   	 </c:if>
+						   	 <c:if test="${    fn:indexOf(adopt.areaKr,'군') == -1 }">
+						   		 ${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }
+						   	 </c:if>
+				   	 	</p>
 				   	</c:if>
 				    <c:if test="${param.boardCode eq 'MS' }">
 				   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
@@ -379,7 +394,7 @@
 									$('#listAdoptJSON').children().remove();
 									$('.text-primary').text('전체 '+data.totalCount+' 건');
 								}
-								if( postSize == 1 && data.list.length == 0 ){
+								if( postSize == 1 && data.totalCount == 0 ){
 									console.log('결과없음');
 									if ( $('#searchKeyword').val()==''){
 										$('#searchEmpty').remove();

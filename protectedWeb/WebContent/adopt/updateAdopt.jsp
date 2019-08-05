@@ -1090,7 +1090,7 @@
 // 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ) < 1 ){
+		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length < 1 ){
 			  swal({
 		           text: "책임비를 입력하세요.",
 		           dangerMode: true,
