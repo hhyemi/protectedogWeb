@@ -209,12 +209,13 @@ h6>b{color: white !important;}
 		$(window).scroll(function(){
 			
 			var boardCode = $("input[name=boardCode]").val();
+			var postNo = $("input[name=postNo]").val();
 			//console.log(${rank});
 			
 			if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){
 				
 				$.ajax({
-					url : "/comment/json/listComment/${board.postNo}/"+currentPage+"/"+boardCode,
+					url : "/comment/json/listComment/"+postNo+"/"+currentPage+"/"+boardCode,
 					method : "POST",
 					dataType : "JSON",
 					headers : {
