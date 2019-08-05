@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>구매내역</title>
+<title>보호할개 · 관리자 구매관리</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -23,6 +23,14 @@
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
 
+
+<style>
+.navigation{
+	
+}
+
+
+</style>
 </head>
 
 <body id="page-top">
@@ -132,8 +140,8 @@
 			</div>
 		</section>
 	</form>
-	
-		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	<p class="navigation">
+		<jsp:include page="../../common/pageNavigator_new.jsp" /></p>
 	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->

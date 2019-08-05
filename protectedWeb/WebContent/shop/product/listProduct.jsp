@@ -162,47 +162,47 @@
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
-				<!-- 서치 -->
-				${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td>
-				<div style="float: right;">
-			<form class="form-inline" name="detailForm">
-				<div class="form-group">
-					<select class="form-control" id="searchCondition"
-						name="searchCondition">
-						<option value="0"
-							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
-						<option value="1"
-							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
-					</select>
-				</div>
+<!-- 				서치 -->
+<%-- 				${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td> --%>
+<!-- 				<div style="float: right;"> -->
+<!-- 			<form class="form-inline" name="detailForm"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<select class="form-control" id="searchCondition" -->
+<!-- 						name="searchCondition"> -->
+<!-- 						<option value="0" -->
+<%-- 							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option> --%>
+<!-- 						<option value="1" -->
+<%-- 							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option> --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
 
 
-				<div class="form-group">
-					<label class="sr-only" for="searchKeyword">검색어</label> <input
-						type="text" class="form-control searchKeyword" id="searchKeyword"
-						name="searchKeyword" placeholder="검색어"
-						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-					<button type="button" id="searchSubmmit"
-						class="btn btn-default searchSubmmit">
-						<span class="fas fa-search"></span>
-					</button>
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="sr-only" for="searchKeyword">검색어</label> <input -->
+<!-- 						type="text" class="form-control searchKeyword" id="searchKeyword" -->
+<!-- 						name="searchKeyword" placeholder="검색어" -->
+<%-- 						value="${! empty search.searchKeyword ? search.searchKeyword : '' }"> --%>
+<!-- 					<button type="button" id="searchSubmmit" -->
+<!-- 						class="btn btn-default searchSubmmit"> -->
+<!-- 						<span class="fas fa-search"></span> -->
+<!-- 					</button> -->
+<!-- 				</div> -->
 
-				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				<input type="hidden" id="currentPage" name="currentPage" value="" />
-			</form>
-		</div>
+<!-- 				PageNavigation 선택 페이지 값을 보내는 부분 -->
+<!-- 				<input type="hidden" id="currentPage" name="currentPage" value="" /> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
 
-	<c:if test="${totalCount == 0}">
-		<div class="row">
-			<div class="col-md-9" align="center"
-				style="height: 500px; padding-top: 150px;">
+<%-- 	<c:if test="${totalCount == 0}"> --%>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-9" align="center" -->
+<!-- 				style="height: 500px; padding-top: 150px;"> -->
 
-				<jsp:include page="/common/searchResult.jsp"></jsp:include>
-			</div>
-			</div>
+<%-- 				<jsp:include page="/common/searchResult.jsp"></jsp:include> --%>
+<!-- 			</div> -->
+<!-- 			</div> -->
 			
-	</c:if>
+<%-- 	</c:if> --%>
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">

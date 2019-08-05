@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>구매내역</title>
+<title><title>보호할개 · 주문내역 조회</title></title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->

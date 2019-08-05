@@ -12,6 +12,7 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>보호할개 · 보호마켓 글 조회</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
@@ -182,6 +183,14 @@ table {
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	
+<!--====================================================
+                      FOOTER
+======================================================-->
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
+	<!--================ End footer Area  =================-->
 
 	<!--================ End footer Area  =================-->
 

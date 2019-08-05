@@ -15,7 +15,7 @@
 ">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>보호마켓</title>
+<title><title>보호할개 · 보호마켓 리스트</title></title>
 
 
 <!-- Global Stylesheets -->
@@ -108,6 +108,9 @@
 	height: 30px;
 	color: white;
 }
+#bottom{
+margin-top: 80px;}
+
 </style>
 
 </head>
@@ -217,7 +220,7 @@
 
 		<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 
-		<div class="row">
+		<div class="row" id="bottom">
 			<div class="col-md-10 col-lg-12 order-md-last">
 				<input type="hidden" id="currentPageList" name="currentPageList"
 					value="${resultPage.currentPage}" />
@@ -259,7 +262,7 @@
 
 
 
-	<!--====================================================
+<!--====================================================
                       FOOTER
 ======================================================-->
 	<!--================ start footer Area  =================-->

@@ -17,6 +17,7 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보호할개 · 구매내역 상세조회</title>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <!--  Google MDL -->
