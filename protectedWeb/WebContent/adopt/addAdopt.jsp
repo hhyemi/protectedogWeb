@@ -854,7 +854,7 @@
 
 		if(parseInt( removeCommas($(this).val())) > 300000 ){
 			swal({
-		           text: "제한 금액을 초과하였습니다.",
+		           text: "제한 금액(30만원)을 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {

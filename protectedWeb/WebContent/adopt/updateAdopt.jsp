@@ -98,7 +98,7 @@
 		            <!-- 미리보기 영역 -->
 		            <div class="form-group col-md-12">
 		            
-		            
+		            <div class="form-group"><div class="row">
 <!-- 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'> -->
 			
 <%-- 							<c:forEach var="name" items="${file}" varStatus="status">             --%>
@@ -111,15 +111,17 @@
 			            
 			            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
 
-				<c:forEach var="name" items="${file}" varStatus="status">            
-				
-				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
-                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
-                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
-                        
-                </c:forEach>           
-            
-            </div>
+							<c:forEach var="name" items="${file}" varStatus="status">            
+							
+							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
+			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
+			                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
+			                        
+			                </c:forEach>           
+			            
+            			</div>
+            			
+            			</div></div>
 		            </div>
       
 	                
