@@ -95,6 +95,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
+<div class="container">
     <div class="page-content d-flex align-items-stretch">
     <input type="hidden" id="myId" name="senderNick" value="${ sessionScope.user.nickname }"/>
 
@@ -318,8 +319,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 									</form>
                                 </tbody>
                             </table>
-                            <div align="center">
-                            <jsp:include page="/common/pageNavigator.jsp" />
+                            <div style="padding-left: 250px;">
+                            	<jsp:include page="/common/pageNavigator_new.jsp"/>
                             </div>
                             </c:if>
                         </div>
@@ -327,6 +328,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                 </div>
             </div> 
         </div>
+     </div>
    
     
     <jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>

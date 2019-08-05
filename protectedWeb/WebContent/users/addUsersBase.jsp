@@ -45,7 +45,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         PAGE CONTENT
 ======================================================-->
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -170,49 +170,94 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		//============= "가입"  Event 연결 =============
 			
 			
-			$("input[name=id]").keyup(function(){
-				if($("input[name=id]").val().length > 12) {
-					swal({
-						text : "아이디가 제한길이를 초과하였습니다.",
-						icon : "error",
-						buttons :{
-							catch : {
-								text : "확인"
-							}
-						}
-					});
-					$("input[name='pw']").focus();
-				}
-			});
-			
-			$("#pw").on("keyup", function(){
-				if(limitPw.length > 12) {
-					swal({
-						text : "비밀번호가 제한길이를 초과하였습니다.",
-						icon : "error",
-						buttons :{
-							catch : {
-								text : "확인"
-							}
-						}
-					});
-					$("input[name='id']").focus();
-				}	
-			});
+// 			$("input[name=id]").keyup(function(){
+// 				if($("input[name=id]").val().length > 12) {
+// 					swal({
+// 						text : "아이디가 제한길이를 초과하였습니다.",
+// 						icon : "error",
+// 						buttons :{
+// 							catch : {
+// 								text : "확인"
+// 							}
+// 						}
+// 					});
+// 					$("input[name='pw']").focus();
+// 				}
+// 			});
 		
-			$("#nickname").on("keyup", function(){
-				if(limitNick.length > 10) {
-					swal({
-						text : "닉네임이 제한길이를 초과하였습니다.",
-						icon : "error",
-						buttons :{
-							catch : {
-								text : "확인"
-							}
-						}
-					})
-					$("input[name='nickname']").focus();
-				}
+			$("input[name=id]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 12) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=id]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+			
+			$("input[name=pw]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 12) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=pw]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+		
+			$("input[name=nickname]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 30) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=nickname]").focus();
+                            }
+                       });
+                   }
+                }
 			})
 
 		
@@ -562,7 +607,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 				
 				swal({
-					text : "미인증회원으로 가입되셨습니다. 추가정보를 기입하시면 인증회원으로 가입하실 수 있습니다.",
+					text : "추가정보기입 페이지로 이동합니다.",
 					buttons : {
 						catch : {
 							text : "확인"

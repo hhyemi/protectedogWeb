@@ -108,6 +108,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
+<div class="container">
     <div class="page-content d-flex align-items-stretch">
 
         <!--***** SIDE NAVBAR *****-->
@@ -133,17 +134,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                             <div class="tab-content tabs">
                               <div role="tabpanel" class="tab-pane fade show active" id="profile">
                                    
-                                    <div class="row mt-3">
+                                    <div class="row mt-3" style="margin-left: 10px;">
                                         <h5 class="col-12 mb-2">나의 정보</h5>
                                         <br/>
                                         <br/>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <strong class="mr-5"><i class="fa fa-envelope"> 아이디 : </i></strong>
+                                                <strong class="mr-5"><i class="fa fa-map"> 아이디 : </i></strong>
 												<div>${ user.id }</div>
                                             </div>
                                             <div class="form-group">
-                                                <strong class="mr-5"><i class="fa fa-phone"> 닉네임 : </i></strong>
+                                                <strong class="mr-5"><i class="fa fa-map"> 닉네임 : </i></strong>
 												<div>${ user.nickname }</div>
                                             </div>
                                             <div class="form-group">
@@ -157,15 +158,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <strong class="mr-5"><i class="fa fa-globe"> 이메일 : </i></strong>
+                                                <strong class="mr-5"><i class="fa fa-envelope"> 이메일 : </i></strong>
 												<div>${ user.email }</div>
                                             </div>
+                                            <br/>
                                             <div class="form-group">
-                                                <strong class="mr-5"><i class="fa fa-map-marker"> 자택주소 : </i></strong>
+                                                <strong class="mr-5"><i class="fa fa-globe"> 자택주소 : </i></strong>
 												<div>${ user.userAddr }</div>
                                             </div>
+                                            <br/>
                                             <div class="form-group">
-                                                <strong class="mr-5"><i class="fa fa-globe"> 휴대전화 : </i></strong>
+                                                <strong class="mr-5"><i class="fa fa-phone"> 휴대전화 : </i></strong>
 												<div>${ user.phone }</div>
                                             </div>
                                             <div class="form-group">
@@ -340,7 +343,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
             </div> 
 
         </div>
-    </div> 
+    </div>
+</div> 
+    
+    <jsp:include page="/layout/footer.jsp"></jsp:include>
 
     <!--Global Javascript -->
     <script src="/resources/newTemplate/admin/js/jquery.min.js"></script>
