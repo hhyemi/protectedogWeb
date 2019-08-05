@@ -91,7 +91,7 @@
 	<mvc:interceptors>
 		
    		<mvc:interceptor>
-			<mvc:mapping path="/users/**"/>
+			<mvc:mapping path="/users/json/login/**"/>
 			<bean class="org.protectedog.common.web.LogonCheckInterceptor" />
    		</mvc:interceptor>
 

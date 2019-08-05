@@ -182,7 +182,7 @@ public class UserController {
 	@RequestMapping(value="addUsersAdditional", method=RequestMethod.POST)
 	public String addUsersAddtional(@ModelAttribute("user") User user, @RequestParam("id") String id, HttpSession session) throws Exception{
 		
-		System.out.println("/users/addUsersAdditional");
+		System.out.println("/users/addUsersAdditional : POST");
 		
 //		String sessionId=((User)session.getAttribute("user")).getId();
 //		if(sessionId.equals(user.getId())) {
@@ -197,8 +197,9 @@ public class UserController {
 		sessionUser.setUserAddr(user.getUserAddr());
 		sessionUser.setBirthDate(user.getBirthDate());
 		sessionUser.setGender(user.getGender());
+		
+		session.removeAttribute("user");
 		session.setAttribute("user", sessionUser);
-		System.out.println(session.getAttribute("user"));
 		
 		return "redirect:/index.jsp";
 	}
@@ -330,14 +331,15 @@ public class UserController {
 		userService.updateUsers(user);
 		
 		String sessionId=((User)session.getAttribute("user")).getId();
+		User dbUser=userService.getUsers(sessionId);
 		System.out.println("update : "+sessionId);
 		
-		if(sessionId.equals(user.getId())) {
+		if(sessionId.equals(dbUser.getId())) {
 			session.removeAttribute("user");
-			session.setAttribute("user", user);
+			session.setAttribute("user", dbUser);
 		}
 		
-		return "redirect:/users/getUsers?id="+user.getId();
+		return "redirect:/users/getUsers?id="+dbUser.getId();
 		
 	}
 	

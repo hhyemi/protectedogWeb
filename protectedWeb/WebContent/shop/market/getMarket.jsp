@@ -32,11 +32,18 @@
 <link rel="stylesheet"
 	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
+@font-face {
+	font-family: NanumSquare;
+	src: url(http://ssl.pstatic.net/static/kin/fonts/NanumSquareR.woff2)
+		format("woff2");
+}
+
+body {
+	font-family: NanumSquare, sans-serif !important;
+}
+
 .form-group3 {
 	padding-left: 465px;
 	padding-right: 100px;
@@ -57,6 +64,10 @@ table {
 .pricecolor {
 	color: #f04f23;
 }
+
+.s_product_text {
+	margin-top: 30px;
+}
 </style>
 
 
@@ -65,7 +76,6 @@ table {
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
-	<!--================Header Menu Area =================-->
 
 	<!--================Single Product Area =================-->
 
@@ -76,7 +86,7 @@ table {
 					<div class="col-lg-6">
 
 						<p />
-						조회수 ${board.viewCount }
+						조회수 ${board.viewCount }&nbsp;|&nbsp;작성일 ${board.regDate}
 						<div id="carouselExampleIndicators" class="carousel slide"
 							data-ride="carousel">
 							<ol class="carousel-indicators">
@@ -130,24 +140,27 @@ table {
 
 
 								거래지역 : ${board.city}<br /> 판매자 연락처 :
-								<c:if test="${user.role eq 'user'}">
-							${board.phone}
-							</c:if>
-								<br />
-								<c:if test="${! user.role eq 'admin'}">
-							인증회원만 열람가능합니다.</c:if>
+									<c:if test="${user.role eq 'admin'||user.role eq 'user'}">
+								${board.phone}
+</c:if>
+									<c:if test="${! user.role eq 'user'}">
+								회원 연락처는 가입한 회원에게만 제공됩니다
+</c:if>
+
 								<hr>
-								<br /> ${board.postContent}<br /> <br /> <br /><br/><br/>
-							
+								<br /> ${board.postContent}<br /> <br /> <br />
+								<br />
+								<br />
+
 
 								<div class="form-group2" align="right">
 									<div class="col-md-5">
 										<c:if test="${user.id eq board.id || user.id eq 'admin'}">
 
-											<button type="button" id="btnUpdate" class="btn btn-default">수정하기</button>
+											<button type="button" id="change" class="btn btn-default">수정하기</button>
 											<button type="button" id="btnDelete" class="btn btn-default">삭제하기</button>
 										</c:if>
-									
+
 									</div>
 								</div>
 							</div>
@@ -158,10 +171,11 @@ table {
 		</form>
 	</div>
 
-	<!--================End Product Description Area =================-->
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■Comment■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
 	<input type="hidden" name="boardCode" value="MK" />
 	<jsp:include page="/common/comment.jsp"></jsp:include>
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
 	<!--================ End footer Area  =================-->
 
@@ -204,7 +218,7 @@ table {
 		//============= 상품정보 GET/UPDATE Event  처리 =============
 		
 			//============= 수정하기 Event  처리 =============	
-			 	$( "#btnUpdate" ).on("click" , function() {
+			 	$( "#change" ).on("click" , function() {
 			 			swal("거래중인 게시글은 수정을 추천하지 않습니다.");   
 			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";
 			 		}

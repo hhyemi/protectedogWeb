@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -10,149 +10,203 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
-            padding-top : 50px;
-        }
-     </style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>ë³´í˜¸í• ê°œ : ë§ˆì´í˜ì´ì§€</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/font-icon-style.css">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
+    
+      	<style type="text/css">
+ 		
+ 		@font-face {
+    		font-family: 'YouandiModernTR';
+   		 	font-style: normal;
+    		font-weight: normal;
+    		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
+		}
+    	
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+    		font-family: 'YouandiModernTR', sans-serif !important;
+    	} 	
+		
+		.navbar-brand{
+			font-weight: bold;
+		}
+		
+		.swal-button {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button:hover {
+		  background-color: #f04f23;
+		  border: 1px  #f04f23;
+		}
+		
+		.swal-button--cancel {
+		    color: white;
+		    background-color: #f04f23;
+		}
+		
+		html {
+	 		scroll-behavior: smooth;
+		}
 	
+  	</style>
+
+    
+    <jsp:include page="/layout/toolbar.jsp" />
+    
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="page-header">
+<!-- 		<div class="page-header"> -->
+<%-- 			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }"> --%>
+<!-- 	       <h3 class=" text-info">ì¿ í°ë°›ì•„ê°€ì…ˆ</h3> -->
+<%-- 	       	<c:if test="${ sessionScope.user.role eq 'admin' }"> --%>
+<!-- 	       		<input type="button" id="couponManage" value="ì¿ í°ë“±ë¡/ìˆ˜ì •"> -->
+<%-- 	       	</c:if> --%>
+<!-- 	    </div> -->
+		<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
 			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }">
-	       <h3 class=" text-info">ÄíÆù¹Ş¾Æ°¡¼À</h3>
-	       	<c:if test="${ sessionScope.user.role eq 'admin' }">
-	       		<input type="button" id="couponManage" value="ÄíÆùµî·Ï/¼öÁ¤">
-	       	</c:if>
-	    </div>
-	
-	
-
-		<div id="dialog" class="row">
-			
-			<c:set var="i" value="0"/>
-			<c:forEach var="coupon" items="${ list }">		
-			<div style="float:left" class="col-md-4">
-				<div class="col-xs-12 col-md-4">
-					<img src="../resources/file/fileCoupon/${ coupon.couponImage }" align="middle" width="300px" height="150px">
+			<div class="container">
+				<div class="row no-gutters slider-text align-items-center justify-content-center">
+					<div class="col-md-9 ftco-animate text-center">
+						<p class="breadcrumbs">
+							<span class="mr-2"><a href="/index.jsp">CouponList</a></span>
+						</p>
+						<h1 class="mb-0 bread">ì´ë‹¬ì˜ ì¿ í°</h1>
+					</div>
 				</div>
-
 			</div>
-				
-				<div style="float:right; min-width:65%" class="col-md-8"> 
-			
-					<input type="hidden" id="couponNo" name="couponNo" value="${ coupon.couponNo }">
-			
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>ÄíÆùÄÚµå</strong></div>
-						<div class="col-xs-8 col-md-6" id="couponCode">${ coupon.couponCode }</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>ÄíÆùÀÌ¸§</strong></div>
-						<div class="col-xs-8 col-md-6">${ coupon.couponName }</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>ÇÒÀÎ±İ¾×</strong></div>
-						<div class="col-xs-8 col-md-6">${ coupon.discount }¿ø</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>µî·ÏÀÏÀÚ</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<fmt:formatDate value="${ coupon.makeDate }" pattern="yyyy³â MM¿ù ddÀÏ"/>
-						</div>
-					</div>
-					
-					<hr/>
-					
-					<div class="row">
-				  		<div class="col-xs-4 col-md-6"><strong>»ç¿ë±âÇÑ</strong></div>
-						<div class="col-xs-8 col-md-6">
-							<fmt:formatDate value="${ coupon.limitDate }" pattern="yyyy³â MM¿ù ddÀÏ"/>
-						</div>
-					</div>
-					
-					<hr/>
-					
-					<c:if test="${ sessionScope.user.role eq 'user' }">
-					<div class="row" style="float:right">
-						<input type="button" id="receiveCoupon" class="receiveCoupon" value="ÄíÆù¹Ş±â">
-					</div>
-					</c:if>
-					<c:if test="${ sessionScope.user.role eq 'admin' }">
-					<div class="row" style="float:right">
-						<input type="button" id="removeCoupon" class="removeCoupon" value="»èÁ¦">
-					</div>
-					</c:if>
-
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-				
-				
-				</div>
-				</c:forEach>
-			
-		
-			
 		</div>
+	
+		<div class="page-content d-flex align-items-stretch col-md-12" style="padding-top: 60px; ">
+			<jsp:include page="/users/mypage/userSideBar.jsp"></jsp:include>
+			<div id="dialog" class="row">
+				<c:set var="i" value="0"/>
+				<c:forEach var="coupon" items="${ list }">		
+				<div style="float:left" class="col-md-4">
+					<div class="col-xs-12 col-md-4">
+						<img src="../resources/file/fileCoupon/${ coupon.couponImage }" align="middle" width="240px" height="135px">
+					</div>
+	
+				</div>
+					
+					<div style="float:right; min-width:65%" class="col-md-8"> 
+				
+						<input type="hidden" id="couponNo" name="couponNo" value="${ coupon.couponNo }">
+						<input type="hidden" id="couponCode" name="couponCode" value="${ coupon.couponCode }">
+				
+<!-- 						<div class="row"> -->
+<!-- 					  		<div class="col-xs-4 col-md-6"><strong>ì¿ í°ì½”ë“œ</strong></div> -->
+<%-- 							<div class="col-xs-8 col-md-6" id="couponCode">${ coupon.couponCode }</div> --%>
+<!-- 						</div> -->
+						
+						<hr/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>ì¿ í°ì´ë¦„</strong></div>
+							<div class="col-xs-8 col-md-6">${ coupon.couponName }</div>
+						</div>
+						
+						<hr/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>í• ì¸ê¸ˆì•¡</strong></div>
+							<div class="col-xs-8 col-md-6">${ coupon.discount }ì›</div>
+						</div>
+						
+						<hr/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>ë“±ë¡ì¼ì</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<fmt:formatDate value="${ coupon.makeDate }" pattern="yyyyë…„ MMì›” ddì¼"/>
+							</div>
+						</div>
+						
+						<hr/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>ì‚¬ìš©ê¸°í•œ</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<fmt:formatDate value="${ coupon.limitDate }" pattern="yyyyë…„ MMì›” ddì¼"/>
+							</div>
+						</div>
+						
+						<hr/>
+						
+						<c:if test="${ sessionScope.user.role eq 'user' }">
+						<div class="row" style="float:right">
+							<button type="button" class="btn btn-default receiveCoupon" id="receiveCoupon">ì¿ í°ë°›ê¸°</button>
+						</div>
+						</c:if>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+						<div class="row" style="float:right">
+							<button type="button" class="btn btn-default removeCoupon" id="removeCoupon">ì¿ í°ì‚­ì œ</button>
+						</div>
+						</c:if>
+	
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+					
+					
+					</div>
+					</c:forEach>
+				
+			
+				
+			</div>
+			</div>
 		
 		<hr/>
 	
 	</div>
 	
-		
+    <jsp:include page="/layout/footer.jsp"></jsp:include>
+
+    <!--Global Javascript -->
+    <script src="/resources/newTemplate/admin/js/jquery.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/popper/popper.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/tether.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/bootstrap.min.js"></script>
+    <script src="/resources/newTemplate/admin/js/jquery.cookie.js"></script>
+    <script src="/resources/newTemplate/admin/js/jquery.validate.min.js"></script> 
+    <script src="/resources/newTemplate/admin/js/chart.min.js"></script> 
+    <script src="/resources/newTemplate/admin/js/front.js"></script> 		
 		
 		
 	
- 	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 
 	<script type="text/javascript">
 		
-		//============= È¸¿øÁ¤º¸¼öÁ¤ Event  Ã³¸® =============	
+		//============= íšŒì›ì •ë³´ìˆ˜ì • Event  ì²˜ë¦¬ =============	
 // 		function fncAddCoupon(couponNo, receiverId) {
-// 			alert("addcouponÆã¼Ç ÄíÆù¹øÈ£ : "+couponNo);
-// 			alert("addcouponÆã¼Ç ¹Ş´Â»ç¶÷ : "+receiverId);
+// 			alert("addcouponí‘ì…˜ ì¿ í°ë²ˆí˜¸ : "+couponNo);
+// 			alert("addcouponí‘ì…˜ ë°›ëŠ”ì‚¬ëŒ : "+receiverId);
 //			self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
 // 		}
 		
@@ -162,31 +216,47 @@
 // 			}))
 // 		})
 		
-		$(function(){
-			$("#couponManage").on("click", function(){
-				self.location="/coupon/addCouponManage"
-			})
-		});
+// 		$(function(){
+// 			$("#couponManage").on("click", function(){
+// 				self.location="/coupon/addCouponManage"
+// 			})
+// 		});
 		
 		$(function(){
 			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("input").val();
-// 				alert(couponNo);
-				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+// 				debugger;
+				var couponNo=$(this).parent().parent().children("input[name=couponNo]").val();
+				var couponCode=$(this).parent().parent().children("input[name=couponCode]").val();
+// 				alert(couponNo+", "+couponCode);
+// 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+				swal({
+					text : "ì¿ í°ì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?",
+					icon : "warning",
+					buttons : ["ì·¨ì†Œ","í™•ì¸"],
+					dangerMode: true,
+				})
+				.then((A) => {
+					if(A) {
+						self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+					}
+				    swal("ì‚­ì œì™„ë£Œ !", {
+				      	icon: "success"
+				    });
+				})
 			})
 		})
 		
 		$(function (){
 		
 			$(".receiveCoupon").on("click", function(){
-				var couponCode=$(this).parent().parent().children("div").find("#couponCode").html();
+				var couponCode=$(this).parent().parent().children("input[name=couponCode]").val();
 				var receiverId=$("#receiverId").val();
 				var checkCoupon = { couponCode:couponCode , receiverId:receiverId }
-				var couponNo=$(this).parent().parent().children("input").val();
-// 				alert("ajaxÅë½Å ÄíÆùÄÚµå : "+couponCode);
-// 				alert("ajaxÅë½Å ¹Ş´Â»ç¶÷ : "+receiverId);
-// 				alert("ajaxÅë½Å Ã¼Å©ÄíÆù : "+JSON.stringify(checkCoupon));
-// 				alert("ajaxÅë½Å ÄíÆù¹øÈ£ : "+couponNo)
+				var couponNo=$(this).parent().parent().children("input[name=couponNo]").val();
+// 				alert("ajaxí†µì‹  ì¿ í°ì½”ë“œ : "+couponCode);
+// 				alert("ajaxí†µì‹  ë°›ëŠ”ì‚¬ëŒ : "+receiverId);
+// 				alert("ajaxí†µì‹  ì²´í¬ì¿ í° : "+JSON.stringify(checkCoupon));
+// 				alert("ajaxí†µì‹  ì¿ í°ë²ˆí˜¸ : "+couponNo)
 				$.ajax({
 					type : "POST",
 					contentType : "application/json",
@@ -195,13 +265,12 @@
 					datatype : "json",
 					success : function(response){
 						if($.trim(response.result)==0){
-							alert("ÄíÆùÀ» ¹Ş¾Ò½À´Ï´Ù");
-// 							alert(couponNo);
-// 							alert(receiverId);
+// 							alert("ì¿ í°ì„ ë°›ì•˜ìŠµë‹ˆë‹¤");
+// 							alert(couponNo+", "+couponCode+", "+receiverId);
 							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
 						}else{
-							alert("ÀÌ¹Ì ¹ŞÀº ÄíÆùÀÔ´Ï´Ù");
-							return;
+// 							alert("ì´ë¯¸ ë°›ì€ ì¿ í°ì…ë‹ˆë‹¤");
+// 							return;
 						}
 					},
 					error : function(request, status, error){

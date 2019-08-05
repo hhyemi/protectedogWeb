@@ -116,7 +116,7 @@
       <div class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
          <b><a class="navbar-brand smooth-scroll" href="/index.jsp">
-            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;<span >보호할개</span>
+            <img src="/resources/file/others/favicon.png" alt="logo" height="40px" width="40px">&ensp;<span style="font-size:20px;">보호할개</span>
           </a></b> 
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
                 <span class="navbar-toggler-icon"></span>
@@ -148,23 +148,22 @@
 	                
                   </div>
                 </li>
-              <c:if test="${ sessionScope.user != null }">
-                <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">마이페이지</a> 
-                  <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a>
-		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a>
-		                <c:if test="${ sessionScope.user.role eq 'admin' }">
-		                	<a class="dropdown-item" href="/coupon/addCoupon">쿠폰생성</a>
-		                </c:if>
-		                <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a>
-		                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#report-modal">신고하기</a>
-		                <c:if test="${ sessionScope.user.role eq 'admin' }">
-		                <a class="dropdown-item" href="/report/listReport">신고글목록</a>
-		                </c:if>
-                  </div>
-                </li>
-                 </c:if>
+<%--               <c:if test="${ sessionScope.user != null }"> --%>
+<!--                 <li class="nav-item dropdown" > -->
+<!--                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">마이페이지</a>  -->
+<!--                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink"> -->
+<%-- 		            <a class="dropdown-item" href="/users/getUsers?id=${ sessionScope.user.id }">내정보보기</a> --%>
+<!-- 		              	<a class="dropdown-item" href="/message/listMessage?searchCondition=all">쪽지함</a> -->
+<%-- 		                <c:if test="${ sessionScope.user.role eq 'admin' }"> --%>
+<!-- 		                	<a class="dropdown-item" href="/coupon/addCouponManage">쿠폰생성</a> -->
+<%-- 		                </c:if> --%>
+<!-- 		                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#report-modal">쿠폰받기</a> -->
+<%-- 		                <c:if test="${ sessionScope.user.role eq 'admin' }"> --%>
+<!-- 		                <a class="dropdown-item" href="/report/listReport">신고글목록</a> -->
+<%-- 		                </c:if> --%>
+<!--                   </div> -->
+<!--                 </li> -->
+<%--                  </c:if> --%>
                 <li class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
@@ -245,7 +244,7 @@
 			
 		});
 		
-		$("#login-modal").on("click", function(){
+		$(".login-modal").on("click", function(){
 			
 			fncLogin();
 			
@@ -273,15 +272,45 @@
 // 				alert(id);
 // 				alert(pw);
 				if(id == null || id.length <1) {
-					alert('ID를 입력하십시오.');
-					$("#login_username").focus();
-					return;
+// 					alert('ID를 입력하십시오.');
+// 					$("#login_username").focus();
+// 					return;
+					swal({
+						title : "ID를 입력하세요",
+						dangerMode: true,
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					.then((A) => {
+						if(A){
+							$("#login_username").focus();
+							return false;
+						}
+					});
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('비밀번호를 입력하십시오.');
-					$("#login_password").focus();
-					return;
+// 					alert('비밀번호를 입력하십시오.');
+// 					$("#login_password").focus();
+// 					return;
+					swal({
+						title : "비밀번호를 입력하세요",
+						dangerMode: true,
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					.then((A) => {
+						if(A){
+							$("#login_password").focus();
+							return false;
+						}
+					});
 				}
 				
 				var chkLogin={id:id, pw:pw};
@@ -323,15 +352,46 @@
 						}
 						if(response.pw != pw || response.id != id){
 // 							alert(response.pw);
-							alert("아이디 혹은 비밀번호가 맞지 않습니다.");
-							$("#login_password").val('');
-							return;
-							$("#id").focus();
+// 							alert("아이디 혹은 비밀번호가 맞지 않습니다.");
+// 							$("#login_password").val('');
+// 							return;
+// 							$("#id").focus();
+							swal({
+								title : "아이디 혹은 비밀번호가 일치하지 않습니다.",
+								dangerMode: true,
+								buttons :{
+									catch : {
+										text : "확인"
+									}
+								}
+							})
+							.then((A) => {
+								if(A){
+									$("#login_password").val('');
+									return;
+									$("#id").focus();
+								}
+							});
 						}
 						if(response.levelPoint < 0) {
-							alert("블랙리스트 처리된 회원입니다.");
-							return;
-							$("#id").focus();
+// 							alert("블랙리스트 처리된 회원입니다.");
+// 							return;
+// 							$("#id").focus();
+							swal({
+								title : "블랙리스트 처리된 회원입니다.",
+								dangerMode: true,
+								buttons :{
+									catch : {
+										text : "확인"
+									}
+								}
+							})
+							.then((A) => {
+								if(A){
+									return;
+									$("#id").focus();
+								}
+							});
 						}
 						
 					},
@@ -365,8 +425,16 @@
 					Kakao.Auth.getAccessToken();
 				},
 				fail : function(err) {
-					alert(JSON.stringify(err));
-					alert("로그인 실패");
+// 					alert(JSON.stringify(err));
+					swal({
+						title : "로그인 실패!",
+						dangerMode: true,
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
 				}
 			})
 		})
