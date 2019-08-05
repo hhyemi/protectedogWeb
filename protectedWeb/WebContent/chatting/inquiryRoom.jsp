@@ -123,7 +123,7 @@
      <input type="hidden" id="postId" value="${postId }">     
      <input type="hidden" id="profile" value="${profile}">  
 </div> 	
-    <script src="http://127.0.0.1:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.0.33:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -145,24 +145,29 @@
             		if(profile==""){
             			profile = "kakaoDefaultImg.jfif";
             		}
-
-            		var socket = io("http://127.0.0.1:82/");
+					
+            		var socket = io("http://192.168.0.33:82/");
 
             		socket.emit("updateUser", userName);
             		
             		socket.emit("send_msg", "server" , userName+'님이 입장하셨습니다.');
             		
             	      $("#msg_process").on('click', function(e){ //2
+      	            	if($("#msg").val()!=''){
             	          socket.emit("send_msg", userName , $("#msg").val());
             	          $('#msg').val('');
             	          $('#msg').focus();
             	          e.preventDefault();
+      	            	}
             	        });
             	        $("#msg").keydown(function(key){ 
-            	            if(key.keyCode == 13){                   
+            	        	
+            	            if(key.keyCode == 13){
+            	            	if($("#msg").val()!=''){
             	          	  socket.emit("send_msg", userName , $("#msg").val());            
             	                $("#msg").val("");
             	                $('#msg').focus();
+            	            	}
             	            }
             	        });
             	        
@@ -176,7 +181,7 @@
             	        	NowTime = '12';
             	        }
             	        var NowMinutes = Now.getMinutes()
-            	        if(NowMinutes.length=1){
+            	        if(NowMinutes.length<10){
             	        	NowTime += ':0'+ NowMinutes;
             	        }else{
             	       		NowTime += ':' + Now.getMinutes();
@@ -189,8 +194,10 @@
                   	       
             	    	  
             	    	  }else{
-            	    		  $('#chat_box').append("<div clas=\"row\"> &emsp;&nbsp;<img src=\"/resources/file/fileUser/"+profile+"\" style=\"border-radius:50px\" height=\"40px\" width=\"40px\">&nbsp;"+re+"<div class='msgLine2' >&emsp;&emsp;&emsp;<button style='pointer-events: none;' class='msgBox2'>"+msg+"</button>&nbsp;<small>"+NowTime+"</small></div><br/></div>");
-            	    
+            	    		 // $('#chat_box').append("<div clas=\"row\"> &emsp;&nbsp;<img src=\"/resources/file/fileUser/"+profile+"\" style=\"border-radius:50px\" height=\"40px\" width=\"40px\">&nbsp;"+re+"<div class='msgLine2' >&emsp;&emsp;&emsp;<button style='pointer-events: none;' class='msgBox2'>"+msg+"</button>&nbsp;<small>"+NowTime+"</small></div><br/></div>");
+            	    		  $('#chat_box').append("<div class='row' style='padding-left:7px'><div class=\"col-xs-1 col-md-1\" ><img src=\"/resources/file/fileUser/"+profile+"\" style=\"border-radius:50px\" height=\"40px\" width=\"40px\">"+
+                    	    			"</div> <div class=\"col-xs-11 col-md-11\" >&emsp;"+re+"<div class='msgLine2' ><button style='pointer-events: none;margin-top:5px' class='msgBox2'>"+msg+
+                  	    			"</button>&nbsp;<small>"+NowTime+"</small></div><br/></div></div></div>");
             	    	  }
             	        $('#chat_box').scrollTop($('#chat_box')[0].scrollHeight);
             	      }); 

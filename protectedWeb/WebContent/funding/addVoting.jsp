@@ -128,7 +128,7 @@
 				<div class=>
 					<input type="text" class="form-control" id="postTitle"
 						name="postTitle" placeholder="제목을 입력해주세요."
-						style="width: 700px; height: 35px;">
+						style="width: 700px; height: 35px;" maxlength="12">
 				</div>
 			</div>
 			<br />
@@ -627,12 +627,8 @@
           
            //============= 글제목 길이 입력 검증 =============
              $('#postTitle').keyup(function(){
-            	 var byteText = $(this).val();
-              	 var byteNum = 0;
-              	 
-                  for(var i = 0; i < byteText.length ; i++) {
-                     byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
-	                  if(byteNum > 50) {     
+
+	                  if($(this).val().length > 12) {     
 	        			  swal({
 		       		           text: "제한길이를 초과하였습니다.",
 		       		           dangerMode: true,
@@ -643,11 +639,10 @@
 		       				   },			   
 		       		      }).then((willDelete) => {
 		       		           if (willDelete) {
-		                           $(this).val($(this).val().substr(0,i));
+		                           $(this).val($(this).val().substr(0,12));
 		       		           }
 		       		      });
 	                  }
-                  }
 
              });
 
