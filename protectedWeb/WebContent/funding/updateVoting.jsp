@@ -132,7 +132,7 @@
 					<b>글제목</b>
 				</h5><p/>		
 		    <div class=>
-		      <input type="text" class="form-control" value="${funding.postTitle}" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
+		      <input type="text" class="form-control" value="${funding.postTitle}" id="postTitle" name="postTitle" maxlength="12"   placeholder="제목을 입력해주세요." style="width:700px; height:35px;">		
 		    </div>
 		  </div>
 		  <br/>
@@ -636,30 +636,24 @@
           
           //============= 글제목 길이 입력 검증 =============
           $('#postTitle').keyup(function(){
-         	 var byteText = $(this).val();
-           	 var byteNum = 0;
-           	 
-               for(var i = 0; i < byteText.length ; i++) {
-                  byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
-	                  if(byteNum > 50) {     
-	        			  swal({
-	       		           text: "제한길이를 초과하였습니다.",
-	       		           dangerMode: true,
-	       		           buttons: {
-	       							 catch: {
-	       							 	text: "확인"
-	       							 }
-	       				   },			   
-	       		      }).then((willDelete) => {
-	       		           if (willDelete) {
-	                           $(this).val($(this).val().substr(0,i));
-	       		           }
-	       		      });
-	                	  
-	                  }
-               }
 
-          });
+              if($(this).val().length > 12) {     
+    			  swal({
+       		           text: "제한길이를 초과하였습니다.",
+       		           dangerMode: true,
+       		           buttons: {
+       							 catch: {
+       							 	text: "확인"
+       							 }
+       				   },			   
+       		      }).then((willDelete) => {
+       		           if (willDelete) {
+                           $(this).val($(this).val().substr(0,12));
+       		           }
+       		      });
+              }
+
+     });
 
              
      }); 

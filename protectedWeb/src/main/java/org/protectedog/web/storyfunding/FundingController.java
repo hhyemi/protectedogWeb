@@ -133,6 +133,7 @@ public class FundingController {
 
 		// 세션
 		User user = (User) session.getAttribute("user");
+		user = userService.getUsers(user.getId());
 		model.addAttribute("user", user);
 
 		return "redirect:/funding/addVoting.jsp";
@@ -159,8 +160,10 @@ public class FundingController {
 		fundingService.addVoting(funding);
 
 		// 포인트
+		if(user.getLevelPoint()!=0) {
 		user.setLevelPoint(user.getLevelPoint() + 3);
 		userService.updateUsers(user);
+		}
 
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
@@ -232,7 +235,6 @@ public class FundingController {
 				model.addAttribute("check", "already");
 			}
 		}
-
 		model.addAttribute("file", file);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
@@ -533,8 +535,10 @@ public class FundingController {
 		fundingService.updateStatusCode(funding);
 
 		// 포인트
+		if(user.getLevelPoint()!=0) {
 		user.setLevelPoint(user.getLevelPoint() + 10);
 		userService.updateUsers(user);
+		}
 
 		return "redirect:/funding/getVoting?postNo=" + postNo;
 	}
@@ -583,8 +587,10 @@ public class FundingController {
 		Funding funding2 = fundingService.getVoting(participate.getPostNo());
 
 		// 포인트
+		if(user.getLevelPoint()!=0) {
 		user.setLevelPoint(user.getLevelPoint() + 10);
 		userService.updateUsers(user);
+		}
 
 		model.addAttribute("user", user);
 		model.addAttribute("funding", funding2);

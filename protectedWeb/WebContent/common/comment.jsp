@@ -22,6 +22,8 @@
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
+h6>b{color: white !important;}
+
 .temp { height: 300px; }
 .commentDiv{ background-color: #F0F0F0; min-height: 50px; }
 .reportModal{ color: #f73325; }
@@ -30,7 +32,6 @@
 .fa-thumbs-up:hover{cursor:pointer;color:#F04F23;}
 .fa-trash-alt:hover{cursor:pointer;color:#F04F23;}
 .fa-pen:hover{cursor:pointer;color:#F04F23;}
-#commentGo{color:white;}
 </style>
 </head>
 <body>
@@ -75,6 +76,7 @@
 		<c:forEach var="comment" items="${list}">
 			<c:set var="rank" value="${ rank+1 }" />
 			<div class="row" id="${comment.commentNo}">
+				<input type="hidden" name="nickname" value="${comment.nickName}">
 				<div class="col-sm-2 col-md-1" align="center">
 					<c:if test="${comment.profile != null }">
 					<img src="/resources/file/fileUser/${comment.profile}" class="profileImg" />
@@ -86,7 +88,7 @@
 				<div class="col-sm-10 col-md-11" align="left">
 					
 					<h4 id="${comment.commentNo}" class="h4tag">
-						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp;
+						<b>${comment.nickName}</b>&nbsp; <small><fmt:parseDate var="dateString" value="${comment.regDate}" pattern="yyyy-MM-dd HH:mm:ss" /><fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd HH:mm" /></small>&nbsp;
 						<small>
 							<c:if test="${rank == 1 and comment.likeCount != 0}">
 								<img src="/resources/file/others/gold-medal.png"></img> ${ rank } 등
@@ -179,6 +181,7 @@
  		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 모달 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <%-- 		<jsp:include page="/common/modal/modalLogin.jsp"></jsp:include> --%>
 		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>		
+
 	</div> <!--  END of Container -->
 	
 	<script type="text/javascript">	
@@ -237,13 +240,24 @@
 	 					
 //	 					var display = "<div class='col-sm-12 col-md-12 commentList'>";
 						var display = "";
+						
+						//console.log(${sessionScope.user.role})
+						
 						$.each(list, function(index, comment){
 							
+							var date = new Date(comment.regDate);
+							//date.format("yyyy-MM-dd HH:mm");
+							var convertDate = date.getFullYear() + "-" 
+											+ (date.getMonth()<10?'0':'') + (date.getMonth()+1) + "-" 
+											+ (date.getDate()<10?'0':'') + date.getDate() +" "
+											+ (date.getHours()<10?'0':'') + date.getHours() +":"
+											+ (date.getMinutes()<10?'0':'') + date.getMinutes()  ;
 							display +=
-								"<div class='row' id='"+comment.commentNo+"'>" +
-									"<div class='col-sm-1 col-md-1' align='center'>";	
+								"<div class='row' id='"+comment.commentNo+"'>"
+								+ "<input type='hidden' name='nickname' value="+comment.nickName+">"
+								+	"<div class='col-sm-1 col-md-1' align='center'>";	
 									if(comment.profile != null){
-										display += "<img src='https://via.placeholder.com/'"+comment.profile+" class='profileImg'/>";
+										display += "<img src='/resources/file/fileUser/"+comment.profile+"' class='profileImg' onERROR='this.src='/resources/file/others/kakaoDafaultImg.jfif''/>";
 									} else {
 										display += "<img src='/resources/file/others/kakaoDefaultImg.jfif' class='profileImg'/>";
 									}
@@ -253,13 +267,13 @@
 								"</div>" +
 									"<div class='col-sm-11 col-md-11' align='left'>" + 
 										"<h4 id="+comment.commentNo+" class='h4tag'>" +	
-											"<b>"+comment.nickName+"</b>&nbsp; <small>"+comment.regDate+"</small>" + 
+											"<b>"+comment.nickName+"</b>&nbsp; <small>"+convertDate+"</small>" + 
 										"</h4>" +
 		 								"<input type='hidden' name='commentNo' value='"+comment.commentNo+"'/>" +
 							   			"<div id="+comment.commentNo+" class='area'>" +
 											"<h5  id="+comment.commentNo+" class='cmCont'>"+comment.commentContent+"</h5>";
 						    	
-								if('${sessionScope.user.role == "admin"}'){
+								if('${sessionScope.user.role}' == "admin"){
 									display +=  "<span class='fas fa-trash-alt'></span>&nbsp;";
 								}
 								
@@ -331,9 +345,20 @@
 							"Content-Type" : "application/json"
 							},
 				success : function(JSONData, status){
-																
+								
+					//debugger;
+					var date = new Date(JSONData.regDate);
+					var convertDate = date.getFullYear() + "-" 
+					+ (date.getMonth()<10?'0':'') + (date.getMonth()+1) + "-" 
+					+ (date.getDate()<10?'0':'') + date.getDate() +" "
+					+ (date.getHours()<10?'0':'') + date.getHours() +":"
+					+ (date.getMinutes()<10?'0':'') + date.getMinutes()  ;
+					
+					//date.format("yyyy-MM-dd HH:mm");
+					
 	 							var display = 
 	 								"<div class=row id="+JSONData.commentNo+">"
+	 								+ "<input type='hidden' name='nickname' value="+JSONData.nickName+">"
 	 								+"<div class=col-sm-1 col-md-1 align=center>";
 	 									if(JSONData.profile == null){
 	 										display += "<img src=/resources/file/others/kakaoDefaultImg.jfif class='profileImg'/>";
@@ -345,7 +370,7 @@
 	 								display += "</div>"
 	 								+"<div class=col-sm-11 col-md-11 align=left>"
 	 									+"<h4 id='"+JSONData.commentNo+"' class=h4tag>"
-	 									+"<b>"+JSONData.nickName+"</b> &nbsp; <small>"+JSONData.regDate+"</small> &nbsp;"
+	 									+"<b>"+JSONData.nickName+"</b> &nbsp;<small>"+convertDate+"</small> &nbsp;"
 	 									+"</h4>"
 	 									+"<input type='hidden' name='commentNo' value='"+JSONData.commentNo+"'>"					
 	 									+"<div id='"+JSONData.commentNo+"' class=area>"
@@ -366,8 +391,7 @@
 	 								+"</div>"
 	 							+"</div>"
 	 							+"<br class="+JSONData.commentNo+" class='line'/>"
-	 								
-	 							
+	 									 							
 								$(".commentList").prepend(display);
 	 							
 	 							$("#commentContent").val("");
@@ -460,7 +484,14 @@
 		// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 신고하기  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 		$(document).on("click",".report",function() {
 			
-			$("#report-modal2").modal("show");
+		 		if(${user==null}){
+		 			$("#login-modal").modal('show');  
+		 		}else{
+			 	    var nickname = $('input[name=nickname]').val();
+			 	   $('#reportedNick').prop('readonly', true);
+			 	    $("#reportedNick").val(nickname);
+			 		$("#report-modal").modal("show");
+		 		}
 		
 		});
 			

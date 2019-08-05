@@ -135,7 +135,7 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
-	public User login(@RequestBody Map<String, Object> chkLogin, 
+	public Map<String, Object> login(@RequestBody Map<String, Object> chkLogin, 
 						HttpSession session, 
 						HttpServletRequest request) throws Exception{
 		
@@ -156,7 +156,17 @@ public class UserRestController {
 
 		System.out.println("json/login URI : "+request.getRequestURI());
 		
-		return user;
+		/**/
+		String prevURI = request.getHeader("referer");
+		
+		String convertURI = prevURI.substring(21);
+		
+		System.out.println(" convertURI " + convertURI);
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("user", user);
+		returnMap.put("returnURI", convertURI);
+		return returnMap;
 	}
 	
 }

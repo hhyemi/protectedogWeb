@@ -43,7 +43,7 @@
        }
          .fa-heart {
          	color: #f04f23;
-/*          	padding-top: 5px; */
+         	padding-top: 10px; 
         }
         img {
        	    max-width: 600px;
@@ -54,6 +54,8 @@
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
+   	<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
+    <jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>  
   </head>
   <body>
     <!--================Header Menu Area =================--> 
@@ -117,12 +119,15 @@
              <h4>&emsp;</h4>
              <div style="padding-bottom:10px">
            		 <div class="row">
-           		 <div class="col-xs-11 col-md-11" style="height:35px; left:0px; bottom:0px;" >             
-             <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b> 
-             </div>				  
+           		 <div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px; margin-right:30px" >
+            <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b>
+				  </div> 	
 			        	<c:if test="${ user.id ne funding.id }">
-				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left: 0;" >
-								
+			        	
+				         	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-top:10px" >
+									<img src="/resources/file/others/siren.png"  id ="report"  width="22px" height="22px" >
+							</div>
+							<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left:9px "  >
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' }">
 										<span class="fas fa-heart"></span>
@@ -293,6 +298,7 @@
 				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
 	              	   <input type="hidden" name="userId" value="${user.id}">
               	       <input type="hidden" name="levels" value="${user.levels}">			       
+	              	   <input type="hidden" name="nickname" value="${funding.nickname}">			 		  
 			 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 			 		   <input type="hidden" id="searchKeyword" name="searchKeyword" value=""/>	  
  					   <input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>					       
@@ -466,7 +472,28 @@
  	$( "#btnList" ).on("click" , function() {
 		self.location = "/funding/listFunding" 	
  	});
-      
+	//============= 문의하기 Event  처리 =============	
+ 	$( "#btnQuestion" ).on("click" , function() {
+ 		
+ 		if(${user==null}){
+ 			$("#login-modal").modal('show');  
+ 		}else{	 	    
+		 	$('#receiverNick').prop('readonly', true);
+		 	$("#receiverNick").val($('input[name=nickname]').val());
+ 			$("#messageModal").modal('show');  
+ 		}
+	});  	
+	//============= 신고하기 Event  처리 =============	
+ 	$( "#report" ).on("click" , function() {
+ 		if(${user==null}){
+ 			$("#login-modal").modal('show');  
+ 		}else{
+	 	    var nickname = $('input[name=nickname]').val();
+	 	   $('#reportedNick').prop('readonly', true);
+	 	    $("#reportedNick").val(nickname);
+	 		$("#report-modal").modal("show");
+ 		}
+	});     
 		//============= 후원하기 Event  처리 =============	
 	 	$( "#btnFund" ).on("click" , function() {
 	 		if(${user == null}){
