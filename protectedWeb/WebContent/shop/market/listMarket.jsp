@@ -54,8 +54,8 @@
 #get {
 	padding-left: 10px;
 	padding-right: 10px;
-	max-width: 350px;
-	min-width: 350px;
+	max-width: 300px;
+	min-width: 300px;
 	min-height: 550px;
 	max-height: 550px;
 }
@@ -63,8 +63,8 @@
 .img-fluid {
 	min-height: 350px;
 	max-height: 350px;
-	max-width: 320px;
-	min-width: 320px;
+	max-width: 280px;
+	min-width: 280px;
 	padding-left: 10px;
 	padding-right: 10px;
 	padding-bottom: 10px;

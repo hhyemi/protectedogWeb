@@ -68,8 +68,14 @@
 }
 
 th {
-	background-color: #e6e6e6;
+	background-color: #F0F0F0;
 }
+
+#list{margin-left: 340px;
+	margin-bottom: 100px;
+	margin-top:10px;}
+
+
 
 </style>
 
@@ -271,8 +277,10 @@ th {
 				</tbody>
 			</table>
 		</div>
-	</div><br/><br/><br/>
+	</div>
+	<button type="button" class="btn btn-default" id="list">목록</button>
 	
+<br/><br/><br/>
 		<jsp:include page="/layout/footer.jsp"/>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
 	

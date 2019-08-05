@@ -45,8 +45,8 @@
 	min-height: 240px;
 	max-height: 240px;
 	overflow: auto;
-	max-width: 250px;
-	min-width: 250px;
+	max-width: 200px;
+	min-width: 200px;
 }
 
 .card {
@@ -96,6 +96,7 @@ th {
 }
 
 
+
 </style>
 
 
@@ -129,6 +130,7 @@ th {
 					<font size="7">보호할개 스토어</font>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	<br />
@@ -176,47 +178,6 @@ th {
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
-
-					<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
-							<div class="row">
-			<div class="col-md-9" style="">
-				<div style="float: right;">
-				전체  ${resultPage.totalCount } 건
-					<form class="form-inline" name="detailForm">
-						<div class="form-group3">
-							<select class="form-control" id="searchCondition" name="searchCondition">
-								<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
-								<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>가격</option>
-							</select>
-						</div>
-
-
-						<div class="form-group">
-							<label class="sr-only" for="searchKeyword">검색어</label> <input
-								type="text" class="form-control searchKeyword" id="searchKeyword"
-								name="searchKeyword" placeholder="검색어를 입력하세요."
-								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit">
-								<span class="fas fa-search"></span>
-							</button>
-						</div>
-						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						<input type="hidden" id="currentPage" name="currentPage" value="" />
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- 검색결과 없음 처리 -->
-				<c:if test="${totalCount == 0}">
-				<div class="row">
-				<div class="col-md-9" align="center" style="height: 500px; padding-top: 150px;">
-					
-					<jsp:include page="/common/searchResult.jsp"></jsp:include>
-				</div>
-				</div>
-				</c:if>
-				
-			
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">

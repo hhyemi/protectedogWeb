@@ -45,8 +45,6 @@ body {
 	border-spacing: 0px;
 }
 
-
-
 #postTitle {
 	padding-left: 120px;
 	padding-right: 120px;
@@ -109,11 +107,24 @@ table {
 }
 
 th {
-	background-color: #e6e6e6;
+	background-color: #F0F0F0;
 }
 
-.form-group4{padding-right : 180px;
-				}
+.form-group4 {
+	padding-right: 30px;
+}
+
+.navigation {
+	margin-left: 450px;
+	margin-bottom: 200px;
+}
+
+#setting{
+	margin-top:70px;
+}
+
+.form-inline{
+	margin-right:190px;}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -137,11 +148,11 @@ th {
 			self.location = "/shop/product/addProduct.jsp";
 		});
 
-// 	$(function() {
+		// 	$(function() {
 
 		$("#searchSubmmit").on("click", function() {
 			fncGetList(1);
-			});
+		});
 
 		// 		$("#change2").on(
 		// 				"click",
@@ -186,43 +197,46 @@ th {
 	<br />
 	<p />
 	<!--/////////////////////// form start /////////////////////////////////-->
-	<div style="float: right;">
-		<form class="form-inline" name="detailForm">
-			<div class="form-group">
-				<select class="form-control" id="searchCondition"
-					name="searchCondition">
-					<option value="0"
-						${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
-					<option value="1"
-						${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
-				</select>
-			</div>
+
+		<div style="float: right;">
+			<form class="form-inline" name="detailForm">
+				<div class="form-group">
+					<select class="form-control" id="searchCondition"
+						name="searchCondition">
+						<option value="0"
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
+						<option value="1"
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
+					</select>
+				</div>
 
 
-			<div class="form-group4">
-				<label class="sr-only" for="searchKeyword">검색어</label> <input
-					type="text" class="form-control searchKeyword" id="searchKeyword"
-					name="searchKeyword" placeholder="검색어"
-					value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-				<button type="button" id="searchSubmmit"
-					class="btn btn-default searchSubmmit">
-					<span class="fas fa-search"></span>
-				</button>
-			</div>
+				<div class="form-group">
+					<label class="sr-only" for="searchKeyword">검색어</label> <input
+						type="text" class="form-control searchKeyword" id="searchKeyword"
+						name="searchKeyword" placeholder="검색어"
+						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+					<button type="button" id="searchSubmmit"
+						class="btn btn-default searchSubmmit">
+						<span class="fas fa-search"></span>
+					</button>
+				</div>
 
-			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-			<input type="hidden" id="currentPage" name="currentPage" value="" />
-		</form>
-	</div>
-
+				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				<input type="hidden" id="currentPage" name="currentPage" value="" />
+			</form>
+		</div>
 
 	<c:if test="${totalCount == 0}">
 		<div class="row">
-				<div class="col-md-9" align="center" style="height: 500px; padding-top: 150px;">
-					
-					<jsp:include page="/common/searchResult.jsp"></jsp:include>
-				</div>
-				</c:if>
+			<div class="col-md-9" align="center"
+				style="height: 500px; padding-top: 150px;">
+
+				<jsp:include page="/common/searchResult.jsp"></jsp:include>
+			</div>
+			</div>
+			
+	</c:if>
 	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 
@@ -230,7 +244,7 @@ th {
 
 	<div class="container" align="left">
 		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"
-			align="center">
+			align="center" id="setting">
 			<thead>
 				<tr>
 					<td colspan="11" id="countfont">기본 내역 조회 : 전체
@@ -314,19 +328,14 @@ th {
 				</c:forEach>
 			</table>
 			<br> <br> <br>
-				<div align="center">
-					<jsp:include page="/common/pageNavigator_new.jsp" />
-					</div>
-					
-					<div style="min-height: 40px">
-					</div>
-
-				<div style="min-height: 40px"></div>
-
+			<div class="navigation">
+				<jsp:include page="/common/pageNavigator_new.jsp" />
 			</div>
+
+
+
 		</div>
 	</div>
-
 
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
 	<!--================ start footer Area  =================-->

@@ -110,6 +110,8 @@
 								<span style="cursor:pointer">배송중</span></c:if>
 								<c:if test="${order.orderCode =='3'}">
 								<span style="cursor:pointer">배송완료</span></c:if>
+								<c:if test="${order.orderCode =='4'}">
+								판매완료</c:if>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
@@ -174,11 +176,11 @@
 		});
 		
 		$("td:nth-child(5) span:contains('배송중')").on("click", function(){
-			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='tranNo']")).val()+"&orderCode=3";
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=3";
 		});
 		
 		$("td:nth-child(5) span:contains('배송완료')").on("click", function(){
-			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='tranNo']")).val()+"&&orderCode=4";
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&&orderCode=4";
 		});
 		
 	});
