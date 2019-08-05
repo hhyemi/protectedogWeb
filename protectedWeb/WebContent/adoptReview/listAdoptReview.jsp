@@ -37,11 +37,12 @@
 			padding-top: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
+			background-color: white;
 		}
 		
  		.listImg {
  			max-height: 330px;  
- 			min-height: 330px;  
+ 			min-height: 300px;  
  			min-width: wrap; 
  			max-width: wrap; 
  			display: block; 
@@ -63,7 +64,7 @@
 		
 		#searchKeyword {
 			height: 40px;
-			width: 150px;
+			width: 160px;
 			border : 1px solid #D3D3D3;
 			padding-left: 5px;
 		}
@@ -101,13 +102,16 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">List</span> <span>AdoptReview</span></p>
+          	<p ><span class="mr-2">Adopt · Missing</span> <span>Review</span></p>
             <font size="7">후기게시판</font>
           </div>
         </div>
       </div>
     </div>
 
+	<div class="sectionContainer ">	
+    <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+	
     
 	<div class="container">
 	
@@ -170,11 +174,11 @@
       
       <div class="col-md-12"  style="padding-left: 0px;">
       
-      <c:if test="${resultPage.totalCount eq 0 }">
-      	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">
+<%--       <c:if test="${resultPage.totalCount eq 0 }"> --%>
+<!--       	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;"> -->
 <!-- 			<font size="4px">검색결과가 없습니다.</font> -->
-		</div>
-      </c:if>
+<!-- 		</div> -->
+<%--       </c:if> --%>
 	
 	  <div class="row"  id="listARJSON">
       <c:set var="i" value="0" />
@@ -217,9 +221,13 @@
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
+ 	</section></div>
  	
  	
  	
+ 	<c:if test="${resultPage.totalCount eq 0 }">
+ 		<jsp:include page="/common/searchResult.jsp"></jsp:include>
+ 	</c:if>
  	<jsp:include page="/layout/footer.jsp"></jsp:include>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
@@ -298,10 +306,12 @@
 								}
 								if( postSize == 1 && data.list.length == 0 ){
 									console.log('결과없음');
-									$('#searchEmpty').remove();
-									displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
-													+'<b><font size="5px">검색결과가 없습니다.</font></b>'
-						                    		+'</div>';
+									if ( $('#searchKeyword').val()==''){
+										$('#searchEmpty').remove();
+										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
+								                    	+'</div>';
+									}
 								}
 								$('#listARJSON').append(displayValue);
 								
@@ -333,15 +343,17 @@
 			console.log(id);
 			if (id == ''){
 				swal({
-			           text: "로그인 먼저 해주세요.",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "닫기"
-								 }
-					   },
-					   
-			    });
+	                   text: "로그인 먼저 해주세요.",
+	                   icon: "warning",
+	                   buttons: ["닫기", "로그인"],
+	                   dangerMode: true     
+	                 })
+	                 .then((willDelete) => {
+	                   if (willDelete) {
+// 	                	   self.location = "/users/addUsersAddition.jsp"
+	                        }
+	        	 });  
+			
 				return;
 			}
 			// 분양글 등록+ 그 글이 완료상태
@@ -394,20 +406,16 @@
 								} else {
 									
 									swal({
-								           text: "후기를 등록하려면 등록한 분양글이 완료상태이거나, "+"입양 신청한 분양글이 완료상태여야 합니다.",
+								           text: "후기를 등록하려면 등록한 분양글이 완료상태이거나, \n입양 신청한 분양글이 완료상태여야 합니다.",
 								           dangerMode: true,
 								           buttons: {
 													 catch: {
-													 	text: "닫기"
+													 	text: "확인"
 													 }
 										   },
 										   
 								    });
-								
-// 									$( '#dialog-cant' ).dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 									$( "#dialog-cant" ).dialog( "open" );
 								}
-								
 						},
 						error: function(request, status, error){ 
 							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -491,16 +499,16 @@
 			$("form").attr("method" , "POST").attr("action" , "/adoptReview/listAdoptReview").submit();
 		}
 		
-		if ( $('#totalCount').val() == 0){
-			$('#searchEmpty').html( 
-// 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
-					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
-					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
-            		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
-            		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
-            		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
-			);
-		}
+// 		if ( $('#totalCount').val() == 0){
+// 			$('#searchEmpty').html( 
+// // 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
+// 					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+// 					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+//             		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+//             		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+//             		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
+// 			);
+// 		}
 		
 	
 	</script>

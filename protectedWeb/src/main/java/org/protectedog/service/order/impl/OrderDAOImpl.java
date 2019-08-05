@@ -29,15 +29,12 @@ import org.springframework.stereotype.Repository;
 	///Constructor
 	public OrderDAOImpl(){
 		System.out.println(this.getClass());
-		System.out.println("여까지는 들어오긴함?");
 	}
 	
 	@Override
 	public void addOrder(Order order) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("들어오는지");
 		sqlSession.insert("OrderMapper.addOrder", order);
-		System.out.println("들어오는지2");
 		
 	}
 	
@@ -45,7 +42,7 @@ import org.springframework.stereotype.Repository;
 	public List<Order> listOrder(Search search, String id) throws Exception {
 		
 		Map<String , Object>  map = new HashMap<String, Object>();
-		System.out.println("어디까지 들어오나");
+
 		map.put("search", search);
 		System.out.println();
 		map.put("id", id);
@@ -85,11 +82,28 @@ import org.springframework.stereotype.Repository;
 
 	}
 
-
 	@Override
 	public void delOrder(Order order) throws Exception {
-			sqlSession.update("OrderMapper.delOrder", order);
-		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Order> listAdminOrder(Search search, String id) throws Exception {
+		Map<String , Object>  map = new HashMap<String, Object>();
+
+		map.put("search", search);
+		System.out.println();
+		map.put("id", id);
+		map.put("startRowNum", search.getStartRowNum());
+		map.put("endRowNum",search.getEndRowNum());
+		System.out.println("listAdminOrder DAOImpl");
+
+		return sqlSession.selectList("OrderMapper.listAdminOrder", map);
+	}
+
+
+
 
 
 	}

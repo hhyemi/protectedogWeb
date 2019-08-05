@@ -121,7 +121,7 @@
      <input type="hidden" id="userId" value="${userId }"> 
      <input type="hidden" id="postId" value="${postId }">     
 </div> 	
-    <script src="http://192.168.0.33:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.0.49:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -138,7 +138,7 @@
             
             		var userName = $("#userId").val();
 
-            		var socket = io("http://192.168.0.33:82/");
+            		var socket = io("http://192.168.0.49:82/");
 
             		socket.emit("updateUser", userName);
             		
@@ -164,17 +164,21 @@
             	        var Now = new Date();
 
             	        var NowTime =  Now.getHours();
-
-            	        NowTime += ':' + Now.getMinutes();
+            	        var NowMinutes = Now.getMinutes()
+            	        if(NowMinutes.length=1){
+            	        	NowTime += ':0'+ NowMinutes;
+            	        }else{
+            	       		NowTime += ':' + Now.getMinutes();
+            	        }
             	      	  if(re==userName){
-            	    		 $('#chat_box').append("<div class='text-right'><div class='msgLine'>"+NowTime+"&nbsp;<button style='pointer-events: none;' class='msgBox' >"+msg+"</button></div></div><br/>");
+            	    		 $('#chat_box').append("<div class='text-right'><div class='msgLine'><small>"+NowTime+"</small>&nbsp;<button style='pointer-events: none;' class='msgBox' >"+msg+"</button></div></div><br/>");
             	    	  
             	      	  }else if(re=="server"){
             	    		  $('#chat_box').append("<div class='text-center'><button class='btn btn-secondary' style='pointer-events: none;' type='button' disabled>&ensp;"+msg+"&ensp;</button></div><br/>");
                   	       
             	    	  
             	    	  }else{
-            	    		  $('#chat_box').append("&emsp;"+re+"<div class='text-right'><div class='msgLine2' ><button style='pointer-events: none;' class='msgBox2'>"+msg+"</button>"+NowTime+"</div></div><br/>");
+            	    		  $('#chat_box').append("&emsp;"+re+"<div class='text-right'><div class='msgLine2' ><button style='pointer-events: none;' class='msgBox2'>"+msg+"</button>&nbsp;<small>"+NowTime+"</small></div></div><br/>");
             	    
             	    	  }
             	        $('#chat_box').scrollTop($('#chat_box')[0].scrollHeight);

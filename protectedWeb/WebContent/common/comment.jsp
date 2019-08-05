@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -20,10 +22,16 @@
 <script src="https://kit.fontawesome.com/e26616618e.js"></script>
 <!--  CSS -->
 <style>
+h6>b{color: white !important;}
+
 .temp { height: 300px; }
-.btn.btn-default { width : 100%; height: 50px;}
 .commentDiv{ background-color: #F0F0F0; min-height: 50px; }
 .reportModal{ color: #f73325; }
+
+.profileImg { border-radius: 50px; min-height: 88px; min-width: 82px; max-height: 88px; max-width: 82px; }
+.fa-thumbs-up:hover{cursor:pointer;color:#F04F23;}
+.fa-trash-alt:hover{cursor:pointer;color:#F04F23;}
+.fa-pen:hover{cursor:pointer;color:#F04F23;}
 </style>
 </head>
 <body>
@@ -35,7 +43,7 @@
 		<c:if test="${sessionScope.user eq null}">
 		<div class="row" id="moreView">
 			<div class="col-sm-12 col-md-12" align="center">
-				비회원은 댓글을 달 수 없습니다<a href="#" class="log-modal" data-toggle="modal" data-target="#login-modal">로그인 </a>후 이용해주시길 바랍니다.
+				비회원은 댓글을 달 수 없습니다<a href="#" class="log-modal" data-toggle="modal" data-target="#login-modal"> 로그인 </a>후 이용해주시길 바랍니다.
 			</div>
 		</div>
 		<br>
@@ -46,12 +54,12 @@
 		<form name="commentGo">
 		<div class="row">
 			<div class="col-sm-10 col-md-10" align="center">
-				<input type="text" name="commentContent" class="form-control commentContent"
+				<input type="text" id="commentContent" name="commentContent" class="form-control commentContent"
 					style="width: 100%; height: 50px" placeholder="댓글입력" />
 			</div>
 			<div class="col-sm-2 col-md-2" align="center">
 				<button type="button" id="commentGo" class="commentSubmit btn btn-default"
-					style="width: 100%; height: 48px;">
+					style="width: 100%; height: 48px; color: white;">
 					<h6>
 						<b>댓글등록</b>
 					</h6>
@@ -68,18 +76,30 @@
 		<c:forEach var="comment" items="${list}">
 			<c:set var="rank" value="${ rank+1 }" />
 			<div class="row" id="${comment.commentNo}">
-				<div class="col-sm-1 col-md-1" align="center">
+				<input type="hidden" name="nickname" value="${comment.nickName}">
+				<div class="col-sm-2 col-md-1" align="center">
 					<c:if test="${comment.profile != null }">
-					<img src="/resources/file/fileUser/${comment.profile}" style="border-radius: 10px; min-height: 88px; min-width: 82px; max-height: 88px; max-width: 82px;" />
+					<img src="/resources/file/fileUser/${comment.profile}" class="profileImg" />
 					</c:if>
 					<c:if test="${comment.profile == null }">
-					<img src="https://via.placeholder.com/80" style="border-radius: 10px; min-height: 88px; min-width: 82px; max-height: 88px; max-width: 82px;" />
+					<img src="/resources/file/others/kakaoDefaultImg.jfif" class="profileImg" />
 					</c:if>
 				</div>
-				<div class="col-sm-11 col-md-11" align="left">
+				<div class="col-sm-10 col-md-11" align="left">
 					
 					<h4 id="${comment.commentNo}" class="h4tag">
-						<b>${comment.nickName}</b>&nbsp; <small>${comment.regDate}</small>&nbsp; <small><c:if test="${rank <= 3 and comment.likeCount != 0}"><span class="fas fa-medal"> ${ rank } 등</span></c:if></small>
+						<b>${comment.nickName}</b>&nbsp; <small><fmt:parseDate var="dateString" value="${comment.regDate}" pattern="yyyy-MM-dd HH:mm:ss" /><fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd HH:mm" /></small>&nbsp;
+						<small>
+							<c:if test="${rank == 1 and comment.likeCount != 0}">
+								<img src="/resources/file/others/gold-medal.png"></img> ${ rank } 등
+							</c:if>
+							<c:if test="${rank == 2 and comment.likeCount != 0}">
+								<img src="/resources/file/others/silver-medal.png"></img> ${ rank } 등
+							</c:if>
+							<c:if test="${rank == 3 and comment.likeCount != 0}">
+								<img src="/resources/file/others/bronze-medal.png"></img> ${ rank } 등
+							</c:if>
+						</small>
 					</h4>
 					<input type="hidden" name="commentNo" value="${comment.commentNo}">
 					
@@ -93,7 +113,11 @@
 					<span class="fas fa-pen"></span> 
 					<span class="fas fa-trash-alt"></span>
 					</c:if>
-					<span><a class="reportModal" href="#" data-toggle="modal" data-target="#report-modal"><span class="fas fa-exclamation-triangle"></span></a></span>					
+					<span class="report"><a class="reportModal" href="#" data-toggle="modal" data-target="#report-modal">
+<!-- 					<span class="fas report"></span> -->
+						<img src="/resources/file/others/siren.png"/>
+					</a>
+					</span>					
 <!-- 					<span class="fas fa-plus"></span> &nbsp;  -->
 					<span id="${comment.commentNo}" class="far fa-thumbs-up"></span>
 					<font id="${comment.commentNo}" class="font">
@@ -109,7 +133,7 @@
 <%-- 			<div class="row" id="${recomment.recommentNo}" style="padding-left: 50px;"> --%>
 <!-- 				ㄴ -->
 <!-- 				<div class="col-sm-1 col-md-1" align="center"> -->
-<!-- 					<img src="https://via.placeholder.com/80" style="border-radius: 5px; min-height: 80px; min-width: 60px;" /> -->
+<!-- 					<img src="/resources/file/others/kakaoDefaultImg.jfif" style="border-radius: 5px; min-height: 80px; min-width: 60px;" /> -->
 <!-- 				</div> -->
 <!-- 				<div class="col-sm-9 col-md-9" align="left"> -->
 					
@@ -124,11 +148,11 @@
 <!-- 					<span class="fas fa-pen"></span> &nbsp;  -->
 <!-- 					<span class="fas fa-trash-alt"></span> &nbsp;  -->
 <%-- 					</c:if> --%>
-<!-- 					<span class="fas fa-exclamation-triangle"></span> &nbsp; 					 -->
+<!-- 					<span class="fas report"></span> &nbsp; 					 -->
 <!-- 					</div> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
-<!-- 			<br/> -->
+<!-- 			<br/ > -->
 <%-- 			</c:if> --%>
 <%-- 			</c:forEach> --%>
 				<!--// Link Attribution -->
@@ -155,8 +179,9 @@
 		</div>
  		
  		<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 모달 처리 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-		<jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
-		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
+<%-- 		<jsp:include page="/common/modal/modalLogin.jsp"></jsp:include> --%>
+		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>		
+
 	</div> <!--  END of Container -->
 	
 	<script type="text/javascript">	
@@ -167,16 +192,15 @@
  		
  		$(".loading-container").hide();
  		
- 		
-		$("#commentGo").keydown(function(key){
-			if(key.keyCode == 13){
-				$("#commentGo").click();
-			}
-		});
 	});
  	
 	$(function(){
 		
+		$("#commentContent").keydown(function(key){
+			if(key.keyCode == 13){
+				$("#commentGo").click();
+			}
+		});
 		// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 댓글 리스트  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 		//$(document).on("click",".moreView",function(){
 			
@@ -200,7 +224,7 @@
 												
 						$('.loading-container').hide();
 						currentPage++;
-						console.log(JSONData.list);
+						//console.log(JSONData.list);
 						
 						var totalCount = JSONData.totalCount;
 						//var reList = JSONData.reList;
@@ -209,21 +233,33 @@
 						var list = JSONData.list; 
 						
 	 					if(list.length == 0 ){
-	 						$(".moreView").remove();
+	 						//$(".moreView").remove();
 	 						$('.loading-container').remove();
+	 						return;
 	 					}
 	 					
 //	 					var display = "<div class='col-sm-12 col-md-12 commentList'>";
 						var display = "";
+						
+						//console.log(${sessionScope.user.role})
+						
 						$.each(list, function(index, comment){
 							
+							var date = new Date(comment.regDate);
+							//date.format("yyyy-MM-dd HH:mm");
+							var convertDate = date.getFullYear() + "-" 
+											+ (date.getMonth()<10?'0':'') + (date.getMonth()+1) + "-" 
+											+ (date.getDate()<10?'0':'') + date.getDate() +" "
+											+ (date.getHours()<10?'0':'') + date.getHours() +":"
+											+ (date.getMinutes()<10?'0':'') + date.getMinutes()  ;
 							display +=
-								"<div class='row' id='"+comment.commentNo+"'>" +
-									"<div class='col-sm-1 col-md-1' align='center'>";	
+								"<div class='row' id='"+comment.commentNo+"'>"
+								+ "<input type='hidden' name='nickname' value="+comment.nickName+">"
+								+	"<div class='col-sm-1 col-md-1' align='center'>";	
 									if(comment.profile != null){
-										display += "<img src='https://via.placeholder.com/'"+comment.profile+" style='border-radius:10px; min-height: 80px; min-width: 60px; max-height: 80px; max-width: 80px; padding-top:5px;'/>";
+										display += "<img src='/resources/file/fileUser/"+comment.profile+"' class='profileImg' onERROR='this.src='/resources/file/others/kakaoDafaultImg.jfif''/>";
 									} else {
-										display += "<img src='https://via.placeholder.com/80' style='border-radius:10px; min-height: 80px; min-width: 60px; max-height: 80px; max-width: 80px; padding-top:5px;'/>";
+										display += "<img src='/resources/file/others/kakaoDefaultImg.jfif' class='profileImg'/>";
 									}
 									
 									
@@ -231,19 +267,23 @@
 								"</div>" +
 									"<div class='col-sm-11 col-md-11' align='left'>" + 
 										"<h4 id="+comment.commentNo+" class='h4tag'>" +	
-											"<b>"+comment.nickName+"</b>&nbsp; <small>"+comment.regDate+"</small>" + 
+											"<b>"+comment.nickName+"</b>&nbsp; <small>"+convertDate+"</small>" + 
 										"</h4>" +
 		 								"<input type='hidden' name='commentNo' value='"+comment.commentNo+"'/>" +
 							   			"<div id="+comment.commentNo+" class='area'>" +
 											"<h5  id="+comment.commentNo+" class='cmCont'>"+comment.commentContent+"</h5>";
 						    	
+								if('${sessionScope.user.role}' == "admin"){
+									display +=  "<span class='fas fa-trash-alt'></span>&nbsp;";
+								}
+								
 								if(comment.id == '${sessionScope.user.id}'){
 				 					display += "<span class='fas fa-pen'></span>&nbsp;" + 
 				 					           "<span class='fas fa-trash-alt'></span>&nbsp;";
 								}
 								
 								display += 
-											"<span><a class='reportModal' href='#' data-toggle='modal' data-target='#report-modal'><span class='fas fa-exclamation-triangle'></span></a></span>&nbsp;" + 
+											"<span><a class='reportModal' href='#' data-toggle='modal' data-target='#report-modal'><img class='report' src='/resources/file/others/siren.png'/></a></span>&nbsp;" + 
 //	  										"<span class='glyphicon glyphicon-plus'></span>" +
 	 	 									"<span id='"+comment.commentNo+"' class='far fa-thumbs-up'></span>&nbsp;"+
 	 	 									"<font id='"+comment.commentNo+"' class='font'>" +
@@ -271,9 +311,6 @@
 
 						 	$('.loading-container').show();
 					},
-					error : function(request, status, error){							
-						alert("Error");							
-					}, // error END
 					timeout:1000
 				}); // ajax END
 			} // scroll IF END
@@ -285,6 +322,12 @@
 		
 		$(document).on("click","#commentGo",function() {
 			
+			if($("input[name=commentContent]").val() == ''){
+				swal({
+					text: "내용을 입력해주세요."
+				});
+				return;
+			}
 			var commentData =  
 			{
 					commentContent : $("input[name=commentContent]").val(),
@@ -302,28 +345,45 @@
 							"Content-Type" : "application/json"
 							},
 				success : function(JSONData, status){
-																
+								
+					//debugger;
+					var date = new Date(JSONData.regDate);
+					var convertDate = date.getFullYear() + "-" 
+					+ (date.getMonth()<10?'0':'') + (date.getMonth()+1) + "-" 
+					+ (date.getDate()<10?'0':'') + date.getDate() +" "
+					+ (date.getHours()<10?'0':'') + date.getHours() +":"
+					+ (date.getMinutes()<10?'0':'') + date.getMinutes()  ;
+					
+					//date.format("yyyy-MM-dd HH:mm");
+					
 	 							var display = 
 	 								"<div class=row id="+JSONData.commentNo+">"
-	 								+"<div class=col-sm-1 col-md-1 align=center>"
-	 									+"<img src=https://via.placeholder.com/80 style='border-radius: 5px; min-height: 80px; min-width: 60px;'/>"
-	 								+"</div>"
+	 								+ "<input type='hidden' name='nickname' value="+JSONData.nickName+">"
+	 								+"<div class=col-sm-1 col-md-1 align=center>";
+	 									if(JSONData.profile == null){
+	 										display += "<img src=/resources/file/others/kakaoDefaultImg.jfif class='profileImg'/>";
+	 									}
+	 									if(JSONData.profile != null){
+	 										display += "<img src=/resources/file/fileUser/"+JSONData.profile+" class='profileImg'/>";
+	 									}
+	 								
+	 								display += "</div>"
 	 								+"<div class=col-sm-11 col-md-11 align=left>"
 	 									+"<h4 id='"+JSONData.commentNo+"' class=h4tag>"
-	 									+"<b>"+JSONData.nickName+"</b> &nbsp; <small>"+JSONData.regDate+"</small> &nbsp;"
+	 									+"<b>"+JSONData.nickName+"</b> &nbsp;<small>"+convertDate+"</small> &nbsp;"
 	 									+"</h4>"
 	 									+"<input type='hidden' name='commentNo' value='"+JSONData.commentNo+"'>"					
 	 									+"<div id='"+JSONData.commentNo+"' class=area>"
 	 									+"<h5  id='"+JSONData.commentNo+"' class=cmCont>"+JSONData.commentContent+"</h5>";
 	 										
-	 											if(JSONData.id == '${sessionScope.user.id}' ){
-	 												display += "<span class='fas fa-pen'></span>  &nbsp;" 
-		 												+"<span class='fas fa-trash-alt'></span>  &nbsp;" ;
-	 											}
+	 									if(JSONData.id == '${sessionScope.user.id}' ){
+	 										display += "<span class='fas fa-pen'></span>&nbsp;" 
+		 									+"<span class='fas fa-trash-alt'></span>&nbsp;" ;
+	 									}
 	 												
-	 											display += "<span><a class='reportModal' href='#' data-toggle='modal' data-target='#report-modal'><span class='fas fa-exclamation-triangle'></span></a></span>  &nbsp;"
+	 											display += "<span><a class='reportModal' href='#' data-toggle='modal' data-target='#report-modal'><img class='report' src='/resources/file/others/siren.png'/></a></span>&nbsp;"
 // 	 													+"<span class='fas fa-plus'></span> &nbsp;" 
-			 											+"<span id='"+JSONData.commentNo+"' class='far fa-thumbs-up'></span>  &nbsp;"
+			 											+"<span id='"+JSONData.commentNo+"' class='far fa-thumbs-up'></span>&nbsp;"
 	 													+"<font id='"+JSONData.commentNo+"' class='font'>"
 	 														+"<b>"+JSONData.likeCount+"</b>"
 	 													+"</font>"
@@ -334,13 +394,8 @@
 	 									 							
 								$(".commentList").prepend(display);
 	 							
-	 							$("commentContent").val("");
-							},
-											
-							error : function(request, status, error){							
-								alert("Error");							
-							}
-					
+	 							$("#commentContent").val("");
+							},					
 						});
 		});
 	});
@@ -368,21 +423,14 @@
 							$("#"+commentNo+""+".area").hide();
 							
  							var display = 
- 								  "<div class='row'><div class='ajax col-md-10'><input type='text' class='form-control' id='commentContent' name='commentContent' style='width: 100%; height: 50px; margin-top : 5px; ' placeholder='"+JSONData.commentContent+"'/></div>"
+ 								  "<div class='row'><div class='ajax col-md-10'><input type='text' class='form-control' id='commentUpdateContent' name='commentContent' style='width: 100%; height: 50px; margin-top : 5px; ' value='"+JSONData.commentContent+"'/></div>"
  								+ "<div class='ajax col-md-2'>" 								
  								+ "<a href='#' onclick='update(); return false;'> "
  								+ "<input type='hidden' id='commentNo' value='"+JSONData.commentNo+"'>"
- 								+ "<button class='btn btn-default'>수정완료</button>" 								
+ 								+ "<button class='btn btn-default' style='width:100%; height:48px;'>수정완료</button>" 								
  								+ "</div></div>"
  							
 							$("#"+commentNo+""+".h4tag").append(display);
-						},
-										
-						error : function(request, status, error){							
-
-							swal({
-								text : "에러 발생"							
-							});
 						}
 				
 					}
@@ -398,11 +446,11 @@
 			  title: "정말 삭제 하시겠습니까 ?",
 			  text: "당신의 소중한 한 마디가 사라지게 됩니다.",
 			  icon: "warning",
-			  buttons: true,
+			  buttons: ["취소","확인"],
 			  dangerMode: true,
 			})
-			.then((willDelete) => {
-			  if (willDelete) {
+			.then((A) => {
+			  if (A) {
 				  
 				  $.ajax({
 						url : "/comment/json/delComment/"+commentNo,
@@ -427,18 +475,26 @@
 				  
 			    swal("삭제완료 !", {
 			      	icon: "success",
+			      	button : "확인"
 			    });
 			  }
 			});
 		});
 		
 		// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 신고하기  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-		$(document).on("click",".fa-exclamation-triangle",function() {
+		$(document).on("click",".report",function() {
 			
-			$("#report-modal2").modal("show");
+		 		if(${user==null}){
+		 			$("#login-modal").modal('show');  
+		 		}else{
+			 	    var nickname = $('input[name=nickname]').val();
+			 	   $('#reportedNick').prop('readonly', true);
+			 	    $("#reportedNick").val(nickname);
+			 		$("#report-modal").modal("show");
+		 		}
 		
 		});
-		
+			
 		// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 답글달기  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 // 		var flag= false;
 		
@@ -468,7 +524,7 @@
 		$(document).on("click", ".far.fa-thumbs-up", function(){
 			
 			if(${sessionScope.user == null}){
-				alert("로그인 합십쇼");
+				$("#login-modal").modal("show");
 				return;
 			}
 				
@@ -485,7 +541,7 @@
 					success : function(JSONData, status){
 						
 						if(JSONData == 1){
-							alert("이미 추천한 댓글입니다.");
+							swal({text:"이미 추천한 댓글입니다."});
 							return;
 						}
 						
@@ -519,14 +575,14 @@
 	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 업데이트 처리  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	function update(){
 		
-		if( $("#commentContent").val() == ''){
+		if( $("#commentUpdateContent").val() == ''){
 			swal({
 				text : "내용을 입력해주세요"							
 			});
 			return;
 		}
 		
-		var search 	= {commentNo : $("#commentNo").val(), commentContent : $("#commentContent").val()};
+		var search 	= {commentNo : $("#commentNo").val(), commentContent : $("#commentUpdateContent").val()};
 		var convertSearch = JSON.stringify(search);
 		
  		$.ajax({
@@ -546,17 +602,12 @@
  						$("#"+JSONData.commentNo+""+".area").show();
  						
  						var modifyScreen = 	
- 							"<div id="+JSONData.commentNo+" class='area'>"
+ 							"<div id="+JSONData.commentNo+" class='area' style='padding-top : 5px;'>"
  							+ "<h5 id="+JSONData.commentNo+" class='cmCont'>"+JSONData.commentContent+"</h5><div>";
 						
  						$("#"+JSONData.commentNo+""+".h4tag").append(modifyScreen);
  	
 					},
- 					error : function(request, status, error){
-						
- 						alert("error");
-						
- 					}
  				});
 	} // end of update function()
 </script>

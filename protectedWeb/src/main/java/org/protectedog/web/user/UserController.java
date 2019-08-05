@@ -333,6 +333,7 @@ public class UserController {
 		System.out.println("update : "+sessionId);
 		
 		if(sessionId.equals(user.getId())) {
+			session.removeAttribute("user");
 			session.setAttribute("user", user);
 		}
 		

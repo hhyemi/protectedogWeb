@@ -19,7 +19,9 @@
 <body>
 
 	<!--================Header Menu Area =================-->
-
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
 	<!--================Single Product Area =================-->
 	<div class="product_image_area">
 		<div class="container">
@@ -31,7 +33,7 @@
 							<img src="img/product/single-product/review-1.png" alt="" />
 						</div>
 						<div class="media-body">
-							<h4>김길동씨</h4>
+							<h4></h4>
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i>

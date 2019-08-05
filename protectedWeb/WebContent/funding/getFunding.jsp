@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
-	
+    <title>보호할개 · 후원게시</title>		
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -29,10 +29,7 @@
 	<!-- KAKAO -->
    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
 	<style>
-		.form-group2{
-		padding-left:420px;
-		padding-right:100px;
-		}	
+
 		.form-group3{
 		padding-left:465px;
 		padding-right:100px;
@@ -48,7 +45,9 @@
          	color: #f04f23;
 /*          	padding-top: 5px; */
         }
-               			
+        img {
+       	    max-width: 600px;
+        }               			
 	</style> 
  
  
@@ -60,11 +59,11 @@
     <!--================Header Menu Area =================--> 
 
     <!--================Single Product Area =================-->
-    <div class="product_image_area">
+    <div class="product_image_area" style="padding-left: 40px">
       <div class="container">
         <div class="row s_product_inner">
-          <div class="col-lg-6">
-            조회 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
+          <div  style="width: 600px">
+            조회수 ${funding.fundViewCount } / 작성일 ${funding.fundStartDate}
             <p/>            
               <div
                 id="carouselExampleIndicators"
@@ -112,7 +111,7 @@
               </div>
             </div>
           </div>
- 			 <div class="col-lg-5 offset-lg-1">
+ 			 <div style="padding-left: 50px;" >
              <div class="s_product_text">			 
             <div>
              <h4>&emsp;</h4>
@@ -163,14 +162,23 @@
 			 </div>			 	 		 	 
                <br/>  
               <div class="card_area">
-                <button id="btnFund" class="btn btn-default" style="width: 225px">후원하기</button><button id="btnQuestion" class="btn btn-default" style="width: 225px">문의하기</button>  
+             <br/>
+			<!-- 투표종료 -->
+			 <c:if test ="${!(funding.statusCode eq 3) }">		
+               		<button class="btn btn-default" id="noApply" style="width: 460px;" id="confirmButton">완료된 글입니다.</button>
+			 </c:if>
+            <!-- 투표중 -->			 
+			<c:if test ="${funding.statusCode eq 3 }">				 			
+                 <button id="btnFund" class="btn btn-default" style="width: 225px">후원</button><button id="btnQuestion" class="btn btn-default" style="width: 225px">문의</button>               
+			</c:if>		              
+                    
               </div>
               <br/>
-              <div align="right">
-			    <a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-				<a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-				<a href="#"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
-	 		  </div>
+			  <div align="right">
+                 <a href="javascript:void(0);"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+                  <a href="javascript:void(0);" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+                  <a href="javascript:void(0);"  id="kakao" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png"  height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
+               </div>
             </div>
           </div></div>
         </div>
@@ -179,11 +187,12 @@
    <br><br><br/>
 <!--================Product Description Area =================-->
 	 <section class="product_description_area">
+	 	  <form class="form-inline" name="detailForm">
 	      <div class="container">
 	        <ul class="nav nav-tabs" id="myTab" role="tablist">
 		          <li class="nav-item">
 		            <a
-		              class="nav-link show active"
+		              class="${ !(search.searchKeyword eq '1') && search.currentPage eq '1' ? 'nav-link show active' : 'nav-link' }"
 		              id="home-tab"
 		              data-toggle="tab"
 		              href="#home"
@@ -195,7 +204,7 @@
 		          </li>
 		          <li class="nav-item">
 		            <a
-		              class="nav-link"
+		              class="${ !(search.searchKeyword eq '1' ) && search.currentPage ne '1' ? 'nav-link show active' : 'nav-link' }"
 		              id="review-tab"
 		              data-toggle="tab"
 		              href="#review"
@@ -206,7 +215,7 @@
 		          </li>
 		          <li class="nav-item">
 		            <a
-		              class="nav-link"
+		              class="${ (search.searchKeyword eq '1') ? 'nav-link show active' : 'nav-link' }"
 		              id="voter-tab"
 		              data-toggle="tab"
 		              href="#voter"
@@ -220,7 +229,7 @@
 		        </ul>
 		        <div class="tab-content" id="myTabContent">
 		          <div
-		            class="tab-pane fade active show"
+		            class="${ !(search.searchKeyword eq '1') && search.currentPage eq '1'  ? 'tab-pane fade active show' : 'tab-pane fade' }"
 		            id="home"
 		            role="tabpanel"
 		            aria-labelledby="home-tab">
@@ -230,7 +239,7 @@
 		          </div>
 		          
 		          <div
-		            class="tab-pane fade"
+		            class="${ !(search.searchKeyword eq '1') && search.currentPage ne '1'  ? 'tab-pane fade active show' : 'tab-pane fade' }"
 		            id="review"
 		            role="tabpanel"
 		            aria-labelledby="review-tab">
@@ -250,27 +259,28 @@
 							<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >작성일 ${funding.reviewRegDate }</div>
 					 </div>			            
 		            <hr/><br/>
-					<c:forEach var="name" items="${fileReview}" varStatus="status">      
-	                    <img src="/resources/file/fileSF/${name.fileName}"  width="150px;" height="150px;"/>	
-	                  </c:forEach>	
-	                <br/>   <br/><p/>   
 					${funding.reviewContent }
-					<hr/><br/>	
-					<div class="form-group2">
+	                <br/> 
+					<c:forEach var="name" items="${fileReview}" varStatus="status">      
+	                    <img src="/resources/file/fileSF/${name.fileName}"  width="600px" height="500px" style="padding-bottom: 10px"/>	
+	                    <br/><p/>
+	                  </c:forEach>	
+					<hr/>	
+					<div align="right">
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-					<button type="button" id="reviewUpdate" class="btn btn-default">후기수정</button> 			
-					<button type="button" id="reviewDelete" class="btn btn-default">후기삭제</button> 
+					<button type="button" id="reviewUpdate" class="btn btn-default">수정</button> 			
+					<button type="button" id="reviewDelete" class="btn btn-default">삭제</button> 
 					</c:if>									
 		            </div>
 					</c:if>	
 		          </div>
 		          
 		          <div
-		            class="tab-pane fade"
+		            class="${ (search.searchKeyword eq '1') ? 'tab-pane fade active show' : 'tab-pane fade' }"
 		            id="voter"
 		            role="tabpanel"
 		            aria-labelledby="voter-tab">
- 					<div><h3>현재 <font color="#8c8479">${funding.sponsorCount}명</font>의 참여가 이루어졌습니다.</h3></div>		            
+ 					<div><h3>현재 <font color="#f04f23">${funding.sponsorCount}명</font>의 참여가 이루어졌습니다.</h3></div>		            
 	 					<hr/>
 		 				<c:forEach var="participate" items="${list}">						
 							<div class="row" style="position:relative;height:35px;">
@@ -279,10 +289,29 @@
 							 </div>																 		
 					    <hr/>       
 				       </c:forEach>
+				       
+				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
+	              	   <input type="hidden" name="userId" value="${user.id}">
+              	       <input type="hidden" name="levels" value="${user.levels}">			       
+			 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			 		   <input type="hidden" id="searchKeyword" name="searchKeyword" value=""/>	  
+ 					   <input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>					       
+				       		<!-- PageNavigation Start... -->
+				           <div style="padding-left:460px">
+				           <jsp:include page="../common/pageNavigator_new.jsp" />
+						   </div>
+							<!-- PageNavigation End... -->
 		          </div>		          
 		       </div>
 	      </div>
+	      </form>
+	      	<p/>
+        	<div align="right" style="padding-right:205px">					
+				<button type="button" id = "btnList" class="btn btn-default">목록</button>  
+			</div>	
+			
 	    </section>
+	    
     <!--================End Product Description Area =================-->
 
 
@@ -313,19 +342,146 @@
  	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-
-    
+	    $(document).ready(function() {
+	 	   var pageCheck = false;
+	 	  //alert($("#pageCheck").val())
+	 	   pageCheck = $("#pageCheck").val();
+	       // ============= 페이징 스크롤이동 =============	    	   
+	 	   if(${pageCheck} ){
+	 		var offset = $('#myTab').offset(); 
+	 		 $('html').animate({scrollTop : offset.top}, 1);
+	 	   }
+	
+	    });
+			   	
+	function fncGetList(currentPage) {
+	   	$("#searchKeyword").val("1");
+	   	$("#currentPage").val(currentPage)
+	   	$("form").attr("method" , "POST").attr("action" , "/funding/getFunding").submit();
+	 
+	}   	
+   	//관심목록에 추가
+	var postNo = ${funding.postNo};
+	  var id = $('input[name=userId]').val();
+		 
+	
+	 function addInterest(){
+	  
+	  		if ( id == "" ){
+	  			
+	  			swal({
+			           text: "회원만 이용할 수 있는 기능입니다.",
+			           dangerMode: true,
+			           buttons: {
+								 cancel: "확인",
+					   }
+	  			});
+	  			return;
+	  			
+	  		}else{
+	  			
+	  			$.ajax( 
+	  			 		{
+	  						url : "/interest/json/addInterest/SF/"+postNo+"/"+id,
+	  						method : "GET" ,
+	  						dataType : "json" ,
+	  						headers : {
+	  									"Accept" : "application/json",
+	  									"Content-Type" : "application/json"
+	  								  },
+	  						success : function(data , status) {
+//	  								console.log(JSON.stringify(data));
+	  								console.log(data.message);
+	  								
+	  								if ( data.message == "insertOK" ) {
+	  									$('#heartIcon').html('<i class="fas fa-heart" ></i>');
+	  									swal({
+	  							           text: "관심목록에 추가되었습니다.",
+	  							           dangerMode: true,
+	  							           buttons: {
+	  												 catch: {
+	  												 	text: "확인"
+	  												 }
+	  									   },
+	  							        });
+	  								}
+	  							
+	  					},
+	  						error: function(request, status, error){ 
+	  								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	  			        }
+	  					
+	  				});
+	  		}
+ 		
+ 	 }
+ 
+	 	//관심목록에서 삭제
+		 function delInterest(){
+		 		console.log(postNo+","+id);
+		  
+		  			
+	 			$.ajax( 
+	 			 		{
+	 						url : "/interest/json/delInterest/SF/"+postNo+"/"+id,
+	 						method : "GET" ,
+	 						dataType : "json" ,
+	 						headers : {
+	 									"Accept" : "application/json",
+	 									"Content-Type" : "application/json"
+	 								  },
+	 						success : function(data , status) {
+	 								console.log(JSON.stringify(data));
+	 								console.log(data.message);
+	 								
+	 								if ( data.message == "delOK" ) {
+	 									$('#heartIcon').html('<i class="far fa-heart"></i>');
+	 									swal({
+		  							           text: "관심목록에서 삭제되었습니다.",
+		  							           dangerMode: true,
+		  							           buttons: {
+		  												 catch: {
+		  												 	text: "확인"
+		  												 }
+		  									   },
+		  							        });
+	 									
+	 								}
+	 							
+	 					},
+	 						error: function(request, status, error){ 
+	 								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);  
+	 			        }
+	 					
+	 			 });
+	
+	 		
+	 	 }
+	$(function(){
+		//관심목록에 추가
+			$(document).on("click", ".far", function() {
+				addInterest();
+			});
+			
+			//관심목록에서 삭제
+			$(document).on("click", ".fas", function() {
+				delInterest();
+			});
+		});
+	
+	//============= 목록버튼 Event  처리 =============	
+ 	$( "#btnList" ).on("click" , function() {
+		self.location = "/funding/listFunding" 	
+ 	});
+      
 		//============= 후원하기 Event  처리 =============	
 	 	$( "#btnFund" ).on("click" , function() {
 	 		if(${user == null}){
-	 			alert("로그인이 필요합니다.");
-	 		}else{
-		 		if(!(${funding.statusCode eq '3'})){
-		 			alert("후원이 종료되었습니다.")
-		 		}else{
+	 			$("#login-modal").modal('show');  
+	 		}else{	
 		 		self.location = "/funding/getTerms?termsTitle=SFFund&postNo=${funding.postNo}";
 		 		}
-	 		}
+	 	
 	 	});   
 	    
 		//============= 문의하기 Event  처리 =============	

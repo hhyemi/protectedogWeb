@@ -63,7 +63,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Add</span> <span>AdoptReview</span></p>
+          	<p ><span class="mr-2">Adopt · Missing</span> <span>Review</span></p>
             <font size="7">후기등록</font>
           </div>
         </div>
@@ -81,10 +81,10 @@
 	          	
 	          	
 				<input type="hidden" name="boardCode" value="AR" >
-				<input type="hidden" name="id" value="${user.id }" >
+<%-- 				<input type="hidden" name="id" value="${user.id }" > --%>
 				<input type="hidden" name="delCode" value="1" >
-				<input type="hidden" name="nickName" value="${user.nickname}" >
-				<input type="hidden" name="phone" value="${user.phone }" >
+<%-- 				<input type="hidden" name="nickName" value="${user.nickname}" > --%>
+<%-- 				<input type="hidden" name="phone" value="${user.phone }" > --%>
 <!-- 				<input type="hidden" class="form-control" id="multiFile" name="multiFile" > -->
 				
 <!-- 				<div class="col-md-12"> -->
@@ -100,7 +100,7 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postTitle"><strong>글제목</strong>&nbsp;&nbsp;<span name="postTitle"></span></label>
+		                	<h5><strong>글 제목</strong></h5>&nbsp;&nbsp;<span name="postTitle"></span>
 		                	<input type="text" class="form-control" name="postTitle" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
@@ -134,7 +134,7 @@
 	
                		<div class="col-md-12">
 		                <div class="form-group">
-		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span>
+<!-- 		                	<label for="postContent"><strong>글내용</strong></label>&nbsp;&nbsp;<span name="postContent"></span> -->
 <!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
 <!-- 		                	<textarea  class="form-control"  name="postContent"  rows="10"  placeholder="내용을 입력하세요."></textarea> -->
 		               
@@ -147,9 +147,6 @@
 	                </div>
 	                
 	                
-               		
-               		<div class="w-100"></div>
-		            <div class="w-100"></div>
                 
 	            </div>
 	          </form>
@@ -171,28 +168,7 @@
 	          	</div>
 	          </div>
 	          
-	          
- <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■       dialog       ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-  
-<!-- 			<div id="dialog-postTitle" title=""> -->
-<!-- 			  <p align="center"><br/>제목을 입력해주세요.</p> -->
-<!-- 			</div>        -->
-<!-- 			<div id="dialog-postTitleLength" title=""> -->
-<!-- 			  <p align="center"><br/>제목은 10자까지 입력할 수 있습니다.</p> -->
-<!-- 			</div>        -->
-<!-- 			<div id="dialog-img" title=""> -->
-<!-- 			  <p align="center"><br/>이미지를 등록해주세요.</p> -->
-<!-- 			</div>    -->
-<!-- 			<div id="dialog-postContent" title=""> -->
-<!-- 			  <p align="center"><br/>내용을 입력해주세요.</p> -->
-<!-- 			</div>       -->
-<!-- 			<div id="dialog-postContentLength" title=""> -->
-<!-- 			  <p align="center"><br/>내용는 100자까지 입력할 수 있습니다.</p> -->
-<!-- 			</div>       -->
-       
-<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   dialog  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->      
-	          
-	          
+	               
           </div> <!-- .col-md-8 -->
         </div>
       </div>
@@ -201,12 +177,7 @@
     
     
   
-
-
-  <!-- dialog -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  스크립트 시작  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!--   <script type="text/javascript" src="/resources/events.js"></script> -->
@@ -301,13 +272,13 @@
                     files[imgNum] = file;
                     
                     fileNameArray[imgNum]=file.name;
-                    fnAddFile(fileNameArray);
+//                     fnAddFile(fileNameArray);
                 };
 
                 reader.readAsDataURL(file);
             }
         } else
-            alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+//             alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
     }
 	 
 
@@ -348,60 +319,22 @@
 
 	var boardCode = $( 'input[name=boardCode]' ).val().trim();
 	
-// 	$( function() {
-// 	    $( "#dialog-postTitle" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  $("input[name=postTitle]").focus();
-// // 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-	
-// 	$( function() {
-// 	    $( "#dialog-postContent, #dialog-postContentLength" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("textarea[name=postContent]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
-	
-// 	$( function() {
-// 	    $( "#dialog-img" ).dialog({
-// 	    	autoOpen: false,
-// 		      width: 350,
-// 		      height: 180,
-// 		      modal: true,
-// 		      buttons: {
-// 		    	  닫기: function(){
-// 		    		  $( this ).dialog( "close" );
-// 		    		  jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
-// 		    	  }
-// 		      }
-// 	    });
-// 	});
-	
 	
 	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     ↑  dialog      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	
 
 	$( "input[name=postTitle]" ).keyup(function( ) {
 		if($("input[name=postTitle]").val().length > 15 ){
-			$("span[name=postTitle]").text('15자까지 입력할 수 있습니다.');
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=postTitle]").val($("input[name=postTitle]").val().toString().substring(0,15));
+// 			$("span[name=postTitle]").text('15자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postTitle]").text('');
 		}
@@ -409,8 +342,18 @@
 	
 	
 	$( "textarea[name=postContent]" ).keyup(function( ) {
-		if($("textarea[name=postContent]").text().length > 100 ){
-			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+		if($("textarea[name=postContent]").text().length > 300 ){
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("textarea[name=postContent]").val($("textarea[name=postContent]").val().toString().substring(0,300));
+// 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=postContent]").text('');
 		}
@@ -423,29 +366,41 @@
 	function fncAddAdoptReview(){
 
 		  if( $("input[name=postTitle]").val().trim() == '' ||  $("input[name=postTitle]").val().length >15 ){
-			  $("input[name=postTitle]").focus();
-			  $('#dialog-postTitle').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-			  $('#dialog-postTitle').dialog( "open" );
-			  return;
-		  }
-		  if( $(".preview-box").length == 0 ){
 			  swal({
-		           text: "이미지를 등록해주세요.",
+		           text: "글 제목을 다시 확인하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
-							 	text: "닫기"
+							 	text: "확인"
 							 }
 				   },
+				   
 		      }).then((willDelete) => {
 		           if (willDelete) {
-		        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+		        	   $("input[name=postTitle]").focus();
 		           }
 		      });
-// 			  $('#dialog-img').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 			  $('#dialog-img').dialog( "open" );
+// 			  $("input[name=postTitle]").focus();
+// 			  $('#dialog-postTitle').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+// 			  $('#dialog-postTitle').dialog( "open" );
 			  return;
-	  	  }
+		  }
+// 		  if( $(".preview-box").length == 0 ){
+// 			  swal({
+// 		           text: "이미지를 등록해주세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "닫기"
+// 							 }
+// 				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+// 		           }
+// 		      });
+// 			  return;
+// 	  	  }
 // 		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
 // 			  $('#dialog-postContent').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 // 			  $('#dialog-postContent').dialog( "open" );
@@ -461,8 +416,25 @@
 
     $(function() {
 			$( "button:contains('등록')" ).on("click" , function() {
-// 				$('textarea').val(editor.getData());
-// 				console.log($('textarea').val());
+				$('textarea').val(editor.getData());
+				
+				if ( editor.getData().toString().indexOf('<img') != -1 ){
+// 				if ( $('textarea').val().toString().indexOf('<img') != -1 ){
+					swal({
+				           text: "사진을 등록해주세요.",
+				           dangerMode: true,
+				           buttons: {
+									 catch: {
+									 	text: "확인"
+									 }
+						   },
+				      }).then((willDelete) => {
+				           if (willDelete) {
+				        	   jQuery($("input[name=postTitle]"))[0].scrollIntoView(true);
+				           }
+				      });
+					return;
+				}
 				
 				fncAddAdoptReview();
 			});

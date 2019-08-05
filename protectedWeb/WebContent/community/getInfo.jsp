@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+<title>보호할개 · 정보공유 조회</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,6 +29,10 @@ img{max-width: 600px;}
 .minibox{padding : 1px solid black;}
 .fa-medal{font-size: 15px;}
 
+#recommand:hover{
+	color: #f04f23;
+	cursor : pointer;
+}
 </style>
 
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
@@ -46,8 +52,8 @@ img{max-width: 600px;}
 			</h3>
 
 			<div class="row" style="position: relative; height: 25px;">
-				<div class="col-md-8"style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id})| ${board.regDate}</div>
-				<div class="col-md-4" align="right" style="position: absolute; right: 0px; bottom: 0px;">조회수 :${board.viewCount} 추천수 : ${board.recommendCount} 댓글수 :${totalCount}</div>
+				<div class="col-md-8"style="position: absolute; left: 0px; bottom: 0px;">${board.nickName}(${board.id}) | ${board.regDate}</div>
+				<div class="col-md-4" align="right" style="position: absolute; right: 0px; bottom: 0px;">조회수 ${board.viewCount} | 추천수 ${board.recommendCount} | 댓글수 ${totalCount} </div>
 			</div>
 			<p />
 
@@ -70,8 +76,10 @@ img{max-width: 600px;}
 		  	
 		<div class="minibox" align="center">
 			<div>
-				<span style="font-size: 15px; border: 1px solid black; padding: 3px">${board.recommendCount}</span>
-				<span class="recommand fas fa-medal">HOT개로</span>
+				<span style="border: 1px solid black; padding: 3px">
+					<span id="recommand" class="recommand fas fa-medal">추천</span>
+					<span style="font-size: 15px;">${board.recommendCount}</span>
+				</span>
 				<p/>
 				<div align="center">
 		        	<a href="javascript:void(0);"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png" height="40px" width="40px" style="opacity: 1" onmouseover="this.style.opacity='0.4'" onmouseleave="this.style.opacity='1'"></a>
@@ -84,10 +92,11 @@ img{max-width: 600px;}
 			</div>
 		</div>
 
-		<c:if test="${board.id == sessionScope.user.id }">
+		<c:if test="${board.id == sessionScope.user.id || sessionScope.user.role == 'admin'}">
 			<div class="button" align="right">
 				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">수정</button>
 				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">삭제</button>
+				<button type="button" class="btn btn-default" style="width: 50px; height: 40px;">목록</button>
 			</div>
 		</c:if>
 	</div>
@@ -100,12 +109,13 @@ img{max-width: 600px;}
 
 	$(function() {
 		
-		$(".fa-medal").on("click", function(){
+		$(document).on("click","#recommand", function(){
 				
-			if(${sessionScope.user == null}){
-				alert("로그인 하십쇼");
+			if(${ empty sessionScope.user}){				
+				$("#login-modal").modal("show");
 				return;
 			}
+			
 			var postNo = "${board.postNo}" ;
 			var id = '${sessionScope.user.id}';
 			$.ajax({
@@ -119,7 +129,7 @@ img{max-width: 600px;}
 				success : function(JSONData, status){
 					
 					if(JSONData == 1){
-						alert("이미 추천한 글입니다.");
+						swal({"text":"이미 추천한 글입니다.",button : "확인"});
 						return;
 					}
 					
@@ -135,9 +145,9 @@ img{max-width: 600px;}
 						success : function(JSONData, status){
 							
 							$(".minibox").children("div").children("span").remove();
-							
-							var result = "<span style='font-size: 15px; border: 1px solid black; padding: 3px'>"+JSONData.recommendCount+"</span>"
-										+"<span class='recommand fas fa-medal'>HOT개로</span>";
+						
+							var result = "<span style='border: 1px solid black; padding: 3px'><span id='recommand' class='recommand fas fa-medal'>추천</span>"
+							+"<span style='font-size: 15px;'> "+JSONData.recommendCount+"</span></span>";
 							
 							$(".minibox").children("div").prepend(result);
 						}
@@ -157,22 +167,43 @@ img{max-width: 600px;}
 				function() {
 					//alert($("input[type='hidden']").val());
 					// 			$(self.location).attr("href","/community/updateInfo.jsp");
-					self.location = "/info/updateView?postNo="
-							+ $("input[name='postNo']").val();
+					self.location = "/info/updateView?postNo="+ $("input[name='postNo']").val();
 				});
-
-		$("button:contains('삭제')").on(
-				"click",
-				function() {
-
-					var result = confirm("정말 삭제 하시겠습니까?");
-
-					if (result) {
-						$("form[name='info']").attr("method", "POST").attr(
-								"action", "/info/delInfo").attr("enctype",
-								"multipart/form-data").submit();
-					}
+		
+		$("button:contains('목록')").on("click",function() {
+				self.location ="/info/listInfo";
+		});
+		$("button:contains('삭제')").on("click",function() {
+					
+			swal({
+				  title: "정말 삭제 하시겠습니까 ?",
+				  text: "더 이상 이 글을 다른 회원이 볼 수 없습니다.",
+				  icon: "warning",
+				  buttons: ["취소", "확인"],
+				  dangerMode: true
+				})
+				.then((result) => {
+				  if (result) {
+					  
+				    swal("삭제완료 !", {
+				      	icon: "success",
+				    }).then((value)=>{
+				    	
+				    	 self.location = "/info/delInfo?postNo="+ $("input[name='postNo']").val();
+				    	 
+						 //$("form[name=info]").attr("method", "POST").attr("action", "/info/delInfo").submit();
+						 
+				    });
+				  }
 				});
+// 					var result = confirm("정말 삭제 하시겠습니까?");
+				
+// 					if (result) {
+// 						$("form[name='info']").attr("method", "POST").attr(
+// 								"action", "/info/delInfo").attr("enctype",
+// 								"multipart/form-data").submit();
+// 					}
+		});
 	});
 	
     var poly;
@@ -195,10 +226,14 @@ img{max-width: 600px;}
       }        
    }
    
-   
-   
    function initMap() {
-     map = new google.maps.Map(document.getElementById('mapArea'), {
+	   
+	   //console.log(routeTest[0]);
+	   if(routeTest[0] == undefined){
+		   return;
+	   }
+	   
+     	map = new google.maps.Map(document.getElementById('mapArea'), {
            zoom: 16,
            center: { lat: parseFloat(routeTest[0].substring( 0, routeTest[0].indexOf(",") )   ) ,
                  lng: parseFloat(routeTest[0].substring( routeTest[0].indexOf(",")+1, routeTest[0].length )) }
@@ -245,21 +280,16 @@ img{max-width: 600px;}
 
 	
 	//============= SNS공유 Event  처리 =============	
-	$( "#twitter" ).on("click" , function() {
- 		 window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-		});		
-	
-	$( "#naver" ).on("click" , function() {
- 		 window.open('https://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(document.URL)+'&title=hyemi!', 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
-		});		
-	
-	$( "#facebook" ).on("click" , function() {
- 		 window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-		});			
-	
-	$( "#kakao" ).on("click" , function() {
-		sendLinkKakao()
-	});	
+    $( "#twitter" ).on("click" , function() {
+           window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600,top=160, left=450');
+	});      
+    $( "#facebook" ).on("click" , function() {
+           window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600,top=160, left=450');
+	});         
+      
+    $( "#kakao" ).on("click" , function() {
+         sendLinkKakao()
+	});   			
 	
   //============= 카카오 공유하기Event  처리 =============		
 	 Kakao.init('153d14a106a978cdc7a42f3f236934a6');

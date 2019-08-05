@@ -56,16 +56,16 @@
   <body class="goto-here">
 	
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Get</span> <span>AdoptReview</span></p>
-            <font size="7">분양후기</font>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- 	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;"> -->
+<!--       <div class="container"> -->
+<!--         <div class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!--           <div class="col-md-9 ftco-animate text-center"> -->
+<!--           	<p ><span class="mr-2">Get</span> <span>AdoptReview</span></p> -->
+<!--             <font size="7">분양후기</font> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
     
     
 
@@ -124,11 +124,6 @@
 		                </div>
 	                </div>
 	                
-	                
-               		
-               		<div class="w-100"></div>
-		            <div class="w-100"></div>
-               		<div class="w-100"></div>
                 
 	            </div>
 	          </form>
@@ -262,22 +257,21 @@
 			});
 			
 			$( "button:contains('삭제')" ).on("click" , function() {
-				
 				swal({
-			           text: "삭제하시겠습니까?",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "예",
-								 },
-								 cancel: "아니오",
-					   },
-					   
-			    }).then((willDelete) => {
-			           if (willDelete) {
-			        	   self.location = "/adoptReview/delAdoptReview?postNo="+${board.postNo};
-			           }
-			    });
+		               text: "삭제하시겠습니까?",
+		               icon: "warning",
+		                buttons: ["취소", "확인"],
+		               dangerMode: true,
+		        }).then((willDelete) => {
+		               if (willDelete) {
+		                 swal("삭제가 완료되었습니다!", {
+		                   icon: "success",
+		                 }).then((value) => {
+		                	 self.location = "/adoptReview/delAdoptReview?postNo="+${board.postNo};
+		                 });
+		               }
+		        });
+
 			});
 			
 			$( "button:contains('목록')" ).on("click" , function() {

@@ -38,8 +38,8 @@ public class ParticipateDAOImpl implements ParticipateDAO {
 	}
 
 	@Override
-	public Participate getParticipate(Participate participate) throws Exception {
-		return sqlSession.selectOne("ParticipateMapper.getParticipate", participate);
+	public Participate getParticipate(int participateNo) throws Exception {
+		return sqlSession.selectOne("ParticipateMapper.getParticipate", participateNo);
 
 	}
 
@@ -64,6 +64,11 @@ public class ParticipateDAOImpl implements ParticipateDAO {
 	@Override
 	public List<Participate> listParticipateUser(int id) throws Exception {
 		return sqlSession.selectList("ParticipateMapper.listParticipateUser",id);
+	}
+
+	@Override
+	public Participate getPostParticipate(Participate participate) throws Exception {
+		return sqlSession.selectOne("ParticipateMapper.getPostParticipate", participate);
 	}
 
 }

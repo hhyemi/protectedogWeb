@@ -84,7 +84,6 @@ public class AdoptController {
 
 		System.out.println("/adopt/addAdopt : GET \n"+boardCode);
 		
-		
 		if( ((User)session.getAttribute("user")) == null  ) {
 			return "redirect:/adopt/listAdopt?boardCode="+boardCode;
 		}else if(   !((User)session.getAttribute("user")).getLevels().equals("미인증회원") ||  !((User)session.getAttribute("user")).getLevels().equals("운영자")  ) {
@@ -99,23 +98,24 @@ public class AdoptController {
 	// 글 등록하고 상세조회 화면으로 
 	@RequestMapping( value="addAdopt", method=RequestMethod.POST )
 	public String addAdopt( @ModelAttribute("adopt") Adopt adopt, Model model,
-							@RequestParam("multiFile") ArrayList<String> multiFile 
-							) throws Exception {
+							@RequestParam("multiFile") ArrayList<String> multiFile, HttpSession session ) throws Exception {
 
 		System.out.println("/adopt/addAdopt : POST \n"+adopt);
-	
+		
+		adopt.setId(((User)session.getAttribute("user")).getId());
+		adopt.setNickname(((User)session.getAttribute("user")).getNickname());
 
 		// 파일
 		adopt.setMainFile(multiFile.get(0));
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
-		
+		System.out.println("--------------1--------------------");
 		User user = userService.getUsers(adopt.getId());
 		user.setLevelPoint(user.getLevelPoint()+5);
 		userService.updateUsers(user);
-		
+		System.out.println("---------------2-------------------");
 		List<FileDog> listFile = new ArrayList<FileDog>();
-		
+		System.out.println("----------------3------------------");
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
 
@@ -127,7 +127,7 @@ public class AdoptController {
 			listFile.add(files);
 		}
 		fileService.addFile(listFile);
-		
+		System.out.println("----------------4------------------");
 		model.addAttribute("adopt", adopt);
 		
 		if(adopt.getBoardCode().equals("AD")) {

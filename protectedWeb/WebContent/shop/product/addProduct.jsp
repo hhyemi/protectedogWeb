@@ -234,17 +234,22 @@
 							
 						
             <!-- 첨부 버튼 -->
-            &nbsp;&nbsp;&nbsp;&nbsp;<div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
-                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
-            </div>
-           <br/><br/>
-            
-            <!-- 미리보기 영역 -->
-            <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
-            </div>
-		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
+			<div id="attach" class="form-group">
+				<span class="label label-primary "><label
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞
+				이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.) <br/><input id="uploadInputBox"
+					style="display: none" type="file" value="등록" name="filedata" />
+			</div>
+
+
+			<!-- 미리보기 영역 -->
+			<div class="form-group">
+			<div class="row">
+				<div id="preview" class="col-md-12" align="center"
+					style='display: inline; min-width: 100px;'></div>
+			</div></div>
+
+
 						
 						
 						<div class="col-md-6">
@@ -256,8 +261,8 @@
 							</div>
 						</div>
 						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">등록하기</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">취소하기</a>
+							<button class="btn btn-default" id="addproduct">등록하기</button>
+							&nbsp;<button class="btn btn-default" id="#">취소하기</button>
 						</p>
 
 						<!-- ////////////////////////////form tag end //////////////////////////////-->

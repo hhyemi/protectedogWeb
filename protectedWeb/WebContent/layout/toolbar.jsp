@@ -34,13 +34,14 @@
     		font-weight: normal;
     		src: url(/resources/font/Youandi_Modern_TextRegular.woff) format('woff');
 		}
-    	
-    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, p, a, th, td {
+
+    	#mainNav, body, .nav-link, .dropdown-item, .navbar-brand, h2, h3, h4, h5, h6, p, b, a, th, td {
     		font-family: 'YouandiModernTR', sans-serif !important;
     	} 	
 		
 		.navbar-brand{
 			font-weight: bold;
+			font-size: 20px;
 		}
 		
 		.swal-button {
@@ -61,7 +62,11 @@
 		html {
 	 		scroll-behavior: smooth;
 		}
-		
+		#fixedbtn{position:fixed;right:10px;bottom:70px;z-index:1000}		
+		i:hover{
+			opacity: 0.5;
+			cursor:pointer
+		}
 		
   	</style>
   </head>
@@ -73,6 +78,7 @@
 ======================================================--> 
 
     <header>
+		<i style="background-image: url('/resources/file/others/chatting.png'); height: 64px;width: 64px; overflow: hidden;" id="fixedbtn"></i>
 
       <!-- Top Navbar  -->
       <div class="top-menubar">
@@ -139,7 +145,7 @@
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/info/listInfo">정보공유</a>
 	                <a class="dropdown-item" href="/community/getDogSense.jsp">애견상식</a>
-	                <a class="dropdown-item" id="chatbot" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a>
+<!-- 	                <a class="dropdown-item" id="chatbot" href="#" data-toggle="modal" data-target="#chatbot-modal">챗봇</a> -->
 	                
                   </div>
                 </li>
@@ -163,12 +169,8 @@
                 <li class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	               <a class="dropdown-item" href="/prodQna/listProdQna?order=1">상품Q&a</a>
 	                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
-	                <a class="dropdown-item" href="/product/listProduct">상품리스트</a>
-	                <c:if test="${ sessionScope.user.role eq 'admin' }">
-	                	<a class="dropdown-item" href="/product/listAdminProduct">관리자상품리스트</a>
-	                </c:if>
+	                <a class="dropdown-item" href="/product/listProduct">스토어</a>
                   </div>
                 </li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp">견종백과</a></li>
@@ -230,19 +232,27 @@
     <!-- sweetalter CDN -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-    <!--  Chat Bot -->
+<!--      Chat Bot -->
 <%-- 	<jsp:include page="/chatbot/chatbot.jsp"></jsp:include> --%>
 	
   	<script type="text/javascript">
 
 		//============= "로그인"  Event 처리 =============
-		$(".login-modal").on("click", function() {
+		$("#submitLogin").on("click", function() {
 			
 // 			alert("ㅎㅇ");
 			fncLogin();
 
 // 			alert("ㅎㅇ");
 			
+		});
+		
+		$("#fixedbtn").on("click",function(){
+			
+			 window.open("/chatting/addChattingUser?postId=${funding.id}",
+						"_blank",
+						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		
 		});
 		
 		function fncLogin(){
@@ -276,10 +286,17 @@
 					datatype : "json",
 					success : function(response){
 // 						alert("pw : "+JSON.stringify(response))
+
+						
+						var URI = response.returnURI;
+																										
+						var response = response.user;
+						
 						if(response.pw == pw && response.id == id && response.levelPoint >= 0){
 // 							alert("로그인 성공 pw : "+response.pw+" && "+response.levelPoint);
 							alert(response.nickname+" 님 환영합니다!");
-							self.location="/index.jsp";
+							self.location=URI;
+
 // 							swal({
 // 								title : "로그인 성공",
 // 								text : response.nickname+" 님 환영합니다!"

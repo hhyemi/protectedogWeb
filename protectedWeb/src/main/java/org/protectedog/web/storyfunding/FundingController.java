@@ -18,6 +18,7 @@ import org.protectedog.service.file.FileService;
 import org.protectedog.service.interest.InterestService;
 import org.protectedog.service.participate.ParticipateService;
 import org.protectedog.service.storyfunding.FundingService;
+import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,6 +51,10 @@ public class FundingController {
 	@Qualifier("interestServiceImpl")
 	private InterestService interestService;
 
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
+
 	public FundingController() {
 		System.out.println(this.getClass());
 	}
@@ -58,8 +63,11 @@ public class FundingController {
 	int pageUnit;
 
 	@Value("#{commonProperties['fundingPageSize']}")
+	int fundingPageSize;
+	
+	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-
+	
 	@Value("#{commonProperties['fileSF']}")
 	String fileroot;
 
@@ -150,6 +158,10 @@ public class FundingController {
 		System.out.println(funding);
 		fundingService.addVoting(funding);
 
+		// 포인트
+		user.setLevelPoint(user.getLevelPoint() + 3);
+		userService.updateUsers(user);
+
 		List<FileDog> listFile = new ArrayList<FileDog>();
 
 		// 파일디비에넣기
@@ -171,7 +183,7 @@ public class FundingController {
 	}
 
 	// 펀딩 글 확인
-	@RequestMapping(value = "getVoting", method = RequestMethod.GET)
+	@RequestMapping(value = "getVoting")
 	public String getVoting(@ModelAttribute("search") Search search, @RequestParam("postNo") int postNo, Model model,
 			HttpSession session) throws Exception {
 
@@ -195,8 +207,12 @@ public class FundingController {
 		// 세션
 		User user = (User) session.getAttribute("user");
 
+		boolean pageCheck = false;
+
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
+		}else {
+			pageCheck = true;
 		}
 		search.setPageSize(pageSize);
 
@@ -204,6 +220,7 @@ public class FundingController {
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
+		
 		if (user != null) {
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("id", user.getId());
@@ -223,7 +240,8 @@ public class FundingController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-
+		model.addAttribute("pageCheck", pageCheck);
+		
 		return "forward:/funding/getVoting.jsp";
 	}
 
@@ -265,6 +283,7 @@ public class FundingController {
 				fileService.delFile(files);
 			}
 		}
+		System.out.println("multiFile.size():::::::::"+multiFile.size());
 		if (multiFile.size() != 0) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
 
@@ -333,7 +352,7 @@ public class FundingController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(fundingPageSize);
 
 		if (search.getSearchKeyword() == null) {
 			search.setSearchKeyword("");
@@ -352,7 +371,7 @@ public class FundingController {
 		Map<String, Object> map = fundingService.listVoting(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
+				fundingPageSize);
 		System.out.println(resultPage);
 
 		search.setSearchKeyword(originSearch);
@@ -379,7 +398,7 @@ public class FundingController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(fundingPageSize);
 
 		if (search.getSearchKeyword() == null) {
 			search.setSearchKeyword("");
@@ -398,7 +417,7 @@ public class FundingController {
 		Map<String, Object> map = fundingService.listFunding(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
+				fundingPageSize);
 		System.out.println(resultPage);
 
 		search.setSearchKeyword(originSearch);
@@ -412,8 +431,9 @@ public class FundingController {
 	}
 
 	// 펀딩 글 확인
-	@RequestMapping(value = "getFunding", method = RequestMethod.GET)
-	public String getFunding(@RequestParam("postNo") int postNo, Model model, HttpSession session, Search search)
+	@RequestMapping(value = "getFunding")
+	public String getFunding(@ModelAttribute("search") Search search, @RequestParam("postNo") int postNo, Model model,
+			HttpSession session)
 			throws Exception {
 
 		System.out.println("/funding/getFunding ");
@@ -436,8 +456,12 @@ public class FundingController {
 		// 세션
 		User user = (User) session.getAttribute("user");
 
+		boolean pageCheck = false;
+
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
+		}else {
+			pageCheck = true;
 		}
 		search.setPageSize(pageSize);
 
@@ -445,8 +469,19 @@ public class FundingController {
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
-		System.out.println(":::::::::" + resultPage);
 
+		if (user != null) {
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("id", user.getId());
+			map2.put("boardCode", "SF");
+			map2.put("searchType", "post");
+			map2.put("searchNo", postNo);
+
+			if (interestService.getInterestCheck(map2) == 1) {
+				model.addAttribute("check", "already");
+			}
+		}
+		
 		// 리뷰
 		Map<String, Object> fileReviewPost = new HashMap<String, Object>();
 		fileReviewPost.put("boardCode", fundReviewBoardCode);
@@ -461,7 +496,8 @@ public class FundingController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-
+		model.addAttribute("pageCheck", pageCheck);
+		
 		return "forward:/funding/getFunding.jsp";
 	}
 	/////////////// FUNDING 참여/////////////////////
@@ -496,6 +532,10 @@ public class FundingController {
 		funding.setVoterCount(1);
 		fundingService.updateStatusCode(funding);
 
+		// 포인트
+		user.setLevelPoint(user.getLevelPoint() + 10);
+		userService.updateUsers(user);
+
 		return "redirect:/funding/getVoting?postNo=" + postNo;
 	}
 
@@ -529,6 +569,8 @@ public class FundingController {
 
 		participateService.addParticipate(participate);
 
+		participate = participateService.getParticipate(participate.getParticipateNo());
+
 		// funding테이블 voter_count += 1
 		Funding funding = new Funding();
 
@@ -540,6 +582,11 @@ public class FundingController {
 
 		Funding funding2 = fundingService.getVoting(participate.getPostNo());
 
+		// 포인트
+		user.setLevelPoint(user.getLevelPoint() + 10);
+		userService.updateUsers(user);
+
+		model.addAttribute("user", user);
 		model.addAttribute("funding", funding2);
 		model.addAttribute("participate", participate);
 
@@ -643,7 +690,7 @@ public class FundingController {
 				if (fileName != null && fileName.length() > 0) {
 
 					FileDog files = new FileDog();
-					files.setBoardCode(fundBoardCode);
+					files.setBoardCode(fundReviewBoardCode);
 					files.setFileName(fileName);
 					files.setFileCode(0);
 					files.setPostNo(funding.getPostNo());
@@ -663,7 +710,7 @@ public class FundingController {
 		filePost.put("postNo", funding.getPostNo());
 		List<FileDog> file = fileService.getFile(filePost);
 
-		funding.setMainFile(file.get(0).getFileName());
+		//funding.setMainFile(file.get(0).getFileName());
 		// 변경여기까지//
 
 		fundingService.updateReview(funding);
@@ -687,17 +734,4 @@ public class FundingController {
 		return "redirect:/funding/getFunding?postNo=" + postNo;
 	}
 
-	@RequestMapping(value = "json/getThumbnailList/{thumbCurrentPage}", method = RequestMethod.GET)
-	public String getThumbnailList(@PathVariable("thumbCurrentPage") int thumbCurrentPage, HttpServletRequest request)
-			throws Exception {
-		System.out.println("json/getThumbnailList");
-		Search search = new Search();
-		search.setCurrentPage(thumbCurrentPage);
-		search.setPageSize(pageSize);
-
-		Map<String, Object> map = fundingService.listVoting(search);
-		request.setAttribute("map", map);
-
-		return "forward:/funding/thumbnailVotingList.jsp";
-	}
 }

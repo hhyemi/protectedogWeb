@@ -68,10 +68,10 @@ public class MessageServiceImpl implements MessageService{
 //	}
 	
 	@Override
-	public Map<String, Object> getMessageList(Search search, String id) throws Exception {
+	public Map<String, Object> getMessageList(Search search, String nickname) throws Exception {
 		// TODO Auto-generated method stub
-		List<Message> list=messageDAO.getMessageList(search, id);
-		int totalCount=messageDAO.getTotalCount(search, id);
+		List<Message> list=messageDAO.getMessageList(search, nickname);
+		int totalCount=messageDAO.getTotalCount(search, nickname);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("list", list);
@@ -87,13 +87,11 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public int getUnreadMessage(String receiverId) throws Exception {
+	public int getUnreadMessage(String receiverNick) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("�� �ȵ�����?");
 		int result=0;
 		
-		Message message=messageDAO.getUnreadMessage(receiverId);
-		System.out.println("message ����? : "+message);
+		Message message=messageDAO.getUnreadMessage(receiverNick);
 		if(message != null) {
 			result=1;
 		}
@@ -102,11 +100,11 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public int getReceiveTotalCount(String receiverId) throws Exception {
+	public int getReceiveTotalCount(String receiverNick) throws Exception {
 		// TODO Auto-generated method stub
 		int result=0;
 		
-		int search=messageDAO.getReceiveTotalCount(receiverId);
+		int search=messageDAO.getReceiveTotalCount(receiverNick);
 		if(search != 0) {
 			result=search;
 		}

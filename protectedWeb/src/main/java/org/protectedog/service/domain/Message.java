@@ -12,8 +12,8 @@ public class Message {
 	private Date sendDate;
 	private Date receiveDate;
 	private String messageStatus;
-	private String senderId;
-	private String receiverId;
+	private String senderNick;
+	private String receiverNick;
 	private String delCode;
 
 	
@@ -57,17 +57,17 @@ public class Message {
 	public void setMessageStatus(String messageStatus) {
 		this.messageStatus = messageStatus;
 	}
-	public String getSenderId() {
-		return senderId;
+	public String getSenderNick() {
+		return senderNick;
 	}
-	public void setSenderId(String senderId) {
-		this.senderId = senderId;
+	public void setSenderNick(String senderNick) {
+		this.senderNick = senderNick;
 	}
-	public String getReceiverId() {
-		return receiverId;
+	public String getReceiverNick() {
+		return receiverNick;
 	}
-	public void setReceiverId(String receiverId) {
-		this.receiverId = receiverId;
+	public void setReceiverNick(String receiverNick) {
+		this.receiverNick = receiverNick;
 	}
 	
 	public String getDelCode() {
@@ -80,7 +80,7 @@ public class Message {
 	public String toString() {
 		return "Message [messageNo=" + messageNo + ", messageTitle=" + messageTitle + ", messageContent="
 				+ messageContent + ", sendDate=" + sendDate + ", receiveDate=" + receiveDate + ", messageStatus="
-				+ messageStatus + ", senderId=" + senderId + ", receiverId=" + receiverId + ", delCode=" + delCode + "]";
+				+ messageStatus + ", senderNick=" + senderNick + ", receiverNick=" + receiverNick + ", delCode=" + delCode + "]";
 	}
 
 	

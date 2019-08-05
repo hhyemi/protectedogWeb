@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
 <!-- ckeditor 사용 CSS-->
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
@@ -70,7 +69,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">support</a></span> <span>apply</span></p>
+          	<p ><span class="mr-2">support</span> <span>apply</span></p>
             <font size="7">후원신청등록</font><br/> 후원신청은 투표 <strong style="color: #f04f23">1개</strong>이상
 				받을 시 <strong style="color: #f04f23">수정이 불가</strong>합니다.
           </div>
@@ -84,9 +83,7 @@
 		<form id="uploadForm" class="form-horizontal">
 
 			<div class="form-group">
-				<h3>
-					<b>후원목표금액</b>
-				</h3>
+					<h5><b>후원 목표금액</b></h5>
 				투표개수는 ( <strong style="color: #f04f23">목표금액 0.01%</strong> )표로
 				적용됩니다. ( <b>10만원 ~ 300만원</b>까지 입력가능합니다. )
 				<p />
@@ -98,19 +95,18 @@
 			</div>
 			<br />
 
-			<div class="form-group" id="voteNum">
-				<h3>
-					<b>투표수 <strong style="color: #f04f23">0</strong>표</b>
-				</h3>
+			<div class="form-group" id="voteNum"> 
+				<h5><b>투표수 <strong style="color: #f04f23"> 0 </strong>표</b></h5>
+
 			<div class="row form-form">
 			후원게시글로 이동하려면 받아야 할 투표 수입니다.
 			</div>
 			</div>
 			<br/>
 			<div class="form-group">
-				<h3>
-					<b>후원목표기간</b>
-				</h3>
+				<h5>
+					<b>후원 목표기간</b>
+				</h5>
 				<strong style="color: #f04f23">후원 받을기간</strong>을 입력하세요. ( 7일 ~ 30일까지 선택가능합니다. )<br /> 투표가 마감되었을 때 시작 날부터의
 				기간입니다. 투표 기간은 <strong >30일</strong>로 고정됩니다.
 				<p />
@@ -125,9 +121,9 @@
 			</div>
 			<br />
 			<div class="form-group">
-				<h3>
-					<b>글제목</b>
-				</h3>
+				<h5>
+					<b>글 제목</b>
+				</h5>
 				<p />
 				<div class=>
 					<input type="text" class="form-control" id="postTitle"
@@ -138,9 +134,9 @@
 			<br />
 
 			<div class="form-group">
-				<h3>
-					<b>글내용</b>
-				</h3>
+				<h5>
+					<b>글 내용</b>
+				</h5>
 				<p />
 				<div>
 					<textarea id="postContent" name="postContent"
@@ -152,8 +148,8 @@
 			<!-- 첨부 버튼 -->
 			<div id="attach" class="form-group">
 				<span class="label label-primary "><label
-					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨앞
-				이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.) <input id="uploadInputBox"
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞
+				이미지는 대표이미지입니다. (최대 <b>10장</b>까지 등록 가능합니다.) <input id="uploadInputBox"
 					style="display: none" type="file" value="등록" name="filedata" />
 			</div>
 
@@ -167,51 +163,29 @@
 
 			<div class="form-group">
 			<br/>
-				<h3>
+				<h5>
 					<b>연락처</b>
-				</h3>
-				문의받을 연락처를 입력해주세요.
-				<p />
+				</h5>
+				연락처가 다를 경우 회원정보를 수정해주세요.
+				<input type="text" class="form-control" name="phone" value="${ user.phone }" readonly style="margin-top: 15px">
 				
-				<div class="row">
-				<div class="col-sm-3">
-					<select class="form-control" name="phone1" id="phone1">
-						<option value="010"
-							${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  }>010</option>
-						<option value="011"
-							${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  }>011</option>
-						<option value="016"
-							${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  }>016</option>
-						<option value="018"
-							${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  }>018</option>
-						<option value="019"
-							${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  }>019</option>
-					</select></div>
-					&emsp;
-					<div class="col-sm-3">
-					<input class="form-control" type="text" id="phone2" name="phone2"
-						value="${ ! empty user.phone2 ? user.phone2 : ''}"
-						placeholder="번호" maxlength="4" style="height: 35px;">
-					</div>
-					&emsp;
-					<div class="col-sm-3">
-					<input class="form-control" type="text"id="phone3" name="phone3"
-						value="${ ! empty user.phone3 ? user.phone3 : ''}"
-						placeholder="번호" maxlength="4" style="height: 35px;">
-					</div>
-				</div>
-				<input type="hidden" name="phone" /> <input type="hidden"
-					class="form-control" id="multiFile" name="multiFile">
+				<input type="hidden" class="form-control" id="multiFile" name="multiFile">
 			</div>
 
 			<br />
 			<br />
-			<div class="form-group2">
-				<button class="btn btn-dafault" type="button"
-					id="btn-add">등록</button>
-				<button class="btn btn-dafault " type="button"
-					id="btn-cancel">취소</button>
-			</div>
+	          	<div class="col-md-12" style="padding-left:170px;padding-right: 160px">
+	          	
+					<p><button  type="button" class="btn btn-default py-3 px-4 col-md-12" id="btn-add">등록</button></p>
+					<div>
+						<div class="col-md-12">
+							<div  align="right">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+						</div>
+					</div>
+					
+	          </div>
 			<br />
 			<br />
 			<br />
@@ -238,65 +212,107 @@
    function fncAddVoting(){
       
       //Form 유효성 검증
-	  $('textarea').val(editor.getData());
+
       var fundTargetPay = $('input[name="fundTargetPay"]').val();
       var postTitle = $('input[name="postTitle"]').val();
-      var postContent = $('textarea').val()
-      var phone2 = $('input[name="phone2"]').val();
-      var phone3 = $('input[name="phone3"]').val();   
+      var postContent =  CKEDITOR.instances.postContent.getData();  
       var file = $("#multiFile").val();    
 
       if(fundTargetPay == null || fundTargetPay.length<1){
-    	  swal("후원목표금액을 입력해주세요.", " ");
-         $('input[name="fundTargetPay"]').focus();
+		  swal({
+	           text: "후원목표금액을 입력해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	               $('input[name="fundTargetPay"]').focus();
+	           }
+	      });
+
          return;
       }
       if(fundTargetPay < 100000 || fundTargetPay > 3000000){
-    	  swal("후원목표금액은  10만원이상 300만원이하로 입력해주세요.", " ");
-         $('input[name="fundTargetPay"]').focus();
+		  swal({
+	           text: "후원목표금액을 10만원이상 300만원이하로 입력해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	               $('input[name="fundTargetPay"]').focus();
+	           }
+	      });
+
          return;
       }
       if(postTitle == null || postTitle.length<1){
-    	  swal("글제목을 입력해주세요.", " ");
-         $('input[name="postTitle"]').focus();
+		  swal({
+	           text: "글 제목을 입력해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	               $('input[name="postTitle"]').focus();
+	           }
+	      });    	  
+
          return;
       }
-      
-      if(postContent == ''){
-    	  swal("글내용을 입력해주세요.", " ");
-	         $(".ck-editor__editable").focus();
+      if(postContent == '' || postContent == null){
+		  swal({
+	           text: "글 내용을 입력해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	  	         $(CKEDITOR.instances.postContent).focus();
+	           }
+	      });      	  
 	         return;
 	      }
       
+      
       if(file == null || file.length<1){
-    	  swal("사진을 1개이상 입력해주세요.", " ");
+		  swal({
+	           text: "사진을 1개이상 등록해주세요.",
+	           dangerMode: true,
+	           buttons: {
+						 catch: {
+						 	text: "확인"
+						 }
+			   },			   
+	      }).then((willDelete) => {
+	           if (willDelete) {
+	  	         $(".ck-editor__editable").focus();
+	           }
+	      });      	  
+
          return;
-      }
-      if(phone2 == null || phone2.length<1){
-         swal("연락처를 입력해주세요.", " ");
-         $('input[name="phone2"]').focus();
-         return;
-      }
-      if(phone3 == null || phone3.length<1){
-    	  swal("연락처를 입력해주세요.", " ");
-         $('input[name="phone3"]').focus();
-         return;
-      }
-      
+      }      
+
       var value = "";   
-      if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
-         var value = $("#phone1 option:selected").val() + "-" 
-                        + $("input[name='phone2']").val() + "-" 
-                        + $("input[name='phone3']").val();
-      }
-      $("input:hidden[name='phone']").val( value );
-      
+ 
       $('input[name="fundTargetPay"]').val(removeCommas($('input[name="fundTargetPay"]').val()));
 
  	 swal({
          title: "등록하시겠습니까?",
          icon: "warning",
-         buttons: true,
+         buttons: ["취소", "확인"],
          dangerMode: true,
        })
        .then((willDelete) => {
@@ -324,7 +340,7 @@
                 data : formData,
                 success : function(result) {
                     if (result === -1) {
-                    	  swal("jpg, gif, png, bmp 확장자만 업로드 가능합니다.", " ");
+                    	  swal("jpg, gif, png, bmp 확장자만 등록 가능합니다.", " ");
                         // 이후 동작 ...
                     } else if (result === -2) {
                         alert('파일이 10MB를 초과하였습니다.');
@@ -343,28 +359,106 @@
      }
    
    //============= "Editor" =============   
-	let editor;
+   CKEDITOR.addCss('figure[class*=easyimage-gradient]::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; }' +
+            'figure[class*=easyimage-gradient] figcaption { position: relative; z-index: 2; }' +
+            '.easyimage-gradient-1::before { background-image: linear-gradient( 135deg, rgba( 115, 110, 254, 0 ) 0%, rgba( 66, 174, 234, .72 ) 100% ); }' +
+            '.easyimage-gradient-2::before { background-image: linear-gradient( 135deg, rgba( 115, 110, 254, 0 ) 0%, rgba( 228, 66, 234, .72 ) 100% ); }');
 
-	ClassicEditor
-	    .create( document.querySelector( '#postContent' ),{
-	    
-        	toolbar : [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-        	heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                ]
-            }
-	    	
-	    })
-	    .then( newEditor => {
-	        editor = newEditor;
-	    } )
-	    .catch( error => {
-	        console.error( error );
-	    } );
-   
+          CKEDITOR.replace('postContent', {
+             language: 'ko',
+            extraPlugins: 'autogrow',
+            autoGrow_minHeight: 200,
+            autoGrow_maxHeight: 600,
+            autoGrow_bottomSpace: 50,
+            removePlugins: 'resize',
+            
+            extraPlugins: 'easyimage',
+            removePlugins: 'image',
+            removeDialogTabs: 'link:advanced',
+            toolbar: [{
+                name: 'document',
+                items: ['Undo', 'Redo']
+              },
+              {
+                name: 'styles',
+                items: ['Format']
+              },
+              {
+                name: 'basicstyles',
+                items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat']
+              },
+              {
+                name: 'paragraph',
+                items: ['NumberedList', 'BulletedList']
+              },
+              {
+                name: 'links',
+                items: ['Link', 'Unlink']
+              },
+              {
+                name: 'insert',
+                items: ['EasyImageUpload']
+              },
+              {
+                 name : 'max',
+                 items:['Maximize', 'ShowBlocks']
+              },
+              {
+                 name : 'fontSize',
+                 items:['Styles','Format','Font','FontSize']
+              },
+              {
+                 name : 'sourceView',
+                 items:['Source','-','Save','NewPage','Preview','-','Templates']
+             },
+              {
+                 name : 'align',
+                 items:['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']
+             },
+            ],
+            height: 630,
+            cloudServices_uploadUrl: 'https://33333.cke-cs.com/easyimage/upload/',
+            // Note: this is a token endpoint to be used for CKEditor 4 samples only. Images uploaded using this token may be deleted automatically at any moment.
+            // To create your own token URL please visit https://ckeditor.com/ckeditor-cloud-services/.
+            cloudServices_tokenUrl: 'https://33333.cke-cs.com/token/dev/ijrDsqFix838Gh3wGO3F77FSW94BwcLXprJ4APSp3XQ26xsUHTi0jcb1hoBt',
+            easyimage_styles: {
+              gradient1: {
+                group: 'easyimage-gradients',
+                attributes: {
+                  'class': 'easyimage-gradient-1'
+                },
+                label: 'Blue Gradient',
+                icon: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/gradient1.png',
+                iconHiDpi: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/hidpi/gradient1.png'
+              },
+              gradient2: {
+                group: 'easyimage-gradients',
+                attributes: {
+                  'class': 'easyimage-gradient-2'
+                },
+                label: 'Pink Gradient',
+                icon: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/gradient2.png',
+                iconHiDpi: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/hidpi/gradient2.png'
+              },
+              noGradient: {
+                group: 'easyimage-gradients',
+                attributes: {
+                  'class': 'easyimage-no-gradient'
+                },
+                label: 'No Gradient',
+                icon: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/nogradient.png',
+                iconHiDpi: 'https://ckeditor.com/docs/ckeditor4/4.12.1/examples/assets/easyimage/icons/hidpi/nogradient.png'
+              }
+            },
+            easyimage_toolbar: [
+              'EasyImageFull',
+              'EasyImageSide',
+              'EasyImageGradient1',
+              'EasyImageGradient2',
+              'EasyImageNoGradient',
+              'EasyImageAlt'
+            ]
+          });
    
    //============= "다중파일업로드 파일명만 저장해서 value" =============   
    function fnAddFile(fileNameArray) {
@@ -408,17 +502,32 @@
                      
                     //5장 이상 업로드시
                      if(Object.keys(files).length>=10){
-                    	swal("사진은 10장까지만 업로드 가능합니다..", " ");
-                        delete files[imgNum];
+              			  swal({
+              		           text: "사진은 10장까지만 등록 가능합니다",
+              		           dangerMode: true,
+              		           buttons: {
+              							 catch: {
+              							 	text: "확인"
+              							 }
+              				   },			   
+              		      }).then((willDelete) => {
+              		           if (willDelete) {
+              	                   delete files[imgNum];
+              		           }
+              		      });
+                           	 
+                           	 
+//                                alert("사진은 10장까지만 업로드 가능합니다.");
+//                                delete files[imgNum];
                      }else{
                // 5장 이하 
                      $("#preview").append(
-                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
                                              + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
                                              + "<span href=\"#\" value=\""
                                              + imgNum
                                              + "\" onclick=\"deletePreview(this)\">"
-                                             + "   <br/><font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 
                      files[imgNum] = file;
                      fileNameArray[imgNum]=file.name;
@@ -450,8 +559,15 @@
          var fileNameExtension = fileName.toLowerCase().substring(
                  fileNameExtensionIndex, fileName.length);
          if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-        	 swal("jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.", " ");
-        
+			  swal({
+		           text: "jpg, gif, png, avi, mp4 확장자만 등록 가능합니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },			   
+		      }); 
              return true;
          } else {
              return false;
@@ -485,18 +601,31 @@
             	 //투표수 계산
                  var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                  $("#voteNum").children().remove();
-                 $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3><div class=\"row form-form\">"+
+                 $("#voteNum").append("<h5><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h5><div class=\"row form-form\">"+
              							"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
                  //후원목표금액 길이초과
                  if (removeCommas($(this).val()).length > 7 ) {
-                	 swal("300만원이하로 입력해주세요.", " ");
+       			  swal({
+      		           text: "300만원이하로 입력해주세요.",
+      		           dangerMode: true,
+      		           buttons: {
+      							 catch: {
+      							 	text: "확인"
+      							 }
+   				   },			   
+       		      }).then((willDelete) => {
+       		           if (willDelete) {
+
+             	  
                      $(this).val(removeCommas($(this).val()).substr(0, 7));
                      
                      $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
                      var inputed = Math.round(removeCommas($(this).val())*0.0001);         
                      $("#voteNum").children().remove();
-                     $("#voteNum").append("<h3><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h3><div class=\"row form-form\">"+
+                     $("#voteNum").append("<h5><b>투표수 <strong  style=\"color:#f04f23\">"+inputed+"</strong>표</b></h5><div class=\"row form-form\">"+
       										"후원게시글로 이동하려면 받아야 할 투표 수입니다.</div>");
+       		           }
+       		      });
                  }
              });
           
@@ -508,21 +637,24 @@
                   for(var i = 0; i < byteText.length ; i++) {
                      byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
 	                  if(byteNum > 50) {     
-	                	  swal("제한길이를 초과하였습니다.", " ");
-	              
-	                      $(this).val($(this).val().substr(0,i));
+	        			  swal({
+		       		           text: "제한길이를 초과하였습니다.",
+		       		           dangerMode: true,
+		       		           buttons: {
+		       							 catch: {
+		       							 	text: "확인"
+		       							 }
+		       				   },			   
+		       		      }).then((willDelete) => {
+		       		           if (willDelete) {
+		                           $(this).val($(this).val().substr(0,i));
+		       		           }
+		       		      });
 	                  }
                   }
 
              });
-           //============= 연락처 문자 입력 검증 (JavaScript 함수사용)=============
-             $('#phone2').keyup(function(){
-                $(this).val($(this).val().replace(/[^0-9]/g,""));          
-             });
-           
-             $('#phone3').keyup(function(){
-                 $(this).val($(this).val().replace(/[^0-9]/g,""));              
-             });
+
              
      }); 
    

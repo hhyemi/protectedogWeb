@@ -26,5 +26,8 @@ public interface OrderService {
 	//주문 삭제(관리자 권한)
 	public void delOrder(Order order)throws Exception;
 	
+	//관리자주문내역 리스트
+    public Map<String,Object> listAdminOrder(Search search, String id) throws Exception;
+	
 
 }

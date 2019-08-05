@@ -82,11 +82,11 @@
                                         </div>
                                         <div class="modal-body">
                                             <form role="form" class="form-horizontal sendReport" id="reportForm">
-                                            <input type="hidden" name="reporterId" id="reporterId" value="${ sessionScope.user.id }">
+                                            <input type="hidden" name="reporterNick" id="reporterNick" value="${ sessionScope.user.nickname }">
                                                 <div class="row form-group">
                                                     <label class="col-lg-4 control-label">신고대상</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" placeholder="" id="reportedId" name="reportedId" class="form-control">
+                                                        <input type="text" placeholder="" id="reportedNick" name="reportedNick" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -231,8 +231,8 @@
                 	url : '/report/json/addReport',
                 	dataType : 'JSON',
                 	data : JSON.stringify({
-                		reportedId : $('#reportedId').val(),
-                		reporterId : $('#reporterId').val(),
+                		reportedNick : $('#reportedNick').val(),
+                		reporterNick : $('#reporterNick').val(),
                 		reportCategory : $('#reportCategory').val(),
                 		reportContent : $('#reportContent').val(),
                 		file : $('#reportMultiFile').val(),

@@ -20,14 +20,14 @@ public interface MessageService {
 //	public Map<String, Object> getReceiveMessageList(Search search, String receiverId) throws Exception;
 	
 	//뭐라고썼지??
-	public Map<String, Object> getMessageList(Search search, String id) throws Exception;
+	public Map<String, Object> getMessageList(Search search, String nickname) throws Exception;
 	
 	//�������� ������Ʈ
 	public void updateMessage(Message message) throws Exception;
 
 	//������ ���� üũ
-	public int getUnreadMessage(String receiverId) throws Exception;
+	public int getUnreadMessage(String receiverNick) throws Exception;
 
-	public int getReceiveTotalCount(String receiverId) throws Exception;
+	public int getReceiveTotalCount(String receiverNick) throws Exception;
 
 }

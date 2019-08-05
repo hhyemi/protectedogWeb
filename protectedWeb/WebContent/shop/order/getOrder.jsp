@@ -70,6 +70,14 @@ body {
 	padding-left: 50px;
 	padding-right: 50px;
 }
+
+.container{
+	width: 800px;
+}
+
+table{
+	align: center;
+}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -176,7 +184,7 @@ body {
 	<!--  table Start /////////////////////////////////////-->
 
 	<div class="container" align="center">
-		<table class="table table-sm">
+		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 			<thead>
 				<tr>
 					<th width="10%">주문번호</th>
@@ -188,7 +196,7 @@ body {
 			<tbody>
 				<tr align="center">
 					<th scope="row">${order.orderNo}</th>
-					<td>${order.orderProd.prodName}</td>
+					<td>${order.orderProd.prodName}&nbsp;${order.orderQuantity}개 구매</td>
 					<td>${order.totalPrice}</td>
 					<td>
 					<c:if test="${order.orderCode =='1'}">
@@ -223,7 +231,7 @@ body {
 		</table>
 		<hr>
 		<br /> <br />
-		<table class="table table-hover">
+		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 			<thead>
 				<tr>
 					<th width="10%">주문자 정보</th>
@@ -244,7 +252,7 @@ body {
 		</table>
 		<hr>
 		<div class="container" align="center">
-			<table class="table table-hover">
+			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 				<thead>
 					<tr>
 						<th width="10%">수령자이름</th>
