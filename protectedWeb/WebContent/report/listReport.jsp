@@ -363,7 +363,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -423,7 +423,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				
 				var reportBody={
@@ -485,9 +485,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
-				debugger;
+// 				debugger;
 				
 				var reportBody={
 						"reportNo" : reportNo,

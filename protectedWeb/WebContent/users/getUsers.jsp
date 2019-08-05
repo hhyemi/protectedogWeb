@@ -637,19 +637,28 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			});
 		
 		
-		 $(function() {
-			 
-			 $("input[name='email']").on("change" , function() {
+			$(function() {
+				 
+				$("input[name='email']").on("change" , function() {
 				
-				 var email=$("input[name='email']").val();
+					var email=$("input[name='email']").val();
 			    
-				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("이메일 형식이 아닙니다.");
-			    	return;
-			     }
-			});
+					if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+// 						alert("이메일 형식이 아닙니다.");
+						swal({
+							text : "올바른 이메일 형식이 아닙니다.",
+							icon : "error",
+							buttons :{
+								catch : {
+									text : "확인"
+								}
+							}
+						})
+						return;
+					}
+				});
 			 
-		});
+			});
 		 
 			function execDaumPostcode() {
 			    new daum.Postcode({

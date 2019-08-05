@@ -73,7 +73,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         <input type="hidden" id="authPhoneCheck" value=""/>
                         <input type="hidden" id="authMailCheck" value=""/>
                         <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px">
-							<input type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
+							<input class="testId" type="text" id="id" name="id" value=${ sessionScope.user.id }>
 							<input type="hidden" name="levelPoint" value=100>
 							<input type="hidden" id="authKeyReturn" value="">                     
                             <div class="row">
@@ -209,6 +209,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			$(function() {
 			
 			$( "#submit" ).on("click" , function() {
+// 				var id=$('input[name=id]').val();
+// 				var email=$('input[name=email]').val();
+// 				var phone=$('input[name=phone]').val();
+// 				var addr=$('input[name=userAddr]').val();
+// 				var birth=$('input[name=birthDate]').val();
+// 				var gender=$('select[name=gender]').val();
+
 				var value = "";	
 				if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 					var value = $("option:selected").val() + "-" 
@@ -543,7 +550,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                    }).then((willDelete) => {
                         if (willDelete) {
                            $(this).val($(this).val().substr(0,i-1));
-                           $("input[name=id]").focus();
+                           $("input[name=phone2]").focus();
                         }
                    });
                }
@@ -568,7 +575,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                        }).then((willDelete) => {
                             if (willDelete) {
                                $(this).val($(this).val().substr(0,i-1));
-                               $("input[name=id]").focus();
+                               $("input[name=phone3]").focus();
                             }
                        });
                    }
@@ -593,7 +600,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                        }).then((willDelete) => {
                             if (willDelete) {
                                $(this).val($(this).val().substr(0,i-1));
-                               $("input[name=id]").focus();
+                               $("input[name=birthDate]").focus();
                             }
                        });
                    }

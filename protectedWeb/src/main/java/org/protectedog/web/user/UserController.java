@@ -182,7 +182,7 @@ public class UserController {
 	@RequestMapping(value="addUsersAdditional", method=RequestMethod.POST)
 	public String addUsersAddtional(@ModelAttribute("user") User user, @RequestParam("id") String id, HttpSession session) throws Exception{
 		
-		System.out.println("/users/addUsersAdditional");
+		System.out.println("/users/addUsersAdditional : POST");
 		
 //		String sessionId=((User)session.getAttribute("user")).getId();
 //		if(sessionId.equals(user.getId())) {
@@ -197,8 +197,9 @@ public class UserController {
 		sessionUser.setUserAddr(user.getUserAddr());
 		sessionUser.setBirthDate(user.getBirthDate());
 		sessionUser.setGender(user.getGender());
+		
+		session.removeAttribute("user");
 		session.setAttribute("user", sessionUser);
-		System.out.println(session.getAttribute("user"));
 		
 		return "redirect:/index.jsp";
 	}
