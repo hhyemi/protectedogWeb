@@ -75,8 +75,7 @@ table {
 	width: 1000px;
 }
 
-<
-style>#searchKeyword {
+#searchKeyword {
 	height: 40px;
 	width: 150px;
 }
@@ -93,11 +92,39 @@ style>#searchKeyword {
 	border-radius: 15px 0px 0px 15px;
 }
 
+#selectPageSize {
+	height: 30px;
+}
+
+#newstd {
+	min-width: 251px;
+	max-width: 251px;
+}
+
 .btn-default {
 	height: 30px;
 	color: white;
 }
-</style>
+
+th {
+	background-color: #F0F0F0;
+}
+
+.form-group4 {
+	padding-right: 30px;
+}
+
+.navigation {
+	margin-left: 450px;
+	margin-bottom: 200px;
+}
+
+#setting{
+	margin-top:70px;
+}
+
+.form-inline{
+	margin-right:190px;}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -123,9 +150,9 @@ style>#searchKeyword {
 
 		// 	$(function() {
 
-		// 		$("td.ct_btn01:contains('검색')").on("click", function() {
-		// 			fncGetList(1);
-		// 		});
+		$("#searchSubmmit").on("click", function() {
+			fncGetList(1);
+		});
 
 		// 		$("#change2").on(
 		// 				"click",
@@ -160,9 +187,9 @@ style>#searchKeyword {
 					<p>
 						<span class="mr-2">protected dog</span> <span>Store</span>
 					</p>
-					<font size="7">관리자 상품 관리</font><a href="#" id="button">
-					<button type="button" class="btn btn-default">상품등록</button>
-				</a>
+					<font size="7">관리자 상품 관리</font><a id="button">
+						<button type="button" class="btn btn-default">상품등록</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -170,48 +197,45 @@ style>#searchKeyword {
 	<br />
 	<p />
 	<!--/////////////////////// form start /////////////////////////////////-->
-	<div style="float: right;">
-		<form class="form-inline" name="detailForm">
-			<div class="form-group">
-				<select class="form-control" id="searchCondition"
-					name="searchCondition">
-					<option value="0"
-						${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-					<option value="1"
-						${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
-					<option value="2"
-						${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
-				</select>
-			</div>
+
+		<div style="float: right;">
+			<form class="form-inline" name="detailForm">
+				<div class="form-group">
+					<select class="form-control" id="searchCondition"
+						name="searchCondition">
+						<option value="0"
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
+						<option value="1"
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
+					</select>
+				</div>
 
 
-			<div class="form-group">
-				<label class="sr-only" for="searchKeyword">검색어</label> <input
-					type="text" class="form-control searchKeyword" id="searchKeyword"
-					name="searchKeyword" placeholder="검색어"
-					value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-				<button type="button" id="searchSubmmit"
-					class="btn btn-default searchSubmmit">
-					<span class="fas fa-search"></span>
-				</button>
-			</div>
+				<div class="form-group">
+					<label class="sr-only" for="searchKeyword">검색어</label> <input
+						type="text" class="form-control searchKeyword" id="searchKeyword"
+						name="searchKeyword" placeholder="검색어"
+						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+					<button type="button" id="searchSubmmit"
+						class="btn btn-default searchSubmmit">
+						<span class="fas fa-search"></span>
+					</button>
+				</div>
 
-			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-			<input type="hidden" id="currentPage" name="currentPage" value="" />
-		</form>
-	</div>
-
+				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				<input type="hidden" id="currentPage" name="currentPage" value="" />
+			</form>
+		</div>
 
 	<c:if test="${totalCount == 0}">
 		<div class="row">
 			<div class="col-md-9" align="center"
-				style="height: 500px; padding-top: 250px;">
-				검색결과 없음
-				<p />
-				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				<input type="hidden" id="currentPage" name="currentPage" value="" />
+				style="height: 500px; padding-top: 150px;">
+
+				<jsp:include page="/common/searchResult.jsp"></jsp:include>
 			</div>
-		</div>
+			</div>
+			
 	</c:if>
 	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
@@ -220,7 +244,7 @@ style>#searchKeyword {
 
 	<div class="container" align="left">
 		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"
-			align="center">
+			align="center" id="setting">
 			<thead>
 				<tr>
 					<td colspan="11" id="countfont">기본 내역 조회 : 전체
@@ -231,7 +255,7 @@ style>#searchKeyword {
 					<th class="mdl-data-table__cell--non-numeric" align="center"
 						id="no">상품번호</th>
 					<th align="center" id="boardfont" width="">상품명</th>
-					<th align="center" id="boardfont" width="" >상품가격</th>
+					<th align="center" id="boardfont" width="">상품가격</th>
 					<th align="center" id="boardfont" width="">할인액</th>
 					<th align="center" id="boardfont" width="">원산지</th>
 					<th align="center" id="boardfont" width="">제조사</th>
@@ -280,6 +304,7 @@ style>#searchKeyword {
 						<th align="center" id="boardfont">제조일</th>
 						<th align="center" id="boardfont">등록일</th>
 						<th align="center" id="boardfont">재고수량</th>
+						<th align="center" id="boardfont">상품유형</th>
 
 					</tr>
 				</thead>
@@ -298,32 +323,32 @@ style>#searchKeyword {
 							<td align="center"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${product.regDate}" /></td>
 							<td align="center">${product.quantity}</td>
+							<td align="center"><c:if test="${product.prodCode == 10 }">
+							사료</c:if>
+							<c:if test="${product.prodCode == 20 }">
+							간식</c:if>
+							<c:if test="${product.prodCode == 30 }">
+							의류</c:if></td>
 
 						</tr>
 					</tbody>
 				</c:forEach>
 			</table>
 			<br> <br> <br>
-			<div class="col-md-12" align="right">
-
-				<br />
-
-				<div align="center">
-					<jsp:include page="../../common/pageNavigator_new.jsp" />
-				</div>
-
-				<div style="min-height: 40px"></div>
-
+			<div class="navigation">
+				<jsp:include page="/common/pageNavigator_new.jsp" />
 			</div>
-		</div>
-		</div>
 
 
-		<!--///////////////////////////////// form end /////////////////////////////////////-->
-		<!--================ start footer Area  =================-->
-		<!-- footer Start /////////////////////////////////////-->
-		<jsp:include page="/layout/footer.jsp"></jsp:include>
-		<!-- footer End /////////////////////////////////////-->
-		<!--================ End footer Area  =================-->
+
+		</div>
+	</div>
+
+	<!--///////////////////////////////// form end /////////////////////////////////////-->
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
+	<!--================ End footer Area  =================-->
 </body>
 </html>
