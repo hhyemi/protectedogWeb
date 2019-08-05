@@ -478,9 +478,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                        		"\') no-repeat center center;background-size:cover;min-height:300px; max-height:300px; min-width:330px; max-width:330px;\" >"+
 			    					"<input type=\"hidden\" value=\""+adopt.postNo+"\" /></a> ";	    																
 					
-									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
+									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\" align=\"center\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
 			    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
-										       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
+										       "<div class=\"col-xs-5 col-md-5\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"3\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
 
 									display += "</div></div></div>";	
 								 }
