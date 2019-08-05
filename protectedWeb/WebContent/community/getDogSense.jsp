@@ -30,6 +30,9 @@
 
 a :hover{color : #1062e6;}
 
+.active { background-color : #f04f23;opacity: 1;}
+
+button:active{background-color:black;}
 </style>
 </head>
 <body>
@@ -100,6 +103,12 @@ a :hover{color : #1062e6;}
 	
 			
 	$(function () {
+		
+		$("button").click(function(){
+			$("button").removeClass('active');
+			$(this).toggleClass("active");
+		});
+		
 		
 		$(".col-md-2").on("click",function(){
 			$("#get_view").empty();

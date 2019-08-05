@@ -39,14 +39,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	background-size: cover;
 }
 
-.arrow {position:fixed;right:50%;bottom:23px;z-index:1000}
-.arrow span{display: block;width: 20px;height: 20px;border-bottom: 5px solid #F04F23;border-right: 5px solid #F04F23;transform: rotate(45deg);margin: -10px;animation: animate 2s infinite;}
+.arrow {position:fixed;right:50%;bottom:15px;z-index:1000}
+.arrow span{display: block;width: 20px;height: 20px;border-bottom: 4px solid #F04F23;border-right: 4px solid #F04F23;transform: rotate(45deg);margin: -10px;animation: animate 2s infinite;}
 .arrow span:nth-child(2){animation-delay: -0.2s;}
 .arrow span:nth-child(3){animation-delay: -0.4s;}
 @keyframes animate {
     0%{
         opacity: 0;
-        transform: rotate(45deg) translate(-20px,-20px);
+        transform: rotate(45deg) translate(-8px,-8px);
     }
     50%{
         opacity: 1;
@@ -257,9 +257,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		<div class="info">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-6" style="padding-left:50px">
-						<div class="service-himg">
-							<iframe src="https://www.youtube.com/embed/L_XlRaGSiY4?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+					<div class="col-md-6" style="padding-left:50px;">
+						<div class="service-himg" style="padding-top : 5px">
+							<iframe src="https://www.youtube.com/embed/L_XlRaGSiY4?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen style=""></iframe>
 						</div>
 					</div>
 					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -458,6 +458,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 								    +  "<tbody>"
 							 $.each(info, function(index, info){
 								 	 
+								 	if(index >= 3){
+								 		return;
+								 	}
 									display +=  "<tr>"
 											+  "<td class=\"mdl-data-table__cell--non-numeric\">";
 										
@@ -467,7 +470,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 											if(index == 1 ){
 												display += "<img src=\"/resources/file/others/silver-medal.png\"> "+ ( index+1 ) +" 등</img>"
 											}
-											if(index >= 2 ){
+											if(index == 2 ){
 												display += "<img src=\"/resources/file/others/bronze-medal.png\"> "+ ( index+1 ) +" 등</img>"
 											}
 									
