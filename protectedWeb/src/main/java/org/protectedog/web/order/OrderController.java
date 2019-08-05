@@ -165,7 +165,7 @@ public class OrderController {
 
 		model.addAttribute("order", order);
 
-		return "forward:/shop/order/addOrder.jsp";
+		return "forward:/order/listOrder";
 		
 	}
 	
@@ -221,7 +221,7 @@ public class OrderController {
 
 	
 	@RequestMapping("/updateOrderView")
-	public String updatePurchaseView(@ModelAttribute("purchase") Order order, Model model) throws Exception{
+	public String updateOrderView(@ModelAttribute("orders") Order order, Model model) throws Exception{
 		
 		System.out.println("/updatePurchaseView");
 				
@@ -238,7 +238,7 @@ public class OrderController {
 	
 	
 	@RequestMapping("/updateOrder")
-	public String updatePurchase(@ModelAttribute("order") Order order ,@RequestParam("prodNo") int prodNo, 	@ModelAttribute("user") User user, 
+	public String updateOrder(@ModelAttribute("order") Order order ,@RequestParam("prodNo") int prodNo, 	@ModelAttribute("user") User user, 
 			Model model , HttpSession session) throws Exception{
 		
 		System.out.println("/updatePurchase");
@@ -292,18 +292,18 @@ public class OrderController {
 			return "forward:/shop/order/listAdminOrder.jsp";
 		}
 		
-		@RequestMapping(value="updateOrderCode")
-		public String updateOrderCode(@ModelAttribute("order") Order order, @RequestParam("orderCode")String orderCode,
-				@RequestParam("id") String id) throws Exception{
+		@RequestMapping(value="updateOrderCode", method=RequestMethod.GET)
+		public String updateOrderCode(@RequestParam("orderNo") int orderNo, @RequestParam("orderCode") int orderCode, Model model, HttpSession session) throws Exception {
 			
+			System.out.println("/purchase/updateTranCode : GET");
 			
+			Order order = orderService.getOrder(orderNo);
 			
-			order.setOrderCode(Integer.parseInt(orderCode));
+			order.setOrderCode(orderCode);
 			
 			orderService.updateOrderCode(order);
 			
-			return "redirect:/order/listOrder?id="+id;
+			return "redirect:/order/listAdminOrder";
+			
 		}
 }
-
-	

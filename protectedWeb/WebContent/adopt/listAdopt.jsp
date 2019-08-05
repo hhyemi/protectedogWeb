@@ -246,7 +246,22 @@
 				</span>
 			    <span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>${adopt.postTitle}</b></h3>
 				    <c:if test="${param.boardCode eq 'AD' }">
-				   	 	<p align="right" style="padding-bottom: 10px;">${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }</p>
+				   	 	<p align="right" style="padding-bottom: 10px;">
+				   	 		<c:if test="${    fn:indexOf(adopt.areaKr,'군') != -1 &&  fn:indexOf(adopt.areaKr,'시') != -1}">
+						   	 	<c:if test="${    fn:indexOf(adopt.areaKr,'시') <  fn:indexOf(adopt.areaKr,'군') }">
+						   	 		${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }
+						   	 	</c:if>
+						   	 	<c:if test="${    fn:indexOf(adopt.areaKr,'시') >  fn:indexOf(adopt.areaKr,'군') }">
+						   	 		${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'군')+1 ) }
+						   	 	</c:if>
+						   	 </c:if>
+						   	 <c:if test="${    fn:indexOf(adopt.areaKr,'군') != -1 &&  fn:indexOf(adopt.areaKr,'시') == -1}">
+						   	 	${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'군')+1 ) }
+						   	 </c:if>
+						   	 <c:if test="${    fn:indexOf(adopt.areaKr,'군') == -1 }">
+						   		 ${fn:substring( adopt.areaKr , 0, fn:indexOf(adopt.areaKr,'시')+1 ) }
+						   	 </c:if>
+				   	 	</p>
 				   	</c:if>
 				    <c:if test="${param.boardCode eq 'MS' }">
 				   	 	<p align="right"><fmt:formatNumber value="${ adopt.dogPay }" pattern="#,###" />원</p>
@@ -286,10 +301,10 @@
 
 <!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 	
 	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -379,11 +394,11 @@
 									$('#listAdoptJSON').children().remove();
 									$('.text-primary').text('전체 '+data.totalCount+' 건');
 								}
-								if( postSize == 1 && data.list.length == 0 ){
+								if( postSize == 1 && data.totalCount == 0 ){
 									console.log('결과없음');
 									if ( $('#searchKeyword').val()==''){
 										$('#searchEmpty').remove();
-										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;">'
+										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
 														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
 								                    	+'</div>';
 									}
@@ -453,7 +468,7 @@
 				var id = $('#sessionId').val();
 				var role = '${sessionScope.user.role}';
 				console.log(lv);
-				if(id == '' || lv == '미인증회원' ){
+				if(lv == '미인증회원' ){
 		              swal({
 		                   title: "인증회원만 작성 가능합니다.",
 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
@@ -467,11 +482,15 @@
 		                        }
 		        	 });   
 					return;
+				} else if (${sessionScope.user == null}) {
+					$("#login-modal").modal('show'); 
+					
+					return;
 				} else if (role == 'admin') {
 					swal({
 		                   text: "운영자는 작성할 수 없습니다.",
 		                   icon: "warning",
-		                   buttons: { cancel:"닫기"},
+		                   buttons: { cancel:"확인"},
 		                   dangerMode: true     
 		             });
 					return;
@@ -501,6 +520,8 @@
 	
 	
 		$('select[name=areaCondition]').change( function(){
+			console.log("지역 체인지");
+		
 			postSize = 1;
 			listAdopt(postSize,"dd");
 		});

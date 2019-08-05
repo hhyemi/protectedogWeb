@@ -78,10 +78,10 @@ public class ApplyController {
 		
 		apply.setAdoptNo(postNo);
 		apply.setId(  ((User)session.getAttribute("user")).getId() );
-		apply.setPhone(  ((User)session.getAttribute("user")).getPhone() );
-		System.out.println("확인  = "+apply.getPhone());
+		User user = userService.getUsers(apply.getId());
 		
 		model.addAttribute("apply", apply);//adoptNo 넘기기
+		model.addAttribute("user", user);
 		
 		//세션조건도 추가
 		if ( adoptService.getAdopt(postNo).getStatusCode().equals("3") ) {
@@ -109,8 +109,10 @@ public class ApplyController {
 		adoptService.updateStatusCode(adopt);    //신청서 등록했으니 분양글 상태코드 2로 변경
 		
 		User user = userService.getUsers(apply.getId());
-		user.setLevelPoint(user.getLevelPoint()+3);
-		userService.updateUsers(user);
+		if ( ! user.getLevels().equals("미인증회원")) {
+			user.setLevelPoint(user.getLevelPoint()+3);
+			userService.updateUsers(user);
+		}
 		
 		model.addAttribute("adopt", adopt);
 		

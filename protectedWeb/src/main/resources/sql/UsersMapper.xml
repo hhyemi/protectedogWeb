@@ -50,7 +50,7 @@
 			account=#{account:VARCHAR},
 			birth_date=#{birthDate:NUMERIC},
 			gender=#{gender:CHAR},
-			level_point=#{levelPoint}
+			level_point=#{levelPoint:NUMERIC}
 		</set>
 		WHERE id=#{id}
 	</update>

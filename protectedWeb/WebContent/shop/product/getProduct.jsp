@@ -11,6 +11,7 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>보호할개·스토어 상품조회</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
@@ -103,8 +104,10 @@ table {
 								<h3>${product.prodName}</h3>
 								<del>
 									<h6>
-										<fmt:formatNumber value="${product.price}" pattern="#,###" />
-										원
+									<c:if test="${product.price > product.discountPrice}">
+									<fmt:formatNumber value="${product.price}" pattern="#,###" />
+										원</c:if>
+										
 									</h6>
 								</del>
 
@@ -115,23 +118,10 @@ table {
 								</h2>
 
 								<ul class="list">
-									<li><a class="active" href="#"> <span>카테고리
-											:<c:if test="${product.prodCode == 10}">
-										사료</c:if></span>
-										<c:if test="${product.prodCode == 20}">
-										간식</c:if>
-										<c:if test="${product.prodCode == 30}">
-										의류</c:if>
-										<c:if test="${product.prodCode == 40}">
-										타임세일</c:if>
-										<input type="hidden" value="prodNo" name="prodNo"/>
-										</a>
-									<li><a href="#"> 
-									</a></li>
+									
 								</ul>
 								<p>
 									원산지 : ${product.country}<br /> 제조사 : ${product.company}<br />
-									기본 적립 포인트 : ${product.discountPrice*0.02}<br />
 								</p>
 
 								<input type="hidden" value="${product.prodNo }" />
@@ -142,14 +132,12 @@ table {
 									<thead>
 										<tr>
 						
-											<th>판매가 <font size="1"> &nbsp;수량선택은 구매페이지에서 가능합니다</font></th>
+											<th><font size="2"> &nbsp;수량선택은 구매페이지에서 가능합니다</font></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											
-											<td id="price" data-price="${product.discountPrice}"><fmt:formatNumber value="${product.discountPrice}" pattern="#,###" />원</td>
-	
 										</tr>
 									</tbody>
 								</table>
@@ -158,9 +146,9 @@ table {
 										
 									<input type="hidden" name="prodNo" value="${product.prodNo}"/>
 									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/><br/>
-
+<br/><br/><br/>
 							<div class="action">
-                <div class="title-but"><button class="btn btn-default" id="addorder">구매하기</button>
+                <div class="title-but"><button class="btn btn-default" id="addorder" align="right">구매</button>
 <!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
                 </div>
               </div>
@@ -174,7 +162,7 @@ table {
 	<!--================End Single Product Area =================-->
 
 	 <!--================Product Description Area =================-->
-    <section class="product_description_area">
+ <section class="product_description_area">
       <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -201,18 +189,18 @@ table {
               >상품 문의</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="contact-tab"
-              data-toggle="tab"
-              href="#contact"
-              role="tab"
-              aria-controls="contact"
-              aria-selected="false"
-              >배송/교환/반품</a
-            >
-          </li>
+<!--           <li class="nav-item"> -->
+<!--             <a -->
+<!--               class="nav-link" -->
+<!--               id="contact-tab" -->
+<!--               data-toggle="tab" -->
+<!--               href="#contact" -->
+<!--               role="tab" -->
+<!--               aria-controls="contact" -->
+<!--               aria-selected="false" -->
+<!--               >배송/교환/반품</a -->
+<!--             > -->
+<!--           </li> -->
 <!--           <li class="nav-item"> -->
 <!--             <a -->
 <!--               class="nav-link" -->
@@ -257,7 +245,7 @@ table {
                 <tbody>
                   <tr>
                     <td>
-<%--                     <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>  --%>
+<%-- <jsp:include page="/prodQna/listProdQna?order=1"></jsp:include>   --%>
                     </td>
                   </tr>
                 </tbody>
@@ -635,6 +623,7 @@ table {
 
 	<script type="text/javascript">
 	var prodNo = ${product.prodNo};
+	
 	
 	//==================장바구니 추가 ===============================
 	$(function() {

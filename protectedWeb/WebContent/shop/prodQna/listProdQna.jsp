@@ -88,8 +88,25 @@ body {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 		$("#qna").on("click", function() {
-			self.location = "/shop/prodQna/addProdQna.jsp";
+			window.open("/shop/prodQna/addProdQna.jsp", "new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+			
+			
+			
 		});
+		
+		$(function() {
+			$("#getgetget").on(
+					"click",
+					function() {
+						//alert($(this).children("input").val())
+						$(self.location).attr(
+								"href",
+								"/prodQna/getProdQna?postNo="
+										+ $(this).children("input").val());
+					});
+		});
+		
+		
 
 		// 	$(function() {
 
@@ -123,9 +140,8 @@ body {
 
 	<div class="container">
 		<h1 align="right">
-			<button
-						class="mdl-button mdl-js-button mdl-button--primary" id="qna">
-						문의하기</button>
+						<button class="btn btn-default" id="qna">문의하기</button>
+
 						
 
 		</h1>
@@ -180,11 +196,11 @@ body {
 					<tr align="center">
 					<td colspan="11" id="countfont">전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td></tr>
 				<thead>
-					<tr class="text-center">
+					<tr>
 						<th>글번호</th>
 						<th id="boardfont">제목</th>
 						<th id="boardfont">질문유형</th>
-						<th width="20%" id="boardfont">등록일</th>
+						<th id="boardfont">등록일</th>
 
 					</tr>
 				</thead>
@@ -195,24 +211,40 @@ body {
 					<tbody>
 					<tr>
 					<td class="mdl-data-table__cell--non-numeric">${ i }</td>
-					<td>${board.postTitle}
+					<td id="getgetget">${board.postTitle}
 					<input type="hidden" name="postNo" value="${board.postNo}" /> 
 					<input type="hidden" name="boardCode" value="${board.boardCode}" /></td>
-					<td>${board.qnaCode}</td>
+					<td><c:if test="${board.qnaCode == '1'}">배송</c:if>
+					<c:if test="${board.qnaCode == '2'}">상품</c:if>
+					<c:if test="${board.qnaCode == '3'}">교환</c:if>
+					<c:if test="${board.qnaCode == '4'}">반품</c:if>
+					<c:if test="${board.qnaCode == '5'}">기타</c:if></td>
 					<td>${board.regDate}</td>
 					</tr>
 					</tbody>
 				</c:forEach>
 				
+				
 			</table>
 			<br/>
 			<!--  table end /////////////////////////////////////-->
-
+<p align="center">
 			<input type="hidden" id="currentPage" name="currentPage" value="0" />
-			<jsp:include page="../../common/pageNavigator_new.jsp"/>
+			<jsp:include page="../../common/pageNavigator_new.jsp"/></p>
 
 		</div>
-	</form>
+		
+	<script type="text/javascript">
+	
+// 	$(function(){
+		
+// 		$("#getgetget").on("click",".go",function(){
+			
+// 			window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+// 		});
+// 	});
+	
+	</script>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
 </body>
 </html>

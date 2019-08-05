@@ -61,7 +61,7 @@
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
 		SELECT o.order_no, p.prod_name, o.order_code, o.total_price, o.id, o.phone, o.order_date, o.receiver_name,
-		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code
+		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, p.discount_price, o.order_quantity, p.mainFile
 
 		FROM orders o, product p
 		WHERE o.order_no = #{orderNo}
@@ -69,11 +69,12 @@
 	</select>
 
 
-	 <update id="updateOrderCode" parameterType="order" >
-	UPDATE orders 
-	SET
-	order_code = #{orderCode}
-	WHERE order_no = #{orderNo}
+	<update	id="updateOrderCode" parameterType="order">
+	  	UPDATE orders
+	  	<set>
+	  		order_code = #{orderCode}
+	  	</set>
+	  	WHERE order_no = #{orderNo}
 	</update>
 	
 	<update id="updateOrder" parameterType="order">

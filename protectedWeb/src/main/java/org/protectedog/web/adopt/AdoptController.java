@@ -109,13 +109,17 @@ public class AdoptController {
 		adopt.setMainFile(multiFile.get(0));
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
-		System.out.println("--------------1--------------------");
+		
+		
 		User user = userService.getUsers(adopt.getId());
-		user.setLevelPoint(user.getLevelPoint()+5);
-		userService.updateUsers(user);
-		System.out.println("---------------2-------------------");
+		if ( ! user.getLevels().equals("미인증회원")) {
+			user.setLevelPoint(user.getLevelPoint()+5);
+			userService.updateUsers(user);
+		}
+		
 		List<FileDog> listFile = new ArrayList<FileDog>();
-		System.out.println("----------------3------------------");
+
+
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
 
@@ -127,7 +131,7 @@ public class AdoptController {
 			listFile.add(files);
 		}
 		fileService.addFile(listFile);
-		System.out.println("----------------4------------------");
+		
 		model.addAttribute("adopt", adopt);
 		
 		if(adopt.getBoardCode().equals("AD")) {
@@ -302,28 +306,6 @@ public class AdoptController {
 		}
 		if(search.getAreaCondition() == null || search.getAreaCondition().equals("all") ) {
 			search.setAreaCondition("");
-//		}else if(search.getAreaCondition().equals("kw")) {
-//			search.setAreaCondition("강원");
-//		}else if(search.getAreaCondition().equals("kk")) {
-//			search.setAreaCondition("경기");
-//		}else if(search.getAreaCondition().equals("ks")) {
-//			search.setAreaCondition("경상");
-//		}else if(search.getAreaCondition().equals("kj")) {
-//			search.setAreaCondition("광주");
-//		}else if(search.getAreaCondition().equals("dj")) {
-//			search.setAreaCondition("대전");
-//		}else if(search.getAreaCondition().equals("bs")) {
-//			search.setAreaCondition("부산");
-//		}else if(search.getAreaCondition().equals("su")) {
-//			search.setAreaCondition("서울");
-//		}else if(search.getAreaCondition().equals("us")) {
-//			search.setAreaCondition("울산");
-//		}else if(search.getAreaCondition().equals("ic")) {
-//			search.setAreaCondition("인천");
-//		}else if(search.getAreaCondition().equals("jr")) {
-//			search.setAreaCondition("전라");
-//		}else if(search.getAreaCondition().equals("cc")) {
-//			search.setAreaCondition("충청");
 		}
 		search.setVoteCondition("");
 		
@@ -358,36 +340,7 @@ public class AdoptController {
 	}
 	
 	
-	
-	// 글 리스트 조회
-	@RequestMapping( value="listAdoptById" )
-	public String listAdoptById( @ModelAttribute("search") Search search, Model model, HttpSession session, 
-			@RequestParam(value="boardCode", required=false) String boardCode) throws Exception{
-		
-		System.out.println("/adopt/listAdoptById : GET / POST"+boardCode);
-		
-		search.setAreaCondition("");
-		search.setSearchKeyword("");
-		search.setSearchCondition("");
-		search.setVoteCondition("");
-		
-		if (search.getCurrentPage() ==0 ) {
-			search.setCurrentPage(1);
-		}
 
-		
-		Map<String , Object> map=adoptService.listAdoptById(search, ((User)session.getAttribute("user")).getId());
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 8);
-		System.out.println(resultPage);
-		
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-		
-		return "forward:/adopt/listAdopt.jsp?boardCode="+boardCode;
-	}
-	
-	
 	
 	
 	@RequestMapping( value="listMissing" )

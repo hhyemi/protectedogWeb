@@ -139,23 +139,6 @@
 	 </select>
 	 
 	 
-	<select  id="listAdoptById"  parameterType="map"	resultMap="adoptSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-  				FROM ( SELECT board_code, post_no, id, nickname, post_title, post_content, phone, adopt_area, area_kr, location, location_kr, reg_date, dog_breed, 
-	  							dog_weight, dog_size, dog_gender, dog_pay, dog_status, dog_char, dog_personality, dog_date, main_file, status_code
-						FROM adopt
-						<where>
-								board_code = 'AD' AND status_code != '0' AND id = #{id}
-						</where>
-						ORDER BY post_no DESC
-						) inner_table
-				WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-	 </select>
-	 
-	 
-	 
 	 
 	 <select  id="listAdopt2"  parameterType="map"	resultMap="adoptSelectMap">
 	  	SELECT board_code, post_no, id,  status_code
