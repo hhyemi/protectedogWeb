@@ -15,7 +15,7 @@
                 <div class="avatar"><img src="/resources/file/fileUser/${ user.profile }" alt="..." class="img-fluid rounded-circle"></div>
                 </c:if>
                 <c:if test="${ user.profile == null }">
-                <div class="avatar"><img src="/resources/file/others/anonymous-250.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="avatar"><img src="/resources/file/fileUser/molang.jpg" alt="..." class="img-fluid rounded-circle"></div>
                 </c:if>
                 <div class="title">
                     <h1 class="h4">${ user.nickname }</h1>
@@ -27,12 +27,18 @@
                 <li><a href="/users/getUsers?id=${ sessionScope.user.id }"><i class="icon-home"></i>내정보보기</a>
 
                 </li>
-                <li><a href="/message/listMessage?searchCondition=receive"><i class="fa fa-bar-chart"></i>쪽지함</a>
+                <li><a href="/message/listMessage?searchCondition=receive"><i class="fa fa-envelope"></i>쪽지함</a>
+
+                </li>
+
+                <li><a href="/coupon/listCoupon"><i class="fa fa-map"></i>쿠폰받기</a>
 
                 </li>
                 
                 <c:if test="${ sessionScope.user.role eq 'admin' }">
                 <li><a href="/report/listReport"><i class="fa fa-map-o"></i>신고글목록</a>
+                </li>
+                <li><a href="/coupon/addCouponManage"><i class="fa fa-map-o"></i>쿠폰생성</a>
                 </li>
                 </c:if>
 			</ul>

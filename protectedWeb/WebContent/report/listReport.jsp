@@ -57,6 +57,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
+<div class="container">
     <div class="page-content d-flex align-items-stretch">
 
         <!--***** SIDE NAVBAR *****-->
@@ -97,10 +98,10 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         </td>
 										<th width="85px">신고자</th>
 										<th width="85px">신고대상</th>
-										<th width="300px" class="text-center">신고유형</th>
+										<th width="270px" class="text-center">신고유형</th>
 										<th width="200px" align="center" class="text-center">신고일시</th>
-										<th width="75px">처리상태</th>
-										<th width="75px">더보기</th>
+										<th width="90px">처리상태</th>
+										<th width="90px">더보기</th>
 									</tr>
 								</thead>
                                 <tbody>
@@ -175,14 +176,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         </td>
 										<td width="85px">${ report.reporterNick }</td>
 										<td width="85px">${ report.reportedNick }</td>
-                                        <td class="view-message text-center" width="300px"> 
+                                        <td class="view-message text-center" width="270px"> 
                                        		${ report.reportCategory }
                                         	<input type="hidden" name="reportContent" value="${ report.reportContent }"/>
                                         </td>
-                                        <td class="view-message text-right" width="200px"> 
+                                        <td class="view-message text-center" width="200px"> 
 											<fmt:formatDate value="${ report.reportDate }" pattern="yy.MM.dd"/>
 										</td>
-                                        <td class="view-message text-center" width="75px" >
+                                        <td class="view-message text-center" width="90px" >
                                         	<c:if test="${ report.reportStatus == 0 }">
                                         		<a>처리중(${ report.reportStatus })</a>
                                         	</c:if>
@@ -190,7 +191,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         		<a>처리완료(${ report.reportStatus })</a>
                                         	</c:if>
                                         </td>
-                                        <td class="view-message text-center" width="75px" >
+                                        <td class="view-message text-center" width="90px" >
                                         	<c:if test="${ report.reportStatus == 0 }">
                                         	<a href=".reportViewModal" data-toggle="modal" title="Compose" class="btn btn-compose">
                                         		더보기
@@ -204,13 +205,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                 </tbody>
                                 
                             </table>
-                            <jsp:include page="/common/pageNavigator.jsp" />
+                            <div style="padding-left: 350px;">
+                            <jsp:include page="/common/pageNavigator_new.jsp"/>                            
+                            </div>
                             </c:if>
                         </div>
                     </aside>
                 </div>
             </div>
         </div>
+     </div>
    
     
     <jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
@@ -359,7 +363,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -419,7 +423,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				
 				var reportBody={
@@ -481,9 +485,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
-				debugger;
+// 				debugger;
 				
 				var reportBody={
 						"reportNo" : reportNo,

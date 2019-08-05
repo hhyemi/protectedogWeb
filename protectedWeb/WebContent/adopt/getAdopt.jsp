@@ -79,7 +79,7 @@
  		
         .fa-heart {
          	color: #f04f23;
-/*          	padding-top: 5px; */
+          	padding-top: 10px !important; 
         }
          
         ol.carousel-indicators {
@@ -120,7 +120,10 @@
         
 
     </style>
+    
   <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+  <jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
+	<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
   </head>
   
   <body>
@@ -128,7 +131,7 @@
     
     <div class="product_image_area">
       <div class="container">
-      <div class="col-md-12"><hr/><br/>작성일 ${adopt.regDate }</div>
+      <div class="col-md-12" style="padding-bottom: 10px;"><hr/><br/>작성일 ${adopt.regDate }</div>
         <div class="row s_product_inner col-md-12">
         
           <div class="col-lg-6">
@@ -190,26 +193,35 @@
               	<input type="hidden" name="id" value="${adopt.id}">
               	<input type="hidden" name="userId" value="${user.id}">
               	<input type="hidden" name="levels" value="${user.levels}">
-              	
+              	<input type="hidden" name="sessionNickname" value="${user.nickname}">  
 <!--                 <li> -->
                    	<div class="row" style="position:relative;height:35px;">
-			        	<div class="col-xs-10 col-md-10" style="position:absolute;height:35px; left:0px; bottom:0px;" >
+			        	<div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px;" >
 			        		<font id="title" size="5px"><strong>${adopt.postTitle}</strong></font>
-			        	&nbsp;&nbsp;${adopt.id}
+			        	&nbsp;&nbsp;${adopt.nickname}
 			        	</div>
 			        	
 			        	<c:if test="${ user.id ne adopt.id }">
-				        	<div class="col-xs-2 col-md-2" style="position:absolute;height:35px; right:0px; bottom:0px;padding-right:15px;padding-left: 0;" >
+			        	
+			        	
+			        		<div class="col-xs-2 col-md-2" style="height:35px;  right:0px; bottom:0px;padding-left: 0;padding-right: 0;" >
+								<p align="right" style="padding-top: 10px;">
+								<img src="/resources/file/others/siren.png"  id ="report"  width="22px" height="22px" >
+								</p>
+							</div>
+				        	<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-right:15px;padding-left: 0;" >
 								<p align="right">
 								<font size="5px" id="heartIcon">
-									<c:if test="${ check eq 'already' }">
+									<c:if test="${ check eq 'already' && sessionScope.user.role ne 'admin'}">
 										<span class="fas fa-heart"></span>
 									</c:if>
-									<c:if test="${ check ne 'already' }">
+									<c:if test="${ check ne 'already' && sessionScope.user.role ne 'admin' }">
 										<span class="far fa-heart"></span>
 									</c:if>
 								</font></p>
 				        	</div>
+				        	
+				        	
 			        	</c:if>
 
 			        </div>
@@ -296,8 +308,8 @@
              	
 				<!-- 공통  -->
               	<c:if test="${adopt.statusCode ne '3' &&  user.id ne adopt.id   }">
-<!--                		<button class="btn btn-default" style="width: 260px">문의하기</button> -->
-               		<button class="btn btn-default" style="width: 255px" data-toggle="modal" data-target="#messageModal">문의하기</button>
+               		<button class="btn btn-default" style="width: 255px" id="messageRq">문의하기</button>
+<!--                		<button class="btn btn-default" style="width: 255px" data-toggle="modal" data-target="#messageModal">문의하기</button> -->
 <!--                		<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
                	</c:if>
                	
@@ -413,8 +425,7 @@
 </div>
 			
 			
-
-	<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
+	
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
   
     <!--================End Product Description Area =================-->
@@ -428,9 +439,9 @@
     <!-- KAKAO -->
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
     
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!--     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!--     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 <!--     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
 <!--     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script>
@@ -520,10 +531,10 @@
 		    
 		    if (  arrayTest.length == 1   ){
 		    	infowindowArea1.setContent(areaKr);
-	    		infowindowArea1.open(map, markerArea);
+	    		infowindowArea1.open(mapArea, markerArea);
 		    } else {
 	    		infowindowArea[i].setContent(areaKr.split(",")[i]);
-	    		infowindowArea[i].open(map, markerArea);
+	    		infowindowArea[i].open(mapArea, markerArea);
 		    }
 		 
 	    }
@@ -570,7 +581,7 @@
 	 		console.log(boardCode+","+postNo+","+id);
 	  
 	  		if ( id == "" ){
-	  			
+	  			$("#login-modal").modal('show'); 
 // 	  			swal({
 // 			           text: "회원만 이용할 수 있는 기능입니다.",
 // 			           dangerMode: true,
@@ -579,18 +590,18 @@
 // 					   }
 // 	  			});
 	  			
-		              swal({
-		                   title: "회원만 이용할 수 있는 기능입니다.",
-// 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
-		                   icon: "warning",
-		                   buttons: ["닫기", "로그인"],
-		                   dangerMode: true     
-		                 })
-		               .then((willDelete) => {
-		                   if (willDelete) {
-// 		                        self.location = "/users/addUsersAddition.jsp"
-		                        }
-		      		  });
+// 		              swal({
+// 		                   title: "회원만 이용할 수 있는 기능입니다.",
+// // 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+// 		                   icon: "warning",
+// 		                   buttons: ["닫기", "로그인"],
+// 		                   dangerMode: true     
+// 		                 })
+// 		               .then((willDelete) => {
+// 		                   if (willDelete) {
+// // 		                        self.location = "/users/addUsersAddition.jsp"
+// 		                        }
+// 		      		  });
 	  			
 	  			return;
 	  			
@@ -798,9 +809,9 @@
 								
 							} else if ( str == '' ){
 								//로그인 안했을때
-								if(id == '' || lv == '미인증회원'){
+								if( lv == '미인증회원'  ){
 						              swal({
-						                   title: "인증회원만 작성 가능합니다.",
+						                   title: "인증회원만 신청 가능합니다.",
 						                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
 						                   icon: "warning",
 						                   buttons: ["닫기", "인증하기"],
@@ -811,20 +822,25 @@
 						                        self.location = "/users/addUsersAddition.jsp"
 						                        }
 						      		  });   
-// 								if ( id == '' || lv == '미인증회원' ) {
-// 									swal({
-// 								           text: "인증회원만 신청할 수 있습니다.",
-// 								           buttons: "닫기",
-// 								    });
+								} else if ( ${sessionScope.user.role == 'admin'} ) {
+									swal({
+						                   text: "운영자는 신청할 수 없습니다.",
+						                   icon: "warning",
+						                   buttons: { cancel:"확인"},
+						                   dangerMode: true     
+						             });
+									return;
+								
 
-								//받아온 데이터에 아이디가 있을때	
-								} else if ( displayValue.indexOf(id) != -1 ) {
+								//로그인한상태+아이디가 없을때
+								} else if (id == '') {
+									$("#login-modal").modal('show'); 
+								} else if (displayValue.indexOf(id) != -1  ) {
 									swal({
 								           text: "이미 신청하셨습니다.",
 								           buttons: "확인",
-								    });
-
-								//로그인한상태+아이디가 없을때
+								    });	
+								
 								} else {
 									self.location = "/apply/addApply?postNo=${adopt.postNo}";
 								}
@@ -834,6 +850,7 @@
 							} else if ( str == 'load' && id != '' && displayValue.indexOf(id) != -1 ) {
 								
 								$( '#adoptApply' ).text("신청완료");
+								
 								
 							}
 							
@@ -995,29 +1012,6 @@
 		               }
 		             });
 				
-// 				swal({
-// 			           text: "삭제하시겠습니까?",
-// 			           dangerMode: true,
-// 			           buttons: {
-// 			        	  		 cancel: "취소",
-// 								 catch: {
-// 								 	text: "확인",
-// //								 	value: "catch",
-// 								 },
-								 
-// 					   },
-					   
-// 			    }).then((willDelete) => {
-// 			           if (willDelete) {
-			        	    
-// 			           		swal("삭제되었습니다.", {
-// 				           		icon: "success",
-// 				           		buttons: "확인"
-// 			           		});
-// 			           		self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
-// 			           }
-// 			    });
-				
 			});
 		
 			$( "button:contains('입양신청')" ).on("click" , function() {
@@ -1030,10 +1024,6 @@
 // 				self.location = "/apply/listApply?adoptNo=${adopt.postNo}"
 			});
 		
-			$( "button:contains('문의')" ).on("click" , function() {
-// 				$('#dialog-message').dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
-// 				$('#dialog-message').dialog( "open" );
-			});
 		
 			$( "#adoptCompleteButton" ).on("click" , function() {
 				swal({
@@ -1056,37 +1046,18 @@
 			    });
 			});
 		
-// 			$( "#missingCompleteButton" ).on("click" , function() {
-// 				swal({
-// 			           text: "찾기완료 상태로 변경하시겠습니까?",
-// 			           buttons: {
-// 								 catch: {
-// 								 	text: "예",
-// 								 },
-// 								 cancel: "아니오",
-// 					   },
-					   
-// 			    }).then((willDelete) => {
-// 			           if (willDelete) {
-// 			        	    fncComplete();
-// 			           		swal("변경되었습니다.", {
-// 				           		icon: "success",
-// 				           		buttons: "확인"
-// 			           		});
-// 			           }
-// 			    });
-// 			});
 		
 			$( "button:contains('목록')" ).on("click" , function() {
 				self.location = "/adopt/listAdopt?boardCode=${adopt.boardCode}"
 			});
-		
-			$( "button:contains('신청완료')" ).on("click" , function() {
-				swal({
-			           text: "이미 신청하셨습니다.",
-			           buttons: "확인",
-			    });
-			});
+			
+
+// 			$( "button:contains('신청완료')" ).on("click" , function() {
+// 				swal({
+// 			           text: "이미 신청하셨습니다.",
+// 			           buttons: "확인",
+// 			    });
+// 			});
 			
 			//관심목록에 추가
 			$(document).on("click", ".far", function() {
@@ -1099,6 +1070,31 @@
 			});
 			
 			$('.modal-body').css('max-height', $(window).height() * 0.6);
+			
+			
+			//============= 신고하기 Event  처리 =============	
+		 	$( "#report" ).on("click" , function() {
+		 		if(${user==null}){
+		 			$("#login-modal").modal('show');  
+		 		}else{
+			 	    var nickname = $('input[name=sessionNickname]').val();
+			 	   $('#reportedNick').prop('readonly', true);
+			 	    $("#reportedNick").val(nickname);
+			 		$("#report-modal").modal("show");
+		 		}
+			});
+			
+			//============= 문의 Event  처리 =============	
+		 	$( "#messageRq" ).on("click" , function() {
+		 		if(${user==null}){
+		 			$("#login-modal").modal('show');  
+		 		}else{
+			 	    var nickname = '${adopt.nickname}';
+			 	   $('#receiverNick').prop('readonly', true);
+			 	    $("#receiverNick").val(nickname);
+			 		$("#messageModal").modal("show");
+		 		}
+			});
 
 	  });
 

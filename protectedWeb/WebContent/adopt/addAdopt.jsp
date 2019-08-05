@@ -319,48 +319,54 @@
       var markersArea = [];
       var markers = [];
       
+      var infowindowLoca;
+      var infowindowArea;
+//       var infowindowAA = [];
       
       function initMap() {
     	  
-    	  if( $('input[name=boardCode]').val().trim() =='AD'){
-		        mapArea = new google.maps.Map(document.getElementById('mapArea'), {
-			    	zoom: 13,
-			    	center: {lat: 37.564, lng: 127.0017}
-		        });
-		
-		        mapArea.addListener('click', function(event) {
-		        	addMarker(event.latLng, "area");
-		        });
-		        
-		        mapArea.addListener('rightclick', function() {
-			    	if( markersArea.length > 0 ){
-	   		        	
-			    		for (var i = markersArea.length-1; i >=0; i--) {
-	   		        		markersArea[i].setMap(null);
-	   		        		markersArea.splice(i, 1 );
-	   		            }
-	   		        	
-	   		        	$('#adoptArea').val('');
-	   		        	$('#areaKr').val('');
-			    	}
-			    });
-    	  }
+
+	        mapArea = new google.maps.Map(document.getElementById('mapArea'), {
+		    	zoom: 13,
+		    	center: {lat: 37.564, lng: 127.0017}
+	        });
+	
+	        mapArea.addListener('click', function(event) {
+	        	addMarker(event.latLng, "area");
+	        });
+	        
+	        mapArea.addListener('rightclick', function() {
+		    	if( markersArea.length > 0 ){
+	  		        	
+		    		for (var i = markersArea.length-1; i >=0; i--) {
+	  		        		markersArea[i].setMap(null);
+	  		        		markersArea.splice(i, 1 );
+	  		            }
+	  		        	
+	  		        	$('#adoptArea').val('');
+	  		        	$('#areaKr').val('');
+		    	}
+		    });
+	        infowindowArea = new google.maps.InfoWindow();
+  
 	  ////////////////////        위: 분양가능지역               //      아래: 분양|실종위치          ////////////////////////////////////////
 	  
-	      map = new google.maps.Map(document.getElementById('map'), {
+			map = new google.maps.Map(document.getElementById('map'), {
 	        	zoom: 13,
 	        	center: {lat: 37.564, lng: 127.0017}
-	      });
+			});
 	
-	      map.addListener('click', function(event) {
+			map.addListener('click', function(event) {
 	        	addMarker(event.latLng, "loca");
-	      });
+			});
 	      
-	      map.addListener('rightclick', function() {
+			map.addListener('rightclick', function() {
 	        	deleteMarkers();
 	        	$('#location').val('');
 	        	$('#locationKr').val('');
-		  });
+			});
+	      
+			infowindowLoca = new google.maps.InfoWindow();
       }
       
       
@@ -383,7 +389,7 @@
 	  		        });
 	  		        
 	  		     	markersArea.push(markerArea);
-	  		   		 
+	  		     	
 			   		$("#adoptArea").val( $("#adoptArea").val()+location+"#");
 			   			
 		    	    var localat = parseFloat(  location.toString().substring( location.toString().indexOf("(")+1 ,location.toString().indexOf(",") )  );
@@ -405,6 +411,9 @@
 	    	          			if ( $("#areaKr").val().toString().indexOf(',') == 0 ){
 	    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  1  ,   ($("#areaKr").val().toString().length)  ) ) ;
 	    	          			}
+	    	          			
+	    	          			infowindowArea.setContent(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
+	    	    	    		infowindowArea.open(mapArea, markerArea);
 // 		    	          			
 		    	         }
 		    	 	});
@@ -513,6 +522,9 @@
 	           				locaKrkr = locaKrkr.replace('자치' ,   '');
 	           			}
 		                $('#locationKr').val( locaKrkr );
+		                
+		                infowindowLoca.setContent(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
+	    	    		infowindowLoca.open(map, marker);
 		            }
 		 		});
     	  }
@@ -588,13 +600,13 @@
 	                    
 	                 }else{
 	          		 // 8장 이하 
-	                	$("#preview").append(
-	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<span value=\""
-	                                         + imgNum
-	                                         + "\" onclick=\"deletePreview(this)\">"
-                                             + "삭제" + "</span>" + "</div> ");
+	                	 $("#preview").append(
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
+                                             + "<span href=\"#\" value=\""
+                                             + imgNum
+                                             + "\" onclick=\"deletePreview(this)\">"
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -840,7 +852,7 @@
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
 
-		if(parseInt( removeCommas($(this).val())) > 1000000 ){
+		if(parseInt( removeCommas($(this).val())) > 300000 ){
 			swal({
 		           text: "제한 금액을 초과하였습니다.",
 		           dangerMode: true,
@@ -851,7 +863,7 @@
 				   },
 		     });
 // 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
-			$(this).val('1000000');
+			$(this).val('300000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
@@ -938,7 +950,7 @@
 		
 		  if( $("input:checkbox:checked").length != 3){
 			  swal({
-		           text: "안내를 모두 확인해주세요.",
+		           text: "안내를 모두 확인하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -955,9 +967,9 @@
 			  return;
 		  }
 		  
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >15){
+		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length <1){
 			  swal({
-		           text: "글 제목을 다시 확인하세요.",
+		           text: "제목을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -974,9 +986,9 @@
 			  return;
 		  }
 		  
-		  if( $("input[name=dogBreed]").val().length >10){
+		  if($("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length <1){
 			  swal({
-		           text: "견종을 다시 확인하세요.",
+		           text: "견종을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1010,9 +1022,9 @@
 			  return;
 		  }
 		  
-		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 || $("input[name=dogWeight]").val() < 1 ){
+		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length < 1 ){
 			  swal({
-		           text: "체중을 다시 확인하세요.",
+		           text: "체중을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1028,9 +1040,9 @@
 // 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 1000000 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
+		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ).length < 1 ){
 			  swal({
-		           text: "책임비를 다시 확인하세요.",
+		           text: "책임비를 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1050,9 +1062,9 @@
 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		  }
 		  
-		  if( $("input[name=dogDate]").val().trim() == '' ){
+		  if( $("input[name=dogDate]").val().trim() == '' || $("input[name=dogDate]").val().length < 1 ){
 			  swal({
-		           text: "발견일을 다시 확인하세요.",
+		           text: "발견일을 선택하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1069,9 +1081,9 @@
 			  return;
 		  }
 		  
-		  if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
+		  if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length < 1 ){
 			  swal({
-		           text: "상태를 다시 확인하세요.",
+		           text: "강아지 상태를 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1087,9 +1099,9 @@
 // 			  $("input[name=dogStatus]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPersonality]").val().trim() == '' || $("input[name=dogPersonality]").val().length > 20 ){
+		  if( $("input[name=dogPersonality]").val().trim() == '' || $("input[name=dogPersonality]").val().length < 1 ){
 			  swal({
-		           text: "성격을 다시 확인하세요.",
+		           text: "강아지 성격을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1105,9 +1117,9 @@
 // 			  $("input[name=dogPersonality]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
+		  if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length < 1 ){
 			  swal({
-		           text: "특징을 다시 확인하세요.",
+		           text: "강아지 특징을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1160,9 +1172,9 @@
 
 			  return;
 		  }
-		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length < 1 ){
 			  swal({
-		           text: "내용을 다시 확인하세요.",
+		           text: "내용을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
