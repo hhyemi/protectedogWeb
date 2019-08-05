@@ -93,20 +93,18 @@ public class AdoptRestController {
 		adopt.setDogStatus(param.get("dogStatus").toString());
 		adopt.setDogChar(param.get("dogChar").toString());
 		adopt.setStatusCode("1");
-		
-		
 		adopt.setDogDate(  new Date( Integer.parseInt(param.get("dogDate").toString().split("-")[0])-1900, Integer.parseInt(param.get("dogDate").toString().split("-")[1])-1 , Integer.parseInt(param.get("dogDate").toString().split("-")[2]) )  );
 		
-		System.out.println("--------5--------");
-		
+
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
-		System.out.println("--------6--------");
 		User user = userService.getUsers(adopt.getId());
-		user.setLevelPoint(user.getLevelPoint()+5);
-		userService.updateUsers(user);
-		System.out.println("--------7--------");
+		if ( ! user.getLevels().equals("미인증회원")) {
+			user.setLevelPoint(user.getLevelPoint()+5);
+			userService.updateUsers(user);
+		}
+
 		
 		List<FileDog> listFile = new ArrayList<FileDog>();
 		
@@ -169,9 +167,6 @@ public class AdoptRestController {
 		adoptService.updateAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
-		User user = userService.getUsers(adopt.getId());
-		user.setLevelPoint(user.getLevelPoint()+5);
-		userService.updateUsers(user);
 		
 		if (   !(images.isEmpty())  ) {
 			List<FileDog> listFile = new ArrayList<FileDog>();
@@ -212,52 +207,28 @@ public class AdoptRestController {
 																			Model model, HttpSession session ) throws Exception{
 		
 		System.out.println("\n\n/adopt/json/listAdopt : GET / POST ");
-		System.out.println(params);
+
 		
-//		search.setSearchCondition( params.get("searchCondition").toString() );
-		if(search.getSearchCondition() == null ) {
+		if(params.get("searchCondition") == null || params.get("searchCondition").toString().equals("") ) {
 			search.setSearchCondition("");
 		} else {
 			search.setSearchCondition( params.get("searchCondition").toString() );
 		}
-		System.out.println("----------------1-------------------");
-//		search.setSearchKeyword( params.get("searchKeyword").toString() );
-		if(search.getSearchKeyword() == null ) {
+
+		if(params.get("searchKeyword") == null || params.get("searchKeyword").toString().equals("") ) {
 			search.setSearchKeyword("");
 		} else {
 			search.setSearchKeyword( params.get("searchKeyword").toString() );
 		}
-		System.out.println("-----------------2------------------");
-//		search.setAreaCondition( params.get("areaCondition").toString() );
-		if( search.getAreaCondition() == null || search.getAreaCondition().equals("undefined") || search.getAreaCondition().equals("all")) {
+		
+		if( params.get("areaCondition") == null || params.get("areaCondition").toString().equals("")|| params.get("areaCondition").toString().equals("undefined") || params.get("areaCondition").toString().equals("all")) {
 			search.setAreaCondition("");
-//		}else if(search.getAreaCondition().equals("kw")) {
-//			search.setAreaCondition("강원");
-//		}else if(search.getAreaCondition().equals("kk")) {
-//			search.setAreaCondition("경기");
-//		}else if(search.getAreaCondition().equals("ks")) {
-//			search.setAreaCondition("경상");
-//		}else if(search.getAreaCondition().equals("kj")) {
-//			search.setAreaCondition("광주");
-//		}else if(search.getAreaCondition().equals("dj")) {
-//			search.setAreaCondition("대전");
-//		}else if(search.getAreaCondition().equals("bs")) {
-//			search.setAreaCondition("부산");
-//		}else if(search.getAreaCondition().equals("su")) {
-//			search.setAreaCondition("서울");
-//		}else if(search.getAreaCondition().equals("us")) {
-//			search.setAreaCondition("울산");
-//		}else if(search.getAreaCondition().equals("ic")) {
-//			search.setAreaCondition("인천");
-//		}else if(search.getAreaCondition().equals("jr")) {
-//			search.setAreaCondition("전라");
-//		}else if(search.getAreaCondition().equals("cc")) {
-//			search.setAreaCondition("충청");
 		} else {
 			search.setAreaCondition( params.get("areaCondition").toString() );
 		}
+		
 		search.setVoteCondition("");
-		System.out.println("----------------3-------------------");
+		
 		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
 		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		

@@ -109,8 +109,10 @@ public class ApplyController {
 		adoptService.updateStatusCode(adopt);    //신청서 등록했으니 분양글 상태코드 2로 변경
 		
 		User user = userService.getUsers(apply.getId());
-		user.setLevelPoint(user.getLevelPoint()+3);
-		userService.updateUsers(user);
+		if ( ! user.getLevels().equals("미인증회원")) {
+			user.setLevelPoint(user.getLevelPoint()+3);
+			userService.updateUsers(user);
+		}
 		
 		model.addAttribute("adopt", adopt);
 		

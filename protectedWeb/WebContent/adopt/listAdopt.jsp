@@ -286,10 +286,10 @@
 
 <!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 	
 	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -453,7 +453,7 @@
 				var id = $('#sessionId').val();
 				var role = '${sessionScope.user.role}';
 				console.log(lv);
-				if(id == '' || lv == '미인증회원' ){
+				if(lv == '미인증회원' ){
 		              swal({
 		                   title: "인증회원만 작성 가능합니다.",
 		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
@@ -467,11 +467,15 @@
 		                        }
 		        	 });   
 					return;
+				} else if (${sessionScope.user == null}) {
+					$("#login-modal").modal('show'); 
+					
+					return;
 				} else if (role == 'admin') {
 					swal({
 		                   text: "운영자는 작성할 수 없습니다.",
 		                   icon: "warning",
-		                   buttons: { cancel:"닫기"},
+		                   buttons: { cancel:"확인"},
 		                   dangerMode: true     
 		             });
 					return;
@@ -501,6 +505,8 @@
 	
 	
 		$('select[name=areaCondition]').change( function(){
+			console.log("지역 체인지");
+		
 			postSize = 1;
 			listAdopt(postSize,"dd");
 		});

@@ -12,7 +12,7 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 후기</title>
+	<title>보호할개 · 분양실종 후기</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,7 +89,7 @@
 			padding-left: 30px !important;
 			padding-right: 30px !important;
 		}
-		
+
 
 
     </style>
@@ -102,7 +102,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Adopt · Missing</span> <span>Review</span></p>
+          	<p ><span class="mr-2">Adopt Missing</span> <span>Review</span></p>
             <font size="7">후기게시판</font>
           </div>
         </div>
@@ -152,7 +152,7 @@
 
 					<div class="form-group">
 						<label class="sr-only" for="searchKeyword">검색어</label>
-						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="&nbsp;검색어를 입력하세요."
+						<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="검색어를 입력하세요."
 						    	value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 					</div>
 
@@ -174,11 +174,6 @@
       
       <div class="col-md-12"  style="padding-left: 0px;">
       
-<%--       <c:if test="${resultPage.totalCount eq 0 }"> --%>
-<!--       	<div id="searchEmpty" align="center" style="height: 400px; padding-top: 150px;"> -->
-<!-- 			<font size="4px">검색결과가 없습니다.</font> -->
-<!-- 		</div> -->
-<%--       </c:if> --%>
 	
 	  <div class="row"  id="listARJSON">
       <c:set var="i" value="0" />
@@ -196,7 +191,7 @@
 				
 				<p align="left" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 5px;">조회수 ${board.viewCount}</p>
 				<span id="image-box">
-					<img class="listImg" style="width:100%;background:url('${board.thumnail }') no-repeat center center;background-size:cover; "   onerror="this.src='http://placehold.it/400x400'"/>
+					<img class="listImg" style="width:100%;background:url('${board.thumnail}') no-repeat center center;background-size:cover; "   onerror="this.src='http://placehold.it/400x400'"/>
 				</span>
 				
 			    <span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>${board.postTitle}</b></h3>
@@ -238,10 +233,10 @@
 
 <!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 <!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 	
 	     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -249,7 +244,7 @@
 	
 
 		var postNo;
-		var postSize = 2;
+		var postSize = 3;
 		var str = '';
 		
 		$(function(){
@@ -346,18 +341,7 @@
 		function confirmAdopt(){
 			console.log(id);
 			if (id == ''){
-				swal({
-	                   text: "로그인 먼저 해주세요.",
-	                   icon: "warning",
-	                   buttons: ["닫기", "로그인"],
-	                   dangerMode: true     
-	                 })
-	                 .then((willDelete) => {
-	                   if (willDelete) {
-// 	                	   self.location = "/users/addUsersAddition.jsp"
-	                        }
-	        	 });  
-			
+				$("#login-modal").modal('show'); 
 				return;
 			}
 			// 분양글 등록+ 그 글이 완료상태

@@ -25,6 +25,14 @@
 			color: white;
 		}
 		
+		.fa-exclamation-circle {
+			color: #f04f23;
+		}
+		
+		#areaFocus {
+			opacity: 0.6;
+		}
+		
 	</style>
 	
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
@@ -89,15 +97,29 @@
 		            
 		            <!-- 미리보기 영역 -->
 		            <div class="form-group col-md-12">
-			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'>
+		            
+		            
+<!-- 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'> -->
 			
-							<c:forEach var="name" items="${file}" varStatus="status">            
-							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
-			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="120px;" height="120px;"/><br/>
-			                            <span value="${name.fileName}"  onclick="deletePreview2(this)">삭제</span></div>     
-			                </c:forEach>     
+<%-- 							<c:forEach var="name" items="${file}" varStatus="status">             --%>
+<%-- 							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' > --%>
+<%-- 			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="120px;" height="120px;"/><br/> --%>
+<%-- 			                            <span value="${name.fileName}"  onclick="deletePreview2(this)">삭제</span></div>      --%>
+<%-- 			                </c:forEach>      --%>
 			                
-			            </div> 
+<!-- 			            </div>  -->
+			            
+			            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
+
+				<c:forEach var="name" items="${file}" varStatus="status">            
+				
+				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
+                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
+                        
+                </c:forEach>           
+            
+            </div>
 		            </div>
       
 	                
@@ -159,7 +181,7 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 <!-- 	                		<label for="dogDate" id="dogDateLabel"> -->
-	                		<h5 id="dogDateLabel"><strong>발견일자</strong></h5>
+	                		<h5><strong id="dogDateLabel">발견일</strong></h5>
 <!-- 	                		</label> -->
 	                  		<input type="text" class="form-control" name="dogDate" value="${ adopt.dogDate }" readonly>
 	               		</div>
@@ -197,8 +219,8 @@
 	            	<div class="col-md-12" id="areaFocus">
 	            	<br/>
 <!--                 		<label> -->
-                		<strong><span class="fas fa-exclamation-circle"></span>
-                		분양가능지역을 수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.</strong>
+                		<label><strong><span class="fas fa-exclamation-circle"></span>
+                		분양가능지역을 수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.</strong><br/></label><br/>
 <!--                 		</label> -->
                		</div>
                		
@@ -299,6 +321,15 @@
   var markTest="";
   var mmm = "";
   
+  var locaKr = $('#locationKr').val().trim();
+  var areaKr = $('#areaKr').val().trim();
+  var infowindowLoca;
+  var infowindowArea0;
+  var infowindowArea1;
+  var infowindowArea2;
+  var infowindowArea3;
+  var infowindowArea = [];
+  
   
   if (adArea.indexOf("#") != -1){
 	  var areaArray = adArea.split("#");
@@ -314,11 +345,22 @@
   function initMap() {
 	  
 	   if( $('input[name=boardCode]').val().trim() =='AD'){
+		   
 	    	mapArea = new google.maps.Map(document.getElementById('mapArea'), {
 				    zoom: 11,
 				    center: { lat: parseFloat(arrayTest[0].substring( 0, arrayTest[0].indexOf(",") ))  ,
 				    		lng: parseFloat(arrayTest[0].substring( arrayTest[0].indexOf(",")+1, arrayTest[0].length )) }
 			});
+	    	
+	    	infowindowArea0 = new google.maps.InfoWindow();
+	    	infowindowArea1 = new google.maps.InfoWindow();
+		    infowindowArea2 = new google.maps.InfoWindow();
+		    infowindowArea3 = new google.maps.InfoWindow();
+		    
+		    infowindowArea.push(infowindowArea1);
+		    infowindowArea.push(infowindowArea2);
+		    infowindowArea.push(infowindowArea3);
+		    infowindowArea.push(infowindowArea0);
 		    
 		    for ( i=0; i<arrayTest.length; i++){
 		    	
@@ -331,6 +373,14 @@
 		   		});
 			    
 			    markersArea.push(markerArea);
+			    
+			    if (  arrayTest.length == 1   ){
+			    	infowindowArea1.setContent(areaKr);
+		    		infowindowArea1.open(mapArea, markerArea);
+			    } else {
+		    		infowindowArea[i].setContent(areaKr.split(",")[i]);
+		    		infowindowArea[i].open(mapArea, markerArea);
+			    }
 	   		}
 		    
 		    mapArea.addListener('click', function(event) {
@@ -376,6 +426,11 @@
         	$('#location').val('');
         	$('#locationKr').val('');
 	    });
+        
+        infowindowLoca = new google.maps.InfoWindow();
+    	// pop up
+        infowindowLoca.setContent(locaKr);
+        infowindowLoca.open(map, marker);
    
   }
   
@@ -413,6 +468,9 @@
 	    	          			if ( $("#areaKr").val().toString().indexOf(',') == 0 ){
 	    	          				$("#areaKr").val(   $("#areaKr").val().toString().substring(  1  ,   ($("#areaKr").val().toString().length)  ) ) ;
 	    	          			}
+	    	          			
+	    	          			infowindowArea0.setContent(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
+	    	    	    		infowindowArea0.open(mapArea, markerArea);
 	    	         }
 	    	 	});
 
@@ -513,6 +571,8 @@
            				locaKrkr = locaKrkr.replace('자치' ,   '');
            			}
 	                $('#locationKr').val( locaKrkr );
+	                infowindowLoca.setContent(data.results[2].formatted_address.substring(5, data.results[2].formatted_address.length));
+    	    		infowindowLoca.open(map, marker);
 	            }
 	 		});
 	  }
@@ -598,13 +658,13 @@
 	                    delete files[imgNum];
 	                 }else{
 	          		 // 5장 이하 
-	                	$("#preview").append(
-	                                 "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-	                                         + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/><br\/>"
-	                                         + "<span value=\""
-	                                         + imgNum
-	                                         + "\" onclick=\"deletePreview(this)\">"
-                                             + "삭제" + "</span>" + "</div> ");
+	                	 $("#preview").append(
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
+                                             + "<span href=\"#\" value=\""
+                                             + imgNum
+                                             + "\" onclick=\"deletePreview(this)\">"
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 	
 		                 files[imgNum] = file;
 		                 fileNameArray[imgNum]=file.name;
@@ -859,7 +919,7 @@
 	$( "input[name=dogPay]" ).keyup(function( ) {
 		$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
 
-		if( parseInt(removeCommas($(this).val()))> 1000000 ){
+		if( parseInt(removeCommas($(this).val()))> 300000 ){
 			swal({
 		           text: "제한 금액을 초과하였습니다.",
 		           dangerMode: true,
@@ -869,7 +929,7 @@
 							 }
 				   },
 		     });
-			$(this).val('1000000');
+			$(this).val('300000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
 		}else{
 			$("span[name=dogPay]").text('');
@@ -957,9 +1017,9 @@
 	// 등록버튼 누르고
 	function fncUpdateAdopt(){
 		
-		  if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length >15){
+		if( $("input[name=postTitle]").val().trim() == '' || $("input[name=postTitle]").val().length <1){
 			  swal({
-		           text: "글 제목을 다시 확인하세요.",
+		           text: "제목을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -972,12 +1032,31 @@
 		        	   $("input[name=postTitle]").focus();
 		           }
 		      });
-			  $("input[name=postTitle]").focus();
+			  
 			  return;
 		  }
+			if($("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length <1){
+			  swal({
+		           text: "견종을 입력하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogBreed]").focus();
+		           }
+		      });
+			  
+			  return;
+		  }
+		  
 		  if( $(".preview-box2").length == 0 && $(".preview-box").length == 0  ){
 			  swal({
-		           text: "이미지를 등록해주세요.",
+		           text: "사진을 한 장 이상 등록하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -992,9 +1071,10 @@
 			  $('#dialog-img').dialog( "open" );
 			  return;
 		  }
-		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length > 6 ){
+		  
+		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length < 1 ){
 			  swal({
-		           text: "체중을 다시 확인하세요.",
+		           text: "체중을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1010,9 +1090,9 @@
 // 			  $("input[name=dogWeight]").focus();
 			  return;
 		  }
-		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 1000000 || removeCommas( $("input[name=dogPay]").val() ) < 0  ){
+		  if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || removeCommas( $("input[name=dogPay]").val() ) < 1 ){
 			  swal({
-		           text: "책임비를 다시 확인하세요.",
+		           text: "책임비를 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1026,13 +1106,14 @@
 		           }
 		      });
 // 			  $("input[name=dogPay]").focus();
+// 			  removeCommas($(this).val())
 			  return;
 		  } else {
 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		  }
-		  if( $("input[name=dogDate]").val().trim() == '' ){
+		  if( $("input[name=dogDate]").val().trim() == '' || $("input[name=dogDate]").val().length < 1 ){
 			  swal({
-		           text: "발견일을 다시 확인하세요.",
+		           text: "발견일을 선택하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1048,9 +1129,9 @@
 // 			  $("input[name=dogDate]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
+		  if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length < 1 ){
 			  swal({
-		           text: "상태를 다시 확인하세요.",
+		           text: "강아지 상태를 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1066,9 +1147,9 @@
 // 			  $("input[name=dogStatus]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogPersonality]").val().trim() == '' || $("input[name=dogPersonality]").val().length > 20 ){
+		  if( $("input[name=dogPersonality]").val().trim() == '' || $("input[name=dogPersonality]").val().length < 1 ){
 			  swal({
-		           text: "성격을 다시 확인하세요.",
+		           text: "강아지 성격을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1084,9 +1165,9 @@
 // 			  $("input[name=dogPersonality]").focus();
 			  return;
 		  }
-		  if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
+		  if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length < 1 ){
 			  swal({
-		           text: "특징을 다시 확인하세요.",
+		           text: "강아지 특징을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1138,9 +1219,9 @@
 		      });
 			  return;
 		  }
-		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+		  if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length < 1 ){
 			  swal({
-		           text: "내용을 다시 확인하세요.",
+		           text: "내용을 입력하세요.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1253,6 +1334,7 @@
 		        yearSuffix: '년'
 			});
 			
+			$('.ui-datepicker-trigger').attr('title','클릭')
 			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
       
