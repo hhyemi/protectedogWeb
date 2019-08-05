@@ -44,7 +44,7 @@
          	color: #f04f23;
           	padding-top: 10px; 
         }
-        #home > img {
+        img {
        	    max-width: 600px;
         }
 

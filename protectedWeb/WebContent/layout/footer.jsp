@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="footer-copyrights">
-                            <p>Copyrights &copy; 2017 All Rights Reserved by #Protected. <a href="#">Privacy Policy</a> <a href="#">Terms of Services</a></p>
+                            <p>Copyrights &copy; 2019 All Rights Reserved by #Protected. <a href="http://gn.bitcamp.co.kr/index.php?main_page=home">BitCamp</a> <a href="#">Terms of Services</a></p>
                         </div>
                     </div> 
                 </div>

@@ -312,7 +312,13 @@
 	      </div>
 	      </form>
 	      	<p/>
-        	<div align="right" style="padding-right:205px">					
+        	<div align="right" style="padding-right:205px">	
+  
+							<c:if test="${ user.id eq 'admin'}">
+							<button type="button" id = "btnUpdate" class="btn btn-default">수정</button> 
+							<button type="button" id = "btnDelete" class="btn btn-default">삭제</button>
+							</c:if>        	
+  
 				<button type="button" id = "btnList" class="btn btn-default">목록</button>  
 			</div>	
 			
@@ -467,7 +473,38 @@
 				delInterest();
 			});
 		});
+    
+	//============= 수정하기 Event  처리 =============	
+ 	$( "#btnUpdate" ).on("click" , function() {
+
+ 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
+ 		
+	});   
 	
+	//============= 삭제하기 Event  처리 =============	
+ 	$( "#btnDelete" ).on("click" , function() {
+ 		
+ 		swal({
+            title: "정말 삭제 하시겠습니까 ?",
+            text: "삭제시 한달간 글 작성 불가입니다.",
+            icon: "warning",
+            buttons: ["취소", "확인"],
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("삭제가 완료되었습니다!", {
+                icon: "success",
+                button : "확인"
+              }).then((value) => {
+            	  self.location = "/funding/delVoting?postNo=${funding.postNo}"
+              });
+            }
+          });	 		
+
+ 	
+	});  
+
 	//============= 목록버튼 Event  처리 =============	
  	$( "#btnList" ).on("click" , function() {
 		self.location = "/funding/listFunding" 	
