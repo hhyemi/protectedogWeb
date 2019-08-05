@@ -54,7 +54,6 @@
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
- 		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
 		<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include> 		
   </head>
   <body>
@@ -498,7 +497,8 @@
 		});  
 		
 		//============= 신고하기 Event  처리 =============	
-	 	$( "#report" ).on("click" , function() {
+	 	$(document).on("click","#report",function() {
+			
 	 		if(${user==null}){
 	 			$("#login-modal").modal('show');  
 	 		}else{
@@ -542,7 +542,7 @@
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "#btnDelete" ).on("click" , function() {
 	 		
-	 		if(${(funding.statusCode ==2) || user.id == 'admin'}){
+	 		if(${(funding.statusCode ==1) ||funding.statusCode==2|| user.id == 'admin'}){
 	 		swal({
 	            title: "정말 삭제 하시겠습니까 ?",
 	            text: "삭제시 한달간 글 작성 불가입니다.",
