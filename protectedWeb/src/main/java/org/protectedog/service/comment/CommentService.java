@@ -12,7 +12,7 @@ public interface CommentService {
 	public void addComment(Comment comment) throws Exception;
 	
 	// 댓글 조회
-	public Comment getComment(int commentNo) throws Exception;
+	public Comment getComment(int commentNo, String boardCode) throws Exception;
 	
 	// 댓글 수정
 	public void updateComment(Comment comment) throws Exception;
@@ -21,10 +21,8 @@ public interface CommentService {
 	public Map<String, Object> listComment(int postNo, Search search, String boardCode) throws Exception;
 	
 	// 댓글 삭제
-	public void delComment(int commentNo) throws Exception;
+	public void delComment(int commentNo, String boardCode) throws Exception;
 	
-	// 댓글 신고
-	public void reportComment(int commentNo) throws Exception;
 	
 	// 댓글 좋아요 업데이트
 	public void updateLikeCnt(Map<String, Object> map) throws Exception;
@@ -36,5 +34,5 @@ public interface CommentService {
 	public List<Comment> listCommentMoreView(Map<String, Object> map) throws Exception;
 	
 	// 전체개수
-	public int getTotalCount(int postNo) throws Exception;
+	public int getTotalCount(int postNo, String boardCode) throws Exception;
 }

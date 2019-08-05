@@ -91,7 +91,7 @@
 		<hr />
 		<div class="row">
 			<div class="col-md-12 text-center ">
-				<button type="button" class="btn btn-default">등록</button>
+				<button id="addInfo" class="btn btn-default">등록</button>
 				<button id="back" class="btn btn-default">취소</button>
 			</div>
 		</div>	
@@ -113,7 +113,7 @@
 		console.log("postTitle : " + postTitle + "\n" +
 					"postContent : " + postContent + "\n" );
 		
-		if(postTitle.length < 1 && postTitle == ""){
+		if(postTitle.length < 1 || postTitle == ""){
 			swal({
 				  title: "제목을 입력해주세요"
 			});
@@ -122,7 +122,7 @@
 			
 		}
 		
-		if(postContent.length < 1 && postContent == ""){
+		if(postContent.length < 1 || postContent == ""){
 			swal({
 				  title: "내용을 입력해주세요"
 			});
@@ -140,7 +140,7 @@
 			history.go(-1);
 		});
 		
-		$("button.btn.btn-default").on("click", function(){
+		$("#addInfo").on("click", function(){
 			fncAddInfo();
 		});
 		
@@ -261,6 +261,9 @@
 
 		    CKEDITOR.replace('editor1', {
 		    	language: 'ko',
+		    	
+		    	extraPlugins: 'video',
+		    	
 		      extraPlugins: 'autogrow',
 		      autoGrow_minHeight: 200,
 		      autoGrow_maxHeight: 600,

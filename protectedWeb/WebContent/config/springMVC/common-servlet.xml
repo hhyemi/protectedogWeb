@@ -79,7 +79,7 @@
 <!-- 			</props> -->
 <!--  		</property> -->
 		
-		<property name="defaultErrorView"	value="/common/error.jsp" />
+		<property name="defaultErrorView"	value="/common/olderror.jsp" />
 		
 	</bean>
     <!-- 브라우저가 multipart/form-data 데이터로 보내는
@@ -91,7 +91,7 @@
 	<mvc:interceptors>
 		
    		<mvc:interceptor>
-			<mvc:mapping path="/users/**"/>
+			<mvc:mapping path="/users/json/login/**"/>
 			<bean class="org.protectedog.common.web.LogonCheckInterceptor" />
    		</mvc:interceptor>
 
