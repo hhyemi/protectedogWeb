@@ -68,6 +68,11 @@ table {
 .s_product_text {
 	margin-top: 30px;
 }
+
+#listm{
+	margin-left:110px;
+	margin-top:10px;
+}
 </style>
 
 
@@ -157,8 +162,8 @@ table {
 									<div class="col-md-5">
 										<c:if test="${user.id eq board.id || user.id eq 'admin'}">
 
-											<button type="button" id="change" class="btn btn-default">수정하기</button>
-											<button type="button" id="btnDelete" class="btn btn-default">삭제하기</button>
+											<button type="button" id="change" class="btn btn-default">수정</button>
+											<button type="button" id="btnDelete" class="btn btn-default">삭제</button>
 										</c:if>
 
 									</div>
@@ -170,12 +175,13 @@ table {
 			</div>
 		</form>
 	</div>
-
+<button type="button" id="listm" class="btn btn-default">목록</button>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■Comment■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
 	<input type="hidden" name="boardCode" value="MK" />
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+	
 
 	<!--================ End footer Area  =================-->
 
@@ -209,7 +215,7 @@ table {
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/funding/getMarket").submit();
+	   	$("form").attr("method" , "POST").attr("action" , "/market/getMarket").submit();
 	 
 	}   
 		
@@ -222,6 +228,11 @@ table {
 			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";
 			 		
 				});  
+		
+			 	$( "#listm" ).on("click" , function() {
+		 		 self.location = "/market/listMarket?order=1";
+		 		
+			});  
 
 		
 		//============= 삭제하기 Event  처리 =============	
