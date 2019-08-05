@@ -45,13 +45,13 @@
 	min-height: 240px;
 	max-height: 240px;
 	overflow: auto;
-	max-width: 250px;
-	min-width: 250px;
+	max-width: 200px;
+	min-width: 200px;
 }
 
 .card {
-	min-height: 450px;
-	max-height: 450px;
+	min-height: 470px;
+	max-height: 470px;
 	overflow: auto;
 }
 
@@ -77,11 +77,28 @@
 	border-radius: 15px 0px 0px 15px;
 }
 
+#selectPageSize {
+	height: 30px;
+}
+
+#newstd {
+	min-width: 251px;
+	max-width: 251px;
+}
+
 .btn-default {
 	height: 30px;
 	color: white;
 }
+
+th {
+	background-color: #F5F5DC;
+}
+
+
+
 </style>
+
 
 
 
@@ -113,6 +130,7 @@
 					<font size="7">보호할개 스토어</font>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	<br />
@@ -136,10 +154,13 @@
 							class="list-group-item" id="two">간식</a> <a
 							class="list-group-item" id="three">의류</a>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
-							<a class="list-group-item" id="admin">관리자 상품관리</a>
+							<a class="list-group-item" id="three">> 관리자 메뉴 </a>
 						</c:if>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
-							<a class="list-group-item" id="adminOrder">관리자 구매관리</a>
+							<a class="list-group-item" id="admin">상품등록관리</a>
+						</c:if>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a class="list-group-item" id="adminOrder">구매상태관리</a>
 						</c:if>
 					</div>
 
@@ -157,58 +178,6 @@
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
-
-					<!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
-					<div class="row">
-						<div class="col-md-9" style="">
-							<div style="float: left;"></div>
-							<div style="float: right;">
-								<form class="form-inline" name="detailForm">
-									<div class="form-group">
-										<select class="form-control" id="searchCondition"
-											name="searchCondition">
-											<option value="0"
-												${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-											<option value="1"
-												${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>작성자</option>
-											<option value="2"
-												${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>글내용</option>
-										</select>
-									</div>
-
-
-									<div class="form-group" align="right">
-										> <label class="sr-only" for="searchKeyword">검색어</label> <input
-											type="text" class="form-control searchKeyword"
-											id="searchKeyword" name="searchKeyword" placeholder="검색어"
-											value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-										<button type="button" id="searchSubmmit"
-											class="btn btn-default searchSubmmit">
-											<span class="fas fa-search"></span>
-										</button>
-									</div>
-
-									<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-									<input type="hidden" id="currentPage" name="currentPage"
-										value="" />
-								</form>
-							</div>
-						</div>
-					</div>
-
-					<c:if test="${totalCount == 0}">
-						<div class="row">
-							<div class="col-md-9" align="center"
-								style="height: 500px; padding-top: 250px;">
-								검색결과 없음
-								<p />
-								<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-								<input type="hidden" id="currentPage" name="currentPage"
-									value="" />
-
-							</div>
-						</div>
-					</c:if>
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
@@ -224,29 +193,32 @@
 												<a href="#">${product.prodName} </a>
 											</div>
 										</div>
-										<del>
-											<font size="2"><fmt:formatNumber
-													value="${product.price}" pattern="#,###" /></font>
-										</del>
+										<del><c:if test="${product.price > product.discountPrice}">
+											<font size="2">
+											<fmt:formatNumber value="${product.price}" pattern="#,###" /></font>
+										</c:if></del>
 										<strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${product.discountPrice}" pattern="#,###" />원
-										</strong>&nbsp;
-
-										<a class="detailprod"><button class="btn btn-default" id="detailprod">상세보기</button>
-										<input type="hidden" value="${product.prodNo}" /></a>
+										</strong>&nbsp; <a class="detailprod"><br><hr><button
+												class="btn btn-default" id="detailprod">상세보기</button> <input
+											type="hidden" value="${product.prodNo}" /></a>
 
 									</div>
 								</div>
 							</div>
 						</c:forEach>
+						
+							<div align="center">
+					<jsp:include page="/common/pageNavigator_new.jsp" />
+					</div>
+					
+					<div style="min-height: 40px">
+					</div>
 					</div>
 
-					<div align="center">
-						<jsp:include page="../../common/pageNavigator_new.jsp" />
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 
 
@@ -263,12 +235,8 @@
 
 
 	<script type="text/javascript">
-		//=============    검색 / page 두가지 경우 모두  Event  처리	 =============	
-		function fncGetList(currentPage) {
-			$("#currentPage").val(currentPage)
-			$("form").attr("method", "POST").attr("action",
-					"/product/listProduct").submit();
-		}
+	
+
 
 		//=============    상품상세조회(썸네일)  Event  처리 		=============
 		//============= 썸네일 사진 클릭 Event  처리 =============	
@@ -348,14 +316,6 @@
 
 		});
 
-		//■■■■■■■■■■■■■■■■■■■■SEARCH■■■■■■■■■■■■■■■■■■■■
-
-		function fncGetList(currentPage) {
-			$("#currentPage").val(currentPage)
-
-			$("form").attr("method", "POST").attr("action",
-					"/product/listProduct").submit();
-		}
 	</script>
 </body>
 

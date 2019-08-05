@@ -19,47 +19,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--  Google MDL -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet"
 	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
-	type="text/css">
-
+<!--  JQUERY -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-
-<!-- jQuery UI toolTip 사용 CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip 사용 JS-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
 <style>
-body {
-	border: 0px;
-	border-spacing: 0px;
-}
 
-#postTitle {
-	padding-left: 120px;
-	padding-right: 120px;
-}
 
-#id {
-	padding-left: 80px;
-	padding-right: 80px;
-}
+/* #postTitle { */
+/* 	padding-left: 120px; */
+/* 	padding-right: 120px; */
+/* } */
 
-#no {
-	padding-left: 50px;
-	padding-right: 50px;
-	font-size: x-small;
-}
+/* #id { */
+/* 	padding-left: 80px; */
+/* 	padding-right: 80px; */
+/* } */
+
+/* #no { */
+/* 	padding-left: 50px; */
+/* 	padding-right: 50px; */
+/* 	font-size: x-small; */
+/* } */
 
 #countfont {
 	font-size: x-small;
@@ -71,13 +61,22 @@ body {
 	padding-right: 50px;
 }
 
-.container{
-	width: 800px;
+
+#order{
+	align: center;
+	width: 700px;
 }
 
-table{
-	align: center;
+th {
+	background-color: #F0F0F0;
 }
+
+#list{margin-left: 340px;
+	margin-bottom: 100px;
+	margin-top:10px;}
+
+
+
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -127,19 +126,6 @@ table{
 
 <body>
 
-
-
-
-
-	<div class="container">
-		
-
-		</h1>
-	</div>
-	<BR />
-	<br/>
-	<br/>
-	<br/>
 	<!-- 	<!--/////////////////////// form start /////////////////////////////////-->
 	<!-- 	<form class="form-inline" name="detailForm"> -->
 	<!-- 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -176,15 +162,29 @@ table{
 	<!-- 		</td> -->
 	<!-- 	</tr> -->
 	<!-- </table> -->
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
 
 
 	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-
+<body class="goto-here">
+    <div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p ><span class="mr-2">protected</span> <span>Store</span></p>
+            <font size="7">상품 상세내역 조회</font>
+          </div>
+        </div>
+      </div>
+    </div>
+	<br/><p/>
 
 	<!--  table Start /////////////////////////////////////-->
 
 	<div class="container" align="center">
-		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+		<table id="order" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 			<thead>
 				<tr>
 					<th width="10%">주문번호</th>
@@ -195,9 +195,11 @@ table{
 			</thead>
 			<tbody>
 				<tr align="center">
-					<th scope="row">${order.orderNo}</th>
-					<td>${order.orderProd.prodName}&nbsp;${order.orderQuantity}개 구매</td>
-					<td>${order.totalPrice}</td>
+					<td scope="row">${order.orderNo}</th>
+					<td><input type="hidden" value="${order.prodNo}"/>${order.orderProd.prodName}</td>
+					<td><fmt:formatNumber value="${order.totalPrice}" pattern="#,###" />원
+					
+					</td>
 					<td>
 					<c:if test="${order.orderCode =='1'}">
 								결제완료</c:if>
@@ -214,24 +216,24 @@ table{
 				</tr>
 			</tbody>
 		</table>
-		<hr>
+<!-- 		<hr width="700px"> -->
 		<br /> <br />
-		<table>
+		<table id="order">
 			<tbody>
 				<tr>
-					<td>
-						상품금액&nbsp;&nbsp;&nbsp;&nbsp;${order.totalPrice}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<img src="/resources/file/fileShop/minicon.png" width="20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;할인금액&nbsp;&nbsp;&nbsp;&nbsp;
-						0
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${order.totalPrice}</b>
+					<td align="center">
+						상품금액&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${order.orderProd.discountPrice}" pattern="#,###" />원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img src="/resources/file/fileShop/gop.png" width="20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;구매수량&nbsp;&nbsp;&nbsp;&nbsp;
+						${order.orderQuantity}개
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><fmt:formatNumber value="${order.totalPrice}" pattern="#,###" />원</b>
 
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<hr>
+		<hr width="700px">
 		<br /> <br />
-		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+		<table id="order" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 			<thead>
 				<tr>
 					<th width="10%">주문자 정보</th>
@@ -242,7 +244,7 @@ table{
 			</thead>
 			<tbody>
 				<tr align="center">
-					<th scope="row">${order.id}</th>
+					<td scope="row">${order.id}</th>
 					<td>${order.phone}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${order.orderDate}" /></td>
@@ -250,9 +252,9 @@ table{
 				</tr>
 			</tbody>
 		</table>
-		<hr>
+		<hr width="700px">
 		<div class="container" align="center">
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+			<table id="order" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 				<thead>
 					<tr>
 						<th width="10%">수령자이름</th>
@@ -264,7 +266,7 @@ table{
 				</thead>
 				<tbody>
 					<tr align="center">
-						<th scope="row">${order.receiverName }</th>
+						<td scope="row">${order.receiverName }</th>
 						<td>${order.receiverPhone}</td>
 						<td>${order.receiverAddr}</td>
 						<td>${order.orderRequest}</td>
@@ -276,6 +278,15 @@ table{
 			</table>
 		</div>
 	</div>
+	<button type="button" class="btn btn-default" id="list">목록</button>
+	
+<br/><br/><br/>
+		<jsp:include page="/layout/footer.jsp"/>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
+	
+
+
+
+
 </body>
 </html>
