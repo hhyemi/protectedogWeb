@@ -79,7 +79,7 @@
 <!-- 			</props> -->
 <!--  		</property> -->
 		
-		<property name="defaultErrorView"	value="/common/olderror.jsp" />
+		<property name="defaultErrorView"	value="/common/error.jsp" />
 		
 	</bean>
     <!-- 브라우저가 multipart/form-data 데이터로 보내는
