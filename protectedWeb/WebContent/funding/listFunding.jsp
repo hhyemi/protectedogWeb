@@ -239,7 +239,7 @@
             	            		page++;
             					$.ajax(
             							{
-            								url : "/funding/json/listVoting/" ,
+            								url : "/funding/json/listFunding/" ,
             								method : "POST" ,
             								data : JSON.stringify({
             									searchCondition : $("#searchCondition").val(),

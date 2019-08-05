@@ -427,7 +427,15 @@
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+				  swal({
+			           text: "jpg, gif, png, avi, mp4 확장자만 등록 가능합니다.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },			   
+			      }); 
 	             return true;
 	         } else {
 	             return false;
@@ -717,7 +725,7 @@
 					 	 		swal({
 						            title: "정말 삭제 하시겠습니까 ?",
 						            icon: "warning",
-						            buttons: true,
+						            buttons: ["취소", "확인"],
 						            dangerMode: true,
 						          })
 						          .then((willDelete) => {
@@ -843,7 +851,7 @@
 		   $(function() {
 		         //============= 비회원일때 후기모달 Event  처리 =============   
 		         $( "#nonMember" ).on("click" , function() {   
-		        	alert("로그인이 필요합니다.")
+		        		$("#login-modal").modal('show');  	
 		        });		      
 		         //============= 등록 Event  처리 =============   
 		         $( "#btn-add" ).on("click" , function() {  
@@ -966,7 +974,7 @@
 				            title: "정말 삭제 하시겠습니까 ?",
 				            text: "당신의 소중한 한마디가 사라지게 됩니다.",		
 				            icon: "warning",
-				            buttons: true,
+				            buttons: ["취소", "확인"],
 				            dangerMode: true,
 				          })
 				          .then((willDelete) => {

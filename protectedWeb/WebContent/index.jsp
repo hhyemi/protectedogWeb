@@ -297,65 +297,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<!--====================================================
                       CLIENT
 ======================================================-->
-	<!--====================================================
-                        OFFER 스토어
-======================================================-->
-	 <section id="comp-offer">
-	 <div class="store">
-      <div class="container-fluid">
-        <div class="row">
-      <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
-            <h2>스토어</h2>
-            <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">보호마켓 바로가기</button>
-            <button class="btn btn-general btn-white" role="button">스토어 바로가기&emsp;  </button>
-          </div>
-          
-         <div class="col-md-3 col-sm-6 wow fadeInUp" style="margin-right: 35px" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont" style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Business Management</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>   
-          
-                 
-          <div class="col-md-3 col-sm-6  wow fadeInUp"  style="margin-right: 35px;" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>              
-              <h3>Leadership Development</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"  style="margin-right: 35px" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Social benefits and services</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      </div><br/><br/><br/><br/><br/>
-    </section>
+	
+      <br/><br/><br/><br/><br/>
+
     
 
 	<!--================ start footer Area  =================-->
