@@ -239,7 +239,7 @@
 											value="${board.price}" pattern="#,###" />원
 									</strong>
 									<hr>
-									<p class="view">${board.id}(&nbsp;${board.city}&nbsp;)
+									<p class="view">${board.nickName}(&nbsp;${board.city}&nbsp;)
 										&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
 									</p>
 								</div>
