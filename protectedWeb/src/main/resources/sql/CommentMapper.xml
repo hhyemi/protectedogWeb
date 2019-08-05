@@ -28,19 +28,19 @@
 		VALUES (#{commentNo}, #{postNo}, #{boardCode}, #{id}, #{commentContent}, SYSDATE, #{likeCount}, #{nickName}, #{profile:VARCHAR})
 	</insert>
 
-	<select id="getComment" parameterType="int"
+	<select id="getComment" parameterType="map"
 		resultMap="commentSelectMap">
 		SELECT comment_no, post_no, board_code, id, comment_content,
 		reg_date, like_count, nickName, profile
 		FROM comments
-		WHERE comment_no = #{value}
+		WHERE comment_no = #{commentNo} AND board_code = #{boardCode}
 	</select>
 
 	<update id="updateComment" parameterType="comment">
 		UPDATE
 		comments
 		SET comment_content = #{commentContent}
-		WHERE comment_no = #{commentNo}
+		WHERE comment_no = #{commentNo} AND board_code = #{boardCode}
 	</update>
 
 	<update id="updateLikeCnt" parameterType="map">
@@ -51,13 +51,13 @@
 		<if test="check.equals('minus')">
 			SET like_count = like_count - 1
 		</if>
-		WHERE comment_no = #{commentNo}
+		WHERE comment_no = #{commentNo} AND board_code = #{boardCode}
 	</update>
 
-	<delete id="delComment" parameterType="int">
+	<delete id="delComment" parameterType="map">
 		UPDATE comments
 		SET status_code = '0'
-		WHERE comment_no = #{value}
+		WHERE comment_no = #{commentNo} AND board_code = #{boardCode}
 	</delete>
 
 	<select id="listComment" parameterType="map"
@@ -83,11 +83,11 @@
 		WHERE row_seq BETWEEN 1 AND #{commentEndRowNum}	
 	</select>
 	
-	<select id="getTotalCount" parameterType="int" resultType="int">
+	<select id="getTotalCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM( SELECT comment_no, post_no, board_code, id, comment_content, reg_date, like_count, nickName, profile
 				FROM comments
-				WHERE post_no = #{value} AND status_code != '0' ) countTable
+				WHERE post_no = #{postNo} AND board_code = #{boardCode} AND status_code != '0' ) countTable
 	</select>
 
 </mapper>

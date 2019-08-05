@@ -208,12 +208,13 @@ h6>b{color: white !important;}
 		
 		$(window).scroll(function(){
 			
+			var boardCode = $("input[name=boardCode]").val();
 			//console.log(${rank});
 			
 			if( $(this).scrollTop() +  $(this).height() + 484 > $(document).height() ){
 				
 				$.ajax({
-					url : "/comment/json/listComment/${board.postNo}/"+currentPage,
+					url : "/comment/json/listComment/${board.postNo}/"+currentPage+"/"+boardCode,
 					method : "POST",
 					dataType : "JSON",
 					headers : {
@@ -406,10 +407,11 @@ h6>b{color: white !important;}
 		$(document).on("click", ".fa-pen", function() {
 			
 			var commentNo = $(this).parent().parent().children("input").val() ;
+			var boardCode = $("input[name=boardCode]").val();
 			
 			$.ajax(
 					{
-						url : "/comment/json/getComment/"+commentNo,
+						url : "/comment/json/getComment/"+commentNo+"/"+boardCode,
 						method : "POST",
 						dataType : "Json",
 						headers : {
@@ -441,6 +443,7 @@ h6>b{color: white !important;}
 		$(document).on("click", ".fa-trash-alt", function() {
 			
 			var commentNo = $(this).parent().parent().children("input").val();
+			var boardCode = $("input[name=boardCode]").val();
 			
 			swal({
 			  title: "정말 삭제 하시겠습니까 ?",
@@ -453,7 +456,7 @@ h6>b{color: white !important;}
 			  if (A) {
 				  
 				  $.ajax({
-						url : "/comment/json/delComment/"+commentNo,
+						url : "/comment/json/delComment/"+commentNo+"/"+boardCode,
 						method : "POST",
 						dataType : "Json",
 						headers : {
@@ -468,15 +471,19 @@ h6>b{color: white !important;}
 							$("#"+commentNo+""+".row").remove();
 							$("#"+commentNo+""+".line").remove();
 							
-							
+							swal("삭제완료 !", {
+							      	icon: "success",
+							      	button : "확인"
+							});
 							
 						},
+						error : function ( a , b , c ){
+							
+							console.log(" 1 : " + JSON.stringify(a) ); 
+							console.log(" 2 : " + b ); 
+							console.log(" 3 : " + c ); 
+						}
 					});
-				  
-			    swal("삭제완료 !", {
-			      	icon: "success",
-			      	button : "확인"
-			    });
 			  }
 			});
 		});
@@ -527,11 +534,12 @@ h6>b{color: white !important;}
 				$("#login-modal").modal("show");
 				return;
 			}
-				
+			
+			var boardCode = $("input[name=boardCode]").val();
 			var commentNo = $(this).parent().parent().children("input").val();
 			var id = '${sessionScope.user.id}';
 				$.ajax({
-					url : "/comment/json/check/"+commentNo+"/"+id,
+					url : "/comment/json/check/"+commentNo+"/"+id+"/"+boardCode,
 					method : "POST",
 					dataType : "Json",
 					headers : {
@@ -547,7 +555,7 @@ h6>b{color: white !important;}
 						
 						if(JSONData == 0){
 						$.ajax({
-							url : "/comment/json/updateLikeCnt/"+commentNo+"/"+"plus",
+							url : "/comment/json/updateLikeCnt/"+commentNo+"/"+"plus"+"/"+boardCode,
 							method : "POST",
 							dataType : "Json",
 							headers : {
@@ -582,7 +590,7 @@ h6>b{color: white !important;}
 			return;
 		}
 		
-		var search 	= {commentNo : $("#commentNo").val(), commentContent : $("#commentUpdateContent").val()};
+		var search 	= {commentNo : $("#commentNo").val(), commentContent : $("#commentUpdateContent").val(), boardCode : $("input[name=boardCode]").val()};
 		var convertSearch = JSON.stringify(search);
 		
  		$.ajax({

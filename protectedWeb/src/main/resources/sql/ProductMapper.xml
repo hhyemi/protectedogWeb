@@ -75,10 +75,10 @@
 	  						 	<where>  					 
 									<if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-											 			prod_name = #{searchKeyword}
+											 			AND prod_name  LIKE '%'||#{searchKeyword}||'%'
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-											 			price = #{searchKeyword}
+											 			AND price LIKE '%'||#{searchKeyword}||'%' 
 													</if>
 												</if>
 												<if test="prodCondition !=null">

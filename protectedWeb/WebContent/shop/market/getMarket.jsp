@@ -206,7 +206,6 @@ table {
 
 
 <!--  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■script■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-	<script type="text/javascript">
 	function fncGetList(currentPage) {
 	   	
 	   	$("#currentPage").val(currentPage)
@@ -221,33 +220,28 @@ table {
 			 	$( "#change" ).on("click" , function() {
 			 			swal("거래중인 게시글은 수정을 추천하지 않습니다.");   
 			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";
-			 		}
-				});   
+			 		
+				});  
 
 		
 		//============= 삭제하기 Event  처리 =============	
-		 	$( "#btnDelete" ).on("click" , function() {
-		 		swal({
-		            title: "정말 삭제 하시겠습니까 ?",
-		            icon: "warning",
-		            buttons: true,
-		            dangerMode: true,
-		          })
-		          .then((willDelete) => {
-		            if (willDelete) {
-		              swal("삭제가 완료되었습니다!", {
-		                icon: "success",
-		              }).then((value) => {
-		            	  self.location = "/market/delMaket?postNo=${board.postNo}"
-		              });
-		            }
-		          });	 		
-			});  
+// 		 	$( "#btnDelete" ).on("click" , function() {
+// 		 		swal({
+// 		            title: "정말 삭제 하시겠습니까 ?",
+// 		            icon: "warning",
+// 		            buttons: true,
+// 		            dangerMode: true,
+// 		          })
+// 		          .then((willDelete) => {
+// 		            if (willDelete) {
+// 		              swal("삭제가 완료되었습니다!", {
+// 		                icon: "success",
+// 		              }).then((value) => {
+// 		            	  self.location = "/market/delMaket?postNo=${board.postNo}"
+// 		              });
+// 		            }
+// 		          });	 		  
 		
-	    });
-
-		
-		 //=============장바구니 이동========================================
 
 	
 		

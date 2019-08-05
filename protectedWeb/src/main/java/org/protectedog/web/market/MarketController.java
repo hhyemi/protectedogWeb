@@ -84,6 +84,8 @@ public class MarketController {
 		
 		//세션 불러오기
 		User user = (User)session.getAttribute("user");
+
+		user.setLevelPoint(user.getLevelPoint() + 10 );
 		
 		board.setId(user.getId());
 		board.setNickName(user.getNickname());

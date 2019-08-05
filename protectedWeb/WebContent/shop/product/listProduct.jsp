@@ -15,15 +15,8 @@
 ">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Business Bootstrap Responsive Template</title>
+<title>보호할개·스토어 상품리스트</title>
 
-
-<!-- Global Stylesheets -->
-<title>상품 등록</title>
-<meta charset="UTF-8">
-
-<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
@@ -52,7 +45,7 @@
 .card {
 	min-height: 470px;
 	max-height: 470px;
-	overflow: auto;
+	
 }
 
 .detailtext {
@@ -81,20 +74,11 @@
 	height: 30px;
 }
 
-#newstd {
-	min-width: 251px;
-	max-width: 251px;
-}
 
 .btn-default {
 	height: 30px;
 	color: white;
 }
-
-th {
-	background-color: #F5F5DC;
-}
-
 
 
 </style>
@@ -178,6 +162,47 @@ th {
 
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 				<div class="col-lg-9">
+				<!-- 서치 -->
+				${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td>
+				<div style="float: right;">
+			<form class="form-inline" name="detailForm">
+				<div class="form-group">
+					<select class="form-control" id="searchCondition"
+						name="searchCondition">
+						<option value="0"
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
+						<option value="1"
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
+					</select>
+				</div>
+
+
+				<div class="form-group">
+					<label class="sr-only" for="searchKeyword">검색어</label> <input
+						type="text" class="form-control searchKeyword" id="searchKeyword"
+						name="searchKeyword" placeholder="검색어"
+						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+					<button type="button" id="searchSubmmit"
+						class="btn btn-default searchSubmmit">
+						<span class="fas fa-search"></span>
+					</button>
+				</div>
+
+				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				<input type="hidden" id="currentPage" name="currentPage" value="" />
+			</form>
+		</div>
+
+	<c:if test="${totalCount == 0}">
+		<div class="row">
+			<div class="col-md-9" align="center"
+				style="height: 500px; padding-top: 150px;">
+
+				<jsp:include page="/common/searchResult.jsp"></jsp:include>
+			</div>
+			</div>
+			
+	</c:if>
 					<div class="row">
 						<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
@@ -208,13 +233,10 @@ th {
 							</div>
 						</c:forEach>
 						
-							<div align="center">
-					<jsp:include page="/common/pageNavigator_new.jsp" />
-					</div>
-					
-					<div style="min-height: 40px">
-					</div>
-					</div>
+					<br> <br> <br>
+			<div class="navigation">
+				<jsp:include page="/common/pageNavigator_new.jsp" />
+			</div>
 
 					</div>
 				</div>
@@ -317,6 +339,29 @@ th {
 		});
 
 	</script>
+	<script>
+		//=============    검색 / page 두가지 경우 모두  Event  처리 =============
+
+	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
+	function fncGetList(currentPage) {
+		//document.getElementById("currentPage").value = currentPage;
+		$("#currentPage").val(currentPage)
+		//document.detailForm.submit();	
+		$("form").attr("method", "POST").attr("action",
+				"/product/listProduct").submit();
+	}
+
+	//============= Event 처리 및  연결 =============
+	$(function() {
+
+		$("#searchSubmmit").on("click", function() {
+			fncGetList(1);
+		});
+
+		
+
+	});
+</script>
 </body>
 
 </html>
