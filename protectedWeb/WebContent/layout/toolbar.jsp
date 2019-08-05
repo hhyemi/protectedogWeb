@@ -442,7 +442,7 @@
 
 		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
 	  	var state = naver_id_login.getUniqState();
-	  	naver_id_login.setButton("green", 1 , 30);
+	  	naver_id_login.setButton("green", 2 , 30);
 	  	naver_id_login.setDomain("http://localhost:8080/");
 	  	naver_id_login.setState(state);
 // 	  	naver_id_login.setPopup();

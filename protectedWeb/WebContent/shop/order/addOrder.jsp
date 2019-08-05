@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>보호할개 · 구매하기</title>
 <!--  bootstrap CDN  -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- IM PORT 추가 -->
