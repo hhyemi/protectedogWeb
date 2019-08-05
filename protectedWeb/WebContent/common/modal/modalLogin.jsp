@@ -33,10 +33,10 @@
                           </div>
                           <div class="modal-footer text-center">
                               <div>
-                                  <button type="submit" id="submitLogin" class="btn btn-default">로그인</button>
+                                  <button type="submit" id="submitLogin" class="btn btn-default" style="height:30px; width:78px;">로그인</button>
                               </div>
                               <div>
-                              	  <img src="/resources/file/others/kakao.png" height="30px" width="30px" class="kakaoLogin">
+                              	  <img src="/resources/file/others/kakao_login_btn_small.png" height="30px" width="78px" class="kakaoLogin">
                               </div>
 							  <div id="naver_id_login"></div>
 
