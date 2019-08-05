@@ -95,7 +95,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
-<div class="container">
+<div class="container" style="min-height:500px;">
     <div class="page-content d-flex align-items-stretch">
     <input type="hidden" id="myId" name="senderNick" value="${ sessionScope.user.nickname }"/>
 
@@ -329,7 +329,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
             </div> 
         </div>
      </div>
-   
+     <div style="min-height: 50px;">
+     </div>
     
     <jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
     <jsp:include page="/layout/footer.jsp"></jsp:include>

@@ -157,7 +157,7 @@
 <%-- 		                <c:if test="${ sessionScope.user.role eq 'admin' }"> --%>
 <!-- 		                	<a class="dropdown-item" href="/coupon/addCouponManage">쿠폰생성</a> -->
 <%-- 		                </c:if> --%>
-<!-- 		                <a class="dropdown-item" href="/coupon/listCoupon">쿠폰받기</a> -->
+<!-- 		                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#report-modal">쿠폰받기</a> -->
 <%-- 		                <c:if test="${ sessionScope.user.role eq 'admin' }"> --%>
 <!-- 		                <a class="dropdown-item" href="/report/listReport">신고글목록</a> -->
 <%-- 		                </c:if> --%>

@@ -328,7 +328,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$("#authButton").hide();
 					$(".authPhone").show();
 					$("#authPhone").remove();
-					$(".authPhone").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
+					$(".authPhone").append("<span style='margin:0; padding-top:7px; color:#32ba78'>인증완료</span>");
 					$("input[name='phone2']").attr("readonly", true);
 					$("input[name='phone3']").attr("readonly", true);
 					$("select[name='phone1']").attr("disabled", true);
@@ -419,7 +419,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						$("#mailAuth").hide();
 						$(".authMail").show();
 						$("#authMail").remove();
-						$(".authMail").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
+						$(".authMail").append("<span style='margin:0; padding-top:7px; color:#32ba78'>인증완료</span>");
 						$("input[name='email']").attr("readonly", true);
 						$("input[id='authMailCheck']").val("auth");
 					swal({
@@ -524,6 +524,81 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				$("form")[0].reset();
 			});
 		});	
+		
+		$("input[name=phone2]").keyup(function(){
+            var byteText = $(this).val();
+            var byteNum = 0;
+            
+            for(var i = 0; i < byteText.length ; i++) {
+               byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+               if(byteNum > 4) {     
+                swal({
+                        text: "제한길이를 초과하였습니다.",
+                        dangerMode: true,
+                        buttons: {
+                             catch: {
+                                text: "확인"
+                             }
+                      },            
+                   }).then((willDelete) => {
+                        if (willDelete) {
+                           $(this).val($(this).val().substr(0,i-1));
+                           $("input[name=id]").focus();
+                        }
+                   });
+               }
+            }
+		})
+		
+		$("input[name=phone3]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 4) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=id]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+			
+			$("input[name=birthDate]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 6) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=id]").focus();
+                            }
+                       });
+                   }
+                }
+			})
 
 	</script>	
 

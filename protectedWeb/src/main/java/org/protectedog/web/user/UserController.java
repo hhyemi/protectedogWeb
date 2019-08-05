@@ -330,14 +330,15 @@ public class UserController {
 		userService.updateUsers(user);
 		
 		String sessionId=((User)session.getAttribute("user")).getId();
+		User dbUser=userService.getUsers(sessionId);
 		System.out.println("update : "+sessionId);
 		
-		if(sessionId.equals(user.getId())) {
+		if(sessionId.equals(dbUser.getId())) {
 			session.removeAttribute("user");
-			session.setAttribute("user", user);
+			session.setAttribute("user", dbUser);
 		}
 		
-		return "redirect:/users/getUsers?id="+user.getId();
+		return "redirect:/users/getUsers?id="+dbUser.getId();
 		
 	}
 	

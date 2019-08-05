@@ -187,144 +187,138 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				                            <h3><i class="fa fa-user-circle"></i>내정보수정</h3>
 				                        </div>
 				                        <br>
-				                        <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px" enctype="multipart/form-data">
-				                        	<div class="col-md-6" style="display:inline; float:left;">
-				                        	<div class="row">
-				                                <div class="col-md-10">
-				                                    <div class="form-group">
-				                                        <label for="id">아 이 디</label>
-				                                        <input type="text" class="form-control" readonly="readonly" id="id" name="id" aria-describedby="emailHelp" value="${ user.id }">
-				                                    </div>
-				                                    <div class="form-group">
-				                                        <label for="cont-number">비 밀 번 호</label>
-				                                        <input type="password" class="form-control" id="pw" name="pw" aria-describedby="emailHelp" value="${ user.pw }">
-				                                    </div> 
-				
-				                                    <div class="form-group has-success">
-				                                        <label for="website">비밀번호 확인</label>
-				                                        <input type="password" class="form-control" id="pw2" name="pw2" aria-describedby="emailHelp" value="${ user.pw }"
-				                                        style="margin-bottom: 0;">
-														<span id="helpBlock1" class="help-block" style="font-size: 14px; display: none;"></span>
-				                                    </div>  
-				                                    <div class="form-group">
-				                                        <label for="userName">회 원 명</label>
-				                                        <input type="text" class="form-control" readonly="readonly" id="userName" name="userName" aria-describedby="emailHelp" value="${ user.userName }">
-				                                    </div>
-				                                    <div class="form-group">
-				                                        <label for="nickname">닉 네 임</label>
-				                                        <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" value="${ user.nickname }">
-				                                        <span id="helpBlock2" class="help-block" style="font-size: 14px; display: none;"></span>
-				                                    </div>
-				                                    <div class="form-group">
-				                                        <label for="nickname">프로필사진</label>
-				                                        <input type="file" class="form-control" id="file" name="file" aria-describedby="emailHelp">
-				                                    </div>
-				                                </div>
-				                            </div> 
-				                        </div>
-				                        <div class="col-md-6" style="display:inline; float:left;">
-											<input type="hidden" id="authKeyReturn" value="">                     
-				                            <div class="row">
-				                                <div class="col-md-10">
-				                                
-				                                    <div class="form-group">
-				                                        <label for="email">이 메 일</label>
-													    <div>
-														    <div class="col-sm-9" style="float:left; padding-left:0; padding-right:0;">
-														      <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="${ user.email }">
-															</div>
-														    <div id="mailAuth" style="display:none">
-														      		<input type="text" id="checkMail"/>
-														      		<button type="button" class="btn btn-default" id="mailClick">전송</button>
+				                        <form class="addUsersForm" name="formal" style="padding-left: 90px;" enctype="multipart/form-data">
+				                        	<div class="col-md-12" style="display:inline; float:left;">
+				                        		<input type="hidden" id="authKeyReturn" value="">  
+					                        	<div class="row">
+					                                <div class="col-md-10">
+					                                    <div class="form-group">
+					                                        <label for="id">아 이 디</label>
+					                                        <input type="text" class="form-control" readonly="readonly" id="id" name="id" aria-describedby="emailHelp" value="${ user.id }">
+					                                    </div>
+					                                    <div class="form-group">
+					                                        <label for="cont-number">비 밀 번 호</label>
+					                                        <input type="password" class="form-control" id="pw" name="pw" aria-describedby="emailHelp" value="${ user.pw }">
+					                                    </div> 
+					
+					                                    <div class="form-group has-success">
+					                                        <label for="website">비밀번호 확인</label>
+					                                        <input type="password" class="form-control" id="pw2" name="pw2" aria-describedby="emailHelp" value="${ user.pw }"
+					                                        style="margin-bottom: 0;">
+															<span id="helpBlock1" class="help-block" style="font-size: 14px; display: none;"></span>
+					                                    </div>  
+					                                    <div class="form-group">
+					                                        <label for="userName">회 원 명</label>
+					                                        <input type="text" class="form-control" readonly="readonly" id="userName" name="userName" aria-describedby="emailHelp" value="${ user.userName }">
+					                                    </div>
+					                                    <div class="form-group">
+					                                        <label for="nickname">닉 네 임</label>
+					                                        <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" value="${ user.nickname }">
+					                                        <span id="helpBlock2" class="help-block" style="font-size: 14px; display: none;"></span>
+					                                    </div>
+					                                    <div class="form-group">
+					                                        <label for="nickname">프로필사진</label>
+					                                        <input type="file" class="form-control" id="file" name="file" aria-describedby="emailHelp">
+					                                    </div>				                                
+					                                    <div class="form-group">
+					                                        <label for="email">이 메 일</label>
+														    <div>
+															    <div class="col-sm-9" style="float:left; padding-left:0; padding-right:0;">
+															      <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="${ user.email }">
+																</div>
+															    <div id="mailAuth" style="display:none">
+															      		<input type="text" id="checkMail"/>
+															      		<button type="button" class="btn btn-default" id="mailClick">전송</button>
+															    </div>
+															    <div class="col-sm-3 authMail" style="float:left; padding-top:0;">
+																	<button type="button" class="btn btn-default" id="authMail" name="authMail" style="margin:0;">인증하기</button>
+																</div>
 														    </div>
-														    <div class="col-sm-3 authMail" style="float:left; padding-top:0;">
-																<button type="button" class="btn btn-default" id="authMail" name="authMail" style="margin:0;">인증하기</button>
+					                                    </div>
+					                                    
+					                                    <br/>
+					                                    <br/>
+					                                    <br/>
+					                                    
+					                                    <div class="form-group">
+					                                        <label for="phone">휴대전화번호</label>
+					                                        <div>
+						                                        <div class="col-sm-3" style="float:left; padding-left:0">
+																	<select class="form-control" name="phone1" id="phone1">
+																	  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
+																		<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
+																		<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
+																		<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
+																		<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
+																	</select>
+						                                        </div>
+															    <div class="col-sm-3" style="float:left;">
+															      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}">
+															    </div>
+															    <div class="col-sm-3" style="float:left; padding-right:0">
+															      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}">
+															    </div>
+															    <input type="hidden" name="phone" value="${ user.phone }"/>
+															    <div id="authButton" style="display:none">
+															   		<input type="text" id="checkAuth"/>
+															    	<button type="button" class="btn btn-default" id="phoneClick">전송</button>
+															    </div>
+															    <div class="col-sm-3 authPhone" style="float:left;">
+													 		    	<button type="button" class="btn btn-default" id="authPhone" name="authPhone" style="margin:0;">인증하기</button>
+													 		    </div>
+														    </div>
+					                                    </div>
+					                                    <br/>
+					                                    <br/>
+					                                    <br/>
+					
+					                                    <div class="form-group">
+					                                        <label for="userAddr">자택주소</label>
+					                                        <div>
+																<div class="col-sm-6" style="float:left; padding-left: 0">
+																	<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly="readonly">
+																</div>
+								      
+																<div class="col-sm-6" style="float:left; padding-right: 0;">
+																	<button type="button" class="btn btn-default" 
+																	style="margin:0; width:100%; height:40px;" onclick="execDaumPostcode()">검색</button><br>
+																</div>
 															</div>
-													    </div>
-				                                    </div>
-				                                    
-				                                    <br/>
-				                                    <br/>
-				                                    <br/>
-				                                    
-				                                    <div class="form-group">
-				                                        <label for="phone">휴대전화번호</label>
-				                                        <div>
-					                                        <div class="col-sm-3" style="float:left; padding-left:0">
-																<select class="form-control" name="phone1" id="phone1">
-																  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
-																	<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
-																	<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
-																	<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
-																	<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
-																</select>
+					                                    </div> 
+					                                    
+					                                    <div class="form-group">
+															<label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
+															<div class="col-sm-12" style="padding: 0;">
+																<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
+																<br>
+																<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
+																<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+																<input type="hidden" name="userAddr" value="${ user.userAddr }">
+															</div>
+					                                    </div>
+					                                    
+					                                    <div class="form-group">
+					                                    	<div class="col-sm-6" style="float: left; padding-left: 0;">
+																<label for="birthDate">생 년 월 일</label>                                        
+																<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" ${ user.birthDate }>
 					                                        </div>
-														    <div class="col-sm-3" style="float:left;">
-														      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}">
-														    </div>
-														    <div class="col-sm-3" style="float:left; padding-right:0">
-														      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}">
-														    </div>
-														    <input type="hidden" name="phone" value="${ user.phone }"/>
-														    <div id="authButton" style="display:none">
-														   		<input type="text" id="checkAuth"/>
-														    	<button type="button" class="btn btn-default" id="phoneClick">전송</button>
-														    </div>
-														    <div class="col-sm-3 authPhone" style="float:left;">
-												 		    	<button type="button" class="btn btn-default" id="authPhone" name="authPhone" style="margin:0;">인증하기</button>
-												 		    </div>
-													    </div>
-				                                    </div>
-				                                    <br/>
-				                                    <br/>
-				                                    <br/>
-				
-				                                    <div class="form-group">
-				                                        <label for="userAddr">자택주소</label>
-				                                        <div>
-															<div class="col-sm-6" style="float:left; padding-left: 0">
-																<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly="readonly">
+					                                        <div class="col-sm-6" style="float: left; padding-right: 0;">
+					                                        	<label for="gender">성 별</label> 
+																<select class="form-control" name="gender" id="gender">
+																	<option value="m" ${ ! empty user.gender && user.gender == "m" ? "selected" : ""  } >남자</option>
+																	<option value="f" ${ ! empty user.gender && user.gender == "f" ? "selected" : ""  } >여자</option>
+																</select>
 															</div>
-							      
-															<div class="col-sm-6" style="float:left; padding-right: 0;">
-																<button type="button" class="btn btn-default" 
-																style="margin:0; width:100%; height:40px;" onclick="execDaumPostcode()">검색</button><br>
-															</div>
-														</div>
-				                                    </div> 
-				                                    
-				                                    <div class="form-group">
-														<label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
-														<div class="col-sm-12" style="padding: 0;">
-															<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
-															<br>
-															<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
-															<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
-															<input type="hidden" name="userAddr" value="${ user.userAddr }">
-														</div>
-				                                    </div>
-				                                    
-				                                    <div class="form-group">
-				                                    	<div class="col-sm-6" style="float: left; padding-left: 0;">
-															<label for="birthDate">생 년 월 일</label>                                        
-															<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" ${ user.birthDate }>
-				                                        </div>
-				                                        <div class="col-sm-6" style="float: left; padding-right: 0;">
-				                                        	<label for="gender">성 별</label> 
-															<select class="form-control" name="gender" id="gender">
-																<option value="m" ${ ! empty user.gender && user.gender == "m" ? "selected" : ""  } >남자</option>
-																<option value="f" ${ ! empty user.gender && user.gender == "f" ? "selected" : ""  } >여자</option>
-															</select>
-														</div>
-				                                    </div>
-				                                </div>
-				                            </div>
-				                         </div>
+					                                    </div>
+					                                </div>
+					                            </div>
+				                         	</div>
 											<br/>
 											<br/>
 											<br/>
 				                        </form>
-											<div class="col-sd-12" style="display: inline-block; float: center;">
+				                        	
+											<div class="col-sd-12" style="display: inline-block; padding-top: 30px; float: center;">
 												<div class="col-sd-6" style="float:right;">
 													<button id="submit" class="btn btn-default">정보수정</button>
 												</div>
@@ -344,7 +338,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
         </div>
     </div>
-</div> 
+</div>
+	<div style="min-height: 50px;">
+	</div>
     
     <jsp:include page="/layout/footer.jsp"></jsp:include>
 
@@ -366,12 +362,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			
 			$("#pw2").on("keyup", function(){
 				if($("#pw2").val() == $("#pw").val()){
-					$("#pw2").css("background-color", "#A9F5D0");
-					$('#helpBlock1').css("color", "#A9F5D0")
+					$("#pw2").css("background-color", "#32ba78");
+					$("#helpBlock1").show();
+					$('#helpBlock1').css("color", "#32ba78")
 					$('#helpBlock1').text("비밀번호가 일치합니다");
 				}else{
-					$("#pw2").css("background-color", "#F5A9BC");
-					$('#helpBlock1').css("color", "#F5A9BC")
+					$("#pw2").css("background-color", "#d63e64");
+					$("#helpBlock1").show();
+					$('#helpBlock1').css("color", "#d63e64")
 					$('#helpBlock1').text("비밀번호가 일치하지 않습니다");
 				}				
 			})
@@ -540,7 +538,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$("#authButton").hide();
 					$(".authPhone").show();
 					$("#authPhone").remove();
-					$(".authPhone").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
+					$(".authPhone").append("<span style='margin:0; padding-top:7px; color:#32ba78'>인증완료</span>");
 					$("input[name='phone2']").attr("readonly", true);
 					$("input[name='phone3']").attr("readonly", true);
 					$("select[name='phone1']").attr("disabled", true);
@@ -612,7 +610,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						$("#mailAuth").hide();
 						$(".authMail").show();
 						$("#authMail").remove();
-						$(".authMail").append("<span style='margin:0; padding-top:7px; color:#A9F5D0'>인증완료</span>");
+						$(".authMail").append("<span style='margin:0; padding-top:7px; color:#32ba78'>인증완료</span>");
 						$("input[name='email']").attr("readonly", true);
 					swal({
 						text : "인증되었습니다.",
@@ -717,14 +715,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							if($.trim(response.result)==0){
 								$('#helpBlock2').show();
 								$('#helpBlock2').html("사용가능");
-								$("#nickname").css("background-color", "#A9F5D0");
-								$('#helpBlock2').css("color", "#A9F5D0")
+								$("#nickname").css("background-color", "#32ba78");
+								$('#helpBlock2').css("color", "#32ba78")
 								$('#submit').attr('disabled', false);
 							}else{
 								$('#helpBlock2').show();
 								$('#helpBlock2').html("사용불가");
-								$("#nickname").css("background-color", "#F5A9BC");
-								$('#helpBlock2').css("color", "#F5A9BC");
+								$("#nickname").css("background-color", "#d63e64");
+								$('#helpBlock2').css("color", "#d63e64");
 								$('#submit').attr('disabled', true);
 							}
 						},
@@ -743,7 +741,133 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				$("form")[0].reset();
 			});
 		});
+
 		
+		$("input[name=phone2]").keyup(function(){
+            var byteText = $(this).val();
+            var byteNum = 0;
+            
+            for(var i = 0; i < byteText.length ; i++) {
+               byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+               if(byteNum > 4) {     
+                swal({
+                        text: "제한길이를 초과하였습니다.",
+                        dangerMode: true,
+                        buttons: {
+                             catch: {
+                                text: "확인"
+                             }
+                      },            
+                   }).then((willDelete) => {
+                        if (willDelete) {
+                           $(this).val($(this).val().substr(0,i-1));
+                           $("input[name=id]").focus();
+                        }
+                   });
+               }
+            }
+		})
+		
+		$("input[name=phone3]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 4) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=id]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+			
+			$("input[name=birthDate]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 6) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=id]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+			
+						$("input[name=pw]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 12) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=pw]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+		
+			$("input[name=nickname]").keyup(function(){
+                var byteText = $(this).val();
+                var byteNum = 0;
+                
+                for(var i = 0; i < byteText.length ; i++) {
+                   byteNum += ( byteText.charCodeAt(i) > 127 ) ? 3 : 1;
+                   if(byteNum > 30) {     
+                    swal({
+                            text: "제한길이를 초과하였습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       }).then((willDelete) => {
+                            if (willDelete) {
+                               $(this).val($(this).val().substr(0,i-1));
+                               $("input[name=nickname]").focus();
+                            }
+                       });
+                   }
+                }
+			})
+
 
     </script> 
 </body>

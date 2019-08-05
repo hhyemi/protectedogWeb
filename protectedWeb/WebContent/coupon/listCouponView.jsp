@@ -115,11 +115,12 @@
 					<div style="float:right; min-width:65%" class="col-md-8"> 
 				
 						<input type="hidden" id="couponNo" name="couponNo" value="${ coupon.couponNo }">
+						<input type="hidden" id="couponCode" name="couponCode" value="${ coupon.couponCode }">
 				
-						<div class="row">
-					  		<div class="col-xs-4 col-md-6"><strong>쿠폰코드</strong></div>
-							<div class="col-xs-8 col-md-6" id="couponCode">${ coupon.couponCode }</div>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 					  		<div class="col-xs-4 col-md-6"><strong>쿠폰코드</strong></div> -->
+<%-- 							<div class="col-xs-8 col-md-6" id="couponCode">${ coupon.couponCode }</div> --%>
+<!-- 						</div> -->
 						
 						<hr/>
 						
@@ -157,12 +158,12 @@
 						
 						<c:if test="${ sessionScope.user.role eq 'user' }">
 						<div class="row" style="float:right">
-							<input type="button" id="receiveCoupon" class="receiveCoupon" value="쿠폰받기">
+							<button type="button" class="btn btn-default receiveCoupon" id="receiveCoupon">쿠폰받기</button>
 						</div>
 						</c:if>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
 						<div class="row" style="float:right">
-							<input type="button" id="removeCoupon" class="removeCoupon" value="삭제">
+							<button type="button" class="btn btn-default removeCoupon" id="removeCoupon">쿠폰삭제</button>
 						</div>
 						</c:if>
 	
@@ -215,27 +216,43 @@
 // 			}))
 // 		})
 		
-		$(function(){
-			$("#couponManage").on("click", function(){
-				self.location="/coupon/addCouponManage"
-			})
-		});
+// 		$(function(){
+// 			$("#couponManage").on("click", function(){
+// 				self.location="/coupon/addCouponManage"
+// 			})
+// 		});
 		
 		$(function(){
 			$(".removeCoupon").on("click", function(){
-				var couponNo=$(this).parent().parent().children("input").val();
-// 				alert(couponNo);
-				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+// 				debugger;
+				var couponNo=$(this).parent().parent().children("input[name=couponNo]").val();
+				var couponCode=$(this).parent().parent().children("input[name=couponCode]").val();
+// 				alert(couponNo+", "+couponCode);
+// 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+				swal({
+					text : "쿠폰을 삭제하시겠습니까?",
+					icon : "warning",
+					buttons : ["취소","확인"],
+					dangerMode: true,
+				})
+				.then((A) => {
+					if(A) {
+						self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
+					}
+				    swal("삭제완료 !", {
+				      	icon: "success"
+				    });
+				})
 			})
 		})
 		
 		$(function (){
 		
 			$(".receiveCoupon").on("click", function(){
-				var couponCode=$(this).parent().parent().children("div").find("#couponCode").html();
+				var couponCode=$(this).parent().parent().children("input[name=couponCode]").val();
 				var receiverId=$("#receiverId").val();
 				var checkCoupon = { couponCode:couponCode , receiverId:receiverId }
-				var couponNo=$(this).parent().parent().children("input").val();
+				var couponNo=$(this).parent().parent().children("input[name=couponNo]").val();
 // 				alert("ajax통신 쿠폰코드 : "+couponCode);
 // 				alert("ajax통신 받는사람 : "+receiverId);
 // 				alert("ajax통신 체크쿠폰 : "+JSON.stringify(checkCoupon));
@@ -248,13 +265,12 @@
 					datatype : "json",
 					success : function(response){
 						if($.trim(response.result)==0){
-							alert("쿠폰을 받았습니다");
-// 							alert(couponNo);
-// 							alert(receiverId);
+// 							alert("쿠폰을 받았습니다");
+// 							alert(couponNo+", "+couponCode+", "+receiverId);
 							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
 						}else{
-							alert("이미 받은 쿠폰입니다");
-							return;
+// 							alert("이미 받은 쿠폰입니다");
+// 							return;
 						}
 					},
 					error : function(request, status, error){

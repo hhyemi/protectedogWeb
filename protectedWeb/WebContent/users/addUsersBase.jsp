@@ -266,13 +266,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			$("#pw2").on("keyup", function(){
 				if($("#pw2").val() == $("#pw").val()){
 					$('#helpBlock3').show();
-					$("#pw2").css("background-color", "#A9F5D0");
-					$('#helpBlock3').css("color", "#A9F5D0")
+					$("#pw2").css("background-color", "#32ba78");
+					$('#helpBlock3').css("color", "#32ba78")
 					$('#helpBlock3').text("비밀번호가 일치합니다");
 				}else{
 					$('#helpBlock3').show();
-					$("#pw2").css("background-color", "#F5A9BC");
-					$('#helpBlock3').css("color", "#F5A9BC")
+					$("#pw2").css("background-color", "#d63e64");
+					$('#helpBlock3').css("color", "#d63e64")
 					$('#helpBlock3').text("비밀번호가 일치하지 않습니다");
 				}				
 			})
@@ -434,14 +434,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						if($.trim(response.result)==0){
 							$('#helpBlock1').show();
 							$('#helpBlock1').html("사용가능");
-							$("#id").css("background-color", "#A9F5D0");
-							$('#helpBlock1').css("color", "#A9F5D0");
+							$("#id").css("background-color", "#32ba78");
+							$('#helpBlock1').css("color", "#32ba78");
 							$('#submit').attr('disabled', false);
 						}else{
 							$('#helpBlock1').show();
 							$('#helpBlock1').html("사용불가");
-							$("#id").css("background-color", "#F5A9BC");
-							$('#helpBlock1').css("color", "#F5A9BC");
+							$("#id").css("background-color", "#d63e64");
+							$('#helpBlock1').css("color", "#d63e64");
 							$('#submit').attr('disabled', true);
 						}
 					},
@@ -467,14 +467,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						if($.trim(response.result)==0){
 							$('#helpBlock2').show();
 							$('#helpBlock2').html("사용가능");
-							$("#nickname").css("background-color", "#A9F5D0");
-							$('#helpBlock2').css("color", "#A9F5D0")
+							$("#nickname").css("background-color", "#32ba78");
+							$('#helpBlock2').css("color", "#32ba78")
 							$('#submit').attr('disabled', false);
 						}else{
 							$('#helpBlock2').show();
 							$('#helpBlock2').html("사용불가");
-							$("#nickname").css("background-color", "#F5A9BC");
-							$('#helpBlock2').css("color", "#F5A9BC");
+							$("#nickname").css("background-color", "#d63e64");
+							$('#helpBlock2').css("color", "#d63e64");
 							$('#submit').attr('disabled', true);
 						}
 					},

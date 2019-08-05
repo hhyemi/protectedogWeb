@@ -102,12 +102,21 @@
 					<div style="padding-left:50px;" class="col-md-12"> 
 						<form class="form-horizontal" name="formal" enctype="multipart/form-data">		
 						<div class="row">
-					  		<div class="col-xs-4 col-md-6"><strong>쿠폰코드</strong></div>
+					  		<div class="col-xs-4 col-md-6"><strong>쿠폰이미지</strong></div>
 							<div class="col-xs-8 col-md-6">
-								<input type="file" class="form-control" id="couponImage" name="couponImg" style="width: 300px; height: 40px" maxLength="13"/>
+								<input type="file" class="form-control" id="couponImg" name="couponImg" style="width: 300px; height: 40px" maxLength="13"/>
 							</div>
 						</div>
 
+						<br/>
+						
+						<div class="row">
+					  		<div class="col-xs-4 col-md-6"><strong>쿠폰코드</strong></div>
+							<div class="col-xs-8 col-md-6">
+								<input type="text" id="couponCode" style="width: 300px; height: 40px" name="couponCode" placeholder="쿠폰코드입력">
+							</div>
+						</div>
+						
 						<br/>
 						
 						<div class="row">
@@ -243,6 +252,7 @@
 		
 		 $(function() {
 			 $( "#submit" ).on("click" , function() {
+// 				 debugger;
 					swal({
 						text : "쿠폰이 등록되었습니다!",
 						buttons : {
