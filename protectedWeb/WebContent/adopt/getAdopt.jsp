@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양</title>
+	<title>보호할개 · 분양실종</title>
 	<meta charset="utf-8">
 	
 	<meta
@@ -76,6 +76,9 @@
 		.col-md-10 {
 			padding-right: 15px !important;
 		}
+ 		.col-xs-9 {
+ 			padding-right: 0px !important;
+ 		}
  		
         .fa-heart {
          	color: #f04f23;
@@ -372,7 +375,7 @@
 				<button class="btn btn-default" id="modiButton">수정</button>
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
-       		<c:if test="${ adopt.statusCode eq '1' && sessionScope.user.role eq 'admin'}">
+       		<c:if test="${  sessionScope.user.role eq 'admin'}">
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
 			

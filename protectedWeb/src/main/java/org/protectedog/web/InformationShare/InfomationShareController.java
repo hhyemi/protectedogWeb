@@ -1,22 +1,18 @@
 package org.protectedog.web.InformationShare;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.board.BoardService;
 import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
-import org.protectedog.service.domain.Comment;
-import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.User;
-import org.protectedog.service.recomment.ReCommentService;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,9 +37,9 @@ public class InfomationShareController {
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
 	
-	@Autowired
-	@Qualifier("reCommentServiceImpl")
-	private ReCommentService reCommentService;
+//	@Autowired
+//	@Qualifier("reCommentServiceImpl")
+//	private ReCommentService reCommentService;
 	
 	@Autowired
 	@Qualifier("userServiceImpl")

@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 
-<title>보호할개 · 분양실종 후기</title>
+<title>보호할개 · 분양실종</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

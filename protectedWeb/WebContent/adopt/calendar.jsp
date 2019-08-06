@@ -39,6 +39,9 @@
 .fc-day-top{
 	padding-bottom: 0px !important;
 }
+.col-md-10 {
+	padding-right: 15px;
+}
 
 
 /*!
@@ -1736,8 +1739,7 @@ var fileNameArray = new Array();
 											        postNo: value[i].postNo,
 								       			}); 
 								        	}
-								        	
-// 									        console.log(events) 
+								        
 							        	}); 
 							       		callback(events); 
 							    }, 
@@ -1768,7 +1770,7 @@ var fileNameArray = new Array();
 				    
 					if( date > today ){
 						swal({
-					           text: "어제까지 선택 가능합니다.",
+					           text: "오늘까지 선택 가능합니다.",
 					           dangerMode: true,
 					           buttons: {
 										 catch: {
@@ -1822,7 +1824,8 @@ var fileNameArray = new Array();
 					}
 				},
 				eventClick: function(event, jsEvent, view) {
-					
+					$('#updateMissing').remove();
+					 $('#delMissing').remove();
 						jQuery('.event-title').html(
 													"<div class='row'>"
 													+"<div class='col-md-6' float='left' >사례금: "+(event.dogPay).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원</div>"
@@ -1832,7 +1835,6 @@ var fileNameArray = new Array();
 													
 													"<div class='col-md-12' style='padding:0px;'>"
 													+"<img src='" + event.imageurl + "' width='100%' height='100%'>"
-// 													+"<br/><br/>실종지역: "+event.realTitle+"<br/>"
 													+"<input type='hidden' name='id' value='"+event.id+"'>"
 													
 													
@@ -1850,7 +1852,7 @@ var fileNameArray = new Array();
 													+"</div>"
 													+"<div class='row'>"
 												  		+"<div class='col-md-2 '><strong>견종</strong></div>"
-														+"<div class='col-md-4 '>"+event.dogBreed+"</div>"
+														+"<div class='col-md-4 ' style='padding-right:0px;'>"+event.dogBreed+"</div>"
 												  		+"<div class='col-md-2 ' style='padding-left:0px;'><strong>성별</strong></div>"
 														+"<div class='col-md-4 '>"+event.dogGender+"</div>"
 													+"</div>"
@@ -1871,18 +1873,12 @@ var fileNameArray = new Array();
 						);
 						
 						 if ( event.id == $('#sessionId').val() ){
-							 if ( $('#delMissing').length > 0  ) {
-								 $('#updateMissing').remove();
-								 $('#delMissing').remove();
-							 }
 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
 													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
-// 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 } else if ( ${sessionScope.user.role == 'admin'}) {
 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 }
 						
-// 						jQuery('.event-body').html(event.description);
 						jQuery('.eventUrl').attr('href',event.url);
 						jQuery('#modal-view-event').modal();
 						
@@ -2182,11 +2178,9 @@ var fileNameArray = new Array();
 							 }
 				   },
 		     });
-// 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
 			$(this).val('300000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
-// 		}else{
-// 			$("span[name=dogPay]").text('');
+
 		}
 	});
 	
@@ -2202,9 +2196,6 @@ var fileNameArray = new Array();
 				   },
 		     });
 			$("input[name=locationKr]").val($("input[name=locationKr]").val().toString().substring(0,30));
-// 			$("span[name=locationKr]").text('30자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=locationKr]").text('');
 		}
 	});
 	
@@ -2220,9 +2211,6 @@ var fileNameArray = new Array();
 				   },
 		     });
 			$("input[name=dogBreed]").val($("input[name=dogBreed]").val().toString().substring(0,10));
-// 			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=dogBreed]").text('');
 		}
 	});
 
@@ -2238,9 +2226,6 @@ var fileNameArray = new Array();
 				   },
 		     });
 			$("input[name=dogStatus]").val($("input[name=dogStatus]").val().toString().substring(0,20));
-// 			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=dogStatus]").text('');
 		}
 	});
 
@@ -2256,9 +2241,6 @@ var fileNameArray = new Array();
 				   },
 		     });
 			$("input[name=dogChar]").val($("input[name=dogChar]").val().toString().substring(0,20));
-// 			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=dogChar]").text('');
 		}
 	});
 	
@@ -2274,9 +2256,6 @@ var fileNameArray = new Array();
 				   },
 		     });
 			$("textarea[name=postContent]").val($("textarea[name=postContent]").val().toString().substring(0,100));
-// 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=postContent]").text('');
 		}
 	});
 	
@@ -2298,7 +2277,6 @@ var fileNameArray = new Array();
 		        	   $("input[name=dogPay]").focus();
 		           }
 		      });
-// 			$("input[name=dogPay]").focus();
 			return;
 		} else {
 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
@@ -2318,7 +2296,6 @@ var fileNameArray = new Array();
 		        	   $("input[name=locationKr]").focus();
 		           }
 		      });
-// 			$("input[name=locationKr]").focus();
 			return;
 		}
 		if( $(".preview-box").length == 0 ){
@@ -2352,7 +2329,6 @@ var fileNameArray = new Array();
 		        	   $("input[name=locationKr]").focus();
 		           }
 		      });
-// 			$("input[name=dogBreed]").focus();
 			return;
 		}
 		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
@@ -2370,7 +2346,6 @@ var fileNameArray = new Array();
 		        	   $("input[name=dogStatus]").focus();
 		           }
 		      });
-// 			$("input[name=dogStatus]").focus();
 			return;
 		}
 		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
@@ -2388,7 +2363,6 @@ var fileNameArray = new Array();
 		        	   $("input[name=dogChar]").focus();
 		           }
 		      });
-// 			$("input[name=dogChar]").focus();
 			return;
 		}
 		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -2406,7 +2380,6 @@ var fileNameArray = new Array();
 		        	   $("textarea[name=postContent]").focus();
 		           }
 		      });
-// 			$("textarea[name=postContent]").focus();
 			return;
 		}
 		

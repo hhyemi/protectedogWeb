@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>보호할개 · 분양실종 후기</title>
+<title>보호할개 · 분양실종</title>
 
 <!-- jqeury CDN -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

@@ -2,12 +2,13 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 
 <html lang="ko">
 <head>
-
+<title>보호할개 · 정보공유</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,14 +31,21 @@
 
 <!--  CSS -->
 <style>
-#searchKeyword{height: 40px;width: 150px;}
-#searchSubmmit{width : 60px;height : 40px;border-radius : 0px 15px 15px 0px;border : 1px solid #D3D3D3;}
-#searchCondition{height : 40px;border-radius : 15px 0px 0px 15px;}
+#searchKeyword{height: 40px;width: 150px;border : 1px solid #D3D3D3;padding-left: 10px;}
+#searchSubmmit{
+	width : 60px;
+	height : 40px;
+	border-radius : 0px 15px 15px 0px;
+	border : 1px solid #f04f23;
+}
+#searchCondition{height : 40px;border-radius : 15px 0px 0px 15px;border-right: 0px;}
 #selectPageSize{height: 30px; width:76px;}
 #newstd{min-width: 306px;max-width : 306px;}	
-.postTitle:hover{cursor:pointer;color:#fa714b}
+.postHotTitle:hover,.postTitle:hover{cursor:pointer;color:#fa714b}
 .btn-default{height: 30px;color:white;}
 th{background-color: #F0F0F0;}
+
+
 
 </style>
 
@@ -48,11 +56,11 @@ th{background-color: #F0F0F0;}
 
 <body>
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">information</span> <span>share</span></p>
+          	<p ><span class="mr-2">Information</span> <span>Share</span></p>
             <font size="7">정보공유</font>
           </div>
         </div>
@@ -67,10 +75,10 @@ th{background-color: #F0F0F0;}
 		
 		<br/>
 		
-		
+		<div> 전체 ${totalCount} 건 | 현재 ${search.currentPage} 페이지</div>
 <!-- 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TABLE AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■	 -->
 		<div class="row">
-			<div class="col-md-9" style="padding-bottom : 5px;">
+			<div class="col-md-9 col-sm-12 col-xs-12" style="padding-bottom : 5px;">
 				<div style="float: left;">
 					<button type="button" class="btn btn-default">전체보기</button>
 					<button type="button" class="btn btn-default">조회수 ▼</button>
@@ -100,7 +108,7 @@ th{background-color: #F0F0F0;}
 
 
 						<div class="form-group">
-							<input type="text" class="form-control searchKeyword" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<input type="text" class=" searchKeyword" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
 						</div>
 						
 						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="margin : 0px;">
@@ -114,6 +122,7 @@ th{background-color: #F0F0F0;}
 			</div>
 		</div>
 		
+		
 				<c:if test="${totalCount == 0}">
 				<div class="row">
 				<div class="col-md-9" align="center" style="height: 500px; padding-top: 150px;">
@@ -124,7 +133,7 @@ th{background-color: #F0F0F0;}
 		
 		<c:if test="${totalCount != 0}">
 		<div class="row">
-			<div class="col-md-9" id="listTable">
+			<div class="col-md-9 col-sm-12 col-xs-12" id="listTable">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 					<thead>
 						<tr align="center" style="height: 54px;">
@@ -160,9 +169,7 @@ th{background-color: #F0F0F0;}
 
 					<br />
 
-					<c:if test="${ ! empty sessionScope.user }">
 						<button type="button" class="btn btn-default">작성</button>
-					</c:if>
 					
 					<div align="center" style="padding-left: 45%">
 					<jsp:include page="/common/pageNavigator_new.jsp" />
@@ -176,7 +183,7 @@ th{background-color: #F0F0F0;}
 
 			</c:if>
 <!-- 		■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ HOT AREA ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-6 col-xs-6">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 
 				<tbody>
@@ -200,8 +207,9 @@ th{background-color: #F0F0F0;}
 								<img src="/resources/file/others/bronze-medal.png"> ${i} 등</img>
 							</c:if>
 							</td>
-							<td align="center" class="postTitle mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo"
-								value="${best.postNo}"> ${best.postTitle}</td>
+							<td align="center" class="postHotTitle mdl-data-table__cell--non-numeric" width="200px"><input type="hidden" name="postNo" value="${best.postNo}">
+								${fn:substring(best.postTitle,0,18)}
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -250,6 +258,7 @@ $(function(){
 		
 		window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
 	});
+	
 });
 
 function listNews(){
@@ -281,7 +290,7 @@ function listNews(){
 				$(".newstbody").append(
 						  "<tr>"
 						+	 "<td id='newstd' class='mdl-data-table__cell--non-numeric'>"
-								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,35)
+								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,27)
 								+ "<input type='hidden' name='link' value='"+items.link+"'>"
 								+ "</a>"
 						+	 "</td>"
@@ -297,6 +306,13 @@ function listNews(){
 	function fncGetList(currentPage) {
 		
 		$("#currentPage").val(currentPage);
+		
+		
+		if(${param.order != null}){
+			$("form").attr("method", "POST").attr("action","/info/listInfo?order=${param.order}&pageSize=${search.pageSize}").submit();
+			return;
+		}
+		
 		$("form").attr("method", "POST").attr("action","/info/listInfo").submit();
 	}
 
@@ -382,6 +398,11 @@ function listNews(){
 		});
 		
 		$("button:contains('작성')").on("click", function(){
+			
+			if(${empty user}){
+				$("#login-modal").modal("show");
+				return;
+			}
 			self.location = "/community/addInfo.jsp"
 		});
 	});

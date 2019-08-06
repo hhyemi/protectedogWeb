@@ -10,7 +10,7 @@
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>보호할개.애견상식</title>
+<title>보호할개 · 정보공유</title>
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -21,26 +21,27 @@
 .title {font-size: 18px;}
 .description {font-size: 14px;}
 .channelTitle {font-size: 14px;font-weight: bold;}
-.paging{width: 100%;height: 40px;}
+.paging{width: 100%;height: 40px;padding:0px;}
 .btn-default{margin: 0px;padding: 0px;}
 
-#searchKeyword {width : 200px;border-radius: 15px 0px 0px 15px;height:38px;}
+#searchKeyword {width : 200px;border-radius: 15px 0px 0px 15px;height:38px;box-shadow: none;border : 1px solid #D3D3D3;padding-left: 10px;}
 #searchSubmit{border-radius: 0px 15px 15px 0px;}
 #searchBox{padding-right: 0px;}
-
+#nav_view{padding:0px;}
 a :hover{color : #1062e6;}
 
 .active { background-color : #f04f23;opacity: 1;}
 
 button:active{background-color:black;}
 </style>
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 </head>
 <body>
 
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ --> 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -56,7 +57,7 @@ button:active{background-color:black;}
 		<div class="row">
 			<div class="col-md-12" align="center">
 				<div align="center" id="searchBox" style="padding-top : 10px; padding-bottom : 50px;">	
-					<span><input type="text" id="searchKeyword" class="searchKeyword"><button type="button" id="searchSubmit" class="btn btn-default searchSubmit"><span class="fas fa-search"></span></button></span>
+					<span><input type="text" id="searchKeyword" class=" searchKeyword"><button type="button" id="searchSubmit" class="btn btn-default searchSubmit"><span class="fas fa-search"></span></button></span>
 				</div>
 			</div>
 		</div>

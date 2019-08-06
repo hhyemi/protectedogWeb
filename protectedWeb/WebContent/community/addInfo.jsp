@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 
-<title>보호할개 · 정보공유 글 등록</title>
+<title>보호할개 · 정보공유</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,14 +35,14 @@
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<div class="container">
 		<div class="hero-wrap hero-bread"
-			style="padding-bottom: 30px; padding-top: 60px;">
+			style="padding-bottom: 60px; padding-top: 60px;">
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-center justify-content-center">
 					<div class="col-md-9 ftco-animate text-center">
 						<p>
-							<span class="mr-2">information</span> <span>share</span>
+							<span class="mr-2">Information</span> <span>Share</span>
 						</p>
-						<font size="7">정보공유 글 등록</font>
+						<font size="7">정보공유글 등록</font>
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
-							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." maxlength="20"/>
+							id="postTitle" style="height: 50px; font-size: 20px" placeholder="제목을 입력해 주세요." maxlength="30"/>
 					</div>
 				</div>
 
