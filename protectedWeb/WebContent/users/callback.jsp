@@ -10,7 +10,7 @@
 </head>
 <body>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+  var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://192.168.0.33:8080/users/callback.jsp");
 
 //   alert(naver_id_login.oauthParams.access_token);
 
