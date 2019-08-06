@@ -7,7 +7,7 @@
 
 <html lang="ko">
 <head>
-
+<title>보호할개 · 정보공유</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,14 +30,21 @@
 
 <!--  CSS -->
 <style>
-#searchKeyword{height: 40px;width: 150px;}
-#searchSubmmit{width : 60px;height : 40px;border-radius : 0px 15px 15px 0px;border : 1px solid #D3D3D3;}
-#searchCondition{height : 40px;border-radius : 15px 0px 0px 15px;}
+#searchKeyword{height: 40px;width: 150px;border : 1px solid #D3D3D3;padding-left: 10px;}
+#searchSubmmit{
+	width : 60px;
+	height : 40px;
+	border-radius : 0px 15px 15px 0px;
+	border : 1px solid #f04f23;
+}
+#searchCondition{height : 40px;border-radius : 15px 0px 0px 15px;border-right: 0px;}
 #selectPageSize{height: 30px; width:76px;}
 #newstd{min-width: 306px;max-width : 306px;}	
 .postTitle:hover{cursor:pointer;color:#fa714b}
 .btn-default{height: 30px;color:white;}
 th{background-color: #F0F0F0;}
+
+
 
 </style>
 
@@ -48,11 +55,11 @@ th{background-color: #F0F0F0;}
 
 <body>
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">information</span> <span>share</span></p>
+          	<p ><span class="mr-2">Information</span> <span>Share</span></p>
             <font size="7">정보공유</font>
           </div>
         </div>
@@ -100,7 +107,7 @@ th{background-color: #F0F0F0;}
 
 
 						<div class="form-group">
-							<input type="text" class="form-control searchKeyword" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<input type="text" class=" searchKeyword" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
 						</div>
 						
 						<button type="button" id="searchSubmmit" class="btn btn-default searchSubmmit" style="margin : 0px;">
@@ -281,7 +288,7 @@ function listNews(){
 				$(".newstbody").append(
 						  "<tr>"
 						+	 "<td id='newstd' class='mdl-data-table__cell--non-numeric'>"
-								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,35)
+								+ "<a href='javascript:void(0)' class='go'>"+title.substring(0,27)
 								+ "<input type='hidden' name='link' value='"+items.link+"'>"
 								+ "</a>"
 						+	 "</td>"

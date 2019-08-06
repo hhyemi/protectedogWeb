@@ -142,7 +142,7 @@
      <input type="hidden" id="postId" value="${postId }">     
      <input type="hidden" id="profile" value="${profile}">  
 </div> 	
-    <script src="http://192.168.0.33:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.0.19:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -165,7 +165,7 @@
             			profile = "kakaoDefaultImg.jfif";
             		}
 					
-            		var socket = io("http://192.168.0.33:82/");
+            		var socket = io("http://192.168.0.19:82/");
 
             		socket.emit("updateUser", userName);
             		

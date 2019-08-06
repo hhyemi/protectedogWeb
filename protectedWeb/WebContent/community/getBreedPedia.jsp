@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 
-<title>견종백과</title>
+<title>보호할개 · 정보공유</title>
 
 <!--  meta  -->
 <meta charset="UTF-8">
@@ -49,11 +49,11 @@
 	<jsp:include page="/layout/toolbar.jsp" />
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 상단 디자인 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ --> 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">Information</span> <span>pedia</span></p>
+          	<p ><span class="mr-2">Information</span> <span>Pedia</span></p>
             <font size="7">견종백과</font>
           </div>
         </div>

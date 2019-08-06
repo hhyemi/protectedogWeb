@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양</title>
+	<title>보호할개 · 분양실종</title>
 	<meta charset="utf-8">
 	
 	<meta

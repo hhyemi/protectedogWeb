@@ -12,7 +12,7 @@
 <html lang="ko">
 	
 <head>
-<title>보호할개 · 실종</title>
+<title>보호할개 · 분양실종</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
