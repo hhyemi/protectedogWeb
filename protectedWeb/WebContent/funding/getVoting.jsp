@@ -133,10 +133,10 @@
 							<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left:9px "  >
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' }">
-										<span class="fas fa-heart"></span>
+										<span class="fas fa-heart" id="heart"></span>
 									</c:if>
 									<c:if test="${ check ne 'already' }">
-										<span class="far fa-heart"></span>
+										<span class="far fa-heart" id="heart"></span>
 									</c:if>
 								</font>
 				 			</div>
@@ -160,14 +160,14 @@
 			 </div>					 
 		     <br/>
 		     
-			 <c:if test="${fuding.voterCount eq 1 }">
+			 <c:if test="${funding.voterCount eq 1 }">
 			 <div><font size="5" >투표율&ensp;1%</font></div>
 			 <div class="progress">					 
 			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: 1%; background-color:#e66447!important;"></div>
 			 </div>				 
 			 </c:if>
 			 
-			 <c:if test="${fuding.voterCount ne 1 }">			 
+			 <c:if test="${funding.voterCount ne 1 }">			 
 			 <div><font size="5" >투표율&ensp;${funding.voteRate}%</font></div>
 			 <div class="progress">					 
 			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%; background-color:#e66447!important;"></div>
@@ -429,13 +429,13 @@
      	 }
     $(function(){
 		//관심목록에 추가
-		$(document).on("click", ".far", function() {
+		$(document).on("click", "#heart", function() {
 //			$( ".far" ).on("click" , function() {
 			addInterest(  );
 		});
 		
 		//관심목록에서 삭제
-		$(document).on("click", ".fas", function() {
+		$(document).on("click", "#heart", function() {
 //			$( ".fas" ).on("click" , function() {
 			console.log("dd");
 			delInterest(   );

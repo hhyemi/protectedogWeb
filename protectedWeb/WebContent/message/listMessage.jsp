@@ -218,6 +218,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                 	<c:set var="i" value="0" />
                                 	<form role="form" class="form-horizontal" name="mailSearchForm">
                                 	<input type="hidden" name="searchCondition" value="${ search.searchCondition }">
+                             	
                                 	<input type="hidden" id="currentPage" name="currentPage" value="" />		
 									<c:forEach var="message" items="${list}">
 										<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="messageViewModal" class="modal fade messageViewModal" style="display: none;">

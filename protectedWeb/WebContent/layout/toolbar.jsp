@@ -440,10 +440,10 @@
 		})
 		
 
-		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://localhost:8080/users/callback.jsp");
+		var naver_id_login = new naver_id_login("qhgCBZA6iuY4bImpUhhX", "http://192.168.0.33:8080/users/callback.jsp");
 	  	var state = naver_id_login.getUniqState();
 	  	naver_id_login.setButton("green", 2 , 30);
-	  	naver_id_login.setDomain("http://localhost:8080/");
+	  	naver_id_login.setDomain("http://192.168.0.33:8080/");
 	  	naver_id_login.setState(state);
 // 	  	naver_id_login.setPopup();
 	  	naver_id_login.init_naver_id_login();

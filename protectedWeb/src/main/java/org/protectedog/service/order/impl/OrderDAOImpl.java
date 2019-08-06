@@ -102,6 +102,20 @@ import org.springframework.stereotype.Repository;
 		return sqlSession.selectList("OrderMapper.listAdminOrder", map);
 	}
 
+	@Override
+	public List<Order> listCancleOrder(Search search, String id) throws Exception {
+		Map<String , Object>  map = new HashMap<String, Object>();
+
+		map.put("search", search);
+		System.out.println();
+		map.put("id", id);
+		map.put("startRowNum", search.getStartRowNum());
+		map.put("endRowNum",search.getEndRowNum());
+		System.out.println("listCancleOrder");
+
+		return sqlSession.selectList("OrderMapper.listCancleOrder", map);
+	}
+
 
 
 
