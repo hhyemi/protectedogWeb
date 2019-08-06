@@ -372,7 +372,7 @@
 				<button class="btn btn-default" id="modiButton">수정</button>
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
-       		<c:if test="${ sessionScope.user.role eq 'admin'}">
+       		<c:if test="${ adopt.statusCode eq '1' && sessionScope.user.role eq 'admin'}">
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
 			
@@ -414,7 +414,7 @@
 	      </div>
 	    </div>
 
-        <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;"></div>
+        <div class="modal-body" id="listApplyModal" style="overflow-y:auto;overflow-x:hidden;"></div>
         
         <div class="modal-footer">
 <!--           <button type="button" class="btn btn-default" ></button> -->
@@ -1071,7 +1071,8 @@
 				delInterest(   );
 			});
 			
-			$('.modal-body').css('max-height', $(window).height() * 0.6);
+			$('#listApplyModal').css('max-height', $(window).height() * 0.6);
+// 			$('.modal-body').css('max-height', $(window).height() * 0.6);
 			
 			
 			//============= 신고하기 Event  처리 =============	
