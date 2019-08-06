@@ -8,24 +8,21 @@
 <html lang="ko">
    
 <head>
-<title>보호할개 · 글 수정</title>
+<title>보호할개 · 보호마켓</title>
    <meta charset="UTF-8">
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > -->
-   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+   <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 .container {
 	width: 1000px;
-	font-size :17px;
 	margin-top: 10px;
 
 }
@@ -128,19 +125,13 @@
 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 	}
 
-	//============= 달력  =============
-	$(function() {
-		$("input[name='manuDate']").datepicker({
-			dateFormat : 'yy-mm-dd'
-		});
-	});
 </script>
-</head>
-
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
+</head>
+
+<body>
 
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
 	<body class="goto-here">
@@ -148,7 +139,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2"><a href="index.html">protected</a></span> <span>Market</span></p>
+          	<p ><span class="mr-2">Protectedog</span> <span>Market</span></p>
             <font size="7">보호마켓 상품정보수정</font><br/>
             <font size="3">※판매자 거주지는 수정할수 없습니다. 거주지 수정시 재작성 바랍니다.</font>
           </div>
@@ -159,7 +150,8 @@
 	<!--//////////////////////////// Sub Toolbar end/////////////////////////////-->
 
 	<!-- ///////////////////////////body navigation tag/////////////////////////// -->
-	<section class="ftco-section">
+	 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+		
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-8 ftco-animate">
@@ -168,86 +160,105 @@
 
 					<!--////////////////////////// form tag Start /////////////////////////////////-->
 					<form class="billing-form" name="addForm">
-					<input type="hidden" value="${board.postNo}"/>
-						<h3 class="mb-4 billing-heading">
-						등록정보를 입력해주세요</h3>
+
+
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">판매자</label> <input type="text"
+									<h5>
+										<b>판매자</b>
+									</h5> 
+									<input type="text"
 										class="form-control" name="id" id="id"
 										placeholder="" value="${sessionScope.user.id }" readonly>
 								</div>
 							</div>
-
-<!-- 							<div class="col-md-6"> -->
-<!-- 								<div class="form-group"> -->
-<!-- 									<label for="firstname">연락처</label> <input type="text" -->
-<!-- 										class="form-control" name="phone" id="phone" -->
-<!-- 										placeholder="상품명을 입력해주세요" value="테스트"> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">상품명</label> <input type="text"
-										class="form-control" name="prodName" id="prodName"
-										placeholder="상품명을 입력해주세요" value="테스트" value="${baord.prodName}">
+									<h5>
+										<b>상품명</b>
+									</h5> 
+									 <input type="text"
+										class="form-control" name="prodName" id="prodName" value="${baord.prodName}"
+										placeholder="상품명을 입력해주세요">
 								</div>
-							</div>
-							<br/>
+							</div>							
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">판매가격</label> <input type="text"
+									<h5>
+										<b>판매가격</b>
+									</h5> 
+									<input type="text"
 										class="form-control" name="price" id="price" value="${board.price}"
 										placeholder="판매가격을 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">판매자 거주지</label> <input type="text"
-										class="form-control" name="city" id="city"
-										placeholder="ex)서울시 강남구" value="${board.city}" readonly>
+									<h5>
+										<b>판매자 거주지</b>
+									</h5> 
+									<input type="text"
+										class="form-control" name="city" id="city"  value="${board.city}"
+										placeholder="ex)서울시 강남구">
 								</div>
 							</div>
 							
-							
-							   <!-- 첨부 버튼 -->
-            <div id="attach" class="form-group">
-                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">사진등록</label></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 8장까지 업로드 가능합니다.)
-                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
-            </div>
+			<!-- 첨부 버튼 -->
+			<div id="attach" class="form-group" style="width: 700px">
+				<span class="label label-primary "><label
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b;margin-left:14px; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞
+				이미지는 대표이미지입니다. (최대 <b>5장</b>까지 등록 가능합니다.) <input id="uploadInputBox"
+					style="display: none" type="file" value="등록" name="filedata" />
+			</div>
            <br/>
             
-            <!-- 미리보기 영역 -->
+               <!-- 미리보기 영역 -->
             <div class="form-group">
-            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
-            </div>
-		    <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
-		    
-		    <hr />
-							<div class="col-md-12">
+            <div class="row">
+            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
+
+				<c:forEach var="name" items="${file}" varStatus="status">            
+				
+				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
+                     <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="130px;" height="115px;"/>
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
+                        
+                </c:forEach>           
+            
+           </div></div>
+            <br/>
 								<div class="form-group">
-									<label for="firstname"></label> <input type="text"
+									<h5>
+										<b>&ensp;&ensp;글 제목</b>
+									</h5>	<input type="text"
 										class="form-control" name="postTitle" id="postTitle"
-										="${board.postTitle}">
-								</div>								
-								<div class="col-md-13">
-									<div class="form-group">
-										<label for="streetaddress"></label>
-										<textarea class="form-control" rows="11" name="postContent"
-											placeholder="내용을 입력해주세요" value="${board.postContent}"></textarea>
+										placeholder="제목을 입력해주세요" style="width: 710px;margin-left:17px" maxlength="12" value="${board.postTitle}">
+								</div>	
+							
+										<div class="form-group">
+									<h5>
+										<b>&ensp;&ensp;글 내용</b>
+									</h5><textarea class="form-control" name="postContent" cols="20" style="width: 710px;margin-left:17px"  rows="11"
+											placeholder="내용을 입력해주세요">${board.postContent }</textarea>
 									</div>
-								</div>
+									
 							</div>
 							</div>
-							<div class="w-100"></div>
-						
-						<p align="center">
-							<a class="btn btn-primary py-3 px-4" id="addproduct">등록하기</a>
-							&nbsp;<a href="#" class="btn btn-primary py-3 px-4">취소하기</a>
-						</p>
-						
-						
+
+							    <input type="hidden" name="postNo" value="${board.postNo }" />		    	
+							    <input type="hidden" id="multiFile" name="multiFile" />
+							    <input type="hidden" id="deleteFile" name="deleteFile" />	
+		              <div class="col-md-12">
+	
+							<button  type="button" class="btn btn-default py-3 px-4 col-md-12" id="addproduct">수정</button>
+							<div  align="right" style="margin-top:10px">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+					  </div>						
+		
+						<br/><br/><br/>
+				
 					</form>
 					<!-- ////////////////////////////form tag end //////////////////////////////-->
 				</div>
@@ -267,20 +278,20 @@
 
 
 
-	<script src="../../resources/prodmenu/js/popper.min.js"></script>
-	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
-	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-	<script src="../../resources/prodmenu/js/aos.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
-	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
-	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
-	<script src="../../resources/prodmenu/js/main.js"></script>
-	<!-- ////////////////////달력 /////////////////////////////-->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 	<script src="../../resources/prodmenu/js/popper.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/aos.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script> -->
+<!-- 	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> --> -->
+<!-- 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/main.js"></script> -->
+<!-- 	<!-- ////////////////////달력 /////////////////////////////--> -->
+<!-- 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 <script>
 	   //============= "다중파일업로드 파일명만 저장해서 value" =============   

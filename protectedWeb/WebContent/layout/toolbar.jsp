@@ -167,7 +167,7 @@
                 <li class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
+	                <a class="dropdown-item" href="/market/listMarket">보호마켓</a>
 	                <a class="dropdown-item" href="/product/listProduct">스토어</a>
                   </div>
                 </li>

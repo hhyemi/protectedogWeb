@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>보호할개 · 구매하기</title>
+<title>보호할개 · 스토어</title>
 <!--  bootstrap CDN  -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- IM PORT 추가 -->
@@ -51,10 +51,10 @@
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-		$("a[href='#' ]").on("click", function() {
+		$("#btn-cancle").on("click", function() {
 			//Debug..
 			//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
-			$("form")[0].reset();
+			history.go(-1)
 		});
 	});
 
@@ -87,12 +87,12 @@
 		//$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
 	}
 </script>
-</head>
-
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
+</head>
+
+<body>
 
 	<!--■■■■■■■■■■■■■■■■■■■■ Sub Toolbar Start	■■■■■■■■■■■■■■■■■■■■-->
 	<body class="goto-here">
@@ -175,7 +175,7 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">구매회원</label> <input type="text"
+									<label for="firstname"><b>구매회원</b></label> <input type="text"
 										class="form-control" name="id" id="id"
 										placeholder="상품명을 입력해주세요" value="${sessionScope.user.id }"
 										readonly>
@@ -184,7 +184,7 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="phone">연락처&nbsp;&nbsp;</label> <input type="text"
+									<label for="phone"><b>연락처</b>&nbsp;&nbsp;</label> <input type="text"
 										class="form-control" name="phone"
 										value="${ sessionScope.user.phone }" readonly>
 								</div>
@@ -200,7 +200,7 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">받는이</label> <input type="text"
+									<label for="firstname"><b>받는이</b></label> <input type="text"
 										class="form-control" name="receiverName" id="receiverName"
 										placeholder="배송받는분 이름을 입력해주세요">
 								</div>
@@ -211,62 +211,61 @@
 							<div class="form-group">
 
 								<div class="row">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="receiverPhone1" id="receiverPhone1">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="receiverPhone1" class="form-control" style="width: 160px" id="receiverPhone1">
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-									</select> &nbsp;&nbsp; <input type="text" id="receiverPhone2" name="receiverPhone2"
-										placeholder="번호" maxlength="4" style="height: 35px;">
-									<input type="text" id="receiverPhone3" name="receiverPhone3"
-										placeholder="번호" maxlength="4" style="height: 35px;">
+									</select> &nbsp;&nbsp; <input type="text" class="form-control" id="receiverPhone2" name="receiverPhone2"
+										placeholder="번호" maxlength="4" style="height: 35px;width: 160px">
+									&nbsp;&nbsp; <input type="text" id="receiverPhone3" class="form-control"  name="receiverPhone3"
+										placeholder="번호" maxlength="4" style="height: 35px;width: 160px">
 								</div> 
 							</div>
 
 							<div class="w-100"></div>
 							<br />
 							<div class="form-group">
-							<div class="row">
+							<div class="row" style="padding-left: 10px">
 								&nbsp;<div class="col-md-8">
-									<label for="firstname">주소&nbsp;|&nbsp;우편번호</label> 
+									<label for="firstname"><b>주소&nbsp;|&nbsp;우편번호</b></label> 
+								<button type="button" class="btn btn-default" onclick="sample6_execDaumPostcode()" >우편번호 찾기</button>
 									<input type="text" class="form-control" id="sample6_postcode"
-										placeholder="번호" style="height: 35px;" readonly name="receiverAddr1">
+										placeholder="번호" style="height: 35px;margin-bottom: 10px" readonly name="receiverAddr1">
 								</div>
-								
-								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-								<div class="w-100"></div>
+	
 								&nbsp;<div class="col-sm-4">
-								<input type="text" class="form-control" id="sample6_address" placeholder="주소" style="height: 35px;" readonly
+								<input type="text" class="form-control" id="sample6_address" placeholder="주소" style="height: 35px;margin-left: 5px" readonly
 								name="receiverAddr2">
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-4" style="padding-left: 0px">
 									<input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목"
 										style="height: 35px;" readonly
 										name="receiverAddr3">
 								</div>
 								 <div class="col-sm-8">
-									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" style="height: 35px;"
+									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" style="height: 35px;margin-left: 5px;margin-top:10px"
 									name="receiverAddr4">
 								</div>
 							</div>
 							</div>
-
+							<p>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">배송요청사항</label> <input type="text"
+									<label for="firstname"><b>배송요청사항</b></label> <input type="text"
 										class="form-control" name="orderRequest" id="orderRequest"
 										placeholder="배송요청사항을 입력해주세요">
 								</div>
 							</div>
 							<hr />
 							<div class="w-100"></div>
+							<p>
 
-							&nbsp;&nbsp;&nbsp;
-							<div class="col-md-13">
+							<div class="col-md-13" style="margin-left: 16px">
 								<div class="form-group">
-									<label for="streetaddress">결제수단</label> <select
+									<label for="streetaddress"><b>결제수단</b></label> <select
 										class="form-control" name="paymentCode" id="paymentCode">
 										<option value="1">무통장결제</option>
 										<option value="2">카드결제</option>
@@ -275,8 +274,8 @@
 							</div>
 						</div>
 						<p align="center">
-						<button class="btn btn-default" id="addproduct">등록하기</button>
-							&nbsp;<button class="btn btn-default" id="#">취소하기</button>
+						<button class="btn btn-default" id="addproduct">구매</button>
+							&nbsp;<button class="btn btn-default" id="btn-cancle">취소</button>
 						</p>
 
 						<!-- ////////////////////////////form tag end //////////////////////////////-->

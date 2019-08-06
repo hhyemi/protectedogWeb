@@ -17,7 +17,7 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>보호할개 · 구매내역 상세조회</title>
+<title>보호할개 · 스토어</title>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <!--  Google MDL -->
@@ -70,14 +70,36 @@
 
 th {
 	background-color: #F0F0F0;
+	font-size: 15px;
+	text-align: center
 }
 
-#list{margin-left: 340px;
-	margin-bottom: 100px;
-	margin-top:10px;}
-
-
-
+/* #list{margin-left: 340px; */
+/* 	margin-bottom: 100px; */
+/* 	margin-top:10px;} */
+.mdl-data-table th {
+    position: relative;
+    vertical-align: bottom;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0;
+    height: 48px;
+    }
+.mdl-data-table th {
+    padding: 0 18px 12px 18px;
+    text-align: center; 
+}
+.mdl-data-table {
+    position: relative;
+    /* border: 1px solid rgba(0,0,0,.12); */
+    border-collapse: collapse;
+    white-space: nowrap;
+    background-color: #fff;
+}
+.mdl-data-table td {
+    text-align: center !important; 
+}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -127,49 +149,12 @@ th {
 
 	});
 </script>
-</head>
-
-<body>
-
-	<!-- 	<!--/////////////////////// form start /////////////////////////////////-->
-	<!-- 	<form class="form-inline" name="detailForm"> -->
-	<!-- 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	<!-- 	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;"> -->
-	<!-- 	<tr> -->
-
-	<!-- 		<td align="right"> -->
-
-	<!-- 			<select name="searchCondition" class="ct_input_g" style="width:80px"> -->
-	<%-- 				<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option> --%>
-	<%-- 				<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option> --%>
-	<%-- 				<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option> --%>
-	<!-- 			</select> -->
-
-	<%-- 			<input type="text" name="searchKeyword" value="${search.searchKeyword}" class="ct_input_g" style="width:200px; height:19px" /> --%>
-
-	<!-- 		</td> -->
-
-	<!-- 		<td align="right" width="70"> -->
-	<!-- 			<table border="0" cellspacing="0" cellpadding="0"> -->
-	<!-- 				<tr> -->
-	<!-- 					<td width="17" height="23"> -->
-	<!-- 						<img src="/images/ct_btnbg01.gif" width="17" height="23"> -->
-	<!-- 					</td> -->
-	<!-- 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;"> -->
-	<!-- 						<a href="javascript:fncGetList('1');">검색</a> -->
-	<!-- 						검색 -->
-	<!-- 					</td> -->
-	<!-- 					<td width="14" height="23"> -->
-	<!-- 						<img src="/images/ct_btnbg03.gif" width="14" height="23"> -->
-	<!-- 					</td> -->
-	<!-- 				</tr> -->
-	<!-- 			</table> -->
-	<!-- 		</td> -->
-	<!-- 	</tr> -->
-	<!-- </table> -->
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
+</head>
+
+<body>
 
 
 	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -192,10 +177,10 @@ th {
 		<table id="order" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
 			<thead>
 				<tr>
-					<th width="10%">주문번호</th>
-					<th width="10%">주문상품 정보</th>
-					<th width="10%">결제금액</th>
-					<th width="10%">상태</th>
+					<th width="10%"><h6>주문번호</h6></th>
+					<th width="10%" ><h6>주문상품 정보</h6></th>
+					<th width="10%"><h6>결제금액</h6></th>
+					<th width="10%"><h6>상태</h6></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -227,64 +212,57 @@ th {
 			<tbody>
 				<tr>
 					<td align="center">
-						상품금액&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${order.orderProd.discountPrice}" pattern="#,###" />원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<h5>상품금액&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${order.orderProd.discountPrice}" pattern="#,###" />원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<img src="/resources/file/fileShop/gop.png" width="20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;구매수량&nbsp;&nbsp;&nbsp;&nbsp;
 						${order.orderQuantity}개
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><fmt:formatNumber value="${order.totalPrice}" pattern="#,###" />원</b>
-
+						</h5>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<hr width="700px">
 		<br /> <br />
-		<table id="order" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
-			<thead>
-				<tr>
-					<th width="10%">주문자 정보</th>
-					<th width="10%">연락처</th>
-					<th width="10%">주문일자</th>
+		<div class="col-md-7" >
+	                   	<div class="row" >
+				  		<div class="col-md-2 "><font size="4px"><strong>주문자</strong></font></div>
+						<div class="col-md-4 "><font size="4px"> ${order.id}</font></div>
+			
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>받는이</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.receiverName }</font></div>
+					</div>	
+					<p/>
+		
+	                   	<div class="row">
+				  		<div class="col-md-2 "><font size="4px"><strong>연락처</strong></font></div>
+						<div class="col-md-4 "><font size="4px"> ${order.phone}</font></div>
+			
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>요청사항</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.orderRequest }</font></div>
+					</div>	
+							<p/>
+		
+		
+	                   	<div class="row">
+				  		<div class="col-md-2 "><font size="4px"><strong>주문일자</strong></font></div>
+						<div class="col-md-4 "><font size="4px"> ${order.id}			 <fmt:formatDate pattern="yyyy-MM-dd"
+							value="${order.orderDate}" />	</font></div>
+			
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>결제수단</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">		<c:if test="${order.paymentCode == 1 }">
+			무통장</c:if> <c:if test="${order.paymentCode == 2}"> 
+ 		 신용카드</c:if>	</font></div>
+					</div>						
 
-				</tr>
-			</thead>
-			<tbody>
-				<tr align="center">
-					<td scope="row">${order.id}</th>
-					<td>${order.phone}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${order.orderDate}" /></td>
+    </div>
+		  <br/><br/>		
 
-				</tr>
-			</tbody>
-		</table>
 		<hr width="700px">
-		<div class="container" align="center">
-			<table id="order" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
-				<thead>
-					<tr>
-						<th width="10%">수령자이름</th>
-						<th width="10%">연락처</th>
-						<th width="10%">주소</th>
-						<th width="10%">배송요청사항</th>
-						<th width="10%">결제수단</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr align="center">
-						<td scope="row">${order.receiverName }</th>
-						<td>${order.receiverPhone}</td>
-						<td>${order.receiverAddr}</td>
-						<td>${order.orderRequest}</td>
-						<td><c:if test="${order.paymentCode == 1 }">
-	무통장</c:if> <c:if test="${order.paymentCode == 2}"> 
- 신용카드</c:if></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+
 	</div>
+	<center>
 	<button type="button" class="btn btn-default" id="list">목록</button>
-	
+	</center>
 <br/><br/><br/>
 		<jsp:include page="/layout/footer.jsp"/>
 	<!--///////////////////////////////// form end /////////////////////////////////////-->

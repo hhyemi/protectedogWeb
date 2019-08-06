@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개 · 주문내역 조회</title>
+<title>보호할개 · 스토어</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -23,13 +23,13 @@
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
 
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
 </head>
 
 <body id="page-top">
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--====================================================
                        HOME-P
@@ -104,36 +104,45 @@
 								<td class="actions">
 								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
 								<c:if test="${order.orderCode =='1'}">
-								결제완료<br/>
-								<span style="cursor:pointer">주문취소</span></c:if>
+								<font color="#38b00c">결제완료</font><br/>
+								<span style="cursor:pointer"><font color="red">주문취소</font></span></c:if>
 								<c:if test="${order.orderCode =='2'}">
-								배송중</c:if>
+								<font color="#62ab4d">배송중</font></c:if>
 								<c:if test="${order.orderCode =='3'}">
-								배송완료</c:if>
+								<b>배송완료</b></c:if>
 								<c:if test="${order.orderCode =='4'}">
-								주문취소완료</c:if></td>
+								<b>취소완료</b></c:if></td>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
 						</c:forEach>
 
 					</tbody>
-
 					<tfoot>
 						<tr>
-<!-- 							<td><a class="btn btn-general btn-white"><i -->
-<!-- 									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td> -->
+							<td><a href="/product/listProduct" class="btn btn-general btn-white"><i
+									class="fa fa-angle-left"></i>상품리스트로</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
 							<td></td>
 						</tr>
 					</tfoot>
+<!-- 					<tfoot> -->
+<!-- 						<tr> -->
+<!-- <!-- 							<td><a class="btn btn-general btn-white"><i --> 
+<!-- <!-- 									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td> --> 
+<!-- 							<td colspan="2" class="hidden-xs"></td> -->
+<!-- 							<td class="hidden-xs text-center"><strong></strong></td> -->
+<!-- 							<td></td> -->
+<!-- 						</tr> -->
+<!-- 					</tfoot> -->
 				</table>
 			</div>
 		</section>
 	</form>
-	
+	<div style="padding-left: 750px">
 		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	</div><br/><br/>
 	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->
