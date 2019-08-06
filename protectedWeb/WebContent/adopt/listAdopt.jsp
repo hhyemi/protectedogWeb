@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 
@@ -361,7 +361,7 @@
 								
 								if( postSize == 1 ) {
 
-									$('#total').text('전체 '+data.totalCount+'건');
+									$('#total').text('전체 '+data.totalCount+' 건');
 								}
 								for( i=0; i<data.list.length; i++ ){
 									
@@ -393,7 +393,7 @@
 								}
 								if(str!=""){
 									$('#listAdoptJSON').children().remove();
-									$('.text-primary').text('전체 '+data.totalCount+' 건');
+// 									$('.text-primary').text('전체 '+data.totalCount+' 건');
 								}
 								if( postSize == 1 && data.totalCount == 0 ){
 									console.log('결과없음'+data.totalCount);
@@ -403,6 +403,8 @@
 														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
 								                    	+'</div>';
 									}else {
+										
+										$('#searchEmpty').remove();
 										displayValue = 
 											'<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
 											+'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
@@ -433,9 +435,9 @@
 			//엔터검색
 			$('#searchKeyword').keydown( function(e) {
 				if(e.keyCode == 13) {
-					postSize = 1;
-					listAdopt(postSize,"dd");
-				
+// 					postSize = 1;
+// 					listAdopt(postSize,"dd");
+					fncGetList(1);
 // 					console.log("엔터 "+$( '#searchKeyword').val());
 //  					return;
 // 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
@@ -554,6 +556,9 @@
 // 			);
 // 		}
 		
+// 		if(${search.areaCondition != null }){
+// 			$('select[name=areaCondition]').val('${search.areaCondition}').prop('selected', true);
+// 		}
 	
 	</script>
 	

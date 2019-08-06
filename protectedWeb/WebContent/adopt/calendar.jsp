@@ -14,6 +14,9 @@
 
 <style type="text/css">
 
+.event-body img{
+	max-height: 300px;
+}
 
 .waves-effect>span {
 	background-color: #f04f23;
@@ -1478,7 +1481,7 @@ h2{
   font-size: 18px;
   margin-bottom: 5px;
 }
-.modal-body{
+.modal-body:not{
   background: white;
   border-radius: 10px;
 }
@@ -1765,7 +1768,7 @@ var fileNameArray = new Array();
 				    
 					if( date > today ){
 						swal({
-					           text: "오늘 날짜까지 선택 가능합니다.",
+					           text: "어제까지 선택 가능합니다.",
 					           dangerMode: true,
 					           buttons: {
 										 catch: {
@@ -2501,8 +2504,8 @@ var fileNameArray = new Array();
 	    }).then((willDelete) => {
 	           if (willDelete) { 
 	        	   swal("삭제가 완료되었습니다!", {
-	        		   buttons: "확인",
 	                   icon: "success",
+	                   button: "확인",
 	                 }).then((value) => {
 	                	 self.location = "/adopt/updateStatusCode?postNo="+postNo;
 	                 });

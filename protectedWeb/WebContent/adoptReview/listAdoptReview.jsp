@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 
@@ -41,7 +41,7 @@
 		}
 		
  		.listImg {
- 			max-height: 330px;  
+ 			max-height: 300px;  
  			min-height: 300px;  
  			min-width: wrap; 
  			max-width: wrap; 

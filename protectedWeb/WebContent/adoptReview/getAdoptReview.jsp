@@ -46,7 +46,7 @@ img{max-width: 600px;}
 		
 		<form name="info">
 			<input type="hidden" name="postNo" value="${board.postNo}" />
-			<input type="hidden" name="boardCode" value="IS" />
+			<input type="hidden" name="boardCode" value="AR" />
 
 			<h3>
 				<b>${board.postTitle}</b>
@@ -109,6 +109,14 @@ img{max-width: 600px;}
 	
 	<script type="text/javascript">
 
+	
+	var commentData =  
+	 {
+	    commentContent       : $("input[name=commentContent]").val(),
+	    postNo         : $("input[name=postNo]").val(),
+	    boardCode       : $("input[name=boardCode]").val()
+	 } ;
+	
 	$(function() {
 		
 		
@@ -185,6 +193,8 @@ img{max-width: 600px;}
 	       ]
 	     }); 
 	 }    
+	 
+	 
      
 	</script>
 
