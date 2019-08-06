@@ -41,9 +41,9 @@ public class InfomationShareController {
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
 	
-	@Autowired
-	@Qualifier("reCommentServiceImpl")
-	private ReCommentService reCommentService;
+//	@Autowired
+//	@Qualifier("reCommentServiceImpl")
+//	private ReCommentService reCommentService;
 	
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -175,7 +175,7 @@ public class InfomationShareController {
 		searchMap.put("postNo",postNo);
 		searchMap.put("startRowNum",search.getStartRowNum());
 		searchMap.put("endRowNum",search.getEndRowNum());
-		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap);
+//		Map<String, Object> reCommmetMap = reCommentService.listReComment(searchMap);
 
 		// 페이징 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -188,11 +188,11 @@ public class InfomationShareController {
 		
 		// 댓글 디버깅
 		System.out.println(" getInfo listComment : " +map.get("list"));
-		System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
+//		System.out.println(" getInfo listReComment : " +reCommmetMap.get("list"));
 		System.out.println(" getInfo totalCount : " +map.get("totalCount"));
 		
 		model.addAttribute("list", map.get("list"));
-		model.addAttribute("relist", reCommmetMap.get("list"));
+//		model.addAttribute("relist", reCommmetMap.get("list"));
 		model.addAttribute("totalCount", map.get("totalCount"));
 		model.addAttribute("board", board);
 		
