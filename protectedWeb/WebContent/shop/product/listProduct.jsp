@@ -41,46 +41,36 @@
 	max-width: 200px;
 	min-width: 200px;
 }
-
 .card {
 	min-height: 470px;
 	max-height: 470px;
 	
 }
-
 .detailtext {
 	min-height: 80px;
 	max-height: 80px;
 }
-
 #searchKeyword {
 	height: 40px;
 	width: 150px;
 }
-
 #searchSubmmit {
 	width: 60px;
 	height: 40px;
 	border-radius: 0px 15px 15px 0px;
 	border: 1px solid #D3D3D3;
 }
-
 #searchCondition {
 	height: 40px;
 	border-radius: 15px 0px 0px 15px;
 }
-
 #selectPageSize {
 	height: 30px;
 }
-
-
 .btn-default {
 	height: 30px;
 	color: white;
 }
-
-
 </style>
 
 
@@ -145,6 +135,9 @@
 						</c:if>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
 							<a class="list-group-item" id="adminOrder">구매상태관리</a>
+						</c:if>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a class="list-group-item" id="cancleOrder">취소주문관리</a>
 						</c:if>
 					</div>
 
@@ -263,8 +256,6 @@
 
 	<script type="text/javascript">
 	
-
-
 		//=============    상품상세조회(썸네일)  Event  처리 		=============
 		//============= 썸네일 사진 클릭 Event  처리 =============	
 		$(function() {
@@ -277,7 +268,6 @@
 								"/product/getProduct?prodNo="
 										+ $(this).children("input").val());
 					});
-
 			$(".detailprod").on(
 					"click",
 					function() {
@@ -288,65 +278,56 @@
 										+ $(this).children("input").val());
 					});
 		});
-
 		// 카테고리 bind
-
 		$(function() {
 			//>전체 PROD_NO DESC
 			$("#total").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=0"
-
 			});
 			//사료
 			$("#one").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=1"
-
 			});
 			//간식
 			$("#two").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=2"
-
 			});
 			//의류
 			$("#three").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=3"
-
 			});
 			//베스트상품
 			$("#four").on("click", function() {
 				//alert("");
 				self.location = "/product/listProduct?prodCondition=4"
-
 			});
 			//관리자 상품조회
 			$("#admin").on("click", function() {
 				//alert("");
 				self.location = "/product/listAdminProduct"
-
 			});
 			//관리자 구매관리
 			$("#adminOrder").on("click", function() {
 				//alert("");
 				self.location = "/order/listAdminOrder"
-
 			});
 			$(".orderhistory").on("click", function() {
 				//alert("");
-
 				self.location = "/order/listOrder"
-
 			});
-
+			//취소주문내역
+			$("#cancleOrder").on("click", function() {
+				//alert("");
+				self.location = "/order/listCancleOrder"
+			});
 		});
-
 	</script>
 	<script>
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============
-
 	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
 	function fncGetList(currentPage) {
 		//document.getElementById("currentPage").value = currentPage;
@@ -355,16 +336,12 @@
 		
 		$("form").attr("method", "POST").attr("action","/product/listProduct").submit();
 	}
-
 	//============= Event 처리 및  연결 =============
 	$(function() {
-
 		$("#searchSubmmit").on("click", function() {
 			fncGetList(1);
 		});
-
 		
-
 	});
 </script>
 </body>

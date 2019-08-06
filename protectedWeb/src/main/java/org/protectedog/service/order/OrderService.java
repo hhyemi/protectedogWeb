@@ -1,5 +1,6 @@
 package org.protectedog.service.order;
 
+import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
@@ -28,6 +29,8 @@ public interface OrderService {
 	
 	//관리자주문내역 리스트
     public Map<String,Object> listAdminOrder(Search search, String id) throws Exception;
+    //주문취소리스트
+    public Map<String,Object> listCancleOrder(Search search, String id) throws Exception;
 	
 
 }

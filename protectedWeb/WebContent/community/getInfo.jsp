@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 
-<title>보호할개 · 정보공유 조회</title>
+<title>보호할개 · 정보공유</title>
 <!--  meta  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -104,7 +104,7 @@ img{max-width: 600px;}
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
-	
+<%-- 	<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>	 --%>
 	<script type="text/javascript">
 
 	$(function() {

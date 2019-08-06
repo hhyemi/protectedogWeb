@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>구매내역</title>
+<title>보호할개 · 주문내역 조회</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -102,16 +102,16 @@
 								
 								</td>
 								<td class="actions">
+								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
 								<c:if test="${order.orderCode =='1'}">
-								결제완료</c:if>
+								결제완료<br/>
+								<span style="cursor:pointer">주문취소</span></c:if>
 								<c:if test="${order.orderCode =='2'}">
 								배송중</c:if>
 								<c:if test="${order.orderCode =='3'}">
 								배송완료</c:if>
 								<c:if test="${order.orderCode =='4'}">
-								취소</c:if>
-								<c:if test="${order.orderCode =='5'}">
-								구매후기 수정</c:if></td>
+								주문취소완료</c:if></td>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
@@ -121,8 +121,8 @@
 
 					<tfoot>
 						<tr>
-							<td><a href="#" class="btn btn-general btn-white"><i
-									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td>
+<!-- 							<td><a class="btn btn-general btn-white"><i -->
+<!-- 									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td> -->
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
 							<td></td>
@@ -153,8 +153,18 @@
 		//alert($(this).children("input").val())
 				$(self.location).attr("href","/order/getOrder?orderNo="+ $(this).children("input").val());
 			});
+
 	
  	});	 
+		
+		$( function(){
+			
+			$("td:nth-child(5) span:contains('주문취소')").on("click", function(){
+				self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=4";
+			});
+			
+		});
+
 	
 	
 

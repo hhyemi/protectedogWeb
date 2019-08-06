@@ -14,6 +14,9 @@
 
 <style type="text/css">
 
+.event-body img{
+	max-height: 300px;
+}
 
 .waves-effect>span {
 	background-color: #f04f23;
@@ -35,6 +38,9 @@
 }
 .fc-day-top{
 	padding-bottom: 0px !important;
+}
+.col-md-10 {
+	padding-right: 15px;
 }
 
 
@@ -1478,7 +1484,7 @@ h2{
   font-size: 18px;
   margin-bottom: 5px;
 }
-.modal-body{
+.modal-body:not{
   background: white;
   border-radius: 10px;
 }
@@ -1639,7 +1645,9 @@ h2{
 
 
 <script>
-
+var files = {};
+var previewIndex = 0;
+var fileNameArray = new Array();
 
 	jQuery(document).ready(function(){
 
@@ -1731,8 +1739,7 @@ h2{
 											        postNo: value[i].postNo,
 								       			}); 
 								        	}
-								        	
-// 									        console.log(events) 
+								        
 							        	}); 
 							       		callback(events); 
 							    }, 
@@ -1763,7 +1770,7 @@ h2{
 				    
 					if( date > today ){
 						swal({
-					           text: "오늘 날짜까지 선택 가능합니다.",
+					           text: "오늘까지 선택 가능합니다.",
 					           dangerMode: true,
 					           buttons: {
 										 catch: {
@@ -1778,7 +1785,7 @@ h2{
 							$("#add-event")[0].reset();
 							$("#preview").children().remove();
 							$('#confirmBtn').text('등록');
-							
+							files = {};
 							
 							$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
 
@@ -1817,7 +1824,8 @@ h2{
 					}
 				},
 				eventClick: function(event, jsEvent, view) {
-					
+					$('#updateMissing').remove();
+					 $('#delMissing').remove();
 						jQuery('.event-title').html(
 													"<div class='row'>"
 													+"<div class='col-md-6' float='left' >사례금: "+(event.dogPay).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원</div>"
@@ -1827,7 +1835,6 @@ h2{
 													
 													"<div class='col-md-12' style='padding:0px;'>"
 													+"<img src='" + event.imageurl + "' width='100%' height='100%'>"
-// 													+"<br/><br/>실종지역: "+event.realTitle+"<br/>"
 													+"<input type='hidden' name='id' value='"+event.id+"'>"
 													
 													
@@ -1845,7 +1852,7 @@ h2{
 													+"</div>"
 													+"<div class='row'>"
 												  		+"<div class='col-md-2 '><strong>견종</strong></div>"
-														+"<div class='col-md-4 '>"+event.dogBreed+"</div>"
+														+"<div class='col-md-4 ' style='padding-right:0px;'>"+event.dogBreed+"</div>"
 												  		+"<div class='col-md-2 ' style='padding-left:0px;'><strong>성별</strong></div>"
 														+"<div class='col-md-4 '>"+event.dogGender+"</div>"
 													+"</div>"
@@ -1866,18 +1873,12 @@ h2{
 						);
 						
 						 if ( event.id == $('#sessionId').val() ){
-							 if ( $('#delMissing').length > 0  ) {
-								 $('#updateMissing').remove();
-								 $('#delMissing').remove();
-							 }
 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="updateMissing" data-dismiss="modal">수정</button>'
 													 +'<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
-// 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 } else if ( ${sessionScope.user.role == 'admin'}) {
 							 $('#confirmFooter').prepend('<button type="button" class="btn btn-default" id="delMissing" data-dismiss="modal">삭제</button>');
 						 }
 						
-// 						jQuery('.event-body').html(event.description);
 						jQuery('.eventUrl').attr('href',event.url);
 						jQuery('#modal-view-event').modal();
 						
@@ -1899,9 +1900,9 @@ h2{
 	  //============= "다중파일업로드"  Event 처리 및  연결 =============      
 
 	  //임의의 file object영역
-	 var files = {};
-	 var previewIndex = 0;
-	 var fileNameArray = new Array();
+// 	 var files = {};
+// 	 var previewIndex = 0;
+// 	 var fileNameArray = new Array();
 	 
 	 // image preview 기능 구현
 	 // input = file object[]
@@ -2169,7 +2170,7 @@ h2{
 
 		if(parseInt(removeCommas($(this).val())) > 300000 ){
 			swal({
-		           text: "제한금액을 초과하였습니다.",
+		           text: "제한금액(30만원)을 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -2177,11 +2178,9 @@ h2{
 							 }
 				   },
 		     });
-// 			$("span[name=dogPay]").text('100만원 이상은 입력하실 수 없습니다.');
 			$(this).val('300000');
 			$(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));  
-// 		}else{
-// 			$("span[name=dogPay]").text('');
+
 		}
 	});
 	
@@ -2197,9 +2196,6 @@ h2{
 				   },
 		     });
 			$("input[name=locationKr]").val($("input[name=locationKr]").val().toString().substring(0,30));
-// 			$("span[name=locationKr]").text('30자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=locationKr]").text('');
 		}
 	});
 	
@@ -2215,9 +2211,6 @@ h2{
 				   },
 		     });
 			$("input[name=dogBreed]").val($("input[name=dogBreed]").val().toString().substring(0,10));
-// 			$("span[name=dogBreed]").text('10자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=dogBreed]").text('');
 		}
 	});
 
@@ -2233,9 +2226,6 @@ h2{
 				   },
 		     });
 			$("input[name=dogStatus]").val($("input[name=dogStatus]").val().toString().substring(0,20));
-// 			$("span[name=dogStatus]").text('20자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=dogStatus]").text('');
 		}
 	});
 
@@ -2251,9 +2241,6 @@ h2{
 				   },
 		     });
 			$("input[name=dogChar]").val($("input[name=dogChar]").val().toString().substring(0,20));
-// 			$("span[name=dogChar]").text('20자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=dogChar]").text('');
 		}
 	});
 	
@@ -2269,9 +2256,6 @@ h2{
 				   },
 		     });
 			$("textarea[name=postContent]").val($("textarea[name=postContent]").val().toString().substring(0,100));
-// 			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
-// 		}else{
-// 			$("span[name=postContent]").text('');
 		}
 	});
 	
@@ -2293,7 +2277,6 @@ h2{
 		        	   $("input[name=dogPay]").focus();
 		           }
 		      });
-// 			$("input[name=dogPay]").focus();
 			return;
 		} else {
 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
@@ -2313,7 +2296,6 @@ h2{
 		        	   $("input[name=locationKr]").focus();
 		           }
 		      });
-// 			$("input[name=locationKr]").focus();
 			return;
 		}
 		if( $(".preview-box").length == 0 ){
@@ -2347,7 +2329,6 @@ h2{
 		        	   $("input[name=locationKr]").focus();
 		           }
 		      });
-// 			$("input[name=dogBreed]").focus();
 			return;
 		}
 		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
@@ -2365,7 +2346,6 @@ h2{
 		        	   $("input[name=dogStatus]").focus();
 		           }
 		      });
-// 			$("input[name=dogStatus]").focus();
 			return;
 		}
 		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
@@ -2383,7 +2363,6 @@ h2{
 		        	   $("input[name=dogChar]").focus();
 		           }
 		      });
-// 			$("input[name=dogChar]").focus();
 			return;
 		}
 		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
@@ -2401,7 +2380,6 @@ h2{
 		        	   $("textarea[name=postContent]").focus();
 		           }
 		      });
-// 			$("textarea[name=postContent]").focus();
 			return;
 		}
 		
@@ -2500,6 +2478,7 @@ h2{
 	           if (willDelete) { 
 	        	   swal("삭제가 완료되었습니다!", {
 	                   icon: "success",
+	                   button: "확인",
 	                 }).then((value) => {
 	                	 self.location = "/adopt/updateStatusCode?postNo="+postNo;
 	                 });

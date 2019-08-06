@@ -40,7 +40,7 @@ public class NewsRestController {
 		if(search.getSearchKeyword() == "" ) {
 			search.setSearchKeyword("반려동물");
 		}
-		System.out.println("searchKeyword before : " + search.getSearchKeyword());
+		System.out.println("searchKeyword after : " + search.getSearchKeyword());
 		
 		try {
 			String text = URLEncoder.encode(search.getSearchKeyword(), "UTF-8");

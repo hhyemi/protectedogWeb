@@ -58,6 +58,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 }
 /* <!-- 정보공유 스타일 --> */
 .postTitle:hover{cursor:pointer;color:#F04F23}
+#newstd{min-width: 306px;max-width : 306px;}
+.service-h-desc{min-height: 602px;}
 /*
 .adopt {
 	height: 10vh;
@@ -125,7 +127,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 <!-- ToolBar Start /////////////////////////////////////-->
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
 <!-- ToolBar End /////////////////////////////////////-->
 </head>
 <body>
@@ -211,7 +212,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	      <div class="container-fluid">
 	        <div class="row" id="rowAdopt">
 	           <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
-	            <h2>분양 · 실종</h2>
+	            <h2><b>분양 · 실종</b></h2>
 	            <div class="heading-border-light"></div> 
 	            <button class="btn btn-general btn-green" role="button" id="AD">분양게시판 바로가기</button>
 	            <button class="btn btn-general btn-white" role="button" id="MS">실종캘린더 바로가기</button>
@@ -232,7 +233,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
       <div class="container-fluid">
         <div class="row" id="rowFunding">
           <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
-            <h2>스토리펀딩</h2>
+            <h2><b>스토리펀딩</b></h2>
             <div class="heading-border-light"></div> 
             <button class="btn btn-general btn-green" role="button" id="vote">투표게시판 바로가기</button>
             <button class="btn btn-general btn-white" role="button" id="fund">후원게시판 바로가기</button>
@@ -264,17 +265,16 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					</div>
 					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
 						<div class="service-h-desc">
-							<h2>정보공유</h2>
+							<h2><b>정보공유</b></h2>
 							<div class="heading-border-light"></div>
-							<p>비트캠프 118기 타이피스트 매력없는 이 혜미 입니다.</p>
 							<div class="service-h-tab">
 								<nav class="nav nav-tabs" id="myTab" role="tablist">
 									<a class="nav-item nav-link active" id="nav-home-tab"
 										data-toggle="tab" href="#nav-home" role="tab"
-										aria-controls="nav-home" aria-expanded="true">HOT개</a> <a
+										aria-controls="nav-home" aria-expanded="true">HOT 개</a> <a
 										class="nav-item nav-link" id="nav-profile-tab"
 										data-toggle="tab" href="#nav-profile" role="tab"
-										aria-controls="nav-profile">사용된 기술</a>
+										aria-controls="nav-profile">뉴스</a>
 
 								</nav>
 								<div class="tab-content" id="nav-tabContent">
@@ -297,65 +297,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	<!--====================================================
                       CLIENT
 ======================================================-->
-	<!--====================================================
-                        OFFER 스토어
-======================================================-->
-	 <section id="comp-offer">
-	 <div class="store">
-      <div class="container-fluid">
-        <div class="row">
-      <div class="col-md-2 col-sm-2 wow fadeInUp" style="padding-left:40px" data-wow-delay="0.2s">
-            <h2>스토어</h2>
-            <div class="heading-border-light"></div> 
-            <button class="btn btn-general btn-green" role="button">보호마켓 바로가기</button>
-            <button class="btn btn-general btn-white" role="button">스토어 바로가기&emsp;  </button>
-          </div>
-          
-         <div class="col-md-3 col-sm-6 wow fadeInUp" style="margin-right: 35px" data-wow-delay="0.4s">
-            <div class="desc-comp-offer-cont" style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Business Management</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>   
-          
-                 
-          <div class="col-md-3 col-sm-6  wow fadeInUp"  style="margin-right: 35px;" data-wow-delay="0.6s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>              
-              <h3>Leadership Development</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-          
-          <div class="col-md-3 col-sm-6 desc-comp-offer wow fadeInUp"  style="margin-right: 35px" data-wow-delay="0.8s">
-            <div class="desc-comp-offer-cont"  style="margin-right: 35px">
-              <div class="thumbnail-blogs">
-                  <div class="caption">
-                    <i class="fa fa-chain"></i>
-                  </div>
-              </div>
-              <h3>Social benefits and services</h3>
-              <p class="desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC. </p>
-              <a href="#"><i class="fa fa-arrow-circle-o-right"></i> Learn More</a>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      </div><br/><br/><br/><br/><br/>
-    </section>
+	
+      <br/><br/><br/><br/><br/>
+
     
 
 	<!--================ start footer Area  =================-->
@@ -487,7 +431,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							 
 							 display += "</tbody>"
 							 		+ "</table>";
-							 
+							 		
 							 $("#nav-home").append(display);
 							 
 							 $( ".postTitle" ).on("click" , function() {
@@ -495,6 +439,64 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							});   
 						}
 					});
+			
+			$.ajax({
+				url : "/News/json/listNews/",
+				method : "POST",
+				data : JSON.stringify({searchKeyword : ""}),
+				dataType : "json",
+				contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json;charset=UTF-8"
+				},
+				success : function(JSONData, status) {
+					
+					//console.log(JSON.stringify(JSONData));
+					
+					var list = JSONData.items;
+					
+					$.each(list, function(index, items) {
+						
+						if(index > 2){
+							return;
+						}
+						//debugger;
+						//console.log("index : " + index );
+						console.log("items : " + JSON.stringify(items) );
+						var title = items.title;
+						var date = new Date(items.pubDate);
+						var convertDate = date.getFullYear() + "-" 
+						+ (date.getMonth()<10?'0':'') + (date.getMonth()+1) + "-" 
+						+ (date.getDate()<10?'0':'') + date.getDate() +" "
+						+ (date.getHours()<10?'0':'') + date.getHours() +":"
+						+ (date.getMinutes()<10?'0':'') + date.getMinutes()  ;
+						
+						$("#nav-profile").append(
+								  "<tr>"
+								+	 "<td id='newstd' class='mdl-data-table__cell--non-numeric'>"
+								+ 		"<a href='javascript:void(0)' class='go'>"+title
+								+ 			"<input type='hidden' name='link' value='"+items.link+"'>"
+								+ 		"</a><br/>"
+								+		convertDate
+								+	 "</td>"
+								+	 "<td class='mdl-data-table__cell--non-numeric'>"
+								+ 		items.description
+								+	 "</td>"
+								+ "</tr>"
+								+ "<hr/>"
+						);						
+					});
+					
+					$("#nav-profile").children("tr").children("td").css("border-bottom","1px solid #F0F0F0").css("padding-top","10px").css("padding-bottom","10px");
+					<%-- linkClick --%>
+					$(document).on("click",".go",function(){
+						
+						window.open($(this).children("input").val(),"new","width=800, height=600, top=100, left=100, toolbar=no, menubar=no, location=no, channelmode=yes");
+						
+					});
+				}
+			});
 // 			■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 정보공유 이벤트 끝 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 			
 		
@@ -535,9 +537,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                        		"\') no-repeat center center;background-size:cover;min-height:300px; max-height:300px; min-width:330px; max-width:330px;\" >"+
 			    					"<input type=\"hidden\" value=\""+adopt.postNo+"\" /></a> ";	    																
 					
-									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
+									display += "<div class=\"text py-3 px-3\"><div id=\"checkPostTitle\" align=\"center\"><font size=\"5\"><b>"+adopt.postTitle+"</b></font></div>"+
 			    						       "<div class=\"row\" style=\"position:relative;height:35px;\">"+						        										
-										       "<div class=\"col-xs-4 col-md-4\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"4\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
+										       "<div class=\"col-xs-5 col-md-5\" align=\"right\" style=\"position:absolute; right:0px; bottom:0px; \" ><font size=\"3\"><b><strong>"+bCode+"</strong></b></font></div></div>";										   				
 
 									display += "</div></div></div>";	
 								 }

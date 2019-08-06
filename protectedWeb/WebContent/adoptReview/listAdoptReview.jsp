@@ -5,14 +5,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양실종 후기</title>
+	<title>보호할개 · 분양실종</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +41,7 @@
 		}
 		
  		.listImg {
- 			max-height: 330px;  
+ 			max-height: 300px;  
  			min-height: 300px;  
  			min-width: wrap; 
  			max-width: wrap; 

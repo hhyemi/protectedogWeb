@@ -5,14 +5,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 
 <html lang="ko">
 	
 <head>
-<title>보호할개 · 분양</title>
+<title>보호할개 · 분양실종</title>
 	<meta charset="utf-8">
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -143,7 +143,7 @@
 		<div class="row">
 	    
 		    <div class="col-md-12 text-left">
-		    	<p style="padding-left: 15px;font-weight: bold;">
+		    	<p style="padding-left: 15px;font-weight: bold;" id="total">
 		    		전체  ${resultPage.totalCount } 건
 		    	</p>
 		    </div>
@@ -335,10 +335,7 @@
 	
 	
 		function listAdopt(postSize, str){
-	// 		console.log("dd "+$("#listAdoptJSON").html());
-	// 		console.log(area+'들어옴'+postSize+", "+str);
-	// 		var sendData = jQuery("form[name=detailForm]").serialize();
-			console.log($("#searchCondition").val()+", "+$("#searchKeyword").val()+", "+area+", "+$("#boardCode").val()+", "+postSize);
+			console.log($("#searchCondition").val()+", "+$("#searchKeyword").val()+", "+$('select[name=areaCondition]').val()+", "+$("#boardCode").val()+", "+postSize);
 			console.log(typeof $("#searchCondition").val());
 			console.log(typeof postSize);
 	  		$.ajax( 
@@ -362,9 +359,13 @@
 	
 								var displayValue = '';
 								
+								if( postSize == 1 ) {
+
+									$('#total').text('전체 '+data.totalCount+' 건');
+								}
 								for( i=0; i<data.list.length; i++ ){
 									
-								
+									
 									var bCode = data.list[i].areaKr.substring( 0, data.list[i].areaKr.indexOf('시')+1 );
 									var sCode = '<img class="listImg" src="../resources/file/fileAdopt/complete.png" style="width:100%;background:url(\'..\/resources\/file\/fileAdopt\/'+data.list[i].mainFile+'\') no-repeat center center;background-size:cover;" onerror="this.src=\'http://placehold.it/400x400\'" />';
 
@@ -392,15 +393,27 @@
 								}
 								if(str!=""){
 									$('#listAdoptJSON').children().remove();
-									$('.text-primary').text('전체 '+data.totalCount+' 건');
+// 									$('.text-primary').text('전체 '+data.totalCount+' 건');
 								}
 								if( postSize == 1 && data.totalCount == 0 ){
-									console.log('결과없음');
+									console.log('결과없음'+data.totalCount);
 									if ( $('#searchKeyword').val()==''){
 										$('#searchEmpty').remove();
 										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
 														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
 								                    	+'</div>';
+									}else {
+										
+										$('#searchEmpty').remove();
+										displayValue = 
+											'<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
+											+'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
+											+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
+							        		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
+							        		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
+							        		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'
+					                    	+'</div>';
+											
 									}
 									
 								}
@@ -422,9 +435,9 @@
 			//엔터검색
 			$('#searchKeyword').keydown( function(e) {
 				if(e.keyCode == 13) {
-					postSize = 1;
-					listAdopt(postSize,"dd");
-				
+// 					postSize = 1;
+// 					listAdopt(postSize,"dd");
+					fncGetList(1);
 // 					console.log("엔터 "+$( '#searchKeyword').val());
 //  					return;
 // 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
@@ -543,6 +556,9 @@
 // 			);
 // 		}
 		
+// 		if(${search.areaCondition != null }){
+// 			$('select[name=areaCondition]').val('${search.areaCondition}').prop('selected', true);
+// 		}
 	
 	</script>
 	

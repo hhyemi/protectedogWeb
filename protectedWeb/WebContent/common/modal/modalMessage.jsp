@@ -52,7 +52,7 @@
                                             </form>
                                                 <div class="row form-group">
                                                     <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-                                                        <button class="btn btn-send ml-3 submit" style="float:right;">보내기</button>
+                                                        <button class="btn btn-send ml-3 submit" id="messageSend" style="float:right;">보내기</button>
                                                     </div>
                                                 </div>
                                         </div>
@@ -64,7 +64,7 @@
 
         <script>          
         $(function(){
-			$(".submit").on("click", function(){
+			$("#messageSend").on("click", function(){
 	        	var receiverNick=$("input[name=receiverNick]").val();
 	        	var messageTitle=$("input[name=messageTitle]").val();
 	        	var messageContent=$("textarea[name=messageContent]").val();

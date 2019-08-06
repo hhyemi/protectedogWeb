@@ -61,7 +61,7 @@
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
 		SELECT o.order_no, p.prod_name, o.order_code, o.total_price, o.id, o.phone, o.order_date, o.receiver_name,
-		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, p.discount_price, o.order_quantity, p.mainFile
+		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, p.discount_price, o.order_quantity
 
 		FROM orders o, product p
 		WHERE o.order_no = #{orderNo}
@@ -112,6 +112,19 @@
 	  		p.prod_name, p.prod_detail, p.main_file, o.order_quantity
 			from orders o, product p
 					WHERE o.prod_no=p.prod_no		
+					ORDER BY order_no) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 </select>
+	 
+	  <select  id="listCancleOrder"  parameterType="map"	resultMap="orderSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  		FROM (	SELECT o.order_no, o.prod_no, o.payment_code, o.order_date, o.total_price, o.order_code ,o.id,
+	  		p.prod_name, p.prod_detail, p.main_file, o.order_quantity
+			from orders o, product p
+					WHERE o.prod_no=p.prod_no	
+					AND o.order_code='4'	
 					ORDER BY order_no) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}

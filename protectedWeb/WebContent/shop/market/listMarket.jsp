@@ -15,7 +15,7 @@
 ">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>보호마켓</title>
+<title><title>보호할개 · 보호마켓 리스트</title></title>
 
 
 <!-- Global Stylesheets -->
@@ -108,6 +108,10 @@
 	height: 30px;
 	color: white;
 }
+#bottom{
+margin-top: 80px;
+margin-right:200px;}
+
 </style>
 
 </head>
@@ -158,6 +162,7 @@
 
 	<div class="container">
 		<button type="button" class="btn btn-default" id="createtext">작성</button>
+		${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지
 
 		<section class="ftco-section bg-light"
 			style="padding-bottom: 0px; padding-top: 30px;">
@@ -208,48 +213,50 @@
 
 
 			</c:if>
-		</section>
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
+			<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+			<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 
-		<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
+			<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
 
-		<div class="row">
-			<div class="col-md-10 col-lg-12 order-md-last">
-				<input type="hidden" id="currentPageList" name="currentPageList"
-					value="${resultPage.currentPage}" />
-				<div class="row">
-					<c:set var="i" value="0" />
-					<c:forEach var="board" items="${list}">
-						<c:set var="i" value="${i+1}" />
-						<figure id="get">
-							<div class="card">
-								<img class="img-fluid" id="clickplease"
-									src="../../resources/file/fileMarket/${board.thumnail}">
-								<input type="hidden" value="${board.postNo}" />
-								<div class="card-body text-center">
-									<div class="card-title">
-										<a><b>${board.postTitle}</b> </a> <input type="hidden"
-											value="${board.postNo}" />
+			<div class="row" id="bottom">
+				<div class="col-md-10 col-lg-12 order-md-last">
+					<input type="hidden" id="currentPageList" name="currentPageList"
+						value="${resultPage.currentPage}" />
+					<div class="row">
+						<c:set var="i" value="0" />
+						<c:forEach var="board" items="${list}">
+							<c:set var="i" value="${i+1}" />
+							<figure id="get">
+								<div class="card">
+									<img class="img-fluid" id="clickplease"
+										src="../../resources/file/fileMarket/${board.thumnail}">
+									<input type="hidden" value="${board.postNo}" />
+									<div class="card-body text-center">
+										<div class="card-title">
+											<a><b>${board.postTitle}</b> </a> <input type="hidden"
+												value="${board.postNo}" />
+										</div>
+										${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
+												value="${board.price}" pattern="#,###" />원
+										</strong>
+										<hr>
+										<p class="view">${board.nickName}(&nbsp;${board.city}&nbsp;)
+											&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
+										</p>
 									</div>
-									${board.prodName} <strong>&nbsp;&nbsp;<fmt:formatNumber
-											value="${board.price}" pattern="#,###" />원
-									</strong>
-									<hr>
-									<p class="view">${board.nickName}(&nbsp;${board.city}&nbsp;)
-										&nbsp;&nbsp;&nbsp;<br />조회수 : ${board.viewCount}<br />
-									</p>
 								</div>
-							</div>
-						</figure>
-					</c:forEach>
+							</figure>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
-		</div>
+			</section>
 	</div>
+	
 
 	<div align="center" style="padding-left: 45%">
 		<jsp:include page="/common/pageNavigator_new.jsp" />
@@ -259,7 +266,7 @@
 
 
 
-	<!--====================================================
+<!--====================================================
                       FOOTER
 ======================================================-->
 	<!--================ start footer Area  =================-->

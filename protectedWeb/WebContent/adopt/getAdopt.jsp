@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<title>보호할개 · 분양</title>
+	<title>보호할개 · 분양실종</title>
 	<meta charset="utf-8">
 	
 	<meta
@@ -76,6 +76,9 @@
 		.col-md-10 {
 			padding-right: 15px !important;
 		}
+ 		.col-xs-9 {
+ 			padding-right: 0px !important;
+ 		}
  		
         .fa-heart {
          	color: #f04f23;
@@ -194,6 +197,7 @@
               	<input type="hidden" name="userId" value="${user.id}">
               	<input type="hidden" name="levels" value="${user.levels}">
               	<input type="hidden" name="sessionNickname" value="${user.nickname}">  
+              	<input type="hidden" name="nickname" value="${adopt.nickname}">  
 <!--                 <li> -->
                    	<div class="row" style="position:relative;height:35px;">
 			        	<div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px;" >
@@ -371,7 +375,7 @@
 				<button class="btn btn-default" id="modiButton">수정</button>
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
-       		<c:if test="${ sessionScope.user.role eq 'admin'}">
+       		<c:if test="${  sessionScope.user.role eq 'admin'}">
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
 			
@@ -389,9 +393,9 @@
     <!-- 	/////////////////////////////////////////       dialog       ///////////////////////////////////////////////////////////////////// -->
   
 			
-			<div id="dialog-listApply" title="">
-<!-- 			  <p id="listJSON"></p> -->
-			</div> 
+<!-- 			<div id="dialog-listApply" title=""> -->
+<!-- <!-- 			  <p id="listJSON"></p> --> -->
+<!-- 			</div>  -->
 			
 			
 			
@@ -413,7 +417,7 @@
 	      </div>
 	    </div>
 
-        <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;"></div>
+        <div class="modal-body" id="listApplyModal" style="overflow-y:auto;overflow-x:hidden;"></div>
         
         <div class="modal-footer">
 <!--           <button type="button" class="btn btn-default" ></button> -->
@@ -737,22 +741,22 @@
 
      
       
-      $( function() {
-  	    $( "#dialog-listApply" ).dialog({
-  	    	  autoOpen: false,
-  		      width: 500,
-  		      height: 600,
-  		      modal: true,
-  		      buttons: {
-//   		        	예: function() {
-//   		        		fncComplete();
-//   		        	},
-  		        	닫기: function() {
-  		          		$( this ).dialog( "close" );
-  		        	}
-  		      }
-  	    });
-      });
+//       $( function() {
+//   	    $( "#dialog-listApply" ).dialog({
+//   	    	  autoOpen: false,
+//   		      width: 500,
+//   		      height: 600,
+//   		      modal: true,
+//   		      buttons: {
+// //   		        	예: function() {
+// //   		        		fncComplete();
+// //   		        	},
+//   		        	닫기: function() {
+//   		          		$( this ).dialog( "close" );
+//   		        	}
+//   		      }
+//   	    });
+//       });
       
       
       
@@ -1006,6 +1010,7 @@
 		               if (willDelete) {
 		                 swal("삭제가 완료되었습니다!", {
 		                   icon: "success",
+		                   buttons: "확인",
 		                 }).then((value) => {
 		                	 self.location = "/adopt/updateStatusCode?postNo=${adopt.postNo}";
 		                 });
@@ -1069,7 +1074,8 @@
 				delInterest(   );
 			});
 			
-			$('.modal-body').css('max-height', $(window).height() * 0.6);
+			$('#listApplyModal').css('max-height', $(window).height() * 0.6);
+// 			$('.modal-body').css('max-height', $(window).height() * 0.6);
 			
 			
 			//============= 신고하기 Event  처리 =============	
@@ -1077,7 +1083,7 @@
 		 		if(${user==null}){
 		 			$("#login-modal").modal('show');  
 		 		}else{
-			 	    var nickname = $('input[name=sessionNickname]').val();
+			 	    var nickname = '${adopt.nickname}';
 			 	   $('#reportedNick').prop('readonly', true);
 			 	    $("#reportedNick").val(nickname);
 			 		$("#report-modal").modal("show");

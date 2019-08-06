@@ -8,7 +8,7 @@
 <html>
 
 <head>
-	<title>보호할개 · 분양</title>
+	<title>보호할개 · 분양실종</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -98,7 +98,7 @@
 		            <!-- 미리보기 영역 -->
 		            <div class="form-group col-md-12">
 		            
-		            
+		            <div class="form-group"><div class="row">
 <!-- 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'> -->
 			
 <%-- 							<c:forEach var="name" items="${file}" varStatus="status">             --%>
@@ -111,15 +111,17 @@
 			            
 			            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
 
-				<c:forEach var="name" items="${file}" varStatus="status">            
-				
-				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
-                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
-                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
-                        
-                </c:forEach>           
-            
-            </div>
+							<c:forEach var="name" items="${file}" varStatus="status">            
+							
+							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px;padding-top: 7px;' >
+			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
+			                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><font color="#f04f23"> 삭제</font></span></div>     
+			                        
+			                </c:forEach>           
+			            
+            			</div>
+            			
+            			</div></div>
 		            </div>
       
 	                
@@ -151,7 +153,7 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 <!-- 	                		<label for="dogWeight"> -->
-	                		<h5><strong>체중</strong></h5>
+	                		<h5><strong>체중(kg)</strong></h5>
 <!-- 	                		&nbsp;&nbsp;<span name="dogWeight"></span></label> -->
 	                  		<input type="number" class="form-control" name="dogWeight"  value="${ adopt.dogWeight }">
 	               		</div>
@@ -754,9 +756,9 @@
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
-	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
+	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')  || (fileNameExtension === 'jpeg')  )) {
 	    	 swal({
-		           text: "jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.",
+		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -892,9 +894,22 @@
 	});
 
 	$( "input[name=dogWeight]" ).keyup(function( ) {
-		if($("input[name=dogWeight]").val().length > 6 ){
+		if( parseFloat($("input[name=dogWeight]").val()) > 60.0 ){
 			swal({
-		           text: "제한 체중을 초과하였습니다.",
+		           text: "제한 체중(60kg)을 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$(this).val('60');
+// 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
+// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
+		}else if($("input[name=dogWeight]").val().length > 6 ){
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -903,7 +918,6 @@
 				   },
 		     });
 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
-// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}
@@ -1265,7 +1279,7 @@
 		            success : function(result) {
 			                if (result === -1) {
 			                	swal({
-				     		           text: "jpg, gif, png, jpeg 확장자만 업로드 가능합니다.",
+				     		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
 				     		           dangerMode: true,
 				     		           buttons: {
 				     							 catch: {

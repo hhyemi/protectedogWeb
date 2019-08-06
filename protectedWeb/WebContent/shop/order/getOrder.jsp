@@ -17,6 +17,7 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보호할개 · 구매내역 상세조회</title>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <!--  Google MDL -->
@@ -98,6 +99,10 @@ th {
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 		$("#qna").on("click", function() {
 			self.location = "/shop/prodQna/addProdQna.jsp";
+		});
+		
+		$("#list").on("click", function() {
+			self.location = "/order/listOrder";
 		});
 
 		// 	$(function() {

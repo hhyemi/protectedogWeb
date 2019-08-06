@@ -72,7 +72,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         <br>
                         <input type="hidden" id="authPhoneCheck" value=""/>
                         <input type="hidden" id="authMailCheck" value=""/>
-                        <form class="addUsersForm" name="formal" style="padding-left: 90px; height: 600px">
+                        <form class="addUsersForm" name="formal" style="padding-left: 90px;">
 							<input class="testId" type="text" id="id" name="id" value=${ sessionScope.user.id }>
 							<input type="hidden" name="levelPoint" value=100>
 							<input type="hidden" id="authKeyReturn" value="">                     

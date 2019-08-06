@@ -12,6 +12,7 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>보호할개 · 보호마켓 글 조회</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
@@ -182,6 +183,14 @@ table {
 	<jsp:include page="/common/comment.jsp"></jsp:include>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	
+<!--====================================================
+                      FOOTER
+======================================================-->
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
+	<!--================ End footer Area  =================-->
 
 	<!--================ End footer Area  =================-->
 
@@ -236,22 +245,25 @@ table {
 
 		
 		//============= 삭제하기 Event  처리 =============	
-// 		 	$( "#btnDelete" ).on("click" , function() {
-// 		 		swal({
-// 		            title: "정말 삭제 하시겠습니까 ?",
-// 		            icon: "warning",
-// 		            buttons: true,
-// 		            dangerMode: true,
-// 		          })
-// 		          .then((willDelete) => {
-// 		            if (willDelete) {
-// 		              swal("삭제가 완료되었습니다!", {
-// 		                icon: "success",
-// 		              }).then((value) => {
-// 		            	  self.location = "/market/delMaket?postNo=${board.postNo}"
-// 		              });
-// 		            }
-// 		          });	 		  
+		 	$( "#btnDelete" ).on("click" , function() {
+		 		alert(${board.postNo})
+		 		swal({
+		            title: "정말 삭제 하시겠습니까 ?",
+		            icon: "warning",
+		            buttons: true,
+		            dangerMode: true,
+		          })
+		          .then((willDelete) => {
+		            if (willDelete) {
+		              swal("삭제가 완료되었습니다!", {
+		                icon: "success",
+		              }).then((value) => {
+		            	  self.location = "/market/delMarket?postNo=${board.postNo}"
+		              });
+		            
+		          }
+		       });	 
+		 	});
 		
 
 	

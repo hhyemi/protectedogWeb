@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>보호할개 · 글수정</title>
+<title>보호할개 · 정보공유</title>
 
 <!-- jqeury CDN -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -34,15 +34,15 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 
 <body>
 	
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">정보공유</a></span>
+						<span class="mr-2">Information</span> <span>Share</span>
 					</p>
-					<h1 class="mb-0 bread">글 수정</h1>
+					<font size="7">정보공유글 수정</font>
 				</div>
 			</div>
 		</div>
@@ -61,7 +61,7 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 					<div class="col-xs-12 col-md-12">
 						<input type="text" class="form-control" name="postTitle"
 							id="postTitle" style="height: 50px; font-size: 20px"
-							value="${board.postTitle}" />
+							value="${board.postTitle}"  maxlength="30"/>
 					</div>
 				</div>
 
@@ -105,7 +105,7 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 			</div>
 		</div>
 
-
+		<div class="row" style="height: 100px"></div>
 
 	</div>
 	
@@ -122,7 +122,7 @@ label {background-color: #3e6dad;color: white;border-radius: 10px;}
 	$(function () {
 		
 		$("#reset").on("click", function(){
-			$("form")[0].reset();
+			history.go(-1);
 		});
 		
 		$("button:contains('수정')").on("click", function(){

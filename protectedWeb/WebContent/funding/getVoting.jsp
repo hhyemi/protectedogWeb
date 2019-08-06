@@ -44,7 +44,7 @@
          	color: #f04f23;
           	padding-top: 10px; 
         }
-        #home > img {
+        img {
        	    max-width: 600px;
         }
 
@@ -54,7 +54,6 @@
  	<!-- ToolBar Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->   
- 		<jsp:include page="/common/modal/modalReport.jsp"></jsp:include>
 		<jsp:include page="/common/modal/modalMessage.jsp"></jsp:include> 		
   </head>
   <body>
@@ -134,10 +133,10 @@
 							<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left:9px "  >
 								<font size="5px" id="heartIcon">
 									<c:if test="${ check eq 'already' }">
-										<span class="fas fa-heart"></span>
+										<span class="fas fa-heart" id="heart"></span>
 									</c:if>
 									<c:if test="${ check ne 'already' }">
-										<span class="far fa-heart"></span>
+										<span class="far fa-heart" id="heart"></span>
 									</c:if>
 								</font>
 				 			</div>
@@ -161,14 +160,14 @@
 			 </div>					 
 		     <br/>
 		     
-			 <c:if test="${fuding.voterCount eq 1 }">
+			 <c:if test="${funding.voterCount eq 1 }">
 			 <div><font size="5" >투표율&ensp;1%</font></div>
 			 <div class="progress">					 
 			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: 1%; background-color:#e66447!important;"></div>
 			 </div>				 
 			 </c:if>
 			 
-			 <c:if test="${fuding.voterCount ne 1 }">			 
+			 <c:if test="${funding.voterCount ne 1 }">			 
 			 <div><font size="5" >투표율&ensp;${funding.voteRate}%</font></div>
 			 <div class="progress">					 
 			 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="50" style="width: ${funding.voteRate}%; background-color:#e66447!important;"></div>
@@ -256,7 +255,7 @@
 		            
  					<div><h3>현재 <font color="#f04f23">${funding.voterCount}명</font>의 참여가 이루어졌습니다.</h3></div>
  					<hr/>
-		 				<c:forEach var="participate" items="${list}">						
+		 				<c:forEach var="participate" items="${list2}">						
 							<div class="row" style="position:relative;height:35px;">
 									 <div class="col-xs-8 col-md-8" style="position:absolute; left:0px; bottom:0px;" ><h4 ><b>${participate.nickname}</b>&nbsp; <small>님이 투표를 하셨습니다.</small>&nbsp;</h4></div>
 									<div class="col-xs-4 col-md-4" align="right" style="position:absolute; right:0px; bottom:0px; " >${participate.regDate}</div>
@@ -270,7 +269,8 @@
               	       <input type="hidden" name="levels" value="${user.levels}">			       
 			 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 			 		   <input type="hidden" id="searchKeyword" name="searchKeyword" value=""/>	  
- 					   <input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>			 		   		  			       
+ 					   <input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>	
+ 					   <input type="hidden" name="boardCode" value="SF" />		 		   		  			       
 				           <!-- PageNavigation Start... -->
 				           <div style="padding-left:460px">
 				           <jsp:include page="../common/pageNavigator_new.jsp" />
@@ -291,7 +291,7 @@
 	    </section>
     <!--================End Product Description Area =================-->
 
-
+	<jsp:include page="/common/comment.jsp"></jsp:include>
     <!--================ start footer Area  =================-->
     <!-- footer Start /////////////////////////////////////-->
 	 <jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -429,13 +429,13 @@
      	 }
     $(function(){
 		//관심목록에 추가
-		$(document).on("click", ".far", function() {
+		$(document).on("click", "#heart", function() {
 //			$( ".far" ).on("click" , function() {
 			addInterest(  );
 		});
 		
 		//관심목록에서 삭제
-		$(document).on("click", ".fas", function() {
+		$(document).on("click", "#heart", function() {
 //			$( ".fas" ).on("click" , function() {
 			console.log("dd");
 			delInterest(   );
@@ -497,7 +497,8 @@
 		});  
 		
 		//============= 신고하기 Event  처리 =============	
-	 	$( "#report" ).on("click" , function() {
+	 	$(document).on("click","#report",function() {
+			
 	 		if(${user==null}){
 	 			$("#login-modal").modal('show');  
 	 		}else{
@@ -541,7 +542,7 @@
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "#btnDelete" ).on("click" , function() {
 	 		
-	 		if(${(funding.statusCode ==2) || user.id == 'admin'}){
+	 		if(${(funding.statusCode ==1) ||funding.statusCode==2|| user.id == 'admin'}){
 	 		swal({
 	            title: "정말 삭제 하시겠습니까 ?",
 	            text: "삭제시 한달간 글 작성 불가입니다.",

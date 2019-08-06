@@ -6,7 +6,7 @@
 
 <head>
 
-	<title>보호할개 · 분양</title>
+	<title>보호할개 · 분양실종</title>
 	
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -175,7 +175,7 @@
 	               		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<h5><strong>체중</strong></h5>
+	                		<h5><strong>체중(kg)</strong></h5>
 <!-- 	                		&nbsp;&nbsp;<span name="dogWeight"></span></label> -->
 	                  		<input type="number" min="0" class="form-control" name="dogWeight"  value="" placeholder="강아지 체중을 입력하세요.">
 	               		</div>
@@ -832,9 +832,23 @@
 	});
 
 	$( "input[name=dogWeight]" ).keyup(function( e ) {
-		if($("input[name=dogWeight]").val().length > 6 ){
+		if(parseFloat( $("input[name=dogWeight]").val()) > 60.0 ){
+// 		if($("input[name=dogWeight]").val().length > 6 ){
 			swal({
-		           text: "제한 체중을 초과하였습니다.",
+		           text: "제한 체중(60kg)을 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogWeight]").val('60');
+// 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
+// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
+		}else if($("input[name=dogWeight]").val().length > 6 ){
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -843,7 +857,6 @@
 				   },
 		     });
 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
-// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}
@@ -854,7 +867,7 @@
 
 		if(parseInt( removeCommas($(this).val())) > 300000 ){
 			swal({
-		           text: "제한 금액을 초과하였습니다.",
+		           text: "제한 금액(30만원)을 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -1218,7 +1231,7 @@
 		            success : function(result) {
 			                if (result === -1) {
 			                	swal({
-			     		           text: "jpg, gif, png, jpeg 확장자만 업로드 가능합니다.",
+			     		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
 			     		           dangerMode: true,
 			     		           buttons: {
 			     							 catch: {

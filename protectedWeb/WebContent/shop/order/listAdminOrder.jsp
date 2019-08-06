@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>구매내역</title>
+<title>보호할개 · 관리자 구매관리</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -23,6 +23,14 @@
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
 
+
+<style>
+.navigation{
+	margin-left:500px;
+}
+
+
+</style>
 </head>
 
 <body id="page-top">
@@ -50,6 +58,29 @@
 	<!--====================================================
                         CART
 ======================================================-->
+
+<div style="float: right;">
+			<form class="form-inline" name="detailForm">
+				<div class="form-group">
+				</div>
+
+				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				<input type="hidden" id="currentPage" name="currentPage" value="" />
+			</form>
+		</div>
+
+	<c:if test="${totalCount == 0}">
+		<div class="row">
+			<div class="col-md-9" align="center"
+				style="height: 500px; padding-top: 150px;">
+
+				<jsp:include page="/common/searchResult.jsp"></jsp:include>
+			</div>
+			</div>
+			
+	</c:if>
+	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
 	<form name="listOrder">
 		<section id="cart" class="cart">
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
@@ -132,8 +163,8 @@
 			</div>
 		</section>
 	</form>
-	
-		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	<a class="navigation">
+		<jsp:include page="../../common/pageNavigator_new.jsp" /></a>
 	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->
@@ -172,10 +203,28 @@
 		});
 		
 		$("td:nth-child(5) span:contains('배송하기')").on("click", function(){
+			swal({
+				title : "배송상태가 배송중으로 변경됩니다",
+				dangerMode: true,
+				buttons :{
+					catch : {
+						text : "확인"
+					}
+				}
+			})
 			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=2";
 		});
 		
 		$("td:nth-child(5) span:contains('배송중')").on("click", function(){
+			swal({
+				title : "배송상태가 배송완료로 변경됩니다",
+				dangerMode: true,
+				buttons :{
+					catch : {
+						text : "확인"
+					}
+				}
+			})
 			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=3";
 		});
 		

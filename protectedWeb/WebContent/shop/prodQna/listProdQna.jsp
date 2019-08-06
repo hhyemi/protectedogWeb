@@ -15,6 +15,7 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보호할개 · 상품 Q&A글 리스트 조회</title>
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <script

@@ -8,7 +8,6 @@
 <html lang="ko">
    
 <head>
-<title> 상품 등록</title>
    <meta charset="UTF-8">
    
    <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -17,7 +16,7 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	    <title>보호할개 · 후원신청</title>
+	    <title>보호할개 · 보호마켓 글 등록</title>
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
     <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 
@@ -265,6 +264,14 @@
 			</div>
 		</div>
 	</section>
+	
+	<!--====================================================
+                      FOOTER
+======================================================-->
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
 
 
 
@@ -385,6 +392,10 @@
 	                addPreview($(this)); //preview form 추가하기
 	            });
 	     });
+	         
+	         //////////////////////////////////////////////////////
+	         
+	         
 	     
 	
 	</script>

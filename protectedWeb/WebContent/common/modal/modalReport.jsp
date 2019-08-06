@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/resources/newTemplate/css/style.css">
    
   	<style type="text/css">
- 		
+	
  		@font-face {
     		font-family: 'YouandiModernTR';
    		 	font-style: normal;
@@ -136,19 +136,18 @@
                                                <br/>
                                                <br/>
                                                 
-                                                <div class="row form-group">
-                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-                                                        <button class="btn btn-send ml-3 submit" type="submit" id="submit">Send</button>
-                                                        <button class="btn btn-reset ml-3 reset" name="reset">Reset</button>
-                                                    </div>
+                                                <div class="row" style="padding-left:120px">
+                                                        <button type="button" class="btn btn-send ml-3 submit" id="reportSend">보내기</button>
+                                                        <button type="button"  class="btn btn-reset ml-3 reset" data-dismiss="modal">취소</button>
+                
                                                 </div>
                                                 <input type="hidden" class="form-control" id="reportMultiFile" name="reportMultiFile" >	
                                             </form>
                                         </div>
                                     </div>
-                                    /.modal-content
+<!--                                     /.modal-content -->
                                 </div>
-                                /.modal-dialog
+<!--                                 /.modal-dialog -->
                             </div>
 
 </section>
@@ -227,9 +226,9 @@
 	                        alert('이미지 업로드 성공');
 	                    }
 	                },
-					error : function(request,status,error){
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
+// 					error : function(request,status,error){
+// 						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 					}
            		});
                 
                 $.ajax({
@@ -250,7 +249,17 @@
                 	}),
                 	success : function(JSONData){
 //                 		alert("5");
-                		console.log(JSON.stringify(JSONData));
+//                 		console.log(JSON.stringify(JSONData));
+                    swal({
+                            text: "신고가 완료되었습니다.",
+                            dangerMode: true,
+                            buttons: {
+                                 catch: {
+                                    text: "확인"
+                                 }
+                          },            
+                       });
+            			$("#report-modal").modal("hide");
                 	}
                 });
         });
@@ -258,19 +267,7 @@
 // 			$(".sendReport").attr("method", "POST").attr("action", "/report/addReport").attr("enctype","multipart/form-data");
 // 			alert("4")
 // 			alert("신고가 완료되었습니다.");
-	          swal({
-	              text: "제한길이를 초과하였습니다.",
-	              dangerMode: true,
-	              buttons: {
-	                   catch: {
-	                      text: "확인"
-	                   }
-	            },            
-	         }).then((A) => {
-	              if (A) {
-	              	$('#report-modal').modal("hide");
-	              }
-	         });
+// 			$("#report-modal").modal("hide");
 		}
 		
 		   //============= "다중파일업로드 파일명만 저장해서 value" =============   
@@ -375,18 +372,17 @@
 		       });
 		
 			$(function(){
-				$('#submit').on('click',function(){
-// 					alert("ssss");
+				$('#reportSend').on('click',function(){
+					//alert("ssss");
 					fncAddReport();
 				});
 			});
-			
-			
-			$(function(){
-				$('a[href="#"]').on('click',function(){
-					$("form")[0].reset;
-				});
-			});	
+		
+// 			$(function(){
+// 				$('a[href="#"]').on('click',function(){
+// 					$("form")[0].reset;
+// 				});
+// 			});	
 			
 			$("textarea[name=reportContent]").keyup(function(){
                 var byteText = $(this).val();
