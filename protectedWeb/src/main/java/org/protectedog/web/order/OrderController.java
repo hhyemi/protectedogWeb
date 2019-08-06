@@ -344,9 +344,9 @@ public class OrderController {
 			String location="";
 			
 			if(user.getRole()!=null&&user.getRole().equals("admin")) {
-				location="redirect:/shop/order/listAdminOrder";
+				location="redirect:/order/listAdminOrder";
 			}else {
-				location="redirect:/shop/order/listOrder";
+				location="redirect:/order/listOrder";
 			}
 			
 			return location;
