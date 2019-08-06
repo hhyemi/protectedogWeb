@@ -380,7 +380,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							"Content-Type" : "application/json"
 						},
 						error: function(request, status, error){ 
-							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				        },
 						success : function(JSONData,status) {
 							
@@ -463,7 +463,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						}
 						//debugger;
 						//console.log("index : " + index );
-						console.log("items : " + JSON.stringify(items) );
+						//console.log("items : " + JSON.stringify(items) );
 						var title = items.title;
 						var date = new Date(items.pubDate);
 						var convertDate = date.getFullYear() + "-" 
@@ -519,7 +519,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 									"Content-Type" : "application/json"
 								  },
 						success : function(data , status) {
-							console.log('성공'+JSON.stringify(data));
+							//console.log('성공'+JSON.stringify(data));
 							var adopt = data.list;
 							var display = "";
 							var bCode = '';
@@ -552,7 +552,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 									
 						},
 						error: function(request, status, error){ 
-							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				        }
 					
 			});

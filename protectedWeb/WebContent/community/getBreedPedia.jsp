@@ -41,6 +41,7 @@
 .goog-trans-info{float:left;margin:0 0 0 10px;height:40px;line-height:40px;color:#686868}
 
 .goog-trans:after{display:block;visibility:hidden;clear:both;content:''}
+.fas.fa-exclamation-circle{color:#F04F23}
 /* .td2{min-width : 300px} */
 </style>
 </head>
@@ -85,9 +86,9 @@
 					</table>
 					
 					<p/>
-					
+					<hr/>
 					<div align="center"><label><strong><span class="fas fa-exclamation-circle"></span>
-	               		원본텍스트를 확인하시려면 글자를 클릭해주세요.</strong></label></div>
+	               		원본 텍스트를 확인하시려면 글자위에 마우스를 올려주세요.</strong></label></div>
 				</div>
 			</div> <!-- translate END -->
 			
