@@ -159,13 +159,13 @@ public class UserRestController {
 		/**/
 		String prevURI = request.getHeader("referer");
 		
-		String convertURI = prevURI.substring(24);
+		String[] convertURI = prevURI.split("/");
 		
-		System.out.println(" convertURI " + convertURI);
+		System.out.println(" convertURI " + convertURI[1]);
 		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("user", user);
-		returnMap.put("returnURI", convertURI);
+		returnMap.put("returnURI", convertURI[1]);
 		return returnMap;
 	}
 	

@@ -113,9 +113,9 @@
 
 							<c:forEach var="name" items="${file}" varStatus="status">            
 							
-							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
+							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px;padding-top: 7px;' >
 			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
-			                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
+			                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><font color="#f04f23"> 삭제</font></span></div>     
 			                        
 			                </c:forEach>           
 			            

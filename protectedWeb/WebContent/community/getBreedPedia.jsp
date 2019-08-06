@@ -27,11 +27,9 @@
 
 #banner-message {BACKGROUND: #FFF;BORDER-RADIUS: 4PX;PADDING: 20PX; PADDING-LEFT: 0px; FONT-SIZE: 25PX;TEXT-ALIGN: CENTER;TRANSITION: ALL 0.2S;MARGIN: 0 AUTO;WIDTH: 500PX;}
 
-#breed_data {background: #fff;border-radius: 4px;padding: 20px; PADDING-LEFT: 0px; font-size: 16px;text-align: left;transition: all 0.2s;margin: 0 auto;width: 500px;color: black;}
+#breed_data {background: #fff;border-radius: 4px;padding: 20px; PADDING-LEFT: 0px; PADDING-right: 0px;  font-size: 16px;text-align: left;transition: all 0.2s;margin: 0 auto;width: 500px;color: black;}
 
 #breed_image {background: #fff;margin: 0 auto;width: 500px;height: 500px;}
-
-td{color : black;width : 300px;}
 
 .breed_select{width : 500px;}
 .goog-trans{background:#f0f0f0}
@@ -71,27 +69,29 @@ td{color : black;width : 300px;}
 	    	<div class="goog-trans">
 	        	<input type="hidden" class="goog-trans-control"></input>
 	    	</div>
-	    <div id="google_translate_element_area">
-		<div id="banner-message">
+	    	<div id="google_translate_element_area">
+				<div id="banner-message">
+					<select class="breed_select">
+						<option></option>
+					</select>
 
-			<select class="breed_select">
-				<option></option>
-			</select>
+				</div>
+				<div id="breed_data">
+					<img id="breed_image" src="" /> <span style="font-size: 24px;"><b>품종
+							정보&nbsp;<span class="fas fa-search"></span>
+					</b></span>
+					<table id="breed_data_table">
 
+					</table>
+					
+					<p/>
+					
+					<div align="center"><label><strong><span class="fas fa-exclamation-circle"></span>
+	               		원본텍스트를 확인하시려면 글자를 클릭해주세요.</strong></label></div>
+				</div>
+			</div> <!-- translate END -->
+			
 		</div>
-		<div id="breed_data">
-			<img id="breed_image" src="" />
-			<span style="font-size: 24px;"><b>품종 정보&nbsp;<span class="fas fa-search"></span></b></span>
-			<table id="breed_data_table">
-
-			</table>
-			
-			
-			
-		</div>
-	</div>
-	
-	</div>
 	</div>
 	
 	<script type="text/javascript">
@@ -359,8 +359,10 @@ td{color : black;width : 300px;}
 							"<tr><td>" + key + "</td><td>" + valueArray
 									+ "</td></tr>");
 					$("td:nth-child(1)").css("font-weight","bold");
+					$("td:nth-child(1)").css("width","150px");
 					$("td:nth-child(2)")[0].append(" KG");
 					$("td:nth-child(2)")[1].append(" CM");
+					$("td:nth-child(2)").css("width","350px");
 // 					$("td:nth-child(2)").addClass('td2');
 				}
 
