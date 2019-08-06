@@ -136,6 +136,9 @@
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
 							<a class="list-group-item" id="adminOrder">구매상태관리</a>
 						</c:if>
+						<c:if test="${ sessionScope.user.role eq 'admin' }">
+							<a class="list-group-item" id="cancleOrder">취소주문관리</a>
+						</c:if>
 					</div>
 
 
@@ -315,6 +318,11 @@
 			$(".orderhistory").on("click", function() {
 				//alert("");
 				self.location = "/order/listOrder"
+			});
+			//취소주문내역
+			$("#cancleOrder").on("click", function() {
+				//alert("");
+				self.location = "/order/listCancleOrder"
 			});
 		});
 	</script>

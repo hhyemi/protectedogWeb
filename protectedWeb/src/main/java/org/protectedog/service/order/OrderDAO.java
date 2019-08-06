@@ -27,5 +27,7 @@ public interface OrderDAO {
 	public void delOrder(Order order)throws Exception;
 	//관리자 구매관리
 	public List<Order> listAdminOrder(Search search, String id) throws Exception;
+	//구매취소내역
+	public List<Order> listCancleOrder(Search search, String id) throws Exception;
 	
 }

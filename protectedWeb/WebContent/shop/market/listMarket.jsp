@@ -161,6 +161,7 @@ margin-top: 80px;}
 
 	<div class="container">
 		<button type="button" class="btn btn-default" id="createtext">작성</button>
+		${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지
 
 		<section class="ftco-section bg-light"
 			style="padding-bottom: 0px; padding-top: 30px;">

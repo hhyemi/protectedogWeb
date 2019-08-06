@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개 · 주문내역 조회</title>
+<title>보호할개 · 관리자 취소주문관리</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -23,6 +23,14 @@
 <!-- Core Stylesheets -->
 <link rel="stylesheet" href="/resources/newTemplate/css/shop.css">
 
+
+<style>
+.navigation{
+	margin-left:500px;
+}
+
+
+</style>
 </head>
 
 <body id="page-top">
@@ -40,8 +48,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">List</span> <span>Order</span></p>
-            <font size="7">스토어 주문내역</font>
+          	<p ><span class="mr-2">List</span> <span>Admin Order</span></p>
+            <font size="7">구매 취소 리스트</font>
           </div>
         </div>
       </div>
@@ -53,13 +61,13 @@
 	<form name="listOrder">
 		<section id="cart" class="cart">
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
-			<input type="hidden" value="${user.id}"/>
+			<input type="hidden" name="id" id="id" value="${ sessionScope.user.phone }"/>
 			<div class="container">
 			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
 					<thead>
 						<tr>
-							<th style="width: 10%">No</th>
+							<th style="width: 10%">No | 회원아이디</th>
 							<th style="width: 30%">상품정보</th>
 							<th style="width: 10%">구매가격</th>
 							<th style="width: 20%" class="text-center">결제수단</th>
@@ -73,8 +81,8 @@
 						<c:forEach var="order" items="${list}">
 							<c:set var="i" value="${i+1}" />
 							<tr class="ordernum">
-							<td>${i}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
-							<input type="hidden" name="id" name="id" value="${sessionScope.user.id }"/></td>
+							<td>&nbsp;${i}&nbsp;|&nbsp;${order.id}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
+							<input type="hidden" name="id" name="id" value="${user.id }"/></td>
 								<td align="center">
 									<div class="row">
 
@@ -103,15 +111,15 @@
 								</td>
 								<td class="actions">
 								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
+								
 								<c:if test="${order.orderCode =='1'}">
-								결제완료<br/>
-								<span style="cursor:pointer">주문취소</span></c:if>
+								<span style="cursor:pointer">배송하기</span></c:if>
 								<c:if test="${order.orderCode =='2'}">
-								배송중</c:if>
+								<span style="cursor:pointer">배송중</span></c:if>
 								<c:if test="${order.orderCode =='3'}">
-								배송완료</c:if>
+								<span style="cursor:pointer">배송완료</span></c:if>
 								<c:if test="${order.orderCode =='4'}">
-								주문취소완료</c:if></td>
+								주문취소</c:if>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
@@ -121,8 +129,8 @@
 
 					<tfoot>
 						<tr>
-<!-- 							<td><a class="btn btn-general btn-white"><i -->
-<!-- 									class="fa fa-angle-left"></i> 계속 쇼핑하기</a></td> -->
+							<td><a href="/product/listProduct" class="btn btn-general btn-white"><i
+									class="fa fa-angle-left"></i>상품리스트로</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
 							<td></td>
@@ -132,8 +140,8 @@
 			</div>
 		</section>
 	</form>
-	
-		<jsp:include page="../../common/pageNavigator_new.jsp" />
+	<p class="navigation">
+		<jsp:include page="../../common/pageNavigator_new.jsp" /></p>
 	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->
@@ -153,20 +161,37 @@
 		//alert($(this).children("input").val())
 				$(self.location).attr("href","/order/getOrder?orderNo="+ $(this).children("input").val());
 			});
-
 	
  	});	 
-		
-		$( function(){
-			
-			$("td:nth-child(5) span:contains('주문취소')").on("click", function(){
-				self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=4";
-			});
-			
+	
+	// 배송상태 CHANGE
+	$( function(){
+		$("select[name='searchCode']").on("change", function(){
+			fncGetList(1);
 		});
-
-	
-	
+		
+		$("td:nth-child(1)").on("click", function(){
+			self.location = "/purchase/getPurchase?tranNo="+$("input:hidden[name='tranNo']").val();
+		});
+		
+		
+		$("#orderRemove").on("click", function(){
+			fncGetList(1);
+		});
+		
+		$("td:nth-child(5) span:contains('배송하기')").on("click", function(){
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=2";
+		});
+		
+		$("td:nth-child(5) span:contains('배송중')").on("click", function(){
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=3";
+		});
+		
+		$("td:nth-child(5) span:contains('배송완료')").on("click", function(){
+			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&&orderCode=4";
+		});
+		
+	});
 
 
 	</script>

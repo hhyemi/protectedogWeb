@@ -143,7 +143,7 @@ public class MarketController {
 		}
 		
 		
-		search.setPageSize(20);
+		search.setPageSize(9);
 		
 		// Business logic 
 		Map<String, Object> map = boardService.listBoard(search, MK, 1);
