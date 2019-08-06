@@ -153,7 +153,7 @@
 	            	<div class="col-md-6">
 	              		<div class="form-group">
 <!-- 	                		<label for="dogWeight"> -->
-	                		<h5><strong>체중</strong></h5>
+	                		<h5><strong>체중(kg)</strong></h5>
 <!-- 	                		&nbsp;&nbsp;<span name="dogWeight"></span></label> -->
 	                  		<input type="number" class="form-control" name="dogWeight"  value="${ adopt.dogWeight }">
 	               		</div>
@@ -756,9 +756,9 @@
 	     var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	     var fileNameExtension = fileName.toLowerCase().substring(
 	             fileNameExtensionIndex, fileName.length);
-	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
+	     if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')  || (fileNameExtension === 'jpeg')  )) {
 	    	 swal({
-		           text: "jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.",
+		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -894,9 +894,22 @@
 	});
 
 	$( "input[name=dogWeight]" ).keyup(function( ) {
-		if($("input[name=dogWeight]").val().length > 6 ){
+		if( parseFloat($("input[name=dogWeight]").val()) > 60.0 ){
 			swal({
-		           text: "제한 체중을 초과하였습니다.",
+		           text: "제한 체중(60kg)을 초과하였습니다.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$(this).val('60');
+// 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
+// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
+		}else if($("input[name=dogWeight]").val().length > 6 ){
+			swal({
+		           text: "제한 길이를 초과하였습니다.",
 		           dangerMode: true,
 		           buttons: {
 							 catch: {
@@ -905,7 +918,6 @@
 				   },
 		     });
 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
-// 			$("span[name=dogWeight]").text('6자까지 입력할 수 있습니다.');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}
@@ -1267,7 +1279,7 @@
 		            success : function(result) {
 			                if (result === -1) {
 			                	swal({
-				     		           text: "jpg, gif, png, jpeg 확장자만 업로드 가능합니다.",
+				     		           text: "jpg, gif, png, jpeg 확장자만 등록 가능합니다.",
 				     		           dangerMode: true,
 				     		           buttons: {
 				     							 catch: {
