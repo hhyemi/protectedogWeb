@@ -1508,7 +1508,6 @@ h2{
 </head>
 <body>
 <div class="p-5">
-<!--   <h2 class="mb-4">Full Calendar</h2> -->
   <div class="card">
     <div class="card-body p-0">
       <div id="calendar"></div>
@@ -1554,10 +1553,8 @@ h2{
 	    
       <form id="add-event">
         <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;">
-<!--         <h4>실종신고</h4>         -->
           <div class="form-group">
             <label>사례금</label>
-<!--             &nbsp;&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span> -->
             <input type="text" class="form-control" name="dogPay" min="0"  placeholder="원하지 않을 경우 0을 입력하세요.">
           </div>
           <div class="form-group">
@@ -1566,7 +1563,6 @@ h2{
           </div>        
           <div class="form-group">
             <label id="dogDateLabel">실종일</label>
-<!--             <input type='text' class="form-control" name="dogDate" value="" readonly> -->
             <input type='text' class="datetimepicker form-control" name="dogDate" value="" readonly>
           </div>        
           <div class="form-group">
@@ -1584,15 +1580,15 @@ h2{
           </div>
 
           <!-- 미리보기 영역 -->
-          <div class="form-group">
+          <div class="form-group" style="height: 170px;">
           	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
           </div>
           
-          <div ><br/><br/><br/><br/><br/><br/></div>
+<!--           <div ><br/><br/><br/><br/><br/><br/></div> -->
           
           <div class="form-group">
             <label>견종</label>&nbsp;&nbsp;<span name="dogBreed"></span>
-            <input class="form-control" name="dogBreed" placeholder="견종을 입력하세요."></input>
+            <input class="form-control" id="dogBreed" name="dogBreed" placeholder="사진등록 시 자동으로 입력됩니다."></input>
           </div>
           <div class="form-group">
             <label>성별</label>
@@ -1620,7 +1616,7 @@ h2{
 		  <input type="hidden" class="form-control" id="multiFile" name="multiFile" >
 
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer ">
         <button type="button" class="btn btn-default" id="confirmBtn">등록</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>        
       </div>
@@ -1974,11 +1970,28 @@ var fileNameArray = new Array();
                                 // if you want to detect more faces, or detect something else, change this
                                 "type":"WEB_DETECTION",
                                 "maxResults":1
-                              }
-                            ]
-                          }
-                        ]
+                              }]
+                          }]
                       };
+                      
+                      $.ajax({
+                          method: 'POST',
+                          url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0',
+                          contentType: 'application/json',
+                          data: JSON.stringify(request),
+                          processData: false,
+                          success: function(data){
+//                           console.log("모두 확인 : "+JSON.stringify(data));
+	                          	var test = data.responses[0].webDetection.bestGuessLabels[0];
+	                          	var breed = test.label;
+	                          	console.log("견종 확인 : "+breed);
+	                       		fncBreed( breed );
+                          },
+                          error: function (data, textStatus, errorThrown) {
+	                            console.log('비전 error: ' + JSON.stringify(data));
+	                            fncBreed( '모름' );
+                          }
+                        });//ajax
                       
 	                }
 	             };
@@ -2034,7 +2047,49 @@ var fileNameArray = new Array();
 	});
 	
 	 //============= 다중파일업로드 AJAX =============
+	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   ↑ 파일업로드      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+
+	function fncBreed(breed) {
+		if ( breed.toLowerCase().indexOf( 'bichon' ) != -1 || breed.toLowerCase().indexOf( '비숑' ) != -1  ) {
+			breed = '비숑';
+		}else if ( breed.toLowerCase().indexOf( 'pomeranian' ) != -1 || breed.toLowerCase().indexOf( '포메' ) != -1 ) {
+			breed = '포메라니안';
+		}else if ( breed.toLowerCase().indexOf( 'bull' ) != -1 || breed.toLowerCase().indexOf( '불독' ) != -1) {
+			breed = '불독';
+		}else if ( breed.toLowerCase().indexOf( 'chihuahua' ) != -1 || breed.toLowerCase().indexOf( '치와와' ) != -1  ) {
+			breed = '치와와';
+		}else if ( breed.toLowerCase().indexOf( 'maltese' ) != -1 || breed.toLowerCase().indexOf( '말티즈' ) != -1 ) {
+			breed = '말티즈';
+		}else if ( breed.toLowerCase().indexOf( 'poodle' ) != -1 || breed.toLowerCase().indexOf( 'poedel' ) != -1 || breed.toLowerCase().indexOf( '푸들' ) != -1 ) {
+			breed = '푸들';
+		}else if ( breed.toLowerCase().indexOf( 'retriever' ) != -1 || breed.toLowerCase().indexOf( '리트리버' ) != -1 ) {
+			breed = '리트리버';
+		}else if ( breed.toLowerCase().indexOf( 'jindo' ) != -1 || breed.toLowerCase().indexOf( '진돗개' ) != -1 ) {
+			breed = '진돗개';
+		}else if ( breed.toLowerCase().indexOf( 'welsh' ) != -1 || breed.toLowerCase().indexOf( 'corgi' ) != -1 || breed.toLowerCase().indexOf( '웰시' ) != -1 ) {
+			breed = '웰시코기';
+		}else if ( breed.toLowerCase().indexOf( 'chow' ) != -1 || breed.toLowerCase().indexOf( '차우' ) != -1 ) {
+			breed = '차우차우';
+		}else if ( breed.toLowerCase().indexOf( 'dobermann') != -1 || breed.toLowerCase().indexOf( '도베르만' ) != -1 ) {
+			breed = '도베르만';
+		}else if ( breed.toLowerCase().indexOf( 'spaniel') != -1 || breed.toLowerCase().indexOf( '니엘' ) != -1 || breed.toLowerCase().indexOf( '니얼' ) != -1 ) {
+			breed = '스파니엘';
+		}else if ( breed.toLowerCase().indexOf( 'spitz') != -1 || breed.toLowerCase().indexOf( '스피츠' ) != -1 ) {
+			breed = '스피츠';
+		}else if ( breed.toLowerCase().indexOf( 'husky' ) != -1 || breed.toLowerCase().indexOf( '허스키' ) != -1 ) {
+			breed = '허스키';
+		}else if ( breed.toLowerCase().indexOf( 'shih' ) != -1 || breed.toLowerCase().indexOf( '시츄' ) != -1 ) {
+			breed = '시츄';
+		}else{
+			breed = '알 수 없음';
+		}
+
+	    $( "#dogBreed" ).val(breed);
+	 }
 	
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■      ↑ 견종번역      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
  	 var str = '';
 	 
  	 function fncAddMissing(str){

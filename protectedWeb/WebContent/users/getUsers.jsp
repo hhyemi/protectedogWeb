@@ -376,7 +376,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			
 			$( "#submit" ).on("click" , function() {
 				
-				
+				alert('서브밋버튼클릭함');
 				var value = "";	
 				var pw=$("#pw").val();
 				var pw_confirm=$("#pw2").val();

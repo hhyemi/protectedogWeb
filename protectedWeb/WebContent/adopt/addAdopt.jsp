@@ -157,7 +157,7 @@
 		                <div class="form-group">
 		                	<h5><strong>견종</strong></h5>
 <!-- 		                	&nbsp;&nbsp;<span name="dogBreed"></span></label> -->
-		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="이미지 등록 시 자동으로 입력됩니다.">
+		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="사진등록 시 자동으로 입력됩니다.">
 		                </div>
 	                </div>
 		                
@@ -998,7 +998,23 @@
 			  
 			  return;
 		  }
-		  
+
+		  if( $(".preview-box").length == 0 ){
+			  swal({
+		           text: "사진을 한 장 이상 등록하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
+			  return;
+		  }
 		  if($("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length <1){
 			  swal({
 		           text: "견종을 입력하세요.",
@@ -1018,22 +1034,6 @@
 			  return;
 		  }
 		  
-		  if( $(".preview-box").length == 0 ){
-			  swal({
-		           text: "사진을 한 장 이상 등록하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   jQuery($("input[name=phone]"))[0].scrollIntoView(true);
-		           }
-		      });
-			  return;
-		  }
 		  
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length < 1 ){
 			  swal({

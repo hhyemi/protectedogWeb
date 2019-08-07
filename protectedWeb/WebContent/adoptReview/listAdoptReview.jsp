@@ -47,6 +47,12 @@
  			max-width: wrap; 
  			display: block; 
  		} 
+ 		#image-box img {
+ 			max-width: 330px;
+ 			min-width: 330px;
+ 			max-height: 300px;
+ 			min-height: 300px;
+ 		}
 
 		form {
 			text-align: left;
@@ -116,8 +122,8 @@
 	<div class="container">
 	
 		<input type="hidden" id="userId" value="${sessionScope.user.id}">
-		<input type="hidden" id="adoptConfirm" value="">
-		<input type="hidden" id="applyConfirm" value="">
+<!-- 		<input type="hidden" id="adoptConfirm" value=""> -->
+<!-- 		<input type="hidden" id="applyConfirm" value=""> -->
 		<input type="hidden" id="boardCode" value="AR">
 		<input type="hidden" id="totalCount" value="${resultPage.totalCount }">
 	
@@ -244,7 +250,7 @@
 	
 
 		var postNo;
-		var postSize = 3;
+		var postSize = 1;
 		var str = '';
 		
 		$(function(){
@@ -287,12 +293,12 @@
 									displayValue += '<div class="col-md-4" ><div class="desc-comp-offer-cont">'
 														+'<figure class="getAR">'
 														+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-															+'<p align="right"><i class="fas fa-user"></i>'+data.list[i].viewCount+'</p>'
+															+'<p align="left" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 5px;">조회수 '+data.list[i].viewCount+'</p>'
 														    +'<span id="image-box">'+data.list[i].thumnail+'</span>'
 														    +'<span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>'
 														   		+data.list[i].postTitle
 															   	+'</b></h3>'
-															   	+'<p align="right">'+data.list[i].nickName+'|'+data.list[i].regDate+'</p>'
+															   	+'<p align="right" style="padding-bottom: 10px;padding-right: 0px;">'+data.list[i].nickName+' '+data.list[i].regDate+'</p>'
 														   	+'</span>'
 														+'</figure>'
 													+'</div></div>'	;
@@ -332,8 +338,8 @@
 		
 
 	
-		var adoptConfirm;
-		var applyConfirm;
+// 		var adoptConfirm;
+// 		var applyConfirm;
 		var id = $('#userId').val().trim();
 
 		
@@ -416,15 +422,6 @@
 			$('#searchKeyword').keydown( function(e) {
 				if(e.keyCode == 13) {
 					fncGetList(1);
-				
-// 					console.log("엔터 "+$( '#searchKeyword').val());
-//  					return;
-// 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
-// 						$("#searchKeyword").focus();
-// 						return;
-// 					}else {
-// 						fncGetList(1); 
-// 					}
 				}
 			});
         });
@@ -433,7 +430,6 @@
 		
 		$(function() {
 			$( "#searchSubmmit" ).on("click" , function() {
-// 			$( "button:contains('검색')" ).on("click" , function() {
 				if ( $( '#searchKeyword').val() == '' ){
 					$("#searchKeyword").focus();
 					return;
@@ -445,15 +441,7 @@
 				if(e.keyCode == 13) {
 					postSize = 1;
 					listAR(postSize,"dd");
-				
-// 					alert("엔터 "+$( '#searchKeyword').val());
-// // 					return;
-// 					if ( $( '#searchKeyword').val().trim() == '' || $( '#searchKeyword').val().trim() == null ){
-// 						$("#searchKeyword").focus();
-// 						return;
-// 					}else {
-// 						fncGetList(1); 
-// 					}
+
 				}
 			});
 			
@@ -472,31 +460,14 @@
 				self.location = "/adoptReview/listAdoptReview";
 			});
 
-// 			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		});	
 	
-	
-// 		$('select[name=areaCondition]').change( function(){
-// 			postSize = 1;
-// 			listAR(postSize,"dd");
-// 		});
-		
+
 		
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
 			$("form").attr("method" , "POST").attr("action" , "/adoptReview/listAdoptReview").submit();
 		}
-		
-// 		if ( $('#totalCount').val() == 0){
-// 			$('#searchEmpty').html( 
-// // 					'<div class="col-md-12"><div class="block text-center"><b><font size="5px" color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</b>'
-// 					'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
-// 					+'<div class="block text-left"><b><font size="5px"><font color="#f04f23"> \''+$('#searchKeyword').val()+'\'</font>'+'에 대한 검색 결과가 없습니다.</font></b></div>'
-//             		+'<p align="left"><br/>단어의 철자가 정확한지 확인해 주세요.<br/>'
-//             		+'검색어의 단어 수를 줄이거나, 다른 검색어로 검색해 보세요.<br/>'
-//             		+'보다 일반적인 검색어로 검색해 주세요.</p></div></div></div>'			
-// 			);
-// 		}
 		
 	
 	</script>

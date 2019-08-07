@@ -223,7 +223,7 @@ public class AdoptReviewController {
 			search.setCurrentPage(1);
 		}
 		
-		search.setPageSize(18);
+		search.setPageSize(6);
 		
 		// Business logic 수행
 		Map<String , Object> map=boardService.listBoard(search, boardCode, 0 );

@@ -65,14 +65,14 @@
 			                        alert('파일이 10MB를 초과하였습니다.');
 			                        // 이후 동작 ...
 			                    } else {
-			                        alert('이미지 업로드 성공');
+// 			                        alert('이미지 업로드 성공');
 			                    }
 			                }
 			            });
 			        });
 					//Debug..
 					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-					$("form[name='addForm']").attr("method", "POST").attr("action", "/market/addMarket").attr("enctype","multipart/form-data").submit();
+					$("form[name='addForm']").attr("method", "POST").attr("action", "/market/updateMarket").attr("enctype","multipart/form-data").submit();
 					//fncAddProduct();
 				});
 	});
@@ -179,7 +179,7 @@
 										<b>상품명</b>
 									</h5> 
 									 <input type="text"
-										class="form-control" name="prodName" id="prodName" value="${baord.prodName}"
+										class="form-control" name="prodName" id="prodName" value="${board.prodName}"
 										placeholder="상품명을 입력해주세요">
 								</div>
 							</div>							
@@ -221,8 +221,8 @@
 				<c:forEach var="name" items="${file}" varStatus="status">            
 				
 				<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' >
-                     <img class="thumbnail" src="/resources/file/fileSF/${name.fileName}"  width="130px;" height="115px;"/>
-                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><br/><font color="#f04f23"> 삭제</font></span></div>     
+                     <img class="thumbnail" src="/resources/file/fileMarket/${name.fileName}"  width="130px;" height="115px;"/>
+                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><font color="#f04f23"> 삭제</font></span></div>     
                         
                 </c:forEach>           
             
@@ -336,7 +336,7 @@
 	                     
 	                    //8장 이상 업로드시
 	                     if(Object.keys(files).length>=8){
-	                        alert("사진은 8장까지만 업로드 가능합니다.");
+// 	                        alert("사진은 8장까지만 업로드 가능합니다.");
 	                        delete files[imgNum];
 	                     }else{
 	               // 8장 이하 
@@ -378,7 +378,7 @@
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+// 	             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
 	             return true;
 	         } else {
 	             return false;

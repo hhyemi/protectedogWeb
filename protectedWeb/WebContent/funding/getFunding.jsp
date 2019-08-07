@@ -118,8 +118,8 @@
              <h4>&emsp;</h4>
              <div style="padding-bottom:10px">
            		 <div class="row">
-           		 <div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px; margin-right:30px" >
-            <font size=6 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b>
+           		 <div class="col-xs-9 col-md-9" style="height:35px; left:0px; bottom:0px; margin-right:30px;" >
+            <font size=5 ><b>${funding.postTitle}</b></font> <b>&emsp;${funding.nickname}</b>
 				  </div> 	
 			        	<c:if test="${ user.id ne funding.id }">
 			        	

@@ -70,18 +70,14 @@
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-<!-- 		                	<label for="postTitle"> -->
 		                	<h5><strong>글제목</strong></h5>
-<!-- 		                	&nbsp;&nbsp;<span name="postTitle"></span></label> -->
 		                	<input type="text" class="form-control" name="postTitle" value="${ adopt.postTitle }" placeholder="제목을 입력하세요.">
 		                </div>
 	                </div>
 	          	
 	          		<div class="col-md-12">
 		                <div class="form-group">
-<!-- 		                	<label for="phone"> -->
 		                	<h5><strong>연락처</strong></h5>
-<!-- 		                	&nbsp;&nbsp;<span name="phone">연락처가 다를 경우 회원정보를 수정해주세요.</span></label> -->
 		                	<input type="text" class="form-control" name="phone" value="${ adopt.phone }" readonly>
 		                </div>
 	                </div>
@@ -99,21 +95,12 @@
 		            <div class="form-group col-md-12">
 		            
 		            <div class="form-group"><div class="row">
-<!-- 			            <div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'> -->
-			
-<%-- 							<c:forEach var="name" items="${file}" varStatus="status">             --%>
-<%-- 							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px' > --%>
-<%-- 			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="120px;" height="120px;"/><br/> --%>
-<%-- 			                            <span value="${name.fileName}"  onclick="deletePreview2(this)">삭제</span></div>      --%>
-<%-- 			                </c:forEach>      --%>
-			                
-<!-- 			            </div>  -->
 			            
 			            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
 
 							<c:forEach var="name" items="${file}" varStatus="status">            
 							
-							<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px;padding-top: 7px;' >
+								<div class="preview-box2" value="${name.fileName}"  style='display:inline;float:left;width:140px;padding-top: 7px;' >
 			                     <img class="thumbnail" src="/resources/file/fileAdopt/${name.fileName}"  width="130px;" height="115px;"/>
 			                            <span href="#" value="${name.fileName}"  onclick="deletePreview2(this)"><font color="#f04f23"> 삭제</font></span></div>     
 			                        
@@ -130,18 +117,14 @@
 	                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-<!-- 		                	<label for="dogBreed"> -->
 		                	<h5><strong>견종</strong></h5>
-<!-- 		                	&nbsp;&nbsp;<span name="dogBreed"></span></label> -->
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" value="${ adopt.dogBreed }">
 		                </div>
 	                </div>
 	                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-<!-- 	                		<label for=""> -->
 	                		<h5><strong>크기</strong></h5>
-<!-- 	                		</label> -->
 						      	<select class="form-control" name="dogSize" id="dogSize">
 								  	<option value="소형견" >소형견</option>
 									<option value="중형견" >중형견</option>
@@ -152,18 +135,14 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogWeight"> -->
 	                		<h5><strong>체중(kg)</strong></h5>
-<!-- 	                		&nbsp;&nbsp;<span name="dogWeight"></span></label> -->
 	                  		<input type="number" class="form-control" name="dogWeight"  value="${ adopt.dogWeight }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogGender"> -->
 	                		<h5><strong>성별</strong></h5>
-<!-- 	                		</label> -->
 						      	<select class="form-control" name="dogGender" id="dogGender">
 								  	<option value="남아" >남아</option>
 									<option value="여아" >여아</option>
@@ -173,45 +152,35 @@
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogPay"> -->
 	                		<h5><strong>책임비</strong></h5>
-<!-- 	                		&nbsp;&nbsp;<span name="dogPay"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogPay" value="${ adopt.dogPay }" placeholder="원하지 않을 경우 0을 입력하세요.">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogDate" id="dogDateLabel"> -->
 	                		<h5><strong id="dogDateLabel">발견일</strong></h5>
-<!-- 	                		</label> -->
 	                  		<input type="text" class="form-control" name="dogDate" value="${ adopt.dogDate }" readonly>
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogStatus"> -->
 	                		<h5><strong>상태</strong></h5>
-<!-- 	                		&nbsp;&nbsp;<span name="dogStatus"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogStatus"  value="${ adopt.dogStatus }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogPersonality"> -->
 	                		<h5><strong>성격</strong></h5>
-<!-- 	                		&nbsp;&nbsp;<span name="dogPersonality"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogPersonality"  value="${ adopt.dogPersonality }">
 	               		</div>
                		</div>
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-<!-- 	                		<label for="dogChar"> -->
 	                		<h5><strong>특징</strong></h5>
-<!-- 	                		&nbsp;&nbsp;<span name="dogChar"></span></label> -->
 	                  		<input type="text" class="form-control" name="dogChar"  value="${ adopt.dogChar }">
 	               		</div>
                		</div>
@@ -223,7 +192,6 @@
 <!--                 		<label> -->
                 		<label><strong><span class="fas fa-exclamation-circle"></span>
                 		분양가능지역을 수정하실 경우 지도를 우클릭하고 마커를 다시 생성해주세요.</strong><br/></label><br/>
-<!--                 		</label> -->
                		</div>
                		
                		
@@ -231,9 +199,7 @@
                		<c:if test="${adopt.boardCode eq 'AD' }">
 		            	<div class="col-md-12">
 		              		<div class="form-group">
-<!-- 		                		<label for="adoptArea"> -->
 		                		<h5><strong>분양가능지역</strong></h5>
-<!-- 		                		 &nbsp;(3곳까지 선택가능합니다.)</label> -->
 		                		<div id="mapArea" style="width: wrap; height: 300px;"></div><br/>
 		                  		<input type="hidden" class="form-control" id="adoptArea" name="adoptArea"  value="${ adopt.adoptArea }">
 		                  		<input type="text" class="form-control" id="areaKr" name="areaKr" value="${ adopt.areaKr }" placeholder="마커 위치가 입력됩니다." readonly="readonly">
@@ -243,9 +209,7 @@
                		
 	            	<div class="col-md-12">
 	              		<div class="form-group">
-<!-- 	                		<label for="location"> -->
 	                		<h5><strong>발견위치</strong></h5>
-<!-- 	                		</label> -->
 	                		<div id="map" style="width:wrap; height: 300px;"></div><br/>
 	                  		<input type="hidden" class="form-control" id="location" name="location" value="${ adopt.location }" >
 	                  		<input type="text" class="form-control" id="locationKr" name="locationKr" value="${ adopt.locationKr }" placeholder="마커 위치가 입력됩니다." readonly>
@@ -255,10 +219,7 @@
                		
                		<div class="col-md-12">
 		                <div class="form-group">
-<!-- 		                	<label for="postContent"> -->
 		                	<h5><strong>글내용</strong></h5>
-<!-- 		                	&nbsp;&nbsp;<span name="postContent"></label> -->
-<!-- 		                	<input type="text" class="form-control" name="postContent" value="dd" placeholder="내용을 입력하세요."> -->
 		                	<textarea  class="form-control"  name="postContent"  rows="5"  placeholder="내용을 입력하세요.">${adopt.postContent }</textarea>
 		                </div>
 	                </div>
@@ -1049,6 +1010,24 @@
 			  
 			  return;
 		  }
+		
+		  if( $(".preview-box2").length == 0 && $(".preview-box").length == 0  ){
+			  swal({
+		           text: "사진을 한 장 이상 등록하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "닫기"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("strong:contains('연락처')"))[0].scrollIntoView(true);
+		           }
+		      });
+			  $('#dialog-img').dialog( "open" );
+			  return;
+		  }
 			if($("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length <1){
 			  swal({
 		           text: "견종을 입력하세요.",
@@ -1068,23 +1047,7 @@
 			  return;
 		  }
 		  
-		  if( $(".preview-box2").length == 0 && $(".preview-box").length == 0  ){
-			  swal({
-		           text: "사진을 한 장 이상 등록하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "닫기"
-							 }
-				   },
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-		           }
-		      });
-			  $('#dialog-img').dialog( "open" );
-			  return;
-		  }
+		  
 		  
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length < 1 ){
 			  swal({
@@ -1327,7 +1290,9 @@
 			});
 			
 			$( "a:contains('취소')" ).on("click" , function() {
-				self.location = "/adopt/getAdopt?postNo=${adopt.postNo}"
+				
+				history.go(-1);
+// 				self.location = "/adopt/getAdopt?postNo=${adopt.postNo}"
 			});
 			
 			$( "input[name=dogDate]" ).datepicker({

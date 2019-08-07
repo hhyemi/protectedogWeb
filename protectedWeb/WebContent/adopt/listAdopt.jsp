@@ -315,7 +315,7 @@
 		console.log($(window).scroll() );
 		console.log($(document).height());
 		var postNo;
-		var postSize = 3;
+		var postSize = 1;
 		var area = '';
 		var str = '';
 		
@@ -338,6 +338,8 @@
 			console.log($("#searchCondition").val()+", "+$("#searchKeyword").val()+", "+$('select[name=areaCondition]').val()+", "+$("#boardCode").val()+", "+postSize);
 			console.log(typeof $("#searchCondition").val());
 			console.log(typeof postSize);
+			
+			
 	  		$.ajax( 
 			 		{
 						url : "/adopt/json/listAdopt",
@@ -396,15 +398,17 @@
 // 									$('.text-primary').text('전체 '+data.totalCount+' 건');
 								}
 								if( postSize == 1 && data.totalCount == 0 ){
+									$('#searchEmpty').remove();	
+								
 									console.log('결과없음'+data.totalCount);
 									if ( $('#searchKeyword').val()==''){
-										$('#searchEmpty').remove();
+// 										$('#searchEmpty').remove();
 										displayValue =   '<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
 														+'<b><font size="5px">검색결과가 없습니다.</font></b>'
 								                    	+'</div>';
 									}else {
 										
-										$('#searchEmpty').remove();
+// 										$('#searchEmpty').remove();
 										displayValue = 
 											'<div class="col-md-12" id="searchEmpty" align="center" style="height: 300px; padding-top: 100px;">'
 											+'<div align="center" style="display: flex;justify-content: center;align-items: center;"><div id="item">'
