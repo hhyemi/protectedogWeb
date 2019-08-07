@@ -20,11 +20,11 @@
                 <div class="col-md-3 col-sm-6 ">
                   <div class="heading-footer"><h2>Position</h2></div>
                   <ul class="list-unstyled link-list">
-                  	<li><a href="project.html">분양 · 실종</a><small>나 민희 [Developer]</small></li> 
+                  	<li><a href="/adopt/listAdopt?boardCode=AD">분양 · 실종</a><small>나 민희 [Developer]</small></li> 
                     <li><a href="about.html">스토리펀딩 · 동물병원 · 채팅</a><small>이 혜미 [Reader]</small></li> 
-                    <li><a href="careers.html">커뮤니티</a><small>박 은우 [GIT Manager]</small></li> 
+                    <li><a href="careers.html">커뮤니티 · 견종백과</a><small>박 은우 [GIT Manager]</small></li> 
                     <li><a href="faq.html">스토어</a><small>이 지수 [Hunter]</small></li> 
-                    <li><a href="contact.html">회원</a><small>박 진태 [SQL Manager]</small></li> 
+                    <li><a href="contact.html">회원관리</a><small>박 진태 [SQL Manager]</small></li> 
                   </ul>
                 </div>
                 <!-- End Recent list -->
@@ -56,17 +56,9 @@
                   	은우 : p960720@naver.com <br>
                   	혜미 : dlgpal9508@gmail.com<br>
                   	민희 : 000ppp0@hanmail.net<br>
-                                     
-                    California, US <br>
-                    Phone: 800 123 3456 <br>
-                    Fax: 800 123 3456 <br>
-                    Email: <a href="mailto:info@Businessbox.com" class="">info@Businessbox.com</a>
+                                        진태 : alfides@naver.com<br>                 
+                                        지수 : <br>
                   </address>  
-                  <ul class="list-inline social-icon-f top-data">
-                    <li><a href="#" target="_empty"><i class="fa top-social fa-facebook"></i></a></li>
-                    <li><a href="#" target="_empty"><i class="fa top-social fa-twitter"></i></a></li>
-                    <li><a href="#" target="_empty"><i class="fa top-social fa-google-plus"></i></a></li> 
-                  </ul>
                 </div>
                 <!-- End Latest Tweets -->
               </div>
