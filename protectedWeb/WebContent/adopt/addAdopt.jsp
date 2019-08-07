@@ -998,7 +998,23 @@
 			  
 			  return;
 		  }
-		  
+
+		  if( $(".preview-box").length == 0 ){
+			  swal({
+		           text: "사진을 한 장 이상 등록하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("input[name=phone]"))[0].scrollIntoView(true);
+		           }
+		      });
+			  return;
+		  }
 		  if($("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length <1){
 			  swal({
 		           text: "견종을 입력하세요.",
@@ -1018,22 +1034,6 @@
 			  return;
 		  }
 		  
-		  if( $(".preview-box").length == 0 ){
-			  swal({
-		           text: "사진을 한 장 이상 등록하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   jQuery($("input[name=phone]"))[0].scrollIntoView(true);
-		           }
-		      });
-			  return;
-		  }
 		  
 		  if( $("input[name=dogWeight]").val().trim() == '' || $("input[name=dogWeight]").val().length < 1 ){
 			  swal({

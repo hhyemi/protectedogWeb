@@ -142,13 +142,14 @@ table {
 
 
 
-								거래지역 : ${board.city}<br /> 판매자 연락처 :
-									<c:if test="${user.role eq 'admin'||user.role eq 'user'}">
-								${board.phone}
-</c:if>
-									<c:if test="${! user.role eq 'user'}">
-								회원 연락처는 가입한 회원에게만 제공됩니다
-</c:if>
+								거래지역 : ${board.city}<br />
+<!-- 								 판매자 연락처 : -->
+<%-- 									<c:if test="${user.role eq 'admin'||user.role eq 'user'}"> --%>
+<%-- 								${board.phone} --%>
+<%-- </c:if> --%>
+<%-- 									<c:if test="${! user.role eq 'user'}"> --%>
+<!-- 								회원 연락처는 가입한 회원에게만 제공됩니다 -->
+<%-- </c:if> --%>
 
 								<hr>
 								<br /> ${board.postContent}<br /> <br /> <br />
@@ -244,17 +245,18 @@ table {
 		
 		//============= 삭제하기 Event  처리 =============	
 		 	$( "#btnDelete" ).on("click" , function() {
-		 		alert(${board.postNo})
+// 		 		alert(${board.postNo})
 		 		swal({
 		            title: "정말 삭제 하시겠습니까 ?",
 		            icon: "warning",
-		            buttons: true,
+		            buttons: ["취소","확인"],
 		            dangerMode: true,
 		          })
 		          .then((willDelete) => {
 		            if (willDelete) {
 		              swal("삭제가 완료되었습니다!", {
 		                icon: "success",
+		                button : "확인",
 		              }).then((value) => {
 		            	  self.location = "/market/delMarket?postNo=${board.postNo}"
 		              });

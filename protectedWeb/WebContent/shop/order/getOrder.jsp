@@ -245,7 +245,7 @@ th {
 		
 	                   	<div class="row">
 				  		<div class="col-md-2 "><font size="4px"><strong>주문일자</strong></font></div>
-						<div class="col-md-4 "><font size="4px"> ${order.id}			 <fmt:formatDate pattern="yyyy-MM-dd"
+						<div class="col-md-4 "><font size="4px"> 	 <fmt:formatDate pattern="yyyy-MM-dd"
 							value="${order.orderDate}" />	</font></div>
 			
 				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>결제수단</strong></font></div>

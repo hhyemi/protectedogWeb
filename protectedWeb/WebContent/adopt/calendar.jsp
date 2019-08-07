@@ -1508,7 +1508,6 @@ h2{
 </head>
 <body>
 <div class="p-5">
-<!--   <h2 class="mb-4">Full Calendar</h2> -->
   <div class="card">
     <div class="card-body p-0">
       <div id="calendar"></div>
@@ -1554,10 +1553,8 @@ h2{
 	    
       <form id="add-event">
         <div class="modal-body" style="overflow-y:auto;overflow-x:hidden;">
-<!--         <h4>실종신고</h4>         -->
           <div class="form-group">
             <label>사례금</label>
-<!--             &nbsp;&nbsp;<span name="dogPay">원하지 않을 경우 0을 입력하세요.</span> -->
             <input type="text" class="form-control" name="dogPay" min="0"  placeholder="원하지 않을 경우 0을 입력하세요.">
           </div>
           <div class="form-group">
@@ -1566,7 +1563,6 @@ h2{
           </div>        
           <div class="form-group">
             <label id="dogDateLabel">실종일</label>
-<!--             <input type='text' class="form-control" name="dogDate" value="" readonly> -->
             <input type='text' class="datetimepicker form-control" name="dogDate" value="" readonly>
           </div>        
           <div class="form-group">
@@ -1584,11 +1580,11 @@ h2{
           </div>
 
           <!-- 미리보기 영역 -->
-          <div class="form-group">
+          <div class="form-group" style="height: 170px;">
           	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
           </div>
           
-          <div ><br/><br/><br/><br/><br/><br/></div>
+<!--           <div ><br/><br/><br/><br/><br/><br/></div> -->
           
           <div class="form-group">
             <label>견종</label>&nbsp;&nbsp;<span name="dogBreed"></span>
