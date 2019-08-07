@@ -78,7 +78,6 @@ public class UserRestController {
 		map.put("result", new Integer(result));
 		map.put("nickname", nickname);
 
-
 		return map;
 	}
 	

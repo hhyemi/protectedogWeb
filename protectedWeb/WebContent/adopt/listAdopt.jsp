@@ -315,7 +315,7 @@
 		console.log($(window).scroll() );
 		console.log($(document).height());
 		var postNo;
-		var postSize = 3;
+		var postSize = 1;
 		var area = '';
 		var str = '';
 		

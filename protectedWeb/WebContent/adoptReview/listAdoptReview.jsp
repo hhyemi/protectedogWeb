@@ -47,6 +47,12 @@
  			max-width: wrap; 
  			display: block; 
  		} 
+ 		#image-box img {
+ 			max-width: 330px;
+ 			min-width: 330px;
+ 			max-height: 300px;
+ 			min-height: 300px;
+ 		}
 
 		form {
 			text-align: left;
@@ -244,7 +250,7 @@
 	
 
 		var postNo;
-		var postSize = 3;
+		var postSize = 1;
 		var str = '';
 		
 		$(function(){
@@ -287,12 +293,12 @@
 									displayValue += '<div class="col-md-4" ><div class="desc-comp-offer-cont">'
 														+'<figure class="getAR">'
 														+'<input type="hidden" name="postNo" value="'+data.list[i].postNo+'"/>'
-															+'<p align="right"><i class="fas fa-user"></i>'+data.list[i].viewCount+'</p>'
+															+'<p align="left" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 5px;">조회수 '+data.list[i].viewCount+'</p>'
 														    +'<span id="image-box">'+data.list[i].thumnail+'</span>'
 														    +'<span id="textList"><h3 align="center" style="padding-right: 0px;padding-left: 0px;"><b>'
 														   		+data.list[i].postTitle
 															   	+'</b></h3>'
-															   	+'<p align="right">'+data.list[i].nickName+'|'+data.list[i].regDate+'</p>'
+															   	+'<p align="right" style="padding-bottom: 10px;padding-right: 0px;">'+data.list[i].nickName+' '+data.list[i].regDate+'</p>'
 														   	+'</span>'
 														+'</figure>'
 													+'</div></div>'	;

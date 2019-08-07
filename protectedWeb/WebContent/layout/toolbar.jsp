@@ -208,7 +208,7 @@
     </header> 
     
     <jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
-    <jsp:include page="/chatting/inquiryRoom.jsp"></jsp:include>
+    
     <!--Global JavaScript -->
     <script src="/resources/newTemplate/js/jquery/jquery.min.js"></script>
     <script src="/resources/newTemplate/js/popper/popper.min.js"></script>
@@ -258,10 +258,9 @@
         	if(${user == null}){       		
         		$("#login-modal").modal('show');  		
         	}else{
-        		$("#chatting-modal").modal('show');
-// 			 window.open("/chatting/addChattingUser?postId=${funding.id}",
-// 						"_blank",
-// 						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+			 window.open("/chatting/addChattingUser?postId=${funding.id}",
+						"_blank",
+						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
         	}
 		});
 		
