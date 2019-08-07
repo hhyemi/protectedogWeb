@@ -113,16 +113,16 @@
 		// OpenAPI이용 데이터 가져오기
 		function getBreeds() {
 			ajax_get('https://api.thedogapi.com/v1/breeds', function(data) {
-				populateBreedsSelect(data);
+				populateBreedsSelect(data);				  
 			});
 		}
 		
-		function populateBreedsSelect(breeds) {
+		function populateBreedsSelect(breeds) {			
 			$breed_select.empty().append(
 					function() {
 						var output = '';
 						$.each(breeds, function(key, value) {
-
+				
 							if (value.name == 'Akbash Dog') {
 								value.name = '악바쉬 도그';
 							}

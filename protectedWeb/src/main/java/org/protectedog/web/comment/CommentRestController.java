@@ -13,7 +13,6 @@ import org.protectedog.service.domain.Interest;
 import org.protectedog.service.domain.ReComment;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.interest.InterestService;
-import org.protectedog.service.recomment.ReCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -147,7 +146,7 @@ public class CommentRestController {
 		comment.setCommentNo(commentNo);
 		
 		Interest interest = new Interest();
-		interest.setBoardCode("IS");
+		interest.setBoardCode(boardCode);
 		interest.setInterestComment(comment);
 		interest.setInterestId(user);
 

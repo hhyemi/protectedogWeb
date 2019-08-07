@@ -123,8 +123,8 @@ public class UserRestController {
 		
 		String receiver=email.get("email");
 		System.out.println("mailSender email : "+email);
-		String title="[#protected] 계정인증 메일입니다";
-		String content="[#protected] 계정 인증 시도중입니다. 계정 인증 번호는 [ "+authKey+" ] 입니다.";
+		String title="[보호할개] 계정인증 메일입니다";
+		String content=" [ "+authKey+" ] 입니다. 본인이 아닐경우 회신바랍니다.";
 		
 		SendMail.mailSend(title, content, receiver);
 

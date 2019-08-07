@@ -35,17 +35,60 @@ public class SendMail {
 	    try {
 	        MimeMessage message = new MimeMessage(session);
 	        message.setFrom(new InternetAddress(user));
-
-	        //¼ö½ÅÀÚ¸ŞÀÏÁÖ¼Ò
+	        String messageUI;
+	        messageUI = "<!DOCTYPE html>" 
+	        + "<html>"
+	        + "<head>"
+	        + "<meta charset=UTF-8>"
+	        + "</head>"
+	        + "<body>"
+	        + "<div style=\"margin-top: 0px; color: #666666; background: #f6f5f1; font-size: 13px; padding: 20px; width: 600px;\" >"
+	        + "<div style=\"width: 80%; max-width: 800px; border: 1px solid #dddddd; padding: 20px; margin-right: 0px!important; margin-left: 30px; \">"
+	        + "<div align=\"center\">"
+	        + "<img src=\"http://192.168.0.19:8080/resources/file/others/favicon.png\" width=\"30px;\" height=\"30px;\" /><br/>"
+	        + "<b>ë³´í˜¸í• ê°œ</b>" 
+	        + "</div>"
+	        + "<p/>"
+	        + "<table style=\"display: inline-block; width: 100%; max-width: 750px; margin: 20px auto; border: 0px; background: #ffffff; border-radius: 5px; box-shadow: 0 1px 0 #b5b6b7; border: 1px solid #e8e9ea; margin-top: 5px\">"
+	        + "<tbody>"
+	        + "<tr>"
+	        + "<td style=\"display:inline-block;     margin: 15px 15px 20px 15px;     padding-bottom: 10px;     font-size: 15px;     color: #37353a; no-repeat;     min-height: 32px;     font-weight: bold;     text-indent: 15px;     line-height: 32px; border-bottom: 1px solid #e8e9ea; width: 450px\">ì´ë©”ì¼ ì¸ì¦ ë²ˆí˜¸ ì•ˆë‚´ ì…ë‹ˆë‹¤.</td>"
+	        + "</tr>"
+	        + "<tr>"
+	        + "<td style=\"display:block;     width:80%;     max-width: 685px;     background:#ededed;     padding: 10px 20px;     margin: 0 auto;     margin-top: 20px;     border-radius: 5px;\"> "
+	        + "<p style=\" display:inline-block;     width:100%;     max-width: 180px;     font-size: 14px;     color:#333333;     font-weight:bold;\">Â· ì¸ì¦ ë²ˆí˜¸ </p>"
+	        + "							<p style=\" display: inline-block;     width: 100%;     font-size: 14px;     color: #333333;     font-weight:bold; \">" + content + "</p><p/>"
+	        + "</td>"
+	        + "</tr>"
+	        +					"<tr>"
+	        +						"<td style=\"height: 20px;\">"
+	        +						"</td>"
+	        +					"</tr>"
+			+ "</tbody>" + "</table>"
+			+ "<table style=\" display:inline-block;     width:100%;     max-width: 750px;     margin:20pxauto;     background:#f6f5f1; \">"
+			+ "<tbody>" + "</tbody>" + "</table>"
+			+ "<table style=\"display:inline-block;     width:100%;     max-width: 750px;     margin:0pxauto;     background:#ffffff;     border-radius:5px;     box-shadow:0 1px 0 #b5b6b7; padding-top:10px; border:1px solid #e8e9ea;\">"
+			+ "<tr>"
+			+ "<td style=\" display:inline-block;     font-size: 12.5px;     color:#999999;     margin: 0 0 0 15px;     line-height: 25px;     padding: 0 20px 10px 20px; width: 420px; text-align: center;\" >"
+			+ "<pre style=\"white-space:pre-wrap;     word-break:break-word;     width:100%;     max-width: 750px;\">copyrightâ“’ #protected</pre>"
+			+ "</td>" + "</tr>" + "</tbody>" + "</table>" + "</div>"
+			+ "</div>" + "</body>" + "</html>";
+	        
+	        
+	    
+	        //ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
 	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver)); 
 
-	        // ¸ŞÀÏ Á¦¸ñ
+	        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	        message.setSubject(title); 
 
-	        // ¸ŞÀÏ ³»¿ë
-	        message.setText(content);   
+	        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	        message.setText(content);
+	        message.setHeader("content-Type", "text/html");
 
-	        // ¸ŞÀÏ Àü¼Û
+	        message.setContent(messageUI,"text/html; charset=UTF-8");
+
+	        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	        Transport.send(message);
 	        
 	        System.out.println("message sent successfully...");
