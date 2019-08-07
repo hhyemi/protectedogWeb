@@ -10,17 +10,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 
+<link rel="shortcut icon" href="/resources/file/others/favicon.png">
+<link rel="icon" href="/resources/file/others/favicon.png">  
    	
-<title>보호할개</title>
+<title>보호할개 · 채팅</title>
  
 <style>
-::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; }
-
-::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 0px; background: url(`./images/bg.png`) #efefef}
-
-::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
-
-::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
 		#chat_box {
 					padding-top : 10px;
 		            width: 400px;
@@ -100,24 +95,12 @@
         padding-right: 10px;
         border-radius: 10px;
     }  
-.scroll {
-  width: 20px;
-  height: 200px;
-  overflow: auto;
-  float: left;
-  margin: 0 10px;
-}
-
-.content {
-  height: 500px;
-}
 
 </style>
 </head>
 <body onload="window.resizeTo(480,650)" onresize="window.resizeTo(480,650)">
 
 <div class="container">
-
     <div>
     
     <div class="col-md-7">
@@ -142,7 +125,7 @@
      <input type="hidden" id="postId" value="${postId }">     
      <input type="hidden" id="profile" value="${profile}">  
 </div> 	
-    <script src="http://192.168.0.19:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.0.33:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -165,7 +148,7 @@
             			profile = "kakaoDefaultImg.jfif";
             		}
 					
-            		var socket = io("http://192.168.0.19:82/");
+            		var socket = io("http://192.168.0.33:82/");
 
             		socket.emit("updateUser", userName);
             		

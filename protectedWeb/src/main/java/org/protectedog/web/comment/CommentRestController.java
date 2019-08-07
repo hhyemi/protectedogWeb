@@ -32,9 +32,9 @@ public class CommentRestController {
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
 	
-	@Autowired
-	@Qualifier("reCommentServiceImpl")
-	private ReCommentService reCommentService;
+//	@Autowired
+//	@Qualifier("reCommentServiceImpl")
+//	private ReCommentService reCommentService;
 	
 	@Autowired
 	@Qualifier("interestServiceImpl")

@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개·스토어 상품등록</title>
+<title>보호할개·스토어</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -25,11 +25,11 @@
 <style>
 .container {
 	width: 1000px;
-	font-size: 17px;
+/* 	font-size: 17px; */
 	margin-top: 10px;
 }
 
-.form-group7{margin-top:10px;}
+/* .form-group7{margin-top:10px;} */
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -140,12 +140,12 @@
 		});
 	});
 </script>
-</head>
-
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
+</head>
+
+<body>
 	<!--//////////////////////////// Sub Toolbar Start/////////////////////////////-->
 <body class="goto-here">
 	<div class="hero-wrap hero-bread"
@@ -177,33 +177,32 @@
 
 						<!--////////////////////////// form tag Start /////////////////////////////////-->
 
-						<h3 class="mb-4 billing-heading">상품정보를 등록해주세요</h3>
 						<div class="w-100"></div>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">상품명</label> <input type="text"
+									<h5><b>상품명</b></h5><input type="text"
 										class="form-control" name="prodName" id="prodName"
 										placeholder="상품명을 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">상품코드</label> <input type="text"
+									<h5><b>상품코드</b></h5> <input type="text"
 										class="form-control" name="prodCode" id="prodCode"
 										placeholder="상품코드를 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="lastname">가 격</label> <input type="text"
+									<h5><b>가 격</b></h5><input type="text"
 										class="form-control" name="price" id="price"
 										placeholder="가격을 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">원산지</label> <input type="text"
+									<h5><b>원산지</b></h5> <input type="text"
 										class="form-control" name="country" id="country"
 										placeholder="원산지를 입력해주세요">
 								</div>
@@ -211,14 +210,14 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="streetaddress">제조사</label> <input type="text"
+									<h5><b>제조사</b></h5><input type="text"
 										class="form-control" name="company" id="company"
 										placeholder="제조사를 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="streetaddress">제조일</label> <input type="text"
+									<h5><b>제조일</b></h5> <input type="text"
 										class="form-control" name="manuDate" id="manuDate"
 										placeholder="제조일자를 입력해주세요">
 								</div>
@@ -226,14 +225,14 @@
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="towncity">할인액</label> <input type="text"
+									<h5><b>할인액</b></h5><input type="text"
 										class="form-control" name="discountPrice" id="discountPrice"
 										placeholder="상품의 할인가를 입력해주세요">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="postcodezip">재고수량</label> <input type="text"
+									<h5><b>재고수량</b></h5> <input type="text"
 										class="form-control" name="quantity" id="quantity"
 										placeholder="상품의 입고수량을 입력해주세요">
 								</div>
@@ -242,24 +241,22 @@
 							<div class="w-100"></div>
 
 
-							<!-- 첨부 버튼 -->
-							<div id="attach" class="form-group">
-								<span class="label label-primary "><label
-									class="waves-effect waves-teal btn-flat" for="uploadInputBox"
-									style="background-color: #f6957b; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨
-								앞 이미지는 대표이미지입니다. (최대 <b>10장</b>까지 업로드 가능합니다.) <br />
-								<input id="uploadInputBox" style="display: none" type="file"
-									value="등록" name="filedata" />
-							</div>
+				<!-- 첨부 버튼 -->
+			<div id="attach" class="form-group" style="width: 700px">
+				<span class="label label-primary "><label
+					class="waves-effect waves-teal btn-flat" for="uploadInputBox"  style="background-color: #f6957b;margin-left:14px; padding: 3px; border-radius: 3px; color: #ffffff">사진등록</label></span>&nbsp;&nbsp;맨 앞
+				이미지는 대표이미지입니다. (최대 <b>5장</b>까지 등록 가능합니다.) <input id="uploadInputBox"
+					style="display: none" type="file" value="등록" name="filedata" />
+			</div>
+           <br/>
 
 
-							<!-- 미리보기 영역 -->
-							<div class="form-group7">
-								<div class="row">
-									<div id="preview" class="col-md-12" align="center"
-										style='display: inline; min-width: 100px;'></div>
-								</div>
-							</div>
+	            <!-- 미리보기 영역 -->
+			<div class="form-group">
+			<div class="row">
+				<div id="preview" class="col-md-12" align="center"
+					style='display: inline; min-width: 100px;'></div>
+			</div></div>
 
 							<input type="hidden" class="form-control" id="multiFile"
 								name="multiFile"> <br />
@@ -268,18 +265,19 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="postcodezip">상세정보</label> <input type="text"
+									<h5><b>상세정보</b></h5> <input type="text"
 										class="form-control" name="prodDetail" id="prodDetail"
 										placeholder="상품의 상세정보를 입력해주세요">
 								</div>
 							</div>
-						</div>
-						<p align="center">
-							<button class="btn btn-default" id="addproduct">등록하기</button>
-							&nbsp;
-							<button class="btn btn-default" id="#">취소하기</button>
-						</p>
-
+						</div><br/>
+		              <div class="col-md-12">
+	
+							<button  type="button" class="btn btn-default py-3 px-6 col-md-12" id="addproduct">등록</button>
+							<div  align="right" style="margin-top:10px">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+				</div>
 						<!-- ////////////////////////////form tag end //////////////////////////////-->
 					</div>
 				</div>
@@ -288,7 +286,10 @@
 
 	</section>
 
-
+	<!--================ start footer Area  =================-->
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
 
 
 	<script src="../../resources/prodmenu/js/popper.min.js"></script>
@@ -349,32 +350,40 @@
 
 						var imgNum = previewIndex++;
 
-						//8장 이상 업로드시
-						if (Object.keys(files).length >= 8) {
-							alert("사진은 8장까지만 업로드 가능합니다.");
-							delete files[imgNum];
-						} else {
-							// 8장 이하 
-							$("#preview")
-									.append(
-											"<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-													+ "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-													+ "<span href=\"#\" value=\""
-													+ imgNum
-													+ "\" onclick=\"deletePreview(this)\">"
-													+ "   삭제"
-													+ "</span>"
-													+ "</div>");
+	                    //8장 이상 업로드시
+	                     if(Object.keys(files).length>=5){
+	              			  swal({
+	              		           text: "사진은 5장까지만 등록 가능합니다",
+	              		           dangerMode: true,
+	              		           buttons: {
+	              							 catch: {
+	              							 	text: "확인"
+	              							 }
+	              				   },			   
+	              		      }).then((willDelete) => {
+	              		           if (willDelete) {
+	              	                   delete files[imgNum];
+	              		           }
+	              		      });	                    	 
+	                     }else{
+	               // 8장 이하 
+                    $("#preview").append(
+                                    "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
+                                            + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
+                                            + "<span href=\"#\" value=\""
+                                            + imgNum
+                                            + "\" onclick=\"deletePreview(this)\">"
+                                            + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 
-							files[imgNum] = file;
-							fileNameArray[imgNum] = file.name;
-							fnAddFile(fileNameArray);
-						}
+	                     files[imgNum] = file;
+	                     fileNameArray[imgNum]=file.name;
+	                     fnAddFile(fileNameArray);
+	                     }
 
-					};
+	                 };
 
-					reader.readAsDataURL(file);
-				}
+	                 reader.readAsDataURL(file);
+	             }
 			} else
 				alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
 		}

@@ -21,13 +21,13 @@
 .title {font-size: 18px;}
 .description {font-size: 14px;}
 .channelTitle {font-size: 14px;font-weight: bold;}
-.paging{width: 100%;height: 40px;}
+.paging{width: 100%;height: 40px;padding:0px;}
 .btn-default{margin: 0px;padding: 0px;}
 
 #searchKeyword {width : 200px;border-radius: 15px 0px 0px 15px;height:38px;box-shadow: none;border : 1px solid #D3D3D3;padding-left: 10px;}
 #searchSubmit{border-radius: 0px 15px 15px 0px;}
 #searchBox{padding-right: 0px;}
-
+#nav_view{padding:0px;}
 a :hover{color : #1062e6;}
 
 .active { background-color : #f04f23;opacity: 1;}

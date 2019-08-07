@@ -132,7 +132,7 @@ public class MarketController {
 	@RequestMapping( value="listMarket")
 	public String listProdQna(@ModelAttribute("search") Search search, @ModelAttribute("board")Board board,
 			HttpServletRequest request, 
-			Model model, @RequestParam("order") int order) throws Exception {
+			Model model) throws Exception {
 
 		
 		System.out.println("/listMarket GET / POST");
@@ -154,30 +154,6 @@ public class MarketController {
 
 		// Model 연결  View 
 		
-		//sorting
-		if(search.getProdCondition()== "1") {
-			search.setProdCondition("서울");
-		}
-		if(search.getProdCondition()== "2") {
-			search.setProdCondition("경기도");
-		}
-		if(search.getProdCondition()== "3") {
-			search.setProdCondition("강원도");
-		}
-		if(search.getProdCondition()== "4") {
-			search.setProdCondition("경상도");
-		}
-		if(search.getProdCondition()== "5") {
-			search.setProdCondition("전라도");
-		}
-		if(search.getProdCondition()== "6") {
-			search.setProdCondition("충청도");
-		}
-		if(search.getProdCondition()== "7") {
-			search.setProdCondition("제주도");
-		}
-		
-		System.out.println("/shop/Maket/listMarket ///////////////////////");
 		System.out.println("/listMarket GET / POST");
 		
 		model.addAttribute("list", map.get("list"));
@@ -332,7 +308,7 @@ public class MarketController {
 			filePost.put("postNo", postNo);
 			fileService.delAllFile(filePost);
 
-			return "redirect:/market/listMarket?order=1";
+			return "redirect:/market/listMarket";
 		}
 
 

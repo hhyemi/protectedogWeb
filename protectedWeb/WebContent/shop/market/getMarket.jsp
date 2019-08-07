@@ -12,7 +12,7 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>보호할개 · 보호마켓 글 조회</title>
+	<title>보호할개 · 보호마켓</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
@@ -70,18 +70,15 @@ table {
 	margin-top: 30px;
 }
 
-#listm{
-	margin-left:110px;
-	margin-top:10px;
-}
+
 </style>
 
 
-</head>
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
+</head>
+<body>
 
 	<!--================Single Product Area =================-->
 
@@ -160,11 +157,13 @@ table {
 
 
 								<div class="form-group2" align="right">
-									<div class="col-md-5">
+									<div class="col-md-12">
 										<c:if test="${user.id eq board.id || user.id eq 'admin'}">
 
 											<button type="button" id="change" class="btn btn-default">수정</button>
 											<button type="button" id="btnDelete" class="btn btn-default">삭제</button>
+											<button type="button" id="listm" class="btn btn-default">목록</button>
+											
 										</c:if>
 
 									</div>
@@ -176,7 +175,6 @@ table {
 			</div>
 		</form>
 	</div>
-<button type="button" id="listm" class="btn btn-default">목록</button>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■Comment■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<input type="hidden" name="postNo" value="${board.postNo}" />
 	<input type="hidden" name="boardCode" value="MK" />

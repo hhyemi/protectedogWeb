@@ -17,7 +17,7 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>보호할개·관리자 상품관리</title>
+<title>보호할개 · 스토어</title>
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -76,8 +76,11 @@ table {
 }
 
 #searchKeyword {
-	height: 40px;
-	width: 150px;
+			height: 40px;
+			width: 150px;
+			border : 1px solid #D3D3D3;
+			padding-left: 5px;
+			border-right: 0px;
 }
 
 #searchSubmmit {
@@ -127,14 +130,14 @@ th {
 	margin-right:190px;}
 </style>
 
+	<!-- //////////////////////ToolBar Start ///////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!--/////////////////////// ToolBar End ////////////////////////////////-->
 
 </head>
 
 <body>
 
-	<!-- //////////////////////ToolBar Start ///////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!--/////////////////////// ToolBar End ////////////////////////////////-->
 <body class="goto-here">
 	<div class="hero-wrap hero-bread"
 		style="padding-bottom: 30px; padding-top: 60px;">
@@ -146,7 +149,6 @@ th {
 						<span class="mr-2">protected dog</span> <span>Store</span>
 					</p>
 					<font size="7">관리자 상품 관리</font><a id="button">
-						<button type="button" class="btn btn-default">상품등록</button>
 					</a>
 				</div>
 			</div>
@@ -156,9 +158,32 @@ th {
 	<p />
 	<!--/////////////////////// form start /////////////////////////////////-->
 
-		<div style="float: right;">
+
+<%-- 	<c:if test="${resultPage.totalCount == 0}"> --%>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-9" align="center" -->
+<!-- 				style="height: 500px; padding-top: 150px;"> -->
+
+<%-- 				<jsp:include page="/common/searchResult.jsp"></jsp:include> --%>
+<!-- 			</div> -->
+<!-- 			</div> -->
+			
+<%-- 	</c:if> --%>
+	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
+
+	<!--  table Start /////////////////////////////////////-->
+			<div class="container">
+					    		<div class="row" > 
+	 		           <div class="col-md-12" align="left">
+			<b>전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</b>
+			</div>
+				<div class="col-md-6" id="justify" align="left">
+					<button type="button" class="btn btn-default" id="addProduct">상품등록</button>
+			 		</div>
+				<div>
 			<form class="form-inline" name="detailForm">
-				<div class="form-group">
+				<div class="form-group" >
 					<select class="form-control" id="searchCondition"
 						name="searchCondition">
 						<option value="0"
@@ -171,8 +196,8 @@ th {
 
 				<div class="form-group">
 					<label class="sr-only" for="searchKeyword">검색어</label> <input
-						type="text" class="form-control searchKeyword" id="searchKeyword"
-						name="searchKeyword" placeholder="검색어"
+						type="text" id="searchKeyword"
+						name="searchKeyword" placeholder="검색어를 입력해주세요."
 						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
 					<button type="button" id="searchSubmmit"
 						class="btn btn-default searchSubmmit">
@@ -184,123 +209,64 @@ th {
 				<input type="hidden" id="currentPage" name="currentPage" value="" />
 			</form>
 		</div>
-
-	<c:if test="${totalCount == 0}">
-		<div class="row">
-			<div class="col-md-9" align="center"
-				style="height: 500px; padding-top: 150px;">
-
-				<jsp:include page="/common/searchResult.jsp"></jsp:include>
-			</div>
 			</div>
 			
-	</c:if>
-	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+	
+				<table id="cart" class="table table-hover table-condensed">
+					<thead>
+						<tr>
+							<th style="width: 10%" class="text-center">상품번호</th>
+							<th style="width: 30%" class="text-center">상품명</th>
+							<th style="width: 10%" class="text-center">상품가격</th>
+							<th style="width: 20%" class="text-center">재고수량</th>
+							<th style="width: 10%" class="text-center"> 상품유형</th>
+							<th style="width: 40%" class="text-center">등록일</th>
+						</tr>
+					</thead>
 
-
-	<!--  table Start /////////////////////////////////////-->
-
-	<div class="container" align="left">
-		<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"
-			align="center" id="setting">
-			<thead>
-				<tr>
-					<td colspan="11" id="countfont">기본 내역 조회 : 전체
-						${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td>
-				</tr>
-			<thead>
-				<tr>
-					<th class="mdl-data-table__cell--non-numeric" align="center"
-						id="no">상품번호</th>
-					<th align="center" id="boardfont" width="">상품명</th>
-					<th align="center" id="boardfont" width="">상품가격</th>
-					<th align="center" id="boardfont" width="">할인액</th>
-					<th align="center" id="boardfont" width="">원산지</th>
-					<th align="center" id="boardfont" width="">제조사</th>
-
-				</tr>
-			</thead>
-
-			<c:set var="i" value="0" />
-			<c:forEach var="product" items="${list}">
-				<c:set var="i" value="${i+1}" />
-				<tbody>
+					<tbody>
+						<c:set var="i" value="0" />
+						<c:forEach var="product" items="${list}">
+							<c:set var="i" value="${i+1}" />
 					<tr>
-						<td class="mdl-data-table__cell--non-numeric" align="center">${product.prodNo }</td>
+						<td align="center" >${product.prodNo }</td>
 						<td align="center">${product.prodName}<input type="hidden"
 							name="prodNo" value="${product.prodNo}" />
 						</td>
 						<td align="center" width="5%">${product.price}</td>
-						<td align="center">${product.discountPrice}</td>
-						<td align="center">${product.country}</td>
-						<td align="center">${product.company}</td>
-
-					</tr>
-				</tbody>
-			</c:forEach>
-		</table>
-		<!--  table end /////////////////////////////////////-->
-		<br>
-		<hr>
-		<br>
-
-		<!--  table Start /////////////////////////////////////-->
-
-		<div class="container" align="left">
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp"
-				align="center">
-				<thead>
-					<tr>
-						<td colspan="11" id="countfont">상세 내역 조회 : 전체
-							${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</td>
-					</tr>
-				<thead>
-					<tr>
-						<th class="mdl-data-table__cell--non-numeric" align="center"
-							id="no">상품번호</th>
-						<th align="center" id="boardfont">상품명</th>
-						<th align="center" id="boardfont">제조일</th>
-						<th align="center" id="boardfont">등록일</th>
-						<th align="center" id="boardfont">재고수량</th>
-						<th align="center" id="boardfont">상품유형</th>
-
-					</tr>
-				</thead>
-
-				<c:set var="i" value="0" />
-				<c:forEach var="product" items="${list}">
-					<c:set var="i" value="${i+1}" />
-					<tbody>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric" align="center">${product.prodNo }</td>
-							<td align="center">${product.prodName}<input type="hidden"
-								name="prodNo" value="${product.prodNo}" />
-							</td>
-							<td align="center"><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${product.manuDate}" /></td>
-							<td align="center"><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${product.regDate}" /></td>
-							<td align="center">${product.quantity}</td>
+						<td align="center">${product.quantity}</td>
 							<td align="center"><c:if test="${product.prodCode == 10 }">
 							사료</c:if>
 							<c:if test="${product.prodCode == 20 }">
 							간식</c:if>
 							<c:if test="${product.prodCode == 30 }">
-							의류</c:if></td>
+							의류</c:if><td align="center">
+<fmt:formatDate pattern="yyyy-MM-dd" value="${product.regDate}" /></td>
+					</tr>
+						</c:forEach>
 
-						</tr>
 					</tbody>
-				</c:forEach>
-			</table>
-			<br> <br> <br>
-			<div class="navigation">
-				<jsp:include page="/common/pageNavigator_new.jsp" />
+					<tfoot>
+						<tr>
+							<td ><a href="/product/listProduct" style="margin-top: 20px" class="btn btn-general btn-white"><i
+									class="fa fa-angle-left"></i>상품리스트로</a></td>
+							<td colspan="2" class="hidden-xs"></td>
+							<td class="hidden-xs text-center"><strong></strong></td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
 			</div>
 
+		<!--  table end /////////////////////////////////////-->
+		<br>
+		
+		<br>
 
+	<div style="padding-left:780px">
+		<jsp:include page="../../common/pageNavigator_new.jsp" /></div>
+		<br/><br/><br/>
 
-		</div>
-	</div>
 
 	<!--///////////////////////////////// form end /////////////////////////////////////-->
 	<!--================ start footer Area  =================-->
@@ -326,7 +292,7 @@ th {
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-		$("#button").on("click", function() {
+		$("#addProduct").on("click", function() {
 			self.location = "/shop/product/addProduct.jsp";
 		});
 

@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개 · 관리자 취소주문관리</title>
+<title>보호할개 · 스토어</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -59,7 +59,7 @@
                         CART
 ======================================================-->
 	<form name="listOrder">
-		<section id="cart" class="cart">
+		<section>
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
 			<input type="hidden" name="id" id="id" value="${ sessionScope.user.phone }"/>
 			<div class="container">
@@ -113,11 +113,11 @@
 								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
 								
 								<c:if test="${order.orderCode =='1'}">
-								<span style="cursor:pointer">배송하기</span></c:if>
+								<span style="cursor:pointer"><font color="#38b00c">배송하기</font></span></c:if>
 								<c:if test="${order.orderCode =='2'}">
-								<span style="cursor:pointer">배송중</span></c:if>
+								<span style="cursor:pointer"><font color="#38b00c">배송중</font></span></c:if>
 								<c:if test="${order.orderCode =='3'}">
-								<span style="cursor:pointer">배송완료</span></c:if>
+								<span style="cursor:pointer"><b>배송완료</b></span></c:if>
 								<c:if test="${order.orderCode =='4'}">
 								주문취소</c:if>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
@@ -140,8 +140,9 @@
 			</div>
 		</section>
 	</form>
-	<p class="navigation">
-		<jsp:include page="../../common/pageNavigator_new.jsp" /></p>
+	<div style="padding-left:780px">
+		<jsp:include page="../../common/pageNavigator_new.jsp" /></div>
+		<br/><br/>
 	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->

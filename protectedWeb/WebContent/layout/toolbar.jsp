@@ -167,7 +167,7 @@
                 <li class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
-	                <a class="dropdown-item" href="/market/listMarket?order=1">보호마켓</a>
+	                <a class="dropdown-item" href="/market/listMarket">보호마켓</a>
 	                <a class="dropdown-item" href="/product/listProduct">스토어</a>
                   </div>
                 </li>
@@ -208,6 +208,7 @@
     </header> 
     
     <jsp:include page="/common/modal/modalLogin.jsp"></jsp:include>
+    
     <!--Global JavaScript -->
     <script src="/resources/newTemplate/js/jquery/jquery.min.js"></script>
     <script src="/resources/newTemplate/js/popper/popper.min.js"></script>
@@ -257,7 +258,6 @@
         	if(${user == null}){       		
         		$("#login-modal").modal('show');  		
         	}else{
-			
 			 window.open("/chatting/addChattingUser?postId=${funding.id}",
 						"_blank",
 						"left=500, top=100, width=462, height=550, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");

@@ -15,7 +15,7 @@
 ">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>보호할개·스토어 상품리스트</title>
+<title>보호할개 · 스토어</title>
 
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -33,6 +33,13 @@
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <style>
+		#checkPostTitle{
+
+	      padding:0 5px;
+	      overflow:hidden;
+	      text-overflow:ellipsis;
+	      white-space:nowrap;
+	  } 
 .img-fluid {
 	padding-top: 10%;
 	min-height: 240px;
@@ -50,10 +57,13 @@
 	min-height: 80px;
 	max-height: 80px;
 }
-#searchKeyword {
-	height: 40px;
-	width: 150px;
-}
+		#searchKeyword {
+			height: 40px;
+			width: 150px;
+			border : 1px solid #D3D3D3;
+			padding-left: 5px;
+			border-right: 0px;
+		}
 #searchSubmmit {
 	width: 60px;
 	height: 40px;
@@ -67,14 +77,14 @@
 #selectPageSize {
 	height: 30px;
 }
-.btn-default {
-	height: 30px;
-	color: white;
-}
+
 </style>
 
 
 
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	<!-- ToolBar End /////////////////////////////////////-->
 
 
 </head>
@@ -85,9 +95,6 @@
                          HEADER
 ======================================================-->
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<!-- ToolBar End /////////////////////////////////////-->
 
 
 	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -99,7 +106,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p>
-						<span class="mr-2">protected dog</span> <span>Store</span>
+						<span class="mr-2">Protectedog</span> <span>Store</span>
 					</p>
 					<font size="7">보호할개 스토어</font>
 				</div>
@@ -122,13 +129,13 @@
 						<div class="heading-border-light"></div>
 					</div>
 					<div class="list-group">
-						<a class="list-group-item" id="total">> 전체 </a> <a
-							class="list-group-item" id="four">베스트상품</a> <a
-							class="list-group-item" id="one">사료</a> <a
-							class="list-group-item" id="two">간식</a> <a
-							class="list-group-item" id="three">의류</a>
+						<a class="list-group-item" id="total"${ search.prodCondition==0 || empty search.prodCondition ? " style='background: #f04f23;color:#ffffff'" : "" }>> 전체 </a> <a
+							class="list-group-item" id="four" ${ search.prodCondition==4 ? " style='background: #f04f23;color:#ffffff'" : "" }>베스트상품</a> <a
+							class="list-group-item" id="one" ${ search.prodCondition==1 ? " style='background: #f04f23;color:#ffffff'" : "" }>사료</a> <a
+							class="list-group-item" id="two" ${ search.prodCondition==2 ? " style='background: #f04f23;color:#ffffff'" : "" }>간식</a> <a
+							class="list-group-item" id="three" ${ search.prodCondition==3 ? " style='background: #f04f23;color:#ffffff'" : "" }>의류</a>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
-							<a class="list-group-item" id="three">> 관리자 메뉴 </a>
+							<a class="list-group-item" id="three" style="background-color: #dbd9d7">> 관리자 메뉴 </a>
 						</c:if>
 						<c:if test="${ sessionScope.user.role eq 'admin' }">
 							<a class="list-group-item" id="admin">상품등록관리</a>
@@ -153,25 +160,16 @@
 
 				</div>
 
+<%--     		    <c:if test="${resultPage.totalCount eq 0 }"> --%>
+<%-- 			 		<jsp:include page="/common/searchResult.jsp"></jsp:include> --%>
+<%-- 			 	</c:if> --%>
 				<!-- 썸네일 Start //////////////////////////////////////////////////////////////////-->
  				<div class="col-lg-9">
-				
-
-	<c:if test="${totalCount == 0}">
-		<div class="row">
-			<div class="col-md-9" align="center"
-				style="height: 500px; padding-top: 150px;">
-
-				<jsp:include page="/common/searchResult.jsp"></jsp:include>
-			</div>
-			</div>
-			
-	</c:if>
 					<div class="row" style="padding-top: 0px;">
 					
-					<div class="col-md-12">
+					<div class="col-md-12" style="padding-bottom: 18px">
 						<!--서치 -->
-						${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지
+						전체 ${resultPage.totalCount} 건 | 현재 ${resultPage.currentPage} 페이지
 						<div style="float: right;">
 							<form class="form-inline" name="detailForm">
 								<div class="form-group">
@@ -187,7 +185,7 @@
 
 								<div class="form-group">
 									<label class="sr-only" for="searchKeyword">검색어</label> 
-									<input type="text" class="form-control searchKeyword"id="searchKeyword" name="searchKeyword" placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+									<input type="text" class="form-control searchKeyword"id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
 <%-- 									<input type="text" class="form-control searchCondition"id="searchCondition" name="searchCondition" placeholder="검색어" value="${! empty search.searchCondition ? search.searchCondition : '' }"> --%>
 									<button type="button" id="searchSubmmit"
 										class="btn btn-default searchSubmmit">
@@ -210,17 +208,15 @@
 										src="../../resources/file/fileShop/${product.mainFile}" alt="">
 										<input type="hidden" value="${product.prodNo}" /></a>
 									<div class="card-body text-center">
-										<div class="detailtext">
-											<div class="card-title">
-												<a href="#">${product.prodName} </a>
-											</div>
-										</div>
-										<del><c:if test="${product.price > product.discountPrice}">
-											<font size="2">
-											<fmt:formatNumber value="${product.price}" pattern="#,###" /></font>
-										</c:if></del>
+										<div id="checkPostTitle" >
+													<font size="5"> ${product.prodName}</font> 		
+										</div><br/>
 										<strong>&nbsp;&nbsp;<fmt:formatNumber
 												value="${product.discountPrice}" pattern="#,###" />원
+										<del><c:if test="${product.price > product.discountPrice}">
+											<font size="2" color="gray">
+											<fmt:formatNumber value="${product.price}" pattern="#,###" />원</font>
+										</c:if></del>
 										</strong>&nbsp; <a class="detailprod"><br><hr><button
 												class="btn btn-default" id="detailprod">상세보기</button> <input
 											type="hidden" value="${product.prodNo}" /></a>
@@ -231,16 +227,18 @@
 						</c:forEach>
 						
 					<br> <br> <br>
-			<div class="navigation">
-				<jsp:include page="/common/pageNavigator_new.jsp" />
-			</div>
 
 					</div>
 				</div>
 			</div>
 			</div>
 	</section>
+	<br/>
 
+			<div class="navigation" style="padding-left:930px">
+				<jsp:include page="/common/pageNavigator_new.jsp" />
+			</div>
+<br/><br/><br/>
 
 
 	<!--====================================================

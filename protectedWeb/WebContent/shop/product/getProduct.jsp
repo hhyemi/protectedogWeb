@@ -11,7 +11,7 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>보호할개·스토어 상품조회</title>
+	<title>보호할개 · 스토어</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/get/css/bootstrap.css" />
 <link rel="stylesheet" href="/resources/get/css/icon/style.css" />
@@ -42,12 +42,12 @@ table {
 }
 </style>
 
-
-</head>
-<body>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
+
+</head>
+<body>
 	<!--================Header Menu Area =================-->
 
 	<!--================Single Product Area =================-->
@@ -598,7 +598,9 @@ table {
     
 
     <!--================End Product Description Area =================-->
-
+	<!-- footer Start /////////////////////////////////////-->
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	<!-- footer End /////////////////////////////////////-->
 
 	<!--================ End footer Area  =================-->
 

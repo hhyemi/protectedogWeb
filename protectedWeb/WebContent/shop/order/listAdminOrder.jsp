@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개 · 관리자 구매관리</title>
+<title>보호할개 · 스토어</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -25,19 +25,19 @@
 
 
 <style>
-.navigation{
-	margin-left:500px;
-}
+/* .navigation{ */
+/* 	margin-left:500px; */
+/* } */
 
 
 </style>
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
 </head>
 
 <body id="page-top">
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--====================================================
                        HOME-P
@@ -69,20 +69,20 @@
 			</form>
 		</div>
 
-	<c:if test="${totalCount == 0}">
-		<div class="row">
-			<div class="col-md-9" align="center"
-				style="height: 500px; padding-top: 150px;">
+<%-- 	<c:if test="${totalCount == 0}"> --%>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-9" align="center" -->
+<!-- 				style="height: 500px; padding-top: 150px;"> -->
 
-				<jsp:include page="/common/searchResult.jsp"></jsp:include>
-			</div>
-			</div>
+<%-- 				<jsp:include page="/common/searchResult.jsp"></jsp:include> --%>
+<!-- 			</div> -->
+<!-- 			</div> -->
 			
-	</c:if>
+<%-- 	</c:if> --%>
 	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 	<form name="listOrder">
-		<section id="cart" class="cart">
+		<section >
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
 			<input type="hidden" name="id" id="id" value="${ sessionScope.user.phone }"/>
 			<div class="container">
@@ -136,9 +136,9 @@
 								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
 								
 								<c:if test="${order.orderCode =='1'}">
-								<span style="cursor:pointer">배송하기</span></c:if>
+								<span style="cursor:pointer"><font color="#f04f23">배송하기</font></span></c:if>
 								<c:if test="${order.orderCode =='2'}">
-								<span style="cursor:pointer">배송중</span></c:if>
+								<span style="cursor:pointer"><font color="#38b00c">배송중</font></span></c:if>
 								<c:if test="${order.orderCode =='3'}">
 								<span style="cursor:pointer">배송완료</span></c:if>
 								<c:if test="${order.orderCode =='4'}">
@@ -149,10 +149,9 @@
 						</c:forEach>
 
 					</tbody>
-
 					<tfoot>
 						<tr>
-							<td><a href="/product/listProduct" class="btn btn-general btn-white"><i
+							<td ><a href="/product/listProduct" style="margin-top: 20px" class="btn btn-general btn-white"><i
 									class="fa fa-angle-left"></i>상품리스트로</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong></strong></td>
@@ -163,8 +162,10 @@
 			</div>
 		</section>
 	</form>
-	<a class="navigation">
-		<jsp:include page="../../common/pageNavigator_new.jsp" /></a>
+
+	<div style="padding-left:780px">
+		<jsp:include page="../../common/pageNavigator_new.jsp" /></div>
+		<br/><br/>
 	<!-- PageNavigation End... -->
 
 	<!-- Footer Start /////////////////////////////////////-->
