@@ -90,7 +90,10 @@ public class MarketController {
 		board.setId(user.getId());
 		board.setNickName(user.getNickname());
 		board.setBoardCode(MK);
+		//조회수
 		board.setViewCount(0);
+		//폰번호 가져오기
+		board.setPhone(user.getPhone());
 		//in thumnail
 		board.setThumnail(multiFile.get(0));
 		
