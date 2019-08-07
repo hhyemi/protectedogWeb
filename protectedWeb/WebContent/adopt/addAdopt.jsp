@@ -157,7 +157,7 @@
 		                <div class="form-group">
 		                	<h5><strong>견종</strong></h5>
 <!-- 		                	&nbsp;&nbsp;<span name="dogBreed"></span></label> -->
-		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="이미지 등록 시 자동으로 입력됩니다.">
+		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="사진등록 시 자동으로 입력됩니다.">
 		                </div>
 	                </div>
 		                

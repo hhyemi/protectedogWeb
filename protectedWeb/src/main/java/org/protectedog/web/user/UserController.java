@@ -301,9 +301,9 @@ public class UserController {
 	public String updateUsers(@ModelAttribute("user") User user, 
 								Model model, 
 								HttpSession session, 
-								@RequestParam("file") MultipartFile file) throws Exception{
+								@RequestParam(value="file", required=false) MultipartFile file) throws Exception{
 		
-		System.out.println("/users/updateUsers : POST");
+		System.out.println("/users/updateUsers : POST-----------------------------------------------------------");
 		
 		String savePath=path;
 		
