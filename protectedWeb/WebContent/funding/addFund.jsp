@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -97,7 +98,7 @@
 		  </div>		  
 		  <div class="form-group ">
 			<font class="text-center" size="5"><b>후원금액&emsp;&emsp;</b></font>
-			 ${participate.fundPay }원
+			<fmt:formatNumber value="${participate.fundPay }" pattern="#,###" />
 		  </div>  
  		  <div class="form-group ">
 			<font class="text-center" size="5"><b>결제방법&emsp;&emsp;</b></font>

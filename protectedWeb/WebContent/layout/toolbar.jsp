@@ -62,7 +62,7 @@
 		html {
 	 		scroll-behavior: smooth;
 		}
-		#fixedbtn{position:fixed;right:10px;bottom:70px;z-index:1000}		
+		#chatting{position:fixed;right:10px;bottom:70px;z-index:1000}		
 		i:hover{
 			opacity: 0.5;
 			cursor:pointer
@@ -78,7 +78,7 @@
 ======================================================--> 
 
     <header>
-		<i style="background-image: url('/resources/file/others/chatting.png'); height: 64px;width: 64px; overflow: hidden;" id="fixedbtn"></i>
+		<i style="background-image: url('/resources/file/others/chatting.png'); height: 64px;width: 64px; overflow: hidden;" id="chatting"></i>
 
       <!-- Top Navbar  -->
       <div class="top-menubar">
@@ -253,7 +253,7 @@
 		
 		
 		
-		$("#fixedbtn").on("click",function(){
+		$("#chatting").on("click",function(){
 			
         	if(${user == null}){       		
         		$("#login-modal").modal('show');  		

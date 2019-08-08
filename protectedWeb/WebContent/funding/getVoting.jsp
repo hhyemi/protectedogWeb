@@ -263,7 +263,7 @@
 					    <hr/>       
 				       </c:forEach>
 				       
-				       <input type="hidden" name="postNo" value="${funding.postNo }" />	
+				       <input type="hidden" name="postNo" id="postNo" value="${funding.postNo }" />	
 	              	   <input type="hidden" name="userId" value="${user.id}">
 	              	   <input type="hidden" name="nickname" value="${funding.nickname}">	              	   
               	       <input type="hidden" name="levels" value="${user.levels}">			       

@@ -60,7 +60,7 @@
 			AND POST_NO = #{postNo} AND STATUS_CODE = #{statusCode}
 			</if>
 		</where>
-		 ORDER BY REG_DATE DESC	
+		 ORDER BY REG_DATE DESC
 		) inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN

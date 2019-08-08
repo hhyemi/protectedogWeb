@@ -145,7 +145,7 @@
 					<div>
 						<div class="col-md-12">
 							<div  align="right">
-								<p><a href="#" ><font color="gray" id="btn-cancel">뒤로</font></a></p>
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
 							</div>
 						</div>
 					</div>

@@ -127,18 +127,19 @@
 									<img src="/resources/file/others/siren.png"  id ="report"  width="22px" height="22px" >
 							</div>
 							<div class="col-xs-1 col-md-1" style="height:35px; right:0px; bottom:0px;padding-left:9px "  >
-								<font size="5px" id="heartIcon">
+								<font size="5px" >
 									<c:if test="${ check eq 'already' }">
-										<span class="fas fa-heart"></span>
+										<span class="fas fa-heart" id="heartAdd"></span>
 									</c:if>
-									<c:if test="${ check ne 'already' }">
-										<span class="far fa-heart"></span>
+									<c:if test="${ check ne 'already' }" >
+										<span class="far fa-heart" id="heartCancle"></span>
 									</c:if>
 								</font>
 				 			</div>
 			        	</c:if>
 				</div>
-			<div style="padding-bottom:10px; padding-top:30px"><font size="5" >${funding.fundPay}원</font></div>
+				
+			<div style="padding-bottom:10px; padding-top:30px"><font size="5" ><fmt:formatNumber value="${funding.fundPay}" pattern="#,###" />원</font></div>
 			<!-- 후원종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
 			<font size="5"><strong style="color:#d43333">후원종료</strong></font>		 			
@@ -463,12 +464,12 @@
 	 	 }
 	$(function(){
 		//관심목록에 추가
-			$(document).on("click", ".far", function() {
+			$(document).on("click", "#heartAdd", function() {
 				addInterest();
 			});
 			
 			//관심목록에서 삭제
-			$(document).on("click", ".fas", function() {
+			$(document).on("click", "#heartCancle", function() {
 				delInterest();
 			});
 		});
