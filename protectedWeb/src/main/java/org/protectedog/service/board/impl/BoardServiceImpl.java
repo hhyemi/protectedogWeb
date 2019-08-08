@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 
-//==> ºÐ¾ç°ü¸® ¼­ºñ½º ±¸Çö
+//==> ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 @Service("boardServiceImpl")
 public class BoardServiceImpl implements BoardService{
 	
@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	@Qualifier("boardDAOImpl")
 	private BoardDAO boardDAO;
-	public void setBoardADO(BoardDAO boardDAO) {
+	public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
 	}
 	

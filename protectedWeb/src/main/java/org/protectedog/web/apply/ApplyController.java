@@ -71,7 +71,7 @@ public class ApplyController {
 	@RequestMapping( value="addApply", method=RequestMethod.GET)
 	public String addApply(@ModelAttribute("apply") Apply apply, 
 												@RequestParam("postNo") int postNo,
-												Model model,  HttpServletRequest request,
+												Model model,  
 												HttpSession session) throws Exception {
 
 		System.out.println("/apply/addApply : GET");

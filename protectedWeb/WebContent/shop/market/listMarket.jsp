@@ -292,6 +292,28 @@ margin-right:200px;}
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 			$("#createtext").on("click", function() {
+				var lv ='${sessionScope.user.levels}';
+				var id = '${sessionScope.user.id}';
+				console.log(lv);
+				if(lv == '미인증회원' ){
+		              swal({
+		                   title: "인증회원만 작성 가능합니다.",
+		                   text: "인증하기를 누르면 인증페이지로 이동합니다.",
+		                   icon: "warning",
+		                   buttons: ["닫기", "인증하기"],
+		                   dangerMode: true     
+		                 })
+		                 .then((willDelete) => {
+		                   if (willDelete) {
+		                        self.location = "/users/addUsersAddition.jsp"
+		                        }
+		        	 });   
+					return;
+				} else if (${sessionScope.user == null}) {
+					$("#login-modal").modal('show'); 
+					
+					return;
+				} 
 				self.location = "/shop/market/addMarket.jsp";
 			});
 

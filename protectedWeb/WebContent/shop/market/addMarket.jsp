@@ -498,7 +498,7 @@
             //판매가격 길이초과
             if (removeCommas($(this).val()).length > 7) {
   			  swal({
- 		           text: "100만원미만으로 입력해주세요.",
+ 		           text: "제한금액(100만원)을 초과하였습니다.",
  		           dangerMode: true,
  		           buttons: {
  							 catch: {
@@ -508,7 +508,8 @@
   		      }).then((willDelete) => {
   		           if (willDelete) {
    
-                $(this).val(removeCommas($(this).val()).substr(0, 5));
+                $(this).val('1000000');
+//                 $(this).val(removeCommas($(this).val()).substr(0, 7));
                 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));                  
                 console.log($(this).val());	  
  

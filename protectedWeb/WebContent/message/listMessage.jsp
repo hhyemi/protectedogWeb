@@ -254,7 +254,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 								
 			                                                <div class="row form-group">
 			                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-			                                                        <button class="btn btn-send ml-3 sendMessage" style="background-color:red;">답장하기</button>
+			                                                        <button class="btn btn-send ml-3 "  data-dismiss="modal"  style="background-color:red;">확인</button>
+<!-- 			                                                        <button class="btn btn-send ml-3 sendMessage" style="background-color:red;">답장하기</button> -->
 			                                                    </div>
 			                                                </div>
 			                                        </div>
