@@ -63,18 +63,18 @@ public class ApplyRestController {
 	}
 
 	//신청서 삭제
-	@RequestMapping( value="json/delApply/{applyNo}", method=RequestMethod.GET)
-	public void delApply( 	@PathVariable("applyNo") int applyNo ) throws Exception{
-
-		System.out.println("/apply/json/delApply : GET");
-		
-		Apply apply = applyService.getApply(applyNo);
-	
-		apply.setStatusCode("0");	// 신청서 삭제
-		
-		//Business Logic
-		applyService.delApply(apply);
-	}
+//	@RequestMapping( value="json/delApply/{applyNo}", method=RequestMethod.GET)
+//	public void delApply( 	@PathVariable("applyNo") int applyNo ) throws Exception{
+//
+//		System.out.println("/apply/json/delApply : GET");
+//		
+//		Apply apply = applyService.getApply(applyNo);
+//	
+//		apply.setStatusCode("0");	// 신청서 삭제
+//		
+//		//Business Logic
+//		applyService.delApply(apply);
+//	}
 	
 	
 	

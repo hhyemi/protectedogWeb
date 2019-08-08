@@ -45,13 +45,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         PAGE CONTENT
 ======================================================-->
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">Regist</a></span>
+						<span class="mr-2">Regist</span>
 					</p>
 					<h1 class="mb-0 bread">회원가입</h1>
 				</div>
@@ -300,12 +300,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='id']").focus();
+					$("input[name='id']").focus();
 					return false;
 				}
-				if(id.length < 8 || id.length > 12){
+				if(id.length < 6 || id.length > 12){
 					swal({
-						text : "아이디는 8자 이상 12자 이하로 입력하셔야 합니다.",
+						text : "아이디는 6자 이상 12자 이하로 입력하셔야 합니다.",
 						icon : "error",
 						buttons :{
 							catch : {
@@ -313,7 +313,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='id']").focus();
+					$("input[name='id']").focus();
 					return false;
 				}
 				
@@ -327,7 +327,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='pw']").focus();
+					$("input[name='pw']").focus();
 					return false;
 				}
 				if(pw.length < 8 || pw.length > 12){
@@ -340,7 +340,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='pw']").focus();
+					$("input[name='pw']").focus();
 					return false;
 				}
 				
@@ -354,7 +354,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='pw2']").focus();
+					$("input[name='pw2']").focus();
 					return false;
 				}
 				
@@ -368,7 +368,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='userName']").focus();
+					$("input[name='userName']").focus();
 					return false;
 				}
 				
@@ -382,11 +382,23 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							}
 						}
 					})
-					$("input:password[name='pw2']").focus();
-					$("input:password[name='pw2']").val('');
+					$("input[name='pw2']").focus();
+					$("input[name='pw2']").val('');
 					return false;
 				}
-				
+				if(nickname == null || nickname.length <1){
+					swal({
+						text : "닉네임은 반드시 입력하셔야 합니다.",
+						icon : "error",
+						buttons :{
+							catch : {
+								text : "확인"
+							}
+						}
+					})
+					$("input[name='nickname']").focus();
+					return false;
+				}
 				if( check.length != 3 || check.length == 0){
 					swal({
 						text : "이용목적은 3개를 선택하셔야 합니다.",
@@ -649,7 +661,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
 			$("#reset").on("click" , function() {
-				$("form")[0].reset();
+				history.go(-1);
+// 				$("form")[0].reset();
 			});
 		});	
 	

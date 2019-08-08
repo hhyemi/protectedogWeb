@@ -21,7 +21,7 @@ public interface ApplyDAO {
 	public Map<String , Object> listApply2(String id) throws Exception ;
 	
 	// DELETE
-	public void delApply(Apply apply) throws Exception ;
+//	public void delApply(Apply apply) throws Exception ;
 	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(int adoptNo) throws Exception ;

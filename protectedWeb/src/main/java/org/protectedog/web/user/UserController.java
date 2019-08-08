@@ -303,7 +303,7 @@ public class UserController {
 								HttpSession session, 
 								@RequestParam("file") MultipartFile file) throws Exception{
 		
-		System.out.println("/users/updateUsers : POST-----------------------------------------------------------");
+		System.out.println("/users/updateUsers : POST");
 		
 		String savePath=path;
 		

@@ -67,9 +67,9 @@ public class ApplyDAOImpl implements ApplyDAO{
 		return map;
 	}
 	
-	public void delApply(Apply apply) throws Exception {
-		sqlSession.update("ApplyMapper.delApply", apply);
-	}
+//	public void delApply(Apply apply) throws Exception {
+//		sqlSession.update("ApplyMapper.delApply", apply);
+//	}
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
 	public int getTotalCount(int adoptNo) throws Exception {

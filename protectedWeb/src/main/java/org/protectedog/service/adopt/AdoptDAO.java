@@ -29,6 +29,5 @@ public interface AdoptDAO {
 	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(Search search, String boardCode) throws Exception ;
-	public int getTotalCountById(Search search, String id) throws Exception ;
 	
 }

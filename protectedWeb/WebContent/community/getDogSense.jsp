@@ -133,12 +133,12 @@ button:active{background-color:black;}
 		// 진태 : AIzaSyDCu5B3VdrbNG54M5ZmpC7jECdE8bBXtR4
 		
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDCu5B3VdrbNG54M5ZmpC7jECdE8bBXtR4&maxResults=9";
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=9";
 		
 		if(sGetToken){
 			
 			var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
-				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDCu5B3VdrbNG54M5ZmpC7jECdE8bBXtR4&maxResults=6";
+				+ "&q=" + encodeURIComponent(searchKeyword) + "&key=AIzaSyDaDu7bjQpGLN3nKnUfulB3khHE-iGQap0&maxResults=6";
  			sTargetUrl += "&pageToken=" + sGetToken;
 
 		}

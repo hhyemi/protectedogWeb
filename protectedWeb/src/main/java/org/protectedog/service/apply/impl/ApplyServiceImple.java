@@ -58,8 +58,8 @@ public class ApplyServiceImple implements ApplyService{
 		return map;
 	}
 
-	public void delApply(Apply apply) throws Exception {
-		applyDAO.delApply(apply);
-	}
+//	public void delApply(Apply apply) throws Exception {
+//		applyDAO.delApply(apply);
+//	}
 	
 }

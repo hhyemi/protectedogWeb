@@ -87,13 +87,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		</div>
 	</div>
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">My Info</a></span>
+						<span class="mr-2">My</span><span> Info</span>
 					</p>
 					<font size="7">내정보보기</font>
 				</div>
@@ -376,7 +376,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			
 			$( "#submit" ).on("click" , function() {
 				
-				alert('서브밋버튼클릭함');
+				
 				var value = "";	
 				var pw=$("#pw").val();
 				var pw_confirm=$("#pw2").val();

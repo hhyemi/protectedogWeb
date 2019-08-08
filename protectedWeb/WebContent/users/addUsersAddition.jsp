@@ -39,13 +39,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
 
 
-	<div class="hero-wrap hero-bread" style="padding-bottom: 0px; padding-top : 10px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/index.jsp">Regist</a></span>
+						<span class="mr-2">Regist</span>
 					</p>
 					<h1 class="mb-0 bread">추가정보입력</h1>
 				</div>
@@ -528,7 +528,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
 			$("a[href='#' ]").on("click" , function() {
-				$("form")[0].reset();
+				history.go(-1);
+// 				$("form")[0].reset();
 			});
 		});	
 		

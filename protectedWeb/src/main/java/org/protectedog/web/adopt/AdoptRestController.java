@@ -230,16 +230,16 @@ public class AdoptRestController {
 		search.setVoteCondition("");
 		
 		search.setCurrentPage( Integer.parseInt( params.get("pazeSize").toString() ) );
-		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
+//		System.out.println(search.getAreaCondition()+"◀확인▶"+Integer.parseInt( params.get("pazeSize").toString() ));
 		
 		search.setPageSize(pageSize);
-		System.out.println("search 확인 : "+search);
+//		System.out.println("search 확인 : "+search);
 		
 		Map<String , Object> map=adoptService.listAdopt(search, "AD");
 //		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
-		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+//		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
 
 		JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", map.get("list"));
@@ -252,30 +252,12 @@ public class AdoptRestController {
         jsonObject.put("totalCount", map.get("totalCount"));
 
       
-        System.out.println("json5========================================================\n"+jsonObject);
+//        System.out.println("json5========================================================\n"+jsonObject);
       
 		return jsonObject;
 	}
 	
 	
-	// 캘린더로 실종글 불러오기
-	@SuppressWarnings("unchecked")
-	@RequestMapping( value="json/listMissing/{boardCode}" )
-	public JSONObject listMissing( @PathVariable("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
-		
-		System.out.println("\n\n/adopt/json/listMissing : GET / POST "+boardCode);
-		
-		Map<String , Object> map=adoptService.listMissing(boardCode);
-		map.put("list", map.get("list"));
-		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
-		
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("list", map.get("list"));
-		
-//        System.out.println("json5========================================================\n"+jsonObject);
-		
-		return jsonObject;
-	}
 	
 	// 후기등록 권한
 	@SuppressWarnings("unchecked")
@@ -295,5 +277,28 @@ public class AdoptRestController {
 		
 		return jsonObject;
 	}
+
+	
+	
+	// 캘린더로 실종글 불러오기
+	@SuppressWarnings("unchecked")
+	@RequestMapping( value="json/listMissing/{boardCode}" )
+	public JSONObject listMissing( @PathVariable("boardCode") String boardCode, Model model, HttpSession session ) throws Exception{
+		
+		System.out.println("\n\n/adopt/json/listMissing : GET / POST "+boardCode);
+		
+		Map<String , Object> map=adoptService.listMissing(boardCode);
+		map.put("list", map.get("list"));
+//		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("list", map.get("list"));
+		
+//        System.out.println("json5========================================================\n"+jsonObject);
+		
+		return jsonObject;
+	}
+	
+	
 	
 }

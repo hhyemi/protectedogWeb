@@ -85,7 +85,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/message/listMessage">MessageList</a></span>
+						<span class="mr-2">Message</span><span> List</span>
 					</p>
 					<font size="7">쪽지함</font>
 				</div>

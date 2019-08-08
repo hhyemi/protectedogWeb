@@ -832,6 +832,8 @@
 	});
 
 	$( "input[name=dogWeight]" ).keyup(function( e ) {
+		$(this).val(addCommas($(this).val().replace(/[ㄱ-ㅎㅏ-ㅡ가-핳]/g,'')));   
+	
 		if(parseFloat( $("input[name=dogWeight]").val()) > 60.0 ){
 // 		if($("input[name=dogWeight]").val().length > 6 ){
 			swal({
@@ -857,6 +859,17 @@
 				   },
 		     });
 			$("input[name=dogWeight]").val($("input[name=dogWeight]").val().toString().substring(0,6));
+		}else if(parseFloat( $("input[name=dogWeight]").val()) < 0 ){
+			swal({
+		           text: "0 미만은 입력할 수 없습니다..",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		     });
+			$("input[name=dogWeight]").val('0');
 		}else{
 			$("span[name=dogWeight]").text('');
 		}

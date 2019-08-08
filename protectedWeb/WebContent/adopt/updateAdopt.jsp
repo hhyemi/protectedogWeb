@@ -855,6 +855,8 @@
 	});
 
 	$( "input[name=dogWeight]" ).keyup(function( ) {
+		$(this).val(addCommas($(this).val().replace(/[ㄱ-ㅎㅏ-ㅡ가-핳]/g,'')));  
+	
 		if( parseFloat($("input[name=dogWeight]").val()) > 60.0 ){
 			swal({
 		           text: "제한 체중(60kg)을 초과하였습니다.",

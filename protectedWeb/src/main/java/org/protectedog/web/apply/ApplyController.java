@@ -122,37 +122,37 @@ public class ApplyController {
 	
 
 	// 신청글 목록
-	@RequestMapping( value="listApply" )
-	public String listApply( @RequestParam("adoptNo") int adoptNo,
-							 @ModelAttribute("search") Search search, Model model ) throws Exception{
-		
-		System.out.println("/apply/listApply : GET / POST");
-		
-		if(search.getCurrentPage() ==0 ){
-			search.setCurrentPage(1);
-		}
-		
-		search.setPageSize(pageSize);
-		System.out.println("■■■■■ 검색어 확인 : "+search.getSearchKeyword());
-		System.out.println("■■■■■ 확인 : "+search);
-		
-		// Business logic 수행
-		Map<String , Object> map=applyService.listApply(search, adoptNo );
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
-			
-		System.out.println("확인                                 :  "+map);
-		System.out.println("확인     222                            :  "+map.get("list"));
-		
-		// Model 과 View 연결
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-		System.out.println("4========================================================"+map.get("list"));
-		
-
-		return "forward:/apply/listApply.jsp";
-	}
+//	@RequestMapping( value="listApply" )
+//	public String listApply( @RequestParam("adoptNo") int adoptNo,
+//							 @ModelAttribute("search") Search search, Model model ) throws Exception{
+//		
+//		System.out.println("/apply/listApply : GET / POST");
+//		
+//		if(search.getCurrentPage() ==0 ){
+//			search.setCurrentPage(1);
+//		}
+//		
+//		search.setPageSize(pageSize);
+//		System.out.println("■■■■■ 검색어 확인 : "+search.getSearchKeyword());
+//		System.out.println("■■■■■ 확인 : "+search);
+//		
+//		// Business logic 수행
+//		Map<String , Object> map=applyService.listApply(search, adoptNo );
+//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+//		System.out.println(resultPage);
+//			
+//		System.out.println("확인                                 :  "+map);
+//		System.out.println("확인     222                            :  "+map.get("list"));
+//		
+//		// Model 과 View 연결
+//		model.addAttribute("list", map.get("list"));
+//		model.addAttribute("resultPage", resultPage);
+//		model.addAttribute("search", search);
+//		System.out.println("4========================================================"+map.get("list"));
+//		
+//
+//		return "forward:/apply/listApply.jsp";
+//	}
 	
 	
 }

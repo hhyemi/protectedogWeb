@@ -102,11 +102,5 @@ public class AdoptDAOImpl implements AdoptDAO{
 		return sqlSession.selectOne("AdoptMapper.getTotalCount", map);
 	}
 	
-	public int getTotalCountById(Search search, String id) throws Exception {
-		Map<String , Object>  map = new HashMap<String, Object>();
-		map.put("id",  id );
-		map.put("endRowNum",  search.getEndRowNum()+"" );
-		map.put("startRowNum",  search.getStartRowNum()+"" );
-		return sqlSession.selectOne("AdoptMapper.getTotalCountById", map);
-	}
+
 }

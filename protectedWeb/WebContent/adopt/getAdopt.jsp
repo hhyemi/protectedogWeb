@@ -408,7 +408,7 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2">List</span> <span>Apply</span></p>
+	          	<p ><span class="mr-2">Adopt</span> <span>Apply</span></p>
 	            <font size="7">
 	            	신청서 확인
 	            </font>

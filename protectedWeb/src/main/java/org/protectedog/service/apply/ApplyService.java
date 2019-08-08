@@ -22,6 +22,6 @@ public interface ApplyService {
 	public Map<String , Object> listApply2(String id) throws Exception;
 	
 	// 신청글 삭제
-	public void delApply(Apply apply) throws Exception;
+//	public void delApply(Apply apply) throws Exception;
 	
 }
