@@ -1,7 +1,6 @@
 package org.protectedog.web.comment;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,10 +9,8 @@ import org.protectedog.common.Search;
 import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Comment;
 import org.protectedog.service.domain.Interest;
-import org.protectedog.service.domain.ReComment;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.interest.InterestService;
-import org.protectedog.service.recomment.ReCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -77,7 +74,7 @@ public class CommentRestController {
 	}
 	
 	@RequestMapping("json/getComment/{commentNo}/{boardCode}")
-	public Comment getCommentView(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode) throws Exception {
+	public Comment getComment(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode) throws Exception {
 
 		System.out.println(" ============================== rest getComment ==================================");
 
@@ -107,7 +104,7 @@ public class CommentRestController {
 	}
 	
 	@RequestMapping( value="json/delComment/{commentNo}/{boardCode}", method=RequestMethod.POST)
-	public int updateComment(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode) throws Exception {
+	public int delComment(@PathVariable("commentNo") int commentNo, @PathVariable("boardCode") String boardCode) throws Exception {
 
 		System.out.println(" ============================== rest delComment ==================================");
 		
@@ -147,7 +144,7 @@ public class CommentRestController {
 		comment.setCommentNo(commentNo);
 		
 		Interest interest = new Interest();
-		interest.setBoardCode("IS");
+		interest.setBoardCode(boardCode);
 		interest.setInterestComment(comment);
 		interest.setInterestId(user);
 

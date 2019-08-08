@@ -38,12 +38,12 @@ public class ChattingRestController {
 
 		System.out.println("/chatting/json/addChattingUser : GET");
 
-		String sessionId = ((User) session.getAttribute("user")).getId();
+		//String sessionId = ((User) session.getAttribute("user")).getId();
 
 		MongoClient mongoClient = null;
 		try {
 			mongoClient = new MongoClient("localhost", 27017);
-			System.out.println("Á¢¼Ó ¼º°ø");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 			WriteConcern wc = new WriteConcern(1, 2000);
 
@@ -58,7 +58,7 @@ public class ChattingRestController {
 			doc.put("userId", "eunwoo");
 			doc.put("chattingTitle", 24);
 			col.insert(doc);
-			System.out.println("»ðÀÔ¿Ï·á");
+			System.out.println("ï¿½ï¿½ï¿½Ô¿Ï·ï¿½");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -88,7 +88,7 @@ public class ChattingRestController {
 
 		try {
 			mongoClient = new MongoClient("localhost", 27017);
-			System.out.println("Á¢¼Ó ¼º°ø");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 			WriteConcern wc = new WriteConcern(1, 2000);
 
@@ -110,13 +110,13 @@ public class ChattingRestController {
 				 * if(cursor.next()==null) { break; }
 				 */
 				chattingRoomList.add(cursor.next());
-				// System.out.println(cursor.next().get("_id")); idÄÃ·³¸¸ Ãâ·Â
+				// System.out.println(cursor.next().get("_id")); idï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				// System.out.println("cursor.next()"+cursor.next());
 			}
 
 			System.out.println("chattingRoomList" + chattingRoomList);
 		} catch (Exception e) {
-			System.out.println("¿¨" + e.getMessage());
+			System.out.println("ï¿½ï¿½" + e.getMessage());
 		}
 
 		return chattingRoomList;

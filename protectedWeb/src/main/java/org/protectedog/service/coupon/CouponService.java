@@ -2,28 +2,27 @@ package org.protectedog.service.coupon;
 
 import java.util.Map;
 
-import org.protectedog.common.Search;
 import org.protectedog.service.domain.Coupon;
 
 public interface CouponService {
 
-	// ÄíÆù µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void addCouponManage(Coupon coupon) throws Exception;
 	
-	// ÄíÆù ¼ö·É
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void addCoupon(Coupon coupon) throws Exception;
 	
-	// ÄíÆù »ó¼¼Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¸
 	public Coupon getCoupon(int couponNo) throws Exception;
 
 	
-	// ÄíÆù ¸¶¸®½ºÆ®Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È¸
 	public Map<String, Object> getCouponList(Map<String, Object> sMap) throws Exception;
 	
-	// ÄíÆù»óÅÂ ¼öÁ¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateCouponStatus(Coupon coupon) throws Exception;
 	
-	// ÄíÆù À¯È¿¼ºÃ¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½Ã¼Å©
 	public int checkCoupon(String couponCode, String receiverId) throws Exception;
 	
 }

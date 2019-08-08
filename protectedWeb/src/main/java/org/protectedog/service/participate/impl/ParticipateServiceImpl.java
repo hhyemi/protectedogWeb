@@ -5,12 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.Participate;
 import org.protectedog.service.participate.ParticipateDAO;
 import org.protectedog.service.participate.ParticipateService;
-import org.protectedog.service.storyfunding.FundingDAO;
-import org.protectedog.service.storyfunding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

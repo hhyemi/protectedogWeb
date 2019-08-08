@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Mileage;
 import org.protectedog.service.domain.Order;
 import org.protectedog.service.order.OrderDAO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -164,7 +164,7 @@ th {
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p ><span class="mr-2">protected</span> <span>Store</span></p>
-            <font size="7">상품 상세내역 조회</font>
+            <font size="7">주문 상세내역 조회</font>
           </div>
         </div>
       </div>
@@ -228,30 +228,39 @@ th {
 				  		<div class="col-md-2 "><font size="4px"><strong>주문자</strong></font></div>
 						<div class="col-md-4 "><font size="4px"> ${order.id}</font></div>
 			
-				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>받는이</strong></font></div>
-						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.receiverName }</font></div>
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>주문자 연락처</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.phone}</font></div>
+					</div>	</div><hr width="700px">
+			
+					
+		<div class="col-md-7" >
+	                   	<div class="row">
+				  		<div class="col-md-2 "><font size="4px"><strong>수령자</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${order.receiverName} </font></div>
+			
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>수령자 연락처</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.receiverPhone}</font></div>
 					</div>	
-					<p/>
+					
+						<div class="row">
+				  		<div class="col-md-2 "><font size="4px"><strong>주소</strong></font></div>
+						<div class="col-md-4 "><font size="4px">${order.receiverAddr} </font></div>
+			
+				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>주문요청사항</strong></font></div>
+						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.orderRequest}</font></div>
+					</div>	
+						
+		
 		
 	                   	<div class="row">
-				  		<div class="col-md-2 "><font size="4px"><strong>연락처</strong></font></div>
-						<div class="col-md-4 "><font size="4px"> ${order.phone}</font></div>
-			
-				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>요청사항</strong></font></div>
-						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.orderRequest }</font></div>
-					</div>	
-							<p/>
-		
-		
-	                   	<div class="row">
-				  		<div class="col-md-2 "><font size="4px"><strong>주문일자</strong></font></div>
-						<div class="col-md-4 "><font size="4px"> ${order.id}			 <fmt:formatDate pattern="yyyy-MM-dd"
-							value="${order.orderDate}" />	</font></div>
-			
-				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>결제수단</strong></font></div>
+				  		
+						<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>결제수단</strong></font></div>
 						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">		<c:if test="${order.paymentCode == 1 }">
 			무통장</c:if> <c:if test="${order.paymentCode == 2}"> 
  		 신용카드</c:if>	</font></div>
+ 		 <div class="col-md-2 "><font size="4px"><strong>주문일자</strong></font></div>
+						<div class="col-md-4 "><font size="4px"> 	 <fmt:formatDate pattern="yyyy-MM-dd"
+							value="${order.orderDate}" />	</font></div>
 					</div>						
 
     </div>

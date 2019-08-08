@@ -9,7 +9,7 @@
 <body> 
     
     <div id="searchEmpty" align="center" style="height: 300px; padding-top: 50px;"></div>
-dsfad
+
 	<script type="text/javascript">
     	if ($('#searchKeyword').val().trim() != '') {
 			$('#searchEmpty').html( 

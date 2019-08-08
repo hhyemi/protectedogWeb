@@ -19,7 +19,6 @@ public class Order {
 	private int totalPrice;
 	private int orderCode;
 	private int deliveryCode;
-	private int mileageNo;
 	private Product orderProd;
 
 
@@ -209,17 +208,6 @@ public class Order {
 	}
 
 
-
-	public int getMileageNo() {
-		return mileageNo;
-	}
-
-
-
-	public void setMileageNo(int mileageNo) {
-		this.mileageNo = mileageNo;
-	}
-	
 	
 	public Product getOrderProd() {
 		return orderProd;
@@ -239,11 +227,8 @@ public class Order {
 				+ couponNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
 				+ receiverPhone + ", orderRequest=" + orderRequest + ", paymentCode=" + paymentCode + ", orderDate="
 				+ orderDate + ", orderQuantity=" + orderQuantity + ", totalPrice=" + totalPrice + ", orderCode="
-				+ orderCode + ", deliveryCode=" + deliveryCode + ", mileageNo=" + mileageNo + ", orderProd=" + orderProd
-				+ "]";
+				+ orderCode + ", deliveryCode=" + deliveryCode + ", orderProd=" + orderProd + "]";
 	}
-
-
 
 
 

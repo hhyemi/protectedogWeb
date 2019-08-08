@@ -620,7 +620,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		
 		////////분양실종 이벤트///////////
 		$("#AD").on("click",function(){
-			self.location ="/adopt/listAdopt";	
+			self.location ="/adopt/listAdopt?boardCode=AD";	
 		});
 		$("#MS").on("click",function(){
 			self.location ="/adopt/listMissing";	

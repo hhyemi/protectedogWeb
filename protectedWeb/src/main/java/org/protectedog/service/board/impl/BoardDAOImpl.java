@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 
 
-//==> °Ô½ÃÆÇ°ü¸® DAO CRUD ±¸Çö
+//==> ï¿½Ô½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ DAO CRUD ï¿½ï¿½ï¿½ï¿½
 @Repository("boardDAOImpl")
 public class BoardDAOImpl implements BoardDAO{
 	
@@ -22,6 +22,7 @@ public class BoardDAOImpl implements BoardDAO{
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
+	
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
@@ -51,7 +52,7 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		List<Board> list = sqlSession.selectList("BoardMapper.listBoard", map); 
 
-		//selectOne: Äõ¸® °á°ú°¡ ¾øÀ¸¸é return null 
+		//selectOne: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ return null 
 		map.put("totalCount", sqlSession.selectOne("BoardMapper.getTotalCount", map))
 		;
 		map.put("list", list);
@@ -75,12 +76,12 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.update("BoardMapper.delBoard", board);
 	}
 
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼ Row(totalCount)  return
+	// ï¿½Ô½ï¿½ï¿½ï¿½ Page Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ Row(totalCount)  return
 	public int getTotalCount(Map<String, Object> map) throws Exception {
 		return sqlSession.selectOne("BoardMapper.getTotalCount", map);
 	}
 	
-	// °Ô½ÃÆÇ »óÀ§ 5°³ÀÇ °Ô½Ã±ÛÀ» Á¶È¸¼ö ³»¸²Â÷¼øÀ¸·Î Ãâ·ÂÇÏ´Â ¸Þ¼Òµå
+	// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception {
 		
 		return sqlSession.selectList("BoardMapper.listBoardRankingSearch", boardCode);

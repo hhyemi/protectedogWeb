@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +36,6 @@ public class UserController {
 	
 	///Constructor
 	public UserController() {
-		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());
 	}
 	
@@ -301,7 +299,7 @@ public class UserController {
 	public String updateUsers(@ModelAttribute("user") User user, 
 								Model model, 
 								HttpSession session, 
-								@RequestParam(value="file", required=false) MultipartFile file) throws Exception{
+								@RequestParam("file") MultipartFile file) throws Exception{
 		
 		System.out.println("/users/updateUsers : POST-----------------------------------------------------------");
 		

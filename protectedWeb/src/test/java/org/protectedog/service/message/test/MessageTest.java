@@ -1,18 +1,7 @@
 package org.protectedog.service.message.test;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.protectedog.common.Search;
-import org.protectedog.service.domain.Message;
-import org.protectedog.service.domain.User;
 import org.protectedog.service.message.MessageService;
-import org.protectedog.service.user.UserService;
-import org.protectedog.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -37,7 +26,7 @@ public class MessageTest {
 //		Message message=new Message();
 //		message.setMessageNo(10000);
 //		message.setMessageTitle("hihi");
-//		message.setMessageContent("ÀÌ°Å½¼ Å×½ºÆ®ÀÎ °Å½Ã¿©1");
+//		message.setMessageContent("ï¿½Ì°Å½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½Å½Ã¿ï¿½1");
 //		
 //		User sender=new User();
 //		sender.setId("user01");
@@ -72,7 +61,7 @@ public class MessageTest {
 //		Message message=new Message();
 //		message.setMessageNo(10001);
 //		message.setMessageTitle("hihihi");
-//		message.setMessageContent("ÀÌ°Å½¼ Å×½ºÆ®ÀÎ °Å½Ã¿©2");
+//		message.setMessageContent("ï¿½Ì°Å½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½Å½Ã¿ï¿½2");
 //		
 //		User sender=new User();
 //		sender.setId("user02");

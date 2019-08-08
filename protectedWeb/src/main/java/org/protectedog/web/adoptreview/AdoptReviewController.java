@@ -134,7 +134,7 @@ public class AdoptReviewController {
 		search.setPageSize(5);
 		// 댓글 불러오기
 		Map<String, Object> map = commentService.listComment(postNo, search, boardCode);
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
+		//Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		//Business Logic
 		boardService.updateViewCount(boardService.getBoard(postNo));

@@ -4,16 +4,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Board;
-import org.protectedog.service.domain.Comment;
 import org.protectedog.service.domain.Interest;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.interest.InterestService;
-import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,6 +27,7 @@ public class InterestTest {
 	@Qualifier("interestServiceImpl")
 	private InterestService interestService;
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAddInterest() throws Exception {
 		
@@ -58,7 +55,8 @@ public class InterestTest {
 	}
 
 	 //@Test
-	 public void testGetInterestListAll() throws Exception{
+	 @SuppressWarnings("unchecked")
+	public void testGetInterestListAll() throws Exception{
 		 
 	 	Search search = new Search();
 	 	search.setCurrentPage(1);

@@ -1,23 +1,7 @@
 package org.protectedog.service.coupon.test;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.protectedog.common.Search;
 import org.protectedog.service.coupon.CouponService;
-import org.protectedog.service.domain.Coupon;
-import org.protectedog.service.domain.Message;
-import org.protectedog.service.domain.Report;
-import org.protectedog.service.domain.User;
-import org.protectedog.service.message.MessageService;
-import org.protectedog.service.report.ReportService;
-import org.protectedog.service.report.impl.ReportServiceImpl;
-import org.protectedog.service.user.UserService;
-import org.protectedog.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,7 +31,7 @@ public class CouponTest {
 //		receiverUser.setId("user01");
 //		coupon.setReceiveUser(receiverUser);
 //		
-//		coupon.setCouponName("ÇÑ°èµ¹ÆÄ1¸¸¿øÇÒÀÎ±Ç");
+//		coupon.setCouponName("ï¿½Ñ°èµ¹ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î±ï¿½");
 //		coupon.setDiscount(10000);
 //		coupon.setCouponStatus('0');
 //		
@@ -82,7 +66,7 @@ public class CouponTest {
 //			receiverUser.setId("user02");
 //			coupon.setReceiveUser(receiverUser);
 //			
-//			coupon.setCouponName("ÇÑ°èµ¹ÆÄ1¸¸¿øÇÒÀÎ±Ç");
+//			coupon.setCouponName("ï¿½Ñ°èµ¹ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î±ï¿½");
 //			coupon.setDiscount(10000);
 //			coupon.setCouponStatus('0');
 //			

@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
-import org.protectedog.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -90,7 +88,7 @@ public class UserTest {
 		user.setNickname("testNick");
 		user.setEmail("abc@naver.com");
 		user.setPhone("111-2222-3333");
-		user.setUserAddr("¼­¿ï½Ã");
+		user.setUserAddr("ï¿½ï¿½ï¿½ï¿½ï¿½");
 		user.setAccount("110-000-111111");
 		user.setProfile("gdgd.jpg");
 		
@@ -113,7 +111,7 @@ public class UserTest {
 //			user.setPassword("testPasswd");
 //			user.setSsn("1111112222222");
 //			user.setPhone("111-2222-3333");
-//			user.setAddr("¼­¿ï½Ã");
+//			user.setAddr("ï¿½ï¿½ï¿½ï¿½ï¿½");
 //			user.setEmail("test@test.com");
 //			
 //			userService.addUser(user);
@@ -126,7 +124,8 @@ public class UserTest {
 	
 
 	 //@Test
-	 public void testGetUserListAll() throws Exception{
+	 @SuppressWarnings("unchecked")
+	public void testGetUserListAll() throws Exception{
 		 
 	 	Search search = new Search();
 	 	search.setCurrentPage(1);
