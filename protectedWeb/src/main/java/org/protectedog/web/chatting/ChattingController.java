@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
 
@@ -51,9 +47,9 @@ public class ChattingController {
 
 			mongoClient.setWriteConcern(wc);
 
-			DB db = mongoClient.getDB("chatting");
+			//DB db = mongoClient.getDB("chatting");
 
-			DBCollection col = db.getCollection("chattingRoomList");
+			//DBCollection col = db.getCollection("chattingRoomList");
 
 //			// insert
 //			DBObject doc = new BasicDBObject();

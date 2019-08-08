@@ -1,16 +1,8 @@
 package org.protectedog.service.board.test;
 
-import java.sql.Date;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.protectedog.common.Search;
-import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.board.BoardService;
-import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,11 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /*
- * ¤· JUnit4 (Test Framework) °ú Spring Framework ÅëÇÕ Test( Unit Test)
- * ¤· Spring Àº JUnit 4¸¦ À§ÇÑ Áö¿ø Å¬·¡½º¸¦ ÅëÇØ ½ºÇÁ¸µ ±â¹Ý ÅëÇÕ Å×½ºÆ® ÄÚµå¸¦ ÀÛ¼º ÇÒ ¼ö ÀÖ´Ù.
- * ¤· @RunWith : Meta-data ¸¦ ÅëÇÑ wiring(»ý¼º,DI) ÇÒ °´Ã¼ ±¸ÇöÃ¼ ÁöÁ¤
- * ¤· @ContextConfiguration : Meta-data location ÁöÁ¤
- * ¤· @Test : Å×½ºÆ® ½ÇÇà ¼Ò½º ÁöÁ¤
+ * ï¿½ï¿½ JUnit4 (Test Framework) ï¿½ï¿½ Spring Framework ï¿½ï¿½ï¿½ï¿½ Test( Unit Test)
+ * ï¿½ï¿½ Spring ï¿½ï¿½ JUnit 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Úµå¸¦ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+ * ï¿½ï¿½ @RunWith : Meta-data ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ wiring(ï¿½ï¿½ï¿½ï¿½,DI) ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @ContextConfiguration : Meta-data location ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @Test : ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/context-common.xml" ,
@@ -32,55 +24,55 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 									"classpath:config/context-transaction.xml"})
 public class BoardServiceTest {
 
-	//==>@RunWith,@ContextConfiguration ÀÌ¿ë Wiring, Test ÇÒ instance DI
+	//==>@RunWith,@ContextConfiguration ï¿½Ì¿ï¿½ Wiring, Test ï¿½ï¿½ instance DI
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
 
-	//@Test	// È®ÀÎ
+	//@Test	// È®ï¿½ï¿½
 	public void testAddBoard() throws Exception {
 		
 		Board board = new Board();
 		
 		board.setBoardCode("AR");
 		board.setId("user03");
-		board.setNickName("¾È³ç");
-		board.setPostTitle("ÀÔ¾çÈÄ±â¿ä");
-		board.setPostContent("ÀÔ¾çÈÄ±â³»¿ë¿Ã·Á¿ä");
+		board.setNickName("ï¿½È³ï¿½");
+		board.setPostTitle("ï¿½Ô¾ï¿½ï¿½Ä±ï¿½ï¿½");
+		board.setPostContent("ï¿½Ô¾ï¿½ï¿½Ä±â³»ï¿½ï¿½Ã·ï¿½ï¿½ï¿½");
 		
 		
 		boardService.addBoard(board);
 		
 		board = boardService.getBoard(10041);
 
-		System.out.println("\n :: console È®ÀÎ :: "+board);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+board);
 		
 		Assert.assertEquals("AR", board.getBoardCode());
 		Assert.assertEquals("user03", board.getId());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â¿ä", board.getPostTitle());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â³»¿ë¿Ã·Á¿ä", board.getPostContent());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±ï¿½ï¿½", board.getPostTitle());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±â³»ï¿½ï¿½Ã·ï¿½ï¿½ï¿½", board.getPostContent());
 	}
 	
 	
 	
-	//@Test	//È®ÀÎ
+	//@Test	//È®ï¿½ï¿½
 	public void testGetBoard() throws Exception {
 		
 		Board board = new Board();
 		board = boardService.getBoard(10041);
 
-		System.out.println("\n :: console È®ÀÎ :: "+board);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+board);
 
 		Assert.assertEquals("AR", board.getBoardCode());
 		Assert.assertEquals("user03", board.getId());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â¿ä", board.getPostTitle());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â³»¿ë¿Ã·Á¿ä", board.getPostContent());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±ï¿½ï¿½", board.getPostTitle());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±â³»ï¿½ï¿½Ã·ï¿½ï¿½ï¿½", board.getPostContent());
 	}
 	
 	
 
 	
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testUpdateBoard() throws Exception{
 		 
 		Board board = boardService.getBoard(10041);
@@ -88,24 +80,24 @@ public class BoardServiceTest {
 		
 		Assert.assertEquals("AR", board.getBoardCode());
 		Assert.assertEquals("user03", board.getId());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â¿ä", board.getPostTitle());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â³»¿ë¿Ã·Á¿ä", board.getPostContent());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±ï¿½ï¿½", board.getPostTitle());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±â³»ï¿½ï¿½Ã·ï¿½ï¿½ï¿½", board.getPostContent());
 
-		board.setPostTitle("ÀÔ¾çÈÄ±â¾÷µ¥ÀÌÆ®");
-		board.setPostContent("ÀÔ¾çÈÄ±â³»¿ë¾÷µ¥ÀÌÆ®");
+		board.setPostTitle("ï¿½Ô¾ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
+		board.setPostContent("ï¿½Ô¾ï¿½ï¿½Ä±â³»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
 		boardService.updateBoard(board);
 		
 		board = boardService.getBoard(10041);
 		Assert.assertNotNull(board);
 
-		System.out.println("\n :: console È®ÀÎ :: "+board);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+board);
 
-		Assert.assertEquals("ÀÔ¾çÈÄ±â¾÷µ¥ÀÌÆ®", board.getPostTitle());
-		Assert.assertEquals("ÀÔ¾çÈÄ±â³»¿ë¾÷µ¥ÀÌÆ®", board.getPostContent());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®", board.getPostTitle());
+		Assert.assertEquals("ï¿½Ô¾ï¿½ï¿½Ä±â³»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®", board.getPostContent());
 	 }
 	 
 	 
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testUpdateViewCount() throws Exception{
 		 
 		Board board = boardService.getBoard(10041);
@@ -118,7 +110,7 @@ public class BoardServiceTest {
 		board = boardService.getBoard(10041);
 		Assert.assertNotNull(board);
 
-		System.out.println("\n :: console È®ÀÎ :: "+board);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+board);
 
 		Assert.assertEquals(1, board.getViewCount());
 	 }
@@ -126,7 +118,7 @@ public class BoardServiceTest {
 	 
 	 
 	 
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testUpdateRecommendCount() throws Exception{
 		 
 		Board board = boardService.getBoard(10041);
@@ -139,12 +131,12 @@ public class BoardServiceTest {
 		board = boardService.getBoard(10041);
 		Assert.assertNotNull(board);
 
-		System.out.println("\n :: console È®ÀÎ :: "+board);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+board);
 
 		Assert.assertEquals(1, board.getRecommendCount());
 	 }
 	 
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testDelBoard() throws Exception{
 		 
 		Board board = boardService.getBoard(10041);
@@ -157,13 +149,13 @@ public class BoardServiceTest {
 		board = boardService.getBoard(10041);
 		Assert.assertNotNull(board);
 
-		System.out.println("\n :: console È®ÀÎ :: "+board);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+board);
 
 		Assert.assertEquals('0', board.getDelCode());
 	 }
 
 
-	 //@Test	//==>È®ÀÎ
+	 //@Test	//==>È®ï¿½ï¿½
 	 public void testListBoard() throws Exception{
 		 
 //	 	Search search = new Search();
@@ -174,7 +166,7 @@ public class BoardServiceTest {
 //	 	List<Object> list = (List<Object>)map.get("list");
 //	 	Assert.assertEquals(0, list.size());
 //	 	
-//	 	System.out.println("\n :: console È®ÀÎ :: "+list);
+//	 	System.out.println("\n :: console È®ï¿½ï¿½ :: "+list);
 //	 	
 //	 	Integer totalCount = (Integer)map.get("totalCount");
 //	 	System.out.println(totalCount);
@@ -186,7 +178,7 @@ public class BoardServiceTest {
 //	 	list = (List<Object>)map.get("list");
 //	 	Assert.assertEquals(0, list.size());
 //	 	
-//	 	System.out.println("\n :: console È®ÀÎ :: "+list);
+//	 	System.out.println("\n :: console È®ï¿½ï¿½ :: "+list);
 //	 	
 //	 	totalCount = (Integer)map.get("totalCount");
 //	 	System.out.println(totalCount);

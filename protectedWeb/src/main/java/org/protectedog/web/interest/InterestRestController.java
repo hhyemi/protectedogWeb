@@ -1,40 +1,18 @@
 package org.protectedog.web.interest;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
-import org.protectedog.common.Page;
-import org.protectedog.common.Search;
-import org.protectedog.service.adopt.AdoptService;
-import org.protectedog.service.domain.Adopt;
-import org.protectedog.service.domain.Apply;
 import org.protectedog.service.domain.Board;
-import org.protectedog.service.domain.FileDog;
 import org.protectedog.service.domain.Interest;
-import org.protectedog.service.domain.User;
-import org.protectedog.service.file.FileService;
 import org.protectedog.service.interest.InterestService;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 
 //==> 분양|실종관리 RestController
 @RestController

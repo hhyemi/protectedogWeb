@@ -1,14 +1,5 @@
 package org.protectedog.web.order;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.protectedog.common.Page;
-import org.protectedog.common.Search;
-import org.protectedog.service.domain.Order;
-import org.protectedog.service.domain.Product;
-import org.protectedog.service.domain.User;
 import org.protectedog.service.order.OrderService;
 import org.protectedog.service.product.ProductService;
 import org.protectedog.service.user.UserService;
@@ -16,13 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-
-//==> È¸¿ø°ü¸® Controller
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Controller
 @Controller
 @RequestMapping("/order/*")
 public class OrderRestController {
@@ -31,7 +18,7 @@ public class OrderRestController {
 	@Autowired
 	@Qualifier("orderServiceImpl")
 	private OrderService orderService;
-	// setter Method ±¸Çö ¾ÊÀ½
+	// setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
@@ -44,8 +31,8 @@ public class OrderRestController {
 	}
 
 	// ==> classpath:config/common.properties ,
-	// classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
-	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
+	// classpath:config/commonservice.xml ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
+	// ==> ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Î°ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ ï¿½Ç¹Ì¸ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;

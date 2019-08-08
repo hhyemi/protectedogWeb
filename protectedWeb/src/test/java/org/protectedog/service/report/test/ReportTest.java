@@ -1,21 +1,7 @@
 package org.protectedog.service.report.test;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.protectedog.common.Search;
-import org.protectedog.service.domain.Message;
-import org.protectedog.service.domain.Report;
-import org.protectedog.service.domain.User;
-import org.protectedog.service.message.MessageService;
 import org.protectedog.service.report.ReportService;
-import org.protectedog.service.report.impl.ReportServiceImpl;
-import org.protectedog.service.user.UserService;
-import org.protectedog.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -48,8 +34,8 @@ public class ReportTest {
 //		reported.setId("user02");
 //		report.setReported(reported);
 //		
-//		report.setReportCategory("ºñ¼Ó¾î»ç¿ë");
-//		report.setReportContent("ÀÌ»ö±â ¼ø ³ª»Û»ö±â·¡¿ä");
+//		report.setReportCategory("ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½");
+//		report.setReportContent("ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Û»ï¿½ï¿½â·¡ï¿½ï¿½");
 //		report.setReportStatus(0);
 //		
 //		Date reportDate=new Date();
@@ -84,8 +70,8 @@ public class ReportTest {
 //		reported.setId("user03");
 //		report.setReported(reported);
 //		
-//		report.setReportCategory("Ç³±â¹®¶õ");
-//		report.setReportContent("À½¶õ¸¶±Í°¡ °¡µæ µé¾îÀÖ´Â °Ô·Î±¸³ª");
+//		report.setReportCategory("Ç³ï¿½â¹®ï¿½ï¿½");
+//		report.setReportContent("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ô·Î±ï¿½ï¿½ï¿½");
 //		report.setReportStatus(0);
 //		
 //		Date reportDate=new Date();

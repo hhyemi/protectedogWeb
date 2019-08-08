@@ -11,10 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.protectedog.common.Page;
-import org.protectedog.common.Search;
 import org.protectedog.service.domain.FileDog;
-import org.protectedog.service.domain.Message;
 import org.protectedog.service.domain.Report;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
@@ -23,14 +20,10 @@ import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -53,7 +46,6 @@ public class ReportRestController {
 	
 	///Constructor
 	public ReportRestController() {
-		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());
 	}
 	

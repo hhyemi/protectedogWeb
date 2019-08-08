@@ -1,10 +1,8 @@
 package org.protectedog.service.participate;
 
 import java.util.List;
-import java.util.Map;
 
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.Participate;
 
 public interface ParticipateDAO {

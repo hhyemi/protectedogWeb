@@ -1,11 +1,9 @@
 package org.protectedog.service.apply.test;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.protectedog.common.Search;
 import org.protectedog.service.apply.ApplyService;
@@ -17,11 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /*
- * ¤· JUnit4 (Test Framework) °ú Spring Framework ÅëÇÕ Test( Unit Test)
- * ¤· Spring Àº JUnit 4¸¦ À§ÇÑ Áö¿ø Å¬·¡½º¸¦ ÅëÇØ ½ºÇÁ¸µ ±â¹Ý ÅëÇÕ Å×½ºÆ® ÄÚµå¸¦ ÀÛ¼º ÇÒ ¼ö ÀÖ´Ù.
- * ¤· @RunWith : Meta-data ¸¦ ÅëÇÑ wiring(»ý¼º,DI) ÇÒ °´Ã¼ ±¸ÇöÃ¼ ÁöÁ¤
- * ¤· @ContextConfiguration : Meta-data location ÁöÁ¤
- * ¤· @Test : Å×½ºÆ® ½ÇÇà ¼Ò½º ÁöÁ¤
+ * ï¿½ï¿½ JUnit4 (Test Framework) ï¿½ï¿½ Spring Framework ï¿½ï¿½ï¿½ï¿½ Test( Unit Test)
+ * ï¿½ï¿½ Spring ï¿½ï¿½ JUnit 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Úµå¸¦ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+ * ï¿½ï¿½ @RunWith : Meta-data ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ wiring(ï¿½ï¿½ï¿½ï¿½,DI) ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @ContextConfiguration : Meta-data location ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @Test : ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/context-common.xml" ,
@@ -30,12 +28,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 									"classpath:config/context-transaction.xml"})
 public class ApplyServiceTest {
 
-	//==>@RunWith,@ContextConfiguration ÀÌ¿ë Wiring, Test ÇÒ instance DI
+	//==>@RunWith,@ContextConfiguration ï¿½Ì¿ï¿½ Wiring, Test ï¿½ï¿½ instance DI
 	@Autowired
 	@Qualifier("applyServiceImpl")
 	private ApplyService applyService;
 
-	//@Test	// È®ÀÎ
+	//@Test	// È®ï¿½ï¿½
 	public void testAddApply() throws Exception {
 		
 		Apply apply = new Apply();
@@ -49,42 +47,42 @@ public class ApplyServiceTest {
 //		apply.setMateAgree(1);
 //		apply.setRaise(1);
 //		apply.setCurrently(1);
-		apply.setPlan("'¾î¶»°Ô Å°¿ï °èÈ¹ÀÎÁö'");
-		apply.setPay("'µ·Àº ¾î´ÀÁ¤µµ µé¾î°¥Áö'");
-		apply.setReason("'ÀÔ¾çÀ» ½ÅÃ»ÇÑ ÀÌÀ¯'");
-		apply.setSituation("'»óÈ²ÀÌ ¹Ù²ï´Ù¸é'");
+		apply.setPlan("'ï¿½î¶»ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½È¹ï¿½ï¿½ï¿½ï¿½'");
+		apply.setPay("'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¥ï¿½ï¿½'");
+		apply.setReason("'ï¿½Ô¾ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½'");
+		apply.setSituation("'ï¿½ï¿½È²ï¿½ï¿½ ï¿½Ù²ï¿½Ù¸ï¿½'");
 
 		applyService.addApply(apply);
 		
 		
 		apply = applyService.getApply(10000);
 
-		System.out.println("\n :: console È®ÀÎ :: "+apply);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+apply);
 		
-		Assert.assertEquals("¾î¶»°Ô Å°¿ï °èÈ¹ÀÎÁö", apply.getPlan());
-		Assert.assertEquals("µ·Àº ¾î´ÀÁ¤µµ µé¾î°¥Áö", apply.getPay());
+		Assert.assertEquals("ï¿½î¶»ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½È¹ï¿½ï¿½ï¿½ï¿½", apply.getPlan());
+		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¥ï¿½ï¿½", apply.getPay());
 		Assert.assertEquals('1', apply.getStatusCode());
 	}
 	
 	
 	
-	//@Test	//È®ÀÎ
+	//@Test	//È®ï¿½ï¿½
 	public void testGetApply() throws Exception {
 		
 		Apply apply = new Apply();
 		apply = applyService.getApply(10000);
 
-		System.out.println("\n :: console È®ÀÎ :: "+apply);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+apply);
 
-		Assert.assertEquals("¾î¶»°Ô Å°¿ï °èÈ¹ÀÎÁö", apply.getPlan());
-		Assert.assertEquals("µ·Àº ¾î´ÀÁ¤µµ µé¾î°¥Áö", apply.getPay());
+		Assert.assertEquals("ï¿½î¶»ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½È¹ï¿½ï¿½ï¿½ï¿½", apply.getPlan());
+		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¥ï¿½ï¿½", apply.getPay());
 		Assert.assertEquals('1', apply.getStatusCode());
 	}
 	
 	
 
 	 
-	 //@Test	//È®ÀÎ
+	 //@Test	//È®ï¿½ï¿½
 	 public void testDelApply() throws Exception{
 		 
 		Apply apply = applyService.getApply(10023);
@@ -96,14 +94,15 @@ public class ApplyServiceTest {
 		apply = applyService.getApply(10023);
 		Assert.assertNotNull(apply);
 
-		System.out.println("\n :: console È®ÀÎ :: "+apply);
+		System.out.println("\n :: console È®ï¿½ï¿½ :: "+apply);
 
 		Assert.assertEquals("0", apply.getStatusCode());
 	 }
 	
 
-	// @Test	//È®ÀÎ
-	 public void testListApply() throws Exception{
+	// @Test	//È®ï¿½ï¿½
+	 @SuppressWarnings("unchecked")
+	public void testListApply() throws Exception{
 		 
 	 	Search search = new Search();
 	 	search.setCurrentPage(1);
@@ -113,7 +112,7 @@ public class ApplyServiceTest {
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(1, list.size());
 	 	
-	 	System.out.println("\n :: console È®ÀÎ :: "+list);
+	 	System.out.println("\n :: console È®ï¿½ï¿½ :: "+list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);
@@ -125,7 +124,7 @@ public class ApplyServiceTest {
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(2, list.size());
 	 	
-	 	System.out.println("\n :: console È®ÀÎ :: "+list);
+	 	System.out.println("\n :: console È®ï¿½ï¿½ :: "+list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);
