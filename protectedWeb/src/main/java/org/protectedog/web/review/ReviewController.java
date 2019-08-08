@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -111,6 +110,7 @@ public class ReviewController {
 		int grade=0;
 		int i=0;
 		int avgGrade=0;
+		@SuppressWarnings("unchecked")
 		List<Review> reviewList= (List<Review>) reviewMap.get("list");
 		for ( i = 0; i < reviewList.size(); i++) {
 			grade += reviewList.get(i).getGrade();

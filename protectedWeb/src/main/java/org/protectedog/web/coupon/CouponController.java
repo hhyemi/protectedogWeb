@@ -151,6 +151,7 @@ public class CouponController {
 		Page resultPage=new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println("Coupon ����Ʈ ������ : "+resultPage);
 		
+		@SuppressWarnings("unchecked")
 		List<Coupon> list=(List<Coupon>) map.get("list");
 		Coupon coupon=list.get(0);
 		

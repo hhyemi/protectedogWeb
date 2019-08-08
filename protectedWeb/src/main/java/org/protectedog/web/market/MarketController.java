@@ -14,11 +14,8 @@ import org.protectedog.service.board.BoardService;
 import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.FileDog;
-import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
-import org.protectedog.service.recomment.ReCommentService;
-import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,13 +42,6 @@ public class MarketController {
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
-	
-	
-	@Autowired
-	@Qualifier("reCommentServiceImpl")
-	private ReCommentService reCommentService;
-	
-
 
 	// setter Method 구현 않음
 

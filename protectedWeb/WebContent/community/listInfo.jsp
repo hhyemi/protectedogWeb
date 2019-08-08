@@ -147,11 +147,17 @@ th{background-color: #F0F0F0;}
 					</thead>
 					
 					<tbody>
-					<c:set var="i" value="0" />
+<%-- 					<c:if test="${param.pageNo == null }"> --%>
+<%-- 						<c:set var="i" value="${totalCount}" /> --%>
+<%-- 					</c:if> --%>
+<%-- 					<c:if test="${param.pageNo != null }"> --%>
+<%-- 						<c:set var="i" value="${param.pageNo}" /> --%>
+<%-- 					</c:if> --%>
+						<c:set var="i" value="${ totalCount - ( (search.currentPage - 1) * search.pageSize )  }" />
 						<c:forEach var="board" items="${list}">
-							<c:set var="i" value="${ i+1 }" />
+							<c:set var="i" value="${  i - 1  }" />
 							<tr>
-								<td align="center" class="text-center">${i}</td>
+								<td align="center" class="text-center">${i + 1 }</td>
 								<td align="center" class="postTitle mdl-data-table__cell--non-numeric">
 									<input type="hidden" name="postNo" value="${board.postNo}">
 									${board.postTitle} [${board.commentCount}]
@@ -171,7 +177,7 @@ th{background-color: #F0F0F0;}
 
 						<button type="button" class="btn btn-default">작성</button>
 					
-					<div align="center" style="padding-left: 45%">
+					<div align="center" style="padding-left: 33%">
 					<jsp:include page="/common/pageNavigator_new.jsp" />
 					</div>
 					
@@ -306,14 +312,15 @@ function listNews(){
 	function fncGetList(currentPage) {
 		
 		$("#currentPage").val(currentPage);
-		
+				
+		var pageNo = $("#listTable tr:last td:first").text();
 		
 		if(${param.order != null}){
 			$("form").attr("method", "POST").attr("action","/info/listInfo?order=${param.order}&pageSize=${search.pageSize}").submit();
 			return;
 		}
 		
-		$("form").attr("method", "POST").attr("action","/info/listInfo").submit();
+		$("form").attr("method", "POST").attr("action","/info/listInfo?pageSize=${search.pageSize}").submit();
 	}
 
 	function getPageSize() {

@@ -32,7 +32,7 @@ public interface BoardService {
 	// 글 삭제
 	public void delBoard(Board board) throws Exception;
 	
-	// SELECT LIST RANKING TOP 5
+	// 상위 랭킹 5개 리스트
 	public List<Board> listBoardRankingSearch(String boardCode) throws Exception ;
 	
 	// 글 리스트 + 댓글 개수 조회

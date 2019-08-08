@@ -1,11 +1,9 @@
 package org.protectedog.service.adopt.test;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
@@ -147,7 +145,8 @@ public class AdoptServiceTest {
 	
 
 	 //@Test	//Ȯ��
-	 public void testGetPurchaseListById() throws Exception{
+	 @SuppressWarnings("unchecked")
+	public void testGetPurchaseListById() throws Exception{
 		 
 	 	Search search = new Search();
 	 	search.setCurrentPage(1);

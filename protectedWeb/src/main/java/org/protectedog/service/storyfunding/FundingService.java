@@ -5,44 +5,43 @@ import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Funding;
-import org.protectedog.service.domain.Participate;
 
 public interface FundingService {
 
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ»°Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½ï¿½Ã»ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 	
-	// ÆÝµù ÇÑ´Þ Àü ±Û ÀÖ´ÂÁö È®ÀÎ
+	// ï¿½Ýµï¿½ ï¿½Ñ´ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public Funding getPost(String id) throws Exception;
 	
-	// ÆÝµù ±Û ÀÛ¼º
+	// ï¿½Ýµï¿½ ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void addVoting(Funding funding) throws Exception;
 
-	// ÆÝµù ±Û È®ÀÎ
+	// ï¿½Ýµï¿½ ï¿½ï¿½ È®ï¿½ï¿½
 	public Funding getVoting(int postNo) throws Exception;
 
-	// ÆÝµù ±Û ¼öÁ¤
+	// ï¿½Ýµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateVoting(Funding funding) throws Exception;
 
-	// ÆÝµù ±Û »èÁ¦
+	// ï¿½Ýµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void delVoting(int postNo) throws Exception;
 
-	// ÆÝµù ±Û ¸®½ºÆ®
+	// ï¿½Ýµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public Map<String, Object> listVoting(Search search) throws Exception;
 
-	// ÆÝµù ±Û AutoComplete
+	// ï¿½Ýµï¿½ ï¿½ï¿½ AutoComplete
 	public List<String> getAutoVoting(Map<String, Object> searchMap) throws Exception;
 	
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ»°Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½ï¿½Ã»ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 	
-	// ÆÝµù ±Û ¸®½ºÆ®
+	// ï¿½Ýµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public Map<String, Object> listFunding(Search search) throws Exception;
 	
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
-	// ÆÝµù »óÅÂÄÚµå ¼öÁ¤
+	// ï¿½Ýµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateStatusCode(Funding funding) throws Exception;
 
-	/////////////// ÈÄ±â °Ô½ÃÆÇ /////////////////////
+	/////////////// ï¿½Ä±ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 	
 	public void addReview(Funding funding) throws Exception;
 

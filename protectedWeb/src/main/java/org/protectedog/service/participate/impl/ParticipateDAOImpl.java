@@ -6,10 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.common.Search;
-import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.Participate;
 import org.protectedog.service.participate.ParticipateDAO;
-import org.protectedog.service.storyfunding.FundingDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;

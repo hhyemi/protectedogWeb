@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Interest;
-import org.protectedog.service.domain.User;
-import org.w3c.dom.ls.LSInput;
 
 public interface InterestDAO {
 	

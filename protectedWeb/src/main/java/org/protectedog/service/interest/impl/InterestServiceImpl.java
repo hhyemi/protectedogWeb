@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Interest;
-import org.protectedog.service.domain.User;
 import org.protectedog.service.interest.InterestDAO;
 import org.protectedog.service.interest.InterestService;
 import org.springframework.beans.factory.annotation.Autowired;
