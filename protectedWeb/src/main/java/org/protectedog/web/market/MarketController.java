@@ -246,7 +246,7 @@ public class MarketController {
 		}
 		
 		@RequestMapping(value = "updateMarket", method = RequestMethod.POST)
-		public String updateVoting(@ModelAttribute("board") Board board,
+		public String updateMarket(@ModelAttribute("board") Board board,
 				@RequestParam("multiFile") ArrayList<String> multiFile,
 				@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
 
