@@ -47,8 +47,14 @@
         img {
        	    max-width: 600px;
         }
-
-            
+        #divId{
+        width: 460px !important;
+        }
+		.product_description_area {
+		    padding-bottom: 30px !important;
+		  
+		}
+		            
 	</style> 
  
  	<!-- ToolBar Start /////////////////////////////////////-->
@@ -116,7 +122,7 @@
           </div>
  			 <div style="padding-left: 50px;" >
              <div class="s_product_text">			 
-            <div>
+            <div id="divId">
             <h4>&emsp;</h4>
             
             
@@ -187,7 +193,7 @@
                		<button class="btn btn-default" id="noApply" style="width: 460px;" id="confirmButton">완료된 글입니다.</button>
 			 </c:if>
             <!-- 투표중 -->			 
-			<c:if test ="${funding.statusCode eq 1 }">				 			
+			<c:if test ="${funding.statusCode eq 1 && funding.id ne user.id}">				 			
                 <button  id="btnAddVote" class="btn btn-default" style="width: 225px">투표</button><button id="btnQuestion"  class="btn btn-default" style="width: 225px">문의</button>             
 			</c:if>		              
        
@@ -281,7 +287,7 @@
 	      </div>
 	      </form>
 	      <p/>
-				<div align="right"  style="padding-right:205px">					
+				<div align="right"  style="padding-right:300px">					
 							<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
 							<button type="button" id = "btnUpdate" class="btn btn-default">수정</button> 
 							<button type="button" id = "btnDelete" class="btn btn-default">삭제</button>
@@ -522,7 +528,7 @@
 		//============= 수정하기 Event  처리 =============	
 	 	$( "#btnUpdate" ).on("click" , function() {
 
-	 		if(${!(funding.voterCount ==0) || user.id == 'admin'}){
+	 		if(${!(funding.voterCount ==0) && !(user.id == 'admin')}){
 	
 				  swal({
 			           text: "투표 1개이상 받을 시 수정이 불가합니다.",
@@ -534,15 +540,17 @@
 					   },			   
 			      });	 			
 
+	 		}else if(${user.id == 'admin'}){
+	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}&code=1"
 	 		}else{
-	 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
+	 			 self.location = "/funding/updateVoting?postNo=${funding.postNo}&code=1"
 	 		}
 		});   
 		
 		//============= 삭제하기 Event  처리 =============	
 	 	$( "#btnDelete" ).on("click" , function() {
 	 		
-	 		if(${(funding.statusCode ==1) ||funding.statusCode==2|| user.id == 'admin'}){
+	 		if(${(funding.statusCode ==1) ||funding.statusCode==2 || user.id == 'admin'}){
 	 		swal({
 	            title: "정말 삭제 하시겠습니까 ?",
 	            text: "삭제시 한달간 글 작성 불가입니다.",

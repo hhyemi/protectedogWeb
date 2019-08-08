@@ -56,7 +56,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">support</span> <span>apply</span></p>
+          	<p ><span class="mr-2">Support</span> <span>Apply</span></p>
             <font size="7">후원이 완료되었습니다.</font><br/> 후원 해주셔서 <strong  style="color:#f04f23">감사</strong>합니다.
           </div>
         </div>

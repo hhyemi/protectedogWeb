@@ -16,7 +16,7 @@ public interface ParticipateDAO {
 	public Participate getParticipate(int participateNo) throws Exception;
 
 	// SELECT ONE
-	public int getParticipateTotalCount(int postNo) throws Exception;
+	public int getParticipateTotalCount(int postNo,String statusCode) throws Exception;
 	
 	//SELECT ONE
 	public Participate getPostParticipate(Participate participate) throws Exception;

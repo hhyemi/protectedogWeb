@@ -68,6 +68,18 @@
 		#{endRowNum}
 	</select>
 	
+	<!-- SQL : SELECT ROW Count  --> 
+	<select id="getParticipateTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
+		FROM PARTICIPATE
+		<where>
+			AND POST_NO = #{postNo} AND STATUS_CODE = #{statusCode}
+		</where>
+		) countTable
+	</select>
+	
 	
 
 <!-- 	<SQL : USER에서 쓰는 SELECT LIST -->
@@ -81,17 +93,5 @@
 <!-- 			</if> -->
 <!-- 		</where> -->
 <!-- 	</select> -->
-	
-	<!-- SQL : SELECT ROW Count  --> 
-	<select id="getParticipateTotalCount" parameterType="int" resultType="int">
-		SELECT COUNT(*)
-		FROM( SELECT
-		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
-		FROM PARTICIPATE
-		<where>
-			AND POST_NO = #{value}
-		</where>
-		) countTable
-	</select>
 
 </mapper>

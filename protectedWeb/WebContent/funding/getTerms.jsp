@@ -78,7 +78,7 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2">protected</span> <span>terms</span></p>
+	          	<p ><span class="mr-2">Protected</span> <span>Terms</span></p>
 	            <font size="7">${termsTitle}&nbsp;</font><br/>정책을<strong style="color:#f04f23"> 꼼꼼히 </strong> 확인해주세요.
 	          </div>
 	        </div>

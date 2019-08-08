@@ -68,7 +68,7 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2">support</span> <span>apply</span></p>
+	          	<p ><span class="mr-2">Support</span> <span>Apply</span></p>
 	            <font size="7">후원신청수정</font><br/> 후원신청은 투표 <strong style="color: #f04f23">1개</strong>이상
 					받을 시 <strong style="color: #f04f23">수정이 불가</strong>합니다.
 	          </div>
@@ -182,7 +182,8 @@
 			</div>
 		    <input type="hidden" name="postNo" value="${funding.postNo }" />		    	
 		    <input type="hidden" id="multiFile" name="multiFile" />
-		    <input type="hidden" id="deleteFile" name="deleteFile" />		    
+		    <input type="hidden" id="deleteFile" name="deleteFile" />
+		    <input type="hidden" id="code" name="code" value="${code}" />			    
 		  <br/><br/>
 	          	<div class="col-md-12" style="padding-left:170px;padding-right: 160px">
 	          	
@@ -338,6 +339,7 @@
             });
         });
 
+      
 
       $('form').attr("method","POST").attr("action","/funding/updateVoting").attr("enctype","multipart/form-data").submit();
 	              });

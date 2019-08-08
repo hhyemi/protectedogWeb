@@ -383,12 +383,12 @@
 	                     }else{
 	               // 3장 이하 
 	                     $("#preview").append(
-	                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px' >"
-	                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"120px;\" height=\"120px;\"/>"
-	                                             + "<span href=\"#\" value=\""
-	                                             + imgNum
-	                                             + "\" onclick=\"deletePreview(this)\">"
-	                                             + "   &ensp;삭제" + "</span>");
+                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:140px;padding-top:7px' >"
+                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"130px;\" height=\"115px;\"/>"
+                                             + "<span href=\"#\" value=\""
+                                             + imgNum
+                                             + "\" onclick=\"deletePreview(this)\">"
+                                             + "   <font color=\"#f04f23\"> 삭제</font>" + "</span>" + "</div>");
 
 	                     files[imgNum] = file;
 	                     fileNameArray[imgNum]=file.name;
@@ -459,7 +459,44 @@
 	          });
 	       });
 	   		   	
-	
+	       
+           //============= 후기제목 길이 입력 검증 =============
+           $('#postTitle').keyup(function(){
+
+	                  if($(this).val().length > 11) {     
+	        			  swal({
+		       		           text: "제한길이를 초과하였습니다.",
+		       		           dangerMode: true,
+		       		           buttons: {
+		       							 catch: {
+		       							 	text: "확인"
+		       							 }
+		       				   },			   
+		       		      }).then((willDelete) => {
+		       		           if (willDelete) {
+		                           $(this).val($(this).val().substr(0,10));
+		       		           }
+		       		      });
+	                  }
+
+           });	 
+           //============= 후기내용 길이 입력 검증 =============
+       $('textarea').keyup(function( ) {
+       		alert("dd")
+    		if($("textarea[name=postContent]").val().length > 100 ){
+    			swal({
+    		           text: "제한 길이를 초과하였습니다.",
+    		           dangerMode: true,
+    		           buttons: {
+    							 catch: {
+    							 	text: "확인"
+    							 }
+    				   },
+    		     });
+    			$("textarea[name=postContent]").val($("textarea[name=postContent]").val().toString().substring(0,100));
+//     			$("span[name=postContent]").text('100자까지 입력할 수 있습니다.');
+    		}
+    	});	
 	   //============= 등록버튼 눌렀을때 함수 =============      
 	   function fncAddReview(){
 	      
@@ -735,6 +772,8 @@
 						              }).then((value) => {
 					        	 //alert($(this).parent().children("input").val())
 						        	 var str = $(this).parent().children("input").val();
+        							
+
 				                  $.ajax({
 									        	url : "/review/json/delHospitalReview/"+str,
 												method : "GET" ,
@@ -750,6 +789,7 @@
 												
 													if(JSONData==1){
 				           								$("div[id=" + str + "]").remove();
+				           								$("#reviewNum").text("사용자 후기 [ ${resultPage.totalCount}건 ]");			           								
 														}
 											}
 										});		      
@@ -981,6 +1021,7 @@
 				            if (willDelete) {
 				              swal("삭제가 완료되었습니다!", {
 				                icon: "success",
+				                button : "확인"
 				              }).then((value) => {
 			        	 //alert($(this).parent().children("input").val())
 				        	 var str = $(this).parent().children("input").val();
@@ -999,6 +1040,7 @@
 										
 											if(JSONData==1){	
 		           								$("div[id=" + str + "]").remove();
+		           								$("#reviewNum").text("사용자 후기 [ ${resultPage.totalCount-1}건 ]");
 												}
 									}
 								});		      

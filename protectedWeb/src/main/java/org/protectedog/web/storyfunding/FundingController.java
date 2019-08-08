@@ -257,7 +257,7 @@ public class FundingController {
 
 	// 펀딩 글 수정작성
 	@RequestMapping(value = "updateVoting", method = RequestMethod.GET)
-	public String updateVoting(@RequestParam("postNo") int postNo, Model model) throws Exception {
+	public String updateVoting(@RequestParam("postNo") int postNo, Model model,@RequestParam("code") int code) throws Exception {
 
 		System.out.println("/funding/updateVoting : GET");
 		// Business Logic
@@ -271,13 +271,14 @@ public class FundingController {
 
 		model.addAttribute("funding", funding);
 		model.addAttribute("file", file);
+		model.addAttribute("code",code);
 
 		return "forward:/funding/updateVoting.jsp";
 	}
 
 	// 펀딩 글 수정등록
 	@RequestMapping(value = "updateVoting", method = RequestMethod.POST)
-	public String updateVoting(@ModelAttribute("funding") Funding funding,
+	public String updateVoting(@ModelAttribute("funding") Funding funding,@RequestParam("code") int code,
 			@RequestParam("multiFile") ArrayList<String> multiFile,
 			@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
 
@@ -331,7 +332,11 @@ public class FundingController {
 
 		fundingService.updateVoting(funding);
 
+		if(code ==1) {
 		return "redirect:/funding/getVoting?postNo=" + funding.getPostNo();
+		}else {
+			return "redirect:/funding/getFunding?postNo=" + funding.getPostNo();	
+		}
 	}
 
 	// 펀딩 글 삭제
@@ -347,6 +352,7 @@ public class FundingController {
 		filePost.put("postNo", postNo);
 		fileService.delAllFile(filePost);
 
+		
 		return "forward:/funding/listVoting";
 	}
 
@@ -498,14 +504,15 @@ public class FundingController {
 		fileReviewPost.put("postNo", postNo);
 		List<FileDog> fileReview = fileService.getFile(fileReviewPost);
 		
+		// 댓글
 		Map<String, Object> map2 = commentService.listComment(postNo, search, fundBoardCode);
-		
 		model.addAttribute("list", map2.get("list"));
+		
+		
 		model.addAttribute("file", file);
 		model.addAttribute("fileReview", fileReview);
 		model.addAttribute("funding", funding);
 		model.addAttribute("user", user);
-		// 댓글
 		model.addAttribute("list2", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

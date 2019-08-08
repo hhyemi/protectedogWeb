@@ -47,7 +47,14 @@
         }
         img {
        	    max-width: 600px;
-        }               			
+        }    
+        #divId{
+        width: 460px !important;
+        }      
+        .product_description_area {
+		    padding-bottom: 30px !important;
+		  
+		}     			
 	</style> 
  
  
@@ -114,7 +121,7 @@
           </div>
  			 <div style="padding-left: 50px;" >
              <div class="s_product_text">			 
-            <div>
+            <div id="divId">
              <h4>&emsp;</h4>
              <div style="padding-bottom:10px">
            		 <div class="row">
@@ -168,12 +175,12 @@
                <br/>  
               <div class="card_area">
              <br/>
-			<!-- 투표종료 -->
+			<!-- 후원종료 -->
 			 <c:if test ="${!(funding.statusCode eq 3) }">		
                		<button class="btn btn-default" id="noApply" style="width: 460px;" id="confirmButton">완료된 글입니다.</button>
 			 </c:if>
-            <!-- 투표중 -->			 
-			<c:if test ="${funding.statusCode eq 3 }">				 			
+            <!--후원중 -->			 
+			<c:if test ="${funding.statusCode eq 3 && funding.id ne user.id}">				 			
                  <button id="btnFund" class="btn btn-default" style="width: 225px">후원</button><button id="btnQuestion" class="btn btn-default" style="width: 225px">문의</button>               
 			</c:if>		              
                     
@@ -252,9 +259,9 @@
 					<c:if test="${funding.reviewContent == null}">
 					<h4>등록된 후기가 없습니다.</h4>
 					<c:if test="${user.id eq funding.id || user.id eq 'admin'}">
-					<div class="form-group3">
+					<center>
 					<button type="button" id="reviewAdd" class="btn btn-default">후기작성</button> 								
-		            </div>					
+		            </center>					
 					</c:if>						
 					</c:if>
 					
@@ -302,6 +309,7 @@
 			 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 			 		   <input type="hidden" id="searchKeyword" name="searchKeyword" value=""/>	  
  					   <input type="hidden" id="pageCheck" name="pageCheck"  value="${pageCheck }"/>					       
+				       <input type="hidden" name="boardCode" value="SF" />	
 				       		<!-- PageNavigation Start... -->
 				           <div style="padding-left:460px">
 				           <jsp:include page="../common/pageNavigator_new.jsp" />
@@ -312,7 +320,7 @@
 	      </div>
 	      </form>
 	      	<p/>
-        	<div align="right" style="padding-right:205px">	
+        	<div align="right" style="padding-right:300px">	
   
 							<c:if test="${ user.id eq 'admin'}">
 							<button type="button" id = "btnUpdate" class="btn btn-default">수정</button> 
@@ -477,7 +485,7 @@
 	//============= 수정하기 Event  처리 =============	
  	$( "#btnUpdate" ).on("click" , function() {
 
- 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}"
+ 		 self.location = "/funding/updateVoting?postNo=${funding.postNo}&code=2"
  		
 	});   
 	
@@ -560,7 +568,19 @@
 	    
 		//============= 후기작성 Event  처리 =============	
 	 	$( "#reviewAdd" ).on("click" , function() {
+	 		if(${funding.statusCode ne 4}){
+				swal({
+			           text: "후원이 종료 시 후기작성이 가능합니다.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },
+			        });	 		 		
+	 		}else{
 	 		self.location = "/funding/addReview?postNo=${funding.postNo}";
+	 		}
 		});   
 		
 		//============= 후기수정 Event  처리 =============	
@@ -574,7 +594,7 @@
 	            title: "정말 삭제 하시겠습니까 ?",
 	            text: "삭제시 한달간 글 작성 불가입니다.",
 	            icon: "warning",
-	            buttons: true,
+                buttons: ["취소", "확인"],
 	            dangerMode: true,
 	          })
 	          .then((willDelete) => {
