@@ -1,11 +1,9 @@
 package org.protectedog.service.apply.test;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.protectedog.common.Search;
 import org.protectedog.service.apply.ApplyService;

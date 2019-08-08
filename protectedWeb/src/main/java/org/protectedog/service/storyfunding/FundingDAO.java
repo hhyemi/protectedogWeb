@@ -5,11 +5,10 @@ import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Funding;
-import org.protectedog.service.domain.Participate;
 
 public interface FundingDAO {
 
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ» °Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½ï¿½Ã» ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	// SELECT ONE
 	public Funding getPost(String id) throws Exception;
@@ -35,7 +34,7 @@ public interface FundingDAO {
 	// SELECT ONE
 	public int getVotingTotalCount(Search search) throws Exception;
 
-	/////////////// FUNDING ÈÄ¿ø°Ô½Ã °Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½Ô½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	// SELECT LIST
 	public List<Funding> listFunding(Search search) throws Exception;
@@ -43,12 +42,12 @@ public interface FundingDAO {
 	// SELECT ONE
 	public int getFundingTotalCount(Search search) throws Exception;
 
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
 	// UPDATE
 	public void updateStatusCode(Funding funding) throws Exception;
 
-	/////////////// ÈÄ±â °Ô½ÃÆÇ /////////////////////
+	/////////////// ï¿½Ä±ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	public void addReview(Funding funding) throws Exception;
 

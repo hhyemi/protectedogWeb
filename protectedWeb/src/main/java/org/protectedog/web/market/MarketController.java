@@ -14,11 +14,8 @@ import org.protectedog.service.board.BoardService;
 import org.protectedog.service.comment.CommentService;
 import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.FileDog;
-import org.protectedog.service.domain.Funding;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
-import org.protectedog.service.recomment.ReCommentService;
-import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,13 +42,6 @@ public class MarketController {
 	@Autowired
 	@Qualifier("commentServiceImpl")
 	private CommentService commentService;
-	
-	
-	@Autowired
-	@Qualifier("reCommentServiceImpl")
-	private ReCommentService reCommentService;
-	
-
 
 	// setter Method 구현 않음
 
@@ -90,7 +80,10 @@ public class MarketController {
 		board.setId(user.getId());
 		board.setNickName(user.getNickname());
 		board.setBoardCode(MK);
+		//조회수
 		board.setViewCount(0);
+		//폰번호 가져오기
+		board.setPhone(user.getPhone());
 		//in thumnail
 		board.setThumnail(multiFile.get(0));
 		
@@ -243,7 +236,7 @@ public class MarketController {
 		}
 		
 		@RequestMapping(value = "updateMarket", method = RequestMethod.POST)
-		public String updateVoting(@ModelAttribute("board") Board board,
+		public String updateMarket(@ModelAttribute("board") Board board,
 				@RequestParam("multiFile") ArrayList<String> multiFile,
 				@RequestParam("deleteFile") ArrayList<String> deleteFile, HttpSession session) throws Exception {
 

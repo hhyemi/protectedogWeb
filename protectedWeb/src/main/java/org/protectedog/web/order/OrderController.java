@@ -151,10 +151,6 @@ public class OrderController {
 			order.setCouponNo(10001);
 		}
 		
-		if(order.getMileageNo() ==0){
-			order.setMileageNo(10000);
-		}
-		
 		
 		
 		orderService.addOrder(order);

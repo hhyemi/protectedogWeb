@@ -2,12 +2,7 @@ package org.protectedog.web.user;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,17 +13,11 @@ import org.protectedog.service.domain.User;
 import org.protectedog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -43,7 +32,6 @@ public class UserRestController {
 		
 	///Constructor
 	public UserRestController() {
-		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());
 	}
 	
@@ -123,8 +111,8 @@ public class UserRestController {
 		
 		String receiver=email.get("email");
 		System.out.println("mailSender email : "+email);
-		String title="[#protected] 계정인증 메일입니다";
-		String content="[#protected] 계정 인증 시도중입니다. 계정 인증 번호는 [ "+authKey+" ] 입니다.";
+		String title="[보호할개] 계정인증 메일입니다";
+		String content=" [ "+authKey+" ] 입니다. 본인이 아닐경우 회신바랍니다.";
 		
 		SendMail.mailSend(title, content, receiver);
 

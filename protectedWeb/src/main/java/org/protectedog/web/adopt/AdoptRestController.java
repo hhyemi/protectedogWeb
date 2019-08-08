@@ -2,20 +2,16 @@ package org.protectedog.web.adopt;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
-import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.domain.Adopt;
-import org.protectedog.service.domain.Board;
 import org.protectedog.service.domain.FileDog;
-import org.protectedog.service.domain.Interest;
 import org.protectedog.service.domain.User;
 import org.protectedog.service.file.FileService;
 import org.protectedog.service.interest.InterestService;
@@ -68,6 +64,7 @@ public class AdoptRestController {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping( value="json/addMissing", method=RequestMethod.POST )
 	public String addMissing( 
 									@RequestParam("files") List<MultipartFile> images
@@ -132,6 +129,7 @@ public class AdoptRestController {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping( value="json/updateMissing", method=RequestMethod.POST )
 	public String updateMissing( 
 									@RequestParam(value="files", required = false ) List<MultipartFile> images
@@ -237,7 +235,7 @@ public class AdoptRestController {
 		
 		Map<String , Object> map=adoptService.listAdopt(search, "AD");
 //		Map<String , Object> map=adoptService.listAdopt(search, params.get("boardCode").toString());
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
 //		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
 

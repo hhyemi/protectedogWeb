@@ -20,7 +20,6 @@
 		<!-- NULL가능  0-->
 		<result property="deliveryCode" 	column="delivery_code" 		jdbcType="NUMERIC"/>
 		<!-- NULL가능이지만 외래키■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-		<result property="mileageNo"		column="mileage_no"			jdbcType="NUMERIC"/>
 		<result property="couponNo"			column="coupon_no"			jdbcType="NUMERIC"/>
 		<result property="orderDate"		column="order_date" 		jdbcType="DATE"/>
 		<!-- HAS A관계 JOIN ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
@@ -52,11 +51,11 @@
 		INTO ORDERS 
 		(ORDER_NO, PROD_NO, PHONE, ID, RECEIVER_ADDR, RECEIVER_NAME, 
 		RECEIVER_PHONE, ORDER_REQUEST, PAYMENT_CODE, ORDER_DATE, 
-		ORDER_QUANTITY, ORDER_CODE, TOTAL_PRICE, COUPON_NO, MILEAGE_NO) 
+		ORDER_QUANTITY, ORDER_CODE, TOTAL_PRICE, COUPON_NO) 
 		VALUES (#{orderNo:NUMERIC}, #{prodNo:NUMERIC}, #{phone:VARCHAR}, #{id:VARCHAR}, 
 		#{receiverAddr:VARCHAR}, #{receiverName:VARCHAR},#{receiverPhone:VARCHAR}, #{orderRequest:VARCHAR}, 
 		#{paymentCode:NUMERIC}, SYSDATE, #{orderQuantity:NUMERIC}, #{orderCode:NUMERIC}, #{totalPrice:NUMERIC}, 
-		#{couponNo:NUMERIC}, #{mileageNo:NUMERIC})
+		#{couponNo:NUMERIC})
 	</insert>
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">

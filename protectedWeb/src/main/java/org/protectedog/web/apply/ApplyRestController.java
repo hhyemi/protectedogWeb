@@ -1,26 +1,18 @@
 package org.protectedog.web.apply;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.protectedog.common.Page;
 import org.protectedog.common.Search;
 import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.apply.ApplyService;
-import org.protectedog.service.domain.Adopt;
 import org.protectedog.service.domain.Apply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -97,7 +89,7 @@ public class ApplyRestController {
 		
 		// Business logic 수행
 		Map<String , Object> map= applyService.listApply(search, adoptNo);
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		// Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 
 		// Model 과 View 연결
 		map.put("list", map.get("list"));

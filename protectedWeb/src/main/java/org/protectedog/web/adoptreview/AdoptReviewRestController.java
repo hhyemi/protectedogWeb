@@ -1,29 +1,19 @@
 package org.protectedog.web.adoptreview;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
-import org.protectedog.common.Page;
 import org.protectedog.common.Search;
-import org.protectedog.service.adopt.AdoptService;
 import org.protectedog.service.board.BoardService;
-import org.protectedog.service.domain.Adopt;
-import org.protectedog.service.domain.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -85,7 +75,7 @@ public class AdoptReviewRestController {
 //		System.out.println("search 확인 : "+search);
 		
 		Map<String , Object> map=boardService.listBoard(search, params.get("boardCode").toString(), 0);
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		//Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		map.put("list", map.get("list"));
 //		System.out.println("■■■■ 리스트 확인 : "+map.get("list"));
 

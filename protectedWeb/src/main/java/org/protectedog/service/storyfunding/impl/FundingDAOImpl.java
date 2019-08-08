@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Funding;
-import org.protectedog.service.domain.Participate;
 import org.protectedog.service.storyfunding.FundingDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,7 +26,7 @@ public class FundingDAOImpl implements FundingDAO {
 		System.out.println(this.getClass());
 	}
 
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ» °Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½ï¿½Ã» ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 	
 	@Override
 	public Funding getPost(String id) throws Exception {
@@ -71,7 +70,7 @@ public class FundingDAOImpl implements FundingDAO {
 	public int getVotingTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("FundingMapper.getVotingTotalCount", search);
 	}
-	/////////////// FUNDING ÈÄ¿ø°Ô½Ã °Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½Ô½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	@Override
 	public List<Funding> listFunding(Search search) throws Exception {
@@ -82,7 +81,7 @@ public class FundingDAOImpl implements FundingDAO {
 	public int getFundingTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("FundingMapper.getFundingTotalCount", search);
 	}
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
 	@Override
 	public void updateStatusCode(Funding funding) throws Exception {
@@ -91,7 +90,7 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 
 
-	/////////////// ÈÄ±â °Ô½ÃÆÇ /////////////////////
+	/////////////// ï¿½Ä±ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	@Override
 	public void addReview(Funding funding) throws Exception {

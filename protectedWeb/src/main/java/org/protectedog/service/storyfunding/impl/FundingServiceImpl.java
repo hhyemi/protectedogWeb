@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.protectedog.common.Search;
 import org.protectedog.service.domain.Funding;
-import org.protectedog.service.domain.Participate;
 import org.protectedog.service.storyfunding.FundingDAO;
 import org.protectedog.service.storyfunding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class FundingServiceImpl implements FundingService {
 		System.out.println(this.getClass());
 	}
 
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ»°Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½ï¿½Ã»ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	@Override
 	public Funding getPost(String id) throws Exception {
@@ -75,7 +74,7 @@ public class FundingServiceImpl implements FundingService {
 		return fundingDAO.getAutoVoting(searchMap);
 	}
 
-	/////////////// FUNDING ÈÄ¿ø½ÅÃ»°Ô½ÃÆÇ /////////////////////
+	/////////////// FUNDING ï¿½Ä¿ï¿½ï¿½ï¿½Ã»ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	@Override
 	public Map<String, Object> listFunding(Search search) throws Exception {
@@ -89,7 +88,7 @@ public class FundingServiceImpl implements FundingService {
 		return map;
 	}
 
-	/////////////// FUNDING Âü¿©/////////////////////
+	/////////////// FUNDING ï¿½ï¿½ï¿½ï¿½/////////////////////
 
 	@Override
 	public void updateStatusCode(Funding funding) throws Exception {
@@ -97,7 +96,7 @@ public class FundingServiceImpl implements FundingService {
 
 	}
 
-	/////////////// ÈÄ±â °Ô½ÃÆÇ /////////////////////
+	/////////////// ï¿½Ä±ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ /////////////////////
 
 	@Override
 	public void addReview(Funding funding) throws Exception {
