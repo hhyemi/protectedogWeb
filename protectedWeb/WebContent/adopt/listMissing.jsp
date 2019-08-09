@@ -56,7 +56,7 @@
 	
 
 	<div class="row justify-content-center">
-      <div class="col-md-9"  >
+      <div class="col-md-8"  >
 <!--       	<div  class="col-md-9" style="padding-left: 0px;">날짜 칸을 클릭하시면 실종글을 작성할 수 있습니다.</div> -->
 	  	<jsp:include page="calendar.jsp"></jsp:include>
 	  </div>

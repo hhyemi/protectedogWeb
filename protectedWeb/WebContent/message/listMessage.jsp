@@ -194,20 +194,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--                                             <input type="checkbox" class="mail-checkbox" id="allCheck"> -->
                                         </td>
                                         <c:if test="${ search.searchCondition=='all' || search.searchCondition=='delete'  }">
-											<th width="85px">보낸사람</th>
-											<th width="85px">받은사람</th>
+											<th width="90px" class="text-center">보낸사람</th>
+											<th width="90px" class="text-center">받은사람</th>
 										</c:if>
 										<c:if test="${ search.searchCondition=='send' }">
-											<th width="170px">받은사람</th>
+											<th width="170px" class="text-center">받은사람</th>
 										</c:if>
 										<c:if test="${ search.searchCondition=='receive' }">
-											<th width="170px">보낸사람</th>
+											<th width="170px" class="text-center">보낸사람</th>
 										</c:if>
 										<th width="300px" class="text-center">제목</th>
-										<th width="200px" align="center" class="text-center">보낸일시</th>
-										<th width="200px" align="center" class="text-center">받은일시</th>
+										<th width="200px"  class="text-center" align="center" class="text-center">보낸일시</th>
+										<th width="200px"  class="text-center" align="center" class="text-center">받은일시</th>
 										<c:if test="${ search.searchCondition == 'receive' }">
-										<th width="75px">더보기</th>
+										<th  class="text-center" width="75px">더보기</th>
 										</c:if>
 										<c:if test="${ search.searchCondition != 'receive' }">
 										<th width="75px"></th>
@@ -265,7 +265,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                                <!-- /.modal-dialog -->
 			                            </div>
                                     <tr style="height:46px;">
-                                        <td class="inbox-small-cells" width="50px">
+                                        <td class="inbox-small-cells text-center" width="50px">
 <%--                                         	<c:if test="${ search.searchCondition != 'delete' }"> --%>
 <!-- 			                                <div class="btn-group"> -->
 <!-- 			                                    <a data-original-title="trash" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips"> -->
@@ -276,14 +276,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                             <input type="hidden" name="messageNo" value="${ message.messageNo }">
                                         </td>
                                         <c:if test="${ search.searchCondition=='all' || search.searchCondition=='delete'  }">
-											<td width="85px">${ message.senderNick }</td>
-											<td width="85px">${ message.receiverNick }</td>
+											<td  class="text-center" width="85px">${ message.senderNick }</td>
+											<td class="text-center" width="85px">${ message.receiverNick }</td>
 										</c:if>
 										<c:if test="${ search.searchCondition=='send' }">
-											<td width="170px">${ message.receiverNick }</td>
+											<td class="text-center" width="170px">${ message.receiverNick }</td>
 										</c:if>
 										<c:if test="${ search.searchCondition=='receive' }">
-											<td width="170px">${ message.senderNick }</td>
+											<td class="text-center" width="170px">${ message.senderNick }</td>
 										</c:if>
                                         <td class="view-message text-center" width="300px"> 
                                        		${ message.messageTitle }
