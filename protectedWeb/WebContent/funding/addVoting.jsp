@@ -235,7 +235,7 @@
 
          return;
       }
-      if(fundTargetPay < 100000 || fundTargetPay > 3000000){
+      if(removeCommas($('input[name="fundTargetPay"]').val()) < 100000 || removeCommas($('input[name="fundTargetPay"]').val()) > 3000000){
 		  swal({
 	           text: "후원목표금액을 10만원이상 300만원이하로 입력해주세요.",
 	           dangerMode: true,

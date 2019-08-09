@@ -202,7 +202,7 @@
 	          return;
 	       } 
 
-	      if(fundPay > 3000000){
+	      if($('input[name="fundPay"]').val() > 3000000){
 			  swal({
 		           text: "후원금액은 300만원이하로 입력해주세요.",
 		           dangerMode: true,

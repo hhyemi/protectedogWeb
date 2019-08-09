@@ -70,7 +70,7 @@ public class ChattingController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "forward:/chatting/inquiryRoom.jsp";
+		return "forward:/chatting/chatting.jsp";
 
 	}
 	

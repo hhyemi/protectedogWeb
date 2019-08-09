@@ -172,15 +172,15 @@
 <!--                   </div> -->
 <!--                 </li> -->
 <%--                  </c:if> --%>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp" style="padding-top:0;">견종백과</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp" style="padding-top:0;">동물병원</a></li>
                 <li class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:0;">스토어</a> 
                   <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
 	                <a class="dropdown-item" href="/market/listMarket">보호마켓</a>
 	                <a class="dropdown-item" href="/product/listProduct">스토어</a>
                   </div>
-                </li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/community/getBreedPedia.jsp" style="padding-top:0;">견종백과</a></li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/hospital/getHospital.jsp" style="padding-top:0;">동물병원</a></li>
+                </li>               
                 <li>
                   <div class="top-menubar-nav">
                     <div class="topmenu ">
