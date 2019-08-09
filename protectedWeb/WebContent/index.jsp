@@ -533,7 +533,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 								 
 								 display += 
 
-			                        "<a href=\"#\" class=\"img-prod\"><img class=\"img-fluid\" style=\"width:100%;background:url(\'..\/resources\/file\/fileAdopt\/"+adopt.mainFile+
+			                        "<a href=\"#\" class=\"img-adopt\"><img class=\"img-fluid\" style=\"width:100%;background:url(\'..\/resources\/file\/fileAdopt\/"+adopt.mainFile+
 			                        		"\') no-repeat center center;background-size:cover;min-height:300px; max-height:300px; min-width:330px; max-width:330px;\" >"+
 			    					"<input type=\"hidden\" value=\""+adopt.postNo+"\" /></a> ";	    																
 					
@@ -546,7 +546,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 							 });
 										
 										$("#rowAdopt").append(display);
-									 	$( ".img-prod" ).on("click" , function() {
+									 	$( ".img-adopt" ).on("click" , function() {
 											$(self.location).attr("href","/adopt/getAdopt?postNo="+$(this).children("input").val());
 										});   
 									

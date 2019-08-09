@@ -99,7 +99,7 @@
 			from orders o, product p
 					WHERE id =#{id}		
 					AND o.prod_no=p.prod_no		
-					ORDER BY order_no) inner_table
+					ORDER BY order_no DESC) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	 </select>
@@ -111,7 +111,7 @@
 	  		p.prod_name, p.prod_detail, p.main_file, o.order_quantity
 			from orders o, product p
 					WHERE o.prod_no=p.prod_no		
-					ORDER BY order_no) inner_table
+					ORDER BY order_no DESC) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	 </select>
@@ -124,7 +124,7 @@
 			from orders o, product p
 					WHERE o.prod_no=p.prod_no	
 					AND o.order_code='4'	
-					ORDER BY order_no) inner_table
+					ORDER BY order_no DESC) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	 </select>

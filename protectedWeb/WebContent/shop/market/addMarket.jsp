@@ -283,7 +283,7 @@
 	         var fileNameExtension = fileName.toLowerCase().substring(
 	                 fileNameExtensionIndex, fileName.length);
 	         if (!((fileNameExtension === 'jpg')|| (fileNameExtension === 'gif') || (fileNameExtension === 'png')||(fileNameExtension === 'avi')||(fileNameExtension === 'mp4'))) {
-	             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
+// 	             alert('jpg, gif, png, avi, mp4 확장자만 업로드 가능합니다.');
 	             return true;
 	         } else {
 	             return false;
@@ -450,13 +450,13 @@
 			                data : formData,
 			                success : function(result) {
 			                    if (result === -1) {
-			                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+// 			                        alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
 			                        // 이후 동작 ...
 			                    } else if (result === -2) {
-			                        alert('파일이 10MB를 초과하였습니다.');
+// 			                        alert('파일이 10MB를 초과하였습니다.');
 			                        // 이후 동작 ...
 			                    } else {
-			                        alert('이미지 업로드 성공');
+// 			                        alert('이미지 업로드 성공');
 			                    }
 			                }
 			            });

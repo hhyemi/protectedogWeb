@@ -88,11 +88,13 @@ table {
 	height: 40px;
 	border-radius: 0px 15px 15px 0px;
 	border: 1px solid #D3D3D3;
+	margin-left: 0px;
 }
 
 #searchCondition {
 	height: 40px;
 	border-radius: 15px 0px 0px 15px;
+	border-right:0px; 
 }
 
 #selectPageSize {
@@ -125,9 +127,13 @@ th {
 #setting{
 	margin-top:70px;
 }
-
-.form-inline{
-	margin-right:190px;}
+.form-group {
+			display: inline-block;
+			right: 0%;
+			text-align: right;
+		}
+/* .form-inline{ */
+/* 	margin-right:190px;} */
 </style>
 
 	<!-- //////////////////////ToolBar Start ///////////////////////////////-->
@@ -146,10 +152,9 @@ th {
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p>
-						<span class="mr-2">protected dog</span> <span>Store</span>
+						<span class="mr-2">Protectedog</span> <span>Store</span>
 					</p>
-					<font size="7">관리자 상품 관리</font><a id="button">
-					</a>
+					<font size="7">관리자 상품 관리</font>
 				</div>
 			</div>
 		</div>
@@ -178,37 +183,40 @@ th {
 	 		           <div class="col-md-12" align="left">
 			<b>전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</b>
 			</div>
-				<div class="col-md-6" id="justify" align="left">
-					<button type="button" class="btn btn-default" id="addProduct">상품등록</button>
-			 		</div>
-				<div>
-			<form class="form-inline" name="detailForm">
-				<div class="form-group" >
-					<select class="form-control" id="searchCondition"
-						name="searchCondition">
-						<option value="0"
-							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
-						<option value="1"
-							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
-					</select>
+				<div class="col-md-6" id="justify" align="left" style="padding-bottom: 20px;">
+					<button type="button" class="btn btn-default" id="addProduct" style="height: 40px;">상품등록</button>
+			 	</div>
+				
+				<div class="col-md-6"  align="right" style="padding-bottom: 20px;">
+					<form class="form-inline" name="detailForm" style="float: right;">
+						<div class="form-group" >
+							<select class="form-control" id="searchCondition"
+								name="searchCondition">
+								<option value="0"
+									${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품명</option>
+								<option value="1"
+									${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품가격</option>
+							</select>
+						</div>
+		
+		
+						<div class="form-group">
+							<label class="sr-only" for="searchKeyword">검색어</label> <input
+								type="text" id="searchKeyword"
+								name="searchKeyword" placeholder="검색어를 입력해주세요."
+								value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							<button type="button" id="searchSubmmit"
+								class="btn btn-default searchSubmmit">
+								<span class="fas fa-search"></span>
+							</button>
+						</div>
+		
+						<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+						<input type="hidden" id="currentPage" name="currentPage" value="" />
+					</form>
 				</div>
-
-
-				<div class="form-group">
-					<label class="sr-only" for="searchKeyword">검색어</label> <input
-						type="text" id="searchKeyword"
-						name="searchKeyword" placeholder="검색어를 입력해주세요."
-						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-					<button type="button" id="searchSubmmit"
-						class="btn btn-default searchSubmmit">
-						<span class="fas fa-search"></span>
-					</button>
-				</div>
-
-				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				<input type="hidden" id="currentPage" name="currentPage" value="" />
-			</form>
-		</div>
+			
+		
 			</div>
 			
 	
@@ -263,7 +271,7 @@ th {
 		
 		<br>
 
-	<div style="padding-left:780px">
+	<div style="padding-left: 650px;">
 		<jsp:include page="../../common/pageNavigator_new.jsp" /></div>
 		<br/><br/><br/>
 

@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개·스토어</title>
+<title>보호할개 · 스토어</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -155,7 +155,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p>
-						<span class="mr-2">PRODUCT</span> <span>INSERT</span>
+						<span class="mr-2">Protectedog</span> <span>Store</span>
 					</p>
 					<font size="7">스토어 상품정보 수정</font>
 				</div>

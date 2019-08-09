@@ -11,6 +11,7 @@
 	<title>보호할개 · 분양실종</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/resources/newTemplate/admin/css/loadingAnimation.css">
     
     <style type="text/css">
 		
@@ -31,6 +32,20 @@
 		
 		#areaFocus {
 			opacity: 0.6;
+		}
+		.loading-container,.loading {
+			max-height: 20px !important;
+			max-width: 20px !important;
+			min-width: 20px !important;
+		}
+		.loading-container {
+			margin: 0px !important;
+		}
+		.col-md-2.divLoad{
+			padding-right: 0px;
+		}
+		.col-md-10.divLoad{
+			padding-left: 0px;
 		}
 		
 	</style>
@@ -117,14 +132,22 @@
 	                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-		                	<h5><strong>견종</strong></h5>
+		               	 <div class="row">
+						  		<div class="col-md-2 divLoad" ><h5><strong>견종</strong></h5></div>
+								<div class="col-md-10 divLoad"><div class="loading-container" ><div class="loading"></div></div></div>
+		                	</div>
+<!-- 		                	<h5><strong>견종</strong></h5> -->
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" value="${ adopt.dogBreed }">
 		                </div>
 	                </div>
 	                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<h5><strong>크기</strong></h5>
+	              			<div class="row">
+						  		<div class="col-md-2 divLoad" ><h5><strong>크기</strong></h5></div>
+								<div class="col-md-10 divLoad"><div class="loading-container" ><div class="loading"></div></div></div>
+		                	</div>
+<!-- 	                		<h5><strong>크기</strong></h5> -->
 						      	<select class="form-control" name="dogSize" id="dogSize">
 								  	<option value="소형견" >소형견</option>
 									<option value="중형견" >중형견</option>
@@ -680,6 +703,15 @@
                             console.log('error: ' + data);
                             fncBreed( '모름' );
                           }
+                          ,beforeSend:function(){
+        						
+    					        $('.loading-container').show();
+
+  		  					},
+  		  					complete:function(){
+  		
+  		  						 	$('.loading-container').hide();
+  		  					}
                         })
 	                	
 	                }
@@ -1318,6 +1350,12 @@
 			$('.ui-datepicker-trigger').attr('title','클릭')
 			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
+    
+	$(document).ready(function(){
+ 		
+ 		$(".loading-container").hide();
+ 		
+	});
       
       
     </script>

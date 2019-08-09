@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="/resources/newTemplate/admin/css/loadingAnimation.css">
     <style type="text/css">
     
 	    html {
@@ -36,6 +37,21 @@
 		
 		#areaFocus {
 			opacity: 0.6;
+		}
+		
+		.loading-container,.loading {
+			max-height: 20px !important;
+			max-width: 20px !important;
+			min-width: 20px !important;
+		}
+		.loading-container {
+			margin: 0px !important;
+		}
+		.col-md-2.divLoad{
+			padding-right: 0px;
+		}
+		.col-md-10.divLoad{
+			padding-left: 0px;
 		}
 
 	</style>
@@ -155,7 +171,11 @@
 		                
 	          		<div class="col-md-6">
 		                <div class="form-group">
-		                	<h5><strong>견종</strong></h5>
+		                	<div class="row">
+						  		<div class="col-md-2 divLoad" ><h5><strong>견종</strong></h5></div>
+								<div class="col-md-10 divLoad"><div class="loading-container" ><div class="loading"></div></div></div>
+		                	</div>
+		                	
 <!-- 		                	&nbsp;&nbsp;<span name="dogBreed"></span></label> -->
 		                	<input type="text" class="form-control" id="dogBreed" name="dogBreed" placeholder="사진등록 시 자동으로 입력됩니다.">
 		                </div>
@@ -163,7 +183,11 @@
 		                
 	            	<div class="col-md-6">
 	              		<div class="form-group">
-	                		<h5><strong>크기</strong></h5>
+	              			<div class="row">
+						  		<div class="col-md-2 divLoad" ><h5><strong>크기</strong></h5></div>
+								<div class="col-md-10 divLoad"><div class="loading-container" ><div class="loading"></div></div></div>
+		                	</div>
+<!-- 	                		<h5><strong>크기</strong></h5> -->
 <!-- 	                		</label> -->
 						      	<select class="form-control" name="dogSize" id="dogSize">
 								  	<option value="소형견" >소형견</option>
@@ -653,6 +677,15 @@
 	                            console.log('비전 error: ' + JSON.stringify(data));
 	                            fncBreed( '모름' );
                           }
+                          ,beforeSend:function(){
+      						
+  					        $('.loading-container').show();
+
+		  					},
+		  					complete:function(){
+		
+		  						 	$('.loading-container').hide();
+		  					}
                         });//ajax
 	                	
 	                }//if
@@ -1311,6 +1344,13 @@
 			$('.ui-datepicker-trigger').attr('title','클릭')
 			$('#dogDateLabel').after( $( ".ui-datepicker-trigger" ));
 	 });	
+    
+    
+	$(document).ready(function(){
+ 		
+ 		$(".loading-container").hide();
+ 		
+	});
       
       
     </script>

@@ -292,7 +292,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 																<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
 																<br>
 																<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
-																<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+																<input type="text" class="form-control" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소">
 																<input type="hidden" name="userAddr" value="${ user.userAddr }">
 															</div>
 					                                    </div>
@@ -300,7 +300,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					                                    <div class="form-group">
 					                                    	<div class="col-sm-6" style="float: left; padding-left: 0;">
 																<label for="birthDate">생 년 월 일</label>                                        
-																<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" ${ user.birthDate }>
+																<input type="text" class="form-control" id="birthDate" name="birthDate" aria-describedby="emailHelp" value="${ user.birthDate }">
 					                                        </div>
 					                                        <div class="col-sm-6" style="float: left; padding-right: 0;">
 					                                        	<label for="gender">성 별</label> 
@@ -746,9 +746,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
-			$("#reset").on("click" , function() {
-				$("form")[0].reset();
-			});
+// 			$("#reset").on("click" , function() {
+// 				$("form")[0].reset();
+// 			});
 		});
 
 		

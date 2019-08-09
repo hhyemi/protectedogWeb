@@ -11,7 +11,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css" rel="stylesheet"/>
-
+<link rel="stylesheet" href="/resources/newTemplate/admin/css/loadingAnimation.css">
 <style type="text/css">
 
 .event-body img{
@@ -42,7 +42,20 @@
 .col-md-10 {
 	padding-right: 15px;
 }
-
+.loading-container,.loading {
+			max-height: 20px !important;
+			max-width: 20px !important;
+			min-width: 20px !important;
+}
+.loading-container {
+	margin: 0px !important;
+}
+.col-md-2.divLoad{
+	padding-right: 0px;
+}
+.col-md-10.divLoad{
+	padding-left: 0px;
+}
 
 /*!
  * FullCalendar v3.9.0
@@ -1587,7 +1600,11 @@ h2{
 <!--           <div ><br/><br/><br/><br/><br/><br/></div> -->
           
           <div class="form-group">
-            <label>견종</label>&nbsp;&nbsp;<span name="dogBreed"></span>
+          	<div class="row">
+		  		<div class="col-md-2 divLoad" ><label>견종</label></div>
+				<div class="col-md-10 divLoad"><div class="loading-container" ><div class="loading"></div></div></div>
+	        </div>
+<!--             <label>견종</label>&nbsp;&nbsp;<span name="dogBreed"></span> -->
             <input class="form-control" id="dogBreed" name="dogBreed" placeholder="사진등록 시 자동으로 입력됩니다."></input>
           </div>
           <div class="form-group">
@@ -1991,6 +2008,15 @@ var fileNameArray = new Array();
 	                            console.log('비전 error: ' + JSON.stringify(data));
 	                            fncBreed( '모름' );
                           }
+                          ,beforeSend:function(){
+        						
+    					        $('.loading-container').show();
+
+  		  					},
+  		  					complete:function(){
+  		
+  		  						 	$('.loading-container').hide();
+  		  					}
                         });//ajax
                       
 	                }
@@ -2332,7 +2358,7 @@ var fileNameArray = new Array();
 		        	   $("input[name=dogPay]").focus();
 		           }
 		      });
-			return;
+			return false;
 		} else {
 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
 		}
@@ -2349,9 +2375,10 @@ var fileNameArray = new Array();
 		      }).then((willDelete) => {
 		           if (willDelete) {
 		        	   $("input[name=locationKr]").focus();
+		        	   
 		           }
 		      });
-			return;
+			return false;
 		}
 		if( $(".preview-box").length == 0 ){
 			swal({
@@ -2367,7 +2394,7 @@ var fileNameArray = new Array();
 		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
 		           }
 		    });
-			return;
+			return false;
 		}
 		if( $("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length >10){
 			swal({
@@ -2384,7 +2411,7 @@ var fileNameArray = new Array();
 		        	   $("input[name=locationKr]").focus();
 		           }
 		      });
-			return;
+			return false;
 		}
 		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
 			swal({
@@ -2401,7 +2428,7 @@ var fileNameArray = new Array();
 		        	   $("input[name=dogStatus]").focus();
 		           }
 		      });
-			return;
+			return false;
 		}
 		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
 			swal({
@@ -2418,7 +2445,7 @@ var fileNameArray = new Array();
 		        	   $("input[name=dogChar]").focus();
 		           }
 		      });
-			return;
+			return false;
 		}
 		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
 			swal({
@@ -2435,7 +2462,7 @@ var fileNameArray = new Array();
 		        	   $("textarea[name=postContent]").focus();
 		           }
 		      });
-			return;
+			return false;
 		}
 		
 	}
@@ -2443,13 +2470,16 @@ var fileNameArray = new Array();
 	
 	
 	$(document).on("click", ".btn-default:contains('등록')", function() {
-		fncConfirm();
-		fncAddMissing("add");
+// 		fncConfirm();
+		if (fncConfirm()){
+			fncAddMissing("add");
+		}
 	});
 	
 	$(document).on("click", "#confirmBtn:contains('수정')", function() {
-		fncConfirm();
-		fncAddMissing("update");
+		if (fncConfirm()){
+			fncAddMissing("update");
+		}
 	});
 	
 	
@@ -2550,7 +2580,11 @@ var fileNameArray = new Array();
 	$( "font:contains('실종캘린더')" ).on("click" , function() {
 		self.location = "/adopt/listMissing"
 	});
-
+	$(document).ready(function(){
+ 		
+ 		$(".loading-container").hide();
+ 		
+	});
 
 
 </script>

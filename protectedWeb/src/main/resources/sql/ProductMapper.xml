@@ -44,7 +44,7 @@
 	<!-- 상품상세조회  : product read(one)  -->
 	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
 		SELECT
-		prod_no, prod_name, price, country, prod_detail, company, discount_price, main_file
+		prod_no, prod_name, price, country, prod_detail, company, discount_price, main_file, quantity
 		FROM product
 		WHERE prod_no = #{prodNo}
 	</select>
@@ -70,7 +70,7 @@
 	<select  id="listProduct"  parameterType="search"	resultMap="productSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  		FROM (	SELECT prod_no, prod_name, price, discount_price, main_file
+	  		FROM (	SELECT prod_no, prod_name, price, discount_price, main_file, quantity
 	  						 FROM product 
 	  						 	<where>  					 
 									<if test="searchCondition != null">
@@ -96,6 +96,7 @@
 													</if>
 												</if>
 												</where>
+											ORDER BY prod_no DESC
 											) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
@@ -132,7 +133,9 @@
 											 			AND price LIKE '%'||#{searchKeyword}||'%' 
 													</if>
 												</where>
-											</if>) inner_table
+											</if>
+											ORDER BY prod_no DESC
+											) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select> 

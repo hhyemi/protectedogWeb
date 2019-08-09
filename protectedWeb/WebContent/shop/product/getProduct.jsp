@@ -146,12 +146,24 @@ table {
 										
 									<input type="hidden" name="prodNo" value="${product.prodNo}"/>
 									<input type="hidden" name="discountPrice" value="${product.discountPrice}"/><br/>
-<br/><br/><br/>
+									<br/><br/><br/>
 							<div class="action">
-                <div class="title-but"><button class="btn btn-default" id="addorder" align="right">구매</button>
-<!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
-                </div>
-              </div>
+							
+							
+							<c:if test="${product.quantity eq 0 }">
+			                <div class="title-but"><button class="btn btn-default" align="right">품절</button>
+			<!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
+			                </div>
+			                </c:if>
+							<c:if test="${product.quantity ne 0 }">
+			                <div class="title-but"><button class="btn btn-default" id="addorder" align="right">구매</button>
+			<!--                 <button class="btn btn-general btn-white" role="button"id="cartplus"><i class="fa fa-cart-plus"></i> 장바구니에 담기</button></div> -->
+			                </div>
+			                </c:if>
+			                
+			                
+			                
+             			 </div>
 							 
 						</div>
 					</div>
@@ -630,6 +642,7 @@ table {
 	//==================장바구니 추가 ===============================
 	$(function() {
 		$("#cartplus").on("click", function() {
+			
 			alert($("form[name='addcart']").html());
 			$("form[name='addcart']").attr("method","POST").attr("action" , "/cart/addCart").submit();
 		});
@@ -653,6 +666,11 @@ table {
 			//구매하기//====================================================
 			$("#addorder").on("click", function() {
 				//Debug..
+				if (${sessionScope.user == null}) {
+					$("#login-modal").modal('show'); 
+					
+					return;
+				} 
 				self.location = "/order/addOrder?prodNo=${product.prodNo}"
 			});
 			$("button:contains('뒤로')").on("click", function() {
@@ -670,6 +688,8 @@ table {
 				$("#total").text(total);
  			});
  		});
+ 		
+		
 	</script>
 </body>
 </html>

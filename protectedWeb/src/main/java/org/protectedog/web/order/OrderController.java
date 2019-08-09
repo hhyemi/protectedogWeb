@@ -257,7 +257,7 @@ public class OrderController {
 		@RequestMapping(value="listAdminOrder")
 		public String listAdminOrder( @ModelAttribute("search") Search search, HttpSession session, Model model) throws Exception{
 			
-			System.out.println("/listAdminOrder");
+			System.out.println("/listAdminOrder"+search.getCurrentPage());
 			
 			if(search.getCurrentPage() ==0 ){
 				search.setCurrentPage(1);
