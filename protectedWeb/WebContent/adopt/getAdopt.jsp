@@ -716,8 +716,8 @@
 	     Kakao.Link.sendDefault({
 	     	objectType: 'feed',
 	     	content: {
-	     		title: '유기견보호',
-	     		description: '멍멍',
+	     		title: '보호할개',
+	     		description: '분양',
 	     		imageUrl:document.location.href,
 	     		link: {
 			     		mobileWebUrl: document.location.href,
@@ -795,7 +795,7 @@
 							            		'<tr class="trApplyNo" id="'+data.list[i].applyNo+'" name="'+data.list[i].applyNo+'">'
 							            			+'<input type="hidden" name="inputApplyNo" value="'+data.list[i].applyNo+'">'
 								            		+'<td align="center"><p>'+(i+1)+'</p></td>'
-								            		+'<td align="center"><p>'+data.list[i].nickname+"("+data.list[i].id+')</p></td>'
+								            		+'<td align="center"><p>'+data.list[i].nickname+'</p></td>'
 								            		+'<td align="center"><p>'+data.list[i].regDate+'</p></td>'
 							            		+'</tr>';	
 							            		

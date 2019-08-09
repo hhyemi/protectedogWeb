@@ -318,7 +318,7 @@
 		                     $("#preview").append(
 		                                     "<div class=\"preview-box\" value=\"" + imgNum +"\"  style='display:inline;float:left;width:100px' >"
 		                                             + "<"+imgSelectName+" class=\"thumbnail\" src=\"" + img.target.result + "\"\/ width=\"80px;\" height=\"80px;\"/>"
-		                                             + "<br/>"
+		                                            
 		                                             + "<a href=\"#\" value=\""
 		                                             + imgNum
 		                                             + "\" onclick=\"deletePreview(this)\">"

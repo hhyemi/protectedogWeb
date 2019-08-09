@@ -298,9 +298,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				} else {
 					swal({
 						text : "인증문자가 전송되었습니다. 문자 확인 후 인증번호를 입력해주세요.",
-						icon : "success",
-						buttons : false,
-						timer : 3500,
+						buttons : {
+							catch : {
+								text : "확인"
+							}
+						}
 					})
 				}
 								
@@ -351,7 +353,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}else{
 					swal({
 						text : "인증에 실패했습니다. 다시 시도해 주십시오.",
-						icon : "error",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -372,7 +373,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if($("input[name='email']").val() == ''){
 					swal({
 						text : "이메일을 확인하세요.",
-						icon : "error",
 						buttons : {
 							catch : {
 								text : "확인"
@@ -388,7 +388,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				} else {
 					swal({
 						text : "인증메일이 전송되었습니다. 메일 확인 후 인증번호를 입력해주세요.",
-						icon : "success",
 						buttons : false,
 						timer : 3500,
 					})
@@ -430,7 +429,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 						$("input[id='authMailCheck']").val("auth");
 					swal({
 						text : "인증되었습니다.",
-						icon : "success",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -441,7 +439,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 // 						alert("인증번호가 맞지 않습니다.");
 						swal({
 							text : "인증에 실패했습니다. 다시 시도해 주십시오.",
-							icon : "error",
 							buttons :{
 								catch : {
 									text : "확인"
@@ -463,7 +460,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 // 						alert("이메일 형식이 아닙니다.");
 						swal({
 							text : "올바른 이메일 형식이 아닙니다.",
-							icon : "error",
 							buttons :{
 								catch : {
 									text : "확인"

@@ -887,7 +887,7 @@
 	});
 
 	$( "input[name=dogWeight]" ).keyup(function( ) {
-		$(this).val(addCommas($(this).val().replace(/[ㄱ-ㅎㅏ-ㅡ가-핳]/g,'')));  
+// 		$(this).val(addCommas($(this).val().replace(/[ㄱ-ㅎㅏ-ㅡ가-핳]/g,'')));  
 	
 		if( parseFloat($("input[name=dogWeight]").val()) > 60.0 ){
 			swal({

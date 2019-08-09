@@ -2119,6 +2119,131 @@ var fileNameArray = new Array();
  	 var str = '';
 	 
  	 function fncAddMissing(str){
+ 		if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 300000 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
+			swal({
+		           text: "사례금을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogPay]").focus();
+		           }
+		      });
+			return false;
+		} else {
+			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
+		}
+		if ( $('input[name=locationKr]').val().trim() == "" || $('input[name=locationKr]').val().length > 30 ) {
+			swal({
+		           text: "실종지역을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=locationKr]").focus();
+		        	   
+		           }
+		      });
+			return false;
+		}
+		if( $(".preview-box").length == 0 ){
+			swal({
+		           text: "이미지를 등록해주세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+		    }).then((willDelete) => {
+		           if (willDelete) {
+		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+		           }
+		    });
+			return false;
+		}
+		if( $("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length >10){
+			swal({
+		           text: "실종지역을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=locationKr]").focus();
+		           }
+		      });
+			return false;
+		}
+		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
+			swal({
+		           text: "상태를 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogStatus]").focus();
+		           }
+		      });
+			return false;
+		}
+		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
+			swal({
+		           text: "특징을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("input[name=dogChar]").focus();
+		           }
+		      });
+			return false;
+		}
+		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+			swal({
+		           text: "내용을 다시 확인하세요.",
+		           dangerMode: true,
+		           buttons: {
+							 catch: {
+							 	text: "확인"
+							 }
+				   },
+				   
+		      }).then((willDelete) => {
+		           if (willDelete) {
+		        	   $("textarea[name=postContent]").focus();
+		           }
+		      });
+			return false;
+		}
+ 		 
+ 		 
+ 		 
+ 		 
  		var boardCode = $('input[name=boardCode]').val();
  		var file = $("#multiFile").val(); 
  		console.log(boardCode+", "+str);
@@ -2343,127 +2468,127 @@ var fileNameArray = new Array();
 	
 	
 	function fncConfirm(){
-		if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 300000 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
-			swal({
-		           text: "사례금을 다시 확인하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
+// 		if( removeCommas( $("input[name=dogPay]").val() ).trim() == '' || parseInt(removeCommas( $("input[name=dogPay]").val() )) > 300000 || removeCommas( $("input[name=dogPay]").val() ) < 0 ){
+// 			swal({
+// 		           text: "사례금을 다시 확인하세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
 				   
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   $("input[name=dogPay]").focus();
-		           }
-		      });
-			return false;
-		} else {
-			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
-		}
-		if ( $('input[name=locationKr]').val().trim() == "" || $('input[name=locationKr]').val().length > 30 ) {
-			swal({
-		           text: "실종지역을 다시 확인하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   $("input[name=dogPay]").focus();
+// 		           }
+// 		      });
+// 			return false;
+// 		} else {
+// 			  $("input[name=dogPay]").val(  removeCommas( $("input[name=dogPay]").val() )  );
+// 		}
+// 		if ( $('input[name=locationKr]').val().trim() == "" || $('input[name=locationKr]').val().length > 30 ) {
+// 			swal({
+// 		           text: "실종지역을 다시 확인하세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
 				   
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   $("input[name=locationKr]").focus();
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   $("input[name=locationKr]").focus();
 		        	   
-		           }
-		      });
-			return false;
-		}
-		if( $(".preview-box").length == 0 ){
-			swal({
-		           text: "이미지를 등록해주세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
-		    }).then((willDelete) => {
-		           if (willDelete) {
-		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
-		           }
-		    });
-			return false;
-		}
-		if( $("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length >10){
-			swal({
-		           text: "실종지역을 다시 확인하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
+// 		           }
+// 		      });
+// 			return false;
+// 		}
+// 		if( $(".preview-box").length == 0 ){
+// 			swal({
+// 		           text: "이미지를 등록해주세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
+// 		    }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   jQuery($("span[name=phone]"))[0].scrollIntoView(true);
+// 		           }
+// 		    });
+// 			return false;
+// 		}
+// 		if( $("input[name=dogBreed]").val().trim() == '' || $("input[name=dogBreed]").val().length >10){
+// 			swal({
+// 		           text: "실종지역을 다시 확인하세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
 				   
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   $("input[name=locationKr]").focus();
-		           }
-		      });
-			return false;
-		}
-		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
-			swal({
-		           text: "상태를 다시 확인하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   $("input[name=locationKr]").focus();
+// 		           }
+// 		      });
+// 			return false;
+// 		}
+// 		if( $("input[name=dogStatus]").val().trim() == '' || $("input[name=dogStatus]").val().length > 20 ){
+// 			swal({
+// 		           text: "상태를 다시 확인하세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
 				   
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   $("input[name=dogStatus]").focus();
-		           }
-		      });
-			return false;
-		}
-		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
-			swal({
-		           text: "특징을 다시 확인하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   $("input[name=dogStatus]").focus();
+// 		           }
+// 		      });
+// 			return false;
+// 		}
+// 		if( $("input[name=dogChar]").val().trim() == '' || $("input[name=dogChar]").val().length > 20 ){
+// 			swal({
+// 		           text: "특징을 다시 확인하세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
 				   
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   $("input[name=dogChar]").focus();
-		           }
-		      });
-			return false;
-		}
-		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
-			swal({
-		           text: "내용을 다시 확인하세요.",
-		           dangerMode: true,
-		           buttons: {
-							 catch: {
-							 	text: "확인"
-							 }
-				   },
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   $("input[name=dogChar]").focus();
+// 		           }
+// 		      });
+// 			return false;
+// 		}
+// 		if( $("textarea[name=postContent]").val().trim() == '' || $("textarea[name=postContent]").val().length > 100 ){
+// 			swal({
+// 		           text: "내용을 다시 확인하세요.",
+// 		           dangerMode: true,
+// 		           buttons: {
+// 							 catch: {
+// 							 	text: "확인"
+// 							 }
+// 				   },
 				   
-		      }).then((willDelete) => {
-		           if (willDelete) {
-		        	   $("textarea[name=postContent]").focus();
-		           }
-		      });
-			return false;
-		}
+// 		      }).then((willDelete) => {
+// 		           if (willDelete) {
+// 		        	   $("textarea[name=postContent]").focus();
+// 		           }
+// 		      });
+// 			return false;
+// 		}
 		
 	}
 	
@@ -2471,15 +2596,16 @@ var fileNameArray = new Array();
 	
 	$(document).on("click", ".btn-default:contains('등록')", function() {
 // 		fncConfirm();
-		if (fncConfirm()){
+// alert('dd');
+// 		if (fncConfirm()){
 			fncAddMissing("add");
-		}
+// 		}
 	});
 	
 	$(document).on("click", "#confirmBtn:contains('수정')", function() {
-		if (fncConfirm()){
+// 		if (fncConfirm()){
 			fncAddMissing("update");
-		}
+// 		}
 	});
 	
 	
