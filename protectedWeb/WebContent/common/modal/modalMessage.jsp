@@ -114,7 +114,6 @@
 						if($.trim(response.result)==1){
 							swal({
 								text : "쪽지를 전송하였습니다.",
-								icon : "success",
 								buttons : {
 									catch : {
 										text : "확인"

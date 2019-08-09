@@ -252,7 +252,6 @@
 //                 		console.log(JSON.stringify(JSONData));
                     swal({
                             text: "신고가 완료되었습니다.",
-                            dangerMode: true,
                             buttons: {
                                  catch: {
                                     text: "확인"

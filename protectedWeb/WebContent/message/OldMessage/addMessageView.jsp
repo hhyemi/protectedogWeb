@@ -130,7 +130,7 @@
 // 			}
 			
 			$("#uploadForm").attr("method", "POST").attr("action", "/message/addMessage");
-			alert("쪽지를 전송하였습니다");
+// 			alert("쪽지를 전송하였습니다");
 		}
 
 			$(function(){
