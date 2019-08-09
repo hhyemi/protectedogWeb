@@ -201,6 +201,7 @@ public class FundingController {
 		voteViewFunding.setVoteViewCount(1);
 		fundingService.updateStatusCode(voteViewFunding);
 
+
 		// 글 가져오기
 		Funding funding = fundingService.getVoting(postNo);
 
@@ -239,6 +240,7 @@ public class FundingController {
 			}
 		}
 		
+		search.setCurrentPage(1);
 	      // 댓글 불러오기
 	      Map<String, Object> map2 = commentService.listComment(postNo, search, fundBoardCode);
 	      model.addAttribute("list", map2.get("list"));
@@ -503,7 +505,7 @@ public class FundingController {
 		fileReviewPost.put("boardCode", fundReviewBoardCode);
 		fileReviewPost.put("postNo", postNo);
 		List<FileDog> fileReview = fileService.getFile(fileReviewPost);
-		
+		search.setCurrentPage(1);		
 		// 댓글
 		Map<String, Object> map2 = commentService.listComment(postNo, search, fundBoardCode);
 		model.addAttribute("list", map2.get("list"));

@@ -199,7 +199,7 @@
    <br><br><br/>
 <!--================Product Description Area =================-->
 	 <section class="product_description_area">
-	 	  <form class="form-inline" name="detailForm">
+	 	  <form class="form-inline" name="detailForm" id="hmForm">
 	      <div class="container">
 	        <ul class="nav nav-tabs" id="myTab" role="tablist">
 		          <li class="nav-item">
@@ -320,10 +320,10 @@
 	      </div>
 	      </form>
 	      	<p/>
-        	<div align="right" style="padding-right:300px">	
+        	<div align="right" style="padding-right:240px">	
   
+
 							<c:if test="${ user.id eq 'admin'}">
-							<button type="button" id = "btnUpdate" class="btn btn-default">수정</button> 
 							<button type="button" id = "btnDelete" class="btn btn-default">삭제</button>
 							</c:if>        	
   
@@ -377,7 +377,7 @@
 	function fncGetList(currentPage) {
 	   	$("#searchKeyword").val("1");
 	   	$("#currentPage").val(currentPage)
-	   	$("form").attr("method" , "POST").attr("action" , "/funding/getFunding").submit();
+	   	$("#hmForm").attr("method" , "POST").attr("action" , "/funding/getFunding").submit();
 	 
 	}   	
    	//관심목록에 추가

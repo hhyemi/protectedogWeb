@@ -342,7 +342,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$("input[id='authPhoneCheck']").val("auth");
 					swal({
 						text : "인증되었습니다.",
-						icon : "success",
 						buttons :{
 							catch : {
 								text : "확인"

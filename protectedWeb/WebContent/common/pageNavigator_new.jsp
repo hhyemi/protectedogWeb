@@ -13,11 +13,12 @@
 		    <!--  <<== ÁÂÃø nav -->
 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		 		<li class="disabled">
+		      <a href="javascript:void(0)" aria-label="Previous">
 			</c:if>
 			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 				<li>
-			</c:if>
 		      <a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous">
+			</c:if>
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
@@ -40,13 +41,16 @@
 			</c:forEach>
 		    
 		     <!--  ¿ìÃø nav==>> -->
+		    
 		     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
+		  		
 		  		<li class="disabled">
+		  		 <a href="javascript:void(0))" aria-label="Next">
 			</c:if>
 			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 				<li>
-			</c:if>
 		      <a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" aria-label="Next">
+			</c:if>
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
@@ -55,7 +59,6 @@
 		
 </div>
  
-
 <!-- 
 <div class="container">
 		<nav>
