@@ -73,7 +73,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                         <input type="hidden" id="authPhoneCheck" value=""/>
                         <input type="hidden" id="authMailCheck" value=""/>
                         <form class="addUsersForm" name="formal" style="padding-left: 90px;">
-							<input class="testId" type="text" id="id" name="id" value=${ sessionScope.user.id }>
+							<input class="testId" type="hidden" id="id" name="id" value=${ sessionScope.user.id }>
 							<input type="hidden" name="levelPoint" value=100>
 							<input type="hidden" id="authKeyReturn" value="">                     
                             <div class="row">
@@ -100,7 +100,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                     <br/>
                                     
                                     <div class="form-group">
-                                        <label for="phone">휴대전화번호</label>
+                                        <label for="phone">연락처</label>
                                         <div>
 	                                        <div class="col-sm-3" style="float:left; padding-left:0">
 												<select class="form-control" name="phone1" id="phone1">
@@ -151,7 +151,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 											<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
 											<br>
 											<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
-											<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+											<input type="text" class="form-control" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소">
 											<input type="hidden" name="userAddr" value="">
 										</div>
                                     </div>

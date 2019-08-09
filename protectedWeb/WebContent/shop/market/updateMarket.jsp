@@ -394,8 +394,119 @@
 	                addPreview($(this)); //preview form 추가하기
 	            });
 	     });
+	         
+	         $('#btn-cancel').on("click", function(){
+	        	history.go(-1); 
+	         });
 	     
-	
+	         //3자리 단위마다 콤마 생성
+	         function addCommas(x) {
+	             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	         }
+	          
+	         //모든 콤마 제거
+	         function removeCommas(x) {
+	             if(!x || x.length == 0) return "";
+	             else return x.split(",").join("");
+	         }	 
+	         
+	         
+	         $(document).ready(function() {
+
+	             //============= 사진미리보기 =============
+	             $('#attach input[type=file]').change(function() {
+	                addPreview($(this)); //preview form 추가하기
+	            });
+	             
+	             //============= 판매가격 =============
+	             $('#price').keyup(function(){
+	            	 //입력시 콤마 적용
+	            	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+	                 //판매가격 길이초과
+	                 if (removeCommas($(this).val()).length > 7) {
+	       			  swal({
+	      		           text: "제한금액(100만원)을 초과하였습니다.",
+	      		           dangerMode: true,
+	      		           buttons: {
+	      							 catch: {
+	      							 	text: "확인"
+	      							 }
+	     				   },			   
+	       		      }).then((willDelete) => {
+	       		           if (willDelete) {
+	        
+	                     $(this).val('1000000');
+//	                      $(this).val(removeCommas($(this).val()).substr(0, 7));
+	                     $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));                  
+	                     console.log($(this).val());	  
+	      
+	       		           }
+	       		      });
+	                 }
+	             });
+	             //============= 상품명 입력 검증 =============
+	             $('#postTitle').keyup(function(){
+
+	                      if($(this).val().length > 12) {     
+	            			  swal({
+	     	       		           text: "제한길이를 초과하였습니다.",
+	     	       		           dangerMode: true,
+	     	       		           buttons: {
+	     	       							 catch: {
+	     	       							 	text: "확인"
+	     	       							 }
+	     	       				   },			   
+	     	       		      }).then((willDelete) => {
+	     	       		           if (willDelete) {
+	     	                           $(this).val($(this).val().substr(0,12));
+	     	       		           }
+	     	       		      });
+	                      }
+
+	             });
+	                       
+	             //============= 상품명 입력 검증 =============
+	             $('#prodName').keyup(function(){
+
+	                      if($(this).val().length > 21) {     
+	            			  swal({
+	     	       		           text: "제한길이를 초과하였습니다.",
+	     	       		           dangerMode: true,
+	     	       		           buttons: {
+	     	       							 catch: {
+	     	       							 	text: "확인"
+	     	       							 }
+	     	       				   },			   
+	     	       		      }).then((willDelete) => {
+	     	       		           if (willDelete) {
+	     	                           $(this).val($(this).val().substr(0,20));
+	     	       		           }
+	     	       		      });
+	                      }
+
+	             });
+	                
+	             //============= 거주지 입력 검증 =============
+	             $('#city').keyup(function(){
+
+	                      if($(this).val().length > 21) {     
+	            			  swal({
+	     	       		           text: "제한길이를 초과하였습니다.",
+	     	       		           dangerMode: true,
+	     	       		           buttons: {
+	     	       							 catch: {
+	     	       							 	text: "확인"
+	     	       							 }
+	     	       				   },			   
+	     	       		      }).then((willDelete) => {
+	     	       		           if (willDelete) {
+	     	                           $(this).val($(this).val().substr(0,20));
+	     	       		           }
+	     	       		      });
+	                      }
+
+	             });    
 	</script>
 
 </body>

@@ -63,7 +63,7 @@ public class MessageController {
 		System.out.println("message : "+message);
 		System.out.println("sender? : "+senderNick);
 		
-		return "/message/listMessage?searchCondition=send";
+		return "redirect:/message/listMessage?searchCondition=send";
 //		return "redirect:/index.jsp";
 		
 	}

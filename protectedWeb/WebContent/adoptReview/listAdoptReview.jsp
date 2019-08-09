@@ -119,7 +119,7 @@
     <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
 	
     
-	<div class="container">
+	<div class="container" style="padding-left: 0;padding-right: 0;">
 	
 		<input type="hidden" id="userId" value="${sessionScope.user.id}">
 <!-- 		<input type="hidden" id="adoptConfirm" value=""> -->

@@ -28,15 +28,33 @@
 <script type="text/javascript">
 	//============= "등록"  Event 연결 =============
 	$(function() {
-		$("#addproduct").on(
-				"click",
-				function() {
+		$("#addproduct").on("click",function() {
+			
+			if ( parseInt( $('input[name=orderQuantity]').val() ) > ${product.quantity} ){
+				swal({
+			           text: "제한수량을 초과하였습니다.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },
+					   
+			      }).then((willDelete) => {
+			           if (willDelete) {
+			        	   $("input[name=orderQuantity]").focus();
+			           }
+			      });
+				return;
+			}
+			var address=$("input[name='simpleAddress']").val() + " " + $("input[name='receiverAddr4']").val();
+			$("input[name='receiverAddr']").val(address);
+	
 					//Debug..
 					console.log($("form[name='addForm']").html());
-					$("form[name='addForm']").attr("method", "POST").attr(
-							"action", "/order/addOrder").submit();
+					$("form[name='addForm']").attr("method", "POST").attr("action", "/order/addOrder").submit();
 					//fncAddProduct();
-				});
+		});
 	});
 
 	//  	$(function() {
@@ -54,7 +72,7 @@
 		$("#btn-cancle").on("click", function() {
 			//Debug..
 			//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
-			history.go(-1)
+			history.go(-1);
 		});
 	});
 
@@ -100,7 +118,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">protected</span> <span>Store</span></p>
+          	<p ><span class="mr-2">Protected</span> <span>Store</span></p>
             <font size="7">스토어 상품구매</font>
           </div>
         </div>
@@ -122,6 +140,7 @@
 			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value 시작■■■■■■■■■■■■■■■■■■■■■ -->
 				<input type="hidden" name="prodNo" value="${product.prodNo}" /> 
 				<input type="hidden" name="id" value="${user.id}" />
+				<input type="hidden" name="receiverAddr" value="" />
 			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
 			
 			
@@ -137,10 +156,10 @@
 										<table id="cartTable" class="table table-hover table-condensed">
 											<thead>
 												<tr>
-													<th style="width: 50%">상품명</th>
-													<th style="width: 20%">상품가격</th>
-													<th style="width: 15%">&nbsp;수량</th>
-													<th style="width: 10%"></th>
+													<th style="width: 50%" class="text-center">상품명</th>
+													<th style="width: 20%" class="text-center">상품가격</th>
+													<th style="width: 15%" class="text-center">수량</th>
+													<th style="width: 10%" class="text-center"></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -158,10 +177,13 @@
 															</div>
 														</div>
 													</td>
-													<td><fmt:formatNumber
+													<td class="text-center"><fmt:formatNumber
 												value="${product.discountPrice}" pattern="#,###" />원</td>
-													<td><input type="number" min="1" size="1"name="orderQuantity"
-														class="form-control text-center" value="1" n></td>
+												
+													<td class="text-center">
+														<input type="number" min="1" size="1" name="orderQuantity"
+															class="form-control text-center" value="1" >
+													</td>
 													<td class="actions"></td>
 												</tr>
 											</tbody>
@@ -184,9 +206,13 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="phone"><b>연락처</b>&nbsp;&nbsp;</label> <input type="text"
-										class="form-control" name="phone"
-										value="${ sessionScope.user.phone }" readonly>
+									<label for="phone"><b>연락처</b>&nbsp;&nbsp;</label> 
+									<c:if test="${ sessionScope.user.phone ne null }">
+										<input type="text" class="form-control" name="phone" value="${ sessionScope.user.phone }" readonly>
+									</c:if>
+									<c:if test="${ sessionScope.user.phone eq null }">
+										<input type="text" class="form-control" name="phone" value="" placehold="연락처를 입력하세요.">
+									</c:if>
 								</div>
 							</div>
 
@@ -245,7 +271,7 @@
 										name="receiverAddr3">
 								</div>
 								 <div class="col-sm-8">
-									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소" style="height: 35px;margin-left: 5px;margin-top:10px"
+									<input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소를 입력하세요." style="height: 35px;margin-left: 5px;margin-top:10px"
 									name="receiverAddr4">
 								</div>
 							</div>
@@ -256,7 +282,7 @@
 								<div class="form-group">
 									<label for="firstname"><b>배송요청사항</b></label> <input type="text"
 										class="form-control" name="orderRequest" id="orderRequest"
-										placeholder="배송요청사항을 입력해주세요">
+										placeholder="배송요청사항을 입력하세요.">
 								</div>
 							</div>
 							<hr />
@@ -288,6 +314,8 @@
 
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
+	
+
 		function sample6_execDaumPostcode() {
 			new daum.Postcode(
 					{

@@ -41,6 +41,7 @@
 	      white-space:nowrap;
 	  } 
 .img-fluid {
+	padding-left:8%;
 	padding-top: 10%;
 	min-height: 240px;
 	max-height: 240px;
@@ -69,10 +70,12 @@
 	height: 40px;
 	border-radius: 0px 15px 15px 0px;
 	border: 1px solid #D3D3D3;
+	margin-left: 0;
 }
 #searchCondition {
 	height: 40px;
 	border-radius: 15px 0px 0px 15px;
+	border-right:0;
 }
 #selectPageSize {
 	height: 30px;
@@ -217,9 +220,15 @@
 											<font size="2" color="gray">
 											<fmt:formatNumber value="${product.price}" pattern="#,###" />원</font>
 										</c:if></del>
-										</strong>&nbsp; <a class="detailprod"><br><hr><button
-												class="btn btn-default" id="detailprod">상세보기</button> <input
-											type="hidden" value="${product.prodNo}" /></a>
+										</strong>&nbsp; <a class="detailprod"><br><hr>
+										
+										
+										<button class="btn btn-default" id="detailprod">
+										<c:if test="${product.quantity ne 0 }">상세보기</c:if>
+										<c:if test="${product.quantity eq 0 }">품절</c:if>
+										</button> 
+										<input type="hidden" value="${product.prodNo}" /></a>
+										
 
 									</div>
 								</div>

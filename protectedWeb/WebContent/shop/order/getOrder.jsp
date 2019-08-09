@@ -163,7 +163,7 @@ th {
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">protected</span> <span>Store</span></p>
+          	<p ><span class="mr-2">Protected</span> <span>Store</span></p>
             <font size="7">주문 상세내역 조회</font>
           </div>
         </div>

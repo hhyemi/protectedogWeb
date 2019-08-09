@@ -48,7 +48,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">List</span> <span>Admin Order</span></p>
+          	<p ><span class="mr-2">Protectedog</span> <span>Store</span></p>
             <font size="7">구매 취소 리스트</font>
           </div>
         </div>
@@ -62,17 +62,18 @@
 		<section>
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
 			<input type="hidden" name="id" id="id" value="${ sessionScope.user.phone }"/>
+			<input type="hidden" name="currentPage" id="currentPage" value=""/>
 			<div class="container">
 			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
 					<thead>
 						<tr>
-							<th style="width: 10%">No | 회원아이디</th>
-							<th style="width: 30%">상품정보</th>
-							<th style="width: 10%">구매가격</th>
-							<th style="width: 20%" class="text-center">결제수단</th>
-							<th style="width: 10%">상태</th>
-							<th style="width: 40%">주문일</th>
+							<th style="width: 10%"  class="text-center">No | 회원아이디</th>
+							<th style="width: 30%" class="text-center">상품정보</th>
+							<th style="width: 15%" class="text-center">구매가격</th>
+							<th style="width: 15%" class="text-center">결제수단</th>
+							<th style="width: 10%" class="text-center">상태</th>
+							<th style="width: 40%" class="text-center">주문일</th>
 						</tr>
 					</thead>
 
@@ -81,9 +82,9 @@
 						<c:forEach var="order" items="${list}">
 							<c:set var="i" value="${i+1}" />
 							<tr class="ordernum">
-							<td>&nbsp;${i}&nbsp;|&nbsp;${order.id}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
+							<td  class="text-center">${i}&nbsp;|&nbsp;${order.id}<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}"/>
 							<input type="hidden" name="id" name="id" value="${user.id }"/></td>
-								<td align="center">
+								<td align="center"  class="text-center">
 									<div class="row">
 
 										<div class="col-sm-2 hidden-xs">
@@ -100,7 +101,7 @@
 										</div>
 									</div>
 								</td>
-								<td><fmt:formatNumber value="${order.totalPrice}" pattern="#,###"/>원</td>
+								<td  class="text-center"><fmt:formatNumber value="${order.totalPrice}" pattern="#,###"/>원</td>
 
 								<td class="text-center">
 								<c:if test="${order.paymentCode =='1'}">
@@ -109,7 +110,7 @@
 								카드결제</c:if>
 								
 								</td>
-								<td class="actions">
+								<td class="actions text-center">
 								<input type="hidden" name="orderNo" class="orderNo" value="${order.orderNo}"/>
 								
 								<c:if test="${order.orderCode =='1'}">
@@ -120,7 +121,7 @@
 								<span style="cursor:pointer"><b>배송완료</b></span></c:if>
 								<c:if test="${order.orderCode =='4'}">
 								주문취소</c:if>
-								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
+								<td class="actions  text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
 						</c:forEach>
@@ -157,6 +158,12 @@
 				 self.location ="/order/getOrder?orderNo="+$(this).text().trim();
 			});
 	
+ 		function fncGetList(currentPage) {
+ 			$("#currentPage").val(currentPage)
+//  			alert($("#currentPage").val());
+ 			$("form").attr("method", "POST").attr("action", "/order/listCancleOrder").submit();
+ 		}
+	
 	$(function() {
 	$(".detailOrder").on("click",function() {
 		//alert($(this).children("input").val())
@@ -171,9 +178,9 @@
 			fncGetList(1);
 		});
 		
-		$("td:nth-child(1)").on("click", function(){
-			self.location = "/purchase/getPurchase?tranNo="+$("input:hidden[name='tranNo']").val();
-		});
+// 		$("td:nth-child(1)").on("click", function(){
+// 			self.location = "/purchase/getPurchase?tranNo="+$("input:hidden[name='tranNo']").val();
+// 		});
 		
 		
 		$("#orderRemove").on("click", function(){

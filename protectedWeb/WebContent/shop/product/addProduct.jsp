@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<title>보호할개·스토어</title>
+<title>보호할개 · 스토어</title>
 <meta charset="UTF-8">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -18,7 +18,7 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
 <!-- <<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >  -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> 
 
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
@@ -36,7 +36,9 @@
 <script type="text/javascript">
 	//============= "등록"  Event 연결 =============
 	$(function() {
-
+		$('#btn-cancel').on("click", function(){
+			history.go(-1);
+		});
 		$("#addproduct")
 				.on(
 						"click",
@@ -134,11 +136,11 @@
 	// 	}
 
 	//============= 달력  =============
-	$(function() {
-		$("input[name='manuDate']").datepicker({
-			dateFormat : 'yy-mm-dd'
-		});
-	});
+// 	$(function() {
+// 		$("input[name='manuDate']").datepicker({
+// 			dateFormat : 'yy-mm-dd'
+// 		});
+// 	});
 </script>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
@@ -155,7 +157,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p>
-						<span class="mr-2">PRODUCT</span> <span>INSERT</span>
+						<span class="mr-2">Protectedog</span> <span>Store</span>
 					</p>
 					<font size="7">스토어 상품등록</font>
 				</div>
@@ -217,9 +219,9 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<h5><b>제조일</b></h5> <input type="text"
+									<h5><b id="manuDateH5">제조일</b></h5> <input type="text"
 										class="form-control" name="manuDate" id="manuDate"
-										placeholder="제조일자를 입력해주세요">
+										placeholder="제조일자를 입력해주세요" readonly>
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -263,15 +265,16 @@
 							<br />
 							<div class="w-100"></div>
 
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
-									<h5><b>상세정보</b></h5> <input type="text"
+									<h5><b>상세정보</b></h5> 
+									<input type="text"
 										class="form-control" name="prodDetail" id="prodDetail"
 										placeholder="상품의 상세정보를 입력해주세요">
 								</div>
 							</div>
 						</div><br/>
-		              <div class="col-md-12">
+		              <div class="col-md-12" style="padding-left: 0;padding-right: 0;">
 	
 							<button  type="button" class="btn btn-default py-3 px-6 col-md-12" id="addproduct">등록</button>
 							<div  align="right" style="margin-top:10px">
@@ -292,18 +295,18 @@
 	<!-- footer End /////////////////////////////////////-->
 
 
-	<script src="../../resources/prodmenu/js/popper.min.js"></script>
-	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script>
-	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script>
-	<script src="../../resources/prodmenu/js/aos.js"></script>
-	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script>
+<!-- 	<script src="../../resources/prodmenu/js/popper.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/bootstrap.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.easing.1.3.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.waypoints.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.stellar.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/owl.carousel.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.magnific-popup.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/aos.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/jquery.animateNumber.min.js"></script> -->
 	<!-- 	<script src="./../resources/prodmenu/js/bootstrap-datepicker.js"></script> -->
-	<script src="../../resources/prodmenu/js/scrollax.min.js"></script>
-	<script src="../../resources/prodmenu/js/main.js"></script>
+<!-- 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script> -->
+<!-- 	<script src="../../resources/prodmenu/js/main.js"></script> -->
 	<!-- ////////////////////달력 /////////////////////////////-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -422,6 +425,47 @@
 				addPreview($(this)); //preview form 추가하기
 			});
 		});
+		
+		$( "input[name=manuDate]" ).datepicker({
+			showOn: "button",
+			buttonImage: "/resources/file/others/calendar.png",
+			buttonImageOnly: true,
+			buttonText: "Select date",
+			dateFormat: "yy-mm-dd",
+			maxDate: "+0d",
+			prevText: '이전 달',
+	        nextText: '다음 달',
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	        showMonthAfterYear: true,
+	        yearSuffix: '년'
+		});
+		$('.ui-datepicker-trigger').attr('title','클릭')
+		$('#manuDateH5').after( $( ".ui-datepicker-trigger" ));
+		
+		
+		
+		$( "input[name=prodCode]" ).keyup(function( ) {
+			$(this).val($(this).val().replace(/[^0-9]/g,""));        	 
+
+			if($(this).val().length > 2 ){
+				swal({
+			           text: "제한길이를 초과하였습니다.",
+			           dangerMode: true,
+			           buttons: {
+								 catch: {
+								 	text: "확인"
+								 }
+					   },
+			     });
+				$(this).val($(this).val().toString().substring(0,2));  
+			}
+		});
+		
+		
 	</script>
 
 </body>

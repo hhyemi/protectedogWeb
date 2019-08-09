@@ -171,7 +171,7 @@ th{background-color: #F0F0F0;}
 					</tbody>
 				</table>
 				
-				<div class="col-md-12" align="right">
+				<div class="col-md-12" align="right" style="padding-right: 0;">
 
 					<br />
 

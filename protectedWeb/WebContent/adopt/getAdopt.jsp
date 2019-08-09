@@ -373,9 +373,8 @@
         <p align="right" style="padding-right: 15px;">
        		<c:if test="${ adopt.statusCode eq '1' && sessionScope.user.id eq adopt.id }">
 				<button class="btn btn-default" id="modiButton">수정</button>
-	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
-       		<c:if test="${  sessionScope.user.role eq 'admin'}">
+       		<c:if test="${ sessionScope.user.id eq adopt.id ||  sessionScope.user.role eq 'admin'}">
 	       		<button class="btn btn-default" id="delButton">삭제</button>
 			</c:if>
 			

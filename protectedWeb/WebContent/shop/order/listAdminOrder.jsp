@@ -48,7 +48,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">List</span> <span>Admin Order</span></p>
+          	<p ><span class="mr-2">Protectedog</span> <span>Store</span></p>
             <font size="7">관리자 구매관리</font>
           </div>
         </div>
@@ -65,7 +65,7 @@
 				</div>
 
 				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				<input type="hidden" id="currentPage" name="currentPage" value="" />
+<!-- 				<input type="hidden" id="currentPage" name="currentPage" value="" /> -->
 			</form>
 		</div>
 
@@ -80,22 +80,26 @@
 			
 <%-- 	</c:if> --%>
 	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-
+	
+	
+	
 	<form name="listOrder">
 		<section >
 			<input type="hidden" name="orderNo" id="orderNo" value="${order.orderNo}" />
 			<input type="hidden" name="id" id="id" value="${ sessionScope.user.phone }"/>
+			<input type="hidden" name="currentPage" id="currentPage" value=""/>
 			<div class="container">
+			<b>전체 ${resultPage.totalCount} 건, 현재 ${resultPage.currentPage} 페이지</b><br/>
 			※ 상세정보는 상품명을 조회해 주세요
 				<table id="cart" class="table table-hover table-condensed">
 					<thead>
 						<tr>
-							<th style="width: 10%">No | 회원아이디</th>
-							<th style="width: 30%">상품정보</th>
-							<th style="width: 10%">구매가격</th>
+							<th style="width: 10%" class="text-center">No | 회원아이디</th>
+							<th style="width: 30%" class="text-center">상품정보</th>
+							<th style="width: 10%" class="text-center">구매가격</th>
 							<th style="width: 20%" class="text-center">결제수단</th>
-							<th style="width: 10%">상태</th>
-							<th style="width: 40%">주문일</th>
+							<th style="width: 10%" class="text-center">상태</th>
+							<th style="width: 40%" class="text-center">주문일</th>
 						</tr>
 					</thead>
 
@@ -176,6 +180,13 @@
 	<script type="text/javascript">
 //=============    상품상세조회(썸네일)  Event  처리 		=============
 //============= 썸네일 사진 클릭 Event  처리 =============	
+	function fncGetList(currentPage) {
+		$("#currentPage").val(currentPage)
+// 		alert($("#currentPage").val());
+		$("form").attr("method", "POST").attr("action", "/order/listAdminOrder").submit();
+	}
+	
+	
  		$( ".number" ).on("click" , function() {
 				 self.location ="/order/getOrder?orderNo="+$(this).text().trim();
 			});

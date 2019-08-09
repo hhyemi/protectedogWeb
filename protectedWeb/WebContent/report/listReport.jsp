@@ -96,12 +96,18 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 									    <td class="inbox-small-cells" width="50px">
 <!--                                             <input type="checkbox" class="mail-checkbox" id="allCheck"> -->
                                         </td>
-										<th width="85px">신고자</th>
-										<th width="85px">신고대상</th>
-										<th width="270px" class="text-center">신고유형</th>
-										<th width="200px" align="center" class="text-center">신고일시</th>
-										<th width="90px">처리상태</th>
-										<th width="90px">더보기</th>
+										<th width="15%" class="text-center">신고자</th>
+										<th width="15%" class="text-center">신고대상</th>
+										<th width="20%" class="text-center">신고유형</th>
+										<th width="15%" class="text-center">신고일시</th>
+										<th width="15%" class="text-center">처리상태</th>
+										<th width=""  class="text-center">더보기</th>
+<!-- 										<th width="85px">신고자</th> -->
+<!-- 										<th width="85px">신고대상</th> -->
+<!-- 										<th width="270px" class="text-center">신고유형</th> -->
+<!-- 										<th width="200px" align="center" class="text-center">신고일시</th> -->
+<!-- 										<th width="90px">처리상태</th> -->
+<!-- 										<th width="90px">더보기</th> -->
 									</tr>
 								</thead>
                                 <tbody>
@@ -164,7 +170,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 			                                <!-- /.modal-dialog -->
 			                            </div>
                                     <tr class="">
-                                        <td class="inbox-small-cells" width="50px">
+                                        <td class="inbox-small-cells" width="50px"  class="text-center">
 <%--                                         	<c:if test="${ search.searchCondition != 'delete' }"> --%>
 <!-- 			                                <div class="btn-group"> -->
 <!-- 			                                    <a data-original-title="trash" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips"> -->
@@ -174,8 +180,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <%-- 			                                </c:if> --%>
                                             <input type="hidden" name="reportNo" value="${ report.reportNo }">
                                         </td>
-										<td width="85px">${ report.reporterNick }</td>
-										<td width="85px">${ report.reportedNick }</td>
+										<td width="85px" class="text-center">${ report.reporterNick }</td>
+										<td width="85px" class="text-center">${ report.reportedNick }</td>
                                         <td class="view-message text-center" width="270px"> 
                                        		${ report.reportCategory }
                                         	<input type="hidden" name="reportContent" value="${ report.reportContent }"/>
@@ -424,7 +430,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
 // 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
-				
+				alert(methodPath+", "+addPoint+","+targetId);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -468,7 +474,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				})
 
 			});
-		})
+		});
 		
 		$(function(){
 			$(".noneOp").on("click", function(){
