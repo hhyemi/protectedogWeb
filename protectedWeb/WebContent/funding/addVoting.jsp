@@ -69,7 +69,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">support</span> <span>apply</span></p>
+          	<p ><span class="mr-2">Support</span> <span>Apply</span></p>
             <font size="7">후원신청등록</font><br/> 후원신청은 투표 <strong style="color: #f04f23">1개</strong>이상
 				받을 시 <strong style="color: #f04f23">수정이 불가</strong>합니다.<br/>후원신청글은 <b>한달에 한번</b> 작성 가능합니다. 신중하게 작성해주세요.
           </div>

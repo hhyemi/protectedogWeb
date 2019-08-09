@@ -44,7 +44,7 @@ public class ParticipateServiceImpl implements ParticipateService {
 	@Override
 	public Map<String, Object> listNoticeComment(Search search, int postNo ,String statusCode) throws Exception {
 		List<Participate> list = participateDAO.listNoticeComment(search,postNo, statusCode);
-		int totalCount = participateDAO.getParticipateTotalCount(postNo);
+		int totalCount = participateDAO.getParticipateTotalCount(postNo,statusCode);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);

@@ -16,8 +16,19 @@
 <title>보호할개 · 채팅</title>
  
 <style>
+<<<<<<< HEAD
 ::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; }
+=======
+      #chat_box {
+               padding-top : 10px;
+                  width: 400px;
+                  height: 400px;
+                  border: 1px solid black;
+                  background: #f0f0f2;
+      }
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
 		::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 0px; background: url(`./images/bg.png`) #efefef}
 
 		::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
@@ -34,6 +45,8 @@ margin-right:0px !important;}
                   background: #f0f0f2;
       }
 
+=======
+>>>>>>> refs/remotes/origin/master
       #msg_process {
                 width: 16%;
                   height: 34px;

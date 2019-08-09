@@ -64,7 +64,7 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2">support</span> <span>fund</span></p>
+	          	<p ><span class="mr-2">Support</span> <span>Fund</span></p>
 	            <font size="7">후원하기</font><br/> 후원 시 <strong  style="color:#f04f23">환불이 불가</strong>하니 참고하시길 바랍니다.	
 	          </div>
 	        </div>

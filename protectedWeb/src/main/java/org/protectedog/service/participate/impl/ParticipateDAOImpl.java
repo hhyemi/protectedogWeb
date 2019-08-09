@@ -53,8 +53,11 @@ public class ParticipateDAOImpl implements ParticipateDAO {
 	}
 
 	@Override
-	public int getParticipateTotalCount(int postNo) throws Exception {
-		return sqlSession.selectOne("ParticipateMapper.getParticipateTotalCount",postNo);
+	public int getParticipateTotalCount(int postNo,String statusCode) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("postNo", postNo);
+		map.put("statusCode", statusCode);		
+		return sqlSession.selectOne("ParticipateMapper.getParticipateTotalCount",map);
 	}
 
 	/////////////// ȸ������ �䱸�� Method/////////////////////

@@ -82,7 +82,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">support</span> <span>post</span></p>
+          	<p ><span class="mr-2">Support</span> <span>Post</span></p>
             <font size="7">후원게시판</font>
           </div>
         </div>

@@ -76,7 +76,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p ><span class="mr-2">support</span> <span>apply</span></p>
+          	<p ><span class="mr-2">Support</span> <span>Apply</span></p>
             <font size="7">투표게시판</font>
           </div>
         </div>

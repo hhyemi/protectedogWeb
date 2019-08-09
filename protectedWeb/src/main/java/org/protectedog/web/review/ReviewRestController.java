@@ -136,7 +136,7 @@ public class ReviewRestController {
 	
 	
 	@RequestMapping(value = "json/updateHospitalReview/", method = RequestMethod.POST)
-	public void updateVoting(@RequestBody Map<String, Object> mapReview , HttpSession session) throws Exception {
+	public void updateHospitalReview(@RequestBody Map<String, Object> mapReview , HttpSession session) throws Exception {
 
 		System.out.println("/review/json/updateHospitalReview : POST");
 

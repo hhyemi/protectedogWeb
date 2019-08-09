@@ -9,7 +9,7 @@
               <div class="row">
                 <!-- About Us -->
                 <div class="col-md-3 col-sm-6 ">
-                  <div><font size="6" color="white">#protected</font></div>
+                  <div><font size="6" color="white"><b>#protected</b></font></div>
                   <ul class="list-unstyled comp-desc-f">
                      <li><p>#protected is a good team. It is the strongest of 118 bitcamp. The theme of the project is the protection of organic dogs.</p></li> 
                   </ul><br> 
@@ -57,7 +57,7 @@
                   	혜미 : dlgpal9508@gmail.com<br>
                   	민희 : 000ppp0@hanmail.net<br>
                                         진태 : alfides@naver.com<br>                 
-                                        지수 : <br>
+                                        지수 : lsu0314@gmail.com<br>
                   </address>  
                 </div>
                 <!-- End Latest Tweets -->

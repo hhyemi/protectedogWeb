@@ -73,14 +73,15 @@
 	      <div class="container">
 	        <div class="row no-gutters slider-text align-items-center justify-content-center">
 	          <div class="col-md-9 ftco-animate text-center">
-	          	<p ><span class="mr-2">support</span> <span>review</span></p>
+	          	<p ><span class="mr-2">Support</span> <span>Review</span></p>
 	            <font size="7">후원후기수정</font><br/> 후기를 <strong style="color: #f04f23">상세하게</strong>작성해주세요.
 	          </div>
 	        </div>
 	      </div>
 	    </div>
 		<br/><p/>		
-	
+			 <section class="ftco-section bg-light" style="padding-bottom: 0px; padding-top : 20px;">   
+			
 
 					<!--  table Start /////////////////////////////////////-->
 				<div class="container2">
@@ -165,7 +166,7 @@
 		  <br/><br/><br/><br/><br/><br/><br/><br/>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
-
+</section>
     </div>
    <!--  화면구성 div end /////////////////////////////////////-->
     <!--================ start footer Area  =================-->

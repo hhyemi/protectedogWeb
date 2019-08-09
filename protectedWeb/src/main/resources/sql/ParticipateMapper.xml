@@ -60,12 +60,24 @@
 			AND POST_NO = #{postNo} AND STATUS_CODE = #{statusCode}
 			</if>
 		</where>
-		 ORDER BY REG_DATE DESC	
+		 ORDER BY REG_DATE DESC
 		) inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN
 		#{startRowNum} AND
 		#{endRowNum}
+	</select>
+	
+	<!-- SQL : SELECT ROW Count  --> 
+	<select id="getParticipateTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT
+		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
+		FROM PARTICIPATE
+		<where>
+			AND POST_NO = #{postNo} AND STATUS_CODE = #{statusCode}
+		</where>
+		) countTable
 	</select>
 	
 	
@@ -81,17 +93,5 @@
 <!-- 			</if> -->
 <!-- 		</where> -->
 <!-- 	</select> -->
-	
-	<!-- SQL : SELECT ROW Count  --> 
-	<select id="getParticipateTotalCount" parameterType="int" resultType="int">
-		SELECT COUNT(*)
-		FROM( SELECT
-		PARTICIPATE_NO , ID , NICKNAME , POST_NO , REG_DATE , FUND_PAY , STATUS_CODE , PAYMENT_CODE 
-		FROM PARTICIPATE
-		<where>
-			AND POST_NO = #{value}
-		</where>
-		) countTable
-	</select>
 
 </mapper>
