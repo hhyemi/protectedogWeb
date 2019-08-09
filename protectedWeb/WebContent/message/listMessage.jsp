@@ -403,7 +403,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$(".messageContent").text(JSONData.message.messageContent);
 					$(".sendDate").text(JSONData.sendDate);
 					$(".senderNick").text(JSONData.message.senderNick);
-					$(".receiverNick").text(JSONData.message.receiverNIck);
+					$(".receiverNick").text(JSONData.message.receiverNick);
 				},
 				error : function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
