@@ -267,8 +267,36 @@
 						if($.trim(response.result)==0){
 // 							alert("쿠폰을 받았습니다");
 // 							alert(couponNo+", "+couponCode+", "+receiverId);
-							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+// 							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+							swal({
+								text : "쿠폰을 받았습니다.",
+								icon : "success",
+								buttons :{
+									catch : {
+										text : "확인"
+									}
+								}
+							})
+							.then((A) => {
+								if(A){
+									self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+								}
+							})
 						}else{
+							swal({
+								text : "이미 받은 쿠폰입니다.",
+								icon : "error",
+								buttons :{
+									catch : {
+										text : "확인"
+									}
+								}
+							})
+							.then((B) => {
+								if(B){
+									return false;
+								}
+							})
 // 							alert("이미 받은 쿠폰입니다");
 // 							return;
 						}
