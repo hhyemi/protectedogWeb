@@ -8,6 +8,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 <!DOCTYPE html>
 <html>
@@ -168,7 +169,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                             </div>
                                             <br/>
                                             <div class="form-group">
-                                                <strong class="mr-5"><i class="fa fa-phone"> 휴대전화 : </i></strong>
+                                                <strong class="mr-5"><i class="fa fa-phone"> 연락처 : </i></strong>
 												<div>${ user.phone }</div>
                                             </div>
                                             <div class="form-group">
@@ -241,7 +242,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					                                    <br/>
 					                                    
 					                                    <div class="form-group">
-					                                        <label for="phone">휴대전화번호</label>
+					                                        <label for="phone">연&nbsp;락&nbsp;처</label>
 					                                        <div>
 						                                        <div class="col-sm-3" style="float:left; padding-left:0">
 																	<select class="form-control" name="phone1" id="phone1">
@@ -276,9 +277,12 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					                                        <label for="userAddr">자택주소</label>
 					                                        <div>
 																<div class="col-sm-6" style="float:left; padding-left: 0">
-																	<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly="readonly">
+																	<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" 
+																		value="${fn:split(user.userAddr , ',')[0] }"
+																		readonly="readonly">
 																</div>
-								      
+																
+
 																<div class="col-sm-6" style="float:left; padding-right: 0;">
 																	<button type="button" class="btn btn-default" 
 																	style="margin:0; width:100%; height:40px;" onclick="execDaumPostcode()">검색</button><br>
@@ -289,10 +293,15 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					                                    <div class="form-group">
 															<label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
 															<div class="col-sm-12" style="padding: 0;">
-																<input type="text" class="form-control" id="userAddr" name="simpleAddress" placeholder="주소" readonly="readonly">
+																<input type="text" class="form-control" id="userAddr" name="simpleAddress" 
+																		value="${ fn:trim(fn:split(user.userAddr , ',')[1]) }"
+																		placeholder="주소" readonly="readonly">
 																<br>
 																<input type="hidden" class="form-control"  id="sample6_extraAddress" placeholder="참고항목">
-																<input type="text" class="form-control" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소">
+																<input type="text" class="form-control" id="sample6_detailAddress" name="detailAddress" 
+																		value="${fn:trim(fn:split(user.userAddr , ',')[2])}"
+<%-- 																		value="${ fn:substringAfter(   user.userAddr , ', ' )  }" --%>
+																		placeholder="상세주소">
 																<input type="hidden" name="userAddr" value="${ user.userAddr }">
 															</div>
 					                                    </div>
@@ -385,7 +394,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if(pw == null || pw.length <1){
 					swal({
 						text : "비밀번호는 반드시 입력하셔야 합니다.",
-						icon : "error",
+// 						icon : "error",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -398,7 +407,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if(pw.length < 8 || pw.length > 12){
 					swal({
 						text : "비밀번호는 8자 이상 12자 이하로 입력하셔야 합니다.",
-						icon : "error",
+// 						icon : "error",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -411,7 +420,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if(pw_confirm == null || pw_confirm.length <1){
 					swal({
 						text : "비밀번호는 반드시 확인하셔야 합니다.",
-						icon : "error",
+// 						icon : "error",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -424,7 +433,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if(name == null || name.length <1){
 					swal({
 						text : "이름은 반드시 입력하셔야 합니다.",
-						icon : "error",
+// 						icon : "error",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -437,7 +446,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if( pw != pw_confirm ) {				
 					swal({
 						text : "비밀번호가 일치하지 않습니다.",
-						icon : "error",
+// 						icon : "error",
 						buttons :{
 							catch : {
 								text : "확인"
@@ -465,7 +474,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 				
 				if($("input:text[name='simpleAddress']").val != "" && $("input:text[name='detailAddress']").val() != "") {
-					var address=$("input[name='simpleAddress']").val() + " " + $("input[name='detailAddress']").val();
+					var address= $('#sample6_postcode').val()+", "+$("input[name='simpleAddress']").val() + ", " + $("input[name='detailAddress']").val();
 				}
 				
 				$("input:hidden[name='userAddr']").val(address);

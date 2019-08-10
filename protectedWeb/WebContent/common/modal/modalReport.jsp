@@ -62,6 +62,13 @@
 	 		scroll-behavior: smooth;
 		}
 		
+		.waves-effect>span {
+			background-color: #f04f23;
+			border-radius: 3px;
+			padding: 3px;
+			color: white;
+		}
+		
 		
   	</style>
   </head>
@@ -78,14 +85,14 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
 											<div class="hero-wrap hero-bread" 
-											style="padding-bottom: 10px; padding-top : 20px; display: inline-block;">
+											style="padding-bottom: 10px; padding-top : 30px; display: inline-block;">
 												<div class="container">
 													<div class="row no-gutters slider-text align-items-center justify-content-center">
 														<div class="col-md-12 ftco-animate text-center" style="padding-left: 125px;">
 															<p class="breadcrumbs">
-																<span class="mr-6"><a href="#">SendReport</a></span>
+																<span class="mr-2">Send</span><span> Report</span>
 															</p>
-															<font size="7">신고작성</font>
+															<font size="7">신고 작성</font>
 														</div>
 													</div>
 												</div>
@@ -121,17 +128,15 @@
                                                     </div>
                                                 </div>
 
-                                                <br/>
-                                                <br/>
-                                                <br/>
 									            <div id="attach" class="form-group">
-									                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadReportInputBox">사진등록</label></span>&nbsp;(최대 3장까지 업로드 가능합니다.)
+									                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadReportInputBox"><span><strong>사진등록</strong></span></label></span>&nbsp;(최대 3장까지 업로드 가능합니다.)
 									                <input id="uploadReportInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 									            </div>                                              	
 <!--                                            미리보기 영역 -->
                                                 <div class="form-group">
 									            	<div id="preview" class="col-md-3" align="center" style='display:inline; min-width:600px;'></div> 
 									            </div>
+                                               <br/>
                                                <br/>
                                                <br/>
                                                <br/>

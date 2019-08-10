@@ -79,7 +79,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                          MAIN NAVBAR
 ======================================================-->        
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -204,8 +204,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 											<th width="170px" class="text-center">보낸사람</th>
 										</c:if>
 										<th width="300px" class="text-center">제목</th>
-										<th width="200px"  class="text-center" align="center" class="text-center">보낸일시</th>
-										<th width="200px"  class="text-center" align="center" class="text-center">받은일시</th>
+										<th width="200px"  class="text-center" align="center" class="text-center">보낸일</th>
+										<th width="200px"  class="text-center" align="center" class="text-center">받은일</th>
 										<c:if test="${ search.searchCondition == 'receive' }">
 										<th  class="text-center" width="75px">더보기</th>
 										</c:if>
@@ -232,7 +232,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 																			
 																<div class="col-md-6" align="right"
 																	style="position: absolute; right: 0px; bottom: 0px;">
-																	보낸일시 | <span class="sendDate"> </span>
+																	보낸일 | <span class="sendDate"> </span>
 																</div>
 															</div>
 			                                                <div class="row messageId" style="position: relative; height: 25px;">
@@ -254,7 +254,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 								
 			                                                <div class="row form-group">
 			                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-			                                                        <button class="btn btn-send ml-3 "  data-dismiss="modal"  style="background-color:red;">확인</button>
+			                                                        <button class="btn btn-send ml-3 " data-dismiss="modal"  style="background-color:red;">확인</button>
 <!-- 			                                                        <button class="btn btn-send ml-3 sendMessage" style="background-color:red;">답장하기</button> -->
 			                                                    </div>
 			                                                </div>
@@ -292,7 +292,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         <td class="view-message text-center" width="200px"> 
 											<fmt:formatDate value="${ message.sendDate }" pattern="yyyy-MM-dd"/>
 										</td>
-                                        <td class="view-message text-center" width="200px">
+                                        <td class="view-message text-center" width="200px" id="receiveDate">
                                         <c:if test="${ message.messageStatus == 0 }">
                                         	읽지 않음
                                         </c:if>
@@ -301,14 +301,14 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                         </c:if>
                                         </td>
                                         <td class="view-message text-center" width="75px" >
-                                        	<c:if test="${ search.searchCondition=='receive' }">
-                                        	<a href=".messageViewModal" data-toggle="modal" title="Compose" class="btn btn-compose">
+<%--                                         	<c:if test="${ search.searchCondition=='receive' }"> --%>
+                                        	<a href=".messageViewModal" id="confirmMSG" data-toggle="modal" title="Compose" class="btn btn-compose">
                                         		더보기
                                         	</a>
-                                        	</c:if>                                        	
-                                        	<c:if test="${ search.searchCondition=='receive' }">
-                                        	<a></a>
-                                        	</c:if>
+<%--                                         	</c:if>                                        	 --%>
+<%--                                         	<c:if test="${ search.searchCondition=='receive' }"> --%>
+<!--                                         	<a></a> -->
+<%--                                         	</c:if> --%>
 <%--                                         	<c:if test="${ search.searchCondition=='delete' }"> --%>
 <!-- 	                                        	<div class="btn-group"> -->
 <!-- 				                                    <a data-original-title="trash" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips"> -->
@@ -355,6 +355,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		$("input[name='searchCondition']").val('${search.searchCondition}')
 		$("form[name='mailSearchForm']").attr("method", "POST").attr("action","/message/listMessage").submit();
 	}
+	$('tr').on("click", "#confirmMSG", function() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+		today = yyyy+'-' + mm+'-'+dd;
+		$(    $(this).parent().parent().children(  "td:nth-child(5)"   )   ).text(today);
+	});
 	
 // 	$(function(){
 // 		$("#messageViewModal").on("load", function(){
