@@ -7,30 +7,31 @@ import org.protectedog.service.domain.User;
 
 public interface UserService {
 
-	//È¸¿ø°¡ÀÔ(±âº»Á¤º¸)
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½âº»ï¿½ï¿½ï¿½ï¿½)
 	public void addUsersBase(User user) throws Exception;
 	
-	//È¸¿ø°¡ÀÔ(Ãß°¡Á¤º¸)
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½)
 	public void addUsersAdditional(User user) throws Exception;
 	
-	//·Î±×ÀÎ, ³»Á¤º¸º¸±â
+	//ï¿½Î±ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public User getUsers(String id) throws Exception;
+	public User getUsersByNick(String nickname) throws Exception;
 	
-	//ÀüÃ¼È¸¿øº¸±â
+	//ï¿½ï¿½Ã¼È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public Map<String, Object> getUsersList(Search search) throws Exception;
 	
-	//È¸¿øÁ¤º¸¼öÁ¤
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void updateUsers(User user) throws Exception;
 	
-	//¾ÆÀÌµð Áßº¹Ã¼Å©
+	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	public int checkId(String id) throws Exception;
 	
-	//SNS ¿¬µ¿
+	//SNS ï¿½ï¿½ï¿½ï¿½
 	public User getKakao(Map<String, Object> map) throws Exception;
 	public User getGoogle(Map<String, Object> map) throws Exception;
 	public User getNaver(Map<String, Object> map) throws Exception;
 
-	//´Ð³×ÀÓ Áßº¹Ã¼Å©
+	//ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½ßºï¿½Ã¼Å©
 	public int checkNick(String nickname) throws Exception;
 	
 
