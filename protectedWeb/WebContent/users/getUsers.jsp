@@ -21,7 +21,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
-    <title>보호할개 : 마이페이지</title>
+    <title>보호할개 · 마이페이지</title>
     <link rel="shortcut icon" href="img/favicon.ico">
     
     <!-- global stylesheets -->

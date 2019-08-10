@@ -41,13 +41,13 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 <!--====================================================
                          MAIN NAVBAR
 ======================================================-->        
-	<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+	<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="/report/listReport">ReportList</a></span>
+						<span class="mr-2">Report</span> <span>List</span>
 					</p>
 					<font size="7">신고글목록</font>
 				</div>
@@ -308,7 +308,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					
 				},
 				error : function(request,status,error){
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
 		});
@@ -358,7 +358,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				var reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
 				var reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -381,7 +381,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-						alert(JSON.stringify(response));
+// 						alert(JSON.stringify(response));
 						swal({
 							text:"신고처리 완료",
 							buttons : {
@@ -502,7 +502,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-						alert(JSON.stringify(response));
+// 						alert(JSON.stringify(response));
 						swal({
 							text : "신고처리가 완료되었습니다.",
 							buttons : {

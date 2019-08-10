@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
-    <title>보호할개 : 마이페이지</title>
+    <title>보호할개 · 마이페이지</title>
     <link rel="shortcut icon" href="img/favicon.ico">
     
     <!-- global stylesheets -->
@@ -231,7 +231,7 @@
 // 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 				swal({
 					text : "쿠폰을 삭제하시겠습니까?",
-					icon : "warning",
+// 					icon : "warning",
 					buttons : ["취소","확인"],
 					dangerMode: true,
 				})
@@ -239,9 +239,9 @@
 					if(A) {
 						self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 					}
-				    swal("삭제완료 !", {
-				      	icon: "success"
-				    });
+					swal("삭제가 완료되었습니다!", {
+		                   buttons: "확인",
+		            });
 				})
 			})
 		})
@@ -270,7 +270,7 @@
 // 							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
 							swal({
 								text : "쿠폰을 받았습니다.",
-								icon : "success",
+// 								icon : "success",
 								buttons :{
 									catch : {
 										text : "확인"
@@ -285,7 +285,7 @@
 						}else{
 							swal({
 								text : "이미 받은 쿠폰입니다.",
-								icon : "error",
+// 								icon : "error",
 								buttons :{
 									catch : {
 										text : "확인"
