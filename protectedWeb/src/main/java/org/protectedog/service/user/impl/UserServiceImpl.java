@@ -48,6 +48,12 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userDAO.getUsersById(id);
 	}
+	
+	@Override
+	public User getUsersByNick(String nickname) throws Exception {
+		// TODO Auto-generated method stub
+		return userDAO.getUsersByNick(nickname);
+	}
 
 	@Override
 	public Map<String, Object> getUsersList(Search search) throws Exception {

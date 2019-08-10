@@ -157,9 +157,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 															</div>											
 			                                                <div class="row form-group">
 			                                                    <div class="offset-lg-2 col-lg-12" align="right" style="padding-right: 0;">
-			                                                        <button class="btn btn-send ml-3 blackOp" type="submit">블랙처리</button>
-			                                                        <button class="btn btn-send ml-3 normalOp" type="submit">일반처리</button>
-			                                                        <button class="btn btn-send ml-3 noneOp" type="submit">비처리</button>
+			                                                        <button class="btn btn-send ml-3 blackOp">블랙처리</button>
+			                                                        <button class="btn btn-send ml-3 normalOp">일반처리</button>
+			                                                        <button class="btn btn-send ml-3 noneOp">비처리</button>
 			                                                    </div>
 			                                                </div>
 			                                            </form>
@@ -223,7 +223,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
      </div>
    
     
-    <jsp:include page="/common/modal/modalMessage.jsp"></jsp:include>
+<%--     <jsp:include page="/common/modal/modalMessage.jsp"></jsp:include> --%>
     <jsp:include page="/layout/footer.jsp"></jsp:include>
 
     <!--Global Javascript -->
@@ -343,33 +343,22 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 	} 
 		
 	
-	$(function(){
-	
-		var reportNo;
-		var delCode;
-		var reportCategory;
-		var reportContent;
-		var reportDate;
-		var reportedId;
-		var reporterId;
-		var reportStatus;
 	
 		$(function(){
 			$(".blackOp").on("click", function(){
-				var methodPath="black";
+				debugger;
 				var addPoint=-1;
-				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
 				
-				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
-				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
-				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
-				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
-				reportedId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
-				reporterId=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
-				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
-				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
+				var reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
+				var delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
+				var reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
+				var reportContent=$(this).parent().parent().parent().children(".reportContent").text();
+				var reportedNick=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+				var reporterNick=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
+				var reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
+				var reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
-// 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
+				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -383,7 +372,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 				
 				$.ajax({
-					url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+					url : "/report/json/updateReport/"+addPoint,
 					dataType : "json",
 					headers : {
 						"Accept" : "application/json",
@@ -392,17 +381,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-// 						alert(JSON.stringify(response));
+						alert(JSON.stringify(response));
 						swal({
-							text : "신고처리가 완료되었습니다.",
+							text:"신고처리 완료",
 							buttons : {
-								catch : {
-									text : "확인"
+								catch:{
+									text:확인
 								}
 							}
 						})
-						.then((A) => {
-							if(A) {
+						.then((AB) => {
+							if(AB){
 								$('#reportViewModal').modal("hide");
 							}
 						})
@@ -416,21 +405,19 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		
 		$(function(){
 			$(".normalOp").on("click", function(){
-				var methodPath="normal";
 				var addPoint=300;
-				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
 				
-				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
-				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
-				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
-				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
-				reportedId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
-				reporterId=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
-				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
-				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
+				var reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
+				var delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
+				var reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
+				var reportContent=$(this).parent().parent().parent().children(".reportContent").text();
+				var reportedNick=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+				var reporterNick=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
+				var reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
+				var reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
 // 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
-				alert(methodPath+", "+addPoint+","+targetId);
+// 				alert(methodPath+", "+addPoint+","+targetId);
 				
 				var reportBody={
 						"reportNo" : reportNo,
@@ -444,7 +431,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 				
 				$.ajax({
-					url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+					url : "/report/json/updateReport/"+addPoint,
 					dataType : "json",
 					headers : {
 						"Accept" : "application/json",
@@ -478,18 +465,17 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		
 		$(function(){
 			$(".noneOp").on("click", function(){
-				var methodPath="none";
 				var addPoint=0;
-				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+// 				var targetId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
 				
-				reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
-				delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
-				reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
-				reportContent=$(this).parent().parent().parent().children(".reportContent").text();
-				reportedId=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
-				reporterId=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
-				reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
-				reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
+				var reportNo=$(this).parent().parent().parent().children().children(".modalReportNo").text();
+				var delCode=$(this).parent().parent().parent().children(".row").children(".delCode").val();
+				var reportCategory=$(this).parent().parent().parent().children(".row").children(".reportCategory").text();
+				var reportContent=$(this).parent().parent().parent().children(".reportContent").text();
+				var reportedNick=$(this).parent().parent().parent().children(".reportNick").find(".reportedNick").text();
+				var reporterNick=$(this).parent().parent().parent().children(".reportNick").find(".reporterNick").text();
+				var reportDate=$(this).parent().parent().parent().children(".row").children(".reportDate").text();
+				var reportStatus=$(this).parent().parent().parent().children(".row").children(".reportStatus").val();
 				
 // 				alert(reportNo+", "+delCode+", "+reportCategory+", "+reportContent+", "+reportedNick+", "+reporterNick+", "+reportDate+", "+reportStatus);
 				
@@ -507,7 +493,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				}
 				
 				$.ajax({
-					url : "/report/json/updateReport/"+methodPath+"/"+addPoint+"/"+targetId,
+					url : "/report/json/updateReport/"+addPoint,
 					dataType : "json",
 					headers : {
 						"Accept" : "application/json",
@@ -516,7 +502,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					method : "POST",
 					data : JSON.stringify(reportBody),
 					success : function(response){
-// 						alert(JSON.stringify(response));
+						alert(JSON.stringify(response));
 						swal({
 							text : "신고처리가 완료되었습니다.",
 							buttons : {
@@ -536,7 +522,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					}
 				})
 			});
-		})
 	
 // 		function reportAjax(){
 			

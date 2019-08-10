@@ -142,17 +142,19 @@ public class ReportRestController {
 		
 	}
 	
-	@RequestMapping(value="json/updateReport/{methodPath}/{addPoint}/{targetId}", method=RequestMethod.POST)
+	@RequestMapping(value="json/updateReport/{addPoint}", method=RequestMethod.POST)
 	public Map<String, Object> updateReport(@RequestBody Map<String, Object> reportBody, 
-											@PathVariable("methodPath") String methodPath, 
-											@PathVariable("targetId") String targetId, 
 											@PathVariable("addPoint") int addPoint) throws Exception{
 		
 		System.out.println("/report/json/updateReport");
 		System.out.println("updateReport reportBody : "+reportBody.toString());
+		System.out.println("updateReport addPoint : "+addPoint);
+		System.out.println("updateReport targetNick : "+(reportBody.get("reportedNick")).toString());
 		
 		Report report=reportService.getReport(Integer.parseInt((String)reportBody.get("reportNo")));
+		String targetNick=(reportBody.get("reportedNick")).toString();
 		System.out.println("updateReport report? : "+report);
+		System.out.println("updateReport targetNick? : "+targetNick);
 		report.setDelCode((String)reportBody.get("delCode"));
 		report.setReportStatus(Integer.parseInt((String)reportBody.get("reportStatus")));
 		System.out.println("updateReport update 전 report? : "+report);
@@ -169,14 +171,15 @@ public class ReportRestController {
 
 		if(addPoint==-1) {
 			System.out.println("updateReport 블랙처리 입장: "+report);	
-			User user=userService.getUsers(targetId);
-			user.setLevelPoint(-1);
+			System.out.println("updateReport 블랙처리 대상 : "+targetNick);
+			User user=userService.getUsersByNick(targetNick);
+			user.setLevelPoint(addPoint);
 			userService.updateUsers(user);
 			map.put("user", user);
 			System.out.println("updateReport 블랙처리 퇴장 : "+map.toString());	
 		} else {
 			System.out.println("updateReport 점수깎기 입장 : "+report);
-			User user=userService.getUsers(targetId);
+			User user=userService.getUsersByNick(targetNick);
 			int levelPoint=user.getLevelPoint();
 			user.setLevelPoint(levelPoint-addPoint);
 			userService.updateUsers(user);
