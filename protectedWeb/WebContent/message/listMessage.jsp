@@ -368,6 +368,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		} 
 		today = yyyy+'-' + mm+'-'+dd;
 		$(    $(this).parent().parent().children(  "td:nth-child(5)"   )   ).text(today);
+		changeCount();
 	});
 	
 // 	$(function(){
@@ -429,35 +430,35 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 		$(function() {
 
 			$(document).ready(function(){
-		
-				var nickname=$("#myId").val();
-				var rcvNick=JSON.stringify({nickname:nickname});
-				$.ajax({
-					type : "POST",
-					contentType : "application/json",
-					url : "/message/json/getReceiveTotalCount",
-					data : rcvNick,
-					datatype : "json",
-					success : function(response){
-// 						alert(response);
-						if(nickname != null && response != 0){
-							$(".received").show();
-							$(".received").text(response)
-						}
-						if(nickname != null && response == 0){
-							$(".received").hide();
-						}
-					},
-					error : function(request,status,error){
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
-	
-				});
-				
+				changeCount();
 			});
 
 		});
-		
+	function changeCount(){
+		var nickname=$("#myId").val();
+		var rcvNick=JSON.stringify({nickname:nickname});
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/message/json/getReceiveTotalCount",
+			data : rcvNick,
+			datatype : "json",
+			success : function(response){
+//					alert(response);
+				if(nickname != null && response != 0){
+					$(".received").show();
+					$(".received").text(response)
+				}
+				if(nickname != null && response == 0){
+					$(".received").hide();
+				}
+			},
+			error : function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+
+		});
+		}
 // 		$(function(){
 // 			$(".submit").on("click", function(){
 // 				swal({
