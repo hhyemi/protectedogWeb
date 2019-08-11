@@ -13,7 +13,10 @@
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="/resources/newTemplate/admin/css/loadingAnimation.css">
+    
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
 <!-- <<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >  -->
@@ -31,117 +34,6 @@
 
 /* .form-group7{margin-top:10px;} */
 </style>
-
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
-<script type="text/javascript">
-	//============= "등록"  Event 연결 =============
-	$(function() {
-		$('#btn-cancel').on("click", function(){
-			history.go(-1);
-		});
-		$("#addproduct")
-				.on(
-						"click",
-						function() {
-
-							//============= 다중파일업로드 AJAX =============
-							$(function() {
-								var form = $('#uploadForm')[0];
-								var formData = new FormData(form);
-
-								for (var index = 0; index < 100; index++) {
-									formData.append('files', files[index]);
-								}
-
-								$
-										.ajax({
-											type : 'POST',
-											enctype : 'multipart/form-data',
-											processData : false,
-											contentType : false,
-											cache : false,
-											timeout : 600000,
-											url : '/Images/json/imageupload/Shop',
-											dataType : 'JSON',
-											data : formData,
-											success : function(result) {
-												if (result === -1) {
-													alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-													// 이후 동작 ...
-												} else if (result === -2) {
-													alert('파일이 10MB를 초과하였습니다.');
-													// 이후 동작 ...
-												} else {
-													alert('이미지 업로드 성공');
-												}
-											}
-										});
-							});
-
-							//Debug..
-							//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-							$("form[name='addForm']").attr("method", "POST")
-									.attr("action", "/product/addProduct")
-									.attr("enctype", "multipart/form-data")
-									.submit();
-							//fncAddProduct();
-						});
-	});
-
-	//  	$(function() {
-
-	// 		$("#addproduct").on("click", function() {
-	// 			self.location = "/shop/product/addProduct"
-	// 		});
-
-	// 	});
-
-	//============= "취소"  Event 처리 및  연결 =============
-	$(function() {
-		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-		$("a[href='#' ]").on("click", function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
-			$("form")[0].reset();
-		});
-	});
-
-	// 	function fncAddProduct() {
-	// 		//Form 유효성 검증
-
-	// 				var prodName=$("input[name='prodName']").val();
-	// 			 	//var name = document.detailForm.prodName.value;
-	// 			 	var prodDetail=$("input[name='prodDetail']").val();
-	// 				//var detail = document.detailForm.prodDetail.value;
-	// 				var manuDate=$("input[name='manuDate']").val();
-	// 				//var manuDate = document.detailForm.manuDate.value;
-	// 				var price=$("input[name='price']").val();
-	// 				//var price = document.detailForm.price.value;
-
-	// 				if(prodName == null || prodName.length<1){
-	// 					alert("상품명은 반드시 입력하여야 합니다.");
-	// 					return;
-	// 				}
-
-	// 				if(manuDate == null || manuDate.length<1){
-	// 					alert("제조일자는 반드시 입력하셔야 합니다.");
-	// 					return;
-	// 				}
-	// 				if(price == null || price.length<1){
-	// 					alert("가격은 반드시 입력하셔야 합니다.");
-	// 					return;
-	// 				}
-	// 		$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
-	// 	}
-
-	//============= 달력  =============
-// 	$(function() {
-// 		$("input[name='manuDate']").datepicker({
-// 			dateFormat : 'yy-mm-dd'
-// 		});
-// 	});
-</script>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
@@ -190,9 +82,15 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<h5><b>상품코드</b></h5> <input type="text"
-										class="form-control" name="prodCode" id="prodCode"
-										placeholder="상품코드를 입력해주세요">
+									<h5><b>상품코드</b></h5>
+									
+								<select class="form-control" name="prodCode"
+									id="prodCode" style="width: 300px; height: 35px;">
+										<option value="10">사료</option>
+										<option value="20">간식</option>
+										<option value="30">의료</option>
+								</select>									
+
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -219,7 +117,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<h5><b id="manuDateH5">제조일</b></h5> <input type="text"
+									<h5><strong id="manuDateH5">제조일</strong></h5> <input type="text"
 										class="form-control" name="manuDate" id="manuDate"
 										placeholder="제조일자를 입력해주세요" readonly>
 								</div>
@@ -308,9 +206,149 @@
 <!-- 	<script src="../../resources/prodmenu/js/scrollax.min.js"></script> -->
 <!-- 	<script src="../../resources/prodmenu/js/main.js"></script> -->
 	<!-- ////////////////////달력 /////////////////////////////-->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+<!--   <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--   <script type="text/javascript" src="/resources/events.js"></script> -->
+<!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+ 
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+	//============= "등록"  Event 연결 =============
+	$(function() {
+		//============= "취소"  Event 처리 및  연결 =============
+		$('#btn-cancel').on("click", function(){
+			history.go(-1);
+		});
+		$("#addproduct").on("click",function(){
+			fncAddProduct();
+		});
+					
+	});
 
-	<script>
+		function fncAddProduct() {
+			//Form 유효성 검증
+
+					var prodName=$("input[name='prodName']").val();
+				 	//var name = document.detailForm.prodName.value;
+				 	var prodDetail=$("input[name='prodDetail']").val();
+					//var detail = document.detailForm.prodDetail.value;
+					var manuDate=$("input[name='manuDate']").val();
+					//var manuDate = document.detailForm.manuDate.value;
+					var price=$("input[name='price']").val();
+					//var price = document.detailForm.price.value;
+
+					if(prodName == null || prodName.length<1){
+						swal({
+					           text: "상품명을 입력해주세요.",
+					           dangerMode: true,
+					           buttons: {
+										 catch: {
+										 	text: "확인"
+										 }
+							   },
+					     }).then((willDelete) => {
+					           if (willDelete) {
+					        	   $("input[name='prodName']").focus();
+						           }
+						      });
+						return;
+					}
+
+					if(manuDate == null || manuDate.length<1){
+						swal({
+					           text: "제조일자를 입력해주세요.",
+					           dangerMode: true,
+					           buttons: {
+										 catch: {
+										 	text: "확인"
+										 }
+							   },
+					     }).then((willDelete) => {
+					           if (willDelete) {
+					        	   $("input[name='manuDate']").focus();
+						           }
+						      }); 
+						return;
+					}
+			 		if(price == null || price.length<1){
+						swal({
+					           text: "판매가격을 입력해주세요.",
+					           dangerMode: true,
+					           buttons: {
+										 catch: {
+										 	text: "확인"
+										 }
+							   },
+					     }).then((willDelete) => {
+					           if (willDelete) {
+					        	   $("input[name='price']").focus();
+						           }
+						      }); 
+			 			return;
+			 		}
+					
+
+
+						//============= 다중파일업로드 AJAX =============
+						$(function() {
+							var form = $('#uploadForm')[0];
+							var formData = new FormData(form);
+
+							for (var index = 0; index < 100; index++) {
+								formData.append('files', files[index]);
+							}
+
+							$
+									.ajax({
+										type : 'POST',
+										enctype : 'multipart/form-data',
+										processData : false,
+										contentType : false,
+										cache : false,
+										timeout : 600000,
+										url : '/Images/json/imageupload/Shop',
+										dataType : 'JSON',
+										data : formData,
+										success : function(result) {
+											if (result === -1) {
+												alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
+												// 이후 동작 ...
+											} else if (result === -2) {
+												alert('파일이 10MB를 초과하였습니다.');
+												// 이후 동작 ...
+											} else {
+												alert('이미지 업로드 성공');
+											}
+										}
+									});
+						});
+			
+				 	      $('input[name="price"]').val(removeCommas($('input[name="price"]').val()));
+						  $('input[name="discountPrice"]').val(removeCommas($('input[name="price"]').val()));
+
+						//Debug..
+						//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
+						$("form[name='addForm']").attr("method", "POST")
+								.attr("action", "/product/addProduct")
+								.attr("enctype", "multipart/form-data")
+								.submit();
+// 			$("form[name='addForm']").attr("method", "POST").attr("action","/product/addProduct").submit;
+		}
+
+	//============= 달력  =============
+// 	$(function() {
+// 		$("input[name='manuDate']").datepicker({
+// 			dateFormat : 'yy-mm-dd'
+// 		});
+// 	});
+
 		//============= "다중파일업로드 파일명만 저장해서 value" =============   
 		function fnAddFile(fileNameArray) {
 			$("#multiFile").val(fileNameArray)
@@ -418,13 +456,6 @@
 			}
 		}
 
-		$(document).ready(function() {
-
-			//============= 사진미리보기 =============
-			$('#attach input[type=file]').change(function() {
-				addPreview($(this)); //preview form 추가하기
-			});
-		});
 		
 		$( "input[name=manuDate]" ).datepicker({
 			showOn: "button",
@@ -447,24 +478,82 @@
 		$('#manuDateH5').after( $( ".ui-datepicker-trigger" ));
 		
 		
-		
-		$( "input[name=prodCode]" ).keyup(function( ) {
-			$(this).val($(this).val().replace(/[^0-9]/g,""));        	 
+		   //3자리 단위마다 콤마 생성
+	    function addCommas(x) {
+	        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    }
+	     
+	    //모든 콤마 제거
+	    function removeCommas(x) {
+	        if(!x || x.length == 0) return "";
+	        else return x.split(",").join("");
+	    }	 
+	    
+	    $(document).ready(function() {
 
-			if($(this).val().length > 2 ){
-				swal({
-			           text: "제한길이를 초과하였습니다.",
-			           dangerMode: true,
-			           buttons: {
-								 catch: {
-								 	text: "확인"
-								 }
-					   },
-			     });
-				$(this).val($(this).val().toString().substring(0,2));  
-			}
-		});
-		
+
+				//============= 사진미리보기 =============
+				$('#attach input[type=file]').change(function() {
+					addPreview($(this)); //preview form 추가하기
+				});
+
+	        //============= 판매가격 =============
+	        $('#price').keyup(function(){
+	       	 //입력시 콤마 적용
+	       	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+	            //판매가격 길이초과
+	            if (removeCommas($(this).val()).length > 7) {
+	  			  swal({
+	 		           text: "제한금액(100만원)을 초과하였습니다.",
+	 		           dangerMode: true,
+	 		           buttons: {
+	 							 catch: {
+	 							 	text: "확인"
+	 							 }
+					   },			   
+	  		      }).then((willDelete) => {
+	  		           if (willDelete) {
+	   
+	                $(this).val('1000000');
+//	                 $(this).val(removeCommas($(this).val()).substr(0, 7));
+	                $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));                  
+	                console.log($(this).val());	  
+	 
+	  		           }
+	  		      });
+	            }
+	        });
+  
+	        //============= 할인액 =============
+	        $('#discountPrice').keyup(function(){
+	       	 //입력시 콤마 적용
+	       	 $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));        	 
+
+	            //판매가격 길이초과
+	            if (removeCommas($(this).val()).length > 7) {
+	  			  swal({
+	 		           text: "제한금액(100만원)을 초과하였습니다.",
+	 		           dangerMode: true,
+	 		           buttons: {
+	 							 catch: {
+	 							 	text: "확인"
+	 							 }
+					   },			   
+	  		      }).then((willDelete) => {
+	  		           if (willDelete) {
+	   
+	                $(this).val('1000000');
+//	                 $(this).val(removeCommas($(this).val()).substr(0, 7));
+	                $(this).val(addCommas($(this).val().replace(/[^0-9]/g,"")));                  
+	                console.log($(this).val());	  
+	 
+	  		           }
+	  		      });
+	            }
+	        });        
+
+	});		
 		
 	</script>
 

@@ -14,7 +14,7 @@
 <!--  bootstrap CDN  -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- IM PORT 추가 -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
 <style>
@@ -49,10 +49,43 @@
 			}
 			var address=$("input[name='simpleAddress']").val() + " " + $("input[name='receiverAddr4']").val();
 			$("input[name='receiverAddr']").val(address);
+			
+			
+			
+			
+			
+			//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ IM PORT START ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
+			
+			IMP.init('imp85290840'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+			
+	
+				IMP.request_pay({
+				    pay_method : 'card',
+					merchant_uid : 'merchant_' + new Date().getTime(),
+					name : '보호할개',
+					amount : $("#totalPrice").val(),
+					buyer_email : '${user.email}',
+					buyer_name : '${user.userName}',
+					buyer_tel : '${user.phone}',
+					buyer_addr : '${user.userAddr}',
+					buyer_postcode : '123-456'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+	/*		        var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num; */
+					$("form[name='addForm']").attr("method", "POST").attr("action", "/order/addOrder").submit();
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    //alert(msg);
+			});
 	
 					//Debug..
 					console.log($("form[name='addForm']").html());
-					$("form[name='addForm']").attr("method", "POST").attr("action", "/order/addOrder").submit();
 					//fncAddProduct();
 		});
 	});
@@ -141,6 +174,7 @@
 				<input type="hidden" name="prodNo" value="${product.prodNo}" /> 
 				<input type="hidden" name="id" value="${user.id}" />
 				<input type="hidden" name="receiverAddr" value="" />
+				<input type="hidden" name="totalPrice"  id="totalPrice" value="" />				
 			<!-- ■■■■■■■■■■■■■■■■■■■■Parameter value END■■■■■■■■■■■■■■■■■■■■■ -->
 			
 			
@@ -181,13 +215,17 @@
 												value="${product.discountPrice}" pattern="#,###" />원</td>
 												
 													<td class="text-center">
-														<input type="number" min="1" size="1" name="orderQuantity"
+														<input type="number" min="1" size="1" name="orderQuantity" id="orderQuantity"
 															class="form-control text-center" value="1" >
 													</td>
 													<td class="actions"></td>
 												</tr>
 											</tbody>
 										</table>
+										
+									<div id="total" style="padding-left:500px">
+									<b>총 결제 금액 : <font color="#f04f23">${product.discountPrice}</font>원</b>
+									</div>
 								</div>
 						<br />
 						<!--////////////////////////// form tag Start /////////////////////////////////-->
@@ -199,7 +237,7 @@
 								<div class="form-group">
 									<label for="firstname"><b>구매회원</b></label> <input type="text"
 										class="form-control" name="id" id="id"
-										placeholder="상품명을 입력해주세요" value="${sessionScope.user.id }"
+										placeholder="상품명을 입력해주세요" value="${sessionScope.user.userName }"
 										readonly>
 								</div>
 							</div>
@@ -299,11 +337,20 @@
 								</div>
 							</div>
 						</div>
-						<p align="center">
-						<button class="btn btn-default" id="addproduct">구매</button>
-							&nbsp;<button class="btn btn-default" id="btn-cancle">취소</button>
-						</p>
-
+						<br/>
+				<div class="col-md-12" >
+	          	
+					<p><button  type="button" class="btn btn-default py-3 px-4 col-md-12" id="addproduct">구매</button></p>
+					<div>
+						<div class="col-md-12">
+							<div  align="right">
+								<p><a href="#" ><font color="gray" id="btn-cancel">취소</font></a></p>
+							</div>
+						</div>
+					</div>
+					
+	          </div>
+	          
 						<!-- ////////////////////////////form tag end //////////////////////////////-->
 					</div>
 				</div>
@@ -375,42 +422,15 @@
 			const p = $("#price").data('price');
 
 			$("#orderQuantity").change(function() {
-				const q = $(this).find(':selected').data('quantity');
-				const total = p * q;
-				$("#total").text(total);
+				var total= $("#orderQuantity").val()* ${product.discountPrice};
+// 				const q = $(this).find(':selected').data('quantity');
+// 				const total = p * q;
+				$("#total").children().remove();
+				$("#total").append("<b>총 결제 금액 : <font color='#f04f23'>"+total+"</font>원</b>");
+				$("#totalPrice").val(total);
+				
 			});
 		});
-		
-		
-		//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ IM PORT START ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■//
-		
-// 		IMP.init('imp32437611'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		
-// 		IMP.request_pay({
-// 		    pg : 'inicis', // version 1.1.0부터 지원.
-// 		    pay_method : 'card',
-// 		    merchant_uid : 'merchant_' + new Date().getTime(),
-// 		    name : ':결제테스트',
-// 		    amount : 14000,
-// /*		    buyer_email : 'iamport@siot.do',
-// 		    buyer_name : '구매자이름',
-// 		    buyer_tel : '010-1234-5678',
-// 		    buyer_addr : '서울특별시 강남구 삼성동',*/
-// 		    buyer_postcode : '123-456',
-// 		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-// 		}, function(rsp) {
-// 		    if ( rsp.success ) {
-// /*		        var msg = '결제가 완료되었습니다.';
-// 		        msg += '고유ID : ' + rsp.imp_uid;
-// 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-// 		        msg += '결제 금액 : ' + rsp.paid_amount;
-// 		        msg += '카드 승인번호 : ' + rsp.apply_num; */
-// 		    } else {
-// 		        var msg = '결제에 실패하였습니다.';
-// 		        msg += '에러내용 : ' + rsp.error_msg;
-// 		    }
-// 		    alert(msg);
-// 		});
 	</script>
 
 

@@ -142,11 +142,11 @@
 								<c:if test="${order.orderCode =='1'}">
 								<span style="cursor:pointer"><font color="#f04f23">배송하기</font></span></c:if>
 								<c:if test="${order.orderCode =='2'}">
-								<span style="cursor:pointer"><font color="#38b00c">배송중</font></span></c:if>
+								<font color="#38b00c">배송중</font></span></c:if>
 								<c:if test="${order.orderCode =='3'}">
-								<span style="cursor:pointer">배송완료</span></c:if>
+								<b>배송완료</b></span></c:if>
 								<c:if test="${order.orderCode =='4'}">
-								판매완료</c:if>
+								<b>배송완료</b></c:if>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
@@ -216,33 +216,42 @@
 		
 		$("td:nth-child(5) span:contains('배송하기')").on("click", function(){
 			swal({
-				title : "배송상태가 배송중으로 변경됩니다",
+				title : "배송하시겠습니까?",
+				text:"배송하기를 원하시면 확인을 눌러주세요.",
+	            buttons: ["취소","확인"],
 				dangerMode: true,
-				buttons :{
-					catch : {
-						text : "확인"
-					}
-				}
-			})
-			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=2";
+
+			})		          
+			.then((willDelete) => {
+	            if (willDelete) {
+		              swal("배송하기가 시작되었습니다!", {
+		                icon: "success",
+		                button : "확인",
+		              }).then((value) => {
+		            	  self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=2";
+		              });
+		            
+		          }
+		       });	 
+			//self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=2";
 		});
 		
-		$("td:nth-child(5) span:contains('배송중')").on("click", function(){
-			swal({
-				title : "배송상태가 배송완료로 변경됩니다",
-				dangerMode: true,
-				buttons :{
-					catch : {
-						text : "확인"
-					}
-				}
-			})
-			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=3";
-		});
+// 		$("td:nth-child(5) span:contains('배송중')").on("click", function(){
+// 			swal({
+// 				title : "배송상태가 배송완료로 변경됩니다",
+// 				dangerMode: true,
+// 				buttons :{
+// 					catch : {
+// 						text : "확인"
+// 					}
+// 				}
+// 			})
+// 			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=3";
+// 		});
 		
-		$("td:nth-child(5) span:contains('배송완료')").on("click", function(){
-			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&&orderCode=4";
-		});
+// 		$("td:nth-child(5) span:contains('배송완료')").on("click", function(){
+// 			self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&&orderCode=4";
+// 		});
 		
 	});
 

@@ -57,7 +57,10 @@ import org.springframework.stereotype.Repository;
 	@Override
 	public int getTotalCount(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("OrderMapper.getTotalCount", id);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("id", id);
+		
+		return sqlSession.selectOne("OrderMapper.getTotalCount", map);
 	}
 	
 

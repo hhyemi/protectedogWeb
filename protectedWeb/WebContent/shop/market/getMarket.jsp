@@ -232,9 +232,18 @@ table {
 		
 			//============= 수정하기 Event  처리 =============	
 			 	$( "#change" ).on("click" , function() {
-			 			swal("거래중인 게시글은 수정을 추천하지 않습니다.");   
-			 		 self.location = "/market/updateMarket?postNo=${board.postNo}";
-			 		
+	 		
+			 		swal({
+			            title: "거래중인 글은 수정을 추천하지 않습니다.",
+			            icon: "warning",
+			            buttons: ["취소","수정"],
+			            dangerMode: true,
+			          })
+			          .then((willDelete) => {
+				            if (willDelete) {
+			 					 self.location = "/market/updateMarket?postNo=${board.postNo}";
+				            }
+			          });			 		
 				});  
 		
 			 	$( "#listm" ).on("click" , function() {

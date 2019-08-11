@@ -106,16 +106,31 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT prod_no, prod_name, price, country, prod_detail, company, manu_date, quantity, discount_price
 		FROM product
-						<if test="searchCondition != null">
-												<where>
+	  						 	<where>  					 
+									<if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-											 			prod_name = #{searchKeyword}
+											 			AND prod_name  LIKE '%'||#{searchKeyword}||'%'
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-											 			price = #{searchKeyword}
+											 			AND price LIKE '%'||#{searchKeyword}||'%' 
 													</if>
+												</if>
+												<if test="prodCondition !=null">
+													<if test="prodCondition == 1 and prodCondition !='' ">
+													and prod_code = 10
+													</if>
+													<if test="prodCondition == 2 and prodCondition !='' ">
+													and prod_code = 20
+													</if>
+													<if test="prodCondition == 3 and prodCondition !='' ">
+													and prod_code = 30
+													</if>
+													<if test="prodCondition == 4 and prodCondition !='' ">
+													<![CDATA[ quantity < 20 ]]>
+													</if>
+												</if>
 												</where>
-											</if> ) countTable						
+											) countTable						
 	 </select>
 	 
 <!-- 관리자 상품조회 --> 
@@ -142,9 +157,9 @@
 	 
 	 <!-- 상품 재고수량 조절 -->
 	 
-	 <update id="updateQuantity">
+	 <update id="updateQuantity" parameterType="product">
 	 	UPDATE PRODUCT
-	 	SET quantity = quantity - #{quantity}
+	 	SET quantity = #{quantity}
 	 	WHERE prod_no = #{prodNo}
 	 
 	 </update>

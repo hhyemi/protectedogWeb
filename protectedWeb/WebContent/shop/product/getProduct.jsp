@@ -97,7 +97,7 @@ table {
 					</div>
 
 				</div>
-				<div class="col-lg-5 offset-lg-1">
+				<div class="col-lg-5 offset-lg-1" style="margin-top: 20px">
 					<div class="s_product_text">
 						<div>
 								<input type="hidden" value="${product.prodNo}" />

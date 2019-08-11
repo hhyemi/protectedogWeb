@@ -107,10 +107,14 @@
 								<c:if test="${order.orderCode =='1'}">
 								<font color="#38b00c">결제완료</font><br/>
 								<span style="cursor:pointer"><font color="red">주문취소</font></span></c:if>
+								
 								<c:if test="${order.orderCode =='2'}">
-								<font color="#62ab4d">배송중</font></c:if>
+								<font color="#62ab4d">배송중</font><br/>
+								<span style="cursor:pointer"><font color="red">배송도착</font></span></c:if>
+								
 								<c:if test="${order.orderCode =='3'}">
 								<b>배송완료</b></c:if>
+								
 								<c:if test="${order.orderCode =='4'}">
 								<b>취소완료</b></c:if></td>
 								<td class="actions text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
@@ -180,6 +184,27 @@
 			
 			$("td:nth-child(5) span:contains('주문취소')").on("click", function(){
 				self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=4";
+			});
+			
+			$("td:nth-child(5) span:contains('배송도착')").on("click", function(){
+				swal({
+					title : "배송확인 안내입니다.",
+					text:"배송이 도착했으면 확인을 눌러주세요.",
+		            buttons: ["취소","확인"],
+					dangerMode: true,
+
+				})		          
+				.then((willDelete) => {
+		            if (willDelete) {
+			              swal("배송확인이 완료되었습니다!", {
+			                icon: "success",
+			                button : "확인",
+			              }).then((value) => {
+								self.location = "/order/updateOrderCode?orderNo="+$(this).parent().find($("input:hidden[name='orderNo']")).val()+"&orderCode=3";
+			              });
+			            
+			          }
+			       });	 
 			});
 			
 		});

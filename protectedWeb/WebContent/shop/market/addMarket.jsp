@@ -73,7 +73,7 @@
 									</h5> 
 									<input type="text"
 										class="form-control" name="id" id="id"
-										placeholder="" value="${sessionScope.user.id }" readonly>
+										placeholder="" value="${sessionScope.user.nickname}" readonly>
 								</div>
 							</div>
 
@@ -462,8 +462,8 @@
 			            });
 			        });
 					//Debug..
-					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
-					debugger;
+// 					//alert(  $( "td.ct_btn01:contains('등록')" ).html() );
+// 					debugger;
 					
 					$("form[name='addForm']").attr("method", "POST").attr(
 							"action", "/market/addMarket").attr("enctype","multipart/form-data").submit();		 		

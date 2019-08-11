@@ -195,13 +195,17 @@
 										<span class="fas fa-search"></span>
 									</button>
 								</div>
-
 <!-- 								PageNavigation 선택 페이지 값을 보내는 부분  -->
 								<input type="hidden" id="currentPage" name="currentPage" value="" />
-<%-- 								<input type="hidden" name="searchCondition" value="${searchCondition}"/> --%>
 							</form>
+<%-- 								<input type="hidden" name="searchCondition" value="${searchCondition}"/> --%>
 						</div>
 					</div>
+		    <c:if test="${resultPage.totalCount eq 0 }">
+		    <div style="padding-left: 200px">
+			 		<jsp:include page="/common/searchResult.jsp"></jsp:include>
+			</div> 	
+			 	</c:if>
 					<c:set var="i" value="0" />
 						<c:forEach var="product" items="${list}">
 							<c:set var="i" value="${i+1}" />

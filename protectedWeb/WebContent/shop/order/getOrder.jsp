@@ -226,7 +226,7 @@ th {
 		<div class="col-md-7" >
 	                   	<div class="row" >
 				  		<div class="col-md-2 "><font size="4px"><strong>주문자</strong></font></div>
-						<div class="col-md-4 "><font size="4px"> ${order.id}</font></div>
+						<div class="col-md-4 "><font size="4px"> ${user.userName}</font></div>
 			
 				  		<div class="col-md-2 " style="padding-left: 0px;padding-right: 0px;"><font size="4px"><strong>주문자 연락처</strong></font></div>
 						<div class="col-md-4 " style="padding-left: 0px;" ><font size="4px">${order.phone}</font></div>
@@ -270,7 +270,7 @@ th {
 
 	</div>
 	<center>
-	<button type="button" class="btn btn-default" id="list">목록</button>
+	<button type="button" class="btn btn-default" id="list">주문내역 더보기</button>
 	</center>
 <br/><br/><br/>
 		<jsp:include page="/layout/footer.jsp"/>

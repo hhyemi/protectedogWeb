@@ -59,7 +59,7 @@
 	</insert>
 
 <select id="getOrder" parameterType="string" resultMap="orderSelectMap">
-		SELECT o.order_no, p.prod_name, o.order_code, o.total_price, o.id, o.phone, o.order_date, o.receiver_name,
+		SELECT o.order_no, p.prod_no, p.prod_name, o.order_code, o.total_price, o.id, o.phone, o.order_date, o.receiver_name,
 		o.receiver_phone, o.receiver_addr, o.order_request, o.payment_code, p.discount_price, o.order_quantity
 
 		FROM orders o, product p
@@ -97,7 +97,7 @@
 	  		FROM (	SELECT o.order_no, o.prod_no, o.payment_code, o.order_date, o.total_price, o.order_code ,o.id,
 	  		p.prod_name, p.prod_detail, p.main_file, o.order_quantity
 			from orders o, product p
-					WHERE id =#{id}		
+					WHERE o.id =#{id}		
 					AND o.prod_no=p.prod_no		
 					ORDER BY order_no DESC) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -133,8 +133,14 @@
 
 	<select id="getTotalCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)
-		FROM(SELECT * FROM orders) countTable
-		</select>
+		FROM(SELECT * FROM orders
+		<where>
+		<if test ="id != 'admin'">
+		id =#{id}
+		</if>
+		</where>
+		) countTable
+	</select>
 		
 	
 		</mapper>

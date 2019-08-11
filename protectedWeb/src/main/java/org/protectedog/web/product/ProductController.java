@@ -200,7 +200,7 @@ public class ProductController {
 			search.setCurrentPage(1);
 		}
 		
-		search.setPageSize(20);
+		search.setPageSize(9);
 		
 		System.out.println(search);
 		System.out.println("search/////////////////////////////////////////////");
@@ -208,7 +208,7 @@ public class ProductController {
 		Map<String, Object> map = productService.listProduct(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				20);
+				9);
 		System.out.println(resultPage);
 
 		// Model �� View ����

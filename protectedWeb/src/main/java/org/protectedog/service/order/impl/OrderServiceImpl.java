@@ -80,6 +80,7 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		System.out.println("serviceImpl listorder");
 		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("너 누구니?????"+id);
 		map.put("list", orderDAO.listAdminOrder(search, id));
 		map.put("totalCount", orderDAO.getTotalCount(id));
 		System.out.println("listorder");

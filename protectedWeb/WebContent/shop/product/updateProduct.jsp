@@ -188,9 +188,14 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<h5><b>상품코드</b></h5> <input type="text"
-										class="form-control" name="prodCode" id="prodCode"
-										placeholder="상품코드를 입력해주세요">
+									<h5><b>상품코드</b></h5>
+									
+								<select class="form-control" name="prodCode"
+									id="prodCode" style="width: 300px; height: 35px;">
+										<option value="10">사료</option>
+										<option value="20">간식</option>
+										<option value="30">의료</option>
+								</select>		
 								</div>
 							</div>
 							<div class="col-md-6">

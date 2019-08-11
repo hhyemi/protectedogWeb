@@ -62,6 +62,7 @@ public class OrderController {
 		
 		Product product = productService.getProduct(prodNo);
 		System.out.println("Order GET/////////////////////////");
+	
 		
 		model.addAttribute("product", product);
 		
@@ -154,11 +155,16 @@ public class OrderController {
 		
 		
 		orderService.addOrder(order);
+		
+		productService.updateQuantity(product);
 
 		System.out.println(order.getOrderNo());
 		System.out.println(order);
 		System.out.println("order Post////////////////////");
-
+		
+		User user = userService.getUsers(order.getId());
+		
+		model.addAttribute("user", user);
 		model.addAttribute("order", order);
 
 		return "redirect:/order/getOrder?orderNo="+order.getOrderNo();
@@ -334,6 +340,18 @@ public class OrderController {
 			order.setOrderCode(orderCode);
 			
 			orderService.updateOrderCode(order);
+			
+			Order order2 = orderService.getOrder(order.getOrderNo());
+			
+			System.out.println("oredCOnde::"+orderCode);
+			System.out.println("prodNo:::"+order2.getProdNo());
+			
+			if(orderCode==4) {
+			Product product = productService.getProduct(order2.getProdNo());
+			product.setQuantity(product.getQuantity()+order2.getOrderQuantity());
+			
+			productService.updateQuantity(product);
+			}
 			
 			
 			User user = (User)session.getAttribute("user");
