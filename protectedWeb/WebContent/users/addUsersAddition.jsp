@@ -226,7 +226,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				$("input:hidden[name='phone']").val( value );
 				
 				if($("input:text[name='simpleAddress']").val != "" && $("input:text[name='detailAddress']").val() != "") {
-					var address=$("input[name='simpleAddress']").val() + " " + $("input[name='detailAddress']").val();
+					var address=$('#sample6_postcode').val()+", "+$("input[name='simpleAddress']").val() + ", " + $("input[name='detailAddress']").val();
 				}
 				
 				$("input:hidden[name='userAddr']").val(address);
@@ -282,7 +282,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				if($("input[name='phone2']").val() == '' || $("input[name='phone3']").val() == ''){
 					swal({
 						text : "핸드폰 번호를 확인해주세요.",
-						icon : "error",
+// 						icon : "error",
 						buttons : {
 							catch : {
 								text : "확인"

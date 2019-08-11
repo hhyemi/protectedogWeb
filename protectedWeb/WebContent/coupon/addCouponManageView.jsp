@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
-    <title>보호할개 : 마이페이지</title>
+    <title>보호할개 · 마이페이지</title>
     <link rel="shortcut icon" href="img/favicon.ico">
     
     <!-- global stylesheets -->
@@ -79,13 +79,13 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+		<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }">
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-center justify-content-center">
 					<div class="col-md-9 ftco-animate text-center">
 						<p class="breadcrumbs">
-							<span class="mr-2"><a href="/index.jsp">CouponList</a></span>
+							<span class="mr-2">Coupon</span><span> List</span>
 						</p>
 						<h1 class="mb-0 bread">이달의 쿠폰</h1>
 					</div>

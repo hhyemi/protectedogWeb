@@ -396,8 +396,7 @@
 							})
 							.then((A) => {
 								if(A){
-									return;
-									$("#id").focus();
+									self.location="/index.jsp";
 								}
 							});
 						}

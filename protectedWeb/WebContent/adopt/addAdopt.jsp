@@ -693,9 +693,10 @@
 	
 	             reader.readAsDataURL(file);
 	         }
-	     } else{
+	     } 
+// 	     else{
 // 	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-	     }
+// 	     }
 	 }
 	 
 
@@ -706,6 +707,8 @@
 	     fileNameArray.splice(imgNum,1);
 	     fnAddFile(fileNameArray);
 	     $("#preview .preview-box[value=" + imgNum + "]").remove();
+	     alert(imgNum);
+	     alert(fileNameArray.length);
 // 	     resizeHeight();
 	 }
 

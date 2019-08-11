@@ -105,7 +105,7 @@ public class AdoptReviewController {
 //		String str = "바나나 : 1000원, 사과 : 2000원, 배 : 3000원";
 //		String target = "사과";
 //		int target_num = str.indexOf("사과"); 
-//		String result; result = str.substring       (               str.indexOf("사과"),                    (   str.substring                 (          str.indexOf("사과")).indexOf("원")+str.indexOf("사과")    )         );
+//		String result; result = str.substring   (     str.indexOf("사과"),      ( str.substring ( str.indexOf("사과") )   .indexOf("원")  +  str.indexOf("사과")    )         );
 
 		
 		boardService.addBoard(board);

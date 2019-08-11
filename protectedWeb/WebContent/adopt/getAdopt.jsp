@@ -1083,6 +1083,7 @@
 		 			$("#login-modal").modal('show');  
 		 		}else{
 			 	    var nickname = '${adopt.nickname}';
+// 			 	   $("#report-modal")[0].reset();
 			 	   $('#reportedNick').prop('readonly', true);
 			 	    $("#reportedNick").val(nickname);
 			 		$("#report-modal").modal("show");

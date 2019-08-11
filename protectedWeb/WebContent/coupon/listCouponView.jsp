@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
-    <title>보호할개 : 마이페이지</title>
+    <title>보호할개 · 마이페이지</title>
     <link rel="shortcut icon" href="img/favicon.ico">
     
     <!-- global stylesheets -->
@@ -86,7 +86,7 @@
 <!-- 	       		<input type="button" id="couponManage" value="쿠폰등록/수정"> -->
 <%-- 	       	</c:if> --%>
 <!-- 	    </div> -->
-		<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+		<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }">
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -231,7 +231,7 @@
 // 				self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 				swal({
 					text : "쿠폰을 삭제하시겠습니까?",
-					icon : "warning",
+// 					icon : "warning",
 					buttons : ["취소","확인"],
 					dangerMode: true,
 				})
@@ -239,9 +239,9 @@
 					if(A) {
 						self.location="/coupon/updateCoupon?couponNo="+couponNo+"&couponStatus=3";
 					}
-				    swal("삭제완료 !", {
-				      	icon: "success"
-				    });
+					swal("삭제가 완료되었습니다!", {
+		                   buttons: "확인",
+		            });
 				})
 			})
 		})
@@ -267,8 +267,36 @@
 						if($.trim(response.result)==0){
 // 							alert("쿠폰을 받았습니다");
 // 							alert(couponNo+", "+couponCode+", "+receiverId);
-							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+// 							self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+							swal({
+								text : "쿠폰을 받았습니다.",
+// 								icon : "success",
+								buttons :{
+									catch : {
+										text : "확인"
+									}
+								}
+							})
+							.then((A) => {
+								if(A){
+									self.location="/coupon/addCoupon?couponNo="+couponNo+"&receiverId="+receiverId+"&couponStatus=1";
+								}
+							})
 						}else{
+							swal({
+								text : "이미 받은 쿠폰입니다.",
+// 								icon : "error",
+								buttons :{
+									catch : {
+										text : "확인"
+									}
+								}
+							})
+							.then((B) => {
+								if(B){
+									return false;
+								}
+							})
 // 							alert("이미 받은 쿠폰입니다");
 // 							return;
 						}

@@ -13,14 +13,14 @@
                                     <div class="modal-content">
                                         <div class="modal-header" style="text-align: center;">
 											<div class="hero-wrap hero-bread" 
-											style="padding-bottom: 10px; padding-top : 20px; display: inline-block;">
+											style="padding-bottom: 10px; padding-top : 30px; display: inline-block;">
 												<div class="container">
 													<div class="row no-gutters slider-text align-items-center justify-content-center">
 														<div class="col-md-12 ftco-animate text-center" style="padding-left: 125px;">
 															<p class="breadcrumbs">
-																<span class="mr-6"><a href="#">SendMessage</a></span>
+																<span class="mr-2">Send</span><span> Message</span>
 															</p>
-															<font size="7">쪽지작성</font>
+															<font size="7">쪽지 작성</font>
 														</div>
 													</div>
 												</div>

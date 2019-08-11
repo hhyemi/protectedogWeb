@@ -522,9 +522,9 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 					$("input:password[name='id']").focus();
 					return false;
 				}
-				if(id.length < 8 || id.length > 12){
+				if(id.length < 6 || id.length > 12){
 					swal({
-						text : "아이디는 8자 이상 12자 이하로 입력하셔야 합니다.",
+						text : "아이디는 6자 이상 12자 이하로 입력하셔야 합니다.",
 						icon : "error",
 						buttons :{
 							catch : {
