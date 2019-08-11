@@ -82,7 +82,7 @@ public class MessageRestController {
 		String receiverNick=rcvNick.get("nickname");
 		System.out.println("getReceiveTotalCount : "+receiverNick);
 		int result=messageService.getReceiveTotalCount(receiverNick);
-		
+		System.out.println("리절트 언제 찍히는건지 궁금하다");
 		return result;
 		
 	}

@@ -86,7 +86,7 @@
 <!-- 	       		<input type="button" id="couponManage" value="쿠폰등록/수정"> -->
 <%-- 	       	</c:if> --%>
 <!-- 	    </div> -->
-		<div class="hero-wrap hero-bread" style="padding-bottom: 30px; padding-top : 60px;">
+		<div class="hero-wrap hero-bread" style="padding-bottom: 60px; padding-top : 60px;">
 			<input type="hidden" id="receiverId" name="receiverId" value="${ sessionScope.user.id }">
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-center justify-content-center">
