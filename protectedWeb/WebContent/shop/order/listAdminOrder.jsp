@@ -146,7 +146,7 @@
 								<c:if test="${order.orderCode =='3'}">
 								<b>배송완료</b></span></c:if>
 								<c:if test="${order.orderCode =='4'}">
-								<b>배송완료</b></c:if>
+								<b>취소완료</b></c:if>
 								<td class="actions"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderDate}" /></td>
 								
 							</tr>
@@ -167,7 +167,7 @@
 		</section>
 	</form>
 
-	<div style="padding-left:780px">
+	<div style="padding-left:600px">
 		<jsp:include page="../../common/pageNavigator_new.jsp" /></div>
 		<br/><br/>
 	<!-- PageNavigation End... -->

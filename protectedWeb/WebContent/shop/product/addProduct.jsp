@@ -88,7 +88,7 @@
 									id="prodCode" style="width: 300px; height: 35px;">
 										<option value="10">사료</option>
 										<option value="20">간식</option>
-										<option value="30">의료</option>
+										<option value="30">의류</option>
 								</select>									
 
 								</div>
@@ -331,7 +331,7 @@
 						});
 			
 				 	      $('input[name="price"]').val(removeCommas($('input[name="price"]').val()));
-						  $('input[name="discountPrice"]').val(removeCommas($('input[name="price"]').val()));
+						  $('input[name="discountPrice"]').val(removeCommas($('input[name="discountPrice"]').val()));
 
 						//Debug..
 						//alert(  $( "td.ct_btn01:contains('등록')" ).html() );

@@ -102,19 +102,24 @@
 			</c:if>
 			<br /> 후기 평균 평점 :&ensp;
 			<c:if test="${avgGrade eq 1 }">
-				<strong class="text-danger">★☆☆☆☆</strong>
+				<strong class="text-danger">★☆☆☆☆</strong> 
+				<strong>1</strong>
 			</c:if>
 			<c:if test="${avgGrade eq 2}">
 				<strong class="text-danger">★★☆☆☆</strong>
+				<strong>2</strong>
 			</c:if>
 			<c:if test="${avgGrade eq 3 }">
 				<strong class="text-danger">★★★☆☆</strong>
+				<strong>3</strong>
 			</c:if>
 			<c:if test="${avgGrade eq 4}">
 				<strong class="text-danger">★★★★☆</strong>
+				<strong>4</strong>
 			</c:if>
 			<c:if test="${avgGrade eq 5}">
 				<strong class="text-danger">★★★★★</strong>
+				<strong>5</strong>
 			</c:if>
 
 
@@ -645,7 +650,7 @@
 	   						$('.starRev span').parent().children('span').removeClass('on');
 	   						$("#preview").children().remove();
 							
-						
+	   					
 		         //============= 수정 Event  처리 =============   
 		         $( ".btnUpdate" ).on("click" , function() {  
 		        	 

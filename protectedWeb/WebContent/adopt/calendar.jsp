@@ -1799,7 +1799,7 @@ var fileNameArray = new Array();
 							$("#preview").children().remove();
 							$('#confirmBtn').text('등록');
 							files = {};
-							
+							previewIndex = 0;
 							$('input[name=dogDate]').val(yyyy+"-"+mm+"-"+dd);
 
 
@@ -2038,6 +2038,7 @@ var fileNameArray = new Array();
 	     delete files[imgNum];
 	     fileNameArray.splice(imgNum,1);
 	     fnAddFile(fileNameArray);
+	     previewIndex = 0;
 	     $("#preview .preview-box[value=" + imgNum + "]").remove();
 // 	     resizeHeight();
 	 }

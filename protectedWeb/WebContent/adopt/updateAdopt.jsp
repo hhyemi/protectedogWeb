@@ -100,7 +100,9 @@
 	                <!-- 첨부 버튼 -->
 	                <div class="col-md-12">
 			            <div id="attach" class="form-group">
-			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox"><span><strong>사진등록</strong></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)</label></span>
+			                <span class="label label-primary " ><label class="waves-effect waves-teal btn-flat" for="uploadInputBox">
+			                	<span><strong>사진등록</strong></span>&nbsp;&nbsp;맨앞 이미지는 대표이미지입니다. (최대 5장까지 업로드 가능합니다.)
+			                </label></span>
 			                <input id="uploadInputBox" style="display: none" type="file" value="등록" name="filedata"  />
 			            </div>
 		            </div>
@@ -109,7 +111,7 @@
 		            <!-- 미리보기 영역 -->
 		            <div class="form-group col-md-12">
 		            
-		            <div class="form-group"><div class="row">
+		           	 <div class="form-group"><div class="row">
 			            
 			            <div id="preview" class="col-md-12" align="center" style='display:inline; min-width:100px;'>
 
@@ -657,7 +659,7 @@
 		                 fnAddFile(fileNameArray);
 	                 }
 	                
-	                if( imgNum == 0){
+	                if( imgNum == 0 && $('.preview-box2').length + Object.keys(files).length <= 5){
 	                	var b64 = img.target.result;
 	                	
 	                	b64 = b64.replace('data:image/jpeg;base64,', ''); // remove content type
@@ -1355,6 +1357,8 @@
  		
  		$(".loading-container").hide();
  		
+ 		$("#dogSize").val("${adopt.dogSize}");
+ 		$("#dogGender").val("${adopt.dogGender}");
 	});
       
       

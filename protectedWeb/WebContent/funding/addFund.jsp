@@ -102,6 +102,7 @@
 		  </div>  
  		  <div class="form-group ">
 			<font class="text-center" size="5"><b>결제방법&emsp;&emsp;</b></font>
+			휴대폰결제
 			 <c:if test="${participate.paymentCode eq 'card' }">
 			 신용카드
 			 </c:if>

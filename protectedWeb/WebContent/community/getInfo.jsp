@@ -187,6 +187,7 @@ img{max-width: 600px;}
 					  
 				    swal("삭제완료 !", {
 				      	icon: "success",
+				      	button:"확인",
 				    }).then((value)=>{
 				    	
 				    	 self.location = "/info/delInfo?postNo="+ $("input[name='postNo']").val();

@@ -109,28 +109,25 @@ public class AdoptController {
 		adoptService.addAdopt(adopt);
 		adopt = adoptService.getAdopt(adopt.getPostNo());
 		
-		
 		User user = userService.getUsers(adopt.getId());
 		if ( ! user.getLevels().equals("미인증회원")) {
 			user.setLevelPoint(user.getLevelPoint()+5);
 			userService.updateUsers(user);
 		}
-		
 		List<FileDog> listFile = new ArrayList<FileDog>();
-
 
 		// 파일디비에넣기
 		for (String fileName : multiFile) {
-
-			FileDog files = new FileDog();
-			files.setBoardCode(adopt.getBoardCode());
-			files.setFileName(fileName);
-			files.setFileCode(0);
-			files.setPostNo(adopt.getPostNo());
-			listFile.add(files);
+			if (fileName != null && fileName.length() > 0) {
+				FileDog files = new FileDog();
+				files.setBoardCode(adopt.getBoardCode());
+				files.setFileName(fileName);
+				files.setFileCode(0);
+				files.setPostNo(adopt.getPostNo());
+				listFile.add(files);
+			}
 		}
 		fileService.addFile(listFile);
-		
 		model.addAttribute("adopt", adopt);
 		
 		if(adopt.getBoardCode().equals("AD")) {

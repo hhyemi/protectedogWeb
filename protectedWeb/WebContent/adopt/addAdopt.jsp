@@ -86,7 +86,7 @@
 					<!-- hidden -->
 					<input type="hidden" name="boardCode" value=" ${ param.boardCode.trim() }" >
 					<input type="hidden" name="statusCode" value="1" >
-					<input type="hidden" class="form-control" id="multiFile" name="multiFile" >
+					<input type="hidden" id="multiFile" name="multiFile" >
 				
 				
 					<!-- 약관 시작 -->
@@ -295,12 +295,12 @@
 	                </div>
 	               		
                 </div>
-	         	</div>
+<!-- 	         	</div> -->
 	         </form>
 	         <!-- END -->
 
-	         <div class="col-xl-8 row mt-5 pt-3 d-flex">
-	          	<div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+	         <div class="row mt-5 pt-3 d-flex">
+	          	<div class="col-md-12" >
 	          	
 					<p><button class="btn btn-default py-3 px-4 col-md-12">등록</button></p>
 					
@@ -573,7 +573,7 @@
 
 	  //============= "다중파일업로드 파일명만 저장해서 value" =============   
 	  function fnAddFile(fileNameArray) {
-	  	   $("#multiFile").val(fileNameArray)    
+	  	   $("#multiFile").val(fileNameArray) ;   
 	  }   
 
 	  //============= "다중파일업로드"  Event 처리 및  연결 =============      
@@ -597,7 +597,11 @@
 	            var fileName = file.name + "";   
 	            var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
 	            var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length); 
+	          //append할때 동영상 이미지 구분해주기
 	            var imgSelectName = "img";
+	            if(fileNameExtension === 'mp4' || fileNameExtension === 'avi'){
+	             	imgSelectName = "iframe";
+	            }  
 	
 	            var reader = new FileReader();
 	            reader.onload = function(img) {
@@ -694,9 +698,9 @@
 	             reader.readAsDataURL(file);
 	         }
 	     } 
-// 	     else{
-// 	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-// 	     }
+	     else
+	         alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	     
 	 }
 	 
 
@@ -707,8 +711,8 @@
 	     fileNameArray.splice(imgNum,1);
 	     fnAddFile(fileNameArray);
 	     $("#preview .preview-box[value=" + imgNum + "]").remove();
-	     alert(imgNum);
-	     alert(fileNameArray.length);
+// 	     alert(imgNum);
+// 	     alert(fileNameArray.length);
 // 	     resizeHeight();
 	 }
 

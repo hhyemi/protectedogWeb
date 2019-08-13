@@ -287,7 +287,7 @@
 	      </div>
 	      </form>
 	      <p/>
-				<div align="right"  style="padding-right:240px">					
+				<div align="right"  style="padding-right:440px">					
 							<c:if test="${user.id eq funding.id}">
 							<button type="button" id = "btnUpdate" class="btn btn-default">수정</button> 
 							</c:if>

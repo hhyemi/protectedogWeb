@@ -35,15 +35,14 @@
                   <ul class="list-unstyled thumb-list">
                     <li>
                       <div class="overflow-h">
-                        <a href="#">Java</a>
-                        <small>v1.8</small>
+                        <a href="#">
+                        
+                        JAVA, HTML5, CSS3, SCSS, JavaScript, GitHub, OvenApp, Apache Tomcat , SqlDeveloper, StarUML, Oracle 11g, Oracle Scheduler, Javax(Mail), Mybatis, Spring, JSTL, EL, SPEL, JDBC, JSP, JUnit4, Log4jdbc, Aspectj, Base64, JS ON-simple, Jackson, BootStrap , Jquery, AJAX, Sweetalert, CKEditor4, Nod e.js, NPM, Socket.io, Express, google Vision API, google Map API, google 번역 API, YouTube API, DOG API,  kakao Map API, kakao 로그인 API, kakao공유 API, facebook공유 API, twitter 공유 API, naver 로그인 API, naver 뉴스 API,  Daum 주소 API,청기와랩 SMS API, FullCalendar API, I’m port API
+                        </a>
                       </div>
                     </li>
                     <li>
-                      <div class="overflow-h">
-                        <a href="#">Spring</a>
-                        <small></small>
-                      </div>
+
                     </li>
                   </ul>
                 </div>

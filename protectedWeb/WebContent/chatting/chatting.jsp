@@ -16,9 +16,9 @@
 <title>보호할개 · 채팅</title>
  
 <style>
-<<<<<<< HEAD
+
 ::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; }
-=======
+
       #chat_box {
                padding-top : 10px;
                   width: 400px;
@@ -26,9 +26,7 @@
                   border: 1px solid black;
                   background: #f0f0f2;
       }
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
 		::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 0px; background: url(`./images/bg.png`) #efefef}
 
 		::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
@@ -45,8 +43,7 @@ margin-right:0px !important;}
                   background: #f0f0f2;
       }
 
-=======
->>>>>>> refs/remotes/origin/master
+
       #msg_process {
                 width: 16%;
                   height: 34px;
@@ -148,7 +145,7 @@ margin-right:0px !important;}
      <input type="hidden" id="postId" value="${postId }">     
      <input type="hidden" id="profile" value="${profile}">  
 </div>    
-    <script src="http://192.168.0.33:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.0.19:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>
@@ -171,7 +168,7 @@ margin-right:0px !important;}
                      profile = "kakaoDefaultImg.jfif";
                   }
                
-                  var socket = io("http://192.168.0.33:82/");
+                  var socket = io("http://192.168.0.19:82/");
 
                   socket.emit("updateUser", userName,profile);
                   

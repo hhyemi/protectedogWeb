@@ -190,7 +190,8 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 				                        <br>
 				                        <form class="addUsersForm" name="formal" style="padding-left: 90px;" enctype="multipart/form-data">
 				                        	<div class="col-md-12" style="display:inline; float:left;">
-				                        		<input type="hidden" id="authKeyReturn" value="">  
+				                        		<input type="hidden" id="authKeyReturn" value="">   
+				                        		<input type="hidden" name="levelPoint" value="${ user.levelPoint }">   
 					                        	<div class="row">
 					                                <div class="col-md-10">
 					                                    <div class="form-group">
@@ -885,6 +886,11 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                    }
                 }
 			})
+			
+			$(document).ready(function(){
+ 		
+// 		 		$("#gender").val("${user.gender}");
+			});
 
 
     </script> 

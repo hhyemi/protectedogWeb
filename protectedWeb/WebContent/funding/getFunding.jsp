@@ -320,7 +320,7 @@
 	      </div>
 	      </form>
 	      	<p/>
-        	<div align="right" style="padding-right:240px">	
+        	<div align="right" style="padding-right:440px">	
   
 
 							<c:if test="${ user.id eq 'admin'}">
@@ -591,8 +591,7 @@
 		//============= 후기삭제 Event  처리 =============	
 	 	$( "#reviewDelete" ).on("click" , function() {
 	 		swal({
-	            title: "정말 삭제 하시겠습니까 ?",
-	            text: "삭제시 한달간 글 작성 불가입니다.",
+	           title: "정말 삭제 하시겠습니까 ?",	      
 	            icon: "warning",
                 buttons: ["취소", "확인"],
 	            dangerMode: true,

@@ -139,6 +139,7 @@ img{max-width: 600px;}
 					  
 				    swal("삭제가 완료되었습니다!", {
 				      	icon: "success",
+				      	button:"확인",
 				    }).then((value)=>{
 				    	
 				    	 self.location = "/adoptReview/delAdoptReview?postNo="+ $("input[name='postNo']").val();
