@@ -23,7 +23,7 @@
 
 
 ## 3. DB 모델링
-
+https://github.com/dlgpal95/protectedogWeb/issues/1#issue-490605703
 ## 4. 화면구성
 
 ## 5. 데모영상
