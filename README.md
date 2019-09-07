@@ -23,7 +23,8 @@
 
 
 ## 3. DB 모델링
-https://github.com/dlgpal95/protectedogWeb/issues/1#issue-490605703
+![ERDDiagram](https://user-images.githubusercontent.com/50124537/64471708-be046b80-d18f-11e9-9d85-b595a724636a.jpg)
+
 ## 4. 화면구성
 
 ## 5. 데모영상
