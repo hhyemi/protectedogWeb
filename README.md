@@ -28,3 +28,4 @@
 ## 4. 화면구성
 
 ## 5. 데모영상
+https://www.youtube.com/watch?v=qGeE3vKoyHs
