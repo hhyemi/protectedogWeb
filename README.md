@@ -28,5 +28,5 @@
 ## 4. 화면구성
 ![main](https://user-images.githubusercontent.com/50124537/64471739-1cc9e500-d190-11e9-8476-b058fdcfc9d7.png)
 
-## 5. 데모영상
+## 5. 영상
 https://www.youtube.com/watch?v=qGeE3vKoyHs
