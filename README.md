@@ -4,14 +4,13 @@
 
 ## 1. 사용기술
 * Language : JAVA 1.8, JSP, HTML5, CSS3, JavaScript
-* Tool : eclipse, Oracle SQL Developer, StarUML, GitHub, OvenApp
 * Database : oracle 11g
 * Web Server : Apache Tomcat 9.0.21
 * Framwork : Spring 4.0.9, JDBC, jQuery, BootStrap, JUnit4, Log4jdbc, Aspectj, JSON-simple, Jackson, Sweetalert
 * MyBatis 3.2.1
 * etc : AJAX, Node.js, NPM, Socket.io, Express
 * API : Javax(Mail), google Vision API, google Map API, google 번역 API, YouTube API, DOG API,  kakao Map API, kakao 로그인 API, kakao공유 API, facebook공유 API, twitter 공유 API, naver 로그인 API, naver 뉴스 API,  Daum 주소 API,cool SMS API, FullCalendar API, I’m port API, CKEditor4
-
+* Tool : eclipse, Oracle SQL Developer, StarUML, GitHub, OvenApp
 
 ## 2. 기능
 *	Story Funding 서비스
