@@ -48,6 +48,7 @@
 
 ## 4. 화면구성
 ![main](https://user-images.githubusercontent.com/50124537/64471739-1cc9e500-d190-11e9-8476-b058fdcfc9d7.png)
+![화면](https://user-images.githubusercontent.com/50124537/119261594-0b9a6380-bc13-11eb-8d7e-2a02907b2158.PNG)
 
 ## 5. 구현영상
 https://www.youtube.com/watch?v=qGeE3vKoyHs
