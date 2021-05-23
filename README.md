@@ -1,10 +1,10 @@
 # 유기견 보호 웹사이트
 반려견의 입양·분양, 스토리펀딩 , 관련정보 및 상품 판매를 회원들에게 제공하는 시스템
 
-## 일정
+## 1. 개발기간
 2019-06 ~ 2019-08
 
-## 1. 사용기술
+## 2. 사용기술
 ### Frontend
 
 * JavaScript, JSP
@@ -35,7 +35,7 @@
 * cool SMS API, FullCalendar API, I’m port API
 
 
-## 2. 기능
+## 3. 기능
 *	Story Funding 서비스
 *	입양 중개 및 실종견 수색 서비스
 *	동물병원 정보검색 서비스
@@ -45,12 +45,15 @@
 *	무한스크롤, 자동완성 기능
 
 
-## 3. DB 모델링
+## 4. DB 모델링
 ![ERDDiagram](https://user-images.githubusercontent.com/50124537/64471708-be046b80-d18f-11e9-9d85-b595a724636a.jpg)
 
-## 4. 화면구성
+## 5. 화면구성
 ![main](https://user-images.githubusercontent.com/50124537/64471739-1cc9e500-d190-11e9-8476-b058fdcfc9d7.png)
 ![화면](https://user-images.githubusercontent.com/50124537/119261594-0b9a6380-bc13-11eb-8d7e-2a02907b2158.PNG)
 
-## 5. 구현영상
+## 6. 영상
+### 구현영상
+
+### 발표영상
 https://www.youtube.com/watch?v=qGeE3vKoyHs
