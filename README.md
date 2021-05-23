@@ -5,14 +5,10 @@
 ## 1. 사용기술
 ### Frontend
 
-* JavaScript
-* JSP
-* HTML5
-* CSS3 
-* jQuery
+* JavaScript, JSP
+* HTML5, CSS3 
+* jQuery, ajax
 * BootStrap
-* ajax
-* Infinite Scroll, Autocomplete
 
 ### Backend
 
@@ -44,6 +40,7 @@
 *	정보 공유 서비스
 *	쇼핑몰 및 중고장터 서비스
 *	일반 회원관리 서비스
+*	무한스크롤, 자동완성 기능
 
 
 ## 3. DB 모델링
