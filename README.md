@@ -54,6 +54,7 @@
 
 ## 6. 영상
 ### 구현영상
+https://www.youtube.com/watch?v=2L8zljNmL6c
 
 ### 발표영상
 https://www.youtube.com/watch?v=qGeE3vKoyHs
