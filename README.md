@@ -8,7 +8,7 @@
 * JavaScript, JSP
 * HTML5, CSS3 
 * jQuery, ajax
-* BootStrap
+* BootStrap, Sweetalert, CKEditor4
 
 ### Backend
 
@@ -30,7 +30,7 @@
 * kakao Map API, kakao 로그인 API, kakao공유 API, Daum 주소 API
 * facebook공유 API, twitter 공유 API
 * naver 로그인 API, naver 뉴스 API
-* cool SMS API, FullCalendar API, I’m port API, CKEditor4, Sweetalert
+* cool SMS API, FullCalendar API, I’m port API
 
 
 ## 2. 기능
